@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Releases on Apache Ozone</title>
+    <link>/release/</link>
+    <description>Recent content in Releases on Apache Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018 Apache Software Foundation</copyright>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/release/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Release 0.2.1-alpha available</title>
+      <link>/release/0.2.1-alpha/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/release/0.2.1-alpha/</guid>
+      <description>This is the first version of Apache Hadoop Ozone. Ozone is an Object store for Hadoop built using Hadoop Distributed Data Store.
+This release is fully functional, but alpha quality.
+ Image credit: heipei, CC-BY-SA-2.0</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<meta name="generator" content="Hugo 0.44" />
+	<meta name="generator" content="Hugo 0.48" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
     <base href="/">
 
     <link rel="canonical" href="http://ozone.hadoop.apache.org/">
-
+    <meta http-equiv="refresh" content="3; URL='https://hadoop.apache.org/ozone/'" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -48,32 +48,6 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#ratis-menu" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div id="ratis-menu" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#qa">Q&A</a></li>
-                    <li><a href="https://github.com/apache/hadoop">Source</a></li>
-                    <li><a href="https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Distributed+Data+Store+and+Applications">Wiki</a></li>
-                    <li><a href="https://www.katacoda.com/elek/scenarios/ozone101"><b>Try it out!</b></a></li>
-                </ul>
-            </div>
-
-    </nav>
-
-    <div style="max-height: 200px; overflow: hidden;">
-      <img src="/cloud.png" style="width: 100%; left:0px;"/>
-    </div>
 
 </div>
 
@@ -86,13 +60,9 @@
 <div class="whatis">
     <div class="container">
         <div class="row header">
-            <h2>What is Apache Hadoop Ozone?</h2>
+            <h2>SITE IS MOVED</h2>
             <p class="lead">
-                Ozone is a new subproject of Apache Hadoop. It provides an
-                 object store semantic for Hadoop.</p>
-            <p class="lead">It uses Hadoop Distributed Data Storage (HDDS) for storage layer. HDDS is 
-             another new subproject of Apache Hadoop.
-            </p>
+				Please use the <a href="https://hadoop.apache.org/ozone">https://hadoop.apache.org/ozone/</a> address.
             </p>
             <p></p>
         </div>
@@ -100,71 +70,6 @@
 </div>
 
 
-<div class="main-section feature-list-group" style="padding: 80px;">
-    <div class="container">
-        <div class="row feature-list">
-            <div class="col-md-4 col-sm-4 feature-item">
-
-                <h4><span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Scalable</h4>
-                <p>
-                 Ozone is designed to scale to tens of billions of files and
-                 blocks and, in the future, even more.
-                </p>
-                <p>
-                  Small files or huge number of datanodes are no longer a limitation.
-                </p>
-                <p></p>
-            </div>
-            <div class="col-md-4 col-sm-4 feature-item">
-                <h4><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
-                   Consistent</h4>
-                <p>
-                    Storage Layer uses RAFT protocol for consistentency.
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-4 feature-item">
-                <h4><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>Cloud-native</h4>
-                <p>Hadoop Ozone is designed to work well in containerized environments like YARN and Kubernetes.
-                </p>
-            </div>
-
-
-        </div>
-
-
-    </div>
-</div>
-
-
-<a name="qa"></a>
-<div class="main-section">
-    <div class="container">
-        <div class="row header">
-            <h2>Question and Answers</h2>
-            <h3>Where can I download it?</h3>
-            <p>Apache Hadoop Ozone is not yet released. It's being actively developed on
-              the trunk branch of Apache Hadoop. It will be released independently from
-              the main Hadoop release.</p>
-            <h3>How can I contribute</h3>
-            <p>The contribution process is the same as is for any other
-              <a href="https://wiki.apache.org/hadoop/HowToContribute">
-                Hadoop subproject.</a></p>
-            <h3>Does it mean a new Hadoop server component?</h3>
-              <p>Both Ozone and HDDS requires one additional master component - 
-               Ozone Manager and Storage Container Manger, respectively. The 
-               worker parts of Ozone/HDDS can be started as a HDFS 
-               Datanode plugin. 
-            </p>
-            <h3>How can I try it out?</h3>
-              <p>There is a
-                <a href="https://www.katacoda.com/elek/scenarios/ozone101">katacoda</a>
-                which can be used to try out Ozone. Please note that this is for 
-                demostration and is not released by Apache.</p>
-              <p>For the Apache version, you can download and build the latest version
-               from <a href="https://github.com/apache/hadoop">trunk</a></p>
-        </div>
-    </div>
-</div>
 
 <footer>
     <div class="container">
