@@ -16,8 +16,6 @@ copyright = "&copy; 2020 Apache Software Foundation"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
 uglyurls = false
-contentDir = "src"
-publishDir = "../content/ozone"
 
 [[menu.main]]
   name = "Download"
