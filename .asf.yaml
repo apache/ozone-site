@@ -4,4 +4,3 @@ github:
 publish:
   whoami: master
   subdir: public
-  hostname: ozone.apache.org
