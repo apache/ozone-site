@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../security.html">Security</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Securing HTTP</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Securing HTTP</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>This document describes how to configure Ozone HTTP web-consoles to require user authentication.</p>
+<h3 id="default-authentication">Default authentication</h3>
+<p>By default Ozone HTTP web-consoles (OM, SCM, S3G, Recon, Datanode)
+allow access without authentication based on the following default configurations.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.security.http.kerberos.enabled</td>
+<td>false</td>
+</tr>
+<tr>
+<td>ozone.http.filter.initializers</td>
+<td><empty></td>
+</tr>
+</tbody>
+</table>
+<p>If you have an SPNEGO enabled Ozone cluster and want to disable it for all Ozone services,
+just make sure the two key mentioned are configured as above.</p>
+<h3 id="kerberos-based-spnego-authentication">Kerberos based SPNEGO authentication</h3>
+<p>However, they can be configured to require Kerberos authentication using HTTP SPNEGO protocol (supported
+by browsers like Firefox and Chrome). To achieve that, the following keys must
+be configured first.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop.security.authentication</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>ozone.security.http.kerberos.enabled</td>
+<td>true</td>
+</tr>
+<tr>
+<td>ozone.http.filter.initializers</td>
+<td>org.apache.hadoop.security.AuthenticationFilterInitializer</td>
+</tr>
+</tbody>
+</table>
+<p>After that, individual component needs to configure properly to completely enable
+SPNEGO or SIMPLE authentication.</p>
+<h3 id="enable-spnego-authentication-for-om-http">Enable SPNEGO authentication for OM HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.om.http.auth.type</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>ozone.om.http.auth.kerberos.principal</td>
+<td>HTTP/_HOST@REALM</td>
+</tr>
+<tr>
+<td>ozone.om.http.auth.kerberos.keytab</td>
+<td>/path/to/HTTP.keytab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enable-spnego-authentication-for-s3g-http">Enable SPNEGO authentication for S3G HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.s3g.http.auth.type</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>ozone.s3g.http.auth.kerberos.principal</td>
+<td>HTTP/_HOST@REALM</td>
+</tr>
+<tr>
+<td>ozone.s3g.http.auth.kerberos.keytab</td>
+<td>/path/to/HTTP.keytab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enable-spnego-authentication-for-recon-http">Enable SPNEGO authentication for RECON HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.recon.http.auth.type</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>ozone.recon.http.auth.kerberos.principal</td>
+<td>HTTP/_HOST@REALM</td>
+</tr>
+<tr>
+<td>ozone.recon.http.auth.kerberos.keytab</td>
+<td>/path/to/HTTP.keytab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enable-spnego-authentication-for-scm-http">Enable SPNEGO authentication for SCM HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hdds.scm.http.auth.type</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>hdds.scm.http.auth.kerberos.principal</td>
+<td>HTTP/_HOST@REALM</td>
+</tr>
+<tr>
+<td>hdds.scm.http.auth.kerberos.keytab</td>
+<td>/path/to/HTTP.keytab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enable-spnego-authentication-for-datanode-http">Enable SPNEGO authentication for DATANODE HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hdds.datanode.http.auth.type</td>
+<td>kerberos</td>
+</tr>
+<tr>
+<td>hdds.datanode.http.auth.kerberos.principal</td>
+<td>HTTP/_HOST@REALM</td>
+</tr>
+<tr>
+<td>hdds.datanode.http.auth.kerberos.keytab</td>
+<td>/path/to/HTTP.keytab</td>
+</tr>
+</tbody>
+</table>
+<p>Note: Ozone datanode does not have a default webpage, which prevents you from
+accessing &ldquo;/&rdquo; or &ldquo;/index.html&rdquo;. But it does provide standard
+servlet like jmx/conf/jstack via HTTP.</p>
+<p>In addition, Ozone HTTP web-console support the equivalent of Hadoop&rsquo;s Pseudo/Simple authentication.
+If this option is enabled, the user name must be specified in the first browser interaction using the user.name
+query string parameter. e.g., http://scm:9876/?user.name=scmadmin.</p>
+<h3 id="enable-simple-authentication-for-om-http">Enable SIMPLE authentication for OM HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.om.http.auth.type</td>
+<td>simple</td>
+</tr>
+<tr>
+<td>ozone.om.http.auth.simple.anonymous_allowed</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>If you don&rsquo;t want to specify the user.name in the query string parameter,
+change ozone.om.http.auth.simple.anonymous_allowed to true.</p>
+<h3 id="enable-simple-authentication-for-s3g-http">Enable SIMPLE authentication for S3G HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.s3g.http.auth.type</td>
+<td>simple</td>
+</tr>
+<tr>
+<td>ozone.s3g.http.auth.simple.anonymous_allowed</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>If you don&rsquo;t want to specify the user.name in the query string parameter,
+change ozone.s3g.http.auth.simple.anonymous_allowed to true.</p>
+<h3 id="enable-simple-authentication-for-recon-http">Enable SIMPLE authentication for RECON HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.recon.http.auth.type</td>
+<td>simple</td>
+</tr>
+<tr>
+<td>ozone.recon.http.auth.simple.anonymous_allowed</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>If you don&rsquo;t want to specify the user.name in the query string parameter,
+change ozone.recon.http.auth.simple.anonymous_allowed to true.</p>
+<h3 id="enable-simple-authentication-for-scm-http">Enable SIMPLE authentication for SCM HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.scm.http.auth.type</td>
+<td>simple</td>
+</tr>
+<tr>
+<td>ozone.scm.http.auth.simple.anonymous_allowed</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>If you don&rsquo;t want to specify the user.name in the query string parameter,
+change ozone.scm.http.auth.simple.anonymous_allowed to true.</p>
+<h3 id="enable-simple-authentication-for-datanode-http">Enable SIMPLE authentication for DATANODE HTTP</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.datanode.http.auth.type</td>
+<td>simple</td>
+</tr>
+<tr>
+<td>ozone.datanode.http.auth.simple.anonymous_allowed</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>If you don&rsquo;t want to specify the user.name in the query string parameter,
+change ozone.datanode.http.auth.simple.anonymous_allowed to true.</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../security/securings3.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

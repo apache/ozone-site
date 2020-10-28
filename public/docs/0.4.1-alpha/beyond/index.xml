@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beyond Basics on Ozone</title>
+    <link>/beyond.html</link>
+    <description>Recent content in Beyond Basics on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/beyond/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Running concurrently with HDFS</title>
+      <link>/beyond/runningwithhdfs.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/runningwithhdfs.html</guid>
+      <description>Ozone is designed to work with HDFS. So it is easy to deploy ozone in an existing HDFS cluster.
+The container manager part of Ozone can run inside DataNodes as a pluggable module or as a standalone component. This document describe how can it be started as a HDFS datanode plugin.
+To activate ozone you should define the service plugin implementation class.
+Important: It should be added to the hdfs-site.xml as the plugin should be activated as part of the normal HDFS Datanode bootstrap.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Containers</title>
+      <link>/beyond/containers.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/containers.html</guid>
+      <description>Docker heavily is used at the ozone development with three principal use-cases:
+ dev:  We use docker to start local pseudo-clusters (docker provides unified environment, but no image creation is required)  test:  We create docker images from the dev branches to test ozone in kubernetes and other container orchestrator system We provide apache/ozone images for each release to make it easier for evaluation of Ozone. These images are not created for production usage.</description>
+    </item>
+    
+    <item>
+      <title>Docker Cheat Sheet</title>
+      <link>/beyond/dockercheatsheet.html</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/dockercheatsheet.html</guid>
+      <description>In the compose directory of the ozone distribution there are multiple pseudo-cluster setup which can be used to run Ozone in different way (for example: secure cluster, with tracing enabled, with prometheus etc.).
+If the usage is not document in a specific directory the default usage is the following:
+cd compose/ozone docker-compose up -d The data of the container is ephemeral and deleted together with the docker volumes.
+docker-compose down Useful Docker &amp;amp; Ozone Commands If you make any modifications to ozone, the simplest way to test it is to run freon and unit tests.</description>
+    </item>
+    
+  </channel>
+</rss>

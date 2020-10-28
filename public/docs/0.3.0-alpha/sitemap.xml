@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/runningviadocker.html</loc>
+  </url>
+  
+  <url>
+    <loc>/buildingsources.html</loc>
+  </url>
+  
+  <url>
+    <loc>/settings.html</loc>
+  </url>
+  
+  <url>
+    <loc>/runningwithhdfs.html</loc>
+  </url>
+  
+  <url>
+    <loc>/realcluster.html</loc>
+  </url>
+  
+  <url>
+    <loc>/hdds.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ozonemanager.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/concepts.html</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/javaapi.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ozonefs.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/freon.html</loc>
+    <lastmod>2017-09-02T23:58:17-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/dozone.html</loc>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/scmcli.html</loc>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/bucketcommands.html</loc>
+  </url>
+  
+  <url>
+    <loc>/categories.html</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/keycommands.html</loc>
+  </url>
+  
+  <url>
+    <loc>/commandshell.html</loc>
+  </url>
+  
+  <url>
+    <loc>/rest.html</loc>
+  </url>
+  
+  <url>
+    <loc>/s3.html</loc>
+  </url>
+  
+  <url>
+    <loc>/tags.html</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/volumecommands.html</loc>
+  </url>
+  
+</urlset>

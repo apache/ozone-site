@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept/overview.html</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/concept/overview.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/concept/overview.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/interface/ofs.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/start.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/feature/ha.html</loc>
+  </url>
+  
+  <url>
+    <loc>/security/secureozone.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security/secureozone.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security/secureozone.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/interface/o3fs.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/interface/o3fs.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/interface/o3fs.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept/ozonemanager.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/concept/ozonemanager.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/concept/ozonemanager.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/feature/topology.html</loc>
+  </url>
+  
+  <url>
+    <loc>/security/securingtde.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security/securingtde.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security/securingtde.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept.html</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/concept.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/concept.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept/storagecontainermanager.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/concept/storagecontainermanager.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/concept/storagecontainermanager.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/interface/s3.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/interface/s3.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/interface/s3.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/security/securingdatanodes.html</loc>
+  </url>
+  
+  <url>
+    <loc>/interface/cli.html</loc>
+  </url>
+  
+  <url>
+    <loc>/feature.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/feature/gdpr.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature/gdpr.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature/gdpr.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/security/securingozonehttp.html</loc>
+  </url>
+  
+  <url>
+    <loc>/interface/javaapi.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/interface/javaapi.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/interface/javaapi.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept/containers.html</loc>
+  </url>
+  
+  <url>
+    <loc>/security/securings3.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security/securings3.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security/securings3.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/security.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/interface/csi.html</loc>
+  </url>
+  
+  <url>
+    <loc>/security/securityacls.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security/securityacls.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security/securityacls.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/concept/datanodes.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/concept/datanodes.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/concept/datanodes.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/security/securitywithranger.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/security/securitywithranger.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/security/securitywithranger.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/feature/recon.html</loc>
+  </url>
+  
+  <url>
+    <loc>/feature/observability.html</loc>
+  </url>
+  
+  <url>
+    <loc>/recipe.html</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/recipe.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/recipe.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/startfromdockerhub.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/startfromdockerhub.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/startfromdockerhub.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/onprem.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/onprem.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/onprem.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/minikube.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/minikube.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/minikube.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/kubernetes.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/kubernetes.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/kubernetes.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/runningviadocker.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/runningviadocker.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/runningviadocker.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/start/fromsource.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/fromsource.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/fromsource.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/design.html</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/ec.html</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/ofs.html</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/storage-class.html</loc>
+    <lastmod>2020-06-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/volume-management.html</loc>
+    <lastmod>2020-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/nfs.html</loc>
+    <lastmod>2020-03-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tools/admin.html</loc>
+    <lastmod>2020-03-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/scmha.html</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/namespace-support.html</loc>
+    <lastmod>2020-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/token.html</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/trash.html</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/recon2.html</loc>
+    <lastmod>2019-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/decommissioning.html</loc>
+    <lastmod>2019-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/gdpr.html</loc>
+    <lastmod>2019-06-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/locks.html</loc>
+    <lastmod>2019-06-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/ozone-enhancement-proposals.html</loc>
+    <lastmod>2019-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/configless.html</loc>
+    <lastmod>2019-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/multiraft.html</loc>
+    <lastmod>2019-05-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/typesafeconfig.html</loc>
+    <lastmod>2019-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/recon1.html</loc>
+    <lastmod>2019-02-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/tde.html</loc>
+    <lastmod>2019-02-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tools/genconf.html</loc>
+    <lastmod>2018-12-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/genconf.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/genconf.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/tools/auditparser.html</loc>
+    <lastmod>2018-12-17T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/auditparser.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/auditparser.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/design/topology.html</loc>
+    <lastmod>2018-11-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/s3gateway.html</loc>
+    <lastmod>2018-09-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/design/omha.html</loc>
+    <lastmod>2018-09-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tools.html</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/interface.html</loc>
+    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/interface.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/interface.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/recipe/prometheus.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/recipe/prometheus.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/recipe/prometheus.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/recipe/sparkozonefsk8s.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/recipe/sparkozonefsk8s.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/recipe/sparkozonefsk8s.html"
+                />
+  </url>
+  
+  <url>
+    <loc>/tools/testtools.html</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/testtools.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/testtools.html"
+                />
+  </url>
+  
+</urlset>

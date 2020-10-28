@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview on Ozone</title>
+    <link>/</link>
+    <description>Recent content in Overview on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Overview</title>
+      <link>/concept/overview.html</link>
+      <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/overview.html</guid>
+      <description>Ozone is a redundant, distributed object store optimized for Big data workloads. The primary design point of ozone is scalability, and it aims to scale to billions of objects.
+Ozone separates namespace management and block space management; this helps ozone to scale much better. The namespace is managed by a daemon called Ozone Manager  (OM), and block space is managed by Storage Container Manager (SCM).
+Ozone consists of volumes, buckets, and keys.</description>
+    </item>
+    
+    <item>
+      <title>Java API</title>
+      <link>/interface/javaapi.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/javaapi.html</guid>
+      <description>Ozone ships with its own client library that supports RPC. For generic use cases the S3 compatible REST interface also can be used instead of the Ozone client.
+Creating an Ozone client The Ozone client factory creates the ozone client. To get a RPC client we can call
+OzoneClient ozClient = OzoneClientFactory.getRpcClient(); If the user want to create a client based on the configuration, then they can call.
+OzoneClient ozClient = OzoneClientFactory.</description>
+    </item>
+    
+    <item>
+      <title>Running concurrently with HDFS</title>
+      <link>/beyond/runningwithhdfs.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/runningwithhdfs.html</guid>
+      <description>Ozone is designed to work with HDFS. So it is easy to deploy ozone in an existing HDFS cluster.
+The container manager part of Ozone can run inside DataNodes as a pluggable module or as a standalone component. This document describe how can it be started as a HDFS datanode plugin.
+To activate ozone you should define the service plugin implementation class.
+Important: It should be added to the hdfs-site.xml as the plugin should be activated as part of the normal HDFS Datanode bootstrap.</description>
+    </item>
+    
+    <item>
+      <title>Securing Ozone</title>
+      <link>/security/secureozone.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/secureozone.html</guid>
+      <description>Kerberos Ozone depends on Kerberos to make the clusters secure. Historically, HDFS has supported running in an isolated secure networks where it is possible to deploy without securing the cluster.
+This release of Ozone follows that model, but soon will move to secure by default. Today to enable security in ozone cluster, we need to set the configuration ozone.security.enabled to true and hadoop.security.authentication to kerberos.
+   Property Value     ozone.</description>
+    </item>
+    
+    <item>
+      <title>Shell Overview</title>
+      <link>/shell/format.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/format.html</guid>
+      <description>Ozone shell help can be invoked at object level or at action level. For example:
+ozone sh volume --help This will show all possible actions for volumes.
+or it can be invoked to explain a specific action like ozone sh volume create --help This command will give you command line options of the create command.
+
+General Command Format The Ozone shell commands take the following format.
+ ozone sh object action url</description>
+    </item>
+    
+    <item>
+      <title>Ozone File System</title>
+      <link>/interface/ozonefs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/ozonefs.html</guid>
+      <description>The Hadoop compatible file system interface allows storage backends like Ozone to be easily integrated into Hadoop eco-system. Ozone file system is an Hadoop compatible file system.
+Setting up the Ozone file system To create an ozone file system, we have to choose a bucket where the file system would live. This bucket will be used as the backend store for OzoneFileSystem. All the files and directories will be stored as keys in this bucket.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Manager</title>
+      <link>/concept/ozonemanager.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/ozonemanager.html</guid>
+      <description>Ozone Manager (OM) is the namespace manager for Ozone.
+This means that when you want to write some data, you ask Ozone Manager for a block and Ozone Manager gives you a block and remembers that information. When you want to read that file back, you need to find the address of the block and Ozone Manager returns it you.
+Ozone Manager also allows users to organize keys under a volume and bucket.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Containers</title>
+      <link>/beyond/containers.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/containers.html</guid>
+      <description>Docker heavily is used at the ozone development with three principal use-cases:
+ dev:  We use docker to start local pseudo-clusters (docker provides unified environment, but no image creation is required)  test:  We create docker images from the dev branches to test ozone in kubernetes and other container orchestrator system We provide apache/ozone images for each release to make it easier for evaluation of Ozone. These images are not created for production usage.</description>
+    </item>
+    
+    <item>
+      <title>Securing Datanodes</title>
+      <link>/security/securingdatanodes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingdatanodes.html</guid>
+      <description>Datanodes under Hadoop is traditionally secured by creating a Keytab file on the data nodes. With Ozone, we have moved away to using data node certificates. That is, Kerberos on data nodes is not needed in case of a secure Ozone cluster.
+However, we support the legacy Kerberos based Authentication to make it easy for the current set of users.The HDFS configuration keys are the following that is setup in hdfs-site.</description>
+    </item>
+    
+    <item>
+      <title>Volume Commands</title>
+      <link>/shell/volumecommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/volumecommands.html</guid>
+      <description>Volume commands generally need administrator privileges. The ozone shell supports the following volume commands.
+ create delete info list update  Create The volume create command allows an administrator to create a volume and assign it to a user.
+Params:
+   Arguments Comment     -q, --quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster.   -u, --user Required, The name of the user who owns this volume.</description>
+    </item>
+    
+    <item>
+      <title>Storage Container Manager</title>
+      <link>/concept/hdds.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/hdds.html</guid>
+      <description>Storage container manager provides multiple critical functions for the Ozone cluster. SCM acts as the cluster manager, Certificate authority, Block manager and the Replica manager.
+ Cluster Management  SCM is in charge of creating an Ozone cluster. When an SCM is booted up via init command, SCM creates the cluster identity and root certificates needed for the SCM certificate authority. SCM manages the life cycle of a data node in the cluster.</description>
+    </item>
+    
+    <item>
+      <title>Bucket Commands</title>
+      <link>/shell/bucketcommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/bucketcommands.html</guid>
+      <description>Ozone shell supports the following bucket commands.
+ create delete info list  Create The bucket create command allows users to create a bucket.
+Params:
+   Arguments Comment     Uri The name of the bucket in /volume/bucket format.    ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.</description>
+    </item>
+    
+    <item>
+      <title>S3 Protocol</title>
+      <link>/interface/s3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/s3.html</guid>
+      <description>Ozone provides S3 compatible REST interface to use the object store data with any S3 compatible tools.
+Getting started S3 Gateway is a separated component which provides the S3 compatible APIs. It should be started additional to the regular Ozone components.
+You can start a docker based cluster, including the S3 gateway from the release package.
+Go to the compose/ozones3 directory, and start the server:
+docker-compose up -d You can access the S3 gateway at http://localhost:9878</description>
+    </item>
+    
+    <item>
+      <title>Transparent Data Encryption</title>
+      <link>/security/securingtde.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingtde.html</guid>
+      <description>Ozone TDE setup process and usage are very similar to HDFS TDE. The major difference is that Ozone TDE is enabled at Ozone bucket level when a bucket is created.
+Setting up the Key Management Server To use TDE, clients must setup a Key Management Server and provide that URI to Ozone/HDFS. Since Ozone and HDFS can use the same Key Management Server, this configuration can be provided via hdfs-site.</description>
+    </item>
+    
+    <item>
+      <title>Datanodes</title>
+      <link>/concept/datanodes.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/datanodes.html</guid>
+      <description>Datanodes are the worker bees of Ozone. All data is stored on data nodes. Clients write data in terms of blocks. Datanode aggregates these blocks into a storage container. A storage container is the data streams and metadata about the blocks written by the clients.
+Storage Containers A storage container is a self-contained super block. It has a list of Ozone blocks that reside inside it, as well as on-disk files which contain the actual data streams.</description>
+    </item>
+    
+    <item>
+      <title>Docker Cheat Sheet</title>
+      <link>/beyond/dockercheatsheet.html</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/dockercheatsheet.html</guid>
+      <description>In the compose directory of the ozone distribution there are multiple pseudo-cluster setup which can be used to run Ozone in different way (for example: secure cluster, with tracing enabled, with prometheus etc.).
+If the usage is not document in a specific directory the default usage is the following:
+cd compose/ozone docker-compose up -d The data of the container is ephemeral and deleted together with the docker volumes.
+docker-compose down Useful Docker &amp;amp; Ozone Commands If you make any modifications to ozone, the simplest way to test it is to run freon and unit tests.</description>
+    </item>
+    
+    <item>
+      <title>Key Commands</title>
+      <link>/shell/keycommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/keycommands.html</guid>
+      <description>Ozone shell supports the following key commands.
+ get put delete info list rename  Get The key get command downloads a key from Ozone cluster to local file system.
+Params:
+   Arguments Comment     Uri The name of the key in /volume/bucket/key format.   FileName Local file to download the key to.    ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.</description>
+    </item>
+    
+    <item>
+      <title>Securing S3</title>
+      <link>/security/securings3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securings3.html</guid>
+      <description>To access an S3 bucket, users need AWS access key ID and AWS secret. Both of these are generated by going to AWS website. When you use Ozone&amp;rsquo;s S3 protocol, you need the same AWS access key and secret.
+Under Ozone, the clients can download the access key directly from Ozone. The user needs to kinit first and once they have authenticated via kerberos they can download the S3 access key ID and AWS secret.</description>
+    </item>
+    
+    <item>
+      <title>Apache Ranger</title>
+      <link>/security/secuitywithranger.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/secuitywithranger.html</guid>
+      <description>Apache Ranger™ is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform. Any version of Apache Ranger which is greater than 1.20 is aware of Ozone, and can manage an Ozone cluster.
+To use Apache Ranger, you must have Apache Ranger installed in your Hadoop Cluster. For installation instructions of Apache Ranger, Please take a look at the Apache Ranger website.
+If you have a working Apache Ranger installation that is aware of Ozone, then configuring Ozone to work with Apache Ranger is trivial.</description>
+    </item>
+    
+    <item>
+      <title>Ozone ACLs</title>
+      <link>/security/securityacls.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securityacls.html</guid>
+      <description>Ozone supports a set of native ACLs. These ACLs can be used independently or along with Ranger. If Apache Ranger is enabled, then ACL will be checked first with Ranger and then Ozone&amp;rsquo;s internal ACLs will be evaluated.
+Ozone ACLs are a super set of Posix and S3 ACLs.
+The general format of an ACL is object:who:rights.
+Where an object can be:
+ Volume - An Ozone volume. e.g. /volume Bucket - An Ozone bucket.</description>
+    </item>
+    
+    <item>
+      <title>Simple Single Ozone</title>
+      <link>/start/startfromdockerhub.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/startfromdockerhub.html</guid>
+      <description>Requirements  Working docker setup AWS CLI (optional)    Ozone in a Single Container The easiest way to start up an all-in-one ozone container is to use the latest docker image from docker hub:
+docker run -p 9878:9878 -p 9876:9876 apache/ozone This command will pull down the ozone image from docker hub and start all ozone services in a single container. This container will run the required metadata servers (Ozone Manager, Storage Container Manager) one data node and the S3 compatible REST server (S3 Gateway).</description>
+    </item>
+    
+    <item>
+      <title>Ozone On Premise Installation</title>
+      <link>/start/onprem.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/onprem.html</guid>
+      <description>If you are feeling adventurous, you can setup ozone in a real cluster. Setting up a real cluster requires us to understand the components of Ozone. Ozone is designed to work concurrently with HDFS. However, Ozone is also capable of running independently. The components of ozone are the same in both approaches.
+Ozone Components  Ozone Manager - Is the server that is in charge of the namespace of Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Minikube &amp; Ozone</title>
+      <link>/start/minikube.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/minikube.html</guid>
+      <description>Requirements  Working minikube setup kubectl    kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use apache/ozone image from the dockerhub.
+To deploy it to minikube use the minikube configuration set:
+cd kubernetes/examples/minikube kubectl apply -f .  And you can check the results with
+kubectl get pod  Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</description>
+    </item>
+    
+    <item>
+      <title>Ozone on Kubernetes</title>
+      <link>/start/kubernetes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/kubernetes.html</guid>
+      <description>Requirements  Working kubernetes cluster (LoadBalancer, PersistentVolume are not required) kubectl    As the apache/ozone docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host) Deploy to kubernetes
+kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</description>
+    </item>
+    
+    <item>
+      <title>Pseudo-cluster</title>
+      <link>/start/runningviadocker.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/runningviadocker.html</guid>
+      <description>Requirements  docker and docker-compose     Download the Ozone binary tarball and untar it.
+ Go to the directory where the docker compose files exist and tell docker-compose to start Ozone in the background. This will start a small ozone instance on your machine.
+  cd compose/ozone/ docker-compose up -d To verify that ozone is working as expected, let us log into a data node and run freon, the load generator for Ozone.</description>
+    </item>
+    
+    <item>
+      <title>From Source</title>
+      <link>/start/fromsource.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/fromsource.html</guid>
+      <description>Requirements  Java 1.8 Maven Protoc (2.5)    This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page. If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
+If you want to build from sources, Please untar the source tarball and run the ozone build command.</description>
+    </item>
+    
+    <item>
+      <title>Generate Configurations</title>
+      <link>/tools/genconf.html</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/genconf.html</guid>
+      <description>Genconf tool generates a template ozone-site.xml file at the specified path. This template file can be edited to replace with proper values.
+ozone genconf &amp;lt;path&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>Audit Parser</title>
+      <link>/tools/auditparser.html</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/auditparser.html</guid>
+      <description>Audit Parser tool can be used for querying the ozone audit logs. This tool creates a sqllite database at the specified path. If the database already exists, it will avoid creating a database.
+The database contains only one table called audit defined as:
+CREATE TABLE IF NOT EXISTS audit ( datetime text, level varchar(7), logger varchar(7), user text, ip text, op text, params text, result varchar(7), exception text, UNIQUE(datetime,level,logger,user,ip,op,params,result))
+Usage: ozone auditparser &amp;lt;path to db file&amp;gt; [COMMAND] [PARAM]</description>
+    </item>
+    
+    <item>
+      <title>SCMCLI</title>
+      <link>/tools/scmcli.html</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/scmcli.html</guid>
+      <description>SCM is the block service for Ozone. It is also the workhorse for ozone. But user process never talks to SCM. However, being able to read the state of SCM is useful.
+SCMCLI allows the developer to access SCM directly. Please note: Improper usage of this tool can destroy your cluster. Unless you know exactly what you are doing, Please do not use this tool. In other words, this is a developer only tool.</description>
+    </item>
+    
+    <item>
+      <title>Monitoring with Prometheus</title>
+      <link>/recipe/prometheus.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/prometheus.html</guid>
+      <description>Prometheus is an open-source monitoring server developed under under the Cloud Native Computing Foundation.
+Ozone supports Prometheus out of the box. The servers start a prometheus compatible metrics endpoint where all the available hadoop metrics are published in prometheus exporter format.
+Prerequisites  Install the and start an Ozone cluster. Download the prometheus binary.  Monitoring with prometheus  To enable the Prometheus metrics endpoint you need to add a new configuration to the ozone-site.</description>
+    </item>
+    
+    <item>
+      <title>Spark in Kubernetes with OzoneFS</title>
+      <link>/recipe/sparkozonefsk8s.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/sparkozonefsk8s.html</guid>
+      <description>This recipe shows how Ozone object store can be used from Spark using:
+ OzoneFS (Hadoop compatible file system) Hadoop 2.7 (included in the Spark distribution) Kubernetes Spark scheduler Local spark client  Requirements Download latest Spark and Ozone distribution and extract them. This method is tested with the spark-2.4.0-bin-hadoop2.7 distribution.
+You also need the following:
+ A container repository to push and pull the spark+ozone images. (In this recipe we will use the dockerhub) A repo/name for the custom containers (in this recipe myrepo/ozone-spark) A dedicated namespace in kubernetes (we use yournamespace in this recipe)  Create the docker image for drivers Create the base Spark driver/executor image First of all create a docker image with the Spark image creator.</description>
+    </item>
+    
+    <item>
+      <title>Testing tools</title>
+      <link>/tools/testtools.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/testtools.html</guid>
+      <description>Testing is one of the most important part during the development of a distributed system. We have the following type of test.
+This page includes our existing test tool which are part of the Ozone source base.
+Note: we have more tests (like TCP-DS, TCP-H tests via Spark or Hive) which are not included here because they use external tools only.
+Unit test As every almost every java project we have the good old unit tests inside each of our projects.</description>
+    </item>
+    
+  </channel>
+</rss>

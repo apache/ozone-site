@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Apache Hadoop Ozone/HDDS documentation</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-3 col-md-2 sidebar">
+  <img src="ozone-logo.png" style="max-width: 100%;"/>
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="index.html">
+                
+
+                    
+                    <span>Ozone Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="runningviadocker.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./runningviadocker.html">Alpha Cluster</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./settings.html">Configuration</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./realcluster.html">Starting an Ozone Cluster</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./runningwithhdfs.html">Running concurrently with HDFS</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./buildingsources.html">Building from Sources</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="commandshell.html">
+                    
+                    <span>Client</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="active">
+                        <a href="./commandshell.html">Ozone CLI</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./volumecommands.html">Volume Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./bucketcommands.html">Bucket Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./keycommands.html">Key Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./javaapi.html">Java API</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./ozonefs.html">Ozone File System</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./rest.html">REST API</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="dozone.html">
+                    
+                    <span>Tools</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./dozone.html">Dozone &amp; Dev Tools</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./freon.html">Freon</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./scmcli.html">SCMCLI</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concepts.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./hdds.html">Hadoop Distributed Data Store</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./ozonemanager.html">Ozone Manager</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Ozone CLI</h1>
+            <div class="col-md-9">
+              
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>Ozone has a set of command line tools that can be used to manage ozone.</p>
+
+<p>All these commands are invoked via the <code>ozone</code> script.</p>
+
+<p>The commands supported by ozone are:</p>
+
+<ul>
+<li><strong>classpath</strong> - Prints the class path needed to get the hadoop jar and the
+required libraries.</li>
+<li><strong>fs</strong> - Runs a command on ozone file system.</li>
+<li><strong>datanode</strong> - Via daemon command, the HDDS data nodes can be started or
+stopped.</li>
+<li><strong>envvars</strong> - Display computed Hadoop environment variables.</li>
+<li><strong>freon</strong> -  Runs the ozone load generator.</li>
+<li><strong>genesis</strong>  - Developer Only, Ozone micro-benchmark application.</li>
+<li><strong>getozoneconf</strong> -  Reads ozone config values from configuration.</li>
+<li><strong>jmxget</strong>  - Get JMX exported values from NameNode or DataNode.</li>
+<li><strong>om</strong> -   Ozone Manager, via daemon command can be started or stopped.</li>
+<li><strong>sh</strong> -  Primary command line interface for ozone.</li>
+<li><strong>scm</strong> -  Storage Container Manager service, via daemon can be
+stated or stopped.</li>
+<li><strong>scmcli</strong> -  Developer only, Command Line Interface for the Storage
+Container Manager.</li>
+<li><strong>version</strong> - Prints the version of Ozone and HDDS.</li>
+<li><strong>genconf</strong> -  Generate minimally required ozone configs and output to
+ozone-site.xml.</li>
+</ul>
+
+<h2 id="understanding-ozone-command-shell">Understanding Ozone command shell</h2>
+
+<p>The most used command when working with Ozone is the Ozone command shell.
+Ozone command shell gives a command shell interface to work against
+Ozone.</p>
+
+<p>The Ozone shell commands take the following format.</p>
+
+<blockquote>
+<p><em>ozone sh object action url</em></p>
+</blockquote>
+
+<p><strong>ozone</strong> script is used to invoke all Ozone sub-commands. The ozone shell is
+invoked via <code>sh</code> command.</p>
+
+<p>The object can be a volume, bucket or a key. The action is various verbs like
+ create, list, delete etc.</p>
+
+<p>Ozone URL can point to a volume, bucket or keys in the following format:</p>
+
+<p><em>[scheme][server:port]/volume/bucket/key</em></p>
+
+<p>Where,</p>
+
+<ol>
+<li><p>Scheme - Can be one of the following</p>
+
+<ul>
+<li>o3  - Ozone&rsquo;s native RPC protocol. If you specify this scheme, the
+native RPC protocol is used while communicating with Ozone Manager and
+data nodes.</li>
+<li>http/https - If an HTTP protocol is specified, then Ozone shell assumes
+that you are interested in using the Ozone Rest protocol and falls back
+to using the REST protocol instead of RPC.
+If no protocol is specified, the Ozone shell defaults to the native RPC
+protocol.</li>
+</ul></li>
+
+<li><p>Server:Port - This is the address of the Ozone Manager. This can be server
+only, in that case, the default port is used. If this value is omitted
+then the defaults specified in the ozone-site.xml will be used for Ozone
+Manager address.</p></li>
+</ol>
+
+<p>Depending on the call, the volume/bucket/key names will be part of the URL.
+Please see volume commands, bucket commands, and key commands section for more
+detail.</p>
+
+<h2 id="invoking-help">Invoking help</h2>
+
+<p>Ozone shell help can be invoked at <em>object</em> level or at <em>action</em> level.
+For example:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume --help</code></pre></div>
+
+<p>This will show all possible actions for volumes.</p>
+
+<p>or it can be invoked to explain a specific action like
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --help</code></pre></div>
+This command will give you command line options of the create command.</p>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

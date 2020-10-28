@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recipes on Ozone</title>
+    <link>/recipe.html</link>
+    <description>Recent content in Recipes on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/recipe/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monitoring with Prometheus</title>
+      <link>/recipe/prometheus.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/prometheus.html</guid>
+      <description>Prometheus is an open-source monitoring server developed under under the Cloud Native Computing Foundation.
+Ozone supports Prometheus out of the box. The servers start a prometheus compatible metrics endpoint where all the available hadoop metrics are published in prometheus exporter format.
+Prerequisites  Install the and start an Ozone cluster. Download the prometheus binary.  Monitoring with prometheus  To enable the Prometheus metrics endpoint you need to add a new configuration to the ozone-site.</description>
+    </item>
+    
+    <item>
+      <title>Spark in Kubernetes with OzoneFS</title>
+      <link>/recipe/sparkozonefsk8s.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/sparkozonefsk8s.html</guid>
+      <description>This recipe shows how Ozone object store can be used from Spark using:
+ OzoneFS (Hadoop compatible file system) Hadoop 2.7 (included in the Spark distribution) Kubernetes Spark scheduler Local spark client  Requirements Download latest Spark and Ozone distribution and extract them. This method is tested with the spark-2.4.0-bin-hadoop2.7 distribution.
+You also need the following:
+ A container repository to push and pull the spark+ozone images. (In this recipe we will use the dockerhub) A repo/name for the custom containers (in this recipe myrepo/ozone-spark) A dedicated namespace in kubernetes (we use yournamespace in this recipe)  Create the docker image for drivers Create the base Spark driver/executor image First of all create a docker image with the Spark image creator.</description>
+    </item>
+    
+  </channel>
+</rss>

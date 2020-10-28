@@ -1,0 +1,58 @@
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License. See accompanying LICENSE file.
+-->
+{{partial "header.html" .}}
+<div class="container">
+
+  <h1>Download</h1>
+
+  <p>Hadoop Ozone is released as source code tarballs with corresponding binary
+  tarballs for convenience. The downloads are distributed via mirror sites
+  and should be checked for tampering using GPG or SHA-256.</p>
+
+<p>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Version</th>
+      <th>Release date</th>
+      <th>Source download</th>
+      <th>Binary download</th>
+      <th>Release notes</th>
+    </tr>
+  </thead>
+   {{range first 5 (where (where .Site.Pages "Section" "release") ".Params.linked" true) }}
+     <tr>
+       <td>{{.File.BaseFileName }}</td>
+       <td>{{dateFormat "2006 Jan 2 " .Date}}</td>
+       <td>
+         <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+         (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
+         <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
+        </td>
+        <td>
+          <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+          (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
+          <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+         </td>
+         <td>
+           <a href="release/{{.File.BaseFileName }}/">Announcement</a>
+         </td>
+     </tr>
+  {{end}}
+  </table>
+</p>
+
+  {{.Content}}
+</div>
+{{partial "footer.html" .}}

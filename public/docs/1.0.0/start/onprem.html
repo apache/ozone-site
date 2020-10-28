@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../start.html">Getting Started</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone On Premise Installation</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    <a href="../zh/start/onprem.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone On Premise Installation</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>If you are feeling adventurous, you can setup ozone in a real cluster.
+Setting up a real cluster requires us to understand the components of Ozone.
+Ozone is designed to work concurrently with HDFS. However, Ozone is also
+capable of running independently. The components of ozone are the same in both approaches.</p>
+<h2 id="ozone-components">Ozone Components</h2>
+<ol>
+<li>Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</li>
+<li>Storage Container Manager - Acts as the block manager. Ozone Manager
+requests blocks from SCM, to which clients can write data.</li>
+<li>Datanodes - Ozone data node code runs inside the HDFS datanode or in the independent deployment case runs an ozone datanode daemon.</li>
+</ol>
+<h2 id="setting-up-an-ozone-only-cluster">Setting up an Ozone only cluster</h2>
+<ul>
+<li>
+<p>Please untar the ozone-&lt;version&gt; to the directory where you are going
+to run Ozone from. We need Ozone jars on all machines in the cluster. So you
+need to do this on all machines in the cluster.</p>
+</li>
+<li>
+<p>Ozone relies on a configuration file called <code>ozone-site.xml</code>. To
+generate a template that you can replace with proper values, please run the
+following command. This will generate a template called <code>ozone-site.xml</code> at
+the specified path (directory).</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone genconf &lt;path&gt;</code></pre></div>
+<p>Let us look at the settings inside the generated file (ozone-site.xml) and
+how they control ozone. Once the right values are defined, this file
+needs to be copied to <code>ozone directory/etc/hadoop</code>.</p>
+<ul>
+<li>
+<p><strong>ozone.metadata.dirs</strong> Allows Administrators to specify where the
+metadata must reside. Usually you pick your fastest disk (SSD if
+you have them on your nodes). OzoneManager, SCM and datanode will  write the
+metadata to this path. This is a required setting, if this is missing Ozone
+will fail to come up.</p>
+<p>Here is an example,</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
+   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<ul>
+<li><strong>ozone.scm.names</strong>  Storage container manager(SCM) is a distributed block
+service which is used by ozone. This property allows data nodes to discover
+SCM&rsquo;s address. Data nodes send heartbeat to SCM.
+Until HA  feature is  complete, we configure ozone.scm.names to be a
+single machine.</li>
+</ul>
+<p>Here is an example,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">      <span style="color:#f92672">&lt;property&gt;</span>
+        <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+      <span style="color:#f92672">&lt;/property&gt;</span>
+  </code></pre></div>
+<ul>
+<li><strong>ozone.scm.datanode.id.dir</strong> Data nodes generate a Unique ID called Datanode
+ID. This identity is written to the file datanode.id in a directory specified by this path. <em>Data nodes
+will create this path if it doesn&rsquo;t exist already.</em></li>
+</ul>
+<p>Here is an  example,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id.dir<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node<span style="color:#f92672">&lt;/value&gt;</span>
+   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
+<ul>
+<li><strong>ozone.om.address</strong> OM server address. This is used by OzoneClient and
+Ozone File System.</li>
+</ul>
+<p>Here is an  example,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
+       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+    <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
+<h2 id="ozone-settings-summary">Ozone Settings Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.metadata.dirs</td>
+<td>file path</td>
+<td>The metadata will be stored here.</td>
+</tr>
+<tr>
+<td>ozone.scm.names</td>
+<td>SCM server name</td>
+<td>Hostname:port or IP:port address of SCM.</td>
+</tr>
+<tr>
+<td>ozone.scm.block.client.address</td>
+<td>SCM server name and port</td>
+<td>Used by services like OM</td>
+</tr>
+<tr>
+<td>ozone.scm.client.address</td>
+<td>SCM server name and port</td>
+<td>Used by client-side</td>
+</tr>
+<tr>
+<td>ozone.scm.datanode.address</td>
+<td>SCM server name and port</td>
+<td>Used by datanode to talk to SCM</td>
+</tr>
+<tr>
+<td>ozone.om.address</td>
+<td>OM server name</td>
+<td>Used by Ozone handler and Ozone file system.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="startup-the-cluster">Startup the cluster</h2>
+<p>Before we boot up the Ozone cluster, we need to initialize both SCM and Ozone Manager.</p>
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init</code></pre></div>
+This allows SCM to create the cluster Identity and initialize its state.
+The <code>init</code> command is similar to Namenode format. Init command is executed only once, that allows SCM to create all the required on-disk structures to work correctly.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start scm</code></pre></div></p>
+<p>Once we know SCM is up and running, we can create an Object Store for our use. This is done by running the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone om --init</code></pre></div>
+<p>Once Ozone manager is initialized, we are ready to run the name service.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start om</code></pre></div>
+<p>At this point Ozone&rsquo;s name services, the Ozone manager, and the block service  SCM is both running.<br>
+<strong>Please note</strong>: If SCM is not running
+<code>om --init</code> command will fail. SCM start will fail if on-disk data structures are missing. So please make sure you have done both <code>scm --init</code> and <code>om --init</code> commands.</p>
+<p>Now we need to start the data nodes. Please run the following command on each datanode.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start datanode</code></pre></div></p>
+<p>At this point SCM, Ozone Manager and data nodes are up and running.</p>
+<p><em><strong>Congratulations!, You have set up a functional ozone cluster.</strong></em></p>
+<h2 id="shortcut">Shortcut</h2>
+<p>If you want to make your life simpler, you can just run
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init
+ozone om --init
+start-ozone.sh</code></pre></div></p>
+<p>This assumes that you have set up the slaves file correctly and ssh
+configuration that allows ssh-ing to all data nodes. This is the same as the
+HDFS configuration, so please refer to HDFS documentation on how to set this
+up.</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../start/minikube.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

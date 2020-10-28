@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GDPR on Ozone</title>
+    <link>/zh/gdpr.html</link>
+    <description>Recent content in GDPR on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/zh/gdpr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ozone 中的 GDPR</title>
+      <link>/zh/gdpr/gdpr-in-ozone.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/gdpr/gdpr-in-ozone.html</guid>
+      <description>Ozone 中的 GDPR</description>
+    </item>
+    
+  </channel>
+</rss>

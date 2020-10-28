@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Designs on Ozone</title>
+    <link>/design.html</link>
+    <description>Recent content in Designs on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ozone Enhancement Proposals</title>
+      <link>/design/ozone-enhancement-proposals.html</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/ozone-enhancement-proposals.html</guid>
+      <description>Definition of the process to share new technical proposals with the Ozone community.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/design/decommissioning.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/design/decommissioning.html</guid>
+      <description>title: Decommissioning in Ozone summary: Formal process to shut down machines in a safe way after the required replications. date: 2019-07-31 jira: HDDS-1881 status: current
+author: Anu Engineer, Marton Elek, Stephen O&amp;rsquo;Donnell Abstract The goal of decommissioning is to turn off a selected set of machines without data loss. It may or may not require to move the existing replicas of the containers to other nodes.
+There are two main classes of the decommissioning:</description>
+    </item>
+    
+  </channel>
+</rss>

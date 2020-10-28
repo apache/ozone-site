@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/interface.html">
+                
+
+                    
+                    <span>编程接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/feature.html">
+                
+
+                    
+                    <span>GDPR</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/security.html">
+                
+
+                    
+                    <span>安全</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/concept.html">
+                
+
+                    
+                    <span>概念</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/tools.html">
+                
+
+                    
+                    <span>工具</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/recipe.html">
+                
+
+                    
+                    <span>使用配方</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/recipe.html">使用配方</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">使用 Prometheus 监控</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    <a href="../../recipe/prometheus.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>使用 Prometheus 监控</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p><a href="https://prometheus.io/">Prometheus</a>是在<a href="https://www.cncf.io/">云原生计算基金会</a>管理下开发的一款开源监控软件。</p>
+<p>Ozone 原生支持 Prometheus，各个组件会启动一个兼容 Prometheus 的指标端点，将所有可用的 hadoop 指标以 Prometheus 的格式导出发布。</p>
+<h2 id="准备">准备</h2>
+<ol>
+<li><a href="../../zh/start/runningviadocker.html">安装启动</a>一个 Ozone 集群。</li>
+<li><a href="https://prometheus.io/download/#prometheus">下载</a> Prometheus 二进制包。</li>
+</ol>
+<h2 id="使用-prometheus-进行监控">使用 Prometheus 进行监控</h2>
+<ul>
+<li>你需要在 <code>ozone-site.xml</code> 文件中添加配置才可以启用 Prometheus 指标端点。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"> <span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+ <span style="color:#f92672">&lt;/property&gt;</span>
+</code></pre></div><p><em>注意</em>: 对于基于 docker-compose 方式的伪集群，在 <code>docker-config</code> 文件中添加 <code>OZONE-SITE.XML_hdds.prometheus.endpoint.enabled=true</code>。</p>
+<ul>
+<li>
+<p>重启 OM 和 SCM，检查端点：</p>
+</li>
+<li>
+<p>http://scm:9874/prom</p>
+</li>
+<li>
+<p>http://ozoneManager:9876/prom</p>
+</li>
+<li>
+<p>根据这两个端点，创建 prometheus.yaml 配置文件：</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">global</span>:
+  <span style="color:#66d9ef">scrape_interval</span>: 15s
+
+<span style="color:#66d9ef">scrape_configs</span>:
+  - <span style="color:#66d9ef">job_name</span>: ozone
+    <span style="color:#66d9ef">metrics_path</span>: /prom
+    <span style="color:#66d9ef">static_configs</span>:
+     - <span style="color:#66d9ef">targets</span>:
+        - <span style="color:#e6db74">&#34;scm:9876&#34;</span>
+        - <span style="color:#e6db74">&#34;ozoneManager:9874&#34;</span>
+</code></pre></div><ul>
+<li>在 prometheus.yaml 文件所在目录启动 Prometheus：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">prometheus
+</code></pre></div><ul>
+<li>在 Prometheus 的 web ui 中查看目标：</li>
+</ul>
+<p>http://localhost:9090/targets</p>
+<p><img src="prometheus.png" alt="Prometheus 目标页面示例"></p>
+<ul>
+<li>在 Prometheus web ui 中查看任意的指标，例如：
+For example:</li>
+</ul>
+<p>http://localhost:9090/graph?g0.range_input=1h&amp;g0.expr=om_metrics_num_key_allocate&amp;g0.tab=1</p>
+<p><img src="prometheus-key-allocate.png" alt="Prometheus 指标页面示例"></p>
+<h2 id="注意事项">注意事项</h2>
+<p>Ozone 发行包中包含了一个即开即用的容器化环境来试用 Ozone 和 Prometheus，在 <code>compose/ozone</code> 目录下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
+export COMPOSE_FILE<span style="color:#f92672">=</span>docker-compose.yaml:monitoring.yaml
+docker-compose up -d
+</code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/recipe/sparkozonefsk8s.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

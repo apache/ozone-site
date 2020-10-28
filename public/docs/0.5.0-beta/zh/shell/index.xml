@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>命令行接口 on Ozone</title>
+    <link>/zh/shell.html</link>
+    <description>Recent content in 命令行接口 on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/zh/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shell 概述</title>
+      <link>/zh/shell/format.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/shell/format.html</guid>
+      <description>shell 命令的语法介绍。</description>
+    </item>
+    
+    <item>
+      <title>卷命令</title>
+      <link>/zh/shell/volumecommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/shell/volumecommands.html</guid>
+      <description>用卷命令管理卷的生命周期</description>
+    </item>
+    
+    <item>
+      <title>桶命令</title>
+      <link>/zh/shell/bucketcommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/shell/bucketcommands.html</guid>
+      <description>用桶命令管理桶的生命周期</description>
+    </item>
+    
+    <item>
+      <title>键命令</title>
+      <link>/zh/shell/keycommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/shell/keycommands.html</guid>
+      <description>用键命令管理键/对象的生命周期</description>
+    </item>
+    
+  </channel>
+</rss>

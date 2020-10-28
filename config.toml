@@ -1,0 +1,86 @@
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. See accompanying LICENSE file.
+#
+title = "Apache Ozone"
+copyright = "&copy; 2020 Apache Software Foundation"
+enableEmoji = true
+footnotereturnlinkcontents = "<sup>^</sup>"
+uglyurls = false
+contentDir = "src"
+publishDir = "../content/ozone"
+
+[[menu.main]]
+  name = "Download"
+  url = "releases.html"
+  weight = 1
+
+
+[[menu.main]]
+  name = "Documentation"
+  identifier = "documentation"
+  weight = 2
+
+[[menu.main]]
+   name = "Latest"
+   parent = "documentation"
+   url = "https://hadoop.apache.org/docs/current/"
+
+[[menu.main]]
+   name = "Stable"
+   parent = "documentation"
+   url = "https://hadoop.apache.org/docs/stable/"
+
+
+
+
+[[menu.main]]
+   name = "Community"
+   identifier = "community"
+   weight = 3
+
+
+
+[[menu.main]]
+   name = "Development"
+   identifier = "development"
+   weight = 4
+
+[[menu.main]]
+  name = "How to Contribute"
+  url = "https://wiki.apache.org/hadoop/HowToContribute"
+  parent = "development"
+
+[[menu.main]]
+   name = "Help"
+   identifier = "help"
+   weight = 5
+
+[[menu.main]]
+   name = "Buy Stuff"
+   url = "https://www.cafepress.com/hadoop"
+   parent = "help"
+
+[[menu.main]]
+   name = "Sponsorshop"
+   url = "https://www.apache.org/foundation/sponsorship.html"
+   parent = "help"
+
+[[menu.main]]
+   name = "Thanks"
+   url = "https://www.apache.org/foundation/thanks.html"
+   parent = "help"
+
+
+# Configure the English version of the website.
+[languages.en]
+  languageCode = "en-us"

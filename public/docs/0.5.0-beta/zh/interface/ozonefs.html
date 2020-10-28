@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/shell.html">
+                
+
+                    
+                    <span>命令行接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/interface.html">
+                
+
+                    
+                    <span>编程接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/gdpr.html">
+                
+
+                    
+                    <span>GDPR</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/concept.html">
+                
+
+                    
+                    <span>概念</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/interface.html">编程接口</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone 文件系统</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    <a href="../../interface/ozonefs.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone 文件系统</h1>
+
+            
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>Hadoop 的文件系统接口兼容可以让任意像 Ozone 这样的存储后端轻松地整合进 Hadoop 生态系统，Ozone 文件系统就是一个兼容 Hadoop 的文件系统。</p>
+
+<h2 id="搭建-ozone-文件系统">搭建 Ozone 文件系统</h2>
+
+<p>要创建一个 ozone 文件系统，我们需要先为它选择一个用来存放数据的桶，这个桶会被用作 Ozone 文件系统的后端存储，所有的文件和目录都存储为这个桶中的键。</p>
+
+<p>如果你还没有可用的卷和桶的话，请使用下面的命令创建：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
+ozone sh bucket create /volume/bucket</code></pre></div>
+
+<p>创建之后，请使用 <em>list volume</em> 或 <em>list bucket</em> 命令来确认桶已存在。</p>
+
+<p>请在 core-site.xml 中添加以下条目：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+<span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+<span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+
+<p>这样会使指定的桶成为 HDFS 的 dfs 命令的默认文件系统，并且将其注册为了 o3fs 文件系统类型。</p>
+
+<p>你还需要将 ozone-filesystem.jar 文件加入 classpath：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/hadoop-ozone-filesystem-lib-current*.jar:$HADOOP_CLASSPATH</code></pre></div>
+
+<p>当配置了默认的文件系统之后，用户可以运行 ls、put、mkdir 等命令，比如：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+
+<p>或</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
+
+<p>或者 put 命令。换句话说，所有像 Hive、Spark 和 Distcp 的程序都会在这个文件系统上工作。
+请注意，在这个桶里使用 Ozone 文件系统以外的方法来进行键的创建和删除时，最终都会体现为 Ozone 文件系统中的目录和文件的创建和删除。</p>
+
+<p>注意：桶名和卷名不可以包含句点。
+此外，文件系统的 URI 可以由桶名和卷名后跟着 OM 主机的 FQDN 和一个可选的端口组成，比如，你可以同时指定主机和端口：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</code></pre></div>
+
+<p>如果 URI 未指定端口，将会尝试从 <code>ozone.om.address</code> 配置中获取端口，如果 <code>ozone.om.address</code> 未配置，则使用默认端口 <code>9862</code>，比如，我们在 <code>ozone-site.xml
+</code> 中配置 <code>ozone.om.address</code> 如下：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;property&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
+  <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+
+<p>当我们运行下面的命令：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</code></pre></div>
+
+<p>它其实等价于：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</code></pre></div>
+
+<p>注意：在这种情况下，<code>ozone.om.address</code> 配置中只有端口号会被用到，主机名是被忽略的。</p>
+
+<h2 id="兼容旧版本-hadoop-legacy-jar-和-basicozonefilesystem">兼容旧版本 Hadoop（Legacy jar 和 BasicOzoneFilesystem）</h2>
+
+<p>Ozone 文件系统的 jar 包有两种类型，它们都包含了所有的依赖：</p>
+
+<ul>
+<li>share/ozone/lib/hadoop-ozone-filesystem-lib-current-VERSION.jar</li>
+<li>share/ozone/lib/hadoop-ozone-filesystem-lib-legacy-VERSION.jar</li>
+</ul>
+
+<p>第一种 jar 包包含了在一个版本兼容的 hadoop（hadoop 3.2）中使用 Ozone 文件系统需要的所有依赖。</p>
+
+<p>第二种 jar 包将所有依赖单独放在一个内部的目录，并且这个目录下的类会用一个特殊的类加载器来加载这些类。通过这种方法，旧版本的 hadoop 就可以使用 hadoop-ozone-filesystem-lib-legacy.jar（比如hadoop 3.1、hadoop 2.7 或者 spark+hadoop 2.7）。</p>
+
+<p>和依赖的 jar 包类似， OzoneFileSystem 也有两种实现。</p>
+
+<p>对于 Hadoop 3.0 之后的版本，你应当使用 <code>org.apache.hadoop.fs.ozone.OzoneFileSystem</code>，它是兼容 Hadoop 文件系统 API 的完整实现。</p>
+
+<p>对于 Hadoop 2.x 的版本，你应该使用基础版本 <code>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</code>，两者实现基本相同，但是不包含在 Hadoop 3.0 中引入的特性和依赖（比如文件系统统计信息、加密桶等）。</p>
+
+<h3 id="总结">总结</h3>
+
+<p>下表总结了各个版本 Hadoop 应当使用的 jar 包和文件系统实现：</p>
+
+<table>
+<thead>
+<tr>
+<th>Hadoop 版本</th>
+<th>需要的 jar</th>
+<th>OzoneFileSystem 实现</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>3.2</td>
+<td>filesystem-lib-current</td>
+<td>org.apache.hadoop.fs.ozone.OzoneFileSystem</td>
+</tr>
+
+<tr>
+<td>3.1</td>
+<td>filesystem-lib-legacy</td>
+<td>org.apache.hadoop.fs.ozone.OzoneFileSystem</td>
+</tr>
+
+<tr>
+<td>2.9</td>
+<td>filesystem-lib-legacy</td>
+<td>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</td>
+</tr>
+
+<tr>
+<td>2.7</td>
+<td>filesystem-lib-legacy</td>
+<td>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</td>
+</tr>
+</tbody>
+</table>
+
+<p>由此可知，低版本的 Hadoop 可以使用 hadoop-ozone-filesystem-lib-legacy.jar（比如 hadoop 2.7 或者 spark+hadoop 2.7）。</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/interface/s3.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

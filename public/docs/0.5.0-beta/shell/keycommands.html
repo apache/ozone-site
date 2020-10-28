@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../shell.html">
+                
+
+                    
+                    <span>Command Line Interface</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../interface.html">
+                
+
+                    
+                    <span>Programming Interfaces</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../gdpr.html">
+                
+
+                    
+                    <span>GDPR</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../security.html">
+                
+
+                    
+                    <span>Security</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../concept.html">
+                
+
+                    
+                    <span>Concepts</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../beyond.html">
+                
+
+                    
+                    <span>Beyond Basics</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../shell.html">Command Line Interface</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Key Commands</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    <a href="../zh/shell/keycommands.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Key Commands</h1>
+
+            
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>Ozone shell supports the following key commands.</p>
+
+<ul>
+<li><a href="#get">get</a></li>
+<li><a href="#put">put</a></li>
+<li><a href="#delete">delete</a></li>
+<li><a href="#info">info</a></li>
+<li><a href="#list">list</a></li>
+<li><a href="#rename">rename</a></li>
+</ul>
+
+<h3 id="get">Get</h3>
+
+<p>The <code>key get</code> command downloads a key from Ozone cluster to local file system.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Uri</td>
+<td>The name of the key in <strong>/volume/bucket/key</strong> format.</td>
+</tr>
+
+<tr>
+<td>FileName</td>
+<td>Local file to download the key to.</td>
+</tr>
+</tbody>
+</table>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key get /hive/jan/sales.orc sales.orc</code></pre></div>
+Downloads the file sales.orc from the <em>/hive/jan</em> bucket and writes to the
+local file sales.orc.</p>
+
+<h3 id="put">Put</h3>
+
+<p>The <code>key put</code> command uploads a file from the local file system to the specified bucket.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Uri</td>
+<td>The name of the key in <strong>/volume/bucket/key</strong> format.</td>
+</tr>
+
+<tr>
+<td>FileName</td>
+<td>Local file to upload.</td>
+</tr>
+
+<tr>
+<td>-r, --replication</td>
+<td>Optional, Number of copies, ONE or THREE are the options. Picks up the default from cluster configuration.</td>
+</tr>
+</tbody>
+</table>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key put /hive/jan/corrected-sales.orc sales.orc</code></pre></div>
+The above command will put the sales.orc as a new key into <em>/hive/jan/corrected-sales.orc</em>.</p>
+
+<h3 id="delete">Delete</h3>
+
+<p>The <code>key delete</code> command removes the key from the bucket.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Uri</td>
+<td>The name of the key.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key delete /hive/jan/corrected-sales.orc</code></pre></div>
+
+<p>The above command deletes the key <em>/hive/jan/corrected-sales.orc</em>.</p>
+
+<h3 id="info">Info</h3>
+
+<p>The <code>key info</code> commands returns the information about the key.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Uri</td>
+<td>The name of the key.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key info /hive/jan/sales.orc</code></pre></div>
+
+<p>The above command will print out the information about <em>/hive/jan/sales.orc</em>
+key.</p>
+
+<h3 id="list">List</h3>
+
+<p>The <code>key list</code> command allows user to list all keys in a bucket.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-l, --length</td>
+<td>Maximum number of results to return. Default: 100</td>
+</tr>
+
+<tr>
+<td>-p, --prefix</td>
+<td>Optional, Only keys that match this prefix will be returned.</td>
+</tr>
+
+<tr>
+<td>-s, --start</td>
+<td>The listing will start from key after the start key.</td>
+</tr>
+
+<tr>
+<td>Uri</td>
+<td>The name of the <em>volume</em>.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key list /hive/jan</code></pre></div>
+
+<p>This command will list all keys in the bucket <em>/hive/jan</em>.</p>
+
+<h3 id="rename">Rename</h3>
+
+<p>The <code>key rename</code> command changes the name of an existing key in the specified bucket.</p>
+
+<p><strong><em>Params:</em></strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Arguments</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Uri</td>
+<td>The name of the bucket in <strong>/volume/bucket</strong> format.</td>
+</tr>
+
+<tr>
+<td>FromKey</td>
+<td>The existing key to be renamed</td>
+</tr>
+
+<tr>
+<td>ToKey</td>
+<td>The new desired name of the key</td>
+</tr>
+</tbody>
+</table>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key rename /hive/jan sales.orc new_name.orc</code></pre></div>
+The above command will rename <em>sales.orc</em> to <em>new_name.orc</em> in the bucket <em>/hive/jan</em>.</p>
+
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

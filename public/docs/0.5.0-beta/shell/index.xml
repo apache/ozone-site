@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Command Line Interface on Ozone</title>
+    <link>/shell.html</link>
+    <description>Recent content in Command Line Interface on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shell Overview</title>
+      <link>/shell/format.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/format.html</guid>
+      <description>Explains the command syntax used by shell command.</description>
+    </item>
+    
+    <item>
+      <title>Volume Commands</title>
+      <link>/shell/volumecommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/volumecommands.html</guid>
+      <description>Volume commands help you to manage the life cycle of a volume.</description>
+    </item>
+    
+    <item>
+      <title>Bucket Commands</title>
+      <link>/shell/bucketcommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/bucketcommands.html</guid>
+      <description>Bucket commands help you to manage the life cycle of a volume.</description>
+    </item>
+    
+    <item>
+      <title>Key Commands</title>
+      <link>/shell/keycommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/keycommands.html</guid>
+      <description>Key commands help you to manage the life cycle of Keys / Objects.</description>
+    </item>
+    
+  </channel>
+</rss>

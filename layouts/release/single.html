@@ -1,0 +1,38 @@
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License. See accompanying LICENSE file.
+-->
+{{partial "header.html" .}}
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+<h1>{{.Title}}</h1>
+{{.Content}}
+</div>
+<div class="col-md-4" style="padding: 20px;">
+   <p><a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz" class="btn btn-success">Download tar.gz</a></p>
+   <p>
+     (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
+     <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+   </p>
+   <p><a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz" class="btn btn-warning">Download src</a></p>
+   <p>
+     (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
+     <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
+   </p>
+      <p><a href="https://hadoop.apache.org/ozone/docs/{{.File.BaseFileName }}" class="btn btn-primary">Documentation</a></p>
+   <p><small>{{dateFormat "2006 Jan 2 " .Date}}</small></p>
+
+</div>
+</div>
+</div>
+{{partial "footer.html" .}}
