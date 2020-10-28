@@ -25,7 +25,7 @@ Choose a version:
      </tr>
    {{range first 5 (where (where .Site.Pages "Section" "release") ".Params.linked" true) }}
      <tr>
-       <td><a href="/ozone/docs/{{.File.BaseFileName }}">{{.File.BaseFileName}}</a></td>
+       <td><a href="/docs/{{.File.BaseFileName }}">{{.File.BaseFileName}}</a></td>
      </tr>
   {{end}}
   </table>
