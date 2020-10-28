@@ -1,0 +1,48 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+name: build-branch
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: regenerate
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout branch with source
+        uses: actions/checkout@v2
+      - name: Checkout branch with rendered version
+        uses: actions/checkout@v2
+        with:
+          path: public
+          ref: asf-site
+      - name: Install hugo
+        run: |
+            mkdir hugo
+            cd hugo
+            curl https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.tar.gz -L -o - | tar zvxf -
+      - name: Regenerate site
+        run: ./hugo/hugo
+      - name: Commit changes
+        run: |
+            git config --global user.name 'Github Actions'
+            git config --global user.email 'noreply@github.com'
+            cd public
+            git add .
+            git commit -a -m "[auto] Apply changes from master $GITHUB_SHA" || true
+            git push
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
