@@ -1,6 +1,3 @@
 github:
   description: "Website for Apache Ozone"
   homepage: https://ozone.apache.org/
-publish:
-  whoami: master
-  subdir: public
