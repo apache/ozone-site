@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview on Ozone</title>
+    <link>/</link>
+    <description>Recent content in Overview on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Overview</title>
+      <link>/concept/overview.html</link>
+      <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/overview.html</guid>
+      <description>Ozone&amp;rsquo;s overview and components that make up Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Java API</title>
+      <link>/interface/javaapi.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/javaapi.html</guid>
+      <description>Ozone has a set of Native RPC based APIs. This is the lowest level API&amp;rsquo;s on which all other protocols are built. This is the most performant and feature-full of all Ozone protocols.</description>
+    </item>
+    
+    <item>
+      <title>Running concurrently with HDFS</title>
+      <link>/beyond/runningwithhdfs.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/runningwithhdfs.html</guid>
+      <description>Ozone is designed to run concurrently with HDFS. This page explains how to deploy Ozone in a exisiting HDFS cluster.</description>
+    </item>
+    
+    <item>
+      <title>Securing Ozone</title>
+      <link>/security/secureozone.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/secureozone.html</guid>
+      <description>Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</description>
+    </item>
+    
+    <item>
+      <title>Shell Overview</title>
+      <link>/shell/format.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/format.html</guid>
+      <description>Explains the command syntax used by shell command.</description>
+    </item>
+    
+    <item>
+      <title>Ozone File System</title>
+      <link>/interface/ozonefs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/ozonefs.html</guid>
+      <description>Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Manager</title>
+      <link>/concept/ozonemanager.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/ozonemanager.html</guid>
+      <description>Ozone Manager is the principal name space service of Ozone. OM manages the life cycle of volumes, buckets and Keys.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Containers</title>
+      <link>/beyond/containers.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/containers.html</guid>
+      <description>Ozone uses containers extensively for testing. This page documents the usage and best practices of Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Securing Datanodes</title>
+      <link>/security/securingdatanodes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingdatanodes.html</guid>
+      <description>Explains different modes of securing data nodes. These range from kerberos to auto approval.</description>
+    </item>
+    
+    <item>
+      <title>Volume Commands</title>
+      <link>/shell/volumecommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/volumecommands.html</guid>
+      <description>Volume commands help you to manage the life cycle of a volume.</description>
+    </item>
+    
+    <item>
+      <title>Storage Container Manager</title>
+      <link>/concept/hdds.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/hdds.html</guid>
+      <description>Storage Container Manager or SCM is the core metadata service of Ozone. SCM provides a distributed block layer for Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Bucket Commands</title>
+      <link>/shell/bucketcommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/bucketcommands.html</guid>
+      <description>Bucket commands help you to manage the life cycle of a volume.</description>
+    </item>
+    
+    <item>
+      <title>S3 Protocol</title>
+      <link>/interface/s3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/s3.html</guid>
+      <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Transparent Data Encryption</title>
+      <link>/security/securingtde.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingtde.html</guid>
+      <description>TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access. You can enable this per key or per bucket.</description>
+    </item>
+    
+    <item>
+      <title>Datanodes</title>
+      <link>/concept/datanodes.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/concept/datanodes.html</guid>
+      <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Docker Cheat Sheet</title>
+      <link>/beyond/dockercheatsheet.html</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/beyond/dockercheatsheet.html</guid>
+      <description>Docker Compose cheat sheet to help you remember the common commands to control an Ozone cluster running on top of Docker.</description>
+    </item>
+    
+    <item>
+      <title>Key Commands</title>
+      <link>/shell/keycommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/keycommands.html</guid>
+      <description>Key commands help you to manage the life cycle of Keys / Objects.</description>
+    </item>
+    
+    <item>
+      <title>Securing S3</title>
+      <link>/security/securings3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securings3.html</guid>
+      <description>Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
+    </item>
+    
+    <item>
+      <title>Apache Ranger</title>
+      <link>/security/secuitywithranger.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/secuitywithranger.html</guid>
+      <description>Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</description>
+    </item>
+    
+    <item>
+      <title>GDPR in Ozone</title>
+      <link>/gdpr/gdpr-in-ozone.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/gdpr/gdpr-in-ozone.html</guid>
+      <description>GDPR in Ozone</description>
+    </item>
+    
+    <item>
+      <title>Ozone ACLs</title>
+      <link>/security/securityacls.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securityacls.html</guid>
+      <description>Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</description>
+    </item>
+    
+    <item>
+      <title>Simple Single Ozone</title>
+      <link>/start/startfromdockerhub.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/startfromdockerhub.html</guid>
+      <description>Requirements  Working docker setup AWS CLI (optional)    Ozone in a Single Container The easiest way to start up an all-in-one ozone container is to use the latest docker image from docker hub:
+docker run -p 9878:9878 -p 9876:9876 apache/ozone This command will pull down the ozone image from docker hub and start all ozone services in a single container. This container will run the required metadata servers (Ozone Manager, Storage Container Manager) one data node and the S3 compatible REST server (S3 Gateway).</description>
+    </item>
+    
+    <item>
+      <title>Ozone On Premise Installation</title>
+      <link>/start/onprem.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/onprem.html</guid>
+      <description>If you are feeling adventurous, you can setup ozone in a real cluster. Setting up a real cluster requires us to understand the components of Ozone. Ozone is designed to work concurrently with HDFS. However, Ozone is also capable of running independently. The components of ozone are the same in both approaches.
+Ozone Components  Ozone Manager - Is the server that is in charge of the namespace of Ozone.</description>
+    </item>
+    
+    <item>
+      <title>Minikube &amp; Ozone</title>
+      <link>/start/minikube.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/minikube.html</guid>
+      <description>Requirements  Working minikube setup kubectl    kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use apache/ozone image from the dockerhub.
+To deploy it to minikube use the minikube configuration set:
+cd kubernetes/examples/minikube kubectl apply -f .  And you can check the results with
+kubectl get pod  Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</description>
+    </item>
+    
+    <item>
+      <title>Ozone on Kubernetes</title>
+      <link>/start/kubernetes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/kubernetes.html</guid>
+      <description>Requirements  Working kubernetes cluster (LoadBalancer, PersistentVolume are not required) kubectl    As the apache/ozone docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host) Deploy to kubernetes
+kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</description>
+    </item>
+    
+    <item>
+      <title>Pseudo-cluster</title>
+      <link>/start/runningviadocker.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/runningviadocker.html</guid>
+      <description>Requirements  docker and docker-compose     Download the Ozone binary tarball and untar it.
+ Go to the directory where the docker compose files exist and tell docker-compose to start Ozone in the background. This will start a small ozone instance on your machine.
+  cd compose/ozone/ docker-compose up -d To verify that ozone is working as expected, let us log into a data node and run freon, the load generator for Ozone.</description>
+    </item>
+    
+    <item>
+      <title>From Source</title>
+      <link>/start/fromsource.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/start/fromsource.html</guid>
+      <description>Requirements  Java 1.8 Maven Protoc (2.5)    This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page. If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
+If you want to build from sources, Please untar the source tarball and run the ozone build command.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Enhancement Proposals</title>
+      <link>/design/ozone-enhancement-proposals.html</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/ozone-enhancement-proposals.html</guid>
+      <description>Definition of the process to share new technical proposals with the Ozone community.</description>
+    </item>
+    
+    <item>
+      <title>Generate Configurations</title>
+      <link>/tools/genconf.html</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/genconf.html</guid>
+      <description>Tool to generate default configuration</description>
+    </item>
+    
+    <item>
+      <title>Audit Parser</title>
+      <link>/tools/auditparser.html</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/auditparser.html</guid>
+      <description>Audit Parser tool can be used for querying the ozone audit logs.</description>
+    </item>
+    
+    <item>
+      <title>SCMCLI</title>
+      <link>/tools/scmcli.html</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/scmcli.html</guid>
+      <description>Admin tool for managing SCM</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/design/decommissioning.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/design/decommissioning.html</guid>
+      <description>title: Decommissioning in Ozone summary: Formal process to shut down machines in a safe way after the required replications. date: 2019-07-31 jira: HDDS-1881 status: current
+author: Anu Engineer, Marton Elek, Stephen O&amp;rsquo;Donnell Abstract The goal of decommissioning is to turn off a selected set of machines without data loss. It may or may not require to move the existing replicas of the containers to other nodes.
+There are two main classes of the decommissioning:</description>
+    </item>
+    
+    <item>
+      <title>Monitoring with Prometheus</title>
+      <link>/recipe/prometheus.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/prometheus.html</guid>
+      <description>A Simple recipe to monitor Ozone using Prometheus</description>
+    </item>
+    
+    <item>
+      <title>Spark in Kubernetes with OzoneFS</title>
+      <link>/recipe/sparkozonefsk8s.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/recipe/sparkozonefsk8s.html</guid>
+      <description>How to use Apache Spark with Ozone on K8s?</description>
+    </item>
+    
+    <item>
+      <title>Testing tools</title>
+      <link>/tools/testtools.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/testtools.html</guid>
+      <description>Ozone contains multiple test tools for load generation, partitioning test or acceptance tests.</description>
+    </item>
+    
+  </channel>
+</rss>

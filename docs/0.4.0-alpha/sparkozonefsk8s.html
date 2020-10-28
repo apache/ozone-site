@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-xs" href="#">Apache Hadoop Ozone/HDDS documentation</a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
+  <img src="ozone-logo.png" style="max-width: 100%;"/>
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="index.html">
+                
+
+                    
+                    <span>Ozone Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="runningviadocker.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./runningviadocker.html">Alpha Cluster</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./settings.html">Configuration</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./realcluster.html">Starting an Ozone Cluster</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonefs.html">Ozone File System</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./runningwithhdfs.html">Running concurrently with HDFS</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./buildingsources.html">Building from Sources</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="commandshell.html">
+                    
+                    <span>Client</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                               <a href="./commandshell.html">
+                                 
+                                 <span>Ozone CLI</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="./volumecommands.html">Volume Commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="./bucketcommands.html">Bucket Commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="./keycommands.html">Key Commands</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./s3.html">S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="dozone.html">
+                    
+                    <span>Tools</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./auditparser.html">Audit Parser</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./dozone.html">Dozone &amp; Dev Tools</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./freon.html">Freon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./genconf.html">Generate Configurations</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./scmcli.html">SCMCLI</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="prometheus.html">
+                    
+                    <span>Recipes</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./prometheus.html">Monitoring with Prometheus</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="./sparkozonefsk8s.html">Spark in Kubernetes with OzoneFS</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concepts.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./hdds.html">Hadoop Distributed Data Store</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonesecurityarchitecture.html">Ozone Security Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./setupsecureozone.html">Setup secure ozone cluster</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Spark in Kubernetes with OzoneFS</h1>
+            <div class="col-md-9">
+              
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<h1 id="using-ozone-from-apache-spark">Using Ozone from Apache Spark</h1>
+
+<p>This recipe shows how Ozone object store can be used from Spark using:</p>
+
+<ul>
+<li>OzoneFS (Hadoop compatible file system)</li>
+<li>Hadoop 2.7 (included in the Spark distribution)</li>
+<li>Kubernetes Spark scheduler</li>
+<li>Local spark client</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Download latest Spark and Ozone distribution and extract them. This method is
+tested with the <code>spark-2.4.0-bin-hadoop2.7</code> distribution.</p>
+
+<p>You also need the following:</p>
+
+<ul>
+<li>A container repository to push and pull the spark+ozone images. (In this recipe we will use the dockerhub)</li>
+<li>A repo/name for the custom containers (in this recipe <em>myrepo/ozone-spark</em>)</li>
+<li>A dedicated namespace in kubernetes (we use <em>yournamespace</em> in this recipe)</li>
+</ul>
+
+<h2 id="create-the-docker-image-for-drivers">Create the docker image for drivers</h2>
+
+<h3 id="create-the-base-spark-driver-executor-image">Create the base Spark driver/executor image</h3>
+
+<p>First of all create a docker image with the Spark image creator.
+Execute the following from the Spark distribution</p>
+
+<pre><code>./bin/docker-image-tool.sh -r myrepo -t 2.4.0 build
+</code></pre>
+
+<p><em>Note</em>: if you use Minikube add the <code>-m</code> flag to use the docker daemon of the Minikube image:</p>
+
+<pre><code>./bin/docker-image-tool.sh -m -r myrepo -t 2.4.0 build
+</code></pre>
+
+<p><code>./bin/docker-image-tool.sh</code> is an official Spark tool to create container images and this step will create multiple Spark container images with the name <em>myrepo/spark</em>. The first container will be used as a base container in the following steps.</p>
+
+<h3 id="customize-the-docker-image">Customize the docker image</h3>
+
+<p>Create a new directory for customizing the created docker image.</p>
+
+<p>Copy the <code>ozone-site.xml</code> from the cluster:</p>
+
+<pre><code>kubectl cp om-0:/opt/hadoop/etc/hadoop/ozone-site.xml .
+</code></pre>
+
+<p>And create a custom <code>core-site.xml</code>:</p>
+
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.o3fs.impl&lt;/name&gt;
+        &lt;value&gt;org.apache.hadoop.fs.ozone.BasicOzoneFileSystem&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p><em>Note</em>: You may also use <code>org.apache.hadoop.fs.ozone.OzoneFileSystem</code> without the <code>Basic</code> prefix. The <code>Basic</code> version doesn&rsquo;t support FS statistics and encryption zones but can work together with older hadoop versions.</p>
+
+<p>Copy the <code>ozonefs.jar</code> file from an ozone distribution (<strong>use the legacy version!</strong>)</p>
+
+<pre><code>kubectl cp om-0:/opt/hadoop/share/ozone/lib/hadoop-ozone-filesystem-lib-legacy-0.4.0-SNAPSHOT.jar .
+</code></pre>
+
+<p>Create a new Dockerfile and build the image:</p>
+
+<pre><code>FROM myrepo/spark:2.4.0
+ADD core-site.xml /opt/hadoop/conf/core-site.xml
+ADD ozone-site.xml /opt/hadoop/conf/ozone-site.xml
+ENV HADOOP_CONF_DIR=/opt/hadoop/conf
+ENV SPARK_EXTRA_CLASSPATH=/opt/hadoop/conf
+ADD hadoop-ozone-filesystem-lib-legacy-0.4.0-SNAPSHOT.jar /opt/hadoop-ozone-filesystem-lib-legacy.jar
+</code></pre>
+
+<pre><code>docker build -t myrepo/spark-ozone
+</code></pre>
+
+<p>For remote kubernetes cluster you may need to push it:</p>
+
+<pre><code>docker push myrepo/spark-ozone
+</code></pre>
+
+<h2 id="create-a-bucket-and-identify-the-ozonefs-path">Create a bucket and identify the ozonefs path</h2>
+
+<p>Download any text file and put it to the <code>/tmp/alice.txt</code> first.</p>
+
+<pre><code>kubectl port-forward s3g-0 9878:9878
+aws s3api --endpoint http://localhost:9878 create-bucket --bucket=test
+aws s3api --endpoint http://localhost:9878 put-object --bucket test --key alice.txt --body /tmp/alice.txt
+kubectl exec -it scm-0 ozone s3 path test
+</code></pre>
+
+<p>The output of the last command is something like this:</p>
+
+<pre><code>Volume name for S3Bucket is : s3asdlkjqiskjdsks
+Ozone FileSystem Uri is : o3fs://test.s3asdlkjqiskjdsks
+</code></pre>
+
+<p>Write down the ozone filesystem uri as it should be used with the spark-submit command.</p>
+
+<h2 id="create-service-account-to-use">Create service account to use</h2>
+
+<pre><code>kubectl create serviceaccount spark -n yournamespace
+kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount=yournamespace:spark --namespace=yournamespace
+</code></pre>
+
+<h2 id="execute-the-job">Execute the job</h2>
+
+<p>Execute the following spark-submit command, but change at least the following values:</p>
+
+<ul>
+<li>the kubernetes master url (you can check your ~/.kube/config to find the actual value)</li>
+<li>the kubernetes namespace (yournamespace in this example)</li>
+<li>serviceAccountName (you can use the <em>spark</em> value if you folllowed the previous steps)</li>
+<li>container.image (in this example this is myrepo/spark-ozone. This is pushed to the registry in the previous steps)</li>
+<li>location of the input file (o3fs://&hellip;), use the string which is identified earlier with the <code>ozone s3 path &lt;bucketname&gt;</code> command</li>
+</ul>
+
+<pre><code>bin/spark-submit \
+    --master k8s://https://kubernetes:6443 \
+    --deploy-mode cluster \
+    --name spark-word-count \
+    --class org.apache.spark.examples.JavaWordCount \
+    --conf spark.executor.instances=1 \
+    --conf spark.kubernetes.namespace=yournamespace \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    --conf spark.kubernetes.container.image=myrepo/spark-ozone \
+    --conf spark.kubernetes.container.image.pullPolicy=Always \
+    --jars /opt/hadoop-ozone-filesystem-lib-legacy.jar \
+    local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar \
+    o3fs://bucket.volume/alice.txt
+</code></pre>
+
+<p>Check the available <code>spark-word-count-...</code> pods with <code>kubectl get pod</code></p>
+
+<p>Check the output of the calculation with <code>kubectl logs spark-word-count-1549973913699-driver</code></p>
+
+<p>You should see the output of the wordcount job. For example:</p>
+
+<pre><code>...
+name: 8
+William: 3
+this,': 1
+SOUP!': 1
+`Silence: 1
+`Mine: 1
+ordered.: 1
+considering: 3
+muttering: 3
+candle: 2
+...
+</code></pre>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

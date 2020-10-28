@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="./css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="./ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="./index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./shell.html">
+                
+
+                    
+                    <span>Command Line Interface</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./interface.html">
+                
+
+                    
+                    <span>Programming Interfaces</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="active">
+                
+                   <a href="./security.html">
+                
+
+                    
+                    <span>Security</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./concept.html">
+                
+
+                    
+                    <span>Concepts</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./beyond.html">
+                
+
+                    
+                    <span>Beyond Basics</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+                <h1>Security</h1>
+            </div>
+            <div class="col-md-9">
+                <!---
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">Securing Ozone </h3>
+        <p class="lead">
+            
+          Ozone is an enterprise class, secure storage system. There are many
+          optional security features in Ozone. Following pages discuss how
+          you can leverage the security features of Ozone.
+
+        </p>
+    </div>
+</div>
+
+<div class="alert alert-warning" role="alert">
+If you would like to understand Ozone's security architecture at a greater
+depth, please take a look at <a href="https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf">Ozone security architecture.</a>
+</div>
+
+<p>Depending on your needs, there are multiple optional steps in securing ozone.</p>
+
+                
+                
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-tower"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing Ozone
+                                </h2>
+                                <p class="card-text">Kerberos Ozone depends on Kerberos to make the clusters secure. Historically, HDFS has supported running in an isolated secure networks where it is possible to deploy without securing the cluster.
+This release of Ozone follows that model, but soon will move to secure by default. Today to enable security in ozone cluster, we need to set the configuration ozone.security.enabled to true and hadoop.security.authentication to kerberos.
+   Property Value     ozone.</p>
+                                <a href="./security/secureozone.html"
+                                   class=" btn btn-primary btn-lg">Securing Ozone</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-th"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing Datanodes
+                                </h2>
+                                <p class="card-text">Datanodes under Hadoop is traditionally secured by creating a Keytab file on the data nodes. With Ozone, we have moved away to using data node certificates. That is, Kerberos on data nodes is not needed in case of a secure Ozone cluster.
+However, we support the legacy Kerberos based Authentication to make it easy for the current set of users.The HDFS configuration keys are the following that is setup in hdfs-site.</p>
+                                <a href="./security/securingdatanodes.html"
+                                   class=" btn btn-primary btn-lg">Securing Datanodes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-lock"
+                                          aria-hidden="true"></span>
+                                    
+                                    Transparent Data Encryption
+                                </h2>
+                                <p class="card-text">Ozone TDE setup process and usage are very similar to HDFS TDE. The major difference is that Ozone TDE is enabled at Ozone bucket level when a bucket is created.
+Setting up the Key Management Server To use TDE, clients must setup a Key Management Server and provide that URI to Ozone/HDFS. Since Ozone and HDFS can use the same Key Management Server, this configuration can be provided via hdfs-site.</p>
+                                <a href="./security/securingtde.html"
+                                   class=" btn btn-primary btn-lg">Transparent Data Encryption</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-cloud"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing S3
+                                </h2>
+                                <p class="card-text">To access an S3 bucket, users need AWS access key ID and AWS secret. Both of these are generated by going to AWS website. When you use Ozone&rsquo;s S3 protocol, you need the same AWS access key and secret.
+Under Ozone, the clients can download the access key directly from Ozone. The user needs to kinit first and once they have authenticated via kerberos they can download the S3 access key ID and AWS secret.</p>
+                                <a href="./security/securings3.html"
+                                   class=" btn btn-primary btn-lg">Securing S3</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-user"
+                                          aria-hidden="true"></span>
+                                    
+                                    Apache Ranger
+                                </h2>
+                                <p class="card-text">Apache Ranger™ is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform. Any version of Apache Ranger which is greater than 1.20 is aware of Ozone, and can manage an Ozone cluster.
+To use Apache Ranger, you must have Apache Ranger installed in your Hadoop Cluster. For installation instructions of Apache Ranger, Please take a look at the Apache Ranger website.
+If you have a working Apache Ranger installation that is aware of Ozone, then configuring Ozone to work with Apache Ranger is trivial.</p>
+                                <a href="./security/secuitywithranger.html"
+                                   class=" btn btn-primary btn-lg">Apache Ranger</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-transfer"
+                                          aria-hidden="true"></span>
+                                    
+                                    Ozone ACLs
+                                </h2>
+                                <p class="card-text">Ozone supports a set of native ACLs. These ACLs can be used independently or along with Ranger. If Apache Ranger is enabled, then ACL will be checked first with Ranger and then Ozone&rsquo;s internal ACLs will be evaluated.
+Ozone ACLs are a super set of Posix and S3 ACLs.
+The general format of an ACL is object:who:rights.
+Where an object can be:
+ Volume - An Ozone volume. e.g. /volume Bucket - An Ozone bucket.</p>
+                                <a href="./security/securityacls.html"
+                                   class=" btn btn-primary btn-lg">Ozone ACLs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

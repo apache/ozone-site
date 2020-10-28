@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-xs" href="#">Apache Hadoop Ozone/HDDS documentation</a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
+  <img src="ozone-logo.png" style="max-width: 100%;"/>
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="index.html">
+                
+
+                    
+                    <span>Ozone Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="runningviadocker.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./runningviadocker.html">Alpha Cluster</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./settings.html">Configuration</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./realcluster.html">Starting an Ozone Cluster</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonefs.html">Ozone File System</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./runningwithhdfs.html">Running concurrently with HDFS</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./buildingsources.html">Building from Sources</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="commandshell.html">
+                    
+                    <span>Client</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                               <a href="./commandshell.html">
+                                 
+                                 <span>Ozone CLI</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="./volumecommands.html">Volume Commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="./bucketcommands.html">Bucket Commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="./keycommands.html">Key Commands</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./s3.html">S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="dozone.html">
+                    
+                    <span>Tools</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./auditparser.html">Audit Parser</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./dozone.html">Dozone &amp; Dev Tools</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./freon.html">Freon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./genconf.html">Generate Configurations</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./scmcli.html">SCMCLI</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="prometheus.html">
+                    
+                    <span>Recipes</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./prometheus.html">Monitoring with Prometheus</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./sparkozonefsk8s.html">Spark in Kubernetes with OzoneFS</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concepts.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./hdds.html">Hadoop Distributed Data Store</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./ozonesecurityarchitecture.html">Ozone Security Overview</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="./setupsecureozone.html">Setup secure ozone cluster</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Setup secure ozone cluster</h1>
+            <div class="col-md-9">
+              
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<h1 id="setup-secure-ozone-cluster">Setup secure ozone cluster</h1>
+
+<p>To enable security in ozone cluster <strong>ozone.security.enabled</strong> should be set to true.</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ozone.security.enabled</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="kerberos">Kerberos</h2>
+
+<p>Configuration for service daemons:</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>hdds.scm.kerberos.principal</td>
+<td>The SCM service principal. Ex scm/<em>HOST@REALM.COM</em></td>
+</tr>
+
+<tr>
+<td>hdds.scm.kerberos.keytab.file</td>
+<td>The keytab file used by SCM daemon to login as its service principal.</td>
+</tr>
+
+<tr>
+<td>ozone.om.kerberos.principal</td>
+<td>The OzoneManager service principal. Ex om/_HOST@REALM.COM</td>
+</tr>
+
+<tr>
+<td>ozone.om.kerberos.keytab.file</td>
+<td>The keytab file used by SCM daemon to login as its service principal.</td>
+</tr>
+
+<tr>
+<td>hdds.scm.http.kerberos.principal</td>
+<td>SCM http server service principal.</td>
+</tr>
+
+<tr>
+<td>hdds.scm.http.kerberos.keytab.file</td>
+<td>The keytab file used by SCM http server to login as its service principal.</td>
+</tr>
+
+<tr>
+<td>ozone.om.http.kerberos.principal</td>
+<td>OzoneManager http server principal.</td>
+</tr>
+
+<tr>
+<td>ozone.om.http.kerberos.keytab.file</td>
+<td>The keytab file used by OM http server to login as its service principal.</td>
+</tr>
+
+<tr>
+<td>ozone.s3g.keytab.file</td>
+<td>The keytab file used by S3 gateway. Ex /etc/security/keytabs/HTTP.keytab</td>
+</tr>
+
+<tr>
+<td>ozone.s3g.authentication.kerberos.principal</td>
+<td>S3 Gateway principal. Ex HTTP/_HOST@EXAMPLE.COM</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="tokens">Tokens</h2>
+
+<h2 id="delegation-token">Delegation token</h2>
+
+<p>Delegation tokens are enabled by default when security is enabled.</p>
+
+<h2 id="block-tokens">Block Tokens</h2>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>hdds.block.token.enabled</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="s3token">S3Token</h2>
+
+<p>S3 token are enabled by default when security is enabled.
+To use S3 tokens users need to perform following steps:</p>
+
+<ul>
+<li>S3 clients should get the secret access id and user secret from OzoneManager.</li>
+</ul>
+
+<pre><code>ozone s3 getsecret
+</code></pre>
+
+<ul>
+<li>Setup secret in aws configs:</li>
+</ul>
+
+<pre><code>aws configure set default.s3.signature_version s3v4
+aws configure set aws_access_key_id ${accessId}
+aws configure set aws_secret_access_key ${secret}
+aws configure set region us-west-1
+</code></pre>
+
+<h2 id="certificates">Certificates</h2>
+
+<p>Certificates are used internally inside Ozone. Its enabled be default when security is enabled.</p>
+
+<h2 id="authorization">Authorization</h2>
+
+<p>Default access authorizer for Ozone approves every request. It is not suitable for production environments. It is recommended that clients use ranger plugin for Ozone to manage authorizations.</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ozone.acl.enabled</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>ozone.acl.authorizer.class</td>
+<td>org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="tde">TDE</h2>
+
+<p>To use TDE clients must set KMS URI.</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>hadoop.security.key.provider.path</td>
+<td>KMS uri. Ex kms://http@kms-host:9600/kms</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

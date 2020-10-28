@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Apache Hadoop Ozone/HDDS documentation</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-3 col-md-2 sidebar">
+  <img src="ozone-logo.png" style="max-width: 100%;"/>
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="index.html">
+                
+
+                    
+                    <span>Ozone Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="runningviadocker.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./runningviadocker.html">Alpha Cluster</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./settings.html">Configuration</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./realcluster.html">Starting an Ozone Cluster</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./runningwithhdfs.html">Running concurrently with HDFS</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./buildingsources.html">Building from Sources</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="commandshell.html">
+                    
+                    <span>Client</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./commandshell.html">Ozone CLI</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./volumecommands.html">Volume Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./bucketcommands.html">Bucket Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./keycommands.html">Key Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./javaapi.html">Java API</a>
+                        </li>
+                    
+                        <li class="active">
+                        <a href="./ozonefs.html">Ozone File System</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./rest.html">REST API</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="dozone.html">
+                    
+                    <span>Tools</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./dozone.html">Dozone &amp; Dev Tools</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./freon.html">Freon</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./scmcli.html">SCMCLI</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concepts.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./hdds.html">Hadoop Distributed Data Store</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./ozonemanager.html">Ozone Manager</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Ozone File System</h1>
+            <div class="col-md-9">
+              
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>There are many Hadoop compatible files systems under Hadoop. Hadoop compatible file systems ensures that storage backends like Ozone can easily be integrated into Hadoop eco-system.</p>
+
+<h2 id="setting-up-the-ozone-file-system">Setting up the Ozone file system</h2>
+
+<p>To create an ozone file system, we have to choose a bucket where the file system would live. This bucket will be used as the backend store for OzoneFileSystem. All the files and directories will be stored as keys in this bucket.</p>
+
+<p>Please run the following commands to create a volume and bucket, if you don&rsquo;t have them already.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
+ozone sh bucket create /volume/bucket</code></pre></div>
+
+<p>Once this is created, please make sure that bucket exists via the listVolume or listBucket commands.</p>
+
+<p>Please add the following entry to the core-site.xml.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.o3.impl<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+<span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.default.name<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>o3://localhost:9864/volume/bucket<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+
+<p>This will make this bucket to be the default file system for HDFS dfs commands and register the o3 file system type..</p>
+
+<p>You also need to add the ozone-filesystem.jar file to the classpath:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/hadoop/ozonefs/hadoop-ozone-filesystem.jar:$HADOOP_CLASSPATH</code></pre></div>
+
+<p>Once the default Filesystem has been setup, users can run commands like ls, put, mkdir, etc.
+For example,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
+
+<p>Or put command etc. In other words, all programs like Hive, Spark, and Distcp will work against this file system.
+Please note that any keys created/deleted in the bucket using methods apart from OzoneFileSystem will show up as diectories and files in the Ozone File System.</p>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

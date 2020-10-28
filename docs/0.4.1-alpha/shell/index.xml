@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Command Line Interface on Ozone</title>
+    <link>/shell.html</link>
+    <description>Recent content in Command Line Interface on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shell Overview</title>
+      <link>/shell/format.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/format.html</guid>
+      <description>Ozone shell help can be invoked at object level or at action level. For example:
+ozone sh volume --help This will show all possible actions for volumes.
+or it can be invoked to explain a specific action like ozone sh volume create --help This command will give you command line options of the create command.
+
+General Command Format The Ozone shell commands take the following format.
+ ozone sh object action url</description>
+    </item>
+    
+    <item>
+      <title>Volume Commands</title>
+      <link>/shell/volumecommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/volumecommands.html</guid>
+      <description>Volume commands generally need administrator privileges. The ozone shell supports the following volume commands.
+ create delete info list update  Create The volume create command allows an administrator to create a volume and assign it to a user.
+Params:
+   Arguments Comment     -q, --quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster.   -u, --user Required, The name of the user who owns this volume.</description>
+    </item>
+    
+    <item>
+      <title>Bucket Commands</title>
+      <link>/shell/bucketcommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/bucketcommands.html</guid>
+      <description>Ozone shell supports the following bucket commands.
+ create delete info list  Create The bucket create command allows users to create a bucket.
+Params:
+   Arguments Comment     Uri The name of the bucket in /volume/bucket format.    ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.</description>
+    </item>
+    
+    <item>
+      <title>Key Commands</title>
+      <link>/shell/keycommands.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/shell/keycommands.html</guid>
+      <description>Ozone shell supports the following key commands.
+ get put delete info list rename  Get The key get command downloads a key from Ozone cluster to local file system.
+Params:
+   Arguments Comment     Uri The name of the key in /volume/bucket/key format.   FileName Local file to download the key to.    ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.</description>
+    </item>
+    
+  </channel>
+</rss>

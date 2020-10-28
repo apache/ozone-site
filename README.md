@@ -12,24 +12,10 @@
  limitations under the License. See accompanying LICENSE file.
 -->
 
-# Apache Ozone web page
+# Rendered version of Apache Ozone web page
 
-This is the source code of the website of Apache Hadoop Ozone.
+This is the *rendered* code of the website of Apache Ozone.
 
-To render it you need hugo static site generator (https://gohugo.io/getting-started/installing) which is available for the most popular platforms as a single binary.
+The site is generated with Hugo from the master branch, all custom changes will be lost during the generation.
 
-To render the final website use the following command:
-
-```
-hugo -d /destination/dir
-```
-
-To develop the site use
-
-```
-hugo serve
-```
-
-which starts an internal server where you can always check the final rendered version.
-
-
+Except: `docs/` subdirectory is not generated and kept during the generation, any doc changes can be committed directly to this branch.

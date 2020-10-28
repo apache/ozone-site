@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../shell.html">
+                
+
+                    
+                    <span>Command Line Interface</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../interface.html">
+                
+
+                    
+                    <span>Programming Interfaces</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../security.html">
+                
+
+                    
+                    <span>Security</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../concept.html">
+                
+
+                    
+                    <span>Concepts</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../beyond.html">
+                
+
+                    
+                    <span>Beyond Basics</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../start.html">Getting Started</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Simple Single Ozone</li>
+                </ol>
+              </nav>
+
+          <div class="col-md-9">
+            <h1>Simple Single Ozone</h1>
+          </div>
+
+          
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Requirements</div>
+    <div class="panel-body">
+        <ul>
+<li>Working docker setup</li>
+<li>AWS CLI (optional)</li>
+</ul>
+
+    </div>
+</div>
+
+
+<h1 id="ozone-in-a-single-container">Ozone in a Single Container</h1>
+
+<p>The easiest way to start up an all-in-one ozone container is to use the latest
+docker image from docker hub:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -p <span style="color:#ae81ff">9878</span>:9878 -p <span style="color:#ae81ff">9876</span>:9876 apache/ozone</code></pre></div>
+<p>This command will pull down the ozone image from docker hub and start all
+ozone services in a single container. <br>
+This container will run the required metadata servers (Ozone Manager, Storage
+Container Manager) one data node  and the S3 compatible REST server
+(S3 Gateway).</p>
+
+<h1 id="local-multi-container-cluster">Local multi-container cluster</h1>
+
+<p>If you would like to use a more realistic pseudo-cluster where each components
+run in own containers, you can start it with a docker-compose file.</p>
+
+<p>We have shipped a docker-compose and an enviorment file as part of the
+container image  that is uploaded to docker hub.</p>
+
+<p>The following commands can be used to extract these files from the image in the docker hub.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run apache/ozone cat docker-compose.yaml &gt; docker-compose.yaml
+docker run apache/ozone cat docker-config &gt; docker-config</code></pre></div>
+<p>Now you can start the cluster with docker-compose:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d</code></pre></div>
+<p>If you need multiple datanodes, we can just scale it up:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> docker-compose scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span></code></pre></div>
+<h1 id="running-s3-clients">Running S3 Clients</h1>
+
+<p>Once the cluster is booted up and ready, you can verify its status by
+connecting to the SCM&rsquo;s UI at <a href="http://localhost:9876">http://localhost:9876</a>.</p>
+
+<p>The S3 gateway endpoint will be exposed at port 9878. You can use Ozone&rsquo;s S3
+support as if you are working against the real S3.</p>
+
+<p>Here is how you create buckets from command line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3api --endpoint http://localhost:9878/ create-bucket --bucket<span style="color:#f92672">=</span>bucket1</code></pre></div>
+<p>Only notable difference in the above command line is the fact that you have
+to tell the <em>endpoint</em> address to the aws s3api command.</p>
+
+<p>Now let us put a simple file into the S3 Bucket hosted by Ozone. We will
+start by creating a temporary file that we can upload to Ozone via S3 support.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -1 &gt; /tmp/testfile</code></pre></div>
+<p>This command creates a temporary file that
+ we can upload to Ozone. The next command actually uploads to Ozone&rsquo;s S3
+ bucket using the standard aws s3 command line interface.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile</code></pre></div>
+<p><div class="alert alert-info" role="alert">
+Note: REDUCED_REDUNDANCY is required for the single container ozone, since it
+ has a single datanode. </div>
+We can now verify that file got uploaded by running the list command against
+our bucket.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile</code></pre></div>
+<p><div class="alert alert-info" role="alert"> You can also check the internal
+bucket browser supported by Ozone S3 interface by clicking on the below link.
+<br>
+</div>
+<a href="http://localhost:9878/bucket1?browser">http://localhost:9878/bucket1?browser</a></p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../start/onprem.html">Next >></a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

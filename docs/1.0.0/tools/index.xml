@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on Ozone</title>
+    <link>/tools.html</link>
+    <description>Recent content in Tools on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ozone Admin</title>
+      <link>/tools/admin.html</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/admin.html</guid>
+      <description>Ozone Admin command can be used for all the admin related tasks.</description>
+    </item>
+    
+    <item>
+      <title>Generate Configurations</title>
+      <link>/tools/genconf.html</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/genconf.html</guid>
+      <description>Tool to generate default configuration</description>
+    </item>
+    
+    <item>
+      <title>Audit Parser</title>
+      <link>/tools/auditparser.html</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/auditparser.html</guid>
+      <description>Audit Parser tool can be used for querying the ozone audit logs.</description>
+    </item>
+    
+    <item>
+      <title>Testing tools</title>
+      <link>/tools/testtools.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/testtools.html</guid>
+      <description>Ozone contains multiple test tools for load generation, partitioning test or acceptance tests.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-xs" href="#">Apache Hadoop Ozone/HDDS documentation</a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
+  <img src="ozone-logo.png" style="max-width: 100%;"/>
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="index.html">
+                
+
+                    
+                    <span>Ozone Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="runningviadocker.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./runningviadocker.html">Alpha Cluster</a>
+                        </li>
+                    
+                        <li class="active">
+                        <a href="./settings.html">Configuration</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./realcluster.html">Starting an Ozone Cluster</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./runningwithhdfs.html">Running concurrently with HDFS</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./buildingsources.html">Building from Sources</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="commandshell.html">
+                    
+                    <span>Client</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./commandshell.html">Ozone CLI</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./s3.html">S3</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./volumecommands.html">Volume Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./bucketcommands.html">Bucket Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./keycommands.html">Key Commands</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./javaapi.html">Java API</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./ozonefs.html">Ozone File System</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./rest.html">REST API</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="dozone.html">
+                    
+                    <span>Tools</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./dozone.html">Dozone &amp; Dev Tools</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./freon.html">Freon</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./scmcli.html">SCMCLI</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concepts.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                        <a href="./hdds.html">Hadoop Distributed Data Store</a>
+                        </li>
+                    
+                        <li class="">
+                        <a href="./ozonemanager.html">Ozone Manager</a>
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Configuration</h1>
+            <div class="col-md-9">
+              
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>If you are feeling adventurous, you can setup ozone in a real cluster.
+Setting up a real cluster requires us to understand the components of Ozone.
+Ozone is designed to work concurrently with HDFS. However, Ozone is also
+capable of running independently. The components of ozone are the same in both approaches.</p>
+
+<h2 id="ozone-components">Ozone Components</h2>
+
+<ol>
+<li>Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</li>
+<li>Storage Container Manager - Acts as the block manager. Ozone Manager
+requests blocks from SCM, to which clients can write data.</li>
+<li>Datanodes - Ozone data node code runs inside the HDFS datanode or in the independent deployment case runs an ozone datanode daemon.</li>
+</ol>
+
+<h2 id="setting-up-an-ozone-only-cluster">Setting up an Ozone only cluster</h2>
+
+<ul>
+<li><p>Please untar the ozone-<version> to the directory where you are going
+to run Ozone from. We need Ozone jars on all machines in the cluster. So you
+need to do this on all machines in the cluster.</p></li>
+
+<li><p>Ozone relies on a configuration file called <code>ozone-site.xml</code>. To
+generate a template that you can replace with proper values, please run the
+following command. This will generate a template called <code>ozone-site.xml</code> at
+the specified path (directory).</p></li>
+</ul>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone genconf &lt;path&gt;</code></pre></div>
+
+<p>Let us look at the settings inside the generated file (ozone-site.xml) and
+how they control ozone. Once the right values are defined, this file
+needs to be copied to <code>ozone directory/etc/hadoop</code>.</p>
+
+<ul>
+<li><strong>ozone.enabled</strong> This is the most critical setting for ozone.
+Ozone is a work in progress and users have to enable this service explicitly.
+By default, Ozone is disabled. Setting this flag to <code>true</code> enables ozone in the
+HDFS or Ozone cluster.</li>
+</ul>
+
+<p>Here is an example,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
+       <span style="color:#f92672">&lt;name&gt;</span>ozone.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+       <span style="color:#f92672">&lt;value&gt;</span>True<span style="color:#f92672">&lt;/value&gt;</span>
+    <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+
+<ul>
+<li><strong>ozone.metadata.dirs</strong> Allows Administrators to specify where the
+metadata must reside. Usually you pick your fastest disk (SSD if
+you have them on your nodes). OzoneManager, SCM and datanode will  write the
+metadata to this path. This is a required setting, if this is missing Ozone
+will fail to come up.</li>
+</ul>
+
+<p>Here is an example,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
+   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+
+<ul>
+<li><strong>ozone.scm.names</strong>  Storage container manager(SCM) is a distributed block
+service which is used by ozone. This property allows data nodes to discover
+SCM&rsquo;s address. Data nodes send heartbeat to SCM.
+Until HA  feature is  complete, we configure ozone.scm.names to be a
+single machine.</li>
+</ul>
+
+<p>Here is an example,</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">      <span style="color:#f92672">&lt;property&gt;</span>
+        <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+      <span style="color:#f92672">&lt;/property&gt;</span>
+  </code></pre></div>
+
+<ul>
+<li><strong>ozone.scm.datanode.id</strong> Data nodes generate a Unique ID called Datanode
+ID. This identity is written to the file specified by this path. <em>Data nodes
+will create this path if it doesn&rsquo;t exist already.</em></li>
+</ul>
+
+<p>Here is an  example,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node/datanode.id<span style="color:#f92672">&lt;/value&gt;</span>
+   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
+
+<ul>
+<li><strong>ozone.om.address</strong> OM server address. This is used by OzoneClient and
+Ozone File System.</li>
+</ul>
+
+<p>Here is an  example,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
+       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+    <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
+
+<h3 id="ozone-settings-summary">Ozone Settings Summary</h3>
+
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ozone.enabled</td>
+<td>true</td>
+<td>This enables SCM and  containers in HDFS cluster.</td>
+</tr>
+
+<tr>
+<td>ozone.metadata.dirs</td>
+<td>file path</td>
+<td>The metadata will be stored here.</td>
+</tr>
+
+<tr>
+<td>ozone.scm.names</td>
+<td>SCM server name</td>
+<td>Hostname:port or IP:port address of SCM.</td>
+</tr>
+
+<tr>
+<td>ozone.scm.block.client.address</td>
+<td>SCM server name and port</td>
+<td>Used by services like OM</td>
+</tr>
+
+<tr>
+<td>ozone.scm.client.address</td>
+<td>SCM server name and port</td>
+<td>Used by client-side</td>
+</tr>
+
+<tr>
+<td>ozone.scm.datanode.address</td>
+<td>SCM server name and port</td>
+<td>Used by datanode to talk to SCM</td>
+</tr>
+
+<tr>
+<td>ozone.om.address</td>
+<td>OM server name</td>
+<td>Used by Ozone handler and Ozone file system.</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

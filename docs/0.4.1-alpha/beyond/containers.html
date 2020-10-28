@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../shell.html">
+                
+
+                    
+                    <span>Command Line Interface</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../interface.html">
+                
+
+                    
+                    <span>Programming Interfaces</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../security.html">
+                
+
+                    
+                    <span>Security</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../concept.html">
+                
+
+                    
+                    <span>Concepts</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../beyond.html">
+                
+
+                    
+                    <span>Beyond Basics</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../beyond.html">Beyond Basics</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone Containers</li>
+                </ol>
+              </nav>
+
+          <div class="col-md-9">
+            <h1>Ozone Containers</h1>
+          </div>
+
+          
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>Docker heavily is used at the ozone development with three principal use-cases:</p>
+
+<ul>
+<li><strong>dev</strong>:
+
+<ul>
+<li>We use docker to start local pseudo-clusters (docker provides unified environment, but no image creation is required)</li>
+</ul></li>
+<li><strong>test</strong>:
+
+<ul>
+<li>We create docker images from the dev branches to test ozone in kubernetes and other container orchestrator system</li>
+<li>We provide <em>apache/ozone</em> images for each release to make it easier for evaluation of Ozone.
+These images are <strong>not</strong> created <strong>for production</strong> usage.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-warning" role="alert">
+We <b>strongly</b> recommend that you create your own custom images when you
+deploy ozone into production using containers. Please treat all the standard
+shipped container images and k8s resources as examples and guides to help you
+ customize your own deployment.
+</div>
+
+<ul>
+<li><strong>production</strong>:
+
+<ul>
+<li>We have documentation on how you can create your own docker image for your production cluster.</li>
+</ul></li>
+</ul>
+
+<p>Let&rsquo;s check out each of the use-cases in more detail:</p>
+
+<h2 id="development">Development</h2>
+
+<p>Ozone artifact contains example docker-compose directories to make it easier to start Ozone cluster in your local machine.</p>
+
+<p>From distribution:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
+docker-compose up -d</code></pre></div>
+<p>After a local build:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd  hadoop-ozone/dist/target/ozone-*/compose
+docker-compose up -d</code></pre></div>
+<p>These environments are very important tools to start different type of Ozone clusters at any time.</p>
+
+<p>To be sure that the compose files are up-to-date, we also provide acceptance test suites which start
+the cluster and check the basic behaviour.</p>
+
+<p>The acceptance tests are part of the distribution, and you can find the test definitions in <code>smoketest</code> directory.</p>
+
+<p>You can start the tests from any compose directory:</p>
+
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
+./test.sh</code></pre></div>
+<h3 id="implementation-details">Implementation details</h3>
+
+<p><code>compose</code> tests are based on the apache/hadoop-runner docker image. The image itself does not contain
+any Ozone jar file or binary just the helper scripts to start ozone.</p>
+
+<p>hadoop-runner provdes a fixed environment to run Ozone everywhere, but the ozone distribution itself
+is mounted from the including directory:</p>
+
+<p>(Example docker-compose fragment)</p>
+
+<pre><code> scm:
+      image: apache/hadoop-runner:jdk11
+      volumes:
+         - ../..:/opt/hadoop
+      ports:
+         - 9876:9876
+
+</code></pre>
+
+<p>The containers are configured based on environment variables, but because the same environment
+variables should be set for each containers we maintain the list of the environment variables
+in a separated file:</p>
+
+<pre><code> scm:
+      image: apache/hadoop-runner:jdk11
+      #...
+      env_file:
+          - ./docker-config
+</code></pre>
+
+<p>The docker-config file contains the list of the required environment variables:</p>
+
+<pre><code>OZONE-SITE.XML_ozone.om.address=om
+OZONE-SITE.XML_ozone.om.http-address=om:9874
+OZONE-SITE.XML_ozone.scm.names=scm
+OZONE-SITE.XML_ozone.enabled=True
+#...
+</code></pre>
+
+<p>As you can see we use naming convention. Based on the name of the environment variable, the
+appropriate hadoop config XML (<code>ozone-site.xml</code> in our case) will be generated by a
+<a href="https://github.com/apache/hadoop/tree/docker-hadoop-runner-latest/scripts">script</a> which is
+included in the <code>hadoop-runner</code> base image.</p>
+
+<p>The <a href="https://github.com/apache/hadoop/blob/docker-hadoop-runner-latest/scripts/starter.sh">entrypoint</a>
+of the <code>hadoop-runner</code> image contains a helper shell script which triggers this transformation and
+can do additional actions (eg. initialize scm/om storage, download required keytabs, etc.)
+based on environment variables.</p>
+
+<h2 id="test-staging">Test/Staging</h2>
+
+<p>The <code>docker-compose</code> based approach is recommended only for local test, not for multi node cluster.
+To use containers on a multi-node cluster we need a Container Orchestrator like Kubernetes.</p>
+
+<p>Kubernetes example files are included in the <code>kubernetes</code> folder.</p>
+
+<p><em>Please note</em>: all the provided images are based the <code>hadoop-runner</code> image which contains all the
+required tool for testing in staging environments. For production we recommend to create your own,
+hardened image with your own base image.</p>
+
+<h3 id="test-the-release">Test the release</h3>
+
+<p>The release can be tested with deploying any of the example clusters:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd kubernetes/examples/ozone
+kubectl apply -f</code></pre></div>
+<p>Plese note that in this case the latest released container will be downloaded from the dockerhub.</p>
+
+<h3 id="test-the-development-build">Test the development build</h3>
+
+<p>To test a development build you can create your own image and upload it to your own docker registry:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean install -f pom.ozone.xml -DskipTests -Pdocker-build,docker-push -Ddocker.image<span style="color:#f92672">=</span>myregistry:9000/name/ozone</code></pre></div>
+<p>The configured image will be used in all the generated kubernetes resources files (<code>image:</code> keys are adjusted during the build)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd kubernetes/examples/ozone
+kubectl apply -f</code></pre></div>
+<h2 id="production">Production</h2>
+
+<div class="alert alert-danger" role="alert">
+We <b>strongly</b> recommend to use your own image in your production cluster
+and
+adjust base image, umask, security settings, user settings according to your own requirements.
+</div>
+
+<p>You can use the source of our development images as an example:</p>
+
+<ul>
+<li><a href="https://github.com/apache/hadoop/blob/docker-hadoop-runner-jdk11/Dockerfile">Base image</a></li>
+<li><a href="https://github.com/apache/hadoop/blob/trunk/hadoop-ozone/dist/src/main/docker/Dockerfile">Docker image</a></li>
+</ul>
+
+<p>Most of the elements are optional and just helper function but to use the provided example
+ kubernetes resources you may need the scripts from
+ <a href="https://github.com/apache/hadoop/tree/docker-hadoop-runner-jdk11/scripts">here</a></p>
+
+<ul>
+<li>The two python scripts convert environment variables to real hadoop XML config files</li>
+<li>The start.sh executes the python scripts (and other initialization) based on environment variables.</li>
+</ul>
+
+<h2 id="containers">Containers</h2>
+
+<p>Ozone related container images and source locations:</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Container</th>
+      <th scope="col">Repository</th>
+      <th scope="col">Base</th>
+      <th scope="col">Branch</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>apache/ozone</td>
+      <td>https://github.com/apache/hadoop-docker-ozone</td>
+      <td>ozone-... </td>
+      <td>hadoop-runner</td>
+      <td>0.3.0,0.4.0,0.4.1</td>
+      <td>For each Ozone release we create new release tag.</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>apache/hadoop-runner </td>
+      <td>https://github.com/apache/hadoop</td>
+      <td>docker-hadoop-runner</td>
+      <td>centos</td>
+      <td>jdk11,jdk8,latest</td>
+      <td>This is the base image used for testing Hadoop Ozone.
+       This is a set of utilities that make it easy for us run ozone.</td>
+    </tr>
+    <!---tr>
+      <th scope="row">3</th>
+      <td>apache/ozone:build (WIP)</td>
+      <td>https://github.com/apache/hadoop-docker-ozone</td>
+      <td>ozone-build </td>
+      <td> </td>
+      <td> </td>
+      <td>TODO: Add more documentation here.</td>
+    </tr-->
+  </tbody>
+</table>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../beyond/dockercheatsheet.html">Next >></a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

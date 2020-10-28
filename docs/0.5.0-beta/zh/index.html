@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.58.3" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="active">
+                
+                   <a href="../zh/">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../zh/shell.html">
+                
+
+                    
+                    <span>命令行接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../zh/interface.html">
+                
+
+                    
+                    <span>编程接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../zh/gdpr.html">
+                
+
+                    
+                    <span>GDPR</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../zh/concept.html">
+                
+
+                    
+                    <span>概念</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+            
+
+<div class="pull-right">
+    
+    
+    <a href="../"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+            
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<h1 id="apache-hadoop-ozone">Apache Hadoop Ozone</h1>
+
+<figure>
+    <img src="../ozone-usage.png" width="60%"/> 
+</figure>
+
+
+<p><em><em>Ozone 是 Hadoop 的分布式对象存储系统，具有易扩展和冗余存储的特点。<p>
+Ozone 不仅能存储数十亿个不同大小的对象，还支持在容器化环境（比如 Kubernetes）中运行。</em></em> <p></p>
+
+<p>Apache Spark、Hive 和 YARN 等应用无需任何修改即可使用 Ozone。Ozone 提供了 <a href="../zh/interface/javaapi.html">Java API</a>、<a href="../zh/interface/s3.html">S3 接口</a>和<a href="../zh/shell.html">命令行接口</a>，极大地方便了 Ozone
+ 在不同应用场景下的的使用。</p>
+
+<p>Ozone 的管理由卷、桶和键组成：</p>
+
+<ul>
+<li>卷的概念和用户账号类似，只有管理员可以创建和删除卷。</li>
+<li>桶的概念和目录类似，用户可以在自己的卷下创建任意数量的桶，每个桶可以包含任意数量的键，但是不可以包含其它的桶。</li>
+<li>键的概念和文件类似，用户通过键来读写数据。</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

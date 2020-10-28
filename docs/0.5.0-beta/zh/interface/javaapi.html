@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="../../ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/shell.html">
+                
+
+                    
+                    <span>命令行接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/interface.html">
+                
+
+                    
+                    <span>编程接口</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/gdpr.html">
+                
+
+                    
+                    <span>GDPR</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/concept.html">
+                
+
+                    
+                    <span>概念</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/interface.html">编程接口</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Java API</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    <a href="../../interface/javaapi.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Java API</h1>
+
+            
+
+<!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<p>Ozone 自带了支持 RPC 的客户端库，对于一般的应用场景也可以使用兼容 AWS S3 的 REST 接口替代 Ozone 客户端 API。</p>
+
+<h2 id="创建-ozone-客户端">创建 Ozone 客户端</h2>
+
+<p>ozone 客户端由客户端工厂创建，我们可以通过如下调用获得一个 RPC 客户端对象：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">OzoneClient <span style="color:#a6e22e">ozClient</span> <span style="color:#f92672">=</span> OzoneClientFactory.<span style="color:#a6e22e">getRpcClient</span>();</code></pre></div>
+
+<p>如果用户想要创建指定配置的客户端，可以这样调用：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">OzoneClient <span style="color:#a6e22e">ozClient</span> <span style="color:#f92672">=</span> OzoneClientFactory.<span style="color:#a6e22e">getClient</span>();</code></pre></div>
+
+<p>这样就会返回一个合适的客户端对象。</p>
+
+<h2 id="使用-ozone-客户端写数据">使用 Ozone 客户端写数据</h2>
+
+<p>ozone 中的数据层次为卷、桶和键。卷是桶的集合，桶是键的集合，如果要向 ozone 写数据，你需要依次获得卷、桶和键。</p>
+
+<h3 id="创建卷">创建卷</h3>
+
+<p>有了客户端对象之后，我们需要获取 ObjectStore 的引用，获取方法为：</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ObjectStore <span style="color:#a6e22e">objectStore</span> <span style="color:#f92672">=</span> ozClient.<span style="color:#a6e22e">getObjectStore</span>();</code></pre></div>
+
+<p>ObjectStore 对象表示了客户端连接的集群。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 让我们创建一个卷来存储资产数据
+</span><span style="color:#75715e">// 使用默认参数来创建资产卷
+</span><span style="color:#75715e"></span>objectStore.<span style="color:#a6e22e">createVolume</span>(<span style="color:#e6db74">&#34;assets&#34;</span>);
+
+<span style="color:#75715e">// 验证 assets 卷是否已创建
+</span><span style="color:#75715e"></span>OzoneVolume <span style="color:#a6e22e">assets</span> <span style="color:#f92672">=</span> objectStore.<span style="color:#a6e22e">getVolume</span>(<span style="color:#e6db74">&#34;assets&#34;</span>);</code></pre></div>
+
+<p>createVolume 方法也支持传入参数数组来指定卷的创建参数。</p>
+
+<h3 id="创建桶">创建桶</h3>
+
+<p>有了卷之后，你就可以在卷中创建桶。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 创建一个名为 videos 的桶
+</span><span style="color:#75715e"></span>assets.<span style="color:#a6e22e">createBucket</span>(<span style="color:#e6db74">&#34;videos&#34;</span>);
+OzoneBucket <span style="color:#a6e22e">video</span> <span style="color:#f92672">=</span> assets.<span style="color:#a6e22e">getBucket</span>(<span style="color:#e6db74">&#34;videos&#34;</span>);</code></pre></div>
+
+<p>此时我们有了一个可用的卷和一个桶，卷名为 <em>assets</em> ，桶名为 <em>videos</em> 。</p>
+
+<p>接下来我们创建一个键。</p>
+
+<h3 id="键的读写">键的读写</h3>
+
+<p>通过桶对象可以进行键的读写，下面的代码从本地磁盘读取名为 intro.mp4 的视频文件，并把它存储到我们刚刚创建的 <em>video</em> 桶中。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 从文件读取数据，需要由用户提供读取函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">byte</span> [] videoData <span style="color:#f92672">=</span> readFile(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>);
+
+<span style="color:#75715e">// 创建一个输出流并写数据
+</span><span style="color:#75715e"></span>OzoneOutputStream <span style="color:#a6e22e">videoStream</span> <span style="color:#f92672">=</span> video.<span style="color:#a6e22e">createKey</span>(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>, 1048576);
+videoStream.<span style="color:#a6e22e">write</span>(videoData);
+
+<span style="color:#75715e">// 写操作完成之后关闭输出流
+</span><span style="color:#75715e"></span>videoStream.<span style="color:#a6e22e">close</span>();
+
+
+<span style="color:#75715e">// 我们可以使用同一个桶，通过创建输入流来读取刚刚写入的文件
+</span><span style="color:#75715e">// 先创建一个用来存储视频的字节数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">byte</span>[] <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[(<span style="color:#66d9ef">int</span>)1048576];
+OzoneInputStream <span style="color:#a6e22e">introStream</span> <span style="color:#f92672">=</span> video.<span style="color:#a6e22e">readKey</span>(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>);
+<span style="color:#75715e">// 读取 intro.mp4 到缓冲区中
+</span><span style="color:#75715e"></span>introStream.<span style="color:#a6e22e">read</span>(data);
+introStream.<span style="color:#a6e22e">close</span>();</code></pre></div>
+
+<p>下面是一个完整的代码示例，请注意代码中 close 函数的调用。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 创建客户端对象
+</span><span style="color:#75715e"></span>OzoneClient <span style="color:#a6e22e">ozClient</span> <span style="color:#f92672">=</span> OzoneClientFactory.<span style="color:#a6e22e">getClient</span>();
+
+<span style="color:#75715e">// 通过客户端对象获取 ObjectStore 的引用
+</span><span style="color:#75715e"></span>ObjectStore <span style="color:#a6e22e">objectStore</span> <span style="color:#f92672">=</span> ozClient.<span style="color:#a6e22e">getObjectStore</span>();
+
+<span style="color:#75715e">// 创建用于存储数据的 assets 卷
+</span><span style="color:#75715e">// 此处创建的卷采用默认参数
+</span><span style="color:#75715e"></span>objectStore.<span style="color:#a6e22e">createVolume</span>(<span style="color:#e6db74">&#34;assets&#34;</span>);
+
+<span style="color:#75715e">// 验证卷是否已创建
+</span><span style="color:#75715e"></span>OzoneVolume <span style="color:#a6e22e">assets</span> <span style="color:#f92672">=</span> objectStore.<span style="color:#a6e22e">getVolume</span>(<span style="color:#e6db74">&#34;assets&#34;</span>);
+
+<span style="color:#75715e">// 创建名为 videos 的桶
+</span><span style="color:#75715e"></span>assets.<span style="color:#a6e22e">createBucket</span>(<span style="color:#e6db74">&#34;videos&#34;</span>);
+OzoneBucket <span style="color:#a6e22e">video</span> <span style="color:#f92672">=</span> assets.<span style="color:#a6e22e">getBucket</span>(<span style="color:#e6db74">&#34;videos&#34;</span>);
+
+<span style="color:#75715e">// 从文件中读取数据，需要用户提供此函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">byte</span> [] videoData <span style="color:#f92672">=</span> readFile(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>);
+
+<span style="color:#75715e">// 创建输出流并写数据
+</span><span style="color:#75715e"></span>OzoneOutputStream <span style="color:#a6e22e">videoStream</span> <span style="color:#f92672">=</span> video.<span style="color:#a6e22e">createKey</span>(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>, 1048576);
+videoStream.<span style="color:#a6e22e">write</span>(videoData);
+
+<span style="color:#75715e">// 写操作完成之后关闭输出流
+</span><span style="color:#75715e"></span>videoStream.<span style="color:#a6e22e">close</span>();
+
+
+<span style="color:#75715e">// 我们可以使用同一个桶，通过创建输入流来读取刚刚写入的文件
+</span><span style="color:#75715e">// 先创建一个用来存储视频的字节数组
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">byte</span>[] <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[(<span style="color:#66d9ef">int</span>)1048576];
+OzoneInputStream <span style="color:#a6e22e">introStream</span> <span style="color:#f92672">=</span> video.<span style="color:#a6e22e">readKey</span>(<span style="color:#e6db74">&#34;intro.mp4&#34;</span>);
+introStream.<span style="color:#a6e22e">read</span>(data);
+
+<span style="color:#75715e">// 读操作完成之后关闭输入流
+</span><span style="color:#75715e"></span>introStream.<span style="color:#a6e22e">close</span>();
+
+<span style="color:#75715e">// 关闭客户端
+</span><span style="color:#75715e"></span>ozClient.<span style="color:#a6e22e">close</span>();</code></pre></div>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/interface/ozonefs.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

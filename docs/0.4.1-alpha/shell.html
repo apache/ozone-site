@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Hadoop Ozone Documentation">
+
+    <title>Documentation for Apache Hadoop Ozone</title>
+
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="./css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-left" style="height: 50px; padding: 5px 5px 5px 0;">
+        <img src="./ozone-logo-small.png" width="40"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="#">
+        Apache Hadoop Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Hadoop Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="./index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="active">
+                
+                   <a href="./shell.html">
+                
+
+                    
+                    <span>Command Line Interface</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./interface.html">
+                
+
+                    
+                    <span>Programming Interfaces</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./security.html">
+                
+
+                    
+                    <span>Security</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./concept.html">
+                
+
+                    
+                    <span>Concepts</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./beyond.html">
+                
+
+                    
+                    <span>Beyond Basics</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+                <h1>Command Line Interface</h1>
+            </div>
+            <div class="col-md-9">
+                <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">OzoneShell </h3>
+        <p class="lead">
+            
+    Ozone  shell is the primary interface to interact with Ozone.
+    It provides a command shell interface to work against Ozone.
+
+        </p>
+    </div>
+</div>
+
+                
+                
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Shell Overview
+                                </h2>
+                                <p class="card-text">Ozone shell help can be invoked at object level or at action level. For example:
+ozone sh volume --help This will show all possible actions for volumes.
+or it can be invoked to explain a specific action like ozone sh volume create --help This command will give you command line options of the create command.
+
+General Command Format The Ozone shell commands take the following format.
+ ozone sh object action url</p>
+                                <a href="./shell/format.html"
+                                   class=" btn btn-primary btn-lg">Shell Overview</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Volume Commands
+                                </h2>
+                                <p class="card-text">Volume commands generally need administrator privileges. The ozone shell supports the following volume commands.
+ create delete info list update  Create The volume create command allows an administrator to create a volume and assign it to a user.
+Params:
+   Arguments Comment     -q, --quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster.   -u, --user Required, The name of the user who owns this volume.</p>
+                                <a href="./shell/volumecommands.html"
+                                   class=" btn btn-primary btn-lg">Volume Commands</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Bucket Commands
+                                </h2>
+                                <p class="card-text">Ozone shell supports the following bucket commands.
+ create delete info list  Create The bucket create command allows users to create a bucket.
+Params:
+   Arguments Comment     Uri The name of the bucket in /volume/bucket format.    ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.</p>
+                                <a href="./shell/bucketcommands.html"
+                                   class=" btn btn-primary btn-lg">Bucket Commands</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Key Commands
+                                </h2>
+                                <p class="card-text">Ozone shell supports the following key commands.
+ get put delete info list rename  Get The key get command downloads a key from Ozone cluster to local file system.
+Params:
+   Arguments Comment     Uri The name of the key in /volume/bucket/key format.   FileName Local file to download the key to.    ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.</p>
+                                <a href="./shell/keycommands.html"
+                                   class=" btn btn-primary btn-lg">Key Commands</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
