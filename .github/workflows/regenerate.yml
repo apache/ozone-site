@@ -35,7 +35,7 @@ jobs:
             cd hugo
             curl https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.tar.gz -L -o - | tar zvxf -
       - name: Regenerate site
-        run: ./hugo/hugo
+        run: ./hugo/hugo -b https://ozone.apache.org/
       - name: Commit changes
         run: |
             git config --global user.name 'Github Actions'

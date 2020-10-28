@@ -16,6 +16,7 @@ copyright = "&copy; 2020 Apache Software Foundation"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
 uglyurls = false
+baseUrl = "/"
 
 [[menu.main]]
   name = "Download"
