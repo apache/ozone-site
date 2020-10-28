@@ -3,63 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>https://ozone.apache.org/</loc>
     <lastmod>2020-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/1.0.0/</loc>
+    <loc>https://ozone.apache.org/release/1.0.0/</loc>
     <lastmod>2020-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/</loc>
+    <loc>https://ozone.apache.org/release/</loc>
     <lastmod>2020-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/0.5.0-beta/</loc>
+    <loc>https://ozone.apache.org/release/0.5.0-beta/</loc>
     <lastmod>2020-03-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/0.4.1-alpha/</loc>
+    <loc>https://ozone.apache.org/release/0.4.1-alpha/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/0.4.0-alpha/</loc>
+    <loc>https://ozone.apache.org/release/0.4.0-alpha/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/0.3.0-alpha/</loc>
+    <loc>https://ozone.apache.org/release/0.3.0-alpha/</loc>
     <lastmod>2018-11-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/release/0.2.1-alpha/</loc>
+    <loc>https://ozone.apache.org/release/0.2.1-alpha/</loc>
     <lastmod>2018-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/downloads/</loc>
+    <loc>https://ozone.apache.org/downloads/</loc>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://ozone.apache.org/categories/</loc>
   </url>
   
   <url>
-    <loc>/docs/</loc>
+    <loc>https://ozone.apache.org/docs/</loc>
   </url>
   
   <url>
-    <loc>/faq/</loc>
+    <loc>https://ozone.apache.org/faq/</loc>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://ozone.apache.org/tags/</loc>
   </url>
   
 </urlset>

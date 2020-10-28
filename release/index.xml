@@ -2,68 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Releases on Apache Ozone</title>
-    <link>/release/</link>
+    <link>https://ozone.apache.org/release/</link>
     <description>Recent content in Releases on Apache Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2020 Apache Software Foundation</copyright>
-    <lastBuildDate>Wed, 02 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/release/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/release/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Release 1.0.0 available</title>
-      <link>/release/1.0.0/</link>
+      <link>https://ozone.apache.org/release/1.0.0/</link>
       <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/release/1.0.0/</guid>
+      <guid>https://ozone.apache.org/release/1.0.0/</guid>
       <description>Apache Hadoop Ozone 1.0.0 is released with following features:
  OM HA - HA support for Ozone Manager Security Phase II Support Hadoop 2.7 &amp;amp; security enabled Hadoop 2.x Ozone OFS new Filesystem scheme Ozone Filesystem performance improvement Recon &amp;amp; Recon UI improvements Bucket link &amp;amp; S3 volume/bucket mapping changes  This is a generally available (GA) release. It represents a point of API stability and quality that we consider production-ready.</description>
     </item>
     
     <item>
       <title>Release 0.5.0-beta available</title>
-      <link>/release/0.5.0-beta/</link>
+      <link>https://ozone.apache.org/release/0.5.0-beta/</link>
       <pubDate>Tue, 24 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/release/0.5.0-beta/</guid>
+      <guid>https://ozone.apache.org/release/0.5.0-beta/</guid>
       <description>Apache Hadoop Ozone 0.5.0-beta is released with following features:
  O3FS - S3A based file system semantics Able to handle 1 billion objects Network topology awareness for block placement GDPR Right to Erasure  This is a beta release and not production ready.</description>
     </item>
     
     <item>
       <title>Release 0.4.1-alpha available</title>
-      <link>/release/0.4.1-alpha/</link>
+      <link>https://ozone.apache.org/release/0.4.1-alpha/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/release/0.4.1-alpha/</guid>
+      <guid>https://ozone.apache.org/release/0.4.1-alpha/</guid>
       <description>Apache Hadoop Ozone 0.4.1-alpha is released with following features:
  Ozone Native ACL support First class K8s support Stability improvements  This is an alpha release and not production ready.</description>
     </item>
     
     <item>
       <title>Release 0.4.0-alpha available</title>
-      <link>/release/0.4.0-alpha/</link>
+      <link>https://ozone.apache.org/release/0.4.0-alpha/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/release/0.4.0-alpha/</guid>
+      <guid>https://ozone.apache.org/release/0.4.0-alpha/</guid>
       <description>Apache Hadoop Ozone 0.4.0-alpha is released with following features:
  Hadoop Delegation Tokens and Block Tokens supported for Ozone. Transparent Data Encryption (TDE) Support - Allows data blocks to be encrypted-at-rest. Kerberos support for Ozone. Certificate Infrastructure for Ozone - Tokens use PKI instead of shared secrets. Datanode to Datanode communication secured via mutual TLS. Ability secure ozone cluster that works with Yarn, Hive, and Spark. Helm/Skaffold support to deploy Ozone clusters on K8s.</description>
     </item>
     
     <item>
       <title>Release 0.3.0-alpha available</title>
-      <link>/release/0.3.0-alpha/</link>
+      <link>https://ozone.apache.org/release/0.3.0-alpha/</link>
       <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/release/0.3.0-alpha/</guid>
+      <guid>https://ozone.apache.org/release/0.3.0-alpha/</guid>
       <description>Apache Hadoop Ozone 0.3.0-alpha is released.
  A new S3 compatible rest server is added. Ozone can be used from any S3 compatible tools (docs, HDDS-434) Ozone Hadoop file system URL prefix is renamed from o3:// to o3fs:// (HDDS-651) Extensive testing and stability improvements of OzoneFs. Spark, YARN and Hive support and stability improvements. Improved Pipeline handling and recovery. Separated/dedicated classpath definitions for all the Ozone components. (HDDS-447)  This is an alpha release.</description>
     </item>
     
     <item>
       <title>Release 0.2.1-alpha available</title>
-      <link>/release/0.2.1-alpha/</link>
+      <link>https://ozone.apache.org/release/0.2.1-alpha/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/release/0.2.1-alpha/</guid>
+      <guid>https://ozone.apache.org/release/0.2.1-alpha/</guid>
       <description>This is the first version of Apache Hadoop Ozone. Ozone is an Object store for Hadoop built using Hadoop Distributed Data Store.
 This release is fully functional, but alpha quality.</description>
     </item>
