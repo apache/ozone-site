@@ -8,31 +8,30 @@ title: Ozone Community
 
 If you’d like to contribute to Ozone, please subscribe to the Hadoop developer mailing list.
 
-The Ozone developer mailing list is: ozone-dev@hadoop.apache.org.
-
-* [Subscribe to List](ozone-dev-subscribe@hadoop.apache.org)
-* [Unsubscribe from List](ozone-dev-unsubscribe@hadoop.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/hadoop-ozone-dev/)
+The Ozone developer mailing list is: dev@ozone.apache.org.
+* [Subscribe to List](dev-subscribe@ozone.apache.org)
+* [Unsubscribe from List](dev-unsubscribe@ozone.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-dev/)
 
 ### Commits
 
 If you’d like to see changes made in the Ozone version control system, please subscribe to the Ozone commits mailing list.
 
-The Ozone commits mailing list is: ozone-commits@hadoop.apache.org.
+The Ozone commits mailing list is: commits@ozone.apache.org.
 
-* [Subscribe to List](ozone-commits-subscribe@hadoop.apache.org)
-* [Unsubscribe from List](ozone-commits-unsubscribe@hadoop.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/hadoop-ozone-commits/)
+* [Subscribe to List](commits-subscribe@ozone.apache.org)
+* [Unsubscribe from List](commits-unsubscribe@ozone.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-commits/)
 
 ### Issues
 
 If you’d like to see changes made in the Ozone issue tracking system, please subscribe to the Ozone issues mailing list.
 
-The Ozone issues mailing list is: ozone-issues@hadoop.apache.org.
+The Ozone issues mailing list is: ssues@ozone.apache.org.
 
-* [Subscribe to List](ozone-issues-subscribe@hadoop.apache.org)
-* [Unsubscribe from List](ozone-issues-unsubscribe@hadoop.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/hadoop-ozone-issues/)
+* [Subscribe to List](issues-subscribe@ozone.apache.org)
+* [Unsubscribe from List](issues-unsubscribe@ozone.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-issues/)
 
 ## Ozone Slack
 
