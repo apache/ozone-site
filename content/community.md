@@ -6,7 +6,7 @@ title: Ozone Community
 
 ### Developers
 
-If you’d like to contribute to Ozone, please subscribe to the Hadoop developer mailing list.
+If you’d like to contribute to Ozone, please subscribe to the Ozone developer mailing list.
 
 The Ozone developer mailing list is: dev@ozone.apache.org.
 
