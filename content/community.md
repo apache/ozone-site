@@ -40,24 +40,4 @@ If you would like to join the Ozone slack Channel, Please use this link to get s
 
 ## Ozone Community Calls
 
-### Monday sync:
-
-* Time: 04:00 PM UTC or [Convert to your local time](http://www.thetimezoneconverter.com/?t=16:00&tz=UTC)
-    1. **West Coast**: 9:00 AM
-    2. **East Coast**: 12:00 PM
-    3. **Ireland / Great Britain**: 05:00 PM
-    4. **Central Europe**: 06:00 PM
-    5. **India**: 9:30 PM
-    6. **China**: 12:00 
-* **Zoom link**: https://zoom.us/j/922195972
-
-### Friday (Thursday Pacific) sync:
-
-* Time: 04:15 AM UTC or [Convert to your local time](http://www.thetimezoneconverter.com/?t=04:15&tz=UTC)
-    1. **West Coast**: 9:15 PM (Thursday)
-    2. **East Coast**: 12:15 AM
-    3. **Ireland / Great Britain**: 05:00 AM
-    4. **Central Europe**: 06:15 AM
-    5. **India**: 9:45 AM
-    6. **China**: 12:15 PM
-* **Zoom link**: https://cloudera.zoom.us/j/5780476042
+Please refer to [this page](https://cwiki.apache.org/confluence/display/HADOOP/Ozone+Community+Calls) to get more information.
