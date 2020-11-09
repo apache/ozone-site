@@ -20,8 +20,8 @@ If you’d like to see changes made in the Ozone version control system, please 
 
 The Ozone commits mailing list is: commits@ozone.apache.org.
 
-* [Subscribe to List](commits-subscribe@ozone.apache.org)
-* [Unsubscribe from List](commits-unsubscribe@ozone.apache.org)
+* [Subscribe to List](mailto:commits-subscribe@ozone.apache.org)
+* [Unsubscribe from List](mailto:commits-unsubscribe@ozone.apache.org)
 * [Archives](http://mail-archives.apache.org/mod_mbox/ozone-commits/)
 
 ### Issues
