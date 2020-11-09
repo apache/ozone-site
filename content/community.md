@@ -10,8 +10,8 @@ If you’d like to contribute to Ozone, please subscribe to the Ozone developer 
 
 The Ozone developer mailing list is: dev@ozone.apache.org.
 
-* [Subscribe to List](dev-subscribe@ozone.apache.org)
-* [Unsubscribe from List](dev-unsubscribe@ozone.apache.org)
+* [Subscribe to List](mailto:dev-subscribe@ozone.apache.org)
+* [Unsubscribe from List](mailto:dev-unsubscribe@ozone.apache.org)
 * [Archives](http://mail-archives.apache.org/mod_mbox/ozone-dev/)
 
 ### Commits
