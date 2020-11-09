@@ -28,7 +28,7 @@ The Ozone commits mailing list is: commits@ozone.apache.org.
 
 If you’d like to see changes made in the Ozone issue tracking system, please subscribe to the Ozone issues mailing list.
 
-The Ozone issues mailing list is: ssues@ozone.apache.org.
+The Ozone issues mailing list is: issues@ozone.apache.org.
 
 * [Subscribe to List](issues-subscribe@ozone.apache.org)
 * [Unsubscribe from List](issues-unsubscribe@ozone.apache.org)
