@@ -30,8 +30,8 @@ If you’d like to see changes made in the Ozone issue tracking system, please s
 
 The Ozone issues mailing list is: issues@ozone.apache.org.
 
-* [Subscribe to List](issues-subscribe@ozone.apache.org)
-* [Unsubscribe from List](issues-unsubscribe@ozone.apache.org)
+* [Subscribe to List](mailto:issues-subscribe@ozone.apache.org)
+* [Unsubscribe from List](mailto:issues-unsubscribe@ozone.apache.org)
 * [Archives](http://mail-archives.apache.org/mod_mbox/ozone-issues/)
 
 ## Ozone Slack
