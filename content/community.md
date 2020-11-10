@@ -34,6 +34,14 @@ The Ozone issues mailing list is: issues@ozone.apache.org.
 * [Unsubscribe from List](mailto:issues-unsubscribe@ozone.apache.org)
 * [Archives](https://mail-archives.apache.org/mod_mbox/ozone-issues/)
 
+### Older Archives
+
+Ozone was approved as a separate Apache project in Oct. 2020, and the previous mailing list archives can be found here.
+
+* [Developers](https://mail-archives.apache.org/mod_mbox/hadoop-ozone-dev/)
+* [Commits](https://mail-archives.apache.org/mod_mbox/hadoop-ozone-commits/)
+* [Issues](https://mail-archives.apache.org/mod_mbox/hadoop-ozone-issues/)
+
 ## Ozone Slack
 
 If you would like to join the Ozone Slack Channel, please use this link to get self-invited  https://s.apache.org/slack-invite and join the **#ozone** channel.
