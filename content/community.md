@@ -12,7 +12,7 @@ The Ozone developer mailing list is: dev@ozone.apache.org.
 
 * [Subscribe to List](mailto:dev-subscribe@ozone.apache.org)
 * [Unsubscribe from List](mailto:dev-unsubscribe@ozone.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-dev/)
+* [Archives](https://mail-archives.apache.org/mod_mbox/ozone-dev/)
 
 ### Commits
 
@@ -22,7 +22,7 @@ The Ozone commits mailing list is: commits@ozone.apache.org.
 
 * [Subscribe to List](mailto:commits-subscribe@ozone.apache.org)
 * [Unsubscribe from List](mailto:commits-unsubscribe@ozone.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-commits/)
+* [Archives](https://mail-archives.apache.org/mod_mbox/ozone-commits/)
 
 ### Issues
 
@@ -32,11 +32,11 @@ The Ozone issues mailing list is: issues@ozone.apache.org.
 
 * [Subscribe to List](mailto:issues-subscribe@ozone.apache.org)
 * [Unsubscribe from List](mailto:issues-unsubscribe@ozone.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/ozone-issues/)
+* [Archives](https://mail-archives.apache.org/mod_mbox/ozone-issues/)
 
 ## Ozone Slack
 
-If you would like to join the Ozone slack Channel, Please use this link to get self-invited  https://s.apache.org/slack-invite and join the **#ozone** channel.
+If you would like to join the Ozone Slack Channel, please use this link to get self-invited  https://s.apache.org/slack-invite and join the **#ozone** channel.
 
 ## Ozone Community Calls
 
