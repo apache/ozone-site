@@ -96,5 +96,18 @@ This release is fully functional, but alpha quality.</description>
 Why an Object Store? Object stores are more straightforward to build and use than standard file systems. It is also easier to scale an object store. The fact that most big data applications and frameworks like Apache Spark, YARN and Hive can run both on cloud and on-prem, makes having an object store on-prem very attractive.</description>
     </item>
     
+    <item>
+      <title>Ozone Community</title>
+      <link>https://ozone.apache.org/community/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/community/</guid>
+      <description>Ozone Mailing Lists Developers If you’d like to contribute to Ozone, please subscribe to the Ozone developer mailing list.
+The Ozone developer mailing list is: dev@ozone.apache.org.
+ Subscribe to List Unsubscribe from List Archives  Commits If you’d like to see changes made in the Ozone version control system, please subscribe to the Ozone commits mailing list.
+The Ozone commits mailing list is: commits@ozone.apache.org.
+ Subscribe to List Unsubscribe from List Archives  Issues If you’d like to see changes made in the Ozone issue tracking system, please subscribe to the Ozone issues mailing list.</description>
+    </item>
+    
   </channel>
 </rss>
