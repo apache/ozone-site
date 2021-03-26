@@ -53,10 +53,7 @@ As Lao Tzu said, "The journey of a thousand miles begins with one step." You mig
  
 Ask us, please don't feel shy. We are an open and welcoming community. Feel free to open a JIRA under HDDS if you know how. The easiest thing is to send us an email in any discussion channel. Someone will always be there to help you out.
 
-You are also welcome to join our weekly community call, and just talk to us. There are several ways to start contributing to Ozone.
-
-The contribution process is the same as for any other Hadoop subproject. The Ozone Contribution Guidelines is available from the [wiki][2].
+You are also welcome to join our weekly community call, and just talk to us. There are several ways to start contributing to Ozone, please see the [guideline][1] for details.
 
 
-[1]: https://cwiki.apache.org/confluence/display/HADOOP/Ozone+Road+Map
-[2]: https://cwiki.apache.org/confluence/display/HADOOP/Ozone+Contributor+Guide
+[1]: https://github.com/apache/ozone/blob/master/CONTRIBUTING.md

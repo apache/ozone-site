@@ -48,4 +48,4 @@ If you would like to join the Ozone Slack Channel, please use this link to get s
 
 ## Ozone Community Calls
 
-Please refer to [this page](https://cwiki.apache.org/confluence/display/HADOOP/Ozone+Community+Calls) to get more information.
+Please refer to [this page](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Community+Calls) to get more information.
