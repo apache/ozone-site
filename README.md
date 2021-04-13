@@ -34,7 +34,7 @@ which starts an internal server where you can always check the final rendered ve
 
 ## Update ozone.apache.org
 
-For modify the content the [Ozone site](https://ozone.apache.org) the rendered version should be committed to the [asf-site](https://github.com/apache/hadoop-site/tree/asf-site) branch.
+For modify the content the [Ozone site](https://ozone.apache.org) the rendered version should be committed to the [asf-site](https://github.com/apache/ozone-site/tree/asf-site) branch.
 
 This is handled by a [Github Action](https://github.com/apache/ozone-site/blob/master/.github/workflows/regenerate.yml) which refresh the rendered branch and commit the changes: *It's enough to modify the source files on this branch, no other action is required.* Updating the Hugo source files on this branch will automatically update the site itself.
 
