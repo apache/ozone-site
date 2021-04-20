@@ -16,9 +16,9 @@
 
   <h1>Download</h1>
 
-  <p>Hadoop Ozone is released as source code tarballs with corresponding binary
+  <p>Apache Ozone is released as source code tarballs with corresponding binary
   tarballs for convenience. The downloads are distributed via mirror sites
-  and should be checked for tampering using GPG or SHA-256.</p>
+  and should be checked for tampering using GPG or SHA-512.</p>
 
 <p>
   <table class="table table-striped">
@@ -35,19 +35,35 @@
      <tr>
        <td>{{.File.BaseFileName }}</td>
        <td>{{dateFormat "2006 Jan 2 " .Date}}</td>
-       <td>
-         <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
-         (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
-         <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
-        </td>
-        <td>
-          <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
-          (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
-          <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+       {{ if eq .Params.hadoop true }}
+         <td>
+           <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+           (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
+           <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
+          </td>
+          <td>
+            <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+            (<a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
+            <a href="https://dist.apache.org/repos/dist/release/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+           </td>
+           <td>
+             <a href="release/{{.File.BaseFileName }}/">Announcement</a>
+           </td>
+       {{else}}
+         <td>
+           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+           (<a href="https://dist.apache.org/repos/dist/release/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.sha512">checksum</a>
+           <a href="https://dist.apache.org/repos/dist/release/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+         </td>
+         <td>
+           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+           (<a href="https://dist.apache.org/repos/dist/release/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.sha512">checksum</a>
+           <a href="https://dist.apache.org/repos/dist/release/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
          </td>
          <td>
            <a href="release/{{.File.BaseFileName }}/">Announcement</a>
          </td>
+       {{end}}
      </tr>
   {{end}}
   </table>
