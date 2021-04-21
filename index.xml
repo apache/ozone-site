@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2020 Apache Software Foundation</copyright>
-    <lastBuildDate>Wed, 02 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release 1.1.0 available</title>
+      <link>https://ozone.apache.org/release/1.1.0/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/release/1.1.0/</guid>
+      <description>Apache Hadoop Ozone 1.1.0 is released with following features:
+ Volume/Bucket Quota Support Security related enhancements ofs/o3fs performance improvements with Teragen and Spark Recon improvements  This is a generally available (GA) release. It represents a point of API stability and quality that we consider production-ready.
+Image credit: diana_robinson , CC BY-NC-ND 2.0</description>
+    </item>
+    
     <item>
       <title>Release 1.0.0 available</title>
       <link>https://ozone.apache.org/release/1.0.0/</link>
