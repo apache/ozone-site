@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-3331">[HDDS-3331]</a> Ozone Volume Management (accepted) </h1>
+                <div><i>Authors: Marton Elek, Arpit Agarwal, Sanjay Radia</i><div class="pull-right">2020-04-02</div></div>
+                <p>&nbsp</p>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        A simplified version of mapping between S3 buckets and Ozone volume/buckets
+                    </div>
+                </div>
+
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<h2 id="introduction">Introduction</h2>
+<p>This document explores how we can improve the Ozone volume semantics especially with respect to the S3 compatibility layer.</p>
+<h2 id="the-problems">The Problems</h2>
+<ol>
+<li>Unprivileged users cannot enumerate volumes.</li>
+<li>The mapping of S3 buckets to Ozone volumes is confusing. Based on external feedback it&rsquo;s hard to understand the exact Ozone URL to be used.</li>
+<li>The volume name is not friendly and cannot be remembered by humans.</li>
+<li>Ozone buckets created via the native object store interface are not visible via the S3 gateway.</li>
+<li>We don&rsquo;t support the revocation of access keys.</li>
+</ol>
+<p>We explore some of these in more detail in subsequent sections.</p>
+<h3 id="volume-enumeration-problem">Volume enumeration problem</h3>
+<p>Currently when a user enumerates volumes, they see the list of volumes that they own. This means that when an unprivileged user enumerates volumes, it always gets any empty list. Instead users should be able to see all volumes that they have been granted read or write access to.</p>
+<p>This also has an impact on <a href="https://issues.apache.org/jira/browse/HDDS-2665">ofs</a> which makes volumes appear as top-level directories.</p>
+<h3 id="s3-to-hcfs-path-mapping-problem">S3 to HCFS path mapping problem</h3>
+<p>Ozone has the semantics of volume <em>and</em> buckets while S3 has only buckets. To make it possible to use the same bucket both from Hadoop world and via S3 we need a mapping between them.</p>
+<p>Currently we maintain a map between the S3 buckets and Ozone volumes + buckets in <code>OmMetadataManagerImpl</code></p>
+<pre><code>s3_bucket --&gt; ozone_volume/ozone_bucket
+</code></pre><p>The current implementation uses the <code>&quot;s3&quot; + s3UserName</code> string as the volume name and the <code>s3BucketName</code> as the bucket name. Where <code>s3UserName</code> is is the <code>DigestUtils.md5Hex(kerberosUsername.toLowerCase())</code></p>
+<p>To create an S3 bucket and use it from o3fs, you should:</p>
+<ol>
+<li>Get your personal secret based on your kerberos keytab</li>
+</ol>
+<pre><code>&gt; kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm
+&gt; ozone s3 getsecret
+awsAccessKey=testuser/scm@EXAMPLE.COM
+awsSecret=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
+</code></pre><ol start="2">
+<li>Create the bucket with S3 cli</li>
+</ol>
+<pre><code>&gt; export AWS_ACCESS_KEY_ID=testuser/scm@EXAMPLE.COM
+&gt; export AWS_SECRET_ACCESS_KEY=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
+&gt; aws s3api --endpoint http://localhost:9878 create-bucket --bucket=bucket1
+</code></pre><ol start="3">
+<li>And identify the ozone path</li>
+</ol>
+<pre><code>&gt; ozone s3 path bucket1
+Volume name for S3Bucket is : s3c89e813c80ffcea9543004d57b2a1239
+Ozone FileSystem Uri is : o3fs://bucket1.s3c89e813c80ffcea9543004d57b2a1239
+</code></pre><h2 id="proposed-solution1">Proposed solution[1]</h2>
+<h3 id="supporting-multiple-access-keys-5-from-the-problem-listing">Supporting multiple access keys (#5 from the problem listing)</h3>
+<p>Problem #5 can be easily supported with improving the <code>ozone s3</code> CLI. Ozone has a separated table for the S3 secrets and the API can be improved to handle multiple secrets for one specific kerberos user.</p>
+<h3 id="solving-the-mapping-problem-2-4-from-the-problem-listing">Solving the mapping problem (#2-4 from the problem listing)</h3>
+<ol>
+<li>Let&rsquo;s always use <code>s3v</code> volume for all the s3 buckets <strong>if the bucket is created from the s3 interface</strong>.</li>
+</ol>
+<p>This is an easy an fast method, but with this approach not all the volumes are available via the S3 interface. We need to provide a method to publish any of the ozone volumes / buckets.</p>
+<ol start="2">
+<li>Let&rsquo;s improve the existing toolset to expose <strong>any</strong> Ozone volume/bucket as an s3 bucket. (Eg. expose <code>o3:/vol1/bucketx</code> as an S3 bucket <code>s3://foobar</code> )</li>
+</ol>
+<p><strong>Implementation</strong>:</p>
+<p>The first part is easy compared to the current implementation. We don&rsquo;t need any mapping table any more.</p>
+<p>To implement the second (expose ozone buckets as s3 buckets) we have multiple options:</p>
+<ol>
+<li>Store some metadata (** s3 bucket name **) on each of the buckets</li>
+<li>Implement a <strong>symbolic link</strong> mechanism which makes it possible to <em>link</em> to any volume/buckets from the &ldquo;s3&rdquo; volume.</li>
+</ol>
+<p>The first approach required a secondary cache table and it violates the naming hierarchy. The s3 bucket name is a global unique name, therefore it&rsquo;s more than just a single attribute on a specific object. It&rsquo;s more like an element in the hierarchy. For this reason the second option is proposed:</p>
+<p>For example if the default s3 volume is <code>s3v</code></p>
+<ol>
+<li>Every new buckets created via s3 interface will be placed under the <code>/s3v</code> volume</li>
+<li>Any existing <strong>Ozone</strong> buckets can be exposed by linking to it from s3: <code>ozone sh bucket link /vol1/bucket1 /s3v/s3bucketname</code></li>
+</ol>
+<p><strong>Lock contention problem</strong></p>
+<p>One possible problem with using just one volume is using the locks of the same volume for all the S3 buckets (thanks Xiaoyu). But this shouldn&rsquo;t be a big problem.</p>
+<ol>
+<li>We hold only a READ lock. Most of the time it can acquired without any contention (writing lock is required only to change owner / set quota)</li>
+<li>For symbolic link the read lock is only required for the first read. After that the lock of the referenced volume will be used. In case of any performance problem multiple volumes and links can be used.</li>
+</ol>
+<p>Note: Sanjay is added to the authors as the original proposal of this approach.</p>
+<h4 id="implementation-details">Implementation details</h4>
+<ul>
+<li><code>bucket link</code> operation creates a link bucket.  Links are like regular buckets, stored in DB the same way, but with two new, optional pieces of information: source volume and bucket.  (The bucket being referenced by the link is called &ldquo;source&rdquo;, not &ldquo;target&rdquo;, to follow symlink terminology.)</li>
+<li>Link buckets share the namespace with regular buckets.  If a bucket or link with the same name already exists, a <code>BUCKET_ALREADY_EXISTS</code> result is returned.</li>
+<li>Link buckets are not inherently specific to a user, access is restricted only by ACL.</li>
+<li>Links are persistent, ie. they can be used until they are deleted.</li>
+<li>Existing bucket operations (info, delete, ACL) work on the link object in the same way as they do on regular buckets.  No new link-specific RPC is required.</li>
+<li>Links are followed for key operations (list, get, put, etc.).  Read permission on the link is required for this.</li>
+<li>Checks for existence of the source bucket, as well as ACL, are performed only when following the link (similar to symlinks).  Source bucket is not checked when operating on the link bucket itself (eg. deleting it).  This avoids the need for reverse checks for each bucket delete or ACL change.</li>
+<li>Bucket links are generic, not restricted to the <code>s3v</code> volume.</li>
+</ul>
+<h2 id="alternative-approaches-and-reasons-to-reject">Alternative approaches and reasons to reject</h2>
+<p>To solve the the <em>s3 bucket name to ozone bucket name mapping</em> problem some other approaches are also considered. They are rejected but keeping them in this section together with the reasons to reject.</p>
+<h3 id="1-predefined-volume-mapping">1. Predefined volume mapping</h3>
+<ol>
+<li>Let&rsquo;s support multiple <code>ACCESS_KEY_ID</code> for the same user.</li>
+<li>For each <code>ACCESS_KEY_ID</code> a volume name MUST be defined.</li>
+<li>Instead of using a specific mapping table, the <code>ACCESS_KEY_ID</code> would provide a <strong>view</strong> of the buckets in the specified volume.</li>
+</ol>
+<p>With this approach the used volume will be more visible and &ndash; hopefully &ndash; understandable.</p>
+<p>Instead of using <code>ozone s3 getsecret</code>, following commands would be used:</p>
+<ol>
+<li><code>ozone s3 secret create --volume=myvolume</code>: To create a secret and use myvolume for all of these buckets</li>
+<li><code>ozone s3 secret list</code>: To list all of the existing S3 secrets (available for the current user)</li>
+<li><code>ozone s3 secret delete &lt;ACCESS_KEY_ID</code>: To delete any secret</li>
+</ol>
+<p>The <code>AWS_ACCESS_KEY_ID</code> should be a random identifier instead of using a kerberos principal.</p>
+<ul>
+<li><strong>pro</strong>: Easier to understand</li>
+<li><strong>con</strong>: We should either have global unique bucket names or it will be possible to see two different buckets with</li>
+<li><strong>con</strong>: It can be hard to remember which volumes are assigned to a specific ACCESS_KEY_ID</li>
+</ul>
+<h3 id="3-string-magic">3. String Magic</h3>
+<p>We can try to make volume name visible for the S3 world by using some structured bucket names. Unfortunately the available separator characters are very limited:</p>
+<p>For example we can&rsquo;t use <code>/</code></p>
+<pre><code>aws s3api create-bucket --bucket=vol1/bucket1
+
+Parameter validation failed:
+Invalid bucket name &quot;vol1/bucket1&quot;: Bucket name must match the regex &quot;^[a-zA-Z0-9.\-_]{1,255}$&quot; or be an ARN matching the regex &quot;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&quot;
+</code></pre><p>But it&rsquo;s possible to use <code>volume-bucket</code> notion:</p>
+<pre><code>aws s3api create-bucket --bucket=vol1-bucket1
+</code></pre><ul>
+<li><strong>pro</strong>: Volume mapping is visible all the time.</li>
+<li><strong>con</strong>: Harder to use any external tool with defaults (all the buckets should have at least one <code>-</code>)</li>
+<li><strong>con</strong>: Hierarchy is not visble. The uniform way to separated elements in fs hierarchy is <code>/</code>. It can be confusing.</li>
+<li></li>
+</ul>
+<h3 id="4-remove-volume-from-ozonefs-paths">4. Remove volume From OzoneFs Paths</h3>
+<p>We can also make volumes a lightweight <em>bucket group</em> object by removing it from the ozonefs path. With this approach we can use all the benefits of the volumes as an administration object but it would be removed from the <code>o3fs</code> path.</p>
+<ul>
+<li><strong>pro</strong>: can be the most simple solution. Easy to understand as there are no more volumes in the path.</li>
+<li><strong>con</strong>: Bigger change (all the API can&rsquo;t be modified to make volumes optional)</li>
+<li><strong>con</strong>: Harder to dis-joint namespaces based on volumes. (With the current scheme, it&rsquo;s easier to delegate the responsibilities for one volumes to a different OM).</li>
+<li><strong>con</strong>: We lose volumes as the top-level directories in <code>ofs</code> scheme.</li>
+<li><strong>con</strong>: One level of hierarchy might not be enough in case of multi-tenancy.</li>
+<li><strong>con</strong>: One level of hierarchy is not enough if we would like to provide separated level for users and admins</li>
+<li><strong>con</strong>: Hierarchical abstraction can be easier to manage and understand</li>
+</ul>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

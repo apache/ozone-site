@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="./css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="./index.html" class="navbar-left ozone-logo">
+        <img src="./ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="./index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="wrapper">
+<div class="container-fluid">
+    <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="./index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="active">
+                <a href="./security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="./design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+
+                
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="./zh/security.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+                <h1>Security</h1>
+            </div>
+
+            <div class="col-md-9">
+                <!---
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">Securing Ozone </h3>
+        <p class="lead">
+            
+          Ozone is an enterprise class, secure storage system. There are many
+          optional security features in Ozone. Following pages discuss how
+          you can leverage the security features of Ozone.
+
+        </p>
+    </div>
+</div>
+<div class="alert alert-warning" role="alert">
+If you would like to understand Ozone's security architecture at a greater
+depth, please take a look at <a href="https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf">Ozone security architecture.</a>
+</div>
+<p>Depending on your needs, there are multiple optional steps in securing ozone.</p>
+
+                
+                
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-tower"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing Ozone
+                                </h2>
+                                <p class="card-text">Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</p>
+                                <a href="./security/secureozone.html"
+                                   class=" btn btn-primary btn-lg">Securing Ozone</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-lock"
+                                          aria-hidden="true"></span>
+                                    
+                                    Transparent Data Encryption
+                                </h2>
+                                <p class="card-text">TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access.</p>
+                                <a href="./security/securingtde.html"
+                                   class=" btn btn-primary btn-lg">Transparent Data Encryption</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-user"
+                                          aria-hidden="true"></span>
+                                    
+                                    GDPR in Ozone
+                                </h2>
+                                <p class="card-text">Support to implement the &ldquo;Right to be Forgotten&rdquo; requirement of GDPR</p>
+                                <a href="./security/gdpr.html"
+                                   class=" btn btn-primary btn-lg">GDPR in Ozone</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-th"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing Datanodes
+                                </h2>
+                                <p class="card-text">Explains different modes of securing data nodes. These range from kerberos to auto approval.</p>
+                                <a href="./security/securingdatanodes.html"
+                                   class=" btn btn-primary btn-lg">Securing Datanodes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-lock"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing HTTP
+                                </h2>
+                                <p class="card-text">Secure HTTP web-consoles for Ozone services</p>
+                                <a href="./security/securingozonehttp.html"
+                                   class=" btn btn-primary btn-lg">Securing HTTP</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-cloud"
+                                          aria-hidden="true"></span>
+                                    
+                                    Securing S3
+                                </h2>
+                                <p class="card-text">Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</p>
+                                <a href="./security/securings3.html"
+                                   class=" btn btn-primary btn-lg">Securing S3</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-transfer"
+                                          aria-hidden="true"></span>
+                                    
+                                    Ozone ACLs
+                                </h2>
+                                <p class="card-text">Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</p>
+                                <a href="./security/securityacls.html"
+                                   class=" btn btn-primary btn-lg">Ozone ACLs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <span class="glyphicon glyphicon-user"
+                                          aria-hidden="true"></span>
+                                    
+                                    Apache Ranger
+                                </h2>
+                                <p class="card-text">Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</p>
+                                <a href="./security/securitywithranger.html"
+                                   class=" btn btn-primary btn-lg">Apache Ranger</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="push"></div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: September 19, 2019 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/88fabf9b4e4f10383dcffd9a8821ca05f373cbd4">88fabf9b4</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

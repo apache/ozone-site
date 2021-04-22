@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-4440">[HDDS-4440]</a> Proposed persistent OM connection for S3 gateway (accepted) </h1>
+                <div><i>Authors: Márton Elek</i><div class="pull-right">2020-11-09</div></div>
+                <p>&nbsp</p>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        Proposal to use per-request authentication and persistent connections between S3g and OM
+                    </div>
+                </div>
+
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<h1 id="overview">Overview</h1>
+<ul>
+<li>Hadoop RPC authenticate the calls at the beginning of the connections. All the subsequent messages on the same call will use existing, initialized authentication.</li>
+<li>S3 gateway sends the authentication as Hadoop RPC delegation token for <strong>each requests</strong>.</li>
+<li>To authenticate each of the S3 REST requests Ozone creates a new <code>OzoneClient</code> for eac HTTP requests, which introduces problems with performance and error handling.</li>
+<li>This proposal suggests to create a new transport (<strong>in addition</strong> to the existing Hadoop RPC) for the OMClientProtocol where the requests can be authenticated per-request.</li>
+</ul>
+<h1 id="authentication-with-s3-gateway">Authentication with S3 gateway</h1>
+<p>AWS S3 request authentication based on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html">signing the REST messages</a>. Each of the HTTP requests must include and authentication header which contains the used the <em>access key id</em> and a signatures created with the help of the <em>secret key</em>.</p>
+<pre><code>Authorization: AWS AWSAccessKeyId:Signature
+</code></pre><p>Ozone S3g is a REST gateway for Ozone which receives AWS compatible HTTP calls and forwards the requests to the Ozone Manager and Datanode services. Ozone S3g is <strong>stateless</strong>, it couldn&rsquo;t check any authentication information which are stored on the Ozone Manager side. It can check only the format of the signature.</p>
+<p>For the authentication S3g parses the HTTP header and sends all the relevant (and required) information to Ozone Manager which can check the signature with the help of stored <em>secret key</em>.</p>
+<p>This is implemented with the help of the delegation token mechanism of Hadoop RPC. Hadoop RPC supports Kerberos and token based authentication where tokens can be customized. The Ozone specific implementation <code>OzoneTokenIdentifier</code> contains a <code>type</code> field which can <code>DELEGATION_TOKEN</code> or <code>S3AUTHINFO</code>. The later one is used to authenticate the request based on S3 REST header (signature + required information).</p>
+<p>Both token and Kerberos based authentication are checked by Hadoop RPC during the connection initialization phase using the SASL standard. SASL defines the initial handshake of the creation where server can check the authentication information with a challenge-response mechanism.</p>
+<p>As a result Ozone S3g requires to create a new Hadoop RPC client for each of the HTTP requests as each requests may have different AWS authentication   information / signature. Ozone S3g creates a new <code>OzoneClient</code> for each of the requests which includes the creation of Hadoop RPC client.</p>
+<p>There are two problems with this approach:</p>
+<ol>
+<li><strong>performance</strong>: Creating a new <code>OzoneClient</code> requires to create new connection, to perform the SASL handshake and to send the initial discovery call to the OzoneManager to get the list of available services. It makes S3 performance very slow.</li>
+<li><strong>error handling:</strong> Creating new <code>OzoneClient</code> for each requests makes the propagation of error code harder with CDI.</li>
+</ol>
+<p><a href="http://cdi-spec.org/">CDI</a> is the specification of <em>Contexts and  Dependency Injection</em> for Java. Can be used for both JavaEE and JavaSE and it&rsquo;s integrated with most web frameworks. Ozone S3g uses this specification to inject different services to to REST handlers using <code>@Inject</code> annotation.</p>
+<p><code>OzoneClient</code> is created by the <code>OzoneClientProducer</code>:</p>
+<pre><code>@RequestScoped
+public class OzoneClientProducer {
+
+  private OzoneClient client;
+
+  @Inject
+  private SignatureProcessor signatureParser;
+
+  @Inject
+  private OzoneConfiguration ozoneConfiguration;
+
+  @Inject
+  private Text omService;
+
+  @Inject
+  private String omServiceID;
+
+
+  @Produces
+  public OzoneClient createClient() throws OS3Exception, IOException {
+    client = getClient(ozoneConfiguration);
+    return client;
+  }
+...
+}
+</code></pre><p>As we can see here, the producer is <em>request</em> scoped (see the annotation on the class), which means that the <code>OzoneClient</code> bean will be created for each request. If the client couldn&rsquo;t be created a specific exception will be thrown by the CDI framework (!) as one bean couldn&rsquo;t be injected with CDI. This error is different from the regular business exceptions therefore the normal exception handler (<code>OS3ExceptionMapper</code> implements <code>javax.ws.rs.ext.ExceptionMapper</code>) &ndash; which can transform exceptions to HTTP error code &ndash; doesn&rsquo;t apply. It can cause strange 500 error instead of some authentication error.</p>
+<h2 id="caching">Caching</h2>
+<p>Hadoop RPC has a very specific caching layer which is <strong>not used</strong> by Ozone S3g. This section describe the caching of the Hadoop RPC, but safe to skip (It explain how is the caching ignored).</p>
+<p>As creating new Hadoop RPC connection is an expensive operation Hadoop RPC has an internal caching mechanism to cache client and connections (!). This caching is hard-coded and based on static fields (couldn&rsquo;t be adjusted easily).</p>
+<p>Hadoop RPC client is usually created by <code>RPC.getProcolProxy</code>. For example:</p>
+<pre><code>HelloWorldServicePB proxy = RPC.getProtocolProxy(
+            HelloWorldServicePB.class,
+            scmVersion,
+            new InetSocketAddress(1234),
+            UserGroupInformation.getCurrentUser(),
+            configuration,
+            new StandardSocketFactory(),
+            Client.getRpcTimeout(configuration),
+            retryPolicy).getProxy();
+</code></pre><p>This code fragment creates a new client which can be used from the code, and it uses multiple caches for client creation.</p>
+<ol>
+<li>
+<p>Protocol engines are cached by <code>RPC.PROTOCOL_ENGINES</code> static field, but it&rsquo;s safe to assume that the <code>ProtobufRpcEngine</code> is used for most of the current applications.</p>
+</li>
+<li>
+<p><code>ProtobufRpcEngine</code> has a static <code>ClientCache</code> field which caches the client instances with the <code>socketFactory</code> and <code>protocol</code> as the key.</p>
+</li>
+<li>
+<p>Finally the <code>Client.getConnection</code> method uses a cache to cache the connections:</p>
+<pre><code>connection = connections.computeIfAbsent(remoteId,
+    id -&gt; new Connection(id, serviceClass, removeMethod));
+</code></pre><p>The key for the cache is the <code>remoteId</code> which includes all the configuration, connection parameters (like destination host) and <code>UserGroupInformation</code> (UGI).</p>
+</li>
+</ol>
+<p>The caching of the connections can cause very interesting cases. As an example, let&rsquo;s assume that delegation token is invalidated with an RPC call. The workflow can be something like this:</p>
+<ol>
+<li>create protocol proxy (with token authentication)</li>
+<li>invalidate token (rpc call)</li>
+<li>close protocol proxy (connection may not be closed. depends from the cache)</li>
+<li>create a new protocol proxy</li>
+<li>If connection is cached (same UGI) services can be used even if the token is invalidated earlier (as the token is checked during the initialization of the tokens).</li>
+</ol>
+<p>Fortunately this behavior doesn&rsquo;t cause any problem in case of Ozone and S3g. UGI (which is part of the cache key of the connection cache) equals if (and only if) the underlying <code>Subject</code> is the same.</p>
+<pre><code>public class UserGroupInformation {
+  
+  ...
+  
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    } else if (o == null || getClass() != o.getClass()) {
+      return false;
+    } else {
+      return subject == ((UserGroupInformation) o).subject;
+    }
+  }
+}
+</code></pre><p>But the UGI initialization of Ozone always creates a new <code>Subject</code> instance for each request (even if the subject name is the same). In <code>OzoneClientProducer</code>:</p>
+<pre><code>  UserGroupInformation remoteUser =
+          UserGroupInformation.createRemoteUser(awsAccessId); // &lt;-- new Subject is created
+      
+      if (OzoneSecurityUtil.isSecurityEnabled(config)) {
+        try {
+          OzoneTokenIdentifier identifier = new OzoneTokenIdentifier();
+          //setup identifier
+          
+          Token&lt;OzoneTokenIdentifier&gt; token = new Token(identifier.getBytes(),
+              identifier.getSignature().getBytes(UTF_8),
+              identifier.getKind(),
+              omService);
+          remoteUser.addToken(token);
+          ....
+</code></pre><p><strong>As a result Hadoop RPC caching doesn&rsquo;t apply to Ozone S3g</strong>. It&rsquo;s a good news because it&rsquo;s secure, but bad news as the performance is bad.</p>
+<h1 id="proposed-change">Proposed change</h1>
+<p>We need an RPC mechanism between the Ozone S3g service and Ozone Manager service which can support per-request authentication and accepts</p>
+<p>The  Ozone Manager client already has a pluggable transport interface: <code>OmTransport</code> is a simple interface which can deliver <code>OMRequest</code> messages:</p>
+<pre><code>public interface OmTransport {
+
+  /**
+   * The main method to send out the request on the defined transport.
+   */
+  OMResponse submitRequest(OMRequest payload) throws IOException;
+  ...
+</code></pre><p>The proposal is to create a new <strong>additional</strong> transport, based on GRPC, which can do the per-request authentication. <strong>Existing Hadoop clients will use the well-known Hadoop RPC client</strong>, but S3g can start to use this specific transport to achieve better performance.</p>
+<p>As this is nothing more, just a transport: exactly the same messages (<code>OmRequest</code>) will be used, it&rsquo;s not a new RPC interface.</p>
+<p>Only one modification is required in the RPC interface: a new per-request<code>token</code> field should be introduced in <code>OMRequest</code> which is optional.</p>
+<p>A new GRPC service should be started in Ozone Manager, which receives <code>OMRequest</code> and for each request, the Hadoop <code>UserGroupInformation</code> is set based on the new token field (after authentication).</p>
+<p><code>OzoneToken</code> identifier can be simplified (after deprecation period) with removing the S3 specific part, as it won&rsquo;t be required any more.</p>
+<p>With this approach the <code>OzoneClient</code> instances can be cached on S3g side (with persistent GRPC connections) as the authentication information is not part of the OzoneClient any more (added by the <code>OmTransport</code> implementation per request (in case of GRPC) or per connection (in case of HadoopRPC)).</p>
+<p>To make it easier to understand the implementation of this approach, let&rsquo;s compare the old (existing) and new (proposed) approach.</p>
+<h3 id="old-approach">Old approach</h3>
+<ol>
+<li>
+<p>OzoneClientProvider creates a new OzoneClient for each of the HTTP requests (@RequestScope)</p>
+</li>
+<li>
+<p>OzoneToken is created based on the authentication header (signature, string to sign)</p>
+</li>
+<li>
+<p>OzoneClient creates new OM connection (Hadoop RPC) with the new OzoneToken</p>
+</li>
+<li>
+<p>OM extracts the information from OzoneToken and validates the signature</p>
+</li>
+<li>
+<p>OzoneClient is injected to the REST endpoints</p>
+</li>
+<li>
+<p>OzoneClient is used for any client calls</p>
+</li>
+<li>
+<p>When HTTP request is handled, the OzoneClient is closed</p>
+<p><img src="s3-performance-old.png" alt="old approach"></p>
+</li>
+</ol>
+<h3 id="new-approach">New approach</h3>
+<ol>
+<li>OzoneClientProvider creates client with @ApplicationScope. Connection is always open to the OM (clients can be pooled)</li>
+<li>OM doesn&rsquo;t authentication the connection, each of the requests should be authenticated one-by-one</li>
+<li>OzoneClients are always injected to the REST endpoints</li>
+<li>For each new HTTP request the authorization header is extracted and added to the outgoing GRPC request as a token</li>
+<li>OM authenticate each of the request and calls the same request handler as before</li>
+<li>OzoneClient can be open long-term</li>
+</ol>
+<p><img src="s3-performance-new.png" alt="new approach"></p>
+<h1 id="possible-alternatives">Possible alternatives</h1>
+<ul>
+<li>It&rsquo;s possible to use pure Hadoop RPC client instead of Ozone Client which would make the client connection slightly cheaper (service discovery call is not required) but it&rsquo;s still require to create new connections for each requests (and downloading data without OzoneClient may have own challenges).</li>
+<li>CDI error handling can be improved with using other dependency injection (eg. Guice, which is already used by Recon) or some additional wrappers and manual connection creation. But it wouldn&rsquo;t solve the performance problem.</li>
+</ul>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

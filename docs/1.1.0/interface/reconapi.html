@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../interface.html">Client Interfaces</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recon API</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/interface/reconapi.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Recon API</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>The Recon API v1 is a set of HTTP endpoints that help you understand the current
+state of an Ozone cluster and to troubleshoot if needed.</p>
+<h3 id="http-endpoints">HTTP Endpoints</h3>
+<h4 id="containers">Containers</h4>
+<ul>
+<li>
+<p><strong>/containers</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers
+</code></pre><p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the containers with ID greater than the given prevKey.
+Example: prevKey=1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the ContainerMetadata objects.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;data&#34;</span>: {
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+    <span style="color:#f92672">&#34;containers&#34;</span>: [
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">834</span>
+      },
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">2</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+      },
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">3</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+      }
+    ]
+  }
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/:id/keys</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers/:id/keys
+</code></pre><p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the keys that are present after the given prevKey key prefix.
+Example: prevKey=/vol1/bucket1/key1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the KeyMetadata objects for the given ContainerID.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;totalCount&#34;</span>:<span style="color:#ae81ff">7</span>,
+  <span style="color:#f92672">&#34;keys&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;Volume&#34;</span>:<span style="color:#e6db74">&#34;vol-1-73141&#34;</span>,
+      <span style="color:#f92672">&#34;Bucket&#34;</span>:<span style="color:#e6db74">&#34;bucket-3-35816&#34;</span>,
+      <span style="color:#f92672">&#34;Key&#34;</span>:<span style="color:#e6db74">&#34;key-0-43637&#34;</span>,
+      <span style="color:#f92672">&#34;DataSize&#34;</span>:<span style="color:#ae81ff">1000</span>,
+      <span style="color:#f92672">&#34;Versions&#34;</span>:[<span style="color:#ae81ff">0</span>],
+      <span style="color:#f92672">&#34;Blocks&#34;</span>: {
+        <span style="color:#f92672">&#34;0&#34;</span>: [
+          {
+            <span style="color:#f92672">&#34;containerID&#34;</span>:<span style="color:#ae81ff">1</span>,
+            <span style="color:#f92672">&#34;localID&#34;</span>:<span style="color:#ae81ff">105232659753992201</span>
+          }
+        ]
+      },
+      <span style="color:#f92672">&#34;CreationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:17.722Z&#34;</span>,
+      <span style="color:#f92672">&#34;ModificationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:30.405Z&#34;</span>
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+  ]
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/missing</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers/missing
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns the MissingContainerMetadata objects for all the missing containers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">26</span>,
+    <span style="color:#f92672">&#34;containers&#34;</span>: [{
+        <span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">&#34;missingSince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+        <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+        <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+        <span style="color:#f92672">&#34;replicas&#34;</span>: [{
+            <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+            <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+            <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+            <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731201301</span>
+        }, 
+        <span style="color:#960050;background-color:#1e0010">...</span>
+        ]
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+    ]
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/:id/replicaHistory</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers/:id/replicaHistory
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the ContainerHistory objects for the given ContainerID.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+  {
+    <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+    <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+    <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+    <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605730421294</span>
+  },
+  <span style="color:#960050;background-color:#1e0010">...</span>
+]
+</code></pre></div></li>
+<li>
+<p><strong>/containers/unhealthy</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers/unhealthy
+</code></pre><p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>batchNum (optional)</p>
+<p>The batch number (like &ldquo;page number&rdquo;) of results to return.
+Passing 1, will return records 1 to limit. 2 will return
+limit + 1 to 2 * limit, etc.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the UnhealthyContainerMetadata objects for all the unhealthy containers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;missingCount&#34;</span>: <span style="color:#ae81ff">2</span>,
+   <span style="color:#f92672">&#34;underReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;overReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;misReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;containers&#34;</span>: [{
+       <span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+       <span style="color:#f92672">&#34;containerState&#34;</span>: <span style="color:#e6db74">&#34;MISSING&#34;</span>,
+       <span style="color:#f92672">&#34;unhealthySince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+       <span style="color:#f92672">&#34;expectedReplicaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+       <span style="color:#f92672">&#34;actualReplicaCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+       <span style="color:#f92672">&#34;replicaDeltaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+       <span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#66d9ef">null</span>,
+       <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+       <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+       <span style="color:#f92672">&#34;replicas&#34;</span>: [{
+           <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+           <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+           <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605722960125</span>,
+           <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731230509</span>
+       }, 
+       <span style="color:#960050;background-color:#1e0010">...</span>
+       ]
+   },
+   <span style="color:#960050;background-color:#1e0010">...</span>
+   ]
+} 
+</code></pre></div></li>
+<li>
+<p><strong>/containers/unhealthy/:state</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/containers/unhealthy/:state
+</code></pre><p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>batchNum (optional)</p>
+<p>The batch number (like &ldquo;page number&rdquo;) of results to return.
+Passing 1, will return records 1 to limit. 2 will return
+limit + 1 to 2 * limit, etc.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the UnhealthyContainerMetadata objects for the containers in the given state.
+Possible unhealthy container states are <code>MISSING</code>, <code>MIS_REPLICATED</code>, <code>UNDER_REPLICATED</code>, <code>OVER_REPLICATED</code>.
+The response structure is same as <code>/containers/unhealthy</code>.</p>
+</li>
+</ul>
+<h4 id="clusterstate">ClusterState</h4>
+<ul>
+<li>
+<p><strong>/clusterState</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/clusterState
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns a summary of the current state of the Ozone cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;pipelines&#34;</span>: <span style="color:#ae81ff">5</span>,
+   <span style="color:#f92672">&#34;totalDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+   <span style="color:#f92672">&#34;healthyDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+   <span style="color:#f92672">&#34;storageReport&#34;</span>: {
+       <span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">1081719668736</span>,
+       <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">1309212672</span>,
+       <span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">597361258496</span>
+   },
+   <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">26</span>,
+   <span style="color:#f92672">&#34;volumes&#34;</span>: <span style="color:#ae81ff">6</span>,
+   <span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
+   <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
+}
+</code></pre></div></li>
+</ul>
+<h4 id="datanodes">Datanodes</h4>
+<ul>
+<li>
+<p><strong>/datanodes</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/datanodes
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the datanodes in the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+   <span style="color:#f92672">&#34;datanodes&#34;</span>: [{
+       <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;f8f8cb45-3ab2-4123&#34;</span>,
+       <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+       <span style="color:#f92672">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+       <span style="color:#f92672">&#34;lastHeartbeat&#34;</span>: <span style="color:#ae81ff">1605738400544</span>,
+       <span style="color:#f92672">&#34;storageReport&#34;</span>: {
+           <span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">270429917184</span>,
+           <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">358805504</span>,
+           <span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">119648149504</span>
+       },
+       <span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+           <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+           <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+           <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+           <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-2&#34;</span>
+       }, {
+           <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;3bf4a9e9-69cc-4d20&#34;</span>,
+           <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+           <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">1</span>,
+           <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>
+       }],
+       <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">17</span>,
+       <span style="color:#f92672">&#34;leaderCount&#34;</span>: <span style="color:#ae81ff">1</span>
+   },
+   <span style="color:#960050;background-color:#1e0010">...</span>
+   ]
+}
+</code></pre></div></li>
+</ul>
+<h4 id="pipelines">Pipelines</h4>
+<ul>
+<li>
+<p><strong>/pipelines</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/pipelines
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the pipelines in the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+   <span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+       <span style="color:#f92672">&#34;pipelineId&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+       <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
+       <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+       <span style="color:#f92672">&#34;datanodes&#34;</span>: [<span style="color:#e6db74">&#34;localhost-1&#34;</span>, <span style="color:#e6db74">&#34;localhost-2&#34;</span>, <span style="color:#e6db74">&#34;localhost-3&#34;</span>],
+       <span style="color:#f92672">&#34;lastLeaderElection&#34;</span>: <span style="color:#ae81ff">0</span>,
+       <span style="color:#f92672">&#34;duration&#34;</span>: <span style="color:#ae81ff">23166128</span>,
+       <span style="color:#f92672">&#34;leaderElections&#34;</span>: <span style="color:#ae81ff">0</span>,
+       <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+       <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+       <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">0</span>
+   },
+   <span style="color:#960050;background-color:#1e0010">...</span>
+   ]
+}
+</code></pre></div></li>
+</ul>
+<h4 id="tasks">Tasks</h4>
+<ul>
+<li>
+<p><strong>/task/status</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/task/status
+</code></pre><p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns the status of all the Recon tasks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+  {
+   <span style="color:#f92672">&#34;taskName&#34;</span>: <span style="color:#e6db74">&#34;OmDeltaRequest&#34;</span>,
+   <span style="color:#f92672">&#34;lastUpdatedTimestamp&#34;</span>: <span style="color:#ae81ff">1605724099147</span>,
+   <span style="color:#f92672">&#34;lastUpdatedSeqNumber&#34;</span>: <span style="color:#ae81ff">186</span>
+  },
+  <span style="color:#960050;background-color:#1e0010">...</span>
+]
+</code></pre></div></li>
+</ul>
+<h4 id="utilization">Utilization</h4>
+<ul>
+<li>
+<p><strong>/utilization/fileCount</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/utilization/fileCount
+</code></pre><p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>volume (optional)</p>
+<p>Filters the results based on the given volume name.</p>
+</li>
+<li>
+<p>bucket (optional)</p>
+<p>Filters the results based on the given bucket name.</p>
+</li>
+<li>
+<p>fileSize (optional)</p>
+<p>Filters the results based on the given fileSize.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the file counts within different file ranges with <code>fileSize</code> in the
+response object being the upper cap for file size range.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[{
+   <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+   <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-0-11685&#34;</span>,
+   <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+   <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+}, {
+   <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+   <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-1-41795&#34;</span>,
+   <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+   <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+}, {
+   <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+   <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-2-93377&#34;</span>,
+   <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+   <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+}, {
+   <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+   <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-3-50336&#34;</span>,
+   <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+   <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">2</span>
+}]
+</code></pre></div></li>
+</ul>
+<h4 id="a-namemetricsa-metrics"><a name="metrics"></a> Metrics</h4>
+<ul>
+<li>
+<p><strong>/metrics/:api</strong></p>
+<p><strong>URL Structure</strong></p>
+<pre><code>GET /api/v1/metrics/:api
+</code></pre><p><strong>Parameters</strong></p>
+<p>Refer to <a href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus HTTP API Reference</a>
+for complete documentation on querying.</p>
+<p><strong>Returns</strong></p>
+<p>This is a proxy endpoint for Prometheus and returns the same response as
+the prometheus endpoint.
+Example: /api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>,
+  <span style="color:#f92672">&#34;data&#34;</span>: {
+    <span style="color:#f92672">&#34;resultType&#34;</span>: <span style="color:#e6db74">&#34;vector&#34;</span>,
+    <span style="color:#f92672">&#34;result&#34;</span>: [
+      {
+        <span style="color:#f92672">&#34;metric&#34;</span>: {
+          <span style="color:#f92672">&#34;__name__&#34;</span>: <span style="color:#e6db74">&#34;ratis_leader_election_electionCount&#34;</span>,
+          <span style="color:#f92672">&#34;exported_instance&#34;</span>: <span style="color:#e6db74">&#34;33a5ac1d-8c65-4c74-a0b8-9314dfcccb42&#34;</span>,
+          <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;group-03CA9397D54B&#34;</span>,
+          <span style="color:#f92672">&#34;instance&#34;</span>: <span style="color:#e6db74">&#34;ozone_datanode_1:9882&#34;</span>,
+          <span style="color:#f92672">&#34;job&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>
+        },
+        <span style="color:#f92672">&#34;value&#34;</span>: [
+          <span style="color:#ae81ff">1599159384.455</span>,
+          <span style="color:#e6db74">&#34;5&#34;</span>
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div></li>
+</ul>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../interface/javaapi.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

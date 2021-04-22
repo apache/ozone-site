@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-1659">[HDDS-1659]</a> Ozone Enhancement Proposals (implemented) </h1>
+                <div><i>Authors: Anu Enginner, Marton Elek</i><div class="pull-right">2019-06-07</div></div>
+                <p>&nbsp</p>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        Definition of the process to share new technical proposals with the Ozone community.
+                    </div>
+                </div>
+
+              <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h2 id="problem-statement">Problem statement</h2>
+<p>Some of the biggers features requires well defined plans before the implementation. Until now it was managed by uploading PDF design docs to selected JIRA. There are multiple problems with the current practice.</p>
+<ol>
+<li>There is no easy way to find existing up-to-date and outdated design docs.</li>
+<li>Design docs usually have better description of the problem that the user docs</li>
+<li>We need better tools to discuss the design docs in the development phase of the doc</li>
+</ol>
+<p>We propose to follow the same process what we have now, but instead of uploading a PDF to the JIRA, create a PR to merge the proposal document to the documentation project.</p>
+<h2 id="non-goals">Non-goals</h2>
+<ul>
+<li>Modify the existing workflow or approval process</li>
+<li>Migrate existing documents</li>
+<li>Make it harder to create design docs (it should be easy to support the creation of proposals for any kind of tasks)</li>
+<li>Define how the design docs are handled/created <em>before</em> the publication (this proposal is about the publishing process)</li>
+</ul>
+<h2 id="proposed-solution">Proposed solution</h2>
+<ul>
+<li>Open a dedicated Jira (<code>HDDS-*</code> but with specific component)</li>
+<li>Use standard name prefix in the jira (easy to filter on the mailing list) `[OEP]</li>
+<li>Create a PR to add the design doc to the current documentation
+<ul>
+<li>The content of the design can be added to the documentation (Recommended)</li>
+<li>Or can be added as external reference</li>
+</ul>
+</li>
+<li>The design doc (or the summary with the reference) will be merged to the design doc folder of <code>hadoop-hdds/docs/content/design</code> (will be part of the docs)</li>
+<li>Discuss it as before (lazy consesus, except if somebody calls for a real vote)</li>
+<li>Design docs can be updated according to the changes during the implementation</li>
+<li>Only the implemented design docs will be visible as part of the design docs</li>
+</ul>
+<p>As a result all the design docs can be listed under the documentation page.</p>
+<p>A good design doc has the following properties:</p>
+<ol>
+<li>Publicly available for anybody (Please try to avoid services which are available only with registration, eg: google docs)</li>
+<li>Archived for the future (Commit it to the source OR use apache jira or wiki)</li>
+<li>Editable later (Best format is markdown, RTF is also good. PDF has a limitation, it&rsquo;s very hard to reuse the text, or create an updated design doc)</li>
+<li>Well structured to make it easy to comment any part of the document (Markdown files which are part of the pull request can be commented in the PR line by line)</li>
+</ol>
+<h3 id="example-1-design-doc-as-a-markdown-file">Example 1: Design doc as a markdown file</h3>
+<p>The easiest way to create a design doc is to create a new markdown file in a PR and merge it to <code>hadoop-hdds/docs/content/design</code>.</p>
+<ol>
+<li>Publicly available: YES, it can be linked from Apache git or github</li>
+<li>Archived: YES, and it&rsquo;s also versioned. All the change history can be tracked.</li>
+<li>Editable later: YES, as it&rsquo;s just a simple text file</li>
+<li>Commentable: YES, comment can be added to each line.</li>
+</ol>
+<h3 id="example-2-design-doc-as-a-pdf">Example 2: Design doc as a PDF</h3>
+<p>A very common practice of today is to create design doc on google docs and upload it to the JIRA.</p>
+<ol>
+<li>Publicly available: YES, anybody can download it from the Jira.</li>
+<li>Archived: YES, it&rsquo;s available from Apache infra.</li>
+<li>Editable: NO, It&rsquo;s harder to reuse the text to import to the docs or create a new design doc.</li>
+<li>Commentable: PARTIAL, Not as easy as a text file or the original google docs, but a good structure with numbered section may help</li>
+</ol>
+<h3 id="the-format">The format</h3>
+<p>While the first version (markdown files) are the most powerful, the second version (the existing practice) is also acceptable. In this case we propose to create a PR with adding a reference page <em>without</em> the content but including the link.</p>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#f92672">title</span>: <span style="color:#ae81ff">Ozone Security Design</span>
+<span style="color:#f92672">summary</span>: <span style="color:#ae81ff">A comprehensive description of the security flow between server and client components.</span>
+<span style="color:#f92672">date</span>: <span style="color:#e6db74">2018-02-22</span>
+<span style="color:#f92672">jira</span>: <span style="color:#ae81ff">HDDS-4</span>
+<span style="color:#f92672">status</span>: <span style="color:#ae81ff">implemented</span>
+<span style="color:#f92672">author</span>: <span style="color:#ae81ff">Sanjay Radia, Jitendra Pandey, Xiaoyu Yao, Anu Engineer</span>
+
+<span style="color:#75715e">## Summary</span>
+
+<span style="color:#f92672">Ozone security model is based on Kerberos and similar to the Hadoop security but some of the parts are improved</span>: <span style="color:#ae81ff">for example the SCM works as a Certificate Authority and PKI based solutions are wildely used.</span>
+
+<span style="color:#75715e">## Reference</span>
+
+<span style="color:#ae81ff">For more details please check the (uploaded design doc)[https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf].</span>
+
+</code></pre></div><p>Obviously with the first approach the design doc itself can be included in this markdown file.</p>
+<h2 id="migration">Migration</h2>
+<p>It&rsquo;s not a hard requirement to migrate all the design doc. But process is always open:</p>
+<ol>
+<li>To create reference pages for any of the old design docs</li>
+<li>To migrate any new design docs to markdown formats (by anybody not just by the author)</li>
+<li>To update any of the old design docs based on the current state of the code (We have versioning!)</li>
+</ol>
+<h2 id="document-template">Document template</h2>
+<p>This the proposed template to document any proposal. It&rsquo;s recommended but not required the use exactly the some structure. Some proposal may require different structure, but we need the following information.</p>
+<ol>
+<li>Summary</li>
+</ol>
+<blockquote>
+<p>Give a one sentence summary, like the jira title. It will be displayed on the documentation page. Should be enough to understand</p>
+</blockquote>
+<ol start="2">
+<li>Status</li>
+</ol>
+<p>Defined in the markdown header. Proposed statuses:</p>
+<ul>
+<li>
+<p><code>accepted</code>: (Use this as by default. If not accepted, won&rsquo;t be merged)</p>
+</li>
+<li>
+<p><code>implemented</code>: The discussed technical solution is implemented (maybe with some minor implementation difference)</p>
+</li>
+<li>
+<p><code>replaced</code>: Replaced by a new design doc</p>
+</li>
+<li>
+<p><code>outdated</code>: Code has been changed and design doc doesn&rsquo;t reflect any more the state of the current code.</p>
+</li>
+</ul>
+<p>Note: the <em>accepted</em> design docs won&rsquo;t be visible as part of the documentation or only under a dedicated section to clearly communicate that it&rsquo;s not ready, yet.</p>
+<ol start="3">
+<li>Problem statement (Motivation / Abstract)</li>
+</ol>
+<blockquote>
+<p>What is the problem and how would you solve it? Think about an abstract of a paper: one paragraph overview. Why will the world better with this change?</p>
+</blockquote>
+<ol start="4">
+<li>Non-goals</li>
+</ol>
+<blockquote>
+<p>Very important to define what is outside of the scope of this proposal</p>
+</blockquote>
+<ol start="5">
+<li>Technical Description (Architecture and implementation details)</li>
+</ol>
+<blockquote>
+<p>Explain the problem in more details. How can it be reproduced? What is the current solution? What is the limitation of the current solution?</p>
+</blockquote>
+<blockquote>
+<p>How the new proposed solution would solve the problem? Architectural design.</p>
+</blockquote>
+<blockquote>
+<p>Implementation details. What should be changed in the code. Is it a huge change? Do we need to change wire protocol? Backward compatibility?</p>
+</blockquote>
+<ol start="6">
+<li>Alternatives</li>
+</ol>
+<blockquote>
+<p>What are the other alternatives you considered and why do yoy prefer the proposed solution The goal of this section is to help people understand why this is the best solution now, and also to prevent churn in the future when old alternatives are reconsidered.</p>
+</blockquote>
+<p>Note: In some cases 4/5 can be combined. For example if you have multiple proposals, the first version may include multiple solutions. At the end ot the discussion we can move the alternatives to 5. and explain why the community is decided to use the selected option.</p>
+<ol start="7">
+<li>Plan</li>
+</ol>
+<blockquote>
+<p>Planning to implement the feature. Estimated size of the work? Do we need feature branch? Any migration plan, dependency? If it&rsquo;s not a big new feature it can be one sentence or optional.</p>
+</blockquote>
+<ol start="8">
+<li>References</li>
+</ol>
+<h2 id="workflows-form-other-projects">Workflows form other projects</h2>
+<p>There are similar process in other open source projects. This document and the template is inspired by the following projects:</p>
+<ul>
+<li><a href="https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Improvement+Proposals">Apache Kafka Improvement Proposals</a></li>
+<li><a href="https://spark.apache.org/improvement-proposals.html">Apache Spark Project Improvement Proposals</a></li>
+<li><a href="https://github.com/kubernetes/enhancements/tree/master/keps">Kubernetes Enhancement Proposals</a></li>
+</ul>
+<p>Short summary of the processes:</p>
+<p><strong>Kafka</strong> process:</p>
+<ul>
+<li>Create wiki page</li>
+<li>Start discussion on mail thread</li>
+<li>Vote on mail thread</li>
+</ul>
+<p><strong>Spark</strong> process:</p>
+<ul>
+<li>Create JIRA (dedicated label)</li>
+<li>Discuss on the jira page</li>
+<li>Vote on dev list</li>
+</ul>
+<p><em>Kubernetes</em>:</p>
+<ul>
+<li>Deditaced git repository</li>
+<li>KEPs are committed to the repo</li>
+<li>Well defined approval process managed by SIGs (KEPs are assigned to SIGs)</li>
+</ul>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

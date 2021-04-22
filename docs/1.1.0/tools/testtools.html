@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../tools.html">Tools</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Testing tools</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/tools/testtools.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Testing tools</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Testing is one of the most important part during the development of a distributed system. We have the following type of test.</p>
+<p>This page includes our existing test tool which are part of the Ozone source base.</p>
+<p>Note: we have more tests (like TCP-DS, TCP-H tests via Spark or Hive) which are not included here because they use external tools only.</p>
+<h2 id="unit-test">Unit test</h2>
+<p>As every almost every java project we have the good old unit tests inside each of our projects.</p>
+<h2 id="integration-test-junit">Integration test (JUnit)</h2>
+<p>Traditional unit tests are supposed to test only one unit, but we also have higher level unit tests. They use <code>MiniOzoneCluster</code> which is a helper method to start real daemons (scm,om,datanodes) during the unit test.</p>
+<p>From maven/java point of view they are just simple unit tests (JUnit library is used) but to separate them (and solve some dependency problems) we moved all of these tests to <code>hadoop-ozone/integration-test</code></p>
+<h2 id="smoketest">Smoketest</h2>
+<p>We use docker-compose based pseudo-cluster to run different configuration of Ozone. To be sure that the different configuration can be started we implemented <em>acceptance</em> tests with the help of <a href="https://robotframework.org/">https://robotframework.org/</a>.</p>
+<p>The smoketests are available from the distribution (<code>./smoketest</code>) but the robot files defines only the tests: usually they start CLI and check the output.</p>
+<p>To run the tests in different environment (docker-compose, kubernetes) you need a definition to start the containers and execute the right tests in the right containers.</p>
+<p>These definition of the tests are included in the <code>compose</code> directory (check <code>./compose/*/test.sh</code> or <code>./compose/test-all.sh</code>).</p>
+<p>For example a simple way to test the distribution package:</p>
+<pre><code>cd compose/ozone
+./test.sh
+</code></pre><h2 id="blockade">Blockade</h2>
+<p><a href="https://github.com/worstcase/blockade">Blockade</a> is a tool to test network failures and partitions (it&rsquo;s inspired by the legendary <a href="https://jepsen.io/analyses">Jepsen tests</a>).</p>
+<p>Blockade tests are implemented with the help of tests and can be started from the <code>./blockade</code> directory of the distribution.</p>
+<pre><code>cd blocakde
+pip install pytest==2.8.7,blockade
+python -m pytest -s .
+</code></pre><p>See the README in the blockade directory for more details.</p>
+<h2 id="minichaosozonecluster">MiniChaosOzoneCluster</h2>
+<p>This is a way to get <a href="https://en.wikipedia.org/wiki/Chaos_engineering">chaos</a> in your machine. It can be started from the source code and a MiniOzoneCluster (which starts real daemons) will be started and killed randomly.</p>
+<h2 id="freon">Freon</h2>
+<p>Freon is a command line application which is included in the Ozone distribution. It&rsquo;s a load generator which is used in our stress tests.</p>
+<p>Random keys:</p>
+<p>In randomkeys mode, the data written into ozone cluster is randomly generated. Each key will be of size 10 KB.</p>
+<p>The number of volumes/buckets/keys can be configured. The replication type and factor (eg. replicate with ratis to 3 nodes) also can be configured.</p>
+<p>For more information use:</p>
+<p>bin/ozone freon &ndash;help</p>
+<p>For example:</p>
+<pre><code>ozone freon randomkeys --num-of-volumes=10 --num-of-buckets 10 --num-of-keys 10  --replication-type=RATIS --factor=THREE
+</code></pre><pre><code>***************************************************
+Status: Success
+Git Base Revision: 48aae081e5afacbb3240657556b26c29e61830c3
+Number of Volumes created: 10
+Number of Buckets created: 100
+Number of Keys added: 1000
+Ratis replication factor: THREE
+Ratis replication type: RATIS
+Average Time spent in volume creation: 00:00:00,035
+Average Time spent in bucket creation: 00:00:00,319
+Average Time spent in key creation: 00:00:03,659
+Average Time spent in key write: 00:00:10,894
+Total bytes written: 10240000
+Total Execution time: 00:00:16,898
+***********************
+</code></pre><h2 id="genesis">Genesis</h2>
+<p>Genesis is a microbenchmarking tool. It&rsquo;s also included in the distribution (<code>ozone genesis</code>) but it doesn&rsquo;t require real cluster. It measures different part of the code in an isolated way (eg. the code which saves the data to the local RocksDB based key value stores)</p>
+<p>Example run:</p>
+<pre><code> ozone genesis -benchmark=BenchMarkRocksDbStore
+# JMH version: 1.19
+# VM version: JDK 11.0.1, VM 11.0.1+13-LTS
+# VM invoker: /usr/lib/jvm/java-11-openjdk-11.0.1.13-3.el7_6.x86_64/bin/java
+# VM options: -Dproc_genesis -Djava.net.preferIPv4Stack=true -Dhadoop.log.dir=/var/log/hadoop -Dhadoop.log.file=hadoop.log -Dhadoop.home.dir=/opt/hadoop -Dhadoop.id.str=hadoop -Dhadoop.root.logger=INFO,console -Dhadoop.policy.file=hadoop-policy.xml -Dhadoop.security.logger=INFO,NullAppender
+# Warmup: 2 iterations, 1 s each
+# Measurement: 20 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 4 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test
+# Parameters: (backgroundThreads = 4, blockSize = 8, maxBackgroundFlushes = 4, maxBytesForLevelBase = 512, maxOpenFiles = 5000, maxWriteBufferNumber = 16, writeBufferSize = 64)
+
+# Run progress: 0.00% complete, ETA 00:00:22
+# Fork: 1 of 1
+# Warmup Iteration   1: 213775.360 ops/s
+# Warmup Iteration   2: 32041.633 ops/s
+Iteration   1: 196342.348 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   2: 41926.816 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   3: 210433.231 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   4: 46941.951 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   5: 212825.884 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   6: 145914.351 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   7: 141838.469 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   8: 205334.438 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration   9: 163709.519 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  10: 162494.608 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  11: 199155.793 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  12: 209679.298 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  13: 193787.574 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  14: 127004.147 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  15: 145511.080 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  16: 223433.864 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  17: 169752.665 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  18: 165217.191 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  19: 191038.476 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+Iteration  20: 196335.579 ops/s
+                 ?stack: &lt;delayed till summary&gt;
+
+
+
+Result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test&quot;:
+  167433.864 ?(99.9%) 43530.883 ops/s [Average]
+  (min, avg, max) = (41926.816, 167433.864, 223433.864), stdev = 50130.230
+  CI (99.9%): [123902.981, 210964.748] (assumes normal distribution)
+
+Secondary result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test:?stack&quot;:
+Stack profiler:
+
+....[Thread state distributions]....................................................................
+ 78.9%         RUNNABLE
+ 20.0%         TIMED_WAITING
+  1.1%         WAITING
+
+....[Thread state: RUNNABLE]........................................................................
+ 59.8%  75.8% org.rocksdb.RocksDB.put
+ 16.5%  20.9% org.rocksdb.RocksDB.get
+  0.7%   0.9% java.io.UnixFileSystem.delete0
+  0.7%   0.9% org.rocksdb.RocksDB.disposeInternal
+  0.3%   0.4% java.lang.Long.formatUnsignedLong0
+  0.1%   0.2% org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test
+  0.1%   0.1% java.lang.Long.toUnsignedString0
+  0.1%   0.1% org.apache.hadoop.ozone.genesis.generated.BenchMarkRocksDbStore_test_jmhTest.test_thrpt_jmhStub
+  0.0%   0.1% java.lang.Object.clone
+  0.0%   0.0% java.lang.Thread.currentThread
+  0.4%   0.5% &lt;other&gt;
+
+....[Thread state: TIMED_WAITING]...................................................................
+ 20.0% 100.0% java.lang.Object.wait
+
+....[Thread state: WAITING].........................................................................
+  1.1% 100.0% jdk.internal.misc.Unsafe.park
+
+
+
+# Run complete. Total time: 00:00:38
+
+Benchmark                          (backgroundThreads)  (blockSize)  (maxBackgroundFlushes)  (maxBytesForLevelBase)  (maxOpenFiles)  (maxWriteBufferNumber)  (writeBufferSize)   Mode  Cnt       Score       Error  Units
+BenchMarkRocksDbStore.test                           4            8                       4                     512            5000                      16                 64  thrpt   20  167433.864 ? 43530.883  ops/s
+BenchMarkRocksDbStore.test:?stack                    4            8                       4                     512            5000                      16                 64  thrpt              NaN                ---
+</code></pre>
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4ad03188ed4fbbe8d6dce1e8e0c8d91518904fc1">4ad03188e</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

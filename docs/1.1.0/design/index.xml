@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Designs on Ozone</title>
+    <link>/design.html</link>
+    <description>Recent content in Designs on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proposed persistent OM connection for S3 gateway</title>
+      <link>/design/s3-performance.html</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/s3-performance.html</guid>
+      <description>Proposal to use per-request authentication and persistent connections between S3g and OM</description>
+    </item>
+    
+    <item>
+      <title>Erasure Coding in Ozone</title>
+      <link>/design/ec.html</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/ec.html</guid>
+      <description>Use Erasure Coding algorithm for efficient storage</description>
+    </item>
+    
+    <item>
+      <title>Implement new Ozone FileSystem scheme ofs://</title>
+      <link>/design/ofs.html</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/ofs.html</guid>
+      <description>A new schema structure for Hadoop compatible file system</description>
+    </item>
+    
+    <item>
+      <title>Storage Class</title>
+      <link>/design/storage-class.html</link>
+      <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/storage-class.html</guid>
+      <description>New abstraction to configure replication methods.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Volume Management</title>
+      <link>/design/volume-management.html</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/volume-management.html</guid>
+      <description>A simplified version of mapping between S3 buckets and Ozone volume/buckets</description>
+    </item>
+    
+    <item>
+      <title>NFS support Ozone</title>
+      <link>/design/nfs.html</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/nfs.html</guid>
+      <description>Adopt NFS gateway of HDFS and provide NFS file system view</description>
+    </item>
+    
+    <item>
+      <title>SCM HA support</title>
+      <link>/design/scmha.html</link>
+      <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/scmha.html</guid>
+      <description>HA for Storage Container Manager using Ratis to replicate data</description>
+    </item>
+    
+    <item>
+      <title>Ozone FS namespace</title>
+      <link>/design/namespace-support.html</link>
+      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/namespace-support.html</guid>
+      <description>Use additional prefix table for indexed data retrieval</description>
+    </item>
+    
+    <item>
+      <title>Generic Extensible Token support for Ozone</title>
+      <link>/design/token.html</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/design/token.html</guid>
+      <description>Extend existing token architecture to all entities of Ozone</description>
+    </item>
+    
+    <item>
+      <title>Ozone Trash Feature</title>
+      <link>/design/trash.html</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/trash.html</guid>
+      <description>Feature provides a user with the ability to recover keys that may have been deleted accidentally. (similar to the HDFS trash feature).</description>
+    </item>
+    
+    <item>
+      <title>Recon server v2</title>
+      <link>/design/recon2.html</link>
+      <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/recon2.html</guid>
+      <description>Second phase of Recon development. Recon acts as a passive SCM.</description>
+    </item>
+    
+    <item>
+      <title>Decommissioning in Ozone</title>
+      <link>/design/decommissioning.html</link>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/decommissioning.html</guid>
+      <description>Formal process to shut down machines in a safe way after the required replications.</description>
+    </item>
+    
+    <item>
+      <title>Ozone GDPR framework</title>
+      <link>/design/gdpr.html</link>
+      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/gdpr.html</guid>
+      <description>Crypto key management to handle GDPR &amp;ldquo;right to be forgotten&amp;rdquo; feature</description>
+    </item>
+    
+    <item>
+      <title>Ozone locks in OM</title>
+      <link>/design/locks.html</link>
+      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/locks.html</guid>
+      <description>Hierarchical locking structure for OM elements (volumes/keys/buckets)</description>
+    </item>
+    
+    <item>
+      <title>Ozone Enhancement Proposals</title>
+      <link>/design/ozone-enhancement-proposals.html</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/ozone-enhancement-proposals.html</guid>
+      <description>Definition of the process to share new technical proposals with the Ozone community.</description>
+    </item>
+    
+    <item>
+      <title>Configless Ozone service management</title>
+      <link>/design/configless.html</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/configless.html</guid>
+      <description>Distribute only minimal configuration and download all the remaining before start</description>
+    </item>
+    
+    <item>
+      <title>Ozone multi-raft support</title>
+      <link>/design/multiraft.html</link>
+      <pubDate>Tue, 21 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/multiraft.html</guid>
+      <description>Datanodes can be part of multiple independent RAFT groups / pipelines</description>
+    </item>
+    
+    <item>
+      <title>Type-safe configuration API</title>
+      <link>/design/typesafeconfig.html</link>
+      <pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/typesafeconfig.html</guid>
+      <description>Inject configuration values based on annotations instead of using constants and Hadoop API</description>
+    </item>
+    
+    <item>
+      <title>Recon server 1</title>
+      <link>/design/recon1.html</link>
+      <pubDate>Tue, 19 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/recon1.html</guid>
+      <description>Second phase of Recon development. Recon acts as a passive SCM.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Encryption At Rest</title>
+      <link>/design/tde.html</link>
+      <pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/design/tde.html</guid>
+      <description>Transparent Data Encryption encrypts the data before store it</description>
+    </item>
+    
+    <item>
+      <title>Topology-awareness</title>
+      <link>/design/topology.html</link>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/design/topology.html</guid>
+      <description>Placement policy to use rack information for read and write</description>
+    </item>
+    
+    <item>
+      <title>S3 protocol support for Ozone</title>
+      <link>/design/s3gateway.html</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/design/s3gateway.html</guid>
+      <description>Support any AWS S3 compatible client with dedicated REST endpoint</description>
+    </item>
+    
+    <item>
+      <title>Ozone Manager HA</title>
+      <link>/design/omha.html</link>
+      <pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/design/omha.html</guid>
+      <description>Support HA for Ozone Manager with the help of RATIS</description>
+    </item>
+    
+  </channel>
+</rss>

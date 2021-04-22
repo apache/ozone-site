@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../../zh/index.html" class="navbar-left ozone-logo">
+        <img src="../../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../../zh/index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/index.html">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/concept.html">
+                    
+                    <span>概念</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/overview.html">概览</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/datanodes.html">数据节点</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/feature.html">
+                    
+                    <span>特点</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/ha.html">高可用</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/gdpr.html">Ozone 中的 GDPR</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/quota.html">Ozone中的配额</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/recon.html">Recon 服务器</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/security.html">
+                    
+                    <span>安全</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/secureozone.html">安全化 Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securingtde.html">透明数据加密</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securings3.html">安全化 S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securityacls.html">Ozone 访问控制列表</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/interface.html">
+                    
+                    <span>编程接口</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/tools.html">
+                
+
+                    
+                    <span>工具</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/recipe.html">
+                
+
+                    
+                    <span>使用配方</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/interface.html">编程接口</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone 文件系统</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    <a href="../../interface/o3fs.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone 文件系统</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<div class="alert alert-warning">
+<p>注意：本页面翻译的信息可能滞后，最新的信息请参看英文版的相关页面。</p>
+</div>
+<p>Hadoop 的文件系统接口兼容可以让任意像 Ozone 这样的存储后端轻松地整合进 Hadoop 生态系统，Ozone 文件系统就是一个兼容 Hadoop 的文件系统。
+目前ozone支持两种协议: o3fs和ofs。两者最大的区别是o3fs只支持在单个bucket上操作，而ofs则支持跨所有volume和bucket的操作。关于两者在操作上的具体区别请参考<a href="../../interface/ofs.html">OFS(英文页面)</a>中的&quot;Differences from o3fs&quot;。</p>
+<h2 id="o3fs的配置及使用">o3fs的配置及使用</h2>
+<p>要创建一个 ozone 文件系统，我们需要先为它选择一个用来存放数据的桶，这个桶会被用作 Ozone 文件系统的后端存储，所有的文件和目录都存储为这个桶中的键。</p>
+<p>如果你还没有可用的卷和桶的话，请使用下面的命令创建：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
+ozone sh bucket create /volume/bucket</code></pre></div>
+<p>创建之后，请使用 <em>list volume</em> 或 <em>list bucket</em> 命令来确认桶已存在。</p>
+<p>请在 core-site.xml 中添加以下条目：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+<span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<p>这样会使指定的桶成为 HDFS 的 dfs 命令的默认文件系统，并且将其注册为了 o3fs 文件系统类型。</p>
+<p>你还需要将 ozone-filesystem.jar 文件加入 classpath：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/hadoop-ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</code></pre></div>
+<p>(注意：当使用Hadoop 2.x时，应该在classpath上添加hadoop-ozone-filesystem-hadoop2-*.jar)</p>
+<p>当配置了默认的文件系统之后，用户可以运行 ls、put、mkdir 等命令，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+<p>或</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
+<p>或者 put 命令。换句话说，所有像 Hive、Spark 和 Distcp 的程序都会在这个文件系统上工作。
+请注意，在这个桶里使用 Ozone 文件系统以外的方法来进行键的创建和删除时，最终都会体现为 Ozone 文件系统中的目录和文件的创建和删除。</p>
+<p>注意：桶名和卷名不可以包含句点。
+此外，文件系统的 URI 可以由桶名和卷名后跟着 OM 主机的 FQDN 和一个可选的端口组成，比如，你可以同时指定主机和端口：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</code></pre></div>
+<p>如果 URI 未指定端口，将会尝试从 <code>ozone.om.address</code> 配置中获取端口，如果 <code>ozone.om.address</code> 未配置，则使用默认端口 <code>9862</code>，比如，我们在 <code>ozone-site.xml</code> 中配置 <code>ozone.om.address</code> 如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;property&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
+  <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<p>当我们运行下面的命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</code></pre></div>
+<p>它其实等价于：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</code></pre></div>
+<p>注意：在这种情况下，<code>ozone.om.address</code> 配置中只有端口号会被用到，主机名是被忽略的。</p>
+<h2 id="ofs的配置及使用">ofs的配置及使用</h2>
+<p>这只是一个通用的介绍。了解更详细的用法，请参考<a href="../../interface/ofs.html">OFS(英文页面)</a>。</p>
+<p>请在 core-site.xml 中添加以下条目：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.ofs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+<span style="color:#f92672">&lt;property&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;value&gt;</span>ofs://om-host.example.com/<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<p>这样会使该om的所有桶和卷成为 HDFS 的 dfs 命令的默认文件系统，并且将其注册为了 ofs 文件系统类型。</p>
+<p>你还需要将 ozone-filesystem.jar 文件加入 classpath：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/hadoop-ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</code></pre></div>
+<p>(注意：当使用Hadoop 2.x时，应该在classpath上添加hadoop-ozone-filesystem-hadoop2-*.jar)</p>
+<p>当配置了默认的文件系统之后，用户可以运行 ls、put、mkdir 等命令，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+<p>需要注意的是ofs能够作用于所有的桶和卷之上，用户可以使用mkdir自行创建桶和卷，比如创建卷volume1和桶bucket1。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /volume1
+hdfs dfs -mkdir /volume1/bucket1</code></pre></div>
+<p>或者用 put 命令向对应的桶写入文件。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -put /etc/hosts /volume1/bucket1/test</code></pre></div>
+<p>更多用法可以参考: <a href="https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf">https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf</a></p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/interface/csi.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/19cb481896f091ec5c02fe4010a5ab428302f38f">19cb48189</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
