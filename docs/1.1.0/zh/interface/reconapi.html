@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../../zh/index.html" class="navbar-left ozone-logo">
+        <img src="../../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../../zh/index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/index.html">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/concept.html">
+                    
+                    <span>概念</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/overview.html">概览</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/datanodes.html">数据节点</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/feature.html">
+                    
+                    <span>特点</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/ha.html">高可用</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/gdpr.html">Ozone 中的 GDPR</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/quota.html">Ozone中的配额</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/recon.html">Recon 服务器</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/security.html">
+                    
+                    <span>安全</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/secureozone.html">安全化 Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securingtde.html">透明数据加密</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securings3.html">安全化 S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securityacls.html">Ozone 访问控制列表</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/interface.html">
+                    
+                    <span>编程接口</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/tools.html">
+                
+
+                    
+                    <span>工具</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/recipe.html">
+                
+
+                    
+                    <span>使用配方</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/interface.html">编程接口</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recon API</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    <a href="../../interface/reconapi.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Recon API</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Recon API v1 是一组 HTTP 端点，可以帮助您了解 Ozone 集群的当前状态，并在需要时进行故障排除。</p>
+<h3 id="http-端点">HTTP 端点</h3>
+<h4 id="容器">容器</h4>
+<ul>
+<li>
+<p><strong>/containers</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers
+</code></pre><p><strong>参数</strong></p>
+<ul>
+<li>
+<p>prevKey (可选)</p>
+<p>只回传ID大于给定的 prevKey 的容器。
+示例：prevKey=1</p>
+</li>
+<li>
+<p>limit (可选)</p>
+<p>只回传有限数量的结果。默认限制是1000。</p>
+</li>
+</ul>
+<p><strong>回传</strong></p>
+<p>回传所有 ContainerMetadata 对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;data&#34;</span>: {
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+    <span style="color:#f92672">&#34;containers&#34;</span>: [
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">834</span>
+      },
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">2</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+      },
+      {
+        <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">3</span>,
+        <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+      }
+    ]
+  }
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/:id/keys</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers/:id/keys
+</code></pre><p><strong>参数</strong></p>
+<ul>
+<li>
+<p>prevKey (可选)</p>
+<p>只回传在给定的 prevKey 键前缀之后的键。
+示例：prevKey=/vol1/bucket1/key1</p>
+</li>
+<li>
+<p>limit (可选)</p>
+<p>只回传有限数量的结果。默认限制是1000。</p>
+</li>
+</ul>
+<p><strong>回传</strong></p>
+<p>回传给定容器 ID 的所有 KeyMetadata 对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;totalCount&#34;</span>:<span style="color:#ae81ff">7</span>,
+  <span style="color:#f92672">&#34;keys&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;Volume&#34;</span>:<span style="color:#e6db74">&#34;vol-1-73141&#34;</span>,
+      <span style="color:#f92672">&#34;Bucket&#34;</span>:<span style="color:#e6db74">&#34;bucket-3-35816&#34;</span>,
+      <span style="color:#f92672">&#34;Key&#34;</span>:<span style="color:#e6db74">&#34;key-0-43637&#34;</span>,
+      <span style="color:#f92672">&#34;DataSize&#34;</span>:<span style="color:#ae81ff">1000</span>,
+      <span style="color:#f92672">&#34;Versions&#34;</span>:[<span style="color:#ae81ff">0</span>],
+      <span style="color:#f92672">&#34;Blocks&#34;</span>: {
+        <span style="color:#f92672">&#34;0&#34;</span>: [
+          {
+            <span style="color:#f92672">&#34;containerID&#34;</span>:<span style="color:#ae81ff">1</span>,
+            <span style="color:#f92672">&#34;localID&#34;</span>:<span style="color:#ae81ff">105232659753992201</span>
+          }
+        ]
+      },
+      <span style="color:#f92672">&#34;CreationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:17.722Z&#34;</span>,
+      <span style="color:#f92672">&#34;ModificationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:30.405Z&#34;</span>
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+  ]
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/missing</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers/missing
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数。</p>
+<p><strong>回传</strong></p>
+<p>回传所有丢失容器的 MissingContainerMetadata 对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">26</span>,
+    <span style="color:#f92672">&#34;containers&#34;</span>: [{
+        <span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">&#34;missingSince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+        <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+        <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+        <span style="color:#f92672">&#34;replicas&#34;</span>: [{
+            <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+            <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+            <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+            <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731201301</span>
+        }, 
+        <span style="color:#960050;background-color:#1e0010">...</span>
+        ]
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+    ]
+}
+</code></pre></div></li>
+<li>
+<p><strong>/containers/:id/replicaHistory</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers/:id/replicaHistory
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数。</p>
+<p><strong>回传</strong></p>
+<p>回传给定容器 ID 的所有 ContainerHistory 对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+  {
+    <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+    <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+    <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+    <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605730421294</span>
+  },
+  <span style="color:#960050;background-color:#1e0010">...</span>
+]
+</code></pre></div></li>
+<li>
+<p><strong>/containers/unhealthy</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers/unhealthy
+</code></pre><p><strong>参数</strong></p>
+<ul>
+<li>
+<p>batchNum (可选)</p>
+<p>回传结果的批号(如“页码”)。
+传递1，将回传记录1到limit。传递2，将回传limit + 1到2 * limit，依此类推。</p>
+</li>
+<li>
+<p>limit (可选)</p>
+<p>只回传有限数量的结果。默认限制是1000。</p>
+</li>
+</ul>
+<p><strong>回传</strong></p>
+<p>回传所有不健康容器的 UnhealthyContainerMetadata 对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;missingCount&#34;</span>: <span style="color:#ae81ff">2</span>,
+   <span style="color:#f92672">&#34;underReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;overReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;misReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+   <span style="color:#f92672">&#34;containers&#34;</span>: [{
+       <span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+       <span style="color:#f92672">&#34;containerState&#34;</span>: <span style="color:#e6db74">&#34;MISSING&#34;</span>,
+       <span style="color:#f92672">&#34;unhealthySince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+       <span style="color:#f92672">&#34;expectedReplicaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+       <span style="color:#f92672">&#34;actualReplicaCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+       <span style="color:#f92672">&#34;replicaDeltaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+       <span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#66d9ef">null</span>,
+       <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+       <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+       <span style="color:#f92672">&#34;replicas&#34;</span>: [{
+           <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+           <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+           <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605722960125</span>,
+           <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731230509</span>
+       }, 
+       <span style="color:#960050;background-color:#1e0010">...</span>
+       ]
+   },
+   <span style="color:#960050;background-color:#1e0010">...</span>
+   ]
+} 
+</code></pre></div></li>
+<li>
+<p><strong>/containers/unhealthy/:state</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/containers/unhealthy/:state
+</code></pre><p><strong>参数</strong></p>
+<ul>
+<li>
+<p>batchNum (可选)</p>
+<p>回传结果的批号(如“页码”)。
+传递1，将回传记录1到limit。传递2，将回传limit + 1到2 * limit，依此类推。</p>
+</li>
+<li>
+<p>limit (可选)</p>
+<p>只回传有限数量的结果。默认限制是1000。</p>
+</li>
+</ul>
+<p><strong>回传</strong></p>
+<p>回传处于给定状态的容器的 UnhealthyContainerMetadata 对象。
+不健康的容器状态可能为<code>MISSING</code>, <code>MIS_REPLICATED</code>, <code>UNDER_REPLICATED</code>, <code>OVER_REPLICATED</code>。
+响应结构与<code>/containers/unhealthy</code>相同。</p>
+</li>
+</ul>
+<h4 id="集群状态">集群状态</h4>
+<ul>
+<li>
+<p><strong>/clusterState</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/clusterState
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数。</p>
+<p><strong>回传</strong></p>
+<p>返回 Ozone 集群当前状态的摘要。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;pipelines&#34;</span>: <span style="color:#ae81ff">5</span>,
+   <span style="color:#f92672">&#34;totalDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+   <span style="color:#f92672">&#34;healthyDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+   <span style="color:#f92672">&#34;storageReport&#34;</span>: {
+       <span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">1081719668736</span>,
+       <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">1309212672</span>,
+       <span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">597361258496</span>
+   },
+   <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">26</span>,
+   <span style="color:#f92672">&#34;volumes&#34;</span>: <span style="color:#ae81ff">6</span>,
+   <span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
+   <span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
+}
+</code></pre></div></li>
+</ul>
+<h4 id="数据节点">数据节点</h4>
+<ul>
+<li>
+<p><strong>/datanodes</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/datanodes
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数。</p>
+<p><strong>回传</strong></p>
+<p>回传集群中的所有数据节点。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+    <span style="color:#f92672">&#34;datanodes&#34;</span>: [{
+        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;f8f8cb45-3ab2-4123&#34;</span>,
+        <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+        <span style="color:#f92672">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+        <span style="color:#f92672">&#34;lastHeartbeat&#34;</span>: <span style="color:#ae81ff">1605738400544</span>,
+        <span style="color:#f92672">&#34;storageReport&#34;</span>: {
+            <span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">270429917184</span>,
+            <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">358805504</span>,
+            <span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">119648149504</span>
+        },
+        <span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+            <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+            <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-2&#34;</span>
+        }, {
+            <span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;3bf4a9e9-69cc-4d20&#34;</span>,
+            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">1</span>,
+            <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>
+        }],
+        <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">17</span>,
+        <span style="color:#f92672">&#34;leaderCount&#34;</span>: <span style="color:#ae81ff">1</span>
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+    ]
+ }
+</code></pre></div></li>
+</ul>
+<h4 id="管道">管道</h4>
+<ul>
+<li>
+<p><strong>/pipelines</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/pipelines
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数</p>
+<p><strong>回传</strong></p>
+<p>回传在集群中的所有管道。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> {
+    <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+        <span style="color:#f92672">&#34;pipelineId&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+        <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
+        <span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+        <span style="color:#f92672">&#34;datanodes&#34;</span>: [<span style="color:#e6db74">&#34;localhost-1&#34;</span>, <span style="color:#e6db74">&#34;localhost-2&#34;</span>, <span style="color:#e6db74">&#34;localhost-3&#34;</span>],
+        <span style="color:#f92672">&#34;lastLeaderElection&#34;</span>: <span style="color:#ae81ff">0</span>,
+        <span style="color:#f92672">&#34;duration&#34;</span>: <span style="color:#ae81ff">23166128</span>,
+        <span style="color:#f92672">&#34;leaderElections&#34;</span>: <span style="color:#ae81ff">0</span>,
+        <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+        <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+        <span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">0</span>
+    },
+    <span style="color:#960050;background-color:#1e0010">...</span>
+    ]
+ }
+</code></pre></div></li>
+</ul>
+<h4 id="任务">任务</h4>
+<ul>
+<li>
+<p><strong>/task/status</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/task/status
+</code></pre><p><strong>参数</strong></p>
+<p>没有参数</p>
+<p><strong>回传</strong></p>
+<p>回传所有 Recon 任务的状态。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> [
+   {
+    <span style="color:#f92672">&#34;taskName&#34;</span>: <span style="color:#e6db74">&#34;OmDeltaRequest&#34;</span>,
+    <span style="color:#f92672">&#34;lastUpdatedTimestamp&#34;</span>: <span style="color:#ae81ff">1605724099147</span>,
+    <span style="color:#f92672">&#34;lastUpdatedSeqNumber&#34;</span>: <span style="color:#ae81ff">186</span>
+   },
+   <span style="color:#960050;background-color:#1e0010">...</span>
+ ]
+</code></pre></div></li>
+</ul>
+<h4 id="使用率">使用率</h4>
+<ul>
+<li>
+<p><strong>/utilization/fileCount</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/utilization/fileCount
+</code></pre><p><strong>参数</strong></p>
+<ul>
+<li>
+<p>volume (可选)</p>
+<p>根据给定的卷名过滤结果。</p>
+</li>
+<li>
+<p>bucket (可选)</p>
+<p>根据给定的桶名过滤结果。</p>
+</li>
+<li>
+<p>fileSize (可选)</p>
+<p>根据给定的文件大小筛选结果。</p>
+</li>
+</ul>
+<p><strong>回传</strong></p>
+<p>回传不同文件范围内的文件计数，其中响应对象中的<code>fileSize</code>是文件大小范围的上限。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> [{
+    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+    <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-0-11685&#34;</span>,
+    <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+    <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+ }, {
+    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+    <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-1-41795&#34;</span>,
+    <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+    <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+ }, {
+    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+    <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-2-93377&#34;</span>,
+    <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+    <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+ }, {
+    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+    <span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-3-50336&#34;</span>,
+    <span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+    <span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">2</span>
+ }]
+</code></pre></div></li>
+</ul>
+<h4 id="a-namemetricsa-指标"><a name="metrics"></a> 指标</h4>
+<ul>
+<li>
+<p><strong>/metrics/:api</strong></p>
+<p><strong>URL 结构</strong></p>
+<pre><code>GET /api/v1/metrics/:api
+</code></pre><p><strong>参数</strong></p>
+<p>请参阅 <a href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus HTTP API 参考</a> 以获取完整的查询文档。</p>
+<p><strong>回传</strong></p>
+<p>这是 Prometheus 的代理端点，并回传与 Prometheus 端点相同的响应。
+示例：/api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>,
+  <span style="color:#f92672">&#34;data&#34;</span>: {
+    <span style="color:#f92672">&#34;resultType&#34;</span>: <span style="color:#e6db74">&#34;vector&#34;</span>,
+    <span style="color:#f92672">&#34;result&#34;</span>: [
+      {
+        <span style="color:#f92672">&#34;metric&#34;</span>: {
+          <span style="color:#f92672">&#34;__name__&#34;</span>: <span style="color:#e6db74">&#34;ratis_leader_election_electionCount&#34;</span>,
+          <span style="color:#f92672">&#34;exported_instance&#34;</span>: <span style="color:#e6db74">&#34;33a5ac1d-8c65-4c74-a0b8-9314dfcccb42&#34;</span>,
+          <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;group-03CA9397D54B&#34;</span>,
+          <span style="color:#f92672">&#34;instance&#34;</span>: <span style="color:#e6db74">&#34;ozone_datanode_1:9882&#34;</span>,
+          <span style="color:#f92672">&#34;job&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>
+        },
+        <span style="color:#f92672">&#34;value&#34;</span>: [
+          <span style="color:#ae81ff">1599159384.455</span>,
+          <span style="color:#e6db74">&#34;5&#34;</span>
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div></li>
+</ul>
+
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: December 17, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1b6f7dbed61a9e70969b6682707ce19e99c459bb">1b6f7dbed</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

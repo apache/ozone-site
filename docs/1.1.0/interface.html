@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="./css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="./index.html" class="navbar-left ozone-logo">
+        <img src="./ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="./index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="wrapper">
+<div class="container-fluid">
+    <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="./index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="active">
+                <a href="./interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="./security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="./security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="./security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="./recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="./design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+            <div class="col-md-9">
+
+                
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="./zh/interface.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+                <h1>Client Interfaces</h1>
+            </div>
+
+            <div class="col-md-9">
+                <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">Multi-Protocol Support </h3>
+        <p class="lead">
+            
+Ozone is a multi-protocol file system. There are different protocols by which
+ users can access data on Ozone.
+
+        </p>
+    </div>
+</div>
+
+                
+                
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Ofs (Hadoop compatible)
+                                </h2>
+                                <p class="card-text">Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. <strong>Global level view.</strong></p>
+                                <a href="./interface/ofs.html"
+                                   class=" btn btn-primary btn-lg">Ofs (Hadoop compatible)</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    O3fs (Hadoop compatible)
+                                </h2>
+                                <p class="card-text">Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. <strong>Bucket level view.</strong></p>
+                                <a href="./interface/o3fs.html"
+                                   class=" btn btn-primary btn-lg">O3fs (Hadoop compatible)</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    S3 Protocol
+                                </h2>
+                                <p class="card-text">Ozone supports Amazon&rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</p>
+                                <a href="./interface/s3.html"
+                                   class=" btn btn-primary btn-lg">S3 Protocol</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Command Line Interface
+                                </h2>
+                                <p class="card-text">Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the Java API.
+There are some functionality which couldn&rsquo;t be accessed without using ozone sh commands. For example:
+ Creating volumes with quota Managing internal ACLs Creating buckets with encryption key  All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</p>
+                                <a href="./interface/cli.html"
+                                   class=" btn btn-primary btn-lg">Command Line Interface</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Recon API
+                                </h2>
+                                <p class="card-text">Recon server supports HTTP endpoints to help troubleshoot and monitor Ozone cluster.</p>
+                                <a href="./interface/reconapi.html"
+                                   class=" btn btn-primary btn-lg">Recon API</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Java API
+                                </h2>
+                                <p class="card-text">Ozone has a set of Native RPC based APIs. This is the lowest level API&rsquo;s on which all other protocols are built. This is the most performant and feature-full of all Ozone protocols.</p>
+                                <a href="./interface/javaapi.html"
+                                   class=" btn btn-primary btn-lg">Java API</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    CSI Protocol
+                                </h2>
+                                <p class="card-text">Ozone supports Container Storage Interface(CSI) protocol. You can use Ozone by mounting an Ozone volume by Ozone CSI.</p>
+                                <a href="./interface/csi.html"
+                                   class=" btn btn-primary btn-lg">CSI Protocol</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="push"></div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script src="./js/ozonedoc.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

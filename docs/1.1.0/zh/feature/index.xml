@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>特点 on Ozone</title>
+    <link>/zh/feature.html</link>
+    <description>Recent content in 特点 on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/zh/feature/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>高可用</title>
+      <link>/zh/feature/ha.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/ha.html</guid>
+      <description>Ozone 用于避免单点故障的高可用设置</description>
+    </item>
+    
+    <item>
+      <title>Ozone中的配额</title>
+      <link>/zh/feature/quota.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/quota.html</guid>
+      <description>Ozone中的配额</description>
+    </item>
+    
+    <item>
+      <title>Recon 服务器</title>
+      <link>/zh/feature/recon.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/recon.html</guid>
+      <description>Recon 是 Ozone 中用于分析服务的网页用户界面（Web UI）</description>
+    </item>
+    
+  </channel>
+</rss>

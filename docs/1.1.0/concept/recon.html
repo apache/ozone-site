@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recon</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/concept/recon.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Recon</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Recon serves as a management and monitoring console for Ozone. It gives a
+bird&rsquo;s-eye view of Ozone and helps users troubleshoot any issues by presenting
+the current state of the cluster through REST based APIs and rich web UI.</p>
+<h2 id="high-level-design">High Level Design</h2>
+<figure>
+    <img src="../concept/ReconHighLevelDesign.png" width="800px"/> 
+</figure>
+
+<br/>
+<p>On a high level, Recon collects and aggregates metadata from Ozone Manager (OM),
+Storage Container Manager (SCM) and Datanodes (DN) and acts as a central
+management and monitoring console. Ozone administrators can use Recon to query
+the current state of the system without overloading OM or SCM.</p>
+<p>Recon maintains multiple databases to enable batch processing, faster querying
+and to persist aggregate information. It maintains a local copy of OM db and
+SCM db along with a SQL database for persisting aggregate information.</p>
+<p>Recon also integrates with Prometheus to provide a HTTP endpoint to query Prometheus
+for Ozone metrics and also to display a few crucial point in time metrics in
+the web UI.</p>
+<h2 id="recon-and-ozone-manager">Recon and Ozone Manager</h2>
+<figure>
+    <img src="../concept/ReconOmDesign.png" width="800px"/> 
+</figure>
+
+<br/>
+<p>Recon gets a full snapshot of OM rocks db initially from the leader OM&rsquo;s HTTP
+endpoint, untars the file and initializes RocksDB for querying locally. The
+database is kept in sync by periodically requesting delta updates from the leader
+OM via RPC calls from the last applied sequence id. If for any reason, the delta
+updates could not be retrieved or applied to the local db, a full snapshot is
+requested again to keep the local db in sync with OM db. Due to this, Recon can
+show stale information since the local db will not always be in sync.</p>
+<p>The db updates retrieved from OM is then converted into a batch of events for
+further processing by OM db tasks via <a href="#task-framework">Recon Task Framework</a>.</p>
+<h2 id="recon-and-storage-container-manager">Recon and Storage Container Manager</h2>
+<figure>
+    <img src="../concept/ReconScmDesign.png" width="800px"/> 
+</figure>
+
+<br/>
+<p>Recon also acts as a passive SCM for datanodes. When Recon is configured in the
+cluster, all the datanodes register with Recon and send heartbeats, container
+reports, incremental container reports etc. to Recon similar to SCM. Recon uses
+all the information it gets from datanodes to construct its own copy of SCM rocks db
+locally. Recon never sends any command to datanodes in response and just acts as
+a passive SCM for faster lookup of SCM metadata.</p>
+<h2 id="a-nametask-frameworka-task-framework"><a name="task-framework"></a> Task Framework</h2>
+<p>Recon has its own Task framework to enable batch processing of data obtained
+from OM and SCM. A task can listen to and act upon db events such as <code>PUT</code>, <code>DELETE</code>,
+<code>UPDATE</code>, etc. on either OM db or SCM db. Based on this, a task either implements
+<code>org.apache.hadoop.ozone.recon.tasks.ReconOmTask</code> or extends
+<code>org.apache.hadoop.ozone.recon.scm.ReconScmTask</code>.</p>
+<p>An example <code>ReconOmTask</code> is <code>ContainerKeyMapperTask</code> that persists the container -&gt; key
+mapping in RocksDB. This is useful to understand which keys were part of the container
+when the container is reported missing or is in a bad health state. Another example is
+<code>FileSizeCountTask</code> which keeps track of count of files within a given file size range in
+a SQL database. These tasks have implementations for two scenarios:</p>
+<ul>
+<li>Full snapshot (reprocess())</li>
+<li>Delta updates (process())</li>
+</ul>
+<p>When a full snapshot of OM db is obtained from the leader OM, the reprocess()
+is called on all the registered OM tasks. On subsequent delta updates, process()
+is called on these OM tasks.</p>
+<p>An example <code>ReconScmTask</code> is <code>ContainerHealthTask</code> that runs in configurable
+intervals to scan the list of all the containers and to persist the state of
+unhealthy containers (<code>MISSING</code>, <code>MIS_REPLICATED</code>, <code>UNDER_REPLICATED</code>, <code>OVER_REPLICATED</code>)
+in a SQL table. This information is used to determine if there are any missing
+containers in the cluster.</p>
+<h2 id="recon-and-prometheus">Recon and Prometheus</h2>
+<p>Recon can integrate with any Prometheus instance configured to collected metrics
+and can display useful information in Recon UI in Datanodes and Pipelines pages.
+Recon also exposes a proxy endpoint (<a href="../interface/reconapi.html#metrics">/metrics</a>)
+to query Prometheus. This integration can be enabled by setting this configuration <code>ozone.recon.prometheus.http.endpoint</code>
+to the Prometheus endpoint like <code>ozone.recon.prometheus.http.endpoint=localhost:9090</code>.</p>
+<h2 id="api-reference">API Reference</h2>
+<p><a href="../interface/reconapi.html">Link to complete API Reference</a></p>
+<h2 id="persisted-state">Persisted state</h2>
+<ul>
+<li>
+<p>A local copy of <a href="../concept/ozonemanager.html#persisted-state">OM database</a></p>
+</li>
+<li>
+<p>A local copy of <a href="../concept/storagecontainermanager.html#persisted-state">SCM database</a></p>
+</li>
+<li>
+<p>The following data is persisted in Recon in the specified RocksDB directory:</p>
+<ul>
+<li>ContainerKey table
+<ul>
+<li>Stores the mapping (container, key) -&gt; count</li>
+</ul>
+</li>
+<li>ContainerKeyCount table
+<ul>
+<li>Stores containerID -&gt; no. of keys count within the container</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The following data is stored in the configured SQL database (default is Derby):</p>
+<ul>
+<li>GlobalStats table
+<ul>
+<li>A Key -&gt; Value table to store aggregate information like total
+number of volumes / buckets / keys present in the cluster</li>
+</ul>
+</li>
+<li>FileCountBySize table
+<ul>
+<li>Keeps track of the number of files present within a file size range in the cluster</li>
+</ul>
+</li>
+<li>ReconTaskStatus table
+<ul>
+<li>Keeps track of the status and last run timestamp of the registered OM and SCM
+db tasks in the <a href="#task-framework">Recon Task Framework</a></li>
+</ul>
+</li>
+<li>ContainerHistory table
+<ul>
+<li>Stores ContainerReplica -&gt; Datanode mapping with last known timestamp. This
+is used to determine the last known datanodes when a container is reported missing</li>
+</ul>
+</li>
+<li>UnhealthyContainers table
+<ul>
+<li>Keeps track of all the Unhealthy Containers (MISSING, UNDER_REPLICATED,
+OVER_REPLICATED, MIS_REPLICATED) in the cluster at any given time</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="notable-configurations">Notable configurations</h2>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>default</th>
+<th><div style="width: 300px;">description</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.recon.http-address</td>
+<td>0.0.0.0:9888</td>
+<td>The address and the base port where the Recon web UI will listen on.</td>
+</tr>
+<tr>
+<td>ozone.recon.address</td>
+<td>0.0.0.0:9891</td>
+<td>RPC address of the Recon.</td>
+</tr>
+<tr>
+<td>ozone.recon.db.dir</td>
+<td>none</td>
+<td>Directory where the Recon Server stores its metadata.</td>
+</tr>
+<tr>
+<td>ozone.recon.om.db.dir</td>
+<td>none</td>
+<td>Directory where the Recon Server stores its OM snapshot DB.</td>
+</tr>
+<tr>
+<td>ozone.recon.om.snapshot<br>.task.interval.delay</td>
+<td>10m</td>
+<td>Interval in MINUTES by Recon to request OM DB Snapshot / delta updates.</td>
+</tr>
+<tr>
+<td>ozone.recon.task<br>.missingcontainer.interval</td>
+<td>300s</td>
+<td>Time interval of the periodic check for Unhealthy Containers in the cluster.</td>
+</tr>
+<tr>
+<td>ozone.recon.sql.db.jooq.dialect</td>
+<td>DERBY</td>
+<td>Please refer to <a href="https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/SQLDialect.html">SQL Dialect</a> to specify a different dialect.</td>
+</tr>
+<tr>
+<td>ozone.recon.sql.db.jdbc.url</td>
+<td>jdbc:derby:${ozone.recon.db.dir}<br>/ozone_recon_derby.db</td>
+<td>Recon SQL database jdbc url.</td>
+</tr>
+<tr>
+<td>ozone.recon.sql.db.username</td>
+<td>none</td>
+<td>Recon SQL database username.</td>
+</tr>
+<tr>
+<td>ozone.recon.sql.db.password</td>
+<td>none</td>
+<td>Recon SQL database password.</td>
+</tr>
+<tr>
+<td>ozone.recon.sql.db.driver</td>
+<td>org.apache.derby.jdbc<br>.EmbeddedDriver</td>
+<td>Recon SQL database jdbc driver.</td>
+</tr>
+</tbody>
+</table>
+
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

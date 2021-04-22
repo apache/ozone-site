@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/ha.html">High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Observability</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Observability</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone provides multiple tools to get more information about the current state of the cluster.</p>
+<h2 id="prometheus">Prometheus</h2>
+<p>Ozone has native support for Prometheus integration. All internal metrics (collected by Hadoop metrics framework) are published under the <code>/prom</code> HTTP endpoint. (For example under http://localhost:9876/prom for SCM).</p>
+<p>The Prometheus endpoint is turned on by default but can be turned off by the <code>hdds.prometheus.endpoint.enabled</code> configuration variable.</p>
+<p>In a secure environment the page is guarded with SPNEGO authentication which is not supported by Prometheus. To enable monitoring in a secure environment, a specific authentication token can be configured</p>
+<p>Example <code>ozone-site.xml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.token<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>putyourtokenhere<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+</code></pre></div><p>Example prometheus configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-YAML" data-lang="YAML"><span style="color:#f92672">scrape_configs</span>:
+  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
+    <span style="color:#f92672">bearer_token</span>: <span style="color:#ae81ff">&lt;putyourtokenhere&gt;</span>
+    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
+    <span style="color:#f92672">static_configs</span>:
+     - <span style="color:#f92672">targets</span>:
+         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
+</code></pre></div><h2 id="distributed-tracing">Distributed tracing</h2>
+<p>Distributed tracing can help to understand performance bottleneck with visualizing end-to-end performance.</p>
+<p>Ozone uses <a href="https://jaegertracing.io">jaeger</a> tracing library to collect traces which can send tracing data to any compatible backend (Zipkin, &hellip;).</p>
+<p>Tracing is turned off by default, but can be turned on with <code>hdds.tracing.enabled</code> from <code>ozone-site.xml</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+</code></pre></div><p>Jager client can be configured with environment variables as documented <a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">here</a>:</p>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
+JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
+JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
+</code></pre></div><p>This configuration will record 1% of the requests to limit the performance overhead. For more information about jaeger sampling <a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">check the documentation</a></p>
+<h2 id="ozone-insight">ozone insight</h2>
+<p>Ozone insight is a swiss-army-knife tool to for checking the current state of Ozone cluster. It can show logging, metrics and configuration for a particular component.</p>
+<p>To check the available components use <code>ozone insight list</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight list
+
+Available insight points:
+
+  scm.node-manager                     SCM Datanode management related information.
+  scm.replica-manager                  SCM closed container replication manager
+  scm.event-queue                      Information about the internal async event delivery
+  scm.protocol.block-location          SCM Block location protocol endpoint
+  scm.protocol.container-location      SCM Container location protocol endpoint
+  scm.protocol.security                SCM Block location protocol endpoint
+  om.key-manager                       OM Key Manager
+  om.protocol.client                   Ozone Manager RPC endpoint
+  datanode.pipeline                    More information about one ratis datanode ring.
+</code></pre></div><h3 id="configuration">Configuration</h3>
+<p><code>ozone insight config</code> can show configuration related to a specific component (supported only for selected components).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight config scm.replica-manager
+
+Configuration <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.replica-manager<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM closed container replication manager<span style="color:#f92672">)</span>
+
+&gt;&gt;&gt; hdds.scm.replication.thread.interval
+       default: 300s
+       current: 300s
+
+There is a replication monitor thread running inside SCM which takes care of replicating the containers in the cluster. This property is used to configure the interval in which that thread runs.
+
+
+&gt;&gt;&gt; hdds.scm.replication.event.timeout
+       default: 30m
+       current: 30m
+
+Timeout <span style="color:#66d9ef">for</span> the container replication/deletion commands sent  to datanodes. After this timeout the command will be retried.
+
+</code></pre></div><h3 id="metrics">Metrics</h3>
+<p><code>ozone insight metrics</code> can show metrics related to a specific component (supported only for selected components).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight metrics scm.protocol.block-location
+Metrics <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.protocol.block-location<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM Block location protocol endpoint<span style="color:#f92672">)</span>
+
+RPC connections
+
+  Open connections: <span style="color:#ae81ff">0</span>
+  Dropped connections: <span style="color:#ae81ff">0</span>
+  Received bytes: <span style="color:#ae81ff">1267</span>
+  Sent bytes: <span style="color:#ae81ff">2420</span>
+
+
+RPC queue
+
+  RPC average queue time: 0.0
+  RPC call queue length: <span style="color:#ae81ff">0</span>
+
+
+RPC performance
+
+  RPC processing time average: 0.0
+  Number of slow calls: <span style="color:#ae81ff">0</span>
+
+
+Message type counters
+
+  Number of AllocateScmBlock: ???
+  Number of DeleteScmKeyBlocks: ???
+  Number of GetScmInfo: ???
+  Number of SortDatanodes: ???
+</code></pre></div><h3 id="logs">Logs</h3>
+<p><code>ozone insight logs</code> can connect to the required service and show the DEBUG/TRACE log related to one specific component. For example to display RPC message:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt;ozone insight logs om.protocol.client
+
+<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:49,988 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol ServiceList request is received
+<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:50,095 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol CreateVolume request is received
+</code></pre></div><p>Using <code>-v</code> flag the content of the protobuf message can also be displayed (TRACE level log):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone insight logs -v om.protocol.client
+
+<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,463 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is received:
+cmdType: CreateVolume
+traceID: <span style="color:#e6db74">&#34;&#34;</span>
+clientId: <span style="color:#e6db74">&#34;client-A31DF5C6ECF2&#34;</span>
+createVolumeRequest <span style="color:#f92672">{</span>
+  volumeInfo <span style="color:#f92672">{</span>
+    adminName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+    ownerName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+    volume: <span style="color:#e6db74">&#34;vol1&#34;</span>
+    quotaInBytes: <span style="color:#ae81ff">1152921504606846976</span>
+    volumeAcls <span style="color:#f92672">{</span>
+      type: USER
+      name: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+      aclScope: ACCESS
+    <span style="color:#f92672">}</span>
+    volumeAcls <span style="color:#f92672">{</span>
+      type: GROUP
+      name: <span style="color:#e6db74">&#34;users&#34;</span>
+      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+      aclScope: ACCESS
+    <span style="color:#f92672">}</span>
+    creationTime: <span style="color:#ae81ff">1595939608460</span>
+    objectID: <span style="color:#ae81ff">0</span>
+    updateID: <span style="color:#ae81ff">0</span>
+    modificationTime: <span style="color:#ae81ff">0</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,474 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is processed. Response:
+cmdType: CreateVolume
+traceID: <span style="color:#e6db74">&#34;&#34;</span>
+success: false
+message: <span style="color:#e6db74">&#34;Volume already exists&#34;</span>
+status: VOLUME_ALREADY_EXISTS
+</code></pre></div><div class="alert alert-warning" role="alert">
+<p>Under the hood <code>ozone insight</code> uses HTTP endpoints to retrieve the required information (<code>/conf</code>, <code>/prom</code> and <code>/logLevel</code> endpoints). It&rsquo;s not yet supported in secure environment.</p>
+</div>
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: September 4, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/157864ad09788fdc72fee50abdf0e6b16bc74527">157864ad0</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

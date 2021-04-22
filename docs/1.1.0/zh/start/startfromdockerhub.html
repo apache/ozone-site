@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../../zh/index.html" class="navbar-left ozone-logo">
+        <img src="../../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../../zh/index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/index.html">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/concept.html">
+                    
+                    <span>概念</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/overview.html">概览</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/datanodes.html">数据节点</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/feature.html">
+                    
+                    <span>特点</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/ha.html">高可用</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/gdpr.html">Ozone 中的 GDPR</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/quota.html">Ozone中的配额</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/recon.html">Recon 服务器</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/security.html">
+                    
+                    <span>安全</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/secureozone.html">安全化 Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securingtde.html">透明数据加密</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securings3.html">安全化 S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securityacls.html">Ozone 访问控制列表</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/interface.html">
+                    
+                    <span>编程接口</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/tools.html">
+                
+
+                    
+                    <span>工具</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/recipe.html">
+                
+
+                    
+                    <span>使用配方</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/start.html">快速入门</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">简易 Ozone</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    <a href="../../start/startfromdockerhub.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>简易 Ozone</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<div class="panel panel-default">
+    <div class="panel-heading">Requirements</div>
+    <div class="panel-body">
+        <ul>
+<li>docker</li>
+<li>AWS CLI（可选）</li>
+</ul>
+
+    </div>
+</div>
+
+<h1 id="所有-ozone-服务在单个容器">所有 Ozone 服务在单个容器</h1>
+<p>启动一个 all-in-one 的 ozone 容器最简单的方法就是使用 Docker Hub 最新的 docker 镜像：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -p 9878:9878 -p 9876:9876 apache/ozone
+</code></pre></div><p>这个命令会从 Docker Hub 拉取 ozone 镜像并在一个容器中启动所有 ozone 服务，包括必要的元数据服务（Ozone Manager，Storage Container Manager）、一个数据节点和兼容 S3
+的 REST 服务（S3 网关）。</p>
+<h1 id="ozone-服务在多个独立的容器">Ozone 服务在多个独立的容器</h1>
+<p>如果你需要一个更类似生产环境的集群，使用 Ozone 发行包自带的 docker-compose 配置文件可以让 Ozone 服务组件在各自独立的容器中运行。</p>
+<p>docker-compose 配置文件和一个 environment 文件已经包含在 Docker Hub 的镜像中。</p>
+<p>下面的命令可以从镜像中获取到这两个文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run apache/ozone cat docker-compose.yaml &gt; docker-compose.yaml
+docker run apache/ozone cat docker-config &gt; docker-config
+</code></pre></div><p>现在你可以用 docker-compose 命令来启动集群：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d
+</code></pre></div><p>如果你需要多个数据节点，可以通过下面的命令增加：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> docker-compose scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</code></pre></div><h1 id="运行-s3-客户端">运行 S3 客户端</h1>
+<p>集群启动就绪后，你可以连接 SCM 的 UI 来验证它的状态，地址为（<a href="http://localhost:9876">http://localhost:9876</a>）。</p>
+<p>S3 网关的端口为 9878，如果你正在使用 S3 作为存储方案，可以考虑 Ozone 的 S3 功能。</p>
+<p>从命令行创建桶的命令为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3api --endpoint http://localhost:9878/ create-bucket --bucket<span style="color:#f92672">=</span>bucket1
+</code></pre></div><p>唯一的区别在于你需要在运行 aws s3api 命令的时候用 &ndash;endpoint 选项指定 ozone S3 网关的地址。</p>
+<p>下面我们来把一个简单的文件存入 Ozone 的 S3 桶中，首先创建一个用来上传的临时文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -1 &gt; /tmp/testfile
+</code></pre></div><p>这个命令创建了一个用来上传到 Ozone 的临时文件，下面的命令用标准的 aws s3 命令行接口把这个文件上传到了 Ozone 的 S3 桶中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
+</code></pre></div><div class="alert alert-info" role="alert">
+注意：对于单容器 ozone 来说，REDUCED_REDUNDANCY 参数是必需的，因为它只有一个数据节点。</div>
+我们可以对桶运行 list 命令来验证文件是否上传成功：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile
+</code></pre></div><div class="alert alert-info" role="alert"> 你也可以点击下面的链接，通过 Ozone S3 网关自带的浏览器去查看桶内的文件。
+<br>
+</div>
+http://localhost:9878/bucket1?browser
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/start/onprem.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: February 6, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3d397239b07c61f98319902366db800f05769949">3d397239b</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

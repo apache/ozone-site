@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../../zh/index.html" class="navbar-left ozone-logo">
+        <img src="../../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../../zh/index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/index.html">
+                
+
+                    
+                    <span>概述</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/start.html">
+                
+
+                    
+                    <span>快速入门</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/concept.html">
+                    
+                    <span>概念</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/overview.html">概览</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/datanodes.html">数据节点</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/feature.html">
+                    
+                    <span>特点</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/ha.html">高可用</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/gdpr.html">Ozone 中的 GDPR</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../../zh/feature/quota.html">Ozone中的配额</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/feature/recon.html">Recon 服务器</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/security.html">
+                    
+                    <span>安全</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/secureozone.html">安全化 Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securingtde.html">透明数据加密</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securings3.html">安全化 S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/security/securityacls.html">Ozone 访问控制列表</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../zh/interface.html">
+                    
+                    <span>编程接口</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/tools.html">
+                
+
+                    
+                    <span>工具</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../zh/recipe.html">
+                
+
+                    
+                    <span>使用配方</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/feature.html">特点</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone中的配额</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    <a href="../../feature/quota.html"><span class="label label-success">English</span></a>
+    
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone中的配额</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>目前，我们知道Ozone允许用户创建Volume，Bucket和Key。一个Volume通常包含几个Bucket，每个Bucket也包含一定数量的Key。显然，它应该允许用户定义配额（例如，在一个Volume下可以创建多少个Bucket或一个Bucket可以使用多少空间），这是存储系统的常见要求。</p>
+<h2 id="目前支持的">目前支持的</h2>
+<ol>
+<li>Storage space级别配额</li>
+</ol>
+<p>管理员应该能够定义一个Volume或Bucket可以使用多少存储空间。目前支持以下storage space quota的设置:</p>
+<p>a. 默认情况下volume和bucket的quota不启用。</p>
+<p>b. 当volume quota启用时，bucket quota的总大小不能超过volume。</p>
+<p>c. 可以在不启用volume quota的情况下单独给bucket设置quota。此时bucket quota的大小是不受限制的。</p>
+<p>d. 目前不支持单独设置volume quota，只有在设置了bucket quota的情况下volume quota才会生效。因为ozone在写入key时只检查bucket的usedBytes。</p>
+<p>e. 如果集群从小于1.1.0的旧版本升级而来，则不建议在旧volume和bucket(可以通过查看volume或者bucket的info确认，如果quota值是-2，那么这个volume或者bucket就是旧的)上使用配额。由于旧的key没有计算到bucket的usedBytes中，所以此时配额设置是不准确的。</p>
+<p>f. 如果volume quota被启用，那么bucket quota将不能被清除。</p>
+<ol start="2">
+<li>命名空间配额</li>
+</ol>
+<p>管理员应当能够定义一个Volume或Bucket可以使用多少命名空间。目前支持命名空间的配额设置为：</p>
+<p>a. 默认情况下volume和bucket的命名空间配额不启用(即无限配额)。</p>
+<p>b. 当volume命名空间配额启用时，该volume的bucket数目不能超过此配额。</p>
+<p>c. 当bucket的命名空间配额启用时，该bucket的key数目不能超过此配额。</p>
+<p>d. Linked bucket不消耗命名空间配额。</p>
+<p>e. 如果集群从小于1.1.0的旧版本升级而来，则不建议在旧volume和bucket(可以通过查看volume或者bucket的info确认，如果quota值是-2，那么这个volume或者bucket就是旧的)上使用配额。由于旧的key没有计算到bucket的命名空间配额中，所以此时配额设置是不准确的。</p>
+<h2 id="客户端用法">客户端用法</h2>
+<h3 id="storage-space级别配额">Storage space级别配额</h3>
+<p>Storage space级别配额允许使用 KB（k），MB（m），GB（g），TB（t）， PB（p）等单位。表示将使用多少个存储空间。</p>
+<h4 id="volume-space-quota用法">Volume Space quota用法</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --space-quota 5MB /volume1
+</code></pre></div><p>这意味着将volume1的存储空间设置为5MB</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --space-quota 10GB /volume1
+</code></pre></div><p>此行为将volume1的配额更改为10GB。</p>
+<h4 id="bucket-space-quota-用法">Bucket Space quota 用法</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
+</code></pre></div><p>这意味着bucket1允许我们使用5MB的存储空间。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
+</code></pre></div><p>该行为将bucket1的配额更改为10GB</p>
+<p>bucket的总配额 不应大于其Volume的配额。让我们看一个例子，如果我们有一个10MB的Volume，该volume下所有bucket的大小之和不能超过10MB，否则设置bucket quota将失败。</p>
+<h4 id="清除volume和bucket的配额">清除volume和bucket的配额</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --space-quota /volume1
+bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
+</code></pre></div><h4 id="查看volume和bucket的quota值以及usedbytes">查看volume和bucket的quota值以及usedBytes</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
+bin/ozone sh bucket info /volume1/bucket1
+</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedBytes的值</p>
+<h3 id="namespace-quota">Namespace quota</h3>
+<p>命名空间配额是一个数字，其代表由多少个名字能够使用。这个数字不能超过Java long数据类型的最大值。</p>
+<h4 id="volume-namespace-quota">Volume Namespace quota</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
+</code></pre></div><p>这意味着将volume1的命名空间配额设置为100。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
+</code></pre></div><p>此行为将volume1的命名空间配额更改为1000。</p>
+<h4 id="bucket-namespace-quota">Bucket Namespace quota</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
+</code></pre></div><p>这意味着bucket1允许我们使用100的命名空间。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
+</code></pre></div><p>该行为将bucket1的命名空间配额更改为1000。</p>
+<h4 id="清除volume和bucket的配额-1">清除volume和bucket的配额</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --namespace-quota /volume1
+bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
+</code></pre></div><h4 id="查看volume和bucket的quota值以及usednamespace">查看volume和bucket的quota值以及usedNamespace</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
+bin/ozone sh bucket info /volume1/bucket1
+</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedNamespace的值</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../../zh/feature/recon.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.1.0, Last Modified: December 29, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1e84d1789256d58d99a94e11ed86461bfd83e701">1e84d1789</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
