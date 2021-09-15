@@ -1,5 +1,5 @@
 ---
-title: "Apache Hadoop Ozone Releases"
+title: "Apache Ozone Releases"
 layout: downloads
 type: custompage
 ---
@@ -22,20 +22,19 @@ type: custompage
 1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
     site](https://www.apache.org/dyn/closer.cgi/ozone).
 2.  Download the signature file ozone-X.Y.Z-src.tar.gz.asc from
-    [Apache](https://dist.apache.org/repos/dist/release/ozone/).
-3.  Download the [Hadoop
-    KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
+    [Apache](https://downloads.apache.org/ozone/).
+3.  Download the Ozone [KEYS](https://downloads.apache.org/ozone/KEYS)
     file.
-4.  gpg --import KEYS
-5.  gpg --verify ozone-X.Y.Z-src.tar.gz.asc
+4.  `gpg --import KEYS`
+5.  `gpg --verify ozone-X.Y.Z-src.tar.gz.asc ozone-X.Y.Z-src.tar.gz`
 
-## To perform a quick check using SHA-256:
+## To perform a quick check using SHA-512:
 
 1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
     site](https://www.apache.org/dyn/closer.cgi/hadoop/ozone).
 2.  Download the checksum ozone-X.Y.Z-src.tar.gz.sha512 from
-    [Apache](https://dist.apache.org/repos/dist/release/hadoop/ozone/).
-3.  sha512sum -c ozone-X.Y.Z-src.tar.gz
+    [Apache](https://downloads.apache.org/ozone/).
+3.  `sha512sum -c ozone-X.Y.Z-src.tar.gz`
 
 Note: Before 1.1.0 release Ozone was part of the Apache Hadoop project. Older release artifacts can be found [there](https://archive.apache.org/dist/hadoop/ozone/).
 
