@@ -80,12 +80,12 @@ This release is fully functional, but alpha quality.</description>
     </item>
     
     <item>
-      <title>Apache Hadoop Ozone Releases</title>
+      <title>Apache Ozone Releases</title>
       <link>https://ozone.apache.org/downloads/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ozone.apache.org/downloads/</guid>
-      <description>To verify Apache Ozone releases using GPG:  Download the release ozone-X.Y.Z-src.tar.gz from a mirror site. Download the signature file ozone-X.Y.Z-src.tar.gz.asc from Apache. Download the Hadoop KEYS file. gpg &amp;ndash;import KEYS gpg &amp;ndash;verify ozone-X.Y.Z-src.tar.gz.asc  To perform a quick check using SHA-256:  Download the release ozone-X.Y.Z-src.tar.gz from a mirror site. Download the checksum ozone-X.Y.Z-src.tar.gz.sha512 from Apache. sha512sum -c ozone-X.Y.Z-src.tar.gz  Note: Before 1.1.0 release Ozone was part of the Apache Hadoop project.</description>
+      <description>To verify Apache Ozone releases using GPG:  Download the release ozone-X.Y.Z-src.tar.gz from a mirror site. Download the signature file ozone-X.Y.Z-src.tar.gz.asc from Apache. Download the Ozone KEYS file. gpg --import KEYS gpg --verify ozone-X.Y.Z-src.tar.gz.asc ozone-X.Y.Z-src.tar.gz  To perform a quick check using SHA-512:  Download the release ozone-X.Y.Z-src.tar.gz from a mirror site. Download the checksum ozone-X.Y.Z-src.tar.gz.sha512 from Apache. sha512sum -c ozone-X.Y.Z-src.tar.gz  Note: Before 1.1.0 release Ozone was part of the Apache Hadoop project.</description>
     </item>
     
     <item>
