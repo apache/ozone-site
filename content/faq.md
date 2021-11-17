@@ -15,7 +15,7 @@ While the technical answer is Yes, there is always a question of why you are not
 Not that we know.  Ozone is an Apache-licensed open source product; Nothing prevents someone from offering Ozone as a product in the cloud.
 
 ### I have an Apache Spark Application. How do I use it with Ozone?
-You have a Spark based application and you want it to work with Ozone. If your current storage system is HDFS, then you are passing the location of data to your application by using an URL that begins with hdfs://. If you replace hdfs:// with 03fs:// Spark application will start using data from an Ozone bucket.
+You have a Spark based application and you want it to work with Ozone. If your current storage system is HDFS, then you are passing the location of data to your application by using an URL that begins with hdfs://. If you replace hdfs:// with o3fs:// Spark application will start using data from an Ozone bucket.
 
 ### I have an application that is reading and writing to S3 buckets. How do I use it with Ozone?
 Ozone supports S3 protocol as a first-class interface. So you can take an existing S3 based application and change the S3 server address. That is it.
@@ -31,7 +31,7 @@ Please take a look at the getting started document. For the impatient, we have d
 
 There are instructions on how to start Ozone on conventional machines or VMs if you would like to go that way.
 
-You can [download](/ozone/downloads/) it and [try it out.](/ozone/docs/0.3.0-alpha/runningviadocker.html)
+You can [download](/downloads/) it and [try it out.](/docs/1.2.0/start/runningviadocker.html)
 
 ### You said K8s in the first page, How do I deploy Ozone on K8s?
 Please look at the getting started with K8s page. Ozone fully supports deployments to a K8s cluster.
