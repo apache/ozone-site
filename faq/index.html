@@ -91,7 +91,7 @@
 <h3 id="is-there-a-cloud-where-i-can-use-ozone-as-the-object-store">Is there a cloud where I can use Ozone as the object store?</h3>
 <p>Not that we know.  Ozone is an Apache-licensed open source product; Nothing prevents someone from offering Ozone as a product in the cloud.</p>
 <h3 id="i-have-an-apache-spark-application-how-do-i-use-it-with-ozone">I have an Apache Spark Application. How do I use it with Ozone?</h3>
-<p>You have a Spark based application and you want it to work with Ozone. If your current storage system is HDFS, then you are passing the location of data to your application by using an URL that begins with hdfs://. If you replace hdfs:// with 03fs:// Spark application will start using data from an Ozone bucket.</p>
+<p>You have a Spark based application and you want it to work with Ozone. If your current storage system is HDFS, then you are passing the location of data to your application by using an URL that begins with hdfs://. If you replace hdfs:// with o3fs:// Spark application will start using data from an Ozone bucket.</p>
 <h3 id="i-have-an-application-that-is-reading-and-writing-to-s3-buckets-how-do-i-use-it-with-ozone">I have an application that is reading and writing to S3 buckets. How do I use it with Ozone?</h3>
 <p>Ozone supports S3 protocol as a first-class interface. So you can take an existing S3 based application and change the S3 server address. That is it.</p>
 <h3 id="you-said-i-could-change-the-s3-server-address-but-i-need-to-put-the-access-key-id-and-secret-access-key-into-my-aws-file-where-do-i-find-it">You said I could change the S3 server address, but I need to put the access key id and secret access key into my .aws file; where do I find it?</h3>
@@ -101,7 +101,7 @@
 <h3 id="okay-i-am-convinced-i-would-like-to-try-out-ozone-how-do-i-get-started">Okay, I am convinced I would like to try out Ozone. How do I get started?</h3>
 <p>Please take a look at the getting started document. For the impatient, we have docker containers, which allows you to start a fully functional cluster on your machine to explore and see if Ozone works for you.</p>
 <p>There are instructions on how to start Ozone on conventional machines or VMs if you would like to go that way.</p>
-<p>You can <a href="/ozone/downloads/">download</a> it and <a href="/ozone/docs/0.3.0-alpha/runningviadocker.html">try it out.</a></p>
+<p>You can <a href="/downloads/">download</a> it and <a href="/docs/1.2.0/start/runningviadocker.html">try it out.</a></p>
 <h3 id="you-said-k8s-in-the-first-page-how-do-i-deploy-ozone-on-k8s">You said K8s in the first page, How do I deploy Ozone on K8s?</h3>
 <p>Please look at the getting started with K8s page. Ozone fully supports deployments to a K8s cluster.</p>
 <h3 id="i-have-an-existing-apache-hadoop-cluster-and-i-run-things-like-hdfs-and-yarn-how-do-i-use-ozone">I have an existing Apache Hadoop cluster, and I run things like HDFS and YARN. How do I use Ozone?</h3>
