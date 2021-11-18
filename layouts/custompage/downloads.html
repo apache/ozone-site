@@ -37,12 +37,12 @@
        <td>{{dateFormat "2006 Jan 2 " .Date}}</td>
        {{ if eq .Params.hadoop true }}
          <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+           <a href="https://dlcdn.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
            (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
            <a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
           </td>
           <td>
-            <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+            <a href="https://dlcdn.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
             (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
             <a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
            </td>
@@ -51,12 +51,12 @@
            </td>
        {{else}}
          <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+           <a href="https://dlcdn.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
            (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.sha512">checksum</a>
            <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
          </td>
          <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+           <a href="https://dlcdn.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
            (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.sha512">checksum</a>
            <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
          </td>

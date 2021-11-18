@@ -21,14 +21,14 @@
 <div class="col-md-4" style="padding: 20px;">
     {{ if eq .Params.hadoop true }}
        <p>
-           <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz"
+           <a href="https://dlcdn.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz"
               class="btn btn-success">Download tar.gz</a></p>
        <p>
            (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
            <a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
        </p>
        <p>
-           <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz"
+           <a href="https://dlcdn.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz"
               class="btn btn-warning">Download src</a></p>
        <p>
            (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
@@ -38,14 +38,14 @@
        </p>
     {{else}}
        <p>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz"
+           <a href="https://dlcdn.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz"
               class="btn btn-success">Download tar.gz</a></p>
        <p>
            (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.sha512">checksum</a>
            <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
        </p>
        <p>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz"
+           <a href="https://dlcdn.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz"
               class="btn btn-warning">Download src</a></p>
        <p>
            (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.sha512">checksum</a>

@@ -20,7 +20,7 @@ type: custompage
 ## To verify Apache Ozone releases using GPG:
 
 1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
-    site](https://www.apache.org/dyn/closer.cgi/ozone).
+    site](https://dlcdn.apache.org/ozone).
 2.  Download the signature file ozone-X.Y.Z-src.tar.gz.asc from
     [Apache](https://downloads.apache.org/ozone/).
 3.  Download the Ozone [KEYS](https://downloads.apache.org/ozone/KEYS)
@@ -31,7 +31,7 @@ type: custompage
 ## To perform a quick check using SHA-512:
 
 1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
-    site](https://www.apache.org/dyn/closer.cgi/hadoop/ozone).
+    site](https://dlcdn.apache.org/ozone).
 2.  Download the checksum ozone-X.Y.Z-src.tar.gz.sha512 from
     [Apache](https://downloads.apache.org/ozone/).
 3.  `sha512sum -c ozone-X.Y.Z-src.tar.gz`
