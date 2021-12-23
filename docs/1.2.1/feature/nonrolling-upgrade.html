@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/hadoop-ozone">Source</a></li>
+        <li><a href="https://hadoop.apache.org">Apache Hadoop</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based FileSystem Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/hadoop"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://hadoop.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Hadoop</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Non-Rolling Upgrades and Downgrades</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Non-Rolling Upgrades and Downgrades</h1>
+
+            <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<p>Ozone supports non-rolling upgrades and downgrades, where all components are stopped first, and then restarted with the upgraded or downgraded versions.</p>
+<h2 id="upgrade-states">Upgrade States</h2>
+<p>After upgrading components, the upgrade process is divided into two states:</p>
+<ol>
+<li>
+<p><strong>Pre-finalized</strong>: When the current components are stopped and the new versions are started, they will see that the data on disk was written by a previous version of Ozone and enter a pre-finalized state. In the pre-finalized state:</p>
+<ul>
+<li>The cluster can be downgraded at any time by stopping all components and restarting with the old versions.</li>
+<li>Backwards incompatible features introduced in the new version will be disallowed by the cluster.</li>
+<li>The cluster will remain fully operational with all functionality present in the old version still allowed.</li>
+<li>Any data created while pre-finalized will remain readable after downgrade.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finalized</strong>: When a finalize command is given to OM or SCM, they will enter a finalized state.  In the finalized state:</p>
+<ul>
+<li>The cluster can no longer be downgraded.</li>
+<li>All new features of the cluster introduced in the new version can be used.</li>
+</ul>
+</li>
+</ol>
+<h3 id="querying-finalization-status">Querying finalization status</h3>
+<p><strong>OM</strong>: <code>ozone admin om finalizationstatus</code>. If using OM HA, finalization status is checked for the quorum, not individual OMs.</p>
+<p><strong>SCM</strong>: <code>ozone admin scm finalizationstatus</code>. SCM will report that finalization is complete once it has finalized and is aware of enough finalized datanodes to form a write pipeline. The remaining datanodes will finalize asynchronously and be incorporated into write pipelines after informing SCM that they have finalized.</p>
+<p><strong>Datanodes</strong>: <code>ozone admin datanode list</code> will list all datanodes and their health state as seen by SCM. If SCM is finalized, then datanodes whose health state is <code>HEALTHY</code> have informed SCM that they have finalized. Datanodes whose health state is <code>HEALTHY_READONLY</code> have not yet informed SCM that they have finished finalization. <code>HEALTHY_READONLY</code> (pre-finalized) datanodes remain readable, so the cluster is operational even if some otherwise healthy datanodes have not yet finalized. <code>STALE</code> or <code>DEAD</code> datanodes will be told to finalize by SCM once they are reachable again.</p>
+<h2 id="steps-to-upgrade-and-downgrade">Steps to upgrade and downgrade</h2>
+<p>Starting with your current version of Ozone, complete the following steps to upgrade to a newer version of Ozone.</p>
+<ol>
+<li>
+<p>If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. If OM HA is not being used, this step can be skipped.</p>
+<pre tabindex="0"><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
+</code></pre><p>The <code>prepare</code> command will block the Ozone Managers from receiving all write requests. See <a href="../design/omprepare.html">Ozone Manager Prepare For Upgrade</a> for more information</p>
+</li>
+<li>
+<p>Stop all components.</p>
+</li>
+<li>
+<p>Replace artifacts of all components with the newer versions.</p>
+</li>
+<li>
+<p>Start the components</p>
+<ol>
+<li>
+<p>Start the SCM and datanodes as usual:</p>
+<pre tabindex="0"><code>ozone --daemon scm start
+</code></pre><pre tabindex="0"><code>ozone --daemon datanode start
+</code></pre></li>
+<li>
+<p>Start the Ozone Manager using the <code>--upgrade</code> flag to take it out of prepare mode.</p>
+<pre tabindex="0"><code>ozone --daemon om start --upgrade
+</code></pre><ul>
+<li>
+<p>There also exists a <code>--downgrade</code> flag which is an alias of <code>--upgrade</code>. The name used does not matter.</p>
+</li>
+<li>
+<p><strong>IMPORTANT</strong>: All OMs must be started with the <code>--upgrade</code>  or <code>--downgrade</code> flag in this step. If some of the OMs are not started with this flag by mistake, run <code>ozone admin om cancelprepare -id=&lt;om-sevice-id&gt;</code> to make sure all OMs leave prepare mode.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>At this point, the cluster is upgraded to a pre-finalized state and fully operational. The cluster can be downgraded by repeating the above steps, but restoring the older versions of components in step 3, instead of the newer versions. To finalize the cluster to use new features, continue on with the following steps.</p>
+<p><strong>Once the following steps are performed, downgrading will not be possible.</strong></p>
+<ol start="5">
+<li>
+<p>Finalize SCM</p>
+<pre tabindex="0"><code>ozone admin scm finalizeupgrade
+</code></pre><p>At this point, SCM will tell all of the datanodes to finalize. Once SCM has finalized enough datanodes to form a write pipeline, it will return that finalization was successful. The remaining pre-finalized datanodes will be in a read-only state until they indicate to SCM that they have finalized. Write requests will be directed to finalized datanodes only.</p>
+</li>
+<li>
+<p>Finalize OM</p>
+<pre tabindex="0"><code>ozone admin om finalizeupgrade -id=&lt;om-service-id&gt;
+</code></pre></li>
+</ol>
+<p>At this point, the cluster is finalized and the upgrade is complete.</p>
+<h2 id="features-requiring-finalization">Features Requiring Finalization</h2>
+<p>Below is a list of backwards incompatible features and the version in which they were introduced. These features can only be used on a finalized ozone cluster with at least the specified version. Run <code>ozone version</code> to get the current version of your Ozone cluster.</p>
+<h3 id="version-120">Version 1.2.0</h3>
+<ul>
+<li>
+<p><a href="../feature/prefixfso.html">Prefix based File System Optimization</a></p>
+<ul>
+<li>Although new 1.2.0 clusters can use this feature, it is currently not supported for clusters upgraded to 1.2.0, even after finalizing.</li>
+</ul>
+</li>
+<li>
+<p><a href="../feature/scm-ha.html">SCM High Availability</a></p>
+<ul>
+<li>Although new 1.2.0 clusters can use this feature, it is currently not supported for clusters upgraded to 1.2.0, even after finalizing.</li>
+</ul>
+</li>
+</ul>
+
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.2.1, Last Modified: August 17, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8088cf8757cf9437400302376766253c97e3beb1">8088cf875</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
