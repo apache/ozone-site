@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>en/sitemap.xml</loc>
+    
+      <lastmod>2021-09-21T11:03:28-07:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>zh/sitemap.xml</loc>
+    
+      <lastmod>2021-09-13T13:17:02+08:00</lastmod>
+    
+  </sitemap>
+  
+</sitemapindex>
