@@ -7,14 +7,14 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2020 Apache Software Foundation</copyright>
-    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Release 1.2.0 available</title>
-      <link>https://ozone.apache.org/release/1.2.0/</link>
-      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      <title>Release 1.2.1 available</title>
+      <link>https://ozone.apache.org/release/1.2.1/</link>
+      <pubDate>Wed, 22 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://ozone.apache.org/release/1.2.0/</guid>
-      <description>Apache Ozone 1.2.0 is released with following features:
+      <guid>https://ozone.apache.org/release/1.2.1/</guid>
+      <description>Apache Ozone 1.2.1 is released with following features:
  Non-rolling downgrade support to 1.1.0 Storage Container Manager high availability for new clusters Filesystem prefix optimization for new clusters Transparent data encryption for S3 buckets Security enhancements  This is a generally available (GA) release. It represents a point of API stability and quality that we consider production-ready.
 Image credit: Glacier National Park 8 by Tony Hisgett, CC BY 2.0 / Text added to original</description>
     </item>
