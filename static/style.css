@@ -39,22 +39,17 @@
   .topnav .navbar {
     z-index: 0;
     margin-bottom: 0px; }
-      .topnav .navbar .navbar-brand {
-        padding: 30px 0 0 0; }
-      .topnav .navbar .navbar-brand img {
-        margin-top: -15px;
-        height: 60px;
-        float: left; }
-      .topnav .navbar .navbar-brand p {
-        white-space: nowrap;
-        text-align: center;
-        font-size: 24px;
-        padding: 5px 0 5px 5px;
-        margin: 0 10px; }
+    .topnav .navbar .navbar-brand {
+      margin-left: 0; }
     .topnav .navbar .nav {
       padding: 30px 0 0 0;
       color: #fff; }
+      .topnav .navbar .nav li img {
+        margin-top: -15px;
+        height: 60px;
+        float: left; }
       .topnav .navbar .nav li a {
+        white-space: nowrap;
         text-align: center;
         font-size: 24px;
         padding: 5px 0 5px 5px;
