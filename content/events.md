@@ -29,8 +29,8 @@ Apache Ozone is a modern object storage that uniquely supports a native S3 inter
 
 # 2022
 * ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla.
-* ApacheCon North America 2022: Inside an Apache Ozone Upgrade. Ethan Rose.
-* ApacheCon North America 2022: Apache Ozone - State of the Union. Siyao Meng, Ethan Rose.
+* ApacheCon North America 2022: Inside an Apache Ozone Upgrade. Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/01_Rose_Inside_Ozone_Upgrade.pdf)
+* ApacheCon North America 2022: Apache Ozone - State of the Union. Siyao Meng, Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/02_Meng_Rose_Apache_Ozone_SOTU.pdf)
 * ApacheCon North America 2022: Performance of Apache Ozone on NVMe. Wei-Chiu Chuang, Ritesh Shukla.
 * China Apache Hadoop Meetup 2022: What's new in Apache Ozone 1.3. Sammi Chen.
 * ApacheCon Asia 2022: [Sharing Of Recent Progress And Practices In Apache Ozone](https://www.youtube.com/watch?v=SB4lgATn-s8). Yan Liu, Sammi Chen.
@@ -48,6 +48,6 @@ Apache Ozone is a modern object storage that uniquely supports a native S3 inter
 * ApacheCon Asia 2021: [Apache Ozone: A High Performance Object Store For Analytics Workloads](https://www.youtube.com/watch?v=dXrDhe8h7gQ). Rakesh Radhakrishnan, Mukul Kumar Singh.
 * ApacheCon Asia 2021: [How Apache Ozone Builds Up High Availablity With Raft Protocol](https://www.youtube.com/watch?v=jeJ519NTVHo). Shashikant Banerjee, Nandakumar Vadivelu, Li Cheng.
 * SDC India 2021: [Apache Ozone: A High Performance Object Store For Analytics Workloads](https://www.youtube.com/watch?v=riRbSbmxFQE). Rakesh Radhakrishnan, Mukul Kumar Singh.
-* SDC India 2021: [Apache Ozone - Balancing and Deleting Data At Scale](https://www.youtube.com/watch?v=BccR07ChxtA). Lokesh Jain.
-* SDC India 2021: [Architecture and Performance at billions’ scale](https://www.youtube.com/watch?v=PHYcExPv8W4). Lokesh Jain.
+* SDC India 2021: [Apache Ozone - Balancing and Deleting Data At Scale](https://www.youtube.com/watch?v=BccR07ChxtA). Lokesh Jain. [Link](https://www.snia.org/educational-library/apache-ozone-balancing-and-deleting-data-scale-2021)
+* SDC India 2021: [Architecture and Performance at billions’ scale](https://www.youtube.com/watch?v=PHYcExPv8W4). Lokesh Jain. [Link](https://www.snia.org/educational-library/ozone-architecture-and-performance-billions%E2%80%99-scale-2021)
 * COSCUP Taiwan 2021: [My Journey with Apache Ozone](https://www.youtube.com/watch?v=DZq6Pz7RLj8). Yi-Sheng Lien.
