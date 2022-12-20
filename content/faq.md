@@ -31,7 +31,7 @@ Please take a look at the getting started document. For the impatient, we have d
 
 There are instructions on how to start Ozone on conventional machines or VMs if you would like to go that way.
 
-You can [download](/downloads/) it and [try it out.](/docs/1.2.0/start/runningviadocker.html)
+You can [download](/downloads/) it and [try it out.](/docs/current/start/runningviadocker.html)
 
 ### You said K8s in the first page, How do I deploy Ozone on K8s?
 Please look at the getting started with K8s page. Ozone fully supports deployments to a K8s cluster.
