@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -193,83 +215,59 @@
             <h1>Ozone Manager</h1>
           </div>
 
-          
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+          <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Ozone Manager (OM) is the namespace manager for Ozone.</p>
-
 <p>This means that when you want to write some data, you ask Ozone
 Manager for a block and Ozone Manager gives you a block and remembers that
 information. When you want to read that file back, you need to find the
 address of the block and Ozone Manager returns it you.</p>
-
 <p>Ozone Manager also allows users to organize keys under a volume and bucket.
 Volumes and buckets are part of the namespace and managed by Ozone Manager.</p>
-
 <p>Each ozone volume is the root of an independent namespace under OM.
 This is very different from HDFS which provides a single rooted file system.</p>
-
 <p>Ozone&rsquo;s namespace is a collection of volumes or is a forest instead of a
 single rooted tree as in HDFS. This property makes it easy to deploy multiple
 OMs for scaling.</p>
-
 <h2 id="ozone-manager-metadata">Ozone Manager Metadata</h2>
-
 <p>OM maintains a list of volumes, buckets, and keys.
 For each user, it maintains a list of volumes.
 For each volume, the list of buckets and for each bucket the list of keys.</p>
-
 <p>Ozone Manager will use Apache Ratis(A Raft protocol implementation) to
 replicate Ozone Manager state. This will ensure High Availability for Ozone.</p>
-
 <h2 id="ozone-manager-and-storage-container-manager">Ozone Manager and Storage Container Manager</h2>
-
 <p>The relationship between Ozone Manager and Storage Container Manager is best
 understood if we trace what happens during a key write and key read.</p>
-
 <h3 id="key-write">Key Write</h3>
-
 <ul>
-<li><p>To write a key to Ozone, a client tells Ozone manager that it would like to
+<li>
+<p>To write a key to Ozone, a client tells Ozone manager that it would like to
 write a key into a bucket that lives inside a specific volume. Once Ozone
 Manager determines that you are allowed to write a key to the specified bucket,
-OM needs to allocate a block for the client to write data.</p></li>
-
-<li><p>To allocate a block, Ozone Manager sends a request to Storage Container
+OM needs to allocate a block for the client to write data.</p>
+</li>
+<li>
+<p>To allocate a block, Ozone Manager sends a request to Storage Container
 Manager (SCM); SCM is the manager of data nodes. SCM picks three data nodes
 into which client can write data. SCM allocates the block and returns the
-block ID to Ozone Manager.</p></li>
-
-<li><p>Ozone manager records this block information in its metadata and returns the
+block ID to Ozone Manager.</p>
+</li>
+<li>
+<p>Ozone manager records this block information in its metadata and returns the
 block and a block token (a security permission to write data to the block)
-to the client.</p></li>
-
-<li><p>The client uses the block token to prove that it is allowed to write data to
-the block and writes data to the data node.</p></li>
-
-<li><p>Once the write is complete on the data node, the client will update the block
+to the client.</p>
+</li>
+<li>
+<p>The client uses the block token to prove that it is allowed to write data to
+the block and writes data to the data node.</p>
+</li>
+<li>
+<p>Once the write is complete on the data node, the client will update the block
 information on
-Ozone manager.</p></li>
+Ozone manager.</p>
+</li>
 </ul>
-
 <h3 id="key-reads">Key Reads</h3>
-
 <ul>
 <li>Key reads are simpler, the client requests the block list from the Ozone
 Manager</li>

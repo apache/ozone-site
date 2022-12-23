@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -277,29 +299,12 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Audit Parser</h1>
             <div class="col-md-9">
-              <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Audit Parser tool can be used for querying the ozone audit logs.
 This tool creates a sqllite database at the specified path. If the database
 already exists, it will avoid creating a database.</p>
-
 <p>The database contains only one table called <code>audit</code> defined as:</p>
-
 <p>CREATE TABLE IF NOT EXISTS audit (
 datetime text,
 level varchar(7),
@@ -311,24 +316,17 @@ params text,
 result varchar(7),
 exception text,
 UNIQUE(datetime,level,logger,user,ip,op,params,result))</p>
-
 <p>Usage:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;path to db file&gt; <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>PARAM<span style="color:#f92672">]</span></code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;path to db file&gt; <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>PARAM<span style="color:#f92672">]</span></span></span></code></pre></div></p>
 <p>To load an audit log to database:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;path to db file&gt; load &lt;path to audit log&gt;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;path to db file&gt; load &lt;path to audit log&gt;</span></span></code></pre></div>
 Load command creates the audit table described above.</p>
-
 <p>To run a custom read-only query:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;path to db file&gt; query &lt;<span style="color:#66d9ef">select</span> query enclosed within double quotes&gt;</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;path to db file&gt; query &lt;<span style="color:#66d9ef">select</span> query enclosed within double quotes&gt;</span></span></code></pre></div></p>
 <p>Audit Parser comes with a set of templates(most commonly used queries).</p>
-
 <p>To run a template query:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;path to db file&gt; template &lt;templateName&gt;</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;path to db file&gt; template &lt;templateName&gt;</span></span></code></pre></div></p>
 <p>Following templates are available:</p>
-
 <table>
 <thead>
 <tr>
@@ -337,24 +335,21 @@ Load command creates the audit table described above.</p>
 <th>SQL</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>top5users</td>
 <td>Top 5 users</td>
 <td>select user,count(*) as total from audit group by user order by total DESC limit 5</td>
 </tr>
-
 <tr>
 <td>top5cmds</td>
 <td>Top 5 commands</td>
 <td>select op,count(*) as total from audit group by op order by total DESC limit 5</td>
 </tr>
-
 <tr>
 <td>top5activetimebyseconds</td>
 <td>Top 5 active times, grouped by seconds</td>
-<td>select substr(datetime,1,charindex(&lsquo;,&rsquo;,datetime)-1) as dt,count(*) as thecount from audit group by dt order by thecount DESC limit 5</td>
+<td>select substr(datetime,1,charindex(&rsquo;,&rsquo;,datetime)-1) as dt,count(*) as thecount from audit group by dt order by thecount DESC limit 5</td>
 </tr>
 </tbody>
 </table>

@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -181,23 +203,8 @@
                 <h1>Beyond Basics</h1>
             </div>
             <div class="col-md-9">
-                <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
 
 <div class="jumbotron jumbotron-fluid">
@@ -229,10 +236,7 @@
                                     
                                     Runing with HDFS
                                 </h2>
-                                <p class="card-text">Ozone is designed to work with HDFS. So it is easy to deploy ozone in an existing HDFS cluster.
-The container manager part of Ozone can run inside DataNodes as a pluggable module or as a standalone component. This document describe how can it be started as a HDFS datanode plugin.
-To activate ozone you should define the service plugin implementation class.
-Important: It should be added to the hdfs-site.xml as the plugin should be activated as part of the normal HDFS Datanode bootstrap.</p>
+                                <p class="card-text">Ozone is designed to run concurrently with HDFS. This page explains how to deploy Ozone in a exisiting HDFS cluster.</p>
                                 <a href="./beyond/runningwithhdfs.html"
                                    class=" btn btn-primary btn-lg">Runing with HDFS</a>
                             </div>
@@ -251,8 +255,7 @@ Important: It should be added to the hdfs-site.xml as the plugin should be activ
                                     
                                     Ozone Containers
                                 </h2>
-                                <p class="card-text">Docker heavily is used at the ozone development with three principal use-cases:
- dev:  We use docker to start local pseudo-clusters (docker provides unified environment, but no image creation is required)  test:  We create docker images from the dev branches to test ozone in kubernetes and other container orchestrator system We provide apache/ozone images for each release to make it easier for evaluation of Ozone. These images are not created for production usage.</p>
+                                <p class="card-text">Ozone uses containers extensively for testing. This page documents the usage and best practices of Ozone.</p>
                                 <a href="./beyond/containers.html"
                                    class=" btn btn-primary btn-lg">Ozone Containers</a>
                             </div>
@@ -275,10 +278,7 @@ Important: It should be added to the hdfs-site.xml as the plugin should be activ
                                     
                                     Docker Cheat Sheet
                                 </h2>
-                                <p class="card-text">In the compose directory of the ozone distribution there are multiple pseudo-cluster setup which can be used to run Ozone in different way (for example: secure cluster, with tracing enabled, with prometheus etc.).
-If the usage is not document in a specific directory the default usage is the following:
-cd compose/ozone docker-compose up -d The data of the container is ephemeral and deleted together with the docker volumes.
-docker-compose down Useful Docker &amp; Ozone Commands If you make any modifications to ozone, the simplest way to test it is to run freon and unit tests.</p>
+                                <p class="card-text">Docker Compose cheat sheet to help you remember the common commands to control an Ozone cluster running on top of Docker.</p>
                                 <a href="./beyond/dockercheatsheet.html"
                                    class=" btn btn-primary btn-lg">Docker Cheat Sheet</a>
                             </div>

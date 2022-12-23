@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -193,48 +215,22 @@
             <h1>Running concurrently with HDFS</h1>
           </div>
 
-          <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+          <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Ozone is designed to work with HDFS. So it is easy to deploy ozone in an
 existing HDFS cluster.</p>
-
 <p>The container manager part of Ozone can run inside DataNodes as a pluggable module
 or as a standalone component. This document describe how can it be started as
 a HDFS datanode plugin.</p>
-
 <p>To activate ozone you should define the service plugin implementation class.</p>
-
-<div class="alert alert-warning" role="alert">
-<b>Important</b>: It should be added to the <b>hdfs-site.xml</b> as the plugin should
-be activated as part of the normal HDFS Datanode bootstrap.
-</div>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>dfs.datanode.plugins<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.HddsDatanodeService<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
-
+<!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>dfs.datanode.plugins<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.HddsDatanodeService<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>You also need to add the ozone-datanode-plugin jar file to the classpath:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/hadoop/ozoneplugin/hadoop-ozone-datanode-plugin.jar</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/hadoop/ozoneplugin/hadoop-ozone-datanode-plugin.jar</span></span></code></pre></div>
 <p>To start ozone with HDFS you should start the the following components:</p>
-
 <ol>
 <li>HDFS Namenode (from Hadoop distribution)</li>
 <li>HDFS Datanode (from the Hadoop distribution with the plugin on the
@@ -242,16 +238,10 @@ classpath from the Ozone distribution)</li>
 <li>Ozone Manager (from the Ozone distribution)</li>
 <li>Storage Container Manager (from the Ozone distribution)</li>
 </ol>
-
 <p>Please check the log of the datanode whether the HDDS/Ozone plugin is started or
 not. Log of datanode should contain something like this:</p>
-
-<pre><code>2018-09-17 16:19:24 INFO  HddsDatanodeService:158 - Started plug-in org.apache.hadoop.ozone.web.OzoneHddsDatanodeService@6f94fb9d
-</code></pre>
-
-<div class="alert alert-warning" role="alert">
-<b>Note:</b> The current version of Ozone is tested with Hadoop 3.1.
-</div>
+<pre tabindex="0"><code>2018-09-17 16:19:24 INFO  HddsDatanodeService:158 - Started plug-in org.apache.hadoop.ozone.web.OzoneHddsDatanodeService@6f94fb9d
+</code></pre><!-- raw HTML omitted -->
 
 
           

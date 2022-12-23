@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -199,64 +221,32 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Ozone File System</h1>
             <div class="col-md-9">
-              
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>There are many Hadoop compatible files systems under Hadoop. Hadoop compatible file systems ensures that storage backends like Ozone can easily be integrated into Hadoop eco-system.</p>
-
 <h2 id="setting-up-the-ozone-file-system">Setting up the Ozone file system</h2>
-
 <p>To create an ozone file system, we have to choose a bucket where the file system would live. This bucket will be used as the backend store for OzoneFileSystem. All the files and directories will be stored as keys in this bucket.</p>
-
 <p>Please run the following commands to create a volume and bucket, if you don&rsquo;t have them already.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
-ozone sh bucket create /volume/bucket</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /volume
+</span></span><span style="display:flex;"><span>ozone sh bucket create /volume/bucket</span></span></code></pre></div>
 <p>Once this is created, please make sure that bucket exists via the listVolume or listBucket commands.</p>
-
 <p>Please add the following entry to the core-site.xml.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>o3fs://localhost:9864/volume/bucket<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>o3fs://localhost:9864/volume/bucket<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>This will make this bucket to be the default file system for HDFS dfs commands and register the o3fs file system type..</p>
-
 <p>You also need to add the ozone-filesystem.jar file to the classpath:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/hadoop/ozonefs/hadoop-ozone-filesystem.jar:$HADOOP_CLASSPATH</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/hadoop/ozonefs/hadoop-ozone-filesystem.jar:$HADOOP_CLASSPATH</span></span></code></pre></div>
 <p>Once the default Filesystem has been setup, users can run commands like ls, put, mkdir, etc.
 For example,</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls /</span></span></code></pre></div>
 <p>or</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -mkdir /users</span></span></code></pre></div>
 <p>Or put command etc. In other words, all programs like Hive, Spark, and Distcp will work against this file system.
 Please note that any keys created/deleted in the bucket using methods apart from OzoneFileSystem will show up as diectories and files in the Ozone File System.</p>
 

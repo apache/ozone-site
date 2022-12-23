@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -181,23 +203,8 @@
                 <h1>Command Line Interface</h1>
             </div>
             <div class="col-md-9">
-                <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
 
 <div class="jumbotron jumbotron-fluid">
@@ -227,12 +234,7 @@
                                     
                                     Shell Overview
                                 </h2>
-                                <p class="card-text">Ozone shell help can be invoked at object level or at action level. For example:
-ozone sh volume --help This will show all possible actions for volumes.
-or it can be invoked to explain a specific action like ozone sh volume create --help This command will give you command line options of the create command.
-
-General Command Format The Ozone shell commands take the following format.
- ozone sh object action url</p>
+                                <p class="card-text">Explains the command syntax used by shell command.</p>
                                 <a href="./shell/format.html"
                                    class=" btn btn-primary btn-lg">Shell Overview</a>
                             </div>
@@ -251,10 +253,7 @@ General Command Format The Ozone shell commands take the following format.
                                     
                                     Volume Commands
                                 </h2>
-                                <p class="card-text">Volume commands generally need administrator privileges. The ozone shell supports the following volume commands.
- create delete info list update  Create The volume create command allows an administrator to create a volume and assign it to a user.
-Params:
-   Arguments Comment     -q, --quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster.   -u, --user Required, The name of the user who owns this volume.</p>
+                                <p class="card-text">Volume commands help you to manage the life cycle of a volume.</p>
                                 <a href="./shell/volumecommands.html"
                                    class=" btn btn-primary btn-lg">Volume Commands</a>
                             </div>
@@ -277,10 +276,7 @@ Params:
                                     
                                     Bucket Commands
                                 </h2>
-                                <p class="card-text">Ozone shell supports the following bucket commands.
- create delete info list  Create The bucket create command allows users to create a bucket.
-Params:
-   Arguments Comment     Uri The name of the bucket in /volume/bucket format.    ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.</p>
+                                <p class="card-text">Bucket commands help you to manage the life cycle of a volume.</p>
                                 <a href="./shell/bucketcommands.html"
                                    class=" btn btn-primary btn-lg">Bucket Commands</a>
                             </div>
@@ -299,10 +295,7 @@ Params:
                                     
                                     Key Commands
                                 </h2>
-                                <p class="card-text">Ozone shell supports the following key commands.
- get put delete info list rename  Get The key get command downloads a key from Ozone cluster to local file system.
-Params:
-   Arguments Comment     Uri The name of the key in /volume/bucket/key format.   FileName Local file to download the key to.    ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.</p>
+                                <p class="card-text">Key commands help you to manage the life cycle of Keys / Objects.</p>
                                 <a href="./shell/keycommands.html"
                                    class=" btn btn-primary btn-lg">Key Commands</a>
                             </div>

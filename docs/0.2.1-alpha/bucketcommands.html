@@ -188,27 +188,9 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Bucket Commands</h1>
             <div class="col-md-9">
-              
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Ozone shell supports the following bucket commands.</p>
-
 <ul>
 <li><a href="#create">create</a></li>
 <li><a href="#delete">delete</a></li>
@@ -216,13 +198,9 @@
 <li><a href="#list">list</a></li>
 <li><a href="#update">update</a></li>
 </ul>
-
 <h3 id="create">Create</h3>
-
 <p>The bucket create command allows a user to create a bucket.</p>
-
-<p><strong><em>Params:</em></strong></p>
-
+<p><em><strong>Params:</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -230,7 +208,6 @@
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -238,19 +215,13 @@
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create /hive/jan</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create /hive/jan</span></span></code></pre></div>
 <p>The above command will create a bucket called <em>jan</em> in the <em>hive</em> volume.
 Since no scheme was specified this command defaults to O3 (RPC) protocol.</p>
-
 <h3 id="delete">Delete</h3>
-
 <p>The bucket delete commands allows an user to delete a volume. If the
 bucket is not empty then this command will fail.</p>
-
-<p><strong><em>Params:</em></strong></p>
-
+<p><em><strong>Params:</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -258,7 +229,6 @@ bucket is not empty then this command will fail.</p>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -266,16 +236,11 @@ bucket is not empty then this command will fail.</p>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume delete /hive/jan</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume delete /hive/jan</span></span></code></pre></div>
 <p>The above command will delete <em>jan</em> bucket if it is empty.</p>
-
 <h3 id="info">Info</h3>
-
 <p>The bucket info commands returns the information about the bucket.
-<strong><em>Params:</em></strong></p>
-
+<em><strong>Params:</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -283,7 +248,6 @@ bucket is not empty then this command will fail.</p>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -291,17 +255,11 @@ bucket is not empty then this command will fail.</p>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket info /hive/jan</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket info /hive/jan</span></span></code></pre></div>
 <p>The above command will print out the information about <em>jan</em> bucket.</p>
-
 <h3 id="list">List</h3>
-
 <p>The bucket list commands allows uset to list the buckets in a volume.</p>
-
-<p><strong><em>Params:</em></strong></p>
-
+<p><em><strong>Params:</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -309,40 +267,30 @@ bucket is not empty then this command will fail.</p>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>-l, &ndash;length</td>
 <td>Maximum number of results to return. Default: 100</td>
 </tr>
-
 <tr>
 <td>-p, &ndash;prefix</td>
 <td>Optional, Only buckets that match this prefix will be returned.</td>
 </tr>
-
 <tr>
 <td>-s, &ndash;start</td>
 <td>The listing will start from key after the start key.</td>
 </tr>
-
 <tr>
 <td>Uri</td>
 <td>The name of the <em>volume</em>.</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket list /hive</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket list /hive</span></span></code></pre></div>
 <p>This command will  list all buckets on the volume <em>hive</em>.</p>
-
 <h3 id="update">Update</h3>
-
 <p>The bucket update command allows changing access permissions on bucket.</p>
-
-<p><strong><em>Params:</em></strong></p>
-
+<p><em><strong>Params:</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -350,29 +298,23 @@ bucket is not empty then this command will fail.</p>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>&ndash;addAcl</td>
 <td>Optional, Comma separated ACLs that will added to bucket.</td>
 </tr>
-
 <tr>
 <td>&ndash;removeAcl</td>
 <td>Optional, Comma separated list of acl to remove.</td>
 </tr>
-
 <tr>
 <td>Uri</td>
 <td>The name of the bucket.</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket update --addAcl<span style="color:#f92672">=</span>user:bilbo:rw /hive/jan</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket update --addAcl<span style="color:#f92672">=</span>user:bilbo:rw /hive/jan</span></span></code></pre></div>
 <p>The above command gives user bilbo read/write permission to the bucket.</p>
-
 <p>You can try out these commands from the docker instance of the <a href="runningviadocker.html">Alpha
 Cluster</a>.</p>
 

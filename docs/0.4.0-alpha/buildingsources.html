@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -277,55 +299,32 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Building from Sources</h1>
             <div class="col-md-9">
-              
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
-<p><strong><em>This is a guide on how to build the ozone sources.  If you are <font
-color="red">not</font>
-planning to build sources yourself, you can safely skip this page.</em></strong></p>
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><em><strong>This is a guide on how to build the ozone sources.  If you are <!-- raw HTML omitted -->not<!-- raw HTML omitted -->
+planning to build sources yourself, you can safely skip this page.</strong></em></p>
 <p>If you are a Hadoop ninja, and wise in the ways of Apache,  you already know
 that a real Apache release is a source release.</p>
-
 <p>If you want to build from sources, Please untar the source tarball and run
 the ozone build command. This instruction assumes that you have all the
 dependencies to build Hadoop on your build machine. If you need instructions
 on how to build Hadoop, please look at the Apache Hadoop Website.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn -f pom.ozone.xml clean package -DskipTests<span style="color:#f92672">=</span>true</code></pre></div>
-<p>This will build an ozone-&lt;version&gt;.tar.gz in your <code>hadoop-ozone/dist/target</code> directory.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn -f pom.ozone.xml clean package -DskipTests<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p>This will build an ozone-&lt;version&gt;.tar.gz in your <code>hadoop-ozone/dist/target</code> directory.</p>
 <p>You can copy this tarball and use this instead of binary artifacts that are
 provided along with the official release.</p>
-
 <h2 id="how-to-test-the-build">How to test the build</h2>
-
 <p>You can run the acceptance tests in the hadoop-ozone directory to make sure
 that  your build is functional. To launch the acceptance tests, please follow
- the instructions in the <strong>README.md</strong> in the <code>smoketest</code> directory.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd smoketest
-./test.sh</code></pre></div>
-<p>You can also execute only a minimal subset of the tests:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd smoketest
-./test.sh --env ozone basic</code></pre></div>
-<p>Acceptance tests
- will start a small ozone cluster and verify that ozone shell and ozone file
- system is fully functional.</p>
+the instructions in the <strong>README.md</strong> in the <code>smoketest</code> directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd smoketest
+</span></span><span style="display:flex;"><span>./test.sh
+</span></span></code></pre></div><p>You can also execute only a minimal subset of the tests:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd smoketest
+</span></span><span style="display:flex;"><span>./test.sh --env ozone basic
+</span></span></code></pre></div><p>Acceptance tests
+will start a small ozone cluster and verify that ozone shell and ozone file
+system is fully functional.</p>
 
             </div>
         </div>

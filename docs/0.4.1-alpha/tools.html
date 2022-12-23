@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -181,29 +203,11 @@
                 <h1>Tools</h1>
             </div>
             <div class="col-md-9">
-                <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Ozone has a set of command line tools that can be used to manage ozone.</p>
-
 <p>All these commands are invoked via the <code>ozone</code> script.</p>
-
 <p>Daemon commands:</p>
-
 <ul>
 <li><strong>scm</strong> -  Storage Container Manager service, via daemon can be started
 or stopped.</li>
@@ -212,17 +216,13 @@ or stopped.</li>
 stopped.</li>
 <li><strong>s3g</strong> -</li>
 </ul>
-
 <p>Client commands:</p>
-
 <ul>
 <li><strong>sh</strong> -  Primary command line interface for ozone to manage volumes/buckets/keys.</li>
 <li><strong>fs</strong> - Runs a command on ozone file system (similar to <code>hdfs dfs</code>)</li>
 <li><strong>version</strong> - Prints the version of Ozone and HDDS.</li>
 </ul>
-
 <p>Admin commands:</p>
-
 <ul>
 <li><strong>classpath</strong> - Prints the class path needed to get the hadoop jar and the
 required libraries.</li>
@@ -235,14 +235,11 @@ Container Manager.</li>
 <li><strong>genconf</strong> -  Generate minimally required ozone configs and output to
 ozone-site.xml.</li>
 </ul>
-
 <p>Test tools:</p>
-
 <ul>
 <li><strong>freon</strong> -  Runs the ozone load generator.</li>
 <li><strong>genesis</strong>  - Developer Only, Ozone micro-benchmark application.</li>
 </ul>
-
 <p>For more information see the following subpages:</p>
 
                 
@@ -260,8 +257,7 @@ ozone-site.xml.</li>
                                     
                                     Generate Configurations
                                 </h2>
-                                <p class="card-text">Genconf tool generates a template ozone-site.xml file at the specified path. This template file can be edited to replace with proper values.
-ozone genconf &lt;path&gt;</p>
+                                <p class="card-text">Tool to generate default configuration</p>
                                 <a href="./tools/genconf.html"
                                    class=" btn btn-primary btn-lg">Generate Configurations</a>
                             </div>
@@ -280,10 +276,7 @@ ozone genconf &lt;path&gt;</p>
                                     
                                     Audit Parser
                                 </h2>
-                                <p class="card-text">Audit Parser tool can be used for querying the ozone audit logs. This tool creates a sqllite database at the specified path. If the database already exists, it will avoid creating a database.
-The database contains only one table called audit defined as:
-CREATE TABLE IF NOT EXISTS audit ( datetime text, level varchar(7), logger varchar(7), user text, ip text, op text, params text, result varchar(7), exception text, UNIQUE(datetime,level,logger,user,ip,op,params,result))
-Usage: ozone auditparser &lt;path to db file&gt; [COMMAND] [PARAM]</p>
+                                <p class="card-text">Audit Parser tool can be used for querying the ozone audit logs.</p>
                                 <a href="./tools/auditparser.html"
                                    class=" btn btn-primary btn-lg">Audit Parser</a>
                             </div>
@@ -306,8 +299,7 @@ Usage: ozone auditparser &lt;path to db file&gt; [COMMAND] [PARAM]</p>
                                     
                                     SCMCLI
                                 </h2>
-                                <p class="card-text">SCM is the block service for Ozone. It is also the workhorse for ozone. But user process never talks to SCM. However, being able to read the state of SCM is useful.
-SCMCLI allows the developer to access SCM directly. Please note: Improper usage of this tool can destroy your cluster. Unless you know exactly what you are doing, Please do not use this tool. In other words, this is a developer only tool.</p>
+                                <p class="card-text">Admin tool for managing SCM</p>
                                 <a href="./tools/scmcli.html"
                                    class=" btn btn-primary btn-lg">SCMCLI</a>
                             </div>
@@ -326,10 +318,7 @@ SCMCLI allows the developer to access SCM directly. Please note: Improper usage 
                                     
                                     Testing tools
                                 </h2>
-                                <p class="card-text">Testing is one of the most important part during the development of a distributed system. We have the following type of test.
-This page includes our existing test tool which are part of the Ozone source base.
-Note: we have more tests (like TCP-DS, TCP-H tests via Spark or Hive) which are not included here because they use external tools only.
-Unit test As every almost every java project we have the good old unit tests inside each of our projects.</p>
+                                <p class="card-text">Ozone contains multiple test tools for load generation, partitioning test or acceptance tests.</p>
                                 <a href="./tools/testtools.html"
                                    class=" btn btn-primary btn-lg">Testing tools</a>
                             </div>

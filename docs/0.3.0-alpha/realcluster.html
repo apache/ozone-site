@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -199,56 +221,30 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Starting an Ozone Cluster</h1>
             <div class="col-md-9">
-              <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Before we boot up the Ozone cluster, we need to initialize both SCM and Ozone Manager.</p>
-
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init</code></pre></div>
+<p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init</span></span></code></pre></div>
 This allows SCM to create the cluster Identity and initialize its state.
 The <code>init</code> command is similar to Namenode format. Init command is executed only once, that allows SCM to create all the required on-disk structures to work correctly.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start scm</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start scm</span></span></code></pre></div></p>
 <p>Once we know SCM is up and running, we can create an Object Store for our use. This is done by running the following command.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone om --init</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone om --init</span></span></code></pre></div>
 <p>Once Ozone manager has created the Object Store, we are ready to run the name
 services.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start om</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start om</span></span></code></pre></div>
 <p>At this point Ozone&rsquo;s name services, the Ozone manager, and the block service  SCM is both running.
 <strong>Please note</strong>: If SCM is not running
 <code>om --init</code> command will fail. SCM start will fail if on-disk data structures are missing. So please make sure you have done both <code>scm --init</code> and <code>om --init</code> commands.</p>
-
 <p>Now we need to start the data nodes. Please run the following command on each datanode.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start datanode</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start datanode</span></span></code></pre></div></p>
 <p>At this point SCM, Ozone Manager and data nodes are up and running.</p>
-
-<p><strong><em>Congratulations!, You have set up a functional ozone cluster.</em></strong></p>
-
-<hr />
-
+<p><em><strong>Congratulations!, You have set up a functional ozone cluster.</strong></em></p>
+<hr>
 <p>If you want to make your life simpler, you can just run
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init
-ozone om --init
-start-ozone.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init
+</span></span><span style="display:flex;"><span>ozone om --init
+</span></span><span style="display:flex;"><span>start-ozone.sh</span></span></code></pre></div>
 This assumes that you have set up the slaves file correctly and ssh
 configuration that allows ssh-ing to all data nodes. This is the same as the
 HDFS configuration, so please refer to HDFS documentation on how to set this

@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -277,112 +299,64 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Ozone Security Overview</h1>
             <div class="col-md-9">
-              
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h1 id="security-in-ozone">Security in Ozone</h1>
-
 <p>Starting with badlands release (ozone-0.4.0-alpha) ozone cluster can be secured against external threats. Specifically it can be configured for following security features:</p>
-
 <ol>
 <li>Authentication</li>
 <li>Authorization</li>
 <li>Audit</li>
 <li>Transparent Data Encryption (TDE)</li>
 </ol>
-
 <h2 id="authentication">Authentication</h2>
-
 <h3 id="kerberos">Kerberos</h3>
-
 <p>Similar to hadoop, Ozone allows kerberos-based authentication. So one way to setup identities for all the daemons and clients is to create kerberos keytabs and configure it like any other service in hadoop.</p>
-
 <h3 id="tokens">Tokens</h3>
-
 <p>Tokens are widely used in Hadoop to achieve lightweight authentication without compromising on security. Main motivation for using tokens inside Ozone is to prevent the unauthorized access while keeping the protocol lightweight and without sharing secret over the wire. Ozone utilizes three types of token:</p>
-
 <h4 id="delegation-token">Delegation token</h4>
-
 <p>Once client establishes their identity via kerberos they can request a delegation token from OzoneManager. This token can be used by a client to prove its identity until the token expires. Like Hadoop delegation tokens, an Ozone delegation token has 3 important fields:</p>
-
 <ol>
 <li><strong>Renewer</strong>: User responsible for renewing the token.</li>
 <li><strong>Issue date</strong>:  Time at which token was issued.</li>
 <li><strong>Max date</strong>:    Time after which token can’t be renewed.</li>
 </ol>
-
 <p>Token operations like get, renew and cancel can only be performed over an Kerberos authenticated connection. Clients can use delegation token to establish connection with OzoneManager and perform any file system/object store related operations like, listing the objects in a bucket or creating a volume etc.</p>
-
 <h4 id="block-tokens">Block Tokens</h4>
-
 <p>Block tokens are similar to delegation tokens in sense that they are signed by OzoneManager. Block tokens are created by OM (OzoneManager) when a client request involves interaction with DataNodes such as read/write Ozone keys.</p>
-
 <p>Unlike delegation tokens there is no client API to request block tokens. Instead, they are handed transparently to client along with key/block locations. Block tokens are validated by Datanodes when receiving read/write requests from clients. Block token can&rsquo;t be renewed explicitly by client. Client with expired block token will need to refetch the key/block locations to get new block tokens.</p>
-
 <h4 id="s3token">S3Token</h4>
-
 <p>Like block tokens S3Tokens are handled transparently for clients. It is signed by S3secret created by client. S3Gateway creates this token for every s3 client request. To create an S3Token user must have a S3 secret.</p>
-
 <h3 id="certificates">Certificates</h3>
-
 <p>Apart from kerberos and tokens Ozone utilizes certificate based authentication for Ozone service components. To enable this, SCM (StorageContainerManager) bootstraps itself as an Certificate Authority when security is enabled. This allows all daemons inside Ozone to have an SCM signed certificate. Below is brief descriptions of steps involved:</p>
-
 <ol>
 <li>Datanodes and OzoneManagers submits a CSR (certificate signing request) to SCM.</li>
 <li>SCM verifies identity of DN (Datanode) or OM via Kerberos and generates a certificate.</li>
 <li>This certificate is used by OM and DN to prove their identities.</li>
 <li>Datanodes use OzoneManager certificate to validate block tokens. This is possible because both of them trust SCM signed certificates. (i.e OzoneManager and Datanodes)</li>
 </ol>
-
 <h2 id="authorization">Authorization</h2>
-
 <p>Ozone provides a pluggable API to control authorization of all client related operations. Default implementation allows every request. Clearly it is not meant for production environments. To configure a more fine grained policy one may configure Ranger plugin for Ozone. Since it is a pluggable module clients can also implement their own custom authorization policy and configure it using <code>ozone.acl.authorizer.class</code>.</p>
-
 <h2 id="audit">Audit</h2>
-
 <p>Ozone provides ability to audit all read &amp; write operations to OM, SCM and Datanodes. Ozone audit leverages the Marker feature which enables user to selectively audit only READ or WRITE operations by a simple config change without restarting the service(s).</p>
-
 <p>To enable/disable audit of READ operations, set filter.read.onMatch to NEUTRAL or DENY respectively. Similarly, the audit of WRITE operations can be controlled using filter.write.onMatch.</p>
-
 <p>Generating audit logs is only half the job, so Ozone also provides AuditParser - a sqllite based command line utility to parse/query audit logs with predefined templates(ex. Top 5 commands) and options for custom query. Once the log file has been loaded to AuditParser, one can simply run a template as shown below:
-ozone auditparser <path to db file> template top5cmds</p>
-
+ozone auditparser <!-- raw HTML omitted --> template top5cmds</p>
 <p>Similarly, users can also execute custom query using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;path to db file&gt; query <span style="color:#e6db74">&#34;select * from audit where level==&#39;FATAL&#39;&#34;</span></code></pre></div>
-<h2 id="transparent-data-encryption">Transparent Data Encryption</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;path to db file&gt; query <span style="color:#e6db74">&#34;select * from audit where level==&#39;FATAL&#39;&#34;</span>
+</span></span></code></pre></div><h2 id="transparent-data-encryption">Transparent Data Encryption</h2>
 <p>Ozone TDE setup process and usage are very similar to HDFS TDE. The major difference is that Ozone TDE is enabled at Ozone bucket level when a bucket is created.</p>
-
 <p>To create an encrypted bucket, client need to</p>
-
 <ul>
 <li>Create a bucket encryption key with hadoop key CLI (same as you do for HDFS encryption zone key)</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop key create key1</code></pre></div>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop key create key1
+</span></span></code></pre></div><ul>
 <li>Create an encrypted bucket with -k option</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k key1 /vol1/ez1</code></pre></div>
-<p>After that the usage will be transparent to the client and end users, i.e., all data written to encrypted bucket are encrypted at datanodes.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k key1 /vol1/ez1
+</span></span></code></pre></div><p>After that the usage will be transparent to the client and end users, i.e., all data written to encrypted bucket are encrypted at datanodes.</p>
 <p>To know more about how to setup a secure Ozone cluster refer to <a href="./setupsecureozone.html">How to setup secure Ozone cluster</a></p>
-
 <p>Ozone <a href="https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf">security architecture document</a> can be referred for a deeper dive into Ozone Security architecture.</p>
 
             </div>

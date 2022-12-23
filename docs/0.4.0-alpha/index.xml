@@ -1,16 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ozone Overview on Ozone</title>
     <link>/</link>
     <description>Recent content in Ozone Overview on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ozone File System</title>
       <link>/ozonefs.html</link>
@@ -50,7 +45,7 @@ If you want to build from sources, Please untar the source tarball and run the o
       
       <guid>/settings.html</guid>
       <description>If you are feeling adventurous, you can setup ozone in a real cluster. Setting up a real cluster requires us to understand the components of Ozone. Ozone is designed to work concurrently with HDFS. However, Ozone is also capable of running independently. The components of ozone are the same in both approaches.
-Ozone Components  Ozone Manager - Is the server that is in charge of the namespace of Ozone.</description>
+Ozone Components Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</description>
     </item>
     
     <item>
@@ -104,7 +99,8 @@ Ozone&amp;rsquo;s namespace is a collection of volumes or is a forest instead of
       
       <guid>/ozonesecurityarchitecture.html</guid>
       <description>Security in Ozone Starting with badlands release (ozone-0.4.0-alpha) ozone cluster can be secured against external threats. Specifically it can be configured for following security features:
- Authentication Authorization Audit Transparent Data Encryption (TDE)  Authentication Kerberos Similar to hadoop, Ozone allows kerberos-based authentication. So one way to setup identities for all the daemons and clients is to create kerberos keytabs and configure it like any other service in hadoop.</description>
+Authentication Authorization Audit Transparent Data Encryption (TDE) Authentication Kerberos Similar to hadoop, Ozone allows kerberos-based authentication. So one way to setup identities for all the daemons and clients is to create kerberos keytabs and configure it like any other service in hadoop.
+Tokens Tokens are widely used in Hadoop to achieve lightweight authentication without compromising on security.</description>
     </item>
     
     <item>
@@ -114,8 +110,8 @@ Ozone&amp;rsquo;s namespace is a collection of volumes or is a forest instead of
       
       <guid>/setupsecureozone.html</guid>
       <description>Setup secure ozone cluster To enable security in ozone cluster ozone.security.enabled should be set to true.
-   Property Value     ozone.security.enabled true    Kerberos Configuration for service daemons:
-   Property Description     hdds.scm.kerberos.principal The SCM service principal. Ex scm/HOST@REALM.COM   hdds.scm.kerberos.keytab.file The keytab file used by SCM daemon to login as its service principal.   ozone.</description>
+Property Value ozone.security.enabled true Kerberos Configuration for service daemons:
+Property Description hdds.scm.kerberos.principal The SCM service principal. Ex scm/HOST@REALM.COM hdds.scm.kerberos.keytab.file The keytab file used by SCM daemon to login as its service principal. ozone.om.kerberos.principal The OzoneManager service principal. Ex om/_HOST@REALM.COM ozone.om.kerberos.keytab.file The keytab file used by SCM daemon to login as its service principal. hdds.</description>
     </item>
     
     <item>
@@ -136,8 +132,7 @@ ozone genconf &amp;lt;path&amp;gt;</description>
       <guid>/auditparser.html</guid>
       <description>Audit Parser tool can be used for querying the ozone audit logs. This tool creates a sqllite database at the specified path. If the database already exists, it will avoid creating a database.
 The database contains only one table called audit defined as:
-CREATE TABLE IF NOT EXISTS audit ( datetime text, level varchar(7), logger varchar(7), user text, ip text, op text, params text, result varchar(7), exception text, UNIQUE(datetime,level,logger,user,ip,op,params,result))
-Usage: ozone auditparser &amp;lt;path to db file&amp;gt; [COMMAND] [PARAM]</description>
+CREATE TABLE IF NOT EXISTS audit ( datetime text, level varchar(7), logger varchar(7), user text, ip text, op text, params text, result varchar(7), exception text, UNIQUE(datetime,level,logger,user,ip,op,params,result))</description>
     </item>
     
     <item>
@@ -206,9 +201,10 @@ SCMCLI allows the developer to access SCM directly. Please note: Improper usage 
       
       <guid>/bucketcommands.html</guid>
       <description>Ozone shell supports the following bucket commands.
- create delete info list update  Create The bucket create command allows users to create a bucket.
+create delete info list update Create The bucket create command allows users to create a bucket.
 Params:
-   Arguments Comment     Uri The name of the bucket in /volume/bucket format.    ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.</description>
+Arguments Comment Uri The name of the bucket in /volume/bucket format. ozone sh bucket create /hive/jan The above command will create a bucket called jan in the hive volume. Since no scheme was specified this command defaults to O3 (RPC) protocol.
+Delete The bucket delete command allows users to delete a bucket.</description>
     </item>
     
     <item>
@@ -218,9 +214,9 @@ Params:
       
       <guid>/keycommands.html</guid>
       <description>Ozone shell supports the following key commands.
- get put delete info list rename  Get The key get command downloads a key from Ozone cluster to local file system.
+get put delete info list rename Get The key get command downloads a key from Ozone cluster to local file system.
 Params:
-   Arguments Comment     Uri The name of the key in /volume/bucket/key format.   FileName Local file to download the key to.    ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.</description>
+Arguments Comment Uri The name of the key in /volume/bucket/key format. FileName Local file to download the key to. ozone sh key get /hive/jan/sales.orc sales.orc Downloads the file sales.orc from the /hive/jan bucket and writes to the local file sales.orc.</description>
     </item>
     
     <item>
@@ -231,7 +227,7 @@ Params:
       <guid>/prometheus.html</guid>
       <description>Prometheus is an open-source monitoring server developed under under the Cloud Native Computing Foundation.
 Ozone supports Prometheus out of the box. The servers start a prometheus compatible metrics endpoint where all the available hadoop metrics are published in prometheus exporter format.
-Prerequisites  Install the and start an Ozone cluster. Download the prometheus binary.  Monitoring with prometheus (1) To enable the Prometheus metrics endpoint you need to add a new configuration to the ozone-site.</description>
+Prerequisites Install the and start an Ozone cluster. Download the prometheus binary. Monitoring with prometheus (1) To enable the Prometheus metrics endpoint you need to add a new configuration to the ozone-site.</description>
     </item>
     
     <item>
@@ -243,7 +239,7 @@ Prerequisites  Install the and start an Ozone cluster. Download the prometheus b
       <description>Ozone has a set of command line tools that can be used to manage ozone.
 All these commands are invoked via the ozone script.
 The commands supported by ozone are:
- classpath - Prints the class path needed to get the hadoop jar and the required libraries. dtutil - Operations related to delegation tokens fs - Runs a command on ozone file system. datanode - Via daemon command, the HDDS data nodes can be started or stopped.</description>
+classpath - Prints the class path needed to get the hadoop jar and the required libraries. dtutil - Operations related to delegation tokens fs - Runs a command on ozone file system. datanode - Via daemon command, the HDDS data nodes can be started or stopped.</description>
     </item>
     
     <item>
@@ -266,9 +262,9 @@ docker-compose up -d You can access the S3 gateway at http://localhost:9878</des
       
       <guid>/sparkozonefsk8s.html</guid>
       <description>Using Ozone from Apache Spark This recipe shows how Ozone object store can be used from Spark using:
- OzoneFS (Hadoop compatible file system) Hadoop 2.7 (included in the Spark distribution) Kubernetes Spark scheduler Local spark client  Requirements Download latest Spark and Ozone distribution and extract them. This method is tested with the spark-2.4.0-bin-hadoop2.7 distribution.
+OzoneFS (Hadoop compatible file system) Hadoop 2.7 (included in the Spark distribution) Kubernetes Spark scheduler Local spark client Requirements Download latest Spark and Ozone distribution and extract them. This method is tested with the spark-2.4.0-bin-hadoop2.7 distribution.
 You also need the following:
- A container repository to push and pull the spark+ozone images.</description>
+A container repository to push and pull the spark+ozone images. (In this recipe we will use the dockerhub) A repo/name for the custom containers (in this recipe myrepo/ozone-spark) A dedicated namespace in kubernetes (we use yournamespace in this recipe) Create the docker image for drivers Create the base Spark driver/executor image First of all create a docker image with the Spark image creator.</description>
     </item>
     
     <item>
@@ -278,9 +274,9 @@ You also need the following:
       
       <guid>/volumecommands.html</guid>
       <description>Volume commands generally need administrator privileges. The ozone shell supports the following volume commands.
- create delete info list update  Create The volume create command allows an administrator to create a volume and assign it to a user.
+create delete info list update Create The volume create command allows an administrator to create a volume and assign it to a user.
 Params:
-   Arguments Comment     -q, &amp;ndash;quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster.   -u, &amp;ndash;user Required, The name of the user who owns this volume.</description>
+Arguments Comment -q, &amp;ndash;quota Optional, This argument that specifies the maximum size this volume can use in the Ozone cluster. -u, &amp;ndash;user Required, The name of the user who owns this volume.</description>
     </item>
     
   </channel>

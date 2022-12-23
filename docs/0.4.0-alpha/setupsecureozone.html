@@ -17,6 +17,28 @@
     
     <link href="css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -277,29 +299,10 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Setup secure ozone cluster</h1>
             <div class="col-md-9">
-              
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+              <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h1 id="setup-secure-ozone-cluster">Setup secure ozone cluster</h1>
-
 <p>To enable security in ozone cluster <strong>ozone.security.enabled</strong> should be set to true.</p>
-
 <table>
 <thead>
 <tr>
@@ -307,7 +310,6 @@
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>ozone.security.enabled</td>
@@ -315,11 +317,8 @@
 </tr>
 </tbody>
 </table>
-
 <h2 id="kerberos">Kerberos</h2>
-
 <p>Configuration for service daemons:</p>
-
 <table>
 <thead>
 <tr>
@@ -327,68 +326,53 @@
 <th>Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>hdds.scm.kerberos.principal</td>
 <td>The SCM service principal. Ex scm/<em>HOST@REALM.COM</em></td>
 </tr>
-
 <tr>
 <td>hdds.scm.kerberos.keytab.file</td>
 <td>The keytab file used by SCM daemon to login as its service principal.</td>
 </tr>
-
 <tr>
 <td>ozone.om.kerberos.principal</td>
-<td>The OzoneManager service principal. Ex om/_HOST@REALM.COM</td>
+<td>The OzoneManager service principal. Ex <a href="mailto:om/_HOST@REALM.COM">om/_HOST@REALM.COM</a></td>
 </tr>
-
 <tr>
 <td>ozone.om.kerberos.keytab.file</td>
 <td>The keytab file used by SCM daemon to login as its service principal.</td>
 </tr>
-
 <tr>
 <td>hdds.scm.http.kerberos.principal</td>
 <td>SCM http server service principal.</td>
 </tr>
-
 <tr>
 <td>hdds.scm.http.kerberos.keytab.file</td>
 <td>The keytab file used by SCM http server to login as its service principal.</td>
 </tr>
-
 <tr>
 <td>ozone.om.http.kerberos.principal</td>
 <td>OzoneManager http server principal.</td>
 </tr>
-
 <tr>
 <td>ozone.om.http.kerberos.keytab.file</td>
 <td>The keytab file used by OM http server to login as its service principal.</td>
 </tr>
-
 <tr>
 <td>ozone.s3g.keytab.file</td>
 <td>The keytab file used by S3 gateway. Ex /etc/security/keytabs/HTTP.keytab</td>
 </tr>
-
 <tr>
 <td>ozone.s3g.authentication.kerberos.principal</td>
-<td>S3 Gateway principal. Ex HTTP/_HOST@EXAMPLE.COM</td>
+<td>S3 Gateway principal. Ex <a href="mailto:HTTP/_HOST@EXAMPLE.COM">HTTP/_HOST@EXAMPLE.COM</a></td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="tokens">Tokens</h2>
-
 <h2 id="delegation-token">Delegation token</h2>
-
 <p>Delegation tokens are enabled by default when security is enabled.</p>
-
 <h2 id="block-tokens">Block Tokens</h2>
-
 <table>
 <thead>
 <tr>
@@ -396,7 +380,6 @@
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>hdds.block.token.enabled</td>
@@ -404,37 +387,24 @@
 </tr>
 </tbody>
 </table>
-
 <h2 id="s3token">S3Token</h2>
-
 <p>S3 token are enabled by default when security is enabled.
 To use S3 tokens users need to perform following steps:</p>
-
 <ul>
 <li>S3 clients should get the secret access id and user secret from OzoneManager.</li>
 </ul>
-
-<pre><code>ozone s3 getsecret
-</code></pre>
-
-<ul>
+<pre tabindex="0"><code>ozone s3 getsecret
+</code></pre><ul>
 <li>Setup secret in aws configs:</li>
 </ul>
-
-<pre><code>aws configure set default.s3.signature_version s3v4
+<pre tabindex="0"><code>aws configure set default.s3.signature_version s3v4
 aws configure set aws_access_key_id ${accessId}
 aws configure set aws_secret_access_key ${secret}
 aws configure set region us-west-1
-</code></pre>
-
-<h2 id="certificates">Certificates</h2>
-
+</code></pre><h2 id="certificates">Certificates</h2>
 <p>Certificates are used internally inside Ozone. Its enabled be default when security is enabled.</p>
-
 <h2 id="authorization">Authorization</h2>
-
 <p>Default access authorizer for Ozone approves every request. It is not suitable for production environments. It is recommended that clients use ranger plugin for Ozone to manage authorizations.</p>
-
 <table>
 <thead>
 <tr>
@@ -442,24 +412,19 @@ aws configure set region us-west-1
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>ozone.acl.enabled</td>
 <td>true</td>
 </tr>
-
 <tr>
 <td>ozone.acl.authorizer.class</td>
 <td>org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="tde">TDE</h2>
-
 <p>To use TDE clients must set KMS URI.</p>
-
 <table>
 <thead>
 <tr>
@@ -467,7 +432,6 @@ aws configure set region us-west-1
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>hadoop.security.key.provider.path</td>

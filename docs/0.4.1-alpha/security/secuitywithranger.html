@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -193,36 +215,18 @@
             <h1>Apache Ranger</h1>
           </div>
 
-          <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+          <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Apache Ranger™ is a framework to enable, monitor and manage comprehensive data
 security across the Hadoop platform. Any version of Apache Ranger which is greater
 than 1.20 is aware of Ozone, and can manage an Ozone cluster.</p>
-
 <p>To use Apache Ranger, you must have Apache Ranger installed in your Hadoop
 Cluster. For installation instructions of Apache Ranger, Please take a look
 at the <a href="https://ranger.apache.org/index.html">Apache Ranger website</a>.</p>
-
 <p>If you have a working Apache Ranger installation that is aware of Ozone, then
 configuring Ozone to work with Apache Ranger is trivial. You have to enable
 the ACLs support and set the acl authorizer class inside Ozone to be Ranger
 authorizer. Please add the following properties to the ozone-site.xml.</p>
-
 <table>
 <thead>
 <tr>
@@ -230,13 +234,11 @@ authorizer. Please add the following properties to the ozone-site.xml.</p>
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>ozone.acl.enabled</td>
 <td>true</td>
 </tr>
-
 <tr>
 <td>ozone.acl.authorizer.class</td>
 <td>org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer</td>

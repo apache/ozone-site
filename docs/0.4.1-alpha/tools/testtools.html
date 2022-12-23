@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -193,84 +215,38 @@
             <h1>Testing tools</h1>
           </div>
 
-          
-
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
+          <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Testing is one of the most important part during the development of a distributed system. We have the following type of test.</p>
-
 <p>This page includes our existing test tool which are part of the Ozone source base.</p>
-
 <p>Note: we have more tests (like TCP-DS, TCP-H tests via Spark or Hive) which are not included here because they use external tools only.</p>
-
 <h2 id="unit-test">Unit test</h2>
-
 <p>As every almost every java project we have the good old unit tests inside each of our projects.</p>
-
 <h2 id="integration-test-junit">Integration test (JUnit)</h2>
-
 <p>Traditional unit tests are supposed to test only one unit, but we also have higher level unit tests. They use <code>MiniOzoneCluster</code> which is a helper method to start real daemons (scm,om,datanodes) during the unit test.</p>
-
 <p>From maven/java point of view they are just simple unit tests (JUnit library is used) but to separate them (and solve some dependency problems) we moved all of these tests to <code>hadoop-ozone/integration-test</code></p>
-
 <h2 id="smoketest">Smoketest</h2>
-
 <p>We use docker-compose based pseudo-cluster to run different configuration of Ozone. To be sure that the different configuration can be started we implemented <em>acceptance</em> tests with the help of <a href="https://robotframework.org/">https://robotframework.org/</a>.</p>
-
 <p>The smoketests are available from the distribution (<code>./smoketest</code>) but the robot files defines only the tests: usually they start CLI and check the output.</p>
-
 <p>To run the tests in different environmente (docker-compose, kubernetes) you need a definition to start the containers and execute the right tests in the right containers.</p>
-
 <p>These definition of the tests are included in the <code>compose</code> directory (check <code>./compose/*/test.sh</code> or <code>./compose/test-all.sh</code>).</p>
-
 <p>For example a simple way to test the distribution packege:</p>
-
-<pre><code>cd compose/ozonze
+<pre tabindex="0"><code>cd compose/ozonze
 ./test.sh
-</code></pre>
-
-<h2 id="blockade">Blockade</h2>
-
+</code></pre><h2 id="blockade">Blockade</h2>
 <p><a href="https://github.com/worstcase/blockade">Blockade</a> is a tool to test network failures and partitions (it&rsquo;s inspired by the legendary <a href="https://jepsen.io/analyses">Jepsen tests</a>).</p>
-
 <p>Blockade tests are implemented with the help of tests and can be started from the <code>./blockade</code> directory of the distrubution.</p>
-
-<pre><code>cd blocakde
+<pre tabindex="0"><code>cd blocakde
 pip install pytest==2.8.7,blockade
 python -m pytest -s .
-</code></pre>
-
-<p>See the README in the blockade directory for more details.</p>
-
+</code></pre><p>See the README in the blockade directory for more details.</p>
 <h2 id="minichaosozonecluster">MiniChaosOzoneCluster</h2>
-
 <p>This is a way to get <a href="https://en.wikipedia.org/wiki/Chaos_engineering">chaos</a> in your machine. It can be started from the source code and a MiniOzoneCluster (which starts real daemons) will be started and killed randomly.</p>
-
 <h2 id="freon">Freon</h2>
-
 <p>Freon is a command line application which is included in the Ozone distribution. It&rsquo;s a load generator which is used in our stress tests.</p>
-
 <p>For example:</p>
-
-<pre><code>ozone freon randomkeys --numOfVolumes=10 --numOfBuckets 10 --numOfKeys 10  --replicationType=RATIS --factor=THREE
-</code></pre>
-
-<pre><code>***************************************************
+<pre tabindex="0"><code>ozone freon randomkeys --numOfVolumes=10 --numOfBuckets 10 --numOfKeys 10  --replicationType=RATIS --factor=THREE
+</code></pre><pre tabindex="0"><code>***************************************************
 Status: Success
 Git Base Revision: 48aae081e5afacbb3240657556b26c29e61830c3
 Number of Volumes created: 10
@@ -285,17 +261,11 @@ Average Time spent in key write: 00:00:10,894
 Total bytes written: 10240000
 Total Execution time: 00:00:16,898
 ***********************
-</code></pre>
-
-<p>For more information check the <a href="https://hadoop.apache.org/ozone/docs/0.4.0-alpha/freon.html">documentation page</a></p>
-
+</code></pre><p>For more information check the <a href="https://hadoop.apache.org/ozone/docs/0.4.0-alpha/freon.html">documentation page</a></p>
 <h2 id="genesis">Genesis</h2>
-
 <p>Genesis is a microbenchmarking tool. It&rsquo;s also included in the distribution (<code>ozone genesis</code>) but it doesn&rsquo;t require real cluster. It measures different part of the code in an isolated way (eg. the code which saves the data to the local RocksDB based key value stores)</p>
-
 <p>Example run:</p>
-
-<pre><code> ozone genesis -benchmark=BenchMarkRocksDbStore
+<pre tabindex="0"><code> ozone genesis -benchmark=BenchMarkRocksDbStore
 # JMH version: 1.19
 # VM version: JDK 11.0.1, VM 11.0.1+13-LTS
 # VM invoker: /usr/lib/jvm/java-11-openjdk-11.0.1.13-3.el7_6.x86_64/bin/java
@@ -374,12 +344,12 @@ Iteration  20: 196335.579 ops/s
 
 
 
-Result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test&quot;:
+Result &#34;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test&#34;:
   167433.864 ?(99.9%) 43530.883 ops/s [Average]
   (min, avg, max) = (41926.816, 167433.864, 223433.864), stdev = 50130.230
   CI (99.9%): [123902.981, 210964.748] (assumes normal distribution)
 
-Secondary result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test:?stack&quot;:
+Secondary result &#34;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test:?stack&#34;:
 Stack profiler:
 
 ....[Thread state distributions]....................................................................
@@ -414,7 +384,6 @@ Benchmark                          (backgroundThreads)  (blockSize)  (maxBackgro
 BenchMarkRocksDbStore.test                           4            8                       4                     512            5000                      16                 64  thrpt   20  167433.864 ? 43530.883  ops/s
 BenchMarkRocksDbStore.test:?stack                    4            8                       4                     512            5000                      16                 64  thrpt              NaN                ---
 </code></pre>
-
 
           
         </div>

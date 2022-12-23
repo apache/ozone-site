@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -181,23 +203,8 @@
                 <h1>Security</h1>
             </div>
             <div class="col-md-9">
-                <!---
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-    -->
-
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
 
 <div class="jumbotron jumbotron-fluid">
@@ -212,12 +219,7 @@
         </p>
     </div>
 </div>
-
-<div class="alert alert-warning" role="alert">
-If you would like to understand Ozone's security architecture at a greater
-depth, please take a look at <a href="https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf">Ozone security architecture.</a>
-</div>
-
+<!-- raw HTML omitted -->
 <p>Depending on your needs, there are multiple optional steps in securing ozone.</p>
 
                 
@@ -238,9 +240,7 @@ depth, please take a look at <a href="https://issues.apache.org/jira/secure/atta
                                     
                                     Securing Ozone
                                 </h2>
-                                <p class="card-text">Kerberos Ozone depends on Kerberos to make the clusters secure. Historically, HDFS has supported running in an isolated secure networks where it is possible to deploy without securing the cluster.
-This release of Ozone follows that model, but soon will move to secure by default. Today to enable security in ozone cluster, we need to set the configuration ozone.security.enabled to true and hadoop.security.authentication to kerberos.
-   Property Value     ozone.</p>
+                                <p class="card-text">Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</p>
                                 <a href="./security/secureozone.html"
                                    class=" btn btn-primary btn-lg">Securing Ozone</a>
                             </div>
@@ -262,8 +262,7 @@ This release of Ozone follows that model, but soon will move to secure by defaul
                                     
                                     Securing Datanodes
                                 </h2>
-                                <p class="card-text">Datanodes under Hadoop is traditionally secured by creating a Keytab file on the data nodes. With Ozone, we have moved away to using data node certificates. That is, Kerberos on data nodes is not needed in case of a secure Ozone cluster.
-However, we support the legacy Kerberos based Authentication to make it easy for the current set of users.The HDFS configuration keys are the following that is setup in hdfs-site.</p>
+                                <p class="card-text">Explains different modes of securing data nodes. These range from kerberos to auto approval.</p>
                                 <a href="./security/securingdatanodes.html"
                                    class=" btn btn-primary btn-lg">Securing Datanodes</a>
                             </div>
@@ -289,8 +288,7 @@ However, we support the legacy Kerberos based Authentication to make it easy for
                                     
                                     Transparent Data Encryption
                                 </h2>
-                                <p class="card-text">Ozone TDE setup process and usage are very similar to HDFS TDE. The major difference is that Ozone TDE is enabled at Ozone bucket level when a bucket is created.
-Setting up the Key Management Server To use TDE, clients must setup a Key Management Server and provide that URI to Ozone/HDFS. Since Ozone and HDFS can use the same Key Management Server, this configuration can be provided via hdfs-site.</p>
+                                <p class="card-text">TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access. You can enable this per key or per bucket.</p>
                                 <a href="./security/securingtde.html"
                                    class=" btn btn-primary btn-lg">Transparent Data Encryption</a>
                             </div>
@@ -312,8 +310,7 @@ Setting up the Key Management Server To use TDE, clients must setup a Key Manage
                                     
                                     Securing S3
                                 </h2>
-                                <p class="card-text">To access an S3 bucket, users need AWS access key ID and AWS secret. Both of these are generated by going to AWS website. When you use Ozone&rsquo;s S3 protocol, you need the same AWS access key and secret.
-Under Ozone, the clients can download the access key directly from Ozone. The user needs to kinit first and once they have authenticated via kerberos they can download the S3 access key ID and AWS secret.</p>
+                                <p class="card-text">Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</p>
                                 <a href="./security/securings3.html"
                                    class=" btn btn-primary btn-lg">Securing S3</a>
                             </div>
@@ -339,9 +336,7 @@ Under Ozone, the clients can download the access key directly from Ozone. The us
                                     
                                     Apache Ranger
                                 </h2>
-                                <p class="card-text">Apache Ranger™ is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform. Any version of Apache Ranger which is greater than 1.20 is aware of Ozone, and can manage an Ozone cluster.
-To use Apache Ranger, you must have Apache Ranger installed in your Hadoop Cluster. For installation instructions of Apache Ranger, Please take a look at the Apache Ranger website.
-If you have a working Apache Ranger installation that is aware of Ozone, then configuring Ozone to work with Apache Ranger is trivial.</p>
+                                <p class="card-text">Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</p>
                                 <a href="./security/secuitywithranger.html"
                                    class=" btn btn-primary btn-lg">Apache Ranger</a>
                             </div>
@@ -363,11 +358,7 @@ If you have a working Apache Ranger installation that is aware of Ozone, then co
                                     
                                     Ozone ACLs
                                 </h2>
-                                <p class="card-text">Ozone supports a set of native ACLs. These ACLs can be used independently or along with Ranger. If Apache Ranger is enabled, then ACL will be checked first with Ranger and then Ozone&rsquo;s internal ACLs will be evaluated.
-Ozone ACLs are a super set of Posix and S3 ACLs.
-The general format of an ACL is object:who:rights.
-Where an object can be:
- Volume - An Ozone volume. e.g. /volume Bucket - An Ozone bucket.</p>
+                                <p class="card-text">Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</p>
                                 <a href="./security/securityacls.html"
                                    class=" btn btn-primary btn-lg">Ozone ACLs</a>
                             </div>
