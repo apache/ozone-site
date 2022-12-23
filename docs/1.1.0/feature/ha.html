@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -380,40 +402,40 @@
 <p>Client connects to the Leader Ozone Manager which process the request and schedule the replication with RAFT. When the request is replicated to all the followers the leader can return with the response.</p>
 <h2 id="configuration">Configuration</h2>
 <p>HA mode of Ozone Manager can be enabled with the following settings in <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple Ozone HA cluster. To select between the available HA clusters a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple Ozone HA cluster. To select between the available HA clusters a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.</p>
 <p>This logical name is called <code>serviceId</code> and can be configured in the <code>ozone-site.xml</code></p>
-<pre><code>&lt;property&gt;
+<pre tabindex="0"><code>&lt;property&gt;
   &lt;name&gt;ozone.om.service.ids&lt;/name&gt;
   &lt;value&gt;cluster1,cluster2&lt;/value&gt;
 &lt;/property&gt;
 </code></pre><p>For each of the defined <code>serviceId</code> a logical configuration name should be defined for each of the servers.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.nodes.cluster1<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>om1,om2,om3<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>The defined prefixes can be used to define the address of each of the OM services:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om1<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>host1<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om2<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>host2<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om3<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>host3<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>The defined <code>serviceId</code> can be used instead of a single OM host using <a href="../interface.html">client interfaces</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.nodes.cluster1<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>om1,om2,om3<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>The defined prefixes can be used to define the address of each of the OM services:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om1<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>host1<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om2<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>host2<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address.cluster1.om3<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>host3<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>The defined <code>serviceId</code> can be used instead of a single OM host using <a href="../interface.html">client interfaces</a></p>
 <p>For example with <code>o3fs://</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hdfs dfs -ls o3fs://bucket.volume.cluster1/prefix/
-</code></pre></div><p>Or with <code>ofs://</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hdfs dfs -ls ofs://cluster1/volume/bucket/prefix/
-</code></pre></div><h2 id="implementation-details">Implementation details</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.cluster1/prefix/
+</span></span></code></pre></div><p>Or with <code>ofs://</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hdfs dfs -ls ofs://cluster1/volume/bucket/prefix/
+</span></span></code></pre></div><h2 id="implementation-details">Implementation details</h2>
 <p>Raft can guarantee the replication of any request if the request is persisted to the RAFT log on the majority of the nodes. To achieve high throughput with Ozone Manager, it returns with the response even if the request is persisted only to the RAFT logs.</p>
 <p>RocksDB instance are updated by a background thread with batching transactions (so called &ldquo;double buffer&rdquo; as when one of the buffers is used to commit the data the other one collects all the new requests for the next commit.) To make all data available for the next request even if the background process is not yet wrote them the key data is cached in the memory.</p>
 <p><img src="HA-OM-doublebuffer.png" alt="Double buffer"></p>
@@ -442,7 +464,7 @@
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: November 17, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d0aa34c4afae21538c6c6225f029c1d1c4c4bafd">d0aa34c4a</a>
+      Version: 1.1.0, Last Modified: November 17, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d0aa34c4afae21538c6c6225f029c1d1c4c4bafd">d0aa34c4af</a>
     </span>
   </div>
 </footer>

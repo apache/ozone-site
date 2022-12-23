@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -415,15 +437,15 @@ to create the encryption key and enable encrypted buckets.</p>
 <li>Create a bucket encryption key with hadoop key CLI, which is similar to
 how you would use HDFS encryption zones.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop key create encKey
-</code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop key create encKey
+</span></span></code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
 Once the key is created, you can tell Ozone to use that key when you are
 reading and writing data into a bucket.</p>
 <ul>
 <li>Assign the encryption key to a bucket.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k encKey /vol/encryptedBucket
-</code></pre></div><p>After this command, all data written to the <em>encryptedBucket</em> will be encrypted
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k encKey /vol/encryptedBucket
+</span></span></code></pre></div><p>After this command, all data written to the <em>encryptedBucket</em> will be encrypted
 via the encKey and while reading the clients will talk to Key Management
 Server and read the key and decrypt it. In other words, the data stored
 inside Ozone is always encrypted. The fact that data is encrypted at rest
@@ -431,11 +453,11 @@ will be completely transparent to the clients and end users.</p>
 <h3 id="using-transparent-data-encryption-from-s3g">Using Transparent Data Encryption from S3G</h3>
 <p>There are two ways to create an encrypted bucket that can be accessed via S3 Gateway.</p>
 <p>####1. Create a bucket using shell under &ldquo;/s3v&rdquo; volume</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k encKey /s3v/encryptedBucket
-</code></pre></div><p>####2. Create a link to an encrypted bucket under &ldquo;/s3v&rdquo; volume</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k encKey /vol/encryptedBucket
-ozone sh bucket link  /vol/encryptedBucket /s3v/linkencryptedbucket
-</code></pre></div><p>Note: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k encKey /s3v/encryptedBucket
+</span></span></code></pre></div><p>####2. Create a link to an encrypted bucket under &ldquo;/s3v&rdquo; volume</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k encKey /vol/encryptedBucket
+</span></span><span style="display:flex;"><span>ozone sh bucket link  /vol/encryptedBucket /s3v/linkencryptedbucket
+</span></span></code></pre></div><p>Note: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
 After creating an encrypted bucket, all the keys added to this bucket using s3g will be encrypted.</p>
 <p>In non-secure mode, the user running the S3Gateway daemon process is the proxy user,
 while in secure mode the S3Gateway Kerberos principal (ozone.s3g.kerberos.principal) is the proxy user.
@@ -449,7 +471,7 @@ logins using configured
   &lt;value&gt;user1,user2,user3&lt;/value&gt;
   &lt;description&gt;
         Here the value can be all the S3G accesskey ids accessing Ozone S3 
-        or set to '*' to allow all the accesskey ids.
+        or set to &#39;*&#39; to allow all the accesskey ids.
   &lt;/description&gt;
 &lt;/property&gt;
 
@@ -457,12 +479,11 @@ logins using configured
   &lt;name&gt;hadoop.kms.proxyuser.s3g.hosts&lt;/name&gt;
   &lt;value&gt;s3g-host1.com&lt;/value&gt;
   &lt;description&gt;
-         This is the host where the S3Gateway is running. Set this to '*' to allow
+         This is the host where the S3Gateway is running. Set this to &#39;*&#39; to allow
          requests from any hosts to be proxied.
   &lt;/description&gt;
 
 &lt;/property&gt;
-
 </code></pre><p>###KMS Authorization
 If Ranger authorization is enabled for KMS, then decrypt key permission should be given to
 access key id user(currently access key is kerberos principal) to decrypt the encrypted key
@@ -486,7 +507,7 @@ to read/write a key in the encrypted bucket.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: August 12, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cef8bf5f8dc3298f846b8aa5e629b7c384f7a56a">cef8bf5f8</a>
+      Version: 1.2.0, Last Modified: August 12, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cef8bf5f8dc3298f846b8aa5e629b7c384f7a56a">cef8bf5f8d</a>
     </span>
   </div>
 </footer>

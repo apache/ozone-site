@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -383,8 +405,8 @@
 <h1 id="ozone-in-a-single-container">Ozone in a Single Container</h1>
 <p>The easiest way to start up an all-in-one ozone container is to use the latest
 docker image from docker hub:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -p 9878:9878 -p 9876:9876 apache/ozone
-</code></pre></div><p>This command will pull down the ozone image from docker hub and start all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 9878:9878 -p 9876:9876 apache/ozone
+</span></span></code></pre></div><p>This command will pull down the ozone image from docker hub and start all
 ozone services in a single container. <br>
 This container will run the required metadata servers (Ozone Manager, Storage
 Container Manager) one data node  and the S3 compatible REST server
@@ -395,36 +417,36 @@ run in own containers, you can start it with a docker-compose file.</p>
 <p>We have shipped a docker-compose and an environment file as part of the
 container image  that is uploaded to docker hub.</p>
 <p>The following commands can be used to extract these files from the image in the docker hub.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run apache/ozone cat docker-compose.yaml &gt; docker-compose.yaml
-docker run apache/ozone cat docker-config &gt; docker-config
-</code></pre></div><p>Now you can start the cluster with docker-compose:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d
-</code></pre></div><p>If you need multiple datanodes, we can just scale it up:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</code></pre></div><h1 id="running-s3-clients">Running S3 Clients</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run apache/ozone cat docker-compose.yaml &gt; docker-compose.yaml
+</span></span><span style="display:flex;"><span>docker run apache/ozone cat docker-config &gt; docker-config
+</span></span></code></pre></div><p>Now you can start the cluster with docker-compose:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><p>If you need multiple datanodes, we can just scale it up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h1 id="running-s3-clients">Running S3 Clients</h1>
 <p>Once the cluster is booted up and ready, you can verify its status by
 connecting to the SCM&rsquo;s UI at <a href="http://localhost:9876">http://localhost:9876</a>.</p>
 <p>The S3 gateway endpoint will be exposed at port 9878. You can use Ozone&rsquo;s S3
 support as if you are working against the real S3.  S3 buckets are stored under
 the <code>/s3v</code> volume.</p>
 <p>Here is how you create buckets from command line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3api --endpoint http://localhost:9878/ create-bucket --bucket<span style="color:#f92672">=</span>bucket1
-</code></pre></div><p>Only notable difference in the above command line is the fact that you have
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878/ create-bucket --bucket<span style="color:#f92672">=</span>bucket1
+</span></span></code></pre></div><p>Only notable difference in the above command line is the fact that you have
 to tell the <em>endpoint</em> address to the aws s3api command.</p>
 <p>Now let us put a simple file into the S3 Bucket hosted by Ozone. We will
 start by creating a temporary file that we can upload to Ozone via S3 support.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -1 &gt; /tmp/testfile
-</code></pre></div><p>This command creates a temporary file that
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -1 &gt; /tmp/testfile
+</span></span></code></pre></div><p>This command creates a temporary file that
 we can upload to Ozone. The next command actually uploads to Ozone&rsquo;s S3
 bucket using the standard aws s3 command line interface.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
-</code></pre></div><div class="alert alert-info" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
+</span></span></code></pre></div><div class="alert alert-info" role="alert">
 Note: REDUCED_REDUNDANCY is required for the single container ozone, since it
  has a single datanode. </div>
 We can now verify that file got uploaded by running the list command against
 our bucket.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile
-</code></pre></div><div class="alert alert-info" role="alert"> You can also check the internal
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile
+</span></span></code></pre></div><div class="alert alert-info" role="alert"> You can also check the internal
 bucket browser supported by Ozone S3 interface by clicking on the below link.
 <br>
 </div>
@@ -448,7 +470,7 @@ http://localhost:9878/bucket1?browser
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
     </span>
   </div>
 </footer>

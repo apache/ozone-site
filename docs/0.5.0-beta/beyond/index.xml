@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beyond Basics on Ozone</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Beyond Basics on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/beyond/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate><atom:link href="/beyond/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Running concurrently with HDFS</title>
       <link>/beyond/runningwithhdfs.html</link>

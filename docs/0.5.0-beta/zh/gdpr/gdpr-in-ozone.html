@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -185,17 +207,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>在 Ozone 中遵守 GDPR 规范非常简单，只需要在创建桶时指定 <code>--enforcegdpr=true</code> 或  <code>-g=true</code> 参数，这样创建出的桶都是符合 GDPR 规范的，当然，在桶中创建的键也都自动符合。</p>
-
 <p>GDPR 只能在新桶上应用，对于已有的桶，要想使它符合 GDPR 规范，只能创建一个符合 GDPR 规范的新桶，然后把旧桶中的数据拷贝到新桶。</p>
-
 <p>创建符合 GDPR 规范的桶的示例：</p>
-
 <p><code>ozone sh bucket create --enforcegdpr=true /hive/jan</code></p>
-
 <p><code>ozone sh bucket create -g=true /hive/jan</code></p>
-
 <p>如果你想创建普通的桶，省略 <code>--enforcegdpr</code> 和 <code>-g</code> 参数即可。</p>
 
 

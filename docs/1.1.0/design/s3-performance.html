@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -354,7 +376,7 @@
 </ul>
 <h1 id="authentication-with-s3-gateway">Authentication with S3 gateway</h1>
 <p>AWS S3 request authentication based on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html">signing the REST messages</a>. Each of the HTTP requests must include and authentication header which contains the used the <em>access key id</em> and a signatures created with the help of the <em>secret key</em>.</p>
-<pre><code>Authorization: AWS AWSAccessKeyId:Signature
+<pre tabindex="0"><code>Authorization: AWS AWSAccessKeyId:Signature
 </code></pre><p>Ozone S3g is a REST gateway for Ozone which receives AWS compatible HTTP calls and forwards the requests to the Ozone Manager and Datanode services. Ozone S3g is <strong>stateless</strong>, it couldn&rsquo;t check any authentication information which are stored on the Ozone Manager side. It can check only the format of the signature.</p>
 <p>For the authentication S3g parses the HTTP header and sends all the relevant (and required) information to Ozone Manager which can check the signature with the help of stored <em>secret key</em>.</p>
 <p>This is implemented with the help of the delegation token mechanism of Hadoop RPC. Hadoop RPC supports Kerberos and token based authentication where tokens can be customized. The Ozone specific implementation <code>OzoneTokenIdentifier</code> contains a <code>type</code> field which can <code>DELEGATION_TOKEN</code> or <code>S3AUTHINFO</code>. The later one is used to authenticate the request based on S3 REST header (signature + required information).</p>
@@ -367,7 +389,7 @@
 </ol>
 <p><a href="http://cdi-spec.org/">CDI</a> is the specification of <em>Contexts and  Dependency Injection</em> for Java. Can be used for both JavaEE and JavaSE and it&rsquo;s integrated with most web frameworks. Ozone S3g uses this specification to inject different services to to REST handlers using <code>@Inject</code> annotation.</p>
 <p><code>OzoneClient</code> is created by the <code>OzoneClientProducer</code>:</p>
-<pre><code>@RequestScoped
+<pre tabindex="0"><code>@RequestScoped
 public class OzoneClientProducer {
 
   private OzoneClient client;
@@ -397,7 +419,7 @@ public class OzoneClientProducer {
 <p>Hadoop RPC has a very specific caching layer which is <strong>not used</strong> by Ozone S3g. This section describe the caching of the Hadoop RPC, but safe to skip (It explain how is the caching ignored).</p>
 <p>As creating new Hadoop RPC connection is an expensive operation Hadoop RPC has an internal caching mechanism to cache client and connections (!). This caching is hard-coded and based on static fields (couldn&rsquo;t be adjusted easily).</p>
 <p>Hadoop RPC client is usually created by <code>RPC.getProcolProxy</code>. For example:</p>
-<pre><code>HelloWorldServicePB proxy = RPC.getProtocolProxy(
+<pre tabindex="0"><code>HelloWorldServicePB proxy = RPC.getProtocolProxy(
             HelloWorldServicePB.class,
             scmVersion,
             new InetSocketAddress(1234),
@@ -416,7 +438,7 @@ public class OzoneClientProducer {
 </li>
 <li>
 <p>Finally the <code>Client.getConnection</code> method uses a cache to cache the connections:</p>
-<pre><code>connection = connections.computeIfAbsent(remoteId,
+<pre tabindex="0"><code>connection = connections.computeIfAbsent(remoteId,
     id -&gt; new Connection(id, serviceClass, removeMethod));
 </code></pre><p>The key for the cache is the <code>remoteId</code> which includes all the configuration, connection parameters (like destination host) and <code>UserGroupInformation</code> (UGI).</p>
 </li>
@@ -430,7 +452,7 @@ public class OzoneClientProducer {
 <li>If connection is cached (same UGI) services can be used even if the token is invalidated earlier (as the token is checked during the initialization of the tokens).</li>
 </ol>
 <p>Fortunately this behavior doesn&rsquo;t cause any problem in case of Ozone and S3g. UGI (which is part of the cache key of the connection cache) equals if (and only if) the underlying <code>Subject</code> is the same.</p>
-<pre><code>public class UserGroupInformation {
+<pre tabindex="0"><code>public class UserGroupInformation {
   
   ...
   
@@ -446,7 +468,7 @@ public class OzoneClientProducer {
   }
 }
 </code></pre><p>But the UGI initialization of Ozone always creates a new <code>Subject</code> instance for each request (even if the subject name is the same). In <code>OzoneClientProducer</code>:</p>
-<pre><code>  UserGroupInformation remoteUser =
+<pre tabindex="0"><code>  UserGroupInformation remoteUser =
           UserGroupInformation.createRemoteUser(awsAccessId); // &lt;-- new Subject is created
       
       if (OzoneSecurityUtil.isSecurityEnabled(config)) {
@@ -464,7 +486,7 @@ public class OzoneClientProducer {
 <h1 id="proposed-change">Proposed change</h1>
 <p>We need an RPC mechanism between the Ozone S3g service and Ozone Manager service which can support per-request authentication and accepts</p>
 <p>The  Ozone Manager client already has a pluggable transport interface: <code>OmTransport</code> is a simple interface which can deliver <code>OMRequest</code> messages:</p>
-<pre><code>public interface OmTransport {
+<pre tabindex="0"><code>public interface OmTransport {
 
   /**
    * The main method to send out the request on the defined transport.
@@ -530,7 +552,7 @@ public class OzoneClientProducer {
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+      Version: 1.1.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
     </span>
   </div>
 </footer>

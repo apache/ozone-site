@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -177,7 +199,6 @@
 -->
 
 
-
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h3 class="display-4">安装 Ozone </h3>
@@ -188,16 +209,12 @@ Ozone 的安装和运行有多种方式，支持从简单的本地节点 docker 
         </p>
     </div>
 </div>
-
 <section class="row cardgroup">
-
-<span class="label label-warning label-">入门级</span>
-
+<p><span class="label label-warning label-">入门级</span></p>
 <h2>通过 Docker Hub 运行 Ozone</h2>
-
-你可以通过 Docker Hub 来运行 Ozone，无需下载官方发行包，这让探索 Ozone 十分容易。
+<p>你可以通过 Docker Hub 来运行 Ozone，无需下载官方发行包，这让探索 Ozone 十分容易。
 <br />
-  
+
 
 
 <div class="col-sm-6">
@@ -222,20 +239,14 @@ Ozone 的安装和运行有多种方式，支持从简单的本地节点 docker 
         </div>
     </div>
 </div>
-
-
+</p>
 </section>
-
 <section class="row cardgroup">
-
-<span class="label label-success">推荐级</span>
-
-
+<p><span class="label label-success">推荐级</span></p>
 <h2>通过官方发行包运行 Ozone</h2>
-
- 官方发行包包括了源代码包和二进制代码包，二进制代码包无需编译就可以根据不同的配置运行在以下平台：
+<p>官方发行包包括了源代码包和二进制代码包，二进制代码包无需编译就可以根据不同的配置运行在以下平台：
 <br />
-  
+
 
 
 <div class="col-sm-6">
@@ -260,9 +271,8 @@ Ozone 能够以并存的方式部署到已有的 HDFS 集群，下面的文档�
         </div>
     </div>
 </div>
+</p>
 
-
-  
 
 
 <div class="col-sm-6">
@@ -289,7 +299,6 @@ Ozone 也能够在 Kubernetes 上良好运行，下面的文档介绍了如何�
 </div>
 
 
-  
 
 
 <div class="col-sm-6">
@@ -316,7 +325,6 @@ Ozone 发行包中包括了一套标准的 K8s 资源，你可以在 MiniKube �
 </div>
 
 
-  
 
 
 <div class="col-sm-6">
@@ -342,18 +350,12 @@ Ozone 发行包中包括了一套标准的 K8s 资源，你可以在 MiniKube �
     </div>
 </div>
 
-
 </section>
-
 <section class="row cardgroup">
-
-<span class="label label-danger">Hadoop 专家级</span>
-
+<p><span class="label label-danger">Hadoop 专家级</span></p>
 <h2>从源码构建 Ozone</h2>
+<p>关于从源码构建 Ozone 部署包。</br></p>
 
- 关于从源码构建 Ozone 部署包。</br>
-
-  
 
 
 <div class="col-sm-6">
@@ -378,7 +380,6 @@ Ozone 发行包中包括了一套标准的 K8s 资源，你可以在 MiniKube �
         </div>
     </div>
 </div>
-
 
 </section>
 

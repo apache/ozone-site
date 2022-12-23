@@ -201,7 +201,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/start/startfromdockerhub.html</guid>
-      <description>Requirements  docker AWS CLI（可选）    所有 Ozone 服务在单个容器 启动一个 all-in-one 的 ozone 容器最简单的方法就是使用 Docker Hub 最新的 docker 镜像：
+      <description>Requirements docker AWS CLI（可选） 所有 Ozone 服务在单个容器 启动一个 all-in-one 的 ozone 容器最简单的方法就是使用 Docker Hub 最新的 docker 镜像：
 docker run -p 9878:9878 -p 9876:9876 apache/ozone 这个命令会从 Docker Hub 拉取 ozone 镜像并在一个容器中启动所有 ozone 服务，包括必要的元数据服务（Ozone Manager，Storage Container Manager）、一个数据节点和兼容 S3 的 REST 服务（S3 网关）。
 Ozone 服务在多个独立的容器 如果你需要一个更类似生产环境的集群，使用 Ozone 发行包自带的 docker-compose 配置文件可以让 Ozone 服务组件在各自独立的容器中运行。
 docker-compose 配置文件和一个 environment 文件已经包含在 Docker Hub 的镜像中。
@@ -216,9 +216,10 @@ docker run apache/ozone cat docker-compose.yaml &amp;gt; docker-compose.yaml doc
       
       <guid>/zh/start/onprem.html</guid>
       <description>如果你想要有点挑战性，你可以在物理集群上安装 ozone。搭建一个 Ozone 集群需要了解它的各个组件，Ozone 既能和现有的 HDFS 集群并存运行，也可以独立运行。在这两种模式下，需要运行的 Ozone 组件是相同的。
-Ozone 组件  Ozone Manager - 管理 Ozone 命名空间的服务，负责所有对卷、桶和键的操作。 Storage Container Manager - Ozone 中块的管理者，Ozone Manager 从 SCM 请求块，然后用户向块写入数据。 Datanodes - Ozone 的 Datanode 代码既可以运行在 HDFS 的 Datanode 内，也可以独立部署成单独的进程。  搭建一个独立 Ozone 集群   将 ozone-&amp;lt;version&amp;gt; 安装包解压到目标目录，因为 Ozone 的 jar 包需要部署到集群的所有机器上，所以你需要在所有机器上进行此操作。
-  Ozone 依赖名为 ozone-site.xml 的配置文件， 运行下面的命令可以在指定目录生成名为 ozone-site.xml 的配置文件模板，然后你可以将参数替换为合适的值。
-  ozone genconf &amp;lt;path&amp;gt; 我们来看看生成的文件（ozone-site.xml）中都有哪些参数，以及它们是如何影响 ozone 的。当各个参数都配置了合适的值之后，需要把该文件拷贝到 ozone directory/etc/hadoop。</description>
+Ozone 组件 Ozone Manager - 管理 Ozone 命名空间的服务，负责所有对卷、桶和键的操作。 Storage Container Manager - Ozone 中块的管理者，Ozone Manager 从 SCM 请求块，然后用户向块写入数据。 Datanodes - Ozone 的 Datanode 代码既可以运行在 HDFS 的 Datanode 内，也可以独立部署成单独的进程。 搭建一个独立 Ozone 集群 将 ozone-&amp;lt;version&amp;gt; 安装包解压到目标目录，因为 Ozone 的 jar 包需要部署到集群的所有机器上，所以你需要在所有机器上进行此操作。
+Ozone 依赖名为 ozone-site.xml 的配置文件， 运行下面的命令可以在指定目录生成名为 ozone-site.xml 的配置文件模板，然后你可以将参数替换为合适的值。
+ozone genconf &amp;lt;path&amp;gt; 我们来看看生成的文件（ozone-site.xml）中都有哪些参数，以及它们是如何影响 ozone 的。当各个参数都配置了合适的值之后，需要把该文件拷贝到 ozone directory/etc/hadoop。
+ozone.metadata.dirs 管理员通过此参数指定元数据的存储位置，通常应该选择最快的磁盘（比如 SSD，如果节点上有的话），OM、SCM 和 Datanode 会将元数据写入此路径。这是个必需的参数，如果不配置它，Ozone 会启动失败。 示例如下：</description>
     </item>
     
     <item>
@@ -227,12 +228,12 @@ Ozone 组件  Ozone Manager - 管理 Ozone 命名空间的服务，负责所有�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/start/minikube.html</guid>
-      <description>Requirements  minikube kubectl    ozone 发行包中的 kubernetes/examples 文件夹下包含了多种用途的 kubernetes 部署资源文件，这些资源文件默认使用 Docker Hub 上的 apache/ozone 镜像。
+      <description>Requirements minikube kubectl ozone 发行包中的 kubernetes/examples 文件夹下包含了多种用途的 kubernetes 部署资源文件，这些资源文件默认使用 Docker Hub 上的 apache/ozone 镜像。
 使用 minikube 资源集在 minikube 上进行部署：
 cd kubernetes/examples/minikube kubectl apply -f . 使用下面的命令检查结果：
 kubectl get pod 注意：kubernetes/exampls/minikube 资源集为 minikube 部署进行了如下优化：
- 即使你只有一个主机，也可以运行多个 Datanode（在实际的生产集群中，每个物理主机上通常只运行一个 Datanode） Ozone 通过不同的节点端口提供服务  访问服务 现在你可以访问 Ozone 的各个服务，minikube 资源集为每个 web 端点额外定义了一个 NodePort 服务，NodePort 服务可以通过指定端口从任意节点访问：
-kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE datanode ClusterIP None &amp;lt;none&amp;gt; &amp;lt;none&amp;gt; 27s kubernetes ClusterIP 10.</description>
+即使你只有一个主机，也可以运行多个 Datanode（在实际的生产集群中，每个物理主机上通常只运行一个 Datanode） Ozone 通过不同的节点端口提供服务 访问服务 现在你可以访问 Ozone 的各个服务，minikube 资源集为每个 web 端点额外定义了一个 NodePort 服务，NodePort 服务可以通过指定端口从任意节点访问：
+kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE datanode ClusterIP None &amp;lt;none&amp;gt; &amp;lt;none&amp;gt; 27s kubernetes ClusterIP 10.96.0.1 &amp;lt;none&amp;gt; 443/TCP 118m om ClusterIP None &amp;lt;none&amp;gt; 9874/TCP 27s om-public NodePort 10.</description>
     </item>
     
     <item>
@@ -241,7 +242,7 @@ kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE datanode ClusterIP 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/start/kubernetes.html</guid>
-      <description>Requirements  可用的 kubernetes 集群（LoadBalancer 和 PersistentVolume 非必需） kubectl    由于 apache/ozone 镜像可以从 Docker Hub 获取到，K8s 上的部署过程和 Minikube 上的部署过程十分相似，唯一的区别是我们为 K8s 部署准备了专门的配置 文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。
+      <description> Requirements 可用的 kubernetes 集群（LoadBalancer 和 PersistentVolume 非必需） kubectl 由于 apache/ozone 镜像可以从 Docker Hub 获取到，K8s 上的部署过程和 Minikube 上的部署过程十分相似，唯一的区别是我们为 K8s 部署准备了专门的配置 文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。
 ozone 安装包中的 kubernetes/examples 目录包含了为不同用例设计的 Kubernetes 部署资源文件。
 使用 ozone 子目录进行部署：
 cd kubernetes/examples/ozone kubectl apply -f . 用下面的命令检查结果：
@@ -255,10 +256,12 @@ kubectl port-forward s3g-0 9878:9878 kubectl port-forward scm-0 9876:9876 </desc
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/start/runningviadocker.html</guid>
-      <description>Requirements  docker 和 docker-compose      下载 Ozone 二进制压缩包并解压。
-  进入 docker compose 文件所在的目录，执行 docker-compose 命令，你的机器会启动一个运行在后台的 ozone 伪集群。
-  cd compose/ozone/ docker-compose up -d 为了验证 Ozone 正常运行，我们可以登录到 Datanode 并运行 Ozone 的负载生成工具 freon。 exec datanode bash 命令会在 Datanode 上启动一个 bash，ozone freon 命令在 Datanode 所在的容器内执行，你随时可以通过 CTRL-C 退出 freon，命令行选项 rk 会让 freon 生成随机的键。
-docker-compose exec datanode bash ozone freon rk 你可以通过 http://localhost:9874/ 访问 OzoneManager UI 来查看服务端处理 freon 负载的情况，以及浏览 ozone 的配置。</description>
+      <description>Requirements docker 和 docker-compose 下载 Ozone 二进制压缩包并解压。
+进入 docker compose 文件所在的目录，执行 docker-compose 命令，你的机器会启动一个运行在后台的 ozone 伪集群。
+cd compose/ozone/ docker-compose up -d 为了验证 Ozone 正常运行，我们可以登录到 Datanode 并运行 Ozone 的负载生成工具 freon。 exec datanode bash 命令会在 Datanode 上启动一个 bash，ozone freon 命令在 Datanode 所在的容器内执行，你随时可以通过 CTRL-C 退出 freon，命令行选项 rk 会让 freon 生成随机的键。
+docker-compose exec datanode bash ozone freon rk 你可以通过 http://localhost:9874/ 访问 OzoneManager UI 来查看服务端处理 freon 负载的情况，以及浏览 ozone 的配置。
+恭喜，你成功运行了你的第一个 ozone 集群。
+关闭集群的命令为： docker-compose down</description>
     </item>
     
     <item>
@@ -268,7 +271,7 @@ docker-compose exec datanode bash ozone freon rk 你可以通过 http://localhos
       
       <guid>/zh/start/fromsource.html</guid>
       <description>注意：本页面翻译的信息可能滞后，最新的信息请参看英文版的相关页面。
- Requirements  Java 1.8 Maven    本文档是关于从源码构建 Ozone 的指南，如果你不打算亲自这么做，你大可放心地跳过本页。 如果你十分了解 Hadoop，并且熟悉 Apache 之道，那你应当知道 Apache 发行包的精髓在于源代码。
+Requirements Java 1.8 Maven 本文档是关于从源码构建 Ozone 的指南，如果你不打算亲自这么做，你大可放心地跳过本页。 如果你十分了解 Hadoop，并且熟悉 Apache 之道，那你应当知道 Apache 发行包的精髓在于源代码。
 从源码构建 ozone 只需要解压源码压缩包然后运行构建命令即可，下面这条命令假设你的机器上拥有构建 Hadoop 所需的所有环境，如果你需要构建 Hadoop 的指南，请查看 Apache Hadoop 网站。
 mvn clean package -DskipTests=true 命令执行完成后，hadoop-ozone/dist/target 目录下会生成一个 ozone-&amp;lt;version&amp;gt;.tar.gz 文件。
 你可以拷贝和使用这个压缩包来替代官方发行的二进制包。

@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -231,13 +253,13 @@
 </tr>
 </tbody>
 </table>
-<h1 id="tokens-">Tokens</h1>
+<h1 id="tokens">Tokens</h1>
 <p>Ozone 使用 token 的方法来防止 Kerberos 服务器负载过重，当每秒处理上千个请求时，Kerberos 可能无法很好地工作。所以，每次当用户完成一次认证之后，Ozone 会向用户颁发代理 token 和块 token，应用程序可以使用这些 token 来对集群进行特定的操作，就像它们持有 kerberos 凭据一样，Ozone 支持以下类型的 token。</p>
-<h3 id="代理-token-">代理 Token</h3>
+<h3 id="代理-token">代理 Token</h3>
 <p>代理 token 允许应用模拟用户的 kerberos 凭据，它基于 kerberos 的身份认证，由 OM 颁发，当集群启用安全机制时，代理 token 功能默认启用。</p>
-<h3 id="块-token-">块 Token</h3>
+<h3 id="块-token">块 Token</h3>
 <p>用户通过块 token 来读写一个块，它的作用是让数据节点知道用户是否有对块进行读和修改的权限。</p>
-<h3 id="s3authinfo-">S3AuthInfo</h3>
+<h3 id="s3authinfo">S3AuthInfo</h3>
 <p>S3 使用了一种不一样的共享秘密的安全机制，Ozone 支持 AWS Signature Version 4 协议，从用户的角度来看，Ozone 的 s3 感觉与 AWS S3 无异。</p>
 <p>S3 token 功能在启用安全机制的情况下也默认开启。</p>
 <p>Ozone 的每个服务进程都需要一个 Kerberos 服务主体名和对应的 [kerberos keytab](<a href="https://web.mit.edu/kerberos/krb5-latest/doc/basic">https://web.mit.edu/kerberos/krb5-latest/doc/basic</a>

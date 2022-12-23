@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -471,7 +493,7 @@ Ozone FileSystem Uri is : o3fs://bucket1.s3c89e813c80ffcea9543004d57b2a1239
 <pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1/bucket1
 
 Parameter validation failed:
-Invalid bucket name &quot;vol1/bucket1&quot;: Bucket name must match the regex &quot;^[a-zA-Z0-9.\-_]{1,255}$&quot; or be an ARN matching the regex &quot;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&quot;
+Invalid bucket name &#34;vol1/bucket1&#34;: Bucket name must match the regex &#34;^[a-zA-Z0-9.\-_]{1,255}$&#34; or be an ARN matching the regex &#34;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&#34;
 </code></pre><p>But it&rsquo;s possible to use <code>volume-bucket</code> notion:</p>
 <pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1-bucket1
 </code></pre><ul>
@@ -503,7 +525,7 @@ Invalid bucket name &quot;vol1/bucket1&quot;: Bucket name must match the regex &
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+      Version: 1.2.0, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
     </span>
   </div>
 </footer>

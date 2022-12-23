@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -356,26 +378,26 @@ because CSIServer will access OM to create or delete a bucket, also, CSIServer w
 through goofys.</p>
 <p>If you don&rsquo;t have an Ozone cluster on kubernetes, you can reference <a href="../start/kubernetes.html">Kubernetes</a> to create one. Use the resources from <code>kubernetes/examples/ozone</code> where you can find all the required Kubernetes resources to run cluster together with the dedicated Ozone CSI daemon (check <code>kubernetes/examples/ozone/csi</code>)</p>
 <p>Now, create the CSI related resources by execute the follow command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f /ozone/kubernetes/examples/ozone/csi
-</code></pre></div><h2 id="crete-pv-test-and-visit-the-result">Crete pv-test and visit the result.</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f /ozone/kubernetes/examples/ozone/csi
+</span></span></code></pre></div><h2 id="crete-pv-test-and-visit-the-result">Crete pv-test and visit the result.</h2>
 <p>Create pv-test related resources by execute the follow command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f /ozone/kubernetes/examples/ozone/pv-test
-</code></pre></div><p>Attach the pod scm-0 and put a key into the /s3v/pvc* bucket.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec -it  scm-0  bash
-<span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh bucket list s3v
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b&#34;</span>,
-  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
-  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-06-11T08:19:47.469Z&#34;</span>,
-  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null
-<span style="color:#f92672">}</span>
-<span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh key put /s3v/pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b/A LICENSE.txt
-</code></pre></div><p>Now, let&rsquo;s forward port of the <code>ozone-csi-test-webserver-7cbdc5d65c-h5mnn</code> to see the UI through the web browser.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward ozone-csi-test-webserver-7cbdc5d65c-h5mnn 8000:8000
-</code></pre></div><p>Eventually, we can see the result from <code>http://localhost:8000/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f /ozone/kubernetes/examples/ozone/pv-test
+</span></span></code></pre></div><p>Attach the pod scm-0 and put a key into the /s3v/pvc* bucket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it  scm-0  bash
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh bucket list s3v
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-06-11T08:19:47.469Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh key put /s3v/pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b/A LICENSE.txt
+</span></span></code></pre></div><p>Now, let&rsquo;s forward port of the <code>ozone-csi-test-webserver-7cbdc5d65c-h5mnn</code> to see the UI through the web browser.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward ozone-csi-test-webserver-7cbdc5d65c-h5mnn 8000:8000
+</span></span></code></pre></div><p>Eventually, we can see the result from <code>http://localhost:8000/</code></p>
 <p><img src="pvtest-webui.png" alt="pvtest-webui"></p>
 
 

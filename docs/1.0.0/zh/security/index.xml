@@ -5,11 +5,7 @@
     <link>/zh/security.html</link>
     <description>Recent content in 安全 on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="/zh/security/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/zh/security/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安全化 Ozone</title>
       <link>/zh/security/secureozone.html</link>

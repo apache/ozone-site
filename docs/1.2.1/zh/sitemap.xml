@@ -54,19 +54,6 @@
                 href="/zh/security/secureozone.html"
                 />
   </url><url>
-    <loc>/zh/start.html</loc>
-    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/start.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/start.html"
-                />
-  </url><url>
     <loc>/zh/feature/om-ha.html</loc>
     <lastmod>2021-08-16T19:11:12+08:00</lastmod>
     <xhtml:link
@@ -91,6 +78,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/feature/scm-ha.html"
+                />
+  </url><url>
+    <loc>/zh/start.html</loc>
+    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start.html"
                 />
   </url><url>
     <loc>/zh/concept/ozonemanager.html</loc>
@@ -509,19 +509,6 @@
                 href="/zh/recipe/sparkozonefsk8s.html"
                 />
   </url><url>
-    <loc>/zh/tools/testtools.html</loc>
-    <lastmod>2020-10-05T19:45:34+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tools/testtools.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tools/testtools.html"
-                />
-  </url><url>
     <loc>/zh/interface.html</loc>
     <lastmod>2020-11-14T23:38:29+08:00</lastmod>
     <xhtml:link
@@ -533,6 +520,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/interface.html"
+                />
+  </url><url>
+    <loc>/zh/tools/testtools.html</loc>
+    <lastmod>2020-10-05T19:45:34+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/testtools.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/testtools.html"
                 />
   </url>
 </urlset>

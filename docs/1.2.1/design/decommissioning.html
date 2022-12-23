@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -395,7 +417,7 @@
 <h2 id="user-experiences-decommissioning-vs-maintenance-mode">User Experiences (Decommissioning vs Maintenance mode)</h2>
 <p>From the user&rsquo;s point of view, there are two kinds of planned failures that the user would like to communicate to Ozone.</p>
 <p>The first kind is when a &lsquo;real&rsquo; failure is going to happen in the future. This &lsquo;real&rsquo; failure is the act of decommissioning. We denote this as &ldquo;decommission&rdquo; throughout this paper. The response that the user wants is SCM/Ozone to make replicas to deal with the planned failure.</p>
-<p>The second kind is when the failure is &lsquo;transient.&rsquo; The user knows that this failure is temporary and cluster in most cases can safely ignore this issue. However, if the transient failures are going to cause a failure of availability; then the user would like the Ozone to take appropriate actions to address it.  An example of this case, is if the user put 3 data nodes into maintenance mode and switched them off.</p>
+<p>The second kind is when the failure is &rsquo;transient.&rsquo; The user knows that this failure is temporary and cluster in most cases can safely ignore this issue. However, if the transient failures are going to cause a failure of availability; then the user would like the Ozone to take appropriate actions to address it.  An example of this case, is if the user put 3 data nodes into maintenance mode and switched them off.</p>
 <p>The transient failure can violate the availability guarantees of Ozone; Since the user is telling us not to take corrective actions. Many times, the user does not understand the impact on availability while asking Ozone to ignore the failure.</p>
 <p>So this paper proposes the following definitions for Decommission and Maintenance of data nodes.</p>
 <p><strong>Decommission</strong> <em>of a data node is deemed to be complete when SCM/Ozone completes the replica of all containers on decommissioned data node to other data nodes.That is, the expected count matches the healthy count of containers in the cluster</em>.</p>
@@ -544,44 +566,43 @@
 </code></pre><p>In case the <em>Replica count</em> is positive, it means that we need to make more replicas. If the number is negative, it means that we are over replicated and we need to remove some replicas of this container. If the Replica count for a container is zero; it means that we have the expected number of containers in the cluster.</p>
 <p>To support idempotent placement strategies we should subtract the in-flight replications from the result: If there are one in-flight replication process and two replicas we won&rsquo;t start a new replication command unless the original command is timed out. The timeout is configured with <code>hdds.scm.replication.event.timeout</code> and the default value is 10 minutes.</p>
 <p>More preciously the current algorithm is the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">{</span>
-   <span style="color:#75715e">// container is over replicated
-</span><span style="color:#75715e"></span><span style="color:#f92672">}.</span><span style="color:#a6e22e">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span>0 <span style="color:#f92672">{</span>
-  <span style="color:#75715e">// handle under replicated containers
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><p>The handling of inflight copies and deletes are independent from the decommissioning problem therefore here we focus only on the core mode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// container is over replicated
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}.</span><span style="color:#a6e22e">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// handle under replicated containers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>The handling of inflight copies and deletes are independent from the decommissioning problem therefore here we focus only on the core mode:</p>
 <pre tabindex="0"><code>replicaCount = expectedCount - healthy;
 </code></pre><h3 id="the-proposed-solution">The proposed solution</h3>
 <p>To support the notion that a user can provide hints to the replication model, we propose to add two variables to the current model.</p>
 <p>In the new model, we propose to break the <code>currentCount</code> into the two separate groups. That is <em>Healthy nodes</em> and <em>Maintenance nodes</em>. The new model replaces the currentCount with these two separate counts. The following function captures the code that drives the logic of computing Replica counts in the new model. The later section discusses the input and output of this model very extensively.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * Calculate the number of the missing replicas.
-</span><span style="color:#75715e"> *
-</span><span style="color:#75715e"> * @return the number of the missing replicas.
-</span><span style="color:#75715e">     If it&#39;s less than zero, the container is over replicated.
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getReplicationCount</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> expectedCount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> healthy<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> maintenance<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-
-   <span style="color:#75715e">//for over replication, count only with the healthy replicas
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expectedCount <span style="color:#f92672">&lt;=</span> healthy<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-      <span style="color:#66d9ef">return</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
-   <span style="color:#f92672">}</span>
-
-   replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> <span style="color:#f92672">(</span>healthy <span style="color:#f92672">+</span> maintenance<span style="color:#f92672">);</span>
-
-   <span style="color:#75715e">//at least one HEALTHY replicas should be guaranteed!
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">==</span> 0 <span style="color:#f92672">&amp;&amp;</span> healthy <span style="color:#f92672">&lt;</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-      replicaCount <span style="color:#f92672">++;</span>
-   <span style="color:#f92672">}</span>
-
-   <span style="color:#75715e">//over replication is already handled. Always return with
-</span><span style="color:#75715e"></span>   <span style="color:#75715e">// positive as over replication is already handled
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> replicaCount<span style="color:#f92672">);</span>
-<span style="color:#f92672">}</span>
-
-</code></pre></div><p>To understand the reasing behind the two special <code>if</code> condition check the examples below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Calculate the number of the missing replicas.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @return the number of the missing replicas.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     If it&#39;s less than zero, the container is over replicated.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getReplicationCount</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> expectedCount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> healthy<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> maintenance<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//for over replication, count only with the healthy replicas
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expectedCount <span style="color:#f92672">&lt;=</span> healthy<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> <span style="color:#f92672">(</span>healthy <span style="color:#f92672">+</span> maintenance<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//at least one HEALTHY replicas should be guaranteed!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> healthy <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      replicaCount <span style="color:#f92672">++;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//over replication is already handled. Always return with
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#75715e">// positive as over replication is already handled
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> replicaCount<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>To understand the reasing behind the two special <code>if</code> condition check the examples below.</p>
 <p>We also need to specify two end condition when the DECOMMISSIONING node can be moved to the DECOMMISSIONED state or the ENTERING_MAINTENANCE mode can be moved to the IN_MAINTENANCE state.</p>
 <p>The following conditions should be true for all the containers and all the containers on the specific node should be closed.</p>
 <p><strong>From DECOMMISSIONING to DECOMMISSIONED</strong>:</p>
@@ -1168,7 +1189,7 @@ Containers to copy (0) = Replica Count (1) - inflight copies (1)
 <p><em>Reasoning</em>:</p>
 <p>Neither of the node state nor the container state are persisted in SCM side. The decommissioned state can be stored on the SCM side (or on the SCM side and the datanode side) which can provide better user experience (and may be implemented).</p>
 <p>But to support maintenance mode after restart all the container information is required to be persisted (which is a too big architectural change).</p>
-<p>To make a replication decision replication manager needs the number of healthy replicas (they are reported via heartbeats) AND the number of containers on the node which is in maintenance mode. The later one is not available if the SCM is restarted as the container map exists only in the memory and the node which is turned off can&rsquo;t report any more container reports. Therefore the information about the existing containers on the node which is in the maintenance mode <strong>can&rsquo;t be available'</strong>.</p>
+<p>To make a replication decision replication manager needs the number of healthy replicas (they are reported via heartbeats) AND the number of containers on the node which is in maintenance mode. The later one is not available if the SCM is restarted as the container map exists only in the memory and the node which is turned off can&rsquo;t report any more container reports. Therefore the information about the existing containers on the node which is in the maintenance mode <strong>can&rsquo;t be available&rsquo;</strong>.</p>
 <h2 id="throttling">Throttling</h2>
 <p>SCM should avoid to request too many replication to live enough network bandwidth for the requests.</p>
 <p>Replication Manager can easily throttle the replication requests based on <code>inflightReplication</code> map, but this problem is independent from the handling of the decommissioning / maintenance mode because it should be solved for any kind of replication not just for this.</p>
@@ -1214,7 +1235,7 @@ Containers to copy (0) = Replica Count (1) - inflight copies (1)
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5</a>
+      Version: 1.2.1, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
     </span>
   </div>
 </footer>

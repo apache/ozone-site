@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -229,9 +251,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>SCM is the block service for Ozone. It is also the workhorse for ozone. But user process never talks to SCM. However, being able to read the state of SCM is useful.</p>
-
 <p>SCMCLI allows the developer to access SCM directly. Please note: Improper usage of this tool can destroy your cluster. Unless you know exactly what you are doing, Please do <em>not</em> use this tool. In other words, this is a developer only tool. We might even remove this command in future to prevent improper use.</p>
 
 

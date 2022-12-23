@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -426,8 +448,8 @@
 namespace in deterministic/constant time.</p>
 <p>This feature can be enabled for each specific bucket that requires it by setting the <code>--layout</code> flag
 to <code>FILE_SYSTEM_OPTIMIZED</code> at the time of bucket creation.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create /&lt;volume-name&gt;/&lt;bucket-name&gt; --layout FILE_SYSTEM_OPTIMIZED
-</code></pre></div><p>Note: File System Optimization favors Hadoop Compatible File System instead of S3 compatibility. Some irregular S3 key
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create /&lt;volume-name&gt;/&lt;bucket-name&gt; --layout FILE_SYSTEM_OPTIMIZED
+</span></span></code></pre></div><p>Note: File System Optimization favors Hadoop Compatible File System instead of S3 compatibility. Some irregular S3 key
 names may be rejected or normalized.</p>
 <p>This feature is strongly recommended to be turned ON for Ozone buckets mainly used via Hadoop compatible interfaces,
 especially with high number of files in deep directory hierarchy.</p>
@@ -457,12 +479,12 @@ operation on a directory.</p>
 if the client has not specified the bucket layout argument.
 Supported values are <code>OBJECT_STORE</code>, <code>FILE_SYSTEM_OPTIMIZED</code> and <code>LEGACY</code>.</p>
 <p>By default, this config value is empty. Ozone will default to <code>LEGACY</code> bucket layout if it finds an empty config value.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML">
-<span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>ozone.default.bucket.layout<span style="color:#f92672">&lt;/name&gt;</span>
-    <span style="color:#f92672">&lt;value/&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>ozone.default.bucket.layout<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;value/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../feature/topology.html">Next >></a>
@@ -481,7 +503,7 @@ Supported values are <code>OBJECT_STORE</code>, <code>FILE_SYSTEM_OPTIMIZED</cod
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: June 2, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c923a266cb1b5f8ed5fc9b5d7055064c8e0e2127">c923a266c</a>
+      Version: 1.3.0, Last Modified: June 2, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c923a266cb1b5f8ed5fc9b5d7055064c8e0e2127">c923a266cb</a>
     </span>
   </div>
 </footer>

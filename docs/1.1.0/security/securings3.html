@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -379,8 +401,8 @@ gives full access to the S3 buckets.</p>
 <ul>
 <li>S3 clients can get the secret access id and user secret from OzoneManager.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone s3 getsecret
-</code></pre></div><p>This command will talk to ozone, validate the user via Kerberos and generate
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 getsecret
+</span></span></code></pre></div><p>This command will talk to ozone, validate the user via Kerberos and generate
 the AWS credentials. The values will be printed out on the screen. You can
 set these values up in your <em>.aws</em> file for automatic access while working
 against Ozone S3 buckets.</p>
@@ -391,11 +413,11 @@ against Ozone S3 buckets.</p>
 <ul>
 <li>Now you can proceed to setup these secrets in aws configs:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws configure set default.s3.signature_version s3v4
-aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
-aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
-aws configure set region us-west-1
-</code></pre></div><p>Please refer to AWS S3 documentation on how to use S3 via command line or via
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws configure set default.s3.signature_version s3v4
+</span></span><span style="display:flex;"><span>aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set region us-west-1
+</span></span></code></pre></div><p>Please refer to AWS S3 documentation on how to use S3 via command line or via
 S3 API.</p>
 
 
@@ -416,7 +438,7 @@ S3 API.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab</a>
+      Version: 1.1.0, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab3</a>
     </span>
   </div>
 </footer>

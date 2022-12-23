@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -169,9 +191,7 @@
           <div class="col-md-9">
             <h1>卷命令</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -187,23 +207,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>卷命令通常需要管理员权限，ozone shell 支持以下卷命令：</p>
-
 <ul>
-<li><a href="#创建">创建</a></li>
-<li><a href="#删除">删除</a></li>
-<li><a href="#查看">查看</a></li>
-<li><a href="#列举">列举</a></li>
-<li><a href="#更新">更新</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA">创建</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4">删除</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B">查看</a></li>
+<li><a href="#%E5%88%97%E4%B8%BE">列举</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0">更新</a></li>
 </ul>
-
 <h3 id="创建">创建</h3>
-
 <p>管理员可以通过 <code>volume create</code> 命令创建一个卷并分配给一个用户。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -211,35 +225,26 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>-q, --quota</td>
 <td>可选，指明该卷在 Ozone 集群所能使用的最大空间，即限额。</td>
 </tr>
-
 <tr>
 <td>-u, --user</td>
 <td>必需，指明该卷的所有者，此用户可以在该卷中创建桶和键。</td>
 </tr>
-
 <tr>
 <td>Uri</td>
 <td>卷名</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --quota<span style="color:#f92672">=</span>1TB --user<span style="color:#f92672">=</span>bilbo /hive</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create --quota<span style="color:#f92672">=</span>1TB --user<span style="color:#f92672">=</span>bilbo /hive</span></span></code></pre></div>
 <p>上述命令会在 ozone 集群中创建名为 <em>hive</em> 的卷，卷的限额为 1TB，所有者为 <em>bilbo</em> 。</p>
-
 <h3 id="删除">删除</h3>
-
 <p>管理员可以通过 <code>volume delete</code> 命令删除一个卷，如果卷不为空，此命令将失败。</p>
-
-<p><strong><em>参数</em></strong></p>
-
+<p><em><strong>参数</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -247,7 +252,6 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -255,17 +259,11 @@
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume delete /hive</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume delete /hive</span></span></code></pre></div>
 <p>如果 hive 卷中不包含任何桶，上述命令将删除 hive 卷。</p>
-
 <h3 id="查看">查看</h3>
-
 <p>通过 <code>volume info</code> 命令可以获取卷的限额和所有者信息。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -273,7 +271,6 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -281,25 +278,15 @@
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume info /hive</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume info /hive</span></span></code></pre></div>
 <p>上述命令会打印出 hive 卷的相关信息。</p>
-
 <h3 id="列举">列举</h3>
-
 <p><code>volume list</code> 命令用来列举一个用户拥有的所有卷。</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume list --user hadoop</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume list --user hadoop</span></span></code></pre></div>
 <p>上述命令会打印出 hadoop 用户拥有的所有卷。</p>
-
 <h3 id="更新">更新</h3>
-
 <p><code>volume update</code> 命令用来修改卷的所有者和限额。</p>
-
-<p><strong><em>参数</em></strong></p>
-
+<p><em><strong>参数</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -307,27 +294,22 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>-q, --quota</td>
 <td>可选，重新指定该卷在 Ozone 集群中的限额。</td>
 </tr>
-
 <tr>
 <td>-u, --user</td>
 <td>可选，重新指定该卷的所有者</td>
 </tr>
-
 <tr>
 <td>Uri</td>
 <td>卷名</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume update --quota<span style="color:#f92672">=</span>10TB /hive</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume update --quota<span style="color:#f92672">=</span>10TB /hive</span></span></code></pre></div>
 <p>上述命令将 hive 卷的限额更新为 10TB。</p>
 
 

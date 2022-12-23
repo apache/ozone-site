@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -233,22 +255,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Enabling GDPR compliance in Ozone is very straight forward. During bucket
 creation, you can specify <code>--enforcegdpr=true</code> or <code>-g=true</code> and this will
 ensure the bucket is GDPR compliant. Thus, any key created under this bucket
 will automatically be GDPR compliant.</p>
-
 <p>GDPR can only be enabled on a new bucket. For existing buckets, you would
 have to create a new GDPR compliant bucket and copy data from old bucket into
- new bucket to take advantage of GDPR.</p>
-
+new bucket to take advantage of GDPR.</p>
 <p>Example to create a GDPR compliant bucket:</p>
-
 <p><code>ozone sh bucket create --enforcegdpr=true /hive/jan</code></p>
-
 <p><code>ozone sh bucket create -g=true /hive/jan</code></p>
-
 <p>If you want to create an ordinary bucket then you can skip <code>--enforcegdpr</code>
 and <code>-g</code> flags.</p>
 

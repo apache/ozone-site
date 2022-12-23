@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -408,26 +430,26 @@ Keys and directories are under each buckets.</p>
 <p>Note that for mounts, only temp mount <code>/tmp</code> is supported at the moment.</p>
 <h2 id="configuration">Configuration</h2>
 <p>Please add the following entry to the core-site.xml.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.ofs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>ofs://om-host.example.com/<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.ofs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>ofs://om-host.example.com/<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>This will make all the volumes and buckets to be the default Hadoop compatible file system and register the ofs file system type.</p>
 <p>You also need to add the ozone-filesystem-hadoop3.jar file to the classpath:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</span></span></code></pre></div>
 <p>(Note: with Hadoop 2.x, use the <code>ozone-filesystem-hadoop2-*.jar</code>)</p>
 <p>Once the default Filesystem has been setup, users can run commands like ls, put, mkdir, etc.
 For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls /</span></span></code></pre></div>
 <p>Note that ofs works on all buckets and volumes. Users can create buckets and volumes using mkdir, such as create volume named volume1 and  bucket named bucket1:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /volume1
-hdfs dfs -mkdir /volume1/bucket1</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -mkdir /volume1
+</span></span><span style="display:flex;"><span>hdfs dfs -mkdir /volume1/bucket1</span></span></code></pre></div>
 <p>Or use the put command to write a file to the bucket.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -put /etc/hosts /volume1/bucket1/test</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -put /etc/hosts /volume1/bucket1/test</span></span></code></pre></div>
 <p>For more usage, see: <a href="https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf">https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf</a></p>
 <h2 id="differences-from-o3fshahahugoshortcode-s5-hbhb">Differences from <a href="../interface/o3fs.html">o3fs</a></h2>
 <h3 id="creating-files">Creating files</h3>
@@ -474,19 +496,19 @@ directory. e.g.:</p>
 <pre tabindex="0"><code>$ ozone fs -touch /tmp/key1
 </code></pre><h2 id="delete-with-trash-enabled">Delete with trash enabled</h2>
 <p>In order to enable trash in Ozone, Please add these configs to core-site.xml</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-<span style="color:#f92672">&lt;name&gt;</span>fs.trash.interval<span style="color:#f92672">&lt;/name&gt;</span>
-<span style="color:#f92672">&lt;value&gt;</span>10<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-<span style="color:#f92672">&lt;name&gt;</span>fs.trash.classname<span style="color:#f92672">&lt;/name&gt;</span>
-<span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.om.TrashPolicyOzone<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;name&gt;</span>fs.trash.interval<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;value&gt;</span>10<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;name&gt;</span>fs.trash.classname<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.om.TrashPolicyOzone<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>When keys are deleted with trash enabled, they are moved to a trash directory
 under each bucket, because keys aren&rsquo;t allowed to be moved(renamed) between
 buckets in Ozone.</p>
 <pre tabindex="0"><code>$ ozone fs -rm /volume1/bucket1/key1
-2020-06-04 00:00:00,100 [main] INFO fs.TrashPolicyDefault: Moved: 'ofs://id1/volume1/bucket1/key1' to trash at: ofs://id1/volume1/bucket1/.Trash/hadoop/Current/volume1/bucket1/key1
+2020-06-04 00:00:00,100 [main] INFO fs.TrashPolicyDefault: Moved: &#39;ofs://id1/volume1/bucket1/key1&#39; to trash at: ofs://id1/volume1/bucket1/.Trash/hadoop/Current/volume1/bucket1/key1
 </code></pre><p>This is very similar to how the HDFS encryption zone handles trash location.</p>
 <p><strong>Note</strong></p>
 <p>1.The flag <code>-skipTrash</code> can be used to delete files permanently without being moved to trash.</p>
@@ -520,7 +542,7 @@ information.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: August 17, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2b70185ee3c48da5f664340624ef451793544480">2b70185ee</a>
+      Version: 1.2.1, Last Modified: August 17, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2b70185ee3c48da5f664340624ef451793544480">2b70185ee3</a>
     </span>
   </div>
 </footer>

@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -370,12 +392,12 @@
 <p>为了在不同环境（docker-compose、kubernetes）下运行冒烟测试，你需要定义如何启动容器，然后在正确的容器中执行正确的测试。</p>
 <p>这部分的测试包含在 <code>compose</code> 目录中（查看 <code>./compose/*/test.sh</code> 或者 <code>./compose/test-all.sh</code>）。</p>
 <p>例如，一种测试分发包的简单方法是：</p>
-<pre><code>cd compose/ozone
+<pre tabindex="0"><code>cd compose/ozone
 ./test.sh
 </code></pre><h2 id="blockade">Blockade</h2>
 <p><a href="https://github.com/worstcase/blockade">Blockade</a> 是一个测试网络故障和分片的工具（灵感来自于大名鼎鼎的<a href="https://jepsen.io/analyses">Jepsen 测试</a>）。</p>
 <p>Blockade 测试在其它测试的基础上实现，可以在分发包中的 <code>./blockade</code> 目录下进行测试。</p>
-<pre><code>cd blockade
+<pre tabindex="0"><code>cd blockade
 pip install pytest==2.8.7,blockade
 python -m pytest -s .
 </code></pre><p>更多细节查看 blockade 目录下的 README。</p>
@@ -390,8 +412,8 @@ python -m pytest -s .
 <p>更多信息，可使用如下命令查看:</p>
 <p>bin/ozone freon &ndash;help</p>
 <p>例如：</p>
-<pre><code>ozone freon randomkeys --num-of-volumes=10 --num-of-buckets 10 --num-of-keys 10  --replication-type=RATIS --factor=THREE
-</code></pre><pre><code>***************************************************
+<pre tabindex="0"><code>ozone freon randomkeys --num-of-volumes=10 --num-of-buckets 10 --num-of-keys 10  --replication-type=RATIS --factor=THREE
+</code></pre><pre tabindex="0"><code>***************************************************
 Status: Success
 Git Base Revision: 48aae081e5afacbb3240657556b26c29e61830c3
 Number of Volumes created: 10
@@ -423,7 +445,7 @@ Total Execution time: 00:00:16,898
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: April 11, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2522127b1c0bc12038265faeb667c9c0592e53bc">2522127b1</a>
+      Version: 1.3.0, Last Modified: April 11, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2522127b1c0bc12038265faeb667c9c0592e53bc">2522127b1c</a>
     </span>
   </div>
 </footer>

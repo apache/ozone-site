@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -169,9 +191,7 @@
           <div class="col-md-9">
             <h1>Shell 概述</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -187,46 +207,32 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Ozone shell 的帮助命令既可以在 <em>对象</em> 级别调用，也可以在 <em>操作</em> 级别调用。
 比如：</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume --help</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume --help</span></span></code></pre></div>
 <p>此命令会列出所有对卷的可能操作。</p>
-
 <p>你也可以通过它查看特定操作的帮助，比如：</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --help</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create --help</span></span></code></pre></div>
 <p>这条命令会给出 create 命令的命令行选项。</p>
-
-<p></p></p>
-
+</p>
 <h3 id="通用命令格式">通用命令格式</h3>
-
 <p>Ozone shell 命令都遵照以下格式：</p>
-
 <blockquote>
 <p><em>ozone sh object action url</em></p>
 </blockquote>
-
 <p><strong>ozone</strong> 脚本用来调用所有 Ozone 子命令，ozone shell 通过 <code>sh</code> 子命令调用。</p>
-
 <p>对象可以是卷、桶或键，操作一般是各种动词，比如 create、list、delete 等等。</p>
-
 <p>Ozone URL 可以指向卷、桶或键，格式如下：</p>
-
 <p><em>[schema][server:port]/volume/bucket/key</em></p>
-
 <p>其中，</p>
-
 <ol>
-<li><p><strong>Schema</strong> - 可选，默认为 <code>o3</code>，表示使用原生 RPC 协议来访问 Ozone API。</p></li>
-
-<li><p><strong>Server:Port</strong> - OM 的地址，如果省略了端口， 则使用 ozone-site.xml 中的默认端口。</p></li>
+<li>
+<p><strong>Schema</strong> - 可选，默认为 <code>o3</code>，表示使用原生 RPC 协议来访问 Ozone API。</p>
+</li>
+<li>
+<p><strong>Server:Port</strong> - OM 的地址，如果省略了端口， 则使用 ozone-site.xml 中的默认端口。</p>
+</li>
 </ol>
-
 <p>根据具体的命令不同，卷名、桶名和键名将用来构成 URL，卷、桶和键命令的文档有更多具体的说明。</p>
 
 

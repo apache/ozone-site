@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -177,7 +199,6 @@
     -->
 
 
-
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h3 class="display-4">GDPR 在 Ozone 中的应用 </h3>
@@ -188,11 +209,9 @@
         </p>
     </div>
 </div>
-
 <div class="alert alert-warning" role="alert">
 如果你想详细了解 Ozone 的 GDPR 框架，请参考 <a href="https://issues.apache.org/jira/secure/attachment/12978992/Ozone%20GDPR%20Framework.pdf">Ozone GDPR 框架</a>。
 </div>
-
 <p>当你创建了一个符合 GDPR 规范的桶，在这个桶中创建的键都将自动符合 GDPR 规范。</p>
 
                 

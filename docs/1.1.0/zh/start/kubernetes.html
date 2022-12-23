@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -348,13 +370,13 @@
 文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。</p>
 <p>ozone 安装包中的 <code>kubernetes/examples</code> 目录包含了为不同用例设计的 Kubernetes 部署资源文件。</p>
 <p>使用 ozone 子目录进行部署：</p>
-<pre><code>cd kubernetes/examples/ozone
+<pre tabindex="0"><code>cd kubernetes/examples/ozone
 kubectl apply -f .
 </code></pre><p>用下面的命令检查结果：</p>
-<pre><code>kubectl get pod
+<pre tabindex="0"><code>kubectl get pod
 访问 ozone 服务
 </code></pre><p>现在你可以访问 ozone 的各个服务，默认情况下它们的端口并没有向外开放，不过你可以通过设置端口转发规则来开放外部访问：</p>
-<pre><code>kubectl port-forward s3g-0 9878:9878
+<pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 </code></pre>
 
@@ -375,7 +397,7 @@ kubectl port-forward scm-0 9876:9876
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: February 6, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3d397239b07c61f98319902366db800f05769949">3d397239b</a>
+      Version: 1.1.0, Last Modified: February 6, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3d397239b07c61f98319902366db800f05769949">3d397239b0</a>
     </span>
   </div>
 </footer>

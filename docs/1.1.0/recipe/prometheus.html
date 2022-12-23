@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -380,11 +402,11 @@ compatible metrics endpoint where all the available hadoop metrics are published
 <ul>
 <li>To enable the Prometheus metrics endpoint you need to add a new configuration to the <code>ozone-site.xml</code> file.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"> <span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.enabled<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
- <span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p><em>Note</em>: for Docker compose based pseudo cluster put the<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span> <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p><em>Note</em>: for Docker compose based pseudo cluster put the <br>
 <code>OZONE-SITE.XML_hdds.prometheus.endpoint.enabled=true</code> line to the <code>docker-config</code> file.</p>
 <ul>
 <li>
@@ -400,21 +422,21 @@ compatible metrics endpoint where all the available hadoop metrics are published
 <p>Create a prometheus.yaml configuration with the previous endpoints:</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">global</span>:
-  <span style="color:#f92672">scrape_interval</span>: <span style="color:#ae81ff">15s</span>
-
-<span style="color:#f92672">scrape_configs</span>:
-  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
-    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
-    <span style="color:#f92672">static_configs</span>:
-     - <span style="color:#f92672">targets</span>:
-        - <span style="color:#e6db74">&#34;scm:9876&#34;</span>
-        - <span style="color:#e6db74">&#34;ozoneManager:9874&#34;</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">global</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">scrape_interval</span>: <span style="color:#ae81ff">15s</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#e6db74">&#34;scm:9876&#34;</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#e6db74">&#34;ozoneManager:9874&#34;</span>
+</span></span></code></pre></div><ul>
 <li>Start with prometheus from the directory where you have the prometheus.yaml file:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">prometheus
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>prometheus
+</span></span></code></pre></div><ul>
 <li>Check the active targets in the prometheus web-ui:</li>
 </ul>
 <p>http://localhost:9090/targets</p>
@@ -427,10 +449,10 @@ For example:</li>
 <p><img src="prometheus-key-allocate.png" alt="Prometheus metrics page example"></p>
 <h2 id="note">Note</h2>
 <p>The ozone distribution contains a ready-to-use, dockerized environment to try out ozone and Prometheus. It can be found under <code>compose/ozone</code> directory.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
-export COMPOSE_FILE<span style="color:#f92672">=</span>docker-compose.yaml:monitoring.yaml
-docker-compose up -d
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd compose/ozone
+</span></span><span style="display:flex;"><span>export COMPOSE_FILE<span style="color:#f92672">=</span>docker-compose.yaml:monitoring.yaml
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../recipe/sparkozonefsk8s.html">Next >></a>
@@ -449,7 +471,7 @@ docker-compose up -d
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: December 9, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cdc2c1333f78151ab5f00ad555da201fc4129e75">cdc2c1333</a>
+      Version: 1.1.0, Last Modified: December 9, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cdc2c1333f78151ab5f00ad555da201fc4129e75">cdc2c1333f</a>
     </span>
   </div>
 </footer>

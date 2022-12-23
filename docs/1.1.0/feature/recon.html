@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -376,7 +398,7 @@ Refer to <a href="../concept/recon.html">Recon Architecture</a> for detailed arc
 for HTTP API reference.</p>
 <p>Recon is a service that brings its own HTTP web server and can be started by
 the following command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start recon</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start recon</span></span></code></pre></div>
 
 
           
@@ -396,7 +418,7 @@ the following command.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81</a>
+      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81c</a>
     </span>
   </div>
 </footer>

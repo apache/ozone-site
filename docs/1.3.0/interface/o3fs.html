@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -434,49 +456,49 @@ provides a full view of all the volume/buckets.</p>
 <h2 id="setting-up-the-o3fs">Setting up the o3fs</h2>
 <p>To create an ozone file system, we have to choose a bucket where the file system would live. This bucket will be used as the backend store for OzoneFileSystem. All the files and directories will be stored as keys in this bucket.</p>
 <p>Please run the following commands to create a volume and bucket, if you don&rsquo;t have them already.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
-ozone sh bucket create /volume/bucket</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /volume
+</span></span><span style="display:flex;"><span>ozone sh bucket create /volume/bucket</span></span></code></pre></div>
 <p>Once this is created, please make sure that bucket exists via the <em>list volume</em> or <em>list bucket</em> commands.</p>
 <p>Please add the following entry to the core-site.xml.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><div class="alert alert-warning" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><div class="alert alert-warning" role="alert">
 <p>Tip: For the <a href="../feature/om-ha.html">OM HA</a> cluster, you need to specify the ozone service id. For example,
 if <code>ozone.om.service.ids = ozone1</code>, then the URL is <code>o3fs://bucket.volume.ozone1</code>.
 For non-HA, it can be <code>o3fs://bucket.volume</code>.</p>
 </div>
 <p>This will make this bucket to be the default Hadoop compatible file system and register the o3fs file system type.</p>
 <p>You also need to add the ozone-filesystem-hadoop3.jar file to the classpath:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozone/lib/ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozone/lib/ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH</span></span></code></pre></div>
 <p>(Note: with Hadoop 2.x, use the <code>ozone-filesystem-hadoop2-*.jar</code>)</p>
 <p>Once the default Filesystem has been setup, users can run commands like ls, put, mkdir, etc.
 For example,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls /</span></span></code></pre></div>
 <p>or</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -mkdir /users</span></span></code></pre></div>
 <p>Or put command etc. In other words, all programs like Hive, Spark, and Distcp will work against this file system.
 Please note that any keys created/deleted in the bucket using methods apart from OzoneFileSystem will show up as directories and files in the Ozone File System.</p>
 <p>Note: Bucket and volume names are not allowed to have a period in them.</p>
 <p>Moreover, the filesystem URI can take a fully qualified form with the OM host and an optional port as a part of the path following the volume name.
 For example, you can specify both host and port:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</span></span></code></pre></div>
 <p>When the port number is not specified, it will be retrieved from config key <code>ozone.om.address</code>
 if defined; or it will fall back to the default port <code>9862</code>.
 For example, we have <code>ozone.om.address</code> configured as following in <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
-    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
-  <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>  <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>When we run command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</span></span></code></pre></div>
 <p>The above command is essentially equivalent to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</span></span></code></pre></div>
 <p>Note: Only port number from the config is used in this case,
 whereas the host name in the config <code>ozone.om.address</code> is ignored.</p>
 
@@ -498,7 +520,7 @@ whereas the host name in the config <code>ozone.om.address</code> is ignored.</p
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: February 28, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/898ccbb46fd52b19030758da3d97b621ae709e0e">898ccbb46</a>
+      Version: 1.3.0, Last Modified: February 28, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/898ccbb46fd52b19030758da3d97b621ae709e0e">898ccbb46f</a>
     </span>
   </div>
 </footer>

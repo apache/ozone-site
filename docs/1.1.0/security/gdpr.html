@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -400,10 +422,10 @@ will automatically be GDPR compliant.</p>
 have to create a new GDPR compliant bucket and copy data from old bucket into
 new bucket to take advantage of GDPR.</p>
 <p>Example to create a GDPR compliant bucket:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket create --enforcegdpr<span style="color:#f92672">=</span>true /hive/jan
-
-ozone sh bucket create -g<span style="color:#f92672">=</span>true /hive/jan
-</code></pre></div><p>If you want to create an ordinary bucket then you can skip <code>--enforcegdpr</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket create --enforcegdpr<span style="color:#f92672">=</span>true /hive/jan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ozone sh bucket create -g<span style="color:#f92672">=</span>true /hive/jan
+</span></span></code></pre></div><p>If you want to create an ordinary bucket then you can skip <code>--enforcegdpr</code>
 and <code>-g</code> flags.</p>
 <h2 id="references">References</h2>
 <ul>
@@ -428,7 +450,7 @@ and <code>-g</code> flags.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: February 2, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/23d21827560e79e939a902dee8396bf6f7b2c6d8">23d218275</a>
+      Version: 1.1.0, Last Modified: February 2, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/23d21827560e79e939a902dee8396bf6f7b2c6d8">23d2182756</a>
     </span>
   </div>
 </footer>

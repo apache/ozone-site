@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -382,12 +404,12 @@
 <p>To run the tests in different environment (docker-compose, kubernetes) you need a definition to start the containers and execute the right tests in the right containers.</p>
 <p>These definition of the tests are included in the <code>compose</code> directory (check <code>./compose/*/test.sh</code> or <code>./compose/test-all.sh</code>).</p>
 <p>For example a simple way to test the distribution package:</p>
-<pre><code>cd compose/ozone
+<pre tabindex="0"><code>cd compose/ozone
 ./test.sh
 </code></pre><h2 id="blockade">Blockade</h2>
 <p><a href="https://github.com/worstcase/blockade">Blockade</a> is a tool to test network failures and partitions (it&rsquo;s inspired by the legendary <a href="https://jepsen.io/analyses">Jepsen tests</a>).</p>
 <p>Blockade tests are implemented with the help of tests and can be started from the <code>./blockade</code> directory of the distribution.</p>
-<pre><code>cd blocakde
+<pre tabindex="0"><code>cd blocakde
 pip install pytest==2.8.7,blockade
 python -m pytest -s .
 </code></pre><p>See the README in the blockade directory for more details.</p>
@@ -401,8 +423,8 @@ python -m pytest -s .
 <p>For more information use:</p>
 <p>bin/ozone freon &ndash;help</p>
 <p>For example:</p>
-<pre><code>ozone freon randomkeys --num-of-volumes=10 --num-of-buckets 10 --num-of-keys 10  --replication-type=RATIS --factor=THREE
-</code></pre><pre><code>***************************************************
+<pre tabindex="0"><code>ozone freon randomkeys --num-of-volumes=10 --num-of-buckets 10 --num-of-keys 10  --replication-type=RATIS --factor=THREE
+</code></pre><pre tabindex="0"><code>***************************************************
 Status: Success
 Git Base Revision: 48aae081e5afacbb3240657556b26c29e61830c3
 Number of Volumes created: 10
@@ -420,7 +442,7 @@ Total Execution time: 00:00:16,898
 </code></pre><h2 id="genesis">Genesis</h2>
 <p>Genesis is a microbenchmarking tool. It&rsquo;s also included in the distribution (<code>ozone genesis</code>) but it doesn&rsquo;t require real cluster. It measures different part of the code in an isolated way (eg. the code which saves the data to the local RocksDB based key value stores)</p>
 <p>Example run:</p>
-<pre><code> ozone genesis -benchmark=BenchMarkRocksDbStore
+<pre tabindex="0"><code> ozone genesis -benchmark=BenchMarkRocksDbStore
 # JMH version: 1.19
 # VM version: JDK 11.0.1, VM 11.0.1+13-LTS
 # VM invoker: /usr/lib/jvm/java-11-openjdk-11.0.1.13-3.el7_6.x86_64/bin/java
@@ -499,12 +521,12 @@ Iteration  20: 196335.579 ops/s
 
 
 
-Result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test&quot;:
+Result &#34;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test&#34;:
   167433.864 ?(99.9%) 43530.883 ops/s [Average]
   (min, avg, max) = (41926.816, 167433.864, 223433.864), stdev = 50130.230
   CI (99.9%): [123902.981, 210964.748] (assumes normal distribution)
 
-Secondary result &quot;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test:?stack&quot;:
+Secondary result &#34;org.apache.hadoop.ozone.genesis.BenchMarkRocksDbStore.test:?stack&#34;:
 Stack profiler:
 
 ....[Thread state distributions]....................................................................
@@ -555,7 +577,7 @@ BenchMarkRocksDbStore.test:?stack                    4            8             
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4ad03188ed4fbbe8d6dce1e8e0c8d91518904fc1">4ad03188e</a>
+      Version: 1.1.0, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4ad03188ed4fbbe8d6dce1e8e0c8d91518904fc1">4ad03188ed</a>
     </span>
   </div>
 </footer>

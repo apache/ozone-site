@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -391,11 +413,11 @@
 <p>All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</p>
 <p>Ozone shell help can be invoked at <em>object</em> level or at <em>action</em> level.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume --help
-</code></pre></div><p>will show all possible actions for volumes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume --help
+</span></span></code></pre></div><p>will show all possible actions for volumes.</p>
 <p>Or it can be invoked to explain a specific action like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --help
-</code></pre></div><p>which will print the command line options of the <code>create</code> command for volumes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create --help
+</span></span></code></pre></div><p>which will print the command line options of the <code>create</code> command for volumes.</p>
 <h2 id="general-command-format">General Command Format</h2>
 <p>Ozone shell commands take the following form:</p>
 <blockquote>
@@ -423,95 +445,95 @@ detail.</p>
 <h2 id="volume-operations">Volume operations</h2>
 <p>Volume is the top level element of the hierarchy, managed only by administrators. Optionally, quota and the owner user can be specified.</p>
 <p>Example commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume create /vol1
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume info /vol1
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
-  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume list /
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
-  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
-  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
-<span style="color:#f92672">}</span>
-....
-</code></pre></div><h2 id="bucket-operations">Bucket operations</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume create /vol1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume info /vol1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume list /
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>....
+</span></span></code></pre></div><h2 id="bucket-operations">Bucket operations</h2>
 <p>Bucket is the second level of the object hierarchy, and is similar to AWS S3 buckets. Users can create buckets in volumes, if they have the necessary permissions.</p>
 <p>Command examples:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket create /vol1/bucket1
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket info /vol1/bucket1
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
-  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
-  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
-  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null,
-  <span style="color:#e6db74">&#34;sourceVolume&#34;</span> : null,
-  <span style="color:#e6db74">&#34;sourceBucket&#34;</span> : null
-<span style="color:#f92672">}</span>
-</code></pre></div><p><a href="../security/securingtde.html">Transparent Data Encryption</a> can be enabled at the bucket level.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket create /vol1/bucket1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket info /vol1/bucket1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;sourceVolume&#34;</span> : null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;sourceBucket&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p><a href="../security/securingtde.html">Transparent Data Encryption</a> can be enabled at the bucket level.</p>
 <h2 id="key-operations">Key operations</h2>
 <p>Key is the object which can store the data.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key put /vol1/bucket1/README.md README.md
-</code></pre></div><div class="alert alert-warning" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key put /vol1/bucket1/README.md README.md
+</span></span></code></pre></div><div class="alert alert-warning" role="alert">
 <p>In this case the standard <code>ozone sh &lt;object_type&gt; &lt;action&gt; &lt;url&gt;</code> scheme may be a bit confusing at first, as it results in the syntax <code>ozone sh key put &lt;destination&gt; &lt;source&gt;</code> instead of the arguably more natural order of <code>&lt;source&gt; &lt;destination&gt;</code>.</p>
 </div>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key info /vol1/bucket1/README.md
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;README.md&#34;</span>,
-  <span style="color:#e6db74">&#34;dataSize&#34;</span> : 3841,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:20.749Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:21.979Z&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationType&#34;</span> : <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationFactor&#34;</span> : 1,
-  <span style="color:#e6db74">&#34;ozoneKeyLocations&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;containerID&#34;</span> : 1,
-    <span style="color:#e6db74">&#34;localID&#34;</span> : 104591670688743424,
-    <span style="color:#e6db74">&#34;length&#34;</span> : 3841,
-    <span style="color:#e6db74">&#34;offset&#34;</span> : <span style="color:#ae81ff">0</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;fileEncryptionInfo&#34;</span> : null
-<span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key get /vol1/bucket1/README.md /tmp/
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key info /vol1/bucket1/README.md
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;README.md&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;dataSize&#34;</span> : 3841,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:20.749Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:21.979Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationType&#34;</span> : <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationFactor&#34;</span> : 1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ozoneKeyLocations&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;containerID&#34;</span> : 1,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;localID&#34;</span> : 104591670688743424,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;length&#34;</span> : 3841,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;offset&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;fileEncryptionInfo&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key get /vol1/bucket1/README.md /tmp/
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../interface/reconapi.html">Next >></a>
@@ -530,7 +552,7 @@ detail.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: March 11, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2cb80b1319630a874beab24506e49f3d49968bb4">2cb80b131</a>
+      Version: 1.2.0, Last Modified: March 11, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2cb80b1319630a874beab24506e49f3d49968bb4">2cb80b1319</a>
     </span>
   </div>
 </footer>

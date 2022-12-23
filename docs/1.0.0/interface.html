@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -430,7 +452,7 @@ Ozone is a multi-protocol file system. There are different protocols by which
                                 </h2>
                                 <p class="card-text">Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the Java API.
 There are some functionality which couldn&rsquo;t be accessed without using ozone sh commands. For example:
- Creating volumes with quota Managing internal ACLs Creating buckets with encryption key  All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</p>
+Creating volumes with quota Managing internal ACLs Creating buckets with encryption key All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</p>
                                 <a href="./interface/cli.html"
                                    class=" btn btn-primary btn-lg">Command Line Interface</a>
                             </div>

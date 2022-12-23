@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -366,26 +388,26 @@
 使用来自 <code>kubernetes/examples/ozone</code>的资源，你可以找到所有需要的 Kubernetes 资源来和指定的 CSI 运行在一起
 (参考 <code>kubernetes/examples/ozone/csi</code>)</p>
 <p>现在，使用如下命令，创建 CSI 相关的资源。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f /ozone/kubernetes/examples/ozone/csi
-</code></pre></div><h2 id="创建-pv-test-并查看结果">创建 pv-test 并查看结果</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f /ozone/kubernetes/examples/ozone/csi
+</span></span></code></pre></div><h2 id="创建-pv-test-并查看结果">创建 pv-test 并查看结果</h2>
 <p>通过执行以下命令，创建 pv-test 相关的资源。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f /ozone/kubernetes/examples/ozone/pv-test
-</code></pre></div><p>连接 pod scm-0 并在 /s3v/pvc* 桶中创建一个键值。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec -it  scm-0  bash
-<span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh bucket list s3v
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b&#34;</span>,
-  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
-  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-06-11T08:19:47.469Z&#34;</span>,
-  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null
-<span style="color:#f92672">}</span>
-<span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh key put /s3v/pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b/A LICENSE.txt
-</code></pre></div><p>现在，通过映射 <code>ozone-csi-test-webserver-7cbdc5d65c-h5mnn</code> 端口，我们可以使用浏览器展示其 UI 页面。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward ozone-csi-test-webserver-7cbdc5d65c-h5mnn 8000:8000
-</code></pre></div><p>最终，我们可以通过 <code>http://localhost:8000/</code> 看到结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f /ozone/kubernetes/examples/ozone/pv-test
+</span></span></code></pre></div><p>连接 pod scm-0 并在 /s3v/pvc* 桶中创建一个键值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it  scm-0  bash
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh bucket list s3v
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-06-11T08:19:47.469Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>hadoop@scm-0 ~<span style="color:#f92672">]</span>$ ozone sh key put /s3v/pvc-861e2d8b-2232-4cd1-b43c-c0c26697ab6b/A LICENSE.txt
+</span></span></code></pre></div><p>现在，通过映射 <code>ozone-csi-test-webserver-7cbdc5d65c-h5mnn</code> 端口，我们可以使用浏览器展示其 UI 页面。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward ozone-csi-test-webserver-7cbdc5d65c-h5mnn 8000:8000
+</span></span></code></pre></div><p>最终，我们可以通过 <code>http://localhost:8000/</code> 看到结果</p>
 <p><img src="pvtest-webui.png" alt="pvtest-webui"></p>
 
 
@@ -406,7 +428,7 @@
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/19cb481896f091ec5c02fe4010a5ab428302f38f">19cb48189</a>
+      Version: 1.2.1, Last Modified: October 5, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/19cb481896f091ec5c02fe4010a5ab428302f38f">19cb481896</a>
     </span>
   </div>
 </footer>

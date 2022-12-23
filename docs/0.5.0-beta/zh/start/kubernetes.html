@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -186,7 +208,6 @@
   limitations under the License.
 -->
 
-
 <div class="panel panel-default">
     <div class="panel-heading">Requirements</div>
     <div class="panel-body">
@@ -194,33 +215,23 @@
 <li>可用的 kubernetes 集群（LoadBalancer 和 PersistentVolume 非必需）</li>
 <li>kubectl</li>
 </ul>
+
     </div>
 </div>
 
-
 <p>由于 <em>apache/ozone</em> 镜像可以从 Docker Hub 获取到，K8s 上的部署过程和 Minikube 上的部署过程十分相似，唯一的区别是我们为 K8s 部署准备了专门的配置
 文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。</p>
-
 <p>ozone 安装包中的 <code>kubernetes/examples</code> 目录包含了为不同用例设计的 Kubernetes 部署资源文件。</p>
-
 <p>使用 ozone 子目录进行部署：</p>
-
-<pre><code>cd kubernetes/examples/ozone
+<pre tabindex="0"><code>cd kubernetes/examples/ozone
 kubectl apply -f .
-</code></pre>
-
-<p>用下面的命令检查结果：</p>
-
-<pre><code>kubectl get pod
+</code></pre><p>用下面的命令检查结果：</p>
+<pre tabindex="0"><code>kubectl get pod
 访问 ozone 服务
-</code></pre>
-
-<p>现在你可以访问 ozone 的各个服务，默认情况下它们的端口并没有向外开放，不过你可以通过设置端口转发规则来开放外部访问：</p>
-
-<pre><code>kubectl port-forward s3g-0 9878:9878
+</code></pre><p>现在你可以访问 ozone 的各个服务，默认情况下它们的端口并没有向外开放，不过你可以通过设置端口转发规则来开放外部访问：</p>
+<pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 </code></pre>
-
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/start/runningviadocker.html">Next >></a>

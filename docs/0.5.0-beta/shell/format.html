@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -217,9 +239,7 @@
           <div class="col-md-9">
             <h1>Shell Overview</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -235,48 +255,36 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Ozone shell help can be invoked at <em>object</em> level or at <em>action</em> level.
 For example:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume --help</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume --help</span></span></code></pre></div>
 <p>This will show all possible actions for volumes.</p>
-
 <p>or it can be invoked to explain a specific action like
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --help</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create --help</span></span></code></pre></div>
 This command will give you command line options of the create command.</p>
-
-<p></p></p>
-
+</p>
 <h3 id="general-command-format">General Command Format</h3>
-
 <p>The Ozone shell commands take the following format.</p>
-
 <blockquote>
 <p><em>ozone sh object action url</em></p>
 </blockquote>
-
 <p><strong>ozone</strong> script is used to invoke all Ozone sub-commands. The ozone shell is
 invoked via <code>sh</code> command.</p>
-
 <p>The object can be a volume, bucket or a key. The action is various verbs like
 create, list, delete etc.</p>
-
 <p>Ozone URL can point to a volume, bucket or keys in the following format:</p>
-
 <p><em>[schema][server:port]/volume/bucket/key</em></p>
-
 <p>Where,</p>
-
 <ol>
-<li><p><strong>Schema</strong> - This should be <code>o3</code> which is the native RPC protocol to access
-Ozone API. The usage of the schema is optional.</p></li>
-
-<li><p><strong>Server:Port</strong> - This is the address of the Ozone Manager. If the port is
-omitted the default port from ozone-site.xml will be used.</p></li>
+<li>
+<p><strong>Schema</strong> - This should be <code>o3</code> which is the native RPC protocol to access
+Ozone API. The usage of the schema is optional.</p>
+</li>
+<li>
+<p><strong>Server:Port</strong> - This is the address of the Ozone Manager. If the port is
+omitted the default port from ozone-site.xml will be used.</p>
+</li>
 </ol>
-
 <p>Depending on the call, the volume/bucket/key names will be part of the URL.
 Please see volume commands, bucket commands, and key commands section for more
 detail.</p>

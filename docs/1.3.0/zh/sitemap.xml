@@ -54,19 +54,6 @@
                 href="/zh/security/secureozone.html"
                 />
   </url><url>
-    <loc>/zh/start.html</loc>
-    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/start.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/start.html"
-                />
-  </url><url>
     <loc>/zh/feature/om-ha.html</loc>
     <lastmod>2022-10-13T19:05:42+05:30</lastmod>
     <xhtml:link
@@ -91,6 +78,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/feature/scm-ha.html"
+                />
+  </url><url>
+    <loc>/zh/start.html</loc>
+    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start.html"
                 />
   </url><url>
     <loc>/zh/concept/ozonemanager.html</loc>
@@ -119,19 +119,6 @@
                 href="/zh/interface/o3fs.html"
                 />
   </url><url>
-    <loc>/zh/feature/prefixfso.html</loc>
-    <lastmod>2022-08-03T16:08:01+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/feature/prefixfso.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/feature/prefixfso.html"
-                />
-  </url><url>
     <loc>/zh/security/securingdatanodes.html</loc>
     <lastmod>2022-01-03T10:43:06+08:00</lastmod>
     <xhtml:link
@@ -143,6 +130,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/security/securingdatanodes.html"
+                />
+  </url><url>
+    <loc>/zh/feature/prefixfso.html</loc>
+    <lastmod>2022-08-03T16:08:01+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature/prefixfso.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature/prefixfso.html"
                 />
   </url><url>
     <loc>/zh/concept.html</loc>
@@ -535,19 +535,6 @@
                 href="/zh/recipe/sparkozonefsk8s.html"
                 />
   </url><url>
-    <loc>/zh/tools/testtools.html</loc>
-    <lastmod>2022-04-11T19:12:00+02:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tools/testtools.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tools/testtools.html"
-                />
-  </url><url>
     <loc>/zh/interface.html</loc>
     <lastmod>2020-11-14T23:38:29+08:00</lastmod>
     <xhtml:link
@@ -559,6 +546,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/interface.html"
+                />
+  </url><url>
+    <loc>/zh/tools/testtools.html</loc>
+    <lastmod>2022-04-11T19:12:00+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/testtools.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/testtools.html"
                 />
   </url>
 </urlset>

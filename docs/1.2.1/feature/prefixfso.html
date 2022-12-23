@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -410,15 +432,15 @@ operation on a directory.
 <h2 id="configuration">Configuration</h2>
 <p>By default the feature is disabled. It can be enabled with the following
 settings in <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.enable.filesystem.paths<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.metadata.layout<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>PREFIX<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.enable.filesystem.paths<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.metadata.layout<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>PREFIX<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../feature/topology.html">Next >></a>
@@ -437,7 +459,7 @@ settings in <code>ozone-site.xml</code>:</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: April 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4449cfda21dc757c1a28ca517ee5cf9fcd19a21c">4449cfda2</a>
+      Version: 1.2.1, Last Modified: April 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4449cfda21dc757c1a28ca517ee5cf9fcd19a21c">4449cfda21</a>
     </span>
   </div>
 </footer>

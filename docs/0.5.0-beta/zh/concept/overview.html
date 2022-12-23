@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -169,9 +191,7 @@
           <div class="col-md-9">
             <h1>概览</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -187,29 +207,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Ozone 是一个分布式、多副本的对象存储系统，并针对大数据场景进行了专门的优化。Ozone 主要围绕可扩展性进行设计，目标是十亿数量级以上的对象存储。</p>
-
-<p>Ozone 通过对命名空间与块空间的管理进行分离，大大增加了其可扩展性，其中命名空间由 <a href="../../zh/concept/ozonemanager.html">Ozone Manager </a>（OM）管理，块空间由 <a href="../../zh/concept/hdds.html">Storage Container Manager</a>（SCM）管理。</p>
-
+<p>Ozone 通过对命名空间与块空间的管理进行分离，大大增加了其可扩展性，其中命名空间由 <a href="../../zh/concept/ozonemanager.html">Ozone Manager </a>（OM）管理，块空间由 [Storage Container Manager] (/zh/concept/hdds.html)（SCM）管理。</p>
 <p>Ozone 的管理由卷、桶和键组成。卷类似于个人主目录，只有管理员可以创建。</p>
-
 <p>卷用来存储桶，用户可以在一个卷中创建任意数量的桶，桶中包含键，在 Ozone 中通过键来存储数据。</p>
-
 <p>Ozone 的命名空间由存储卷组成，同时存储卷也用作存储账户管理。</p>
-
 <p>下面的框图展示了 Ozone 的核心组件：</p>
-
-<p><img src="ozoneBlockDiagram.png" alt="架构图" /></p>
-
+<p><img src="ozoneBlockDiagram.png" alt="架构图"></p>
 <p>Ozone Manager 管理命名空间，Storage Container Manager 管理底层的数据，而 Recon 是 Ozone 的管理接口。</p>
-
 <h2 id="多种角度看-ozone">多种角度看 Ozone</h2>
-
-<p><img src="FunctionalOzone.png" alt="FunctionalOzone" /></p>
-
+<p><img src="FunctionalOzone.png" alt="FunctionalOzone"></p>
 <p>任何分布式系统都可以从不同角度去观察。一种观察角度是，把 Ozone 看作是在分布式块存储（HDDS）之上加了一个命名空间服务（OM）。</p>
-
 <p>另一种角度是把 Ozone 看作由几个不同的功能层组成：由 OM 和 SCM 组成的元数据管理层；由数据节点以及 SCM 构成的数据存储层；由 Ratis 提供的副本层，用来复制 OM 和 SCM 的元数据以及在修改数据节点上数据时保持数据一致性；Recon 是管理服务器，它负责和其它 Ozone 组件通信，并提供统一的管理 API 和界面。</p>
 
 

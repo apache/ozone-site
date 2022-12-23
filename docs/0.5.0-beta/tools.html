@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -219,13 +241,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Ozone has a set of command line tools that can be used to manage ozone.</p>
-
 <p>All these commands are invoked via the <code>ozone</code> script.</p>
-
 <p>Daemon commands:</p>
-
 <ul>
 <li><strong>scm</strong> -  Storage Container Manager service, via daemon can be started
 or stopped.</li>
@@ -234,17 +252,13 @@ or stopped.</li>
 stopped.</li>
 <li><strong>s3g</strong> -</li>
 </ul>
-
 <p>Client commands:</p>
-
 <ul>
 <li><strong>sh</strong> -  Primary command line interface for ozone to manage volumes/buckets/keys.</li>
 <li><strong>fs</strong> - Runs a command on ozone file system (similar to <code>hdfs dfs</code>)</li>
 <li><strong>version</strong> - Prints the version of Ozone and HDDS.</li>
 </ul>
-
 <p>Admin commands:</p>
-
 <ul>
 <li><strong>classpath</strong> - Prints the class path needed to get the hadoop jar and the
 required libraries.</li>
@@ -257,14 +271,11 @@ Container Manager.</li>
 <li><strong>genconf</strong> -  Generate minimally required ozone configs and output to
 ozone-site.xml.</li>
 </ul>
-
 <p>Test tools:</p>
-
 <ul>
 <li><strong>freon</strong> -  Runs the ozone load generator.</li>
 <li><strong>genesis</strong>  - Developer Only, Ozone micro-benchmark application.</li>
 </ul>
-
 <p>For more information see the following subpages:</p>
 
                 

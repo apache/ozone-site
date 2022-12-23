@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>/zh/</loc>
-    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-07T03:42:43+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,11 +14,9 @@
                 hreflang="zh"
                 href="/zh/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/concept/overview.html</loc>
-    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-12T08:08:28+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -30,11 +27,9 @@
                 hreflang="zh"
                 href="/zh/concept/overview.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/interface/javaapi.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-03T01:10:31+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -45,10 +40,9 @@
                 hreflang="zh"
                 href="/zh/interface/javaapi.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/shell/format.html</loc>
+    <lastmod>2020-01-23T14:18:39+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -59,10 +53,9 @@
                 hreflang="zh"
                 href="/zh/shell/format.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start.html</loc>
+    <lastmod>2020-01-15T05:38:34+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -73,11 +66,9 @@
                 hreflang="zh"
                 href="/zh/start.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/concept/ozonemanager.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-22T06:23:05+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -88,11 +79,9 @@
                 hreflang="zh"
                 href="/zh/concept/ozonemanager.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/interface/ozonefs.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-03T01:26:42+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -103,10 +92,9 @@
                 hreflang="zh"
                 href="/zh/interface/ozonefs.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/shell/volumecommands.html</loc>
+    <lastmod>2020-01-24T00:40:11+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -117,11 +105,9 @@
                 hreflang="zh"
                 href="/zh/shell/volumecommands.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/concept/hdds.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-12T08:08:28+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -132,10 +118,9 @@
                 hreflang="zh"
                 href="/zh/concept/hdds.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/interface/s3.html</loc>
+    <lastmod>2020-02-03T01:28:25+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -146,10 +131,9 @@
                 hreflang="zh"
                 href="/zh/interface/s3.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/shell/bucketcommands.html</loc>
+    <lastmod>2020-01-25T00:52:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -160,11 +144,9 @@
                 hreflang="zh"
                 href="/zh/shell/bucketcommands.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/concept/datanodes.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-12-16T07:31:13+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -175,10 +157,9 @@
                 hreflang="zh"
                 href="/zh/concept/datanodes.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/shell/keycommands.html</loc>
+    <lastmod>2020-01-25T00:54:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -189,10 +170,9 @@
                 hreflang="zh"
                 href="/zh/shell/keycommands.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/gdpr.html</loc>
+    <lastmod>2020-02-03T01:29:51+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -203,10 +183,9 @@
                 hreflang="zh"
                 href="/zh/gdpr.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/gdpr/gdpr-in-ozone.html</loc>
+    <lastmod>2020-02-07T08:53:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -217,11 +196,9 @@
                 hreflang="zh"
                 href="/zh/gdpr/gdpr-in-ozone.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/concept.html</loc>
-    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-04T03:49:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -232,10 +209,9 @@
                 hreflang="zh"
                 href="/zh/concept.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/startfromdockerhub.html</loc>
+    <lastmod>2020-01-17T06:54:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -246,10 +222,9 @@
                 hreflang="zh"
                 href="/zh/start/startfromdockerhub.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/onprem.html</loc>
+    <lastmod>2020-01-15T05:38:34+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -260,10 +235,9 @@
                 hreflang="zh"
                 href="/zh/start/onprem.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/minikube.html</loc>
+    <lastmod>2020-01-23T03:20:42+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -274,10 +248,9 @@
                 hreflang="zh"
                 href="/zh/start/minikube.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/kubernetes.html</loc>
+    <lastmod>2020-01-22T13:45:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -288,10 +261,9 @@
                 hreflang="zh"
                 href="/zh/start/kubernetes.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/runningviadocker.html</loc>
+    <lastmod>2020-01-23T03:22:52+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -302,10 +274,9 @@
                 hreflang="zh"
                 href="/zh/start/runningviadocker.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/start/fromsource.html</loc>
+    <lastmod>2020-01-17T06:50:39+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -316,11 +287,9 @@
                 hreflang="zh"
                 href="/zh/start/fromsource.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/interface.html</loc>
-    <lastmod>2017-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-25T00:49:53+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -331,10 +300,9 @@
                 hreflang="zh"
                 href="/zh/interface.html"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/zh/shell.html</loc>
+    <lastmod>2020-01-23T06:01:40+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -346,5 +314,4 @@
                 href="/zh/shell.html"
                 />
   </url>
-  
 </urlset>

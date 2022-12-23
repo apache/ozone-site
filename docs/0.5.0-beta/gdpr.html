@@ -17,6 +17,28 @@
     
     <link href="./css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -225,7 +247,6 @@
     -->
 
 
-
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h3 class="display-4">GDPR compliance in Ozone </h3>
@@ -237,12 +258,10 @@
         </p>
     </div>
 </div>
-
 <div class="alert alert-warning" role="alert">
 If you would like to understand Ozone's GDPR framework at a greater
 depth, please take a look at <a href="https://issues.apache.org/jira/secure/attachment/12978992/Ozone%20GDPR%20Framework.pdf">Ozone GDPR Framework.</a>
 </div>
-
 <p>Once you create a GDPR compliant bucket, any key created in that bucket will
 automatically by GDPR compliant.</p>
 

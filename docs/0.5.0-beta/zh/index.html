@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta name="generator" content="Hugo 0.58.3" />
+	<meta name="generator" content="Hugo 0.108.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,28 @@
 
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
 
   </head>
 
@@ -154,9 +176,7 @@
     
 </div>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -172,22 +192,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <h1 id="apache-hadoop-ozone">Apache Hadoop Ozone</h1>
-
-<figure>
-    <img src="../ozone-usage.png" width="60%"/> 
+<figure><img src="../ozone-usage.png" width="60%"/>
 </figure>
-
 
 <p><em><em>Ozone 是 Hadoop 的分布式对象存储系统，具有易扩展和冗余存储的特点。<p>
 Ozone 不仅能存储数十亿个不同大小的对象，还支持在容器化环境（比如 Kubernetes）中运行。</em></em> <p></p>
-
 <p>Apache Spark、Hive 和 YARN 等应用无需任何修改即可使用 Ozone。Ozone 提供了 <a href="../zh/interface/javaapi.html">Java API</a>、<a href="../zh/interface/s3.html">S3 接口</a>和<a href="../zh/shell.html">命令行接口</a>，极大地方便了 Ozone
- 在不同应用场景下的的使用。</p>
-
+在不同应用场景下的的使用。</p>
 <p>Ozone 的管理由卷、桶和键组成：</p>
-
 <ul>
 <li>卷的概念和用户账号类似，只有管理员可以创建和删除卷。</li>
 <li>桶的概念和目录类似，用户可以在自己的卷下创建任意数量的桶，每个桶可以包含任意数量的键，但是不可以包含其它的桶。</li>

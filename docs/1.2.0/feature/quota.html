@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -411,42 +433,42 @@
 <h3 id="storage-space-level-quota">Storage Space level quota</h3>
 <p>Storage space level quotas allow the use of units such as KB (k), MB (m), GB (g), TB (t), PB (p), etc. Represents how much storage Spaces will be used.</p>
 <h4 id="volume-storage-space-level-quota">Volume Storage Space level quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --space-quota 5MB /volume1
-</code></pre></div><p>This means setting the storage space of Volume1 to 5MB</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --space-quota 10GB /volume1
-</code></pre></div><p>This behavior changes the quota of Volume1 to 10GB.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --space-quota 5MB /volume1
+</span></span></code></pre></div><p>This means setting the storage space of Volume1 to 5MB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --space-quota 10GB /volume1
+</span></span></code></pre></div><p>This behavior changes the quota of Volume1 to 10GB.</p>
 <h4 id="bucket-storage-space-level-quota">Bucket Storage Space level quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
-</code></pre></div><p>That means bucket1 allows us to use 5MB of storage.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
-</code></pre></div><p>This behavior changes the quota for Bucket1 to 10GB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
+</span></span></code></pre></div><p>That means bucket1 allows us to use 5MB of storage.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
+</span></span></code></pre></div><p>This behavior changes the quota for Bucket1 to 10GB</p>
 <p>Total bucket quota should not be greater than its Volume quota. If we have a 10MB Volume, The sum of the sizes of all buckets under this volume cannot exceed 10MB, otherwise the bucket set quota fails.</p>
 <h4 id="clear-the-quota-for-volume-and-bucket">Clear the quota for volume and bucket</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --space-quota /volume1
-bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
-</code></pre></div><h4 id="check-quota-and-usedbytes-for-volume-and-bucket">Check quota and usedBytes for volume and bucket</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>We can get the quota value and usedBytes in the info of volume and bucket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --space-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="check-quota-and-usedbytes-for-volume-and-bucket">Check quota and usedBytes for volume and bucket</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>We can get the quota value and usedBytes in the info of volume and bucket.</p>
 <h3 id="namespace-quota">Namespace quota</h3>
 <p>Namespace quota is a number that represents how many unique names can be used. This number cannot be greater than LONG.MAX_VALUE in Java.</p>
 <h4 id="volume-namespace-quota">Volume Namespace quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
-</code></pre></div><p>This means setting the namespace quota of Volume1 to 100.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
-</code></pre></div><p>This behavior changes the namespace quota of Volume1 to 1000.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
+</span></span></code></pre></div><p>This means setting the namespace quota of Volume1 to 100.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
+</span></span></code></pre></div><p>This behavior changes the namespace quota of Volume1 to 1000.</p>
 <h4 id="bucket-namespace-quota">Bucket Namespace quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
-</code></pre></div><p>That means bucket1 allows us to use 100 of namespace.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
-</code></pre></div><p>This behavior changes the quota for Bucket1 to 1000.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
+</span></span></code></pre></div><p>That means bucket1 allows us to use 100 of namespace.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
+</span></span></code></pre></div><p>This behavior changes the quota for Bucket1 to 1000.</p>
 <h4 id="clear-the-quota-for-volume-and-bucket-1">Clear the quota for volume and bucket</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --namespace-quota /volume1
-bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
-</code></pre></div><h4 id="check-quota-and-usednamespace-for-volume-and-bucket">Check quota and usedNamespace for volume and bucket</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>We can get the quota value and usedNamespace in the info of volume and bucket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --namespace-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="check-quota-and-usednamespace-for-volume-and-bucket">Check quota and usedNamespace for volume and bucket</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>We can get the quota value and usedNamespace in the info of volume and bucket.</p>
 
 
           
@@ -466,7 +488,7 @@ bin/ozone sh bucket info /volume1/bucket1
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: December 29, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1e84d1789256d58d99a94e11ed86461bfd83e701">1e84d1789</a>
+      Version: 1.2.0, Last Modified: December 29, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1e84d1789256d58d99a94e11ed86461bfd83e701">1e84d17892</a>
     </span>
   </div>
 </footer>

@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -364,15 +386,15 @@ result varchar(7),
 exception text,
 UNIQUE(datetime,level,logger,user,ip,op,params,result))</p>
 <p>用法：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;数据库文件的路径&gt; <span style="color:#f92672">[</span>命令<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>参数<span style="color:#f92672">]</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;数据库文件的路径&gt; <span style="color:#f92672">[</span>命令<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>参数<span style="color:#f92672">]</span></span></span></code></pre></div></p>
 <p>将审计日志加载到数据库：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;数据库文件的路径&gt; load &lt;审计日志的路径&gt;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;数据库文件的路径&gt; load &lt;审计日志的路径&gt;</span></span></code></pre></div>
 Load 命令会创建如上所述的审计表。</p>
 <p>运行一个自定义的只读查询：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;数据库文件的路径&gt; query &lt;双引号括起来的 <span style="color:#66d9ef">select</span> 查询&gt;</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;数据库文件的路径&gt; query &lt;双引号括起来的 <span style="color:#66d9ef">select</span> 查询&gt;</span></span></code></pre></div></p>
 <p>审计解析起自带了一些模板（最常用的查询）</p>
 <p>运行模板查询：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone auditparser &lt;数据库文件的路径 template &lt;模板名称&gt;</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone auditparser &lt;数据库文件的路径 template &lt;模板名称&gt;</span></span></code></pre></div></p>
 <p>Ozone 提供了以下模板：</p>
 <table>
 <thead>
@@ -396,7 +418,7 @@ Load 命令会创建如上所述的审计表。</p>
 <tr>
 <td>top5activetimebyseconds</td>
 <td>Top 5 active times, grouped by seconds</td>
-<td>select substr(datetime,1,charindex(',',datetime)-1) as dt,count(*) as thecount from audit group by dt order by thecount DESC limit 5</td>
+<td>select substr(datetime,1,charindex(&rsquo;,&rsquo;,datetime)-1) as dt,count(*) as thecount from audit group by dt order by thecount DESC limit 5</td>
 </tr>
 </tbody>
 </table>
@@ -419,7 +441,7 @@ Load 命令会创建如上所述的审计表。</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: April 16, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5936594b7a25134aeb880eed941256af5563ef03">5936594b7</a>
+      Version: 1.2.1, Last Modified: April 16, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5936594b7a25134aeb880eed941256af5563ef03">5936594b7a</a>
     </span>
   </div>
 </footer>

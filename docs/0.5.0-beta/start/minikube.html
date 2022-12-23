@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -217,9 +239,7 @@
           <div class="col-md-9">
             <h1>Minikube &amp; Ozone</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -236,7 +256,6 @@
   limitations under the License.
 -->
 
-
 <div class="panel panel-default">
     <div class="panel-heading">Requirements</div>
     <div class="panel-body">
@@ -244,49 +263,37 @@
 <li>Working minikube setup</li>
 <li>kubectl</li>
 </ul>
+
     </div>
 </div>
 
-
 <p><code>kubernetes/examples</code> folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use <code>apache/ozone</code> image from the dockerhub.</p>
-
 <p>To deploy it to minikube use the minikube configuration set:</p>
-
-<pre><code>cd kubernetes/examples/minikube
+<pre tabindex="0"><code>cd kubernetes/examples/minikube
 kubectl apply -f .
-</code></pre>
-
-<p>And you can check the results with</p>
-
-<pre><code>kubectl get pod
-</code></pre>
-
-<p>Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</p>
-
+</code></pre><p>And you can check the results with</p>
+<pre tabindex="0"><code>kubectl get pod
+</code></pre><p>Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</p>
 <ul>
 <li>You can have multiple datanodes even if you have only one host (in a real production cluster usually you need one datanode per physical host)</li>
 <li>The services are published with node port</li>
 </ul>
-
 <h2 id="access-the-services">Access the services</h2>
-
 <p>Now you can access any of the services. For each web endpoint an additional NodeType service is defined in the minikube k8s resource set. NodeType services are available via a generated port of any of the host nodes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get svc
-NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
-datanode     ClusterIP   None            &lt;none&gt;        &lt;none&gt;           27s
-kubernetes   ClusterIP   <span style="color:#ae81ff">10</span>.96.0.1       &lt;none&gt;        <span style="color:#ae81ff">443</span>/TCP          118m
-om           ClusterIP   None            &lt;none&gt;        <span style="color:#ae81ff">9874</span>/TCP         27s
-om-public    NodePort    <span style="color:#ae81ff">10</span>.108.48.148   &lt;none&gt;        <span style="color:#ae81ff">9874</span>:32649/TCP   27s
-s3g          ClusterIP   None            &lt;none&gt;        <span style="color:#ae81ff">9878</span>/TCP         27s
-s3g-public   NodePort    <span style="color:#ae81ff">10</span>.97.133.137   &lt;none&gt;        <span style="color:#ae81ff">9878</span>:31880/TCP   27s
-scm          ClusterIP   None            &lt;none&gt;        <span style="color:#ae81ff">9876</span>/TCP         27s
-scm-public   NodePort    <span style="color:#ae81ff">10</span>.105.231.28   &lt;none&gt;        <span style="color:#ae81ff">9876</span>:32171/TCP   27s</code></pre></div>
-<p>Minikube contains a convenience command to access any of the NodePort services:</p>
-
-<pre><code>minikube service s3g-public
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get svc
+</span></span><span style="display:flex;"><span>NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+</span></span><span style="display:flex;"><span>datanode     ClusterIP   None            &lt;none&gt;        &lt;none&gt;           27s
+</span></span><span style="display:flex;"><span>kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP          118m
+</span></span><span style="display:flex;"><span>om           ClusterIP   None            &lt;none&gt;        9874/TCP         27s
+</span></span><span style="display:flex;"><span>om-public    NodePort    10.108.48.148   &lt;none&gt;        9874:32649/TCP   27s
+</span></span><span style="display:flex;"><span>s3g          ClusterIP   None            &lt;none&gt;        9878/TCP         27s
+</span></span><span style="display:flex;"><span>s3g-public   NodePort    10.97.133.137   &lt;none&gt;        9878:31880/TCP   27s
+</span></span><span style="display:flex;"><span>scm          ClusterIP   None            &lt;none&gt;        9876/TCP         27s
+</span></span><span style="display:flex;"><span>scm-public   NodePort    10.105.231.28   &lt;none&gt;        9876:32171/TCP   27s
+</span></span></code></pre></div><p>Minikube contains a convenience command to access any of the NodePort services:</p>
+<pre tabindex="0"><code>minikube service s3g-public
 Opening kubernetes service default/s3g-public in default browser...
 </code></pre>
-
 
           
           <a class="btn  btn-success btn-lg" href="../start/kubernetes.html">Next >></a>

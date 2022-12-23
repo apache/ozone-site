@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -217,9 +239,7 @@
           <div class="col-md-9">
             <h1>Ozone File System</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -235,113 +255,75 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>The Hadoop compatible file system interface allows storage backends like Ozone
 to be easily integrated into Hadoop eco-system.  Ozone file system is an
 Hadoop compatible file system.</p>
-
 <h2 id="setting-up-the-ozone-file-system">Setting up the Ozone file system</h2>
-
 <p>To create an ozone file system, we have to choose a bucket where the file system would live. This bucket will be used as the backend store for OzoneFileSystem. All the files and directories will be stored as keys in this bucket.</p>
-
 <p>Please run the following commands to create a volume and bucket, if you don&rsquo;t have them already.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /volume
-ozone sh bucket create /volume/bucket</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /volume
+</span></span><span style="display:flex;"><span>ozone sh bucket create /volume/bucket</span></span></code></pre></div>
 <p>Once this is created, please make sure that bucket exists via the <em>list volume</em> or <em>list bucket</em> commands.</p>
-
 <p>Please add the following entry to the core-site.xml.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneFileSystem<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>o3fs://bucket.volume<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>This will make this bucket to be the default file system for HDFS dfs commands and register the o3fs file system type.</p>
-
 <p>You also need to add the ozone-filesystem.jar file to the classpath:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/hadoop-ozone-filesystem-lib-current*.jar:$HADOOP_CLASSPATH</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export HADOOP_CLASSPATH<span style="color:#f92672">=</span>/opt/ozone/share/ozonefs/lib/hadoop-ozone-filesystem-lib-current*.jar:$HADOOP_CLASSPATH</span></span></code></pre></div>
 <p>Once the default Filesystem has been setup, users can run commands like ls, put, mkdir, etc.
 For example,</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls /</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls /</span></span></code></pre></div>
 <p>or</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -mkdir /users</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -mkdir /users</span></span></code></pre></div>
 <p>Or put command etc. In other words, all programs like Hive, Spark, and Distcp will work against this file system.
 Please note that any keys created/deleted in the bucket using methods apart from OzoneFileSystem will show up as directories and files in the Ozone File System.</p>
-
 <p>Note: Bucket and volume names are not allowed to have a period in them.
 Moreover, the filesystem URI can take a fully qualified form with the OM host and an optional port as a part of the path following the volume name.
 For example, you can specify both host and port:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:5678/key</span></span></code></pre></div>
 <p>When the port number is not specified, it will be retrieved from config key <code>ozone.om.address</code>
 if defined; or it will fall back to the default port <code>9862</code>.
 For example, we have <code>ozone.om.address</code> configured as following in <code>ozone-site.xml</code>:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
-    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
-  <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>  <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;value&gt;</span>0.0.0.0:6789<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>When we run command:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com/key</span></span></code></pre></div>
 <p>The above command is essentially equivalent to:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -ls o3fs://bucket.volume.om-host.example.com:6789/key</span></span></code></pre></div>
 <p>Note: Only port number from the config is used in this case,
 whereas the host name in the config <code>ozone.om.address</code> is ignored.</p>
-
 <h2 id="supporting-older-hadoop-version-legacy-jar-basicozonefilesystem">Supporting older Hadoop version (Legacy jar, BasicOzoneFilesystem)</h2>
-
 <p>There are two ozonefs files, both of them include all the dependencies:</p>
-
 <ul>
 <li>share/ozone/lib/hadoop-ozone-filesystem-lib-current-VERSION.jar</li>
 <li>share/ozone/lib/hadoop-ozone-filesystem-lib-legacy-VERSION.jar</li>
 </ul>
-
 <p>The first one contains all the required dependency to use ozonefs with a
- compatible hadoop version (hadoop 3.2).</p>
-
+compatible hadoop version (hadoop 3.2).</p>
 <p>The second one contains all the dependency in an internal, separated directory,
- and a special class loader is used to load all the classes from the location.</p>
-
+and a special class loader is used to load all the classes from the location.</p>
 <p>With this method the hadoop-ozone-filesystem-lib-legacy.jar can be used from
- any older hadoop version (eg. hadoop 3.1, hadoop 2.7 or spark+hadoop 2.7)</p>
-
+any older hadoop version (eg. hadoop 3.1, hadoop 2.7 or spark+hadoop 2.7)</p>
 <p>Similar to the dependency jar, there are two OzoneFileSystem implementation.</p>
-
 <p>For hadoop 3.0 and newer, you can use <code>org.apache.hadoop.fs.ozone.OzoneFileSystem</code>
- which is a full implementation of the Hadoop compatible File System API.</p>
-
+which is a full implementation of the Hadoop compatible File System API.</p>
 <p>For Hadoop 2.x you should use the Basic version: <code>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</code>.</p>
-
 <p>This is the same implementation but doesn&rsquo;t include the features/dependencies which are added with
- Hadoop 3.0. (eg. FS statistics, encryption zones).</p>
-
+Hadoop 3.0. (eg. FS statistics, encryption zones).</p>
 <h3 id="summary">Summary</h3>
-
 <p>The following table summarize which jar files and implementation should be used:</p>
-
 <table>
 <thead>
 <tr>
@@ -350,36 +332,39 @@ whereas the host name in the config <code>ozone.om.address</code> is ignored.</p
 <th>OzoneFileSystem implementation</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>3.2</td>
 <td>filesystem-lib-current</td>
 <td>org.apache.hadoop.fs.ozone.OzoneFileSystem</td>
 </tr>
-
 <tr>
 <td>3.1</td>
 <td>filesystem-lib-legacy</td>
 <td>org.apache.hadoop.fs.ozone.OzoneFileSystem</td>
 </tr>
-
 <tr>
 <td>2.9</td>
 <td>filesystem-lib-legacy</td>
 <td>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</td>
 </tr>
-
 <tr>
 <td>2.7</td>
 <td>filesystem-lib-legacy</td>
 <td>org.apache.hadoop.fs.ozone.BasicOzoneFileSystem</td>
 </tr>
+<tr>
+<td>With this method the hadoop-ozone-filesystem-lib-legacy.jar can be used from</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>any older hadoop version (eg. hadoop 2.7 or spark+hadoop 2.7)</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-
-<p>With this method the hadoop-ozone-filesystem-lib-legacy.jar can be used from
- any older hadoop version (eg. hadoop 2.7 or spark+hadoop 2.7)</p>
 
 
           

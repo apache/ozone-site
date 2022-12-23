@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -444,7 +466,7 @@
 <ol>
 <li>
 <p>If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. If OM HA is not being used, this step can be skipped.</p>
-<pre><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
+<pre tabindex="0"><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
 </code></pre><p>The <code>prepare</code> command will block the Ozone Managers from receiving all write requests. See <a href="../design/omprepare.html">Ozone Manager Prepare For Upgrade</a> for more information</p>
 </li>
 <li>
@@ -458,12 +480,12 @@
 <ol>
 <li>
 <p>Start the SCM and datanodes as usual:</p>
-<pre><code>ozone --daemon start scm
-</code></pre><pre><code>ozone --daemon start datanode
+<pre tabindex="0"><code>ozone --daemon start scm
+</code></pre><pre tabindex="0"><code>ozone --daemon start datanode
 </code></pre></li>
 <li>
 <p>Start the Ozone Manager using the <code>--upgrade</code> flag to take it out of prepare mode.</p>
-<pre><code>ozone --daemon start om --upgrade
+<pre tabindex="0"><code>ozone --daemon start om --upgrade
 </code></pre><ul>
 <li>
 <p>There also exists a <code>--downgrade</code> flag which is an alias of <code>--upgrade</code>. The name used does not matter.</p>
@@ -481,12 +503,12 @@
 <ol start="5">
 <li>
 <p>Finalize SCM</p>
-<pre><code>ozone admin scm finalizeupgrade
+<pre tabindex="0"><code>ozone admin scm finalizeupgrade
 </code></pre><p>At this point, SCM will tell all of the datanodes to finalize. Once SCM has finalized enough datanodes to form a write pipeline, it will return that finalization was successful. The remaining pre-finalized datanodes will be in a read-only state until they indicate to SCM that they have finalized. Write requests will be directed to finalized datanodes only.</p>
 </li>
 <li>
 <p>Finalize OM</p>
-<pre><code>ozone admin om finalizeupgrade -id=&lt;om-service-id&gt;
+<pre tabindex="0"><code>ozone admin om finalizeupgrade -id=&lt;om-service-id&gt;
 </code></pre></li>
 </ol>
 <p>At this point, the cluster is finalized and the upgrade is complete.</p>
@@ -526,7 +548,7 @@
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: October 21, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/83284d0e690731b2088c9d2e203f1ecc3b12305b">83284d0e6</a>
+      Version: 1.3.0, Last Modified: October 21, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/83284d0e690731b2088c9d2e203f1ecc3b12305b">83284d0e69</a>
     </span>
   </div>
 </footer>

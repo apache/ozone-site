@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -377,15 +399,15 @@ to create the encryption key and enable encrypted buckets.</p>
 <li>Create a bucket encryption key with hadoop key CLI, which is similar to
 how you would use HDFS encryption zones.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop key create encKey
-</code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop key create encKey
+</span></span></code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
 Once the key is created, you can tell Ozone to use that key when you are
 reading and writing data into a bucket.</p>
 <ul>
 <li>Assign the encryption key to a bucket.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k encKey /vol/encryptedBucket
-</code></pre></div><p>After this command, all data written to the <em>encryptedBucket</em> will be encrypted
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k encKey /vol/encryptedBucket
+</span></span></code></pre></div><p>After this command, all data written to the <em>encryptedBucket</em> will be encrypted
 via the encKey and while reading the clients will talk to Key Management
 Server and read the key and decrypt it. In other words, the data stored
 inside Ozone is always encrypted. The fact that data is encrypted at rest

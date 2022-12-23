@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -406,22 +428,22 @@ tested with the <code>spark-2.4.6-bin-hadoop2.7</code> distribution.</p>
 <h3 id="create-the-base-spark-driverexecutor-image">Create the base Spark driver/executor image</h3>
 <p>First of all create a docker image with the Spark image creator.
 Execute the following from the Spark distribution</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/docker-image-tool.sh -r myrepo -t 2.4.6 build
-</code></pre></div><p><em>Note</em>: if you use Minikube add the <code>-m</code> flag to use the docker daemon of the Minikube image:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/docker-image-tool.sh -m -r myrepo -t 2.4.6 build
-</code></pre></div><p><code>./bin/docker-image-tool.sh</code> is an official Spark tool to create container images and this step will create multiple Spark container images with the name <em>myrepo/spark</em>. The first container will be used as a base container in the following steps.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/docker-image-tool.sh -r myrepo -t 2.4.6 build
+</span></span></code></pre></div><p><em>Note</em>: if you use Minikube add the <code>-m</code> flag to use the docker daemon of the Minikube image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/docker-image-tool.sh -m -r myrepo -t 2.4.6 build
+</span></span></code></pre></div><p><code>./bin/docker-image-tool.sh</code> is an official Spark tool to create container images and this step will create multiple Spark container images with the name <em>myrepo/spark</em>. The first container will be used as a base container in the following steps.</p>
 <h3 id="customize-the-docker-image">Customize the docker image</h3>
 <p>Create a new directory for customizing the created docker image.</p>
 <p>Copy the <code>ozone-site.xml</code> from the cluster:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl cp om-0:/opt/hadoop/etc/hadoop/ozone-site.xml .
-</code></pre></div><p>And create a custom <code>core-site.xml</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;configuration&gt;</span>
-    <span style="color:#f92672">&lt;property&gt;</span>
-        <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-        <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
-     <span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;/configuration&gt;</span>
-</code></pre></div><p>Copy the <code>ozonefs.jar</code> file from an ozone distribution (<strong>use the hadoop2 version!</strong>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl cp om-0:/opt/hadoop/etc/hadoop/ozone-site.xml .
+</span></span></code></pre></div><p>And create a custom <code>core-site.xml</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>Copy the <code>ozonefs.jar</code> file from an ozone distribution (<strong>use the hadoop2 version!</strong>)</p>
 <pre tabindex="0"><code>kubectl cp om-0:/opt/hadoop/share/ozone/lib/ozone-filesystem-hadoop2-VERSION.jar ozone-filesystem-hadoop2.jar
 </code></pre><p>Create a new Dockerfile and build the image:</p>
 <pre tabindex="0"><code>FROM myrepo/spark:2.4.6
@@ -430,18 +452,18 @@ ADD ozone-site.xml /opt/hadoop/conf/ozone-site.xml
 ENV HADOOP_CONF_DIR=/opt/hadoop/conf
 ENV SPARK_EXTRA_CLASSPATH=/opt/hadoop/conf
 ADD ozone-filesystem-hadoop2.jar /opt/ozone-filesystem-hadoop2.jar
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t myrepo/spark-ozone
-</code></pre></div><p>For remote Kubernetes cluster you may need to push it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker push myrepo/spark-ozone
-</code></pre></div><h2 id="create-a-bucket">Create a bucket</h2>
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t myrepo/spark-ozone
+</span></span></code></pre></div><p>For remote Kubernetes cluster you may need to push it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker push myrepo/spark-ozone
+</span></span></code></pre></div><h2 id="create-a-bucket">Create a bucket</h2>
 <p>Download any text file and put it to the <code>/tmp/alice.txt</code> first.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward s3g-0 9878:9878
-aws s3api --endpoint http://localhost:9878 create-bucket --bucket<span style="color:#f92672">=</span>test
-aws s3api --endpoint http://localhost:9878 put-object --bucket test --key alice.txt --body /tmp/alice.txt
-</code></pre></div><h2 id="create-service-account-to-use">Create service account to use</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create serviceaccount spark -n yournamespace
-kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f92672">=</span>edit --serviceaccount<span style="color:#f92672">=</span>yournamespace:spark --namespace<span style="color:#f92672">=</span>yournamespace
-</code></pre></div><h2 id="execute-the-job">Execute the job</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward s3g-0 9878:9878
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket<span style="color:#f92672">=</span>test
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 put-object --bucket test --key alice.txt --body /tmp/alice.txt
+</span></span></code></pre></div><h2 id="create-service-account-to-use">Create service account to use</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create serviceaccount spark -n yournamespace
+</span></span><span style="display:flex;"><span>kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f92672">=</span>edit --serviceaccount<span style="color:#f92672">=</span>yournamespace:spark --namespace<span style="color:#f92672">=</span>yournamespace
+</span></span></code></pre></div><h2 id="execute-the-job">Execute the job</h2>
 <p>Execute the following spark-submit command, but change at least the following values:</p>
 <ul>
 <li>the Kubernetes master url (you can check your <em>~/.kube/config</em> to find the actual value)</li>
@@ -449,28 +471,28 @@ kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f9
 <li>serviceAccountName (you can use the <em>spark</em> value if you followed the previous steps)</li>
 <li>container.image (in this example this is <em>myrepo/spark-ozone</em>. This is pushed to the registry in the previous steps)</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/spark-submit <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --master k8s://https://kubernetes:6443 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --deploy-mode cluster <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --name spark-word-count <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --class org.apache.spark.examples.JavaWordCount <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.executor.instances<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.namespace<span style="color:#f92672">=</span>yournamespace <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.authenticate.driver.serviceAccountName<span style="color:#f92672">=</span>spark <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image<span style="color:#f92672">=</span>myrepo/spark-ozone <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image.pullPolicy<span style="color:#f92672">=</span>Always <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --jars /opt/ozone-filesystem-hadoop2.jar <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    o3fs://test.s3v.ozone-om-0.ozone-om:9862/alice.txt
-</code></pre></div><p>Check the available <code>spark-word-count-...</code> pods with <code>kubectl get pod</code></p>
-<p>Check the output of the calculation with<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bin/spark-submit <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --master k8s://https://kubernetes:6443 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --deploy-mode cluster <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --name spark-word-count <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --class org.apache.spark.examples.JavaWordCount <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.executor.instances<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.namespace<span style="color:#f92672">=</span>yournamespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.authenticate.driver.serviceAccountName<span style="color:#f92672">=</span>spark <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image<span style="color:#f92672">=</span>myrepo/spark-ozone <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image.pullPolicy<span style="color:#f92672">=</span>Always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --jars /opt/ozone-filesystem-hadoop2.jar <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    o3fs://test.s3v.ozone-om-0.ozone-om:9862/alice.txt
+</span></span></code></pre></div><p>Check the available <code>spark-word-count-...</code> pods with <code>kubectl get pod</code></p>
+<p>Check the output of the calculation with <br>
 <code>kubectl logs spark-word-count-1549973913699-driver</code></p>
 <p>You should see the output of the wordcount job. For example:</p>
 <pre tabindex="0"><code>...
 name: 8
 William: 3
-this,': 1
-SOUP!': 1
+this,&#39;: 1
+SOUP!&#39;: 1
 `Silence: 1
 `Mine: 1
 ordered.: 1
@@ -495,7 +517,7 @@ candle: 2
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: May 31, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fa4ddbccf361e4df1f0421fd8193f5e22cd7c9c6">fa4ddbccf</a>
+      Version: 1.2.0, Last Modified: May 31, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fa4ddbccf361e4df1f0421fd8193f5e22cd7c9c6">fa4ddbccf3</a>
     </span>
   </div>
 </footer>

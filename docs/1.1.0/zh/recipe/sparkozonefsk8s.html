@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -351,23 +373,23 @@
 <h3 id="创建-spark-driverexecutor-基础镜像">创建 Spark driver/executor 基础镜像</h3>
 <p>首先使用 Spark 的镜像创建工具创建一个镜像。
 在 Spark 发行包中运行以下命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/docker-image-tool.sh -r myrepo -t 2.4.6 build
-</code></pre></div><p><em>注意</em>: 如果你使用 Minikube，需要加上 <code>-m</code> 参数来使用 Minikube 镜像的 docker 进程。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./bin/docker-image-tool.sh -m -r myrepo -t 2.4.6 build
-</code></pre></div><p><code>./bin/docker-image-tool.sh</code> 是 Spark 用来创建镜像的官方工具，上面的步骤会创建多个名为 <em>myrepo/spark</em> 的 Spark 镜像，其中的第一个镜像用作接下来步骤的基础镜像。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/docker-image-tool.sh -r myrepo -t 2.4.6 build
+</span></span></code></pre></div><p><em>注意</em>: 如果你使用 Minikube，需要加上 <code>-m</code> 参数来使用 Minikube 镜像的 docker 进程。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bin/docker-image-tool.sh -m -r myrepo -t 2.4.6 build
+</span></span></code></pre></div><p><code>./bin/docker-image-tool.sh</code> 是 Spark 用来创建镜像的官方工具，上面的步骤会创建多个名为 <em>myrepo/spark</em> 的 Spark 镜像，其中的第一个镜像用作接下来步骤的基础镜像。</p>
 <h3 id="定制镜像">定制镜像</h3>
 <p>创建一个用于定制镜像的目录。</p>
 <p>从集群中拷贝 <code>ozone-site.xml</code>：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl cp om-0:/opt/hadoop/etc/hadoop/ozone-site.xml .
-</code></pre></div><p>从 Ozone 目录中拷贝 <code>ozonefs.jar</code>（<strong>使用 hadoop2 版本！</strong>）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;configuration&gt;</span>
-    <span style="color:#f92672">&lt;property&gt;</span>
-        <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
-        <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
-     <span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;/configuration&gt;</span>
-</code></pre></div><p>kubectl cp om-0:/opt/hadoop/share/ozone/lib/hadoop-ozone-filesystem-hadoop2-VERSION.jar hadoop-ozone-filesystem-hadoop2.jar</p>
-<pre><code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl cp om-0:/opt/hadoop/etc/hadoop/ozone-site.xml .
+</span></span></code></pre></div><p>从 Ozone 目录中拷贝 <code>ozonefs.jar</code>（<strong>使用 hadoop2 版本！</strong>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;name&gt;</span>fs.AbstractFileSystem.o3fs.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzFs<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>kubectl cp om-0:/opt/hadoop/share/ozone/lib/hadoop-ozone-filesystem-hadoop2-VERSION.jar hadoop-ozone-filesystem-hadoop2.jar</p>
+<pre tabindex="0"><code>
 
 编写新的 Dockerfile 并构建镜像：
 </code></pre><p>FROM myrepo/spark:2.4.6
@@ -376,21 +398,21 @@ ADD ozone-site.xml /opt/hadoop/conf/ozone-site.xml
 ENV HADOOP_CONF_DIR=/opt/hadoop/conf
 ENV SPARK_EXTRA_CLASSPATH=/opt/hadoop/conf
 ADD hadoop-ozone-filesystem-hadoop2.jar /opt/hadoop-ozone-filesystem-hadoop2.jar</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```bash
 docker build -t myrepo/spark-ozone
 </code></pre><p>对于远程的 Kubernetes 集群，你可能需要推送镜像：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker push myrepo/spark-ozone
-</code></pre></div><h2 id="创建桶并获取-ozonefs-路径">创建桶并获取 OzoneFS 路径</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker push myrepo/spark-ozone
+</span></span></code></pre></div><h2 id="创建桶并获取-ozonefs-路径">创建桶并获取 OzoneFS 路径</h2>
 <p>下载任意文本文件并保存为 <code>/tmp/alice.txt</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward s3g-0 9878:9878
-aws s3api --endpoint http://localhost:9878 create-bucket --bucket<span style="color:#f92672">=</span>test
-aws s3api --endpoint http://localhost:9878 put-object --bucket test --key alice.txt --body /tmp/alice.txt
-</code></pre></div><p>记下 Ozone 文件系统的 URI，在接下来的 spark-submit 命令中会用到它。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward s3g-0 9878:9878
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket<span style="color:#f92672">=</span>test
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 put-object --bucket test --key alice.txt --body /tmp/alice.txt
+</span></span></code></pre></div><p>记下 Ozone 文件系统的 URI，在接下来的 spark-submit 命令中会用到它。</p>
 <h2 id="创建服务账号">创建服务账号</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create serviceaccount spark -n yournamespace
-kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f92672">=</span>edit --serviceaccount<span style="color:#f92672">=</span>yournamespace:spark --namespace<span style="color:#f92672">=</span>yournamespace
-</code></pre></div><h2 id="运行任务">运行任务</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create serviceaccount spark -n yournamespace
+</span></span><span style="display:flex;"><span>kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f92672">=</span>edit --serviceaccount<span style="color:#f92672">=</span>yournamespace:spark --namespace<span style="color:#f92672">=</span>yournamespace
+</span></span></code></pre></div><h2 id="运行任务">运行任务</h2>
 <p>运行如下的 spark-submit 命令，但需要对下列的值进行修改：</p>
 <ul>
 <li>kubernetes master url（你可以查看 <em>~/.kube/config</em> 来获取实际值）</li>
@@ -399,27 +421,27 @@ kubectl create clusterrolebinding spark-role --clusterrole<span style="color:#f9
 <li>container.image (在本例中该值为 <em>myrepo/spark-ozone</em>，在上一步中这个镜像被推送至镜像仓库）</li>
 <li>输入文件的位置（o3fs://&hellip;），使用上面 <code>ozone s3 path &lt;桶名&gt;</code> 命令输出中的字符串即可）</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/spark-submit <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --master k8s://https://kubernetes:6443 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --deploy-mode cluster <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --name spark-word-count <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --class org.apache.spark.examples.JavaWordCount <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.executor.instances<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.namespace<span style="color:#f92672">=</span>yournamespace <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.authenticate.driver.serviceAccountName<span style="color:#f92672">=</span>spark <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image<span style="color:#f92672">=</span>myrepo/spark-ozone <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image.pullPolicy<span style="color:#f92672">=</span>Always <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --jars /opt/hadoop-ozone-filesystem-hadoop2.jar <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    o3fs://test.s3v.ozone-om-0.ozone-om:9862/alice.txt
-</code></pre></div><p>使用 <code>kubectl get pod</code> 命令查看可用的 <code>spark-word-count-...</code> pod。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bin/spark-submit <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --master k8s://https://kubernetes:6443 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --deploy-mode cluster <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --name spark-word-count <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --class org.apache.spark.examples.JavaWordCount <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.executor.instances<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.namespace<span style="color:#f92672">=</span>yournamespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.authenticate.driver.serviceAccountName<span style="color:#f92672">=</span>spark <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image<span style="color:#f92672">=</span>myrepo/spark-ozone <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --conf spark.kubernetes.container.image.pullPolicy<span style="color:#f92672">=</span>Always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --jars /opt/hadoop-ozone-filesystem-hadoop2.jar <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    o3fs://test.s3v.ozone-om-0.ozone-om:9862/alice.txt
+</span></span></code></pre></div><p>使用 <code>kubectl get pod</code> 命令查看可用的 <code>spark-word-count-...</code> pod。</p>
 <p>使用 <code>kubectl logs spark-word-count-1549973913699-driver</code> 命令查看计算结果。</p>
 <p>输出的结果类似如下：</p>
-<pre><code>...
+<pre tabindex="0"><code>...
 name: 8
 William: 3
-this,': 1
-SOUP!': 1
+this,&#39;: 1
+SOUP!&#39;: 1
 `Silence: 1
 `Mine: 1
 ordered.: 1
@@ -444,7 +466,7 @@ candle: 2
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: June 25, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fe015bdd7529db0c7088a9de09dc58907f531d91">fe015bdd7</a>
+      Version: 1.1.0, Last Modified: June 25, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fe015bdd7529db0c7088a9de09dc58907f531d91">fe015bdd75</a>
     </span>
   </div>
 </footer>

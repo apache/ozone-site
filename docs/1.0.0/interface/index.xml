@@ -5,12 +5,7 @@
     <link>/interface.html</link>
     <description>Recent content in Client Interfaces on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 14 Sep 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/interface/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/interface/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ofs (Hadoop compatible)</title>
       <link>/interface/ofs.html</link>
@@ -46,7 +41,7 @@
       <guid>/interface/cli.html</guid>
       <description>Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the Java API.
 There are some functionality which couldn&amp;rsquo;t be accessed without using ozone sh commands. For example:
- Creating volumes with quota Managing internal ACLs Creating buckets with encryption key  All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</description>
+Creating volumes with quota Managing internal ACLs Creating buckets with encryption key All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</description>
     </item>
     
     <item>

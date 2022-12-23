@@ -6,11 +6,7 @@
     <description>Recent content in 使用配方 on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/zh/recipe/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate><atom:link href="/zh/recipe/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 Prometheus 监控</title>
       <link>/zh/recipe/prometheus.html</link>

@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -356,16 +378,16 @@
 <p>S3 网关是提供兼容 S3 的 API 的独立组件，它应当和普通的 Ozone 组件分别启动。</p>
 <p>你可以使用发行包启动一个基于 docker 的集群，其中会包括 S3 网关。</p>
 <p>进入 <code>compose/ozone</code> 目录，启动服务：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</code></pre></div><p>你可以通过 <code>http://localhost:9878</code> 访问 S3 网关。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>你可以通过 <code>http://localhost:9878</code> 访问 S3 网关。</p>
 <h2 id="url-规范">URL 规范</h2>
 <p>Ozone S3 网关既支持虚拟主机风格的 URL 作为桶地址（形如：http://bucketname.host:9878），也支持多级路径风格的 URL 作为桶地址（形如 http://host:9878/bucketname）。</p>
 <p>默认使用多级路径风格，如果要使用虚拟主机风格的 URL，在 <code>ozone-site.xml</code> 中设置你的主域名：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.s3g.domain.name<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>s3g.internal<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><h2 id="桶浏览器">桶浏览器</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.s3g.domain.name<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>s3g.internal<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h2 id="桶浏览器">桶浏览器</h2>
 <p>在桶的 URL 中加上 <code>?browser=true</code>，就可以在浏览器中浏览桶。</p>
 <p>比如，<code>testbucket</code> 桶中的内容可以在浏览器中用 http://localhost:9878/testbucket?browser=true 来查看。</p>
 <h2 id="已实现的-rest-端点">已实现的 REST 端点</h2>
@@ -461,34 +483,34 @@
 <h2 id="安全">安全</h2>
 <p>如果不启用安全机制，你可以<em>使用</em><strong>任何</strong> AWS_ACCESS_KEY_ID 和 AWS_SECRET_ACCESS_KEY 来访问 Ozone 的 S3 服务。</p>
 <p>在启用了安全机制的情况下，你可以通过 <code>ozone s3 gesecret</code> 命令获取 key 和 secret（需要进行 Kerberos 认证）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM
-ozone s3 getsecret
-awsAccessKey<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
-awsSecret<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
-</code></pre></div><p>现在你可以使用 key 和 secret 来访问 S3 endpoint：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
-export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
-aws s3api --endpoint http://localhost:9878 create-bucket --bucket bucket1
-</code></pre></div><h2 id="公开任何卷">公开任何卷</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>ozone s3 getsecret
+</span></span><span style="display:flex;"><span>awsAccessKey<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>awsSecret<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
+</span></span></code></pre></div><p>现在你可以使用 key 和 secret 来访问 S3 endpoint：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket bucket1
+</span></span></code></pre></div><h2 id="公开任何卷">公开任何卷</h2>
 <p>Ozone 与 S3 相比，Ozone 在命名空间层次结构中多了一个元素：卷。默认情况下，可以使用 S3 接口访问 <code>/s3v</code> 卷的所有存储桶，但仅有 <code>/s3v</code> 卷的（Ozone）存储桶被公开。</p>
 <p>为了使 S3 接口上的任何其他桶可用，可以创建一个“符号链接”的桶:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create /s3v
-ozone sh volume create /vol1
-
-ozone sh bucket create /vol1/bucket1
-ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
-</code></pre></div><p>本例通过 S3 接口将 <code>/vol1/bucket1</code> Ozone 桶公开为 S3 兼容的 <code>common-bucket</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /s3v
+</span></span><span style="display:flex;"><span>ozone sh volume create /vol1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ozone sh bucket create /vol1/bucket1
+</span></span><span style="display:flex;"><span>ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
+</span></span></code></pre></div><p>本例通过 S3 接口将 <code>/vol1/bucket1</code> Ozone 桶公开为 S3 兼容的 <code>common-bucket</code>。</p>
 <p>(注:桶链接功能的实现细节可在<a href="../../design/volume-management.html">设计文档</a>中找到)</p>
 <h2 id="客户端">客户端</h2>
 <h3 id="aws-命令行接口">AWS 命令行接口</h3>
 <p>通过指定自定义的 &ndash;endpoint 选项，<code>aws</code> 命令行接口可以在 Ozone S3 上使用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3api --endpoint http://localhost:9878 create-bucket --bucket buckettest
-</code></pre></div><p>或者</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 ls --endpoint http://localhost:9878 s3://buckettest
-</code></pre></div><h3 id="s3-fuse-驱动goofys">S3 Fuse 驱动（goofys）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket buckettest
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 ls --endpoint http://localhost:9878 s3://buckettest
+</span></span></code></pre></div><h3 id="s3-fuse-驱动goofys">S3 Fuse 驱动（goofys）</h3>
 <p>Goofys 是一个 S3 FUSE 驱动，可以将 Ozone 的桶挂载到 POSIX 文件系统。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">goofys --endpoint http://localhost:9878 bucket1 /mount/bucket1
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>goofys --endpoint http://localhost:9878 bucket1 /mount/bucket1
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/interface/reconapi.html">Next >></a>
@@ -507,7 +529,7 @@ ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.1, Last Modified: January 15, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ee4c8f1259240d33d0fc45761a29821c569825a0">ee4c8f125</a>
+      Version: 1.2.1, Last Modified: January 15, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ee4c8f1259240d33d0fc45761a29821c569825a0">ee4c8f1259</a>
     </span>
   </div>
 </footer>

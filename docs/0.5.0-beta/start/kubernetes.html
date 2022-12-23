@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -234,7 +256,6 @@
   limitations under the License.
 -->
 
-
 <div class="panel panel-default">
     <div class="panel-heading">Requirements</div>
     <div class="panel-body">
@@ -242,33 +263,23 @@
 <li>Working kubernetes cluster (LoadBalancer, PersistentVolume are not required)</li>
 <li>kubectl</li>
 </ul>
+
     </div>
 </div>
 
-
 <p>As the <em>apache/ozone</em> docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host)
 Deploy to kubernetes</p>
-
 <p><code>kubernetes/examples</code> folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</p>
-
 <p>To deploy to a hosted cluster use the ozone subdirectory:</p>
-
-<pre><code>cd kubernetes/examples/ozone
+<pre tabindex="0"><code>cd kubernetes/examples/ozone
 kubectl apply -f .
-</code></pre>
-
-<p>And you can check the results with</p>
-
-<pre><code>kubectl get pod
+</code></pre><p>And you can check the results with</p>
+<pre tabindex="0"><code>kubectl get pod
 Access the services
-</code></pre>
-
-<p>Now you can access any of the services. By default the services are not published but you can access them with port-foward rules.</p>
-
-<pre><code>kubectl port-forward s3g-0 9878:9878
+</code></pre><p>Now you can access any of the services. By default the services are not published but you can access them with port-foward rules.</p>
+<pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 </code></pre>
-
 
           
           <a class="btn  btn-success btn-lg" href="../start/runningviadocker.html">Next >></a>

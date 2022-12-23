@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -169,9 +191,7 @@
           <div class="col-md-9">
             <h1>键命令</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -187,24 +207,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Ozone shell 提供以下键命令：</p>
-
 <ul>
-<li><a href="#下载">下载</a></li>
-<li><a href="#上传">上传</a></li>
-<li><a href="#删除">删除</a></li>
-<li><a href="#查看">查看</a></li>
-<li><a href="#列举">列举</a></li>
-<li><a href="#重命名">重命名</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BD">下载</a></li>
+<li><a href="#%E4%B8%8A%E4%BC%A0">上传</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4">删除</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B">查看</a></li>
+<li><a href="#%E5%88%97%E4%B8%BE">列举</a></li>
+<li><a href="#%E9%87%8D%E5%91%BD%E5%90%8D">重命名</a></li>
 </ul>
-
 <h3 id="下载">下载</h3>
-
 <p><code>key get</code> 命令从 Ozone 集群下载一个键到本地文件系统。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -212,30 +226,22 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
 <td>键名，格式为 <strong>/volume/bucket/key</strong></td>
 </tr>
-
 <tr>
 <td>FileName</td>
 <td>下载到本地后的文件名</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key get /hive/jan/sales.orc sales.orc</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key get /hive/jan/sales.orc sales.orc</span></span></code></pre></div>
 <p>从 <em>/hive/jan</em> 桶中下载 sales.orc 文件，写入到本地名为 sales.orc 的文件。</p>
-
 <h3 id="上传">上传</h3>
-
 <p><code>key put</code> 命令从本地文件系统上传一个文件到指定的桶。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -243,35 +249,26 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
 <td>键名，格式为 <strong>/volume/bucket/key</strong></td>
 </tr>
-
 <tr>
 <td>FileName</td>
 <td>待上传的本地文件</td>
 </tr>
-
 <tr>
 <td>-r, --replication</td>
 <td>可选，上传后的副本数，合法值为 ONE 或者 THREE，如果不设置，将采用集群配置中的默认值。</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key put /hive/jan/corrected-sales.orc sales.orc</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key put /hive/jan/corrected-sales.orc sales.orc</span></span></code></pre></div>
 <p>上述命令将 sales.orc 文件作为新键上传到 <em>/hive/jan/corrected-sales.orc</em> 。</p>
-
 <h3 id="删除">删除</h3>
-
 <p><code>key delete</code> 命令用来从桶中删除指定键。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -279,7 +276,6 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -287,17 +283,11 @@
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key delete /hive/jan/corrected-sales.orc</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key delete /hive/jan/corrected-sales.orc</span></span></code></pre></div>
 <p>上述命令会将 <em>/hive/jan/corrected-sales.orc</em> 这个键删除。</p>
-
 <h3 id="查看">查看</h3>
-
 <p><code>key info</code> 命令返回指定键的信息。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -305,7 +295,6 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
@@ -313,17 +302,11 @@
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key info /hive/jan/sales.orc</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key info /hive/jan/sales.orc</span></span></code></pre></div>
 <p>上述命令会打印出 <em>/hive/jan/sales.orc</em> 键的相关信息。</p>
-
 <h3 id="列举">列举</h3>
-
 <p>用户通过 <code>key list</code> 命令列出一个桶中的所有键。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -331,40 +314,30 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>-l, --length</td>
 <td>返回结果的最大数量，默认值为 100</td>
 </tr>
-
 <tr>
 <td>-p, --prefix</td>
 <td>可选，只有匹配指定前缀的键会被返回</td>
 </tr>
-
 <tr>
 <td>-s, --start</td>
 <td>从指定键开始列举</td>
 </tr>
-
 <tr>
 <td>Uri</td>
 <td>桶名</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key list /hive/jan</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key list /hive/jan</span></span></code></pre></div>
 <p>此命令会列出 <em>/hive/jan</em> 桶中的所有键。</p>
-
 <h3 id="重命名">重命名</h3>
-
 <p><code>key rename</code> 命令用来修改指定桶中的已有键的键名。</p>
-
-<p><strong><em>参数：</em></strong></p>
-
+<p><em><strong>参数：</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -372,27 +345,22 @@
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Uri</td>
 <td>桶名，格式为 <strong>/volume/bucket</strong></td>
 </tr>
-
 <tr>
 <td>FromKey</td>
 <td>旧的键名</td>
 </tr>
-
 <tr>
 <td>ToKey</td>
 <td>新的键名</td>
 </tr>
 </tbody>
 </table>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh key rename /hive/jan sales.orc new_name.orc</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key rename /hive/jan sales.orc new_name.orc</span></span></code></pre></div>
 <p>上述命令会将 <em>/hive/jan</em> 桶中的 <em>sales.orc</em> 重命名为 <em>new_name.orc</em> 。</p>
 
 

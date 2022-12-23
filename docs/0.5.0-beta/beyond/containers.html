@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -213,9 +235,7 @@
           <div class="col-md-9">
             <h1>Ozone Containers</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -231,164 +251,122 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Docker heavily is used at the ozone development with three principal use-cases:</p>
-
 <ul>
 <li><strong>dev</strong>:
-
 <ul>
 <li>We use docker to start local pseudo-clusters (docker provides unified environment, but no image creation is required)</li>
-</ul></li>
+</ul>
+</li>
 <li><strong>test</strong>:
-
 <ul>
 <li>We create docker images from the dev branches to test ozone in kubernetes and other container orchestrator system</li>
 <li>We provide <em>apache/ozone</em> images for each release to make it easier for evaluation of Ozone.
 These images are <strong>not</strong> created <strong>for production</strong> usage.</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <div class="alert alert-warning" role="alert">
 We <b>strongly</b> recommend that you create your own custom images when you
 deploy ozone into production using containers. Please treat all the standard
 shipped container images and k8s resources as examples and guides to help you
  customize your own deployment.
 </div>
-
 <ul>
 <li><strong>production</strong>:
-
 <ul>
 <li>We have documentation on how you can create your own docker image for your production cluster.</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>Let&rsquo;s check out each of the use-cases in more detail:</p>
-
 <h2 id="development">Development</h2>
-
 <p>Ozone artifact contains example docker-compose directories to make it easier to start Ozone cluster in your local machine.</p>
-
 <p>From distribution:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
-docker-compose up -d</code></pre></div>
-<p>After a local build:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd  hadoop-ozone/dist/target/ozone-*/compose
-docker-compose up -d</code></pre></div>
-<p>These environments are very important tools to start different type of Ozone clusters at any time.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd compose/ozone
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><p>After a local build:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd  hadoop-ozone/dist/target/ozone-*/compose
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><p>These environments are very important tools to start different type of Ozone clusters at any time.</p>
 <p>To be sure that the compose files are up-to-date, we also provide acceptance test suites which start
 the cluster and check the basic behaviour.</p>
-
 <p>The acceptance tests are part of the distribution, and you can find the test definitions in <code>smoketest</code> directory.</p>
-
 <p>You can start the tests from any compose directory:</p>
-
 <p>For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd compose/ozone
-./test.sh</code></pre></div>
-<h3 id="implementation-details">Implementation details</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd compose/ozone
+</span></span><span style="display:flex;"><span>./test.sh
+</span></span></code></pre></div><h3 id="implementation-details">Implementation details</h3>
 <p><code>compose</code> tests are based on the apache/hadoop-runner docker image. The image itself does not contain
 any Ozone jar file or binary just the helper scripts to start ozone.</p>
-
 <p>hadoop-runner provdes a fixed environment to run Ozone everywhere, but the ozone distribution itself
 is mounted from the including directory:</p>
-
 <p>(Example docker-compose fragment)</p>
-
-<pre><code> scm:
+<pre tabindex="0"><code> scm:
       image: apache/hadoop-runner:jdk11
       volumes:
          - ../..:/opt/hadoop
       ports:
          - 9876:9876
-
-</code></pre>
-
-<p>The containers are configured based on environment variables, but because the same environment
+</code></pre><p>The containers are configured based on environment variables, but because the same environment
 variables should be set for each containers we maintain the list of the environment variables
 in a separated file:</p>
-
-<pre><code> scm:
+<pre tabindex="0"><code> scm:
       image: apache/hadoop-runner:jdk11
       #...
       env_file:
           - ./docker-config
-</code></pre>
-
-<p>The docker-config file contains the list of the required environment variables:</p>
-
-<pre><code>OZONE-SITE.XML_ozone.om.address=om
+</code></pre><p>The docker-config file contains the list of the required environment variables:</p>
+<pre tabindex="0"><code>OZONE-SITE.XML_ozone.om.address=om
 OZONE-SITE.XML_ozone.om.http-address=om:9874
 OZONE-SITE.XML_ozone.scm.names=scm
 #...
-</code></pre>
-
-<p>As you can see we use naming convention. Based on the name of the environment variable, the
+</code></pre><p>As you can see we use naming convention. Based on the name of the environment variable, the
 appropriate hadoop config XML (<code>ozone-site.xml</code> in our case) will be generated by a
 <a href="https://github.com/apache/hadoop/tree/docker-hadoop-runner-latest/scripts">script</a> which is
 included in the <code>hadoop-runner</code> base image.</p>
-
 <p>The <a href="https://github.com/apache/hadoop/blob/docker-hadoop-runner-latest/scripts/starter.sh">entrypoint</a>
 of the <code>hadoop-runner</code> image contains a helper shell script which triggers this transformation and
 can do additional actions (eg. initialize scm/om storage, download required keytabs, etc.)
 based on environment variables.</p>
-
-<h2 id="test-staging">Test/Staging</h2>
-
+<h2 id="teststaging">Test/Staging</h2>
 <p>The <code>docker-compose</code> based approach is recommended only for local test, not for multi node cluster.
 To use containers on a multi-node cluster we need a Container Orchestrator like Kubernetes.</p>
-
 <p>Kubernetes example files are included in the <code>kubernetes</code> folder.</p>
-
 <p><em>Please note</em>: all the provided images are based the <code>hadoop-runner</code> image which contains all the
 required tool for testing in staging environments. For production we recommend to create your own,
 hardened image with your own base image.</p>
-
 <h3 id="test-the-release">Test the release</h3>
-
 <p>The release can be tested with deploying any of the example clusters:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd kubernetes/examples/ozone
-kubectl apply -f</code></pre></div>
-<p>Plese note that in this case the latest released container will be downloaded from the dockerhub.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd kubernetes/examples/ozone
+</span></span><span style="display:flex;"><span>kubectl apply -f
+</span></span></code></pre></div><p>Plese note that in this case the latest released container will be downloaded from the dockerhub.</p>
 <h3 id="test-the-development-build">Test the development build</h3>
-
 <p>To test a development build you can create your own image and upload it to your own docker registry:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean install -DskipTests -Pdocker-build,docker-push -Ddocker.image<span style="color:#f92672">=</span>myregistry:9000/name/ozone</code></pre></div>
-<p>The configured image will be used in all the generated kubernetes resources files (<code>image:</code> keys are adjusted during the build)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd kubernetes/examples/ozone
-kubectl apply -f</code></pre></div>
-<h2 id="production">Production</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean install -DskipTests -Pdocker-build,docker-push -Ddocker.image<span style="color:#f92672">=</span>myregistry:9000/name/ozone
+</span></span></code></pre></div><p>The configured image will be used in all the generated kubernetes resources files (<code>image:</code> keys are adjusted during the build)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd kubernetes/examples/ozone
+</span></span><span style="display:flex;"><span>kubectl apply -f
+</span></span></code></pre></div><h2 id="production">Production</h2>
 <div class="alert alert-danger" role="alert">
 We <b>strongly</b> recommend to use your own image in your production cluster
 and
 adjust base image, umask, security settings, user settings according to your own requirements.
 </div>
-
 <p>You can use the source of our development images as an example:</p>
-
 <ul>
 <li><a href="https://github.com/apache/hadoop/blob/docker-hadoop-runner-jdk11/Dockerfile">Base image</a></li>
 <li><a href="https://github.com/apache/hadoop/blob/trunk/hadoop-ozone/dist/src/main/docker/Dockerfile">Docker image</a></li>
 </ul>
-
 <p>Most of the elements are optional and just helper function but to use the provided example
- kubernetes resources you may need the scripts from
- <a href="https://github.com/apache/hadoop/tree/docker-hadoop-runner-jdk11/scripts">here</a></p>
-
+kubernetes resources you may need the scripts from
+<a href="https://github.com/apache/hadoop/tree/docker-hadoop-runner-jdk11/scripts">here</a></p>
 <ul>
 <li>The two python scripts convert environment variables to real hadoop XML config files</li>
 <li>The start.sh executes the python scripts (and other initialization) based on environment variables.</li>
 </ul>
-
 <h2 id="containers">Containers</h2>
-
 <p>Ozone related container images and source locations:</p>
-
 <table class="table table-dark">
   <thead>
     <tr>

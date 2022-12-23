@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -217,9 +239,7 @@
           <div class="col-md-9">
             <h1>Ozone On Premise Installation</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -235,55 +255,49 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>If you are feeling adventurous, you can setup ozone in a real cluster.
 Setting up a real cluster requires us to understand the components of Ozone.
 Ozone is designed to work concurrently with HDFS. However, Ozone is also
 capable of running independently. The components of ozone are the same in both approaches.</p>
-
 <h2 id="ozone-components">Ozone Components</h2>
-
 <ol>
 <li>Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</li>
 <li>Storage Container Manager - Acts as the block manager. Ozone Manager
 requests blocks from SCM, to which clients can write data.</li>
 <li>Datanodes - Ozone data node code runs inside the HDFS datanode or in the independent deployment case runs an ozone datanode daemon.</li>
 </ol>
-
 <h2 id="setting-up-an-ozone-only-cluster">Setting up an Ozone only cluster</h2>
-
 <ul>
-<li><p>Please untar the ozone-&lt;version&gt; to the directory where you are going
+<li>
+<p>Please untar the ozone-&lt;version&gt; to the directory where you are going
 to run Ozone from. We need Ozone jars on all machines in the cluster. So you
-need to do this on all machines in the cluster.</p></li>
-
-<li><p>Ozone relies on a configuration file called <code>ozone-site.xml</code>. To
+need to do this on all machines in the cluster.</p>
+</li>
+<li>
+<p>Ozone relies on a configuration file called <code>ozone-site.xml</code>. To
 generate a template that you can replace with proper values, please run the
 following command. This will generate a template called <code>ozone-site.xml</code> at
-the specified path (directory).</p></li>
+the specified path (directory).</p>
+</li>
 </ul>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone genconf &lt;path&gt;</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone genconf &lt;path&gt;</span></span></code></pre></div>
 <p>Let us look at the settings inside the generated file (ozone-site.xml) and
 how they control ozone. Once the right values are defined, this file
 needs to be copied to <code>ozone directory/etc/hadoop</code>.</p>
-
 <ul>
-<li><strong>ozone.metadata.dirs</strong> Allows Administrators to specify where the
+<li>
+<p><strong>ozone.metadata.dirs</strong> Allows Administrators to specify where the
 metadata must reside. Usually you pick your fastest disk (SSD if
 you have them on your nodes). OzoneManager, SCM and datanode will  write the
 metadata to this path. This is a required setting, if this is missing Ozone
-will fail to come up.</li>
-</ul>
-
+will fail to come up.</p>
 <p>Here is an example,</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
-      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
-      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
-
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>   <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <ul>
 <li><strong>ozone.scm.names</strong>  Storage container manager(SCM) is a distributed block
 service which is used by ozone. This property allows data nodes to discover
@@ -291,40 +305,31 @@ SCM&rsquo;s address. Data nodes send heartbeat to SCM.
 Until HA  feature is  complete, we configure ozone.scm.names to be a
 single machine.</li>
 </ul>
-
 <p>Here is an example,</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">      <span style="color:#f92672">&lt;property&gt;</span>
-        <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
-        <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
-      <span style="color:#f92672">&lt;/property&gt;</span>
-  </code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <ul>
 <li><strong>ozone.scm.datanode.id.dir</strong> Data nodes generate a Unique ID called Datanode
 ID. This identity is written to the file datanode.id in a directory specified by this path. <em>Data nodes
 will create this path if it doesn&rsquo;t exist already.</em></li>
 </ul>
-
 <p>Here is an  example,
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
-      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id.dir<span style="color:#f92672">&lt;/name&gt;</span>
-      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>   <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id.dir<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div></p>
 <ul>
 <li><strong>ozone.om.address</strong> OM server address. This is used by OzoneClient and
 Ozone File System.</li>
 </ul>
-
 <p>Here is an  example,
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
-       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
-       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
-    <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div></p>
 <h2 id="ozone-settings-summary">Ozone Settings Summary</h2>
-
 <table>
 <thead>
 <tr>
@@ -333,38 +338,32 @@ Ozone File System.</li>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>ozone.metadata.dirs</td>
 <td>file path</td>
 <td>The metadata will be stored here.</td>
 </tr>
-
 <tr>
 <td>ozone.scm.names</td>
 <td>SCM server name</td>
 <td>Hostname:port or IP:port address of SCM.</td>
 </tr>
-
 <tr>
 <td>ozone.scm.block.client.address</td>
 <td>SCM server name and port</td>
 <td>Used by services like OM</td>
 </tr>
-
 <tr>
 <td>ozone.scm.client.address</td>
 <td>SCM server name and port</td>
 <td>Used by client-side</td>
 </tr>
-
 <tr>
 <td>ozone.scm.datanode.address</td>
 <td>SCM server name and port</td>
 <td>Used by datanode to talk to SCM</td>
 </tr>
-
 <tr>
 <td>ozone.om.address</td>
 <td>OM server name</td>
@@ -372,42 +371,28 @@ Ozone File System.</li>
 </tr>
 </tbody>
 </table>
-
 <h2 id="startup-the-cluster">Startup the cluster</h2>
-
 <p>Before we boot up the Ozone cluster, we need to initialize both SCM and Ozone Manager.</p>
-
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init</code></pre></div>
+<p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init</span></span></code></pre></div>
 This allows SCM to create the cluster Identity and initialize its state.
 The <code>init</code> command is similar to Namenode format. Init command is executed only once, that allows SCM to create all the required on-disk structures to work correctly.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start scm</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start scm</span></span></code></pre></div></p>
 <p>Once we know SCM is up and running, we can create an Object Store for our use. This is done by running the following command.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone om --init</code></pre></div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone om --init</span></span></code></pre></div>
 <p>Once Ozone manager is initialized, we are ready to run the name service.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start om</code></pre></div>
-
-<p>At this point Ozone&rsquo;s name services, the Ozone manager, and the block service  SCM is both running.<br />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start om</span></span></code></pre></div>
+<p>At this point Ozone&rsquo;s name services, the Ozone manager, and the block service  SCM is both running.<br>
 <strong>Please note</strong>: If SCM is not running
 <code>om --init</code> command will fail. SCM start will fail if on-disk data structures are missing. So please make sure you have done both <code>scm --init</code> and <code>om --init</code> commands.</p>
-
 <p>Now we need to start the data nodes. Please run the following command on each datanode.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start datanode</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start datanode</span></span></code></pre></div></p>
 <p>At this point SCM, Ozone Manager and data nodes are up and running.</p>
-
-<p><strong><em>Congratulations!, You have set up a functional ozone cluster.</em></strong></p>
-
+<p><em><strong>Congratulations!, You have set up a functional ozone cluster.</strong></em></p>
 <h2 id="shortcut">Shortcut</h2>
-
 <p>If you want to make your life simpler, you can just run
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init
-ozone om --init
-start-ozone.sh</code></pre></div></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init
+</span></span><span style="display:flex;"><span>ozone om --init
+</span></span><span style="display:flex;"><span>start-ozone.sh</span></span></code></pre></div></p>
 <p>This assumes that you have set up the slaves file correctly and ssh
 configuration that allows ssh-ing to all data nodes. This is the same as the
 HDFS configuration, so please refer to HDFS documentation on how to set this

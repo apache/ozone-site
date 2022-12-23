@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -372,8 +394,7 @@
 bird&rsquo;s-eye view of Ozone and helps users troubleshoot any issues by presenting
 the current state of the cluster through REST based APIs and rich web UI.</p>
 <h2 id="high-level-design">High Level Design</h2>
-<figure>
-    <img src="../concept/ReconHighLevelDesign.png" width="800px"/> 
+<figure><img src="../concept/ReconHighLevelDesign.png" width="800px"/>
 </figure>
 
 <br/>
@@ -388,8 +409,7 @@ SCM db along with a SQL database for persisting aggregate information.</p>
 for Ozone metrics and also to display a few crucial point in time metrics in
 the web UI.</p>
 <h2 id="recon-and-ozone-manager">Recon and Ozone Manager</h2>
-<figure>
-    <img src="../concept/ReconOmDesign.png" width="800px"/> 
+<figure><img src="../concept/ReconOmDesign.png" width="800px"/>
 </figure>
 
 <br/>
@@ -403,8 +423,7 @@ show stale information since the local db will not always be in sync.</p>
 <p>The db updates retrieved from OM is then converted into a batch of events for
 further processing by OM db tasks via <a href="#task-framework">Recon Task Framework</a>.</p>
 <h2 id="recon-and-storage-container-manager">Recon and Storage Container Manager</h2>
-<figure>
-    <img src="../concept/ReconScmDesign.png" width="800px"/> 
+<figure><img src="../concept/ReconScmDesign.png" width="800px"/>
 </figure>
 
 <br/>
@@ -587,7 +606,7 @@ OVER_REPLICATED, MIS_REPLICATED) in the cluster at any given time</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81</a>
+      Version: 1.1.0, Last Modified: November 24, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a304ba81c9d52e2fb3a67e669d08c729a4113ae">1a304ba81c</a>
     </span>
   </div>
 </footer>

@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -362,143 +384,142 @@
 <p>Prometheus 端点默认是打开的，但可以通过<code>hdds.prometheus.endpoint.enabled</code>配置变量把它关闭。</p>
 <p>在安全环境中，该页面是用 SPNEGO 认证来保护的，但 Prometheus 不支持这种认证。为了在安全环境中启用监控，可以配置一个特定的认证令牌。</p>
 <p><code>ozone-site.xml</code> 配置示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.token<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>putyourtokenhere<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>prometheus 配置示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-YAML" data-lang="YAML"><span style="color:#f92672">scrape_configs</span>:
-  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
-    <span style="color:#f92672">bearer_token</span>: <span style="color:#ae81ff">&lt;putyourtokenhere&gt;</span>
-    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
-    <span style="color:#f92672">static_configs</span>:
-     - <span style="color:#f92672">targets</span>:
-         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
-</code></pre></div><h2 id="分布式跟踪">分布式跟踪</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.token<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>putyourtokenhere<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>prometheus 配置示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">bearer_token</span>: <span style="color:#ae81ff">&lt;putyourtokenhere&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
+</span></span></code></pre></div><h2 id="分布式跟踪">分布式跟踪</h2>
 <p>分布式跟踪可以通过可视化端到端的性能来帮助了解性能瓶颈。</p>
 <p>Ozone 使用 <a href="https://jaegertracing.io">jaeger</a> 跟踪库收集跟踪，可以将跟踪数据发送到任何兼容的后端(Zipkin，…)。</p>
 <p>默认情况下，跟踪功能是关闭的，可以通过 <code>ozon-site.xml</code> 的 <code>hdds.tracing.enabled</code> 配置变量打开。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Jaeger 客户端可以用环境变量进行配置，如<a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">这份</a>文档所述。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Jaeger 客户端可以用环境变量进行配置，如<a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">这份</a>文档所述。</p>
 <p>例如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
-JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
-JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
-</code></pre></div><p>此配置将记录1%的请求，以限制性能开销。有关 Jaeger 抽样的更多信息，请查看<a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">文档</a>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
+</span></span><span style="display:flex;"><span>JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
+</span></span><span style="display:flex;"><span>JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
+</span></span></code></pre></div><p>此配置将记录1%的请求，以限制性能开销。有关 Jaeger 抽样的更多信息，请查看<a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">文档</a>。</p>
 <h2 id="ozone-insight">Ozone Insight</h2>
 <p>Ozone Insight 是一个用于检查 Ozone 集群当前状态的工具，它可以显示特定组件的日志记录、指标和配置。</p>
 <p>请使用<code>ozone insight list</code>命令检查可用的组件：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight list
-
-Available insight points:
-
-  scm.node-manager                     SCM Datanode management related information.
-  scm.replica-manager                  SCM closed container replication manager
-  scm.event-queue                      Information about the internal async event delivery
-  scm.protocol.block-location          SCM Block location protocol endpoint
-  scm.protocol.container-location      SCM Container location protocol endpoint
-  scm.protocol.security                SCM Block location protocol endpoint
-  om.key-manager                       OM Key Manager
-  om.protocol.client                   Ozone Manager RPC endpoint
-  datanode.pipeline                    More information about one ratis datanode ring.
-</code></pre></div><h2 id="配置">配置</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Available insight points:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  scm.node-manager                     SCM Datanode management related information.
+</span></span><span style="display:flex;"><span>  scm.replica-manager                  SCM closed container replication manager
+</span></span><span style="display:flex;"><span>  scm.event-queue                      Information about the internal async event delivery
+</span></span><span style="display:flex;"><span>  scm.protocol.block-location          SCM Block location protocol endpoint
+</span></span><span style="display:flex;"><span>  scm.protocol.container-location      SCM Container location protocol endpoint
+</span></span><span style="display:flex;"><span>  scm.protocol.security                SCM Block location protocol endpoint
+</span></span><span style="display:flex;"><span>  om.key-manager                       OM Key Manager
+</span></span><span style="display:flex;"><span>  om.protocol.client                   Ozone Manager RPC endpoint
+</span></span><span style="display:flex;"><span>  datanode.pipeline                    More information about one ratis datanode ring.
+</span></span></code></pre></div><h2 id="配置">配置</h2>
 <p><code>ozone insight config</code> 可以显示与特定组件有关的配置（只支持选定的组件）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight config scm.replica-manager
-
-Configuration <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.replica-manager<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM closed container replication manager<span style="color:#f92672">)</span>
-
-&gt;&gt;&gt; hdds.scm.replication.thread.interval
-       default: 300s
-       current: 300s
-
-There is a replication monitor thread running inside SCM which takes care of replicating the containers in the cluster. This property is used to configure the interval in which that thread runs.
-
-
-&gt;&gt;&gt; hdds.scm.replication.event.timeout
-       default: 30m
-       current: 30m
-
-Timeout <span style="color:#66d9ef">for</span> the container replication/deletion commands sent  to datanodes. After this timeout the command will be retried.
-
-</code></pre></div><h2 id="指标">指标</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight config scm.replica-manager
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Configuration <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.replica-manager<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM closed container replication manager<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; hdds.scm.replication.thread.interval
+</span></span><span style="display:flex;"><span>       default: 300s
+</span></span><span style="display:flex;"><span>       current: 300s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>There is a replication monitor thread running inside SCM which takes care of replicating the containers in the cluster. This property is used to configure the interval in which that thread runs.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; hdds.scm.replication.event.timeout
+</span></span><span style="display:flex;"><span>       default: 30m
+</span></span><span style="display:flex;"><span>       current: 30m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Timeout <span style="color:#66d9ef">for</span> the container replication/deletion commands sent  to datanodes. After this timeout the command will be retried.
+</span></span></code></pre></div><h2 id="指标">指标</h2>
 <p><code>ozone insight metrics</code> 可以显示与特定组件相关的指标（只支持选定的组件）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight metrics scm.protocol.block-location
-Metrics <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.protocol.block-location<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM Block location protocol endpoint<span style="color:#f92672">)</span>
-
-RPC connections
-
-  Open connections: <span style="color:#ae81ff">0</span>
-  Dropped connections: <span style="color:#ae81ff">0</span>
-  Received bytes: <span style="color:#ae81ff">1267</span>
-  Sent bytes: <span style="color:#ae81ff">2420</span>
-
-
-RPC queue
-
-  RPC average queue time: 0.0
-  RPC call queue length: <span style="color:#ae81ff">0</span>
-
-
-RPC performance
-
-  RPC processing time average: 0.0
-  Number of slow calls: <span style="color:#ae81ff">0</span>
-
-
-Message type counters
-
-  Number of AllocateScmBlock: ???
-  Number of DeleteScmKeyBlocks: ???
-  Number of GetScmInfo: ???
-  Number of SortDatanodes: ???
-</code></pre></div><h2 id="日志">日志</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight metrics scm.protocol.block-location
+</span></span><span style="display:flex;"><span>Metrics <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.protocol.block-location<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM Block location protocol endpoint<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC connections
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Open connections: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  Dropped connections: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  Received bytes: <span style="color:#ae81ff">1267</span>
+</span></span><span style="display:flex;"><span>  Sent bytes: <span style="color:#ae81ff">2420</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC queue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  RPC average queue time: 0.0
+</span></span><span style="display:flex;"><span>  RPC call queue length: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC performance
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  RPC processing time average: 0.0
+</span></span><span style="display:flex;"><span>  Number of slow calls: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Message type counters
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Number of AllocateScmBlock: ???
+</span></span><span style="display:flex;"><span>  Number of DeleteScmKeyBlocks: ???
+</span></span><span style="display:flex;"><span>  Number of GetScmInfo: ???
+</span></span><span style="display:flex;"><span>  Number of SortDatanodes: ???
+</span></span></code></pre></div><h2 id="日志">日志</h2>
 <p><code>ozone insights logs</code> 可以连接到所需的服务并显示与一个特定组件相关的DEBUG/TRACE日志。例如，显示RPC消息：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt;ozone insight logs om.protocol.client
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:49,988 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol ServiceList request is received
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:50,095 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol CreateVolume request is received
-</code></pre></div><p>使用 <code>-v</code> 标志，也可以显示 protobuf 信息的内容（TRACE级别的日志）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone insight logs -v om.protocol.client
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,463 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is received:
-cmdType: CreateVolume
-traceID: <span style="color:#e6db74">&#34;&#34;</span>
-clientId: <span style="color:#e6db74">&#34;client-A31DF5C6ECF2&#34;</span>
-createVolumeRequest <span style="color:#f92672">{</span>
-  volumeInfo <span style="color:#f92672">{</span>
-    adminName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-    ownerName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-    volume: <span style="color:#e6db74">&#34;vol1&#34;</span>
-    quotaInBytes: <span style="color:#ae81ff">1152921504606846976</span>
-    volumeAcls <span style="color:#f92672">{</span>
-      type: USER
-      name: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-      rights: <span style="color:#e6db74">&#34;200&#34;</span>
-      aclScope: ACCESS
-    <span style="color:#f92672">}</span>
-    volumeAcls <span style="color:#f92672">{</span>
-      type: GROUP
-      name: <span style="color:#e6db74">&#34;users&#34;</span>
-      rights: <span style="color:#e6db74">&#34;200&#34;</span>
-      aclScope: ACCESS
-    <span style="color:#f92672">}</span>
-    creationTime: <span style="color:#ae81ff">1595939608460</span>
-    objectID: <span style="color:#ae81ff">0</span>
-    updateID: <span style="color:#ae81ff">0</span>
-    modificationTime: <span style="color:#ae81ff">0</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,474 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is processed. Response:
-cmdType: CreateVolume
-traceID: <span style="color:#e6db74">&#34;&#34;</span>
-success: false
-message: <span style="color:#e6db74">&#34;Volume already exists&#34;</span>
-status: VOLUME_ALREADY_EXISTS
-</code></pre></div><div class="alert alert-warning" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;ozone insight logs om.protocol.client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:49,988 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol ServiceList request is received
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:50,095 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol CreateVolume request is received
+</span></span></code></pre></div><p>使用 <code>-v</code> 标志，也可以显示 protobuf 信息的内容（TRACE级别的日志）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone insight logs -v om.protocol.client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,463 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is received:
+</span></span><span style="display:flex;"><span>cmdType: CreateVolume
+</span></span><span style="display:flex;"><span>traceID: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>clientId: <span style="color:#e6db74">&#34;client-A31DF5C6ECF2&#34;</span>
+</span></span><span style="display:flex;"><span>createVolumeRequest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  volumeInfo <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    adminName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>    ownerName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>    volume: <span style="color:#e6db74">&#34;vol1&#34;</span>
+</span></span><span style="display:flex;"><span>    quotaInBytes: <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span>    volumeAcls <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      type: USER
+</span></span><span style="display:flex;"><span>      name: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+</span></span><span style="display:flex;"><span>      aclScope: ACCESS
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    volumeAcls <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      type: GROUP
+</span></span><span style="display:flex;"><span>      name: <span style="color:#e6db74">&#34;users&#34;</span>
+</span></span><span style="display:flex;"><span>      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+</span></span><span style="display:flex;"><span>      aclScope: ACCESS
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    creationTime: <span style="color:#ae81ff">1595939608460</span>
+</span></span><span style="display:flex;"><span>    objectID: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    updateID: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    modificationTime: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,474 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is processed. Response:
+</span></span><span style="display:flex;"><span>cmdType: CreateVolume
+</span></span><span style="display:flex;"><span>traceID: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>success: false
+</span></span><span style="display:flex;"><span>message: <span style="color:#e6db74">&#34;Volume already exists&#34;</span>
+</span></span><span style="display:flex;"><span>status: VOLUME_ALREADY_EXISTS
+</span></span></code></pre></div><div class="alert alert-warning" role="alert">
 <p>实际上 <code>ozone insight</code> 是通过 HTTP 端点来检索所需的信息（<code>/conf</code>、<code>/prom</code>和<code>/logLevel</code>端点），它在安全环境中还不被支持。</p>
 </div>
 
@@ -517,7 +538,7 @@ status: VOLUME_ALREADY_EXISTS
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: April 11, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2522127b1c0bc12038265faeb667c9c0592e53bc">2522127b1</a>
+      Version: 1.3.0, Last Modified: April 11, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2522127b1c0bc12038265faeb667c9c0592e53bc">2522127b1c</a>
     </span>
   </div>
 </footer>

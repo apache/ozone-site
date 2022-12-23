@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -185,11 +207,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <p>Storage container manager provides multiple critical functions for the Ozone
 cluster.  SCM acts as the cluster manager, Certificate authority, Block
 manager and the Replica manager.</p>
-
 
 
 
@@ -211,7 +231,6 @@ SCM is in charge of creating an Ozone cluster. When an SCM is booted up via <kbd
         </div>
     </div>
 </div>
-
 
 
 
@@ -242,7 +261,6 @@ token infrastructure depends on this certificate infrastructure.
 
 
 
-
 <div class="col-sm-6">
 
     <div class="media">
@@ -263,7 +281,6 @@ read and write these blocks directly.
         </div>
     </div>
 </div>
-
 
 
 

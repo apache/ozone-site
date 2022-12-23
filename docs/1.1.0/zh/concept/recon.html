@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -334,8 +356,7 @@
 -->
 <p>Recon 充当 Ozone 的管理和监视控制台。它提供了 Ozone 的鸟瞰图，并通过基于 REST 的 API 和丰富的网页用户界面（Web UI）展示了集群的当前状态，从而帮助用户解决任何问题。</p>
 <h2 id="高层次设计">高层次设计</h2>
-<figure>
-    <img src="../../concept/ReconHighLevelDesign.png" width="800px"/> 
+<figure><img src="../../concept/ReconHighLevelDesign.png" width="800px"/>
 </figure>
 
 <br/>
@@ -343,15 +364,13 @@
 <p>Recon 维护多个数据库，以支持批处理，更快的查询和持久化聚合信息。它维护 OM DB 和 SCM DB 的本地副本，以及用于持久存储聚合信息的 SQL 数据库。</p>
 <p>Recon 还与 Prometheus 集成，提供一个 HTTP 端点来查询 Prometheus 的 Ozone 指标，并在网页用户界面（Web UI）中显示一些关键时间点的指标。</p>
 <h2 id="recon-和-ozone-manager">Recon 和 Ozone Manager</h2>
-<figure>
-    <img src="../../concept/ReconOmDesign.png" width="800px"/> 
+<figure><img src="../../concept/ReconOmDesign.png" width="800px"/>
 </figure>
 
 <br/>
 <p>Recon 最初从领导者 OM 的 HTTP 端点获取 OM rocks DB 的完整快照，解压缩文件并初始化 RocksDB 以进行本地查询。通过对最后一个应用的序列 ID 的 RPC 调用，定期请求领导者 OM 进行增量更新，从而使数据库保持同步。如果由于某种原因而无法检索增量更新或将其应用于本地数据库，则会再次请求一个完整快照以使本地数据库与 OM DB 保持同步。因此，Recon 可能会显示陈旧的信息，因为本地数据库不会总是同步的。</p>
 <h2 id="recon-和-storage-container-manager">Recon 和 Storage Container Manager</h2>
-<figure>
-    <img src="../../concept/ReconScmDesign.png" width="800px"/> 
+<figure><img src="../../concept/ReconScmDesign.png" width="800px"/>
 </figure>
 
 <br/>
@@ -501,7 +520,7 @@
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.1.0, Last Modified: December 17, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1b6f7dbed61a9e70969b6682707ce19e99c459bb">1b6f7dbed</a>
+      Version: 1.1.0, Last Modified: December 17, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1b6f7dbed61a9e70969b6682707ce19e99c459bb">1b6f7dbed6</a>
     </span>
   </div>
 </footer>

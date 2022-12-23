@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -352,7 +374,7 @@
 -->
 <p>Recon 作为 Ozone 的管理和监听控制台。它是一个可选组件，但强烈建议将其添加到集群中，因为 Recon 可以在关键时刻帮助您对集群进行故障排除。请参阅 <a href="../../zh/concept/recon.html">Recon 架构</a> 以获得详细的架构概述和 <a href="../../zh/interface/reconapi.html">Recon API</a> 文档，以获得 HTTP API 参考。</p>
 <p>Recon 是一个自带 HTTP 网页服务器的服务，可以通过以下命令启动。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start recon</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start recon</span></span></code></pre></div>
 
 
           
@@ -370,7 +392,7 @@
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: August 16, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/66ee3b4420182fa3d97381827e06837df261beeb">66ee3b442</a>
+      Version: 1.2.0, Last Modified: August 16, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/66ee3b4420182fa3d97381827e06837df261beeb">66ee3b4420</a>
     </span>
   </div>
 </footer>

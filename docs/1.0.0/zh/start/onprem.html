@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -226,44 +248,43 @@
 <p>Ozone 依赖名为 <code>ozone-site.xml</code> 的配置文件， 运行下面的命令可以在指定目录生成名为 <code>ozone-site.xml</code> 的配置文件模板，然后你可以将参数替换为合适的值。</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone genconf &lt;path&gt;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone genconf &lt;path&gt;</span></span></code></pre></div>
 <p>我们来看看生成的文件（ozone-site.xml）中都有哪些参数，以及它们是如何影响 ozone 的。当各个参数都配置了合适的值之后，需要把该文件拷贝到 <code>ozone directory/etc/hadoop</code>。</p>
 <ul>
 <li><strong>ozone.metadata.dirs</strong> 管理员通过此参数指定元数据的存储位置，通常应该选择最快的磁盘（比如 SSD，如果节点上有的话），OM、SCM 和 Datanode
 会将元数据写入此路径。这是个必需的参数，如果不配置它，Ozone 会启动失败。</li>
 </ul>
 <p>示例如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
-      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
-      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>   <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.metadata.dirs<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <ul>
 <li><strong>ozone.scm.names</strong>  Storage container manager(SCM) 提供 ozone 使用的分布式块服务，Datanode 通过这个参数来连接 SCM 并向 SCM 发送心跳。Ozone
 目前尚未支持 SCM 的 HA，ozone.scm.names 只需配置单个 SCM 地址即可。</li>
 </ul>
 <p>示例如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
-        <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
-      <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
-      <span style="color:#f92672">&lt;/property&gt;</span>
-  </code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>  <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.names<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;value&gt;</span>scm.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <ul>
 <li><strong>ozone.scm.datanode.id.dir</strong> 每个 Datanode 会生成一个唯一 ID，叫做 Datanode ID。Datanode ID 会被写入此参数所指定路径下名为 datanode.id
 的文件中，如果该路径不存在，Datanode 会自动创建。</li>
 </ul>
 <p>示例如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;property&gt;</span>
-      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id.dir<span style="color:#f92672">&lt;/name&gt;</span>
-      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>   <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.datanode.id.dir<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>/data/disk1/meta/node<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <ul>
 <li><strong>ozone.om.address</strong> OM 服务地址，OzoneClient 和 Ozone 文件系统需要使用此地址。</li>
 </ul>
 <p>示例如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;property&gt;</span>
-       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
-       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
-    <span style="color:#f92672">&lt;/property&gt;</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&lt;name&gt;</span>ozone.om.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&lt;value&gt;</span>ozonemanager.hadoop.apache.org<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <h2 id="ozone-参数汇总">Ozone 参数汇总</h2>
 <table>
 <thead>
@@ -308,25 +329,25 @@
 </table>
 <h2 id="启动集群">启动集群</h2>
 <p>在启动 Ozone 集群之前，需要依次初始化 SCM 和 OM。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init</span></span></code></pre></div>
 <p>这条命令会使 SCM 创建集群 ID 并初始化它的状态。
 <code>init</code> 命令和 Namenode 的 <code>format</code> 命令类似，只需要执行一次，SCM 就可以在磁盘上准备好正常运行所需的数据结构。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start scm</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start scm</span></span></code></pre></div>
 <p>SCM 启动之后，我们就可以创建对象存储空间，命令如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone om --init</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone om --init</span></span></code></pre></div>
 <p>OM 初始化完成之后，就可以启动 OM 服务了：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start om</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start om</span></span></code></pre></div>
 <p>此时 Ozone 的命名服务 OM 和 块服务 SCM 都已运行。<br>
 <strong>注意</strong>: 如果 SCM 未启动，<code>om --init</code> 命令会失败，同样，如果磁盘上的元数据缺失，SCM 也无法启动，所以请确保 <code>scm --init</code> 和 <code>om --init</code> 两条命令都成功执行了。</p>
 <p>接下来启动 Datanode，在每个 Datanode 上运行下面的命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone --daemon start datanode</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --daemon start datanode</span></span></code></pre></div>
 <p>现在 SCM、OM 和所有的 Datanode 都已启动并运行。</p>
 <p><em><strong>恭喜！你成功地搭建了一个完整的 ozone 集群。</strong></em></p>
 <h2 id="捷径">捷径</h2>
 <p>如果你想简化操作，可以直接运行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone scm --init
-ozone om --init
-start-ozone.sh</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone scm --init
+</span></span><span style="display:flex;"><span>ozone om --init
+</span></span><span style="display:flex;"><span>start-ozone.sh</span></span></code></pre></div>
 <p>这么做的前提是，slaves 文件已经正确编写，并且配置好了到各个 Datanode 的 ssh，这和 HDFS 的配置方式相同，具体方法请查看 HDFS 文档。</p>
 
 

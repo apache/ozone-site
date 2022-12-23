@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -445,18 +467,18 @@ that a real Apache release is a source release.</p>
 from the <a href="https://github.com/apache/ozone">git repository</a>) and run the ozone build command. This instruction assumes that you have all the
 dependencies to build Hadoop on your build machine. If you need instructions
 on how to build Hadoop, please look at the Apache Hadoop Website.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean package -DskipTests<span style="color:#f92672">=</span>true
-</code></pre></div><p>This will build an <code>ozone-\&lt;version\&gt;</code> directory in your <code>hadoop-ozone/dist/target</code> directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p>This will build an <code>ozone-\&lt;version\&gt;</code> directory in your <code>hadoop-ozone/dist/target</code> directory.</p>
 <p>You can copy this tarball and use this instead of binary artifacts that are
 provided along with the official release.</p>
 <p>To create tar file distribution, use the <code>-Pdist</code> profile:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean package -DskipTests<span style="color:#f92672">=</span>true -Pdist
-</code></pre></div><h2 id="how-to-run-ozone-from-build">How to run Ozone from build</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true -Pdist
+</span></span></code></pre></div><h2 id="how-to-run-ozone-from-build">How to run Ozone from build</h2>
 <p>When you have the new distribution, you can start a local cluster <a href="../start/runningviadocker.html">with docker-compose</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd hadoop-ozone/dist/target/ozone-X.X.X...
-cd compose/ozone
-docker-compose up -d
-</code></pre></div><h2 id="how-to-test-the-build">How to test the build</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd hadoop-ozone/dist/target/ozone-X.X.X...
+</span></span><span style="display:flex;"><span>cd compose/ozone
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><h2 id="how-to-test-the-build">How to test the build</h2>
 <p><code>compose</code> subfolder contains multiple type of example setup (secure, non-secure, HA, Yarn). They can be tested with the help of <a href="http://robotframework.org/">robotframework</a> with executing <code>test.sh</code> in any of the directories.</p>
 
 
@@ -475,7 +497,7 @@ docker-compose up -d
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.3.0, Last Modified: November 4, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1cf43ace9603119b4895f1072ef828a5ae04514d">1cf43ace9</a>
+      Version: 1.3.0, Last Modified: November 4, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1cf43ace9603119b4895f1072ef828a5ae04514d">1cf43ace96</a>
     </span>
   </div>
 </footer>

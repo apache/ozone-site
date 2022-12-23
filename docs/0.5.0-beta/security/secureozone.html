@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -213,9 +235,7 @@
           <div class="col-md-9">
             <h1>Securing Ozone</h1>
 
-            
-
-<!---
+            <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -231,18 +251,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <h1 id="kerberos">Kerberos</h1>
-
 <p>Ozone depends on <a href="https://web.mit.edu/kerberos/">Kerberos</a> to make the
 clusters secure. Historically, HDFS has supported running in an isolated
 secure networks where it is possible to deploy without securing the cluster.</p>
-
 <p>This release of Ozone follows that model, but soon will move to <em>secure by
 default.</em>  Today to enable security in ozone cluster, we need to set the
 configuration <strong>ozone.security.enabled</strong> to <em>true</em> and <strong>hadoop.security.authentication</strong>
 to <em>kerberos</em>.</p>
-
 <table>
 <thead>
 <tr>
@@ -250,55 +266,41 @@ to <em>kerberos</em>.</p>
 <th>Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>ozone.security.enabled</td>
 <td><em>true</em></td>
 </tr>
-
 <tr>
 <td>hadoop.security.authentication</td>
 <td><em>kerberos</em></td>
 </tr>
 </tbody>
 </table>
-
 <h1 id="tokens">Tokens</h1>
-
 <p>Ozone uses a notion of tokens to avoid overburdening the Kerberos server.
 When you serve thousands of requests per second, involving Kerberos might not
 work well. Hence once an authentication is done, Ozone issues delegation
 tokens and block tokens to the clients. These tokens allow applications to do
 specified operations against the cluster, as if they have kerberos tickets
 with them. Ozone supports following kinds of tokens.</p>
-
 <h3 id="delegation-token">Delegation Token</h3>
-
 <p>Delegation tokens allow an application to impersonate a users kerberos
 credentials. This token is based on verification of kerberos identity and is
 issued by the Ozone Manager. Delegation tokens are enabled by default when
 security is enabled.</p>
-
 <h3 id="block-token">Block Token</h3>
-
 <p>Block tokens allow a client to read or write a block. This is needed so that
 data nodes know that the user/client has permission to read or make
 modifications to the block.</p>
-
 <h3 id="s3authinfo">S3AuthInfo</h3>
-
 <p>S3 uses a very different shared secret security scheme. Ozone supports the AWS Signature Version 4 protocol,
 and from the end users perspective Ozone&rsquo;s S3 feels exactly like AWS S3.</p>
-
 <p>The S3 credential tokens are called S3 auth info in the code. These tokens are
 also enabled by default when security is enabled.</p>
-
 <p>Each of the service daemons that make up Ozone needs a  Kerberos service
 principal name and a corresponding <a href="https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html">kerberos key tab</a> file.</p>
-
 <p>All these settings should be made in ozone-site.xml.</p>
-
 <div class="card-group">
   <div class="card">
     <div class="card-body">

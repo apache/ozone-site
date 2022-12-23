@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -357,42 +379,42 @@
 <p>Topology hierarchy can be configured with using <code>net.topology.node.switch.mapping.impl</code> configuration key. This configuration should define an implementation of the <code>org.apache.hadoop.net.CachedDNSToSwitchMapping</code>. As this is a Hadoop class, the configuration is exactly the same as the Hadoop Configuration</p>
 <h3 id="static-list">Static list</h3>
 <p>Static list can be configured with the help of <code>TableMapping</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>net.topology.table.file.name<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>/opt/hadoop/compose/ozone-topology/network-config<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>The second configuration option should point to a text file. The file format is a two column text file, with columns separated by whitespace. The first column is a DNS or IP address and the second column specifies the rack where the address maps. If no entry corresponding to a host in the cluster is found, then <code>/default-rack</code> is assumed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.table.file.name<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/opt/hadoop/compose/ozone-topology/network-config<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>The second configuration option should point to a text file. The file format is a two column text file, with columns separated by whitespace. The first column is a DNS or IP address and the second column specifies the rack where the address maps. If no entry corresponding to a host in the cluster is found, then <code>/default-rack</code> is assumed.</p>
 <h3 id="dynamic-list">Dynamic list</h3>
 <p>Rack information can be identified with the help of an external script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>/usr/local/bin/rack.sh<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>If implementing an external script, it will be specified with the <code>net.topology.script.file.name</code> parameter in the configuration files. Unlike the java class, the external topology script is not included with the Ozone distribution and is provided by the administrator. Ozone will send multiple IP addresses to ARGV when forking the topology script. The number of IP addresses sent to the topology script is controlled with <code>net.topology.script.number.args</code> and defaults to 100. If <code>net.topology.script.number.args</code> was changed to 1, a topology script would get forked for each IP submitted.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/usr/local/bin/rack.sh<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>If implementing an external script, it will be specified with the <code>net.topology.script.file.name</code> parameter in the configuration files. Unlike the java class, the external topology script is not included with the Ozone distribution and is provided by the administrator. Ozone will send multiple IP addresses to ARGV when forking the topology script. The number of IP addresses sent to the topology script is controlled with <code>net.topology.script.number.args</code> and defaults to 100. If <code>net.topology.script.number.args</code> was changed to 1, a topology script would get forked for each IP submitted.</p>
 <h2 id="write-path">Write path</h2>
 <p>Placement of the closed containers can be configured with <code>ozone.scm.container.placement.impl</code> configuration key. The available container placement policies can be found in the <code>org.apache.hdds.scm.container.placement</code> <a href="https://github.com/apache/hadoop-ozone/tree/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms">package</a>.</p>
 <p>By default the <code>SCMContainerPlacementRandom</code> is used for topology-awareness the <code>SCMContainerPlacementRackAware</code> can be used:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRackAware<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>This placement policy complies with the algorithm used in HDFS. With default 3 replica, two replicas will be on the same rack, the third one will on a different rack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRackAware<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>This placement policy complies with the algorithm used in HDFS. With default 3 replica, two replicas will be on the same rack, the third one will on a different rack.</p>
 <p>This implementation applies to network topology like &ldquo;/rack/node&rdquo;. Don&rsquo;t recommend to use this if the network topology has more layers.</p>
 <h2 id="read-path">Read path</h2>
 <p>Finally the read path also should be configured to read the data from the closest pipeline.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.network.topology.aware.read<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><h2 id="references">References</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.network.topology.aware.read<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h2 id="references">References</h2>
 <ul>
 <li>Hadoop documentation about <code>net.topology.node.switch.mapping.impl</code>: <a href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html">https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html</a></li>
 <li><a href="../design/topology.html">Design doc</a></li>

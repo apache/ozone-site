@@ -5,11 +5,7 @@
     <link>/feature.html</link>
     <description>Recent content in Features on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="/feature/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/feature/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>High Availability</title>
       <link>/feature/ha.html</link>

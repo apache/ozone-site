@@ -17,6 +17,28 @@
     
     <link href="../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -374,23 +396,23 @@ to <em>kerberos</em>.</p>
 </tr>
 </tbody>
 </table>
-<h1 id="tokens-">Tokens</h1>
+<h1 id="tokens">Tokens</h1>
 <p>Ozone uses a notion of tokens to avoid overburdening the Kerberos server.
 When you serve thousands of requests per second, involving Kerberos might not
 work well. Hence once an authentication is done, Ozone issues delegation
 tokens and block tokens to the clients. These tokens allow applications to do
 specified operations against the cluster, as if they have kerberos tickets
 with them. Ozone supports following kinds of tokens.</p>
-<h3 id="delegation-token-">Delegation Token</h3>
+<h3 id="delegation-token">Delegation Token</h3>
 <p>Delegation tokens allow an application to impersonate a users kerberos
 credentials. This token is based on verification of kerberos identity and is
 issued by the Ozone Manager. Delegation tokens are enabled by default when
 security is enabled.</p>
-<h3 id="block-token-">Block Token</h3>
+<h3 id="block-token">Block Token</h3>
 <p>Block tokens allow a client to read or write a block. This is needed so that
 data nodes know that the user/client has permission to read or make
 modifications to the block.</p>
-<h3 id="s3authinfo-">S3AuthInfo</h3>
+<h3 id="s3authinfo">S3AuthInfo</h3>
 <p>S3 uses a very different shared secret security scheme. Ozone supports the AWS Signature Version 4 protocol,
 and from the end users perspective Ozone&rsquo;s S3 feels exactly like AWS S3.</p>
 <p>The S3 credential tokens are called S3 auth info in the code. These tokens are

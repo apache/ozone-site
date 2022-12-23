@@ -5,12 +5,7 @@
     <link>/</link>
     <description>Recent content in Overview on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
       <link>/concept/overview.html</link>
@@ -118,7 +113,7 @@
       <guid>/interface/cli.html</guid>
       <description>Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the Java API.
 There are some functionality which couldn&amp;rsquo;t be accessed without using ozone sh commands. For example:
- Creating volumes with quota Managing internal ACLs Creating buckets with encryption key  All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</description>
+Creating volumes with quota Managing internal ACLs Creating buckets with encryption key All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</description>
     </item>
     
     <item>
@@ -226,7 +221,7 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/start/startfromdockerhub.html</guid>
-      <description>Requirements  Working docker setup AWS CLI (optional)    Ozone in a Single Container The easiest way to start up an all-in-one ozone container is to use the latest docker image from docker hub:
+      <description>Requirements Working docker setup AWS CLI (optional) Ozone in a Single Container The easiest way to start up an all-in-one ozone container is to use the latest docker image from docker hub:
 docker run -p 9878:9878 -p 9876:9876 apache/ozone This command will pull down the ozone image from docker hub and start all ozone services in a single container. This container will run the required metadata servers (Ozone Manager, Storage Container Manager) one data node and the S3 compatible REST server (S3 Gateway).</description>
     </item>
     
@@ -237,7 +232,7 @@ docker run -p 9878:9878 -p 9876:9876 apache/ozone This command will pull down th
       
       <guid>/start/onprem.html</guid>
       <description>If you are feeling adventurous, you can setup ozone in a real cluster. Setting up a real cluster requires us to understand the components of Ozone. Ozone is designed to work concurrently with HDFS. However, Ozone is also capable of running independently. The components of ozone are the same in both approaches.
-Ozone Components  Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</description>
+Ozone Components Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</description>
     </item>
     
     <item>
@@ -246,7 +241,7 @@ Ozone Components  Ozone Manager - Is the server that is in charge of the namespa
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/start/minikube.html</guid>
-      <description>Requirements  Working minikube setup kubectl    kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use apache/ozone image from the dockerhub.
+      <description>Requirements Working minikube setup kubectl kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use apache/ozone image from the dockerhub.
 To deploy it to minikube use the minikube configuration set:
 cd kubernetes/examples/minikube kubectl apply -f . And you can check the results with
 kubectl get pod Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</description>
@@ -258,7 +253,7 @@ kubectl get pod Note: the kubernetes/examples/minikube resource set is optimized
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/start/kubernetes.html</guid>
-      <description>Requirements  Working kubernetes cluster (LoadBalancer, PersistentVolume are not required) kubectl    As the apache/ozone docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host) Deploy to kubernetes
+      <description>Requirements Working kubernetes cluster (LoadBalancer, PersistentVolume are not required) kubectl As the apache/ozone docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host) Deploy to kubernetes
 kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</description>
     </item>
     
@@ -268,9 +263,9 @@ kubernetes/examples folder of the ozone distribution contains kubernetes deploym
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/start/runningviadocker.html</guid>
-      <description>Requirements  docker and docker-compose      Download the Ozone binary tarball and untar it.
-  Go to the directory where the docker compose files exist and tell docker-compose to start Ozone in the background. This will start a small ozone instance on your machine.
-  cd compose/ozone/ docker-compose up -d To verify that ozone is working as expected, let us log into a data node and run freon, the load generator for Ozone.</description>
+      <description>Requirements docker and docker-compose Download the Ozone binary tarball and untar it.
+Go to the directory where the docker compose files exist and tell docker-compose to start Ozone in the background. This will start a small ozone instance on your machine.
+cd compose/ozone/ docker-compose up -d To verify that ozone is working as expected, let us log into a data node and run freon, the load generator for Ozone. The exec datanode bash command will open a bash shell on the datanode.</description>
     </item>
     
     <item>
@@ -279,8 +274,8 @@ kubernetes/examples folder of the ozone distribution contains kubernetes deploym
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/start/fromsource.html</guid>
-      <description>Requirements  Java 1.8 Maven    This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page.
- If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
+      <description>Requirements Java 1.8 Maven This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page.
+If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
 If you want to build from sources, Please untar the source tarball (or clone the latest code from the git repository) and run the ozone build command.</description>
     </item>
     

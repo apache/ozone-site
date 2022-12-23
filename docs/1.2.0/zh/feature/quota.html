@@ -17,6 +17,28 @@
     
     <link href="../../css/ozonedoc.css" rel="stylesheet">
 
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
   </head>
 
 
@@ -375,42 +397,42 @@
 <h3 id="storage-space级别配额">Storage space级别配额</h3>
 <p>Storage space级别配额允许使用 KB（k），MB（m），GB（g），TB（t）， PB（p）等单位。表示将使用多少个存储空间。</p>
 <h4 id="volume-space-quota用法">Volume Space quota用法</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --space-quota 5MB /volume1
-</code></pre></div><p>这意味着将volume1的存储空间设置为5MB</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --space-quota 10GB /volume1
-</code></pre></div><p>此行为将volume1的配额更改为10GB。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --space-quota 5MB /volume1
+</span></span></code></pre></div><p>这意味着将volume1的存储空间设置为5MB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --space-quota 10GB /volume1
+</span></span></code></pre></div><p>此行为将volume1的配额更改为10GB。</p>
 <h4 id="bucket-space-quota-用法">Bucket Space quota 用法</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
-</code></pre></div><p>这意味着bucket1允许我们使用5MB的存储空间。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
-</code></pre></div><p>该行为将bucket1的配额更改为10GB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
+</span></span></code></pre></div><p>这意味着bucket1允许我们使用5MB的存储空间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
+</span></span></code></pre></div><p>该行为将bucket1的配额更改为10GB</p>
 <p>bucket的总配额 不应大于其Volume的配额。让我们看一个例子，如果我们有一个10MB的Volume，该volume下所有bucket的大小之和不能超过10MB，否则设置bucket quota将失败。</p>
 <h4 id="清除volume和bucket的配额">清除volume和bucket的配额</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --space-quota /volume1
-bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
-</code></pre></div><h4 id="查看volume和bucket的quota值以及usedbytes">查看volume和bucket的quota值以及usedBytes</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedBytes的值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --space-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="查看volume和bucket的quota值以及usedbytes">查看volume和bucket的quota值以及usedBytes</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedBytes的值</p>
 <h3 id="namespace-quota">Namespace quota</h3>
 <p>命名空间配额是一个数字，其代表由多少个名字能够使用。这个数字不能超过Java long数据类型的最大值。</p>
 <h4 id="volume-namespace-quota">Volume Namespace quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
-</code></pre></div><p>这意味着将volume1的命名空间配额设置为100。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
-</code></pre></div><p>此行为将volume1的命名空间配额更改为1000。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
+</span></span></code></pre></div><p>这意味着将volume1的命名空间配额设置为100。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
+</span></span></code></pre></div><p>此行为将volume1的命名空间配额更改为1000。</p>
 <h4 id="bucket-namespace-quota">Bucket Namespace quota</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
-</code></pre></div><p>这意味着bucket1允许我们使用100的命名空间。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
-</code></pre></div><p>该行为将bucket1的命名空间配额更改为1000。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
+</span></span></code></pre></div><p>这意味着bucket1允许我们使用100的命名空间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
+</span></span></code></pre></div><p>该行为将bucket1的命名空间配额更改为1000。</p>
 <h4 id="清除volume和bucket的配额-1">清除volume和bucket的配额</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --namespace-quota /volume1
-bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
-</code></pre></div><h4 id="查看volume和bucket的quota值以及usednamespace">查看volume和bucket的quota值以及usedNamespace</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedNamespace的值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --namespace-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="查看volume和bucket的quota值以及usednamespace">查看volume和bucket的quota值以及usedNamespace</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedNamespace的值</p>
 
 
           
@@ -430,7 +452,7 @@ bin/ozone sh bucket info /volume1/bucket1
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.2.0, Last Modified: August 16, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/66ee3b4420182fa3d97381827e06837df261beeb">66ee3b442</a>
+      Version: 1.2.0, Last Modified: August 16, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/66ee3b4420182fa3d97381827e06837df261beeb">66ee3b4420</a>
     </span>
   </div>
 </footer>
