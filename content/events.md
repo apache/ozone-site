@@ -18,12 +18,12 @@ The following was the list of agenda:
 # Past Conference Talks
 
 # 2022
-* ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla.
+* ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla. [Slides](/assets/Apache%20Ozone%20Erasure%20Coding%28EC%29.pdf)
 * ApacheCon North America 2022: Inside an Apache Ozone Upgrade. Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/01_Rose_Inside_Ozone_Upgrade.pdf)
 * ApacheCon North America 2022: Apache Ozone - State of the Union. Siyao Meng, Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/02_Meng_Rose_Apache_Ozone_SOTU.pdf)
-* ApacheCon North America 2022: Performance of Apache Ozone on NVMe. Wei-Chiu Chuang, Ritesh Shukla.
-* China Apache Hadoop Meetup 2022: What's new in Apache Ozone 1.3. Sammi Chen.
-* ApacheCon Asia 2022: [Sharing Of Recent Progress And Practices In Apache Ozone](https://www.youtube.com/watch?v=SB4lgATn-s8). Yan Liu, Sammi Chen.
+* ApacheCon North America 2022: Performance of Apache Ozone on NVMe. Wei-Chiu Chuang, Ritesh Shukla. [Slides](/assets/04_Chuang_Performance_of_Apache.pdf)
+* China Apache Hadoop Meetup 2022: What's new in Apache Ozone 1.3. Sammi Chen. [Slides](/assets/What%27sNewInApacheOzone-v3.pdf)
+* ApacheCon Asia 2022: [Sharing Of Recent Progress And Practices In Apache Ozone](https://www.youtube.com/watch?v=SB4lgATn-s8). Yan Liu, Sammi Chen. [Slides](/assets/ApacheConAsia2022_Yan_Sammi.pdf)
 * ApacheCon Asia 2022: [Disaster Recovery In Apache Ozone](https://www.youtube.com/watch?v=E97fYFZJ2LQ). Sadanand Shenoy, Rakesh Radhakrishnan.
 * ApacheCon Asia 2022: [Apache Ozone Behind Simulation And Ai Industries](https://www.youtube.com/watch?v=EmpHluBOesg). Kota Uenishi.
 * ApacheCon Asia 2022: [Apache Ozone: Multi-Protocol Aware System Handles Both Files And Objects Efficiently](https://www.youtube.com/watch?v=HN7PWX9TdAE). Radhakrishnan Rakesh, Singh Mukul Kumar.
