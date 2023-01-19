@@ -6,7 +6,7 @@
     <description>Recent content on Apache Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2020 Apache Software Foundation</copyright>
+    <copyright>&amp;copy; 2022 Apache Software Foundation</copyright>
     <lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Release 1.3.0 available</title>
@@ -139,6 +139,17 @@ The Ozone developer mailing list is: dev@ozone.apache.org.
  Subscribe to List Unsubscribe from List Archives  Commits If you’d like to see changes made in the Ozone version control system, please subscribe to the Ozone commits mailing list.
 The Ozone commits mailing list is: commits@ozone.apache.org.
  Subscribe to List Unsubscribe from List Archives  Issues If you’d like to see changes made in the Ozone issue tracking system, please subscribe to the Ozone issues mailing list.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Events</title>
+      <link>https://ozone.apache.org/events/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/events/</guid>
+      <description>Past Meetups The first ever Apache Ozone User Group Summit was held at Cloudera&amp;rsquo;s headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. Meetup link YouTube recording Slide deck
+The following was the list of agenda:
+ Opening, Karthik Krishnamoorthy Recording Apache Ozone - Scalable, redundant distributed object store Recording Bucket types and FSO improvements, Ethan Rose Recording Apache Ozone snapshots - new design, Prashant Pogde, Siyao Meng Recording Apache Ozone Performance, Ritesh Shukla, Recording    Past Conference Talks 2022  ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding.</description>
     </item>
     
   </channel>
