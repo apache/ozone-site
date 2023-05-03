@@ -20,7 +20,7 @@ on:
 jobs:
   build:
     name: regenerate
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout branch with source
         uses: actions/checkout@v2
