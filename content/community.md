@@ -46,6 +46,10 @@ Ozone was approved as a separate Apache project in Oct. 2020, and the previous m
 
 If you would like to join the Ozone Slack Channel, please use this link to get self-invited  https://s.apache.org/slack-invite and join the **#ozone** channel.
 
+## GitHub Discussions
+
+[GitHub Discussions](https://github.com/apache/ozone/discussions) is an alternative to Slack and only needs a GitHub account to interact with the community.
+
 ## Ozone Community Calls
 
 Please refer to [this page](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Community+Calls) to get more information.
