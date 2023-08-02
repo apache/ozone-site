@@ -15,7 +15,7 @@ While the technical answer is Yes, there is always a question of why you are not
 Not that we know.  Ozone is an Apache-licensed open source product; Nothing prevents someone from offering Ozone as a product in the cloud.
 
 ### I have an Apache Spark Application. How do I use it with Ozone?
-You have a Spark based application and you want it to work with Ozone. If your current storage system is HDFS, then you are passing the location of data to your application by using an URL that begins with hdfs://. If you replace hdfs:// with ofs:// Spark application will start using data from an Ozone bucket.
+You have a Spark based application and you want it to work with Ozone. If you were using HDFS, your data location URL would start with `hdfs://`, or that is implied by the client's `fs.defaultFS` config. Because Ozone `ofs://` is a Hadoop-compatible File System (HCFS) interface, as long as Ozone client jars and configurations are correctly set up (in `core-site.xml` and `ozone-site.xml`), you could simply replace `hdfs://` with `ofs://`. Your Spark application would then start using data from an Ozone bucket (e.g. `ofs://om-service/volume1/bucket1/`).
 
 ### I have an application that is reading and writing to S3 buckets. How do I use it with Ozone?
 Ozone supports S3 protocol as a first-class interface. So you can take an existing S3 based application and change the S3 server address. That is it.
