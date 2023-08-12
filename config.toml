@@ -12,7 +12,7 @@
 # limitations under the License. See accompanying LICENSE file.
 #
 title = "Apache Ozone"
-copyright = "&copy; {year} The Apache Software Foundation"
+copyright = "© {year} The Apache Software Foundation"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
 uglyurls = false
