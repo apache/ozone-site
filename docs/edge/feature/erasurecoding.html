@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/snapshot.html">Ozone Snapshot</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone Erasure Coding</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/feature/erasurecoding.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone Erasure Coding</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h2 id="background">Background</h2>
+<p>Distributed systems basic expectation is to provide the data durability.
+To provide the higher data durability, many popular storage systems use replication
+approach which is expensive. The Apache Ozone supports <code>RATIS/THREE</code> replication scheme.
+The Ozone default replication scheme <code>RATIS/THREE</code> has 200% overhead in storage
+space and other resources (e.g., network bandwidth).
+However, for warm and cold datasets with relatively low I/O activities, additional
+block replicas rarely accessed during normal operations, but still consume the same
+amount of resources as the first replica.</p>
+<p>Therefore, a natural improvement is to use Erasure Coding (EC) in place of replication,
+which provides the same level of fault-tolerance with much less storage space.
+In typical EC setups, the storage overhead is no more than 50%. The replication factor of an EC file is meaningless.
+Instead of replication factor, we introduced ReplicationConfig interface to specify the required type of replication,
+either <code>RATIS/THREE</code> or <code>EC</code>.</p>
+<p>Integrating EC with Ozone can improve storage efficiency while still providing similar
+data durability as traditional replication-based Ozone deployments.
+As an example, a 3x replicated file with 6 blocks will consume 6*3 = <code>18</code> blocks of disk space.
+But with EC (6 data, 3 parity) deployment, it will only consume <code>9</code> blocks of disk space.</p>
+<h2 id="architecture">Architecture</h2>
+<p>The storage data layout is a key factor in the implementation of EC. After deep analysis
+and several technical consideration, the most fitting data layout is striping model.
+The data striping layout is not new. The striping model already adapted by several other
+file systems(Ex: Quantcast File System, Hadoop Distributed File System etc) successfully before.</p>
+<p>For example, with the EC (6 data, 3 parity) scheme, the data chunks will be distributed to first 6 data nodes in order
+and then client generates the 3 parity chunks and transfer to remaining 3 nodes in order.
+These 9 chunks together we call as &ldquo;Stripe&rdquo;. Next 6 chunks will be distributed to the same first 6 data nodes again
+and the parity to remaining 3 nodes. These 9 data nodes stored blocks together called as &ldquo;BlockGroup&rdquo;.</p>
+<p>If the application is continuing to write beyond the size of <code>6 * BLOCK_SIZE</code>, then client will request new block group from Ozone Manager.</p>
+<h3 id="erasure-coding-write">Erasure Coding Write</h3>
+<p>The core logic of erasure coding writes are placed at ozone client.
+When client creates the file, ozone manager allocates the block group(<code>d + p</code>)
+number of nodes from the pipeline provider and return the same to client.
+As data is coming in from the application, client will write first d number of chunks
+to d number of data nodes in block group. It will also cache the d number chunks
+to generate the parity chunks. Once parity chunks generated, it will transfer the
+same to the remaining p nodes in order. Once all blocks reached their configured sizes,
+client will request the new block group nodes.</p>
+<p>Below diagram depicts the block allocation in containers as logical groups.
+For interest of space, we assumed EC(3, 2) Replication Config for the diagram.</p>
+<p>
+
+<img src="EC-Write-Block-Allocation-in-Containers.png" alt='EC Block Allocation in Containers'  class="img-responsive" /></p>
+<p>Let&rsquo;s zoom out the blockID: 1 data layout from the above picture, that showed in the following picture.
+This picture shows how the chunks will be layed out in data node blocks.</p>
+<p>
+
+<img src="EC-Chunk-Layout.png" alt='EC Chunk Layout'  class="img-responsive" /></p>
+<p>Currently, the EC client re-used the data transfer end-points to transfer the data to data nodes.
+The XceiverClientGRPC client used for writing data and putBlock info.
+The datanode side changes are minimal as we reused the same existing transfer protocols.
+The EC data block written at the datanode is same as any other block in non-EC mode.
+In a single block group, container id numbers are same in all nodes. A file can have multiple block groups.
+Each block group will have <code>d+p</code> number of block and all ids are same.</p>
+<p><strong>d</strong> - Number of data blocks in a block group</p>
+<p><strong>p</strong> - Number of parity blocks in a block group</p>
+<h3 id="erasure-coding-read">Erasure Coding Read</h3>
+<p>For reads, OM will provide the node location details as part of key lookup.
+If the key is erasure coded, Ozone client reads it in EC fashion. Since the data layout
+is different(see the previous section about write path), reads should consider the layout and do the reads accordingly.</p>
+<p>The EC client will open the connections to DNs based on the expected locations. When all data locations are available,
+it will attempt to do plain reads chunk by chunk in round robin fashion from d data blocks.</p>
+<p>Below picture shows the order when there are no failures while reading.</p>
+<p>
+
+<img src="EC-Reads-With-No-Failures.png" alt='EC Reads With no Failures'  class="img-responsive" /></p>
+<p>Until it sees read failures, there is no need of doing EC reconstruction.</p>
+<h4 id="erasure-coding-on-the-fly-reconstruction-reads">Erasure Coding On-the-fly Reconstruction Reads</h4>
+<p>When client detects there are failures while reading or when starting the reads,
+Ozone EC client is capable of reconstructing/recovering the lost data by doing the EC decoding.
+To do the EC decoding it needs to read parity replicas. This is a degraded read as it needs to do reconstruction.
+This reconstruction is completely transparent to the applications.</p>
+<p>Below picture depicts how it uses parity replicas in reconstruction.</p>
+<p>
+
+<img src="EC-Reconstructional-Read.png" alt='EC Reconstructional Reads'  class="img-responsive" /></p>
+<h3 id="erasure-coding-replication-config">Erasure Coding Replication Config</h3>
+<p>Apache Ozone built with the pure &lsquo;Object Storage&rsquo; semantics. However, many big data
+eco system projects still uses file system APIs. To provide both worlds best access to Ozone,
+it&rsquo;s provided both faces of interfaces. In both cases, keys/files would be written into buckets under the hood.
+So, EC Replication Configs can be set at bucket level.
+The EC policy encapsulates how to encode/decode a file.
+Each EC Replication Config defined by the following pieces of information:</p>
+<ol>
+<li><strong>data:</strong> Data blocks number in an EC block group.</li>
+<li><strong>parity:</strong> Parity blocks number in an EC block group.</li>
+<li><strong>ecChunkSize:</strong> The size of a striping chunk. This determines the granularity of striped reads and writes.</li>
+<li><strong>codec:</strong> This is to indicate the type of EC algorithms (e.g., <code>RS</code>(Reed-Solomon), <code>XOR</code>).</li>
+</ol>
+<p>To pass the EC Replication Config in command line or configuration files, we need to use the following format:
+<em>codec</em>-<em>num data blocks</em>-<em>num parity blocks</em>-<em>ec chunk size</em></p>
+<p>Currently, there are three built-in EC Replication Configs supported: <code>RS-3-2-1024k</code>, <code>RS-6-3-1024k</code>, <code>XOR-2-1-1024k</code>.
+The most recommended option is <code>RS-6-3-1024k</code>. When a key/file created without specifying the Replication Config,
+it inherits the EC Replication Config of its bucket if it&rsquo;s available.</p>
+<p>Changing the bucket level EC Replication Config only affect new files created within the bucket.
+Once a file has been created, its EC Replication Config cannot be changed currently.</p>
+<h2 id="deployment">Deployment</h2>
+<h3 id="cluster-and-hardware-configuration">Cluster and Hardware Configuration</h3>
+<p>EC places additional demands on the cluster in terms of CPU and network.
+Encoding and decoding work consumes additional CPU on both Ozone clients and DataNodes.
+EC requires a minimum of as many DataNodes in the cluster as the configured EC stripe width. For the EC Replication Config <code>RS</code> (6,3), we need
+a minimum of 9 DataNodes.</p>
+<p>Erasure Coded keys/files also spread across racks for rack fault-tolerance.
+This means that when reading and writing striped files, most operations are off-rack.
+Network bisection bandwidth is thus very important.</p>
+<p>For rack fault-tolerance, it is also important to have enough number of racks,
+so that on average, each rack holds number of blocks no more than the number of EC parity blocks.
+A formula to calculate this would be (data blocks + parity blocks) / parity blocks, rounding up.
+For <code>RS</code> (6,3) EC Replication Config, this means minimally 3 racks (calculated by (6 + 3) / 3 = 3),
+and ideally 9 or more to handle planned and unplanned outages.
+For clusters with fewer racks than the number of the parity cells, Ozone cannot maintain rack fault-tolerance,
+but will still attempt to spread a striped file across multiple nodes to preserve node-level fault-tolerance.
+Due to this reason, it is recommended to setup racks with similar number of DataNodes.</p>
+<h3 id="configurations">Configurations</h3>
+<p>EC Replication Config can be enabled at bucket level as discussed above.
+Cluster wide default Replication Config can be set with EC Replication Config by using
+the configuration keys <code>ozone.server.default.replication.type</code> and <code>ozone.server.default.replication</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+
+<span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+</code></pre></div><p>Please note, the above configurations will be used only when client does not pass
+any replication config or bucket does not have any default values.</p>
+<h4 id="setting-ec-replication-config-on-bucket">Setting EC Replication Config On Bucket</h4>
+<p>We can set the bucket EC Replication Config via ozone sh command. The EC Replication Config options can be passed while creating the bucket.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
+</code></pre></div><p>We can also reset the EC Replication Config with the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
+</code></pre></div><p>Once we reset, only newly created keys take effect of this new setting. Prior created keys in the bucket stay with same older setting.</p>
+<h4 id="setting-ec-replication-config-while-creating-keysfiles">Setting EC Replication Config While Creating Keys/Files</h4>
+<p>We can pass the EC Replication Config while creating the keys irrespective of bucket Replication Config.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
+</code></pre></div><p>In the case bucket already has default EC Replication Config, there is no need of passing EC Replication Config while creating key.</p>
+<h3 id="enable-intel-isa-l">Enable Intel ISA-L</h3>
+<p>Intel Intelligent Storage Acceleration Library (ISA-L) is an open-source collection of optimized low-level functions used for
+storage applications. Enabling ISA-L allows significantly improve EC performance.</p>
+<h4 id="prerequisites">Prerequisites</h4>
+<p>To enable ISA-L you will also require Hadoop native libraries (libhadoop.so).</p>
+<h4 id="installation">Installation</h4>
+<p>Both libraries should be placed to the directory specified by the java.library.path property or set by  <code>LD_LIBRARY_PATH</code> environment variable.
+The default value of java.library.path depends on the OS and Java version. For example, on Linux with OpenJDK 8 it is <code>/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</code>.</p>
+<h4 id="verification">Verification</h4>
+<p>You can check if ISA-L is accessible to Ozone by running the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone checknative
+</code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../feature/snapshot.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.4.0-SNAPSHOT, Last Modified: September 7, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f44d5354288ef95a99747ac8929df89d5807ba77">f44d535</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
