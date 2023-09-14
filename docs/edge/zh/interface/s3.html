@@ -496,7 +496,8 @@ s=d.getElementsByTagName('script')[0];
 ozone s3 getsecret
 awsAccessKey<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
 awsSecret<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
-</code></pre></div><p>现在你可以使用 key 和 secret 来访问 S3 endpoint：</p>
+</code></pre></div><p>注意：自 Ozone 1.4.0 起，使用 <code>getsecret</code> 生成的密钥<strong>仅会显示一次</strong>。若密钥丢失，用户必须先 <code>revokesecret</code>，再用 <code>getsecret</code> 生成新的密钥。</p>
+<p>现在你可以使用 key 和 secret 来访问 S3 endpoint：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
 export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
 aws s3api --endpoint http://localhost:9878 create-bucket --bucket bucket1
@@ -538,7 +539,7 @@ ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: September 7, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f44d5354288ef95a99747ac8929df89d5807ba77">f44d535</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: September 14, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/0787bd05b3adfff31d77092066dd2d439bedc78d">0787bd0</a>
     </span>
   </div>
 </footer>

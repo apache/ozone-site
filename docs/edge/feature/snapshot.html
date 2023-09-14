@@ -496,7 +496,11 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot diff <span style="color:#f92672">[</span>-chV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p<span style="color:#f92672">=</span>&lt;pageSize&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t<span style="color:#f92672">=</span>&lt;continuation-token&gt;<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;fromSnapshot&gt; &lt;toSnapshot&gt;
 </code></pre></div><p>SnapshotDiff CLI/API is asynchronous. The first time the API is invoked, OM starts a background thread to calculate the SnapshotDiff, and returns &ldquo;Retry&rdquo; with suggested duration for the retry operation. Once the SnapshotDiff is computed, this API returns the diffs in multiple Pages. Within each Diff response, OM also returns a continuation token for the client to continue from the last batch of Diff results.  This API is safe to be called multiple times for a given snapshot source and destination pair. Internally each Ozone Manager computes Snapdiff only once and stores it for future invocations of the same Snapshot Diff API.</p>
-<h2 id="architecture">Architecture</h2>
+<ul>
+<li>List SnapshotDiff Jobs: List all snapshotDiff jobs of a given bucket</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot listDiff <span style="color:#f92672">[</span>-ahV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;jobStatus&gt;<span style="color:#f92672">]</span> &lt;bucket&gt;
+</code></pre></div><h2 id="architecture">Architecture</h2>
 <p>Ozone Snapshot architecture leverages the fact that data blocks once written, remain immutable for their lifetime. These data blocks are reclaimed only when the object key metadata that references them, is deleted from the Ozone namespace. All of this Ozone metadata is stored on the OM nodes in the Ozone cluster. When a user takes a snapshot of an Ozone bucket, internally the system takes snapshot of the Ozone metadata in OM nodes. Since Ozone doesn&rsquo;t allow updates to datanode blocks, integrity of data blocks referenced by Ozone metadata snapshot in OM nodes remains intact. Ozone key deletion service is also aware of Ozone snapshots.  Key deletion service does not reclaim any key as long as it is referenced by the active object store bucket or any of its snapshot. When the snapshots are deleted, a background garbage collection service reclaims any key that will not be part of any snapshot or active object store.
 Ozone also provides SnapshotDiff API. Whenever a user issues a SnapshotDiff between two snapshots, it efficiently calculates all the keys that are different between these two snapshots and returns paginated diff list result.</p>
 <h2 id="deployment">Deployment</h2>
@@ -523,7 +527,7 @@ Ozone also provides SnapshotDiff API. Whenever a user issues a SnapshotDiff betw
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: September 7, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f44d5354288ef95a99747ac8929df89d5807ba77">f44d535</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: September 14, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/0787bd05b3adfff31d77092066dd2d439bedc78d">0787bd0</a>
     </span>
   </div>
 </footer>
