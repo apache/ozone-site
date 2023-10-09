@@ -489,22 +489,17 @@ If a property is reconfigurable, you can modify it in the configuration file (<c
 </ul>
 </li>
 </ul>
+<h2 id="retrieve-the-reconfigurable-properties-list">Retrieve the reconfigurable properties list</h2>
+<p>To retrieve all the reconfigurable properties list for a specific component in Ozone,
+you can use the command: <code>ozone admin reconfig --address=&lt;ip:port&gt; properties</code>.
+This command will list all the properties that can be dynamically reconfigured at runtime for specific component.<br></p>
+<blockquote>
+<p>For example, get the Ozone OM reconfigurable properties list.</p>
+<p>$ <code>ozone admin reconfig --address=hadoop1:9862 properties</code><br>
+OM: Node [hadoop1:9862] Reconfigurable properties:<br>
+ozone.administrators</p>
+</blockquote>
 <h2 id="om-reconfigurability">OM Reconfigurability</h2>
-<p><strong>Reconfigurable properties</strong></p>
-<table>
-<thead>
-<tr>
-<th>key</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.administrators</td>
-<td>OM startup user will be added to admin by default</td>
-</tr>
-</tbody>
-</table>
 <blockquote>
 <p>For example, modify <code>ozone.administrators</code> in ozone-site.xml and execute:</p>
 <p>$ <code>ozone admin reconfig --address=hadoop1:9862 start</code><br>
@@ -519,21 +514,6 @@ OM: Node [hadoop1:9862] Reconfigurable properties:<br>
 ozone.administrators</p>
 </blockquote>
 <h2 id="scm-reconfigurability">SCM Reconfigurability</h2>
-<p><strong>Reconfigurable properties</strong></p>
-<table>
-<thead>
-<tr>
-<th>key</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.administrators</td>
-<td>OM startup user will be added to admin by default</td>
-</tr>
-</tbody>
-</table>
 <blockquote>
 <p>For example, modify <code>ozone.administrators</code> in ozone-site.xml and execute:</p>
 <p>$ <code>ozone admin reconfig --address=hadoop1:9860 start</code><br>
@@ -548,15 +528,6 @@ SCM: Node [hadoop1:9860] Reconfigurable properties:<br>
 ozone.administrators</p>
 </blockquote>
 <h2 id="datanode-reconfigurability">Datanode Reconfigurability</h2>
-<p><strong>Reconfigurable properties</strong></p>
-<table>
-<thead>
-<tr>
-<th>key</th>
-<th>description</th>
-</tr>
-</thead>
-</table>
 <blockquote>
 <p>For example, modify <code>ozone.example.config</code> in ozone-site.xml and execute:</p>
 <p>$ <code>ozone admin reconfig --address=hadoop1:9864 start</code><br>
@@ -604,7 +575,7 @@ Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: October 7, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/0a11bba5aa277a26c9b7c24adb6367fd13c9c1aa">0a11bba</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: October 9, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1199db55ea7b2e3410f4485446e202a4b73f0b28">1199db5</a>
     </span>
   </div>
 </footer>
