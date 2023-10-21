@@ -469,7 +469,7 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>#DataNode Decommission</p>
+<h1 id="datanode-decommission">DataNode Decommission</h1>
 <p>The DataNode decommission is the process that removes the existing DataNode from the Ozone cluster while ensuring that the new data should not be written to the decommissioned DataNode. When you initiate the process of decommissioning a DataNode, Ozone automatically ensures that all the storage containers on that DataNode have an additional copy created on another DataNode before the decommission completes. So, datanode will keep running after it has been decommissioned and may be used for reads, but not for writes until it is stopped manually.</p>
 <p>When we initiate the process of decommissioning, first we check the current state of the node, ideally it should be &ldquo;IN_SERVICE&rdquo;, then we change it&rsquo;s state to &ldquo;DECOMMISSIONING&rdquo; and start the process of decommissioning, it goes through a workflow where the following happens:</p>
 <ol>
@@ -495,7 +495,7 @@ s=d.getElementsByTagName('script')[0];
 <p><strong>Note:</strong> To recommission a datanode you may execute the below command in cli,</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
        <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
-</code></pre></div><h2 id="om-decommission">OM Decommission</h2>
+</code></pre></div><h1 id="om-decommission">OM Decommission</h1>
 <p>Ozone Manager (OM) decommissioning is the process in which you gracefully remove one of the OM from the OM HA Ring.</p>
 <p>To decommission an OM and remove the node from the OM HA ring, the following steps need to be executed.</p>
 <ol>
@@ -509,13 +509,18 @@ other OMs.</li>
 <h1 id="scm-decommission">SCM Decommission</h1>
 <p>Storage Container Manager (SCM) decommissioning is the process in which you can gracefully remove one of the SCM from the SCM HA Ring.</p>
 <p>To decommission a SCM and remove the node from the SCM HA ring, the following steps need to be executed.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -nodeid<span style="color:#f92672">=</span>&lt;nodeId&gt;
-                                    <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -nodeid<span style="color:#f92672">=</span>&lt;nodeId&gt;
 </code></pre></div><p>You can obtain the &lsquo;nodeId&rsquo; by executing this command, <strong>&ldquo;ozone admin scm roles&rdquo;</strong></p>
-<p><strong>Note -</strong> If you want to decommission a <strong>primordial</strong> scm, you may first transfer the leadership to a non primordial scm and then decommission the primordial scm.</p>
+<h3 id="leader-scm">Leader SCM</h3>
+<p>If you want to decommission the <strong>leader</strong> scm, you must first transfer the leadership to a different scm and then decommission the node.</p>
 <p>To transfer the leader, we can excute below command,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm transfer --service-id<span style="color:#f92672">=</span>scmservice -n <span style="color:#e6db74">${</span>nodeId<span style="color:#e6db74">}</span>
-</code></pre></div><p>After successful leadership change we can follow the above decommissioning command to decommission the scm node.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm transfer <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -n<span style="color:#f92672">=</span>&lt;nodeId&gt;
+</code></pre></div><p>After successful leadership change you can proceed with decommissioning.</p>
+<h3 id="primordial-scm">Primordial SCM</h3>
+<p>If you want to decommission the <strong>primordial</strong> scm, you have to change the <em>ozone.scm.primordial.node.id</em> property to point to a different SCM and then proceed with decommissioning.</p>
+<h3 id="note">Note</h3>
+<p>During SCM decommissioning the private key of the decommissioned SCM should be manually deleted. The private keys can be found inside <em>hdds.metadata.dir</em>.</p>
+<p>Manual deletion is needed until we have certificate revocation support (HDDS-8399)</p>
 
 
           
@@ -535,7 +540,7 @@ other OMs.</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: October 20, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/73e4e5b3bc9a9c45bafb63ff9aae6209c3120624">73e4e5b</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: October 21, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3117c6d8ae5c5a0097bd55e3501d82de384124e7">3117c6d</a>
     </span>
   </div>
 </footer>
