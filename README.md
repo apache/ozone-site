@@ -12,31 +12,8 @@
  limitations under the License. See accompanying LICENSE file.
 -->
 
-# Apache Ozone web page
+# Apache Ozone Website v2
 
-This is the source code of the website of Apache Ozone.
+Welcome to the development branch of the new and improved Apache Ozone website. The new site will be built with [docusaurus](https://docusaurus.io/). This README will be updated as the framework for the new site is committed.
 
-To render it you need hugo static site generator (https://gohugo.io/getting-started/installing) which is available for the most popular platforms as a single binary.
-
-To check the rendered website use the following command (and check the temporary, rendered version at `./public`):
-
-```
-hugo
-```
-
-To develop the site use
-
-```
-hugo serve
-```
-
-which starts an internal server where you can always check the final rendered version.
-
-## Update ozone.apache.org
-
-For modify the content the [Ozone site](https://ozone.apache.org) the rendered version should be committed to the [asf-site](https://github.com/apache/ozone-site/tree/asf-site) branch.
-
-This is handled by a [Github Action](https://github.com/apache/ozone-site/blob/master/.github/workflows/regenerate.yml) which refresh the rendered branch and commit the changes: *It's enough to modify the source files on this branch, no other action is required.* Updating the Hugo source files on this branch will automatically update the site itself.
-
-Publishing the `asf-site` branch as the https://ozone.apache.org is configured by the [.asf.yaml descriptor](https://github.com/apache/ozone-site/blob/asf-site/.asf.yaml).
 
