@@ -1,0 +1,8 @@
+{
+  "label": "Example Summary",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "The index page for sections under this header"
+  }
+}
