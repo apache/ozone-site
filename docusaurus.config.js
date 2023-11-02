@@ -35,9 +35,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // TODO when docs are moved within the ozone site repo, update this link to their base directory.
+          // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site',
+            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
