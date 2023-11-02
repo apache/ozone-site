@@ -21,6 +21,8 @@ github:
     squash:  true
     merge:   false
     rebase:  false
+  autolink_jira:
+    - HDDS
 notifications:
   commits:      commits@ozone.apache.org
   issues:       issues@ozone.apache.org
