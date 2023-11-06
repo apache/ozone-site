@@ -71,7 +71,3 @@ You will need a Node package manager like npm, yarn, or pnpm installed to run th
 - `docs`
   - Documentation pages.
   - See https://docusaurus.io/docs/create-doc
-
-
-
-
