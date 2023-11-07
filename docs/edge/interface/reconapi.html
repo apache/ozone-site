@@ -1120,6 +1120,101 @@ map to the first bin (index); for keys larger than <code>1 PB</code>, map to the
      	<span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
      	<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
      }
+</code></pre></div><h2 id="volumes-admin-only">Volumes (admin only)</h2>
+<h3 id="get-apiv1volumes">GET /api/v1/volumes</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the volume after the given prevKey.
+Example: prevKey=vol1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the volumes in the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
+     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+     	<span style="color:#f92672">&#34;volumes&#34;</span>: [{
+          <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+          <span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>,
+          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176660</span> ,
+          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590397315</span>,
+          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">2048</span>,
+          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">10</span>,
+          <span style="color:#f92672">&#34;acls&#34;</span>: [
+            {
+              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+                <span style="color:#e6db74">&#34;READ&#34;</span>,
+                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+              ]
+            }
+          ]
+        },
+        <span style="color:#960050;background-color:#1e0010">...</span>
+        ]
+     }
+</code></pre></div><h2 id="buckets-admin-only">Buckets (admin only)</h2>
+<h3 id="get-apiv1buckets">GET /api/v1/buckets</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>volume (optional)</p>
+<p>The volume in string without any protocol prefix.</p>
+</li>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the bucket after the given prevKey. prevKey is ignored if volume is not specified.
+Example: prevKey=bucket1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the buckets in the cluster if volume is not specified or it is an empty string.
+If <code>volume</code> is specified, it returns only the buckets under <code>volume</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
+     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+     	<span style="color:#f92672">&#34;buckets&#34;</span>: [{
+          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;buck1&#34;</span>,
+          <span style="color:#f92672">&#34;versioning&#34;</span>: <span style="color:#66d9ef">false</span>,
+          <span style="color:#f92672">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
+          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176616</span>,
+          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590392293</span>,
+          <span style="color:#f92672">&#34;usedBytes&#34;</span>: <span style="color:#ae81ff">943718400</span>,
+          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">40000</span>,
+          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">50000</span>,
+          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+          <span style="color:#f92672">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;OBJECT_STORE&#34;</span>,
+          <span style="color:#f92672">&#34;acls&#34;</span>: [
+            {
+              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+                <span style="color:#e6db74">&#34;READ&#34;</span>,
+                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+              ]
+            }
+          ]
+        },
+        <span style="color:#960050;background-color:#1e0010">...</span>
+        ]
+     }
 </code></pre></div><h2 id="datanodes">Datanodes</h2>
 <h3 id="get-apiv1datanodes">GET /api/v1/datanodes</h3>
 <p><strong>Parameters</strong></p>
@@ -1282,7 +1377,7 @@ Example: /api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: November 6, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/9f67f4b1b59544493c02ce56a70250bfb7c5af78">9f67f4b</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: November 7, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/11ea8a7a18ad17da002a184d1c3bb3abc77ea07c">11ea8a7</a>
     </span>
   </div>
 </footer>
