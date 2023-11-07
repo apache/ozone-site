@@ -32,21 +32,21 @@ Welcome to the development branch of the new and improved Apache Ozone website. 
 
 ## Previewing the New Website Locally
 
-You will need a Node package manager like npm, yarn, or pnpm installed to run these commands. Once installed, there are two ways to preview the website locally. Each option will launch the site at `localhost:3000` on your machine.
+Install [pnpm](https://pnpm.io/installation), which will be used to build the site. Once installed, there are two ways to preview the website locally. Each option will launch the site at `localhost:3000` on your machine.
 
 1. **Development Server** (See [Docusaurus docs](https://docusaurus.io/docs/installation#running-the-development-server))
 
 - This option will start the Docusaurus development server. It will not produce a `build` directory with build artifacts, and allows updates to website files to be displayed in the browser in real time.
 
-- Run `npm run start` from the repository root to start the development server.
+- Run `pnpm start` from the repository root to start the development server.
 
 2. **Local Build** (See [Docusaurus docs](https://docusaurus.io/docs/installation#build))
 
 - This option will do a production build, putting artifacts in the `build` directory. This can still be previewed locally, but will not automatically reflect changes to website files.
 
-- Run `npm run build` from the repository root to build the content.
+- Run `pnpm build` from the repository root to build the content.
 
-- Run `npm run serve` to preview the built website locally.
+- Run `pnpm serve` to preview the built website locally.
 
 ## Updating the Website
 
