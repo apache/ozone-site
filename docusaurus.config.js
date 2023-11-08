@@ -120,6 +120,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+    scripts: ['/script/matomo.js'],
 };
 
 module.exports = config;
