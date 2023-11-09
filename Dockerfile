@@ -22,10 +22,9 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Install dependencies to /ozone-site-deps/node_modules as part of the image.
+# Install dependencies to /ozone-site/node_modules as part of the image.
 WORKDIR /ozone-site
 COPY package.json .
 COPY pnpm-lock.yaml .
-# ERROR: Complains about peer dependencies.
+# Lockfile should not be changed when installing dependencies, hence freezing it.
 RUN pnpm install --frozen-lockfile
-# RUN pnpm install
