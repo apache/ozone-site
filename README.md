@@ -54,6 +54,24 @@ Once installed, there are two ways to preview the website locally. Each option w
 
   2. Run `pnpm serve` to preview the built website locally.
 
+- **Containerized Build (Recommended)**: This is the easiest way to preview the website and the easiest for any developer who would want to contribute to the project.
+**Prerequisites**:
+  
+  - Docker
+  - Docker Compose
+
+  The project has included `Dockerfile` and `compose.yml` files to build and run the website in a containerized environment.
+
+    1. Make sure the current repository is the working directory.
+        - Default port is mapped to **3000**. Make changes accordingly if this is already being used in the local machine.
+    2. Run `docker-compose up`.
+    3. Preview for the website will be available at `localhost:3000`
+
+  Any changes made in the repository will be reflected in the preview. No extra installation required.
+
+
+
+
 ### Updating the Website
 
 The following files can be modified to change various aspects of the website:
