@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, redundant, and distributed object store',
-  favicon: 'img/favicon.ico',
+  favicon: 'static/img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://ozone.apache.org',
