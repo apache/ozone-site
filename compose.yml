@@ -23,9 +23,9 @@ services:
       - 3000:3000
     volumes:
       - ".:/ozone-site"
-      # The below option is used to prevent overwriting of the docker image
-      # node_modules by the mounted volume's node_modules
-      # This would create an empty node_modules in the working directory of the local machine if not already present.
+      # The below option is used to prevent overwriting the node_modules directory in the docker image
+      # with the node_modules present in the mounted volume.
+      # This will create an empty node_modules directory in the working directory of the host if it is not already present.
       - /ozone-site/node_modules/
     working_dir: "/ozone-site"
     command: pnpm start --host '0.0.0.0'
