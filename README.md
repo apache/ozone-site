@@ -34,25 +34,49 @@ Welcome to the development branch of the new and improved Apache Ozone website. 
 
 ## Local Development
 
-### Setup
+Docusaurus supports previewing the website locally. Below are various options to launch a preview of the site at `localhost:3000` on your machine.
+
+### Option 1: Docker (Recommended)
+
+The project includes a `Dockerfile` and a `compose.yml` file to build and run the website in a containerized environment. This creates a docker image called `ozone-site-dev` with all the dependencies included, and uses it to run the [Docusaurus development server](https://docusaurus.io/docs/installation#running-the-development-server).
+
+1. Install [docker](https://docs.docker.com/engine/install/).
+
+2. Install [docker compose](https://docs.docker.com/compose/install/).
+
+3. Run `docker compose up` from the repository root.
+
+4. Preview the website at `localhost:3000` in your browser.
+
+  - Any changes made in the repository will be reflected in the preview.
+
+5. Press `Ctrl+C` or run `docker compose down` to stop the preview.
+
+### Option 2: pnpm
+
+Build and run the website locally with the `pnpm` package manager.
 
 1. Install [pnpm](https://pnpm.io/installation), which will be used to build the site.
 
 2. Install dependencies required to build the website by running `pnpm install` at the website root.
 
-### Preview
-
-Once installed, there are two ways to preview the website locally. Each option will launch the site at `localhost:3000` on your machine.
-
-- **Development Server** (See [Docusaurus docs](https://docusaurus.io/docs/installation#running-the-development-server)): This option will start the Docusaurus development server. It will not produce a `build` directory with build artifacts, and allows updates to website files to be displayed in the browser in real time.
+- [**Development Server**](https://docusaurus.io/docs/installation#running-the-development-server): This option will start the Docusaurus development server, which allows updates to website files to be displayed in the browser in real time. It will not produce a `build` directory with build artifacts.
 
   1. Run `pnpm start` from the repository root to start the development server.
 
-- **Local Build** (See [Docusaurus docs](https://docusaurus.io/docs/installation#build)): This option will do a production build, putting artifacts in the `build` directory. This can still be previewed locally, but will not automatically reflect changes to website files.
+  2. Preview the website at `localhost:3000` in your browser.
+
+  3. Press `Ctrl+C` to stop the preview.
+
+- [**Local Build**](https://docusaurus.io/docs/installation#build): This option will do a production build, putting artifacts in the `build` directory. This can still be previewed locally, but will not automatically reflect changes to website files.
 
   1. Run `pnpm build` from the repository root to build the content.
 
   2. Run `pnpm serve` to preview the built website locally.
+
+  3. Preview the website at `localhost:3000` in your browser.
+
+  4. Press `Ctrl+C` to stop the preview.
 
 ### Updating the Website
 
