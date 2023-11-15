@@ -749,6 +749,15 @@ There is a custom IdentityProvider implementation for Ozone that must be specifi
     </item>
     
     <item>
+      <title>Interactive Recon API Specification</title>
+      <link>/interface/swaggerreconapi.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/interface/swaggerreconapi.html</guid>
+      <description>    window.onload = function () { const ui = SwaggerUIBundle({ url: &#34;..\/swagger-resources\/recon-api.yaml&#34;, dom_id: &#39;#api-container&#39;, deepLinking: true, presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ], plugins: [ SwaggerUIBundle.plugins.DownloadUrl ], layout: &#34;StandaloneLayout&#34;, docExpansion: &#39;none&#39; }) window.ui = ui; }  </description>
+    </item>
+    
+    <item>
       <title>Access Ozone object store with Amazon Boto3 client</title>
       <link>/recipe/botoclient.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
