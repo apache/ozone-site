@@ -534,15 +534,15 @@ ozone.administrators</p>
 <h2 id="datanode-reconfigurability">Datanode Reconfigurability</h2>
 <blockquote>
 <p>For example, modify <code>ozone.example.config</code> in ozone-site.xml and execute:</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9864 start</code><br>
-Datanode: Started reconfiguration task on node [hadoop1:9864].</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9864 status</code><br>
-Datanode: Reconfiguring status for node [hadoop1:9864]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
+<p>$ <code>ozone admin reconfig --address=hadoop1:19864 start</code><br>
+Datanode: Started reconfiguration task on node [hadoop1:19864].</p>
+<p>$ <code>ozone admin reconfig --address=hadoop1:19864 status</code><br>
+Datanode: Reconfiguring status for node [hadoop1:19864]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
 SUCCESS: Changed property ozone.example.config<br>
 From: &ldquo;old&rdquo;<br>
 To: &ldquo;new&rdquo;</p>
-<p>$ <code>ozone admin reconfig -address=hadoop1:9864 properties</code><br>
-Datanode: Node [hadoop1:9864] Reconfigurable properties:<br>
+<p>$ <code>ozone admin reconfig -address=hadoop1:19864 properties</code><br>
+Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
 ozone.example.config</p>
 </blockquote>
 <h3 id="batch-operation">Batch operation</h3>
@@ -552,11 +552,11 @@ Currently, only Datanode supports batch operations<br></p>
 <blockquote>
 <p>For example, to list the reconfigurable properties of all Datanodes:<br>
 $ <code>ozone admin reconfig --in-service-datanodes properties</code><br>
-Datanode: Node [hadoop1:9864] Reconfigurable properties:<br>
+Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
 ozone.example.config<br>
-Datanode: Node [hadoop2:9864] Reconfigurable properties:<br>
+Datanode: Node [hadoop2:19864] Reconfigurable properties:<br>
 ozone.example.config<br>
-Datanode: Node [hadoop3:9864] Reconfigurable properties:<br>
+Datanode: Node [hadoop3:19864] Reconfigurable properties:<br>
 ozone.example.config<br>
 Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 </blockquote>
@@ -579,7 +579,7 @@ Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.4.0-SNAPSHOT, Last Modified: November 22, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fbae1b873cc1a9c65c191aa4ce40baf6844f98d5">fbae1b8</a>
+      Version: 1.4.0-SNAPSHOT, Last Modified: November 23, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a17a93be3a86e9936f8fbe6bc6e5e59a94ace798">a17a93b</a>
     </span>
   </div>
 </footer>
