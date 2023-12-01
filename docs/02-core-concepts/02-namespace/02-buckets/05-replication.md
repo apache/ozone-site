@@ -1,5 +1,5 @@
 ---
-sidebar_label: Default Replication Types
+sidebar_label: Default Replication Type
 ---
 
-# Bucket Level Default Replication Types
+# Bucket Level Default Replication Type

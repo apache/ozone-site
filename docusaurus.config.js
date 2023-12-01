@@ -34,6 +34,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          // path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // TODO update this link when the new website's branch is merged.
           editUrl:
@@ -50,7 +51,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // TODO Generate social card for Ozone.
-      // image: 'img/docusaurus-social-card.jpg',
+      // image: 'img/ozone-social-card.jpg',
       navbar: {
         title: 'Apache Ozone',
         logo: {
@@ -58,11 +59,110 @@ const config = {
           src: 'img/ozone-logo.svg',
         },
         items: [
+          /*
+          quick 
+          roadmap
+          downloads ( link to release notes)
+          community
+            who Uses ozone?
+            communication channels
+            report an issue
+            how to contribute
+            blogs
+            events and recordings
+          faq
+          apache
+          */
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
+            to: 'docs/getting-started/quick-start/installation/docker',
+            label: 'Quick Start',
+          },
+          {
+            to: 'faq',
+            label: 'FAQ',
+          },
+          {
+            to: 'roadmap',
+            label: 'Roadmap',
+          },
+          {
+            to: 'download',
+            label: 'Download',
+          },
+          {
+            label: 'Community',
+            items: [
+              {
+                to: 'community/communication-channels',
+                label: 'Communication Channels',
+              },
+              {
+                to: 'community/who-uses-ozone',
+                label: 'Who Uses Ozone?',
+              },
+              {
+                to: 'community/report-an-issue',
+                label: 'Report An Issue',
+              },
+              {
+                to: 'community/how-to-contribute',
+                label: 'How to Contribute',
+              },
+              {
+                to: 'community/events-and-media',
+                label: 'Events and Media',
+              },
+              {
+                to: 'community/blogs',
+                label: 'Blogs',
+              },
+            ]
+          },
+          {
+            label: 'Apache',
+            items: [
+              {
+                label: 'Apache Software Foundation',
+                href: 'https://www.apache.org/'
+              },
+              {
+                label: 'Events',
+                href: 'https://www.apache.org/events/current-event'
+              },
+              {
+                label: 'License',
+                href: 'https://www.apache.org/licenses/'
+              },
+              {
+                label: 'Sponsors',
+                href: 'https://www.apache.org/foundation/thanks.html'
+              },
+              {
+                label: 'Sponsorship',
+                href: 'https://www.apache.org/foundation/sponsorship.html'
+              },
+              {
+                label: 'Privacy Policy',
+                href: 'https://privacy.apache.org/policies/privacy-policy-public.html'
+              },
+              {
+                label: 'Security',
+                href: 'https://www.apache.org/security/'
+              }
+            ]
+          },
+          // {
+          //   type: 'docsVersionDropdown',
+          //   position: 'right',
+          // },
+          {
             label: 'Docs',
+            to: 'docs',
+            position: 'right',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
           },
           {
             href: 'https://github.com/apache/ozone',

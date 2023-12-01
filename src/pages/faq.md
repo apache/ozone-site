@@ -1,11 +1,7 @@
----
-title: Example Markdown Page
-description: An example markdown page
-hide_table_of_contents: true
----
+# FAQ
 
-# Markdown page example
+Fill this in with each question as a level 2 header. Include link to Github discussions from this page for asking new questions and proposing additions to this page.
 
-- Example of a plain markdown page created outside of the docs section.
+## What is Ozone?
 
-- Viewable at `<host>/<file-name-without-extenion>`
+Someone answer this question.

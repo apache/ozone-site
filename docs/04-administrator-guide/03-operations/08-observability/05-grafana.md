@@ -2,5 +2,5 @@
 sidebar_label: Grafana
 ---
 
-# Charting Metrics with Grafana
+# Dashboarding Metrics with Grafana
 
