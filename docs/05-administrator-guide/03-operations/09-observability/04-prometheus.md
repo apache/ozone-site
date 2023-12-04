@@ -2,4 +2,4 @@
 sidebar_label: Prometheus
 ---
 
-# Tracking Metrics with Prometheus
+# Tracking Metrics With Prometheus
