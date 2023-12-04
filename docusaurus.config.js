@@ -8,7 +8,7 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
-  tagline: 'Scalable, redundant, and distributed object store',
+  tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -17,8 +17,9 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
+  // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -34,7 +35,6 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // TODO update this link when the new website's branch is merged.
           editUrl:
@@ -50,6 +50,15 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Optional: Add an announcement bat to the top of the website.
+      // announcementBar: {
+      //   id: 'announce',
+      //   backgroundColor: 'var(--color-accent)',
+      //   textColor: 'white',
+      //   content:
+      //       'Sample Announcement Content',
+      // },
+
       // TODO Generate social card for Ozone.
       // image: 'img/ozone-social-card.jpg',
       navbar: {
@@ -59,35 +68,22 @@ const config = {
           src: 'img/ozone-logo.svg',
         },
         items: [
-          /*
-          quick 
-          roadmap
-          downloads ( link to release notes)
-          community
-            who Uses ozone?
-            communication channels
-            report an issue
-            how to contribute
-            blogs
-            events and recordings
-          faq
-          apache
-          */
           {
-            to: 'docs/getting-started/quick-start/installation/docker',
-            label: 'Quick Start',
+            label: 'Docs',
+            to: 'docs',
+            position: 'left',
           },
           {
-            to: 'faq',
-            label: 'FAQ',
+            to: 'download',
+            label: 'Download',
           },
           {
             to: 'roadmap',
             label: 'Roadmap',
           },
           {
-            to: 'download',
-            label: 'Download',
+            to: 'faq',
+            label: 'FAQ',
           },
           {
             label: 'Community',
@@ -156,30 +152,31 @@ const config = {
           //   position: 'right',
           // },
           {
-            label: 'Docs',
-            to: 'docs',
-            position: 'right',
-          },
-          {
             type: 'localeDropdown',
             position: 'right',
           },
+          // {
+          //   href: 'https://github.com/apache/ozone',
+          //   label: 'GitHub',
+          //   position: 'right',
+          // },
           {
             href: 'https://github.com/apache/ozone',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub Repo',
           },
         ],
       },
       footer: {
         // TODO style the footer. Leaving the stock docusaurus one as a reference.
-        /*
         style: 'dark',
         links: [
           {
             title: 'Docs',
             items: [
               {
+                icon: 'img/ozone-logo.svg',
                 label: 'Tutorial',
                 to: '/docs/intro',
               },
@@ -213,14 +210,21 @@ const config = {
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      */
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        appId: "PLACEHOLDER",
+        apiKey: "PLACEHOLDER",
+        indexName: "PLACEHOLDER",
+        placeholder: "foobar",
+        searchParameters: {}
+      }
     }),
     scripts: ['/script/matomo.js'],
+    // TODO HDDS-9566
 };
 
 module.exports = config;
