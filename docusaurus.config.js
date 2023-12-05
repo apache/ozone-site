@@ -115,51 +115,9 @@ const config = {
             ]
           },
           {
-            label: 'Apache',
-            items: [
-              {
-                label: 'Apache Software Foundation',
-                href: 'https://www.apache.org/'
-              },
-              {
-                label: 'Events',
-                href: 'https://www.apache.org/events/current-event'
-              },
-              {
-                label: 'License',
-                href: 'https://www.apache.org/licenses/'
-              },
-              {
-                label: 'Sponsors',
-                href: 'https://www.apache.org/foundation/thanks.html'
-              },
-              {
-                label: 'Sponsorship',
-                href: 'https://www.apache.org/foundation/sponsorship.html'
-              },
-              {
-                label: 'Privacy Policy',
-                href: 'https://privacy.apache.org/policies/privacy-policy-public.html'
-              },
-              {
-                label: 'Security',
-                href: 'https://www.apache.org/security/'
-              }
-            ]
-          },
-          // {
-          //   type: 'docsVersionDropdown',
-          //   position: 'right',
-          // },
-          {
             type: 'localeDropdown',
             position: 'right',
           },
-          // {
-          //   href: 'https://github.com/apache/ozone',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
           {
             href: 'https://github.com/apache/ozone',
             position: 'right',
@@ -169,62 +127,108 @@ const config = {
         ],
       },
       footer: {
-        // TODO style the footer. Leaving the stock docusaurus one as a reference.
-        style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Apache Software Foundation',
             items: [
               {
-                icon: 'img/ozone-logo.svg',
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Foundation',
+                href: 'https://www.apache.org/'
               },
-            ],
+              {
+                label: 'License',
+                href: 'https://www.apache.org/licenses/'
+              },
+              {
+                label: 'Events',
+                href: 'https://www.apache.org/events/current-event'
+              },
+              {
+                label: 'Sponsorship',
+                href: 'https://www.apache.org/foundation/sponsorship.html'
+              },
+              {
+                label: 'Privacy',
+                href: 'https://privacy.apache.org/policies/privacy-policy-public.html'
+              },
+              {
+                label: 'Security',
+                href: 'https://www.apache.org/security/'
+              },
+              {
+                label: 'Thanks',
+                href: 'https://www.apache.org/foundation/thanks.html'
+              },
+            ]
           },
           {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'GitHub Discussions',
+                href: 'https://github.com/apache/ozone/discussions',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: 'Jira',
+                href: 'https://issues.apache.org/jira/projects/HDDS/issues',
+              },
+              {
+                label: 'Slack',
+                href: 'https://infra.apache.org/slack.html',
+              },
+              {
+                label: 'Mailing List',
+                href: 'mailto:dev@ozone.apache.org',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/@ApacheOzone',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/ApacheOzone',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Repositories',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'Ozone',
+                to: 'https://github.com/apache/ozone',
+              },
+              {
+                label: 'Website',
+                to: 'https://github.com/apache/ozone-site',
+              },
+              {
+                label: 'Docker Image',
+                to: 'https://github.com/apache/ozone-docker',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `
+        <div>
+          Copyright © ${new Date().getFullYear()} <a href="https://www.apache.org/">The Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>. <br>
+          <div>
+            <p>The Apache Software Foundation, Apache Ozone, Ozone, Apache, the Apache Feather, and the Apache Ozone project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p>
+          </div>
+        </div>`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      // TODO HDDS-9566
       algolia: {
         appId: "PLACEHOLDER",
         apiKey: "PLACEHOLDER",
         indexName: "PLACEHOLDER",
-        placeholder: "foobar",
         searchParameters: {}
       }
     }),
     scripts: ['/script/matomo.js'],
-    // TODO HDDS-9566
 };
 
 module.exports = config;

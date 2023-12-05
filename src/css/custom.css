@@ -87,3 +87,35 @@ aside .custom-sidebar-version p {
     font-size: var(--fbc-font-size: 13px;);
     padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
 }
+
+/* Footer */
+
+/* Make footer dark regardless of the website theme */
+html[data-theme='dark'] .footer {
+  background-color: #202020;
+}
+html[data-theme='light'] .footer {
+  background-color: #202020;
+}
+
+.footer__links {
+  color: #ccc;
+}
+
+.footer__link-item:hover {
+  color: #ccc;
+}
+
+.footer__link-item {
+  color: #ccc;
+}
+
+/* Remove Docusaurus icons next to links */
+footer.footer .footer__link-item svg {
+  display: none;
+}
+
+footer.footer .footer__copyright {
+  color: #ccc;
+  font-size: 0.85rem;
+}
