@@ -205,6 +205,10 @@ const config = {
                 label: 'Docker Image',
                 to: 'https://github.com/apache/ozone-docker',
               },
+              {
+                label: 'Docker Runner Image',
+                to: 'https://github.com/apache/ozone-docker-runner',
+              },
             ],
           },
         ],
