@@ -20,6 +20,8 @@ const config = {
   // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
+  // Fail the build if multiple pages map to the same URL.
+  onDuplicateRoutes: 'throw',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -50,7 +52,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Optional: Add an announcement bat to the top of the website.
+      // Optional: Add an announcement bar to the top of the website.
       // announcementBar: {
       //   id: 'announce',
       //   backgroundColor: 'var(--color-accent)',
@@ -60,7 +62,7 @@ const config = {
       // },
 
       // TODO Generate social card for Ozone.
-      // image: 'img/ozone-social-card.jpg',
+      // image: 'img/ozone-social-card.png',
       navbar: {
         title: 'Apache Ozone',
         logo: {
