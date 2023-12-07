@@ -102,6 +102,11 @@ html[data-theme='light'] .footer {
   color: #ccc;
 }
 
+.bi-slack {
+  color: #ccc;
+  background-color: #ccc;
+}
+
 .footer__link-item {
   color: #ccc;
 }
