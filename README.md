@@ -14,7 +14,7 @@
 
 # Apache Ozone Website v2
 
-Welcome to the development branch of the new and improved Apache Ozone website. The new site is being built with [Docusaurus](https://docusaurus.io/). See the [Docusaurus docs](https://docusaurus.io/docs) for details on working with this framework.
+Welcome to the development branch of the new and improved Apache Ozone website. The new site is being built with [Docusaurus](https://docusaurus.io/). See the [Docusaurus docs](https://docusaurus.io/docs) for details on working with this framework. The `progress.sh` script can be used to get an approximation of how many pages are remaining before the website is ready.
 
 ## Relevant Links
 
