@@ -43,7 +43,12 @@ const config = {
             'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/custom.css'),
+            require.resolve('./src/css/header.css'),
+            require.resolve('./src/css/footer.css'),
+            require.resolve('./src/css/sidebar.css'),
+          ],
         },
       }),
     ],
