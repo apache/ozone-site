@@ -1,9 +1,12 @@
 # Downloads
 
+**TODO [HDDS-9616](https://issues.apache.org/jira/browse/HDDS-9616) Fill in this page.**
+
 Fill this in similar to what is on the current website.
 - Create in a table with all release information from 1.0.0-1.3.0 (example below).
 - Include instructions for verifying signatures and checksums.
 - Include license information.
+- Fill in the release notes pages for all past versions 1.0.0-1.3.0.
 
 | Version | Release Date | Source Download | Binary Download | Release Notes |
 |-|-|-|-|-|
