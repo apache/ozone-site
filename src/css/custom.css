@@ -2,23 +2,9 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
-
- light:
-
- #4d9f40 darkest green in logo, maybe too light.
- #35752b not bad
- #357500 pretty good.
- #357000 pretty good.
- #2e6326 good contrast with white but not next to black text .
-
- dark:
- #4d9f40 darkest green in logo, ok.
- #62cc52 good, maybe too light?
- #96d26e Lighest but looks good, matches bolt.
  */
 
 /* Infima colors generated from --ifm-color-primary using https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima */
-
 :root {
   --ifm-color-primary: #357500;
   --ifm-color-primary-dark: #306900;
