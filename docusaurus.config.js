@@ -57,6 +57,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'light'
+      },
       // Optional: Add an announcement bar to the top of the website.
       // announcementBar: {
       //   id: 'announce',
@@ -239,7 +242,7 @@ const config = {
         ],
         copyright: `
         <div>
-          Copyright © ${new Date().getFullYear()} <a href="https://www.apache.org/">The Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>. <br>
+          Copyright © ${new Date().getFullYear()} <a href="https://www.apache.org/" class=copyright-link>The Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class=copyright-link>Apache License, Version 2.0</a>. <br>
           <div>
             <p>The Apache Software Foundation, Apache Ozone, Ozone, Apache, the Apache Feather, and the Apache Ozone project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p>
           </div>

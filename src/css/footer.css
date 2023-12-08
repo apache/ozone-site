@@ -1,21 +1,28 @@
 /* Make footer dark regardless of the website theme */
-html[data-theme='dark'] .footer {
-  background-color: #202020;
+:root {
+  --footer-background-color: #202020;
+  --footer-foreground-color: #ccc;
+  --copyright-link-color: #96d26e
 }
+
+html[data-theme='dark'] .footer {
+  background-color: var(--footer-background-color);
+}
+
 html[data-theme='light'] .footer {
-  background-color: #202020;
+  background-color: var(--footer-background-color);
 }
 
 .footer__links {
-  color: #ccc;
+  color: var(--footer-foreground-color);
 }
 
 .footer__link-item:hover {
-  color: #ccc;
+  color: var(--footer-foreground-color);
 }
 
 .footer__link-item {
-  color: #ccc;
+  color: var(--footer-foreground-color);
 }
 
 /* Remove Docusaurus icons next to links */
@@ -26,5 +33,14 @@ footer.footer .footer__link-item svg {
 footer.footer .footer__copyright {
   color: #ccc;
   font-size: 0.85rem;
+}
+
+/* Keep copyright links in the footer the same color regardless of light or dark theme. */
+.copyright-link {
+  color: var(--copyright-link-color)
+}
+
+.copyright-link:hover {
+  color: var(--copyright-link-color)
 }
 

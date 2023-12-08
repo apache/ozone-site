@@ -2,25 +2,39 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
+
+ light:
+
+ #4d9f40 darkest green in logo, maybe too light.
+ #35752b not bad
+ #357500 pretty good.
+ #357000 pretty good.
+ #2e6326 good contrast with white but not next to black text .
+
+ dark:
+ #4d9f40 darkest green in logo, ok.
+ #62cc52 good, maybe too light?
+ #96d26e Lighest but looks good, matches bolt.
  */
 
-/* Infima colors generated from a primary color in the Ozone logo using https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima */
+/* Infima colors generated from --ifm-color-primary using https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima */
+
 :root {
-  --ifm-color-primary: #4d9f40;
-  --ifm-color-primary-dark: #458f3a;
-  --ifm-color-primary-darker: #418736;
-  --ifm-color-primary-darkest: #366f2d;
-  --ifm-color-primary-light: #55af46;
-  --ifm-color-primary-lighter: #59b64a;
-  --ifm-color-primary-lightest: #6fc062;
+  --ifm-color-primary: #357500;
+  --ifm-color-primary-dark: #306900;
+  --ifm-color-primary-darker: #2d6300;
+  --ifm-color-primary-darkest: #255200;
+  --ifm-color-primary-light: #3a8100;
+  --ifm-color-primary-lighter: #3d8700;
+  --ifm-color-primary-lightest: #459800;
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #4d9f40;
-  --ifm-color-primary-dark: #458f3a;
-  --ifm-color-primary-darker: #418736;
-  --ifm-color-primary-darkest: #366f2d;
-  --ifm-color-primary-light: #55af46;
-  --ifm-color-primary-lighter: #59b64a;
-  --ifm-color-primary-lightest: #6fc062;
+  --ifm-color-primary: #96d26e;
+  --ifm-color-primary-dark: #84ca56;
+  --ifm-color-primary-darker: #7bc749;
+  --ifm-color-primary-darkest: #64ab35;
+  --ifm-color-primary-light: #a8da86;
+  --ifm-color-primary-lighter: #b1dd93;
+  --ifm-color-primary-lightest: #cbe9b7;
 }
