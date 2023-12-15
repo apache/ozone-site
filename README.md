@@ -16,7 +16,9 @@
 
 Welcome to the development branch of the new and improved Apache Ozone website. The new site is being built with [Docusaurus](https://docusaurus.io/). See the [Docusaurus docs](https://docusaurus.io/docs) for details on working with this framework.
 
-## Relevant Links
+You can preview the current state of the new website at https://ozone-site-v2.staged.apache.org.
+
+## Context
 
 - [HDDS-9225](https://issues.apache.org/jira/browse/HDDS-9225) is the parent Jira tracking current tasks required to get the new website ready for deployment.
 
