@@ -46,11 +46,11 @@ jobs:
       - name: "Commit changes"
         working-directory: 'publish'
         run: |
-            echo "Deleting previous build from the branch ${{ github.ref_name }}
+            echo "Deleting previous build from the branch $(git branch --show-current)"
             # Skips removing the .git folder so that we still have branch tracking information.
             rm -rf *
 
-            echo "Committing new build to the branch ${{ github.ref_name }}"
+            echo "Committing new build to the branch $(git branch --show-current)"
             cp -R ../src/build/. .
             git config --global user.name 'Github Actions'
             git config --global user.email 'noreply@github.com'
