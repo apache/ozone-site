@@ -48,7 +48,7 @@ jobs:
         run: |
           # Delete previous build from the branch, but preserve files with necessary metadata.
           mv README.md .asf.yaml .git /tmp
-          rm -rf * .*
+          rm -rf $(ls -A)
           mv /tmp/README.md /tmp/.asf.yaml /tmp/.git .
 
           # Commit new build to the branch.
