@@ -1,0 +1,5 @@
+staging:
+  # Display the website at ozone-site-v2.staged.apache.org
+  profile: site-v2
+  # Only takes affect on this branch.
+  whoami: asf-site-v2
