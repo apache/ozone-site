@@ -22,6 +22,7 @@ on:
     branches:
       # TODO update this to master when the new website is ready to be published.
       - HDDS-9225-website-v2
+      - publish-changes
 
 jobs:
   build:
@@ -41,21 +42,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: 'publish'
-          ref: 'asf-site-v2'
+          ref: 'asf-site-v2-test'
       - name: "Commit changes"
         working-directory: 'publish'
         run: |
-            # Delete previous build from the branch.
-            # Skips removing the .git folder so that we still have branch tracking information.
-            # Skips removing .asf.yaml which has auto-publishing information.
-            rm -rf *
+          # Delete previous build from the branch, but preserve files with necessary metadata.
+          mv README.md .asf.yaml .git /tmp
+          rm -rf * .*
+          mv /tmp/README.md /tmp/.asf.yaml /tmp/.git .
 
-            # Commit new build to the branch.
-            cp -R ../src/build/. .
-            git config --global user.name 'Github Actions'
-            git config --global user.email 'noreply@github.com'
-            git add .
-            git commit -a -m "[auto] Apply changes from $GITHUB_REF_NAME $GITHUB_SHA" || true
-            git push
+          # Commit new build to the branch.
+          cp -R ../src/build/. .
+          git config --global user.name 'Github Actions'
+          git config --global user.email 'noreply@github.com'
+          git add .
+          git commit -a -m "[auto] Apply changes from $GITHUB_REF_NAME $GITHUB_SHA" || true
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
