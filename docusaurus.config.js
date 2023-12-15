@@ -47,7 +47,6 @@ const config = {
             require.resolve('./src/css/custom.css'),
             require.resolve('./src/css/header.css'),
             require.resolve('./src/css/footer.css'),
-            require.resolve('./src/css/sidebar.css'),
           ],
         },
       }),
@@ -175,46 +174,28 @@ const config = {
             title: 'Community',
             items: [
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/github.svg" aria-label="GitHub Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="https://github.com/apache/ozone/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    GitHub Discussions
-                  </a>`
+                label: 'GitHub Discussions',
+                href: 'https://github.com/apache/ozone/discussions'
               },
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/jira.svg" aria-label="Jira Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="https://issues.apache.org/jira/projects/HDDS/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    Jira
-                  </a>`
+                label: 'Jira Issues',
+                href: 'https://issues.apache.org/jira/projects/HDDS/issues'
               },
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/slack.svg" aria-label="Slack Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="https://infra.apache.org/slack.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    Slack
-                  </a>`
+                label: 'Slack',
+                href: 'https://infra.apache.org/slack.html'
               },
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/mail.svg" aria-label="Email Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="mailto:dev@ozone.apache.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    Mailing List
-                  </a>`
+                label: 'Mailing List',
+                href: 'mailto:dev@ozone.apache.org'
               },
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/youtube.svg" aria-label="YouTube Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="https://www.youtube.com/@ApacheOzone" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    YouTube
-                  </a>`
+                label: 'YouTube',
+                href: 'https://www.youtube.com/@ApacheOzone'
               },
               {
-                html: `
-                  <object type="image/svg+xml" data="img/social/twitter-x.svg" aria-label="Twitter X Icon" style="width: 1em; height: 1em;"></object>
-                  <a href="https://twitter.com/ApacheOzone" target="_blank" rel="noopener noreferrer" class="footer__link-item">
-                    Twitter
-                  </a>`
+                label: 'Twitter',
+                href: 'https://twitter.com/ApacheOzone'
               },
             ],
           },
