@@ -21,7 +21,8 @@ name: "auto-build-website-v2"
 on:
   push:
     branches:
-      - HDDS-9225-website-v2
+      # - HDDS-9225-website-v2
+      - publish-staging
 
 jobs:
   build:
