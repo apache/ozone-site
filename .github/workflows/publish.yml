@@ -34,6 +34,7 @@ jobs:
         with:
           path: 'src'
       - name: "Build website"
+        working-directory: 'src'
         # Website source is mounted as volume, so the build output ends up in ./src/build outside of the container.
         run: |
           docker compose run site pnpm run build
