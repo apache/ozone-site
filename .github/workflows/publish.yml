@@ -28,20 +28,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Check out the website source in the current working directory.
       - name: "Checkout source branch"
         uses: actions/checkout@v3
-        # with:
-        #   path: './ozone-site-src'
-      - name: "Build Website"
-        # working-directory: './ozone-site-src'
-        # Website source is mounted as volume, so the build output ends up in ./build outside of the container.
-        run: |
-          docker compose run site pnpm run build
       - name: "Checkout build branch"
         uses: actions/checkout@v3
         with:
           path: './build'
           ref: 'asf-site-v2'
+      - name: "Build Website"
+        # Website source is mounted as volume, so the build output ends up in ./build outside of the container.
+        # This overwrites all files from the initial asf-site-v2 branch checkout, so we can just commit the result of this command.
+        run: |
+          docker compose run site pnpm run build
       - name: "Commit changes"
         working-directory: './build'
         run: |
