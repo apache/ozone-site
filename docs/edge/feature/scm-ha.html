@@ -483,13 +483,6 @@ s=d.getElementsByTagName('script')[0];
 <p>Both Ozone Manager and Storage Container Manager supports HA. In this mode the internal state is replicated via RAFT (with Apache Ratis)</p>
 <p>This document explains the HA setup of Storage Container Manager (SCM), please check <a href="../feature/om-ha.html">this page</a> for HA setup of Ozone Manager (OM). While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.</p>
 <h2 id="configuration">Configuration</h2>
-<blockquote>
-<p>⚠️ <strong>IMPORTANT</strong> ⚠️</p>
-<p>SCM HA is currently supported only for fresh installations.
-SCM HA must be enabled when starting the Ozone service in the beginning.
-Once an SCM has been started in non-HA mode,
-changing it to HA mode is unsupported.</p>
-</blockquote>
 <p>HA mode of Storage Container Manager can be enabled with the following settings in <code>ozone-site.xml</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
    <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
@@ -633,7 +626,7 @@ bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: December 28, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/47560b1582bf9e9ee27d5b7eb17df9f8b2f52c1d">47560b1</a>
+      Version: 1.5.0-SNAPSHOT, Last Modified: December 29, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4eca52b6b76b0737bfb2d6ed94097969a0737a45">4eca52b</a>
     </span>
   </div>
 </footer>
