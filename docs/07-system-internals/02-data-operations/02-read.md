@@ -1,4 +1,12 @@
-# Data Read Requests
+---
+sidebar_label: Read
+---
+
+# Implementation of Read Operations
+
+## Reading Metadata
+
+## Reading Data
 
 Trace every part of a read request from beginning to end. This includes:
 - Client getting encryption keys
@@ -10,8 +18,9 @@ Trace every part of a read request from beginning to end. This includes:
 - OM returning container, blocks, pipeline, block tokens
 - Client sending block tokens and datanode validating based on the shared secret from SCM
 - Client sending read chunk requests to datanode to fetch the data.
-    - Include topology choices of which datanodes to use
-    - Include EC vs. Ratis datanode write process
-    - Include failover handling
+    - For replication:
+        - Include topology choices of which datanodes to use
+        - Include failover handling
+    - For EC, link to the [EC feature page](../features/erasure-coding).
 - Client validating checksums
 

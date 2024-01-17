@@ -1,4 +1,12 @@
-# Data Delete Requests
+---
+sidebar_label: Delete
+---
+
+# Implementation of Delete Operations
+
+## Deleting Metadata
+
+## Deleting Data
 
 Trace every part of a delete request from beginning to end. This includes:
 - Client getting encryption keys
@@ -11,5 +19,5 @@ Trace every part of a delete request from beginning to end. This includes:
 - SCM sending blocks to delete to the datanode
 - Datanode removes data
 
-Also document timing of background services and their batch size to estimate the rate of deletion.
+Note that delete works the same regardless of replication type. Also document timing of background services and their batch size to estimate the rate of deletion.
 
