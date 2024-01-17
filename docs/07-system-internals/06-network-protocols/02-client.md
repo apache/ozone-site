@@ -4,6 +4,8 @@ sidebar_label: Client
 
 # Network Protocols Used By Ozone Clients
 
+**TODO:** File a subtask under [HDDS-9862](https://issues.apache.org/jira/browse/HDDS-9862) and complete this page or section.
+
 For each section, indicate the network protocol that is used, why it is used, and how it is secured. Some intro/explanation at the top here would be good too.
 
 | Client | Server | Protocol | Authentication | Authorization | Encryption | Notes |

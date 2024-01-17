@@ -4,6 +4,8 @@ sidebar_label: Delete
 
 # Implementation of Delete Operations
 
+**TODO:** File a subtask under [HDDS-9862](https://issues.apache.org/jira/browse/HDDS-9862) and complete this page or section.
+
 ## Deleting Metadata
 
 ## Deleting Data
