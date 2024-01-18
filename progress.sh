@@ -17,14 +17,14 @@ complete_pages="$(grep -rL 'TODO' --include '*.md' "$repo_dir/docs" "$repo_dir/s
 echo "Total pages: $page_count"
 
 echo "------------"
-echo "Complete pages: $(echo "$complete_pages" | wc -l)"
+echo "Complete pages: $(echo "$complete_pages" | grep -vc '^$')"
 if [ "$verbose" = 'true' ]; then
     echo "------------"
     echo "$complete_pages"
 fi
 
 echo "------------"
-echo "Incomplete pages: $(echo "$incomplete_pages" | wc -l)"
+echo "Incomplete pages: $(echo "$incomplete_pages" | grep -vc '^$')"
 if [ "$verbose" = 'true' ]; then
     echo "------------"
     echo "$incomplete_pages"
