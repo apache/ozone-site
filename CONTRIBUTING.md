@@ -1,8 +1,8 @@
 # Apache Ozone Website Contribution Guide
 
-Ozone is an Apache project. The bug tracking system for Ozone and its website is under the [Apache Jira project named HDDS](https://issues.apache.org/jira/projects/HDDS/).
+The Apache Ozone is a top-level Apache project and is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). The bug tracking system for Ozone and its website is under the [Apache Jira project named HDDS](https://issues.apache.org/jira/projects/HDDS/).
 
-This document summarize the contribution process.
+This document summarizes the contribution process.
 
 ## What Can I Contribute?
 
@@ -12,7 +12,7 @@ This document summarize the contribution process.
 
 - **Theme and Styling**: You can help improve the overall appearance of the Ozone website using standard web development tools like Javascript, React, HTML, and CSS. You can also create or modify graphics and images used on the site.
 
-- **Tests**: HDDS-9601 will implement a basic set of tests to run as part of CI for the website, but you can help expand or improve them.
+- **Tests**: [HDDS-9601](https://issues.apache.org/jira/browse/HDDS-9601) will implement a basic set of tests to run as part of CI for the website, but you can help expand or improve them.
 
 - **Tools**: You can submit improvements to how we use various tools like pnpm, docker, and Dependabot that are used in the development of the website.
 
@@ -58,8 +58,7 @@ The Apache Ozone Website uses [Docusaurus](https://docusaurus.io/) as a static s
   - [pages](https://docusaurus.io/docs/static-assets)
     - Static pages outside of the documentation section.
 
-    - **index.js**
-      - The website homepage.
+    - **index.js**: The website homepage.
 
   - [theme](https://docusaurus.io/docs/swizzling)
     - Contains theme overrides of Docusaurus specific components created with [swizzling](https://docusaurus.io/docs/swizzling).
