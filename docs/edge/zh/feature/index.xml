@@ -43,6 +43,15 @@
     </item>
     
     <item>
+      <title>拓扑感知能力</title>
+      <link>/zh/feature/topology.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/topology.html</guid>
+      <description>机架感知配置可以提高读/写性能</description>
+    </item>
+    
+    <item>
       <title>Ozone 中的配额</title>
       <link>/zh/feature/quota.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
