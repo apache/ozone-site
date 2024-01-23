@@ -25,6 +25,15 @@
     </item>
     
     <item>
+      <title>Decommissioning</title>
+      <link>/zh/feature/decommission.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/decommission.html</guid>
+      <description>Decommissioning of SCM, OM and Datanode.</description>
+    </item>
+    
+    <item>
       <title>安全化 Ozone</title>
       <link>/zh/security/secureozone.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -76,6 +85,15 @@
       
       <guid>/zh/interface/o3fs.html</guid>
       <description>Hadoop 文件系统兼容使得任何使用类 HDFS 接口的应用无需任何修改就可以在 Ozone 上工作，比如基于 Apache Spark、YARN 和 Hive 等框架的应用。</description>
+    </item>
+    
+    <item>
+      <title>在DataNode上合并Container的RocksDB</title>
+      <link>/zh/feature/dn-merge-rocksdb.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/feature/dn-merge-rocksdb.html</guid>
+      <description>Ozone DataNode Container模式简介V3</description>
     </item>
     
     <item>
