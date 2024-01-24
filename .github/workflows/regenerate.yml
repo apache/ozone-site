@@ -23,9 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch with source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Checkout branch with rendered version
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: public
           ref: asf-site
