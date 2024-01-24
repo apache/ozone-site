@@ -22,7 +22,6 @@ on:
     branches:
       # TODO update this to master when the new website is ready to be published.
       - HDDS-9225-website-v2
-      - update-actions
 
 jobs:
   build:
