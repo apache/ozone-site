@@ -29,7 +29,7 @@ jobs:
     steps:
       # Check out the website source in the current working directory.
       - name: "Checkout source branch ${{ github.ref_name }}"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'src'
       - name: "Build website"
@@ -38,7 +38,7 @@ jobs:
         run: |
           docker compose run site pnpm run build
       - name: "Checkout publish branch"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'publish'
           # TODO update this to asf-site when the website is ready to be published.
