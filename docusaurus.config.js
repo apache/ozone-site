@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://ozone.apache.org',
@@ -68,8 +68,7 @@ const config = {
       //       'Sample Announcement Content',
       // },
 
-      // TODO Generate social card for Ozone.
-      // image: 'img/ozone-social-card.png',
+      image: 'img/social-card.png',
       navbar: {
         title: 'Apache Ozone',
         logo: {
