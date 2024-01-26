@@ -196,20 +196,20 @@ The website uses [pnpm](https://pnpm.io/) as a package manager. This is the same
 
 #### Relevant Files
 
-##### package.json
+- **package.json**
 
-This file contains all the top level dependencies required to build the website. Rules for version pinning are defined here as well. This file may be updated manually to adjust which versions are installed, or automatically when commands like `pnpm update` are run.
+This file contains version guidelines for all the top level dependencies required to build the website. This file may be updated manually to adjust which versions are installed, or automatically when commands like `pnpm update` are run.
 
-##### pnpm-lock.yaml
+- **pnpm-lock.yaml**
 
-This file contains version information of all dependencies required to build the website. All versions declared here are exact. These are the versions of packages that will be used when `pnpm install` is run. This file should not be updated manually, and may be updated by commands like `pnpm update`.
+This file contains exact version information of all dependencies required to build the website. These are the versions of packages that will be used when `pnpm install` is run. This file should not be updated manually, and may be updated automatically by commands like `pnpm update`.
 
 #### Version Pinning
 
 *package.json* allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
 - `~` means to allow all patch updates (last semantic versioning digit)
 - `^` means to allow all minor version updates (second semantic versioning digit)
-- No specifier means only the exact version declared in *package.json* is allowed.
+- A version with no specifier means only the exact version declared in *package.json* is allowed.
 
 Currently all `@docusaurus/*` packages are pinned to an exact version for website stability.
 
@@ -221,11 +221,11 @@ Currently all `@docusaurus/*` packages are pinned to an exact version for websit
 
   - This should make no modifications to *package.json* or *pnpm-lock.yaml* if all explicit versions in *pnpm-lock.yaml* comply with the version specifiers in *package.json*.
 
-    - This should always be the case, because the CI build of the website uses `pnpm install --frozen-lockfile` to fail the build if the two files do not match.
+    - This should always be true for committed code, because the CI build of the website uses `pnpm install --frozen-lockfile` to fail the build if the two files do not match.
 
 - **To update all packages to their latest versions allowed by package.json**: `pnpm update`
 
-    - This will update *package.json* to match the exact versions installed for reference.
+    - This will update *package.json* to match the exact versions that were installed, but this is for reference only. Exact version information still comes from *pnpm-lock.yaml*
       - The version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
 
     - This will update *pnpm-lock.yaml* to reflect the exact versions of all top level and transitive dependencies installed.
@@ -236,11 +236,11 @@ Currently all `@docusaurus/*` packages are pinned to an exact version for websit
 
   2. Run `pnpm update '@docusaurus/*'` to update to the new version.
 
-    - This should modify *package-lock.yaml* with the exact versions of docusaurus and its transitive dependencies that were installed.
+    - This should modify *pnpm-lock.yaml* with the exact versions of docusaurus and its transitive dependencies that were installed.
 
     - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify *package.json* as well.
 
-  3. Commit *package.json* and *package-lock.yaml* to git.
+  3. Commit *package.json* and *pnpm-lock.yaml* to git.
 
 ### Previewing Your Modifications Locally
 
@@ -257,7 +257,7 @@ The project includes a `Dockerfile` and a `compose.yml` file to build and run th
 2. Install [docker compose](https://docs.docker.com/compose/install/).
 
 3. Run `docker compose up` from the repository root.
-  - **Note**: This will continue to use the last built version of the `ozone-site-dev` image, which saves time on future runs.
+  - **Note**: This will continue to use the last locally built version of the `ozone-site-dev` image, which saves time on future runs.
     - Run `docker compose up --build` to rebuild the image and incorporate any package dependency updates that may have been committed since the last build.
 
 4. Preview the website at `localhost:3000` in your browser.
