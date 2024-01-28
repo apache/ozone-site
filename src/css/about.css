@@ -1,0 +1,14 @@
+/**
+ * home page about related css template
+ */
+ .about-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-color: aqua;
+  height: 400px;
+  /* add container border to debug the layout
+   * border: 2px solid red; 
+   */
+ }
