@@ -232,6 +232,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['bash'],
       },
       // TODO HDDS-9566
       algolia: {
