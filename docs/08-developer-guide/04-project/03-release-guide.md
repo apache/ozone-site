@@ -144,8 +144,8 @@ git tag -s "ozone-$VERSION-RC$RC"
 If the command fails on MacOS, you may need to do the following additional steps:
  * Install a program to prompt you for your gpg key passphrase (example using homebrew): `brew install pinentry-mac`
  * Tell git to use this program for signing:`git config --global gpg.program "$(which gpg)"`
- * Tell git which key to sign with: `git config --global user.signingKey &lt;gpg_key_id&gt;`
- * Tell gpg to use this program to prompt for passphrase: `echo "pinentry-program $(which pinentry-mac)" &gt; ~/.gnupg/gpg-agent.conf`
+ * Tell git which key to sign with: `git config --global user.signingKey <gpg_key_id>`
+ * Tell gpg to use this program to prompt for passphrase: `echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf`
  * Reload gpg-agent: `gpgconf --kill gpg-agent`
 
 ### Create the release artifacts
@@ -188,7 +188,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
  3. Verify signatures
     * Download the KEYS file from [https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
     * Import its contents (which should include your public gpg key): `gpg --import KEYS`
-    * Verify each .tar.gz artifact: `gpg --verify &lt;artifact&gt;.tar.gz.asc &lt;artifact&gt;.tar.gz`
+    * Verify each .tar.gz artifact: `gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz`
  4. Verify checksums
     * Run `shasum -a 512 *.tar.gz`
     * Verify that the output checksums for each artifact match the contents of its .sha512 file and the SHA512 line in its .mds file.
@@ -259,7 +259,8 @@ git push origin "ozone-$VERSION-RC$RC"
 
 ### Send the voting mail to below mailing list
 
-dev@ozone &lt;dev@ozone.apache.org&gt;
+dev@ozone.apache.org
+
 Include the following items in the email:
 
  * Link to the release candidate tag on Github
@@ -279,7 +280,7 @@ Once voting is finished, send an email summarizing the results (binding +1s, non
 
 You should commit the artifacts to the SVN repository. If you are not a PMC member you can commit it to the dev zone first and ask a PMC for the final move.
 
-Checkout the svn folder &amp;commit the artifacts to a new directory.
+Checkout the svn folder and commit the artifacts to a new directory.
 
 ```
 svn checkout https://dist.apache.org/repos/dist/dev/ozone
@@ -321,7 +322,7 @@ git push origin "ozone-$VERSION"
 ### Update the master branch
 
  * Cherry pick your commit updating the protolock files to a branch on your fork, and merge it to master with a pull request.
- * Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [national park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at &lt;ozone.release&gt;. [Example](https://github.com/apache/ozone/pull/2863)
+ * Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [national park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. [Example](https://github.com/apache/ozone/pull/2863)
 
 ### Update the Ozone Roadmap
 
@@ -358,7 +359,7 @@ If there is a security vulnerability or critical bug uncovered in a major or min
     * Do not update the protolock files unless protocol buffers were changed as part of the fix.
     * When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
       * For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
-      * Continuing the 1.2.0 &rarr; 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
+      * Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
       * An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
       * The docs can be added to the website normally as described above in **Update the ozone website**. The docs link for the original major/minor release can remain alongside the docs link for the patch release.
 
