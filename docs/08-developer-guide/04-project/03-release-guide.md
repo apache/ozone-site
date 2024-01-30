@@ -261,8 +261,6 @@ git push origin "ozone-$VERSION-RC$RC"
 
 ## Vote
 
-### Send the voting mail to below mailing list
-
 Send a vote email to the dev@ozone.apache.org mailing list.  Include the following items in the email:
 
  * Link to the release candidate tag on Github
