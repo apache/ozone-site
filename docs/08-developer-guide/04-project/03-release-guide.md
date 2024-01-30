@@ -4,7 +4,7 @@ sidebar_label: Release Manager Guide
 
 # Apache Release Manager Guide
 
-This document describes the process to release Apache Ozone. The process is not yet scripted, and the documentation is **a work in progress**
+This document describes the process to release Apache Ozone. The process is not yet scripted, and the documentation is **a work in progress**.
 
 ## Pre-Requisite
 
@@ -86,7 +86,7 @@ git clean -dfx
 
 ### Update the versions
 
-Use the commands below or your IDE to replace "$VERSION-SNAPSHOT" with "$VERSION".
+Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -109,7 +109,7 @@ find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$
 git commit -am "Update Ozone version to $VERSION"
 ```
 
-### Build and commit the proto.lock change
+### Build and commit the `proto.lock` change
 
 Protolock files are used to check backwards compatibility of protocol buffers between releases. The ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed. Save and run the following script from your ozone repo root, and then commit the changed files to git. Double check that only files called `proto.lock` are being committed, and that the changes to the files makes sense based on new features added in this release.
 
@@ -176,6 +176,7 @@ for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
 
 for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
 ```
+
 Now each .tar.gz file should have an associated .mds file, .asc file, and .sha512 file
 
 ### Check the artifacts
@@ -224,7 +225,7 @@ svn commit -m "Ozone $VERSION RC$RC"
 
 ### Upload the Artifacts to Apache Nexus
 
-Double check that your apache credentials are added to your local `~/.m2/settings.xml`
+Double check that your apache credentials are added to your local `~/.m2/settings.xml`.
 
 ```xml
 <settings>
@@ -285,7 +286,7 @@ You should commit the artifacts to the SVN repository. If you are not a PMC memb
 
 Checkout the svn folder and commit the artifacts to a new directory.
 
-```
+```bash
 svn checkout https://dist.apache.org/repos/dist/dev/ozone
 cd ozone
 svn mkdir "$VERSION"
@@ -296,7 +297,7 @@ svn commit -m "Added ozone-$VERSION directory"
 
 PMC members can move it to the final location:
 
-```
+```bash
 svn mv -m "Move ozone-$VERSION to release" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION" https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
 ```
 
