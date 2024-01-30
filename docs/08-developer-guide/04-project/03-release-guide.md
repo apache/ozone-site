@@ -8,20 +8,19 @@ This document describes the process to release Apache Ozone. The process is not 
 
 ## Pre-Requisite
 
-The release manager should have a gpg key setup to sign the artifacts. For more details refer to below link.
-[https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys](https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys)
+The release manager should have a GPG key set up to sign the artifacts. For help creating your key refer to the [ASF new committer guide](https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys).
 
-## Publish your key
+## Publish Your GPG Key
 
-The key is supposed to be published together with the release. Please append it to the end of KEYS files:<br /><br />[https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
+The release manager's GPG key is supposed to be published together with the release. Please append it to the end of the [KEYS file](https://dist.apache.org/repos/dist/release/ozone/KEYS) if it is not already present by using SVN.
 
 ```bash title="Publish key (committer)"
 svn co https://dist.apache.org/repos/dist/release/ozone
 cd ozone
-export CODESIGNINGKEY=your_gpg_key_id
+export CODESIGNINGKEY=<your_gpg_key_id>
 gpg --list-sigs $CODESIGNINGKEY >> KEYS
 gpg --armor --export $CODESIGNINGKEY >> KEYS
-svn commit -m "ozone: adding key of XXXX to the KEYS"
+svn commit -m "ozone: adding key of <your_name> to the KEYS"
 ```
 
 In case you are only a committer and not a PMC member, you can add your key to the dev KEYS file and a PMC can move it to the final destination
@@ -61,9 +60,9 @@ Issue a Jira query like [this](https://issues.apache.org/jira/browse/HDDS-4183?j
     Even though the action is called `Change Comment`, it actually adds a comment to the Jira and does not affect existing comments.
  7. Keep clicking through until the operation is started. It may take a while for Jira to finish the bulk update once it is started.
 
-### Branching
+### Create a Release Branch
 
-After the date specified in the Jira comments has passed and blocking issues have been resolved, you can create a release branch in the main apache/ozone github repo. Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 1.2.0, create a branch called `ozone-1.2` . All release related changes will go to this branch until the release is complete, after which some changes mentioned below will be cherry picked to `master`.
+After the date specified in the Jira comments has passed and blocking issues have been resolved, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo. Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 1.2.0, create a branch called `ozone-1.2` . All release related changes will go to this branch until the release is complete, after which some changes mentioned below will be cherry picked to `master`.
 
 ### Set up local environment
 
@@ -76,7 +75,7 @@ export CODESIGNINGKEY=<your_gpg_key_id>
 export RC=0 # Set to the number of the current release candidate, starting at 0.
 ```
 
-It is probably best to clone a fresh ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the apache/ozone upstream repo is named `origin`. This is required for release build metadata to be correctly populated. Assume all following commands are executed from within this repo with your release branch checked out.
+It is probably best to clone a fresh ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the apache/ozone upstream repo is named `origin`. This is required for release build metadata to be correctly populated. Assume all following commands are executed from within this repo with your release branch checked out.
 
 ### Reset the git repository
 
@@ -87,7 +86,7 @@ git clean -dfx
 
 ### Update the versions
 
-Use below command or use IDE to replace "$VERSION-SNAPSHOT" with "$VERSION".
+Use the commands below or your IDE to replace "$VERSION-SNAPSHOT" with "$VERSION".
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -105,7 +104,6 @@ find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$
 </TabItem>
 </Tabs>
 
-### Commit the changes
 
 ```bash title="Commit the version changes "
 git commit -am "Update Ozone version to $VERSION"
@@ -113,7 +111,7 @@ git commit -am "Update Ozone version to $VERSION"
 
 ### Build and commit the proto.lock change
 
-Protolock files are used to check backwards compatibility of protocol buffers between releases. The ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed. Save and run the following script from your ozone repo root, and then commit the changed files to git. Double check that only files called proto.lock are being committed, and that the changes to the files makes sense based on new features added in this release.
+Protolock files are used to check backwards compatibility of protocol buffers between releases. The ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed. Save and run the following script from your ozone repo root, and then commit the changed files to git. Double check that only files called `proto.lock` are being committed, and that the changes to the files makes sense based on new features added in this release.
 
 ```bash title="update_protolocks.sh"
 #!/usr/bin/env sh
@@ -135,7 +133,7 @@ git commit -m "update proto.lock for Ozone $VERSION"
 
 ### Tag the commit for the release candidate
 
-This will sign the tag with the gpg key matching the git mailing address. Make sure that the email given by git config user.email matches the email for the key you want to use shown by `gpg --list-secret-keys`.
+This will sign the tag with the gpg key matching the git mailing address. Make sure that the email given by `git config user.email` matches the email for the key you want to use shown by `gpg --list-secret-keys`.
 
 ```bash title="Tag the Release"
 git tag -s "ozone-$VERSION-RC$RC"
@@ -223,9 +221,10 @@ svn commit -m "Ozone $VERSION RC$RC"
 
  * Check the results using your browser by connecting to [https://dist.apache.org/repos/dist/dev/ozone/](https://dist.apache.org/repos/dist/dev/ozone/)
 
-### Upload the artifacts to the apache nexus
 
-Double check if your apache credentials are added to your local ~/.m2/settings.xml
+### Upload the Artifacts to Apache Nexus
+
+Double check that your apache credentials are added to your local `~/.m2/settings.xml`
 
 ```xml
 <settings>
@@ -251,7 +250,7 @@ Return to your Ozone repository being used for the release, and run the followin
 mvn deploy -Psign -pl '!:ozone-dist' -DskipTests -Dbuildhelper.skipAttach
 ```
 
-Go to [https://repository.apache.org/#stagingRepositories](https://repository.apache.org/#stagingRepositories) and **close** the newly created orgapacheozone repository.
+Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
 
 ### Push the release candidate tag to github
 
@@ -269,14 +268,14 @@ Include the following items in the email:
 
  * Link to the release candidate tag on Github
  * Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
- * Location of the source and binary tarballs. This link will look something like [https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0/](https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0/)
+ * Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
  * Location where the maven artifacts are staged. This link will look something like [https://repository.apache.org/content/repositories/orgapacheozone-1001/](https://repository.apache.org/content/repositories/orgapacheozone-1001/)
  * Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: [https://dist.apache.org/repos/dist/dev/ozone/KEYS](https://dist.apache.org/repos/dist/dev/ozone/KEYS)
  * Fingerprint of the key used to sign the artifacts.
 
-If no issues are found with the artifacts, let the vote run for 7 days. Review [https://www.apache.org/legal/release-policy.html#release-approval](https://www.apache.org/legal/release-policy.html#release-approval) for the ASF wide release voting policy. Note what is required of binding voters, and that binding votes can only come from PMC members. Sometimes responders will not specify whether or not their vote is binding. If in doubt check [https://people.apache.org/committer-index.htm](https://people.apache.org/committer-index.html)l. Users whose group membership includes ozone-pmc can cast binding votes.
+If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether or not their vote is binding. If in doubt check [The ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
 
-Once voting is finished, send an email summarizing the results (binding +1s, non-binding +1s, -1s, 0s) and, if the vote passed, indicate that the release artifacts will be published. If an issue is found with the artifacts, apply fixes to the release branch and repeat the steps starting from **tagging the commit for the release candidate** with the $RC variable incremented by 1 for all steps.
+Once voting is finished, send an email summarizing the results (binding +1s, non-binding +1s, -1s, 0s) and, if the vote passed, indicate that the release artifacts will be published. If an issue is found with the artifacts, apply fixes to the release branch and repeat the steps starting from [Tag the Commit for the Release Candidate](#tag-the-commit-for-the-release-candidate) with the `$RC` variable incremented by 1 for all steps.
 
 ## After-Vote
 
@@ -298,7 +297,7 @@ svn commit -m "Added ozone-$VERSION directory"
 PMC members can move it to the final location:
 
 ```
-svn mv -m "commit msg" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION" https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
+svn mv -m "Move ozone-$VERSION to release" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION" https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
 ```
 
 To publish the artifacts to the central maven, login to [https://repository.apache.org/#stagingRepositories](https://repository.apache.org/#stagingRepositories)[,](https://repository.apache.org,) select your **staging** repository and **release** it.
@@ -358,16 +357,16 @@ git push origin ozone-latest "ozone-$VERSION"
 
 If there is a security vulnerability or critical bug uncovered in a major or minor Ozone release, a patch release may be necessary to fix this. The process is a bit simpler than a major or minor release, since there is already a solid foundation on the release's maintenance branch.
 
- 1. Cherry pick the fix(es) on to the maintenance branch. For example, for Ozone's 1.2.0 release, this is the branch called ozone-1.2.
- 2. Run all steps from the sections **Update the versions** through **Publish a docker image for the release**, with the following modifications:
+ 1. Cherry pick the fix(es) on to the maintenance branch. For example, for Ozone's 1.2.0 release, this is the branch called `ozone-1.2`.
+ 2. Run all steps from the sections [Update the Versions](#update-the-versions) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
     * Do not update the protolock files unless protocol buffers were changed as part of the fix.
     * When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
       * For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
       * Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
       * An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
-      * The docs can be added to the website normally as described above in **Update the ozone website**. The docs link for the original major/minor release can remain alongside the docs link for the patch release.
+      * The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
 
-In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
+  - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
 Remove the previous patch release from Apache distribution site:
 
