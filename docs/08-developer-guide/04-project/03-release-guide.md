@@ -297,7 +297,7 @@ PMC members can move it to the final location:
 svn mv -m "Move ozone-$VERSION to release" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION" https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
 ```
 
-To publish the artifacts to the central maven, login to [https://repository.apache.org/#stagingRepositories](https://repository.apache.org/#stagingRepositories)[,](https://repository.apache.org,) select your **staging** repository and **release** it.
+To publish the artifacts to [Maven Central](https://central.sonatype.com), login to https://repository.apache.org/#stagingRepositories, select your **staging** repository and **release** it.
 
 ### Write a haiku
 
