@@ -203,7 +203,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
       * A non-snapshot version of Ratis.
       * A link to the apache/ozone GitHub repository (not your fork).
       * The git hash of the last commit the release was built on.
- 7. Run the Ozone upgrade acceptance tests by running `test.sh` from the compose/upgrade directory in the extracted release tarball.<br />
+ 7. Run the Ozone upgrade acceptance tests by running `test.sh` from the compose/upgrade directory in the extracted release tarball.
     * This check is also run by the GitHub actions CI for each commit, so it should pass with no surprises.
 
 ### Upload the artifacts dev staging area
