@@ -263,9 +263,7 @@ git push origin "ozone-$VERSION-RC$RC"
 
 ### Send the voting mail to below mailing list
 
-dev@ozone.apache.org
-
-Include the following items in the email:
+Send a vote email to the dev@ozone.apache.org mailing list.  Include the following items in the email:
 
  * Link to the release candidate tag on Github
  * Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
