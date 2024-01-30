@@ -169,6 +169,7 @@ If the command fails on MacOS, you may need to do the following additional steps
     ```
 
 ### Calculate the checksum and sign the artifacts
+
 ```bash
 cd "$RELEASE_DIR"
 for i in $(ls -1 *.tar.gz); do gpg  -u "$CODESIGNINGKEY" --armor --output "$i.asc" --detach-sig "$i"; done
@@ -178,7 +179,9 @@ for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
 for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
 ```
 Now each .tar.gz file should have an associated .mds file, .asc file, and .sha512 file
+
 ### Check the artifacts
+
 Before uploading the artifacts, run some basic tests on them, similar to what other devs will run before voting in favor of the release.
 
  1. Extract the contents of the source tarball and build it with an empty maven cache by renaming your `~/.m2` directory before doing the build.
@@ -219,6 +222,7 @@ svn commit -m "Ozone $VERSION RC$RC"
 ```
 
  * Check the results using your browser by connecting to [https://dist.apache.org/repos/dist/dev/ozone/](https://dist.apache.org/repos/dist/dev/ozone/)
+
 ### Upload the artifacts to the apache nexus
 
 Double check if your apache credentials are added to your local ~/.m2/settings.xml
