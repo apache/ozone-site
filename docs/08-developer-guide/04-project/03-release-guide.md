@@ -322,7 +322,7 @@ git push origin "ozone-$VERSION"
 ### Update the master branch
 
  * Cherry pick your commit updating the protolock files to a branch on your fork, and merge it to master with a pull request.
- * Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [national park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. [Example](https://github.com/apache/ozone/pull/2863)
+ * Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [national park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
 
 ### Update the Ozone Roadmap
 
