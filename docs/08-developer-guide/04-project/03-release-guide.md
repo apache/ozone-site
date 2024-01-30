@@ -340,7 +340,9 @@ Include the following links:
 
 ### Publish a docker image for the release
 
-The Ozone docker image is intended for testing purposes only, not production use. Therefore, it is ok to update this after announcing the release. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to docker hub by fast-forwarding the `ozone-latest` branch to match the `latest` branch. Also, create a new branch named like `ozone-1.5.0` (replace the version) and push it to [GitHub](https://github.com/apache/ozone-docker).
+The Ozone docker image is intended for testing purposes only, not production use. Therefore, it is ok to update this after announcing the release. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [docker image tags](https://hub.docker.com/r/apache/ozone/tags).
+1.  Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
+2. Publish the image with a version specific tag by creating a new branch with a name like `ozone-1.5.0` (replace this with the current version) from the `latest` branch and push it to [GitHub](https://github.com/apache/ozone-docker).
 
 ```bash
 git checkout ozone-latest
