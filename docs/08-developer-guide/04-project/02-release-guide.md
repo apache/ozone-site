@@ -57,7 +57,7 @@ This provides visibility into the progress of the release for the community. Tas
 
 ### Bulk Comment on Jiras Targeting This Release
 
-Issue a Jira query like [this](https://issues.apache.org/jira/browse/HDDS-4183?jql=project%20%3D%20HDDS%20AND%20resolution%20%3D%20Unresolved%20AND%20(cf%5B12310320%5D%20%3D%201.3.0%20OR%20fixVersion%20%3D%201.3.0)%20ORDER%20BY%20priority%20DESC%2C%20updated%20DESC), modified for the release number you are working with, to find all unresolved Jiras that have the target version field set to this release. Note that some people incorrectly use Fix Version as the Target Version, so Fix Version is included in this search. Use the following steps to issue a bulk update to these Jiras:
+Issue a Jira query like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20resolution%20%3D%20Unresolved%20AND%20(cf%5B12310320%5D%20%3D%201.3.0%20OR%20fixVersion%20%3D%201.3.0)%20ORDER%20BY%20priority%20DESC%2C%20updated%20DESC), modified for the release number you are working with, to find all unresolved Jiras that have the target version field set to this release. Note that some people incorrectly use Fix Version as the Target Version, so Fix Version is included in this search. Use the following steps to issue a bulk update to these Jiras:
 
  1. In the top right corner, click `Tools` and under `Bulk Change` , select `all ... issues`.
  2. Click the top check box to select all the issues. Click `Next`.
