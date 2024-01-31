@@ -257,8 +257,10 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - A non-snapshot version of Ratis.
     - A link to the [apache/ozone](https://github.com/apache/ozone) GitHub repository (not your fork).
     - The git hash of the last commit the release was built on.
-7. Run the Ozone upgrade acceptance tests by running `test.sh` from the compose/upgrade directory in the extracted release tarball.
-    - This check is also run by the GitHub actions CI for each commit, so it should pass with no surprises.
+7. Run the upgrade compatibility acceptance tests by running `test.sh` from the `compose/upgrade` directory in the extracted release tarball.
+    :::note
+    The `test.sh` file committed to the master branch only checks upgrade compatiblity against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
+    :::
 
 ### Upload the Artifacts to Dev Staging
 
@@ -359,9 +361,9 @@ Write a haiku to the photo with Future font.
 
 ### Update the Ozone Website
 
-- Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`.
-- Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
-- Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
+1. Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`.
+2. Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
+3. Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
 
 ### Add the Final Git Tag and Push It
 
@@ -371,28 +373,9 @@ git tag -s "ozone-$VERSION" -m "Ozone $VERSION release"
 git push origin "ozone-$VERSION"
 ```
 
-### Update the Master Branch
-
-- Cherry pick your commit updating the protolock files to a branch on your fork, and merge it to master with a pull request.
-- Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [national park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
-
-### Update the Ozone Roadmap
-
-- Update the [Ozone Roadmap](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Roadmap) so that the release notes for the just completed release are correct.
-- Move its row to the `Past Releases` section.
-- Create a row for the next release in the `Upcoming Releases` section, and add planned features that you are aware of.
-
-### Write an Announcement Mail to the Ozone Mailing Lists
-
-Include the following links:
-
-- Release notes: [https://ozone.apache.org/release/1.2.0/](https://ozone.apache.org/release/1.2.0/). Replace the version in the URL with the version being released.
-- Download link: [https://ozone.apache.org/downloads/](https://ozone.apache.org/downloads/)
-- Link to versioned documentation: [https://ozone.apache.org/docs/](https://ozone.apache.org/docs/)
-
 ### Publish a Docker Image for the Release
 
-The Ozone docker image is intended for testing purposes only, not production use. Therefore, it is ok to update this after announcing the release. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [docker image tags](https://hub.docker.com/r/apache/ozone/tags).
+The Ozone docker image is intended for testing purposes only, not production use. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [docker image tags](https://hub.docker.com/r/apache/ozone/tags).
 
 1. Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
 
@@ -410,6 +393,33 @@ The Ozone docker image is intended for testing purposes only, not production use
     git checkout -b "ozone-$VERSION"
     git push origin "ozone-$VERSION"
     ```
+
+### Update the Master Branch
+
+1. Cherry pick your commit updating the protolock files to a branch on your fork, and merge it to master with a pull request.
+
+2. Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
+
+3. Update the upgrade and client cross compatibility acceptance tests to check against the new release. See [this pull request](https://github.com/apache/ozone/pull/6040/files) for an example.
+    :::note
+    This step requires the release's [docker image](#publish-a-docker-image-for-the-release) to be published.
+    :::
+
+### Update the Ozone Roadmap
+
+1. Update the [Ozone Roadmap](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Roadmap) so that the release notes for the just completed release are correct.
+
+2. Move its row to the `Past Releases` section.
+
+3. Create a row for the next release in the `Upcoming Releases` section, and add planned features that you are aware of.
+
+### Write an Announcement Mail to the Ozone Mailing Lists
+
+Include the following links:
+
+- Release notes: [https://ozone.apache.org/release/1.2.0/](https://ozone.apache.org/release/1.2.0/). Replace the version in the URL with the version being released.
+- Download link: [https://ozone.apache.org/downloads/](https://ozone.apache.org/downloads/)
+- Link to versioned documentation: [https://ozone.apache.org/docs/](https://ozone.apache.org/docs/)
 
 ## Patch Release
 
