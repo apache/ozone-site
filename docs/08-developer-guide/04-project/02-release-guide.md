@@ -221,7 +221,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 7. Run the Ozone upgrade acceptance tests by running `test.sh` from the compose/upgrade directory in the extracted release tarball.
   - This check is also run by the GitHub actions CI for each commit, so it should pass with no surprises.
 
-### Upload the Artifacts Dev Staging Area
+### Upload the Artifacts to Dev Staging
 
 - Upload everything from the `$RELEASE_DIR` to the dev staging area.
 
