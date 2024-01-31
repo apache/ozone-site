@@ -11,9 +11,9 @@ This document describes the process to release Apache Ozone. The process is not 
 ### Install Required Packages
 
 In addition to the usual development tools required to work on Ozone, the following packages are required during the release process:
-  - [Subversion](https://subversion.apache.org/) to publish release artifacts and GPG keys.
-  - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
-  - [protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
+- [Subversion](https://subversion.apache.org/) to publish release artifacts and GPG keys.
+- [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
+- [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
 
 ### Publish Your GPG Key
 
@@ -39,7 +39,7 @@ svn cp https://dist.apache.org/repos/dist/release/ozone/KEYS https://dist.apache
 
 svn co https://dist.apache.org/repos/dist/dev/ozone
 cd ozone
-export CODESIGNINGKEY=your_gpg_key_id
+export CODESIGNINGKEY=<your_gpg_key_id>
 gpg --list-sigs $CODESIGNINGKEY >> KEYS
 gpg --armor --export $CODESIGNINGKEY >> KEYS
 svn commit -m "ozone: adding key of <your_name> to the KEYS"
@@ -59,17 +59,19 @@ This provides visibility into the progress of the release for the community. Tas
 
 Issue a Jira query like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20resolution%20%3D%20Unresolved%20AND%20(cf%5B12310320%5D%20%3D%201.3.0%20OR%20fixVersion%20%3D%201.3.0)%20ORDER%20BY%20priority%20DESC%2C%20updated%20DESC), modified for the release number you are working with, to find all unresolved Jiras that have the target version field set to this release. Note that some people incorrectly use Fix Version as the Target Version, so Fix Version is included in this search. Use the following steps to issue a bulk update to these Jiras:
 
- 1. In the top right corner, click `Tools` and under `Bulk Change` , select `all ... issues`.
- 2. Click the top check box to select all the issues. Click `Next`.
- 3. Select `Edit Issues` , then click `Next`.
- 4. Select `Change Fix Version/s` , and in the drop down select `Clear field`.
+1. In the top right corner, click `Tools` and under `Bulk Change` , select `all ... issues`.
+2. Click the top check box to select all the issues. Click `Next`.
+3. Select `Edit Issues` , then click `Next`.
+4. Select `Change Fix Version/s` , and in the drop down select `Clear field`.
     :::note
     This corrects unresolved issues which incorrectly set a fix version for this release.
- 5. Select `Change Target Version/s`, and enter the version of the release after the one you are managing.
- 6. Select `Change Comment`, and add a comment saying that you have moved the release field out, but if the issue is being actively worked on, is close to completion, and would like to be included in this release, to contact you by a given date, probably a week in the future.
+    :::
+5. Select `Change Target Version/s`, and enter the version of the release after the one you are managing.
+6. Select `Change Comment`, and add a comment saying that you have moved the release field out, but if the issue is being actively worked on, is close to completion, and would like to be included in this release, to contact you by a given date, probably a week in the future.
     :::note
     Even though the action is called `Change Comment`, it actually adds a comment to the Jira and does not affect existing comments.
- 7. Keep clicking through until the operation is started. It may take a while for Jira to finish the bulk update once it is started.
+    :::
+7. Keep clicking through until the operation is started. It may take a while for Jira to finish the bulk update once it is started.
 
 ### Create a Release Branch
 
@@ -77,7 +79,7 @@ After the date specified in the Jira comments has passed and blocking issues hav
 
 ### Set Up Local Environment
 
-The following variables will be referenced in commands.
+The following variables will be referenced in commands:
 
 ```bash
 export VERSION=1.1.0 # Set to the version of ozone being released.
@@ -121,62 +123,93 @@ git commit -am "Update Ozone version to $VERSION"
 
 ### Build and Commit the `proto.lock` Change
 
-Protolock files are used to check backwards compatibility of protocol buffers between releases. The ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed. Save and run the following script from your ozone repo root, and then commit the changed files to git. Double check that only files called `proto.lock` are being committed, and that the changes to the files makes sense based on new features added in this release.
+Protolock files are used to check backwards compatibility of protocol buffers between releases. The Ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed.
 
-```bash title="update_protolocks.sh"
-#!/usr/bin/env sh
+1. Save and run the following script from your Ozone repo root.
 
-for lock in $(find . -name proto.lock); do
-    lockdir="$(dirname "$lock")"
-    protoroot="$lockdir"/../proto
-    if protolock status --lockdir="$lockdir" --protoroot="$protoroot"; then
+    ```bash title="update_protolocks.sh"
+    #!/usr/bin/env sh
+
+    for lock in $(find . -name proto.lock); do
+      lockdir="$(dirname "$lock")"
+      protoroot="$lockdir"/../proto
+      if protolock status --lockdir="$lockdir" --protoroot="$protoroot"; then
         protolock commit --lockdir="$lockdir" --protoroot="$protoroot"
-    else
+      else
         echo "protolock update failed for $protoroot"
-    fi
-done
-```
+      fi
+    done
+    ```
 
-- Commit changes to the `proto.lock` files.
+2. Commit changes to the `proto.lock` files.
+    ```bash
+    git commit -m "Update proto.lock for Ozone $VERSION"
+    ```
 
-```bash
-git commit -m "update proto.lock for Ozone $VERSION"
-```
+    :::warning
+    Double check that only files called `proto.lock` are being committed, and that the changes to the files makes sense based on new features added in this release.
+    :::
+
+    :::tip
+    Ozone currently uses the following protolock files:
+    - `hadoop-hdds/interface-client/src/main/resources/proto.lock`: Controls the protocol for clients communicating with datanodes.
+    - `hadoop-hdds/interface-admin/src/main/resources/proto.lock`: Controls the protocol for clients communicating with SCM.
+    - `hadoop-hdds/interface-server/src/main/resources/proto.lock`: Controls the protocol for SCMs communicating with each other.
+    - `hadoop-ozone/interface-client/src/main/resources/proto.lock`: Controls all protocols involving the Ozone Manager.
+    - `hadoop-ozone/csi/src/main/resources/proto.lock`: Controls the protocol for the Ozone CSI server.
+    :::
 
 ### Tag the Commit for the Release Candidate
 
-This will sign the tag with the gpg key matching the git mailing address. Make sure that the email given by `git config user.email` matches the email for the key you want to use shown by `gpg --list-secret-keys`.
+This will sign the tag with the GPG key matching the git mailing address. Make sure that the email given by `git config user.email` matches the email for the key you want to use shown by `gpg --list-secret-keys`.
 
 ```bash
 git tag -s "ozone-$VERSION-RC$RC"
 ```
 
+:::tip
 If the command fails on MacOS, you may need to do the following additional steps:
-- Install a program to prompt you for your gpg key passphrase (example using homebrew): `brew install pinentry-mac`
-- Tell git to use this program for signing:`git config --global gpg.program "$(which gpg)"`
-- Tell git which key to sign with: `git config --global user.signingKey <gpg_key_id>`
-- Tell gpg to use this program to prompt for passphrase: `echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf`
-- Reload gpg-agent: `gpgconf --kill gpg-agent`
+- Install a program to prompt you for your gpg key passphrase (example using homebrew):
+  ```bash
+  brew install pinentry-mac
+  ```
+- Tell git to use this program for signing:
+  ```bash
+  git config --global gpg.program "$(which gpg)"
+  ```
+- Tell git which key to sign with:
+  ```bash
+  git config --global user.signingKey <gpg_key_id>
+  ```
+- Tell gpg to use this program to prompt for passphrase:
+  ```bash
+  echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
+  ```
+- Reload gpg-agent:
+  ```
+  gpgconf --kill gpg-agent
+  ```
+:::
 
 ### Create the Release Artifacts
 
 - Run rat check and ensure there are no failures.
-    ```bash
-    ./hadoop-ozone/dev-support/checks/rat.sh
-    ```
+  ```bash
+  ./hadoop-ozone/dev-support/checks/rat.sh
+  ```
 - Clean the Repo of all Rat output
-    ```bash
-    git reset --hard
-    git clean -dfx
-    ```
+  ```bash
+  git reset --hard
+  git clean -dfx
+  ```
 - Build the Release Tarballs. Make sure you are using GNU-tar instead of BSD-tar.
-    ```bash
-    mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
-    ```
+  ```bash
+  mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
+  ```
 - Now that we have built the release artifacts, we will copy them to the release directory.
-    ```bash
-    cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
-    ```
+  ```bash
+  cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
+  ```
 
 ### Calculate the Checksum and Sign the Artifacts
 
@@ -199,31 +232,37 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 
 1. Extract the contents of the source tarball and build it with an empty maven cache by renaming your `~/.m2` directory before doing the build.
 2. Check the size of the output binary tarball for significant size increase from the last release.
-  - A significant increase in size could indicate a dependency issue that needs to be fixed.
-  - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
+    - A significant increase in size could indicate a dependency issue that needs to be fixed.
+    - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
 3. Verify signatures
-  - Download the KEYS file from [https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
-  - Import its contents (which should include your public gpg key): `gpg --import KEYS`
-  - Verify each .tar.gz artifact: `gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz`
+    - Download the KEYS file from [https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
+    - Import its contents (which should include your public gpg key):
+      ```bash
+      gpg --import KEYS
+      ```
+    - Verify each .tar.gz artifact:
+      ```bash
+      gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz
+      ```
 4. Verify checksums
-  - Run `shasum -a 512 *.tar.gz`
-  - Verify that the output checksums for each artifact match the contents of its .sha512 file and the SHA512 line in its .mds file.
+    - For each artifact, verify that the checksums given by the `shasum` command match the contents of the .sha512 file and the SHA512 line in its .mds file.
+        ```bash
+        shasum -a 512 *.tar.gz
+        ```
 5. Make sure docs are present in the release tarball
-  - There should be a directory called docs in the top level. If there is not, then `hugo` was not installed during the build and it must be re-done.
-  - Extract the release and open docs/index.html in your web browser, and check that the documentation website looks ok.
-6. Check the output of running `bin/ozone version` from the extracted release tarball
-  - After extracting the release, the output of this command should contain:
+   - Extract the release and open docs/index.html in your web browser, and check that the documentation website looks ok.
+6. Run `bin/ozone version` from the extracted release tarball. The output of this command should contain:
     - The correct release
     - The correct national park tag
     - A non-snapshot version of Ratis.
-    - A link to the apache/ozone GitHub repository (not your fork).
+    - A link to the [apache/ozone](https://github.com/apache/ozone) GitHub repository (not your fork).
     - The git hash of the last commit the release was built on.
 7. Run the Ozone upgrade acceptance tests by running `test.sh` from the compose/upgrade directory in the extracted release tarball.
-  - This check is also run by the GitHub actions CI for each commit, so it should pass with no surprises.
+    - This check is also run by the GitHub actions CI for each commit, so it should pass with no surprises.
 
 ### Upload the Artifacts to Dev Staging
 
-- Upload everything from the `$RELEASE_DIR` to the dev staging area.
+1. Upload everything from the `$RELEASE_DIR` to the dev staging area.
 
 ```bash
 svn mkdir https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
@@ -234,7 +273,7 @@ svn add *
 svn commit -m "Ozone $VERSION RC$RC"
 ```
 
-- Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
+2. Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
 
 ### Upload the Artifacts to Apache Nexus
 
@@ -283,7 +322,7 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 - Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: [https://dist.apache.org/repos/dist/dev/ozone/KEYS](https://dist.apache.org/repos/dist/dev/ozone/KEYS)
 - Fingerprint of the key used to sign the artifacts.
 
-If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether or not their vote is binding. If in doubt check [The ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
+If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether their vote is binding. If in doubt check the [ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
 
 Once voting is finished, send an email summarizing the results (binding +1s, non-binding +1s, -1s, 0s) and, if the vote passed, indicate that the release artifacts will be published. If an issue is found with the artifacts, apply fixes to the release branch and repeat the steps starting from [Tag the Commit for the Release Candidate](#tag-the-commit-for-the-release-candidate) with the `$RC` variable incremented by 1 for all steps.
 
@@ -321,7 +360,7 @@ Write a haiku to the photo with Future font.
 ### Update the Ozone Website
 
 - Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`.
-- Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the docs/current symlink has been updated to point to the latest release's directory.
+- Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
 - Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
 
 ### Add the Final Git Tag and Push It
@@ -357,20 +396,20 @@ The Ozone docker image is intended for testing purposes only, not production use
 
 1. Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
 
-```bash
-git checkout ozone-latest
-git pull
-git merge --ff-only origin/latest
-git push origin ozone-latest
-```
+    ```bash
+    git checkout ozone-latest
+    git pull
+    git merge --ff-only origin/latest
+    git push origin ozone-latest
+    ```
 
 2. Publish the image with a version specific tag by creating a new branch with a name like `ozone-1.5.0` (replace this with the current version) from the `latest` branch and push it to [GitHub](https://github.com/apache/ozone-docker).
 
-```bash
-git checkout ozone-latest
-git checkout -b "ozone-$VERSION"
-git push origin "ozone-$VERSION"
-```
+    ```bash
+    git checkout ozone-latest
+    git checkout -b "ozone-$VERSION"
+    git push origin "ozone-$VERSION"
+    ```
 
 ## Patch Release
 
@@ -379,19 +418,19 @@ If there is a security vulnerability or critical bug uncovered in a major or min
 1. Cherry pick the fix(es) on to the maintenance branch. For example, for Ozone's 1.2.0 release, this is the branch called `ozone-1.2`.
 
 2. Run all steps from the sections [Update the Versions](#update-the-versions) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
-  - Do not update the protolock files unless protocol buffers were changed as part of the fix.
-  - When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
-    - For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
-    - Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
-    - An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
-    - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
-   - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
+    - Do not update the protolock files unless protocol buffers were changed as part of the fix.
+    - When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
+      - For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
+      - Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
+      - An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
+      - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
+     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
 3. Remove the previous release that this patch release supercedes from the Apache distribution site:
 
-```bash
-svn rm -m 'Ozone: delete old version 1.2.0' https://dist.apache.org/repos/dist/release/ozone/1.2.0
-```
+    ```bash
+    svn rm -m 'Ozone: delete old version 1.2.0' https://dist.apache.org/repos/dist/release/ozone/1.2.0
+    ```
 
 ## Update This Document
 
