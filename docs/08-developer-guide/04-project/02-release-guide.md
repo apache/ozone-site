@@ -17,7 +17,7 @@ In addition to the usual development tools required to work on Ozone, the follow
 
 ### Publish Your GPG Key
 
-Create a GPG key to sign the artifacts if you do not already have one. For help creating your key refer to the [ASF new committer guide](https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys). The release manager's GPG key is supposed to be published together with the release. Please use Subversion to append it to the end of the [KEYS file](https://dist.apache.org/repos/dist/release/ozone/KEYS) if it is not already present.
+Create a GPG key to sign the artifacts if you do not already have one. For help creating your key refer to the [ASF new committer guide](https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys). The release manager's GPG key is supposed to be published together with the release. Please append it to the end of the [KEYS file](https://dist.apache.org/repos/dist/release/ozone/KEYS) stored in Subversion, if it is not already present.
 
 - PMC members can append their key directly to the release KEYS file:
 
