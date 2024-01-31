@@ -234,7 +234,7 @@ svn add *
 svn commit -m "Ozone $VERSION RC$RC"
 ```
 
-- Check the results using your browser by connecting to [https://dist.apache.org/repos/dist/dev/ozone/](https://dist.apache.org/repos/dist/dev/ozone/)
+- Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
 
 ### Upload the Artifacts to Apache Nexus
 
