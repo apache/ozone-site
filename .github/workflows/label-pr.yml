@@ -1,3 +1,5 @@
+# This workflow reads its configuration from the .github/labeler.yml file.
+# This workflow and its configuration can be deleted once the website's feature branch is merged.
 name: "Pull Request Labeler"
 on:
 - pull_request_target
@@ -10,4 +12,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/labeler@v5
-
