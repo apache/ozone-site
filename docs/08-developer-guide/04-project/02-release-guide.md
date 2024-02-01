@@ -119,6 +119,10 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 
 Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 1.4.0, then the master branch's current version would be `1.4.0-SNAPSHOT`. Here you would increase it to `1.5.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
 
+:::note
+It is okay if there are commits that land between the `proto.lock` file updates and the SNAPSHOT version increase on the master branch, but they will not be part of the release unless they are manually cherry-picked after the release branch is created.
+:::
+
 ### Create a Release Branch
 
 Once the previous two pull requests to update protolock files and the Ozone SNAPSHOT version are merged, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo. 
