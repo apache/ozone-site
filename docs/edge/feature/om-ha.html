@@ -478,10 +478,10 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>Ozone has two metadata-manager nodes (<em>Ozone Manager</em> for key space management and <em>Storage Container Management</em> for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.</p>
+<p>Ozone has two metadata-manager nodes (<em>Ozone Manager</em> for key space management and <em>Storage Container Manager</em> for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.</p>
 <p>To avoid any single point of failure the metadata-manager nodes also should have a HA setup.</p>
 <p>Both Ozone Manager and Storage Container Manager supports HA. In this mode the internal state is replicated via RAFT (with Apache Ratis)</p>
-<p>This document explain the HA setup of Ozone Manager (OM) HA, please check <a href="../feature/scm-ha.html">this page</a> for SCM HA.  While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.</p>
+<p>This document explains the HA setup of Ozone Manager (OM) HA, please check <a href="../feature/scm-ha.html">this page</a> for SCM HA.  While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.</p>
 <h2 id="ozone-manager-ha">Ozone Manager HA</h2>
 <p>A single Ozone Manager uses <a href="https://github.com/facebook/rocksdb/">RocksDB</a> to persist metadata (volumes, buckets, keys) locally. HA version of Ozone Manager does exactly the same but all the data is replicated with the help of the RAFT consensus algorithm to follower Ozone Manager instances.</p>
 <p>
@@ -525,15 +525,15 @@ s=d.getElementsByTagName('script')[0];
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hdfs dfs -ls ofs://cluster1/volume/bucket/prefix/
 </code></pre></div><h2 id="implementation-details">Implementation details</h2>
 <p>Raft can guarantee the replication of any request if the request is persisted to the RAFT log on the majority of the nodes. To achieve high throughput with Ozone Manager, it returns with the response even if the request is persisted only to the RAFT logs.</p>
-<p>RocksDB instance are updated by a background thread with batching transactions (so called &ldquo;double buffer&rdquo; as when one of the buffers is used to commit the data the other one collects all the new requests for the next commit.) To make all data available for the next request even if the background process is not yet wrote them the key data is cached in the memory.</p>
+<p>RocksDB instance are updated by a background thread with batching transactions (so called &ldquo;double buffer&rdquo; as when one of the buffers is used to commit the data the other one collects all the new requests for the next commit.) To make all data available for the next request even if the background process has not yet written them, the key data is cached in the memory.</p>
 <p>
 
 <img src="HA-OM-doublebuffer.png" alt='HA - OM Double Buffer'  class="img-responsive" /></p>
-<p>The details of this approach discussed in a separated <a href="../design/omha.html">design doc</a> but it&rsquo;s integral part of the OM HA design.</p>
+<p>The details of this approach are discussed in a separate <a href="../design/omha.html">design doc</a> but it&rsquo;s an integral part of the OM HA design.</p>
 <h2 id="om-bootstrap">OM Bootstrap</h2>
 <p>To convert a non-HA OM to be HA or to add new OM nodes to existing HA OM ring, new OM node(s) need to be bootstrapped.</p>
 <p>Before bootstrapping a new OM node, all the existing OM&rsquo;s on-disk configuration file (ozone-site.xml) must be updated with the configuration details
-of the new OM such nodeId, address, port etc. Note that the existing OM&rsquo;s need not be restarted. They will reload the configuration from disk when
+of the new OM such as nodeId, address, port etc. Note that the existing OM&rsquo;s need not be restarted. They will reload the configuration from disk when
 they receive a bootstrap request from the bootstrapping node.</p>
 <p>To bootstrap an OM, the following command needs to be run:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone om <span style="color:#f92672">[</span>global options <span style="color:#f92672">(</span>optional<span style="color:#f92672">)]</span> --bootstrap
@@ -565,7 +565,7 @@ using the <em>force</em> option. The <em>force</em> option allows to continue wi
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: January 31, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/fb2caac8ba7bf646d246cc2bd3138bdf37167e66">fb2caac</a>
+      Version: 1.5.0-SNAPSHOT, Last Modified: February 1, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/361ad068ed56d2cb8e1343f0d14969792f118228">361ad06</a>
     </span>
   </div>
 </footer>
