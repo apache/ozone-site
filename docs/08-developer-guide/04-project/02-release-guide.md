@@ -73,55 +73,9 @@ Issue a Jira query like [this](https://issues.apache.org/jira/issues/?jql=projec
     :::
 7. Keep clicking through until the operation is started. It may take a while for Jira to finish the bulk update once it is started.
 
-### Create a Release Branch
+Wait for the date specified in the Jira comments to pass and blocking issues to be resolved before proceeding with the next steps to update the master branch and cut a release branch.
 
-After the date specified in the Jira comments has passed and blocking issues have been resolved, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo. Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 1.2.0, create a branch called `ozone-1.2` . All release related changes will go to this branch until the release is complete, after which some changes mentioned below will be cherry picked to `master`.
-
-### Set Up Local Environment
-
-The following variables will be referenced in commands:
-
-```bash
-export VERSION=1.1.0 # Set to the version of ozone being released.
-export RELEASE_DIR=~/ozone-release/ # ozone-release needs to be created
-export CODESIGNINGKEY=<your_gpg_key_id>
-export RC=0 # Set to the number of the current release candidate, starting at 0.
-```
-
-It is probably best to clone a fresh ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the apache/ozone upstream repo is named `origin`. This is required for release build metadata to be correctly populated. Assume all following commands are executed from within this repo with your release branch checked out.
-
-### Reset the Git Repository
-
-```bash
-git reset --hard
-git clean -dfx
-```
-
-### Update the Versions
-
-Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs>
-<TabItem value="linux" label="Linux">
-```bash title="Update the Versions"
-find . -name pom.xml -type f | xargs sed -i "s/$VERSION-SNAPSHOT/$VERSION/g"
-```
-</TabItem>
-<TabItem value="mac" label="Mac">
-```bash title="Update the Versions (Mac)"
-find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$VERSION/g"
-```
-</TabItem>
-</Tabs>
-
-```bash title="Commit the Version Changes "
-git commit -am "Update Ozone version to $VERSION"
-```
-
-### Build and Commit the `proto.lock` Change
+### Build and Commit `proto.lock` Files to the Master Branch
 
 Protolock files are used to check backwards compatibility of protocol buffers between releases. The Ozone build checks protocol buffers against these lock files and fails if an incompatibility is detected. They should be updated for each release, and require [protolock](https://github.com/nilslice/protolock) to be installed.
 
@@ -158,6 +112,65 @@ Protolock files are used to check backwards compatibility of protocol buffers be
     - `hadoop-ozone/interface-client/src/main/resources/proto.lock`: Controls all protocols involving the Ozone Manager.
     - `hadoop-ozone/csi/src/main/resources/proto.lock`: Controls the protocol for the Ozone CSI server.
     :::
+
+3. Submit a pull request to add the updated `proto.lock` changes to Ozone's master branch. This commit will be the parent of your release branch.
+
+### Update the Ozone Version on the Master Branch
+
+Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 1.4.0, then the master branch's current version would be `1.4.0-SNAPSHOT`. Here you would increase it to `1.5.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
+
+### Create a Release Branch
+
+Once the previous two pull requests to update protolock files and the Ozone SNAPSHOT version are merged, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo. 
+:::important
+The parent commit of the release branch should be the commit that was merged in the [proto.lock file update](#build-and-commit-protolock-files-to-the-master-branch).
+:::
+Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 1.2.0, create a branch called `ozone-1.2` . All release related changes will go to this branch until the release is complete.
+
+### Set Up Local Environment
+
+The following variables will be referenced in commands:
+
+```bash
+export VERSION=1.1.0 # Set to the version of ozone being released.
+export RELEASE_DIR=~/ozone-release/ # ozone-release needs to be created
+export CODESIGNINGKEY=<your_gpg_key_id>
+export RC=0 # Set to the number of the current release candidate, starting at 0.
+```
+
+It is probably best to clone a fresh Ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the [apache/ozone](https://github.com/apache/ozone) upstream repo is named `origin`. This is required for release build metadata to be correctly populated.
+
+Run the following commands to make sure your repo is clean:
+```bash
+git reset --hard
+git clean -dfx
+```
+
+Assume all following commands are executed from within this repo with your release branch checked out.
+
+### Update the Ozone Version on the Release Branch
+
+Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="linux" label="Linux">
+```bash title="Update the Versions"
+find . -name pom.xml -type f | xargs sed -i "s/$VERSION-SNAPSHOT/$VERSION/g"
+```
+</TabItem>
+<TabItem value="mac" label="Mac">
+```bash title="Update the Versions (Mac)"
+find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$VERSION/g"
+```
+</TabItem>
+</Tabs>
+
+```bash title="Commit the Version Changes "
+git commit -am "Update Ozone version to $VERSION"
+```
 
 ### Tag the Commit for the Release Candidate
 
@@ -394,16 +407,12 @@ The Ozone docker image is intended for testing purposes only, not production use
     git push origin "ozone-$VERSION"
     ```
 
-### Update the Master Branch
+### Update Acceptance Tests on the Master Branch
 
-1. Cherry pick your commit updating the protolock files to a branch on your fork, and merge it to master with a pull request.
-
-2. Update the Ozone SNAPSHOT version and national park tag on master with a pull request. Here you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
-
-3. Update the upgrade and client cross compatibility acceptance tests to check against the new release. See [this pull request](https://github.com/apache/ozone/pull/6040/files) for an example.
-    :::note
-    This step requires the release's [docker image](#publish-a-docker-image-for-the-release) to be published.
-    :::
+Update the upgrade and client cross compatibility acceptance tests to check against the new release. See [this pull request](https://github.com/apache/ozone/pull/6040/files) for an example.
+:::note
+This step requires the release's [docker image](#publish-a-docker-image-for-the-release) to be published.
+:::
 
 ### Update the Ozone Roadmap
 
