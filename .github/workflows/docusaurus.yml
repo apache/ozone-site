@@ -34,11 +34,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build Docker image
         run: |
-          docker build -t ozone-site:ci .
-      - name: Install dependencies
-        run: |
-          docker run --rm -v $PWD:/ozone-site ozone-site:ci pnpm install
+          docker compose build
       - name: Run test
         run: |
-          docker run --rm -v $PWD:/ozone-site ozone-site:ci pnpm build
-
+          docker compose run site pnpm build
