@@ -11,6 +11,7 @@ This document describes the process to release Apache Ozone. The process is not 
 ### Install Required Packages
 
 In addition to the usual development tools required to work on Ozone, the following packages are required during the release process:
+
 - [Subversion](https://subversion.apache.org/) to publish release artifacts and GPG keys.
 - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
@@ -125,7 +126,7 @@ It is okay if there are commits that land between the `proto.lock` file updates 
 
 ### Create a Release Branch
 
-Once the previous two pull requests to update protolock files and the Ozone SNAPSHOT version are merged, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo. 
+Once the previous two pull requests to update protolock files and the Ozone SNAPSHOT version are merged, you can create a release branch in the [apache/ozone](https://github.com/apache/ozone) Github repo.
 :::important
 The parent commit of the release branch should be the commit that was merged in the [proto.lock file update](#build-and-commit-protolock-files-to-the-master-branch).
 :::
@@ -186,6 +187,7 @@ git tag -s "ozone-$VERSION-RC$RC"
 
 :::tip
 If the command fails on MacOS, you may need to do the following additional steps:
+
 - Install a program to prompt you for your gpg key passphrase (example using homebrew):
   ```bash
   brew install pinentry-mac
@@ -203,9 +205,10 @@ If the command fails on MacOS, you may need to do the following additional steps
   echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
   ```
 - Reload gpg-agent:
-  ```
+  ```bash
   gpgconf --kill gpg-agent
   ```
+
 :::
 
 ### Create the Release Artifacts
@@ -283,14 +286,14 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 
 1. Upload everything from the `$RELEASE_DIR` to the dev staging area.
 
-```bash
-svn mkdir https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
-svn co https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
-cp "$RELEASE_DIR"/* "$VERSION-rc$RC"
-cd "$VERSION-rc$RC"
-svn add *
-svn commit -m "Ozone $VERSION RC$RC"
-```
+    ```bash
+    svn mkdir https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
+    svn co https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
+    cp "$RELEASE_DIR"/* "$VERSION-rc$RC"
+    cd "$VERSION-rc$RC"
+    svn add *
+    svn commit -m "Ozone $VERSION RC$RC"
+    ```
 
 2. Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
 
@@ -301,17 +304,17 @@ Double check that your apache credentials are added to your local `~/.m2/setting
 ```xml title="settings.xml"
 <settings>
   <servers>
-	<server>
-      <id>apache.snapshots.https</id>
-      <username>your_apache_id</username>
-      <password>your_apache_password</password>
-    </server>
-    <!-- To stage a release of some part of Maven -->
     <server>
-      <id>apache.staging.https</id>
-      <username>your_apache_id</username>
-      <password>your_apache_password</password>
-	</server>
+        <id>apache.snapshots.https</id>
+        <username>your_apache_id</username>
+        <password>your_apache_password</password>
+      </server>
+      <!-- To stage a release of some part of Maven -->
+      <server>
+        <id>apache.staging.https</id>
+        <username>your_apache_id</username>
+        <password>your_apache_password</password>
+    </server>
   </servers>
 </settings>
 ```
@@ -440,14 +443,14 @@ If there is a security vulnerability or critical bug uncovered in a major or min
 
 1. Cherry pick the fix(es) on to the maintenance branch. For example, for Ozone's 1.2.0 release, this is the branch called `ozone-1.2`.
 
-2. Run all steps from the sections [Update the Versions](#update-the-versions) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
+2. Run all steps from the sections [Update the Versions](#update-the-ozone-version-on-the-release-branch) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
     - Do not update the protolock files unless protocol buffers were changed as part of the fix.
     - When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
       - For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
       - Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
       - An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
       - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
-     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
+    - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
 3. Remove the previous release that this patch release supercedes from the Apache distribution site:
 
