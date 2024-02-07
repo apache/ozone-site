@@ -1,0 +1,119 @@
+/**
+ * home page banner related css template
+ */
+
+ .banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  height: 400px;
+  /* add container border to debug the layout
+   * border: 2px solid red; 
+   */
+}
+
+.overlay{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+}
+
+.content-box {
+  font-family: Helvetica, sans-serif;
+  text-align:center;
+  max-width: 500px;
+  margin: auto;
+  /* add container border to debug the layout
+   * border: 2px solid blue; 
+   */
+}
+
+.content-box h1 {
+  font-size: 60px;
+  color: #fff;
+}
+
+.content-box p {
+  font-size: 20px;
+  color: #fff;
+}
+
+.buttons-container {
+  display:flex;
+  justify-content: center;
+  /* add container border to debug the layout
+   * border: 2px solid green; 
+   */
+
+}
+
+.buttons-container button {
+  width: 126px;
+  height: 40px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  /* add container border to debug the layout
+   * border: 2px solid yellow; 
+   */
+
+}
+
+.logo-container img {
+  width: 223px;
+  height: 245px;
+}
+
+/* responsive design for mobile */
+@media (max-width: 768px) {
+  .banner-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-container {
+    display:none;
+  }
+
+  .content-box h1 {
+    font-size: 40px;
+  }
+
+  .content-box p {
+    font-size: 14px;
+  }
+
+  .buttons-container{
+    margin-bottom:10px;
+    width:auto
+  }
+  .buttons-container button {
+    margin-bottom: 10px;
+  }
+  .buttons-container button:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons-container button {
+    width: 100px;
+    font-size: 14px;
+  }
+
+  .logo-container {
+    display:none;
+  }
+}

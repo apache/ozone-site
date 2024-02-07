@@ -1,0 +1,46 @@
+/**
+ * home page features related css template
+ */
+
+ .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 50vh;
+  }
+  
+  .features-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  .features-container div {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px; 
+    width: 100%; 
+    border: 2px solid #007BFF;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .f1 {
+    max-width: 800px;
+  }
+  
+  .f2 {
+    max-width: 800px;
+  }
+  
+  .f3 {
+    max-width: 800px;
+  }
+  
+  .f4 {
+    max-width: 800px;
+  }
+  

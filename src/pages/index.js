@@ -1,7 +1,8 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import Logo from '@site/static/img/ozone-logo.svg';
+import Logo from '@site/static/img/ozone-logo-hug.svg';
+import Banner from '@site/static/img/banner.png';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -10,30 +11,47 @@ export default function Home() {
     <Layout
       title={`Welcome to ${siteConfig.title}`}
       description="{siteConfig.tagline}">
-          <div class="hero">
-            <div class="container">
-              <div class="row" style={{alignItems: 'center'}}>
-                <div class="col col--6">
-                  <h1 class="hero__title">{siteConfig.title}</h1>
-                  <p class="hero__subtitle">
-                    {siteConfig.tagline}
-                    <br/>
-                    TODO <a href="https://issues.apache.org/jira/browse/HDDS-9539">HDDS-9539</a>
-                  </p>
-                  <div>
-                    <a href={getStartedHref}>
-                      <button class="button button--primary button--lg margin-right--sm" href={getStartedHref}>
-                        Get Started
-                      </button>
-                    </a>
-                  </div>
-                  </div>
-                <div class="col col--6 padding--lg" >
-                  <Logo height="100%" width="100%" />
-                </div>
-              </div>
+      <div className="banner-container" style={{ backgroundImage: `url(${Banner})` }}>
+        <div className="overlay">
+          <div className="content-box">
+            <h1>{siteConfig.title}</h1>
+            <p>{siteConfig.tagline}</p>
+            <div className="buttons-container">
+              <button>Slack</button>
+              <button>Github</button>
+              <button>Community</button>
             </div>
           </div>
+          <div className="logo-container">
+            <Logo />
+          </div>
+      </div>
+    </div>
+        
+    <div className="about-container">
+      <p>To-Do: about component</p>
+      <p> create about component in src/components as function and import to here </p>
+    </div>
+
+      <div className="center-container">
+        <div className="features-container">
+          <div className="f1"> feature-1
+            <p>create feature-1 component in src/components as function and import to here </p>
+          </div>
+
+          <div className="f2"> feature-2
+            <p>create feature-2 component in src/components as function and import to here </p>
+          </div>
+
+          <div className="f3"> feature-3
+            <p>create feature-3 component in src/components as function and import to here </p>
+          </div>
+
+          <div className="f4"> feature-4
+            <p>create feature-4 component in src/components as function and import to here </p>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 }
