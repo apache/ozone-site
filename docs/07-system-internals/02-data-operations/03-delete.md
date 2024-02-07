@@ -13,7 +13,7 @@ sidebar_label: Delete
 Trace every part of a delete request from beginning to end. This includes:
 - Client getting encryption keys
 - Client calling OM to delete the key
-- OM validating client's Kerberos princiapl
+- OM validating client's Kerberos principal
 - OM checking permissions (Ranger or Native ACLs)
 - OM marking the key for deletion and removing it from the namespace.
 - OM acking to the client
