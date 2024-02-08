@@ -22,6 +22,7 @@ const config = {
   onBrokenMarkdownLinks: 'throw',
   // Fail the build if multiple pages map to the same URL.
   onDuplicateRoutes: 'throw',
+  onBrokenAnchors: 'throw',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
