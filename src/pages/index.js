@@ -8,8 +8,8 @@ export default function Home() {
   const getStartedHref = `docs/quick-start/installation/docker`
   return (
     <Layout
-      title={`Welcome to ${siteConfig.title}`}
-      description="{siteConfig.tagline}">
+      title="Home"
+      description={`${siteConfig.tagline}`}>
           <div class="hero">
             <div class="container">
               <div class="row" style={{alignItems: 'center'}}>

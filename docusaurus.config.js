@@ -11,8 +11,10 @@ const config = {
   tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads',
   favicon: 'img/favicon/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://ozone.apache.org',
+  // Set the production URL of the website. Must be updated when the final site is deployed.
+  // This must match the URL the website is hosted at for social media previews to work.
+  // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3000.
+  url: 'https://ozone-site-v2.staged.apache.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -20,9 +22,9 @@ const config = {
   // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'throw',
   // Fail the build if multiple pages map to the same URL.
   onDuplicateRoutes: 'throw',
-  onBrokenAnchors: 'throw',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
