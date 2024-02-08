@@ -8,13 +8,14 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
-  tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads',
+  tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads.',
   favicon: 'img/favicon/favicon.ico',
 
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3000.
-  url: 'https://ozone-site-v2.staged.apache.org',
+  // url: 'https://ozone-site-v2.staged.apache.org',
+  url: 'http://localhost:3000',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
