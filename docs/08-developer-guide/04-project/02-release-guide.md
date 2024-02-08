@@ -60,7 +60,7 @@ svn cp -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repo
 
 ### Create a Parent Jira for the Release
 
-This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the ozone website, publishing the docker image, etc can be added as subtasks.
+This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the Ozone website, publishing the docker image, etc can be added as subtasks.
 
 ### Bulk Comment on Jiras Targeting This Release
 
@@ -103,6 +103,7 @@ Protolock files are used to check backwards compatibility of protocol buffers be
     ```
 
 2. Commit changes to the `proto.lock` files.
+
     ```bash
     git commit -m "Update proto.lock for Ozone $VERSION"
     ```
@@ -152,6 +153,7 @@ export RC=0 # Set to the number of the current release candidate, starting at 0.
 It is probably best to clone a fresh Ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the [apache/ozone](https://github.com/apache/ozone) upstream repo is named `origin`. This is required for release build metadata to be correctly populated.
 
 Run the following commands to make sure your repo is clean:
+
 ```bash
 git reset --hard
 git clean -dfx
@@ -195,22 +197,31 @@ git tag -s "ozone-$VERSION-RC$RC"
 If the command fails on MacOS, you may need to do the following additional steps:
 
 - Install a program to prompt you for your gpg key passphrase (example using homebrew):
+
   ```bash
   brew install pinentry-mac
   ```
+
 - Tell git to use this program for signing:
+
   ```bash
   git config --global gpg.program "$(which gpg)"
   ```
+
 - Tell git which key to sign with:
+
   ```bash
   git config --global user.signingKey <gpg_key_id>
   ```
+
 - Tell gpg to use this program to prompt for passphrase:
+
   ```bash
   echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
   ```
+
 - Reload gpg-agent:
+
   ```bash
   gpgconf --kill gpg-agent
   ```
@@ -220,19 +231,26 @@ If the command fails on MacOS, you may need to do the following additional steps
 ### Create the Release Artifacts
 
 - Run rat check and ensure there are no failures.
+
   ```bash
   ./hadoop-ozone/dev-support/checks/rat.sh
   ```
+
 - Clean the Repo of all Rat output
+
   ```bash
   git reset --hard
   git clean -dfx
   ```
+
 - Build the Release Tarballs. Make sure you are using GNU-tar instead of BSD-tar.
+
   ```bash
   mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
   ```
+
 - Now that we have built the release artifacts, we will copy them to the release directory.
+
   ```bash
   cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
   ```
@@ -261,20 +279,26 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - A significant increase in size could indicate a dependency issue that needs to be fixed.
     - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
 3. Verify signatures
-    - Download the KEYS file from [https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
+    - Download the KEYS file from <https://dist.apache.org/repos/dist/release/ozone/KEYS>
     - Import its contents (which should include your public gpg key):
+
       ```bash
       gpg --import KEYS
       ```
+
     - Verify each .tar.gz artifact:
+
       ```bash
       gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz
       ```
+
 4. Verify checksums
     - For each artifact, verify that the checksums given by the `shasum` command match the contents of the .sha512 file and the SHA512 line in its .mds file.
+
         ```bash
         shasum -a 512 *.tar.gz
         ```
+
 5. Make sure docs are present in the release tarball
    - Extract the release and open docs/index.html in your web browser, and check that the documentation website looks ok.
 6. Run `bin/ozone version` from the extracted release tarball. The output of this command should contain:
@@ -346,8 +370,8 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 - Link to the release candidate tag on Github
 - Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
 - Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
-- Location where the maven artifacts are staged. This link will look something like [https://repository.apache.org/content/repositories/orgapacheozone-1001/](https://repository.apache.org/content/repositories/orgapacheozone-1001/)
-- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: [https://dist.apache.org/repos/dist/dev/ozone/KEYS](https://dist.apache.org/repos/dist/dev/ozone/KEYS)
+- Location where the maven artifacts are staged. This link will look something like <https://repository.apache.org/content/repositories/orgapacheozone-1001/>
+- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: <https://dist.apache.org/repos/dist/dev/ozone/KEYS>
 - Fingerprint of the key used to sign the artifacts.
 
 If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether their vote is binding. If in doubt check the [ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
@@ -439,9 +463,9 @@ This step requires the release's [docker image](#publish-a-docker-image-for-the-
 
 Include the following links:
 
-- Release notes: [https://ozone.apache.org/release/1.2.0/](https://ozone.apache.org/release/1.2.0/). Replace the version in the URL with the version being released.
-- Download link: [https://ozone.apache.org/downloads/](https://ozone.apache.org/downloads/)
-- Link to versioned documentation: [https://ozone.apache.org/docs/](https://ozone.apache.org/docs/)
+- Release notes: <https://ozone.apache.org/release/1.2.0/>. Replace the version in the URL with the version being released.
+- Download link: <https://ozone.apache.org/downloads/>
+- Link to versioned documentation: <https://ozone.apache.org/docs/>
 
 ## Patch Release
 

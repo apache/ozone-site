@@ -21,4 +21,3 @@ REST Client | HttpFS Server | | | | | |
 REST Client | Recon REST API | HTTPS | Kerberos + SPNEGO | [Configured Ozone Administrators](../../administrator-guide/configuration/security/administrators) | TLS | |
 Web Browser | Recon UI | HTTPS | Kerberos + SPNEGO/Apache Knox | [Configured Ozone Administrators](../../administrator-guide/configuration/security/administrators) | TLS | |
 Web Browser | Ozone WebUIs | HTTPS | Kerberos + SPNEGO/Apache Knox | | TLS | |
-

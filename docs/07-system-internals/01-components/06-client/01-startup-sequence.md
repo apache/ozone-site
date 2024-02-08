@@ -8,4 +8,3 @@ sidebar_label: Startup Sequence
 
 - Ozone shell script invokes the correct jar.
 - Client makes `getServiceInfo` call to Ozone Manager.
-
