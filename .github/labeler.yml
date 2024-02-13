@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for .github/workflows/label-pr.yml
+# Configuration for the labeler GitHub Action.
 # This workflow and its configuration can be deleted once the website's feature branch is merged.
 website-v2:
   - base-branch: HDDS-9225-website-v2
