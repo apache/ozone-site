@@ -13,19 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# See https://pnpm.io/docker
+name: ci
 
-ARG NODE_VERSION=20
-FROM node:${NODE_VERSION}-slim AS base
-# Creates store at /pnpm/store by default.
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+on:
+  pull_request:
+    types:
+    - opened
+    - synchronize
+  push:
 
-# Install dependencies to /ozone-site/node_modules as part of the image.
-WORKDIR /ozone-site
-COPY package.json .
-COPY pnpm-lock.yaml .
-# --frozen-lockfile: pnpm-lock.yaml is expected to match constraints in package.json. Fail if it does not.
-# --prod: Do not install dev dependencies. The image is only used for running the website.
-RUN pnpm install --prod --frozen-lockfile
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  docusaurus:
+    uses: ./.github/workflows/docusaurus.yml
+  publish:
+    needs: docusaurus
+    # Update this to master when the website is ready to be published.
+    if: ${{ github.event == 'push' && github.ref_name == 'HDDS-9225-website-v2' }}
+    uses: ./.github/workflows/publish.yml

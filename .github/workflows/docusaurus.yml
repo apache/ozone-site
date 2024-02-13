@@ -16,25 +16,90 @@
 name: docusaurus
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-  push:
+  workflow_call:
 
 concurrency:
   group: docusaurus-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+env:
+  script_dir: .github/scripts
+  image_tar: ozone-site-image.tar
+
 jobs:
-  build:
+  build-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v4
-      - name: Build Docker image
-        run: |
-          docker compose build
-      - name: Run test
-        run: |
-          docker compose run site pnpm build
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Check Docker image cache
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.image_tar }}
+        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+        lookup-only: true
+    - name: Build Docker image
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        docker compose build
+    - name: Save docker image to tar
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        docker save ozone-site --output="${{ env.image_tar }}"
+    - name: Save docker image tar to cache
+      if: steps.cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ env.image_tar }}
+        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+  build-website:
+    needs:
+    - build-image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Restore docker image tar from cache
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ env.image_tar }}
+        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+    - name: Load docker image
+      run: |
+        docker load --input="${{ env.image_tar }}"
+    - name: Build website
+      run: |
+        docker compose run site pnpm build
+    - name: Save website build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build
+        path: build
+        if-no-files-found: error
+        retention-days: 1
+  run-website:
+    needs:
+    - build-website
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get Docker files
+      uses: actions/checkout@v4
+    - name: Download website build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: build
+    - name: Restore docker image tar from cache
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ env.image_tar }}
+        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+    - name: Load docker image
+      run: |
+        docker load --input="${{ env.image_tar }}"
+    - name: Curl website homepage
+      timeout-minutes: 5
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./curl.sh
