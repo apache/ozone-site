@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Builds the website and runs tests using Docker.
+# The Docker image contains only pnpm prod dependencies, so it is cached.
+# The website build is stored as an artifact.
+
 name: docusaurus
 
 on:
