@@ -215,9 +215,9 @@ Currently all `@docusaurus/*` packages are pinned to an exact version for websit
 
 #### Command Cheat-Sheet
 
-- **To install packages after cloning the repo**: `pnpm install`
+- **To install all packages after cloning the repo**: `pnpm install`
 
-  - This will install the exact package versions listed in *pnpm-lock.yaml*.
+  - This will read the metadata for the packages and their transitive dependencies from *pnpm-lock.yaml*, which is generated from *package.json* - and install the required dependencies for the project in the *node_modules* folder.
 
   - This should make no modifications to *package.json* or *pnpm-lock.yaml* if all explicit versions in *pnpm-lock.yaml* comply with the version specifiers in *package.json*.
 
@@ -226,7 +226,7 @@ Currently all `@docusaurus/*` packages are pinned to an exact version for websit
 - **To update all packages to their latest versions allowed by package.json**: `pnpm update`
 
     - This will update *package.json* to match the exact versions that were installed, but this is for reference only. Exact version information still comes from *pnpm-lock.yaml*
-      - The version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
+      - Version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
 
     - This will update *pnpm-lock.yaml* to reflect the exact versions of all top level and transitive dependencies installed.
 
