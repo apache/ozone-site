@@ -9,7 +9,11 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads.',
-  favicon: 'img/favicon/favicon.ico',
+  staticDirectories: [
+    'static',
+    // Put favicons at the root of website on build.
+    'favicon',
+  ],
 
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
@@ -33,6 +37,44 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  /*
+  Docusaurus does not currently support multiple favicons out of the box.
+  Manually insert head tags to configure support for favicons on multiple platforms.
+  */
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        href: 'favicon.ico',
+        sizes: '32x32'
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        href: 'favicon.svg',
+        type: "image/svg+xml"
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        href: 'apple-touch-icon.png',
+      },
+    },
+    {
+      // Used for Progressive Web Apps (PWAs).
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: 'site.webmanifest',
+      },
+    },
+  ],
 
   presets: [
     [
