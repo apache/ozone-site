@@ -28,6 +28,7 @@ concurrency:
 
 env:
   script_dir: .github/scripts
+  resource_dir: .github/resource
   node_version: 20
 
 jobs:
@@ -53,8 +54,4 @@ jobs:
     - name: Output spelling check tips
       if: ${{ failure() }}
       run: |
-        echo "## Spelling Check Failed" >> $GITHUB_STEP_SUMMARY
-        echo "Spelling can be checked locally by running the script *.github/scripts/spelling.sh*. This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run \`pnpm install --dev\`)." >> $GITHUB_STEP_SUMMARY
-        echo "** If spell check fails for words that are correct but not recognized:**" >> $GITHUB_STEP_SUMMARY
-        echo "  - Option 1: If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid." >> $GITHUB_STEP_SUMMARY
-        echo "  - Option 2: If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown frontmatter of that page only." >> $GITHUB_STEP_SUMMARY
+        cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
