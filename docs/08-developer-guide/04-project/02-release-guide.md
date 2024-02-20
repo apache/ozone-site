@@ -12,6 +12,8 @@ sidebar_label: Release Manager Guide
 
 This document describes the process to release Apache Ozone. The process is not yet scripted, and the documentation is **a work in progress**.
 
+spelng mstake
+
 ## Pre-Requisites
 
 ### Install Required Packages
