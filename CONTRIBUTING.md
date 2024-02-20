@@ -166,6 +166,16 @@ Docusaurus provides many options for laying out documentation pages and their me
 
     - The sidebar label makes sense because it has the context of the parent sidebar sections, however the Kerberos page should have a title like "Configuring Kerberos" instead of just "Kerberos" like its sidebar label.
 
+#### Spelling
+
+The file names and content of all markdown pages are checked for spelling mistakes using [cspell](https://cspell.org/) as part of GitHub actions. Spelling can also be checked locally by running the script *.github/scripts/spelling.sh*. This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run `pnpm install --dev`).
+
+**If spell check fails for words that are correct but not recognized:**
+
+- Option 1: If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid.
+
+- Option 2: If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown frontmatter of that page only.
+
 ### Updating Graphics
 
 When adding or updating graphics in the Ozone website, please follow these guidelines:
