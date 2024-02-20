@@ -29,7 +29,10 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  static:
+    uses: ./.github/workflows/static.yml
   docusaurus:
+    needs: static
     uses: ./.github/workflows/docusaurus.yml
   publish:
     needs: docusaurus
