@@ -1,4 +1,4 @@
-## Spelling Check Failed
+# Spelling Check Failed
 
 Spelling can be checked locally by running the script *.github/scripts/spelling.sh*. This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run `pnpm install --dev`).
 
