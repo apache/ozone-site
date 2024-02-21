@@ -1,5 +1,11 @@
 ---
 sidebar_label: Release Manager Guide
+
+# Custom words specific to this page:
+# cSpell:ignore protoroot codesigningkey lockdir pinentry gpgconf orgapacheozone
+
+# On this page, don't check spelling of CLI options used with -D or -P.
+# cSpell:ignoreRegExp -(D|P)[a-z\.,]+([\s]|=)
 ---
 
 # Apache Release Manager Guide
@@ -279,7 +285,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - The git hash of the last commit the release was built on.
 7. Run the upgrade compatibility acceptance tests by running `test.sh` from the `compose/upgrade` directory in the extracted release tarball.
     :::note
-    The `test.sh` file committed to the master branch only checks upgrade compatiblity against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
+    The `test.sh` file committed to the master branch only checks upgrade compatibility against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
     :::
 
 ### Upload the Artifacts to Dev Staging
@@ -452,7 +458,7 @@ If there is a security vulnerability or critical bug uncovered in a major or min
       - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
-3. Remove the previous release that this patch release supercedes from the Apache distribution site:
+3. Remove the previous release that this patch release supersedes from the Apache distribution site:
 
     ```bash
     svn rm -m 'Ozone: delete old version 1.2.0' https://dist.apache.org/repos/dist/release/ozone/1.2.0
