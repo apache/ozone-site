@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+import Ajv from 'ajv';
+
 const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
@@ -32,6 +34,28 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  markdown: {
+    // Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
+    // This ensures all pages are using a minimal set of consistent keys.
+    parseFrontMatter: async (params) => {
+      // Reuse the default parser.
+      const result = await params.defaultParseFrontMatter(params);
+
+      // Validate frontmatter against the schema.
+      const frontmatterSchema = require('./.github/resource/frontmatter.schema.json');
+      const ajv = new Ajv();
+      const validate = ajv.compile(frontmatterSchema);
+      const isValid = validate(result.frontMatter);
+
+      if (!isValid) {
+        console.error('Frontmatter validation error in ' + params.filePath + ':', validate.errors);
+        process.exit(1);
+      }
+
+      return result;
+    },
   },
 
   presets: [
