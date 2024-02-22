@@ -32,6 +32,15 @@ env:
   node_version: 20
 
 jobs:
+  file-names:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Run file name check
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./file_names.sh
   spelling:
     runs-on: ubuntu-latest
     steps:
