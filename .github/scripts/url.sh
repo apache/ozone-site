@@ -40,7 +40,7 @@ for url in $(yq --output-format=props '.urlset.url[].loc' "$sitemap"); do
 done
 
 if [ "$rc" != 0 ]; then
-    echo "Found URLs in the build that do match the allowed URL regex: $valid_url_regex" 1>&2
+    echo "Found URLs in the build that do not match the allowed URL regex: $valid_url_regex" 1>&2
     echo "All URLs should use kebab case and lowercase letters." 1>&2
 fi
 
