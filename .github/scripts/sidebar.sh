@@ -24,21 +24,22 @@ rc=0
 root="$(git rev-parse --show-toplevel)"
 schema="$root"/.github/resource/category.schema.json
 
-check_dir() {
-    dir="$1"
-    category_file="$dir/_category_.yml"
-    if [ ! -f "$category_file" ]; then
-        echo "_category_.yml is required for docs subdirectory $dir" 1>&2
-        rc=1
-    elif ! pnpm ajv validate --errors=text -s "$schema" -d "$category_file" 1>/dev/null; then
-        rc=1
-    fi
-}
-
+# Make sure all docs directories have a category sidebar file.
 for child in $(find "$root"/docs/*); do
     if [ -d "$child" ]; then
-        check_dir "$child"
+        category_file="$child/_category_.yml"
+        if [ ! -f "$category_file" ]; then
+            echo "_category_.yml is required for docs subdirectory $child" 1>&2
+            rc=1
+        fi
     fi
 done
+
+[ "$rc" = 0 ] || exit $rc
+
+# If all category files are present, make sure they follow the schema.
+if ! pnpm ajv validate --errors=text -s "$schema" -d "$root/docs/**/_category_.yml" 1>/dev/null; then
+    rc=1
+fi
 
 exit "$rc"
