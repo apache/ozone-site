@@ -16,7 +16,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-
 # Validates docusaurus _category_.yml files used to configure the docs sidebar.
 # Each docs subdirectory should have a _category_.yml file, and it must follow the defined schema.
 
@@ -32,7 +31,6 @@ check_dir() {
         echo "_category_.yml is required for docs subdirectory $dir" 1>&2
         rc=1
     elif ! pnpm ajv validate --errors=text -s "$schema" -d "$category_file" 1>/dev/null; then
-        # Ensure the category file contains only allowed keys.
         rc=1
     fi
 }
@@ -44,4 +42,3 @@ for child in $(find "$root"/docs/*); do
 done
 
 exit "$rc"
-
