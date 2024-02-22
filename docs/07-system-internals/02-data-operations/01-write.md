@@ -26,7 +26,7 @@ Trace every part of a write request from beginning to end. This includes:
     - For Ratis:
         - Include topology choices of which datanodes to use
         - Include failover handling
-    - For [EC](../features/erasure-coding) and [Ratis Streaming](../features/ratis-streaming), link to their feature pages.
+    - For [EC](../features/erasure-coding) and Ratis streaming, link to their feature pages.
 - Client allocating more blocks if needed
 - Client committing to OM
 - OM checking the current namespace
