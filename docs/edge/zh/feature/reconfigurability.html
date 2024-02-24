@@ -408,9 +408,10 @@ s=d.getElementsByTagName('script')[0];
 -->
 <p>Ozone支持在不重启服务的情况下动态加载某些配置。如果某个属性支持热加载，就可以先在配置文件（<code>ozone-site.xml</code>）中修改它然后调用命令使之刷新到内存。</p>
 <p>命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin reconfig --address<span style="color:#f92672">=</span>&lt;ip:port&gt; start|status|properties
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin reconfig --service<span style="color:#f92672">=[</span>OM|SCM|DATANODE<span style="color:#f92672">]</span> --address<span style="color:#f92672">=</span>&lt;ip:port&gt; start|status|properties
 </code></pre></div><p>命令项的含义:</p>
 <ul>
+<li><strong>&ndash;service</strong>: &ndash;address 指定节点的Ozone服务类型</li>
 <li><strong>&ndash;address</strong>: 一台服务所在的主机与客户端通信的RPC地址</li>
 <li>提供3中操作:
 <ul>
@@ -421,53 +422,53 @@ s=d.getElementsByTagName('script')[0];
 </li>
 </ul>
 <h2 id="获取可动态加载的属性列表">获取可动态加载的属性列表</h2>
-<p>要获取 Ozone 中指定组件的可动态加载属性列表, 可以使用命令 <code>ozone admin reconfig --address=&lt;ip:port&gt; properties</code>。
+<p>要获取 Ozone 中指定组件的可动态加载属性列表, 可以使用命令 <code>ozone admin reconfig --service=[OM|SCM|DATANODE] --address=&lt;ip:port&gt; properties</code>。
 这个命令将会列出所有可以在运行时动态加载的属性。</p>
 <blockquote>
 <p>例如, 获取 Ozone OM 可动态加载属性列表</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9862 properties</code><br>
+<p>$ <code>ozone admin reconfig --service=OM --address=hadoop1:9862 properties</code><br>
 OM: Node [hadoop1:9862] Reconfigurable properties:<br>
 ozone.administrators</p>
 </blockquote>
 <h2 id="om动态配置">OM动态配置</h2>
 <blockquote>
 <p>例如, 在<code>ozone-site.xml</code>文件中修改<code>ozone.administrators</code>的值并执行:</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9862 start</code><br>
+<p>$ <code>ozone admin reconfig --service=OM --address=hadoop1:9862 start</code><br>
 OM: Started reconfiguration task on node [hadoop1:9862].</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9862 status</code><br>
+<p>$ <code>ozone admin reconfig --service=OM --address=hadoop1:9862 status</code><br>
 OM: Reconfiguring status for node [hadoop1:9862]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
 SUCCESS: Changed property ozone.administrators<br>
 From: &ldquo;hadoop&rdquo;<br>
 To: &ldquo;hadoop,bigdata&rdquo;</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9862 properties</code><br>
+<p>$ <code>ozone admin reconfig --service=OM --address=hadoop1:9862 properties</code><br>
 OM: Node [hadoop1:9862] Reconfigurable properties:<br>
 ozone.administrators</p>
 </blockquote>
 <h2 id="scm动态配置">SCM动态配置</h2>
 <blockquote>
 <p>例如, 在<code>ozone-site.xml</code>文件中修改<code>ozone.administrators</code>的值并执行:</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9860 start</code><br>
+<p>$ <code>ozone admin reconfig --service=SCM --address=hadoop1:9860 start</code><br>
 SCM: Started reconfiguration task on node [hadoop1:9860].</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9860 status</code><br>
+<p>$ <code>ozone admin reconfig --service=SCM --address=hadoop1:9860 status</code><br>
 SCM: Reconfiguring status for node [hadoop1:9860]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
 SUCCESS: Changed property ozone.administrators<br>
 From: &ldquo;hadoop&rdquo;<br>
 To: &ldquo;hadoop,bigdata&rdquo;</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:9860 properties</code><br>
+<p>$ <code>ozone admin reconfig --service=SCM --address=hadoop1:9860 properties</code><br>
 SCM: Node [hadoop1:9860] Reconfigurable properties:<br>
 ozone.administrators</p>
 </blockquote>
 <h2 id="datanode-动态配置">Datanode 动态配置</h2>
 <blockquote>
 <p>例如, 在<code>ozone-site.xml</code>文件中修改<code>ozone.example.config</code>的值并执行:</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:19864 start</code><br>
+<p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 start</code><br>
 Datanode: Started reconfiguration task on node [hadoop1:19864].</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:19864 status</code><br>
+<p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 status</code><br>
 Datanode: Reconfiguring status for node [hadoop1:19864]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
 SUCCESS: Changed property ozone.example.config<br>
 From: &ldquo;old&rdquo;<br>
 To: &ldquo;new&rdquo;</p>
-<p>$ <code>ozone admin reconfig --address=hadoop1:19864 properties</code><br>
+<p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 properties</code><br>
 Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
 ozone.example.config</p>
 </blockquote>
@@ -477,7 +478,7 @@ ozone.example.config</p>
 目前只有 Datanode 支持批量操作</p>
 <blockquote>
 <p>例如, 列出 Datanode 所有可配置的属性:<br>
-$ <code>ozone admin reconfig --in-service-datanodes properties</code><br>
+$ <code>ozone admin reconfig --service=DATANODE --in-service-datanodes properties</code><br>
 Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
 ozone.example.config<br>
 Datanode: Node [hadoop2:19864] Reconfigurable properties:<br>
@@ -505,7 +506,7 @@ Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 23, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/babf85c762ec159b6086145299f9a69b0a27f2ae">babf85c</a>
+      Version: 1.5.0-SNAPSHOT, Last Modified: February 24, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c325315cae49b88e3e1c707b1d8f23e8c94db502">c325315</a>
     </span>
   </div>
 </footer>
