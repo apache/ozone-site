@@ -1,0 +1,128 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+# See https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+
+# Only - (dash) character is allowed for bullet lists.
+MD004:
+  style: dash
+
+MD013:
+  # No line length requirement for general text.
+  line_length: -1
+  # For code, match Ozone's line length.
+  code_block_line_length: 120
+  # Use shorter headings to keep the minimap on the right legible.
+  heading_block_line_length: 80
+
+# Numbered lists must use numbers in ascending order.
+MD029:
+  style: ordered
+
+# Disallow inline html except for these allowed elements.
+# If new elements are required for some use cases, this list can be expanded.
+MD033:
+  allowed_elements:
+  - br
+  - Tabs
+  - TabItem
+
+# Allow bare URLs since wrapping URLs in <> is invalid mdx.
+MD034: false
+
+# Horizontal rule.
+MD035:
+  style: ---
+
+# Enforce consistent captialization.
+# Use markdownlint instead of cspell to enforce capitalization since markdownlint is aware of code blocks within
+# markdown, for which these rules do not apply.
+MD044:
+  # Do not enforced capitalization checks inside code blocks.
+  code_blocks: false
+  # HTML elements may be rendering user facing text with these words in them.
+  html_elements: true
+  # Enforce consistent capitalization for these words:
+  names:
+  # Ozone components:
+  - OM
+  - Ozone Manager
+  - SCM
+  - Storage Container Manager
+  - Recon
+  - Datanode
+  - Datanodes
+  - S3 Gateway
+  - HDDS
+  # Acronyms:
+  - FSO
+  - OBS
+  - ofs
+  - HttpFS
+  - CLI
+  - RPC
+  - EC
+  - SPNEGO
+  - SASL
+  - TLS
+  - mTLS
+  - SSL
+  - X.509
+  - REST API
+  - JSON
+  - .json
+  - YAML
+  - .yaml
+  - XML
+  - .xml
+  # Other systems:
+  - gRPC
+  - RocksDB
+  - Jira
+  - Java
+  - Maven
+  - GPG
+  - Netty
+  - Docker Compose
+  - Docker
+  - pnpm
+  - S3
+  - Hadoop
+  # Enforce capitalization for these words only when they are used in sentences (surrounded by spaces).
+  # Other uses in repo names or links like [apache/ozone](https://github.com/apache/ozone) are ok.
+  - " Ratis "
+  - " Ozone "
+  - " Apache "
+  - " ASF "
+  - " HTTP "
+  - " HTTPS "
+
+# Indentation should not be used to indicate a multi-line code block.
+MD046:
+  style: fenced
+
+# Only allow ``` to define multi-line code blocks.
+MD048:
+  style: backtick
+
+# Disable inline links with the same URL, like [www.example.com](www.example.com)
+MD054:
+  url_inline: false
+
+# Use pipes on both ends of every line in a table.
+MD055:
+  style: leading_and_trailing

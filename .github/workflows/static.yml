@@ -64,3 +64,22 @@ jobs:
       if: ${{ failure() }}
       run: |
         cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
+  lint-markdown:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Enable corepack
+      run: |
+        corepack enable
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.node_version }}
+        cache: pnpm
+    - name: Install pnpm dependencies
+      run: pnpm install --dev
+    - name: Run markdownlint
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./markdownlint.sh
