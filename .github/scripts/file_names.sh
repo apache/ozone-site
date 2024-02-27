@@ -32,7 +32,7 @@ doc_file_regex="[0-9][0-9]-$file_regex"
 check_regex() {
     file="$1"
     regex="$2"
-    if ! echo "$(basename "$file")" | grep -Exq "$regex"; then
+    if ! basename "$file" | grep -Exq "$regex"; then
         echo "$file does not match regex '$regex'" 1>&2
         rc=1
     fi
