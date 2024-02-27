@@ -490,7 +490,7 @@ and has a better utilization of the CPUs and the disks in each datanode.</p>
 <li>To enable the Streaming Write Pipeline feature, set the following property to true.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML">  <span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>dfs.container.ratis.datastream.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>hdds.container.ratis.datastream.enabled<span style="color:#f92672">&lt;/name&gt;</span>
     <span style="color:#f92672">&lt;value&gt;</span>false<span style="color:#f92672">&lt;/value&gt;</span>
     <span style="color:#f92672">&lt;tag&gt;</span>OZONE, CONTAINER, RATIS, DATASTREAM<span style="color:#f92672">&lt;/tag&gt;</span>
     <span style="color:#f92672">&lt;description&gt;</span>It specifies whether to enable data stream of container.<span style="color:#f92672">&lt;/description&gt;</span>
@@ -499,7 +499,7 @@ and has a better utilization of the CPUs and the disks in each datanode.</p>
 <li>Datanodes listen to the following port for the streaming traffic.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML">  <span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>dfs.container.ratis.datastream.port<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>hdds.container.ratis.datastream.port<span style="color:#f92672">&lt;/name&gt;</span>
     <span style="color:#f92672">&lt;value&gt;</span>9855<span style="color:#f92672">&lt;/value&gt;</span>
     <span style="color:#f92672">&lt;tag&gt;</span>OZONE, CONTAINER, RATIS, DATASTREAM<span style="color:#f92672">&lt;/tag&gt;</span>
     <span style="color:#f92672">&lt;description&gt;</span>The datastream port number of container.<span style="color:#f92672">&lt;/description&gt;</span>
@@ -585,7 +585,7 @@ as the existing <code>createKey</code> and <code>createMultipartKey</code> metho
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 26, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1b48186a0107711235abcd2636977ae0242f6be8">1b48186</a>
+      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
     </span>
   </div>
 </footer>
