@@ -87,6 +87,10 @@ Docusaurus docs are written in markdown. All standard markdown formatting can be
 
 - Inline diagrams with [Mermaid](https://docusaurus.io/docs/markdown-features/diagrams)
 
+#### Markdown Editing
+
+[Markdownlint](https://github.com/DavidAnson/markdownlint) is used to regulate the format of markdown documentation. To get feedback while editing, you can use a markdownlint plugin [like this one](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for Visual Studio Code that reads the `.markdownlint.yaml` file checked in to this repository.
+
 #### Best Practices
 
 Docusaurus provides many options for laying out documentation pages and their metadata. The following best practices are followed by this repo, and some may be enforced by CI checks once HDDS-9601 is complete.
