@@ -1,5 +1,5 @@
 ---
-sidebar_label: GRPC
+sidebar_label: gRPC
 ---
 
 # Configuring gRPC With TLS
