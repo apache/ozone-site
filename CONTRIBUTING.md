@@ -87,10 +87,6 @@ Docusaurus docs are written in markdown. All standard markdown formatting can be
 
 - Inline diagrams with [Mermaid](https://docusaurus.io/docs/markdown-features/diagrams)
 
-#### Markdown Editing
-
-[Markdownlint](https://github.com/DavidAnson/markdownlint) is used to regulate the format of markdown documentation. To get feedback while editing, you can use a markdownlint plugin [like this one](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for Visual Studio Code that reads the `.markdownlint.yaml` file checked in to this repository.
-
 #### Best Practices
 
 Docusaurus provides many options for laying out documentation pages and their metadata. The following best practices are followed by this repo, and some may be enforced by CI checks once HDDS-9601 is complete.
@@ -113,50 +109,50 @@ Docusaurus provides many options for laying out documentation pages and their me
 - Use short, succinct labels in the sidebar.
   - For example, the pages on bucket layouts may be organized as:
 
-    ```text
-    ...
-    Buckets
-        ...
-        Layouts
-            File System Optimized (FSO)
-            Object Store (OBS)
-    ```
+  ```text
+  ...
+  Buckets
+      ...
+      Layouts
+          File System Optimized (FSO)
+          Object Store (OBS)
+  ```
 
-    - This avoids a verbose sidebar with duplicate information like this example:
+  - This avoids a verbose sidebar with duplicate information like this example:
 
-    ```text
-    ...
-    Buckets
-        ...
-        Bucket Layouts
-            File System Optimized Bucket Layout
-            Object Store Bucket Layout
-    ```
+  ```text
+  ...
+  Buckets
+      ...
+      Bucket Layouts
+          File System Optimized Bucket Layout
+          Object Store Bucket Layout
+  ```
 
-    - Sidebar labels are automatically generated from page titles. To use a different sidebar label, use the `sidebar_label` property in the page's frontmatter.
+  - Sidebar labels are automatically generated from page titles. To use a different sidebar label, use the `sidebar_label` property in the page's frontmatter.
 
 - Don't rely on Ozone specific acronyms in the sidebar. This makes docs navigation more beginner friendly.
   - For example, the pages on bucket layouts may be organized as:
 
-    ```text
-    ...
-    Buckets
-        ...
-        Layouts
-            File System Optimized (FSO)
-            Object Store (OBS)
-    ```
+  ```text
+  ...
+  Buckets
+      ...
+      Layouts
+          File System Optimized (FSO)
+          Object Store (OBS)
+  ```
 
   - Which is easier for a new Ozone user to follow than this:
 
-    ```text
-    ...
-    Buckets
-        ...
-        Layouts
-            FSO
-            OBS
-    ```
+  ```text
+  ...
+  Buckets
+      ...
+      Layouts
+          FSO
+          OBS
+  ```
 
 - Use descriptive page titles.
   - Pages may be linked directly from other sources and users should be able to tell what the page is without looking at the sidebar.
@@ -164,15 +160,25 @@ Docusaurus provides many options for laying out documentation pages and their me
 
   - For example, pages in the security configuration section may be organized like this:
 
-    ```text
-    Configuration
-        ...
-        Security
-            ...
-            Kerberos
-    ```
+  ```text
+  Configuration
+      ...
+      Security
+          ...
+          Kerberos
+  ```
 
-    - The sidebar label makes sense because it has the context of the parent sidebar sections, however the Kerberos page should have a title like "Configuring Kerberos" instead of just "Kerberos" like its sidebar label.
+  - The sidebar label makes sense because it has the context of the parent sidebar sections, however the Kerberos page should have a title like "Configuring Kerberos" instead of just "Kerberos" like its sidebar label.
+
+#### Spelling
+
+The file names and content of all markdown pages are checked for spelling mistakes using [cspell](https://cspell.org/) as part of GitHub actions. Spelling can also be checked locally by running the script *.github/scripts/spelling.sh*. This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run `pnpm install --dev`).
+
+**If spell check fails for words that are correct but not recognized:**
+
+- Option 1: If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid.
+
+- Option 2: If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown frontmatter of that page only.
 
 ### Updating Graphics
 
@@ -198,11 +204,64 @@ Changing appearance or theme of the website from Docusaurus defaults can be done
 
 - Make sure styling changes work in both [light and dark modes](https://docusaurus.io/docs/styling-layout#dark-mode).
 
+### Package Management
+
+The website uses [pnpm](https://pnpm.io/) as a package manager. This is the same package manager used to build [Recon](https://github.com/apache/ozone/tree/master/hadoop-ozone/recon/src/main/resources/webapps/recon/ozone-recon-web). Basic knowledge required to maintain the website's dependencies is outlined here. See [pnpm docs](https://pnpm.io/pnpm-cli) for complete usage.
+
+#### Relevant Files
+
+- **package.json**
+
+This file contains version guidelines for all the top level dependencies required to build the website. This file may be updated manually to adjust which versions are installed, or automatically when commands like `pnpm update` are run.
+
+- **pnpm-lock.yaml**
+
+This file contains exact version information of all dependencies required to build the website. These are the versions of packages that will be used when `pnpm install` is run. This file should not be updated manually, and may be updated automatically by commands like `pnpm update`.
+
+#### Version Pinning
+
+*package.json* allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
+
+- `~` means to allow all patch updates (last semantic versioning digit)
+- `^` means to allow all minor version updates (second semantic versioning digit)
+- A version with no specifier means only the exact version declared in *package.json* is allowed.
+
+Currently all `@docusaurus/*` packages are pinned to an exact version for website stability.
+
+#### Command Cheat-Sheet
+
+- **To install all packages after cloning the repo**: `pnpm install`
+
+  - This will read the metadata for the packages and their transitive dependencies from *pnpm-lock.yaml*, which is generated from *package.json* - and install the required dependencies for the project in the *node_modules* folder.
+
+  - This should make no modifications to *package.json* or *pnpm-lock.yaml* if all explicit versions in *pnpm-lock.yaml* comply with the version specifiers in *package.json*.
+
+    - This should always be true for committed code, because the CI build of the website uses `pnpm install --frozen-lockfile` to fail the build if the two files do not match.
+
+- **To update all packages to their latest versions allowed by package.json**: `pnpm update`
+
+  - This will update *package.json* to match the exact versions that were installed, but this is for reference only. Exact version information still comes from *pnpm-lock.yaml*
+    - Version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
+
+  - This will update *pnpm-lock.yaml* to reflect the exact versions of all top level and transitive dependencies installed.
+
+- **To update docusaurus to a specific version**:
+
+  1. Update the version of all `@docusaurus/*` packages in *package.json* to the desired docusaurus version.
+
+  2. Run `pnpm update '@docusaurus/*'` to update to the new version.
+
+      - This should modify *pnpm-lock.yaml* with the exact versions of docusaurus and its transitive dependencies that were installed.
+
+      - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify *package.json* as well.
+
+  3. Commit *package.json* and *pnpm-lock.yaml* to git.
+
 ### Previewing Your Modifications Locally
 
 Docusaurus supports previewing the website locally. Below are various options to launch a preview of the site at `localhost:3000` on your machine.
 
-**NOTE** If using the [Docusaurus development server](https://docusaurus.io/docs/installation#running-the-development-server), changes to `docusaurus.config.js` may not be automatically reloaded and require the server to be restarted.
+**NOTE**: If using the [Docusaurus development server](https://docusaurus.io/docs/installation#running-the-development-server), changes to `docusaurus.config.js` may not be automatically reloaded and require the server to be restarted.
 
 #### Option 1: Docker (Recommended)
 
@@ -214,7 +273,11 @@ The project includes a `Dockerfile` and a `compose.yml` file to build and run th
 
 3. Run `docker compose up` from the repository root.
 
+    - **Note**: This will continue to use the last locally built version of the `ozone-site-dev` image, which saves time on future runs.
+      - Run `docker compose up --build` to rebuild the image and incorporate any package dependency updates that may have been committed since the last build.
+
 4. Preview the website at `localhost:3000` in your browser.
+
     - Any changes made in the repository will be reflected in the preview.
 
 5. Press `Ctrl+C` or run `docker compose down` to stop the preview.
@@ -247,4 +310,4 @@ Build and run the website locally with the `pnpm` package manager.
 
 ### Contributing Your Modifications
 
-Fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo and follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository. the target branch for the PR should be `HDDS-9225-website-v2` for changes targeting this new unreleased version of the website.
+Fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo and follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository. The target branch for the PR should be `HDDS-9225-website-v2` for changes targeting this new unreleased version of the website.
