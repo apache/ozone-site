@@ -21,11 +21,11 @@ Trace every part of a write request from beginning to end. This includes:
   - Mention open key cleanup service, and that if key is not committed within a given time it will be picked up for [deletion](./delete#deleting-data)
 - OM generating block tokens from the shared secret previously retrieved from SCM
 - OM returning container, blocks, pipeline, block tokens
-- Client sending checksums and datanodes validating
-- Client sending block tokens and datanode validating based on the shared secret from SCM
-- Client sending write chunk and put block requests to the datanodes
+- Client sending checksums and Datanodes validating
+- Client sending block tokens and Datanode validating based on the shared secret from SCM
+- Client sending write chunk and put block requests to the Datanodes
   - For Ratis:
-    - Include topology choices of which datanodes to use
+    - Include topology choices of which Datanodes to use
     - Include failover handling
   - For [EC](../features/erasure-coding) and [Ratis Streaming](../features/ratis-streaming), link to their feature pages.
 - Client allocating more blocks if needed

@@ -19,7 +19,7 @@ Trace every part of a delete request from beginning to end. This includes:
 - OM marking the key for deletion and removing it from the namespace.
 - OM acking to the client
 - OM sending blocks to delete to SCM
-- SCM sending blocks to delete to the datanode
+- SCM sending blocks to delete to the Datanode
 - Datanode removes data
 
 Note that delete works the same regardless of replication type. Also document timing of background services and their batch size to estimate the rate of deletion.

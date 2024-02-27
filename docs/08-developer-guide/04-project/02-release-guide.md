@@ -4,7 +4,7 @@ sidebar_label: Release Manager Guide
 # Custom words specific to this page:
 # cSpell:ignore protoroot codesigningkey lockdir pinentry gpgconf orgapacheozone
 
-# On this page, don't check spelling of CLI options used with -D or -P.
+# On this page, ignore CLI options used with -D or -P.
 # cSpell:ignoreRegExp -(D|P)[a-z\.,]+([\s]|=)
 ---
 
@@ -60,7 +60,7 @@ svn cp -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repo
 
 ### Create a Parent Jira for the Release
 
-This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the Ozone website, publishing the docker image, etc can be added as subtasks.
+This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the Ozone website, publishing the Docker image, etc can be added as subtasks.
 
 ### Bulk Comment on Jiras Targeting This Release
 
@@ -114,7 +114,7 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 
     :::tip
     Ozone currently uses the following protolock files:
-    - `hadoop-hdds/interface-client/src/main/resources/proto.lock`: Controls the protocol for clients communicating with datanodes.
+    - `hadoop-hdds/interface-client/src/main/resources/proto.lock`: Controls the protocol for clients communicating with Datanodes.
     - `hadoop-hdds/interface-admin/src/main/resources/proto.lock`: Controls the protocol for clients communicating with SCM.
     - `hadoop-hdds/interface-server/src/main/resources/proto.lock`: Controls the protocol for SCMs communicating with each other.
     - `hadoop-ozone/interface-client/src/main/resources/proto.lock`: Controls all protocols involving the Ozone Manager.
@@ -196,7 +196,7 @@ git tag -s "ozone-$VERSION-RC$RC"
 :::tip
 If the command fails on MacOS, you may need to do the following additional steps:
 
-- Install a program to prompt you for your gpg key passphrase (example using homebrew):
+- Install a program to prompt you for your GPG key passphrase (example using homebrew):
 
   ```bash
   brew install pinentry-mac
@@ -214,13 +214,13 @@ If the command fails on MacOS, you may need to do the following additional steps
   git config --global user.signingKey <gpg_key_id>
   ```
 
-- Tell gpg to use this program to prompt for passphrase:
+- Tell GPG to use this program to prompt for passphrase:
 
   ```bash
   echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
   ```
 
-- Reload gpg-agent:
+- Reload `gpg-agent`:
 
   ```bash
   gpgconf --kill gpg-agent
@@ -274,13 +274,13 @@ Now each .tar.gz file should have an associated .mds file, .asc file, and .sha51
 
 Before uploading the artifacts, run some basic tests on them, similar to what other devs will run before voting in favor of the release.
 
-1. Extract the contents of the source tarball and build it with an empty maven cache by renaming your `~/.m2` directory before doing the build.
+1. Extract the contents of the source tarball and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
 2. Check the size of the output binary tarball for significant size increase from the last release.
     - A significant increase in size could indicate a dependency issue that needs to be fixed.
     - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
 3. Verify signatures
     - Download the KEYS file from <https://dist.apache.org/repos/dist/release/ozone/KEYS>
-    - Import its contents (which should include your public gpg key):
+    - Import its contents (which should include your public GPG key):
 
       ```bash
       gpg --import KEYS
@@ -329,7 +329,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 
 ### Upload the Artifacts to Apache Nexus
 
-Double check that your apache credentials are added to your local `~/.m2/settings.xml`.
+Double check that your Apache credentials are added to your local `~/.m2/settings.xml`.
 
 ```xml title="settings.xml"
 <settings>
@@ -370,7 +370,7 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 - Link to the release candidate tag on Github
 - Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
 - Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
-- Location where the maven artifacts are staged. This link will look something like <https://repository.apache.org/content/repositories/orgapacheozone-1001/>
+- Location where the Maven artifacts are staged. This link will look something like <https://repository.apache.org/content/repositories/orgapacheozone-1001/>
 - Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: <https://dist.apache.org/repos/dist/dev/ozone/KEYS>
 - Fingerprint of the key used to sign the artifacts.
 
@@ -425,7 +425,7 @@ git push origin "ozone-$VERSION"
 
 ### Publish a Docker Image for the Release
 
-The Ozone docker image is intended for testing purposes only, not production use. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [docker image tags](https://hub.docker.com/r/apache/ozone/tags).
+The Ozone Docker image is intended for testing purposes only, not production use. An example pull request to update the Docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [Docker image tags](https://hub.docker.com/r/apache/ozone/tags).
 
 1. Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
 
@@ -448,7 +448,7 @@ The Ozone docker image is intended for testing purposes only, not production use
 
 Update the upgrade and client cross compatibility acceptance tests to check against the new release. See [this pull request](https://github.com/apache/ozone/pull/6040/files) for an example.
 :::note
-This step requires the release's [docker image](#publish-a-docker-image-for-the-release) to be published.
+This step requires the release's [Docker image](#publish-a-docker-image-for-the-release) to be published.
 :::
 
 ### Update the Ozone Roadmap
