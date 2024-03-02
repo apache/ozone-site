@@ -48,7 +48,7 @@ MD034: false
 MD035:
   style: ---
 
-# Enforce consistent captialization.
+# Enforce consistent capitalization.
 # Use markdownlint instead of cspell to enforce capitalization since markdownlint is aware of code blocks within
 # markdown, for which these rules do not apply.
 MD044:
@@ -118,6 +118,14 @@ MD046:
 # Only allow ``` to define multi-line code blocks.
 MD048:
   style: backtick
+
+# Use asterisks for italics.
+MD049:
+  style: asterisk
+
+# Use double asterisks for bold.
+MD050:
+  style: asterisk
 
 # Disable inline links with the same URL, like [www.example.com](www.example.com)
 MD054:
