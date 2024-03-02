@@ -15,13 +15,13 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# See https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+# This file extends the defaults present in https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
 # Only - (dash) character is allowed for bullet lists.
-MD004:
+heading-increment:
   style: dash
 
-MD013:
+line-length:
   # No line length requirement for general text.
   line_length: -1
   # For code, match Ozone's line length.
@@ -30,28 +30,28 @@ MD013:
   heading_block_line_length: 80
 
 # Numbered lists must use numbers in ascending order.
-MD029:
+ol-prefix:
   style: ordered
 
 # Disallow inline html except for these allowed elements.
 # If new elements are required for some use cases, this list can be expanded.
-MD033:
+no-inline-html:
   allowed_elements:
   - br
   - Tabs
   - TabItem
 
 # Allow bare URLs since wrapping URLs in <> is invalid mdx.
-MD034: false
+no-bare-urls: false
 
 # Horizontal rule.
-MD035:
+hr-style:
   style: ---
 
 # Enforce consistent capitalization.
 # Use markdownlint instead of cspell to enforce capitalization since markdownlint is aware of code blocks within
 # markdown, for which these rules do not apply.
-MD044:
+proper-names:
   # Do not enforced capitalization checks inside code blocks.
   code_blocks: false
   # HTML elements may be rendering user facing text with these words in them.
@@ -112,25 +112,25 @@ MD044:
   - " HTTPS "
 
 # Indentation should not be used to indicate a multi-line code block.
-MD046:
+code-block-style:
   style: fenced
 
 # Only allow ``` to define multi-line code blocks.
-MD048:
+code-fence-style:
   style: backtick
 
 # Use asterisks for italics.
-MD049:
+emphasis-style:
   style: asterisk
 
 # Use double asterisks for bold.
-MD050:
+strong-style:
   style: asterisk
 
 # Disable inline links with the same URL, like [www.example.com](www.example.com)
-MD054:
+link-image-style:
   url_inline: false
 
 # Use pipes on both ends of every line in a table.
-MD055:
+table-pipe-style:
   style: leading_and_trailing
