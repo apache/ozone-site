@@ -10,4 +10,3 @@ slug: /
 ## What is Ozone?
 
 ## Features
-

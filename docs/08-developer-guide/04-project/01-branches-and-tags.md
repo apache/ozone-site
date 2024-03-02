@@ -10,5 +10,4 @@
 
 - When to use feature branches
 - Feature branch merge process, including vote and checklist from Confluence.
-    - Checklist can be attached to Github PR and mailing list, does not need to be updated on the website.
-
+  - Checklist can be attached to Github PR and mailing list, does not need to be updated on the website.
