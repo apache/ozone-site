@@ -10,14 +10,13 @@ For each section, indicate the network protocol that is used, why it is used, an
 
 | Client | Server | Protocol | Authentication | Encryption | Notes |
 |-|-|-|-|-|-|
-Ozone Manager | Storage Container Manager | gRPC | Certificate | TLS | Used to allocate blocks, delete blocks, and get block locations.
-Ozone Manager | Ranger | | | |
-Ozone Manager | S3 Secret Store | | | |
-Datanode | Datanode | | | |
-Datanode | Storage Container Manager | | | |
-Datanode | Recon | | | |
-Recon | Ozone Manager | | | |
-Recon | Storage Container Manager | | | |
-All Ozone Components | Kerberos KDC | | | |
-Prometheus | All Ozone Components | | | |
-
+| Ozone Manager | Storage Container Manager | gRPC | Certificate | TLS | Used to allocate blocks, delete blocks, and get block locations. |
+| Ozone Manager | Ranger | | | | |
+| Ozone Manager | S3 Secret Store | | | | |
+| Datanode | Datanode | | | | |
+| Datanode | Storage Container Manager | | | | |
+| Datanode | Recon | | | | |
+| Recon | Ozone Manager | | | | |
+| Recon | Storage Container Manager | | | | |
+| All Ozone Components | Kerberos KDC | | | | |
+| Prometheus | All Ozone Components | | | | |
