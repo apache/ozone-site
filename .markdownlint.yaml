@@ -102,6 +102,8 @@ proper-names:
   - pnpm
   - S3
   - Hadoop
+  - UUID
+  - IP address
   # Enforce capitalization for these words only when they are used in sentences (surrounded by spaces).
   # Other uses in repo names or links like [apache/ozone](https://github.com/apache/ozone) are ok.
   - " Ratis "
