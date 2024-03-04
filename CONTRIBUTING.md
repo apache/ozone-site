@@ -6,28 +6,19 @@ This document summarizes the contribution process.
 
 ## Quick Start
 
-1. Clone the [apache/ozone-site](https://github.com/apache/ozone-site) repo and checkout the [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) branch:
+1. Review the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications). Contributing to the new website follows a similar process with a few differences:
+    - You should fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo instead of the main [apache/ozone](https://github.com/apache/ozone) repo.
+    - You should enable the `ci` workflow on your fork, which will run tests on your changes before submitting a pull request.
+    - Your local branch containing changes for the new website should be based off of the [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) branch.
 
-    ```shell
-    git clone https://github.com/apache/ozone-site -b HDDS-9225-website-v2
-    ```
-
-    - If you already have the repo, make sure to run `git pull` with the `HDDS-9225-website-v2` branch checked out to incorporate the latest upstream changes from [apache/ozone-site](https://github.com/apache/ozone-site).
-
-2. Create a feature branch to work on:
-
-    ```shell
-    git checkout -b my-website-improvement
-    ```
-
-3. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
+2. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
     - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
 
-4. Preview your changes locally by running `docker compose up` and opening `localhost:3000` in your browser.
-    - If you need to update the dependencies in your docker image at any time, run `docker compose up --build` to create an updated image.
+3. Preview your changes locally by running `docker compose up` and opening `localhost:3000` in your browser.
+    - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
 
-5. Submit a pull request to contribute your changes back to the website.
-    - [Enable GitHub actions](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository) on your fork to validate your change against the website CI prior to submitting.
+4. Follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository.
+    - The target branch for the PR should be [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) for changes targeting this new unreleased version of the website.
 
 ⬇️ Continue reading for more details, helpful tips, and advanced usage. ⬇️
 
@@ -257,7 +248,7 @@ This file contains exact version information of all dependencies required to bui
 
 Currently all `@docusaurus/*` packages are pinned to an exact version for website stability.
 
-#### Pnpm Command Cheat-Sheet
+#### `pnpm` Command Cheat-Sheet
 
 - **To install all packages after cloning the repo**: `pnpm install`
 
