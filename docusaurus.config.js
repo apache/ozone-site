@@ -39,12 +39,12 @@ const config = {
   markdown: {
     // Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
     // This ensures all pages are using a minimal set of consistent keys.
-    // It can also be used to require all pages to define certain markdown frontmatter keys.
+    // It can also be used to require all pages to define certain markdown front matter keys.
     parseFrontMatter: async (params) => {
       // Reuse the default parser.
       const result = await params.defaultParseFrontMatter(params);
 
-      // Validate frontmatter against the schema.
+      // Validate front matter against the schema.
       const schemaPath = './.github/resource/frontmatter.schema.json';
       const frontMatterSchema = require(schemaPath);
       const ajv = new Ajv();
