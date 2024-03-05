@@ -11,4 +11,3 @@ sidebar_label: Authentication
 ## SPNEGO
 
 ## S3 Credentials
-

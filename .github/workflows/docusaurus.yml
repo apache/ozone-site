@@ -82,6 +82,22 @@ jobs:
         path: build
         if-no-files-found: error
         retention-days: 1
+  check-sitemap:
+    needs:
+    - build-website
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get URL check script
+      uses: actions/checkout@v4
+    - name: Download website build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: build
+    - name: Check sitemap.xml
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./url.sh "$GITHUB_WORKSPACE"/build/sitemap.xml
   run-website:
     needs:
     - build-website

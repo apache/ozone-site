@@ -10,4 +10,3 @@ sidebar_label: HFlush and HSync
 ## HFlush
 
 ## HSync
-

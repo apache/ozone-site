@@ -37,6 +37,7 @@ You can preview the current state of the new website at https://ozone-site-v2.st
 ## Contributing
 
 Please see `CONTRIBUTING.md` for information about
+
 - [Directory layout](./CONTRIBUTING.md#directory-layout)
 - [Previewing the website locally](./CONTRIBUTING.md#previewing-your-modifications-locally)
 - [Filing Issues](./CONTRIBUTING.md#filing-jira-issues)

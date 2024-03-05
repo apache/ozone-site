@@ -9,4 +9,3 @@ sidebar_label: Kerberos
 ## Configuring SPNEGO
 
 This section will probably be pretty short so we can combine it with the Kerberos section.
-

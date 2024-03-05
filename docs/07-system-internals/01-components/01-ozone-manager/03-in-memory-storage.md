@@ -9,4 +9,3 @@ sidebar_label: In-Memory Storage
 - Volume and bucket tables
 - RocksDB block cache
 - Container cache
-
