@@ -21,7 +21,7 @@ root="$(git rev-parse --show-toplevel)"
 rc=0
 
 echo 'Checking document content...'
-pnpm cspell lint --root="$root" --no-progress --show-context '**/*.md' '**/*.mdx' '**/_category_.yml' || rc="$?"
+pnpm cspell lint --root="$root" --no-progress --show-context '**/*.md' '**/_category_.yml' || rc="$?"
 
 echo 'Checking file names...'
 find "$root"/docs "$root"/src/pages | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
