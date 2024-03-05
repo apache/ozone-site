@@ -42,6 +42,7 @@ done
 # If all category files are present, make sure they follow the schema.
 if ! pnpm ajv validate -s "$schema" -d "$root/docs/**/_category_.yml" 1>/dev/null; then
     rc=1
+    echo "Sidebar configuration validation failed against JSON schema $schema" 1>&2
 fi
 
 exit "$rc"

@@ -45,13 +45,15 @@ const config = {
       const result = await params.defaultParseFrontMatter(params);
 
       // Validate frontmatter against the schema.
-      const frontmatterSchema = require('./.github/resource/frontmatter.schema.json');
+      const schemaPath = './.github/resource/frontmatter.schema.json';
+      const frontMatterSchema = require(schemaPath);
       const ajv = new Ajv();
-      const validate = ajv.compile(frontmatterSchema);
+      const validate = ajv.compile(frontMatterSchema);
       const isValid = validate(result.frontMatter);
 
       if (!isValid) {
-        console.error('Frontmatter validation error in ' + params.filePath + ':', validate.errors);
+        console.error('Front matter validation error in', params.filePath + ':\n', validate.errors);
+        console.error('Front matter validation failed against JSON schema', schemaPath);
         process.exit(1);
       }
 
