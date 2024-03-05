@@ -6,6 +6,7 @@
   "type": "object",
   "properties": {
     "label": {
+      "description": "The name of this section shown in the docs sidebar.",
       "type": "string"
     }
   },

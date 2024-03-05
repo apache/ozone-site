@@ -1,4 +1,5 @@
 ---
+# Page is available only in the development server. It can be included in production builds when the feature is complete.
 draft: true
 sidebar_label: Ratis Streaming
 ---
