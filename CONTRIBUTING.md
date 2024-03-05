@@ -15,6 +15,7 @@ This document summarizes the contribution process.
     - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
 
 3. Preview your changes locally by running `docker compose up` and opening `localhost:3000` in your browser.
+    - Make sure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your system.
     - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
 
 4. Follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository.
@@ -224,7 +225,7 @@ Changing appearance or theme of the website from Docusaurus defaults can be done
 
 ### Package Management
 
-**NOTE:** pnpm is **not** required for local website previews. Simply run `docker compose up` if a local preview is the only functionality is all you need.
+**NOTE:** pnpm is **not** required for local website previews. Simply run `docker compose up` if a local preview is the only functionality you need.
 
 The website uses [pnpm](https://pnpm.io/) as a package manager. This is the same package manager used to build [Recon](https://github.com/apache/ozone/tree/master/hadoop-ozone/recon/src/main/resources/webapps/recon/ozone-recon-web). Basic knowledge required to maintain the website's dependencies is outlined here. See [pnpm docs](https://pnpm.io/pnpm-cli) for complete usage.
 
