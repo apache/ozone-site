@@ -18,6 +18,8 @@
 
 # Validates docusaurus _category_.yml files used to configure the docs sidebar.
 # Each docs subdirectory should have a _category_.yml file, and it must follow the defined schema.
+# The schema is more restrictive than what Docusaurus allows, and can be used to disallow keys or require all category
+# files to define the same keys.
 
 rc=0
 
