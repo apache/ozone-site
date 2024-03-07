@@ -1,6 +1,6 @@
 ---
-# Page is accessible by direct link only in production site builds. It can be included in the sidebar when the feature is complete.
-unlisted: true
+# Page is available only in the development server. It can be included in production builds when the feature is complete.
+draft: true
 sidebar_label: Ratis Streaming
 ---
 
