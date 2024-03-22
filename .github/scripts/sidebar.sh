@@ -27,13 +27,11 @@ root="$(git rev-parse --show-toplevel)"
 schema="$root"/.github/resource/category.schema.json
 
 # Make sure all docs directories have a category sidebar file.
-for child in $(find "$root"/docs/*); do
-    if [ -d "$child" ]; then
-        category_file="$child/_category_.yml"
-        if [ ! -f "$category_file" ]; then
-            echo "_category_.yml is required for docs subdirectory $child" 1>&2
-            rc=1
-        fi
+for child in $(find "$root"/docs/* -type d); do
+    category_file="$child/_category_.yml"
+    if [ ! -f "$category_file" ]; then
+        echo "_category_.yml is required for docs subdirectory $child" 1>&2
+        rc=1
     fi
 done
 
