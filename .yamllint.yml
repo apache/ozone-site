@@ -1,0 +1,84 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+# Ref: https://yamllint.readthedocs.io/en/stable/rules.html
+
+ignore:
+- pnpm-lock.yaml
+- node_modules
+
+rules:
+  anchors: enable
+  braces:
+    forbid: false
+    min-spaces-inside: 1
+    max-spaces-inside: 1
+    min-spaces-inside-empty: 1
+    max-spaces-inside-empty: 1
+  brackets:
+    forbid: false
+    min-spaces-inside: 1
+    max-spaces-inside: 1
+    min-spaces-inside-empty: 1
+    max-spaces-inside-empty: 1
+  # Use default values to control spaces around colons.
+  colons: enable
+  # Use default values to control spaces around commas.
+  commas: enable
+  # Rules for spacing around comments.
+  comments:
+    min-spaces-from-content: 1
+  # Comments should be indented at the same level as the content they are commenting.
+  comments-indentation: enable
+  # No requirements on document start or end markers.
+  document-end: disable
+  document-start: disable
+  empty-lines:
+    max: 1
+  # Empty values are allowed, disable enforcement of this rule.
+  empty-values: disable
+  float-values:
+    require-numeral-before-decimal: true
+  hyphens:
+    max-spaces-after: 1
+  indentation:
+    spaces: 2
+    indent-sequences: false
+    check-multi-line-strings: false
+  # Enable checking that there are no duplicate keys.
+  key-duplicates: enable
+  key-ordering: disable
+  # Max line length is the same as the main Ozone project.
+  # Non-breakable words like URLs are excluded.
+  line-length:
+    max: 120
+  new-line-at-end-of-file: enable
+  new-lines:
+    type: unix
+  # 0o prefix without quotes must be used to indicate octal values.
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: false
+  quoted-strings:
+    quote-type: double
+    required: only-when-needed
+  # Enable check for no trailing spaces.
+  trailing-spaces: enable
+  # Only use true and false to represent boolean values.
+  truthy:
+    # Prevent this from flagging Github actions key "on".
+    check-keys: false

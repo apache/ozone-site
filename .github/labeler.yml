@@ -16,4 +16,4 @@
 # Configuration for .github/workflows/label-pr.yml
 # This workflow and its configuration can be deleted once the website's feature branch is merged.
 website-v2:
-  - base-branch: HDDS-9225-website-v2
+- base-branch: HDDS-9225-website-v2
