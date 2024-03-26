@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ozone.apache.org/category.schema.json",
+  "title": "Category",
+  "description": "Validates an allowed subset of keys in Docusaurus _category_.yml files.",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "The name of this section shown in the docs sidebar.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label"
+  ],
+  "additionalProperties": false
+}

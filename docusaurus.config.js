@@ -1,5 +1,26 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
+
+import Ajv from 'ajv';
 
 const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
@@ -32,6 +53,31 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  markdown: {
+    // Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
+    // This ensures all pages are using a minimal set of consistent keys.
+    // It can also be used to require all pages to define certain markdown front matter keys.
+    parseFrontMatter: async (params) => {
+      // Reuse the default parser.
+      const result = await params.defaultParseFrontMatter(params);
+
+      // Validate front matter against the schema.
+      const schemaPath = './.github/resource/frontmatter.schema.json';
+      const frontMatterSchema = require(schemaPath);
+      const ajv = new Ajv();
+      const validate = ajv.compile(frontMatterSchema);
+      const isValid = validate(result.frontMatter);
+
+      if (!isValid) {
+        console.error('Front matter validation error in', params.filePath + ':\n', validate.errors);
+        console.error('Front matter validation failed against JSON schema', schemaPath);
+        process.exit(1);
+      }
+
+      return result;
+    },
   },
 
   presets: [
