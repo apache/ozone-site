@@ -15,7 +15,8 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# This file extends the defaults present in https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+# This file extends the defaults present in
+# https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
 # Only - (dash) character is allowed for bullet lists.
 heading-increment:

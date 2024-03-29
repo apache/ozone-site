@@ -15,7 +15,8 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Static analysis of website files. These jobs only require pnpm's dev dependencies and does not build or run the website.
+# Static analysis of website files.
+# These jobs only require pnpm's dev dependencies and do not building or running the website.
 
 name: static
 
@@ -109,3 +110,12 @@ jobs:
       working-directory: ${{ env.script_dir }}
       run: |
         ./sidebar.sh
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Run yamllint
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./yamllint.sh
