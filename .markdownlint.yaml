@@ -113,7 +113,9 @@ proper-names:
   - " Apache"
   - " ASF"
   - " HTTP"
+  - " http:"
   - " HTTPS"
+  - " https:"
 
 # Indentation should not be used to indicate a multi-line code block.
 code-block-style:
