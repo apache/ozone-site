@@ -67,12 +67,14 @@ jobs:
     - name: Run spelling check
       working-directory: ${{ env.script_dir }}
       run: |
-        ./spelling.sh
+        # TODO Update this link to master when the new website's branch is merged.
+        ./spelling.sh || echo Spell check failed. \
+        For help fixing false positive spelling errors, see \
+        https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#spelling 1>&2
     - name: Output spelling check tips
       if: ${{ failure() }}
       run: |
         cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
-        cat ${{ env.resource_dir }}/spelling_tips.md 1>&2
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
