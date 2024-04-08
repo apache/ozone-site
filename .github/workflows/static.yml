@@ -67,10 +67,7 @@ jobs:
     - name: Run spelling check
       working-directory: ${{ env.script_dir }}
       run: |
-        # TODO Update this link to master when the new website's branch is merged.
-        ./spelling.sh || echo Spell check failed. \
-        For help fixing false positive spelling errors, see \
-        https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#spelling 1>&2
+        ./spelling.sh
     - name: Output spelling check tips
       if: ${{ failure() }}
       run: |
