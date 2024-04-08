@@ -72,6 +72,7 @@ jobs:
       if: ${{ failure() }}
       run: |
         cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
+        cat ${{ env.resource_dir }}/spelling_tips.md 1>&2
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
