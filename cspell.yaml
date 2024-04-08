@@ -51,6 +51,11 @@ words:
 - OBS
 - HttpFS
 - safemode
+- mis-replicate
+- mis-replication
+- mis-replicated
+- BCSID
+- EC
 # Other systems' words
 - KDC
 - classpath
