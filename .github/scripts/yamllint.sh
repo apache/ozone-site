@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -15,23 +16,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Dependencies
-/node_modules
 
-# Production
-/build
-
-# Generated files
-.docusaurus
-.cache-loader
-
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+root="$(git rev-parse --show-toplevel)"
+yamllint --format=colored "$root"

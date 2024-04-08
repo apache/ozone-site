@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ozone.apache.org/frontmatter.schema.json",
+  "title": "Frontmatter",
+  "description": "Validates an allowed subset of Docusaurus docs frontmatter.",
+  "type": [ "object", "null" ],
+  "properties": {
+    "sidebar_label": {
+      "type": "string"
+    },
+    "slug": {
+      "description": "Only use slug to specify the base URL for documentation.",
+      "type": "string",
+      "enum": [ "/" ]
+    },
+    "draft": {
+      "description": "Makes pages for incomplete features only visible in development mode.",
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}
+

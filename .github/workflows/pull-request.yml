@@ -18,20 +18,19 @@ name: pull request
 on:
   pull_request:
     types:
-      - reopened
-      - opened
-      - edited
-      - synchronize
+    - reopened
+    - opened
+    - edited
+    - synchronize
 
 jobs:
   title:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v4
-      - name: Check pull request title
-        env:
-          TITLE: ${{ github.event.pull_request.title }}
-        run:
-          .github/scripts/pr_title_check.sh "${TITLE}"
-
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Check pull request title
+      env:
+        TITLE: ${{ github.event.pull_request.title }}
+      run:
+        .github/scripts/pr_title_check.sh "${TITLE}"

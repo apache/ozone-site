@@ -100,7 +100,7 @@ Docusaurus provides many options for laying out documentation pages and their me
 
 - File names and therefore generated URLs should all be `kebab-case`.
 
-- Let Docusaurus automatically generate the page's title from its top level markdown heading instead of using `title` in the frontmatter. This is different from the sidebar label or URL slug.
+- Let Docusaurus automatically generate the page's title from its top level markdown heading instead of using `title` in the front matter. This is different from the sidebar label or URL slug.
 
 - Use relative file paths for all links between pages.
   - This keeps page links pointing to the current version of the documentation.
@@ -129,7 +129,7 @@ Docusaurus provides many options for laying out documentation pages and their me
           Object Store Bucket Layout
   ```
 
-  - Sidebar labels are automatically generated from page titles. To use a different sidebar label, use the `sidebar_label` property in the page's frontmatter.
+  - Sidebar labels are automatically generated from page titles. To use a different sidebar label, use the `sidebar_label` property in the page's front matter.
 
 - Don't rely on Ozone specific acronyms in the sidebar. This makes docs navigation more beginner friendly.
   - For example, the pages on bucket layouts may be organized as:
@@ -178,7 +178,7 @@ The file names and content of all markdown pages are checked for spelling mistak
 
 - Option 1: If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid.
 
-- Option 2: If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown frontmatter of that page only.
+- Option 2: If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown front matter of that page only.
 
 ### Updating Graphics
 

@@ -15,7 +15,8 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Static analysis of website files. These jobs only require pnpm's dev dependencies and does not build or run the website.
+# Static analysis of website files.
+# These jobs only require pnpm's dev dependencies and do not building or running the website.
 
 name: static
 
@@ -32,6 +33,13 @@ env:
   node_version: 20
 
 jobs:
+  license:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Check Apache license headers
+      uses: apache/skywalking-eyes@v0.5.0
   file-names:
     runs-on: ubuntu-latest
     steps:
@@ -83,3 +91,31 @@ jobs:
       working-directory: ${{ env.script_dir }}
       run: |
         ./markdownlint.sh
+  check-sidebar:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Enable corepack
+      run: |
+        corepack enable
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.node_version }}
+        cache: pnpm
+    - name: Install pnpm dependencies
+      run: pnpm install --dev
+    - name: Run docs sidebar check
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./sidebar.sh
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v4
+    - name: Run yamllint
+      working-directory: ${{ env.script_dir }}
+      run: |
+        ./yamllint.sh
