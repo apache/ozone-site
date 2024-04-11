@@ -33,6 +33,10 @@ import:
 - "@cspell/dict-shell/cspell-ext.json"
 - "@cspell/dict-docker/cspell-ext.json"
 
+flagWords:
+# Write "quasi-closed" instead of "quasi closed".
+- quasi
+
 # List of words to be always considered correct.
 # Case insensitive.
 words:
@@ -56,6 +60,8 @@ words:
 - mis-replicated
 - BCSID
 - EC
+- quasi-close
+- quasi-closed
 # Other systems' words
 - KDC
 - classpath
