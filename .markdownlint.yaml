@@ -77,6 +77,7 @@ proper-names:
   - CLI
   - RPC
   - EC
+  - BCSID
   - SPNEGO
   - SASL
   - TLS
@@ -103,14 +104,18 @@ proper-names:
   - pnpm
   - S3
   - Hadoop
-  # Enforce capitalization for these words only when they are used in sentences (surrounded by spaces).
+  - UUID
+  - IP address
+  # Enforce capitalization for these words only when they are used in sentences (preceded by a space).
   # Other uses in repo names or links like [apache/ozone](https://github.com/apache/ozone) are ok.
-  - " Ratis "
-  - " Ozone "
-  - " Apache "
-  - " ASF "
-  - " HTTP "
-  - " HTTPS "
+  - " Ratis"
+  - " Ozone"
+  - " Apache"
+  - " ASF"
+  - " HTTP"
+  - " http:"
+  - " HTTPS"
+  - " https:"
 
 # Indentation should not be used to indicate a multi-line code block.
 code-block-style:
