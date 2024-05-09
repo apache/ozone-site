@@ -8,10 +8,25 @@
     "label": {
       "description": "The name of this section shown in the docs sidebar.",
       "type": "string"
+    },
+    "link": {
+      "description": "Determines the behavior of the link created for this section.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "A short description of this section's content.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of page to generate for this section.",
+          "type": "string",
+          "enum": ["generated-index"]
+        }
+      },
+      "required": ["description", "type"],
+      "additionalProperties": false
     }
   },
-  "required": [
-    "label"
-  ],
+  "required": [ "label", "link" ],
   "additionalProperties": false
 }
