@@ -86,7 +86,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: undefined,
           // TODO update this link when the new website's branch is merged.
           editUrl:
             'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
