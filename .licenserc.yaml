@@ -30,7 +30,7 @@ header:
   # See examples on https://github.com/apache/www-site and the skywalking-eyes recommended configuration for
   # Apache projects at https://github.com/apache/skywalking-eyes?tab=readme-ov-file#github-actions
   - "**/*.md"
-  - "**/_category_.yml"
+  - "**/*.mdx"
   - pnpm-lock.yaml
 
   # Do not comment on pull requests.
