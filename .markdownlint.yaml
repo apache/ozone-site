@@ -41,6 +41,7 @@ no-inline-html:
   - br
   - Tabs
   - TabItem
+  - DocCardList
 
 # Allow bare URLs since wrapping URLs in <> is invalid mdx.
 no-bare-urls: false

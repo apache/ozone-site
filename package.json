@@ -31,7 +31,6 @@
     "@cspell/dict-java": "^5.0.6",
     "@cspell/dict-markdown": "^2.0.1",
     "@cspell/dict-shell": "^1.0.6",
-    "ajv-cli": "^5.0.0",
     "markdownlint-cli": "^0.39.0"
   },
   "browserslist": {

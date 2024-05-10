@@ -16,31 +16,27 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Validates docusaurus _category_.yml files used to configure the docs sidebar.
-# Each docs subdirectory should have a _category_.yml file, and it must follow the defined schema.
-# The schema is more restrictive than what Docusaurus allows, and can be used to disallow keys or require all category
-# files to define the same keys.
+# Validates docusaurus README.mdx files used to configure sections in the docs sidebar.
+# Each docs subdirectory should have a README.mdx file, and the file should contain a generated index of pages or
+# subsections using the `<DocCardList/>` tag as its last line.
 
 rc=0
 
 root="$(git rev-parse --show-toplevel)"
-schema="$root"/.github/resource/category.schema.json
+index_name='README.mdx'
 
-# Make sure all docs directories have a category sidebar file.
+# Make sure all docs directories have an index file that contains an index of subsections.
 for child in $(find "$root"/docs/* -type d); do
-    category_file="$child/_category_.yml"
-    if [ ! -f "$category_file" ]; then
-        echo "_category_.yml is required for docs subdirectory $child" 1>&2
+    index_file="$child/$index_name"
+    if [ ! -f "$index_file" ]; then
+        echo "A $index_name index file is required in the docs subdirectory $child" 1>&2
+        rc=1
+    elif [ "$(tail -n1 "$index_file")" != '<DocCardList/>' ]; then
+        echo "$index_file is missing an index of sidebar items. Add the \`<DocCardList/>\` tag " \
+            "at the end of the file to generate one automatically. " \
+            "See https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page" 1>&2
         rc=1
     fi
 done
-
-[ "$rc" = 0 ] || exit $rc
-
-# If all category files are present, make sure they follow the schema.
-if ! pnpm ajv validate -s "$schema" -d "$root/docs/**/_category_.yml" 1>/dev/null; then
-    rc=1
-    echo "Sidebar configuration validation failed against JSON schema $schema" 1>&2
-fi
 
 exit "$rc"
