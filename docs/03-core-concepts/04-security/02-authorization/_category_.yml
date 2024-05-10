@@ -1,4 +1,0 @@
-label: Authorization
-link:
-  type: generated-index
-  description: Ozone uses ACLs to control access to different parts of the namespace.

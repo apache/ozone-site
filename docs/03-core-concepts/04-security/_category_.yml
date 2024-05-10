@@ -1,5 +1,0 @@
-label: Security
-link:
-  type: generated-index
-  description: >
-    Ozone supports authentication and authorization to restrict access to different portions of the namespace.
