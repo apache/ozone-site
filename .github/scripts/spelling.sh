@@ -20,10 +20,16 @@ root="$(git rev-parse --show-toplevel)"
 
 rc=0
 
-echo 'Checking document content...'
+printf '%s\n' 'Checking document content...'
 pnpm cspell lint --root="$root" --no-progress --show-context '**/*.md' '**/_category_.yml' || rc="$?"
 
-echo 'Checking file names...'
+printf '\n%s\n' 'Checking file names...'
 find "$root"/docs "$root"/src/pages | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
+
+if [ "$rc" != 0 ]; then
+  # TODO Update this link to master when the new website's branch is merged.
+  printf '\n%s\n%s\n' 'Spell check failed. See CONTRIBUTING.md for help fixing false positive spelling errors:' \
+    'https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#spelling' 1>&2
+fi
 
 exit $rc
