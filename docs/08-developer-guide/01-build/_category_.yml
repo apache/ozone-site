@@ -1,1 +1,5 @@
 label: Build
+link:
+  type: generated-index
+  description: Instructions for developers to build Ozone from source.
+

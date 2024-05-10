@@ -1,1 +1,5 @@
 label: Data Operations
+link:
+  type: generated-index
+  description: Documents how read, write, and delete operations work within Ozone.
+

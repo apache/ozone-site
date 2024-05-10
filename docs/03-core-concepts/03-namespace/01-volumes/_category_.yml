@@ -1,1 +1,5 @@
 label: Volumes
+link:
+  type: generated-index
+  description: Volumes are Ozone's highest level of namespace organization.
+

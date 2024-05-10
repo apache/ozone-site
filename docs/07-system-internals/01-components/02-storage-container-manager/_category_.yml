@@ -1,1 +1,5 @@
 label: Storage Container Manager
+link:
+  type: generated-index
+  description: Documents the internal workings of the Storage Container Manager.
+

@@ -1,1 +1,5 @@
 label: Troubleshooting
+link:
+  type: generated-index
+  description: Instructions to troubleshoot common issues in an Ozone deployment.
+

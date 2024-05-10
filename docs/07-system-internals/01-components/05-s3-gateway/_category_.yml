@@ -1,1 +1,5 @@
 label: S3 Gateway
+link:
+  type: generated-index
+  description: Documents the internal workings of the S3 Gateway.
+

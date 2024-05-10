@@ -1,1 +1,4 @@
 label: Recon
+link:
+  type: generated-index
+  description: Recon is Ozone's observability server. It provides a web UI and REST APIs to gain insight about a running Ozone system.

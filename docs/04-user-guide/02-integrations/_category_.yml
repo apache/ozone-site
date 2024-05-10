@@ -1,1 +1,5 @@
 label: Integrations
+link:
+  type: generated-index
+  description: Instructions to configure other systems to use Ozone for storage.
+

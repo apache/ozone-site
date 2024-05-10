@@ -1,1 +1,5 @@
 label: Developer Guide
+link:
+  type: generated-index
+  description: A guide for developers looking to contribute to the Ozone project.
+

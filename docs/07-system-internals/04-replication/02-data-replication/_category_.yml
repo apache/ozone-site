@@ -1,1 +1,5 @@
 label: Data Replication
+link:
+  type: generated-index
+  description: Documents the implementation of data replication in Ozone's block storage layer.
+

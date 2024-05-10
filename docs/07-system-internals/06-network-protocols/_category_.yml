@@ -1,1 +1,5 @@
 label: Network Protocols
+link:
+  type: generated-index
+  description: Documents the various network protocols used within Ozone.
+

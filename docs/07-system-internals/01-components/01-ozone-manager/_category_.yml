@@ -1,1 +1,5 @@
 label: Ozone Manager
+link:
+  type: generated-index
+  description: Documents the internal workings of the Ozone Manager.
+

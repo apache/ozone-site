@@ -1,1 +1,4 @@
 label: Installation
+link:
+  type: generated-index
+  description: Instructions to quickly install an Ozone instance for testing.

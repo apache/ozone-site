@@ -1,1 +1,5 @@
 label: Client Interfaces
+link:
+  type: generated-index
+  description: Ozone provides multiple interfaces for clients to communicate with the system.
+

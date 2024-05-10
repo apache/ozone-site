@@ -1,1 +1,4 @@
 label: Node Decommissioning and Maintenance
+link:
+  type: generated-index
+  description: Instructions to remove Ozone nodes from the cluster in a controlled manner, either temporarily or permanently.

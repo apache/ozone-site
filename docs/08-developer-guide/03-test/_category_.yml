@@ -1,1 +1,5 @@
 label: Test
+link:
+  type: generated-index
+  description: Instructions to run and modify tests against Ozone.
+

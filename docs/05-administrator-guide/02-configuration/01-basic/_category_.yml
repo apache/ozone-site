@@ -1,1 +1,5 @@
 label: Basic
+link:
+  type: generated-index
+  description: Documents the minimal set of configurations required for Ozone to run.
+
