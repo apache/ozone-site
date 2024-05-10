@@ -2,4 +2,3 @@ label: Security
 link:
   type: generated-index
   description: Instructions to configure a fully secure Ozone cluster in production.
-

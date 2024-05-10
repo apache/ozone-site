@@ -2,4 +2,3 @@ label: System Internals
 link:
   type: generated-index
   description: Documents the internal workings of Ozone for developers. Familiarity with this section is not required for users or administrators to work with Ozone.
-

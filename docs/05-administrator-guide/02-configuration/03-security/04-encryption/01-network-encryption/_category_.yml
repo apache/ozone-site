@@ -2,4 +2,3 @@ label: Network Encryption
 link:
   type: generated-index
   description: Configure encryption for each type of network communication in Ozone.
-

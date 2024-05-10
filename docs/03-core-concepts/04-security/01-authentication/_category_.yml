@@ -2,4 +2,3 @@ label: Authentication
 link:
   type: generated-index
   description: Ozone supports multiple mechanisms for users to authenticate with the system.
-

@@ -2,4 +2,3 @@ label: Logging
 link:
   type: generated-index
   description: Configure Ozone's application and audit logs.
-

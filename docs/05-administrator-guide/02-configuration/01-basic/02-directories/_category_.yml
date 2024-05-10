@@ -2,4 +2,3 @@ label: Directories
 link:
   type: generated-index
   description: Configure which directories Ozone components should store their data in.
-
