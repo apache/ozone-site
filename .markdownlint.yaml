@@ -97,6 +97,7 @@ proper-names:
   - RocksDB
   - Jira
   - Java
+  - JVM
   - Maven
   - GPG
   - Netty
