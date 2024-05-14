@@ -21,6 +21,7 @@
 # subsections using the `<DocCardList/>` tag as its last line.
 
 rc=0
+missing_index=0
 
 root="$(git rev-parse --show-toplevel)"
 index_name='README.mdx'
@@ -32,11 +33,13 @@ for child in $(find "$root"/docs/* -type d); do
         echo "A $index_name index file is required in the docs subdirectory $child" 1>&2
         rc=1
     elif [ "$(tail -n1 "$index_file")" != '<DocCardList/>' ]; then
-        echo "$index_file is missing an index of sidebar items. Add the \`<DocCardList/>\` tag " \
-            "at the end of the file to generate one automatically. " \
-            "See https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page" 1>&2
+        echo "$index_file is missing an index of sidebar items." 1>&2
         rc=1
     fi
 done
+
+if [ "$rc" != 0 ]; then
+    echo 'For help with documentation sidebar configuration see https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#documentation-sidebar' 1>&2
+fi
 
 exit "$rc"

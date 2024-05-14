@@ -110,6 +110,10 @@ jobs:
       working-directory: ${{ env.script_dir }}
       run: |
         ./sidebar.sh
+    - name: Output sidebar check tips
+      if: ${{ failure() }}
+      run: |
+        cat ${{ env.resource_dir }}/sidebar_tips.md >> $GITHUB_STEP_SUMMARY
   lint-yaml:
     runs-on: ubuntu-latest
     steps:
