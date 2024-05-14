@@ -1,3 +1,3 @@
 # Recon REST API
 
-**TODO:** File a subtask under [HDDS-9859](https://issues.apache.org/jira/browse/HDDS-9859) and complete this page or section.
+**TODO:** [HDDS-10684](https://issues.apache.org/jira/browse/HDDS-10684) Embed a Swagger API spec into this page.
