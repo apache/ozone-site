@@ -2,7 +2,7 @@
 sidebar_label: Application Logs
 ---
 
-# Configuration Application Logs
+# Configuring Application Logs
 
 Document Ozone's use of log4j for application logging, including:
 
