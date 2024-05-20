@@ -24,7 +24,7 @@ import Logo from '@site/static/img/ozone-logo.svg';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
-  const getStartedHref = `docs/quick-start/installation/docker`
+  const getStartedHref = `docs/quick-start`
   return (
     <Layout
       title="Home"
