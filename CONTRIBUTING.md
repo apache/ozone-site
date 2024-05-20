@@ -191,14 +191,19 @@ The file names and content of all markdown pages are checked for spelling mistak
 
 #### Documentation Sidebar
 
-Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website uses a *README.mdx* file in each documentation directory to configure how the section is displayed in the sidebar. This file should contain a summary of the section and an index of the pages in that section.
+Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website configures this using a *README.mdx* file in each documentation directory. This gives a one to one mapping of subdirectories of the *docs* directory to sidebar dropdown sections.
 
-When creating a new sidebar section, use the `sidebar_label` front matter key to give the section a brief title that will be shown in the sidebar. Then use a more descriptive title on the page itself. Write a brief summary (usually just one sentence) about the content in that section. Avoid placing actual documentation on these pages, since it may be missed by readers clicking through the sidebar. If an overview of content in a section is required, add a dedicated "Overview" page to the section.
+When creating a new *docs* subdirectory (which will be rendered as a sidebar section), add a *README.mdx* file to that directory. In this file:
 
-Every *README.mdx* file should end with an index of the pages in that section. Adding this index is described in the [Docusaurus docs](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page), but in summary it only requires two lines:
-
-1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the *README.mdx* file.
-2. Add the `<DocCardList/>` tag at the end of the file.
+1. Use the `sidebar_label` front matter key to give the section a brief title that will be shown in the sidebar.
+2. Add a descriptive title on the markdown page itself.
+    - This should be more verbose than the sidebar label as described in [Best Practices](#best-practices) for documentation pages.
+3. Write a brief summary (usually just one sentence) about the content in that section.
+    - Avoid placing actual documentation on these pages, since it may be missed by readers clicking through the sidebar.
+    - If an overview of content in a section is required, add a dedicated "Overview" page to the section.
+4. Add an automatically generated index of the content in this section as the last line in the markdown file. Adding this index is described in the [Docusaurus docs](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page), but in summary it only requires two lines:
+    1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the *README.mdx* file.
+    2. Add the `<DocCardList/>` tag at the end of the file.
 
 ### Updating Graphics
 
