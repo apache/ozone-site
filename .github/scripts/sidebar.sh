@@ -39,7 +39,7 @@ for child in $(find "$root"/docs/* -type d); do
 done
 
 if [ "$rc" != 0 ]; then
-    echo 'For help with documentation sidebar configuration see https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#documentation-sidebar' 1>&2
+    printf '\n%s\n' 'For help with documentation sidebar configuration see https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#documentation-sidebar' 1>&2
 fi
 
 exit "$rc"
