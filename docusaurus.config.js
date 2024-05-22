@@ -56,9 +56,12 @@ const config = {
   },
 
   markdown: {
-    // Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
-    // This ensures all pages are using a minimal set of consistent keys.
-    // It can also be used to require all pages to define certain markdown front matter keys.
+    /*
+    Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
+    This ensures all pages are using a minimal set of consistent keys.
+    It can also be used to require all pages to define certain markdown front matter keys.
+    See https://docusaurus.io/docs/api/docusaurus-config#markdown for reference.
+    */
     parseFrontMatter: async (params) => {
       // Reuse the default parser.
       const result = await params.defaultParseFrontMatter(params);
@@ -99,10 +102,15 @@ const config = {
           ],
         },
         sitemap: {
+          /*
+          Check that all generated URLs from the build use kebab-case and lowercase.
+          See https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap#ex-config for reference.
+          */
           createSitemapItems: async (params) => {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
 
+            // TODO Base URL must be updated when the new website's branch is merged.
             const validUrlRegex = new RegExp('^https://ozone-site-v2\.staged\.apache\.org/([a-z0-9][a-z0-9\./-]*[a-z0-9/])?$');
             items.forEach((item, index) => {
               if (!validUrlRegex.test(item.url)) {
