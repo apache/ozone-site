@@ -98,6 +98,22 @@ const config = {
             require.resolve('./src/css/footer.css'),
           ],
         },
+        sitemap: {
+          createSitemapItems: async (params) => {
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+
+            const validUrlRegex = new RegExp('^https://ozone-site-v2\.staged\.apache\.org/([a-z0-9][a-z0-9\./-]*[a-z0-9/])?$');
+            items.forEach((item, index) => {
+              if (!validUrlRegex.test(item.url)) {
+                  console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
+                  console.error('All URLs should use kebab case and lowercase letters.');
+                  process.exit(1);
+              }
+            });
+            return items;
+          },
+        },
       }),
     ],
   ],
