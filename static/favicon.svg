@@ -1,3 +1,22 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+-->
+
 <svg width="225" height="247" viewBox="0 0 225 247" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect x="1.5" y="2" width="206.957" height="207.019" fill="url(#pattern0)"/>
 <path d="M104.085 4.40723C48.8849 4.40723 4.13557 49.1696 4.13557 104.387C4.13557 159.604 48.8849 204.366 104.085 204.366C159.286 204.366 204.035 159.604 204.035 104.387C204.035 49.1696 159.286 4.40723 104.085 4.40723ZM104.085 174.265C65.5042 174.265 34.2281 142.98 34.2281 104.387C34.2281 65.7943 65.5042 34.5088 104.085 34.5088C142.666 34.5088 173.942 65.7943 173.942 104.387C173.942 142.979 142.666 174.265 104.085 174.265Z" fill="url(#paint0_radial_10_128565)"/>

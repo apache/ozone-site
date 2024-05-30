@@ -163,7 +163,7 @@ const config = {
           {
             tagName: 'link',
             rel: 'manifest',
-            href: 'pwa/site.webmanifest',
+            href: 'pwa/manifest.json',
           },
         ],
       },
