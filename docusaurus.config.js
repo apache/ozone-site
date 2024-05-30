@@ -29,7 +29,7 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
-  tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads.',
+  tagline: 'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
 
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.

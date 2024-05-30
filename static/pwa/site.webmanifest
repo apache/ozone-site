@@ -1,7 +1,7 @@
 {
     "name": "Apache Ozone",
     "short_name": "Ozone",
-    "description": "Scalable, reliable, distributed object store",
+    "description": "Scalable, reliable, distributed storage system",
     "icons":[
         {
             "src": "pwa/icon-192.png",
