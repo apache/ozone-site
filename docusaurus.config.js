@@ -30,11 +30,6 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, redundant, distributed storage system optimized for data analytics and object store workloads.',
-  staticDirectories: [
-    'static',
-    // Put favicons at the root of website on build.
-    'favicon',
-  ],
 
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
@@ -92,7 +87,7 @@ const config = {
       tagName: 'link',
       attributes: {
         rel: 'manifest',
-        href: 'site.webmanifest',
+        href: 'pwa/site.webmanifest',
       },
     },
   ],
