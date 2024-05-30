@@ -13,50 +13,48 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build Ozone website v2 and commit it to a staging branch.
-# This will be picked up by configurations in .asf.yml to publish it to a staging domain.
-name: "auto-publish-website-v2"
+# Commits the website build to the asf-site-v2 branch, where ASF automation configured by the .asf.yaml file on that
+# branch will publish it to the specified domain.
+# The website build is read from an artifact and is not built in this workflow.
+
+name: publish
 
 on:
-  push:
-    branches:
-      # TODO update this to master when the new website is ready to be published.
-      - HDDS-9225-website-v2
+  workflow_call:
+
+concurrency:
+  group: publish-${{ github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
-  build:
+  publish-website:
     runs-on: ubuntu-latest
     steps:
-      # Check out the website source in the current working directory.
-      - name: "Checkout source branch ${{ github.ref_name }}"
-        uses: actions/checkout@v4
-        with:
-          path: 'src'
-      - name: "Build website"
-        working-directory: 'src'
-        # Website source is mounted as volume, so the build output ends up in ./src/build outside of the container.
-        run: |
-          docker compose run site pnpm run build
-      - name: "Checkout publish branch"
-        uses: actions/checkout@v4
-        with:
-          path: 'publish'
-          # TODO update this to asf-site when the website is ready to be published.
-          ref: 'asf-site-v2'
-      - name: "Commit changes"
-        working-directory: 'publish'
-        run: |
-          # Delete previous build from the branch, but preserve files with necessary metadata.
-          mv README.md .asf.yaml .git /tmp
-          rm -rf $(ls -A)
-          mv /tmp/README.md /tmp/.asf.yaml /tmp/.git .
+    - name: Download website build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: build
+    - name: Checkout publish branch
+      uses: actions/checkout@v4
+      with:
+        path: publish
+        # Update this to asf-site when the website is ready to be published.
+        ref: asf-site-v2
+    - name: Commit changes
+      working-directory: publish
+      run: |
+        # Delete previous build from the branch, but preserve files with necessary metadata.
+        mv README.md .asf.yaml .git /tmp
+        rm -rf $(ls -A)
+        mv /tmp/README.md /tmp/.asf.yaml /tmp/.git .
 
-          # Commit new build to the branch.
-          cp -R ../src/build/. .
-          git config --global user.name 'Github Actions'
-          git config --global user.email 'noreply@github.com'
-          git add .
-          git commit -a -m "[auto] Apply changes from $GITHUB_REF_NAME $GITHUB_SHA" || true
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Commit new build to the branch.
+        cp -R ../build/. .
+        git config --global user.name 'Github Actions'
+        git config --global user.email 'noreply@github.com'
+        git add .
+        git commit -a -m "[auto] Apply changes from $GITHUB_REF_NAME $GITHUB_SHA" || true
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

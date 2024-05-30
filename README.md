@@ -32,11 +32,13 @@ You can preview the current state of the new website at https://ozone-site-v2.st
 
 - The `master` branch is still tracking content for the currently active Ozone website. `master` and `HDDS-9225-website-v2` will remain separate until the new website is ready to be deployed.
 
-- The `asf-site` branch is still holding build artifacts being used to deploy content from the `master` branch. The new website is not being hosted anywhere, but can be previewed locally.
+- The `asf-site` branch is still holding build artifacts being used to deploy content from the `master` branch.
 
 ## Contributing
 
 Please see `CONTRIBUTING.md` for information about
+
+- [Quick start](./CONTRIBUTING.md#quick-start)
 - [Directory layout](./CONTRIBUTING.md#directory-layout)
-- [Previewng the website locally](./CONTRIBUTING.md#previewing-your-modifications-locally)
+- [Previewing the website locally](./CONTRIBUTING.md#previewing-your-modifications-locally)
 - [Filing Issues](./CONTRIBUTING.md#filing-jira-issues)

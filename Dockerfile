@@ -26,5 +26,6 @@ RUN corepack enable
 WORKDIR /ozone-site
 COPY package.json .
 COPY pnpm-lock.yaml .
-# Lockfile should not be changed when installing dependencies, hence freezing it.
-RUN pnpm install --frozen-lockfile
+# --frozen-lockfile: pnpm-lock.yaml is expected to match constraints in package.json. Fail if it does not.
+# --prod: Do not install dev dependencies. The image is only used for running the website.
+RUN pnpm install --prod --frozen-lockfile

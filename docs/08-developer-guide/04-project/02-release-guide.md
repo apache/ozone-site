@@ -1,5 +1,11 @@
 ---
 sidebar_label: Release Manager Guide
+
+# Custom words specific to this page:
+# cSpell:ignore protoroot codesigningkey lockdir pinentry gpgconf orgapacheozone
+
+# On this page, ignore CLI options used with -D or -P.
+# cSpell:ignoreRegExp -(D|P)[a-z\.,]+([\s]|=)
 ---
 
 # Apache Release Manager Guide
@@ -54,7 +60,7 @@ svn cp -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repo
 
 ### Create a Parent Jira for the Release
 
-This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the ozone website, publishing the docker image, etc can be added as subtasks.
+This provides visibility into the progress of the release for the community. Tasks mentioned in this guide like cherry-picking fixes on to the release branch, updating the Ozone website, publishing the Docker image, etc can be added as subtasks.
 
 ### Bulk Comment on Jiras Targeting This Release
 
@@ -97,6 +103,7 @@ Protolock files are used to check backwards compatibility of protocol buffers be
     ```
 
 2. Commit changes to the `proto.lock` files.
+
     ```bash
     git commit -m "Update proto.lock for Ozone $VERSION"
     ```
@@ -107,7 +114,7 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 
     :::tip
     Ozone currently uses the following protolock files:
-    - `hadoop-hdds/interface-client/src/main/resources/proto.lock`: Controls the protocol for clients communicating with datanodes.
+    - `hadoop-hdds/interface-client/src/main/resources/proto.lock`: Controls the protocol for clients communicating with Datanodes.
     - `hadoop-hdds/interface-admin/src/main/resources/proto.lock`: Controls the protocol for clients communicating with SCM.
     - `hadoop-hdds/interface-server/src/main/resources/proto.lock`: Controls the protocol for SCMs communicating with each other.
     - `hadoop-ozone/interface-client/src/main/resources/proto.lock`: Controls all protocols involving the Ozone Manager.
@@ -146,6 +153,7 @@ export RC=0 # Set to the number of the current release candidate, starting at 0.
 It is probably best to clone a fresh Ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the [apache/ozone](https://github.com/apache/ozone) upstream repo is named `origin`. This is required for release build metadata to be correctly populated.
 
 Run the following commands to make sure your repo is clean:
+
 ```bash
 git reset --hard
 git clean -dfx
@@ -188,23 +196,32 @@ git tag -s "ozone-$VERSION-RC$RC"
 :::tip
 If the command fails on MacOS, you may need to do the following additional steps:
 
-- Install a program to prompt you for your gpg key passphrase (example using homebrew):
+- Install a program to prompt you for your GPG key passphrase (example using homebrew):
+
   ```bash
   brew install pinentry-mac
   ```
+
 - Tell git to use this program for signing:
+
   ```bash
   git config --global gpg.program "$(which gpg)"
   ```
+
 - Tell git which key to sign with:
+
   ```bash
   git config --global user.signingKey <gpg_key_id>
   ```
-- Tell gpg to use this program to prompt for passphrase:
+
+- Tell GPG to use this program to prompt for passphrase:
+
   ```bash
   echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
   ```
-- Reload gpg-agent:
+
+- Reload `gpg-agent`:
+
   ```bash
   gpgconf --kill gpg-agent
   ```
@@ -214,19 +231,26 @@ If the command fails on MacOS, you may need to do the following additional steps
 ### Create the Release Artifacts
 
 - Run rat check and ensure there are no failures.
+
   ```bash
   ./hadoop-ozone/dev-support/checks/rat.sh
   ```
+
 - Clean the Repo of all Rat output
+
   ```bash
   git reset --hard
   git clean -dfx
   ```
+
 - Build the Release Tarballs. Make sure you are using GNU-tar instead of BSD-tar.
+
   ```bash
   mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
   ```
+
 - Now that we have built the release artifacts, we will copy them to the release directory.
+
   ```bash
   cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
   ```
@@ -250,25 +274,31 @@ Now each .tar.gz file should have an associated .mds file, .asc file, and .sha51
 
 Before uploading the artifacts, run some basic tests on them, similar to what other devs will run before voting in favor of the release.
 
-1. Extract the contents of the source tarball and build it with an empty maven cache by renaming your `~/.m2` directory before doing the build.
+1. Extract the contents of the source tarball and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
 2. Check the size of the output binary tarball for significant size increase from the last release.
     - A significant increase in size could indicate a dependency issue that needs to be fixed.
     - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
 3. Verify signatures
-    - Download the KEYS file from [https://dist.apache.org/repos/dist/release/ozone/KEYS](https://dist.apache.org/repos/dist/release/ozone/KEYS)
-    - Import its contents (which should include your public gpg key):
+    - Download the KEYS file from https://dist.apache.org/repos/dist/release/ozone/KEYS
+    - Import its contents (which should include your public GPG key):
+
       ```bash
       gpg --import KEYS
       ```
+
     - Verify each .tar.gz artifact:
+
       ```bash
       gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz
       ```
+
 4. Verify checksums
     - For each artifact, verify that the checksums given by the `shasum` command match the contents of the .sha512 file and the SHA512 line in its .mds file.
+
         ```bash
         shasum -a 512 *.tar.gz
         ```
+
 5. Make sure docs are present in the release tarball
    - Extract the release and open docs/index.html in your web browser, and check that the documentation website looks ok.
 6. Run `bin/ozone version` from the extracted release tarball. The output of this command should contain:
@@ -279,7 +309,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - The git hash of the last commit the release was built on.
 7. Run the upgrade compatibility acceptance tests by running `test.sh` from the `compose/upgrade` directory in the extracted release tarball.
     :::note
-    The `test.sh` file committed to the master branch only checks upgrade compatiblity against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
+    The `test.sh` file committed to the master branch only checks upgrade compatibility against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
     :::
 
 ### Upload the Artifacts to Dev Staging
@@ -299,7 +329,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 
 ### Upload the Artifacts to Apache Nexus
 
-Double check that your apache credentials are added to your local `~/.m2/settings.xml`.
+Double check that your Apache credentials are added to your local `~/.m2/settings.xml`.
 
 ```xml title="settings.xml"
 <settings>
@@ -340,8 +370,8 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 - Link to the release candidate tag on Github
 - Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
 - Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
-- Location where the maven artifacts are staged. This link will look something like [https://repository.apache.org/content/repositories/orgapacheozone-1001/](https://repository.apache.org/content/repositories/orgapacheozone-1001/)
-- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: [https://dist.apache.org/repos/dist/dev/ozone/KEYS](https://dist.apache.org/repos/dist/dev/ozone/KEYS)
+- Location where the Maven artifacts are staged. This link will look something like https://repository.apache.org/content/repositories/orgapacheozone-1001/
+- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: https://dist.apache.org/repos/dist/dev/ozone/KEYS
 - Fingerprint of the key used to sign the artifacts.
 
 If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether their vote is binding. If in doubt check the [ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
@@ -395,7 +425,7 @@ git push origin "ozone-$VERSION"
 
 ### Publish a Docker Image for the Release
 
-The Ozone docker image is intended for testing purposes only, not production use. An example pull request to update the docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [docker image tags](https://hub.docker.com/r/apache/ozone/tags).
+The Ozone Docker image is intended for testing purposes only, not production use. An example pull request to update the Docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [Docker image tags](https://hub.docker.com/r/apache/ozone/tags).
 
 1. Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
 
@@ -418,7 +448,7 @@ The Ozone docker image is intended for testing purposes only, not production use
 
 Update the upgrade and client cross compatibility acceptance tests to check against the new release. See [this pull request](https://github.com/apache/ozone/pull/6040/files) for an example.
 :::note
-This step requires the release's [docker image](#publish-a-docker-image-for-the-release) to be published.
+This step requires the release's [Docker image](#publish-a-docker-image-for-the-release) to be published.
 :::
 
 ### Update the Ozone Roadmap
@@ -433,9 +463,9 @@ This step requires the release's [docker image](#publish-a-docker-image-for-the-
 
 Include the following links:
 
-- Release notes: [https://ozone.apache.org/release/1.2.0/](https://ozone.apache.org/release/1.2.0/). Replace the version in the URL with the version being released.
-- Download link: [https://ozone.apache.org/downloads/](https://ozone.apache.org/downloads/)
-- Link to versioned documentation: [https://ozone.apache.org/docs/](https://ozone.apache.org/docs/)
+- Release notes: https://ozone.apache.org/release/1.2.0/. Replace the version in the URL with the version being released.
+- Download link: https://ozone.apache.org/downloads/
+- Link to versioned documentation: https://ozone.apache.org/docs/
 
 ## Patch Release
 
@@ -452,7 +482,7 @@ If there is a security vulnerability or critical bug uncovered in a major or min
       - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
-3. Remove the previous release that this patch release supercedes from the Apache distribution site:
+3. Remove the previous release that this patch release supersedes from the Apache distribution site:
 
     ```bash
     svn rm -m 'Ozone: delete old version 1.2.0' https://dist.apache.org/repos/dist/release/ozone/1.2.0

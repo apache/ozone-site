@@ -10,5 +10,4 @@ sidebar_label: Authorization
 
 ## Native ACLs
 
-## Ozone Administrator Priviledges
-
+## Ozone Administrator Privileges

@@ -9,5 +9,3 @@ sidebar_label: Datanodes
 ## Decommissioning
 
 ## Maintenance
-
-
