@@ -82,15 +82,8 @@ const config = {
         href: 'apple-touch-icon.png',
       },
     },
-    {
-      // Used for Progressive Web Apps (PWAs).
-      tagName: 'link',
-      attributes: {
-        rel: 'manifest',
-        href: 'pwa/site.webmanifest',
-      },
-    },
   ],
+
   markdown: {
     /*
     Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
@@ -160,6 +153,21 @@ const config = {
         },
       }),
     ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: 'pwa/site.webmanifest',
+          },
+        ],
+      },
+    ]
   ],
 
   themeConfig:
