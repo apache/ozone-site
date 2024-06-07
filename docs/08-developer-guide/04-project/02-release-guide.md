@@ -181,6 +181,11 @@ find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$
 </TabItem>
 </Tabs>
 
+```xml title="Update release year tag in root POM. e.g."
+    <!-- Set the Release year during release -->
+    <release-year>2024</release-year>
+```
+
 ```bash title="Commit the Version Changes "
 git commit -am "Update Ozone version to $VERSION"
 ```
