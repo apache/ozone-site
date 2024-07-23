@@ -24,12 +24,12 @@ import isInternalUrl from '@docusaurus/isInternalUrl';
 import IconExternalLink from '@theme/Icon/ExternalLink';
 
 const iconMapping = {
-  'GitHub Discussions': '/img/icon-github.svg',
-  'Jira Issues': '/img/icon-jira.svg',
-  'Slack': '/img/icon-slack.svg',
-  'Mailing List': '/img/icon-mail.svg',
-  'YouTube': '/img/icon-youtube.svg',
-  'Twitter': '/img/icon-twitter-x.svg'
+  'GitHub Discussions': '/img/social/github.svg',
+  'Jira Issues': '/img/social/jira.svg',
+  'Slack': '/img/social/slack.svg',
+  'Mailing List': '/img/social/mail.svg',
+  'YouTube': '/img/social/youtube.svg',
+  'Twitter': '/img/social/twitter-x.svg'
 };
 export default function FooterLinkItem({item}) {
   const {to, href, label, prependBaseUrlToHref, ...props} = item;
@@ -48,8 +48,8 @@ export default function FooterLinkItem({item}) {
                 to: toUrl,
               })}
           {...props}>
+        {iconPath && <img src={iconPath} alt={`${label} Icon`} style={{width: '1em', height: '1em', marginRight: '0.5em', verticalAlign: 'middle'}} />}
         {label}
-        {iconPath && <img src={iconPath} alt={`${label} Icon`} style={{fill: 'white', width: '16px', height: '16px', marginLeft: '5px', verticalAlign: 'middle' }} />}
         {href && !isInternalUrl(href) && <IconExternalLink />}
       </Link>
   );
