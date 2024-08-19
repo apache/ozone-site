@@ -359,6 +359,10 @@ const config = {
       }
     }),
     scripts: ['/script/matomo.js'],
+    customFields: {
+      apache: 'Apache',
+      project: 'Ozone'
+    }
 };
 
 module.exports = config;
