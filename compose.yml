@@ -20,7 +20,7 @@ services:
     build: .
     image: ozone-site
     ports:
-    - 3000:3000
+    - 3001:3001
     volumes:
     - .:/ozone-site
     # The below option is used to prevent overwriting the node_modules directory in the docker image

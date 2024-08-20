@@ -14,7 +14,7 @@ This document summarizes the contribution process.
 2. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
     - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
 
-3. Preview your changes locally by running `docker compose up` and opening `localhost:3000` in your browser.
+3. Preview your changes locally by running `docker compose up` and opening `localhost:3001` in your browser.
     - Make sure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your system.
     - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
 
@@ -280,7 +280,7 @@ Currently all `@docusaurus/*` packages are pinned to an exact version for websit
 
 ### Previewing Your Modifications Locally
 
-Docusaurus supports previewing the website locally. Below are various options to launch a preview of the site at `localhost:3000` on your machine.
+Docusaurus supports previewing the website locally. Below are various options to launch a preview of the site at `localhost:3001` on your machine.
 
 **NOTE**: If using the [Docusaurus development server](https://docusaurus.io/docs/installation#running-the-development-server), changes to `docusaurus.config.js` may not be automatically reloaded and require the server to be restarted.
 
@@ -297,7 +297,7 @@ The project includes a `Dockerfile` and a `compose.yml` file to build and run th
     - **Note**: This will continue to use the last locally built version of the `ozone-site-dev` image, which saves time on future runs.
       - Run `docker compose up --build` to rebuild the image and incorporate any package dependency updates that may have been committed since the last build.
 
-4. Preview the website at `localhost:3000` in your browser.
+4. Preview the website at `localhost:3001` in your browser.
 
     - Any changes made in the repository will be reflected in the preview.
 
@@ -315,7 +315,7 @@ Build and run the website locally with the `pnpm` package manager.
 
   1. Run `pnpm start` from the repository root to start the development server.
 
-  2. Preview the website at `localhost:3000` in your browser.
+  2. Preview the website at `localhost:3001` in your browser.
 
   3. Press `Ctrl+C` to stop the preview.
 
@@ -325,7 +325,7 @@ Build and run the website locally with the `pnpm` package manager.
 
   2. Run `pnpm serve` to preview the built website locally.
 
-  3. Preview the website at `localhost:3000` in your browser.
+  3. Preview the website at `localhost:3001` in your browser.
 
   4. Press `Ctrl+C` to stop the preview.
 
