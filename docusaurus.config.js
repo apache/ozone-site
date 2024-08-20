@@ -128,7 +128,6 @@ const config = {
           {
             label: 'Docs',
             to: 'docs',
-            position: 'left',
           },
           {
             to: 'download',
@@ -141,6 +140,10 @@ const config = {
           {
             to: 'faq',
             label: 'FAQ',
+          },
+          {
+            to: 'community/blogs',
+            label: 'Blogs',
           },
           {
             label: 'Community',
@@ -164,10 +167,6 @@ const config = {
               {
                 to: 'community/events-and-media',
                 label: 'Events and Media',
-              },
-              {
-                to: 'community/blogs',
-                label: 'Blogs',
               },
             ]
           },
