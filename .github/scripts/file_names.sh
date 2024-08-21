@@ -49,7 +49,7 @@ for file in $(find "$root"/docs/*); do
     if [ -d "$file" ]; then
         # Check docs directories.
         check_regex "$file" "$doc_dir_regex"
-    elif is_markdown "$file"; then
+    elif is_markdown "$file" && [ "$(basename "$file")" != README.mdx ]; then
         # Check docs files.
         check_regex "$file" "$doc_file_regex"
     fi

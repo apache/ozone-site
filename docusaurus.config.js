@@ -118,7 +118,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: undefined,
           // TODO update this link when the new website's branch is merged.
           editUrl:
             'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
@@ -196,7 +196,6 @@ const config = {
           {
             label: 'Docs',
             to: 'docs',
-            position: 'left',
           },
           {
             to: 'download',
@@ -209,6 +208,10 @@ const config = {
           {
             to: 'faq',
             label: 'FAQ',
+          },
+          {
+            to: 'community/blogs',
+            label: 'Blogs',
           },
           {
             label: 'Community',
@@ -232,10 +235,6 @@ const config = {
               {
                 to: 'community/events-and-media',
                 label: 'Events and Media',
-              },
-              {
-                to: 'community/blogs',
-                label: 'Blogs',
               },
             ]
           },
