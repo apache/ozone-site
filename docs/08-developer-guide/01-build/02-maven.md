@@ -2,19 +2,17 @@
 sidebar_label: Maven
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+# Building Ozone With Maven
 
 **TODO:** File a subtask under [HDDS-9861](https://issues.apache.org/jira/browse/HDDS-9861) and complete this page or section.
 
 - Cover basic Maven commands to build and run tests.
 - Document all the Ozone specific Maven flags we use to speed up or skip parts of the build, and when they are useful.
 
-
-# Building Ozone With Maven
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide explains how to build Apache Ozone from source using Maven and prepare it for deployment.
-
 
 ## Prerequisites
 
@@ -42,7 +40,7 @@ Choose one of the following methods to get the source code:
     ```
   </TabItem>
   <TabItem value="Tarball" label="Tarball">
-    ```bash 
+    ```bash
     curl -OL https://dlcdn.apache.org/ozone/1.4.0/ozone-1.4.0-src.tar.gz
     tar xzf ozone-1.4.0-src.tar.gz
     cd ozone-1.4.0-src
@@ -53,6 +51,7 @@ Choose one of the following methods to get the source code:
 ### 2. Build the Project
 
 #### Basic Build
+
 For a basic build that skips tests:
 
 ```bash
@@ -60,12 +59,14 @@ mvn clean package -DskipTests=true
 ```
 
 This command will:
+
 - Clean previous build artifacts
 - Compile the source code
 - Package the compiled code into JAR files
 - Create a distribution in `hadoop-ozone/dist/target/ozone-<version>`
 
 #### Build with Tests
+
 To run unit tests during the build:
 
 ```bash
@@ -73,6 +74,7 @@ mvn clean package
 ```
 
 #### Create Distribution Tarball
+
 To create a distribution tarball for deployment:
 
 ```bash
@@ -99,6 +101,6 @@ The build process creates several important artifacts:
 - **Distribution Tarball**: `hadoop-ozone/dist/target/ozone-<version>.tar.gz` (when using `-Pdist`)
 - **Individual Module JARs**: Found in `target/` directories within each module
 
-
 ### Next Steps
-Run the build by deploying the binary on either a [machine](../../05-administrator-guide/01-installation/03-installing-binaries.md) or on a [docker cluster](../../08-developer-guide/02-run/02-docker-compose.md)
+
+Run the build by deploying the binary on either a [machine](../../05-administrator-guide/01-installation/03-installing-binaries.md) or on a [Docker cluster](../../08-developer-guide/02-run/02-docker-compose.md)
