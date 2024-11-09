@@ -16,10 +16,12 @@
 
   <h1>Download</h1>
 
-  <p>Apache Ozone is released as source code tarballs with corresponding binary
-  tarballs for convenience. The downloads are distributed via mirror sites
-  and should be checked for tampering using GPG or SHA-512.</p>
+  <p>Apache Ozone is released as source code tarball.  Binary tarballs are also
+  provided for convenience.  Both kinds of tarballs are distributed via mirror
+  sites.  Theyt should be verified after download against checksums and
+  signatures, available directly from Apache.</p>
 
+  <h2>Supported Releases</h2>
 <p>
   <table class="table table-striped">
     <thead>
@@ -35,35 +37,19 @@
      <tr>
        <td>{{.File.BaseFileName }}</td>
        <td>{{dateFormat "2006 Jan 2 " .Date}}</td>
-       {{ if eq .Params.hadoop true }}
-         <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
-           (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.mds">checksum</a>
-           <a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
-          </td>
-          <td>
-            <a href="https://www.apache.org/dyn/closer.cgi/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
-            (<a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.mds">checksum</a>
-            <a href="https://downloads.apache.org/hadoop/ozone/ozone-{{.File.BaseFileName }}/hadoop-ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
-           </td>
-           <td>
-             <a href="release/{{.File.BaseFileName }}/">Announcement</a>
-           </td>
-       {{else}}
-         <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
-           (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.sha512">checksum</a>
-           <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
-         </td>
-         <td>
-           <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
-           (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.sha512">checksum</a>
-           <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
-         </td>
-         <td>
-           <a href="release/{{.File.BaseFileName }}/">Announcement</a>
-         </td>
-       {{end}}
+       <td>
+         <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz">source</a>
+         (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.sha512">checksum</a>
+         <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}-src.tar.gz.asc">signature</a>)
+       </td>
+       <td>
+         <a href="https://www.apache.org/dyn/closer.cgi/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz">binary</a>
+         (<a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.sha512">checksum</a>
+         <a href="https://downloads.apache.org/ozone/{{.File.BaseFileName }}/ozone-{{.File.BaseFileName }}.tar.gz.asc">signature</a>)
+       </td>
+       <td>
+         <a href="release/{{.File.BaseFileName }}/">Announcement</a>
+       </td>
      </tr>
   {{end}}
   </table>
