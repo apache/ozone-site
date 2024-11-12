@@ -35,7 +35,7 @@ gpg --import KEYS
 gpg --verify ozone-${OZONE_VERSION}-src.tar.gz.asc ozone-${OZONE_VERSION}-src.tar.gz
 ```
 
-## SHA-512 checksum
+### SHA-512 checksum
 
 ```
 sha512sum -c ozone-${OZONE_VERSION}-src.tar.gz
