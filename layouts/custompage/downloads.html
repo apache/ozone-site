@@ -33,7 +33,7 @@
       <th>Release notes</th>
     </tr>
   </thead>
-   {{range first 5 (where (where .Site.Pages "Section" "release") ".Params.linked" true) }}
+   {{range (where (where .Site.Pages "Section" "release") ".Params.linked" true) }}
      <tr>
        <td>{{.File.BaseFileName }}</td>
        <td>{{dateFormat "2006 Jan 2 " .Date}}</td>
