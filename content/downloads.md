@@ -17,6 +17,12 @@ type: custompage
   limitations under the License. See accompanying LICENSE file.
 -->
 
+### Archives
+
+Releases starting with 1.1.0, when Apache Ozone became a top-level project, are available in the [Ozone archives](https://archive.apache.org/dist/ozone/).
+
+Releases before that can be found in [Apache Hadoop archives](https://archive.apache.org/dist/hadoop/ozone/).
+
 ## Download
 
 1.  Download the release `ozone-${OZONE_VERSION}-src.tar.gz` from a [mirror
@@ -40,12 +46,6 @@ gpg --verify ozone-${OZONE_VERSION}-src.tar.gz.asc ozone-${OZONE_VERSION}-src.ta
 ```
 sha512sum -c ozone-${OZONE_VERSION}-src.tar.gz
 ```
-
-## Archives
-
-Releases starting with 1.1.0, when Apache Ozone became a top-level project, are available in the [Ozone archives](https://archive.apache.org/dist/ozone/).
-
-Releases before that can be found in [Apache Hadoop archives](https://archive.apache.org/dist/hadoop/ozone/).
 
 ## License
 
