@@ -2,7 +2,7 @@
 sidebar_label: Maven
 ---
 
-<!-- cspell:words xzf Dskip Pdist -->
+<!-- cspell:words xzf Dskip Pdist installnpm installnpx installyarn -->
 
 # Building Ozone With Maven
 
@@ -94,11 +94,16 @@ This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary
 
 Several Maven options are available to customize the build process:
 
-- `-DskipTests=true`: Skip all tests
-- `-Pdist`: Enable the distribution profile to create deployment tarballs
-- `-T 4`: Use 4 threads for parallel building (adjust number based on your CPU)
-- `-T 2C`: Use 2 threads per core for parallel building (adjust number based on your CPU)
-- `-am -pl module-name`: Build a specific module and its dependencies
+Here's the conversion to a markdown table:
+
+| Command | Description |
+|---------|-------------|
+| `-DskipTests=true` | Skip all tests |
+| `-Dskip.installnpm -Dskip.installnpx -Dskip.installyarn -Dskip.npm -Dskip.npx -Dskip.yarn` | Skip building the Javascript frontend for Recon |
+| `-Pdist` | Enable the distribution profile to create deployment tarballs |
+| `-T 4` | Use 4 threads for parallel building (adjust number based on your CPU) |
+| `-T 2C` | Use 2 threads per core for parallel building (adjust number based on your CPU) |
+| `-am -pl module-name` | Build a specific module and its dependencies |
 
 ### Build Output
 
