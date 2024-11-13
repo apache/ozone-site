@@ -15,8 +15,8 @@ This guide explains how to run Apache Ozone using Docker Compose, either with lo
 
 ## Prerequisites
 
-- Docker Engine 20.10.0 or higher
-- Docker Compose V2
+- [Docker Engine](https://www.docker.com/products/docker-desktop/) 20.10.0 or higher
+- [Docker Compose](https://docs.docker.com/compose/install/) V2
 - Built Ozone distribution (if running from local build)
 
 ## Running Ozone
@@ -36,7 +36,7 @@ If you've built Ozone from source, follow these steps:
 2. Start the cluster:
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 The local build uses the `ozone-docker-runner` image, which is automatically created during the build process to wrap your compiled Ozone binaries.
@@ -62,18 +62,20 @@ If you haven't built Ozone locally, you can quickly start a cluster using offici
 3. Start the cluster:
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 This will pull the official Apache Ozone images from Docker Hub.
 
-## Architecture Diagram
+## Container Diagram
 
-This image shows the containers that will be created when running the `docker-compose up -d` command.
+This image shows the containers that will be created by the `docker compose up -d` command.
+
+<!-- cspell:word DN -->
 
 ```mermaid
 graph TB
-    subgraph "Apache Ozone Architecture"
+    subgraph "Apache Ozone Containers"
         scm["SCM<br/>Storage Container Manager<br/>(Port: 9876, 9860)"]
         om["OM<br/>Ozone Manager<br/>(Port: 9874, 9862)"]
         s3g["S3G<br/>S3 Gateway<br/>(Port: 9878)"]
@@ -119,34 +121,23 @@ The default Docker Compose configuration includes:
 - Datanodes
 - HttpFS
 
-### Port Mappings
-
-The default setup exposes the following ports:
-
-- SCM: 9876 (RPC), 9860 (Client)
-- OM: 9874 (RPC), 9862 (Client)
-- S3 Gateway: 9878
-- Recon: 9888
-- HttpFS: 14000
-- Datanodes: 19864 (Container), 9882 (Client)
-
 ## Cluster Management
 
 Common Docker Compose commands:
 
 ```bash
 # Start the cluster
-docker-compose up -d
+docker compose up -d
 
 # Stop the cluster
-docker-compose down
+docker compose down
 
 # View service logs
-docker-compose logs -f [service_name]
+docker compose logs -f [service_name]
 
 # Scale data nodes
-docker-compose up -d --scale datanode=3
+docker compose up -d --scale datanode=3
 
 # Check service status
-docker-compose ps
+docker compose ps
 ```
