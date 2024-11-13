@@ -26,7 +26,6 @@ Before you begin, ensure you have the following installed on your build machine:
 - Apache Maven 3.6.3 or higher
 - Git (if building from source repository)
 
-
 ## Obtain the Source Code
 
 You can build Apache Ozone either by cloning the source code from Git or by downloading the official source tarball.
@@ -42,9 +41,7 @@ Choose one of the following methods to get the source code:
   </TabItem>
   <TabItem value="Tarball" label="Tarball">
     Obtain the Ozone sources from the [download](/download) page.
-    
     Next, unpack the tarball
-    
     ```bash
     tar xzf ozone-<version>-src.tar.gz
     cd ozone-<version>-src
@@ -53,9 +50,11 @@ Choose one of the following methods to get the source code:
 </Tabs>
 
 ## Build the Project
+
 Apache Ozone uses Maven as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
 
 ### Build Options
+
 The build system offers several options to customize the build process according to your requirements:
 
 #### Basic Build
@@ -104,6 +103,7 @@ Several Maven options are available to customize the build process:
 ### Build Output
 
 You can test the result of the compilation process by running a simple Ozone command which will display the Ozone version
+
 ```bash
 ./hadoop-ozone/dist/target/ozone-<version>-SNAPSHOT/bin/ozone version
 ```
