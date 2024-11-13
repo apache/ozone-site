@@ -17,26 +17,35 @@ type: custompage
   limitations under the License. See accompanying LICENSE file.
 -->
 
-## To verify Apache Ozone releases using GPG:
+### Archives
 
-1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
+Releases starting with 1.1.0, when Apache Ozone became a top-level project, are available in the [Ozone archives](https://archive.apache.org/dist/ozone/).
+
+Releases before that can be found in [Apache Hadoop archives](https://archive.apache.org/dist/hadoop/ozone/).
+
+## Download
+
+1.  Download the release `ozone-${OZONE_VERSION}-src.tar.gz` from a [mirror
     site](https://www.apache.org/dyn/closer.cgi/ozone).
-2.  Download the signature file ozone-X.Y.Z-src.tar.gz.asc from
+2.  Download signature or checksum from
     [Apache](https://downloads.apache.org/ozone/).
-3.  Download the Ozone [KEYS](https://downloads.apache.org/ozone/KEYS)
-    file.
-4.  `gpg --import KEYS`
-5.  `gpg --verify ozone-X.Y.Z-src.tar.gz.asc ozone-X.Y.Z-src.tar.gz`
 
-## To perform a quick check using SHA-512:
+## Verify
 
-1.  Download the release ozone-X.Y.Z-src.tar.gz from a [mirror
-    site](https://www.apache.org/dyn/closer.cgi/hadoop/ozone).
-2.  Download the checksum ozone-X.Y.Z-src.tar.gz.sha512 from
-    [Apache](https://downloads.apache.org/ozone/).
-3.  `sha512sum -c ozone-X.Y.Z-src.tar.gz`
+### GnuPG signature
 
-Note: Before 1.1.0 release Ozone was part of the Apache Hadoop project. Older release artifacts can be found [there](https://archive.apache.org/dist/hadoop/ozone/).
+Download Ozone developers' public [KEYS](https://downloads.apache.org/ozone/KEYS).
+
+```
+gpg --import KEYS
+gpg --verify ozone-${OZONE_VERSION}-src.tar.gz.asc ozone-${OZONE_VERSION}-src.tar.gz
+```
+
+### SHA-512 checksum
+
+```
+sha512sum -c ozone-${OZONE_VERSION}-src.tar.gz
+```
 
 ## License
 
