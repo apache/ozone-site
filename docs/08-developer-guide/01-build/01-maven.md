@@ -2,6 +2,8 @@
 sidebar_label: Maven
 ---
 
+<!-- cspell:words xzf Dskip Pdist -->
+
 # Building Ozone With Maven
 
 **TODO:** File a subtask under [HDDS-9861](https://issues.apache.org/jira/browse/HDDS-9861) and complete this page or section.
@@ -24,11 +26,10 @@ Before you begin, ensure you have the following installed on your build machine:
 - Apache Maven 3.6.3 or higher
 - Git (if building from source repository)
 
-## Building Ozone
+
+## Obtain the Source Code
 
 You can build Apache Ozone either by cloning the source code from Git or by downloading the official source tarball.
-
-### 1. Obtain the Source Code
 
 Choose one of the following methods to get the source code:
 
@@ -40,22 +41,29 @@ Choose one of the following methods to get the source code:
     ```
   </TabItem>
   <TabItem value="Tarball" label="Tarball">
+    Obtain the Ozone sources from the [download](/download) page.
+    
+    Next, unpack the tarball
+    
     ```bash
-    curl -OL https://dlcdn.apache.org/ozone/1.4.0/ozone-1.4.0-src.tar.gz
-    tar xzf ozone-1.4.0-src.tar.gz
-    cd ozone-1.4.0-src
+    tar xzf ozone-<version>-src.tar.gz
+    cd ozone-<version>-src
     ```
   </TabItem>
 </Tabs>
 
-### 2. Build the Project
+## Build the Project
+Apache Ozone uses Maven as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
+
+### Build Options
+The build system offers several options to customize the build process according to your requirements:
 
 #### Basic Build
 
 For a basic build that skips tests:
 
 ```bash
-mvn clean package -DskipTests=true
+mvn clean install -DskipTests=true
 ```
 
 This command will:
@@ -70,7 +78,7 @@ This command will:
 To run unit tests during the build:
 
 ```bash
-mvn clean package
+mvn clean install
 ```
 
 #### Create Distribution Tarball
@@ -78,29 +86,34 @@ mvn clean package
 To create a distribution tarball for deployment:
 
 ```bash
-mvn clean package -DskipTests=true -Pdist
+mvn clean install -DskipTests=true -Pdist
 ```
 
 This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment.
 
-### Maven Build Options
+#### Maven Build Options
 
 Several Maven options are available to customize the build process:
 
 - `-DskipTests=true`: Skip all tests
 - `-Pdist`: Enable the distribution profile to create deployment tarballs
-- `-Pnative`: Build native libraries (requires additional system dependencies)
 - `-T 4`: Use 4 threads for parallel building (adjust number based on your CPU)
+- `-T 2C`: Use 2 threads per core for parallel building (adjust number based on your CPU)
 - `-am -pl module-name`: Build a specific module and its dependencies
 
 ### Build Output
 
+You can test the result of the compilation process by running a simple Ozone command which will display the Ozone version
+```bash
+./hadoop-ozone/dist/target/ozone-<version>-SNAPSHOT/bin/ozone version
+```
+
 The build process creates several important artifacts:
 
-- **Distribution Directory**: `hadoop-ozone/dist/target/ozone-<version>/`
 - **Distribution Tarball**: `hadoop-ozone/dist/target/ozone-<version>.tar.gz` (when using `-Pdist`)
-- **Individual Module JARs**: Found in `target/` directories within each module
+- **Distribution Directory**: `hadoop-ozone/dist/target/ozone-<version>/`
+- **Individual Module JARs**: `hadoop-ozone/dist/target/ozone-<version>-SNAPSHOT/share/ozone/lib`
 
-### Next Steps
+## Next Steps
 
 Run the build by deploying the binary on either a [machine](../../05-administrator-guide/01-installation/03-installing-binaries.md) or on a [Docker cluster](../../08-developer-guide/02-run/02-docker-compose.md)
