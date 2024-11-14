@@ -34,12 +34,14 @@ Choose one of the following methods to get the source code:
 
 <Tabs>
   <TabItem value="Git" label="Git" default>
+    Use this option to build any release, tag or commit of Ozone.
     ```bash
     git clone https://github.com/apache/ozone.git
     cd ozone
     ```
   </TabItem>
   <TabItem value="Tarball" label="Tarball">
+    Use this option if you only want the released version of Ozone.
     Obtain the Ozone sources from the [download](/download) page.
     Next, unpack the tarball
     ```bash
