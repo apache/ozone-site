@@ -2,14 +2,12 @@
 sidebar_label: Docker Compose
 ---
 
+<!-- cspell:words xzf -->
+
 # Running Ozone From Docker Compose
 
-**TODO:** File a subtask under [HDDS-9861](https://issues.apache.org/jira/browse/HDDS-9861) and complete this page or section.
-
-- Reference common clusters from acceptance tests that can be used.
-- Define the Ozone runner image at `ozone-docker-runner` and its purpose to wrap Ozone binaries.
-- How to define which image gets used in the cluster (runner or other pre-built image).
-- Changing configurations in Docker Compose (`docker-config` file, transformation.py, etc).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide explains how to run Apache Ozone using Docker Compose, either with locally built sources or pre-built images.
 
@@ -21,51 +19,58 @@ This guide explains how to run Apache Ozone using Docker Compose, either with lo
 
 ## Running Ozone
 
-You can run Ozone either using your locally built version or using official pre-built Docker images.
+1. Obtain the Docker Compose configurations
 
-### Option 1: Running from Local Build
-
-If you've built Ozone from source, follow these steps:
-
-1. Navigate to the compose directory in your build output:
-
+<Tabs groupId="source-based-instructions">
+  <TabItem value="Tarball" label="Tarball" default>
+    With this option, the Docker Compose cluster will automatically fetch the required images from Docker Hub.
+    <br/>Obtain the Ozone sources from the [download](/download) page.
+    <br/>Next, unpack the tarball
     ```bash
-    cd hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/ozone
+    tar xzf ozone-<version>-src.tar.gz
     ```
-
-2. Start the cluster:
-
+  </TabItem>
+  <TabItem value="Building from Source" label="Building from Source" default>
+  With this option, the `ozone-docker-runner` image will use the compiled Ozone binaries to run the Docker Compose cluster.
+  <br/> Follow the steps listed in the [Build with Maven](/docs/08-developer-guide/01-build/02-maven.md) page to obtain the sources and compile them.
+  </TabItem>
+</Tabs>
+2. Navigate to the compose directory in your build output:
+<Tabs groupId="source-based-instructions">
+  <TabItem value="Tarball" label="Tarball" default>
     ```bash
-    docker compose up -d
+    cd ozone-<version>-src/compose/ozone
     ```
-
-The local build uses the `ozone-docker-runner` image, which is automatically created during the build process to wrap your compiled Ozone binaries.
-
-### Option 2: Running from Pre-built Images
-
-If you haven't built Ozone locally, you can quickly start a cluster using official pre-built images from Docker Hub:
-
-1. Create a directory for your Ozone deployment:
-
+  </TabItem>
+  <TabItem value="Building from Source" label="Building from Source" default>
     ```bash
-    mkdir ozone && cd ozone
+    cd ./hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/ozone
     ```
+  </TabItem>
+</Tabs>
+3. Modify the configurations for Ozone (Optional)
+The configurations are stored in the `docker-config` file.
+<Tabs groupId="source-based-instructions">
+   <TabItem value="Tarball" label="Tarball" default>
 
-2. Download the example compose file:
+   ```bash
+   ozone-<version>-src/compose/ozone/docker-config
+   ```
 
-    ```bash
-    curl \
-   https://raw.githubusercontent.com/apache/ozone/master/hadoop-ozone/dist/src/main/compose/ozone/docker-compose.yaml \
-   -o docker-compose.yaml
-    ```
+   </TabItem>
+   <TabItem value="Building from Source" label="Building from Source" default>
 
-3. Start the cluster:
+   ```bash
+   ./hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/ozone/docker-config
+   ```
 
-    ```bash
-    docker compose up -d
-    ```
+</TabItem>
+</Tabs>
+4. Start the cluster:
 
-This will pull the official Apache Ozone images from Docker Hub.
+ ```bash
+ docker compose up -d
+ ```
 
 ## Container Diagram
 
@@ -141,3 +146,19 @@ docker compose up -d --scale datanode=3
 # Check service status
 docker compose ps
 ```
+
+# Next Steps
+
+This page explains the Docker Compose configuration for a basic Ozone cluster.
+You can next explore some of the other Docker Compose configurations that are available under the compose directory.
+
+```bash
+cd hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/
+```
+
+| Docker Compose configuration | Description |
+|--------------|-------------|
+| ozone-ha     | Explore Ozone high availability with this configuration |
+| ozone-secure | Explore various SSL certificate and Kerberos configurations |
+| topology     | Explore the rack-aware configuration |
+| upgrade      | Explore the non-rolling upgrade configuration |
