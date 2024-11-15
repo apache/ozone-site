@@ -38,3 +38,8 @@ yarn-error.log*
 
 # IDE - JetBrains IntelliJ
 .idea/
+
+# Website v1 generated files
+public
+hugo
+.hugo_build.lock
