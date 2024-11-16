@@ -85,6 +85,7 @@ const config = {
   ],
 
   markdown: {
+    mermaid: true,
     /*
     Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
     This ensures all pages are using a minimal set of consistent keys.
@@ -170,6 +171,7 @@ const config = {
     ]
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
