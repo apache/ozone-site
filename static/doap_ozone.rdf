@@ -39,8 +39,8 @@ Applications using frameworks like Apache Spark, YARN and Hive work natively wit
     <release>
       <Version>
         <name>Stable Release</name>
-        <created>2024-01-19 </created>
-        <revision>1.4.0</revision>
+        <created>2024-11-24 </created>
+        <revision>1.4.1</revision>
       </Version>
     </release>
     <repository>
