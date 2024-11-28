@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year} The Apache Software Foundation</copyright>
-    <lastBuildDate>Fri, 19 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/release/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/release/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release 1.4.1 available</title>
+      <link>https://ozone.apache.org/release/1.4.1/</link>
+      <pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/release/1.4.1/</guid>
+      <description>Apache Ozone 1.4.1 is a minor bug fix release that addresses several issues to enhance stability and reliability compared to version 1.4.0. For a detailed list of commits and resolved JIRA issues in this release, please refer to Changes between ozone-1.4.0 and ozone-1.4.1 on GitHub.</description>
+    </item>
+    
     <item>
       <title>Release 1.4.0 available</title>
       <link>https://ozone.apache.org/release/1.4.0/</link>
