@@ -27,6 +27,7 @@ jobs:
         with:
           repository: apache/ozone
           path: ozone
+          fetch-depth: 0
       - name: Build Ozone docs
         working-directory: ozone
         run: |
