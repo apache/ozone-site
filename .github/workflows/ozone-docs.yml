@@ -30,7 +30,7 @@ jobs:
       - name: Build Ozone docs
         working-directory: ozone
         run: |
-          mvn --no-transfer-progress -pl :hdds-docs clean package
+          hadoop-ozone/dev-support/checks/docs.sh
           mv hadoop-hdds/docs/target/classes/docs ../edge
       - name: Checkout Ozone Site generated version
         uses: actions/checkout@v4
