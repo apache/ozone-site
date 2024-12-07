@@ -451,6 +451,11 @@ s=d.getElementsByTagName('script')[0];
     
     
     
+    
+    
+    <a href="../zh/tools/admin.html"><span class="label label-success">中文</span></a>
+    
+    
 </div>
 
 
@@ -484,7 +489,124 @@ s=d.getElementsByTagName('script')[0];
 <li><code>ozone admin replicationmanager</code>: Can be used to check the status of the replications (and start / stop replication in case of emergency).</li>
 <li><code>ozone admin om</code>: Ozone Manager HA related tool to get information about the current cluster.</li>
 </ul>
-<p>For more detailed usage see the output of the <code>--help</code>.</p>
+<p>For more detailed usage see the output of <code>--help</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone admin --help
+Usage: ozone admin <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;<span style="color:#f92672">]</span>
+                   <span style="color:#f92672">[</span>-D<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
+Developer tools <span style="color:#66d9ef">for</span> Ozone Admin operations
+      -conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;
+
+  -D, --set<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;
+
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+      --verbose   More verbose output. Show the stack trace of the errors.
+Commands:
+  containerbalancer   ContainerBalancer specific operations
+  replicationmanager  ReplicationManager specific operations
+  safemode            Safe mode specific operations
+  printTopology       Print a tree of the network topology as reported by SCM
+  cert                Certificate related operations
+  container           Container specific operations
+  datanode            Datanode specific operations
+  pipeline            Pipeline specific operations
+  namespace           Namespace Summary specific admin operations
+  om                  Ozone Manager specific admin operations
+  reconfig            Dynamically reconfigure server without restarting it
+  scm                 Ozone Storage Container Manager specific admin operations
+</code></pre></div><p>Some of those subcommand usages has been detailed in their dedicated feature documentation pages. For instance, <a href="../feature/decommission.html">Decommissioning</a>, <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>.</p>
+<h2 id="list-open-files">List open files</h2>
+<p>List open files admin command lists open keys in Ozone Manager&rsquo;s <code>OpenKeyTable</code>.
+Works for all bucket types.
+Argument <code>--prefix</code> could be root (<code>/</code>), path to a bucket (<code>/vol1/buck</code>) or a key prefix (for FSO buckets the key prefix could contain parent object ID). But it can&rsquo;t be a volume.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone admin om lof --help
+Usage: ozone admin om list-open-files <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--json<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-l<span style="color:#f92672">=</span>&lt;limit&gt;<span style="color:#f92672">]</span>
+                                      <span style="color:#f92672">[</span>-p<span style="color:#f92672">=</span>&lt;pathPrefix&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;startItem&gt;<span style="color:#f92672">]</span>
+                                      <span style="color:#f92672">[</span>--service-host<span style="color:#f92672">=</span>&lt;omHost&gt;<span style="color:#f92672">]</span>
+                                      <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
+Lists open files <span style="color:#f92672">(</span>keys<span style="color:#f92672">)</span> in Ozone Manager.
+  -h, --help                Show this help message and exit.
+      --json                Format output as JSON
+  -l, --length<span style="color:#f92672">=</span>&lt;limit&gt;      Maximum number of items to list
+  -p, --prefix<span style="color:#f92672">=</span>&lt;pathPrefix&gt; Filter results by the specified path on the server
+                              side.
+  -s, --start<span style="color:#f92672">=</span>&lt;startItem&gt;   The item to start the listing from.
+                            i.e. continuation token. This will be excluded from
+                              the result.
+      --service-host<span style="color:#f92672">=</span>&lt;omHost&gt;
+                            Ozone Manager Host. If OM HA is enabled, use
+                              --service-id instead. If you must use
+                              --service-host with OM HA, this must point
+                              directly to the leader OM. This option is
+                              required when --service-id is not provided or
+                              when HA is not enabled.
+      --service-id, --om-service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
+                            Ozone Manager Service ID
+  -V, --version             Print version information and exit.
+</code></pre></div><h3 id="example-usages">Example usages</h3>
+<ul>
+<li>In human-readable format, list open files (keys) under bucket <code>/volumelof/buck1</code> with a batch size of 3:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone admin om lof --service-id<span style="color:#f92672">=</span>om-service-test1 --length<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --prefix<span style="color:#f92672">=</span>/volumelof/buck1
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">5</span> total open files <span style="color:#f92672">(</span>est.<span style="color:#f92672">)</span>. Showing <span style="color:#ae81ff">3</span> open files <span style="color:#f92672">(</span>limit 3<span style="color:#f92672">)</span> under path prefix:
+  /volume-lof/buck1
+
+Client ID		Creation time	Hsync<span style="color:#960050;background-color:#1e0010">&#39;</span>ed	Open File Path
+111726338148007937	1704808626523	No		/volume-lof/buck1/-9223372036854774527/key0
+111726338151415810	1704808626578	No		/volume-lof/buck1/-9223372036854774527/key1
+111726338152071171	1704808626588	No		/volume-lof/buck1/-9223372036854774527/key2
+
+To get the next batch of open keys, run:
+  ozone admin om lof -id<span style="color:#f92672">=</span>om-service-test1 --length<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --prefix<span style="color:#f92672">=</span>/volume-lof/buck1 --start<span style="color:#f92672">=</span>/-9223372036854775552/-9223372036854775040/-9223372036854774527/key2/111726338152071171
+</code></pre></div><ul>
+<li>In JSON, list open files (keys) under bucket <code>/volumelof/buck1</code> with a batch size of 3:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone admin om lof --service-id<span style="color:#f92672">=</span>om-service-test1 --length<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --prefix<span style="color:#f92672">=</span>/volumelof/buck1 --json
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;openKeys&#34;</span> : [ {
+    <span style="color:#f92672">&#34;keyInfo&#34;</span> : {
+      <span style="color:#f92672">&#34;metadata&#34;</span> : { },
+      <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-9223372036854774015</span>,
+      <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">7</span>,
+      <span style="color:#f92672">&#34;parentObjectID&#34;</span> : <span style="color:#ae81ff">-9223372036854774527</span>,
+      <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;volume-lof&#34;</span>,
+      <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;buck1&#34;</span>,
+      <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;key0&#34;</span>,
+      <span style="color:#f92672">&#34;dataSize&#34;</span> : <span style="color:#ae81ff">4194304</span>,
+      <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : [ <span style="color:#960050;background-color:#1e0010">...</span> ],
+      <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1704808722487</span>,
+      <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1704808722487</span>,
+      <span style="color:#f92672">&#34;replicationConfig&#34;</span> : {
+        <span style="color:#f92672">&#34;replicationFactor&#34;</span> : <span style="color:#e6db74">&#34;THREE&#34;</span>,
+        <span style="color:#f92672">&#34;requiredNodes&#34;</span> : <span style="color:#ae81ff">3</span>,
+        <span style="color:#f92672">&#34;replicationType&#34;</span> : <span style="color:#e6db74">&#34;RATIS&#34;</span>
+      },
+      <span style="color:#f92672">&#34;fileName&#34;</span> : <span style="color:#e6db74">&#34;key0&#34;</span>,
+      <span style="color:#f92672">&#34;acls&#34;</span> : [ <span style="color:#960050;background-color:#1e0010">...</span> ],
+      <span style="color:#f92672">&#34;path&#34;</span> : <span style="color:#e6db74">&#34;-9223372036854774527/key0&#34;</span>,
+      <span style="color:#f92672">&#34;file&#34;</span> : <span style="color:#66d9ef">true</span>,
+      <span style="color:#f92672">&#34;replicatedSize&#34;</span> : <span style="color:#ae81ff">12582912</span>,
+      <span style="color:#f92672">&#34;objectInfo&#34;</span> : <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;volume-lof&#39;, bucket=&#39;buck1&#39;, key=&#39;key0&#39;, dataSize=&#39;4194304&#39;, creationTime=&#39;1704808722487&#39;, objectID=&#39;-9223372036854774015&#39;, parentID=&#39;-9223372036854774527&#39;, replication=&#39;RATIS/THREE&#39;, fileChecksum=&#39;null}&#34;</span>,
+      <span style="color:#f92672">&#34;hsync&#34;</span> : <span style="color:#66d9ef">false</span>,
+      <span style="color:#f92672">&#34;latestVersionLocations&#34;</span> : { <span style="color:#960050;background-color:#1e0010">...</span> },
+      <span style="color:#f92672">&#34;updateIDset&#34;</span> : <span style="color:#66d9ef">true</span>
+    },
+    <span style="color:#f92672">&#34;openVersion&#34;</span> : <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;clientId&#34;</span> : <span style="color:#ae81ff">111726344437039105</span>
+  }, {
+    <span style="color:#f92672">&#34;keyInfo&#34;</span> : { <span style="color:#960050;background-color:#1e0010">...</span> },
+    <span style="color:#f92672">&#34;openVersion&#34;</span> : <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;clientId&#34;</span> : <span style="color:#ae81ff">111726344440578050</span>
+  }, {
+    <span style="color:#f92672">&#34;keyInfo&#34;</span> : { <span style="color:#960050;background-color:#1e0010">...</span> },
+    <span style="color:#f92672">&#34;openVersion&#34;</span> : <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;clientId&#34;</span> : <span style="color:#ae81ff">111726344441233411</span>
+  } ],
+  <span style="color:#f92672">&#34;totalOpenKeyCount&#34;</span> : <span style="color:#ae81ff">5</span>,
+  <span style="color:#f92672">&#34;hasMore&#34;</span> : <span style="color:#66d9ef">true</span>,
+  <span style="color:#f92672">&#34;contToken&#34;</span> : <span style="color:#e6db74">&#34;/-9223372036854775552/-9223372036854775040/-9223372036854774527/key2/111726344441233411&#34;</span>
+}
+</code></pre></div><p>Note in JSON output mode, field <code>contToken</code> won&rsquo;t show up at all in the result if there are no more entries after the batch (i.e. when <code>hasMore</code> is <code>false</code>).</p>
 
 
           
@@ -504,7 +626,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: January 18, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/082d759448e3995b9330f8e914bb5bab171acaf2">082d759448</a>
     </span>
   </div>
 </footer>

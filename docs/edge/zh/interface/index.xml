@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>编程接口 on Ozone</title>
+    <title>客户端接口 on Ozone</title>
     <link>/zh/interface.html</link>
-    <description>Recent content in 编程接口 on Ozone</description>
+    <description>Recent content in 客户端接口 on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/zh/interface/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,6 +13,15 @@
       
       <guid>/zh/interface/javaapi.html</guid>
       <description>Ozone 有一套基于原生 RPC 的 API，其它协议都由这个最底层的 API 扩展而来，它也是所有 Ozone 支持的协议中性能最好、功能最全的。</description>
+    </item>
+    
+    <item>
+      <title>Ofs (兼容 Hadoop 的文件系统)</title>
+      <link>/zh/interface/ofs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/interface/ofs.html</guid>
+      <description>Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. &lt;strong&gt;Global level view.&lt;/strong&gt;</description>
     </item>
     
     <item>
@@ -49,6 +58,25 @@
       
       <guid>/zh/interface/reconapi.html</guid>
       <description>Recon 服务器支持 HTTP 端点，以帮助故障排除和监听 Ozone 集群。</description>
+    </item>
+    
+    <item>
+      <title>命令行接口</title>
+      <link>/zh/interface/cli.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/interface/cli.html</guid>
+      <description>Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 Java API.
+有些功能只能通过使用 ozone sh 命令才能访问。例如：
+ 创建带有配额的卷 管理内部 ACL 创建带有加密的键的桶  所有这些命令都是一次性的管理任务。应用程序也可以使用其他接口，如 Hadoop 兼容文件系统（o3fs 或 ofs）或 S3 接口来实现相同功能而无需使用 Ozone 命令行接口。
+Ozone shell 的帮助菜单可以在 对象 级别 或者 动作 级别被调出.
+示例命令:
+ozone sh volume --help 这条命令展示了卷的所有可用的 动作 命令
+或者也可以用来解释具体的某个 动作 ，例如：
+ozone sh volume create --help 这条命令输出卷的create动作的所有命令行选项
+通用命令格式 Ozone shell 命令采取以下形式:
+ ozone sh object action url
+ ozone 脚本用于调用所有 Ozone 子命令。通过 sh 命令调用 ozone shell 命令。</description>
     </item>
     
   </channel>

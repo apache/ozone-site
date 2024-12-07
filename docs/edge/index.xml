@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Securing Ozone</title>
+      <link>/security/secureozone.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/security/secureozone.html</guid>
+      <description>Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</description>
+    </item>
+    
+    <item>
       <title>Overview</title>
       <link>/concept/overview.html</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
@@ -70,21 +79,21 @@
     </item>
     
     <item>
-      <title>Securing Ozone</title>
-      <link>/security/secureozone.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/security/secureozone.html</guid>
-      <description>Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</description>
-    </item>
-    
-    <item>
       <title>Streaming Write Pipeline</title>
       <link>/feature/streaming-write-pipeline.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/feature/streaming-write-pipeline.html</guid>
       <description>A new write pipeline using Ratis Streaming.</description>
+    </item>
+    
+    <item>
+      <title>Transparent Data Encryption</title>
+      <link>/security/securingtde.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingtde.html</guid>
+      <description>TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access.</description>
     </item>
     
     <item>
@@ -133,12 +142,21 @@
     </item>
     
     <item>
-      <title>Transparent Data Encryption</title>
-      <link>/security/securingtde.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>GDPR in Ozone</title>
+      <link>/security/gdpr.html</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/security/securingtde.html</guid>
-      <description>TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access.</description>
+      <guid>/security/gdpr.html</guid>
+      <description>Support to implement the &amp;ldquo;Right to be Forgotten&amp;rdquo; requirement of GDPR</description>
+    </item>
+    
+    <item>
+      <title>Securing Datanodes</title>
+      <link>/security/securingdatanodes.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingdatanodes.html</guid>
+      <description>Explains different modes of securing data nodes. These range from kerberos to auto approval.</description>
     </item>
     
     <item>
@@ -151,15 +169,6 @@
     </item>
     
     <item>
-      <title>GDPR in Ozone</title>
-      <link>/security/gdpr.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/security/gdpr.html</guid>
-      <description>Support to implement the &amp;ldquo;Right to be Forgotten&amp;rdquo; requirement of GDPR</description>
-    </item>
-    
-    <item>
       <title>S3 Protocol</title>
       <link>/interface/s3.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -169,12 +178,21 @@
     </item>
     
     <item>
-      <title>Securing Datanodes</title>
-      <link>/security/securingdatanodes.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Quota in Ozone</title>
+      <link>/feature/quota.html</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/security/securingdatanodes.html</guid>
-      <description>Explains different modes of securing data nodes. These range from kerberos to auto approval.</description>
+      <guid>/feature/quota.html</guid>
+      <description>Introduction to Ozone Quota</description>
+    </item>
+    
+    <item>
+      <title>Securing HTTP</title>
+      <link>/security/securingozonehttp.html</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/security/securingozonehttp.html</guid>
+      <description>Secure HTTP web-consoles for Ozone services</description>
     </item>
     
     <item>
@@ -189,15 +207,6 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
     </item>
     
     <item>
-      <title>Quota in Ozone</title>
-      <link>/feature/quota.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/feature/quota.html</guid>
-      <description>Introduction to Ozone Quota</description>
-    </item>
-    
-    <item>
       <title>Recon API</title>
       <link>/interface/reconapi.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -207,12 +216,12 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
     </item>
     
     <item>
-      <title>Securing HTTP</title>
-      <link>/security/securingozonehttp.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Securing S3</title>
+      <link>/security/securings3.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/security/securingozonehttp.html</guid>
-      <description>Secure HTTP web-consoles for Ozone services</description>
+      <guid>/security/securings3.html</guid>
+      <description>Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
     </item>
     
     <item>
@@ -234,12 +243,12 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
     </item>
     
     <item>
-      <title>Securing S3</title>
-      <link>/security/securings3.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Ozone ACLs</title>
+      <link>/security/securityacls.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/security/securings3.html</guid>
-      <description>Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
+      <guid>/security/securityacls.html</guid>
+      <description>Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</description>
     </item>
     
     <item>
@@ -252,12 +261,12 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
     </item>
     
     <item>
-      <title>Ozone ACLs</title>
-      <link>/security/securityacls.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Apache Ranger</title>
+      <link>/security/securitywithranger.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/security/securityacls.html</guid>
-      <description>Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</description>
+      <guid>/security/securitywithranger.html</guid>
+      <description>Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</description>
     </item>
     
     <item>
@@ -267,15 +276,6 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
       
       <guid>/concept/datanodes.html</guid>
       <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
-    </item>
-    
-    <item>
-      <title>Apache Ranger</title>
-      <link>/security/securitywithranger.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/security/securitywithranger.html</guid>
-      <description>Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</description>
     </item>
     
     <item>
@@ -430,6 +430,24 @@ kubernetes/examples folder of the ozone distribution contains kubernetes deploym
       <description>Requirements  Java 1.8 Maven    This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page.
  If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
 If you want to build from sources, Please untar the source tarball (or clone the latest code from the git repository) and run the ozone build command.</description>
+    </item>
+    
+    <item>
+      <title>Ozone Debug</title>
+      <link>/tools/debug.html</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tools/debug.html</guid>
+      <description>Ozone Debug command can be used for all the debugging related tasks.</description>
+    </item>
+    
+    <item>
+      <title>Overwriting an Ozone Key only if it has not changed.</title>
+      <link>/design/overwrite-key-only-if-unchanged.html</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/design/overwrite-key-only-if-unchanged.html</guid>
+      <description>A minimal design illustrating how to replace a key in Ozone only if it has not changes since it was read.</description>
     </item>
     
     <item>

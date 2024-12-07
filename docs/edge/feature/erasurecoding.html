@@ -598,8 +598,7 @@ the configuration keys <code>ozone.server.default.replication.type</code> and <c
    <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
    <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
 <span style="color:#f92672">&lt;/property&gt;</span>
-
-<span style="color:#f92672">&lt;property&gt;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
    <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
    <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
 <span style="color:#f92672">&lt;/property&gt;</span>
@@ -614,6 +613,15 @@ any replication config or bucket does not have any default values.</p>
 <h4 id="setting-ec-replication-config-while-creating-keysfiles">Setting EC Replication Config While Creating Keys/Files</h4>
 <p>We can pass the EC Replication Config while creating the keys irrespective of bucket Replication Config.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
+</code></pre></div><p>When using ofs/o3fs, we can pass the EC Replication Config by setting the configuration keys <code>ozone.replication.type</code> and <code>ozone.replication</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
+   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication<span style="color:#f92672">&lt;/name&gt;</span>
+   <span style="color:#f92672">&lt;value&gt;</span>rs-3-2-1024k<span style="color:#f92672">&lt;/value&gt;</span>
+<span style="color:#f92672">&lt;/property&gt;</span>
 </code></pre></div><p>In the case bucket already has default EC Replication Config, there is no need of passing EC Replication Config while creating key.</p>
 <h3 id="enable-intel-isa-l">Enable Intel ISA-L</h3>
 <p>Intel Intelligent Storage Acceleration Library (ISA-L) is an open-source collection of optimized low-level functions used for
@@ -645,7 +653,7 @@ The default value of java.library.path depends on the OS and Java version. For e
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: March 24, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b267a578313da15cb0b5e40fddc4d003c8c222d4">b267a57831</a>
     </span>
   </div>
 </footer>

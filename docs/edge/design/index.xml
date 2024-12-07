@@ -6,7 +6,16 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overwriting an Ozone Key only if it has not changed.</title>
+      <link>/design/overwrite-key-only-if-unchanged.html</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/design/overwrite-key-only-if-unchanged.html</guid>
+      <description>A minimal design illustrating how to replace a key in Ozone only if it has not changes since it was read.</description>
+    </item>
+    
     <item>
       <title>Ozone Token Signatures using Symmetric Keys</title>
       <link>/design/symmetric-token-signatures.html</link>

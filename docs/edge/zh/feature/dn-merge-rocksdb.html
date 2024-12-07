@@ -263,6 +263,12 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
+                           <a href="../../zh/security/securingozonehttp.html">安全化 HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
                            <a href="../../zh/security/securings3.html">安全化 S3</a>
                            
                         </li>
@@ -287,37 +293,13 @@ s=d.getElementsByTagName('script')[0];
             <li class="">
                 <a href="../../zh/interface.html">
                     
-                    <span>编程接口</span>
+                    <span>客户端接口</span>
                 </a>
                 <ul class="nav">
                     
                         <li class="">
                            
-                           <a href="../../zh/interface/javaapi.html">Java API</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/csi.html">CSI 协议</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           <a href="../../zh/interface/cli.html">命令行接口</a>
                            
                         </li>
                     
@@ -346,6 +328,54 @@ s=d.getElementsByTagName('script')[0];
                     
                     <span>使用配方</span>
                 </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../">
+                    
+                    <span></span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/ofs.html">Ofs (兼容 Hadoop 的文件系统)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
             </li>
         
     
@@ -407,10 +437,10 @@ s=d.getElementsByTagName('script')[0];
   limitations under the License.
 -->
 <p>在 Ozone 中，用户数据被分割成blocks并存储在 HDDS Container中。Container是 Ozone/HDDS 的基本复制单元。每个Container都有自己的元数据和数据, 数据以文件形式保存在磁盘上，元数据保存在RocksDB中。</p>
-<p>目前，数据节点上的每个Container都有一个RocksDB。随着用户数据的不断增长，一个DataNode上将会有成百上千个RocksDB实例。在一个JVM中管理如此多的RocksDB实例是一个巨大的挑战。</p>
-<p>与当前使用方法不同，&ldquo;Merge Container RocksDB in DN&quot;功能将为每个Volume只使用一个RocksDB，并在此RocksDB中保存所有Container的元数据。</p>
+<p>之前，数据节点上每个Container都有一个RocksDB。随着用户数据的不断增长，一个DataNode上将会有成百上千个RocksDB实例。在一个JVM中管理如此多的RocksDB实例是一个巨大的挑战。</p>
+<p>与以前的用法不同，&ldquo;Merge Container RocksDB in DN&quot;功能将为每个Volume只使用一个RocksDB，并在此RocksDB中保存所有Container的元数据。</p>
 <h2 id="配置">配置</h2>
-<p>这主要是DataNode的功能，不需要太多配置。</p>
+<p>这主要是DataNode的功能，不需要太多配置。默认情况下，它是启用的。</p>
 <p>如果更倾向于为每个Container使用一个RocksDB的模式，那么这下面的配置可以禁用上面所介绍的功能。请注意，一旦启用该功能，强烈建议以后不要再禁用。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
    <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.container.schema.v3.enabled<span style="color:#f92672">&lt;/name&gt;</span>
@@ -455,7 +485,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: November 25, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c4b2056e6f3e965c8df75bb8cf62aef182fcb86a">c4b2056e6f</a>
     </span>
   </div>
 </footer>

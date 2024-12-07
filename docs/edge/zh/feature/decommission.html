@@ -263,6 +263,12 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
+                           <a href="../../zh/security/securingozonehttp.html">安全化 HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
                            <a href="../../zh/security/securings3.html">安全化 S3</a>
                            
                         </li>
@@ -287,37 +293,13 @@ s=d.getElementsByTagName('script')[0];
             <li class="">
                 <a href="../../zh/interface.html">
                     
-                    <span>编程接口</span>
+                    <span>客户端接口</span>
                 </a>
                 <ul class="nav">
                     
                         <li class="">
                            
-                           <a href="../../zh/interface/javaapi.html">Java API</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/csi.html">CSI 协议</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           <a href="../../zh/interface/cli.html">命令行接口</a>
                            
                         </li>
                     
@@ -346,6 +328,54 @@ s=d.getElementsByTagName('script')[0];
                     
                     <span>使用配方</span>
                 </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../">
+                    
+                    <span></span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/ofs.html">Ofs (兼容 Hadoop 的文件系统)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
             </li>
         
     
@@ -429,6 +459,9 @@ s=d.getElementsByTagName('script')[0];
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
        <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
 </code></pre></div><p>您可以输入多个主机，以便一起Decommission多个DataNode。</p>
+<p>查看 Decommission时datanode 的状态，可以执行下面的命令,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode status decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--id<span style="color:#f92672">=</span>&lt;uuid&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--ip<span style="color:#f92672">=</span>&lt;ipAddress&gt;<span style="color:#f92672">]</span>
+</code></pre></div><p>您可以指定一个 Datanode 的 IP address 或 UUID 以查看该 Datanode 相关的详细信息。</p>
 <p><strong>Note:</strong> 要Recommission某台DataNode的时候，可在命令行执行以下命令,</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
        <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
@@ -475,7 +508,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: March 5, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/80592135edffbcec2087edfd70c3b31b70841ebc">80592135ed</a>
     </span>
   </div>
 </footer>

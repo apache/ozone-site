@@ -521,6 +521,48 @@ blocks that get reported. That is a 40x reduction in the block reports.</p>
 <p>This extra indirection helps tremendously with scaling Ozone. SCM has far
 less block data to process and the namespace service (Ozone Manager) as a
 different service are critical to scaling Ozone.</p>
+<h2 id="notable-configurations">Notable configurations</h2>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>default</th>
+<th><div style="width: 300px;">description</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dfs.container.ratis.datanode.storage.dir</td>
+<td>none</td>
+<td>This directory is used for storing Ratis metadata like logs.</td>
+</tr>
+<tr>
+<td>ozone.scm.datanode.id.dir</td>
+<td>none</td>
+<td>The path that datanodes will use to store the datanode ID.</td>
+</tr>
+<tr>
+<td>hdds.datanode.dir</td>
+<td>none</td>
+<td>Determines where HDDS data will be stored on the local filesystem.</td>
+</tr>
+<tr>
+<td>hdds.datanode.dir.du.reserved</td>
+<td>none</td>
+<td>Reserved space in bytes per volume. Always leave this much space free for non dfs use.</td>
+</tr>
+<tr>
+<td>ozone.metadata.dirs</td>
+<td>none</td>
+<td>Directory to store persisted data (RocksDB).</td>
+</tr>
+<tr>
+<td>ozone.recon.address</td>
+<td>0.0.0.0:9891</td>
+<td>RPC address of the Recon. Use <a href="host:port">host:port</a> to connect Recon.</td>
+</tr>
+</tbody>
+</table>
 
 
           
@@ -540,7 +582,7 @@ different service are critical to scaling Ozone.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: September 23, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/0fcb64564d88defc8d2c0ab585bff5717c26632b">0fcb64564d</a>
     </span>
   </div>
 </footer>

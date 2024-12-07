@@ -487,7 +487,7 @@ capable of running independently. The components of ozone are the same in both a
 <li>Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</li>
 <li>Storage Container Manager - Acts as the block manager. Ozone Manager
 requests blocks from SCM, to which clients can write data.</li>
-<li>Datanodes - Ozone data node code runs inside the HDFS datanode or in the independent deployment case runs an ozone datanode daemon.</li>
+<li>Datanodes - Ozone Datanodes is the server that stores all the containers created by SCM. Datanode is the service that handles all data reads and writes from the Ozone Client.</li>
 </ol>
 <h2 id="setting-up-an-ozone-only-cluster">Setting up an Ozone only cluster</h2>
 <ul>
@@ -645,7 +645,7 @@ up.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: June 3, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ce5bbb0f4a079b11fa397a7ab6b57c1ee2829c13">ce5bbb0f4a</a>
     </span>
   </div>
 </footer>

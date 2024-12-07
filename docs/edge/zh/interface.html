@@ -263,6 +263,12 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
+                           <a href="../zh/security/securingozonehttp.html">安全化 HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
                            <a href="../zh/security/securings3.html">安全化 S3</a>
                            
                         </li>
@@ -287,37 +293,13 @@ s=d.getElementsByTagName('script')[0];
             <li class="active">
                 <a href="../zh/interface.html">
                     
-                    <span>编程接口</span>
+                    <span>客户端接口</span>
                 </a>
                 <ul class="nav">
                     
                         <li class="">
                            
-                           <a href="../zh/interface/javaapi.html">Java API</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../zh/interface/o3fs.html">Ozone 文件系统</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../zh/interface/csi.html">CSI 协议</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../zh/interface/s3.html">S3 协议接口</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="../zh/interface/reconapi.html">Recon API</a>
+                           <a href="../zh/interface/cli.html">命令行接口</a>
                            
                         </li>
                     
@@ -349,6 +331,54 @@ s=d.getElementsByTagName('script')[0];
             </li>
         
     
+        
+            <li class="">
+                <a href="../">
+                    
+                    <span></span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/ofs.html">Ofs (兼容 Hadoop 的文件系统)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/o3fs.html">Ozone 文件系统</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/csi.html">CSI 协议</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/s3.html">S3 协议接口</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../zh/interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
     <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
     <li class="visible-xs"><a href="#">References</a>
     <ul class="nav">
@@ -376,7 +406,7 @@ s=d.getElementsByTagName('script')[0];
     
 </div>
 
-                <h1>编程接口</h1>
+                <h1>客户端接口</h1>
             </div>
 
             <div class="col-md-9">
@@ -442,11 +472,11 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Ozone 文件系统
+                                    Ofs (兼容 Hadoop 的文件系统)
                                 </h2>
-                                <p class="card-text">Hadoop 文件系统兼容使得任何使用类 HDFS 接口的应用无需任何修改就可以在 Ozone 上工作，比如基于 Apache Spark、YARN 和 Hive 等框架的应用。</p>
-                                <a href="../zh/interface/o3fs.html"
-                                   class=" btn btn-primary btn-lg">Ozone 文件系统</a>
+                                <p class="card-text">Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. <strong>Global level view.</strong></p>
+                                <a href="../zh/interface/ofs.html"
+                                   class=" btn btn-primary btn-lg">Ofs (兼容 Hadoop 的文件系统)</a>
                             </div>
                         </div>
                     </div>
@@ -460,6 +490,25 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                 
                 <div class="row">
                     
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Ozone 文件系统
+                                </h2>
+                                <p class="card-text">Hadoop 文件系统兼容使得任何使用类 HDFS 接口的应用无需任何修改就可以在 Ozone 上工作，比如基于 Apache Spark、YARN 和 Hive 等框架的应用。</p>
+                                <a href="../zh/interface/o3fs.html"
+                                   class=" btn btn-primary btn-lg">Ozone 文件系统</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
@@ -475,10 +524,14 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                     </div>
 
                     
+                        </div>
+                    
                 
 
                 
                 
+                <div class="row">
+                    
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
@@ -489,6 +542,25 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                                 <p class="card-text">Ozone 支持 Amazon 的 Simple Storage Service (S3) 协议，事实上，你不需要对基于 S3 客户端和 S3 SDK 的应用做任何修改就可以在 Ozone 上使用。</p>
                                 <a href="../zh/interface/s3.html"
                                    class=" btn btn-primary btn-lg">S3 协议接口</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Recon API
+                                </h2>
+                                <p class="card-text">Recon 服务器支持 HTTP 端点，以帮助故障排除和监听 Ozone 集群。</p>
+                                <a href="../zh/interface/reconapi.html"
+                                   class=" btn btn-primary btn-lg">Recon API</a>
                             </div>
                         </div>
                     </div>
@@ -507,11 +579,21 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Recon API
+                                    命令行接口
                                 </h2>
-                                <p class="card-text">Recon 服务器支持 HTTP 端点，以帮助故障排除和监听 Ozone 集群。</p>
-                                <a href="../zh/interface/reconapi.html"
-                                   class=" btn btn-primary btn-lg">Recon API</a>
+                                <p class="card-text">Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 Java API.
+有些功能只能通过使用 ozone sh 命令才能访问。例如：
+ 创建带有配额的卷 管理内部 ACL 创建带有加密的键的桶  所有这些命令都是一次性的管理任务。应用程序也可以使用其他接口，如 Hadoop 兼容文件系统（o3fs 或 ofs）或 S3 接口来实现相同功能而无需使用 Ozone 命令行接口。
+Ozone shell 的帮助菜单可以在 对象 级别 或者 动作 级别被调出.
+示例命令:
+ozone sh volume --help 这条命令展示了卷的所有可用的 动作 命令
+或者也可以用来解释具体的某个 动作 ，例如：
+ozone sh volume create --help 这条命令输出卷的create动作的所有命令行选项
+通用命令格式 Ozone shell 命令采取以下形式:
+ ozone sh object action url
+ ozone 脚本用于调用所有 Ozone 子命令。通过 sh 命令调用 ozone shell 命令。</p>
+                                <a href="../zh/interface/cli.html"
+                                   class=" btn btn-primary btn-lg">命令行接口</a>
                             </div>
                         </div>
                     </div>
@@ -531,7 +613,7 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: April 5, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/e34de9fbdbb7c78a5a415d8fe234f0db408fad61">e34de9fbdb</a>
     </span>
   </div>
 </footer>

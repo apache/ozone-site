@@ -9,7 +9,7 @@
     <item>
       <title>安全化 Ozone</title>
       <link>/zh/security/secureozone.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/secureozone.html</guid>
       <description>简要介绍 Ozone 中的安全概念以及安全化 OM 和 SCM 的步骤。</description>
@@ -18,7 +18,7 @@
     <item>
       <title>透明数据加密</title>
       <link>/zh/security/securingtde.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securingtde.html</guid>
       <description>透明数据加密（Transparent Data Encryption，TDE）以密文形式在磁盘上保存数据，但可以在用户访问的时候自动进行解密。</description>
@@ -27,7 +27,7 @@
     <item>
       <title>Ozone 中的 GDPR</title>
       <link>/zh/security/gdpr.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/gdpr.html</guid>
       <description>Ozone 中的 GDPR</description>
@@ -36,16 +36,25 @@
     <item>
       <title>安全化 Datanode</title>
       <link>/zh/security/securingdatanodes.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securingdatanodes.html</guid>
       <description>解释安全化 datanode 的不同模式，包括 Kerberos、证书的手动颁发和自动颁发等。</description>
     </item>
     
     <item>
+      <title>安全化 HTTP</title>
+      <link>/zh/security/securingozonehttp.html</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/securingozonehttp.html</guid>
+      <description>安全化 Ozone 服务的 HTTP 网络控制台</description>
+    </item>
+    
+    <item>
       <title>安全化 S3</title>
       <link>/zh/security/securings3.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securings3.html</guid>
       <description>Ozone 支持 S3 协议，并使用 AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
@@ -54,7 +63,7 @@
     <item>
       <title>Ozone 访问控制列表</title>
       <link>/zh/security/securityacls.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securityacls.html</guid>
       <description>Ozone 原生的授权模块提供了不需要集成 Ranger 的访问控制列表（ACL）支持。</description>
@@ -63,7 +72,7 @@
     <item>
       <title>Apache Ranger</title>
       <link>/zh/security/securitywithranger.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securitywithranger.html</guid>
       <description>Apache Ranger 是一个用于管理和监控 Hadoop 平台复杂数据权限的框架。</description>

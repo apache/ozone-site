@@ -624,9 +624,6 @@ ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3api --endpoint http://localhost:9878 create-bucket --bucket buckettest
 </code></pre></div><p>Or</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 ls --endpoint http://localhost:9878 s3://buckettest
-</code></pre></div><h3 id="s3-fuse-driver-goofys">S3 Fuse driver (goofys)</h3>
-<p><a href="https://github.com/kahing/goofys">Goofys</a> is a S3 FUSE driver. As Ozone S3 gateway is AWS S3 compatible, it can be used to mount any Ozone buckets as an OS level mounted filesystem.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">goofys --endpoint http://localhost:9878 bucket1 /mount/bucket1
 </code></pre></div>
 
           
@@ -646,7 +643,7 @@ ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 1.5.0-SNAPSHOT, Last Modified: February 27, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7939faf7d6c904bf1e4ad32baa5d6d0c1de19003">7939faf</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: December 4, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cb0a402bea59da76fe51c51cd61ab4bfe99417cb">cb0a402bea</a>
     </span>
   </div>
 </footer>

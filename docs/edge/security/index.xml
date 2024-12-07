@@ -9,7 +9,7 @@
     <item>
       <title>Securing Ozone</title>
       <link>/security/secureozone.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/secureozone.html</guid>
       <description>Overview of Ozone security concepts and steps to secure Ozone Manager and SCM.</description>
@@ -18,7 +18,7 @@
     <item>
       <title>Transparent Data Encryption</title>
       <link>/security/securingtde.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/securingtde.html</guid>
       <description>TDE allows data on the disks to be encrypted-at-rest and automatically decrypted during access.</description>
@@ -27,7 +27,7 @@
     <item>
       <title>GDPR in Ozone</title>
       <link>/security/gdpr.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/gdpr.html</guid>
       <description>Support to implement the &amp;ldquo;Right to be Forgotten&amp;rdquo; requirement of GDPR</description>
@@ -36,7 +36,7 @@
     <item>
       <title>Securing Datanodes</title>
       <link>/security/securingdatanodes.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/securingdatanodes.html</guid>
       <description>Explains different modes of securing data nodes. These range from kerberos to auto approval.</description>
@@ -45,7 +45,7 @@
     <item>
       <title>Securing HTTP</title>
       <link>/security/securingozonehttp.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/security/securingozonehttp.html</guid>
       <description>Secure HTTP web-consoles for Ozone services</description>
@@ -54,7 +54,7 @@
     <item>
       <title>Securing S3</title>
       <link>/security/securings3.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/securings3.html</guid>
       <description>Ozone supports S3 protocol, and uses AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
@@ -63,7 +63,7 @@
     <item>
       <title>Ozone ACLs</title>
       <link>/security/securityacls.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/securityacls.html</guid>
       <description>Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</description>
@@ -72,7 +72,7 @@
     <item>
       <title>Apache Ranger</title>
       <link>/security/securitywithranger.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/security/securitywithranger.html</guid>
       <description>Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.</description>

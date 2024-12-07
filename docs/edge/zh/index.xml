@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>安全化 Ozone</title>
+      <link>/zh/security/secureozone.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/secureozone.html</guid>
+      <description>简要介绍 Ozone 中的安全概念以及安全化 OM 和 SCM 的步骤。</description>
+    </item>
+    
+    <item>
       <title>概览</title>
       <link>/zh/concept/overview.html</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
@@ -25,21 +34,21 @@
     </item>
     
     <item>
+      <title>Ofs (兼容 Hadoop 的文件系统)</title>
+      <link>/zh/interface/ofs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/interface/ofs.html</guid>
+      <description>Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. &lt;strong&gt;Global level view.&lt;/strong&gt;</description>
+    </item>
+    
+    <item>
       <title>Decommissioning</title>
       <link>/zh/feature/decommission.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/feature/decommission.html</guid>
       <description>Decommissioning of SCM, OM and Datanode.</description>
-    </item>
-    
-    <item>
-      <title>安全化 Ozone</title>
-      <link>/zh/security/secureozone.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/security/secureozone.html</guid>
-      <description>简要介绍 Ozone 中的安全概念以及安全化 OM 和 SCM 的步骤。</description>
     </item>
     
     <item>
@@ -67,6 +76,15 @@
       
       <guid>/zh/feature/scm-ha.html</guid>
       <description>Storage Container Manager 的 HA 设置可以避免任何单点故障。</description>
+    </item>
+    
+    <item>
+      <title>透明数据加密</title>
+      <link>/zh/security/securingtde.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/securingtde.html</guid>
+      <description>透明数据加密（Transparent Data Encryption，TDE）以密文形式在磁盘上保存数据，但可以在用户访问的时候自动进行解密。</description>
     </item>
     
     <item>
@@ -115,12 +133,21 @@
     </item>
     
     <item>
-      <title>透明数据加密</title>
-      <link>/zh/security/securingtde.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Ozone 中的 GDPR</title>
+      <link>/zh/security/gdpr.html</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/zh/security/securingtde.html</guid>
-      <description>透明数据加密（Transparent Data Encryption，TDE）以密文形式在磁盘上保存数据，但可以在用户访问的时候自动进行解密。</description>
+      <guid>/zh/security/gdpr.html</guid>
+      <description>Ozone 中的 GDPR</description>
+    </item>
+    
+    <item>
+      <title>安全化 Datanode</title>
+      <link>/zh/security/securingdatanodes.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/securingdatanodes.html</guid>
+      <description>解释安全化 datanode 的不同模式，包括 Kerberos、证书的手动颁发和自动颁发等。</description>
     </item>
     
     <item>
@@ -142,15 +169,6 @@
     </item>
     
     <item>
-      <title>Ozone 中的 GDPR</title>
-      <link>/zh/security/gdpr.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/security/gdpr.html</guid>
-      <description>Ozone 中的 GDPR</description>
-    </item>
-    
-    <item>
       <title>S3 协议接口</title>
       <link>/zh/interface/s3.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -160,12 +178,21 @@
     </item>
     
     <item>
-      <title>安全化 Datanode</title>
-      <link>/zh/security/securingdatanodes.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Ozone 中的配额</title>
+      <link>/zh/feature/quota.html</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/zh/security/securingdatanodes.html</guid>
-      <description>解释安全化 datanode 的不同模式，包括 Kerberos、证书的手动颁发和自动颁发等。</description>
+      <guid>/zh/feature/quota.html</guid>
+      <description>Ozone中的配额</description>
+    </item>
+    
+    <item>
+      <title>安全化 HTTP</title>
+      <link>/zh/security/securingozonehttp.html</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/securingozonehttp.html</guid>
+      <description>安全化 Ozone 服务的 HTTP 网络控制台</description>
     </item>
     
     <item>
@@ -178,21 +205,40 @@
     </item>
     
     <item>
-      <title>Ozone 中的配额</title>
-      <link>/zh/feature/quota.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/feature/quota.html</guid>
-      <description>Ozone中的配额</description>
-    </item>
-    
-    <item>
       <title>Recon API</title>
       <link>/zh/interface/reconapi.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/interface/reconapi.html</guid>
       <description>Recon 服务器支持 HTTP 端点，以帮助故障排除和监听 Ozone 集群。</description>
+    </item>
+    
+    <item>
+      <title>命令行接口</title>
+      <link>/zh/interface/cli.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/interface/cli.html</guid>
+      <description>Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 Java API.
+有些功能只能通过使用 ozone sh 命令才能访问。例如：
+ 创建带有配额的卷 管理内部 ACL 创建带有加密的键的桶  所有这些命令都是一次性的管理任务。应用程序也可以使用其他接口，如 Hadoop 兼容文件系统（o3fs 或 ofs）或 S3 接口来实现相同功能而无需使用 Ozone 命令行接口。
+Ozone shell 的帮助菜单可以在 对象 级别 或者 动作 级别被调出.
+示例命令:
+ozone sh volume --help 这条命令展示了卷的所有可用的 动作 命令
+或者也可以用来解释具体的某个 动作 ，例如：
+ozone sh volume create --help 这条命令输出卷的create动作的所有命令行选项
+通用命令格式 Ozone shell 命令采取以下形式:
+ ozone sh object action url
+ ozone 脚本用于调用所有 Ozone 子命令。通过 sh 命令调用 ozone shell 命令。</description>
+    </item>
+    
+    <item>
+      <title>安全化 S3</title>
+      <link>/zh/security/securings3.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/security/securings3.html</guid>
+      <description>Ozone 支持 S3 协议，并使用 AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
     </item>
     
     <item>
@@ -205,18 +251,9 @@
     </item>
     
     <item>
-      <title>安全化 S3</title>
-      <link>/zh/security/securings3.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/security/securings3.html</guid>
-      <description>Ozone 支持 S3 协议，并使用 AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
-    </item>
-    
-    <item>
       <title>Ozone 访问控制列表</title>
       <link>/zh/security/securityacls.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securityacls.html</guid>
       <description>Ozone 原生的授权模块提供了不需要集成 Ranger 的访问控制列表（ACL）支持。</description>
@@ -225,7 +262,7 @@
     <item>
       <title>Apache Ranger</title>
       <link>/zh/security/securitywithranger.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/security/securitywithranger.html</guid>
       <description>Apache Ranger 是一个用于管理和监控 Hadoop 平台复杂数据权限的框架。</description>
@@ -350,6 +387,24 @@ cd smoketest ./test.sh --env ozone basic 验收测试会启动一个基于 docke
     </item>
     
     <item>
+      <title>Ozone Debug</title>
+      <link>/zh/tools/debug.html</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/tools/debug.html</guid>
+      <description>Ozone Debug 命令可用于所有与调试相关的任务。</description>
+    </item>
+    
+    <item>
+      <title>Ozone Admin</title>
+      <link>/zh/tools/admin.html</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/tools/admin.html</guid>
+      <description>Ozone Admin 命令可以用于所有与管理有关的任务。</description>
+    </item>
+    
+    <item>
       <title>配置生成</title>
       <link>/zh/tools/genconf.html</link>
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
@@ -365,6 +420,15 @@ cd smoketest ./test.sh --env ozone basic 验收测试会启动一个基于 docke
       
       <guid>/zh/tools/auditparser.html</guid>
       <description>审计解析器工具用来查看 Ozone 的审计日志。</description>
+    </item>
+    
+    <item>
+      <title>使用 Boto3 客户端访问 Ozone 对象存储</title>
+      <link>/zh/recipe/botoclient.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/recipe/botoclient.html</guid>
+      <description>如何使用 Boto3 客户端访问 Ozone 对象存储？</description>
     </item>
     
     <item>
