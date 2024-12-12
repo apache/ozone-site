@@ -106,6 +106,9 @@ Here's the conversion to a markdown table:
 | `-T 4` | Use 4 threads for parallel building (adjust number based on your CPU) |
 | `-T 2C` | Use 2 threads per core for parallel building (adjust number based on your CPU) |
 | `-am -pl module-name` | Build a specific module and its dependencies |
+| `-DskipShade` | Skip shading. This saves a ton of time by e.g. skipping the ozone-filesystem-hadoop3 fat jar build |
+| `-Dmaven.artifact.threads=30` | Allow maven to download 30 artifacts at once. The default value is 5. This could speed up the build process by a lot when the maven cache was not previously populated. |
+| `-Pnative` | Build native module(s). So far it only affects `hdds-rocks-native` |
 
 ### Build Output
 
