@@ -352,7 +352,7 @@ Double check that your Apache credentials are added to your local `~/.m2/setting
 Return to your Ozone repository being used for the release, and run the following command to upload the release artifacts:
 
 ```bash
-mvn deploy -Psign -pl '!:ozone-dist' -DskipTests -Dbuildhelper.skipAttach
+mvn deploy:deploy
 ```
 
 Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
