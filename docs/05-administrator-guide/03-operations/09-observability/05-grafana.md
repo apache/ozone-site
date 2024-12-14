@@ -42,7 +42,7 @@ Finish the setup by clicking on `Save and Test`.
 Apache Ozone comes with a default Grafana dashboard. Follow the instructions
 below to import it:
 
-Download dashboard json:
+Download dashboard JSON:
 
 ```shell
 wget https://raw.githubusercontent.com/apache/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Overall%20Metrics.json
