@@ -7,11 +7,12 @@ The `hadoop distcp` command can be used to copy data to/from Ozone and any Hadoo
 ## Basic usage
 
 To copy files from a source Ozone cluster directory to a destination Ozone cluster directory:
+
 ```bash
   hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2
 ```
 
-> You must have both ozone1 and ozone2 cluster service ID defined in ozone-site.xml configuration file.
+> You must have both `ozone1` and `ozone2` cluster service ID defined in `ozone-site.xml` configuration file.
 
 ## Copy between Ozone and HDFS
 
@@ -23,7 +24,8 @@ hadoop distcp \
   -Dozone.client.checksum.type=CRC32C \
   hdfs://ns1/tmp ofs://ozone1/vol1/bucket1/dst
 ```
-The parameter `-Ddfs.checksum.combine.mode=COMPOSITE_CRC` is not required if the HDFS cluster is on Hadoop 3.1.1 or above.
+
+> The parameter `-Ddfs.checksum.combine.mode=COMPOSITE_CRC` is not required if the HDFS cluster is on Hadoop 3.1.1 or above.
 
 Alternatively, skip file checksum check:
 
