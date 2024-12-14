@@ -20,13 +20,16 @@ sidebar_label: Grafana
 
 # Dashboarding With Grafana
 
-Once Prometheus is up and running, Grana can be configured to monitor and visualize Ozone metrics.
+Once Prometheus is up and running, Grana can be configured to monitor and
+visualize Ozone metrics.
 
 ## Add Prometheus as a data source
 
 In the Grafana web UI, go to `Add Data Sources` and then select `Prometheus`.
 
-Enter the Prometheus hostname/port in the `HTTP`. For example, http://localhost:9094 (verify the port used by looking at Prometheus command line flags `-web.listen-address`. The port can also be found from Prometheus web UI → Status → Command-Line Flags.)
+Enter the Prometheus hostname/port in the `HTTP`. For example, `http://localhost:9094`
+(verify the port used by looking at Prometheus command line flags `-web.listen-address`.
+The port can also be found from Prometheus web UI → Status → Command-Line Flags.)
 
 Choose Prometheus type: `Prometheus`
 
@@ -36,7 +39,8 @@ Finish the setup by clicking on `Save and Test`.
 
 ## Import a Grafana dashboard for Ozone
 
-Apache Ozone comes with a default Grafana dashboard. Follow the instructions below to import it:
+Apache Ozone comes with a default Grafana dashboard. Follow the instructions
+below to import it:
 
 Download dashboard json:
 
@@ -46,18 +50,24 @@ wget https://raw.githubusercontent.com/apache/ozone/master/hadoop-ozone/dist/src
 
 Open Grafana portal and click on Dashboards on the left and select `Import`.
 
-Click at `Upload JSON file` and select the file `Ozone - Overall Metrics.json` that was just downloaded.
+Click at `Upload JSON file` and select the file `Ozone - Overall Metrics.json`
+that was just downloaded.
 
 The dashboard is now imported.
 
 ![Overall dashboard](GrafanaOzoneOverall.png)
 
-Repeat the same for [Object Metrics](https://raw.githubusercontent.com/Xushaohong/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Object%20Metrics.json) dashboard and [RPC Metrics](https://raw.githubusercontent.com/Xushaohong/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20RPC%20Metrics.json) dashboard.
+Repeat the same for [Object Metrics](https://raw.githubusercontent.com/Xushaohong/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Object%20Metrics.json)
+dashboard and [RPC Metrics](https://raw.githubusercontent.com/Xushaohong/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20RPC%20Metrics.json)
+dashboard.
 
 ![Object dashboard](GrafanaOzoneObjectMetrics.png)
 
 ![RPC dashboard](GrafanaOzoneRPCMetrics.png)
 
-More dashboards are constantly being added. Check out the [dashboard repo](https://github.com/apache/ozone/tree/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards) for more.
+More dashboards are constantly being added. Check out the [dashboard repo](https://github.com/apache/ozone/tree/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards)
+for more.
 
-Check out the official Grafana doc [Monitor Apache Ozone with Prometheus and Grafana Cloud](https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-prometheus/prometheus-config-examples/the-apache-software-foundation-apache-ozone/) for more details.
+Check out the official Grafana doc [Monitor Apache Ozone with Prometheus and Grafana
+Cloud](https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-prometheus/prometheus-config-examples/the-apache-software-foundation-apache-ozone/)
+for more details.
