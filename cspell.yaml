@@ -91,6 +91,7 @@ words:
 - mds
 - javadoc
 - JVM
+- dockerhub
 # Misc words
 - acking
 - dashboarding
