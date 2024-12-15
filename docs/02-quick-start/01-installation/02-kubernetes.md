@@ -71,14 +71,14 @@ minikube service s3g-public
 Opening kubernetes service default/s3g-public in default browser...
 ```
 
-## Hosted Cluster
+## Hosted Kubernetes Cluster
 
 **Requirements:**
 
 * Working Kubernetes cluster (LoadBalancer, PersistentVolume are not required)
 * kubectl
 
-As *apache/ozone* Docker images are available from the Docker Hub, the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one Datanode per host).
+As *apache/ozone* Docker images are available from Docker Hub, the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one Datanode per host)
 
 ### Deploy to Kubernetes
 
