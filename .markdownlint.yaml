@@ -143,5 +143,6 @@ link-image-style:
 table-pipe-style:
   style: leading_and_trailing
 
+# Disallow duplicate headings at the same level under the same parent heading.
 no-duplicate-heading:
   siblings_only: true
