@@ -142,3 +142,7 @@ link-image-style:
 # Use pipes on both ends of every line in a table.
 table-pipe-style:
   style: leading_and_trailing
+
+# Disallow duplicate headings at the same level under the same parent heading.
+no-duplicate-heading:
+  siblings_only: true
