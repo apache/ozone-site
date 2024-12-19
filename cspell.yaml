@@ -34,7 +34,9 @@ import:
 - "@cspell/dict-docker/cspell-ext.json"
 
 languageSettings:
-- languageId: markdown
+- languageId:
+  - markdown
+  - mdx
   ignoreRegExpList:
   - markdown_code_block
   - markdown_inline_code
