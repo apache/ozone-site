@@ -1,11 +1,5 @@
 ---
 sidebar_label: Release Manager Guide
-
-# Custom words specific to this page:
-# cSpell:ignore protoroot codesigningkey lockdir pinentry gpgconf orgapacheozone
-
-# On this page, ignore CLI options used with -D or -P.
-# cSpell:ignoreRegExp -(D|P)[a-z\.,]+([\s]|=)
 ---
 
 # Apache Release Manager Guide
