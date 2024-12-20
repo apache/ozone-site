@@ -39,6 +39,15 @@ This document summarizes the contribution process.
 
 Please follow the same [Jira guidelines](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#jira-guideline) as the main Ozone project when filing improvements or issues for the website. Website Jira issues are also under the HDDS project, but can be tagged with `website` and `documentation` to distinguish them from changes to Ozone itself.
 
+## Migrating Content From the Current Website to the New Website
+
+If you are migrating a page from the old website to the new website, please follow these steps:
+
+1. Verify that the content of the original page is clear and accurate.
+2. If there are issues with the original page, raise a PR with your fixes to the [current Ozone website](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs) to fix the page first.
+3. Once the page is merged into the current website, migrate it to the new website and raise a PR.
+    - Pages being brought in from the current website may be enhanced with [additional markdown functionality](#page-format) supported by the new website.
+
 ## Modifying the Website
 
 The Apache Ozone Website uses [Docusaurus](https://docusaurus.io/) as a static site generator. Most simple updates to the website can be done with little knowledge of Docusaurus, but for more complex modifications to the website or a better understanding of how it is built, see the Docusaurus [documentation](https://docusaurus.io/docs) and [API](https://docusaurus.io/docs/cli).
