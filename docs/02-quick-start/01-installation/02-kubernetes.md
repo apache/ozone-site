@@ -33,7 +33,7 @@ To deploy it to minikube, use the minikube configuration set:
 
 ``` bash
 cd kubernetes/examples/minikube
-kubectl apply -f .
+kubectl apply -k .
 ```
 
 And you can check the results with
@@ -88,15 +88,16 @@ To deploy to a hosted cluster use the Ozone subdirectory:
 
 ``` bash
 cd kubernetes/examples/ozone
-kubectl apply -f .
+kubectl apply -k .
 ```
 
 And you can check the results with
 
 ``` bash
 kubectl get pod
-Access the services
 ```
+
+### Access the services
 
 Now you can access any of the services. By default the services are not published but you can access them with port-forward rules.
 
