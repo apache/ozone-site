@@ -16,5 +16,8 @@ Please describe your PR in detail:
 
 ## How was this patch tested?
 
-Please explain how this patch was tested. In most cases this will just be checking the local preview of the website, but existing CI checks should also pass.
+Check off which of the following tests were done on this change. If additional testing was done, please elaborate here as well.
 
+- [ ] The CI checks on my fork are passing
+- [ ] I verified the rendered content using a local preview
+- [ ] I manually verified the steps provided in this change work as described
