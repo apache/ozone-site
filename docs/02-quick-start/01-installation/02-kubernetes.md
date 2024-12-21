@@ -64,7 +64,7 @@ scm          ClusterIP   None            <none>        9876/TCP         27s
 scm-public   NodePort    10.105.231.28   <none>        9876:32171/TCP   27s
 ```
 
-Minikube contains a convenience command to access any of the NodePort services:
+Minikube provides a convenience command to access any of the NodePort services:
 
 ``` bash
 minikube service s3g-public
