@@ -22,7 +22,7 @@ sidebar_label: Kubernetes
 
 ## Minikube
 
-**Requirements:**
+### Requirements
 
 * Working minikube setup
 * kubectl
