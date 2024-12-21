@@ -1,31 +1,18 @@
 ---
 sidebar_label: Kubernetes
 ---
-<!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 
 # Try Ozone With Kubernetes
+
+Ozone is designed to work well under Kubernetes. This document provides a guide for deploying and experimenting with Ozone on K8s, using MiniKube or a self-hosted Kubernetes cluster.
 
 ## Minikube
 
 ### Requirements
 
-* Working minikube setup
-* kubectl
+- Working minikube setup
+- kubectl
+
 ### Deploy the Services
 The `kubernetes/examples` directory of the Ozone distribution contains Kubernetes deployment resource files for multiple use cases. By default the Kubernetes resource files are configured to use the [apache/ozone](https://hub.docker.com/r/apache/ozone) image from Docker Hub.
 
@@ -42,10 +29,14 @@ And you can check the results with
 kubectl get pod
 ```
 
-Note: the `kubernetes/examples/minikube` resource set is optimized for minikube usage:
+:::note
 
-* You can have multiple Datanodes even if you have only one host (in a real production cluster usually you need one Datanode per physical host)
-* The services are published with node port
+the `kubernetes/examples/minikube` resource set is optimized for minikube usage:
+
+- You can have multiple Datanodes even if you have only one host (in a real production cluster usually you need one Datanode per physical host)
+- The services are published with node port
+
+:::
 
 ### Access the services
 
@@ -73,18 +64,16 @@ Opening kubernetes service default/s3g-public in default browser...
 
 ## Hosted Kubernetes Cluster
 
-**Requirements:**
+### Requirements:
 
-* Working Kubernetes cluster (LoadBalancer, PersistentVolume are not required)
-* kubectl
-
-As *apache/ozone* Docker images are available from Docker Hub, the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one Datanode per host)
+- Working Kubernetes cluster (LoadBalancer, PersistentVolume are not required)
+- kubectl
 
 ### Deploy to Kubernetes
 
-`kubernetes/examples` folder of the Ozone distribution contains Kubernetes deployment resource files for multiple use cases.
+As [apache/ozone](https://hub.docker.com/r/apache/ozone) images are available from Docker Hub, the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one Datanode per host)
 
-To deploy to a hosted cluster use the Ozone subdirectory:
+To deploy to a hosted cluster, use the Ozone subdirectory:
 
 ``` bash
 cd kubernetes/examples/ozone
@@ -95,6 +84,7 @@ And you can check the results with
 
 ``` bash
 kubectl get pod
+kubectl exec scm-0 -- ozone version
 ```
 
 ### Access the services
