@@ -190,7 +190,7 @@ Docusaurus provides many options for laying out documentation pages and their me
 
 #### Spelling
 
-The file names and content of all markdown pages are checked for spelling mistakes using [cspell](https://cspell.org/) as part of GitHub actions. Spelling can also be checked locally by running the script [.github/scripts/spelling.sh](.github/scripts/spelling.sh). This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run `pnpm install --dev`).
+As part of the GitHub Actions CI, all markdown pages will be checked for spelling mistakes using [cspell](https://cspell.org/). Markdown code blocks are excluded from spelling checks. Spelling can also be checked locally by running the script [.github/scripts/spelling.sh](.github/scripts/spelling.sh). This requires you to have pnpm's dev dependencies installed on your machine for cspell to work (run `pnpm install --dev`).
 
 **If spell check fails for words that are correct but not recognized:**
 
