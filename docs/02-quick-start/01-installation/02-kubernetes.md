@@ -27,7 +27,7 @@ sidebar_label: Kubernetes
 * Working minikube setup
 * kubectl
 
-`kubernetes/examples` folder of the Ozone distribution contains Kubernetes deployment resource files for multiple use cases. By default the Kubernetes resource files are configured to use *apache/ozone* image from the Docker Hub.
+The `kubernetes/examples` directory of the Ozone distribution contains Kubernetes deployment resource files for multiple use cases. By default the Kubernetes resource files are configured to use the [apache/ozone](https://hub.docker.com/r/apache/ozone) image from Docker Hub.
 
 To deploy it to minikube, use the minikube configuration set:
 
