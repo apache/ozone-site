@@ -49,7 +49,7 @@ Note: the `kubernetes/examples/minikube` resource set is optimized for minikube 
 
 ### Access the services
 
-Now you can access any of the services. For each web endpoint an additional NodeType service is defined in the minikube k8s resource set. NodeType services are available via a generated port of any of the host nodes:
+Now you can access any of the services. For each web endpoint an additional NodeType service is defined in the minikube k8s resource set. NodeType services are available via a generated port on any of the host nodes:
 
 ``` bash
 kubectl get svc
