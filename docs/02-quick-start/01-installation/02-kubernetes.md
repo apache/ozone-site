@@ -27,6 +27,7 @@ And you can check the results with
 
 ``` bash
 kubectl get pod
+kubectl exec scm-0 -- ozone version
 ```
 
 :::note
