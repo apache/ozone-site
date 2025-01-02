@@ -18,8 +18,7 @@
 # This file extends the defaults present in
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
-# Headings must use # characters at the beginning of the line only, and cannot increment by more than one.
-heading-increment:
+heading-style:
   style: atx
 
 # Only - (dash) character is allowed for bullet lists.
