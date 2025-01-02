@@ -228,7 +228,7 @@ If the command fails on MacOS, you may need to do the following additional steps
 
 :::
 
-### Create the Release Artifacts
+### Build the Project
 
 - Run rat check and ensure there are no failures.
 
@@ -243,11 +243,37 @@ If the command fails on MacOS, you may need to do the following additional steps
   git clean -dfx
   ```
 
-- Build the Release Tarballs. Make sure you are using GNU-tar instead of BSD-tar.
+- Build the project. Make sure you are using GNU-tar instead of BSD-tar.
 
   ```bash
   mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
   ```
+
+### Create and Upload Maven Artifacts
+
+- Double check that your Apache credentials are added to your local `~/.m2/settings.xml`.
+
+  ```xml title="settings.xml"
+  <settings>
+    <servers>
+      <server>
+        <id>apache.staging.https</id>
+        <username>your_apache_id</username>
+        <password>your_apache_password</password>
+      </server>
+    </servers>
+  </settings>
+  ```
+
+- Return to your Ozone repository being used for the release, and run the following command to perform the final build and upload the release artifacts:
+
+  ```bash
+  mvn deploy -DdeployAtEnd=true -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
+  ```
+
+Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
+
+### Calculate the Checksum and Sign the Artifacts
 
 - Now that we have built the release artifacts, we will copy them to the release directory.
 
@@ -255,18 +281,16 @@ If the command fails on MacOS, you may need to do the following additional steps
   cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
   ```
 
-### Calculate the Checksum and Sign the Artifacts
+- Run the following commands to generate checksum files for all release artifacts:
 
-Run the following commands to generate checksum files for all release artifacts:
+  ```bash
+  cd "$RELEASE_DIR"
+  for i in $(ls -1 *.tar.gz); do gpg -u "$CODESIGNINGKEY" --armor --output "$i.asc" --detach-sig "$i"; done
 
-```bash
-cd "$RELEASE_DIR"
-for i in $(ls -1 *.tar.gz); do gpg -u "$CODESIGNINGKEY" --armor --output "$i.asc" --detach-sig "$i"; done
+  for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
 
-for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
-
-for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
-```
+  for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
+  ```
 
 Now each .tar.gz file should have an associated .mds file, .asc file, and .sha512 file
 
@@ -326,36 +350,6 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     ```
 
 2. Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
-
-### Upload the Artifacts to Apache Nexus
-
-Double check that your Apache credentials are added to your local `~/.m2/settings.xml`.
-
-```xml title="settings.xml"
-<settings>
-  <servers>
-    <server>
-        <id>apache.snapshots.https</id>
-        <username>your_apache_id</username>
-        <password>your_apache_password</password>
-      </server>
-      <!-- To stage a release of some part of Maven -->
-      <server>
-        <id>apache.staging.https</id>
-        <username>your_apache_id</username>
-        <password>your_apache_password</password>
-    </server>
-  </servers>
-</settings>
-```
-
-Return to your Ozone repository being used for the release, and run the following command to upload the release artifacts:
-
-```bash
-mvn deploy:deploy
-```
-
-Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
 
 ### Push the Release Candidate Tag to GitHub
 
