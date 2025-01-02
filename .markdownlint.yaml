@@ -18,6 +18,7 @@
 # This file extends the defaults present in
 # https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 
+# Only use # characters to indicate headings
 heading-style:
   style: atx
 
