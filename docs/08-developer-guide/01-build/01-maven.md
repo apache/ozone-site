@@ -90,11 +90,7 @@ mvn clean install -DskipTests=true -Pdist
 
 This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment.
 
-#### Maven Build Options
-
-Several Maven options are available to customize the build process:
-
-Here's the conversion to a markdown table:
+#### Common Maven Build Options
 
 | Command | Description |
 |---------|-------------|
