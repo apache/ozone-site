@@ -106,17 +106,16 @@ This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary
 
 ### Build Output
 
-You can test the result of the compilation process by running a simple Ozone command which will display the Ozone version
-
-```bash
-./hadoop-ozone/dist/target/ozone-<version>-SNAPSHOT/bin/ozone version
-```
-
 The build process creates several important artifacts:
 
 - **Distribution Tarball**: `hadoop-ozone/dist/target/ozone-<version>.tar.gz` (when using `-Pdist`)
 - **Distribution Directory**: `hadoop-ozone/dist/target/ozone-<version>/`
-- **Individual Module JARs**: `hadoop-ozone/dist/target/ozone-<version>-SNAPSHOT/share/ozone/lib`
+- **Individual Module JARs**: `hadoop-ozone/dist/target/ozone-<version>/share/ozone/lib`
+
+You can test the result of the compilation process by running a simple Ozone command which will display the Ozone version:
+
+```bash
+hadoop-ozone/dist/target/ozone-<version>/bin/ozone version
 
 ## Next Steps
 
