@@ -1,11 +1,5 @@
 ---
 sidebar_label: Release Manager Guide
-
-# Custom words specific to this page:
-# cSpell:ignore protoroot codesigningkey lockdir pinentry gpgconf orgapacheozone
-
-# On this page, ignore CLI options used with -D or -P.
-# cSpell:ignoreRegExp -(D|P)[a-z\.,]+([\s]|=)
 ---
 
 # Apache Release Manager Guide
@@ -382,23 +376,12 @@ Once voting is finished, send an email summarizing the results (binding +1s, non
 
 ### Publish the Artifacts
 
-You should commit the artifacts to the SVN repository. If you are not a PMC member you can commit it to the dev zone first and ask a PMC for the final move.
-
-Checkout the svn folder and commit the artifacts to a new directory.
+If you are a PMC member, move artifacts in Subversion to the final location, otherwise ask the PMC to do the same:
 
 ```bash
-svn checkout https://dist.apache.org/repos/dist/dev/ozone
-cd ozone
-svn mkdir "$VERSION"
-cp "$RELEASE_DIR"/* "$VERSION"/
-svn add "$VERSION"/*
-svn commit -m "Added ozone-$VERSION directory"
-```
-
-PMC members can move it to the final location:
-
-```bash
-svn mv -m "Move ozone-$VERSION to release" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION" https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
+svn mv -m "Release ozone-$VERSION-rc$RC as ozone-$VERSION" \
+  https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC" \
+  https://dist.apache.org/repos/dist/release/ozone/"$VERSION"
 ```
 
 To publish the artifacts to [Maven Central](https://central.sonatype.com), login to https://repository.apache.org/#stagingRepositories, select your **staging** repository and **release** it.
