@@ -96,7 +96,7 @@ docker compose up -d --scale datanode=3
 docker compose ps
 ```
 
-# Next Steps
+## Next Steps
 
 This page explains the Docker Compose configuration for a basic Ozone cluster.
 You can next explore some of the other Docker Compose configurations that are available under the compose directory.
