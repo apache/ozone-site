@@ -19,62 +19,11 @@ This guide explains how to run Apache Ozone using Docker Compose, either with lo
 
 ## Running Ozone
 
-1. Obtain the Docker Compose configurations
-
-<Tabs groupId="source-based-instructions">
-  <TabItem value="Tarball" label="Tarball" default>
-    With this option, the Docker Compose cluster will automatically fetch the required images from Docker Hub.
-    <br/>Obtain the Ozone sources from the [download](/download) page.
-    <br/>Next, unpack the tarball
-    ```bash
-    tar xzf ozone-<version>-src.tar.gz
-    ```
-  </TabItem>
-  <TabItem value="Building from Source" label="Building from Source" default>
-  With this option, the `ozone-docker-runner` image will use the compiled Ozone binaries to run the Docker Compose cluster.
-  <br/> Follow the steps listed in the [Build with Maven](/docs/08-developer-guide/01-build/02-maven.md) page to obtain the sources and compile them.
-  </TabItem>
-</Tabs>
-2. Navigate to the compose directory in your build output:
-<Tabs groupId="source-based-instructions">
-  <TabItem value="Tarball" label="Tarball" default>
-    ```bash
-    cd ozone-<version>-src/compose/ozone
-    ```
-  </TabItem>
-  <TabItem value="Building from Source" label="Building from Source" default>
-    ```bash
-    cd ./hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/ozone
-    ```
-  </TabItem>
-</Tabs>
-3. Modify the configurations for Ozone (Optional)
-The configurations are stored in the `docker-config` file.
-<Tabs groupId="source-based-instructions">
-   <TabItem value="Tarball" label="Tarball" default>
-
-   ```bash
-   ozone-<version>-src/compose/ozone/docker-config
-   ```
-
-   </TabItem>
-   <TabItem value="Building from Source" label="Building from Source" default>
-
-   ```bash
-   ./hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/ozone/docker-config
-   ```
-
-</TabItem>
-</Tabs>
-4. Start the cluster:
-
- ```bash
- docker compose up -d
- ```
+Follow the [Try Ozone with Docker](/docs/02-quick-start/01-installation/01-docker.md) quick start guide to run Ozone via Docker Compose
 
 ## Container Diagram
 
-This image shows the containers that will be created by the `docker compose up -d` command.
+This image shows the containers that will be created by the `docker compose up -d` command when running the default `ozone` Docker Compose configuration as listed under the [Try Ozone with Docker](/docs/02-quick-start/01-installation/01-docker.md) quick start guide.
 
 <!-- cspell:word DN -->
 
