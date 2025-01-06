@@ -51,7 +51,7 @@ Choose one of the following methods to get the source code:
 
 ## Build the Project
 
-Apache Ozone uses Maven as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
+Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
 
 ### Build Options
 
