@@ -62,7 +62,7 @@ The build system offers several options to customize the build process according
 For a basic build that skips tests:
 
 ```bash
-mvn clean install -DskipTests=true
+mvn clean package -DskipTests=true
 ```
 
 This command will:
@@ -85,7 +85,7 @@ mvn clean install
 To create a distribution tarball for deployment:
 
 ```bash
-mvn clean install -DskipTests=true -Pdist
+mvn clean package -DskipTests=true -Pdist
 ```
 
 This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment.
@@ -95,7 +95,7 @@ This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary
 | Command | Description |
 |---------|-------------|
 | `-DskipTests=true` | Skip all tests |
-| `-Dskip.installnpm -Dskip.installnpx -Dskip.installyarn -Dskip.npm -Dskip.npx -Dskip.yarn` | Skip building the Javascript frontend for Recon |
+| `-DskipRecon` | Skip building the Javascript frontend for Recon |
 | `-Pdist` | Enable the distribution profile to create deployment tarballs |
 | `-T 4` | Use 4 threads for parallel building (adjust number based on your CPU) |
 | `-T 2C` | Use 2 threads per core for parallel building (adjust number based on your CPU) |
@@ -116,6 +116,7 @@ You can test the result of the compilation process by running a simple Ozone com
 
 ```bash
 hadoop-ozone/dist/target/ozone-<version>/bin/ozone version
+```
 
 ## Next Steps
 
