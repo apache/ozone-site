@@ -489,12 +489,7 @@ s=d.getElementsByTagName('script')[0];
 <img src="HA-OM.png" alt='HA OM'  class="img-responsive" /></p>
 <p>Client connects to the Leader Ozone Manager which process the request and schedule the replication with RAFT. When the request is replicated to all the followers the leader can return with the response.</p>
 <h2 id="configuration">Configuration</h2>
-<p>HA mode of Ozone Manager can be enabled with the following settings in <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.om.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple Ozone HA cluster. To select between the available HA clusters a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.</p>
+<p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple Ozone HA cluster. To select between the available HA clusters a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.</p>
 <p>This logical name is called <code>serviceId</code> and can be configured in the <code>ozone-site.xml</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
    <span style="color:#f92672">&lt;name&gt;</span>ozone.om.service.ids<span style="color:#f92672">&lt;/name&gt;</span>
@@ -565,7 +560,7 @@ using the <em>force</em> option. The <em>force</em> option allows to continue wi
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.0.0-SNAPSHOT, Last Modified: February 1, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5748d4066499b7c01d4251ebc262adc86a953fcf">5748d40664</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: January 6, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8f2689dfe5f9b79e64f7d78acbaaf300c1ccbd1c">8f2689dfe5</a>
     </span>
   </div>
 </footer>
