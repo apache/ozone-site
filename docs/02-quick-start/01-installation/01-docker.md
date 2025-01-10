@@ -7,7 +7,7 @@ sidebar_label: Docker
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Apache Ozone can be quickly deployed using Docker Compose, making it ideal for development, testing, and evaluation purposes. This guide walks you through setting up a multi-node Ozone cluster using either pre-built Docker images or locally built sources.
+Apache Ozone can be quickly deployed using Docker Compose, making it ideal for development, testing, and evaluation purposes. This guide walks you through setting up a multi-node Ozone cluster using pre-built Docker images.
 
 ## Prerequisites
 
