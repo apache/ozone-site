@@ -2,11 +2,8 @@
 sidebar_label: Maven
 ---
 
-<!-- cspell:words xzf Dskip Pdist installnpm installnpx installyarn -->
 
 # Building Ozone With Maven
-
-**TODO:** File a subtask under [HDDS-9861](https://issues.apache.org/jira/browse/HDDS-9861) and complete this page or section.
 
 - Cover basic Maven commands to build and run tests.
 - Document all the Ozone specific Maven flags we use to speed up or skip parts of the build, and when they are useful.
@@ -55,14 +52,12 @@ Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The bu
 
 ### Build Options
 
-The build system offers several options to customize the build process according to your requirements:
+The build system offers several options to customize the build process according to your requirements
 
-#### Basic Build
-
-For a basic build that skips tests:
+#### Basic Build with Tests
 
 ```bash
-mvn clean package -DskipTests=true
+mvn clean package
 ```
 
 This command will:
@@ -71,38 +66,30 @@ This command will:
 - Compile the source code
 - Package the compiled code into JAR files
 - Create a distribution in `hadoop-ozone/dist/target/ozone-<version>`
+- Run [unit](/docs/developer-guide/test/unit-tests) and [integration](/docs/developer-guide/test/integration-tests) tests during the build
 
-#### Build with Tests
+:::note
 
-To run unit and integration tests during the build:
+This command does not run acceptance tests.
 
-```bash
-mvn clean install
-```
+Refer to the [acceptance tests](/docs/developer-guide/test/acceptance-tests) page for test execution instructions.
 
-#### Create Distribution Tarball
-
-To create a distribution tarball for deployment:
-
-```bash
-mvn clean package -DskipTests=true -Pdist
-```
-
-This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment.
+:::
 
 #### Common Maven Build Options
 
-| Command | Description |
-|---------|-------------|
-| `-DskipTests=true` | Skip all tests |
-| `-DskipRecon` | Skip building the Javascript frontend for Recon |
-| `-Pdist` | Enable the distribution profile to create deployment tarballs |
-| `-T 4` | Use 4 threads for parallel building (adjust number based on your CPU) |
-| `-T 2C` | Use 2 threads per core for parallel building (adjust number based on your CPU) |
-| `-am -pl :<module-name>` | Build a specific module and its dependencies when run from the root of the project |
-| `-DskipShade` | Skip shading. This saves a ton of time by skipping the `ozone-filesystem-hadoop3` fat jar build used by the client |
+| Command                       | Description                                                                                                                                                             |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-DskipTests=true`            | Skip all tests                                                                                                                                                          |
+| `-Pdist`                      | This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment                                                                   |
+| `-DskipRecon`                 | Skip building the Javascript frontend for Recon                                                                                                                         |
+| `-Pdist`                      | Enable the distribution profile to create deployment tarballs                                                                                                           |
+| `-T 4`                        | Use 4 threads for parallel building (adjust number based on your CPU)                                                                                                   |
+| `-T 2C`                       | Use 2 threads per core for parallel building (adjust number based on your CPU)                                                                                          |
+| `-am -pl :<module-name>`      | Build a specific module and its dependencies when run from the root of the project                                                                                      |
+| `-DskipShade`                 | Skip shading. This saves a ton of time by skipping the `ozone-filesystem-hadoop3` fat jar build used by the client                                                      |
 | `-Dmaven.artifact.threads=30` | Allow Maven to download 30 artifacts at once. The default value is 5. This could speed up the build process by a lot when the Maven cache was not previously populated. |
-| `-Pnative` | Build native module(s). So far it only affects `hdds-rocks-native` |
+| `-Pnative`                    | Build native module(s). So far it only affects `hdds-rocks-native`                                                                                                      |
 
 ### Build Output
 
