@@ -69,7 +69,7 @@ The configurations are stored in the `docker-config` file.
 4. Start the cluster:
 
  ```bash
- docker compose up -d
+ docker compose up -d --scale datanode=3
  ```
 
 At this stage, a functional Apache Ozone cluster is available.
