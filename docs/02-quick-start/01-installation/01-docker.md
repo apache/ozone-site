@@ -15,7 +15,6 @@ This guide explains how to run Apache Ozone using Docker Compose, either with lo
 
 - [Docker Engine](https://www.docker.com/products/docker-desktop/) 20.10.0 or higher
 - [Docker Compose](https://docs.docker.com/compose/install/) V2
-- Built Ozone distribution (if running from local build)
 
 ## Running Ozone
 
