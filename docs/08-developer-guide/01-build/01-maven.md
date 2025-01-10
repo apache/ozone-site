@@ -74,7 +74,7 @@ This command will:
 
 #### Build with Tests
 
-To run unit tests during the build:
+To run unit and integration tests during the build:
 
 ```bash
 mvn clean install
