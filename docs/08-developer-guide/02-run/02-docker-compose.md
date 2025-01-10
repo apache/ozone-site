@@ -61,6 +61,8 @@ This command creates a fully functional Apache Ozone cluster using the `ozone-do
 
 This image shows the containers that will be created by the `docker compose up -d` command when running the default Docker Compose configuration under `/compose/ozone` .
 
+<!-- cspell:word DN -->
+
 ```mermaid
 graph TB
     subgraph "Apache Ozone Containers"
@@ -106,7 +108,7 @@ Your Ozone cluster includes the following components:
 - **Ozone Manager (OM)**: Handles namespace operations and metadata management
 - **S3 Gateway**: Provides S3-compatible API access
 - **Recon**: Monitoring and management service
-- **DataNodes**: Distributed storage nodes
+- **Datanodes**: Distributed storage nodes
 - **HttpFS**: HTTP-based filesystem interface
 
 ## Cluster Management
@@ -134,7 +136,7 @@ docker compose ps
 
 ### CLI Access
 
-Access the Ozone command-line interface from any ozone container:
+Access the Ozone command-line interface from any Ozone container:
 
 ```bash
 # Enter the Ozone Manager container or any other container
@@ -147,6 +149,8 @@ ozone
 ## Advanced Configurations
 
 The compose directory includes several specialized configurations for different use cases:
+
+<!-- cspell:word  ozonesecure -->
 
 | Configuration  | Purpose                                 |
 |----------------|-----------------------------------------|
