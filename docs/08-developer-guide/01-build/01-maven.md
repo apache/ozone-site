@@ -120,4 +120,4 @@ hadoop-ozone/dist/target/ozone-<version>/bin/ozone version
 
 ## Next Steps
 
-Run the build by deploying the binary on either a [machine](../../05-administrator-guide/01-installation/03-installing-binaries.md) or on a [Docker cluster](../../08-developer-guide/02-run/02-docker-compose.md)
+Run the build by deploying the binary on either [bare metal](../../05-administrator-guide/01-installation/03-installing-binaries.md) or a [Docker cluster](../../08-developer-guide/02-run/02-docker-compose.md)
