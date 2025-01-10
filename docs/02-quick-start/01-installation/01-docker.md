@@ -12,7 +12,7 @@ Apache Ozone can be quickly deployed using Docker Compose, making it ideal for d
 ## Prerequisites
 
 - [Docker Engine](https://docs.docker.com/engine/install/) - Latest stable version
-- [Docker Compose V2](https://docs.docker.com/compose/install/) - Latest stable version
+- [Docker Compose](https://docs.docker.com/compose/install/) - Latest stable version
 
 ## Quick Start Guide
 
