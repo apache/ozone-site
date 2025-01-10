@@ -2,30 +2,64 @@
 sidebar_label: Docker Compose
 ---
 
-<!-- cspell:words xzf -->
-
 # Running Ozone From Docker Compose
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to run Apache Ozone using Docker Compose, either with locally built sources or pre-built images.
+This guide walks you through the process of building Apache Ozone from source and running it using Docker Compose. This approach is particularly useful for development, testing, and understanding Ozone's architecture.
 
 ## Prerequisites
 
-- [Docker Engine](https://www.docker.com/products/docker-desktop/) 20.10.0 or higher
-- [Docker Compose](https://docs.docker.com/compose/install/) V2
-- Built Ozone distribution (if running from local build)
+Before you begin, ensure you have installed:
 
-## Running Ozone
+- [Docker Engine](https://docs.docker.com/engine/install/) - Latest stable version
+- [Docker Compose](https://docs.docker.com/compose/install/) - Latest stable version
 
-Follow the [Try Ozone with Docker](/docs/02-quick-start/01-installation/01-docker.md) quick start guide to run Ozone via Docker Compose
+## Building and Deploying Ozone
+
+### Step 1: Build from Source
+
+First, build Ozone from source following our [Build with Maven](/docs/08-developer-guide/01-build/02-maven.md) guide.
+
+### Step 2: Locate Docker Compose Files
+
+Navigate to the compose directory in your build output:
+
+```bash
+cd ./hadoop-ozone/dist/target/ozone-<VERSION>/compose/ozone
+```
+
+### Step 3: Configure Your Deployment (Optional)
+
+You can customize your Ozone deployment by modifying the configuration parameters in the `docker-compose.yaml` file:
+
+1. **Common Configurations**: Located under the `x-common-config` section
+2. **Service-Specific Settings**: Found under the `environment` section of individual services
+
+Example configuration modification:
+
+```yaml
+# Example configuration modifications
+x-common-config:
+  environment:
+    OZONE-SITE.XML_ozone.scm.container.size: 1GB
+    OZONE-SITE.XML_ozone.scm.block.size: 256MB
+```
+
+### Step 4: Launch the Cluster
+
+Start your Ozone cluster:
+
+```bash
+docker compose up -d --scale datanode=3
+```
+
+This command creates a fully functional Apache Ozone cluster using the `ozone-docker-runner` base image, which mounts your locally compiled Ozone binaries.
 
 ## Container Diagram
 
-This image shows the containers that will be created by the `docker compose up -d` command when running the default `ozone` Docker Compose configuration as listed under the [Try Ozone with Docker](/docs/02-quick-start/01-installation/01-docker.md) quick start guide.
-
-<!-- cspell:word DN -->
+This image shows the containers that will be created by the `docker compose up -d` command when running the default Docker Compose configuration under `/compose/ozone` .
 
 ```mermaid
 graph TB
@@ -62,52 +96,74 @@ graph TB
     class scm,om manager;
 ```
 
-## Cluster Configuration
+## Cluster Components
 
-### Default Services
+### Core Services
 
-The default Docker Compose configuration includes:
+Your Ozone cluster includes the following components:
 
-- Storage Container Manager (SCM)
-- Ozone Manager (OM)
-- S3 Gateway
-- Recon (Monitoring Service)
-- Datanodes
-- HttpFS
+- **Storage Container Manager (SCM)**: Manages storage containers and block allocation
+- **Ozone Manager (OM)**: Handles namespace operations and metadata management
+- **S3 Gateway**: Provides S3-compatible API access
+- **Recon**: Monitoring and management service
+- **DataNodes**: Distributed storage nodes
+- **HttpFS**: HTTP-based filesystem interface
 
 ## Cluster Management
 
-Common Docker Compose commands:
+### Essential Commands
+
+Here are the key commands for managing your Ozone cluster:
 
 ```bash
 # Start the cluster
 docker compose up -d
 
-# Stop the cluster
+# Stop and remove all containers
 docker compose down
 
-# View service logs
+# Monitor service logs
 docker compose logs -f [service_name]
 
-# Scale data nodes
+# Scale the number of datanodes
 docker compose up -d --scale datanode=3
 
-# Check service status
+# Check cluster status
 docker compose ps
 ```
 
-## Next Steps
+### CLI Access
 
-This page explains the Docker Compose configuration for a basic Ozone cluster.
-You can next explore some of the other Docker Compose configurations that are available under the compose directory.
+Access the Ozone command-line interface from any ozone container:
+
+```bash
+# Enter the Ozone Manager container or any other container
+docker compose exec om bash
+
+# Run Ozone commands
+ozone
+```
+
+## Advanced Configurations
+
+The compose directory includes several specialized configurations for different use cases:
+
+| Configuration  | Purpose                                 |
+|----------------|-----------------------------------------|
+| ozone-ha       | High availability deployment setup      |
+| ozonesecure    | Security features with SSL and Kerberos |
+| ozone-topology | Rack-aware deployment configuration     |
+| upgrade        | Non-rolling upgrade testing environment |
+
+To explore these configurations:
 
 ```bash
 cd hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/
 ```
 
-| Docker Compose configuration | Description |
-|--------------|-------------|
-| ozone-ha     | Explore Ozone high availability with this configuration |
-| ozone-secure | Explore various SSL certificate and Kerberos configurations |
-| topology     | Explore the rack-aware configuration |
-| upgrade      | Explore the non-rolling upgrade configuration |
+## Next Steps
+
+After setting up your development cluster:
+
+1. Explore the [Ozone CLI documentation](/docs/04-user-guide/02-clients/01-ozone.md)
+2. Experiment with the various compose configurations for specific use cases
