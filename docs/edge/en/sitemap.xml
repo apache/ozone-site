@@ -320,6 +320,12 @@
                 href="/feature.html"
                 />
   </url><url>
+    <loc>/integration/hive.html</loc>
+    <lastmod>2025-01-11T09:27:03-08:00</lastmod>
+  </url><url>
+    <loc>/integration/impala.html</loc>
+    <lastmod>2025-01-11T09:27:26-08:00</lastmod>
+  </url><url>
     <loc>/interface/reconapi.html</loc>
     <lastmod>2024-08-11T21:33:21+05:30</lastmod>
     <xhtml:link
@@ -764,6 +770,9 @@
   </url><url>
     <loc>/feature/faircallqueue.html</loc>
     <lastmod>2023-06-29T00:30:39+03:00</lastmod>
+  </url><url>
+    <loc>/integration.html</loc>
+    <lastmod>2025-01-11T09:27:03-08:00</lastmod>
   </url><url>
     <loc>/interface.html</loc>
     <lastmod>2020-08-07T18:35:36+02:00</lastmod>

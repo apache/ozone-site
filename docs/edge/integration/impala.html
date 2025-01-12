@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -288,7 +291,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../integration/impala.html">Impala</a>
                            
@@ -453,137 +456,115 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/">[]</a> Upgrade - Developer Primer () </h1>
-                <div><i>Authors: Aravindan Vijayan</i><div class="pull-right">2021-02-15</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Helpful resources for those who are bringing layout changes.
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../integration.html">Application Integrations</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Impala</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Impala</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<h1 id="terminologies">Terminologies</h1>
-<h2 id="layout-feature">Layout Feature</h2>
-<p>A layout feature is any new Ozone feature that makes a backward incompatible change to the on disk layout. Each layout feature is associated with a layout version that it defines. A component has a list of monotonically increasing layout features (versions) that it supports.</p>
-<h2 id="finalizing--pre-finalized-state">Finalizing &amp; Pre-Finalized State</h2>
-<p>When upgrading a component from an older version to a newer version which has a higher layout version, the component automatically goes into a pre-finalized state after which an explicit ‘finalize’ action is required from the user to finalize it. In the pre-finalized state, commands/APIs/on disk structures used and created by newer layout features are meant to be unsupported or unused. After finalizing, the newer layout feature APIs are supported.</p>
-<h2 id="downgrade">Downgrade</h2>
-<p>Downgrade to a lower version is allowed from the pre-finalized state. This involves stopping the component, replacing the artifacts to the older version, and then starting it up again.</p>
-<h1 id="useful-framework-tools-to-use">Useful framework tools to use</h1>
-<h2 id="layoutfeature">LayoutFeature</h2>
-<pre><code>org.apache.hadoop.ozone.om.upgrade.OMLayoutFeature
-org.apache.hadoop.hdds.upgrade.HDDSLayoutFeature
-</code></pre>
-<p>Class to add  a new layout feature being brought in. Layout version is typically 1 + last layout feature in that catalog.</p>
-<h2 id="layoutversionmanager">LayoutVersionManager</h2>
-<pre><code>org.apache.hadoop.ozone.om.upgrade.OMLayoutVersionManager
-org.apache.hadoop.hdds.upgrade.HDDSLayoutVersionManager
-</code></pre>
-<p>Every component carries an instance of this interface, which provides APIs to get runtime layout version, and if a feature is allowed based on that or not.</p>
-<p>The LayoutVersionManager interface carries an API that can be used to check if a feature is allowed in the current layout version.
-org.apache.hadoop.ozone.upgrade.LayoutVersionManager#isAllowed(org.apache.hadoop.ozone.upgrade.LayoutFeature)</p>
-<h2 id="disalloweduntillayoutversion-annotation">@DisallowedUntilLayoutVersion Annotation</h2>
-<p>Method level annotation used to &ldquo;disallow&rdquo; an API if current layout version does not include the associated layout feature. Currently it is added only to the OM module, but can easily be moved down to a common module based on need on the HDDS layer.</p>
-<h2 id="belongstolayoutversion-annotation">@BelongsToLayoutVersion Annotation</h2>
-<p>Annotation to mark an OM request class that it belongs to a specific Layout Version. Until that version is available post finalize, this request will not be supported. A newer version of an existing OM request can be created (by inheritance or a fully new class) and marked with a newer layout version. Until finalizing this layout version, the older request class is used. Post finalizing, the newer version of the request class is used.</p>
-<h2 id="layoutversioninstancefactoryt">LayoutVersionInstanceFactory<T></h2>
-<p>Generic factory which stores different instances of Type &lsquo;T&rsquo; sharded by a key &amp; version. A single key can be associated with different versions of &lsquo;T&rsquo;.</p>
-<h3 id="why-does-this-class-exist">Why does this class exist?</h3>
-<p>A typical use case during upgrade is to have multiple versions of a class / method / object and choose them based  on the current layout version at runtime. Before finalizing, an older version is typically needed, and after finalization, a newer version is needed. This class serves this purpose in a generic way. For example, we can create a Factory to create multiple versions of OMRequests sharded by Request Type &amp; Layout Version Supported.</p>
-<h2 id="upgrade-action-upgradeactionom--upgradeactionhdds">Upgrade Action (UpgradeActionOm &amp; UpgradeActionHdds)</h2>
-<p>Annotation to specify upgrade action run during specific upgrade phases. Each layout feature can optionally define an upgrade action for every supported phase. These are the supported phases of action callbacks.</p>
-<h4 id="validate_in_prefinalize">VALIDATE_IN_PREFINALIZE</h4>
-<p>A ‘validation’ action run every time a component is started up with this layout feature being unfinalized.</p>
+<p>Starting with version 4.2.0, Apache Impala provides full support for querying data stored in Apache Ozone. To utilize this functionality, ensure that your Ozone version is 1.4.0 or later.</p>
+<h2 id="supported-access-protocols">Supported Access Protocols</h2>
+<p>Impala supports the following protocols for accessing Ozone data:</p>
 <ul>
-<li>
-<p>Example: Stopping a component if a new configuration is used prior to it being finalized.</p>
-</li>
-<li>
-<p>Example: Cleaning up from a failed ON_FINALIZE action that may have left on disk data in an inoperable state.</p>
+<li>ofs</li>
+<li>s3a</li>
+</ul>
+<p>Note: The o3fs protocol is <strong>NOT</strong> supported by Impala.</p>
+<h2 id="supported-replication-types">Supported Replication Types</h2>
+<p>Impala is compatible with Ozone buckets configured with either:</p>
 <ul>
-<li>Note that because the ON_FINALIZE action failed, the feature remains pre-finalized.</li>
+<li>RATIS (Replication)</li>
+<li>Erasure Coding</li>
 </ul>
-</li>
-</ul>
-<h4 id="on_first_upgrade_start">ON_FIRST_UPGRADE_START</h4>
-<p>A backward compatible action run once when an upgraded cluster is detected with this new layout version. This differs from VALIDATE_IN_PREFINALIZE because it will not be run again once it completes successfully.
-This action will be run again if it fails partway through, and may be run again if another error occurs during the upgrade. The action must always leave on disk data in a backwards compatible state, even if it fails partway through, since it is being executed before finalization.</p>
+<h2 id="querying-ozone-data-with-impala">Querying Ozone Data with Impala</h2>
+<p>Impala provides two approaches to interact with Ozone:</p>
 <ul>
-<li>Example: The new version expects data in a different location even when it is pre-finalized. The action creates a symlink in the new location pointing to the old location.</li>
+<li>Managed Tables</li>
+<li>External Tables</li>
 </ul>
-<h4 id="on_finalize">ON_FINALIZE</h4>
-<p>An action run once during finalization of layout version (feature). This action will be run again if it fails partway through, and may be run again if another error occurs during the upgrade. This is the only action permitted to make backwards incompatible changes to on disk structures, since finalization has been initiated by the time it is run. If a failure partway through could leave the component in an inoperable state, a cleanup action should be used in VALIDATE_IN_PREFINALIZE, which will be run when the component is restarted after a failure.</p>
+<h3 id="managed-tables">Managed Tables</h3>
+<p>If the Hive Warehouse Directory is located in Ozone, you can execute Impala queries without any changes, treating the Ozone file system like HDFS. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 (x INT, s STRING);
+</code></pre></div><p>The data will be stored under the Hive Warehouse Directory path in Ozone.</p>
+<h4 id="specifying-a-custom-ozone-path">Specifying a Custom Ozone Path</h4>
+<p>You can create managed databases, tables, or partitions at a specific Ozone path using the <code>LOCATION</code> clause. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/d1.db&#39;</span>;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
+</code></pre></div><h3 id="external-tables">External Tables</h3>
+<p>You can create an external table in Impala to query Ozone data. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">EXTERNAL</span> <span style="color:#66d9ef">TABLE</span> external_table (
+  id INT,
+  name STRING
+)
+<span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
+</code></pre></div><ul>
+<li>With external tables, the data is expected to be created and managed by another tool.</li>
+<li>Impala queries the data as-is.</li>
+<li>The metadata is stored under the external warehouse directory.</li>
+<li>Note: Dropping an external table in Impala does not delete the associated data.</li>
+</ul>
+<h2 id="using-the-s3a-protocol">Using the S3A Protocol</h2>
+<p>In addition to ofs, Impala can access Ozone via the S3 Gateway using the S3A file system. For more details, refer to</p>
 <ul>
-<li>
-<p>Example: Adding a new RocksDB column family.</p>
-</li>
-<li>
-<p>Example: Logging a message saying a feature is being finalized.</p>
-</li>
+<li>The <a href="../interface/s3.html">S3 Protocol</a></li>
+<li>The <a href="https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html">Hadoop S3A</a> documentation.</li>
 </ul>
-<h2 id="prepare-the-ozone-manager">‘Prepare’ the Ozone Manager</h2>
-<p>Used to flush all transactions to disk, take a DB snapshot, and purge the logs, leaving Ratis in a clean state without unapplied log entries. This prepares the OM for upgrades/downgrades so that no request in the log is applied to the database in the old version of the code in one OM, and the new version of the code in another OM.</p>
-<p>To prepare an OM quorum, run</p>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; prepare
-</code></pre>
-<p>To cancel preparation of an OM quorum, run</p>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; cancelprepare
-</code></pre>
-<h2 id="when-do-you-bring-in-a-change-as-a-layout-feature">When do you bring in a change as a Layout feature?</h2>
-<p>By using the new feature, if it creates a change in disk layout (RocksDB, HDDS Volume etc) that is incompatible with the older version, then that qualifies as a layout feature.</p>
-<h4 id="what-are-some-examples-of-changes-that-need-not-be-layout-features">What are some examples of changes that need not be layout features?</h4>
-<ul>
-<li>A feature that creates a table and writes into it. On downgrade, the table
-is no longer accessed (as expected), but does not interfere with the existing
-functionality.</li>
-<li>A change to an existing OM request that does not change on disk layout.</li>
-</ul>
-<h2 id="testing-layout-feature-onboarding">Testing layout feature onboarding</h2>
-<ul>
-<li>Ability to deploy Mini ozone cluster with any layout version
-<ul>
-<li>org.apache.hadoop.ozone.MiniOzoneCluster.Builder#setScmLayoutVersion</li>
-<li>org.apache.hadoop.ozone.MiniOzoneCluster.Builder#setOmLayoutVersion</li>
-<li>org.apache.hadoop.ozone.MiniOzoneCluster.Builder#setDnLayoutVersion</li>
-</ul>
-</li>
-<li>Acceptance test framework provides callbacks at various upgrade stages
-(older, pre-finalize, on downgrade, on finalize) to plug in data ingestion / verification logic.
-<ul>
-<li>Please refer to hadoop-ozone/dist/src/main/compose/upgrade/README.md</li>
-</ul>
-</li>
-</ul>
+<p>For additional information, consult the Apache Impala User Documentation
+<a href="https://impala.apache.org/docs/build/html/topics/impala_ozone.html">Using Impala with Apache Ozone Storage</a>.</p>
 
-            </div>
+
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.0.0-SNAPSHOT, Last Modified: April 28, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5927bd26a61edf964c1ea429f61d27eec4713165">5927bd26a6</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: January 11, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/468c35d76c068d5e55fac676dd6d3e4b6e4c3773">468c35d76c</a>
     </span>
   </div>
 </footer>
@@ -595,5 +576,6 @@ functionality.</li>
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

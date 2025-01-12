@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Application Integrations on Ozone</title>
+    <link>/integration.html</link>
+    <description>Recent content in Application Integrations on Ozone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/integration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hive</title>
+      <link>/integration/hive.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/integration/hive.html</guid>
+      <description>Apache Hive has supported Apache Ozone since Hive 4.0. To enable Hive to work with Ozone paths, ensure that the ozone-filesystem-hadoop3 JAR is added to the Hive classpath.
+Supported Access Protocols Hive supports the following protocols for accessing Ozone data:
+ ofs o3fs s3a  Supported Replication Types Hive is compatible with Ozone buckets configured with either:
+ RATIS (Replication) Erasure Coding  Accessing Ozone Data in Hive Hive provides two methods to interact with data in Ozone:</description>
+    </item>
+    
+    <item>
+      <title>Impala</title>
+      <link>/integration/impala.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/integration/impala.html</guid>
+      <description>Starting with version 4.2.0, Apache Impala provides full support for querying data stored in Apache Ozone. To utilize this functionality, ensure that your Ozone version is 1.4.0 or later.
+Supported Access Protocols Impala supports the following protocols for accessing Ozone data:
+ ofs s3a  Note: The o3fs protocol is NOT supported by Impala.
+Supported Replication Types Impala is compatible with Ozone buckets configured with either:
+ RATIS (Replication) Erasure Coding  Querying Ozone Data with Impala Impala provides two approaches to interact with Ozone:</description>
+    </item>
+    
+  </channel>
+</rss>
