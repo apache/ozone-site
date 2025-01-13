@@ -5,7 +5,6 @@ sidebar_label: Maven
 
 # Building Ozone With Maven
 
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
