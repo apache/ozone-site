@@ -68,9 +68,7 @@ This command will:
 
 :::note
 
-This command does not run acceptance tests.
-
-Refer to the [acceptance tests](/docs/developer-guide/test/acceptance-tests) page for test execution instructions.
+This command does not run acceptance tests. Refer to the [acceptance tests](/docs/developer-guide/test/acceptance-tests) page for test execution instructions.
 
 :::
 
