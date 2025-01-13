@@ -5,8 +5,6 @@ sidebar_label: Maven
 
 # Building Ozone With Maven
 
-- Cover basic Maven commands to build and run tests.
-- Document all the Ozone specific Maven flags we use to speed up or skip parts of the build, and when they are useful.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
