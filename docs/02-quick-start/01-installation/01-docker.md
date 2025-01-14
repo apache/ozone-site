@@ -32,7 +32,7 @@ docker compose up -d --scale datanode=3
 
 This command will:
 
-- Automatically pull the required Ozone images from Docker Hub
+- Automatically pull required images from Docker Hub
 - Create a multi-node cluster with the core Ozone services
 - Start all components in detached mode
 
