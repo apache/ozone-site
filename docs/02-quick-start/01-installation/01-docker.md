@@ -58,10 +58,12 @@ docker-scm-1        apache/ozone:1.4.1-rocky   "/usr/local/bin/dumb…"   scm   
 ```
 
 Find the Ozone version
+
 ```bash
 docker compose exec om bash
 ozone version
 ```
+
 Once your cluster is running, you can access the Ozone Recon server, which provides monitoring and management capabilities by navigating to the [Recon server home page](http://localhost:9888)
 
 ## Configuration
