@@ -76,7 +76,6 @@ This command does not run acceptance tests. Refer to the [acceptance tests](/doc
 | `-DskipTests=true`            | Skip all tests                                                                                                                                                          |
 | `-Pdist`                      | This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment                                                                   |
 | `-DskipRecon`                 | Skip building the Javascript frontend for Recon                                                                                                                         |
-| `-Pdist`                      | Enable the distribution profile to create deployment tarballs                                                                                                           |
 | `-T 4`                        | Use 4 threads for parallel building (adjust number based on your CPU)                                                                                                   |
 | `-T 2C`                       | Use 2 threads per core for parallel building (adjust number based on your CPU)                                                                                          |
 | `-am -pl :<module-name>`      | Build a specific module and its dependencies when run from the root of the project                                                                                      |
