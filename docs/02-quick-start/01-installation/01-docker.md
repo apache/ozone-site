@@ -70,7 +70,6 @@ You can customize your Ozone deployment by modifying the configuration parameter
 1. **Common Configurations**: Located under the `x-common-config` section
 2. **Service-Specific Settings**: Found under the `environment` section of individual services
 
-Example configuration modification:
 As an example, to modify the Storage Container Manager's container and block sizes, you can add the following additional properties to the `x-common-config` section
 
 ```yaml
