@@ -11,9 +11,9 @@ Apache Ozone can be quickly deployed using Docker Compose, making it ideal for d
 - [Docker Engine](https://docs.docker.com/engine/install/) - Latest stable version
 - [Docker Compose](https://docs.docker.com/compose/install/) - Latest stable version
 
-## Quick Start Guide
+## Running Ozone
 
-### Step 1: Set Up Docker Compose Configuration
+### Obtain the Docker Compose Configuration
 
 First, obtain Ozone's sample Docker Compose configuration:
 
@@ -22,7 +22,7 @@ First, obtain Ozone's sample Docker Compose configuration:
 curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/docker-compose.yaml
 ```
 
-### Step 2: Launch the Cluster
+### Start the Cluster
 
 Start your Ozone cluster with three Datanodes using the following command:
 
@@ -36,7 +36,7 @@ This command will:
 - Create a multi-node cluster with the core Ozone services
 - Start all components in detached mode
 
-### Step 3: Verify Deployment
+### Verify the Deployment
 
 Check the status of your Ozone cluster components:
 
@@ -57,27 +57,29 @@ docker-s3g-1        apache/ozone:1.4.1-rocky   "/usr/local/bin/dumb…"   s3g   
 docker-scm-1        apache/ozone:1.4.1-rocky   "/usr/local/bin/dumb…"   scm        14 seconds ago   Up 13 seconds   0.0.0.0:9876->9876/tcp, :::9876->9876/tcp
 ```
 
-### Step 4: Access the Management Console
-
+Find the Ozone version
+```bash
+docker compose exec om bash
+ozone version
+```
 Once your cluster is running, you can access the Ozone Recon server, which provides monitoring and management capabilities by navigating to the [Recon server home page](http://localhost:9888)
 
-## Advanced Configuration
-
-### Customizing Ozone Settings
+## Configuration
 
 You can customize your Ozone deployment by modifying the configuration parameters in the `docker-compose.yaml` file:
 
 1. **Common Configurations**: Located under the `x-common-config` section
 2. **Service-Specific Settings**: Found under the `environment` section of individual services
 
-As an example, to modify the Storage Container Manager's container and block sizes, you can add the following additional properties to the `x-common-config` section
+As an example, to update the port on which Recon listens to, append the following configuration:
 
 ```yaml
 x-common-config:
   ...
-  OZONE-SITE.XML_ozone.scm.container.size: 1GB
-  OZONE-SITE.XML_ozone.scm.block.size: 256MB
+  OZONE-SITE.XML_ozone.recon.http-address: 0.0.0.0:9090
 ```
+
+Refer to the [Configuring Ozone For Production](/docs/quick-start/installation/docker) page for more configuration guidelines
 
 ## Next Steps
 
