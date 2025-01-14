@@ -77,7 +77,7 @@ This command does not run acceptance tests. Refer to the [acceptance tests](/doc
 | `-Pdist`                      | This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment                                                                   |
 | `-DskipRecon`                 | Skip building the Javascript frontend for Recon                                                                                                                         |
 | `-T 4`                        | Use 4 threads for parallel building (adjust number based on your CPU)                                                                                                   |
-| `-T 2C`                       | Use 2 threads per core for parallel building (adjust number based on your CPU)                                                                                          |
+| `-T 2C`                       | Use 2 threads per core for parallel building                                                                                          |
 | `-am -pl :<module-name>`      | Build a specific module and its dependencies when run from the root of the project                                                                                      |
 | `-DskipShade`                 | Skip shading. This saves a ton of time by skipping the `ozone-filesystem-hadoop3` fat jar build used by the client                                                      |
 | `-Dmaven.artifact.threads=30` | Allow Maven to download 30 artifacts at once. The default value is 5. This could speed up the build process by a lot when the Maven cache was not previously populated. |
