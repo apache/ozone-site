@@ -75,6 +75,7 @@ As an example, to modify the Storage Container Manager's container and block siz
 
 ```yaml
 x-common-config:
+  ...
   OZONE-SITE.XML_ozone.scm.container.size: 1GB
   OZONE-SITE.XML_ozone.scm.block.size: 256MB
 ```
