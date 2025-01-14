@@ -15,7 +15,7 @@ Apache Ozone can be quickly deployed using Docker Compose, making it ideal for d
 
 ### Step 1: Set Up Docker Compose Configuration
 
-First, obtain the official Ozone Docker Compose configuration:
+First, obtain Ozone's sample Docker Compose configuration:
 
 ```bash
 # Download the latest Docker Compose configuration file
