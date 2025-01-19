@@ -287,6 +287,12 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
+                           <a href="./integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
                            <a href="./integration/hive.html">Hive</a>
                            
                         </li>
@@ -514,6 +520,28 @@ Many applications can be integrated with Ozone through the Hadoop-compatible ofs
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
+                                    Hadoop DistCp
+                                </h2>
+                                <p class="card-text">Hadoop DistCp is a command line, MapReduce-based tool for bulk data copying.
+The hadoop distcp command can be used to copy data to and from Ozone and any Hadoop compatible file systems, such as HDFS or S3A.
+Basic usage To copy files from a source Ozone cluster directory to a destination Ozone cluster directory, use the following command:
+hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2 You must define the service IDs for both ozone1 and ozone2 clusters in the ozone-site.</p>
+                                <a href="./integration/distcp.html"
+                                   class=" btn btn-primary btn-lg">Hadoop DistCp</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
                                     Hive
                                 </h2>
                                 <p class="card-text">Apache Hive has supported Apache Ozone since Hive 4.0. To enable Hive to work with Ozone paths, ensure that the ozone-filesystem-hadoop3 JAR is added to the Hive classpath.
@@ -527,10 +555,14 @@ Supported Access Protocols Hive supports the following protocols for accessing O
                     </div>
 
                     
+                        </div>
+                    
                 
 
                 
                 
+                <div class="row">
+                    
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
@@ -549,8 +581,6 @@ Supported Replication Types Impala is compatible with Ozone buckets configured w
                         </div>
                     </div>
 
-                    
-                        </div>
                     
                 
                 

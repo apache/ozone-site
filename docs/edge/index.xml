@@ -207,6 +207,18 @@ There are some functionality which couldn&amp;rsquo;t be accessed without using 
     </item>
     
     <item>
+      <title>Hadoop DistCp</title>
+      <link>/integration/distcp.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/integration/distcp.html</guid>
+      <description>Hadoop DistCp is a command line, MapReduce-based tool for bulk data copying.
+The hadoop distcp command can be used to copy data to and from Ozone and any Hadoop compatible file systems, such as HDFS or S3A.
+Basic usage To copy files from a source Ozone cluster directory to a destination Ozone cluster directory, use the following command:
+hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2 You must define the service IDs for both ozone1 and ozone2 clusters in the ozone-site.</description>
+    </item>
+    
+    <item>
       <title>Hive</title>
       <link>/integration/hive.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
