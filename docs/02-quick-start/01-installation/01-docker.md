@@ -81,7 +81,7 @@ x-common-config:
   OZONE-SITE.XML_ozone.recon.http-address: 0.0.0.0:9090
 ```
 
-Refer to the [Configuring Ozone For Production](/docs/quick-start/installation/docker) page for more configuration guidelines
+Refer to the [Configuring Ozone For Production](/docs/quick-start/installation/docker) page for more configuration guidelines.
 
 ## Next Steps
 
