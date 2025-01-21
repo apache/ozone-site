@@ -513,12 +513,7 @@ s=d.getElementsByTagName('script')[0];
 <p>Both Ozone Manager and Storage Container Manager supports HA. In this mode the internal state is replicated via RAFT (with Apache Ratis)</p>
 <p>This document explains the HA setup of Storage Container Manager (SCM), please check <a href="../feature/om-ha.html">this page</a> for HA setup of Ozone Manager (OM). While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.</p>
 <h2 id="configuration">Configuration</h2>
-<p>HA mode of Storage Container Manager can be enabled with the following settings in <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple SCM HA node set, multiple Ozone clusters. To select between the available SCM nodes a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Storage Container Managers.</p>
+<p>One Ozone configuration (<code>ozone-site.xml</code>) can support multiple SCM HA node set, multiple Ozone clusters. To select between the available SCM nodes a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Storage Container Managers.</p>
 <p>This logical name is called <code>serviceId</code> and can be configured in the <code>ozone-site.xml</code></p>
 <p>Most of the time you need to set only the values of your current cluster:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
@@ -604,15 +599,13 @@ signed certificate for sub-CA from root CA.</p>
 <p><strong>Note</strong>: Make sure to run <strong>&ndash;init</strong> only on one of the SCM host if
 primordial SCM is not defined. Bring up other SCM&rsquo;s using <strong>&ndash;bootstrap</strong>.</p>
 <h3 id="current-scm-ha-security-limitation">Current SCM HA Security limitation:</h3>
-<ol>
-<li>When primordial SCM is down, new SCM’s cannot be bootstrapped and join the
-quorum.</li>
-<li>Secure cluster upgrade to ratis-enable secure cluster is not supported.</li>
-</ol>
+<ul>
+<li>Unsecure HA cluster upgrade to secure HA cluster is not supported.</li>
+</ul>
 <h2 id="implementation-details">Implementation details</h2>
 <p>SCM HA uses Apache Ratis to replicate state between the members of the SCM HA quorum. Each node maintains the block management metadata in local RocksDB.</p>
 <p>This replication process is a simpler version of OM HA replication process as it doesn&rsquo;t use any double buffer (as the overall db thourghput of SCM requests are lower)</p>
-<p>Datanodes are sending all the reports (Container reports, Pipeline reports&hellip;) to <em>all</em> the Datanodes parallel. Only the leader node can assign/create new containers, and only the leader node sends command back to the Datanodes.</p>
+<p>Datanodes are sending all the reports (Container reports, Pipeline reports&hellip;) to <em>all</em> SCM nodes in parallel. Only the leader node can assign/create new containers, and only the leader node sends commands back to the Datanodes.</p>
 <h2 id="verify-scm-ha-setup">Verify SCM HA setup</h2>
 <p>After starting an SCM-HA it can be validated if the SCM nodes are forming one single quorum instead of 3 individual SCM nodes.</p>
 <p>First, check if all the SCM nodes store the same ClusterId metadata:</p>
@@ -633,10 +626,10 @@ bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db
 
 
 bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db scan --column-family<span style="color:#f92672">=</span>containers
-</code></pre></div><h2 id="migrating-from-existing-scm">Migrating from existing SCM</h2>
-<p>SCM HA can be turned on on any Ozone cluster. First enable Ratis (<code>ozone.scm.ratis.enable</code>) and configure only one node for the Ratis ring (<code>ozone.scm.nodes.serviceId</code> should have one element).</p>
-<p>Start the cluster and test if it works well.</p>
-<p>If everything is fine, you can extend the cluster configuration with multiple nodes, restart SCM node, and initialize the additional nodes with <code>scm --bootstrap</code> command.</p>
+</code></pre></div><h2 id="migrating-from-non-ha-to-ha-scm">Migrating from Non-HA to HA SCM</h2>
+<p>Add additional SCM nodes and extend the cluster configuration to reflect the newly added nodes.
+Bootstrap the newly added SCM nodes with <code>scm --bootstrap</code> command and start the SCM service.
+Note: Make sure that the <code>ozone.scm.primordial.node.id</code> property is pointed to the existing SCM before you run the <code>bootstrap</code> command on the newly added SCM nodes.</p>
 
 
           
@@ -656,7 +649,7 @@ bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.0.0-SNAPSHOT, Last Modified: November 6, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2547ac0438ec0374f75227f60a35b11ad9a986a4">2547ac0438</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: January 21, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7b4df04beb59373f0dda509adeb59a33feb488fd">7b4df04beb</a>
     </span>
   </div>
 </footer>

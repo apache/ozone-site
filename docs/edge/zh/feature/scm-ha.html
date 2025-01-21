@@ -441,18 +441,7 @@ s=d.getElementsByTagName('script')[0];
 <p>Ozone Manager 和 Storage Container Manager 都支持 HA。在这种模式下，内部状态通过 RAFT (使用 Apache Ratis )复制。</p>
 <p>本文档解释了 Storage Container Manager (SCM)的 HA 设置，请在<a href="../../zh/feature/om-ha.html">本页</a>中查看 Ozone Manager (OM)的 HA 设置。虽然它们可以独立地为 HA 进行设置，但可靠的、完全的 HA 设置需要为两个服务启用 HA。</p>
 <h2 id="配置">配置</h2>
-<blockquote>
-<p>⚠️ <strong>注意</strong> ⚠️</p>
-<p>SCM HA 目前仅支持新初始化的集群。
-SCM HA 必须在 Ozone 服务首次启动前开启。
-当某个 SCM 以非 HA 的模式启动后，不支持将其改为 HA 模式。</p>
-</blockquote>
-<p>Storage Container Manager 的 HA 模式可以在 <code>ozone-site.xml</code> 中进行以下设置：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.ratis.enable<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>一个 Ozone 配置(<code>ozone-site.xml</code>)可以支持多个SCM HA节点集，多个 Ozone 集群。要在可用的 SCM 节点之间进行选择，每个集群都需要一个逻辑名称，可以将其解析为 Storage Container Manage 的 IP 地址(和域名)。</p>
+<p>一个 Ozone 配置(<code>ozone-site.xml</code>)可以支持多个SCM HA节点集，多个 Ozone 集群。要在可用的 SCM 节点之间进行选择，每个集群都需要一个逻辑名称，可以将其解析为 Storage Container Manage 的 IP 地址(和域名)。</p>
 <p>这个逻辑名称称为 <code>serviceId</code>，可以在 <code>ozone-site.xml</code> 中配置。</p>
 <p>大多数情况下，你只需要设置当前集群的值：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
@@ -527,10 +516,9 @@ SCM 使用子 CA 证书来签署 OM/Datanodes 的证书。</p>
 <p><strong>注意</strong>: 当原始 SCM 未定义时，请确保仅在一个 SCM 上运行 <strong>&ndash;init</strong>，
 在其他 SCM 节点上需使用 <strong>&ndash;bootstrap</strong> 进行引导。</p>
 <h3 id="目前-scm-ha-安全的限制">目前 SCM HA 安全的限制</h3>
-<ol>
-<li>当原始 SCM 失效时, 新的 SCM 不能被引导并添加到 HA 节点中。</li>
+<ul>
 <li>尚未支持从非 HA 安全集群升级到 HA 安全集群。</li>
-</ol>
+</ul>
 <h2 id="实现细节">实现细节</h2>
 <p>SCM HA 使用 Apache Ratis 在 SCM HA 仲裁的成员之间复制状态。每个节点在本地 RocksDB 中维护块管理元数据。</p>
 <p>这个复制过程是 OM HA 复制过程的一个简单版本，因为它不使用任何双缓冲区(SCM 请求的总体 db 吞吐量更低)。</p>
@@ -555,10 +543,10 @@ bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db
 
 
 bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db scan --column-family<span style="color:#f92672">=</span>containers
-</code></pre></div><h2 id="从现有的scm迁移">从现有的SCM迁移</h2>
-<p>可以在任何 Ozone 集群上打开 SCM HA。 首先启用 Ratis（<code>ozone.scm.ratis.enable</code>）并为 Ratis ring 配置一个节点（<code>ozone.scm.nodes.serviceId</code> 应该有一个元素）。</p>
-<p>启动集群并测试它是否正常工作。</p>
-<p>如果一切正常，您可以用多个节点扩展集群配置，重新启动 SCM 节点，并使用 <code>scm --bootstrap</code> 命令初始化其他节点。</p>
+</code></pre></div><h2 id="从非ha-scm迁移到scm-ha">从非HA SCM迁移到SCM HA</h2>
+<p>添加额外的 SCM 节点，并扩展集群配置以包含新添加的节点。
+使用 <code>scm --bootstrap</code> 命令为新添加的 SCM 节点引导启动，然后启动 SCM 服务。
+注意：在新添加的 SCM 节点上运行 bootstrap 命令之前，请确保 <code>ozone.scm.primordial.node.id</code> 属性指向现有的 SCM。</p>
 
 
           
@@ -578,7 +566,7 @@ bin/ozone debug ldb --db<span style="color:#f92672">=</span>/tmp/metadata/scm.db
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.0.0-SNAPSHOT, Last Modified: March 25, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7357f752e481037e7d4eb2a05b61f9cb15323f1e">7357f752e4</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: January 21, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7b4df04beb59373f0dda509adeb59a33feb488fd">7b4df04beb</a>
     </span>
   </div>
 </footer>
