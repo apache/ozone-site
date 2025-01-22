@@ -29,8 +29,6 @@ ul-style:
 line-length:
   # No line length requirement for general text.
   line_length: -1
-  # For code, match Ozone's line length.
-  code_block_line_length: 120
   # Use shorter headings to keep the minimap on the right legible.
   heading_block_line_length: 80
 
