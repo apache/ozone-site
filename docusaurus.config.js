@@ -30,7 +30,8 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
-
+  // TODO: HDDS-12129 Delete this before the site goes live to enable search engine indexing.
+  noIndex: true,
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3001.
