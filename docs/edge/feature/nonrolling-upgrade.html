@@ -530,7 +530,7 @@ s=d.getElementsByTagName('script')[0];
 <ol>
 <li>
 <p>If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. If OM HA is not being used, this step can be skipped.</p>
-<pre><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
+<pre tabindex="0"><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
 </code></pre><p>The <code>prepare</code> command will block the Ozone Managers from receiving all write requests. See <a href="../design/omprepare.html">Ozone Manager Prepare For Upgrade</a> for more information</p>
 </li>
 <li>
@@ -544,12 +544,12 @@ s=d.getElementsByTagName('script')[0];
 <ol>
 <li>
 <p>Start the SCM and datanodes as usual:</p>
-<pre><code>ozone --daemon start scm
-</code></pre><pre><code>ozone --daemon start datanode
+<pre tabindex="0"><code>ozone --daemon start scm
+</code></pre><pre tabindex="0"><code>ozone --daemon start datanode
 </code></pre></li>
 <li>
 <p>Start the Ozone Manager using the <code>--upgrade</code> flag to take it out of prepare mode.</p>
-<pre><code>ozone --daemon start om --upgrade
+<pre tabindex="0"><code>ozone --daemon start om --upgrade
 </code></pre><ul>
 <li>
 <p>There also exists a <code>--downgrade</code> flag which is an alias of <code>--upgrade</code>. The name used does not matter.</p>
@@ -567,12 +567,12 @@ s=d.getElementsByTagName('script')[0];
 <ol start="5">
 <li>
 <p>Finalize SCM</p>
-<pre><code>ozone admin scm finalizeupgrade
+<pre tabindex="0"><code>ozone admin scm finalizeupgrade
 </code></pre><p>At this point, SCM will tell all of the datanodes to finalize. Once SCM has finalized enough datanodes to form a write pipeline, it will return that finalization was successful. The remaining pre-finalized datanodes will be in a read-only state until they indicate to SCM that they have finalized. Write requests will be directed to finalized datanodes only.</p>
 </li>
 <li>
 <p>Finalize OM</p>
-<pre><code>ozone admin om finalizeupgrade -id=&lt;om-service-id&gt;
+<pre tabindex="0"><code>ozone admin om finalizeupgrade -id=&lt;om-service-id&gt;
 </code></pre></li>
 </ol>
 <p>At this point, the cluster is finalized and the upgrade is complete.</p>

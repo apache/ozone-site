@@ -516,18 +516,18 @@ when a bucket is created.</p>
 Ozone/HDFS. Since Ozone and HDFS can use the same Key Management Server, this
 configuration can be provided via <em>core-site.xml</em>.</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hadoop.security.key.provider.path</td>
-<td>KMS uri. <br> e.g. kms://http@kms-host:9600/kms</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hadoop.security.key.provider.path</td>
+          <td>KMS uri. <br> e.g. kms://http@kms-host:9600/kms</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="using-transparent-data-encryption">Using Transparent Data Encryption</h3>
 <p>If this is already configured for your cluster, then you can simply proceed
@@ -537,15 +537,15 @@ to create the encryption key and enable encrypted buckets.</p>
 <li>Create a bucket encryption key with hadoop key CLI, which is similar to
 how you would use HDFS encryption zones.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop key create enckey
-</code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop key create enckey
+</span></span></code></pre></div><p>The above command creates an encryption key for the bucket you want to protect.
 Once the key is created, you can tell Ozone to use that key when you are
 reading and writing data into a bucket.</p>
 <ul>
 <li>Assign the encryption key to a bucket.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k enckey /vol/encryptedbucket
-</code></pre></div><p>After this command, all data written to the <em>encryptedbucket</em> will be encrypted
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k enckey /vol/encryptedbucket
+</span></span></code></pre></div><p>After this command, all data written to the <em>encryptedbucket</em> will be encrypted
 via the enckey and while reading the clients will talk to Key Management
 Server and read the key and decrypt it. In other words, the data stored
 inside Ozone is always encrypted. The fact that data is encrypted at rest
@@ -553,23 +553,23 @@ will be completely transparent to the clients and end users.</p>
 <h3 id="using-transparent-data-encryption-from-s3g">Using Transparent Data Encryption from S3G</h3>
 <p>There are two ways to create an encrypted bucket that can be accessed via S3 Gateway.</p>
 <h4 id="option-1-create-a-bucket-using-shell-under-s3v-volume">Option 1. Create a bucket using shell under &ldquo;/s3v&rdquo; volume</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k enckey --layout<span style="color:#f92672">=</span>OBJECT_STORE /s3v/encryptedbucket
-</code></pre></div><h4 id="option-2-create-a-link-to-an-encrypted-bucket-under-s3v-volume">Option 2. Create a link to an encrypted bucket under &ldquo;/s3v&rdquo; volume</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k enckey --layout<span style="color:#f92672">=</span>OBJECT_STORE /vol/encryptedbucket
-ozone sh bucket link /vol/encryptedbucket /s3v/linkencryptedbucket
-</code></pre></div><p>Note 1: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k enckey --layout<span style="color:#f92672">=</span>OBJECT_STORE /s3v/encryptedbucket
+</span></span></code></pre></div><h4 id="option-2-create-a-link-to-an-encrypted-bucket-under-s3v-volume">Option 2. Create a link to an encrypted bucket under &ldquo;/s3v&rdquo; volume</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k enckey --layout<span style="color:#f92672">=</span>OBJECT_STORE /vol/encryptedbucket
+</span></span><span style="display:flex;"><span>ozone sh bucket link /vol/encryptedbucket /s3v/linkencryptedbucket
+</span></span></code></pre></div><p>Note 1: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
 After creating an encrypted bucket, all the keys added to this bucket using s3g will be encrypted.</p>
 <p>Note 2: <code>--layout=OBJECT_STORE</code> is specified in the above examples
 for full compatibility with S3 (which is the default value for the <code>--layout</code>
 argument, but explicitly added here to make a point).</p>
 <p>Bucket created with the <code>OBJECT_STORE</code> type will NOT be accessible via
 HCFS (ofs or o3fs) at all. And such access will be rejected. For instance:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone fs -ls ofs://ozone1/s3v/encryptedbucket/
--ls: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone fs -ls o3fs://encryptedbucket.s3v.ozone1/
-22/02/07 00:00:00 WARN fs.FileSystem: Failed to initialize fileystem o3fs://encryptedbucket.s3v.ozone1/: java.lang.IllegalArgumentException: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
--ls: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
-</code></pre></div><p>If one wants the bucket to be accessible from both S3G and HCFS (ofs and o3fs)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone fs -ls ofs://ozone1/s3v/encryptedbucket/
+</span></span><span style="display:flex;"><span>-ls: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone fs -ls o3fs://encryptedbucket.s3v.ozone1/
+</span></span><span style="display:flex;"><span>22/02/07 00:00:00 WARN fs.FileSystem: Failed to initialize fileystem o3fs://encryptedbucket.s3v.ozone1/: java.lang.IllegalArgumentException: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
+</span></span><span style="display:flex;"><span>-ls: Bucket: encryptedbucket has layout: OBJECT_STORE, which does not support file system semantics. Bucket Layout must be FILE_SYSTEM_OPTIMIZED or LEGACY.
+</span></span></code></pre></div><p>If one wants the bucket to be accessible from both S3G and HCFS (ofs and o3fs)
 at the same time, use <code>--layout=FILE_SYSTEM_OPTIMIZED</code> instead.</p>
 <p>However, in buckets with <code>FILE_SYSTEM_OPTIMIZED</code> layout, some irregular S3 key
 names may be rejected or normalized, which can be undesired.
@@ -581,24 +581,24 @@ For this purpose on security enabled cluster, during S3Gateway server startup
 logins using configured
 <strong>ozone.s3g.kerberos.keytab.file</strong>  and <strong>ozone.s3g.kerberos.principal</strong>.</p>
 <p>The below two configurations must be added to the kms-site.xml to allow the S3Gateway principal to act as a proxy for other users. In this example, &ldquo;ozone.s3g.kerberos.principal&rdquo; is assumed to be &ldquo;s3g&rdquo;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>hadoop.kms.proxyuser.s3g.users<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>user1,user2,user3<span style="color:#f92672">&lt;/value&gt;</span>
-  <span style="color:#f92672">&lt;description&gt;</span>
-        Here the value can be all the S3G accesskey ids accessing Ozone S3 
-        or set to &#39;*&#39; to allow all the accesskey ids.
-  <span style="color:#f92672">&lt;/description&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-
-<span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>hadoop.kms.proxyuser.s3g.hosts<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>s3g-host1.com<span style="color:#f92672">&lt;/value&gt;</span>
-  <span style="color:#f92672">&lt;description&gt;</span>
-         This is the host where the S3Gateway is running. Set this to &#39;*&#39; to allow
-         requests from any hosts to be proxied.
-  <span style="color:#f92672">&lt;/description&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><h3 id="kms-authorization">KMS Authorization</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hadoop.kms.proxyuser.s3g.users<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>user1,user2,user3<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;description&gt;</span>
+</span></span><span style="display:flex;"><span>        Here the value can be all the S3G accesskey ids accessing Ozone S3 
+</span></span><span style="display:flex;"><span>        or set to &#39;*&#39; to allow all the accesskey ids.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hadoop.kms.proxyuser.s3g.hosts<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>s3g-host1.com<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;description&gt;</span>
+</span></span><span style="display:flex;"><span>         This is the host where the S3Gateway is running. Set this to &#39;*&#39; to allow
+</span></span><span style="display:flex;"><span>         requests from any hosts to be proxied.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h3 id="kms-authorization">KMS Authorization</h3>
 <p>If Ranger authorization is enabled for KMS, then decrypt key permission should be given to
 access key id user(currently access key is kerberos principal) to decrypt the encrypted key
 to read/write a key in the encrypted bucket.</p>

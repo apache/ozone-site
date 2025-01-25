@@ -517,7 +517,7 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="user-experiences-decommissioning-vs-maintenance-mode">User Experiences (Decommissioning vs Maintenance mode)</h2>
 <p>From the user&rsquo;s point of view, there are two kinds of planned failures that the user would like to communicate to Ozone.</p>
 <p>The first kind is when a &lsquo;real&rsquo; failure is going to happen in the future. This &lsquo;real&rsquo; failure is the act of decommissioning. We denote this as &ldquo;decommission&rdquo; throughout this paper. The response that the user wants is SCM/Ozone to make replicas to deal with the planned failure.</p>
-<p>The second kind is when the failure is &lsquo;transient.&rsquo; The user knows that this failure is temporary and cluster in most cases can safely ignore this issue. However, if the transient failures are going to cause a failure of availability; then the user would like the Ozone to take appropriate actions to address it.  An example of this case, is if the user put 3 data nodes into maintenance mode and switched them off.</p>
+<p>The second kind is when the failure is &rsquo;transient.&rsquo; The user knows that this failure is temporary and cluster in most cases can safely ignore this issue. However, if the transient failures are going to cause a failure of availability; then the user would like the Ozone to take appropriate actions to address it.  An example of this case, is if the user put 3 data nodes into maintenance mode and switched them off.</p>
 <p>The transient failure can violate the availability guarantees of Ozone; Since the user is telling us not to take corrective actions. Many times, the user does not understand the impact on availability while asking Ozone to ignore the failure.</p>
 <p>So this paper proposes the following definitions for Decommission and Maintenance of data nodes.</p>
 <p><strong>Decommission</strong> <em>of a data node is deemed to be complete when SCM/Ozone completes the replica of all containers on decommissioned data node to other data nodes.That is, the expected count matches the healthy count of containers in the cluster</em>.</p>
@@ -562,42 +562,42 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="datanode-state-machine">Datanode state machine</h2>
 <p><code>NodeStateManager</code> maintains the state of the connected datanodes. The possible states:</p>
 <table>
-<thead>
-<tr>
-<th>state</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>The node is up and running.</td>
-</tr>
-<tr>
-<td>STALE</td>
-<td>Some heartbeats were missing for an already missing nodes.</td>
-</tr>
-<tr>
-<td>DEAD</td>
-<td>The stale node has not been recovered.</td>
-</tr>
-<tr>
-<td>ENTERING_MAINTENANCE</td>
-<td>The in-progress state, scheduling is disabled but the node can&rsquo;t not been turned off due to in-progress replication.</td>
-</tr>
-<tr>
-<td>IN_MAINTENANCE</td>
-<td>Node can be turned off but we expected to get it back and have all the replicas.</td>
-</tr>
-<tr>
-<td>DECOMMISSIONING</td>
-<td>The in-progress state, scheduling is disabled, all the containers should be replicated to other nodes.</td>
-</tr>
-<tr>
-<td>DECOMMISSIONED</td>
-<td>The node can be turned off, all the containers are replicated to other machine</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>state</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>The node is up and running.</td>
+      </tr>
+      <tr>
+          <td>STALE</td>
+          <td>Some heartbeats were missing for an already missing nodes.</td>
+      </tr>
+      <tr>
+          <td>DEAD</td>
+          <td>The stale node has not been recovered.</td>
+      </tr>
+      <tr>
+          <td>ENTERING_MAINTENANCE</td>
+          <td>The in-progress state, scheduling is disabled but the node can&rsquo;t not been turned off due to in-progress replication.</td>
+      </tr>
+      <tr>
+          <td>IN_MAINTENANCE</td>
+          <td>Node can be turned off but we expected to get it back and have all the replicas.</td>
+      </tr>
+      <tr>
+          <td>DECOMMISSIONING</td>
+          <td>The in-progress state, scheduling is disabled, all the containers should be replicated to other nodes.</td>
+      </tr>
+      <tr>
+          <td>DECOMMISSIONED</td>
+          <td>The node can be turned off, all the containers are replicated to other machine</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="high-level-algorithm">High level algorithm</h2>
 <p>The Algorithm is pretty simple from the Decommission or Maintenance point of view;</p>
@@ -635,75 +635,74 @@ s=d.getElementsByTagName('script')[0];
 <p>To calculate the required steps (required replication + stop condition) we need counter about the first two categories.</p>
 <p>Each counters should be calculated per container bases.</p>
 <table>
-<thead>
-<tr>
-<th>Node state</th>
-<th>Variable (# of containers)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td><code>healthy</code></td>
-</tr>
-<tr>
-<td>STALE + DEAD + DECOMMISSIONED</td>
-<td></td>
-</tr>
-<tr>
-<td>DECOMMISSIONING</td>
-<td></td>
-</tr>
-<tr>
-<td>ENTERING_MAINTENANCE + IN_MAINTENANCE</td>
-<td><code>maintenance</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node state</th>
+          <th>Variable (# of containers)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td><code>healthy</code></td>
+      </tr>
+      <tr>
+          <td>STALE + DEAD + DECOMMISSIONED</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>DECOMMISSIONING</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>ENTERING_MAINTENANCE + IN_MAINTENANCE</td>
+          <td><code>maintenance</code></td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="the-current-replication-model">The current replication model</h3>
 <p>The current replication model in SCM/Ozone is very simplistic. We compute the replication count or the number of replications that we need to do as:</p>
-<pre><code>Replica count = expectedCount - currentCount
+<pre tabindex="0"><code>Replica count = expectedCount - currentCount
 </code></pre><p>In case the <em>Replica count</em> is positive, it means that we need to make more replicas. If the number is negative, it means that we are over replicated and we need to remove some replicas of this container. If the Replica count for a container is zero; it means that we have the expected number of containers in the cluster.</p>
 <p>To support idempotent placement strategies we should subtract the in-flight replications from the result: If there are one in-flight replication process and two replicas we won&rsquo;t start a new replication command unless the original command is timed out. The timeout is configured with <code>hdds.scm.replication.event.timeout</code> and the default value is 10 minutes.</p>
 <p>More preciously the current algorithm is the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">{</span>
-   <span style="color:#75715e">// container is over replicated
-</span><span style="color:#75715e"></span><span style="color:#f92672">}.</span><span style="color:#a6e22e">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span>0 <span style="color:#f92672">{</span>
-  <span style="color:#75715e">// handle under replicated containers
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><p>The handling of inflight copies and deletes are independent from the decommissioning problem therefore here we focus only on the core mode:</p>
-<pre><code>replicaCount = expectedCount - healthy;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> healthy;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes) <span style="color:#f92672">&gt;</span> 0 {
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// container is over replicated</span>
+</span></span><span style="display:flex;"><span>}.<span style="color:#a6e22e">else</span> <span style="color:#66d9ef">if</span> (replicaCount <span style="color:#f92672">-</span> inflight copies <span style="color:#f92672">+</span> inflight deletes) <span style="color:#f92672">&lt;</span>0 {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// handle under replicated containers</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The handling of inflight copies and deletes are independent from the decommissioning problem therefore here we focus only on the core mode:</p>
+<pre tabindex="0"><code>replicaCount = expectedCount - healthy;
 </code></pre><h3 id="the-proposed-solution">The proposed solution</h3>
 <p>To support the notion that a user can provide hints to the replication model, we propose to add two variables to the current model.</p>
 <p>In the new model, we propose to break the <code>currentCount</code> into the two separate groups. That is <em>Healthy nodes</em> and <em>Maintenance nodes</em>. The new model replaces the currentCount with these two separate counts. The following function captures the code that drives the logic of computing Replica counts in the new model. The later section discusses the input and output of this model very extensively.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * Calculate the number of the missing replicas.
-</span><span style="color:#75715e"> *
-</span><span style="color:#75715e"> * @return the number of the missing replicas.
-</span><span style="color:#75715e">     If it&#39;s less than zero, the container is over replicated.
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getReplicationCount</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> expectedCount<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> healthy<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> maintenance<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-
-   <span style="color:#75715e">//for over replication, count only with the healthy replicas
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expectedCount <span style="color:#f92672">&lt;=</span> healthy<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-      <span style="color:#66d9ef">return</span> expectedCount <span style="color:#f92672">-</span> healthy<span style="color:#f92672">;</span>
-   <span style="color:#f92672">}</span>
-
-   replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> <span style="color:#f92672">(</span>healthy <span style="color:#f92672">+</span> maintenance<span style="color:#f92672">);</span>
-
-   <span style="color:#75715e">//at least one HEALTHY replicas should be guaranteed!
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>replicaCount <span style="color:#f92672">==</span> 0 <span style="color:#f92672">&amp;&amp;</span> healthy <span style="color:#f92672">&lt;</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-      replicaCount <span style="color:#f92672">++;</span>
-   <span style="color:#f92672">}</span>
-
-   <span style="color:#75715e">//over replication is already handled. Always return with
-</span><span style="color:#75715e"></span>   <span style="color:#75715e">// positive as over replication is already handled
-</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> replicaCount<span style="color:#f92672">);</span>
-<span style="color:#f92672">}</span>
-
-</code></pre></div><p>To understand the reasing behind the two special <code>if</code> condition check the examples below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Calculate the number of the missing replicas.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @return the number of the missing replicas.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     If it&#39;s less than zero, the container is over replicated.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getReplicationCount</span>(<span style="color:#66d9ef">int</span> expectedCount, <span style="color:#66d9ef">int</span> healthy, <span style="color:#66d9ef">int</span> maintenance) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//for over replication, count only with the healthy replicas</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (expectedCount <span style="color:#f92672">&lt;=</span> healthy) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> expectedCount <span style="color:#f92672">-</span> healthy;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   replicaCount <span style="color:#f92672">=</span> expectedCount <span style="color:#f92672">-</span> (healthy <span style="color:#f92672">+</span> maintenance);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//at least one HEALTHY replicas should be guaranteed!</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (replicaCount <span style="color:#f92672">==</span> 0 <span style="color:#f92672">&amp;&amp;</span> healthy <span style="color:#f92672">&lt;</span> 1) {
+</span></span><span style="display:flex;"><span>      replicaCount <span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//over replication is already handled. Always return with</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// positive as over replication is already handled</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">max</span>(0, replicaCount);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>To understand the reasing behind the two special <code>if</code> condition check the examples below.</p>
 <p>We also need to specify two end condition when the DECOMMISSIONING node can be moved to the DECOMMISSIONED state or the ENTERING_MAINTENANCE mode can be moved to the IN_MAINTENANCE state.</p>
 <p>The following conditions should be true for all the containers and all the containers on the specific node should be closed.</p>
 <p><strong>From DECOMMISSIONING to DECOMMISSIONED</strong>:</p>
@@ -712,7 +711,7 @@ s=d.getElementsByTagName('script')[0];
 <li>We have three replicas (both healthy and maintenance)</li>
 </ul>
 <p>Which means that our stop condition can be formalized as:</p>
-<pre><code>(healthy &gt;= 1) &amp;&amp; (healthy + maintenance &gt;= 3)
+<pre tabindex="0"><code>(healthy &gt;= 1) &amp;&amp; (healthy + maintenance &gt;= 3)
 </code></pre><p>Both the numbers can be configurable:</p>
 <ul>
 <li>1 is the minimum number of healthy replicas (<code>decommissioning.minimum.healthy-replicas</code>)</li>
@@ -724,89 +723,89 @@ s=d.getElementsByTagName('script')[0];
 <li>There are at least one healthy replicas</li>
 </ul>
 <p>This is the weaker version of the previous condition:</p>
-<pre><code>(healthy &gt;= 1)
+<pre tabindex="0"><code>(healthy &gt;= 1)
 </code></pre><h3 id="examples-normal-cases">Examples (normal cases)</h3>
 <p>In this section we show example use cases together with the output of the proposed algorithm</p>
 <h4 id="all-healthy">All healthy</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>3</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>3</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+  </tbody>
 </table>
 <p>The container C1 exists on machines A, B , and C. All the container reports tell us that the container is healthy.  Running the above algorithm, we get:</p>
 <p><code>expected - healthy + maint. = 3 - (3 + 0) = 0</code></p>
 <p>It means, <em>&ldquo;we don’t need no replication&rdquo;.</em></p>
 <h4 id="one-failure">One failure</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>DEAD</td>
-<td>3</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>DEAD</td>
+          <td>3</td>
+          <td>2</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p>The machine C has failed, and as a result, the healthy count has gone down from <code>3</code> to <code>2</code>. This means that we need to start one replication flow.</p>
 <p><code>ReplicaCount = expected - healthy + maint. =  3 - (2 + 0) = 1.</code></p>
 <p>This means that the new model will handle failure cases just like the current model.</p>
 <h4 id="one-decommissioning">One decommissioning</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>DECOMM</td>
-<td>3</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>DECOMM</td>
+          <td>3</td>
+          <td>2</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p>In this case, machine C is being decommissioned. Therefore the healthy count has gone down to <code>2</code> , and decommission count is <code>1</code>. Since the</p>
 <p><code>ReplicaCount = expected - healthy + maint`. we have `1 = 3 - (2 + 0)</code>,</p>
@@ -814,115 +813,115 @@ s=d.getElementsByTagName('script')[0];
 <p><strong>Stop condition</strong>: Not that if this containers is the only one on node C, node C can be moved to the DECOMMISSIONED state.</p>
 <h4 id="failure--decommissioning">Failure + decommissioning</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>DEAD</td>
-<td>DECOMM</td>
-<td>3</td>
-<td>1</td>
-<td>0</td>
-<td>2</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>DEAD</td>
+          <td>DECOMM</td>
+          <td>3</td>
+          <td>1</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+  </tbody>
 </table>
 <p>Here is a case where we have a failure of a data node and a decommission of another data node. In this case, the container C1 needs two replica flows to heal itself. The equation is the same and we get</p>
 <p><code>ReplicaCount(2) = ExpectecCount(3) - healthy(1)</code></p>
 <p>The maintenance is still zero so ignored in this equation.</p>
 <h4 id="1-failure--2-decommissioning">1 failure + 2 decommissioning</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>DECOMM</td>
-<td>DECOMM</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>DECOMM</td>
+          <td>DECOMM</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+          <td>3</td>
+      </tr>
+  </tbody>
 </table>
 <p>In this case, we have one failed data node and two data nodes being decommissioned. We need to get three replica flows in the system. This is achieved by:</p>
-<pre><code>ReplicaCount(3) = ExpectedCount(3) - (healthy(0) + maintenance(0))
+<pre tabindex="0"><code>ReplicaCount(3) = ExpectedCount(3) - (healthy(0) + maintenance(0))
 </code></pre><h4 id="maintenance-mode">Maintenance mode</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>DEAD</td>
-<td>MAINT</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>DEAD</td>
+          <td>MAINT</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td>0</td>
+      </tr>
+  </tbody>
 </table>
 <p>This represents the normal maintenance mode, where a single machine is marked as in maintenance mode. This means the following:</p>
-<pre><code>ReplicaCount(0) = ExpectedCount(3) - (healthy(2) + maintenance(1)
+<pre tabindex="0"><code>ReplicaCount(0) = ExpectedCount(3) - (healthy(2) + maintenance(1)
 </code></pre><p>There are no replica flows since the user has asked us to move a single node into maintenance mode, and asked us explicitly not to worry about the single missing node.</p>
 <p><strong>Stop condition</strong>: Not that if this containers is the only one on node C, node C can be moved to the IN_MAINTENANCE state.</p>
 <h4 id="maintenance--decommissioning">Maintenance + decommissioning</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>DECOMM</td>
-<td>MAINT</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>DECOMM</td>
+          <td>MAINT</td>
+          <td>3</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p><em>This is a fascinating case</em>; We have one good node; one decommissioned node and one node in maintenance mode. The expected result is that the replica manager will launch one replication flow to compensate for the node that is being decommissioned, and we also expect that there will be no replication for the node in maintenance mode.</p>
-<pre><code>Replica Count (1) = expectedCount(3) - (healthy(1) + maintenance(1))
+<pre tabindex="0"><code>Replica Count (1) = expectedCount(3) - (healthy(1) + maintenance(1))
 </code></pre><p>So as expected we have one replication flow in the system.</p>
 <p><strong>Stop condition</strong>: Not that if this containers is the only one in the system:</p>
 <ul>
@@ -931,139 +930,139 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <h4 id="decommissioning-all-the-replicas">Decommissioning all the replicas</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DECOMM</td>
-<td>DECOMM</td>
-<td>DECOMM</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DECOMM</td>
+          <td>DECOMM</td>
+          <td>DECOMM</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+          <td>3</td>
+      </tr>
+  </tbody>
 </table>
 <p>In this case, we deal with all the data nodes being decommissioned. The number of healthy replicas for this container is 0, and hence:</p>
-<pre><code>replicaCount (3) = expectedCount (3)- (healthy(0) + maintenance(0)).
+<pre tabindex="0"><code>replicaCount (3) = expectedCount (3)- (healthy(0) + maintenance(0)).
 </code></pre><p>This provides us with all 3 independent replica flows in the system.</p>
 <h4 id="decommissioning-the-one-remaining-replicas">Decommissioning the one remaining replicas</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEAD</td>
-<td>DEAD</td>
-<td>DECOMM</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DEAD</td>
+          <td>DEAD</td>
+          <td>DECOMM</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+          <td>3</td>
+      </tr>
+  </tbody>
 </table>
 <p>We have two failed nodes and one node in Decomm. It is the opposite of case Line 5, where we have one failed node and 2 nodes in Decomm. The expected results are the same, we get 3 flows.</p>
 <h4 id="total-failure">Total failure</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEAD</td>
-<td>DEAD</td>
-<td>DEAD</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DEAD</td>
+          <td>DEAD</td>
+          <td>DEAD</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+          <td>3</td>
+      </tr>
+  </tbody>
 </table>
 <p>This is really an error condition. We have lost all 3 data nodes. The Replica Manager will compute that we need to rebuild 3 replicas, but we might not have a source to rebuild from.</p>
 <h3 id="last-replica-is-on-entering_maintenance">Last replica is on ENTERING_MAINTENANCE</h3>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEAD</td>
-<td>MAINT</td>
-<td>DEAD</td>
-<td>3</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DEAD</td>
+          <td>MAINT</td>
+          <td>DEAD</td>
+          <td>3</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+  </tbody>
 </table>
 <p>Is also an interesting case; we have lost 2 data nodes; and one node is being marked as Maint. Since we have 2 failed nodes, we need 2 replica flows in the system. However, the maintenance mode cannot be entered, since we will lose lone replica if we do that.</p>
 <h3 id="all-maintenance">All maintenance</h3>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MAINT</td>
-<td>MAINT</td>
-<td>MAINT</td>
-<td>3</td>
-<td>0</td>
-<td>3</td>
-<td><em>1</em></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>MAINT</td>
+          <td>MAINT</td>
+          <td>MAINT</td>
+          <td>3</td>
+          <td>0</td>
+          <td>3</td>
+          <td><em>1</em></td>
+      </tr>
+  </tbody>
 </table>
 <p>This is also a very special case; this is the case where the user is telling us to ignore the peril for all 3 replicas being offline. This means that the system will not be able to get to that container and would lead to potential I/O errors. Ozone will strive to avoid that case; this means that Ozone will hit the “if condition” and discover that we our ReplicCount is 0; since the user asked for it; but we are also going to lose all Replicas. At this point of time, we make a conscious decision to replicate one copy instead of obeying the user command and get to the situation where I/O can fail.</p>
 <p><strong>This brings us back to the semantics of Maintenance mode in Ozone</strong>. If going into maintenance mode will not lead to a potential I/O failure, we will enter into the maintenance mode; Otherwise, we will replicate and enter into the maintenance mode after the replication is done. This is just the core replication algorithm, not the complete Decommission or Maintenance mode algorithms, just how the replica manager would behave.  Once we define the behavior of Replica Manager, rest of the algorithm is easy to construct.</p>
 <p>Note: this is the case why we need the seconf <code>if</code> in the model (numbers in the brackets shows the actual value):</p>
-<pre><code>   replicaCount(0) = expectedCount(3) - ( healthy(0) + maintenance(0) );
+<pre tabindex="0"><code>   replicaCount(0) = expectedCount(3) - ( healthy(0) + maintenance(0) );
 
 
    //at least one HEALTHY replicas should be guaranteed!
@@ -1072,7 +1071,7 @@ s=d.getElementsByTagName('script')[0];
    }
 </code></pre><h3 id="over-replication">Over replication</h3>
 <p>For over-replicated containers Ozone prefers to keep the replicas on the healthy nodes. We delete containers only if we have enough replicas on <em>healthy</em> nodes.</p>
-<pre><code>int getReplicationCount(int expectedCount, int healthy, int maintenance) {
+<pre tabindex="0"><code>int getReplicationCount(int expectedCount, int healthy, int maintenance) {
 
    //for over replication, count only with the healthy replicas
    if (expectedCount &lt;= healthy) {
@@ -1090,119 +1089,119 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="over-replication-examples">Over replication examples</h3>
 <h4 id="4-replicas">4 replicas</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>Node D</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>Node D</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>3</td>
+          <td>4</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+  </tbody>
 </table>
 <p>This is an easy case as we have too many replicas we can safely remove on.</p>
-<pre><code>if (expectedCount &lt;= healthy) {
+<pre tabindex="0"><code>if (expectedCount &lt;= healthy) {
    return expectedCount -  healthy
 }
 </code></pre><h4 id="over-replicated-with-in_maintenance">over replicated with IN_MAINTENANCE</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>Node D</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>MAINT</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>Node D</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>MAINT</td>
+          <td>3</td>
+          <td>3</td>
+          <td>1</td>
+          <td>0</td>
+      </tr>
+  </tbody>
 </table>
 <p>In this case we will delete the forth replica only after node D is restored and healthy again. (expectedCount is not less than healthy). As the <code>expectedCount (3) &lt;= healthy (3)</code> the replicaCount will be calculated as <code>0</code>.</p>
 <h4 id="over-replicated-with-in_maintenance-1">over replicated with IN_MAINTENANCE</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>Node D</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>MAINT</td>
-<td>MAINT</td>
-<td>3</td>
-<td>2</td>
-<td>2</td>
-<td>0</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>Node D</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>MAINT</td>
+          <td>MAINT</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+          <td>0</td>
+      </tr>
+  </tbody>
 </table>
 <p>Here we are not over-repliacated as we don&rsquo;t have any healthy nodes. We will calculate the under-replication number as defined in the previous section:</p>
-<pre><code>replicaCount(-1) = expectedCount(3) - ( healthy(2) + maintenance(2) );
+<pre tabindex="0"><code>replicaCount(-1) = expectedCount(3) - ( healthy(2) + maintenance(2) );
 </code></pre><p>The main algorithm would return with <code>replicaCount = -1</code> but as we return <code>Math.max(0,replicaCount)</code> the real response will be 0. Waiting for healthy nodes.</p>
 <h3 id="handling-in-flight-replications">Handling in-flight replications</h3>
 <p>In-flight replication requests and deletes are handled by the Replica Manager and the problem is orthogonal to the replication problem, but this section shows that the proposed model is not conflicted with the existing approach.</p>
 <p>Let&rsquo;s say we have an under-replicated container and we already selected a new datanode to copy a new replica to that specific node.</p>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>HEALTHY</td>
-<td>(copy)</td>
-<td>3</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>HEALTHY</td>
+          <td>(copy)</td>
+          <td>3</td>
+          <td>2</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p>Here the Replication Manager detects that one replica is missing but the real copy shouldn&rsquo;t been requested as it&rsquo;s alread inprogress. ReplicaManager must not select a new datanode based on the ContainerPlacementPolicy implementation as the policy may or may not be idempotent.</p>
 <p>For example if the placement policy would select a datanode randomly with each loop we would select a new datanode to replicate to.</p>
@@ -1222,60 +1221,60 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="in-flight-examples">In-flight examples</h3>
 <h4 id="maintenance--inflight">Maintenance + inflight</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-<th>copy</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HEALTHY</td>
-<td>MAINT</td>
-<td>copying</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+          <th>copy</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEALTHY</td>
+          <td>MAINT</td>
+          <td>copying</td>
+          <td>3</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p>Here one have one node ENTERING_MAINTENANCE state, and one replica is missing and already started to be replicated. We don&rsquo;t need to start a new copy and node B can be moved to the IN_MAINTENANCE mode.</p>
-<pre><code>Replica Count (1) = expectedCount(3) - (healthy(1) + maintenance(1))
+<pre tabindex="0"><code>Replica Count (1) = expectedCount(3) - (healthy(1) + maintenance(1))
 Containers to copy (0) = Replica Count (1) - inflight copies (1)
 </code></pre><h4 id="maintenance--inflight-1">Maintenance + inflight</h4>
 <table>
-<thead>
-<tr>
-<th>Node A</th>
-<th>Node B</th>
-<th>Node C</th>
-<th>expctd</th>
-<th>healthy</th>
-<th>mainten</th>
-<th>repCount</th>
-<th>copy</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DECOMM</td>
-<td>copying</td>
-<td>copying</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-<td>1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Node A</th>
+          <th>Node B</th>
+          <th>Node C</th>
+          <th>expctd</th>
+          <th>healthy</th>
+          <th>mainten</th>
+          <th>repCount</th>
+          <th>copy</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DECOMM</td>
+          <td>copying</td>
+          <td>copying</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0</td>
+          <td>3</td>
+          <td>1</td>
+      </tr>
+  </tbody>
 </table>
 <p>Node A can not be DECOMMISSIONED as we have no HEALTHY replicas at all.</p>
 <h2 id="statefulness">Statefulness</h2>
@@ -1290,7 +1289,7 @@ Containers to copy (0) = Replica Count (1) - inflight copies (1)
 <p><em>Reasoning</em>:</p>
 <p>Neither of the node state nor the container state are persisted in SCM side. The decommissioned state can be stored on the SCM side (or on the SCM side and the datanode side) which can provide better user experience (and may be implemented).</p>
 <p>But to support maintenance mode after restart all the container information is required to be persisted (which is a too big architectural change).</p>
-<p>To make a replication decision replication manager needs the number of healthy replicas (they are reported via heartbeats) AND the number of containers on the node which is in maintenance mode. The later one is not available if the SCM is restarted as the container map exists only in the memory and the node which is turned off can&rsquo;t report any more container reports. Therefore the information about the existing containers on the node which is in the maintenance mode <strong>can&rsquo;t be available'</strong>.</p>
+<p>To make a replication decision replication manager needs the number of healthy replicas (they are reported via heartbeats) AND the number of containers on the node which is in maintenance mode. The later one is not available if the SCM is restarted as the container map exists only in the memory and the node which is turned off can&rsquo;t report any more container reports. Therefore the information about the existing containers on the node which is in the maintenance mode <strong>can&rsquo;t be available&rsquo;</strong>.</p>
 <h2 id="throttling">Throttling</h2>
 <p>SCM should avoid to request too many replication to live enough network bandwidth for the requests.</p>
 <p>Replication Manager can easily throttle the replication requests based on <code>inflightReplication</code> map, but this problem is independent from the handling of the decommissioning / maintenance mode because it should be solved for any kind of replication not just for this.</p>
@@ -1318,7 +1317,7 @@ Containers to copy (0) = Replica Count (1) - inflight copies (1)
 <h2 id="maintain-progress">Maintain progress</h2>
 <p>We need to show the progress of the decommissioning process per node and cluster-wide. We already have the information about the under replicated containers, but we don&rsquo;t know the numbers of the containers before decommissioning.</p>
 <p>Instead of saving the original number of the required replications before (which is very fragile) we don&rsquo;t provide an absolute progress just the numbers of the remaining replication:</p>
-<pre><code> Node            | Status                 | # containers |  in-progress replications| required replication
+<pre tabindex="0"><code> Node            | Status                 | # containers |  in-progress replications| required replication
  ----------------|------------------------|--------------|--------------------------|------------------------
  Node A          | ENTERING_MAINTENANCE   | 2837         | 12                       | 402
  Node B          | HEALTHY                | 1239         | 0                        | 0

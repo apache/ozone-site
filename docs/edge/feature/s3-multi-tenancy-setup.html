@@ -512,20 +512,20 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="set-up-apache-ranger">Set up Apache Ranger</h3>
 <p>First make sure ACL is enabled, and <code>RangerOzoneAuthorizer</code> is the effective ACL authorizer implementation in-use for Ozone.
 If that is not the case, <a href="../security/securitywithranger.html">follow this</a>.</p>
-<p>Add the following configs to all Ozone Managers' <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.multitenancy.enabled<span style="color:#f92672">&lt;/name&gt;</span>
-	<span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https-address<span style="color:#f92672">&lt;/name&gt;</span>
-	<span style="color:#f92672">&lt;value&gt;</span>https://RANGER_HOST:6182<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.service<span style="color:#f92672">&lt;/name&gt;</span>
-	<span style="color:#f92672">&lt;value&gt;</span>RANGER_OZONE_SERVICE_NAME<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>The value of <code>ozone.om.ranger.service</code> should match Ozone&rsquo;s &ldquo;Service Name&rdquo; as configured under &ldquo;Service Manager&rdquo; page in Ranger Admin Server Web UI. e.g. <code>cm_ozone</code>.</p>
+<p>Add the following configs to all Ozone Managers&rsquo; <code>ozone-site.xml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.multitenancy.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https-address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;value&gt;</span>https://RANGER_HOST:6182<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.service<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;value&gt;</span>RANGER_OZONE_SERVICE_NAME<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>The value of <code>ozone.om.ranger.service</code> should match Ozone&rsquo;s &ldquo;Service Name&rdquo; as configured under &ldquo;Service Manager&rdquo; page in Ranger Admin Server Web UI. e.g. <code>cm_ozone</code>.</p>
 <p>To authenticate to Apache Ranger Admin Server, <code>ozone.om.kerberos.principal</code> and <code>ozone.om.kerberos.keytab.file</code> will be picked up from the existing configs used for Kerberos security setup.</p>
 <ul>
 <li>Note: Make sure the user behind the Kerberos principal (e.g. <code>om</code>) has Admin privilege in Ranger, otherwise some functionality will break.
@@ -533,15 +533,15 @@ This is a limitation of Apache Ranger at the moment.
 e.g. background sync won&rsquo;t be able to get the policyVersion to function properly, and create/update/delete Ranger role will fail.</li>
 </ul>
 <p>In addition, if one wants to test Ranger with user name and clear text password login (not recommended in production), add the following configs to Ozone Manager:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https.admin.api.user<span style="color:#f92672">&lt;/name&gt;</span>
-	<span style="color:#f92672">&lt;value&gt;</span>RANGER_ADMIN_USERNAME<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https.admin.api.passwd<span style="color:#f92672">&lt;/name&gt;</span>
-	<span style="color:#f92672">&lt;value&gt;</span>RANGER_ADMIN_PASSWORD<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Note if both Ranger user name and password are configured, it will be chosen over the (default and recommended) Kerberos keytab authentication method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https.admin.api.user<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;value&gt;</span>RANGER_ADMIN_USERNAME<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;name&gt;</span>ozone.om.ranger.https.admin.api.passwd<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;value&gt;</span>RANGER_ADMIN_PASSWORD<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Note if both Ranger user name and password are configured, it will be chosen over the (default and recommended) Kerberos keytab authentication method.</p>
 <p>Finally restart all OzoneManagers to apply the new configs.</p>
 <p>Now you can follow the <a href="../feature/s3-tenant-commands.html">Multi-Tenancy CLI command</a> guide to try the commands.</p>
 <h2 id="try-in-a-docker-compose-cluster-for-developers">Try in a Docker Compose cluster (For developers)</h2>
@@ -551,12 +551,12 @@ But note it differs from an actual production cluster that Ranger has been repla
 <p>Because the mock server does not mock all Ranger endpoints, some operations that works for a real Ranger deployment will not work by default. e.g. assigning users to a tenant other than <code>tenantone</code>.
 But one can add new custom endpoints in <code>./compose/ozonesecure/mockserverInitialization.json</code> as needed.</p>
 <p>To launch the Docker Compose cluster locally, from Ozone distribution root:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd compose/ozonesecure
-docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-docker-compose exec scm bash
-</code></pre></div><p>Operations requiring Ozone cluster administrator privilege should be run as <code>om</code> user:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kinit -kt /etc/security/keytabs/om.keytab om/om@EXAMPLE.COM
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd compose/ozonesecure
+</span></span><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>docker-compose exec scm bash
+</span></span></code></pre></div><p>Operations requiring Ozone cluster administrator privilege should be run as <code>om</code> user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kinit -kt /etc/security/keytabs/om.keytab om/om@EXAMPLE.COM
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../feature/s3-tenant-commands.html">Next >></a>

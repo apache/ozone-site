@@ -589,9 +589,23 @@ Ozone is a multi-protocol file system. There are different protocols by which
                                     
                                     Command Line Interface
                                 </h2>
-                                <p class="card-text">Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the Java API.
-There are some functionality which couldn&rsquo;t be accessed without using ozone sh commands. For example:
- Creating volumes with quota Managing internal ACLs Creating buckets with encryption key  All of these are one-time, administration tasks. Applications can use Ozone without this CLI using other interface like Hadoop Compatible File System (o3fs or ofs) or S3 interface.</p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the <a href="./interface/javaapi.html">Java API</a>.</p></p>
                                 <a href="./interface/cli.html"
                                    class=" btn btn-primary btn-lg">Command Line Interface</a>
                             </div>
@@ -698,7 +712,46 @@ There are some functionality which couldn&rsquo;t be accessed without using ozon
                                     
                                     Interactive Recon API Specification
                                 </h2>
-                                <p class="card-text">    window.onload = function () { const ui = SwaggerUIBundle({ url: "..\/swagger-resources\/recon-api.yaml", dom_id: '#api-container', deepLinking: true, presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ], plugins: [ SwaggerUIBundle.plugins.DownloadUrl ], layout: "StandaloneLayout", docExpansion: 'none' }) window.ui = ui; }  </p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<div id="swagger-ui"></div>
+<script src="./swagger-resources/swagger-ui-bundle.js"></script>
+<script src="./swagger-resources/swagger-ui-standalone-preset.js"> </script>
+<script>
+  window.onload = function () {
+    const ui = SwaggerUIBundle({
+      url: "..\/swagger-resources\/recon-api.yaml",
+      dom_id: '#api-container',
+      deepLinking: true,
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      plugins: [
+        SwaggerUIBundle.plugins.DownloadUrl
+      ],
+      layout: "StandaloneLayout",
+      docExpansion: 'none'
+    })
+    window.ui = ui;
+  }
+</script></p>
                                 <a href="./interface/swaggerreconapi.html"
                                    class=" btn btn-primary btn-lg">Interactive Recon API Specification</a>
                             </div>

@@ -447,26 +447,26 @@ s=d.getElementsByTagName('script')[0];
 <p>当一个容器被创建后，它就以 OPEN 状态开始。而当其被写满（写入约 5GB 数据）时，它就会被关闭并且处于 CLOSED 状态。</p>
 <p>OPEN 和 CLOSED 容器之间的根本区别：</p>
 <table>
-<thead>
-<tr>
-<th>OPEN</th>
-<th>CLOSED</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>可变</td>
-<td>不可变</td>
-</tr>
-<tr>
-<td>基于 RAFT (Ratis) 进行复制</td>
-<td>异步地对容器副本进行复制</td>
-</tr>
-<tr>
-<td>只有 Raft leader 用于读/写</td>
-<td>所有节点都可用于读</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>OPEN</th>
+          <th>CLOSED</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>可变</td>
+          <td>不可变</td>
+      </tr>
+      <tr>
+          <td>基于 RAFT (Ratis) 进行复制</td>
+          <td>异步地对容器副本进行复制</td>
+      </tr>
+      <tr>
+          <td>只有 Raft leader 用于读/写</td>
+          <td>所有节点都可用于读</td>
+      </tr>
+  </tbody>
 </table>
 
 

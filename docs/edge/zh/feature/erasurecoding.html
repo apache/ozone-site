@@ -521,30 +521,30 @@ EC 要求集群中 datanode 的数量至少和带宽数量相等，因此对于 
 <h3 id="配置">配置</h3>
 <p>如上所述，EC 的副本配置可以在 bucket 级别启用。
 可以用 <code>ozone.server.default.replication.type</code> 和 <code>ozone.server.default.replication</code> 来设定集群内副本配置的预设值。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>要注意的是，上述设定只有在客户端没有做任何配置，或 bucket 没有预设值才有效。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>要注意的是，上述设定只有在客户端没有做任何配置，或 bucket 没有预设值才有效。</p>
 <h4 id="在-bucket-上做-ec-配置">在 bucket 上做 EC 配置</h4>
 <p>我们可以用 <code>ozone sh</code> 命令来做 bucket 的 EC 副本设定，EC 的相关配置可以在新增 bucket 时做设定。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
-</code></pre></div><p>我们还可以使用以下命令重设 EC Replication Config。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
-</code></pre></div><p>重置后，只有新建的文件会受到新设定的影响，bucket 中已经建立的文件会维持旧设定。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
+</span></span></code></pre></div><p>我们还可以使用以下命令重设 EC Replication Config。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
+</span></span></code></pre></div><p>重置后，只有新建的文件会受到新设定的影响，bucket 中已经建立的文件会维持旧设定。</p>
 <h4 id="在新增文件时做-ec-配置">在新增文件时做 EC 配置</h4>
 <p>在新增文件时可以进行 EC 副本设定，且不用考虑 bucket 的副本配置。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
-</code></pre></div><p>如果 bucket 已经有预设的 EC 副本设定，那么创建文件时就不用再做设定。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
+</span></span></code></pre></div><p>如果 bucket 已经有预设的 EC 副本设定，那么创建文件时就不用再做设定。</p>
 
 
           
-          <a class="btn  btn-success btn-lg" href="../../zh/feature/om-ha.html">Next >></a>
+          <a class="btn  btn-success btn-lg" href="../../zh/feature/prefixfso.html">Next >></a>
           
           </div>
 

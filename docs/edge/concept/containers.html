@@ -519,26 +519,26 @@ Blocks are local information and not managed by SCM. Therefore even if billions 
 <p>When a container is created it starts in an OPEN state. When it&rsquo;s full (~5GB data is written), container will be closed and becomes a CLOSED container.</p>
 <p>The fundamental differences between OPEN and CLOSED containers:</p>
 <table>
-<thead>
-<tr>
-<th>OPEN</th>
-<th>CLOSED</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mutable</td>
-<td>immutable</td>
-</tr>
-<tr>
-<td>replicated with RAFT (Ratis)</td>
-<td>Replicated with async container copy</td>
-</tr>
-<tr>
-<td>Raft leader is used to READ / WRITE</td>
-<td>All the nodes can be used to READ</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>OPEN</th>
+          <th>CLOSED</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mutable</td>
+          <td>immutable</td>
+      </tr>
+      <tr>
+          <td>replicated with RAFT (Ratis)</td>
+          <td>Replicated with async container copy</td>
+      </tr>
+      <tr>
+          <td>Raft leader is used to READ / WRITE</td>
+          <td>All the nodes can be used to READ</td>
+      </tr>
+  </tbody>
 </table>
 
 

@@ -440,264 +440,264 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="默认身份验证">默认身份验证</h3>
 <p>默认情况下 Ozone HTTP Web 控制台 (OM、SCM、S3G、Recon、Datanode) 根据以下默认配置允许无需身份验证的访问。</p>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.security.http.kerberos.enabled</td>
-<td>false</td>
-</tr>
-<tr>
-<td>ozone.http.filter.initializers</td>
-<td><empty></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.security.http.kerberos.enabled</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>ozone.http.filter.initializers</td>
+          <td><empty></td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您有一个启用了 SPNEGO 的 Ozone 集群,并且想要为所有 Ozone 服务禁用它,只需确保按上述两个参数配置即可。</p>
 <h3 id="基于-kerberos-的-spnego-身份验证">基于 Kerberos 的 SPNEGO 身份验证</h3>
 <p>身份验证也可以配置为要求使用 HTTP SPNEGO 协议（被 Firefox 和 Chrome 等浏览器所支持）。为了实现这一点，必须先配置以下参数。</p>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hadoop.security.authentication</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.security.http.kerberos.enabled</td>
-<td>true</td>
-</tr>
-<tr>
-<td>ozone.http.filter.initializers</td>
-<td>org.apache.hadoop.security.AuthenticationFilterInitializer</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hadoop.security.authentication</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.security.http.kerberos.enabled</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>ozone.http.filter.initializers</td>
+          <td>org.apache.hadoop.security.AuthenticationFilterInitializer</td>
+      </tr>
+  </tbody>
 </table>
 <p>之后，各个组件需要正确配置才能完全启用 SPNEGO 或 SIMPLE 身份验证。</p>
 <h3 id="为-om-http-启用-spnego-身份验证">为 OM HTTP 启用 SPNEGO 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.om.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.om.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="为-s3g-http-启用-spnego-身份验证">为 S3G HTTP 启用 SPNEGO 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.s3g.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.s3g.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="为-recon-http-启用-spnego-身份验证">为 RECON HTTP 启用 SPNEGO 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.recon.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.recon.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="为-scm-http-启用-spnego-身份验证">为 SCM HTTP 启用 SPNEGO 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.scm.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.scm.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="为-datanode-http-启用-spnego-身份验证">为 DATANODE HTTP 启用 SPNEGO 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.datanode.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.datanode.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <p>注意： Ozone datanode 没有默认网页，这会阻止您访问“/”或“/index.html”。但它通过 HTTP 提供了标准 Java Servlet，如 jmx/conf/jstack。</p>
 <p>此外，Ozone HTTP Web 控制台支持相当于 Hadoop 的 Pseudo/Simple 身份验证。 如果启用此选项，则必须在第一次与浏览器交互中使用 user.name 指定用户名查询字符串参数。例如，http://scm:9876/?user.name=scmadmin。</p>
 <h3 id="为-om-http-启用-simple-身份验证">为 OM HTTP 启用 SIMPLE 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.om.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.om.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您不想在查询字符串参数中指定 user.name，更改 ozone.om.http.auth.simple.anonymous.allowed 为 true。</p>
 <h3 id="为-s3g-http-启用-simple-身份验证">为 S3G HTTP 启用 SIMPLE 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.s3g.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.s3g.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您不想在查询字符串参数中指定 user.name，更改 ozone.s3g.http.auth.simple.anonymous.allowed 为 true。</p>
 <h3 id="为-recon-http-启用-simple-身份验证">为 RECON HTTP 启用 SIMPLE 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.recon.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.recon.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您不想在查询字符串参数中指定 user.name，更改 ozone.recon.http.auth.simple.anonymous.allowed 为 true。</p>
 <h3 id="为-scm-http-启用-simple-身份验证">为 SCM HTTP 启用 SIMPLE 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.scm.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.scm.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您不想在查询字符串参数中指定 user.name，更改 hdds.scm.http.auth.simple.anonymous.allowed 为 true。</p>
 <h3 id="为-datanode-http-启用-simple-身份验证">为 DATANODE HTTP 启用 SIMPLE 身份验证</h3>
 <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.datanode.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.datanode.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>如果您不想在查询字符串参数中指定 user.name，更改 hdds.datanode.http.auth.simple.anonymous.allowed 为 true。</p>
 

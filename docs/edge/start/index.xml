@@ -4,71 +4,50 @@
     <title>Getting Started on Ozone</title>
     <link>/start.html</link>
     <description>Recent content in Getting Started on Ozone</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/start/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="/start/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Simple Single Ozone</title>
       <link>/start/startfromdockerhub.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/startfromdockerhub.html</guid>
-      <description>Requirements  Working docker setup AWS CLI (optional)    Ozone in a Single Container The easiest way to start up an all-in-one ozone container is to use the latest docker image from docker hub:
-docker run -p 9878:9878 -p 9876:9876 apache/ozone This command will pull down the ozone image from docker hub and start all ozone services in a single container. This container will run the required metadata servers (Ozone Manager, Storage Container Manager) one data node and the S3 compatible REST server (S3 Gateway).</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working docker setup&lt;/li&gt;&#xA;&lt;li&gt;AWS CLI (optional)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;ozone-in-a-single-container&#34;&gt;Ozone in a Single Container&lt;/h1&gt;&#xA;&lt;p&gt;The easiest way to start up an all-in-one ozone container is to use the latest&#xA;docker image from docker hub:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ozone On Premise Installation</title>
       <link>/start/onprem.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/onprem.html</guid>
-      <description>If you are feeling adventurous, you can setup ozone in a real cluster. Setting up a real cluster requires us to understand the components of Ozone. Ozone is designed to work concurrently with HDFS. However, Ozone is also capable of running independently. The components of ozone are the same in both approaches.
-Ozone Components  Ozone Manager - Is the server that is in charge of the namespace of Ozone. Ozone Manager is responsible for all volume, bucket and key operations.</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;If you are feeling adventurous, you can setup ozone in a real cluster.&#xA;Setting up a real cluster requires us to understand the components of Ozone.&#xA;Ozone is designed to work concurrently with HDFS. However, Ozone is also&#xA;capable of running independently. The components of ozone are the same in both approaches.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Minikube &amp; Ozone</title>
       <link>/start/minikube.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/minikube.html</guid>
-      <description>Requirements  Working minikube setup kubectl    kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use apache/ozone image from the dockerhub.
-To deploy it to minikube use the minikube configuration set:
-cd kubernetes/examples/minikube kubectl apply -f . And you can check the results with
-kubectl get pod Note: the kubernetes/examples/minikube resource set is optimized for minikube usage:</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working minikube setup&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;kubernetes/examples&lt;/code&gt; folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use &lt;code&gt;apache/ozone&lt;/code&gt; image from the dockerhub.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ozone on Kubernetes</title>
       <link>/start/kubernetes.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/kubernetes.html</guid>
-      <description>Requirements  Working kubernetes cluster (LoadBalancer, PersistentVolume are not required) kubectl    As the apache/ozone docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host) Deploy to kubernetes
-kubernetes/examples folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working kubernetes cluster (LoadBalancer, PersistentVolume are not required)&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;As the &lt;em&gt;apache/ozone&lt;/em&gt; docker images are available from the dockerhub the deployment process is very similar to Minikube deployment. The only big difference is that we have dedicated set of k8s files for hosted clusters (for example we can use one datanode per host)&#xA;Deploy to kubernetes&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Pseudo-cluster</title>
       <link>/start/runningviadocker.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/runningviadocker.html</guid>
-      <description>Requirements  docker and docker-compose      Download the Ozone binary tarball and untar it.
-  Go to the directory where the docker compose files exist and tell docker-compose to start Ozone in the background. This will start a small ozone instance on your machine.
-  cd compose/ozone/ docker-compose up -d To verify that ozone is working as expected, let us log into a data node and run freon, the load generator for Ozone.</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;docker and docker-compose&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Download the Ozone binary tarball and untar it.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>From Source</title>
       <link>/start/fromsource.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/start/fromsource.html</guid>
-      <description>Requirements  Java 1.8 Maven    This is a guide on how to build the ozone sources. If you are not planning to build sources yourself, you can safely skip this page.
- If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release.
-If you want to build from sources, Please untar the source tarball (or clone the latest code from the git repository) and run the ozone build command.</description>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Java 1.8&lt;/li&gt;&#xA;&lt;li&gt;Maven&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;&#xA;&lt;p&gt;This is a guide on how to build the ozone sources.  If you are &lt;font&#xA;color=&#34;red&#34;&gt;not&lt;/font&gt;&#xA;planning to build sources yourself, you can safely skip this page.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -553,45 +553,45 @@ less block data to process and the namespace service (Ozone Manager) as a
 different service are critical to scaling Ozone.</p>
 <h2 id="notable-configurations">Notable configurations</h2>
 <table>
-<thead>
-<tr>
-<th>key</th>
-<th>default</th>
-<th><div style="width: 300px;">description</div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dfs.container.ratis.datanode.storage.dir</td>
-<td>none</td>
-<td>This directory is used for storing Ratis metadata like logs.</td>
-</tr>
-<tr>
-<td>ozone.scm.datanode.id.dir</td>
-<td>none</td>
-<td>The path that datanodes will use to store the datanode ID.</td>
-</tr>
-<tr>
-<td>hdds.datanode.dir</td>
-<td>none</td>
-<td>Determines where HDDS data will be stored on the local filesystem.</td>
-</tr>
-<tr>
-<td>hdds.datanode.dir.du.reserved</td>
-<td>none</td>
-<td>Reserved space in bytes per volume. Always leave this much space free for non dfs use.</td>
-</tr>
-<tr>
-<td>ozone.metadata.dirs</td>
-<td>none</td>
-<td>Directory to store persisted data (RocksDB).</td>
-</tr>
-<tr>
-<td>ozone.recon.address</td>
-<td>0.0.0.0:9891</td>
-<td>RPC address of the Recon. Use <a href="host:port">host:port</a> to connect Recon.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>key</th>
+          <th>default</th>
+          <th><div style="width: 300px;">description</div></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfs.container.ratis.datanode.storage.dir</td>
+          <td>none</td>
+          <td>This directory is used for storing Ratis metadata like logs.</td>
+      </tr>
+      <tr>
+          <td>ozone.scm.datanode.id.dir</td>
+          <td>none</td>
+          <td>The path that datanodes will use to store the datanode ID.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.dir</td>
+          <td>none</td>
+          <td>Determines where HDDS data will be stored on the local filesystem.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.dir.du.reserved</td>
+          <td>none</td>
+          <td>Reserved space in bytes per volume. Always leave this much space free for non dfs use.</td>
+      </tr>
+      <tr>
+          <td>ozone.metadata.dirs</td>
+          <td>none</td>
+          <td>Directory to store persisted data (RocksDB).</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.address</td>
+          <td>0.0.0.0:9891</td>
+          <td>RPC address of the Recon. Use <a href="#ZgotmplZ">host:port</a> to connect Recon.</td>
+      </tr>
+  </tbody>
 </table>
 
 

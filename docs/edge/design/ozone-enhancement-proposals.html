@@ -545,23 +545,22 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="the-format">The format</h3>
 <p>While the first version (markdown files) are the most powerful, the second version (the existing practice) is also acceptable. In this case we propose to create a PR with adding a reference page <em>without</em> the content but including the link.</p>
 <p>For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#f92672">title</span>: <span style="color:#ae81ff">Ozone Security Design</span>
-<span style="color:#f92672">summary</span>: <span style="color:#ae81ff">A comprehensive description of the security flow between server and client components.</span>
-<span style="color:#f92672">date</span>: <span style="color:#e6db74">2018-02-22</span>
-<span style="color:#f92672">jira</span>: <span style="color:#ae81ff">HDDS-4</span>
-<span style="color:#f92672">status</span>: <span style="color:#ae81ff">implemented</span>
-<span style="color:#f92672">author</span>: <span style="color:#ae81ff">Sanjay Radia, Jitendra Pandey, Xiaoyu Yao, Anu Engineer</span>
-
-<span style="color:#75715e">## Summary</span>
-
-<span style="color:#f92672">Ozone security model is based on Kerberos and similar to the Hadoop security but some of the parts are improved</span>: <span style="color:#ae81ff">for example the SCM works as a Certificate Authority and PKI based solutions are wildely used.</span>
-
-<span style="color:#75715e">## Reference</span>
-
-<span style="color:#ae81ff">For more details please check the (uploaded design doc)[https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf].</span>
-
-</code></pre></div><p>Obviously with the first approach the design doc itself can be included in this markdown file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#ae81ff">Ozone Security Design</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">summary</span>: <span style="color:#ae81ff">A comprehensive description of the security flow between server and client components.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2018-02-22</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jira</span>: <span style="color:#ae81ff">HDDS-4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">status</span>: <span style="color:#ae81ff">implemented</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#ae81ff">Sanjay Radia, Jitendra Pandey, Xiaoyu Yao, Anu Engineer</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Summary</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Ozone security model is based on Kerberos and similar to the Hadoop security but some of the parts are improved</span>: <span style="color:#ae81ff">for example the SCM works as a Certificate Authority and PKI based solutions are wildely used.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Reference</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">For more details please check the (uploaded design doc)[https://issues.apache.org/jira/secure/attachment/12911638/HadoopStorageLayerSecurity.pdf].</span>
+</span></span></code></pre></div><p>Obviously with the first approach the design doc itself can be included in this markdown file.</p>
 <h2 id="migration">Migration</h2>
 <p>It&rsquo;s not a hard requirement to migrate all the design doc. But process is always open:</p>
 <ol>
@@ -639,7 +638,7 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="workflows-form-other-projects">Workflows form other projects</h2>
 <p>There are similar process in other open source projects. This document and the template is inspired by the following projects:</p>
 <ul>
-<li><a href="https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Improvement+Proposals">Apache Kafka Improvement Proposals</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/KAFKA/Kafka&#43;Improvement&#43;Proposals">Apache Kafka Improvement Proposals</a></li>
 <li><a href="https://spark.apache.org/improvement-proposals.html">Apache Spark Project Improvement Proposals</a></li>
 <li><a href="https://github.com/kubernetes/enhancements/tree/master/keps">Kubernetes Enhancement Proposals</a></li>
 </ul>

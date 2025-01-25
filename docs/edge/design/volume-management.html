@@ -502,26 +502,26 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="s3-to-hcfs-path-mapping-problem">S3 to HCFS path mapping problem</h3>
 <p>Ozone has the semantics of volume <em>and</em> buckets while S3 has only buckets. To make it possible to use the same bucket both from Hadoop world and via S3 we need a mapping between them.</p>
 <p>Currently we maintain a map between the S3 buckets and Ozone volumes + buckets in <code>OmMetadataManagerImpl</code></p>
-<pre><code>s3_bucket --&gt; ozone_volume/ozone_bucket
+<pre tabindex="0"><code>s3_bucket --&gt; ozone_volume/ozone_bucket
 </code></pre><p>The current implementation uses the <code>&quot;s3&quot; + s3UserName</code> string as the volume name and the <code>s3BucketName</code> as the bucket name. Where <code>s3UserName</code> is is the <code>DigestUtils.md5Hex(kerberosUsername.toLowerCase())</code></p>
 <p>To create an S3 bucket and use it from o3fs, you should:</p>
 <ol>
 <li>Get your personal secret based on your kerberos keytab</li>
 </ol>
-<pre><code>&gt; kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm
+<pre tabindex="0"><code>&gt; kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm
 &gt; ozone s3 getsecret
 awsAccessKey=testuser/scm@EXAMPLE.COM
 awsSecret=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
 </code></pre><ol start="2">
 <li>Create the bucket with S3 cli</li>
 </ol>
-<pre><code>&gt; export AWS_ACCESS_KEY_ID=testuser/scm@EXAMPLE.COM
+<pre tabindex="0"><code>&gt; export AWS_ACCESS_KEY_ID=testuser/scm@EXAMPLE.COM
 &gt; export AWS_SECRET_ACCESS_KEY=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
 &gt; aws s3api --endpoint http://localhost:9878 create-bucket --bucket=bucket1
 </code></pre><ol start="3">
 <li>And identify the ozone path</li>
 </ol>
-<pre><code>&gt; ozone s3 path bucket1
+<pre tabindex="0"><code>&gt; ozone s3 path bucket1
 Volume name for S3Bucket is : s3c89e813c80ffcea9543004d57b2a1239
 Ozone FileSystem Uri is : o3fs://bucket1.s3c89e813c80ffcea9543004d57b2a1239
 </code></pre><h2 id="proposed-solution1">Proposed solution[1]</h2>
@@ -592,12 +592,12 @@ Ozone FileSystem Uri is : o3fs://bucket1.s3c89e813c80ffcea9543004d57b2a1239
 <h3 id="3-string-magic">3. String Magic</h3>
 <p>We can try to make volume name visible for the S3 world by using some structured bucket names. Unfortunately the available separator characters are very limited:</p>
 <p>For example we can&rsquo;t use <code>/</code></p>
-<pre><code>aws s3api create-bucket --bucket=vol1/bucket1
+<pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1/bucket1
 
 Parameter validation failed:
-Invalid bucket name &quot;vol1/bucket1&quot;: Bucket name must match the regex &quot;^[a-zA-Z0-9.\-_]{1,255}$&quot; or be an ARN matching the regex &quot;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&quot;
+Invalid bucket name &#34;vol1/bucket1&#34;: Bucket name must match the regex &#34;^[a-zA-Z0-9.\-_]{1,255}$&#34; or be an ARN matching the regex &#34;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&#34;
 </code></pre><p>But it&rsquo;s possible to use <code>volume-bucket</code> notion:</p>
-<pre><code>aws s3api create-bucket --bucket=vol1-bucket1
+<pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1-bucket1
 </code></pre><ul>
 <li><strong>pro</strong>: Volume mapping is visible all the time.</li>
 <li><strong>con</strong>: Harder to use any external tool with defaults (all the buckets should have at least one <code>-</code>)</li>

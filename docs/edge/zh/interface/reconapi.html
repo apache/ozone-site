@@ -453,26 +453,26 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>回传所有 ContainerMetadata 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;data&#34;</span>: {
-        <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">3</span>,
-        <span style="color:#f92672">&#34;containers&#34;</span>: [
-          {
-            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">834</span>
-          },
-          {
-            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">2</span>,
-            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
-          },
-          {
-            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">3</span>,
-            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
-          }
-        ]
-      }
-    }
-</code></pre></div><h3 id="get-apiv1containersidkeys">GET /api/v1/containers/:id/keys</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containers&#34;</span>: [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">834</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersidkeys">GET /api/v1/containers/:id/keys</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -487,68 +487,68 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>回传给定容器 ID 的所有 KeyMetadata 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;totalCount&#34;</span>:<span style="color:#ae81ff">7</span>,
-      <span style="color:#f92672">&#34;keys&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;Volume&#34;</span>:<span style="color:#e6db74">&#34;vol-1-73141&#34;</span>,
-          <span style="color:#f92672">&#34;Bucket&#34;</span>:<span style="color:#e6db74">&#34;bucket-3-35816&#34;</span>,
-          <span style="color:#f92672">&#34;Key&#34;</span>:<span style="color:#e6db74">&#34;key-0-43637&#34;</span>,
-          <span style="color:#f92672">&#34;DataSize&#34;</span>:<span style="color:#ae81ff">1000</span>,
-          <span style="color:#f92672">&#34;Versions&#34;</span>:[<span style="color:#ae81ff">0</span>],
-          <span style="color:#f92672">&#34;Blocks&#34;</span>: {
-            <span style="color:#f92672">&#34;0&#34;</span>: [
-              {
-                <span style="color:#f92672">&#34;containerID&#34;</span>:<span style="color:#ae81ff">1</span>,
-                <span style="color:#f92672">&#34;localID&#34;</span>:<span style="color:#ae81ff">105232659753992201</span>
-              }
-            ]
-          },
-          <span style="color:#f92672">&#34;CreationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:17.722Z&#34;</span>,
-          <span style="color:#f92672">&#34;ModificationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:30.405Z&#34;</span>
-        },
-        <span style="color:#960050;background-color:#1e0010">...</span>
-      ]
-    }
-</code></pre></div><h3 id="get-apiv1containersmissing">GET /api/v1/containers/missing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;totalCount&#34;</span>:<span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keys&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Volume&#34;</span>:<span style="color:#e6db74">&#34;vol-1-73141&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Bucket&#34;</span>:<span style="color:#e6db74">&#34;bucket-3-35816&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Key&#34;</span>:<span style="color:#e6db74">&#34;key-0-43637&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;DataSize&#34;</span>:<span style="color:#ae81ff">1000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Versions&#34;</span>:[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Blocks&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;0&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;containerID&#34;</span>:<span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;localID&#34;</span>:<span style="color:#ae81ff">105232659753992201</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;CreationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:17.722Z&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ModificationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:30.405Z&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersmissing">GET /api/v1/containers/missing</h3>
 <p><strong>参数</strong></p>
 <p>没有参数。</p>
 <p><strong>回传</strong></p>
 <p>回传所有丢失容器的 MissingContainerMetadata 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-    	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">26</span>,
-    	<span style="color:#f92672">&#34;containers&#34;</span>: [{
-    		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
-    		<span style="color:#f92672">&#34;missingSince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
-    		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
-    		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
-    		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
-    			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
-    			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
-    			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
-    			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731201301</span>
-    		}, 
-            <span style="color:#960050;background-color:#1e0010">...</span>
-            ]
-    	},
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-    }
-</code></pre></div><h3 id="get-apiv1containersidreplicahistory">GET /api/v1/containers/:id/replicaHistory</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>    	<span style="color:#f92672">&#34;containers&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;missingSince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731201301</span>
+</span></span><span style="display:flex;"><span>    		}, 
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>    	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersidreplicahistory">GET /api/v1/containers/:id/replicaHistory</h3>
 <p><strong>参数</strong></p>
 <p>没有参数。</p>
 <p><strong>回传</strong>
 回传给定容器 ID 的所有 ContainerHistory 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    [
-      {
-        <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
-        <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
-        <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
-        <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605730421294</span>
-      },
-      <span style="color:#960050;background-color:#1e0010">...</span>
-    ]
-</code></pre></div><h3 id="get-apiv1containersunhealthy">GET /api/v1/containers/unhealthy</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605730421294</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span></code></pre></div><h3 id="get-apiv1containersunhealthy">GET /api/v1/containers/unhealthy</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -563,34 +563,34 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>回传所有不健康容器的 UnhealthyContainerMetadata 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-     	<span style="color:#f92672">&#34;missingCount&#34;</span>: <span style="color:#ae81ff">2</span>,
-     	<span style="color:#f92672">&#34;underReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
-     	<span style="color:#f92672">&#34;overReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
-     	<span style="color:#f92672">&#34;misReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
-     	<span style="color:#f92672">&#34;containers&#34;</span>: [{
-     		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
-     		<span style="color:#f92672">&#34;containerState&#34;</span>: <span style="color:#e6db74">&#34;MISSING&#34;</span>,
-     		<span style="color:#f92672">&#34;unhealthySince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
-     		<span style="color:#f92672">&#34;expectedReplicaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
-     		<span style="color:#f92672">&#34;actualReplicaCount&#34;</span>: <span style="color:#ae81ff">0</span>,
-     		<span style="color:#f92672">&#34;replicaDeltaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
-     		<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#66d9ef">null</span>,
-     		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
-     		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
-     		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
-     			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
-     			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
-     			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605722960125</span>,
-     			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731230509</span>
-     		}, 
-            <span style="color:#960050;background-color:#1e0010">...</span>
-            ]
-     	},
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-     } 
-</code></pre></div><h3 id="get-apiv1containersunhealthystate">GET /api/v1/containers/unhealthy/:state</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;missingCount&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;underReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;overReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;misReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;containers&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containerState&#34;</span>: <span style="color:#e6db74">&#34;MISSING&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;unhealthySince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;expectedReplicaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;actualReplicaCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicaDeltaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605722960125</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731230509</span>
+</span></span><span style="display:flex;"><span>     		}, 
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     } 
+</span></span></code></pre></div><h3 id="get-apiv1containersunhealthystate">GET /api/v1/containers/unhealthy/:state</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -614,20 +614,20 @@ s=d.getElementsByTagName('script')[0];
 <li>容器存在于 OM 中，但不存在于 SCM 中。</li>
 <li>容器存在于 SCM 中，但不存在于 OM 中。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
-  {
-    <span style="color:#f92672">&#34;containerId&#34;</span> : <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">&#34;numberOfKeys&#34;</span> : <span style="color:#ae81ff">3</span>,
-    <span style="color:#f92672">&#34;pipelines&#34;</span> : [
-      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;1423ghjds832403232&#34;</span>,
-      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdh4443&#34;</span>,
-      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdhs443&#34;</span>
-    ],
-    <span style="color:#f92672">&#34;existsAt&#34;</span> : <span style="color:#e6db74">&#34;OM&#34;</span>
-  }
-  <span style="color:#960050;background-color:#1e0010">...</span>
-]
-</code></pre></div><h3 id="get-apiv1containersmismatchdeleted">GET /api/v1/containers/mismatch/deleted</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;containerId&#34;</span> : <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;numberOfKeys&#34;</span> : <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;pipelines&#34;</span> : [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;1423ghjds832403232&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdh4443&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdhs443&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;existsAt&#34;</span> : <span style="color:#e6db74">&#34;OM&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><h3 id="get-apiv1containersmismatchdeleted">GET /api/v1/containers/mismatch/deleted</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>prevKey (可选)</li>
@@ -642,15 +642,15 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回在SCM中已删除但在OM中存在的容器集合，以找出映射到这些已删除状态容器的键列表。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
-  {
-    <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;numberOfKeys&#34;</span>: <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;pipelines&#34;</span>: []
-  }
-  <span style="color:#960050;background-color:#1e0010">...</span>
-]
-</code></pre></div><h3 id="get-apiv1keysopen">GET /api/v1/keys/open</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;numberOfKeys&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;pipelines&#34;</span>: []
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><h3 id="get-apiv1keysopen">GET /api/v1/keys/open</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -665,54 +665,54 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回处于打开状态的键/文件集合。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
-  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">13824</span>,
-  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">4608</span>,
-  <span style="color:#f92672">&#34;entities&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1&#34;</span>,
-      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
-      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
-      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
-      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
-      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
-    },
-    {
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key2&#34;</span>,
-      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
-      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
-      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">512</span>,
-      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">1536</span>,
-      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">512</span>,
-      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
-    },
-    {
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/file1&#34;</span>,
-      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
-      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
-      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
-      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
-      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
-    },
-    {
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
-      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
-      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
-      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>,
-      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">6144</span>,
-      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">2048</span>,
-      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
-    }
-  ]
-}
-</code></pre></div><h3 id="get-apiv1keysdeletepending">GET /api/v1/keys/deletePending</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">13824</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">4608</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;entities&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key2&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">512</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">1536</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">512</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/file1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">6144</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="get-apiv1keysdeletepending">GET /api/v1/keys/deletePending</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -727,47 +727,47 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回处于待删除状态的键/文件集合。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;sampleVol/bucketOne/key_one&#34;</span>,
-  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
-          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
-          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
-          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
-          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
-            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
-            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
-          },
-          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
-          <span style="color:#f92672">&#34;acls&#34;</span>: [],
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
-          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
-          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
-          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
-        }
-      ]
-    }
-  ],
-  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
-}
-</code></pre></div><h3 id="get-apiv1keysdeletependingdirs">GET /api/v1/keys/deletePending/dirs</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;sampleVol/bucketOne/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="get-apiv1keysdeletependingdirs">GET /api/v1/keys/deletePending/dirs</h3>
 <p><strong>参数</strong></p>
 <ul>
 <li>
@@ -782,47 +782,47 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回处于待删除状态的目录集合。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;vol1/bucket1/bucket1/dir1&#34;</span>,
-  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
-          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
-          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
-          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
-          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
-          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
-            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
-            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
-          },
-          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
-          <span style="color:#f92672">&#34;acls&#34;</span>: [],
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
-          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
-          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
-          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
-          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
-          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
-        }
-      ]
-    }
-  ],
-  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
-}
-</code></pre></div><h2 id="blocks-metadata-admin-only">Blocks Metadata (admin only)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;vol1/bucket1/bucket1/dir1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="blocks-metadata-admin-only">Blocks Metadata (admin only)</h2>
 <h3 id="get-apiv1blocksdeletepending">GET /api/v1/blocks/deletePending</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -838,22 +838,22 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回待删除的块列表。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;OPEN&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">100</span>,
-      <span style="color:#f92672">&#34;localIDList&#34;</span>: [
-        <span style="color:#ae81ff">1</span>,
-        <span style="color:#ae81ff">2</span>,
-        <span style="color:#ae81ff">3</span>,
-        <span style="color:#ae81ff">4</span>
-      ],
-      <span style="color:#f92672">&#34;localIDCount&#34;</span>: <span style="color:#ae81ff">4</span>,
-      <span style="color:#f92672">&#34;txID&#34;</span>: <span style="color:#ae81ff">1</span>
-    }
-  ]
-}
-</code></pre></div><h2 id="namespace-metadata-仅-admin">Namespace Metadata (仅 admin)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;OPEN&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;localIDList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;localIDCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;txID&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="namespace-metadata-仅-admin">Namespace Metadata (仅 admin)</h2>
 <h3 id="get-apiv1namespacesummary">GET /api/v1/namespace/summary</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -866,51 +866,51 @@ s=d.getElementsByTagName('script')[0];
 <p>返回路径的基本信息汇总，包括实体类型和路径下对象的聚合计数。</p>
 <p>如果路径存在，则 <code>status</code> 为 <code>OK</code>，否则为 <code>PATH_NOT_FOUND</code>。</p>
 <p>示例: /api/v1/namespace/summary?path=/</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">ROOT</span>,
-      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">10</span>,
-      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">100</span>,
-      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">1000</span>,
-      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">10000</span>
-    }
-</code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">VOLUME</span>,
-      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">10</span>,
-      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">100</span>,
-      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">1000</span>
-    }
-</code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">BUCKET</span>,
-      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">50</span>,
-      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">500</span>
-    }
-</code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1/dir</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
-      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">10</span>,
-      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">100</span>
-    }
-</code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1/dir/nestedDir</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
-      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
-      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">5</span>,
-      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">50</span>
-    }
-</code></pre></div><p>如果任何 <code>num</code> 字段为 <code>-1</code>，则该路径请求不适用于该实体类型。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">ROOT</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">1000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">VOLUME</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">BUCKET</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1/dir</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>示例: /api/v1/namespace/summary?path=/volume1/bucket1/dir/nestedDir</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>如果任何 <code>num</code> 字段为 <code>-1</code>，则该路径请求不适用于该实体类型。</p>
 <h3 id="get-apiv1namespacedu">GET /api/v1/namespace/du</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -932,41 +932,41 @@ s=d.getElementsByTagName('script')[0];
 <code>sizeDirectKey</code>，并以字节为单位返回 <code>size/sizeWithReplica</code>。</p>
 <p>如果路径存在，则 <code>status</code> 为 <code>OK</code>，否则为 <code>PATH_NOT_FOUND</code>。</p>
 <p>示例: /api/v1/namespace/du?path=/vol1/bucket1&amp;files=true&amp;replica=true</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1&#34;</span>,
-      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">100000</span>,
-      <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">300000</span>,
-      <span style="color:#f92672">&#34;subPathCount&#34;</span>: <span style="color:#ae81ff">4</span>,
-      <span style="color:#f92672">&#34;subPaths&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-1&#34;</span>,
-          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
-          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
-          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
-        },
-        {
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-2&#34;</span>,
-          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
-          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
-          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
-        },
-        {
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-3&#34;</span>,
-          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
-          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
-          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
-        },
-        {
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1-1&#34;</span>,
-          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">10000</span>,
-          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">30000</span>,
-          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">true</span>
-        }
-      ],
-      <span style="color:#f92672">&#34;sizeDirectKey&#34;</span>: <span style="color:#ae81ff">10000</span>
-    }
-</code></pre></div><p>如果 <code>files</code> 设置为 <code>false</code>，则子路径 <code>/vol1/bucket1/key1-1</code> 将被省略。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">100000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">300000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;subPathCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;subPaths&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-2&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-3&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1-1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">10000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;sizeDirectKey&#34;</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>如果 <code>files</code> 设置为 <code>false</code>，则子路径 <code>/vol1/bucket1/key1-1</code> 将被省略。
 如果 <code>replica</code> 设置为 <code>false</code>，则 <code>sizeWithReplica</code> 返回 <code>-1</code>。
 如果路径的实体类型无法具有直接键（例如根目录、卷），则 <code>sizeDirectKey</code> 返回 <code>-1</code>。</p>
 <h3 id="get-apiv1namespacequota">GET /api/v1/namespace/quota</h3>
@@ -983,12 +983,12 @@ s=d.getElementsByTagName('script')[0];
 <p>如果请求有效，则 <code>status</code> 为 <code>OK</code>；如果路径不存在，则为 <code>PATH_NOT_FOUND</code>；
 如果路径存在但路径的实体类型不适用于请求，则为 <code>TYPE_NOT_APPLICABLE</code>。</p>
 <p>示例: /api/v1/namespace/quota?path=/vol</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;allowed&#34;</span>: <span style="color:#ae81ff">200000</span>,
-      <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">160000</span>
-    }
-</code></pre></div><p>如果未设置配额，则 <code>allowed</code> 返回 <code>-1</code>。详情请参阅 [Ozone 中的配额]。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;allowed&#34;</span>: <span style="color:#ae81ff">200000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">160000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>如果未设置配额，则 <code>allowed</code> 返回 <code>-1</code>。详情请参阅 [Ozone 中的配额]。
 (<a href="https://ci-hadoop.apache.org/view/Hadoop%20Ozone/job/ozone-doc-master/lastSuccessfulBuild/artifact/hadoop-hdds/docs/public/feature/quota.html">https://ci-hadoop.apache.org/view/Hadoop%20Ozone/job/ozone-doc-master/lastSuccessfulBuild/artifact/hadoop-hdds/docs/public/feature/quota.html</a>)</p>
 <h3 id="get-apiv1namespacedist">GET /api/v1/namespace/dist</h3>
 <p><strong>参数</strong></p>
@@ -1003,21 +1003,21 @@ s=d.getElementsByTagName('script')[0];
 <p>如果请求有效，则 <code>status</code> 为 <code>OK</code>；如果路径不存在，则为 <code>PATH_NOT_FOUND</code>；
 如果路径存在，但该路径是一个键，键不具有文件大小分布，则为 <code>TYPE_NOT_APPLICABLE</code>。</p>
 <p>示例: /api/v1/namespace/dist?path=/</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
-      <span style="color:#f92672">&#34;dist&#34;</span>: [
-        <span style="color:#ae81ff">0</span>,
-        <span style="color:#ae81ff">0</span>,
-        <span style="color:#ae81ff">10</span>,
-        <span style="color:#ae81ff">20</span>,
-        <span style="color:#ae81ff">0</span>,
-        <span style="color:#ae81ff">30</span>,
-        <span style="color:#ae81ff">0</span>,
-        <span style="color:#ae81ff">100</span>,
-        <span style="color:#960050;background-color:#1e0010">...</span>
-      ]
-    }
-</code></pre></div><p>Recon跟踪所有大小从<code>1 KB</code>到<code>1 PB</code>的键。对于小于<code>1 KB</code>的键，映射到第一个箱（索引）；
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;dist&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Recon跟踪所有大小从<code>1 KB</code>到<code>1 PB</code>的键。对于小于<code>1 KB</code>的键，映射到第一个箱（索引）；
 对于大于<code>1 PB</code>的键，映射到最后一个箱（索引）。</p>
 <p><code>dist</code> 的每个索引都映射到一个文件大小范围（例如 <code>1 MB</code> 到 <code>2 MB</code>）。</p>
 <h2 id="集群状态">集群状态</h2>
@@ -1026,21 +1026,21 @@ s=d.getElementsByTagName('script')[0];
 <p>没有参数。</p>
 <p><strong>回传</strong></p>
 <p>返回 Ozone 集群当前状态的摘要。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-     	<span style="color:#f92672">&#34;pipelines&#34;</span>: <span style="color:#ae81ff">5</span>,
-     	<span style="color:#f92672">&#34;totalDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
-     	<span style="color:#f92672">&#34;healthyDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
-     	<span style="color:#f92672">&#34;storageReport&#34;</span>: {
-     		<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">1081719668736</span>,
-     		<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">1309212672</span>,
-     		<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">597361258496</span>
-     	},
-     	<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">26</span>,
-     	<span style="color:#f92672">&#34;volumes&#34;</span>: <span style="color:#ae81ff">6</span>,
-     	<span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
-     	<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
-     }
-</code></pre></div><h2 id="volumes-仅-admin">Volumes (仅 admin)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;pipelines&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;healthyDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;storageReport&#34;</span>: {
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">1081719668736</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">1309212672</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">597361258496</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volumes&#34;</span>: <span style="color:#ae81ff">6</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="volumes-仅-admin">Volumes (仅 admin)</h2>
 <h3 id="get-apiv1volumes">GET /api/v1/volumes</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -1056,34 +1056,34 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>返回集群中的所有卷。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
-     	<span style="color:#f92672">&#34;volumes&#34;</span>: [{
-          <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
-          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
-          <span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>,
-          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176660</span> ,
-          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590397315</span>,
-          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">2048</span>,
-          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
-          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">10</span>,
-          <span style="color:#f92672">&#34;acls&#34;</span>: [
-            {
-              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
-              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-              <span style="color:#f92672">&#34;aclList&#34;</span>: [
-                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
-                <span style="color:#e6db74">&#34;READ&#34;</span>,
-                <span style="color:#e6db74">&#34;DELETE&#34;</span>
-              ]
-            }
-          ]
-        },
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-     }
-</code></pre></div><h2 id="buckets-仅-admin">Buckets (仅 admin)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volumes&#34;</span>: [{
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176660</span> ,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590397315</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;READ&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+</span></span><span style="display:flex;"><span>              ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="buckets-仅-admin">Buckets (仅 admin)</h2>
 <h3 id="get-apiv1buckets">GET /api/v1/buckets</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -1104,110 +1104,110 @@ s=d.getElementsByTagName('script')[0];
 <p><strong>回传</strong></p>
 <p>如果未指定卷或指定的卷是一个空字符串，则返回集群中的所有存储桶。
 如果指定了 <code>volume</code>，则仅返回 <code>volume</code> 下的存储桶。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
-     	<span style="color:#f92672">&#34;buckets&#34;</span>: [{
-          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
-          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;buck1&#34;</span>,
-          <span style="color:#f92672">&#34;versioning&#34;</span>: <span style="color:#66d9ef">false</span>,
-          <span style="color:#f92672">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
-          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176616</span>,
-          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590392293</span>,
-          <span style="color:#f92672">&#34;usedBytes&#34;</span>: <span style="color:#ae81ff">943718400</span>,
-          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">40000</span>,
-          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
-          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">50000</span>,
-          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
-          <span style="color:#f92672">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;OBJECT_STORE&#34;</span>,
-          <span style="color:#f92672">&#34;acls&#34;</span>: [
-            {
-              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
-              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-              <span style="color:#f92672">&#34;aclList&#34;</span>: [
-                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
-                <span style="color:#e6db74">&#34;READ&#34;</span>,
-                <span style="color:#e6db74">&#34;DELETE&#34;</span>
-              ]
-            }
-          ]
-        },
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-     }
-</code></pre></div><h2 id="数据节点">数据节点</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;buckets&#34;</span>: [{
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;buck1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;versioning&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176616</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590392293</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedBytes&#34;</span>: <span style="color:#ae81ff">943718400</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">40000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">50000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;OBJECT_STORE&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;READ&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+</span></span><span style="display:flex;"><span>              ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="数据节点">数据节点</h2>
 <h3 id="get-apiv1datanodes">GET /api/v1/datanodes</h3>
 <p><strong>参数</strong></p>
 <p>没有参数。</p>
 <p><strong>回传</strong></p>
 <p>回传集群中的所有数据节点。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
-     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
-     	<span style="color:#f92672">&#34;datanodes&#34;</span>: [{
-     		<span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;f8f8cb45-3ab2-4123&#34;</span>,
-     		<span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
-     		<span style="color:#f92672">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
-     		<span style="color:#f92672">&#34;lastHeartbeat&#34;</span>: <span style="color:#ae81ff">1605738400544</span>,
-     		<span style="color:#f92672">&#34;storageReport&#34;</span>: {
-     			<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">270429917184</span>,
-     			<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">358805504</span>,
-     			<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">119648149504</span>
-     		},
-     		<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
-     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
-     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
-     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-2&#34;</span>
-     		}, {
-     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;3bf4a9e9-69cc-4d20&#34;</span>,
-     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">1</span>,
-     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>
-     		}],
-     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">17</span>,
-     		<span style="color:#f92672">&#34;leaderCount&#34;</span>: <span style="color:#ae81ff">1</span>
-     	},
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-     }
-</code></pre></div><h2 id="管道">管道</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;datanodes&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;f8f8cb45-3ab2-4123&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;lastHeartbeat&#34;</span>: <span style="color:#ae81ff">1605738400544</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;storageReport&#34;</span>: {
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">270429917184</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">358805504</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">119648149504</span>
+</span></span><span style="display:flex;"><span>     		},
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-2&#34;</span>
+</span></span><span style="display:flex;"><span>     		}, {
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;3bf4a9e9-69cc-4d20&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>
+</span></span><span style="display:flex;"><span>     		}],
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">17</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderCount&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="管道">管道</h2>
 <h3 id="get-apiv1pipelines">GET /api/v1/pipelines</h3>
 <p><strong>参数</strong></p>
 <p>没有参数</p>
 <p><strong>回传</strong></p>
 <p>回传在集群中的所有管道。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
-     	<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
-     		<span style="color:#f92672">&#34;pipelineId&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
-     		<span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
-     		<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
-     		<span style="color:#f92672">&#34;datanodes&#34;</span>: [<span style="color:#e6db74">&#34;localhost-1&#34;</span>, <span style="color:#e6db74">&#34;localhost-2&#34;</span>, <span style="color:#e6db74">&#34;localhost-3&#34;</span>],
-     		<span style="color:#f92672">&#34;lastLeaderElection&#34;</span>: <span style="color:#ae81ff">0</span>,
-     		<span style="color:#f92672">&#34;duration&#34;</span>: <span style="color:#ae81ff">23166128</span>,
-     		<span style="color:#f92672">&#34;leaderElections&#34;</span>: <span style="color:#ae81ff">0</span>,
-     		<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-     		<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
-     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">0</span>
-     	},
-        <span style="color:#960050;background-color:#1e0010">...</span>
-        ]
-     }
-</code></pre></div><h2 id="任务">任务</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelineId&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;datanodes&#34;</span>: [<span style="color:#e6db74">&#34;localhost-1&#34;</span>, <span style="color:#e6db74">&#34;localhost-2&#34;</span>, <span style="color:#e6db74">&#34;localhost-3&#34;</span>],
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;lastLeaderElection&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;duration&#34;</span>: <span style="color:#ae81ff">23166128</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderElections&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="任务">任务</h2>
 <h3 id="get-apiv1taskstatus">GET /api/v1/task/status</h3>
 <p><strong>参数</strong></p>
 <p>没有参数</p>
 <p><strong>回传</strong></p>
 <p>回传所有 Recon 任务的状态。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     [
-       {
-     	<span style="color:#f92672">&#34;taskName&#34;</span>: <span style="color:#e6db74">&#34;OmDeltaRequest&#34;</span>,
-     	<span style="color:#f92672">&#34;lastUpdatedTimestamp&#34;</span>: <span style="color:#ae81ff">1605724099147</span>,
-     	<span style="color:#f92672">&#34;lastUpdatedSeqNumber&#34;</span>: <span style="color:#ae81ff">186</span>
-       },
-       <span style="color:#960050;background-color:#1e0010">...</span>
-     ]
-</code></pre></div><h2 id="使用率">使用率</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     [
+</span></span><span style="display:flex;"><span>       {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;taskName&#34;</span>: <span style="color:#e6db74">&#34;OmDeltaRequest&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;lastUpdatedTimestamp&#34;</span>: <span style="color:#ae81ff">1605724099147</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;lastUpdatedSeqNumber&#34;</span>: <span style="color:#ae81ff">186</span>
+</span></span><span style="display:flex;"><span>       },
+</span></span><span style="display:flex;"><span>       <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>     ]
+</span></span></code></pre></div><h2 id="使用率">使用率</h2>
 <h3 id="get-apiv1utilizationfilecount">GET /api/v1/utilization/fileCount</h3>
 <p><strong>参数</strong></p>
 <ul>
@@ -1226,56 +1226,56 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <p><strong>回传</strong></p>
 <p>回传不同文件范围内的文件计数，其中响应对象中的<code>fileSize</code>是文件大小范围的上限。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     [{
-     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
-     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-0-11685&#34;</span>,
-     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
-     }, {
-     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
-     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-1-41795&#34;</span>,
-     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
-     }, {
-     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
-     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-2-93377&#34;</span>,
-     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
-     }, {
-     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
-     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-3-50336&#34;</span>,
-     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
-     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">2</span>
-     }]
-</code></pre></div><h2 id="指标">指标</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     [{
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-0-11685&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-1-41795&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-2-93377&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-3-50336&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>     }]
+</span></span></code></pre></div><h2 id="指标">指标</h2>
 <h3 id="get-apiv1metricsapi">GET /api/v1/metrics/:api</h3>
 <p><strong>参数</strong></p>
 <p>请参阅 <a href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus HTTP API 参考</a> 以获取完整的查询文档。</p>
 <p><strong>回传</strong></p>
 <p>这是 Prometheus 的代理端点，并回传与 Prometheus 端点相同的响应。
 示例：/api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">     {
-       <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>,
-       <span style="color:#f92672">&#34;data&#34;</span>: {
-         <span style="color:#f92672">&#34;resultType&#34;</span>: <span style="color:#e6db74">&#34;vector&#34;</span>,
-         <span style="color:#f92672">&#34;result&#34;</span>: [
-           {
-             <span style="color:#f92672">&#34;metric&#34;</span>: {
-               <span style="color:#f92672">&#34;__name__&#34;</span>: <span style="color:#e6db74">&#34;ratis_leader_election_electionCount&#34;</span>,
-               <span style="color:#f92672">&#34;exported_instance&#34;</span>: <span style="color:#e6db74">&#34;33a5ac1d-8c65-4c74-a0b8-9314dfcccb42&#34;</span>,
-               <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;group-03CA9397D54B&#34;</span>,
-               <span style="color:#f92672">&#34;instance&#34;</span>: <span style="color:#e6db74">&#34;ozone_datanode_1:9882&#34;</span>,
-               <span style="color:#f92672">&#34;job&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>
-             },
-             <span style="color:#f92672">&#34;value&#34;</span>: [
-               <span style="color:#ae81ff">1599159384.455</span>,
-               <span style="color:#e6db74">&#34;5&#34;</span>
-             ]
-           }
-         ]
-       }
-     }
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;resultType&#34;</span>: <span style="color:#e6db74">&#34;vector&#34;</span>,
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;result&#34;</span>: [
+</span></span><span style="display:flex;"><span>           {
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">&#34;metric&#34;</span>: {
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;__name__&#34;</span>: <span style="color:#e6db74">&#34;ratis_leader_election_electionCount&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;exported_instance&#34;</span>: <span style="color:#e6db74">&#34;33a5ac1d-8c65-4c74-a0b8-9314dfcccb42&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;group-03CA9397D54B&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;instance&#34;</span>: <span style="color:#e6db74">&#34;ozone_datanode_1:9882&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;job&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>
+</span></span><span style="display:flex;"><span>             },
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">&#34;value&#34;</span>: [
+</span></span><span style="display:flex;"><span>               <span style="color:#ae81ff">1599159384.455</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#34;5&#34;</span>
+</span></span><span style="display:flex;"><span>             ]
+</span></span><span style="display:flex;"><span>           }
+</span></span><span style="display:flex;"><span>         ]
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/interface/cli.html">Next >></a>

@@ -454,36 +454,36 @@ s=d.getElementsByTagName('script')[0];
 </li>
 </ol>
 <p>要检查DataNode的当前状态，可以执行以下命令,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode list
-</code></pre></div><p>要decommission某台datanode的时候，可以执行下面的命令,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
-       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
-</code></pre></div><p>您可以输入多个主机，以便一起Decommission多个DataNode。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode list
+</span></span></code></pre></div><p>要decommission某台datanode的时候，可以执行下面的命令,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>您可以输入多个主机，以便一起Decommission多个DataNode。</p>
 <p>查看 Decommission时datanode 的状态，可以执行下面的命令,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode status decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--id<span style="color:#f92672">=</span>&lt;uuid&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--ip<span style="color:#f92672">=</span>&lt;ipAddress&gt;<span style="color:#f92672">]</span>
-</code></pre></div><p>您可以指定一个 Datanode 的 IP address 或 UUID 以查看该 Datanode 相关的详细信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode status decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--id<span style="color:#f92672">=</span>&lt;uuid&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--ip<span style="color:#f92672">=</span>&lt;ipAddress&gt;<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>您可以指定一个 Datanode 的 IP address 或 UUID 以查看该 Datanode 相关的详细信息。</p>
 <p><strong>Note:</strong> 要Recommission某台DataNode的时候，可在命令行执行以下命令,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
-       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
-</code></pre></div><h1 id="om-decommission">OM Decommission</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><h1 id="om-decommission">OM Decommission</h1>
 <p>Ozone Manager（OM）Decommissioning是指从 OM HA Ring 中从容地(gracefully)移除一个 OM 的过程。</p>
 <p>要Decommission OM 并将这个节点从 OM HA ring中移除，需要执行以下步骤。</p>
 <ol>
 <li>将要被Decommission的 OM 节点的 <em>OM NodeId</em> 添加到所有其他 OM 的 <em>ozone-site.xml</em> 中的 <em>ozone.om.decommissioned.nodes.<omServiceId></em> 属性中。</li>
 <li>运行以下命令Decommission这台 OM 节点.</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin om decommission -id<span style="color:#f92672">=</span>&lt;om-service-id&gt; -nodeid<span style="color:#f92672">=</span>&lt;decommissioning-om-node-id&gt; -hostname<span style="color:#f92672">=</span>&lt;decommissioning-om-node-address&gt; <span style="color:#f92672">[</span>optional --force<span style="color:#f92672">]</span>
-</code></pre></div><p>_force选项将跳过检查 <em>ozone-site.xml</em> 中的 OM 配置是否已更新，并将Decommission节点添加至 <em><strong>ozone.om.decommissioned.nodes</strong></em> 配置中. <p><strong>Note -</strong> 建议在Decommissioning一个 OM 节点之前bootstrap另一个 OM 节点，以保持OM的高可用性（HA）.</p></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin om decommission -id<span style="color:#f92672">=</span>&lt;om-service-id&gt; -nodeid<span style="color:#f92672">=</span>&lt;decommissioning-om-node-id&gt; -hostname<span style="color:#f92672">=</span>&lt;decommissioning-om-node-address&gt; <span style="color:#f92672">[</span>optional --force<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>_force选项将跳过检查 <em>ozone-site.xml</em> 中的 OM 配置是否已更新，并将Decommission节点添加至 <em><strong>ozone.om.decommissioned.nodes</strong></em> 配置中. <p><strong>Note -</strong> 建议在Decommissioning一个 OM 节点之前bootstrap另一个 OM 节点，以保持OM的高可用性（HA）.</p></p>
 <h1 id="scm-decommission">SCM Decommission</h1>
 <p>存储容器管理器 (SCM) Decommissioning 是允许您从容地(gracefully)将一个 SCM 从 SCM HA Ring 中移除的过程。</p>
 <p>在Decommission一台SCM，并将其从SCM HA ring中移除时，需要执行以下步骤。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -nodeid<span style="color:#f92672">=</span>&lt;nodeId&gt;
-</code></pre></div><p>执行以下命令可获得 &ldquo;nodeId&rdquo;： <strong>&ldquo;ozone admin scm roles &ldquo;</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin scm decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -nodeid<span style="color:#f92672">=</span>&lt;nodeId&gt;
+</span></span></code></pre></div><p>执行以下命令可获得 &ldquo;nodeId&rdquo;： <strong>&ldquo;ozone admin scm roles &ldquo;</strong></p>
 <h3 id="leader-scm">Leader SCM</h3>
 <p>如果需要decommission <strong>leader</strong> SCM, 您必须先将leader的角色转移到另一个 scm，然后再Decommission这个节点。</p>
 <p>您可以使用以下的命令来转移leader的角色，</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone admin scm transfer <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -n<span style="color:#f92672">=</span>&lt;nodeId&gt;
-</code></pre></div><p>在Leader的角色成功地转移之后，您可以继续decommission的操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin scm transfer <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -n<span style="color:#f92672">=</span>&lt;nodeId&gt;
+</span></span></code></pre></div><p>在Leader的角色成功地转移之后，您可以继续decommission的操作。</p>
 <h3 id="primordial-scm">Primordial SCM</h3>
 <p>如果要decommission <strong>primordial</strong> scm，必须更改 <em>ozone.scm.primordial.node.id</em> 的属性，使其指向不同的 SCM，然后再继续decommissioning。</p>
 <h3 id="注意">注意</h3>
@@ -492,7 +492,7 @@ s=d.getElementsByTagName('script')[0];
 
 
           
-          <a class="btn  btn-success btn-lg" href="../../zh/feature/erasurecoding.html">Next >></a>
+          <a class="btn  btn-success btn-lg" href="../../zh/feature/om-ha.html">Next >></a>
           
           </div>
 

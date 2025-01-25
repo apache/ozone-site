@@ -514,19 +514,19 @@ s=d.getElementsByTagName('script')[0];
 <p>The Prometheus endpoint is turned on by default but can be turned off by the <code>hdds.prometheus.endpoint.enabled</code> configuration variable.</p>
 <p>In a secure environment the page is guarded with SPNEGO authentication which is not supported by Prometheus. To enable monitoring in a secure environment, a specific authentication token can be configured</p>
 <p>Example <code>ozone-site.xml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.token<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>putyourtokenhere<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Example prometheus configuration:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-YAML" data-lang="YAML"><span style="color:#f92672">scrape_configs</span>:
-  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
-    <span style="color:#f92672">bearer_token</span>: <span style="color:#ae81ff">&lt;putyourtokenhere&gt;</span>
-    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
-    <span style="color:#f92672">static_configs</span>:
-     - <span style="color:#f92672">targets</span>:
-         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
-</code></pre></div><h2 id="grafana">Grafana</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.prometheus.endpoint.token<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>putyourtokenhere<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Example prometheus configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#ae81ff">ozone</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">bearer_token</span>: <span style="color:#ae81ff">&lt;putyourtokenhere&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/prom</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#f92672">targets</span>:
+</span></span><span style="display:flex;"><span>         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
+</span></span></code></pre></div><h2 id="grafana">Grafana</h2>
 <p>Once Prometheus is up and running, Grana can be configured to monitor and visualize Ozone metrics.</p>
 <h3 id="add-prometheus-as-a-data-source">Add Prometheus as a data source</h3>
 <p>In the Grafana web UI, go to <code>Add Data Sources</code> and then select <code>Prometheus</code>.</p>
@@ -537,8 +537,8 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="import-a-grafana-dashboard-for-ozone">Import a Grafana dashboard for Ozone</h3>
 <p>Apache Ozone comes with a default Grafana dashboard. Follow the instructions below to import it:</p>
 <p>Download dashboard json:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget https://raw.githubusercontent.com/apache/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Overall%20Metrics.json
-</code></pre></div><p>Open Grafana portal and click on Dashboards on the left and select <code>Import</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://raw.githubusercontent.com/apache/ozone/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Overall%20Metrics.json
+</span></span></code></pre></div><p>Open Grafana portal and click on Dashboards on the left and select <code>Import</code>.</p>
 <p>Click at <code>Upload JSON file</code> and select the file <code>Ozone - Overall Metrics.json</code> that was just downloaded.</p>
 <p>The dashboard is now imported.</p>
 <p>
@@ -555,127 +555,126 @@ s=d.getElementsByTagName('script')[0];
 <p>Distributed tracing can help to understand performance bottleneck with visualizing end-to-end performance.</p>
 <p>Ozone uses <a href="https://jaegertracing.io">jaeger</a> tracing library to collect traces which can send tracing data to any compatible backend (Zipkin, &hellip;).</p>
 <p>Tracing is turned off by default, but can be turned on with <code>hdds.tracing.enabled</code> from <code>ozone-site.xml</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Jaeger client can be configured with environment variables as documented <a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">here</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Jaeger client can be configured with environment variables as documented <a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">here</a>:</p>
 <p>For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
-JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
-JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
-</code></pre></div><p>This configuration will record 1% of the requests to limit the performance overhead. For more information about jaeger sampling <a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">check the documentation</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
+</span></span><span style="display:flex;"><span>JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
+</span></span><span style="display:flex;"><span>JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
+</span></span></code></pre></div><p>This configuration will record 1% of the requests to limit the performance overhead. For more information about jaeger sampling <a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">check the documentation</a></p>
 <h2 id="ozone-insight">ozone insight</h2>
 <p>Ozone insight is a swiss-army-knife tool to for checking the current state of Ozone cluster. It can show logging, metrics and configuration for a particular component.</p>
 <p>To check the available components use <code>ozone insight list</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight list
-
-Available insight points:
-
-  scm.node-manager                     SCM Datanode management related information.
-  scm.replica-manager                  SCM closed container replication manager
-  scm.event-queue                      Information about the internal async event delivery
-  scm.protocol.block-location          SCM Block location protocol endpoint
-  scm.protocol.container-location      SCM Container location protocol endpoint
-  scm.protocol.security                SCM Block location protocol endpoint
-  om.key-manager                       OM Key Manager
-  om.protocol.client                   Ozone Manager RPC endpoint
-  datanode.pipeline                    More information about one ratis datanode ring.
-</code></pre></div><h3 id="configuration">Configuration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Available insight points:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  scm.node-manager                     SCM Datanode management related information.
+</span></span><span style="display:flex;"><span>  scm.replica-manager                  SCM closed container replication manager
+</span></span><span style="display:flex;"><span>  scm.event-queue                      Information about the internal async event delivery
+</span></span><span style="display:flex;"><span>  scm.protocol.block-location          SCM Block location protocol endpoint
+</span></span><span style="display:flex;"><span>  scm.protocol.container-location      SCM Container location protocol endpoint
+</span></span><span style="display:flex;"><span>  scm.protocol.security                SCM Block location protocol endpoint
+</span></span><span style="display:flex;"><span>  om.key-manager                       OM Key Manager
+</span></span><span style="display:flex;"><span>  om.protocol.client                   Ozone Manager RPC endpoint
+</span></span><span style="display:flex;"><span>  datanode.pipeline                    More information about one ratis datanode ring.
+</span></span></code></pre></div><h3 id="configuration">Configuration</h3>
 <p><code>ozone insight config</code> can show configuration related to a specific component (supported only for selected components).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight config scm.replica-manager
-
-Configuration <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.replica-manager<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM closed container replication manager<span style="color:#f92672">)</span>
-
-&gt;&gt;&gt; hdds.scm.replication.thread.interval
-       default: 300s
-       current: 300s
-
-There is a replication monitor thread running inside SCM which takes care of replicating the containers in the cluster. This property is used to configure the interval in which that thread runs.
-
-
-&gt;&gt;&gt; hdds.scm.replication.event.timeout
-       default: 30m
-       current: 30m
-
-Timeout <span style="color:#66d9ef">for</span> the container replication/deletion commands sent  to datanodes. After this timeout the command will be retried.
-
-</code></pre></div><h3 id="metrics">Metrics</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight config scm.replica-manager
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Configuration <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.replica-manager<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM closed container replication manager<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; hdds.scm.replication.thread.interval
+</span></span><span style="display:flex;"><span>       default: 300s
+</span></span><span style="display:flex;"><span>       current: 300s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>There is a replication monitor thread running inside SCM which takes care of replicating the containers in the cluster. This property is used to configure the interval in which that thread runs.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; hdds.scm.replication.event.timeout
+</span></span><span style="display:flex;"><span>       default: 30m
+</span></span><span style="display:flex;"><span>       current: 30m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Timeout <span style="color:#66d9ef">for</span> the container replication/deletion commands sent  to datanodes. After this timeout the command will be retried.
+</span></span></code></pre></div><h3 id="metrics">Metrics</h3>
 <p><code>ozone insight metrics</code> can show metrics related to a specific component (supported only for selected components).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ozone insight metrics scm.protocol.block-location
-Metrics <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.protocol.block-location<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM Block location protocol endpoint<span style="color:#f92672">)</span>
-
-RPC connections
-
-  Open connections: <span style="color:#ae81ff">0</span>
-  Dropped connections: <span style="color:#ae81ff">0</span>
-  Received bytes: <span style="color:#ae81ff">1267</span>
-  Sent bytes: <span style="color:#ae81ff">2420</span>
-
-
-RPC queue
-
-  RPC average queue time: 0.0
-  RPC call queue length: <span style="color:#ae81ff">0</span>
-
-
-RPC performance
-
-  RPC processing time average: 0.0
-  Number of slow calls: <span style="color:#ae81ff">0</span>
-
-
-Message type counters
-
-  Number of AllocateScmBlock: ???
-  Number of DeleteScmKeyBlocks: ???
-  Number of GetScmInfo: ???
-  Number of SortDatanodes: ???
-</code></pre></div><h3 id="logs">Logs</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; ozone insight metrics scm.protocol.block-location
+</span></span><span style="display:flex;"><span>Metrics <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>scm.protocol.block-location<span style="color:#e6db74">`</span> <span style="color:#f92672">(</span>SCM Block location protocol endpoint<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC connections
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Open connections: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  Dropped connections: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  Received bytes: <span style="color:#ae81ff">1267</span>
+</span></span><span style="display:flex;"><span>  Sent bytes: <span style="color:#ae81ff">2420</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC queue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  RPC average queue time: 0.0
+</span></span><span style="display:flex;"><span>  RPC call queue length: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RPC performance
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  RPC processing time average: 0.0
+</span></span><span style="display:flex;"><span>  Number of slow calls: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Message type counters
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Number of AllocateScmBlock: ???
+</span></span><span style="display:flex;"><span>  Number of DeleteScmKeyBlocks: ???
+</span></span><span style="display:flex;"><span>  Number of GetScmInfo: ???
+</span></span><span style="display:flex;"><span>  Number of SortDatanodes: ???
+</span></span></code></pre></div><h3 id="logs">Logs</h3>
 <p><code>ozone insight logs</code> can connect to the required service and show the DEBUG/TRACE log related to one specific component. For example to display RPC message:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt;ozone insight logs om.protocol.client
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:49,988 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol ServiceList request is received
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:50,095 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol CreateVolume request is received
-</code></pre></div><p>Using <code>-v</code> flag the content of the protobuf message can also be displayed (TRACE level log):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone insight logs -v om.protocol.client
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,463 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is received:
-cmdType: CreateVolume
-traceID: <span style="color:#e6db74">&#34;&#34;</span>
-clientId: <span style="color:#e6db74">&#34;client-A31DF5C6ECF2&#34;</span>
-createVolumeRequest <span style="color:#f92672">{</span>
-  volumeInfo <span style="color:#f92672">{</span>
-    adminName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-    ownerName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-    volume: <span style="color:#e6db74">&#34;vol1&#34;</span>
-    quotaInBytes: <span style="color:#ae81ff">1152921504606846976</span>
-    volumeAcls <span style="color:#f92672">{</span>
-      type: USER
-      name: <span style="color:#e6db74">&#34;hadoop&#34;</span>
-      rights: <span style="color:#e6db74">&#34;200&#34;</span>
-      aclScope: ACCESS
-    <span style="color:#f92672">}</span>
-    volumeAcls <span style="color:#f92672">{</span>
-      type: GROUP
-      name: <span style="color:#e6db74">&#34;users&#34;</span>
-      rights: <span style="color:#e6db74">&#34;200&#34;</span>
-      aclScope: ACCESS
-    <span style="color:#f92672">}</span>
-    creationTime: <span style="color:#ae81ff">1595939608460</span>
-    objectID: <span style="color:#ae81ff">0</span>
-    updateID: <span style="color:#ae81ff">0</span>
-    modificationTime: <span style="color:#ae81ff">0</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,474 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is processed. Response:
-cmdType: CreateVolume
-traceID: <span style="color:#e6db74">&#34;&#34;</span>
-success: false
-message: <span style="color:#e6db74">&#34;Volume already exists&#34;</span>
-status: VOLUME_ALREADY_EXISTS
-</code></pre></div><div class="alert alert-warning" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;ozone insight logs om.protocol.client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:49,988 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol ServiceList request is received
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:31:50,095 <span style="color:#f92672">[</span>DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> OzoneProtocol CreateVolume request is received
+</span></span></code></pre></div><p>Using <code>-v</code> flag the content of the protobuf message can also be displayed (TRACE level log):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone insight logs -v om.protocol.client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,463 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is received:
+</span></span><span style="display:flex;"><span>cmdType: CreateVolume
+</span></span><span style="display:flex;"><span>traceID: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>clientId: <span style="color:#e6db74">&#34;client-A31DF5C6ECF2&#34;</span>
+</span></span><span style="display:flex;"><span>createVolumeRequest <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  volumeInfo <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    adminName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>    ownerName: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>    volume: <span style="color:#e6db74">&#34;vol1&#34;</span>
+</span></span><span style="display:flex;"><span>    quotaInBytes: <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span>    volumeAcls <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      type: USER
+</span></span><span style="display:flex;"><span>      name: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+</span></span><span style="display:flex;"><span>      aclScope: ACCESS
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    volumeAcls <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      type: GROUP
+</span></span><span style="display:flex;"><span>      name: <span style="color:#e6db74">&#34;users&#34;</span>
+</span></span><span style="display:flex;"><span>      rights: <span style="color:#e6db74">&#34;200&#34;</span>
+</span></span><span style="display:flex;"><span>      aclScope: ACCESS
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    creationTime: <span style="color:#ae81ff">1595939608460</span>
+</span></span><span style="display:flex;"><span>    objectID: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    updateID: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    modificationTime: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>OM<span style="color:#f92672">]</span> 2020-07-28 12:33:28,474 <span style="color:#f92672">[</span>TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>service<span style="color:#f92672">=</span>OzoneProtocol<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>type<span style="color:#f92672">=</span>CreateVolume<span style="color:#f92672">]</span> request is processed. Response:
+</span></span><span style="display:flex;"><span>cmdType: CreateVolume
+</span></span><span style="display:flex;"><span>traceID: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>success: false
+</span></span><span style="display:flex;"><span>message: <span style="color:#e6db74">&#34;Volume already exists&#34;</span>
+</span></span><span style="display:flex;"><span>status: VOLUME_ALREADY_EXISTS
+</span></span></code></pre></div><div class="alert alert-warning" role="alert">
 <p>Under the hood <code>ozone insight</code> uses HTTP endpoints to retrieve the required information (<code>/conf</code>, <code>/prom</code> and <code>/logLevel</code> endpoints). It&rsquo;s not yet supported in secure environment.</p>
 </div>
 

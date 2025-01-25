@@ -455,45 +455,45 @@ s=d.getElementsByTagName('script')[0];
 <p>这种间接管理的方式大大地提高了 Ozone 的扩展性，因为 SCM 需要处理的块数据大大减少，且命名服务（OM）作为一个独特的服务主体对于扩展 Ozone 具有重要意义。</p>
 <h2 id="需要关注的配置项">需要关注的配置项</h2>
 <table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>默认值</th>
-<th><div style="width:300px;">描述</div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dfs.container.ratis.datanode.storage.dir</td>
-<td>none</td>
-<td>该目录用于存储 Ratis 元数据，如日志。</td>
-</tr>
-<tr>
-<td>ozone.scm.datanode.id.dir</td>
-<td>none</td>
-<td>数据节点上用于存储数据节点 ID 的路径。</td>
-</tr>
-<tr>
-<td>hdds.datanode.dir</td>
-<td>none</td>
-<td>此配置决定数据节点上的数据将存储在本地文件系统的哪个位置。</td>
-</tr>
-<tr>
-<td>hdds.datanode.dir.du.reserved</td>
-<td>none</td>
-<td>每个卷保留的存储空间（以字节为单位）。始终为非DFS用途保留这么多空闲空间。</td>
-</tr>
-<tr>
-<td>ozone.metadata.dirs</td>
-<td>none</td>
-<td>用于存储持久化数据（RocksDB）的目录。</td>
-</tr>
-<tr>
-<td>ozone.recon.address</td>
-<td>0.0.0.0:9891</td>
-<td>Recon的RPC地址。 使用 <a href="host:port">host:port</a> 连接到Recon。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>配置项</th>
+          <th>默认值</th>
+          <th><div style="width:300px;">描述</div></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfs.container.ratis.datanode.storage.dir</td>
+          <td>none</td>
+          <td>该目录用于存储 Ratis 元数据，如日志。</td>
+      </tr>
+      <tr>
+          <td>ozone.scm.datanode.id.dir</td>
+          <td>none</td>
+          <td>数据节点上用于存储数据节点 ID 的路径。</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.dir</td>
+          <td>none</td>
+          <td>此配置决定数据节点上的数据将存储在本地文件系统的哪个位置。</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.dir.du.reserved</td>
+          <td>none</td>
+          <td>每个卷保留的存储空间（以字节为单位）。始终为非DFS用途保留这么多空闲空间。</td>
+      </tr>
+      <tr>
+          <td>ozone.metadata.dirs</td>
+          <td>none</td>
+          <td>用于存储持久化数据（RocksDB）的目录。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.address</td>
+          <td>0.0.0.0:9891</td>
+          <td>Recon的RPC地址。 使用 <a href="#ZgotmplZ">host:port</a> 连接到Recon。</td>
+      </tr>
+  </tbody>
 </table>
 
 

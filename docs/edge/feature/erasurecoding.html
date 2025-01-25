@@ -624,35 +624,35 @@ Due to this reason, it is recommended to setup racks with similar number of Data
 <p>EC Replication Config can be enabled at bucket level as discussed above.
 Cluster wide default Replication Config can be set with EC Replication Config by using
 the configuration keys <code>ozone.server.default.replication.type</code> and <code>ozone.server.default.replication</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Please note, the above configurations will be used only when client does not pass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.server.default.replication<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>RS-6-3-1024k<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Please note, the above configurations will be used only when client does not pass
 any replication config or bucket does not have any default values.</p>
 <h4 id="setting-ec-replication-config-on-bucket">Setting EC Replication Config On Bucket</h4>
 <p>We can set the bucket EC Replication Config via ozone sh command. The EC Replication Config options can be passed while creating the bucket.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
-</code></pre></div><p>We can also reset the EC Replication Config with the following command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
-</code></pre></div><p>Once we reset, only newly created keys take effect of this new setting. Prior created keys in the bucket stay with same older setting.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
+</span></span></code></pre></div><p>We can also reset the EC Replication Config with the following command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
+</span></span></code></pre></div><p>Once we reset, only newly created keys take effect of this new setting. Prior created keys in the bucket stay with same older setting.</p>
 <h4 id="setting-ec-replication-config-while-creating-keysfiles">Setting EC Replication Config While Creating Keys/Files</h4>
 <p>We can pass the EC Replication Config while creating the keys irrespective of bucket Replication Config.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
-</code></pre></div><p>When using ofs/o3fs, we can pass the EC Replication Config by setting the configuration keys <code>ozone.replication.type</code> and <code>ozone.replication</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>rs-3-2-1024k<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>In the case bucket already has default EC Replication Config, there is no need of passing EC Replication Config while creating key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
+</span></span></code></pre></div><p>When using ofs/o3fs, we can pass the EC Replication Config by setting the configuration keys <code>ozone.replication.type</code> and <code>ozone.replication</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication.type<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>EC<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.replication<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>rs-3-2-1024k<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>In the case bucket already has default EC Replication Config, there is no need of passing EC Replication Config while creating key.</p>
 <h3 id="enable-intel-isa-l">Enable Intel ISA-L</h3>
 <p>Intel Intelligent Storage Acceleration Library (ISA-L) is an open-source collection of optimized low-level functions used for
 storage applications. Enabling ISA-L allows significantly improve EC performance.</p>
@@ -663,8 +663,8 @@ storage applications. Enabling ISA-L allows significantly improve EC performance
 The default value of java.library.path depends on the OS and Java version. For example, on Linux with OpenJDK 8 it is <code>/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</code>.</p>
 <h4 id="verification">Verification</h4>
 <p>You can check if ISA-L is accessible to Ozone by running the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone checknative
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone checknative
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../feature/snapshot.html">Next >></a>

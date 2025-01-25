@@ -522,10 +522,23 @@ Many applications can be integrated with Ozone through the Hadoop-compatible ofs
                                     
                                     Hadoop DistCp
                                 </h2>
-                                <p class="card-text">Hadoop DistCp is a command line, MapReduce-based tool for bulk data copying.
-The hadoop distcp command can be used to copy data to and from Ozone and any Hadoop compatible file systems, such as HDFS or S3A.
-Basic usage To copy files from a source Ozone cluster directory to a destination Ozone cluster directory, use the following command:
-hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2 You must define the service IDs for both ozone1 and ozone2 clusters in the ozone-site.</p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p><a href="https://hadoop.apache.org/docs/current/hadoop-distcp/DistCp.html">Hadoop DistCp</a> is a command line, MapReduce-based tool for bulk data copying.</p></p>
                                 <a href="./integration/distcp.html"
                                    class=" btn btn-primary btn-lg">Hadoop DistCp</a>
                             </div>
@@ -544,10 +557,23 @@ hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2 You m
                                     
                                     Hive
                                 </h2>
-                                <p class="card-text">Apache Hive has supported Apache Ozone since Hive 4.0. To enable Hive to work with Ozone paths, ensure that the ozone-filesystem-hadoop3 JAR is added to the Hive classpath.
-Supported Access Protocols Hive supports the following protocols for accessing Ozone data:
- ofs o3fs s3a  Supported Replication Types Hive is compatible with Ozone buckets configured with either:
- RATIS (Replication) Erasure Coding  Accessing Ozone Data in Hive Hive provides two methods to interact with data in Ozone:</p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Apache Hive has supported Apache Ozone since Hive 4.0. To enable Hive to work with Ozone paths, ensure that the <code>ozone-filesystem-hadoop3</code> JAR is added to the Hive classpath.</p></p>
                                 <a href="./integration/hive.html"
                                    class=" btn btn-primary btn-lg">Hive</a>
                             </div>
@@ -570,11 +596,23 @@ Supported Access Protocols Hive supports the following protocols for accessing O
                                     
                                     Impala
                                 </h2>
-                                <p class="card-text">Starting with version 4.2.0, Apache Impala provides full support for querying data stored in Apache Ozone. To utilize this functionality, ensure that your Ozone version is 1.4.0 or later.
-Supported Access Protocols Impala supports the following protocols for accessing Ozone data:
- ofs s3a  Note: The o3fs protocol is NOT supported by Impala.
-Supported Replication Types Impala is compatible with Ozone buckets configured with either:
- RATIS (Replication) Erasure Coding  Querying Ozone Data with Impala Impala provides two approaches to interact with Ozone:</p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Starting with version 4.2.0, Apache Impala provides full support for querying data stored in Apache Ozone. To utilize this functionality, ensure that your Ozone version is 1.4.0 or later.</p></p>
                                 <a href="./integration/impala.html"
                                    class=" btn btn-primary btn-lg">Impala</a>
                             </div>

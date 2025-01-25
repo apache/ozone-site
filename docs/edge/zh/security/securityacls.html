@@ -438,22 +438,22 @@ s=d.getElementsByTagName('script')[0];
 -->
 <p>Ozone 既支持类似 Ranger 这样的 ACL 插件，也支持原生的 ACL。如果需要启用原生的 ACL，在 ozone-site.xml 中添加下面的参数：</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.acl.enabled</td>
-<td>true</td>
-</tr>
-<tr>
-<td>ozone.acl.authorizer.class</td>
-<td>org.apache.ranger.authorization.ozone.authorizer.OzoneNativeAuthorizer</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.acl.enabled</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>ozone.acl.authorizer.class</td>
+          <td>org.apache.ranger.authorization.ozone.authorizer.OzoneNativeAuthorizer</td>
+      </tr>
+  </tbody>
 </table>
 <p>Ozone 的 ACL 是 Posix ACL 和 S3 ACL 的超集。</p>
 <p>ACL 的通用格式为 <em>对象</em>:<em>角色</em>:<em>权限</em>:<em>范围</em>.</p>
@@ -520,40 +520,40 @@ s=d.getElementsByTagName('script')[0];
 <br>
 以下是 CLI 支持的 ACL 具体操作。
 <h3>setacl</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket setacl -a user:testuser2:a /vol1/bucket1
- ACLs set successfully.
-$ ozone sh bucket setacl -a user:om:a,group:om:a /vol1/bucket2
- ACLs set successfully.
-$ ozone sh bucket setacl -a<span style="color:#f92672">=</span>anonymous::lr /vol1/bucket3
- ACLs set successfully.
-$ ozone sh bucket setacl -a world::a /vol1/bucket4
- ACLs set successfully.
-</code></pre></div><h3>getacl</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket getacl /vol1/bucket2 
-<span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om/om@EXAMPLE.COM&#34;</span>,
-  <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-  <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-<span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-  <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-<span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
-</code></pre></div><h3>addacl</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket addacl -a user:testuser2:a /vol1/bucket2
-ACL user:testuser2:a<span style="color:#f92672">[</span>ACCESS<span style="color:#f92672">]</span> added successfully.
-
-$ ozone sh bucket addacl -a user:testuser:rxy<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/bucket2
-ACL user:testuser:rxy<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> added successfully.
-
-$ ozone sh prefix addacl -a user:testuser2:a<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/buck3/dir1/
-ACL user:testuser2:a<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> added successfully.
-</code></pre></div><h3>removeacl</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket removeacl -a user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/bucket2
-ACL user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> removed successfully.
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket setacl -a user:testuser2:a /vol1/bucket1
+</span></span><span style="display:flex;"><span> ACLs set successfully.
+</span></span><span style="display:flex;"><span>$ ozone sh bucket setacl -a user:om:a,group:om:a /vol1/bucket2
+</span></span><span style="display:flex;"><span> ACLs set successfully.
+</span></span><span style="display:flex;"><span>$ ozone sh bucket setacl -a<span style="color:#f92672">=</span>anonymous::lr /vol1/bucket3
+</span></span><span style="display:flex;"><span> ACLs set successfully.
+</span></span><span style="display:flex;"><span>$ ozone sh bucket setacl -a world::a /vol1/bucket4
+</span></span><span style="display:flex;"><span> ACLs set successfully.
+</span></span></code></pre></div><h3>getacl</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket getacl /vol1/bucket2 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om/om@EXAMPLE.COM&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
+</span></span></code></pre></div><h3>addacl</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket addacl -a user:testuser2:a /vol1/bucket2
+</span></span><span style="display:flex;"><span>ACL user:testuser2:a<span style="color:#f92672">[</span>ACCESS<span style="color:#f92672">]</span> added successfully.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone sh bucket addacl -a user:testuser:rxy<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/bucket2
+</span></span><span style="display:flex;"><span>ACL user:testuser:rxy<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> added successfully.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone sh prefix addacl -a user:testuser2:a<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/buck3/dir1/
+</span></span><span style="display:flex;"><span>ACL user:testuser2:a<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> added successfully.
+</span></span></code></pre></div><h3>removeacl</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket removeacl -a user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/bucket2
+</span></span><span style="display:flex;"><span>ACL user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> removed successfully.
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/security/securitywithranger.html">Next >></a>

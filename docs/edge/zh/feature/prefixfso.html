@@ -438,8 +438,8 @@ s=d.getElementsByTagName('script')[0];
 -->
 <p>基于前缀的文件系统优化特性支持命名空间中任意级别目录的重命名和删除操作，且操作均能在常数时间内完成。</p>
 <p>若要启用该特性，需要在创建桶时指定 <code>--layout</code> 参数为 <code>FILE_SYSTEM_OPTIMIZED</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create /&lt;volume-name&gt;/&lt;bucket-name&gt; --layout FILE_SYSTEM_OPTIMIZED
-</code></pre></div><p>注意：在启用基于前缀的文件系统优化的桶中，对 Hadoop 文件系统的兼容性优先于对 S3 的兼容性，某些不规范的 S3 键名在操作时将会被拒绝或规范化。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create /&lt;volume-name&gt;/&lt;bucket-name&gt; --layout FILE_SYSTEM_OPTIMIZED
+</span></span></code></pre></div><p>注意：在启用基于前缀的文件系统优化的桶中，对 Hadoop 文件系统的兼容性优先于对 S3 的兼容性，某些不规范的 S3 键名在操作时将会被拒绝或规范化。</p>
 <p>当 Ozone 中的桶主要通过兼容 Hadoop 的接口使用，尤其是涉及到较深目录层级下的大量文件时，强烈推荐开启该特性。</p>
 <h2 id="ozonemanager-元数据布局格式">OzoneManager 元数据布局格式</h2>
 <p>OzoneManager 支持两种元数据布局格式：简单布局格式和基于前缀的布局格式。</p>
@@ -461,12 +461,12 @@ s=d.getElementsByTagName('script')[0];
 <p>可以在 <code>ozone-site.xml</code> 中加入以下配置来设定创建桶时，客户端未指定桶样式时的默认的桶样式：
 可用的值有 <code>OBJECT_STORE</code>, <code>FILE_SYSTEM_OPTIMIZED</code> 和 <code>LEGACY</code>.</p>
 <p>若该配置的值为空，则默认值为 <code>FILE_SYSTEM_OPTIMIZED</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML">
-<span style="color:#f92672">&lt;property&gt;</span>
-    <span style="color:#f92672">&lt;name&gt;</span>ozone.default.bucket.layout<span style="color:#f92672">&lt;/name&gt;</span>
-    <span style="color:#f92672">&lt;value/&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>ozone.default.bucket.layout<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;value/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/feature/topology.html">Next >></a>

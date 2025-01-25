@@ -4,53 +4,44 @@
     <title>工具 on Ozone</title>
     <link>/zh/tools.html</link>
     <description>Recent content in 工具 on Ozone</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 10 Oct 2017 00:00:00 +0000</lastBuildDate><atom:link href="/zh/tools/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 30 Oct 2024 12:13:52 +0530</lastBuildDate>
+    <atom:link href="/zh/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ozone Debug</title>
       <link>/zh/tools/debug.html</link>
       <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
-      
       <guid>/zh/tools/debug.html</guid>
       <description>Ozone Debug 命令可用于所有与调试相关的任务。</description>
     </item>
-    
     <item>
       <title>Ozone Admin</title>
       <link>/zh/tools/admin.html</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>/zh/tools/admin.html</guid>
       <description>Ozone Admin 命令可以用于所有与管理有关的任务。</description>
     </item>
-    
     <item>
       <title>配置生成</title>
       <link>/zh/tools/genconf.html</link>
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
-      
       <guid>/zh/tools/genconf.html</guid>
       <description>用于生成默认配置的工具</description>
     </item>
-    
     <item>
       <title>审计解析器</title>
       <link>/zh/tools/auditparser.html</link>
       <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      
       <guid>/zh/tools/auditparser.html</guid>
       <description>审计解析器工具用来查看 Ozone 的审计日志。</description>
     </item>
-    
     <item>
       <title>测试工具</title>
       <link>/zh/tools/testtools.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/zh/tools/testtools.html</guid>
       <description>Ozone 提供了负载生成、网络分片测试、验收测试等多种测试工具。</description>
     </item>
-    
   </channel>
 </rss>

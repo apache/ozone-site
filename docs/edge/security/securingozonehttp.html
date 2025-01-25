@@ -513,22 +513,22 @@ s=d.getElementsByTagName('script')[0];
 <p>By default Ozone HTTP web-consoles (OM, SCM, S3G, Recon, Datanode)
 allow access without authentication based on the following default configurations.</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.security.http.kerberos.enabled</td>
-<td>false</td>
-</tr>
-<tr>
-<td>ozone.http.filter.initializers</td>
-<td><empty></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.security.http.kerberos.enabled</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>ozone.http.filter.initializers</td>
+          <td><empty></td>
+      </tr>
+  </tbody>
 </table>
 <p>If you have an SPNEGO enabled Ozone cluster and want to disable it for all Ozone services,
 just make sure the two key mentioned are configured as above.</p>
@@ -537,143 +537,143 @@ just make sure the two key mentioned are configured as above.</p>
 by browsers like Firefox and Chrome). To achieve that, the following keys must
 be configured first.</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hadoop.security.authentication</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.security.http.kerberos.enabled</td>
-<td>true</td>
-</tr>
-<tr>
-<td>ozone.http.filter.initializers</td>
-<td>org.apache.hadoop.security.AuthenticationFilterInitializer</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hadoop.security.authentication</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.security.http.kerberos.enabled</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>ozone.http.filter.initializers</td>
+          <td>org.apache.hadoop.security.AuthenticationFilterInitializer</td>
+      </tr>
+  </tbody>
 </table>
 <p>After that, individual component needs to configure properly to completely enable
 SPNEGO or SIMPLE authentication.</p>
 <h3 id="enable-spnego-authentication-for-om-http">Enable SPNEGO authentication for OM HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.om.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.om.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="enable-spnego-authentication-for-s3g-http">Enable SPNEGO authentication for S3G HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.s3g.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.s3g.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="enable-spnego-authentication-for-recon-http">Enable SPNEGO authentication for RECON HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.recon.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.recon.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="enable-spnego-authentication-for-scm-http">Enable SPNEGO authentication for SCM HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.scm.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.scm.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="enable-spnego-authentication-for-datanode-http">Enable SPNEGO authentication for DATANODE HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.datanode.http.auth.type</td>
-<td>kerberos</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.principal</td>
-<td>HTTP/_HOST@REALM</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.keytab</td>
-<td>/path/to/HTTP.keytab</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.datanode.http.auth.type</td>
+          <td>kerberos</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.principal</td>
+          <td>HTTP/_HOST@REALM</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.keytab</td>
+          <td>/path/to/HTTP.keytab</td>
+      </tr>
+  </tbody>
 </table>
 <p>Note: Ozone datanode does not have a default webpage, which prevents you from
 accessing &ldquo;/&rdquo; or &ldquo;/index.html&rdquo;. But it does provide standard
@@ -683,106 +683,106 @@ If this option is enabled, the user name must be specified in the first browser 
 query string parameter. e.g., http://scm:9876/?user.name=scmadmin.</p>
 <h3 id="enable-simple-authentication-for-om-http">Enable SIMPLE authentication for OM HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.om.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.om.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.om.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.om.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>If you don&rsquo;t want to specify the user.name in the query string parameter,
 change ozone.om.http.auth.simple.anonymous.allowed to true.</p>
 <h3 id="enable-simple-authentication-for-s3g-http">Enable SIMPLE authentication for S3G HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.s3g.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.s3g.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.s3g.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.s3g.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>If you don&rsquo;t want to specify the user.name in the query string parameter,
 change ozone.s3g.http.auth.simple.anonymous.allowed to true.</p>
 <h3 id="enable-simple-authentication-for-recon-http">Enable SIMPLE authentication for RECON HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.recon.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>ozone.recon.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.recon.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>If you don&rsquo;t want to specify the user.name in the query string parameter,
 change ozone.recon.http.auth.simple.anonymous.allowed to true.</p>
 <h3 id="enable-simple-authentication-for-scm-http">Enable SIMPLE authentication for SCM HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.scm.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>hdds.scm.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.scm.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>hdds.scm.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>If you don&rsquo;t want to specify the user.name in the query string parameter,
 change hdds.scm.http.auth.simple.anonymous.allowed to true.</p>
 <h3 id="enable-simple-authentication-for-datanode-http">Enable SIMPLE authentication for DATANODE HTTP</h3>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hdds.datanode.http.auth.type</td>
-<td>simple</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.simple.anonymous.allowed</td>
-<td>false</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.datanode.http.auth.type</td>
+          <td>simple</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.simple.anonymous.allowed</td>
+          <td>false</td>
+      </tr>
+  </tbody>
 </table>
 <p>If you don&rsquo;t want to specify the user.name in the query string parameter,
 change hdds.datanode.http.auth.simple.anonymous.allowed to true.</p>

@@ -515,8 +515,8 @@ s=d.getElementsByTagName('script')[0];
 <p>HttpFS service itself is a Jetty based web-application that uses the Hadoop FileSystem API to talk to the cluster, it is a separate service which provides access to Ozone via a REST APIs. It should be started in addition to other regular Ozone components.</p>
 <p>To try it out, you can start a Docker Compose dev cluster that has an HttpFS gateway.</p>
 <p>Extract the release tarball, go to the <code>compose/ozone</code> directory and start the cluster:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</code></pre></div><p>You can/should find now the HttpFS gateway in docker with the name <code>ozone_httpfs</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>You can/should find now the HttpFS gateway in docker with the name <code>ozone_httpfs</code>.
 HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file system operation. For example, using the <code>curl</code> Unix command.</p>
 <p>E.g. in the docker cluster you can execute commands like these:</p>
 <ul>
@@ -531,149 +531,149 @@ HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file 
 <p>Here are the tables of WebHDFS REST APIs and their state of support in Ozone.</p>
 <h3 id="file-and-directory-operations">File and Directory Operations</h3>
 <table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Create and Write to a File</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Append to a File</td>
-<td>not implemented in Ozone</td>
-</tr>
-<tr>
-<td>Concat File(s)</td>
-<td>not implemented in Ozone</td>
-</tr>
-<tr>
-<td>Open and Read a File</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Make a Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Create a Symbolic Link</td>
-<td>not implemented in Ozone</td>
-</tr>
-<tr>
-<td>Rename a File/Directory</td>
-<td>supported (with limitations)</td>
-</tr>
-<tr>
-<td>Delete a File/Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Truncate a File</td>
-<td>not implemented in Ozone</td>
-</tr>
-<tr>
-<td>Status of a File/Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>List a Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>List a File</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Iteratively List a Directory</td>
-<td>unsupported</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Support</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Create and Write to a File</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Append to a File</td>
+          <td>not implemented in Ozone</td>
+      </tr>
+      <tr>
+          <td>Concat File(s)</td>
+          <td>not implemented in Ozone</td>
+      </tr>
+      <tr>
+          <td>Open and Read a File</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Make a Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Create a Symbolic Link</td>
+          <td>not implemented in Ozone</td>
+      </tr>
+      <tr>
+          <td>Rename a File/Directory</td>
+          <td>supported (with limitations)</td>
+      </tr>
+      <tr>
+          <td>Delete a File/Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Truncate a File</td>
+          <td>not implemented in Ozone</td>
+      </tr>
+      <tr>
+          <td>Status of a File/Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>List a Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>List a File</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Iteratively List a Directory</td>
+          <td>unsupported</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="other-file-system-operations">Other File System Operations</h3>
 <table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Get Content Summary of a Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Get Quota Usage of a Directory</td>
-<td>supported</td>
-</tr>
-<tr>
-<td>Set Quota</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Set Quota By Storage Type</td>
-<td>not implemented in Ozone</td>
-</tr>
-<tr>
-<td>Get File Checksum</td>
-<td>unsupported (to be fixed)</td>
-</tr>
-<tr>
-<td>Get Home Directory</td>
-<td>unsupported (to be fixed)</td>
-</tr>
-<tr>
-<td>Get Trash Root</td>
-<td>unsupported</td>
-</tr>
-<tr>
-<td>Set Permission</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Set Owner</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Set Replication Factor</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Set Access or Modification Time</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Modify ACL Entries</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Remove ACL Entries</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Remove Default ACL</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Remove ACL</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Set ACL</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Get ACL Status</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-<tr>
-<td>Check access</td>
-<td>not implemented in Ozone FileSystem API</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Support</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Get Content Summary of a Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Get Quota Usage of a Directory</td>
+          <td>supported</td>
+      </tr>
+      <tr>
+          <td>Set Quota</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Set Quota By Storage Type</td>
+          <td>not implemented in Ozone</td>
+      </tr>
+      <tr>
+          <td>Get File Checksum</td>
+          <td>unsupported (to be fixed)</td>
+      </tr>
+      <tr>
+          <td>Get Home Directory</td>
+          <td>unsupported (to be fixed)</td>
+      </tr>
+      <tr>
+          <td>Get Trash Root</td>
+          <td>unsupported</td>
+      </tr>
+      <tr>
+          <td>Set Permission</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Set Owner</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Set Replication Factor</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Set Access or Modification Time</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Modify ACL Entries</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Remove ACL Entries</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Remove Default ACL</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Remove ACL</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Set ACL</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Get ACL Status</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+      <tr>
+          <td>Check access</td>
+          <td>not implemented in Ozone FileSystem API</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="hadoop-user-and-developer-documentation-about-httpfs">Hadoop user and developer documentation about HttpFS</h2>
 <ul>

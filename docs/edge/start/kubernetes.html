@@ -524,13 +524,13 @@ s=d.getElementsByTagName('script')[0];
 Deploy to kubernetes</p>
 <p><code>kubernetes/examples</code> folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases.</p>
 <p>To deploy to a hosted cluster use the ozone subdirectory:</p>
-<pre><code>cd kubernetes/examples/ozone
+<pre tabindex="0"><code>cd kubernetes/examples/ozone
 kubectl apply -f .
 </code></pre><p>And you can check the results with</p>
-<pre><code>kubectl get pod
+<pre tabindex="0"><code>kubectl get pod
 Access the services
 </code></pre><p>Now you can access any of the services. By default the services are not published but you can access them with port-forward rules.</p>
-<pre><code>kubectl port-forward s3g-0 9878:9878
+<pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 </code></pre>
 

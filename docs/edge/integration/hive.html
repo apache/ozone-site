@@ -526,79 +526,79 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="managed-tables">Managed Tables</h3>
 <h4 id="configuring-the-hive-warehouse-directory-in-ozone">Configuring the Hive Warehouse Directory in Ozone</h4>
 <p>To store managed tables in Ozone, update the following properties in the <code>hive-site.xml</code> configuration file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>hive.metastore.warehouse.dir<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>ofs://ozone1/vol1/bucket1/warehouse/<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><h4 id="creating-a-managed-table">Creating a Managed Table</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hive.metastore.warehouse.dir<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>ofs://ozone1/vol1/bucket1/warehouse/<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h4 id="creating-a-managed-table">Creating a Managed Table</h4>
 <p>You can create a managed table with a standard <code>CREATE TABLE</code> statement:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> myTable (
-    id INT,
-    name STRING
-);
-</code></pre></div><h4 id="loading-data-into-a-managed-table">Loading Data into a Managed Table</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> myTable (
+</span></span><span style="display:flex;"><span>    id INT,
+</span></span><span style="display:flex;"><span>    name STRING
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h4 id="loading-data-into-a-managed-table">Loading Data into a Managed Table</h4>
 <p>Data can be loaded into a Hive table from an Ozone location:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">LOAD</span> <span style="color:#66d9ef">DATA</span> INPATH <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table.csv&#39;</span> <span style="color:#66d9ef">INTO</span> <span style="color:#66d9ef">TABLE</span> myTable;
-</code></pre></div><h4 id="specifying-a-custom-ozone-path">Specifying a Custom Ozone Path</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">LOAD</span> <span style="color:#66d9ef">DATA</span> INPATH <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table.csv&#39;</span> <span style="color:#66d9ef">INTO</span> <span style="color:#66d9ef">TABLE</span> myTable;
+</span></span></code></pre></div><h4 id="specifying-a-custom-ozone-path">Specifying a Custom Ozone Path</h4>
 <p>You can define a custom Ozone path for a database using the <code>MANAGEDLOCATION</code> clause:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1 MANAGEDLOCATION <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/data&#39;</span>;
-</code></pre></div><p>Tables created in the database d1 will be stored under the specified path:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1 MANAGEDLOCATION <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/data&#39;</span>;
+</span></span></code></pre></div><p>Tables created in the database d1 will be stored under the specified path:
 <code>ofs://ozone1/vol1/bucket1/data</code></p>
 <h4 id="verifying-the-ozone-path">Verifying the Ozone Path</h4>
 <p>You can confirm that Hive references the correct Ozone path using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1;
-</code></pre></div><p>Output Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+----------------------------------------------------+
-|                   createdb_stmt                    |
-+----------------------------------------------------+
-| CREATE DATABASE `d1`                               |
-| LOCATION                                           |
-|   &#39;ofs://ozone1/vol1/bucket1/external/d1.db&#39;       |
-| MANAGEDLOCATION                                    |
-|   &#39;ofs://ozone1/vol1/bucket1/data&#39;                 |
-+----------------------------------------------------+
-</code></pre></div><h3 id="external-tables">External Tables</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1;
+</span></span></code></pre></div><p>Output Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span><span style="display:flex;"><span>|                   createdb_stmt                    |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span><span style="display:flex;"><span>| CREATE DATABASE `d1`                               |
+</span></span><span style="display:flex;"><span>| LOCATION                                           |
+</span></span><span style="display:flex;"><span>|   &#39;ofs://ozone1/vol1/bucket1/external/d1.db&#39;       |
+</span></span><span style="display:flex;"><span>| MANAGEDLOCATION                                    |
+</span></span><span style="display:flex;"><span>|   &#39;ofs://ozone1/vol1/bucket1/data&#39;                 |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span></code></pre></div><h3 id="external-tables">External Tables</h3>
 <p>Hive allows the creation of external tables to query existing data stored in Ozone.</p>
 <h4 id="creating-an-external-table">Creating an External Table</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">EXTERNAL</span> <span style="color:#66d9ef">TABLE</span> external_table (
-    id INT,
-    name STRING
-)
-<span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">EXTERNAL</span> <span style="color:#66d9ef">TABLE</span> external_table (
+</span></span><span style="display:flex;"><span>    id INT,
+</span></span><span style="display:flex;"><span>    name STRING
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
+</span></span></code></pre></div><ul>
 <li>With external tables, the data is expected to be created and managed by another tool.</li>
 <li>Hive queries the data as-is.</li>
 <li>Note: Dropping an external table in Hive does not delete the associated data.</li>
 </ul>
 <p>To set a default path for external tables, configure the following property in the <code>hive-site.xml</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;property&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>hive.metastore.warehouse.external.dir<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;value&gt;</span>ofs://ozone1/vol1/bucket1/external/<span style="color:#f92672">&lt;/value&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>This property specifies the base directory for external tables when no explicit <code>LOCATION</code> is provided.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hive.metastore.warehouse.external.dir<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>ofs://ozone1/vol1/bucket1/external/<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>This property specifies the base directory for external tables when no explicit <code>LOCATION</code> is provided.</p>
 <h4 id="verifying-the-external-table-path">Verifying the External Table Path</h4>
 <p>To confirm the table&rsquo;s metadata and location, use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> external_table;
-</code></pre></div><p>Output Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+----------------------------------------------------+
-|                   createtab_stmt                   |
-+----------------------------------------------------+
-| CREATE EXTERNAL TABLE `external_table`(            |
-|   `id` int,                                        |
-|   `name` string)                                   |
-| ROW FORMAT SERDE                                   |
-|   &#39;org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe&#39;  |
-| STORED AS INPUTFORMAT                              |
-|   &#39;org.apache.hadoop.mapred.TextInputFormat&#39;       |
-| OUTPUTFORMAT                                       |
-|   &#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39; |
-| LOCATION                                           |
-|   &#39;ofs://ozone1/vol1/bucket1/table1&#39;               |
-| TBLPROPERTIES (                                    |
-|   &#39;bucketing_version&#39;=&#39;2&#39;,                         |
-|   &#39;transient_lastDdlTime&#39;=&#39;1734725573&#39;)            |
-+----------------------------------------------------+
-</code></pre></div><h2 id="using-the-s3a-protocol">Using the S3A Protocol</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> external_table;
+</span></span></code></pre></div><p>Output Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span><span style="display:flex;"><span>|                   createtab_stmt                   |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span><span style="display:flex;"><span>| CREATE EXTERNAL TABLE `external_table`(            |
+</span></span><span style="display:flex;"><span>|   `id` int,                                        |
+</span></span><span style="display:flex;"><span>|   `name` string)                                   |
+</span></span><span style="display:flex;"><span>| ROW FORMAT SERDE                                   |
+</span></span><span style="display:flex;"><span>|   &#39;org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe&#39;  |
+</span></span><span style="display:flex;"><span>| STORED AS INPUTFORMAT                              |
+</span></span><span style="display:flex;"><span>|   &#39;org.apache.hadoop.mapred.TextInputFormat&#39;       |
+</span></span><span style="display:flex;"><span>| OUTPUTFORMAT                                       |
+</span></span><span style="display:flex;"><span>|   &#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39; |
+</span></span><span style="display:flex;"><span>| LOCATION                                           |
+</span></span><span style="display:flex;"><span>|   &#39;ofs://ozone1/vol1/bucket1/table1&#39;               |
+</span></span><span style="display:flex;"><span>| TBLPROPERTIES (                                    |
+</span></span><span style="display:flex;"><span>|   &#39;bucketing_version&#39;=&#39;2&#39;,                         |
+</span></span><span style="display:flex;"><span>|   &#39;transient_lastDdlTime&#39;=&#39;1734725573&#39;)            |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------+
+</span></span></code></pre></div><h2 id="using-the-s3a-protocol">Using the S3A Protocol</h2>
 <p>In addition to ofs, Hive can access Ozone using the S3 Gateway via the S3A file system.</p>
 <p>For more information, consult:</p>
 <ul>

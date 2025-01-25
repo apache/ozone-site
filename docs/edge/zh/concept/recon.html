@@ -438,7 +438,7 @@ s=d.getElementsByTagName('script')[0];
 -->
 <p>Recon 充当 Ozone 的管理和监视控制台。它提供了 Ozone 的鸟瞰图，并通过基于 REST 的 API 和丰富的网页用户界面（Web UI）展示了集群的当前状态，从而帮助用户解决任何问题。</p>
 <h2 id="高层次设计">高层次设计</h2>
-<figure><img src="../../concept/ReconHighLevelDesign.png" width="800px"/>
+<figure><img src="../../concept/ReconHighLevelDesign.png" width="800px">
 </figure>
 
 <br/>
@@ -446,13 +446,13 @@ s=d.getElementsByTagName('script')[0];
 <p>Recon 维护多个数据库，以支持批处理，更快地查询和持久化聚合信息。它维护 OM DB 和 SCM DB 的本地副本，以及用于持久存储聚合信息的 SQL 数据库。</p>
 <p>Recon 还与 Prometheus 集成，提供一个 HTTP 端点来查询 Prometheus 的 Ozone 指标，并在网页用户界面（Web UI）中显示一些关键时间点的指标。</p>
 <h2 id="recon-和-ozone-manager">Recon 和 Ozone Manager</h2>
-<figure><img src="../../concept/ReconOmDesign.png" width="800px"/>
+<figure><img src="../../concept/ReconOmDesign.png" width="800px">
 </figure>
 
 <br/>
 <p>Recon 最初从领导者 OM 的 HTTP 端点获取 OM rocks DB 的完整快照，解压缩文件并初始化 RocksDB 以进行本地查询。通过对最后一个应用的序列 ID 的 RPC 调用，定期请求领导者 OM 进行增量更新，从而使数据库保持同步。如果由于某种原因而无法检索增量更新或将其应用于本地数据库，则会再次请求一个完整快照以使本地数据库与 OM DB 保持同步。因此，Recon 可能会显示陈旧的信息，因为本地数据库不会总是同步的。</p>
 <h2 id="recon-和-storage-container-manager">Recon 和 Storage Container Manager</h2>
-<figure><img src="../../concept/ReconScmDesign.png" width="800px"/>
+<figure><img src="../../concept/ReconScmDesign.png" width="800px">
 </figure>
 
 <br/>
@@ -502,7 +502,7 @@ s=d.getElementsByTagName('script')[0];
 </li>
 <li>ReconTaskStatus 表
 <ul>
-<li>跟踪在<a href="#task-framework">Recon 任务框架</a>中已注册的 OM 和 SCM DB 任务的状态和最后运行时间戳</li>
+<li>跟踪在<a href="../../zh/concept/recon.html#task-framework">Recon 任务框架</a>中已注册的 OM 和 SCM DB 任务的状态和最后运行时间戳</li>
 </ul>
 </li>
 <li>ContainerHistory 表
@@ -520,75 +520,75 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <h2 id="需要关注的配置项">需要关注的配置项</h2>
 <table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>默认值</th>
-<th><div style="width:300px;">描述</div></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.recon.http-address</td>
-<td>0.0.0.0:9888</td>
-<td>Recon web UI 监听的地址和基本端口。</td>
-</tr>
-<tr>
-<td>ozone.recon.address</td>
-<td>0.0.0.0:9891</td>
-<td>Recon 的 RPC 地址。</td>
-</tr>
-<tr>
-<td>ozone.recon.db.dir</td>
-<td>none</td>
-<td>Recon Server 存储其元数据的目录。</td>
-</tr>
-<tr>
-<td>ozone.recon.om.db.dir</td>
-<td>none</td>
-<td>Recon Server 存储其 OM 快照 DB 的目录。</td>
-</tr>
-<tr>
-<td>ozone.recon.om.snapshot<br>.task.interval.delay</td>
-<td>10m</td>
-<td>Recon 以分钟间隔请求 OM DB 快照。</td>
-</tr>
-<tr>
-<td>ozone.recon.task<br>.missingcontainer.interval</td>
-<td>300s</td>
-<td>定期检查集群中不健康容器的时间间隔。</td>
-</tr>
-<tr>
-<td>ozone.recon.task<br>.safemode.wait.threshold</td>
-<td>300s</td>
-<td>Recon退出safe mode需要等待的最大时间。</td>
-</tr>
-<tr>
-<td>ozone.recon.sql.db.jooq.dialect</td>
-<td>DERBY</td>
-<td>请参考 <a href="https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/SQLDialect.html">SQL 方言</a> 来指定不同的方言。</td>
-</tr>
-<tr>
-<td>ozone.recon.sql.db.jdbc.url</td>
-<td>jdbc:derby:${ozone.recon.db.dir}<br>/ozone_recon_derby.db</td>
-<td>Recon SQL database 的 jdbc url。</td>
-</tr>
-<tr>
-<td>ozone.recon.sql.db.username</td>
-<td>none</td>
-<td>Recon SQL数据库的用户名。</td>
-</tr>
-<tr>
-<td>ozone.recon.sql.db.password</td>
-<td>none</td>
-<td>Recon SQL数据库的密码。</td>
-</tr>
-<tr>
-<td>ozone.recon.sql.db.driver</td>
-<td>org.apache.derby.jdbc<br>.EmbeddedDriver</td>
-<td>Recon SQL数据库的 jdbc driver。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>配置项</th>
+          <th>默认值</th>
+          <th><div style="width:300px;">描述</div></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.recon.http-address</td>
+          <td>0.0.0.0:9888</td>
+          <td>Recon web UI 监听的地址和基本端口。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.address</td>
+          <td>0.0.0.0:9891</td>
+          <td>Recon 的 RPC 地址。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.db.dir</td>
+          <td>none</td>
+          <td>Recon Server 存储其元数据的目录。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.om.db.dir</td>
+          <td>none</td>
+          <td>Recon Server 存储其 OM 快照 DB 的目录。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.om.snapshot<br>.task.interval.delay</td>
+          <td>10m</td>
+          <td>Recon 以分钟间隔请求 OM DB 快照。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.task<br>.missingcontainer.interval</td>
+          <td>300s</td>
+          <td>定期检查集群中不健康容器的时间间隔。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.task<br>.safemode.wait.threshold</td>
+          <td>300s</td>
+          <td>Recon退出safe mode需要等待的最大时间。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.sql.db.jooq.dialect</td>
+          <td>DERBY</td>
+          <td>请参考 <a href="https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/SQLDialect.html">SQL 方言</a> 来指定不同的方言。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.sql.db.jdbc.url</td>
+          <td>jdbc:derby:${ozone.recon.db.dir}<br>/ozone_recon_derby.db</td>
+          <td>Recon SQL database 的 jdbc url。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.sql.db.username</td>
+          <td>none</td>
+          <td>Recon SQL数据库的用户名。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.sql.db.password</td>
+          <td>none</td>
+          <td>Recon SQL数据库的密码。</td>
+      </tr>
+      <tr>
+          <td>ozone.recon.sql.db.driver</td>
+          <td>org.apache.derby.jdbc<br>.EmbeddedDriver</td>
+          <td>Recon SQL数据库的 jdbc driver。</td>
+      </tr>
+  </tbody>
 </table>
 
 

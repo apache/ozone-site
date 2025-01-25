@@ -439,30 +439,30 @@ s=d.getElementsByTagName('script')[0];
 <p>Hadoop 中 datanode 的安全机制是通过给每个节点创建 Keytab 文件实现的。Ozone 的 datanode 安全机制不依赖 Kerberos，而是改用 datanode 证书。</p>
 <p>但是我们也支持传统的基于 Kerberos 的认证来方便现有用户，用户只需要在 hdfs-site.xml 里配置下面参数即可：</p>
 <table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dfs.datanode.kerberos.principal</td>
-<td>datanode 的服务主体名 <br/> 比如：dn/_<a href="mailto:HOST@REALM.COM">HOST@REALM.COM</a></td>
-</tr>
-<tr>
-<td>dfs.datanode.kerberos.keytab.file</td>
-<td>datanode 进程所使用的 keytab 文件</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.principal</td>
-<td>datanode http 服务器的服务主体名</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.keytab</td>
-<td>datanode http 服务器的服务主体登录所使用的 keytab 文件</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfs.datanode.kerberos.principal</td>
+          <td>datanode 的服务主体名 <br/> 比如：dn/_<a href="mailto:HOST@REALM.COM">HOST@REALM.COM</a></td>
+      </tr>
+      <tr>
+          <td>dfs.datanode.kerberos.keytab.file</td>
+          <td>datanode 进程所使用的 keytab 文件</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.principal</td>
+          <td>datanode http 服务器的服务主体名</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.keytab</td>
+          <td>datanode http 服务器的服务主体登录所使用的 keytab 文件</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="如何安全化-datanode">如何安全化 datanode</h2>
 <p>在 Ozone 中，当 datanode 启动并发现 SCM 的地址之后，datanode 首先创建私钥并向 SCM 发送证书请求。</p>

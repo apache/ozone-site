@@ -519,12 +519,12 @@ gives full access to the S3 buckets.</p>
 <ul>
 <li>S3 clients can get the secret access id and user secret from OzoneManager.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone s3 getsecret
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 getsecret
+</span></span></code></pre></div><ul>
 <li>Or by sending request to /secret S3 REST endpoint.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT --negotiate -u : https://localhost:9879/secret
-</code></pre></div><p>This command will talk to ozone, validate the user via Kerberos and generate
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X PUT --negotiate -u : https://localhost:9879/secret
+</span></span></code></pre></div><p>This command will talk to ozone, validate the user via Kerberos and generate
 the AWS credentials. The values will be printed out on the screen. You can
 set these values up in your <em>.aws</em> file for automatic access while working
 against Ozone S3 buckets.</p>
@@ -535,11 +535,11 @@ against Ozone S3 buckets.</p>
 <ul>
 <li>Now you can proceed to setup these secrets in aws configs:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws configure set default.s3.signature_version s3v4
-aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
-aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
-aws configure set region us-west-1
-</code></pre></div><p>Please refer to AWS S3 documentation on how to use S3 via command line or via
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws configure set default.s3.signature_version s3v4
+</span></span><span style="display:flex;"><span>aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set region us-west-1
+</span></span></code></pre></div><p>Please refer to AWS S3 documentation on how to use S3 via command line or via
 S3 API.</p>
 
 

@@ -516,30 +516,30 @@ secure Ozone cluster.</p>
 for the current set of users.The HDFS configuration keys are the following
 that is setup in  hdfs-site.xml.</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dfs.datanode.kerberos.principal</td>
-<td>The datanode service principal. <br/> e.g. <a href="mailto:dn/_HOST@REALM.COM">dn/_HOST@REALM.COM</a></td>
-</tr>
-<tr>
-<td>dfs.datanode.kerberos.keytab.file</td>
-<td>The keytab file used by datanode daemon to login as its service principal.</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.principal</td>
-<td>Datanode http server service principal.</td>
-</tr>
-<tr>
-<td>hdds.datanode.http.auth.kerberos.keytab</td>
-<td>The keytab file used by datanode http server to login as its service principal.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfs.datanode.kerberos.principal</td>
+          <td>The datanode service principal. <br/> e.g. <a href="mailto:dn/_HOST@REALM.COM">dn/_HOST@REALM.COM</a></td>
+      </tr>
+      <tr>
+          <td>dfs.datanode.kerberos.keytab.file</td>
+          <td>The keytab file used by datanode daemon to login as its service principal.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.principal</td>
+          <td>Datanode http server service principal.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.http.auth.kerberos.keytab</td>
+          <td>The keytab file used by datanode http server to login as its service principal.</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="how-a-datanode-becomes-secure">How a datanode becomes secure.</h2>
 <p>Under Ozone, when a datanode boots up and discovers SCM&rsquo;s address, the first

@@ -440,18 +440,18 @@ s=d.getElementsByTagName('script')[0];
 <h3 id="配置密钥管理服务器">配置密钥管理服务器</h3>
 <p>使用 TDE 之前，管理员必须要提前配置密钥管理服务 KMS，并且把 KMS 的 URI 通过 core-site.xml 提供给 Ozone。</p>
 <table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hadoop.security.key.provider.path</td>
-<td>KMS uri. <br> 比如 kms://http@kms-host:9600/kms</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>参数名</th>
+          <th>值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hadoop.security.key.provider.path</td>
+          <td>KMS uri. <br> 比如 kms://http@kms-host:9600/kms</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="使用-tde">使用 TDE</h3>
 <p>如果你的集群已经配置好了 TDE，那么你只需要创建加密密钥并启用桶加密即可。</p>
@@ -459,13 +459,13 @@ s=d.getElementsByTagName('script')[0];
 <ul>
 <li>使用 hadoop key 命令创建桶加密密钥，和 HDFS 加密区域的使用方法类似。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop key create enckey
-</code></pre></div><p>上面这个命令会创建一个用于保护桶数据的密钥。创建完成之后，你可以告诉 Ozone 在读写某个桶中的数据时使用这个密钥。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop key create enckey
+</span></span></code></pre></div><p>上面这个命令会创建一个用于保护桶数据的密钥。创建完成之后，你可以告诉 Ozone 在读写某个桶中的数据时使用这个密钥。</p>
 <ul>
 <li>将加密密钥分配给桶</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh bucket create -k enckey /vol/encryptedbucket
-</code></pre></div><p>这条命令执行后，所以写往 <em>encryptedbucket</em> 的数据都会用 enckey 进行加密，当读取里面的数据时，客户端通过 KMS 获取密钥进行解密。换句话说，Ozone 中存储的数据一直是加密的，但用户和客户端对此完全无感知。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create -k enckey /vol/encryptedbucket
+</span></span></code></pre></div><p>这条命令执行后，所以写往 <em>encryptedbucket</em> 的数据都会用 enckey 进行加密，当读取里面的数据时，客户端通过 KMS 获取密钥进行解密。换句话说，Ozone 中存储的数据一直是加密的，但用户和客户端对此完全无感知。</p>
 
 
           

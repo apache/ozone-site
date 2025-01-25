@@ -525,21 +525,21 @@ s=d.getElementsByTagName('script')[0];
 </ul>
 <h3 id="managed-tables">Managed Tables</h3>
 <p>If the Hive Warehouse Directory is located in Ozone, you can execute Impala queries without any changes, treating the Ozone file system like HDFS. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1;
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 (x INT, s STRING);
-</code></pre></div><p>The data will be stored under the Hive Warehouse Directory path in Ozone.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 (x INT, s STRING);
+</span></span></code></pre></div><p>The data will be stored under the Hive Warehouse Directory path in Ozone.</p>
 <h4 id="specifying-a-custom-ozone-path">Specifying a Custom Ozone Path</h4>
 <p>You can create managed databases, tables, or partitions at a specific Ozone path using the <code>LOCATION</code> clause. Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/d1.db&#39;</span>;
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
-</code></pre></div><h3 id="external-tables">External Tables</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> d1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/d1.db&#39;</span>;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 <span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
+</span></span></code></pre></div><h3 id="external-tables">External Tables</h3>
 <p>You can create an external table in Impala to query Ozone data. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">EXTERNAL</span> <span style="color:#66d9ef">TABLE</span> external_table (
-  id INT,
-  name STRING
-)
-<span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">EXTERNAL</span> <span style="color:#66d9ef">TABLE</span> external_table (
+</span></span><span style="display:flex;"><span>  id INT,
+</span></span><span style="display:flex;"><span>  name STRING
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">LOCATION</span> <span style="color:#e6db74">&#39;ofs://ozone1/vol1/bucket1/table1&#39;</span>;
+</span></span></code></pre></div><ul>
 <li>With external tables, the data is expected to be created and managed by another tool.</li>
 <li>Impala queries the data as-is.</li>
 <li>The metadata is stored under the external warehouse directory.</li>

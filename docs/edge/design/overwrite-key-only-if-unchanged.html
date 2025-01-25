@@ -508,7 +508,7 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="atomic-key-replacement">Atomic Key Replacement</h2>
 <p>In relational database applications, records are often assigned an update counter similar to the updateID for a key in Ozone. The data record can be read and displayed on a UI to be edited, and then written back to the database. However another user could have made an edit to the same record in the mean time, and if the record is written back without any checks, those edits could be lost.</p>
 <p>To combat this, &ldquo;optimistic locking&rdquo; is used. With Optimistic locking, no locks are actually involved. The client reads the data along with the update counter. When it attempts to write the data back, it validates the record has not change by including the updateID in the update statement, eg:</p>
-<pre><code>update customerDetails
+<pre tabindex="0"><code>update customerDetails
 set &lt;columns = values&gt;
 where customerID = :b1
 and updateCounter = :b2
@@ -558,22 +558,22 @@ and updateCounter = :b2
 <li>We need to allow the updateID (called generation on the client) of an existing key to be accessible when an existing details are read, by adding it to OzoneKey and OzoneKeyDetails. There are internal object changes and do no impact any APIs.</li>
 <li>To pass the expectedGeneration to OM on key open, it would be possible to overload the existing OzoneBucket.createKey() method, which already has several overloaded versions, or create a new explicit method on Ozone bucket called rewriteKey, passing the expectedGeneration, eg:</li>
 </ol>
-<pre><code>public OzoneOutputStream rewriteKey(String volumeName, String bucketName, String keyName, long size, long expectedGeneration, ReplicationConfig replicationConfigOfNewKey)
+<pre tabindex="0"><code>public OzoneOutputStream rewriteKey(String volumeName, String bucketName, String keyName, long size, long expectedGeneration, ReplicationConfig replicationConfigOfNewKey)
      throws IOException 
      
 // Can also add an overloaded version of these methods to pass a metadata map, as with the existing
 // create key method.        
 </code></pre><p>This specification is roughly in line with the exiting createKey method:</p>
-<pre><code>  public OzoneOutputStream createKey(
+<pre tabindex="0"><code>  public OzoneOutputStream createKey(
       String volumeName, String bucketName, String keyName, long size,
       ReplicationConfig replicationConfig,
       Map&lt;String, String&gt; metadata)
 </code></pre><p>An alternative, is to create a new overloaded createKey, but it is probably less confusing to have the new rewriteKey method:</p>
-<pre><code>  public OzoneOutputStream createKey(
+<pre tabindex="0"><code>  public OzoneOutputStream createKey(
       String volumeName, String bucketName, String keyName, long size,
       ReplicationConfig replicationConfig, long expectedUpdateID)
 </code></pre><p>The intended usage of this API, is that the existing key details are read, perhaps inspected and then used to open the new key, and then data is written. In this example, the key is overwritten with the same data in a different replication format. Equally, the key could be rewritten with the original data modified in some application specific way. The atomic check guarantees against lost updates if another application thread is attempting to update the same key in a different way.</p>
-<pre><code>OzoneKeyDetails exisitingKey = bucket.getKey(keyName);
+<pre tabindex="0"><code>OzoneKeyDetails exisitingKey = bucket.getKey(keyName);
 // Insepect the key and decide if overwrite is desired:
 boolean shouldOverwrite = ...
 if (shouldOverwrite) {

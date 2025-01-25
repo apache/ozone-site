@@ -437,17 +437,17 @@ s=d.getElementsByTagName('script')[0];
   limitations under the License.
 -->
 <p>Ozone Debug 命令 (<code>ozone debug</code>) 是开发人员工具的集合，旨在帮助调试并获取 Ozone 各个组件的更多信息。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: ozone debug <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;<span style="color:#f92672">]</span>
-                   <span style="color:#f92672">[</span>-D<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
-Developer tools <span style="color:#66d9ef">for</span> Ozone Debug operations
-      -conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;
-                  path to the ozone configuration file
-  -D, --set<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;
-                  a map of <span style="color:#f92672">(</span>configuration_key,configuration_value<span style="color:#f92672">)</span> <span style="color:#66d9ef">for</span> any overrides
-  -h, --help      Show this help message and exit.
-  -V, --version   Print version information and exit.
-      --verbose   More verbose output. Show the stack trace of the errors.
-</code></pre></div><p>子命令:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#f92672">[</span>-D<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Developer tools <span style="color:#66d9ef">for</span> Ozone Debug operations
+</span></span><span style="display:flex;"><span>      -conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;
+</span></span><span style="display:flex;"><span>                  path to the ozone configuration file
+</span></span><span style="display:flex;"><span>  -D, --set<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;
+</span></span><span style="display:flex;"><span>                  a map of <span style="color:#f92672">(</span>configuration_key,configuration_value<span style="color:#f92672">)</span> <span style="color:#66d9ef">for</span> any overrides
+</span></span><span style="display:flex;"><span>  -h, --help      Show this help message and exit.
+</span></span><span style="display:flex;"><span>  -V, --version   Print version information and exit.
+</span></span><span style="display:flex;"><span>      --verbose   More verbose output. Show the stack trace of the errors.
+</span></span></code></pre></div><p>子命令:
 chunkinfo                  返回指定文件/对象的块位置信息。
 print-log-dag, pld         在 OM 中创建当前压缩日志 DAG 的镜像。
 find-missing-padding, fmp  列出所有缺少填充的文件/对象，可以选择指定卷/存储桶/键 URI。
@@ -462,79 +462,79 @@ ratislogparser             解析Ratis Log 成用户可理解的文字形式。<
 <p>Ozone 大量使用 RocksDB 来存储元数据。该工具帮助解析各个Ozone Roles 的 RocksDB 数据内容。
 支持的数据库：Ozone Manager (om.db)、StorageContainerManager (scm.db)、Datanode/Container (container.db)
 下面是用法：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: ozone debug ldb --db<span style="color:#f92672">=</span>&lt;dbPath&gt; <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
-Parse rocksdb file content
-      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
-Commands:
-  scan                      Parse specified metadataTable
-  list_column_families, ls  list all column families in db.
-  value-schema              Schema of value in metadataTable
-</code></pre></div><h3 id="list_column_families-command">list_column_families command</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug ldb --db<span style="color:#f92672">=</span>&lt;dbPath&gt; <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Parse rocksdb file content
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
+</span></span><span style="display:flex;"><span>Commands:
+</span></span><span style="display:flex;"><span>  scan                      Parse specified metadataTable
+</span></span><span style="display:flex;"><span>  list_column_families, ls  list all column families in db.
+</span></span><span style="display:flex;"><span>  value-schema              Schema of value in metadataTable
+</span></span></code></pre></div><h3 id="list_column_families-command">list_column_families command</h3>
 <p><code>list_column_families</code> 命令列出指定数据库中的所有列族。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/scm.db ls
-default
-sequenceId
-revokedCertsV2
-pipelines
-crls
-crlSequenceId
-meta
-containers
-validCerts
-validSCMCerts
-scmTransactionInfos
-deletedBlocks
-statefulServiceConfig
-revokedCerts
-move
-</code></pre></div><h3 id="scan-command">scan command</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/scm.db ls
+</span></span><span style="display:flex;"><span>default
+</span></span><span style="display:flex;"><span>sequenceId
+</span></span><span style="display:flex;"><span>revokedCertsV2
+</span></span><span style="display:flex;"><span>pipelines
+</span></span><span style="display:flex;"><span>crls
+</span></span><span style="display:flex;"><span>crlSequenceId
+</span></span><span style="display:flex;"><span>meta
+</span></span><span style="display:flex;"><span>containers
+</span></span><span style="display:flex;"><span>validCerts
+</span></span><span style="display:flex;"><span>validSCMCerts
+</span></span><span style="display:flex;"><span>scmTransactionInfos
+</span></span><span style="display:flex;"><span>deletedBlocks
+</span></span><span style="display:flex;"><span>statefulServiceConfig
+</span></span><span style="display:flex;"><span>revokedCerts
+</span></span><span style="display:flex;"><span>move
+</span></span></code></pre></div><h3 id="scan-command">scan command</h3>
 <p><code>scan</code> 命令解析提供的 rocksdb 的特定列族并打印记录。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: ozone debug ldb scan <span style="color:#f92672">[</span>--compact<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--count<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--with-keys<span style="color:#f92672">]</span>
-                            <span style="color:#f92672">[</span>--batch-size<span style="color:#f92672">=</span>&lt;batchSize&gt;<span style="color:#f92672">]</span> --cf<span style="color:#f92672">=</span>&lt;tableName&gt;
-                            <span style="color:#f92672">[</span>--cid<span style="color:#f92672">=</span>&lt;containerId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-d<span style="color:#f92672">=</span>&lt;dnDBSchemaVersion&gt;<span style="color:#f92672">]</span>
-                            <span style="color:#f92672">[</span>-e<span style="color:#f92672">=</span>&lt;endKey&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--fields<span style="color:#f92672">=</span>&lt;fieldsFilter&gt;<span style="color:#f92672">]</span>
-                            <span style="color:#f92672">[</span>--filter<span style="color:#f92672">=</span>&lt;filter&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-l<span style="color:#f92672">=</span>&lt;limit&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-o<span style="color:#f92672">=</span>&lt;fileName&gt;<span style="color:#f92672">]</span>
-                            <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;startKey&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--thread-count<span style="color:#f92672">=</span>&lt;threadCount&gt;<span style="color:#f92672">]</span>
-Parse specified metadataTable
-      --batch-size<span style="color:#f92672">=</span>&lt;batchSize&gt;
-                          Batch size <span style="color:#66d9ef">for</span> processing DB data.
-      --cf, --column_family, --column-family<span style="color:#f92672">=</span>&lt;tableName&gt;
-                          Table name
-      --cid, --container-id<span style="color:#f92672">=</span>&lt;containerId&gt;
-                          Container ID. Applicable <span style="color:#66d9ef">if</span> datanode DB Schema is V3
-      --compact           disable the pretty print the output
-      --count, --show-count
-                          Get estimated key count <span style="color:#66d9ef">for</span> the given DB column family
-                            Default: false
-  -d, --dnSchema, --dn-schema<span style="color:#f92672">=</span>&lt;dnDBSchemaVersion&gt;
-                          Datanode DB Schema Version: V1/V2/V3
-  -e, --ek, --endkey<span style="color:#f92672">=</span>&lt;endKey&gt;
-                          Key at which iteration of the DB ends
-      --fields<span style="color:#f92672">=</span>&lt;fieldsFilter&gt;
-                          Comma-separated list of fields needed <span style="color:#66d9ef">for</span> each value.
-                            eg.<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;name,acls.type&#34;</span> <span style="color:#66d9ef">for</span> showing name and type
-                            under acls.
-      --filter<span style="color:#f92672">=</span>&lt;filter&gt;   Comma-separated list of <span style="color:#e6db74">&#34;&lt;field&gt;:&lt;operator&gt;:&lt;value&gt;&#34;</span>
-                            where &lt;field&gt; is any valid field of the record,
-                            &lt;operator&gt; is <span style="color:#f92672">[</span>EQUALS,LESSER, GREATER or REGEX<span style="color:#f92672">]</span>.
-                            <span style="color:#f92672">(</span>EQUALS compares the exact string, REGEX compares
-                            with a valid regular expression passed, and
-                            LESSER/GREATER works with numeric values<span style="color:#f92672">)</span>, &lt;value&gt;
-                            is the value of the field.
-                          eg.<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;dataSize:equals:1000&#34;</span> <span style="color:#66d9ef">for</span> showing records
-                            having the value <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">for</span> dataSize,
-                               <span style="color:#e6db74">&#34;keyName:regex:^key.*</span>$<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">for</span> showing records
-                            having keyName that matches the given regex.
-  -l, --limit, --length<span style="color:#f92672">=</span>&lt;limit&gt;
-                          Maximum number of items to list.
-  -o, --out<span style="color:#f92672">=</span>&lt;fileName&gt;    File to dump table scan data
-  -s, --sk, --startkey<span style="color:#f92672">=</span>&lt;startKey&gt;
-                          Key from which to iterate the DB
-      --thread-count<span style="color:#f92672">=</span>&lt;threadCount&gt;
-                          Thread count <span style="color:#66d9ef">for</span> concurrent processing.
-      --with-keys         Print a JSON object of key-&gt;value pairs <span style="color:#f92672">(</span>default<span style="color:#f92672">)</span>
-                            instead of a JSON array of only values.
-</code></pre></div><p>默认情况下，内容打印在控制台上，但可以使用 <code>--out</code> 选项将其重定向到文件。 <br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug ldb scan <span style="color:#f92672">[</span>--compact<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--count<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--with-keys<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>--batch-size<span style="color:#f92672">=</span>&lt;batchSize&gt;<span style="color:#f92672">]</span> --cf<span style="color:#f92672">=</span>&lt;tableName&gt;
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>--cid<span style="color:#f92672">=</span>&lt;containerId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-d<span style="color:#f92672">=</span>&lt;dnDBSchemaVersion&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>-e<span style="color:#f92672">=</span>&lt;endKey&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--fields<span style="color:#f92672">=</span>&lt;fieldsFilter&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>--filter<span style="color:#f92672">=</span>&lt;filter&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-l<span style="color:#f92672">=</span>&lt;limit&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-o<span style="color:#f92672">=</span>&lt;fileName&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;startKey&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--thread-count<span style="color:#f92672">=</span>&lt;threadCount&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Parse specified metadataTable
+</span></span><span style="display:flex;"><span>      --batch-size<span style="color:#f92672">=</span>&lt;batchSize&gt;
+</span></span><span style="display:flex;"><span>                          Batch size <span style="color:#66d9ef">for</span> processing DB data.
+</span></span><span style="display:flex;"><span>      --cf, --column_family, --column-family<span style="color:#f92672">=</span>&lt;tableName&gt;
+</span></span><span style="display:flex;"><span>                          Table name
+</span></span><span style="display:flex;"><span>      --cid, --container-id<span style="color:#f92672">=</span>&lt;containerId&gt;
+</span></span><span style="display:flex;"><span>                          Container ID. Applicable <span style="color:#66d9ef">if</span> datanode DB Schema is V3
+</span></span><span style="display:flex;"><span>      --compact           disable the pretty print the output
+</span></span><span style="display:flex;"><span>      --count, --show-count
+</span></span><span style="display:flex;"><span>                          Get estimated key count <span style="color:#66d9ef">for</span> the given DB column family
+</span></span><span style="display:flex;"><span>                            Default: false
+</span></span><span style="display:flex;"><span>  -d, --dnSchema, --dn-schema<span style="color:#f92672">=</span>&lt;dnDBSchemaVersion&gt;
+</span></span><span style="display:flex;"><span>                          Datanode DB Schema Version: V1/V2/V3
+</span></span><span style="display:flex;"><span>  -e, --ek, --endkey<span style="color:#f92672">=</span>&lt;endKey&gt;
+</span></span><span style="display:flex;"><span>                          Key at which iteration of the DB ends
+</span></span><span style="display:flex;"><span>      --fields<span style="color:#f92672">=</span>&lt;fieldsFilter&gt;
+</span></span><span style="display:flex;"><span>                          Comma-separated list of fields needed <span style="color:#66d9ef">for</span> each value.
+</span></span><span style="display:flex;"><span>                            eg.<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;name,acls.type&#34;</span> <span style="color:#66d9ef">for</span> showing name and type
+</span></span><span style="display:flex;"><span>                            under acls.
+</span></span><span style="display:flex;"><span>      --filter<span style="color:#f92672">=</span>&lt;filter&gt;   Comma-separated list of <span style="color:#e6db74">&#34;&lt;field&gt;:&lt;operator&gt;:&lt;value&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>                            where &lt;field&gt; is any valid field of the record,
+</span></span><span style="display:flex;"><span>                            &lt;operator&gt; is <span style="color:#f92672">[</span>EQUALS,LESSER, GREATER or REGEX<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">(</span>EQUALS compares the exact string, REGEX compares
+</span></span><span style="display:flex;"><span>                            with a valid regular expression passed, and
+</span></span><span style="display:flex;"><span>                            LESSER/GREATER works with numeric values<span style="color:#f92672">)</span>, &lt;value&gt;
+</span></span><span style="display:flex;"><span>                            is the value of the field.
+</span></span><span style="display:flex;"><span>                          eg.<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;dataSize:equals:1000&#34;</span> <span style="color:#66d9ef">for</span> showing records
+</span></span><span style="display:flex;"><span>                            having the value <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">for</span> dataSize,
+</span></span><span style="display:flex;"><span>                               <span style="color:#e6db74">&#34;keyName:regex:^key.*</span>$<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">for</span> showing records
+</span></span><span style="display:flex;"><span>                            having keyName that matches the given regex.
+</span></span><span style="display:flex;"><span>  -l, --limit, --length<span style="color:#f92672">=</span>&lt;limit&gt;
+</span></span><span style="display:flex;"><span>                          Maximum number of items to list.
+</span></span><span style="display:flex;"><span>  -o, --out<span style="color:#f92672">=</span>&lt;fileName&gt;    File to dump table scan data
+</span></span><span style="display:flex;"><span>  -s, --sk, --startkey<span style="color:#f92672">=</span>&lt;startKey&gt;
+</span></span><span style="display:flex;"><span>                          Key from which to iterate the DB
+</span></span><span style="display:flex;"><span>      --thread-count<span style="color:#f92672">=</span>&lt;threadCount&gt;
+</span></span><span style="display:flex;"><span>                          Thread count <span style="color:#66d9ef">for</span> concurrent processing.
+</span></span><span style="display:flex;"><span>      --with-keys         Print a JSON object of key-&gt;value pairs <span style="color:#f92672">(</span>default<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                            instead of a JSON array of only values.
+</span></span></code></pre></div><p>默认情况下，内容打印在控制台上，但可以使用 <code>--out</code> 选项将其重定向到文件。 <br>
 <code>--length</code> 可用于限制打印的记录数。 <br>
 <code>--count</code> 不打印记录，它显示大概的，并不是完全精确的记录数。 <br>
 <code>ozone debug ldb scan</code> 命令提供了许多过滤选项以使调试更容易，详细说明如下：<br></p>
@@ -544,281 +544,281 @@ Parse specified metadataTable
 <h4 id="--startkey-and---endkey">&ndash;startkey and &ndash;endkey</h4>
 <p>顾名思义，这些选项指定迭代需要发生的键。  <br>
 <code>--startkey</code> 指定从哪个键开始迭代，包含该键。 <code>--endkey</code> 指定停止迭代的键，不包含该键。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --startkey<span style="color:#f92672">=</span>vol3 --endkey<span style="color:#f92672">=</span>vol5
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#f92672">&#34;/vol3&#34;</span>: {
-  <span style="color:#f92672">&#34;metadata&#34;</span> : { },
-  <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-9999</span>,
-  <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">4000</span>,
-  <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol3&#34;</span>,
-  <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1707192335309</span>,
-  <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1714057412205</span>,
-  <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">22854448694951936</span>,
-  <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
-  <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">1</span>,
-  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
-    <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-  } ],
-  <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
-}
-, <span style="color:#f92672">&#34;/vol4&#34;</span>: {
-    <span style="color:#f92672">&#34;metadata&#34;</span> : { },
-    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-888</span>,
-    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">5000</span>,
-    <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol4&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">2251799813685250</span>,
-    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
-    <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span> : [ {
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-      <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-      <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-    } ],
-    <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
-}
-  }
-</code></pre></div><h4 id="--fields">&ndash;fields</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --startkey<span style="color:#f92672">=</span>vol3 --endkey<span style="color:#f92672">=</span>vol5
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;/vol3&#34;</span>: {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metadata&#34;</span> : { },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-9999</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">4000</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol3&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1707192335309</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1714057412205</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">22854448694951936</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>  } ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>, <span style="color:#f92672">&#34;/vol4&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span> : { },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-888</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">5000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol4&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">2251799813685250</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span> : [ {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>    } ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><h4 id="--fields">&ndash;fields</h4>
 <p>每条记录中有多个字段。 <code>--fields</code> 选项允许我们选择要显示的特定字段。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>keyTable -l<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volumeName,bucketName,keyName,keyLocationVersions.version,acls.name&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#f92672">&#34;/vol1/ozone-legacy-bucket/10T-1-terasort-input/&#34;</span>: {
-  <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : [ {
-    <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#ae81ff">0</span>
-  } ],
-  <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;10T-1-terasort-input/&#34;</span>,
-  <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;ozone-legacy-bucket&#34;</span>,
-  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>
-  }, {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;scm&#34;</span>
-  }, {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;testuser&#34;</span>
-  } ],
-  <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>
-}
-}
-</code></pre></div><h4 id="--filter">&ndash;filter</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>keyTable -l<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volumeName,bucketName,keyName,keyLocationVersions.version,acls.name&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;/vol1/ozone-legacy-bucket/10T-1-terasort-input/&#34;</span>: {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : [ {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  } ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;10T-1-terasort-input/&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;ozone-legacy-bucket&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>
+</span></span><span style="display:flex;"><span>  }, {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;scm&#34;</span>
+</span></span><span style="display:flex;"><span>  }, {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;testuser&#34;</span>
+</span></span><span style="display:flex;"><span>  } ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="--filter">&ndash;filter</h4>
 <p><code>--filter</code> 可用于选择值与给定条件匹配的记录。过滤器按以下格式给出：<code>&lt;field&gt;:&lt;operator&gt;:&lt;value&gt;</code>，
 其中“<field>”是记录值中的任何有效字段，“<operator>”是 4 个支持的操作 <code>[equals, regex, lesser, greater]</code> 之一，“<value>”是使用的值用于比较。<br>
 <code>Equals</code> 和 <code>regex</code> 适用于字符串、布尔值和数字字段，<code>lesser</code> 和 <code>greater</code> 仅适用于数字值。  <br>
 也可以在一个命令中给出多个过滤器，它们需要用逗号分隔。<br>
 使用 <code>equals</code> (等于) 运算符：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:equals:2&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;/vol4&#34;</span>: {
-    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-888</span>,
-    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">5000</span>,
-    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol4&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">2251799813685250</span>,
-    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
-    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span>: [
-      {
-        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-      }
-    ],
-    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
-  }
-, <span style="color:#f92672">&#34;/vol5&#34;</span>: {
-  <span style="color:#f92672">&#34;metadata&#34;</span> : { },
-  <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-956599</span>,
-  <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">45600</span>,
-  <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol5&#34;</span>,
-  <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1807192332309</span>,
-  <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1914057410005</span>,
-  <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">7785494951936</span>,
-  <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
-  <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">2</span>,
-  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
-    <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-  } ],
-  <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
-}
- }
-</code></pre></div><p>使用 <code>lesser</code> (较小) 运算符（<code>greater</code>(较大) 运算符也可以以相同的方式使用）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:lesser:2&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;/vol2&#34;</span>: {
-    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-73548</span>,
-    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">2384</span>,
-    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol2&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">11980979907</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1296280979900</span>,
-    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">417913685250</span>,
-    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
-    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span>: [
-      {
-        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-      }
-    ],
-    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
-  }
- }
-</code></pre></div><p>使用 <code>regex</code> 运算符：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volume:regex:^v.*2</span>$<span style="color:#e6db74">&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;/vol2&#34;</span>: {
-    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-73548</span>,
-    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">2384</span>,
-    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol2&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">11980979907</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1296280979900</span>,
-    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">417913685250</span>,
-    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
-    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span>: [
-      {
-        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-      }
-    ],
-    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
-  }
- }
-</code></pre></div><p>使用多个过滤器：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:equals:2,volume:regex:^.*4</span>$<span style="color:#e6db74">&#34;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;/vol4&#34;</span>: {
-    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
-    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-888</span>,
-    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">5000</span>,
-    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol4&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
-    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">2251799813685250</span>,
-    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
-    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span>: [
-      {
-        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
-      }
-    ],
-    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
-  }
- }
-</code></pre></div><h3 id="value-schema-command">value-schema command</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:equals:2&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;/vol4&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-888</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">5000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol4&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">2251799813685250</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>, <span style="color:#f92672">&#34;/vol5&#34;</span>: {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metadata&#34;</span> : { },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#ae81ff">-956599</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#ae81ff">45600</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;adminName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;volume&#34;</span> : <span style="color:#e6db74">&#34;vol5&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#ae81ff">1807192332309</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#ae81ff">1914057410005</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;quotaInBytes&#34;</span> : <span style="color:#ae81ff">7785494951936</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;quotaInNamespace&#34;</span> : <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;usedNamespace&#34;</span> : <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;acls&#34;</span> : [ {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>  } ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><p>使用 <code>lesser</code> (较小) 运算符（<code>greater</code>(较大) 运算符也可以以相同的方式使用）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:lesser:2&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;/vol2&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-73548</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">2384</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol2&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">11980979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1296280979900</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">417913685250</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><p>使用 <code>regex</code> 运算符：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volume:regex:^v.*2</span>$<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;/vol2&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-73548</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">2384</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol2&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">11980979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1296280979900</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">417913685250</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><p>使用多个过滤器：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;usedNamespace:equals:2,volume:regex:^.*4</span>$<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;/vol4&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">-888</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">5000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;adminName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol4&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1696280979907</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">2251799813685250</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">100000000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;aclScope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><h3 id="value-schema-command">value-schema command</h3>
 <p>“value-schema”命令显示存储在rocksdb的列族中的值的模式，即，它显示存储在值中的字段及其数据类型。
 可以选择使用<code>--depth</code>来限制获取字段的级别。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/data/metadata/om.db value-schema --cf<span style="color:#f92672">=</span>keyTable --depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;OmKeyInfo&#34;</span> : {
-    <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
-    <span style="color:#f92672">&#34;metadata&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;fileName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
-    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;isFile&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>, 
-    <span style="color:#f92672">&#34;acls&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;replicationConfig&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;encInfo&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;dataSize&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
-    <span style="color:#f92672">&#34;tags&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
-    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
-    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
-    <span style="color:#f92672">&#34;parentObjectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
-    <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
-    <span style="color:#f92672">&#34;fileChecksum&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
-    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
-}
- }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ozone debug ldb --db<span style="color:#f92672">=</span>/data/metadata/om.db value-schema --cf<span style="color:#f92672">=</span>keyTable
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;OmKeyInfo&#34;</span> : {
-    <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;metadata&#34;</span> : { },
-    <span style="color:#f92672">&#34;fileName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;isFile&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>,
-    <span style="color:#f92672">&#34;acls&#34;</span> : {
-      <span style="color:#f92672">&#34;toStringMethod&#34;</span> : { },
-      <span style="color:#f92672">&#34;hashCodeMethod&#34;</span> : { },
-      <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : {
-        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-      },
-      <span style="color:#f92672">&#34;aclScope&#34;</span> : {
-        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-      },
-      <span style="color:#f92672">&#34;aclBits&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-    },
-    <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;replicationConfig&#34;</span> : { },
-    <span style="color:#f92672">&#34;encInfo&#34;</span> : {
-      <span style="color:#f92672">&#34;ezKeyVersionName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-      <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-      <span style="color:#f92672">&#34;edek&#34;</span> : { },
-      <span style="color:#f92672">&#34;cipherSuite&#34;</span> : {
-        <span style="color:#f92672">&#34;unknownValue&#34;</span> : {
-          <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-        },
-        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;algoBlockSize&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>,
-        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-      },
-      <span style="color:#f92672">&#34;version&#34;</span> : {
-        <span style="color:#f92672">&#34;unknownValue&#34;</span> : {
-          <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-        },
-        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;description&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-        <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>,
-        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
-      },
-      <span style="color:#f92672">&#34;iv&#34;</span> : { }
-    },
-    <span style="color:#f92672">&#34;dataSize&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;tags&#34;</span> : { },
-    <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : {
-      <span style="color:#f92672">&#34;isMultipartKey&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>,
-      <span style="color:#f92672">&#34;locationVersionMap&#34;</span> : { },
-      <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
-    },
-    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;parentObjectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
-    <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
-    <span style="color:#f92672">&#34;fileChecksum&#34;</span> : { },
-    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
-  }
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/data/metadata/om.db value-schema --cf<span style="color:#f92672">=</span>keyTable --depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;OmKeyInfo&#34;</span> : {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fileName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;isFile&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;replicationConfig&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;encInfo&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dataSize&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;tags&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;parentObjectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fileChecksum&#34;</span> : <span style="color:#e6db74">&#34;struct&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/data/metadata/om.db value-schema --cf<span style="color:#f92672">=</span>keyTable
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;OmKeyInfo&#34;</span> : {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;metadata&#34;</span> : { },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fileName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;isFile&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;acls&#34;</span> : {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;toStringMethod&#34;</span> : { },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;hashCodeMethod&#34;</span> : { },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;aclScope&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;aclBits&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;replicationConfig&#34;</span> : { },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;encInfo&#34;</span> : {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ezKeyVersionName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;edek&#34;</span> : { },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;cipherSuite&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;unknownValue&#34;</span> : {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;algoBlockSize&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;unknownValue&#34;</span> : {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;value&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;description&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ordinal&#34;</span> : <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;iv&#34;</span> : { }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dataSize&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;tags&#34;</span> : { },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;keyLocationVersions&#34;</span> : {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;isMultipartKey&#34;</span> : <span style="color:#e6db74">&#34;boolean&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;locationVersionMap&#34;</span> : { },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;updateID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ownerName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;parentObjectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;String&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fileChecksum&#34;</span> : { },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;objectID&#34;</span> : <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../../zh/tools/admin.html">Next >></a>

@@ -581,17 +581,23 @@ Ozone 是一个多协议文件系统，用户可以通过多种协议访问 Ozon
                                     
                                     命令行接口
                                 </h2>
-                                <p class="card-text">Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 Java API.
-有些功能只能通过使用 ozone sh 命令才能访问。例如：
- 创建带有配额的卷 管理内部 ACL 创建带有加密的键的桶  所有这些命令都是一次性的管理任务。应用程序也可以使用其他接口，如 Hadoop 兼容文件系统（o3fs 或 ofs）或 S3 接口来实现相同功能而无需使用 Ozone 命令行接口。
-Ozone shell 的帮助菜单可以在 对象 级别 或者 动作 级别被调出.
-示例命令:
-ozone sh volume --help 这条命令展示了卷的所有可用的 动作 命令
-或者也可以用来解释具体的某个 动作 ，例如：
-ozone sh volume create --help 这条命令输出卷的create动作的所有命令行选项
-通用命令格式 Ozone shell 命令采取以下形式:
- ozone sh object action url
- ozone 脚本用于调用所有 Ozone 子命令。通过 sh 命令调用 ozone shell 命令。</p>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 <a href="../zh/interface/javaapi.html">Java API</a>.</p></p>
                                 <a href="../zh/interface/cli.html"
                                    class=" btn btn-primary btn-lg">命令行接口</a>
                             </div>

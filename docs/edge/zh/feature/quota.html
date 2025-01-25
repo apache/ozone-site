@@ -464,7 +464,7 @@ s=d.getElementsByTagName('script')[0];
 <li>对于桶中垃圾的内部目录路径，即 <code>/.trash/&lt;user&gt;/&lt;current or timestamp&gt;</code></li>
 <li>用于将文件/目录移动到垃圾桶中对应层次结构时创建的额外路径。例如：</li>
 </ul>
-<pre><code>- 来源：/&lt;vol&gt;/&lt;bucket&gt;/dir1/dir2/file.txt
+<pre tabindex="0"><code>- 来源：/&lt;vol&gt;/&lt;bucket&gt;/dir1/dir2/file.txt
 场景 1：
 - 将 file.txt 移至回收站（删除操作时）
 - 使用“dir1”和“dir2” 在垃圾桶中创建与来源相同的路径
@@ -480,7 +480,6 @@ s=d.getElementsByTagName('script')[0];
 场景 3：
 - 将 dir1 移动到垃圾桶（删除操作时），在这种情况下，不需要额外的命名空间
   /&lt;vol&gt;/&lt;bucket&gt;/.trash/&lt;user&gt;/current/dir1/dir2/file.txt
-
 </code></pre><h3 id="笔记">笔记</h3>
 <ul>
 <li>对于FSO bucket，当递归删除目录时，配额将在子目录和文件被异步删除后释放（当目录被删除时，递归删除在后台进行）。</li>
@@ -495,42 +494,42 @@ s=d.getElementsByTagName('script')[0];
 <li>最小的有效空间配额，是一个数据块需要的存储空间，即默认块大小 * 副本数. 请确保设置的空间配额不小于这个数值，不然对象/文件写入操作，会失败。</li>
 </ul>
 <h4 id="volume-space-quota用法">Volume Space quota用法</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --space-quota 5MB /volume1
-</code></pre></div><p>这意味着将volume1的存储空间设置为5MB</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --space-quota 10GB /volume1
-</code></pre></div><p>此行为将volume1的配额更改为10GB。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --space-quota 5MB /volume1
+</span></span></code></pre></div><p>这意味着将volume1的存储空间设置为5MB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --space-quota 10GB /volume1
+</span></span></code></pre></div><p>此行为将volume1的配额更改为10GB。</p>
 <h4 id="bucket-space-quota-用法">Bucket Space quota 用法</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
-</code></pre></div><p>这意味着bucket1允许我们使用5MB的存储空间。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
-</code></pre></div><p>该行为将bucket1的配额更改为10GB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
+</span></span></code></pre></div><p>这意味着bucket1允许我们使用5MB的存储空间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
+</span></span></code></pre></div><p>该行为将bucket1的配额更改为10GB</p>
 <p>bucket的总配额 不应大于其Volume的配额。让我们看一个例子，如果我们有一个10MB的Volume，该volume下所有bucket的大小之和不能超过10MB，否则设置bucket quota将失败。</p>
 <h4 id="清除volume和bucket的配额">清除volume和bucket的配额</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --space-quota /volume1
-bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
-</code></pre></div><h4 id="查看volume和bucket的quota值以及usedbytes">查看volume和bucket的quota值以及usedBytes</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedBytes的值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --space-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --space-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="查看volume和bucket的quota值以及usedbytes">查看volume和bucket的quota值以及usedBytes</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedBytes的值</p>
 <h3 id="namespace-quota">Namespace quota</h3>
 <p>命名空间配额是一个数字，其代表由多少个名字能够使用。这个数字不能超过Java long数据类型的最大值。</p>
 <h4 id="volume-namespace-quota">Volume Namespace quota</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
-</code></pre></div><p>这意味着将volume1的命名空间配额设置为100。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
-</code></pre></div><p>此行为将volume1的命名空间配额更改为1000。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume create --namespace-quota <span style="color:#ae81ff">100</span> /volume1
+</span></span></code></pre></div><p>这意味着将volume1的命名空间配额设置为100。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1
+</span></span></code></pre></div><p>此行为将volume1的命名空间配额更改为1000。</p>
 <h4 id="bucket-namespace-quota">Bucket Namespace quota</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
-</code></pre></div><p>这意味着bucket1允许我们使用100的命名空间。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
-</code></pre></div><p>该行为将bucket1的命名空间配额更改为1000。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket create --namespace-quota <span style="color:#ae81ff">100</span> /volume1/bucket1
+</span></span></code></pre></div><p>这意味着bucket1允许我们使用100的命名空间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh bucket setquota --namespace-quota <span style="color:#ae81ff">1000</span> /volume1/bucket1 
+</span></span></code></pre></div><p>该行为将bucket1的命名空间配额更改为1000。</p>
 <h4 id="清除volume和bucket的配额-1">清除volume和bucket的配额</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume clrquota --namespace-quota /volume1
-bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
-</code></pre></div><h4 id="查看volume和bucket的quota值以及usednamespace">查看volume和bucket的quota值以及usedNamespace</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/ozone sh volume info /volume1
-bin/ozone sh bucket info /volume1/bucket1
-</code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedNamespace的值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume clrquota --namespace-quota /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket clrquota --namespace-quota /volume1/bucket1
+</span></span></code></pre></div><h4 id="查看volume和bucket的quota值以及usednamespace">查看volume和bucket的quota值以及usedNamespace</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bin/ozone sh volume info /volume1
+</span></span><span style="display:flex;"><span>bin/ozone sh bucket info /volume1/bucket1
+</span></span></code></pre></div><p>我们能够在volume和bucket的info中查看quota及usedNamespace的值</p>
 
 
           

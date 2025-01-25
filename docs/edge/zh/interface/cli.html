@@ -446,11 +446,11 @@ s=d.getElementsByTagName('script')[0];
 <p>所有这些命令都是一次性的管理任务。应用程序也可以使用其他接口，如 Hadoop 兼容文件系统（o3fs 或 ofs）或 S3 接口来实现相同功能而无需使用 Ozone 命令行接口。</p>
 <p>Ozone shell 的帮助菜单可以在 <em>对象</em> 级别 或者 <em>动作</em> 级别被调出.</p>
 <p>示例命令:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume --help
-</code></pre></div><p>这条命令展示了卷的所有可用的 <em>动作</em> 命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume --help
+</span></span></code></pre></div><p>这条命令展示了卷的所有可用的 <em>动作</em> 命令</p>
 <p>或者也可以用来解释具体的某个 <em>动作</em> ，例如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone sh volume create --help
-</code></pre></div><p>这条命令输出卷的<code>create</code>动作的所有命令行选项</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create --help
+</span></span></code></pre></div><p>这条命令输出卷的<code>create</code>动作的所有命令行选项</p>
 <h2 id="通用命令格式">通用命令格式</h2>
 <p>Ozone shell 命令采取以下形式:</p>
 <blockquote>
@@ -473,175 +473,175 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="卷操作">卷操作</h2>
 <p>卷位于层次结构的顶层，仅由管理员管理。也可以指定所有者用户和配额。</p>
 <p>示例命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume create /vol1
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume info /vol1
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
-  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume list /
-<span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
-  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
-  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
-    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
-    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
-    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
-<span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
-  ....
-<span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
-</code></pre></div><p>如果卷为空，我们可以使用以下命令删除卷。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume delete /vol1
-Volume vol1 is deleted
-</code></pre></div><p>如果卷包含任意桶或键，我们可以递归地删除卷。这将删除卷中所有的桶和键，然后删除卷本身。在运行这个命令后，将无法恢复已删除的内容。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh volume delete -r /vol1
-This command will delete volume recursively.
-There is no recovery option after using this command, and no trash <span style="color:#66d9ef">for</span> FSO buckets.
-Delay is expected running this command.
-Enter <span style="color:#e6db74">&#39;yes&#39;</span> to proceed<span style="color:#960050;background-color:#1e0010">&#39;</span>: yes
-Volume vol1 is deleted
-</code></pre></div><h2 id="桶操作">桶操作</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume create /vol1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume info /vol1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T12:31:50.112Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume list /
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;s3v&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;admin&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;owner&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-27T11:32:22.314Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;acls&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;hadoop&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;GROUP&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclScope&#34;</span> : <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aclList&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;ALL&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quota&#34;</span> : <span style="color:#ae81ff">1152921504606846976</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>, <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  ....
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>如果卷为空，我们可以使用以下命令删除卷。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume delete /vol1
+</span></span><span style="display:flex;"><span>Volume vol1 is deleted
+</span></span></code></pre></div><p>如果卷包含任意桶或键，我们可以递归地删除卷。这将删除卷中所有的桶和键，然后删除卷本身。在运行这个命令后，将无法恢复已删除的内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh volume delete -r /vol1
+</span></span><span style="display:flex;"><span>This command will delete volume recursively.
+</span></span><span style="display:flex;"><span>There is no recovery option after using this command, and no trash <span style="color:#66d9ef">for</span> FSO buckets.
+</span></span><span style="display:flex;"><span>Delay is expected running this command.
+</span></span><span style="display:flex;"><span>Enter <span style="color:#e6db74">&#39;yes&#39;</span> to proceed<span style="color:#960050;background-color:#1e0010">&#39;</span>: yes
+</span></span><span style="display:flex;"><span>Volume vol1 is deleted
+</span></span></code></pre></div><h2 id="桶操作">桶操作</h2>
 <p>桶是层次结构的第二层级，与 AWS S3 桶相似。如果用户有必要的权限，可以在卷中创建桶。</p>
 <p>示例命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket create /vol1/bucket1
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket info /vol1/bucket1
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
-  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
-  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
-  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null,
-  <span style="color:#e6db74">&#34;sourceVolume&#34;</span> : null,
-  <span style="color:#e6db74">&#34;sourceBucket&#34;</span> : null
-<span style="color:#f92672">}</span>
-</code></pre></div><p>如果桶是空的，我们可以用以下命令来删除桶。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket delete /vol1/bucket1
-Bucket bucket1 is deleted
-</code></pre></div><p>如果桶包含任意键，我们可以递归地删除桶。这将删除桶中的所有键，然后删除桶本身。在运行这个命令后，将无法恢复已删除的内容。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket delete -r /vol1/bucket1
-This command will delete bucket recursively.
-There is no recovery option after using this command, and deleted keys won<span style="color:#e6db74">&#39;t move to trash.
-</span><span style="color:#e6db74">Enter &#39;</span>yes<span style="color:#e6db74">&#39; to proceed&#39;</span>: yes
-Bucket bucket1 is deleted
-</code></pre></div><p><a href="../../zh/security/securingtde.html">透明数据加密</a> 可以在桶层级被启用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket create /vol1/bucket1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket info /vol1/bucket1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;storageType&#34;</span> : <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;versioning&#34;</span> : false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:14:45.091Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;encryptionKeyName&#34;</span> : null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;sourceVolume&#34;</span> : null,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;sourceBucket&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>如果桶是空的，我们可以用以下命令来删除桶。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket delete /vol1/bucket1
+</span></span><span style="display:flex;"><span>Bucket bucket1 is deleted
+</span></span></code></pre></div><p>如果桶包含任意键，我们可以递归地删除桶。这将删除桶中的所有键，然后删除桶本身。在运行这个命令后，将无法恢复已删除的内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket delete -r /vol1/bucket1
+</span></span><span style="display:flex;"><span>This command will delete bucket recursively.
+</span></span><span style="display:flex;"><span>There is no recovery option after using this command, and deleted keys won<span style="color:#e6db74">&#39;t move to trash.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Enter &#39;</span>yes<span style="color:#e6db74">&#39; to proceed&#39;</span>: yes
+</span></span><span style="display:flex;"><span>Bucket bucket1 is deleted
+</span></span></code></pre></div><p><a href="../../zh/security/securingtde.html">透明数据加密</a> 可以在桶层级被启用。</p>
 <h2 id="键操作">键操作</h2>
 <p>键是可以存储数据的对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key put /vol1/bucket1/README.md README.md
-</code></pre></div><div class="alert alert-warning" role="alert">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key put /vol1/bucket1/README.md README.md
+</span></span></code></pre></div><div class="alert alert-warning" role="alert">
 <p>在这个命令中，标准的命令顺序 <code>ozone sh &lt;object_type&gt; &lt;action&gt; &lt;url&gt;</code> 可能会让使用者困惑, 因为它的格式是 <code>ozone sh key put &lt;destination&gt; &lt;source&gt;</code>， 而不是我们习惯的自然的顺序 <code>&lt;source&gt; &lt;destination&gt;</code>.</p>
 </div>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key info /vol1/bucket1/README.md
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
-  <span style="color:#e6db74">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;README.md&#34;</span>,
-  <span style="color:#e6db74">&#34;dataSize&#34;</span> : 3841,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:20.749Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:21.979Z&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationType&#34;</span> : <span style="color:#e6db74">&#34;RATIS&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationFactor&#34;</span> : 1,
-  <span style="color:#e6db74">&#34;ozoneKeyLocations&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;containerID&#34;</span> : 1,
-    <span style="color:#e6db74">&#34;localID&#34;</span> : 104591670688743424,
-    <span style="color:#e6db74">&#34;length&#34;</span> : 3841,
-    <span style="color:#e6db74">&#34;offset&#34;</span> : <span style="color:#ae81ff">0</span>
-  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
-  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
-  <span style="color:#e6db74">&#34;fileEncryptionInfo&#34;</span> : null
-<span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key get /vol1/bucket1/README.md /tmp/
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh key delete /vol1/bucket1/key1
-</code></pre></div><p>如果键是在 <a href="../../zh/feature/prefixfso.html">FSO</a> 桶中，当删除键时它会被移动到回收站，回收站的位置是:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ /&lt;volume&gt;/&lt;bucket&gt;/.Trash/&lt;user&gt;
-</code></pre></div><p>如果键是在OBS桶中，它将被永久删除。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key info /vol1/bucket1/README.md
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;bucketName&#34;</span> : <span style="color:#e6db74">&#34;bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;README.md&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;dataSize&#34;</span> : 3841,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:20.749Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span> : <span style="color:#e6db74">&#34;2020-07-28T13:17:21.979Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationType&#34;</span> : <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationFactor&#34;</span> : 1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;ozoneKeyLocations&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;containerID&#34;</span> : 1,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;localID&#34;</span> : 104591670688743424,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;length&#34;</span> : 3841,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;offset&#34;</span> : <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span> : <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;fileEncryptionInfo&#34;</span> : null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key get /vol1/bucket1/README.md /tmp/
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh key delete /vol1/bucket1/key1
+</span></span></code></pre></div><p>如果键是在 <a href="../../zh/feature/prefixfso.html">FSO</a> 桶中，当删除键时它会被移动到回收站，回收站的位置是:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ /&lt;volume&gt;/&lt;bucket&gt;/.Trash/&lt;user&gt;
+</span></span></code></pre></div><p>如果键是在OBS桶中，它将被永久删除。</p>
 <h2 id="查询命令行结果">查询命令行结果</h2>
 <p>Ozone命令行返回JSON响应。<a href="https://stedolan.github.io/jq/manual/">jq</a> 是一个命令行JSON处理器，可以用来过滤CLI结果以获取所需信息.</p>
 <p>示例命令:</p>
 <ul>
 <li>列出不是链接的 FSO 桶。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket list /s3v | jq <span style="color:#e6db74">&#39;.[] | select(.link==false and .bucketLayout==&#34;FILE_SYSTEM_OPTIMIZED&#34;)&#39;</span>
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;metadata&#34;</span>: <span style="color:#f92672">{}</span>,
-  <span style="color:#e6db74">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;s3v&#34;</span>,
-  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;fso-bucket&#34;</span>,
-  <span style="color:#e6db74">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
-  <span style="color:#e6db74">&#34;versioning&#34;</span>: false,
-  <span style="color:#e6db74">&#34;usedBytes&#34;</span>: 0,
-  <span style="color:#e6db74">&#34;usedNamespace&#34;</span>: 0,
-  <span style="color:#e6db74">&#34;creationTime&#34;</span>: <span style="color:#e6db74">&#34;2023-02-01T05:18:46.974Z&#34;</span>,
-  <span style="color:#e6db74">&#34;modificationTime&#34;</span>: <span style="color:#e6db74">&#34;2023-02-01T05:18:46.974Z&#34;</span>,
-  <span style="color:#e6db74">&#34;quotaInBytes&#34;</span>: -1,
-  <span style="color:#e6db74">&#34;quotaInNamespace&#34;</span>: -1,
-  <span style="color:#e6db74">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;FILE_SYSTEM_OPTIMIZED&#34;</span>,
-  <span style="color:#e6db74">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
-  <span style="color:#e6db74">&#34;link&#34;</span>: false
-<span style="color:#f92672">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket list /s3v | jq <span style="color:#e6db74">&#39;.[] | select(.link==false and .bucketLayout==&#34;FILE_SYSTEM_OPTIMIZED&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;metadata&#34;</span>: <span style="color:#f92672">{}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;s3v&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;fso-bucket&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;versioning&#34;</span>: false,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;usedBytes&#34;</span>: 0,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;usedNamespace&#34;</span>: 0,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;creationTime&#34;</span>: <span style="color:#e6db74">&#34;2023-02-01T05:18:46.974Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;modificationTime&#34;</span>: <span style="color:#e6db74">&#34;2023-02-01T05:18:46.974Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quotaInBytes&#34;</span>: -1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;quotaInNamespace&#34;</span>: -1,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;FILE_SYSTEM_OPTIMIZED&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;om&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;link&#34;</span>: false
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
 <li>列出 EC 桶以及它们的复制策略配置。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ozone sh bucket list /vol1 | jq -r <span style="color:#e6db74">&#39;.[] | select(.replicationConfig.replicationType == &#34;EC&#34;) | {&#34;name&#34;: .name, &#34;replicationConfig&#34;: .replicationConfig}&#39;</span>
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ec5&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationConfig&#34;</span>: <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;data&#34;</span>: 3,
-    <span style="color:#e6db74">&#34;parity&#34;</span>: 2,
-    <span style="color:#e6db74">&#34;ecChunkSize&#34;</span>: 1048576,
-    <span style="color:#e6db74">&#34;codec&#34;</span>: <span style="color:#e6db74">&#34;RS&#34;</span>,
-    <span style="color:#e6db74">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;EC&#34;</span>,
-    <span style="color:#e6db74">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">5</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ec9&#34;</span>,
-  <span style="color:#e6db74">&#34;replicationConfig&#34;</span>: <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;data&#34;</span>: 6,
-    <span style="color:#e6db74">&#34;parity&#34;</span>: 3,
-    <span style="color:#e6db74">&#34;ecChunkSize&#34;</span>: 1048576,
-    <span style="color:#e6db74">&#34;codec&#34;</span>: <span style="color:#e6db74">&#34;RS&#34;</span>,
-    <span style="color:#e6db74">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;EC&#34;</span>,
-    <span style="color:#e6db74">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">9</span>
-  <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket list /vol1 | jq -r <span style="color:#e6db74">&#39;.[] | select(.replicationConfig.replicationType == &#34;EC&#34;) | {&#34;name&#34;: .name, &#34;replicationConfig&#34;: .replicationConfig}&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ec5&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationConfig&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data&#34;</span>: 3,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;parity&#34;</span>: 2,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;ecChunkSize&#34;</span>: 1048576,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;codec&#34;</span>: <span style="color:#e6db74">&#34;RS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;EC&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;ec9&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;replicationConfig&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data&#34;</span>: 6,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;parity&#34;</span>: 3,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;ecChunkSize&#34;</span>: 1048576,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;codec&#34;</span>: <span style="color:#e6db74">&#34;RS&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;EC&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><ul>
 <li>以制表符分隔的格式列出加密桶的名字以及它们的加密的键名。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
-$ ozone sh bucket list /vol1 | jq -r <span style="color:#e6db74">&#39;.[] | select(.encryptionKeyName != null) | [.name, .encryptionKeyName] | @tsv&#39;</span>
-ec5     key1
-encrypted-bucket        key1
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone sh bucket list /vol1 | jq -r <span style="color:#e6db74">&#39;.[] | select(.encryptionKeyName != null) | [.name, .encryptionKeyName] | @tsv&#39;</span>
+</span></span><span style="display:flex;"><span>ec5     key1
+</span></span><span style="display:flex;"><span>encrypted-bucket        key1
+</span></span></code></pre></div>
 
           
           </div>

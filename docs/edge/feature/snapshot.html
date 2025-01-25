@@ -516,29 +516,29 @@ s=d.getElementsByTagName('script')[0];
 <ul>
 <li>Create Snapshot: Create an instantenous snapshot for a given bucket</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot create <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; <span style="color:#f92672">[</span>&lt;snapshotName&gt;<span style="color:#f92672">]</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot create <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; <span style="color:#f92672">[</span>&lt;snapshotName&gt;<span style="color:#f92672">]</span>
+</span></span></code></pre></div><ul>
 <li>List Snapshots: List all snapshots of a given bucket</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot list <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot list <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt;
+</span></span></code></pre></div><ul>
 <li>Delete snapshot: Delete a given snapshot for a given bucket</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot delete <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot delete <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
+</span></span></code></pre></div><ul>
 <li>Snapshot Diff: Given two snapshots, list all the keys that are different between the them.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot diff <span style="color:#f92672">[</span>-chV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p<span style="color:#f92672">=</span>&lt;pageSize&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t<span style="color:#f92672">=</span>&lt;continuation-token&gt;<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;fromSnapshot&gt; &lt;toSnapshot&gt;
-</code></pre></div><p>SnapshotDiff CLI/API is asynchronous. The first time the API is invoked, OM starts a background thread to calculate the SnapshotDiff, and returns &ldquo;Retry&rdquo; with suggested duration for the retry operation. Once the SnapshotDiff is computed, this API returns the diffs in multiple Pages. Within each Diff response, OM also returns a continuation token for the client to continue from the last batch of Diff results.  This API is safe to be called multiple times for a given snapshot source and destination pair. Internally each Ozone Manager computes Snapdiff only once and stores it for future invocations of the same Snapshot Diff API.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot diff <span style="color:#f92672">[</span>-chV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p<span style="color:#f92672">=</span>&lt;pageSize&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t<span style="color:#f92672">=</span>&lt;continuation-token&gt;<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;fromSnapshot&gt; &lt;toSnapshot&gt;
+</span></span></code></pre></div><p>SnapshotDiff CLI/API is asynchronous. The first time the API is invoked, OM starts a background thread to calculate the SnapshotDiff, and returns &ldquo;Retry&rdquo; with suggested duration for the retry operation. Once the SnapshotDiff is computed, this API returns the diffs in multiple Pages. Within each Diff response, OM also returns a continuation token for the client to continue from the last batch of Diff results.  This API is safe to be called multiple times for a given snapshot source and destination pair. Internally each Ozone Manager computes Snapdiff only once and stores it for future invocations of the same Snapshot Diff API.</p>
 <ul>
 <li>List SnapshotDiff Jobs: List all snapshotDiff jobs of a given bucket</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot listDiff <span style="color:#f92672">[</span>-ahV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;jobStatus&gt;<span style="color:#f92672">]</span> &lt;bucket&gt;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot listDiff <span style="color:#f92672">[</span>-ahV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;jobStatus&gt;<span style="color:#f92672">]</span> &lt;bucket&gt;
+</span></span></code></pre></div><ul>
 <li>Snapshot Info: Returns information about an existing snapshot</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ozone sh snapshot info <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
-</code></pre></div><h2 id="architecture">Architecture</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot info <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
+</span></span></code></pre></div><h2 id="architecture">Architecture</h2>
 <p>Ozone Snapshot architecture leverages the fact that data blocks once written, remain immutable for their lifetime. These data blocks are reclaimed only when the object key metadata that references them, is deleted from the Ozone namespace. All of this Ozone metadata is stored on the OM nodes in the Ozone cluster. When a user takes a snapshot of an Ozone bucket, internally the system takes snapshot of the Ozone metadata in OM nodes. Since Ozone doesn&rsquo;t allow updates to datanode blocks, integrity of data blocks referenced by Ozone metadata snapshot in OM nodes remains intact. Ozone key deletion service is also aware of Ozone snapshots.  Key deletion service does not reclaim any key as long as it is referenced by the active object store bucket or any of its snapshot. When the snapshots are deleted, a background garbage collection service reclaims any key that will not be part of any snapshot or active object store.
 Ozone also provides SnapshotDiff API. Whenever a user issues a SnapshotDiff between two snapshots, it efficiently calculates all the keys that are different between these two snapshots and returns paginated diff list result.</p>
 <h2 id="deployment">Deployment</h2>

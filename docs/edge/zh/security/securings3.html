@@ -441,23 +441,23 @@ s=d.getElementsByTagName('script')[0];
 <ul>
 <li>S3 客户端可以从 OM 获取 access key id 和 secret。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ozone s3 getsecret
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 getsecret
+</span></span></code></pre></div><ul>
 <li>或者通过向 /secret S3 REST 端点发送请求。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT --negotiate -u : https://localhost:9879/secret
-</code></pre></div><p>这条命令会与 Ozone 进行通信，对用户进行 Kerberos 认证并生成 AWS 凭据，结果会直接打印在屏幕上，你可以将其配置在 <em>.aws.</em> 文件中，这样可以在操作 Ozone S3 桶时自动进行认证。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X PUT --negotiate -u : https://localhost:9879/secret
+</span></span></code></pre></div><p>这条命令会与 Ozone 进行通信，对用户进行 Kerberos 认证并生成 AWS 凭据，结果会直接打印在屏幕上，你可以将其配置在 <em>.aws.</em> 文件中，这样可以在操作 Ozone S3 桶时自动进行认证。</p>
 <div class="alert alert-danger" role="alert">
 请注意：这些 S3 凭据和你的 Kerberos 密码一样，具有你所有桶的完全访问权限。 
 </div>
 <ul>
 <li>在 aws 配置中添加上述凭据：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws configure set default.s3.signature_version s3v4
-aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
-aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
-aws configure set region us-west-1
-</code></pre></div><p>关于通过命令行和 S3 API 使用 S3，请参考 AWS S3 的文档。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws configure set default.s3.signature_version s3v4
+</span></span><span style="display:flex;"><span>aws configure set aws_access_key_id <span style="color:#e6db74">${</span>accessId<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set aws_secret_access_key <span style="color:#e6db74">${</span>secret<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>aws configure set region us-west-1
+</span></span></code></pre></div><p>关于通过命令行和 S3 API 使用 S3，请参考 AWS S3 的文档。</p>
 
 
           

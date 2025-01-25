@@ -520,107 +520,107 @@ configuring Ozone to work with Apache Ranger is trivial. You have to enable
 the ACLs support and set the acl authorizer class inside Ozone to be Ranger
 authorizer. Please add the following properties to the ozone-site.xml.</p>
 <table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ozone.acl.enabled</td>
-<td>true</td>
-</tr>
-<tr>
-<td>ozone.acl.authorizer.class</td>
-<td>org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ozone.acl.enabled</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>ozone.acl.authorizer.class</td>
+          <td>org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer</td>
+      </tr>
+  </tbody>
 </table>
 <p>To use the RangerOzoneAuthorizer, you also need to add the following environment variables to ozone-env.sh:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export OZONE_MANAGER_CLASSPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OZONE_HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/share/ozone/lib/libext/*&#34;</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export OZONE_MANAGER_CLASSPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OZONE_HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/share/ozone/lib/libext/*&#34;</span>
+</span></span></code></pre></div><ul>
 <li>The location of the ranger-ozone-plugin jars depends on where the Ranger Plugin is installed.</li>
 <li>If the ranger-ozone-plugin jars is installed on another node, copy it to the Ozone installation directory.</li>
 </ul>
 <p>The Ranger permissions corresponding to the Ozone operations are as follows:</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:left">operation&amp;permission</th>
-<th style="text-align:left">Volume  permission</th>
-<th style="text-align:left">Bucket permission</th>
-<th style="text-align:left">Key permission</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Create  volume</td>
-<td style="text-align:left">CREATE</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">List volume</td>
-<td style="text-align:left">LIST</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Get volume Info</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Delete volume</td>
-<td style="text-align:left">DELETE</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Create  bucket</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">CREATE</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">List bucket</td>
-<td style="text-align:left">LIST, READ</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Get bucket info</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Delete bucket</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">DELETE</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">List key</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">LIST, READ</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Write key</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">CREATE, WRITE</td>
-</tr>
-<tr>
-<td style="text-align:left">Read key</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">READ</td>
-<td style="text-align:left">READ</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">operation&amp;permission</th>
+          <th style="text-align: left">Volume  permission</th>
+          <th style="text-align: left">Bucket permission</th>
+          <th style="text-align: left">Key permission</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Create  volume</td>
+          <td style="text-align: left">CREATE</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">List volume</td>
+          <td style="text-align: left">LIST</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Get volume Info</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Delete volume</td>
+          <td style="text-align: left">DELETE</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Create  bucket</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">CREATE</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">List bucket</td>
+          <td style="text-align: left">LIST, READ</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Get bucket info</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Delete bucket</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">DELETE</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">List key</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">LIST, READ</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Write key</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">CREATE, WRITE</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Read key</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">READ</td>
+          <td style="text-align: left">READ</td>
+      </tr>
+  </tbody>
 </table>
 
 

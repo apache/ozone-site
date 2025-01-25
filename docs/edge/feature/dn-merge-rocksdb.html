@@ -514,25 +514,25 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="configuration">Configuration</h2>
 <p>This is mainly a DN feature, which doesn&rsquo;t require much configuration. By default, it is enabled.</p>
 <p>Here is a configuration which disables this feature if the &ldquo;one RocksDB for each container&rdquo; mode is more preferred. Please be noted that once the feature is enabled, it&rsquo;s strongly suggested not to disable it in later.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.container.schema.v3.enabled<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>false<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;description&gt;</span>Disable or enable this feature.<span style="color:#f92672">&lt;/description&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><p>Without any specific configuration, the single RocksDB will be created under the data volume configured in &ldquo;hdds.datanode.dir&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.container.schema.v3.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>false<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;description&gt;</span>Disable or enable this feature.<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>Without any specific configuration, the single RocksDB will be created under the data volume configured in &ldquo;hdds.datanode.dir&rdquo;.</p>
 <p>For some advanced cluster admins who have the high performance requirement, he/she can leverage quick storages to save RocksDB. In this case, configure these two properties.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.container.db.dir<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value/&gt;</span>
-   <span style="color:#f92672">&lt;description&gt;</span>This setting is optional. Specify where the per-disk rocksdb instances will be stored.<span style="color:#f92672">&lt;/description&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-<span style="color:#f92672">&lt;property&gt;</span>
-   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.failed.db.volumes.tolerated<span style="color:#f92672">&lt;/name&gt;</span>
-   <span style="color:#f92672">&lt;value&gt;</span>-1<span style="color:#f92672">&lt;/value&gt;</span>
-   <span style="color:#f92672">&lt;description&gt;</span>The number of db volumes that are allowed to fail before a datanode stops offering service.
-   Default -1 means unlimited, but we should have at least one good volume left.<span style="color:#f92672">&lt;/description&gt;</span>
-<span style="color:#f92672">&lt;/property&gt;</span>
-</code></pre></div><h3 id="backward-compatibility">Backward compatibility</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.container.db.dir<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value/&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;description&gt;</span>This setting is optional. Specify where the per-disk rocksdb instances will be stored.<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.datanode.failed.db.volumes.tolerated<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>-1<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;description&gt;</span>The number of db volumes that are allowed to fail before a datanode stops offering service.
+</span></span><span style="display:flex;"><span>   Default -1 means unlimited, but we should have at least one good volume left.<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h3 id="backward-compatibility">Backward compatibility</h3>
 <p>Existing containers each has one RocksDB for them will be still accessible after this feature is enabled. All container data will co-exist in an existing Ozone cluster.</p>
 <h2 id="references">References</h2>
 <ul>

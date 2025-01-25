@@ -507,35 +507,35 @@ s=d.getElementsByTagName('script')[0];
 <p>The <code>hadoop distcp</code> command can be used to copy data to and from Ozone and any Hadoop compatible file systems, such as HDFS or S3A.</p>
 <h2 id="basic-usage">Basic usage</h2>
 <p>To copy files from a source Ozone cluster directory to a destination Ozone cluster directory, use the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2
-</code></pre></div><p>You must define the service IDs for both <code>ozone1</code> and <code>ozone2</code> clusters in the <code>ozone-site.xml</code> configuration file. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&lt;property&gt;
-  &lt;name&gt;ozone.om.service.ids&lt;/name&gt;
-  &lt;value&gt;ozone1,ozone2&lt;/value&gt;
-&lt;/property&gt;
-</code></pre></div><p>Next, define their logical mappings. For more details, refer to <a href="../feature/om-ha.html">OM High Availability</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop distcp ofs://ozone1/vol1/bucket/dir1 ofs://ozone2/vol2/bucket2/dir2
+</span></span></code></pre></div><p>You must define the service IDs for both <code>ozone1</code> and <code>ozone2</code> clusters in the <code>ozone-site.xml</code> configuration file. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&lt;property&gt;
+</span></span><span style="display:flex;"><span>  &lt;name&gt;ozone.om.service.ids&lt;/name&gt;
+</span></span><span style="display:flex;"><span>  &lt;value&gt;ozone1,ozone2&lt;/value&gt;
+</span></span><span style="display:flex;"><span>&lt;/property&gt;
+</span></span></code></pre></div><p>Next, define their logical mappings. For more details, refer to <a href="../feature/om-ha.html">OM High Availability</a>.</p>
 <h2 id="copy-from-hdfs-to-ozone">Copy from HDFS to Ozone</h2>
 <p>DistCp performs a file checksum check to ensure file integrity. However, since the default checksum type of HDFS (<code>CRC32C</code>) differs from that of Ozone (<code>CRC32</code>), the file checksum check will cause the DistCp job to fail.</p>
 <p>To prevent job failures, specify checksum options in the DistCp command to force Ozone to use the same checksum type as HDFS. For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop distcp <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -Ddfs.checksum.combine.mode<span style="color:#f92672">=</span>COMPOSITE_CRC <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -Dozone.client.checksum.type<span style="color:#f92672">=</span>CRC32C <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  hdfs://ns1/tmp ofs://ozone1/vol1/bucket1/dst
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop distcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -Ddfs.checksum.combine.mode<span style="color:#f92672">=</span>COMPOSITE_CRC <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -Dozone.client.checksum.type<span style="color:#f92672">=</span>CRC32C <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  hdfs://ns1/tmp ofs://ozone1/vol1/bucket1/dst
+</span></span></code></pre></div><blockquote>
 <p>Note: The parameter <code>-Ddfs.checksum.combine.mode=COMPOSITE_CRC</code> is not required if the HDFS cluster is running Hadoop 3.1.1 or later.</p>
 </blockquote>
 <p>Alternatively, you can skip the file checksum check entirely:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop distcp <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -skipcrccheck <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  hdfs://ns1/tmp ofs://ozone1/vol1/bucket1/dst
-</code></pre></div><h2 id="copy-from-ozone-to-hdfs">Copy from Ozone to HDFS</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop distcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -skipcrccheck <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  hdfs://ns1/tmp ofs://ozone1/vol1/bucket1/dst
+</span></span></code></pre></div><h2 id="copy-from-ozone-to-hdfs">Copy from Ozone to HDFS</h2>
 <p>When copying files from Ozone to HDFS, similar issues can occur due to differences in checksum types. In this case, you must configure the checksum type for HDFS, as it is the destination system.</p>
 <p>Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hadoop distcp <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -Ddfs.checksum.combine.mode<span style="color:#f92672">=</span>COMPOSITE_CRC <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -Ddfs.checksum.type<span style="color:#f92672">=</span>CRC32 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  ofs://ozone1/vol1/bucket1/src hdfs://ns1/tmp/dst 
-</code></pre></div><p>By specifying the appropriate checksum configuration or skipping the validation, you can ensure that DistCp jobs complete successfully when transferring data between HDFS and Ozone.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hadoop distcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -Ddfs.checksum.combine.mode<span style="color:#f92672">=</span>COMPOSITE_CRC <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -Ddfs.checksum.type<span style="color:#f92672">=</span>CRC32 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  ofs://ozone1/vol1/bucket1/src hdfs://ns1/tmp/dst 
+</span></span></code></pre></div><p>By specifying the appropriate checksum configuration or skipping the validation, you can ensure that DistCp jobs complete successfully when transferring data between HDFS and Ozone.</p>
 <h2 id="encrypted-data">Encrypted data</h2>
 <p>When data resides in an HDFS encryption zone or Ozone encrypted buckets, the file checksum will not match. This is because the underlying block data differs due to the use of a new EDEK (Encryption Data Encryption Key) at the destination. In such cases, specify the <code>-skipcrccheck</code> parameter to avoid job failures.</p>
 <p>For more information about using Hadoop DistCp, consult the <a href="https://hadoop.apache.org/docs/current/hadoop-distcp/DistCp.html">DistCp Guide</a>.</p>

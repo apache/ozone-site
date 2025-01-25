@@ -80,32 +80,6 @@
                 href="/zh/feature/decommission.html"
                 />
   </url><url>
-    <loc>/zh/start.html</loc>
-    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/start.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/start.html"
-                />
-  </url><url>
-    <loc>/zh/feature/erasurecoding.html</loc>
-    <lastmod>2023-02-17T00:20:25+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/feature/erasurecoding.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/feature/erasurecoding.html"
-                />
-  </url><url>
     <loc>/zh/feature/om-ha.html</loc>
     <lastmod>2025-01-06T08:40:12+01:00</lastmod>
     <xhtml:link
@@ -130,6 +104,32 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/feature/scm-ha.html"
+                />
+  </url><url>
+    <loc>/zh/feature/erasurecoding.html</loc>
+    <lastmod>2023-02-17T00:20:25+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature/erasurecoding.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature/erasurecoding.html"
+                />
+  </url><url>
+    <loc>/zh/start.html</loc>
+    <lastmod>2020-02-06T14:59:14-08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start.html"
                 />
   </url><url>
     <loc>/zh/security/securingtde.html</loc>
@@ -171,19 +171,6 @@
                 href="/zh/interface/o3fs.html"
                 />
   </url><url>
-    <loc>/zh/feature/dn-merge-rocksdb.html</loc>
-    <lastmod>2024-11-25T14:32:03+05:30</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/feature/dn-merge-rocksdb.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/feature/dn-merge-rocksdb.html"
-                />
-  </url><url>
     <loc>/zh/feature/prefixfso.html</loc>
     <lastmod>2023-01-26T08:55:43-08:00</lastmod>
     <xhtml:link
@@ -208,6 +195,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/feature/topology.html"
+                />
+  </url><url>
+    <loc>/zh/feature/dn-merge-rocksdb.html</loc>
+    <lastmod>2024-11-25T14:32:03+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature/dn-merge-rocksdb.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature/dn-merge-rocksdb.html"
                 />
   </url><url>
     <loc>/zh/security/gdpr.html</loc>
@@ -678,19 +678,6 @@
                 href="/zh/recipe/sparkozonefsk8s.html"
                 />
   </url><url>
-    <loc>/zh/interface.html</loc>
-    <lastmod>2024-04-05T15:15:49+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/interface.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/interface.html"
-                />
-  </url><url>
     <loc>/zh/tools/testtools.html</loc>
     <lastmod>2022-04-11T19:12:00+02:00</lastmod>
     <xhtml:link
@@ -702,6 +689,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/tools/testtools.html"
+                />
+  </url><url>
+    <loc>/zh/interface.html</loc>
+    <lastmod>2024-04-05T15:15:49+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/interface.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/interface.html"
                 />
   </url>
 </urlset>
