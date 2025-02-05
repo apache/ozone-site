@@ -515,7 +515,7 @@ approach which is expensive. The Apache Ozone supports <code>RATIS/THREE</code> 
 The Ozone default replication scheme <code>RATIS/THREE</code> has 200% overhead in storage
 space and other resources (e.g., network bandwidth).
 However, for warm and cold datasets with relatively low I/O activities, additional
-block replicas rarely accessed during normal operations, but still consume the same
+block replicas are rarely accessed during normal operations, but still consume the same
 amount of resources as the first replica.</p>
 <p>Therefore, a natural improvement is to use Erasure Coding (EC) in place of replication,
 which provides the same level of fault-tolerance with much less storage space.
@@ -639,7 +639,7 @@ any replication config or bucket does not have any default values.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket create &lt;bucket path&gt; --type EC --replication rs-6-3-1024k
 </span></span></code></pre></div><p>We can also reset the EC Replication Config with the following command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh bucket set-replication-config &lt;bucket path&gt; --type EC --replication rs-3-2-1024k
-</span></span></code></pre></div><p>Once we reset, only newly created keys take effect of this new setting. Prior created keys in the bucket stay with same older setting.</p>
+</span></span></code></pre></div><p>Once we reset, only newly created keys will take effect of this new setting. Prior created keys in the bucket stay with same older setting.</p>
 <h4 id="setting-ec-replication-config-while-creating-keysfiles">Setting EC Replication Config While Creating Keys/Files</h4>
 <p>We can pass the EC Replication Config while creating the keys irrespective of bucket Replication Config.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh key put &lt;Ozone Key Object Path&gt; &lt;Local File&gt; --type EC --replication rs-6-3-1024k
@@ -659,7 +659,7 @@ storage applications. Enabling ISA-L allows significantly improve EC performance
 <h4 id="prerequisites">Prerequisites</h4>
 <p>To enable ISA-L you will also require Hadoop native libraries (libhadoop.so).</p>
 <h4 id="installation">Installation</h4>
-<p>Both libraries should be placed to the directory specified by the java.library.path property or set by  <code>LD_LIBRARY_PATH</code> environment variable.
+<p>Both libraries should be placed in the directory specified by the java.library.path property or set by  <code>LD_LIBRARY_PATH</code> environment variable.
 The default value of java.library.path depends on the OS and Java version. For example, on Linux with OpenJDK 8 it is <code>/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</code>.</p>
 <h4 id="verification">Verification</h4>
 <p>You can check if ISA-L is accessible to Ozone by running the following command:</p>
@@ -683,7 +683,7 @@ The default value of java.library.path depends on the OS and Java version. For e
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.0.0-SNAPSHOT, Last Modified: March 24, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b267a578313da15cb0b5e40fddc4d003c8c222d4">b267a57831</a>
+      Version: 2.0.0-SNAPSHOT, Last Modified: February 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a9cf6cfe0f288da76d5adbe7066998bae39ba33">1a9cf6cfe0</a>
     </span>
   </div>
 </footer>
