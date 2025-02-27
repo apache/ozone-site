@@ -20,6 +20,7 @@ FROM node:${NODE_VERSION}-slim AS base
 # Creates store at /pnpm/store by default.
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+RUN npm i -g --force corepack # see https://github.com/actions/setup-node/issues/1222
 RUN corepack enable
 
 # Install dependencies to /ozone-site/node_modules as part of the image.
