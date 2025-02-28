@@ -30,7 +30,7 @@ Published to [Docker Hub](https://hub.docker.com/r/apache/ozone) and [GitHub](ht
 
 [ozone-testkrb5](https://github.com/apache/ozone-docker-testkrb5) is used as KDC in tests where Kerberos is enabled.
 
-Published only to [GitHub](https://github.com/apache/ozone-docker-testkrb5/pkgs/container/ozone-testkrb5).
+Published only to [GitHub](https://github.com/apache/ozone-docker-testkrb5/pkgs/container/ozone-testkrb5), because it is completely insecure, and should be used only for testing.
 
 ## Development
 
