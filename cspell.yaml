@@ -111,6 +111,7 @@ words:
 - mds
 - javadoc
 - JVM
+- distcp
 # Misc words
 - acking
 - dashboarding
@@ -119,3 +120,5 @@ words:
 - UX
 - devs
 - CLI
+- EDEK
+- skipcrccheck
