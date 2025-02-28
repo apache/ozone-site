@@ -10,15 +10,15 @@ This page provides an overview of the Docker images maintained by the Apache Ozo
 
 ## Images
 
-### Base Image (without any Ozone)
+### ozone-runner
 
-[ozone-runner](https://github.com/apache/ozone-docker-runner) contains tools for running and testing Ozone, but does not include any Ozone artifacts.
+[ozone-runner](https://github.com/apache/ozone-docker-runner) is the base image with tools for running and testing Ozone, but does not include any Ozone artifacts.
 
 Developers and CI workflows rely on it heavily to run/test custom Ozone builds (using the local build via bind-mount).  It also serves as the base image for `apache/ozone` (see next section).
 
 Published to [Docker Hub](https://hub.docker.com/r/apache/ozone-runner) and [GitHub](https://github.com/apache/ozone-docker-runner/pkgs/container/ozone-runner).
 
-### Image with Specific Version of Ozone
+### ozone
 
 [ozone](https://github.com/apache/ozone-docker) is built on top of `ozone-runner`, adding the binaries built for official Ozone releases.
 
@@ -26,7 +26,7 @@ These are used for testing compatibility of various Ozone versions, and upgrade 
 
 Published to [Docker Hub](https://hub.docker.com/r/apache/ozone) and [GitHub](https://github.com/apache/ozone-docker/pkgs/container/ozone).
 
-### Kerberos KDC for Testing
+### ozone-testkrb5
 
 [ozone-testkrb5](https://github.com/apache/ozone-docker-testkrb5) is used as KDC in tests where Kerberos is enabled.
 
