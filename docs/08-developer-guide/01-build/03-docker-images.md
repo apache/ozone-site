@@ -51,10 +51,10 @@ High-level overview of making changes to any of the Docker images:
 
 Development happens on branch `master`, relevant changes are cherry-picked to branch `jdk11`.
 
-The image can be built locally using standard command:
+The image can be built simply by running the helper script `build.sh`:
 
 ```bash
-docker build -t apache/ozone-runner:dev .
+./build.sh
 ```
 
 #### Image Tagging
@@ -111,10 +111,10 @@ Publishing Docker tags:
 
 Development branch: `master`.
 
-The image can be built locally using standard command:
+The image can be built simply by running the helper script `build.sh`:
 
 ```bash
-docker build -t apache/ozone-testkrb5:dev .
+./build.sh
 ```
 
 #### Image Tagging
