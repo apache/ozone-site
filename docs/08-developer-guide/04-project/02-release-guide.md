@@ -16,6 +16,8 @@ In addition to the usual development tools required to work on Ozone, the follow
 - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
 
+Make sure you are using GNU-tar instead of BSD-tar.
+
 ### Publish Your GPG Key
 
 Create a GPG key to sign the artifacts if you do not already have one. For help creating your key refer to the [ASF new committer guide](https://www.apache.org/dev/new-committers-guide.html#set-up-security-and-pgp-keys). The release manager's GPG key is supposed to be published together with the release. Please append it to the end of the [KEYS file](https://dist.apache.org/repos/dist/release/ozone/KEYS) stored in Subversion, if it is not already present.
@@ -49,6 +51,22 @@ svn commit -m "ozone: adding key of <your_name> to the KEYS"
 ```bash title="Move Key (PMC)"
 svn cp -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repos/dist/dev/ozone/KEYS https://dist.apache.org/repos/dist/release/ozone/KEYS
 ```
+
+### Configure Maven Credentials
+
+Add your Apache credentials to the local Maven settings `~/.m2/settings.xml`.
+
+  ```xml title="settings.xml"
+  <settings>
+    <servers>
+      <server>
+        <id>apache.staging.https</id>
+        <username>your_apache_id</username>
+        <password>your_apache_password</password>
+      </server>
+    </servers>
+  </settings>
+  ```
 
 ## Pre-Vote
 
@@ -222,7 +240,7 @@ If the command fails on MacOS, you may need to do the following additional steps
 
 :::
 
-### Create the Release Artifacts
+### Perform Sanity Checks
 
 - Run rat check and ensure there are no failures.
 
@@ -237,11 +255,25 @@ If the command fails on MacOS, you may need to do the following additional steps
   git clean -dfx
   ```
 
-- Build the Release Tarballs. Make sure you are using GNU-tar instead of BSD-tar.
+### Build the Project
+
+Build the project to fetch dependencies.
 
   ```bash
   mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
   ```
+
+### Create and Upload Maven Artifacts
+
+- Perform the final build and upload the release artifacts.
+
+  ```bash
+  mvn deploy -DdeployAtEnd=true -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
+  ```
+
+- Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
+
+### Calculate the Checksum and Sign the Artifacts
 
 - Now that we have built the release artifacts, we will copy them to the release directory.
 
@@ -249,18 +281,16 @@ If the command fails on MacOS, you may need to do the following additional steps
   cp hadoop-ozone/dist/target/ozone-*.tar.gz "$RELEASE_DIR"/
   ```
 
-### Calculate the Checksum and Sign the Artifacts
+- Run the following commands to generate checksum files for all release artifacts:
 
-Run the following commands to generate checksum files for all release artifacts:
+  ```bash
+  cd "$RELEASE_DIR"
+  for i in $(ls -1 *.tar.gz); do gpg -u "$CODESIGNINGKEY" --armor --output "$i.asc" --detach-sig "$i"; done
 
-```bash
-cd "$RELEASE_DIR"
-for i in $(ls -1 *.tar.gz); do gpg -u "$CODESIGNINGKEY" --armor --output "$i.asc" --detach-sig "$i"; done
+  for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
 
-for i in $(ls -1 *.tar.gz); do sha512sum "$i" > "$i.sha512"; done
-
-for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
-```
+  for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
+  ```
 
 Now each .tar.gz file should have an associated .mds file, .asc file, and .sha512 file
 
@@ -320,36 +350,6 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     ```
 
 2. Check the results by opening the [dev directory](https://dist.apache.org/repos/dist/dev/ozone/) in your browser.
-
-### Upload the Artifacts to Apache Nexus
-
-Double check that your Apache credentials are added to your local `~/.m2/settings.xml`.
-
-```xml title="settings.xml"
-<settings>
-  <servers>
-    <server>
-        <id>apache.snapshots.https</id>
-        <username>your_apache_id</username>
-        <password>your_apache_password</password>
-      </server>
-      <!-- To stage a release of some part of Maven -->
-      <server>
-        <id>apache.staging.https</id>
-        <username>your_apache_id</username>
-        <password>your_apache_password</password>
-    </server>
-  </servers>
-</settings>
-```
-
-Return to your Ozone repository being used for the release, and run the following command to upload the release artifacts:
-
-```bash
-mvn deploy -Psign -pl '!:ozone-dist' -DskipTests -Dbuildhelper.skipAttach
-```
-
-Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
 
 ### Push the Release Candidate Tag to GitHub
 
