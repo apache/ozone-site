@@ -76,7 +76,7 @@ Share your artwork through the [GitHub Discussions](https://github.com/apache/oz
 ### 6. Community Support
 
 - Answer questions on [GitHub Discussions](https://github.com/apache/ozone/discussions)
-- Help review pull requests
+- Help review [pull requests](https://github.com/apache/ozone/pulls)
 - Join community calls and discussions
 
 ## Getting Help
