@@ -20,7 +20,7 @@ Apache Ozone welcomes contributions in many forms, not just code. Here are vario
 #### Finding Issues to Work On
 
 - **Newbie Issues**: Start with [beginner-friendly issues](https://issues.apache.org/jira/issues/?filter=12353868) that are good entry points
-- **All Open Issues**: Browse [unassigned Jira issues](https://s.apache.org/OzoneUnassignedJiras) to find something that matches your interests and skills
+- **All Open Issues**: Browse [unassigned Jira issues](https://issues.apache.org/jira/browse/HDDS-12179?jql=labels%20%3D%20newbie%20AND%20project%20%3D%20%22Apache%20Ozone%22%20AND%20status%20%3D%20open%20ORDER%20BY%20created) to find something that matches your interests and skills
 
 #### Making Code Changes
 
