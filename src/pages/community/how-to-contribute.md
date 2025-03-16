@@ -2,20 +2,6 @@
 
 Thank you for your interest in contributing to Apache Ozone! This guide will help you understand the various ways you can contribute to the project and how to get started.
 
-## Table of Contents
-
-- [Quick Links](#quick-links)
-- [Ways to Contribute](#ways-to-contribute)
-  - [Code Contributions](#code-contributions)
-  - [Reviewing Code and Design](#reviewing-code-and-design)
-  - [Documentation](#documentation)
-  - [Testing](#testing)
-  - [Visual Design & Art](#visual-design--art)
-  - [Bug Reports and Feature Requests](#bug-reports-and-feature-requests)
-  - [Community Support](#community-support)
-- [Getting Help](#getting-help)
-- [Recognition](#recognition)
-
 ## Quick Links
 
 - [GitHub Repository](https://github.com/apache/ozone)
