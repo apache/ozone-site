@@ -6,7 +6,7 @@ Thank you for your interest in contributing to Apache Ozone! This guide will hel
 
 - [GitHub Repository](https://github.com/apache/ozone)
 - [CONTRIBUTING.md](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md) - Detailed contribution guidelines
-- [Newbie Jira Issues](https://issues.apache.org/jira/issues/?filter=12353868) - Good first issues for new contributors
+- [Newbie Jira Issues](https://issues.apache.org/jira/issues/?jql=labels%20%3D%20newbie%20AND%20project%20%3D%20%22Apache%20Ozone%22%20AND%20status%20%3D%20open%20ORDER%20BY%20created) - Good first issues for new contributors
 - [GitHub Discussions](https://github.com/apache/ozone/discussions) - Engage with the community
 - [Ozone Website](https://ozone.apache.org/) - Project documentation
 - [Slack Channel](http://s.apache.org/slack-invite) - Join #ozone on ASF Slack
