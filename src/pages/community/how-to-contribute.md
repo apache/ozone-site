@@ -15,7 +15,7 @@ Thank you for your interest in contributing to Apache Ozone! This guide will hel
 
 Apache Ozone welcomes contributions in many forms, not just code. Here are various ways you can contribute:
 
-### 1. Code Contributions
+### Code Contributions
 
 #### Finding Issues to Work On
 
