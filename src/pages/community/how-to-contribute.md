@@ -2,6 +2,20 @@
 
 Thank you for your interest in contributing to Apache Ozone! This guide will help you understand the various ways you can contribute to the project and how to get started.
 
+## Table of Contents
+
+- [Quick Links](#quick-links)
+- [Ways to Contribute](#ways-to-contribute)
+  - [Code Contributions](#code-contributions)
+  - [Reviewing Code and Design](#reviewing-code-and-design)
+  - [Documentation](#documentation)
+  - [Testing](#testing)
+  - [Visual Design & Art](#visual-design--art)
+  - [Bug Reports and Feature Requests](#bug-reports-and-feature-requests)
+  - [Community Support](#community-support)
+- [Getting Help](#getting-help)
+- [Recognition](#recognition)
+
 ## Quick Links
 
 - [GitHub Repository](https://github.com/apache/ozone)
@@ -19,7 +33,7 @@ Apache Ozone welcomes contributions in many forms, not just code. Here are vario
 
 #### Finding Issues to Work On
 
-- **Newbie Issues**: Start with [beginner-friendly issues](https://issues.apache.org/jira/issues/?filter=12353868) that are good entry points
+- **Newbie Issues**: Start with [beginner-friendly issues](https://issues.apache.org/jira/browse/HDDS-12179?jql=labels%20%3D%20newbie%20AND%20project%20%3D%20%22Apache%20Ozone%22%20AND%20status%20%3D%20open%20ORDER%20BY%20created) that are good entry points
 - **All Open Issues**: Browse [unassigned Jira issues](https://issues.apache.org/jira/browse/HDDS-12179?jql=labels%20%3D%20newbie%20AND%20project%20%3D%20%22Apache%20Ozone%22%20AND%20status%20%3D%20open%20ORDER%20BY%20created) to find something that matches your interests and skills
 
 #### Making Code Changes
@@ -33,30 +47,46 @@ Apache Ozone welcomes contributions in many forms, not just code. Here are vario
    - Create a branch for your work: `git checkout -b HDDS-1234`
 
 3. **Develop Your Changes**
-   - Follow code style guidelines (2 spaces indentation, 120-char line length)
+   - [Follow code style guidelines](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#code-convention-and-tests)
    - Write tests for your changes
    - Run relevant checks from `hadoop-ozone/dev-support/checks/` directory
 
 4. **Submit Your Contribution**
    - Push changes to your fork
    - Wait for the `build-branch` workflow to complete
-   - Create a pull request with a clear description
+   - Create a pull request follwing the template used. (PRs pushed to master first and then if needed to a release branch)
    - Update the Jira issue status to "Patch Available"
+   - Once the PR is merged close the Jira if completely resolved. 
 
-### 2. Documentation
+### Reviewing Code and Design
 
-- **Website Improvements**: Contribute to the [Ozone website](https://ozone.apache.org/) - see [instructions](https://cwiki.apache.org/confluence/display/OZONE/Modifying+the+Ozone+Website)
+Code reviews are a crucial part of the Apache Ozone development process. Reviewing others' code not only helps maintain quality but is also an excellent way to learn about the codebase.
+
+#### How to Review Pull Requests
+
+1. **Browse Open PRs**: Visit the [open pull requests](https://github.com/apache/ozone/pulls) on GitHub
+2. **Choose PRs to Review**: Start with PRs in areas you're familiar with or interested in learning
+3. **Run the Code**: When possible, check out the PR branch and test it locally
+4. **Review Checklist**:
+   - Does the code follow project style guidelines?
+   - Are there sufficient tests for the new functionality?
+   - Is the documentation updated?
+   - Is the design sound and consistent with the rest of the codebase?
+   - Does the code address the issue described in the linked Jira?
+
+### Documentation
+
+- **Website Improvements**: Contribute to the [Ozone website](https://ozone.apache.org/) 
 - **Developer Docs**: Enhance the [markdown documentation](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs/content) in the source tree
-- **Wiki Pages**: Update the [project wiki](https://cwiki.apache.org/confluence/display/OZONE) (request access through dev@ozone.apache.org)
 
-### 3. Testing
+### Testing
 
 - **Unit Tests**: Write JUnit tests for Java code
 - **Acceptance Tests**: Create Docker + Robot Framework tests
-- **Blockade Tests**: Develop Python + Blockade tests
+- **Application integration test**: Report any issues integrating with third party applications.
 - **Performance Testing**: Run benchmarks with `ozone freon` and report findings
 
-### 4. Visual Design & Art
+### Visual Design & Art
 
 Ozone welcomes contributions in design and visual arts:
 
@@ -67,13 +97,13 @@ Ozone welcomes contributions in design and visual arts:
 
 Share your artwork through the [GitHub Discussions](https://github.com/apache/ozone/discussions) or on the dev mailing list dev@ozone.apache.org.
 
-### 5. Bug Reports and Feature Requests
+### Bug Reports and Feature Requests
 
 - Report bugs or suggest features through [Jira](https://issues.apache.org/jira/projects/HDDS/)
 - Search existing issues before creating a new one
 - Provide detailed steps to reproduce bugs
 
-### 6. Community Support
+### Community Support
 
 - Answer questions on [GitHub Discussions](https://github.com/apache/ozone/discussions)
 - Help review [pull requests](https://github.com/apache/ozone/pulls)
@@ -81,34 +111,8 @@ Share your artwork through the [GitHub Discussions](https://github.com/apache/oz
 
 ## Getting Help
 
-If you need assistance with your contribution, you can use the following channels:
+Details for how to [reach the community can be found here](communication-channels)
 
-### Join the Dev Mailing List
-
-The dev mailing list is the primary communication channel for Ozone development discussions:
-
-1. Send an email to [dev-subscribe@ozone.apache.org](mailto:dev-subscribe@ozone.apache.org)
-2. You'll receive a confirmation email - reply to it to confirm your subscription
-3. Once subscribed, you can send emails to [dev@ozone.apache.org](mailto:dev@ozone.apache.org)
-4. To unsubscribe, send an email to [dev-unsubscribe@ozone.apache.org](mailto:dev-unsubscribe@ozone.apache.org)
-
-You can also view the [mailing list archives](https://lists.apache.org/list.html?dev@ozone.apache.org) to see past discussions.
-
-## When to Use GitHub Discussions
-
-The [GitHub Discussions](https://github.com/apache/ozone/discussions) platform is ideal for:
-
-- **Q&A**: Technical questions about using Ozone
-- **Ideas**: Suggesting new features or improvements before creating a Jira issue
-- **Show and Tell**: Sharing your projects built with Ozone
-- **Community Engagement**: General discussions about the project direction
-
-For bug reports and concrete feature requests, please continue to use Jira. For code contributions, follow the pull request workflow.
-
-### Other Communication Channels
-
-- Join the #ozone channel on [ASF Slack](http://s.apache.org/slack-invite)
-- Attend [weekly community calls](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Community+Calls)
 
 ## Recognition
 
@@ -118,5 +122,6 @@ All contributions are recognized in Apache Ozone:
 - Documentation improvements help the entire community
 - Testing helps ensure project quality
 - Bug reports guide project improvement
+- Evangelism: write blog posts, submit talks at conferences, commenting on social media
 
 Your contributions, large or small, are valued and appreciated by the Ozone community!
