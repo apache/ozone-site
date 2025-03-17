@@ -40,7 +40,7 @@ Apache Ozone welcomes contributions in many forms, not just code. Here are vario
 4. **Submit Your Contribution**
    - Push changes to your fork
    - Wait for the `build-branch` workflow to complete
-   - Create a pull request follwing the template used. (PRs pushed to master first and then if needed to a release branch)
+   - Create a pull request following the template used. (PRs pushed to master first and then if needed to a release branch)
    - Update the Jira issue status to "Patch Available"
    - Once the PR is merged close the Jira if completely resolved. 
 
