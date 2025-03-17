@@ -19,7 +19,7 @@ For development discussions, design proposals, and community decisions:
 - **Subscribe**: Send an empty email to [dev-subscribe@ozone.apache.org](mailto:dev-subscribe@ozone.apache.org)
 - **Post messages**: [dev@ozone.apache.org](mailto:dev@ozone.apache.org) (only after subscribing)
 - **Unsubscribe**: Send an email to [dev-unsubscribe@ozone.apache.org](mailto:dev-unsubscribe@ozone.apache.org)
-- **Archives**: [https://lists.apache.org/list.html?dev@ozone.apache.org](https://lists.apache.org/list.html?dev@ozone.apache.org)
+- **Archives**: [Dev List Archives](https://lists.apache.org/list.html?dev@ozone.apache.org)
 
 ### User Mailing List
 
@@ -28,7 +28,7 @@ For user questions and discussions:
 - **Subscribe**: Send an empty email to [user-subscribe@ozone.apache.org](mailto:user-subscribe@ozone.apache.org)
 - **Post messages**: [user@ozone.apache.org](mailto:user@ozone.apache.org) (only after subscribing)
 - **Unsubscribe**: Send an email to [user-unsubscribe@ozone.apache.org](mailto:user-unsubscribe@ozone.apache.org)
-- **Archives**: [https://lists.apache.org/list.html?user@ozone.apache.org](https://lists.apache.org/list.html?user@ozone.apache.org)
+- **Archives**: [User List Archives](https://lists.apache.org/list.html?user@ozone.apache.org)
 
 ### Best Practices for Mailing Lists
 
