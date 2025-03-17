@@ -1,16 +1,13 @@
-import AskQuestionForm from '@site/src/components/AskQuestionForm';
-
 # Ask a Question About Apache Ozone
+
+import AskQuestionForm from '@site/src/components/AskQuestionForm';
 
 Have a question about Apache Ozone? Use the form below to submit your question to our GitHub Discussions. The form will redirect you to GitHub with your question pre-filled.
 
+{/*We're using a special Docusaurus comment style to allow the React component*/}
 <AskQuestionForm />
 
-<div style={{marginTop: '3rem'}}>
-
 ## About GitHub Discussions
-
-</div>
 
 [GitHub Discussions](https://github.com/apache/ozone/discussions) is where our community comes together to ask and answer questions, share ideas, and discuss Apache Ozone. It's a great place to:
 
