@@ -1,5 +1,7 @@
 # Report an Issue or Ask a Question
 
+<!-- markdownlint-disable -->
+
 import AskQuestionForm from '@site/src/components/AskQuestionForm';
 
 ## Have a Question?
@@ -8,6 +10,8 @@ If you have a question about Apache Ozone, you can use the form below to submit 
 
 {/*We're using a special Docusaurus comment style to allow the React component*/}
 <AskQuestionForm />
+
+<!-- markdownlint-disable -->
 
 ## Report a Bug
 

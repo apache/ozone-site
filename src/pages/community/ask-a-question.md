@@ -1,11 +1,12 @@
 # Ask a Question About Apache Ozone
 
+<!-- markdownlint-disable -->
 import AskQuestionForm from '@site/src/components/AskQuestionForm';
 
 Have a question about Apache Ozone? Use the form below to submit your question to our GitHub Discussions. The form will redirect you to GitHub with your question pre-filled.
 
-{/*We're using a special Docusaurus comment style to allow the React component*/}
 <AskQuestionForm />
+<!-- markdownlint-enable -->
 
 ## About GitHub Discussions
 
