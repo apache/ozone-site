@@ -11,7 +11,7 @@ If you have a question about Apache Ozone, you can use the form below to submit 
 {/*We're using a special Docusaurus comment style to allow the React component*/}
 <AskQuestionForm />
 
-<!-- markdownlint-disable -->
+<!-- markdownlint-enable -->
 
 ## Report a Bug
 
