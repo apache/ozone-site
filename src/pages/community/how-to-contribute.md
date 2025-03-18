@@ -42,7 +42,7 @@ Apache Ozone welcomes contributions in many forms, not just code. Here are vario
    - Wait for the `build-branch` workflow to complete
    - Create a pull request following the template used. (PRs pushed to master first and then if needed to a release branch)
    - Update the Jira issue status to "Patch Available"
-   - Once the PR is merged close the Jira if completely resolved. 
+   - Once the PR is merged close the Jira if completely resolved.
 
 ### Reviewing Code and Design
 
@@ -62,7 +62,7 @@ Code reviews are a crucial part of the Apache Ozone development process. Reviewi
 
 ### Documentation
 
-- **Website Improvements**: Contribute to the [Ozone website](https://ozone.apache.org/) 
+- **Website Improvements**: Contribute to the [Ozone website](https://ozone.apache.org/)
 - **Developer Docs**: Enhance the [markdown documentation](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs/content) in the source tree
 
 ### Testing
@@ -98,7 +98,6 @@ Share your artwork through the [GitHub Discussions](https://github.com/apache/oz
 ## Getting Help
 
 Details for how to [reach the community can be found here](communication-channels)
-
 
 ## Recognition
 
