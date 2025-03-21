@@ -35,8 +35,8 @@ Ozone combines the best aspects of traditional distributed file systems with clo
 
 ### Robust Data Management
 
-- **Strong Consistency**: Provides strict serializability to simplify application design and ensure data integrity
-- **Metadata Management**: Efficient handling of metadata with dedicated services for high performance 
+- **Strong Consistency**: Provides strict consistency to simplify application design and ensure data integrity
+- **Metadata Management**: Efficient handling of metadata with dedicated services for high performance
 - **Snapshots**: Support for point-in-time snapshots to protect against data corruption and facilitate backups
 
 ### Operational Excellence
@@ -49,7 +49,7 @@ Ozone combines the best aspects of traditional distributed file systems with clo
 
 - **Hadoop Ecosystem**: Seamless integration with Hadoop, Hive, and Spark workloads
 - **SQL Engines**: Works with SQL query engines like Hive, Impala, and Trino without modification
-- **Modern Data Formats**: Supports modern table formats like Apache Iceberg for data lakehouse architectures
+- **Modern Data Formats**: Supports modern table formats like Apache Iceberg for data lake architectures
 
 ## Architecture Overview
 
@@ -57,7 +57,7 @@ Ozone has a layered architecture that separates namespace management from storag
 
 - **Ozone Manager (OM)**: Manages the namespace hierarchy (volumes, buckets, and keys) and handles client metadata operations
 - **Storage Container Manager (SCM)**: Manages the containers where data is stored and handles block allocation
-- **DataNodes**: Store the actual data in containers and provide read and write access
+- **Datanodes**: Store the actual data in containers and provide read and write access
 - **Recon**: Analytics and monitoring service that provides insight into the cluster
 
 This separation allows Ozone to achieve the scale required for modern storage systems while maintaining high performance and reliability.
@@ -70,7 +70,7 @@ Ozone organizes storage in a three-level hierarchy:
 - **Buckets**: Created by users within volumes, similar to S3 buckets
 - **Keys**: Data objects stored inside buckets, each potentially containing multiple blocks
 
-When a client writes data, Ozone stores it on DataNodes in chunks called blocks, which are organized into containers for efficient management and replication.
+When a client writes data, Ozone stores it on Datanodes in chunks called blocks, which are organized into containers for efficient management and replication.
 
 ## Getting Started
 
