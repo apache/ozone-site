@@ -23,6 +23,9 @@
  * work well for content-centric websites.
  */
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 /* Infima colors generated from --ifm-color-primary using https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima */
 :root {
   --ifm-color-primary: #357500;
@@ -35,6 +38,11 @@
   --ozone-hero-background: #357500;
   --ozone-hero-text: #ffffff;
   --ifm-background-color: #f5f5f0; /* Even softer background color with slight warm tone */
+  
+  /* Custom font settings */
+  --ifm-font-family-base: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 [data-theme='dark'] {
@@ -58,4 +66,22 @@
 .hero-banner .hero__title,
 .hero-banner .hero__subtitle {
   color: var(--ozone-hero-text);
+  font-family: var(--ifm-heading-font-family);
+}
+
+/* Additional typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
+  letter-spacing: -0.02em;
+}
+
+pre, code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 14px;
+}
+
+/* Improve body text readability */
+p, li, td, th {
+  font-family: var(--ifm-font-family-base);
+  line-height: 1.6;
 }
