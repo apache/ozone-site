@@ -132,7 +132,7 @@ export default function Home() {
     <Layout
       title="Home"
       description={`${siteConfig.tagline}`}>
-      <div className="hero hero--primary">
+      <div className="hero hero-banner">
         <div className="container">
           <div className="row" style={{alignItems: 'center'}}>
             <div className="col col--6">

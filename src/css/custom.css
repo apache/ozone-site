@@ -32,6 +32,8 @@
   --ifm-color-primary-light: #3a8100;
   --ifm-color-primary-lighter: #3d8700;
   --ifm-color-primary-lightest: #459800;
+  --ozone-hero-background: #357500;
+  --ozone-hero-text: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -42,4 +44,17 @@
   --ifm-color-primary-light: #a8da86;
   --ifm-color-primary-lighter: #b1dd93;
   --ifm-color-primary-lightest: #cbe9b7;
+  --ozone-hero-background: #357500; /* Keep the same green background in dark mode */
+  --ozone-hero-text: #ffffff;
+}
+
+/* Custom hero styling to maintain consistent colors in both light and dark modes */
+.hero-banner {
+  background-color: var(--ozone-hero-background);
+  color: var(--ozone-hero-text);
+}
+
+.hero-banner .hero__title,
+.hero-banner .hero__subtitle {
+  color: var(--ozone-hero-text);
 }
