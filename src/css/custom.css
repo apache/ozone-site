@@ -35,8 +35,9 @@
   --ifm-color-primary-light: #3a8100;
   --ifm-color-primary-lighter: #3d8700;
   --ifm-color-primary-lightest: #459800;
-  --ozone-hero-background: #357500;
-  --ozone-hero-text: #ffffff;
+  --ozone-hero-background: #e0edd2; /* Slightly darker background for better contrast */
+  --ozone-hero-text: #1a1a1a; /* Darker text for increased contrast */
+  --ozone-hero-gradient: linear-gradient(135deg, #d1e4bc, #e0edd2); /* Darker gradient for better contrast */
   --ifm-background-color: #f5f5f0; /* Even softer background color with slight warm tone */
   
   /* Custom font settings */
@@ -53,14 +54,16 @@
   --ifm-color-primary-light: #a8da86;
   --ifm-color-primary-lighter: #b1dd93;
   --ifm-color-primary-lightest: #cbe9b7;
-  --ozone-hero-background: #357500; /* Keep the same green background in dark mode */
-  --ozone-hero-text: #ffffff;
+  --ozone-hero-background: #324d20; /* Darker green background in dark mode for better contrast */
+  --ozone-hero-text: #f0f6eb; /* Light text for contrast on darker background */
+  --ozone-hero-gradient: linear-gradient(135deg, #2b4218, #324d20); /* Gradient for hero section in dark mode */
 }
 
 /* Custom hero styling to maintain consistent colors in both light and dark modes */
 .hero-banner {
-  background-color: var(--ozone-hero-background);
+  background: var(--ozone-hero-gradient);
   color: var(--ozone-hero-text);
+  padding: 6.4rem 0; /* Doubled the height by doubling padding from 3.2rem to 6.4rem */
 }
 
 .hero-banner .hero__title,

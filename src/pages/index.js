@@ -24,101 +24,171 @@ import Logo from '@site/static/img/ozone-logo.svg';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
 
+// Import Bootstrap icons
+import { GraphUpArrow, Diagram3Fill, LockFill, Speedometer, Stack, HddRackFill } from 'react-bootstrap-icons';
+
 const features = [
   {
-    title: 'Scalable Storage',
+    title: 'Scalable',
     description: 'Handle petabytes of data with ease. Apache Ozone scales to billions of objects and supports both small and large files efficiently.',
-    icon: '📊',
+    icon: GraphUpArrow,
+    iconSize: 30,
   },
   {
-    title: 'Cloud Native',
-    description: 'Designed to run in containerized environments with Kubernetes integration, supporting both cloud and on-premises deployments.',
-    icon: '☁️',
-  },
-  {
-    title: 'S3 Compatible',
-    description: 'Native S3 protocol support makes it easy to use with existing S3 clients and applications without modification.',
-    icon: '🔄',
-  },
-  {
-    title: 'Hadoop Integration',
-    description: 'Seamlessly works with the Hadoop ecosystem including HDFS, Hive, Spark, and more through multiple filesystem interfaces.',
-    icon: '🐘',
-  },
-  {
-    title: 'Reliable & Resilient',
+    title: 'Resilient',
     description: 'Built-in replication, erasure coding, and robust consistency model ensure your data remains safe and available.',
-    icon: '🔒',
+    icon: Diagram3Fill,
+    iconSize: 30,
   },
   {
-    title: 'Enterprise Ready',
+    title: 'Secure',
     description: 'Security features including Kerberos authentication, TDE encryption, ACL-based and Ranger based authorization for enterprise environments.',
-    icon: '🏢',
+    icon: LockFill,
+    iconSize: 30,
+  },
+  {
+    title: 'Performant',
+    description: 'Optimized for both high throughput and low latency operations, with support for tiered storage.',
+    icon: Speedometer,
+    iconSize: 30,
+  },
+  {
+    title: 'Multi-Protocol',
+    description: 'Native S3 protocol support plus seamless integration with the Hadoop ecosystem through multiple filesystem interfaces.',
+    icon: Stack,
+    iconSize: 30,
+  },
+  {
+    title: 'Efficient',
+    description: 'Dense storage nodes and extensive scalability allow consolidation of multiple clusters, reducing operational costs.',
+    icon: HddRackFill,
+    iconSize: 30,
   },
 ];
 
-function Feature({title, description, icon}) {
+function Feature({title, description, icon: Icon, iconSize}) {
   return (
     <div className="col col--4 margin-bottom--lg">
-      <div className="card padding--lg height--100">
-        <div className="card__header">
-          <h3>{icon} {title}</h3>
+      <div className="text--center padding--lg">
+        <div className="margin-bottom--md" style={{ color: 'var(--ifm-color-primary)' }}>
+          <Icon size={iconSize} />
         </div>
-        <div className="card__body">
-          <p>{description}</p>
-        </div>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </div>
   );
 }
 
+// Import additional Bootstrap icons for use cases
+import { Water, Bucket, Folder2 } from 'react-bootstrap-icons';
+
 function UseCases() {
+  const useCases = [
+    {
+      title: 'Data Lakes',
+      description: 'Build cost-effective, scalable data lakes for analytics workloads with tiered storage support.',
+      icon: Water,
+      iconSize: 30,
+    },
+    {
+      title: 'Object Storage',
+      description: 'S3-compatible storage for applications, backups, and unstructured data at any scale.',
+      icon: Bucket,
+      iconSize: 30,
+    },
+    {
+      title: 'Big Data Storage',
+      description: 'Reliable storage foundation for Hadoop, Spark, and other data processing frameworks.',
+      icon: Folder2,
+      iconSize: 30,
+    },
+  ];
+
   return (
     <section className="padding-vert--xl">
       <div className="container">
         <div className="row">
           <div className="col">
-            <h2 className="text--center margin-bottom--lg">Common Use Cases</h2>
+            <h2 className="text--center margin-bottom--lg">Use Cases</h2>
           </div>
         </div>
         <div className="row">
-          <div className="col col--4 margin-bottom--lg">
-            <div className="card padding--lg height--100">
-              <div className="card__header">
-                <h3>Data Lakes</h3>
-              </div>
-              <div className="card__body">
-                <p>Build cost-effective, scalable data lakes for analytics workloads with tiered storage support.</p>
-              </div>
-            </div>
-          </div>
-          <div className="col col--4 margin-bottom--lg">
-            <div className="card padding--lg height--100">
-              <div className="card__header">
-                <h3>Object Storage</h3>
-              </div>
-              <div className="card__body">
-                <p>S3-compatible storage for applications, backups, and unstructured data at any scale.</p>
+          {useCases.map((useCase, idx) => (
+            <div key={idx} className="col col--4 margin-bottom--lg">
+              <div className="text--center padding--lg">
+                <div className="margin-bottom--md" style={{ color: 'var(--ifm-color-primary)' }}>
+                  <useCase.icon size={useCase.iconSize} />
+                </div>
+                <h3>{useCase.title}</h3>
+                <p>{useCase.description}</p>
               </div>
             </div>
-          </div>
-          <div className="col col--4 margin-bottom--lg">
-            <div className="card padding--lg height--100">
-              <div className="card__header">
-                <h3>Big Data Storage</h3>
-              </div>
-              <div className="card__body">
-                <p>Reliable storage foundation for Hadoop, Spark, and other data processing frameworks.</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="row">
           <div className="col col--12 text--center margin-top--lg">
             <Link to="/community/who-uses-ozone">
-              <button className="button button--secondary button--lg">See Who Uses Ozone</button>
+              <button className="button button--primary button--lg">See Who Uses Ozone</button>
             </Link>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Import icons for integrations
+import {
+  Hdd,
+  FileEarmarkCodeFill,
+  SegmentedNav,
+  Server,
+  Calendar3,
+  Lightning,
+  Table,
+  ShieldLockFill,
+  KeyFill,
+  ClipboardData,
+  GraphUp,
+  Database
+} from 'react-bootstrap-icons';
+
+function Integrations() {
+  const integrations = [
+    { name: 'Hive', icon: Table, link: '/docs/user-guide/integrations/hive' },
+    { name: 'Spark', icon: Lightning, link: '/docs/user-guide/integrations/spark' },
+    { name: 'Iceberg', icon: Hdd, link: '/docs/user-guide/integrations/iceberg' },
+    { name: 'Trino', icon: Database, link: '/docs/user-guide/integrations/trino' },
+    { name: 'Impala', icon: FileEarmarkCodeFill, link: '/docs/user-guide/integrations/impala' },
+    { name: 'Ranger', icon: ShieldLockFill, link: '/docs/administrator-guide/configuration/security/ranger' },
+    { name: 'Knox', icon: KeyFill, link: '/docs/administrator-guide/configuration/security/knox' },
+    { name: 'Kerberos', icon: Server, link: '/docs/administrator-guide/configuration/security/kerberos' },
+    { name: 'Prometheus', icon: ClipboardData, link: '/docs/administrator-guide/operations/observability/prometheus' },
+    { name: 'Grafana', icon: GraphUp, link: '/docs/administrator-guide/operations/observability/grafana' },
+    { name: 'Oozie', icon: Calendar3, link: '/docs/user-guide/integrations/oozie' },
+    { name: 'Hue', icon: SegmentedNav, link: '/docs/user-guide/integrations/hue' },
+  ];
+
+  return (
+    <section className="padding-vert--xl">
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h2 className="text--center margin-bottom--lg">Integrations</h2>
+          </div>
+        </div>
+        <div className="row">
+          {integrations.map((integration, idx) => (
+            <div key={idx} className="col col--2 margin-bottom--lg">
+              <Link to={integration.link} className="text--center padding--md" style={{ display: 'block', textDecoration: 'none' }}>
+                <div className="margin-bottom--sm" style={{ color: 'var(--ifm-color-primary)' }}>
+                  <integration.icon size={24} />
+                </div>
+                <div>{integration.name}</div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -142,41 +212,32 @@ export default function Home() {
               </p>
               <div>
                 <Link to={getStartedHref}>
-                  <button className="button button--secondary button--lg margin-right--sm">
+                  <button className="button button--primary button--lg margin-right--sm">
                     Get Started
                   </button>
                 </Link>
                 <Link to="/download">
-                  <button className="button button--outline button--secondary button--lg">
+                  <button className="button button--secondary button--lg">
                     Download
                   </button>
                 </Link>
               </div>
             </div>
-            <div className="col col--6 padding--lg">
-              <Logo height="100%" width="100%" />
+            <div className="col col--6 text--center">
+              {/* Logo with increased size */}
+              <Logo style={{ maxHeight: '180px', width: 'auto' }} />
             </div>
           </div>
         </div>
       </div>
 
-      <section className="padding-vert--xl">
-        <div className="container">
-          <div className="row">
-            <div className="col col--8 col--offset-2">
-              <h2 className="text--center margin-bottom--md">What is Apache Ozone?</h2>
-              <p className="text--center">
-                Apache Ozone is a distributed, scalable, and high-performance object store designed for modern data lakes  and cloud-native workloads. It addresses scaling needs while providing S3 compatibility and strong integrations with the data processing ecosystem.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Use Cases section moved before Features as recommended */}
+      <UseCases />
 
       <section className="padding-vert--xl container">
         <div className="row">
           <div className="col">
-            <h2 className="text--center margin-bottom--lg">Key Features</h2>
+            <h2 className="text--center margin-bottom--lg">Features</h2>
           </div>
         </div>
         <div className="row">
@@ -186,7 +247,7 @@ export default function Home() {
         </div>
       </section>
 
-      <UseCases />
+      <Integrations />
 
       <section className="padding-vert--xl">
         <div className="container">
@@ -212,7 +273,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </Layout>
   );
 }
