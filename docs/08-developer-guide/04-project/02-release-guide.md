@@ -49,7 +49,7 @@ svn commit -m "ozone: adding key of <your_name> to the KEYS"
 ```
 
 ```bash title="Move Key (PMC)"
-svn cp -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repos/dist/dev/ozone/KEYS https://dist.apache.org/repos/dist/release/ozone/KEYS
+svn mv -m "ozone: adding key of <name> to the KEYS" https://dist.apache.org/repos/dist/dev/ozone/KEYS https://dist.apache.org/repos/dist/release/ozone/KEYS
 ```
 
 ### Configure Maven Credentials
