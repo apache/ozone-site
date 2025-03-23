@@ -88,3 +88,47 @@ p, li, td, th {
   font-family: var(--ifm-font-family-base);
   line-height: 1.6;
 }
+
+/* SVG Logo Display Refinements */
+.integration-logo-img {
+  /* Subtle enhancement for all logos */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Consistent card design for integrations in both modes */
+.integrations-section {
+  padding: 2rem 0;
+  margin: 0 auto 2rem;
+}
+
+/* Light mode integration items */
+.integration-item {
+  background-color: #f5f5f7;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin: 0.5rem;
+  padding: 1rem 0.5rem;
+  border: 1px solid #e0e0e5;
+}
+
+.integration-item:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode integration items with light background for better logo visibility */
+html[data-theme='dark'] .integration-item {
+  background-color: #e0e0e5;  /* Light gray that works in dark mode */
+  border: 1px solid #666670;
+}
+
+html[data-theme='dark'] .integration-item:hover {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Make integration names dark in dark mode cards since they have light backgrounds */
+html[data-theme='dark'] .integration-item .integration-name {
+  color: #333;
+}

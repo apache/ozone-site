@@ -25,7 +25,7 @@ import Link from '@docusaurus/Link';
 import clsx from 'clsx';
 
 // Import Bootstrap icons
-import { GraphUpArrow, Diagram3Fill, LockFill, Speedometer, Stack, HddRackFill } from 'react-bootstrap-icons';
+import { GraphUpArrow, Diagram3Fill, LockFill, Speedometer, Stack, HddRackFill, ShieldLock } from 'react-bootstrap-icons';
 
 const features = [
   {
@@ -140,38 +140,82 @@ function UseCases() {
 
 // Import icons for integrations
 import {
-  Hdd,
   FileEarmarkCodeFill,
   SegmentedNav,
-  Server,
   Calendar3,
   Lightning,
-  Table,
   ShieldLockFill,
   KeyFill,
   ClipboardData,
   GraphUp,
   Database
 } from 'react-bootstrap-icons';
-
 function Integrations() {
   const integrations = [
-    { name: 'Hive', icon: Table, link: '/docs/user-guide/integrations/hive' },
-    { name: 'Spark', icon: Lightning, link: '/docs/user-guide/integrations/spark' },
-    { name: 'Iceberg', icon: Hdd, link: '/docs/user-guide/integrations/iceberg' },
-    { name: 'Trino', icon: Database, link: '/docs/user-guide/integrations/trino' },
-    { name: 'Impala', icon: FileEarmarkCodeFill, link: '/docs/user-guide/integrations/impala' },
-    { name: 'Ranger', icon: ShieldLockFill, link: '/docs/administrator-guide/configuration/security/ranger' },
-    { name: 'Knox', icon: KeyFill, link: '/docs/administrator-guide/configuration/security/knox' },
-    { name: 'Kerberos', icon: Server, link: '/docs/administrator-guide/configuration/security/kerberos' },
-    { name: 'Prometheus', icon: ClipboardData, link: '/docs/administrator-guide/operations/observability/prometheus' },
-    { name: 'Grafana', icon: GraphUp, link: '/docs/administrator-guide/operations/observability/grafana' },
-    { name: 'Oozie', icon: Calendar3, link: '/docs/user-guide/integrations/oozie' },
-    { name: 'Hue', icon: SegmentedNav, link: '/docs/user-guide/integrations/hue' },
+    { 
+      name: 'Hive', 
+      icon: () => <img src="/img/integrations/hive.svg" className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/hive' 
+    },
+    { 
+      name: 'Spark', 
+      icon: () => <img src="/img/integrations/spark.svg" className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/spark' 
+    },
+    { 
+      name: 'Iceberg', 
+      icon: () => <img src="/img/integrations/iceberg.svg" className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/iceberg' 
+    },
+    { 
+      name: 'Trino', 
+      icon: () => <img src="/img/integrations/trino.svg" className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/trino' 
+    },
+    { 
+      name: 'Impala', 
+      icon: () => <img src="/img/integrations/impala.svg" className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/impala' 
+    },
+    { 
+      name: 'Ranger', 
+      icon: () => <img src="/img/integrations/ranger.svg" className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/administrator-guide/configuration/security/ranger' 
+    },
+    { 
+      name: 'Knox', 
+      icon: () => <img src="/img/integrations/knox.svg" className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/administrator-guide/configuration/security/knox' 
+    },
+    { 
+      name: 'Kerberos', 
+      icon: props => <ShieldLock {...props} size={28} />, 
+      link: '/docs/administrator-guide/configuration/security/kerberos' 
+    },
+    { 
+      name: 'Prometheus', 
+      icon: () => <img src="/img/integrations/prometheus.svg" className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/administrator-guide/operations/observability/prometheus' 
+    },
+    { 
+      name: 'Grafana', 
+      icon: () => <img src="/img/integrations/grafana.svg" className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/administrator-guide/operations/observability/grafana' 
+    },
+    { 
+      name: 'Oozie', 
+      icon: () => <img src="/img/integrations/oozie.svg" className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/oozie' 
+    },
+    { 
+      name: 'Hue', 
+      icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: '/docs/user-guide/integrations/hue' 
+    },
   ];
 
   return (
-    <section className="padding-vert--xl">
+    <section className="padding-vert--xl integrations-section">
       <div className="container">
         <div className="row">
           <div className="col">
@@ -181,11 +225,17 @@ function Integrations() {
         <div className="row">
           {integrations.map((integration, idx) => (
             <div key={idx} className="col col--2 margin-bottom--lg">
-              <Link to={integration.link} className="text--center padding--md" style={{ display: 'block', textDecoration: 'none' }}>
-                <div className="margin-bottom--sm" style={{ color: 'var(--ifm-color-primary)' }}>
-                  <integration.icon size={24} />
+              <Link to={integration.link} className="text--center padding--md integration-item" style={{ display: 'block', textDecoration: 'none' }}>
+                <div className="margin-bottom--sm" style={{ 
+                  color: 'var(--ifm-color-primary)',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <integration.icon size={28} />
                 </div>
-                <div>{integration.name}</div>
+                <div className="integration-name">{integration.name}</div>
               </Link>
             </div>
           ))}
