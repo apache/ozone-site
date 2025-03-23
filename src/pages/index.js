@@ -224,8 +224,10 @@ export default function Home() {
               </div>
             </div>
             <div className="col col--6 text--center">
-              {/* Logo with increased size */}
-              <Logo style={{ maxHeight: '180px', width: 'auto' }} />
+              {/* Logo with increased size and positioned more to the right */}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2rem' }}>
+                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
+              </div>
             </div>
           </div>
         </div>
