@@ -60,7 +60,7 @@ Ozone has a layered architecture that separates namespace management from block 
 - **Datanodes**: Store the actual data in containers and provide read and write access
 - **Recon**: Analytics and monitoring service that provides insight into the cluster
 
-This separation allows Ozone to achieve the scale required for modern storage systems while maintaining high performance and reliability.
+This separation allows Ozone to achieve the scale required of modern storage systems while maintaining high performance and reliability.
 
 ## Storage Elements
 
