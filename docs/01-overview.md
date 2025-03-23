@@ -18,7 +18,7 @@ Ozone combines the best aspects of traditional distributed file systems with clo
 ### Scalable Architecture
 
 - **Billions of Objects**: Designed from the ground up to store and manage billions of objects efficiently
-- **Separation of Namespaces**: Decouples namespace management from block space management, allowing independent scaling on both axes
+- **Separation of Namespaces**: Decouples namespace management from block space management, allowing the cluster to scale with capacity regardless of file sizes
 - **Dense Storage Support**: Optimized for high-density storage nodes with support for up to 400TB per node (compared to 100TB in traditional HDFS)
 
 ### Multi-Protocol Support
