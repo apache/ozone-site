@@ -29,7 +29,7 @@ Ozone combines the best aspects of traditional distributed file systems with clo
 
 ### Enterprise-Ready Security
 
-- **Strong Authentication**: Integrated Kerberos authentication with robust security mechanisms
+- **Strong Authentication**: Integrates with [Kerberos authentication](administrator-guide/configuration/security/kerberos) for robust security
 - **Fine-Grained Authorization**: Support for both native ACLs and Apache Ranger integration for centralized authorization policies
 - **Encryption**: Transparent data encryption at rest and in-flight to protect sensitive information
 
