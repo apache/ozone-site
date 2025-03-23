@@ -370,7 +370,21 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 
 If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether their vote is binding. If in doubt check the [ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
 
-Once voting is finished, send an email summarizing the results (binding +1s, non-binding +1s, -1s, 0s) and, if the vote passed, indicate that the release artifacts will be published. If an issue is found with the artifacts, apply fixes to the release branch and repeat the steps starting from [Tag the Commit for the Release Candidate](#tag-the-commit-for-the-release-candidate) with the `$RC` variable incremented by 1 for all steps.
+Once voting is finished, send an email summarizing the results (binding +1s, non-binding +1s, -1s, 0s) and, if the vote passed, indicate that the release artifacts will be published.
+
+### If Release Candidate has Problems
+
+If an issue is found with the artifacts:
+
+1. Remove the abandoned release candidate from Subversion.
+
+    ```bash
+    svn delete https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
+    ```
+
+2. Discard the staging repository at https://repository.apache.org/#stagingRepositories
+3. Apply fixes to the release branch.
+4. Repeat the steps starting from [Tag the Commit for the Release Candidate](#tag-the-commit-for-the-release-candidate) with the `$RC` variable incremented by 1 for all steps.
 
 ## After-Vote
 
