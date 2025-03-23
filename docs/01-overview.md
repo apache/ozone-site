@@ -74,4 +74,4 @@ When a client writes data, Ozone stores it on Datanodes in chunks called blocks,
 
 ## Getting Started
 
-To get started with Ozone, see the [Quick Start Guide](./02-quick-start/01-installation/01-docker.md) for installation instructions and basic usage examples.
+To get started with Ozone, see the [Quick Start Guide](quick-start) for installation instructions and basic usage examples.
