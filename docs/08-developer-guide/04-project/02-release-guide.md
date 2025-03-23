@@ -379,7 +379,7 @@ If an issue is found with the artifacts:
 1. Remove the abandoned release candidate from Subversion.
 
     ```bash
-    svn delete https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
+    svn delete -m "Abandon Ozone $VERSION RC$RC" https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
     ```
 
 2. Discard the staging repository at https://repository.apache.org/#stagingRepositories
