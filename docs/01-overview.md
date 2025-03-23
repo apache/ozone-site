@@ -9,7 +9,7 @@ slug: /
 
 Apache Ozone is a scalable, reliable, distributed storage system optimized for data analytics and object store workloads. Designed to address the limitations of traditional storage systems, Ozone efficiently scales to petabytes of data and billions of objects while managing both small and large files.
 
-As a modern storage solution for data lakes and AI/ML workloads, Ozone provides a high-performance foundation that seamlessly integrates with existing big data frameworks. Applications built on Apache Spark, Hive, Hadoop, and other data processing engines work natively with Ozone without modifications.
+As a modern storage solution for data lakes and AI workloads, Ozone provides a high-performance foundation that seamlessly integrates with existing big data frameworks. Applications like Apache Spark, Hive, Hadoop, and other data processing engines work natively with Ozone without modifications.
 
 Ozone combines the best aspects of traditional distributed file systems with cloud-native object storage capabilities, delivering durability, consistency, and performance at scale.
 
