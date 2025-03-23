@@ -365,7 +365,7 @@ Send a vote email to the dev@ozone.apache.org mailing list. Include the followin
 - Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
 - Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
 - Location where the Maven artifacts are staged. This link will look something like https://repository.apache.org/content/repositories/orgapacheozone-1001/
-- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: https://dist.apache.org/repos/dist/dev/ozone/KEYS
+- Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: https://dist.apache.org/repos/dist/release/ozone/KEYS
 - Fingerprint of the key used to sign the artifacts.
 
 If no issues are found with the artifacts, let the vote run for 7 days. Review the [ASF wide release voting policy](https://www.apache.org/legal/release-policy.html#release-approval), and note the requirements for binding votes which can only come from PMC members. Sometimes responders will not specify whether their vote is binding. If in doubt check the [ASF committer index](https://people.apache.org/committer-index.html). Users whose group membership includes `ozone-pmc` can cast binding votes.
