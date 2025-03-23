@@ -70,7 +70,7 @@ Ozone organizes storage in a three-level hierarchy:
 - **Buckets**: Created by users within volumes, similar to S3 buckets
 - **Keys**: Data objects stored inside buckets, each potentially containing multiple blocks
 
-When a client writes data, Ozone stores it on Datanodes in chunks called blocks, which are organized into containers for efficient management and replication.
+When a client writes data, Ozone stores it as blocks on the Datanodes, which are organized into storage containers for efficient management and replication.
 
 ## Getting Started
 
