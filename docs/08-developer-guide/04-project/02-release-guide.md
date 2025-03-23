@@ -16,7 +16,13 @@ In addition to the usual development tools required to work on Ozone, the follow
 - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
 
-Make sure you are using GNU-tar instead of BSD-tar.
+Make sure to use [GNU tar](https://www.gnu.org/software/tar/).  On Mac, built-in tar includes additional metadata in the archive, which appears as extra files when extracted on other platforms.  GNU tar can be installed e.g. via Homebrew:
+
+```bash title="Install GNU tar on Mac"
+brew install gnu-tar
+# to use it as "tar", not "gtar", add the "gnubin" directory to your PATH
+export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
+```
 
 ### Publish Your GPG Key
 
