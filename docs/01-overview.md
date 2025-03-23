@@ -53,7 +53,7 @@ Ozone combines the best aspects of traditional distributed file systems with clo
 
 ## Architecture Overview
 
-Ozone has a layered architecture that separates namespace management from storage management:
+Ozone has a layered architecture that separates namespace management from block space management:
 
 - **Ozone Manager (OM)**: Manages the namespace hierarchy (volumes, buckets, and keys) and handles client metadata operations
 - **Storage Container Manager (SCM)**: Manages the containers where data is stored and handles block allocation
