@@ -341,11 +341,11 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
 1. Upload everything from the `$RELEASE_DIR` to the dev staging area.
 
     ```bash
-    svn mkdir https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
-    svn co https://dist.apache.org/repos/dist/dev/ozone/"$VERSION-rc$RC"
-    cp "$RELEASE_DIR"/* "$VERSION-rc$RC"
-    cd "$VERSION-rc$RC"
-    svn add *
+    svn checkout https://dist.apache.org/repos/dist/dev/ozone
+    cd ozone
+    mkdir "$VERSION-rc$RC"
+    cp -v "$RELEASE_DIR"/* "$VERSION-rc$RC"/
+    svn add "$VERSION-rc$RC"
     svn commit -m "Ozone $VERSION RC$RC"
     ```
 
