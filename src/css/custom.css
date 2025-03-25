@@ -117,18 +117,30 @@ p, li, td, th {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Dark mode integration items with light background for better logo visibility */
+/* Dark mode integration items styled to match the primary button */
 html[data-theme='dark'] .integration-item {
-  background-color: #e0e0e5;  /* Light gray that works in dark mode */
-  border: 1px solid #666670;
+  background-color: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary-darker);
+  color: var(--ifm-color-white);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 html[data-theme='dark'] .integration-item:hover {
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--ifm-color-primary-darker);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
 }
 
-/* Make integration names dark in dark mode cards since they have light backgrounds */
+/* Make integration names light in dark mode cards to match primary button text */
 html[data-theme='dark'] .integration-item .integration-name {
-  color: #333;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Adjust SVG icons for better visibility against primary button */
+html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos-icon"]) {
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }

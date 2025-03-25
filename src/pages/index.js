@@ -189,7 +189,7 @@ function Integrations() {
     },
     { 
       name: 'Kerberos', 
-      icon: props => <ShieldLock {...props} size={28} />, 
+      icon: props => <ShieldLock {...props} size={28} style={{ color: '#212529' }} data-logo="kerberos-icon" />, 
       link: '/docs/administrator-guide/configuration/security/kerberos' 
     },
     { 
