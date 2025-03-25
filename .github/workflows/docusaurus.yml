@@ -41,7 +41,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ${{ env.image_tar }}
-        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+        key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
         lookup-only: true
     - name: Build Docker image
       if: steps.cache.outputs.cache-hit != 'true'
@@ -56,7 +56,7 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: ${{ env.image_tar }}
-        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+        key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
   build-website:
     needs:
     - build-image
@@ -68,7 +68,7 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ${{ env.image_tar }}
-        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+        key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
     - name: Load docker image
       run: |
         docker load --input="${{ env.image_tar }}"
@@ -98,7 +98,7 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ${{ env.image_tar }}
-        key: image-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
+        key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
     - name: Load docker image
       run: |
         docker load --input="${{ env.image_tar }}"
