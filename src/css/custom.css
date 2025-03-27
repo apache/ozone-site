@@ -78,6 +78,56 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+/* Colored headings for markdown */
+.markdown h1 {
+  color: var(--ifm-color-primary-darkest);
+}
+
+.markdown h2 {
+  color: var(--ifm-color-primary-darker);
+}
+
+.markdown h3 {
+  color: var(--ifm-color-primary-dark);
+}
+
+.markdown h4 {
+  color: var(--ifm-color-primary);
+}
+
+.markdown h5 {
+  color: var(--ifm-color-primary-light);
+}
+
+.markdown h6 {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* Dark mode heading colors */
+[data-theme='dark'] .markdown h1 {
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .markdown h2 {
+  color: var(--ifm-color-primary-lighter);
+}
+
+[data-theme='dark'] .markdown h3 {
+  color: var(--ifm-color-primary-light);
+}
+
+[data-theme='dark'] .markdown h4 {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .markdown h5 {
+  color: var(--ifm-color-primary-dark);
+}
+
+[data-theme='dark'] .markdown h6 {
+  color: var(--ifm-color-primary-darker);
+}
+
 pre, code {
   font-family: var(--ifm-font-family-monospace);
   font-size: 14px;

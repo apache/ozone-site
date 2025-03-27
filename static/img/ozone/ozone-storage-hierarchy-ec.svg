@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900">
+    <!-- Background -->
+    <rect width="1100" height="900" fill="transparent" />
+
+    <!-- Title with improved styling -->
+    <text x="550" y="40" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Erasure Coding (3:2 scheme)</text>
+    
+    <!-- Object Split Text - Moved to top -->
+    <text x="550" y="70" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#357500" font-weight="bold">Object Data Split</text>
+    <text x="550" y="90" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#357500">Across 3 Data Blocks</text>
+
+    <!-- DATA NODES - First row (data blocks) -->
+    <!-- Datanode 1 -->
+    <rect x="150" y="110" width="250" height="330" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="275" y="145" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-42</text>
+
+    <!-- Disk-Volume in Datanode 1 -->
+    <rect x="170" y="170" width="210" height="250" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="275" y="200" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-107</text>
+
+    <!-- Data Container in Datanode 1 -->
+    <rect x="190" y="220" width="170" height="180" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="275" y="250" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">EC Container-583</text>
+    <text x="275" y="270" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Data Block 1)</text>
+
+    <!-- Block in Container -->
+    <rect x="210" y="290" width="130" height="90" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="275" y="312" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-84</text>
+    <text x="275" y="332" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <!-- Chunks in Block -->
+    <rect x="220" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="245" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-1</text>
+
+    <rect x="280" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="305" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-2</text>
+
+    <!-- Datanode 2 -->
+    <rect x="425" y="110" width="250" height="330" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="550" y="145" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-78</text>
+
+    <!-- Disk-Volume in Datanode 2 -->
+    <rect x="445" y="170" width="210" height="250" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="550" y="200" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-254</text>
+
+    <!-- Data Container in Datanode 2 -->
+    <rect x="465" y="220" width="170" height="180" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="550" y="250" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">EC Container-584</text>
+    <text x="550" y="270" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Data Block 2)</text>
+
+    <!-- Block in Container -->
+    <rect x="485" y="290" width="130" height="90" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="550" y="312" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-85</text>
+    <text x="550" y="332" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <!-- Chunks in Block -->
+    <rect x="495" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="520" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-1</text>
+
+    <rect x="555" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="580" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-2</text>
+
+    <!-- Datanode 3 -->
+    <rect x="700" y="110" width="250" height="330" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="825" y="145" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-96</text>
+
+    <!-- Disk-Volume in Datanode 3 -->
+    <rect x="720" y="170" width="210" height="250" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="825" y="200" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-487</text>
+
+    <!-- Data Container in Datanode 3 -->
+    <rect x="740" y="220" width="170" height="180" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="825" y="250" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">EC Container-585</text>
+    <text x="825" y="270" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Data Block 3)</text>
+
+    <!-- Block in Container -->
+    <rect x="760" y="290" width="130" height="90" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="825" y="312" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-86</text>
+    <text x="825" y="332" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <!-- Chunks in Block -->
+    <rect x="770" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="795" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-1</text>
+
+    <rect x="830" y="350" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="855" y="365" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-2</text>
+
+    <!-- Parity Calculation Text - Between data and parity containers -->
+    <text x="550" y="500" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Parity Calculation</text>
+    <text x="550" y="520" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#357500">P, Q = f(Data Blocks)</text>
+
+    <!-- DATA NODES - Second row (parity blocks) -->
+    <!-- Datanode 4 -->
+    <rect x="275" y="550" width="250" height="330" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="400" y="585" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-112</text>
+
+    <!-- Disk-Volume in Datanode 4 -->
+    <rect x="295" y="610" width="210" height="250" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="400" y="640" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-632</text>
+
+    <!-- Parity Container in Datanode 4 -->
+    <rect x="315" y="660" width="170" height="180" rx="8" ry="8" fill="#a8da86" stroke="#3a8100" stroke-width="3" />
+    <text x="400" y="690" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">EC Container-586</text>
+    <text x="400" y="710" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Parity Block 1)</text>
+
+    <!-- Block in Container -->
+    <rect x="335" y="730" width="130" height="90" rx="6" ry="6" fill="#84ca56" stroke="#306900" stroke-width="2" />
+    <text x="400" y="752" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-87</text>
+    <text x="400" y="772" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Parity Data P)</text>
+
+    <!-- Chunks in Block -->
+    <rect x="345" y="790" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#306900" stroke-width="1.5" />
+    <text x="370" y="805" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-1</text>
+
+    <rect x="405" y="790" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#306900" stroke-width="1.5" />
+    <text x="430" y="805" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-2</text>
+
+    <!-- Datanode 5 -->
+    <rect x="575" y="550" width="250" height="330" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="700" y="585" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-143</text>
+
+    <!-- Disk-Volume in Datanode 5 -->
+    <rect x="595" y="610" width="210" height="250" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="700" y="640" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-839</text>
+
+    <!-- Parity Container in Datanode 5 -->
+    <rect x="615" y="660" width="170" height="180" rx="8" ry="8" fill="#a8da86" stroke="#3a8100" stroke-width="3" />
+    <text x="700" y="690" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">EC Container-587</text>
+    <text x="700" y="710" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Parity Block 2)</text>
+
+    <!-- Block in Container -->
+    <rect x="635" y="730" width="130" height="90" rx="6" ry="6" fill="#84ca56" stroke="#306900" stroke-width="2" />
+    <text x="700" y="752" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-88</text>
+    <text x="700" y="772" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Parity Data Q)</text>
+
+    <!-- Chunks in Block -->
+    <rect x="645" y="790" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#306900" stroke-width="1.5" />
+    <text x="670" y="805" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-1</text>
+
+    <rect x="705" y="790" width="50" height="20" rx="4" ry="4" fill="#459800" stroke="#306900" stroke-width="1.5" />
+    <text x="730" y="805" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Chunk-2</text>
+</svg>

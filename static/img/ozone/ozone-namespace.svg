@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+    <!-- Background -->
+    <rect width="1000" height="700" fill="transparent" />
+    
+    <!-- Title -->
+    <text x="500" y="40" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Namespace Hierarchy</text>
+    
+    <!-- Ozone cluster -->
+    <rect x="100" y="90" width="800" height="580" rx="10" ry="10" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="500" y="120" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Ozone Namespace</text>
+    
+    <!-- Volume 1 - Left side -->
+    <rect x="150" y="150" width="320" height="480" rx="8" ry="8" fill="#d1e4bc" stroke="#2d6300" stroke-width="2.5" />
+    <text x="310" y="180" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#2d6300" font-weight="bold">Volume 1</text>
+    <text x="310" y="205" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#2d6300">(tenant1)</text>
+    
+    <!-- Volume 2 - Right side -->
+    <rect x="530" y="150" width="320" height="480" rx="8" ry="8" fill="#d1e4bc" stroke="#2d6300" stroke-width="2.5" />
+    <text x="690" y="180" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#2d6300" font-weight="bold">Volume 2</text>
+    <text x="690" y="205" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#2d6300">(tenant2)</text>
+    
+    <!-- Buckets in Volume 1 -->
+    <rect x="170" y="230" width="280" height="180" rx="6" ry="6" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="310" y="255" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Bucket A</text>
+    <text x="310" y="275" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#255200">(FSO Layout)</text>
+    
+    <rect x="170" y="430" width="280" height="180" rx="6" ry="6" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="310" y="455" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Bucket B</text>
+    <text x="310" y="475" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#255200">(OBS Layout)</text>
+    
+    <!-- Keys/Objects in Bucket A (Folder structure) -->
+    <rect x="190" y="295" width="240" height="105" rx="4" ry="4" fill="#64ab35" stroke="#306900" stroke-width="1.5" />
+    <text x="310" y="315" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Directory Structure</text>
+    
+    <!-- Directory tree -->
+    <text x="210" y="335" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">/ (root)</text>
+    <text x="225" y="355" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">├── dir1/</text>
+    <text x="240" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   ├── file1.txt</text>
+    <text x="240" y="395" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   └── file2.txt</text>
+    
+    <!-- Keys/Objects in Bucket B (Flat namespace) -->
+    <rect x="190" y="495" width="240" height="105" rx="4" ry="4" fill="#64ab35" stroke="#306900" stroke-width="1.5" />
+    <text x="310" y="515" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Objects (Flat)</text>
+    
+    <!-- Object list -->
+    <text x="215" y="535" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">object1</text>
+    <text x="215" y="555" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">object2</text>
+    <text x="215" y="575" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">object3</text>
+    <text x="215" y="595" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">object4</text>
+    
+    <!-- Buckets in Volume 2 (the encrypted bucket with deep structure) -->
+    <rect x="550" y="230" width="280" height="380" rx="6" ry="6" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="690" y="255" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Bucket F</text>
+    <text x="690" y="275" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#255200">(FSO Layout + Encryption)</text>
+    
+    <!-- Security icon for encrypted bucket -->
+    <circle cx="610" y="255" r="10" fill="#ffffff" stroke="#255200" stroke-width="1" />
+    <text x="610" y="260" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200" font-weight="bold">🔒</text>
+    
+    <!-- Directory structure in Bucket F - Deep Structure -->
+    <rect x="570" y="295" width="240" height="305" rx="4" ry="4" fill="#64ab35" stroke="#306900" stroke-width="1.5" />
+    <text x="690" y="315" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Directory Structure</text>
+    
+    <!-- Deep directory tree -->
+    <text x="590" y="335" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">/ (root)</text>
+    <text x="590" y="355" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">├── data/</text>
+    <text x="590" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   ├── logs/</text>
+    <text x="590" y="395" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   │   ├── 2023/</text>
+    <text x="590" y="415" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   │   └── 2024/</text>
+    <text x="590" y="435" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   └── backup/</text>
+    <text x="590" y="455" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">├── apps/</text>
+    <text x="590" y="475" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   ├── app1/</text>
+    <text x="590" y="495" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">│   └── app2/</text>
+    <text x="590" y="515" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">└── config/</text>
+    <text x="590" y="535" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">    ├── dev/</text>
+    <text x="590" y="555" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">    ├── staging/</text>
+    <text x="590" y="575" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="start" fill="#ffffff">    └── prod/</text>
+</svg>

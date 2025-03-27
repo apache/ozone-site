@@ -1,0 +1,90 @@
+<svg width="1200" height="550" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="1200" height="550" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="600" y="30" font-family="JetBrains Mono, monospace" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Recon Interactions</text>
+
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#255200" />
+        </marker>
+    </defs>
+
+    <style>
+        .user-icon { stroke: #255200; stroke-width: 2; fill: none; }
+        .interface-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .interface-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        /* Updated enclosing box style */
+        .enclosing-box { fill: none; stroke: #2d6300; stroke-width: 1.5; stroke-dasharray: 6 4; rx: 10; ry: 10; }
+        .client-box { fill: #96d26e; stroke: #3a8100; stroke-width: 2.5; rx: 8; ry: 8; }
+        /* Updated client text style */
+        .client-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .arrow-line { stroke: #255200; stroke-width: 1.5; marker-end: url(#arrow); }
+        /* Ozone Manager style */
+        .manager-box { fill: #4c8c2b; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .manager-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+        /* SCM style */
+        .scm-box { fill: #3a7a1a; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        /* Datanode style */
+        .datanode-box { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        /* Recon style */
+        .recon-box { fill: #2a6010; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .recon-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+    </style>
+
+    <!-- Metadata Enclosing Box -->
+    <rect x="150" y="50" width="900" height="150" rx="15" ry="15" stroke="#357500" stroke-width="2" fill="#e0edd2"/>
+    <text x="600" y="70" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Metadata</text>
+    
+    <!-- Ozone Manager Box -->
+    <rect x="230" y="90" width="300" height="80" class="manager-box"/>
+    <text x="380" y="135" class="manager-text" font-size="16" font-family="JetBrains Mono, monospace">Ozone Manager</text>
+    
+    <!-- Storage Container Manager Box -->
+    <rect x="670" y="90" width="300" height="80" class="scm-box"/>
+    <text x="820" y="135" class="manager-text" font-size="16" font-family="JetBrains Mono, monospace">Storage Container Manager</text>
+    
+    <!-- Recon Box in the center -->
+    <rect x="450" y="230" width="300" height="80" class="recon-box"/>
+    <text x="600" y="260" class="recon-text" font-size="18" font-family="JetBrains Mono, monospace">Recon</text>
+    <text x="600" y="285" class="recon-text" font-size="14" font-family="JetBrains Mono, monospace">Analytics and Monitoring</text>
+    
+    <!-- Data Enclosing Box -->
+    <rect x="150" y="340" width="900" height="180" rx="15" ry="15" stroke="#357500" stroke-width="2" fill="#e0edd2"/>
+    <text x="600" y="360" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Data</text>
+    
+    <!-- Datanode Boxes: 3x2 Grid -->
+    <!-- Row 1 -->
+    <rect x="230" y="380" width="160" height="60" class="datanode-box"/>
+    <text x="310" y="415" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="520" y="380" width="160" height="60" class="datanode-box"/>
+    <text x="600" y="415" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="810" y="380" width="160" height="60" class="datanode-box"/>
+    <text x="890" y="415" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <!-- Row 2 -->
+    <rect x="230" y="450" width="160" height="60" class="datanode-box"/>
+    <text x="310" y="485" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="520" y="450" width="160" height="60" class="datanode-box"/>
+    <text x="600" y="485" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="810" y="450" width="160" height="60" class="datanode-box"/>
+    <text x="890" y="485" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+
+    <!-- Arrows from Recon to OM -->
+    <path d="M 500 230 L 380 170" stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrow)"/> <!-- Recon -> OM -->
+    <text x="400" y="220" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Read DB</text>
+    
+    <!-- Arrows from Recon to SCM -->
+    <path d="M 700 230 L 820 170" stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrow)"/> <!-- Recon -> SCM -->
+    <text x="750" y="220" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Read DB</text>
+    
+    <!-- Arrows from Data to Recon -->
+    <path d="M 600 340 L 600 310" stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrow)"/> <!-- Data -> Recon -->
+    <text x="620" y="330" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Heartbeats and Reports</text>
+</svg>

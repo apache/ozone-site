@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 730">
+    <!-- Background -->
+    <rect width="1000" height="850" fill="transparent" />
+
+    <!-- Title -->
+    <text x="500" y="40" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Storage Hierarchy</text>
+
+    <!-- Datanode -->
+    <rect x="50" y="70" width="900" height="630" rx="15" ry="15" fill="#e0edd2" stroke="#357500" stroke-width="4" />
+    <text x="500" y="110" font-family="Inter, sans-serif" font-size="30" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-42</text>
+
+    <!-- Disk-Volumes -->
+    <rect x="80" y="120" width="410" height="550" rx="12" ry="12" fill="#d1e4bc" stroke="#2d6300" stroke-width="3.5" />
+    <text x="285" y="155" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-107</text>
+
+    <rect x="510" y="120" width="410" height="550" rx="12" ry="12" fill="#d1e4bc" stroke="#2d6300" stroke-width="3.5" />
+    <text x="715" y="155" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-394</text>
+
+    <!-- Containers in Disk-Volume 1 -->
+    <rect x="100" y="180" width="370" height="230" rx="10" ry="10" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="285" y="210" font-family="Inter, sans-serif" font-size="24" text-anchor="middle" fill="#255200" font-weight="bold">Container-583</text>
+
+    <rect x="100" y="430" width="370" height="220" rx="10" ry="10" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="285" y="460" font-family="Inter, sans-serif" font-size="24" text-anchor="middle" fill="#255200" font-weight="bold">Container-217</text>
+
+    <!-- Containers in Disk-Volume 2 -->
+    <rect x="530" y="180" width="370" height="230" rx="10" ry="10" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="715" y="210" font-family="Inter, sans-serif" font-size="24" text-anchor="middle" fill="#255200" font-weight="bold">Container-965</text>
+
+    <rect x="530" y="430" width="370" height="220" rx="10" ry="10" fill="#96d26e" stroke="#3a8100" stroke-width="3" />
+    <text x="715" y="460" font-family="Inter, sans-serif" font-size="24" text-anchor="middle" fill="#255200" font-weight="bold">Container-742</text>
+
+    <!-- Blocks in Container 1 -->
+    <rect x="120" y="240" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="195" y="265" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-84</text>
+    <text x="195" y="290" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <rect x="300" y="240" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="375" y="265" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-129</text>
+    <text x="375" y="290" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 517)</text>
+
+    <!-- Blocks in Container 2 -->
+    <rect x="120" y="480" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="195" y="505" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-352</text>
+    <text x="195" y="530" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 673)</text>
+
+    <rect x="300" y="480" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="375" y="505" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-198</text>
+    <text x="375" y="530" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 429)</text>
+
+    <!-- Blocks in Container 3 -->
+    <rect x="550" y="240" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="625" y="265" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-456</text>
+    <text x="625" y="290" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 814)</text>
+
+    <rect x="730" y="240" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="805" y="265" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-762</text>
+    <text x="805" y="290" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 329)</text>
+
+    <!-- Blocks in Container 4 -->
+    <rect x="550" y="480" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="625" y="505" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-507</text>
+    <text x="625" y="530" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 946)</text>
+
+    <rect x="730" y="480" width="150" height="155" rx="8" ry="8" fill="#64ab35" stroke="#306900" stroke-width="2.5" />
+    <text x="805" y="505" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-631</text>
+    <text x="805" y="530" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">(Object 182)</text>
+
+    <!-- Chunks in Block-84 - wider chunks -->
+    <rect x="130" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="162" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-37</text>
+
+    <rect x="130" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="162" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-92</text>
+
+    <rect x="200" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="232" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-15</text>
+
+    <rect x="200" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="232" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-64</text>
+
+    <!-- Chunks in Block-129 -->
+    <rect x="310" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="342" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-23</text>
+
+    <rect x="310" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="342" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-51</text>
+
+    <rect x="380" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="412" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-88</text>
+
+    <rect x="380" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="412" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-47</text>
+
+    <!-- Chunks in Block-352 -->
+    <rect x="130" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="162" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-74</text>
+
+    <rect x="130" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="162" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-19</text>
+
+    <rect x="200" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="232" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-83</text>
+
+    <rect x="200" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="232" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-42</text>
+
+    <!-- Chunks in Block-198 -->
+    <rect x="310" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="342" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-67</text>
+
+    <rect x="310" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="342" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-29</text>
+
+    <rect x="380" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="412" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-54</text>
+
+    <rect x="380" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="412" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-78</text>
+
+    <!-- Chunks in Block-456 -->
+    <rect x="560" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="592" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-11</text>
+
+    <rect x="560" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="592" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-95</text>
+
+    <rect x="630" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="662" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-30</text>
+
+    <rect x="630" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="662" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-86</text>
+
+    <!-- Chunks in Block-762 -->
+    <rect x="740" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="772" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-43</text>
+
+    <rect x="740" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="772" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-68</text>
+
+    <rect x="810" y="305" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="842" y="330" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-21</text>
+
+    <rect x="810" y="350" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="842" y="375" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-59</text>
+
+    <!-- Chunks in Block-507 -->
+    <rect x="560" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="592" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-32</text>
+
+    <rect x="560" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="592" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-75</text>
+
+    <rect x="630" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="662" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-27</text>
+
+    <rect x="630" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="662" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-90</text>
+
+    <!-- Chunks in Block-631 -->
+    <rect x="740" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="772" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-56</text>
+
+    <rect x="740" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="772" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-13</text>
+
+    <rect x="810" y="545" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="842" y="570" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-81</text>
+
+    <rect x="810" y="590" width="65" height="40" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="842" y="615" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Chunk-49</text>
+
+</svg>

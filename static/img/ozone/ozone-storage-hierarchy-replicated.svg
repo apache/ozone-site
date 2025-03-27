@@ -1,0 +1,281 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 690">
+    <!-- Improved background with softer color -->
+    <rect width="1100" height="860" fill="transparent" />
+
+    <!-- Title with improved styling -->
+    <text x="550" y="40" font-family="Inter, sans-serif" font-size="26" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Container Replication</text>
+
+    <!-- DATANODE 1 -->
+    <!-- Datanode box -->
+    <rect x="50" y="80" width="320" height="600" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="210" y="115" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-42</text>
+
+    <!-- Disk-Volume in Datanode 1 -->
+    <rect x="70" y="140" width="280" height="520" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="210" y="170" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-107</text>
+
+    <!-- Container 1 in Datanode 1 (Replicated) -->
+    <rect x="90" y="190" width="240" height="220" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" stroke-dasharray="5,3" />
+    <text x="210" y="220" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">Container-583</text>
+    <text x="210" y="240" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Replicated across 3 DNs)</text>
+
+    <!-- Blocks in Container 1 of Datanode 1 -->
+    <rect x="110" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="155" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-84</text>
+    <text x="155" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <rect x="220" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="265" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-129</text>
+    <text x="265" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 517)</text>
+
+    <!-- Chunks in Block-84 -->
+    <rect x="120" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="137" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-37</text>
+
+    <rect x="120" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="137" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-92</text>
+
+    <rect x="160" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="177" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-15</text>
+
+    <rect x="160" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="177" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-64</text>
+
+    <!-- Chunks in Block-129 -->
+    <rect x="230" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="247" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-23</text>
+
+    <rect x="230" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="247" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-51</text>
+
+    <rect x="270" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="287" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-88</text>
+
+    <rect x="270" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="287" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-47</text>
+
+    <!-- Container 2 in Datanode 1 (Not Replicated) -->
+    <rect x="90" y="430" width="240" height="210" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="210" y="460" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Container-217</text>
+
+    <!-- Blocks in Container 2 of Datanode 1 -->
+    <rect x="110" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="155" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-352</text>
+    <text x="155" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 673)</text>
+
+    <!-- Chunks in Block-352 -->
+    <rect x="120" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="137" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-74</text>
+
+    <rect x="120" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="137" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-19</text>
+
+    <rect x="160" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="177" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-83</text>
+
+    <rect x="160" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="177" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-42</text>
+
+    <rect x="220" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="265" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-198</text>
+    <text x="265" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 429)</text>
+
+    <!-- Chunks in Block-198 -->
+    <rect x="230" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="247" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-67</text>
+
+    <rect x="230" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="247" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-29</text>
+
+    <rect x="270" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="287" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-54</text>
+
+    <rect x="270" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="287" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-78</text>
+
+    <!-- DATANODE 2 -->
+    <!-- Datanode box -->
+    <rect x="390" y="80" width="320" height="600" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="550" y="115" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-78</text>
+
+    <!-- Disk-Volume in Datanode 2 -->
+    <rect x="410" y="140" width="280" height="520" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="550" y="170" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-254</text>
+
+    <!-- Container 1 in Datanode 2 (Replicated) -->
+    <rect x="430" y="190" width="240" height="220" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" stroke-dasharray="5,3" />
+    <text x="550" y="220" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">Container-583</text>
+    <text x="550" y="240" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Replicated across 3 DNs)</text>
+
+    <!-- Blocks in Container 1 of Datanode 2 -->
+    <rect x="450" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="495" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-84</text>
+    <text x="495" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <!-- Chunks in Block-84 (DN 2) -->
+    <rect x="460" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="477" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-37</text>
+
+    <rect x="460" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="477" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-92</text>
+
+    <rect x="500" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="517" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-15</text>
+
+    <rect x="500" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="517" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-64</text>
+
+    <rect x="560" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="605" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-129</text>
+    <text x="605" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 517)</text>
+
+    <!-- Chunks in Block-129 (DN 2) -->
+    <rect x="570" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="587" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-23</text>
+
+    <rect x="570" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="587" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-51</text>
+
+    <rect x="610" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="627" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-88</text>
+
+    <rect x="610" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="627" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-47</text>
+
+    <!-- Container 3 in Datanode 2 (Not Replicated) -->
+    <rect x="430" y="430" width="240" height="210" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="550" y="460" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Container-468</text>
+
+    <!-- Blocks in Container 3 of Datanode 2 -->
+    <rect x="450" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="495" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-123</text>
+    <text x="495" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 321)</text>
+
+    <!-- Chunks in Block-123 -->
+    <rect x="460" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="477" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-31</text>
+
+    <rect x="460" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="477" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-62</text>
+
+    <rect x="500" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="517" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-08</text>
+
+    <rect x="500" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="517" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-45</text>
+
+    <rect x="560" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="605" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-777</text>
+    <text x="605" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 159)</text>
+
+    <!-- Chunks in Block-777 -->
+    <rect x="570" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="587" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-17</text>
+
+    <rect x="570" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="587" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-38</text>
+
+    <rect x="610" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="627" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-75</text>
+
+    <rect x="610" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="627" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-93</text>
+
+    <!-- DATANODE 3 -->
+    <!-- Datanode box -->
+    <rect x="730" y="80" width="320" height="600" rx="12" ry="12" fill="#e0edd2" stroke="#357500" stroke-width="3" />
+    <text x="890" y="115" font-family="Inter, sans-serif" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Datanode-96</text>
+
+    <!-- Disk-Volume in Datanode 3 -->
+    <rect x="750" y="140" width="280" height="520" rx="10" ry="10" fill="#d1e4bc" stroke="#2d6300" stroke-width="2" />
+    <text x="890" y="170" font-family="Inter, sans-serif" font-size="20" text-anchor="middle" fill="#2d6300" font-weight="bold">Disk-Volume-487</text>
+
+    <!-- Container 1 in Datanode 3 (Replicated) -->
+    <rect x="770" y="190" width="240" height="220" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="3" stroke-dasharray="5,3" />
+    <text x="890" y="220" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" fill="#255200" font-weight="bold">Container-583</text>
+    <text x="890" y="240" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#255200">(Replicated across 3 DNs)</text>
+
+    <!-- Blocks in Container 1 of Datanode 3 -->
+    <rect x="790" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="835" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-84</text>
+    <text x="835" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 235)</text>
+
+    <!-- Chunks in Block-84 (DN 3) -->
+    <rect x="800" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="817" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-37</text>
+
+    <rect x="800" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="817" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-92</text>
+
+    <rect x="840" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="857" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-15</text>
+
+    <rect x="840" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="857" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-64</text>
+
+    <rect x="900" y="260" width="90" height="130" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="945" y="282" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-129</text>
+    <text x="945" y="302" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 517)</text>
+
+    <!-- Chunks in Block-129 (DN 3) -->
+    <rect x="910" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="927" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-23</text>
+
+    <rect x="910" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="927" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-51</text>
+
+    <rect x="950" y="320" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="967" y="343" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-88</text>
+
+    <rect x="950" y="360" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="967" y="378" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-47</text>
+
+    <!-- Container 4 in Datanode 3 (Not Replicated) -->
+    <rect x="770" y="430" width="240" height="210" rx="8" ry="8" fill="#96d26e" stroke="#3a8100" stroke-width="2" />
+    <text x="890" y="460" font-family="Inter, sans-serif" font-size="18" text-anchor="middle" fill="#255200" font-weight="bold">Container-912</text>
+
+    <!-- Blocks in Container 4 of Datanode 3 -->
+    <rect x="790" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="835" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-637</text>
+    <text x="835" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 842)</text>
+
+    <!-- Chunks in Block-637 -->
+    <rect x="800" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="817" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-26</text>
+
+    <rect x="800" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="817" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-58</text>
+
+    <rect x="840" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="857" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-39</text>
+
+    <rect x="840" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="857" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-72</text>
+
+    <rect x="900" y="480" width="90" height="140" rx="6" ry="6" fill="#64ab35" stroke="#306900" stroke-width="2" />
+    <text x="945" y="505" font-family="Inter, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="bold">Block-422</text>
+    <text x="945" y="525" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#ffffff">(Object 705)</text>
+
+    <!-- Chunks in Block-422 -->
+    <rect x="910" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="927" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-11</text>
+
+    <rect x="910" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="927" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-43</text>
+
+    <rect x="950" y="540" width="35" height="35" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="967" y="563" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-27</text>
+
+    <rect x="950" y="580" width="35" height="25" rx="4" ry="4" fill="#459800" stroke="#255200" stroke-width="1.5" />
+    <text x="967" y="598" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="white" font-weight="bold">Ch-81</text>
+
+    <!--  Replication arrows with better styling -->
+    <line x1="330" y1="300" x2="429" y2="300" stroke="#3a8100" stroke-width="2.5" stroke-dasharray="8,3"/>
+    <polygon points="423,296 430,300 423,304" fill="#255200"/>
+    <polygon points="336,296 329,300 336,304" fill="#255200"/>
+
+    <line x1="670" y1="300" x2="769" y2="300" stroke="#3a8100" stroke-width="2.5" stroke-dasharray="8,3"/>
+    <polygon points="763,296 770,300 763,304" fill="#255200"/>
+    <polygon points="676,296 669,300 676,304" fill="#255200"/>
+
+</svg>

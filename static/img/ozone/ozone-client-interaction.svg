@@ -1,0 +1,209 @@
+<svg width="1400" height="700" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="1400" height="700" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="700" y="50" font-family="JetBrains Mono, monospace" font-size="22" text-anchor="middle" fill="#357500" font-weight="bold">Apache Ozone Client Interactions</text>
+
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#255200" />
+        </marker>
+    </defs>
+
+    <style>
+        .user-icon { stroke: #255200; stroke-width: 2; fill: none; }
+        .interface-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .interface-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        /* Updated enclosing box style */
+        .enclosing-box { fill: none; stroke: #2d6300; stroke-width: 1.5; stroke-dasharray: 6 4; rx: 10; ry: 10; }
+        .client-box { fill: #96d26e; stroke: #3a8100; stroke-width: 2.5; rx: 8; ry: 8; }
+        /* Updated client text style */
+        .client-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .arrow-line { stroke: #255200; stroke-width: 1.5; marker-end: url(#arrow); }
+        /* Ozone Manager style - Updated color */
+        .manager-box { fill: #4c8c2b; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .manager-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+        /* SCM style - New color */
+        .scm-box { fill: #3a7a1a; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        /* Datanode style - New color */
+        .datanode-box { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+    </style>
+
+    <!-- Data Enclosing Box -->
+    <rect x="245" y="380" width="770" height="300" rx="15" ry="15" stroke="#357500" stroke-width="2" fill="#e0edd2"/>
+    <text x="630" y="400" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Data</text>
+
+    <!-- User Stick Figure -->
+    <g transform="translate(50, 195)">
+        <circle cx="0" cy="-20" r="10" class="user-icon" fill="#64ab35"/>
+        <line x1="0" y1="-10" x2="0" y2="10" class="user-icon"/>
+        <line x1="-15" y1="0" x2="15" y2="0" class="user-icon"/>
+        <line x1="0" y1="10" x2="-10" y2="30" class="user-icon"/>
+        <line x1="0" y1="10" x2="10" y2="30" class="user-icon"/>
+        <text x="0" y="45" text-anchor="middle" font-size="16" fill="#255200" font-weight="bold" font-family="JetBrains Mono, monospace">User</text>
+    </g>
+
+    <!-- Enclosing Box for Interfaces AND Client Library -->
+    <rect x="140" y="80" width="310" height="270" rx="15" ry="15" stroke="#357500" stroke-width="2" fill="#e0edd2"/>
+    <text x="295" y="105" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Client Application</text>
+
+    <!-- Interface/Application Boxes -->
+    <g id="interfaces">
+        <rect x="150" y="120" width="120" height="30" class="interface-box"/>
+        <text x="210" y="140" class="interface-text" font-size="16" font-family="JetBrains Mono, monospace">S3 Gateway</text>
+
+        <rect x="150" y="160" width="120" height="30" class="interface-box"/>
+        <text x="210" y="180" class="interface-text" font-size="16" font-family="JetBrains Mono, monospace">HttpFS</text>
+
+        <rect x="150" y="200" width="120" height="30" class="interface-box"/>
+        <text x="210" y="220" class="interface-text" font-size="16" font-family="JetBrains Mono, monospace">Hive</text>
+
+        <rect x="150" y="240" width="120" height="30" class="interface-box"/>
+        <text x="210" y="260" class="interface-text" font-size="16" font-family="JetBrains Mono, monospace">Spark</text>
+
+        <rect x="150" y="280" width="120" height="30" class="interface-box"/>
+        <text x="210" y="300" class="interface-text" font-size="16" font-family="JetBrains Mono, monospace">Iceberg</text>
+    </g>
+
+    <!-- Ozone Client Library Box -->
+    <rect x="320" y="120" width="120" height="210" class="client-box"/>
+    <!-- Updated Text -->
+    <text x="380" y="210" class="client-text" font-size="16" font-family="JetBrains Mono, monospace">Ozone</text>
+    <text x="380" y="230" class="client-text" font-size="16" font-family="JetBrains Mono, monospace">Client</text>
+    <text x="380" y="250" class="client-text" font-size="16" font-family="JetBrains Mono, monospace">Library</text>
+
+    <!-- Metadata Enclosing Box -->
+    <rect x="540" y="70" width="650" height="220" rx="15" ry="15" stroke="#357500" stroke-width="2" fill="#e0edd2"/>
+    <text x="865" y="90" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Metadata</text>
+    
+    <!-- OM Ratis Components -->
+    <rect x="550" y="95" width="290" height="180" fill="#d1e4bc" stroke="#2d6300" stroke-width="1.5" rx="10" ry="10"/>
+    <text x="695" y="115" text-anchor="middle" font-weight="bold" font-size="16" fill="#306900" font-family="JetBrains Mono, monospace">Ratis (Raft)</text>
+    
+    <!-- Leader Manager Box -->
+    <rect x="560" y="130" width="270" height="50" class="manager-box"/>
+    <text x="695" y="160" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">OM (Leader)</text>
+    
+    <!-- Follower Boxes Row -->
+    <g id="om-followers-row">
+        <!-- Follower 1 Manager Box -->
+        <rect x="560" y="190" width="130" height="50" class="manager-box" fill-opacity="0.85"/>
+        <text x="625" y="220" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">OM (Follower)</text>
+        
+        <!-- Follower 2 Manager Box -->
+        <rect x="700" y="190" width="130" height="50" class="manager-box" fill-opacity="0.85"/>
+        <text x="765" y="220" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">OM (Follower)</text>
+    </g>
+    
+    <!-- Storage Container Manager Boxes - Ratis(Raft)  -->
+    <g id="storage-container-managers">
+        <!-- Enclosing box for SCM Ratis group -->
+        <rect x="550" y="95" width="290" height="180" fill="#d1e4bc" stroke="#2d6300" stroke-width="1.5" rx="10" ry="10" transform="translate(340, 0)"/>
+        <text x="695" y="115" text-anchor="middle" font-weight="bold" font-size="16" fill="#306900" font-family="JetBrains Mono, monospace" transform="translate(340, 0)">Ratis (Raft)</text>
+        
+        <!-- Leader Storage Container Manager Box -->
+        <rect x="560" y="130" width="270" height="50" class="scm-box" transform="translate(340, 0)"/>
+        <text x="695" y="160" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace" transform="translate(340, 0)">SCM (Leader)</text>
+        
+        <!-- Follower Boxes Row -->
+        <g id="scm-followers-row" transform="translate(340, 0)">
+            <!-- Follower 1 Storage Container Manager Box -->
+            <rect x="560" y="190" width="130" height="50" class="scm-box" fill-opacity="0.85"/>
+            <text x="625" y="220" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">SCM (Follower)</text>
+            
+            <!-- Follower 2 Storage Container Manager Box -->
+            <rect x="700" y="190" width="130" height="50" class="scm-box" fill-opacity="0.85"/>
+            <text x="765" y="220" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">SCM (Follower)</text>
+        </g>
+    </g>
+
+    <!-- Arrows -->
+    <!-- User -> Interfaces (Simplified to point to the enclosing box area) -->
+    <line x1="80" y1="195" x2="140" y2="195" class="arrow-line"/>
+
+    <!-- Interfaces -> Ozone Client Library -->
+    <line x1="270" y1="135" x2="320" y2="135" class="arrow-line"/>  <!-- S3 GW -> Client -->
+    <line x1="270" y1="175" x2="320" y2="175" class="arrow-line"/> <!-- HttpFS -> Client -->
+    <line x1="270" y1="215" x2="320" y2="215" class="arrow-line"/> <!-- Hive -> Client -->
+    <line x1="270" y1="255" x2="320" y2="255" class="arrow-line"/> <!-- Spark -> Client -->
+    <line x1="270" y1="295" x2="320" y2="295" class="arrow-line"/> <!-- Iceberg -> Client -->
+
+    <!-- Ozone Client Library -> Ozone Manager Leader -->
+    <line x1="440" y1="160" x2="560" y2="160" class="arrow-line"/> <!-- Client -> Leader Manager -->
+    <text x="460" y="145" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Metadata</text>
+    <text x="460" y="175" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Operations</text>
+    
+    
+    <!-- Text for OM -> SCM communication -->
+    
+    <!-- Datanode Boxes: 3x5 Grid -->
+    <!-- Row 1 -->
+    <rect x="265" y="420" width="130" height="60" class="datanode-box"/>
+    <text x="330" y="455" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="415" y="420" width="130" height="60" class="datanode-box"/>
+    <text x="480" y="455" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="565" y="420" width="130" height="60" class="datanode-box"/>
+    <text x="630" y="455" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="715" y="420" width="130" height="60" class="datanode-box"/>
+    <text x="780" y="455" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="865" y="420" width="130" height="60" class="datanode-box"/>
+    <text x="930" y="455" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <!-- Row 2 -->
+    <rect x="265" y="500" width="130" height="60" class="datanode-box"/>
+    <text x="330" y="535" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="415" y="500" width="130" height="60" class="datanode-box"/>
+    <text x="480" y="535" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="565" y="500" width="130" height="60" class="datanode-box"/>
+    <text x="630" y="535" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="715" y="500" width="130" height="60" class="datanode-box"/>
+    <text x="780" y="535" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="865" y="500" width="130" height="60" class="datanode-box"/>
+    <text x="930" y="535" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <!-- Row 3 -->
+    <rect x="265" y="580" width="130" height="60" class="datanode-box"/>
+    <text x="330" y="615" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="415" y="580" width="130" height="60" class="datanode-box"/>
+    <text x="480" y="615" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="565" y="580" width="130" height="60" class="datanode-box"/>
+    <text x="630" y="615" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="715" y="580" width="130" height="60" class="datanode-box"/>
+    <text x="780" y="615" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <rect x="865" y="580" width="130" height="60" class="datanode-box"/>
+    <text x="930" y="615" class="manager-text" font-size="14" font-family="JetBrains Mono, monospace">Datanode</text>
+    
+    <!-- Curved Arrow from Data to SCM Leader following right edge then up -->
+    <path d="M 1015 430 L 1245 430 L 1245 155 L 1170 155" 
+          stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrow)"/> <!-- Data -> SCM Leader -->
+    <text x="1195" y="135" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">Heartbeats and Reports</text>
+    
+    <!-- Vertical Arrow from Client to Data -->
+    <path d="M 380 330 L 380 380" stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/> <!-- Client -> Data -->
+    <text x="460" y="370" font-size="12" font-family="JetBrains Mono, monospace" fill="#255200" font-weight="bold">I/O Operations</text>
+    
+    <!-- Replication arrows from Leader to Followers -->
+    <path d="M 695 180 L 625 190" stroke="#306900" stroke-width="1.5" marker-end="url(#arrow)"/> <!-- Leader -> Follower 1 -->
+    <path d="M 695 180 L 765 190" stroke="#306900" stroke-width="1.5" marker-end="url(#arrow)"/> <!-- Leader -> Follower 2 -->
+    
+    <!-- Replication arrows from SCM Leader to Followers -->
+    <path d="M 1035 180 L 965 190" stroke="#306900" stroke-width="1.5" marker-end="url(#arrow)"/> <!-- SCM Leader -> Follower 1 -->
+    <path d="M 1035 180 L 1105 190" stroke="#306900" stroke-width="1.5" marker-end="url(#arrow)"/> <!-- SCM Leader -> Follower 2 -->
+    
+    <!-- Communication arrow between Ozone Manager and Storage Container Manager -->
+    <path d="M 830 155 L 900 155" stroke="#255200" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/> <!-- OM Leader -> SCM Leader -->
+</svg>
