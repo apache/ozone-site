@@ -22,20 +22,27 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 import IconExternalLink from '@theme/Icon/ExternalLink';
+import {useDocusaurusContext} from '@docusaurus/useDocusaurusContext';
 
-const iconMapping = {
-  'GitHub Discussions': '/img/social/github.svg',
-  'Jira Issues': '/img/social/jira.svg',
-  'Slack': '/img/social/slack.svg',
-  'Mailing List': '/img/social/mail.svg',
-  'YouTube': '/img/social/youtube.svg',
-  'Twitter': '/img/social/twitter-x.svg'
+// Define icon paths without the leading slash so they can be properly prefixed
+const iconPathMapping = {
+  'GitHub Discussions': 'img/social/github.svg',
+  'Jira Issues': 'img/social/jira.svg',
+  'Slack': 'img/social/slack.svg',
+  'Mailing List': 'img/social/mail.svg',
+  'YouTube': 'img/social/youtube.svg',
+  'Twitter': 'img/social/twitter-x.svg'
 };
+
 export default function FooterLinkItem({item}) {
   const {to, href, label, prependBaseUrlToHref, ...props} = item;
   const toUrl = useBaseUrl(to);
   const normalizedHref = useBaseUrl(href, {forcePrependBaseUrl: true});
-  const iconPath = iconMapping[label];  // Get icon path from mapping
+  const {siteConfig} = useDocusaurusContext();
+  
+  // Get icon path and apply base URL
+  const iconRelativePath = iconPathMapping[label];
+  const iconPath = iconRelativePath ? useBaseUrl(iconRelativePath) : null;
 
   return (
       <Link
