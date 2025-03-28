@@ -258,7 +258,7 @@ const config = {
           src: 'img/ozone-logo.svg',
         },
         // Navbar style can only be 'dark' or 'primary'
-        style: 'primary',
+        style: 'dark',
         // Add ARIA attributes
         hideOnScroll: false,
         items: [
