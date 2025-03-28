@@ -72,38 +72,32 @@
   font-family: var(--ifm-heading-font-family);
 }
 
-/* Comprehensive typography improvements with increased contrast */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--ifm-heading-font-family);
-  letter-spacing: -0.02em;
-  font-weight: 500; /* Slightly bolder for better contrast */
-  color: #14182B; /* Darker color for better contrast */
-}
 
 /* Specific heading size hierarchy */
 h1 {
   font-size: 48px;
   margin-top: 24px;
-  font-weight: 600; /* Bolder for main headings */
+  font-weight: 400; /* Bolder for main headings */
 }
 
+/*
 h2 {
   font-size: 42px;
   margin-top: 24px;
-  font-weight: 600; /* Bolder for section headings */
-  color: #1B2536; /* Slightly different shade for hierarchy */
+  font-weight: 600; !* Bolder for section headings *!
+  color: #1B2536; !* Slightly different shade for hierarchy *!
 }
 
 h3 {
   font-size: 32px;
   margin-top: 20px;
-  color: #1F2942; /* Slightly different shade for hierarchy */
+  color: #1F2942; !* Slightly different shade for hierarchy *!
 }
 
 h4 {
   font-size: 26px;
   margin-top: 18px;
-  color: #232D4D; /* Slightly different shade for hierarchy */
+  color: #232D4D; !* Slightly different shade for hierarchy *!
 }
 
 h5 {
@@ -116,6 +110,7 @@ h6 {
   margin-top: 14px;
 }
 
+*/
 /* Homepage hero heading styling - larger than regular h1 */
 .hero__title {
   font-size: 54px;
