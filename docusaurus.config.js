@@ -39,6 +39,7 @@ const config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/ozone-site/',
+  trailingSlash: true,
 
   // GitHub pages deployment config
   organizationName: 'kerneltime', // Your GitHub username. Usually your GitHub org/user name.
@@ -145,12 +146,12 @@ const config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
 
-            // Updated for GitHub Pages deployment
-            const validUrlRegex = new RegExp('^https://kerneltime\\.github\\.io/ozone-site/([a-z0-9][a-z0-9\\./\\-]*[a-z0-9/])?$');
+            // Updated for GitHub Pages deployment with trailing slash
+            const validUrlRegex = new RegExp('^https://kerneltime\\.github\\.io/ozone-site(/|(/[a-z0-9][a-z0-9\\./\\-]*[a-z0-9]/))$');
             items.forEach((item, index) => {
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
-                  console.error('All URLs should use kebab case and lowercase letters.');
+                  console.error('All URLs should use kebab case and lowercase letters with proper trailing slashes.');
                   process.exit(1);
               }
             });
