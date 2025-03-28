@@ -76,6 +76,27 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ifm-heading-font-family);
   letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+/* Homepage heading styling */
+.hero__title {
+  font-size: 54px;
+  font-weight: 400;
+  margin-top: 24px;
+}
+
+/* Section heading styles */
+h2 {
+  font-size: 42px;
+  font-weight: 400;
+  margin-top: 24px;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-top: 20px;
 }
 
 /* Colored headings for markdown */
