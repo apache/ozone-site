@@ -174,7 +174,20 @@ const config = {
           },
         ],
       },
-    ]
+    ],
+    // Create .nojekyll file to prevent GitHub Pages from using Jekyll
+    function (context, options) {
+      return {
+        name: 'create-nojekyll-file',
+        async postBuild({ outDir }) {
+          const fs = require('fs');
+          const path = require('path');
+          const nojekyllPath = path.join(outDir, '.nojekyll');
+          fs.writeFileSync(nojekyllPath, '');
+          console.log('Created .nojekyll file');
+        },
+      };
+    }
   ],
 
   themeConfig:
