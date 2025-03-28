@@ -23,6 +23,7 @@ import Layout from '@theme/Layout';
 import Logo from '@site/static/img/ozone-logo.svg';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // Import Bootstrap icons
 import { GraphUpArrow, Diagram3Fill, LockFill, Speedometer, Stack, HddRackFill, ShieldLock } from 'react-bootstrap-icons';
@@ -128,7 +129,7 @@ function UseCases() {
         </div>
         <div className="row">
           <div className="col col--12 text--center margin-top--lg">
-            <Link to="/community/who-uses-ozone">
+            <Link to={useBaseUrl('/community/who-uses-ozone')}>
               <button className="button button--primary button--lg">See Who Uses Ozone</button>
             </Link>
           </div>
@@ -154,63 +155,63 @@ function Integrations() {
   const integrations = [
     { 
       name: 'Hive', 
-      icon: () => <img src="/img/integrations/hive.svg" className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/hive' 
+      icon: () => <img src={useBaseUrl('/img/integrations/hive.svg')} className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/hive') 
     },
     { 
       name: 'Spark', 
-      icon: () => <img src="/img/integrations/spark.svg" className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/spark' 
+      icon: () => <img src={useBaseUrl('/img/integrations/spark.svg')} className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/spark') 
     },
     { 
       name: 'Iceberg', 
-      icon: () => <img src="/img/integrations/iceberg.svg" className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/iceberg' 
+      icon: () => <img src={useBaseUrl('/img/integrations/iceberg.svg')} className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/iceberg') 
     },
     { 
       name: 'Trino', 
-      icon: () => <img src="/img/integrations/trino.svg" className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/trino' 
+      icon: () => <img src={useBaseUrl('/img/integrations/trino.svg')} className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/trino') 
     },
     { 
       name: 'Impala', 
-      icon: () => <img src="/img/integrations/impala.svg" className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/impala' 
+      icon: () => <img src={useBaseUrl('/img/integrations/impala.svg')} className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/impala') 
     },
     { 
       name: 'Ranger', 
-      icon: () => <img src="/img/integrations/ranger.svg" className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/configuration/security/ranger' 
+      icon: () => <img src={useBaseUrl('/img/integrations/ranger.svg')} className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/ranger') 
     },
     { 
       name: 'Knox', 
-      icon: () => <img src="/img/integrations/knox.svg" className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/configuration/security/knox' 
+      icon: () => <img src={useBaseUrl('/img/integrations/knox.svg')} className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/knox') 
     },
     { 
       name: 'Kerberos', 
       icon: props => <ShieldLock {...props} size={28} style={{ color: '#212529' }} data-logo="kerberos-icon" />, 
-      link: '/docs/administrator-guide/configuration/security/kerberos' 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/kerberos') 
     },
     { 
       name: 'Prometheus', 
-      icon: () => <img src="/img/integrations/prometheus.svg" className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/operations/observability/prometheus' 
+      icon: () => <img src={useBaseUrl('/img/integrations/prometheus.svg')} className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/administrator-guide/operations/observability/prometheus') 
     },
     { 
       name: 'Grafana', 
-      icon: () => <img src="/img/integrations/grafana.svg" className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/operations/observability/grafana' 
+      icon: () => <img src={useBaseUrl('/img/integrations/grafana.svg')} className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/administrator-guide/operations/observability/grafana') 
     },
     { 
       name: 'Oozie', 
-      icon: () => <img src="/img/integrations/oozie.svg" className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/oozie' 
+      icon: () => <img src={useBaseUrl('/img/integrations/oozie.svg')} className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/oozie') 
     },
     { 
       name: 'Hue', 
-      icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/hue' 
+      icon: () => <img src={useBaseUrl('/img/integrations/hue.svg')} className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      link: useBaseUrl('/docs/user-guide/integrations/hue') 
     },
   ];
 
@@ -247,7 +248,7 @@ function Integrations() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
-  const getStartedHref = `docs/quick-start/installation/docker`;
+  const getStartedHref = useBaseUrl(`docs/quick-start/installation/docker`);
   return (
     <Layout
       title="Home"
@@ -266,7 +267,7 @@ export default function Home() {
                     Get Started
                   </button>
                 </Link>
-                <Link to="/download">
+                <Link to={useBaseUrl('/download')}>
                   <button className="button button--secondary button--lg">
                     Download
                   </button>
@@ -315,7 +316,7 @@ export default function Home() {
                     Quick Start
                   </button>
                 </Link>
-                <Link to="/docs">
+                <Link to={useBaseUrl('/docs')}>
                   <button className="button button--secondary button--lg">
                     Documentation
                   </button>
