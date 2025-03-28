@@ -50,6 +50,20 @@
 
 .label {
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.requiredMark {
+  color: var(--ifm-color-danger);
+  font-weight: bold;
+}
+
+.fieldHint {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-top: 0.25rem;
 }
 
 .input,
@@ -60,6 +74,30 @@
   font-size: 16px;
   background-color: var(--ifm-background-color);
   color: var(--ifm-font-color-base);
+  width: 100%;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--ifm-color-primary);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb), 0.25);
+}
+
+.inputError {
+  border-color: var(--ifm-color-danger);
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px rgba(var(--ifm-color-danger-rgb), 0.25);
+}
+
+.errorMessage {
+  color: var(--ifm-color-danger);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
 }
 
 .textarea {

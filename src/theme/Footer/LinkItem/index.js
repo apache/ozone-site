@@ -56,10 +56,10 @@ export default function FooterLinkItem({item}) {
               })}
           {...props}>
 
-        {iconPath && <img src={iconPath} alt={`${label} Icon`} style={{width: '1em', height: '1em', marginRight: '0.5em', verticalAlign: 'middle'}} />}
+        {iconPath && <img src={iconPath} alt="" aria-hidden="true" style={{width: '1em', height: '1em', marginRight: '0.5em', verticalAlign: 'middle'}} />}
 
-        {label}
-        {href && !isInternalUrl(href) && <IconExternalLink />}
+        <span>{label}</span>
+        {href && !isInternalUrl(href) && <IconExternalLink aria-hidden="true" />}
       </Link>
   );
 }

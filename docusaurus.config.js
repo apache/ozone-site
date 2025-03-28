@@ -66,6 +66,7 @@ const config = {
   Manually insert head tags to configure support for favicons on multiple platforms.
   */
   headTags: [
+    // Favicons
     {
       tagName: 'link',
       attributes: {
@@ -88,6 +89,50 @@ const config = {
         rel: 'apple-touch-icon',
         href: 'apple-touch-icon.png',
       },
+    },
+    // Resource hints for performance
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    // Structured data for SEO
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Apache Ozone',
+        'applicationCategory': 'Storage',
+        'operatingSystem': 'Cross-platform',
+        'offers': {
+          '@type': 'Offer',
+          'price': '0',
+          'priceCurrency': 'USD'
+        },
+        'description': 'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
+        'url': 'https://ozone.apache.org/',
+        'author': {
+          '@type': 'Organization',
+          'name': 'The Apache Software Foundation',
+          'url': 'https://www.apache.org/'
+        },
+        'license': 'https://www.apache.org/licenses/LICENSE-2.0'
+      }),
     },
   ],
 
@@ -135,6 +180,7 @@ const config = {
             require.resolve('./src/css/custom.css'),
             require.resolve('./src/css/header.css'),
             require.resolve('./src/css/footer.css'),
+            require.resolve('./src/css/docs-layout.css'),
           ],
         },
         sitemap: {
@@ -210,6 +256,10 @@ const config = {
         logo: {
           alt: 'Ozone Logo',
           src: 'img/ozone-logo.svg',
+        },
+        // Add accessibility attributes to the navbar
+        style: {
+          ariaLabel: 'Main',
         },
         items: [
           {

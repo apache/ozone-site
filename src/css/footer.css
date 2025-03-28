@@ -20,8 +20,8 @@
 /* Make footer dark regardless of the website theme */
 :root {
   --footer-background-color: #202020;
-  --footer-foreground-color: #ccc;
-  --copyright-link-color: #96d26e
+  --footer-foreground-color: #E0E0E0; /* Improved from #ccc to #E0E0E0 for better contrast */
+  --copyright-link-color: #A7E57F /* Brightened from #96d26e for better contrast against dark background */
 }
 
 html[data-theme='dark'] .footer {
@@ -50,7 +50,7 @@ footer.footer .footer__link-item svg {
 }
 
 footer.footer .footer__copyright {
-  color: #ccc;
+  color: var(--footer-foreground-color); /* Use the variable instead of hardcoded color */
   font-size: 0.85rem;
 }
 

@@ -218,30 +218,60 @@ p, li, td, th {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Dark mode integration items styled to match the primary button */
+/* Dark mode integration items - white background for better icon visibility */
 html[data-theme='dark'] .integration-item {
-  background-color: var(--ifm-color-primary);
-  border: 1px solid var(--ifm-color-primary-darker);
-  color: var(--ifm-color-white);
+  background-color: #ffffff; /* White background for maximum icon visibility */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #333333; /* Dark text for contrast against white */
   transition: all 0.3s ease;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 html[data-theme='dark'] .integration-item:hover {
-  background-color: var(--ifm-color-primary-darker);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff; /* Stay white on hover */
+  box-shadow: 0 4px 10px rgba(var(--ifm-color-primary-rgb), 0.2);
   transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
 }
 
-/* Make integration names light in dark mode cards to match primary button text */
+/* Make integration names dark in dark mode for better readability on white background */
 html[data-theme='dark'] .integration-item .integration-name {
-  color: #ffffff;
+  color: #333333;
   font-weight: 500;
 }
 
-/* Adjust SVG icons for better visibility against primary button */
+html[data-theme='dark'] .integration-item:hover .integration-name {
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Keep original icon colors in dark mode against white background */
 html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos-icon"]) {
-  color: #ffffff;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  color: inherit; /* Use the icon's original color */
+  filter: none;
+}
+
+/* Enhance icons on hover */
+.integration-item:hover .integration-logo-img,
+.integration-item:hover svg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12));
+}
+
+/* Ensure clean layout for integration grid */
+.integrations-section .row {
+  margin: 0 -0.5rem; /* Compensate for margins inside items */
+}
+
+.integrations-section .col {
+  padding: 0 0.5rem; /* Even spacing */
+}
+
+/* Increased size for container architecture diagrams */
+.markdown img[src*="ozone-storage-hierarchy-replicated.svg"],
+.markdown img[src*="ozone-storage-hierarchy-ec.svg"] {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: block;
 }
