@@ -1,6 +1,6 @@
 # Apache Ozone Changelog
 
-## Release 2.0.0 - 2025-03-26
+## Release 2.0.0 - 2025-03-27
 
 
 
@@ -903,5 +903,6 @@
 | [HDDS-12576](https://issues.apache.org/jira/browse/HDDS-12576) | [Ozone 2.0] Update proto.lock files |  Major | . | Wei-Chiu Chuang | Wei-Chiu Chuang |
 | [HDDS-12588](https://issues.apache.org/jira/browse/HDDS-12588) | Ozone Recon - Containers page has incorrect label for count for the number of blocks for various unhealthy states of containers |  Major | . | Devesh Kumar Singh | Devesh Kumar Singh |
 | [HDDS-12684](https://issues.apache.org/jira/browse/HDDS-12684) | Update NOTICE and LICENSE file |  Blocker | . | Wei-Chiu Chuang | Wei-Chiu Chuang |
+| [HDDS-1186](https://issues.apache.org/jira/browse/HDDS-1186) | Ozone S3 gateway (phase III) |  Major | S3 | Marton Elek |  |
 
 

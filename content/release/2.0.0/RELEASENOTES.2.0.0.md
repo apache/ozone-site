@@ -19,6 +19,13 @@ A new layout version, HBASE\_SUPPORT (7) is added to Ozone Manager that provides
 
 ---
 
+* [HDDS-11227](https://issues.apache.org/jira/browse/HDDS-11227) | *Major* | **Use OM's KMS from client side when connecting to a cluster and dealing with encrypted data**
+
+Ozone clients can now interact with multiple encrypted Ozone clusters. This improvement enables distcp to copy from one encrypted source Ozone cluster to another encrypted destination Ozone cluster.
+
+
+---
+
 * [HDDS-11375](https://issues.apache.org/jira/browse/HDDS-11375) | *Major* | **DN Startup fails with Illegal configuration**
 
 Remove the predefined hdds.ratis.raft.grpc.message.size. Its default value is determined by hdds.container.ratis.log.appender.queue.byte-limit + 1MB = 33MB.
@@ -61,6 +68,13 @@ ozone sh snapshot delete \<vol\>/\<linked bucket name\> \<snapshot name\>
 
 ---
 
+* [HDDS-11617](https://issues.apache.org/jira/browse/HDDS-11617) | *Blocker* | **Update hadoop to 3.4.1**
+
+Ozone's Hadoop dependency version was updated from 3.3.6 to 3.4.1.
+
+
+---
+
 * [HDDS-8101](https://issues.apache.org/jira/browse/HDDS-8101) | *Major* | **Add FSO repair tool to ozone CLI in read-only and repair modes**
 
 Added a new command "ozone repair om fso-tree" to detect and repair broken FSO trees caused by bugs such as HDDS-7592, which can orphan data in the OM.
@@ -71,11 +85,32 @@ ozone repair om fso-tree --db \<dbPath\> [--repair \| --r] [--volume \| -v \<vol
 
 ---
 
+* [HDDS-7852](https://issues.apache.org/jira/browse/HDDS-7852) | *Major* | **SCM Decommissioning Support**
+
+A Storage Container Manager can now be decommissioned from a set of SCM nodes. Check out user doc for usage and more details: https://ozone.apache.org/docs/edge/feature/decommission.html
+
+
+---
+
 * [HDDS-11753](https://issues.apache.org/jira/browse/HDDS-11753) | *Blocker* | **Deprecate file per chunk layout from datanode code**
 
 FILE\_PER\_CHUNK container layout (ozone.scm.container.layout) is deprecated. Starting from Apache Ozone 2.0, users will not be able to create new FILE\_PER\_CHUNK containers.
 
 The support will be removed in a future release.
+
+
+---
+
+* [HDDS-12488](https://issues.apache.org/jira/browse/HDDS-12488) | *Major* | **S3G should handle the signature calculation with trailers**
+
+AWS Java SDK V2 2.30.0 introduced an incompatible protocol change that caused file upload to Ozone S3 Gateway to fail. S3G is now updated to support AWS Java SDK V2 2.30.0 and later.
+
+
+---
+
+* [HDDS-12327](https://issues.apache.org/jira/browse/HDDS-12327) | *Blocker* | **Restore non-HA (to HA) upgrade test**
+
+Non-HA 1.4.1 cluster (in a non-rolling fashion) upgrade to 2.0.0 is tested.
 
 
 ---
