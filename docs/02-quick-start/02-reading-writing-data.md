@@ -4,25 +4,28 @@ sidebar_label: Reading and Writing Data
 
 # Reading and Writing Data in Ozone
 
-Apache Ozone provides multiple interfaces for reading and writing data, catering to different use cases and client preferences. This guide explains how to use the three primary interfaces within a Docker environment:
+Apache Ozone provides multiple interfaces for reading and writing data, catering to different use cases and client
+preferences. This guide explains how to use the three primary interfaces within a Docker environment:
 
-1.  **Ozone Shell (`ozone sh`)** - The native command-line interface
-2.  **OFS (Ozone File System)** - Hadoop-compatible file system interface
-3.  **S3 API** - Amazon S3 compatible REST interface
+1. **Ozone Shell (`ozone sh`)** - The native command-line interface
+2. **OFS (Ozone File System)** - Hadoop-compatible file system interface
+3. **S3 API** - Amazon S3 compatible REST interface
 
-All examples assume you already have a running Ozone cluster using Docker Compose as described in the [Docker Installation Guide](./01-installation/01-docker.md).
+All examples assume you already have a running Ozone cluster using Docker Compose as described in
+the [Docker Installation Guide](./01-installation/01-docker.md).
 
 ## Interface Comparison
 
-| Interface       | Strengths                                                                                    | Use Cases                                                                 |
-| :-------------- |:---------------------------------------------------------------------------------------------| :------------------------------------------------------------------------ |
-| **Ozone Shell** | - Full feature access Advanced operations Detailed metadata                             | - Administrative tasks Bucket/volume management Quota/ACL management |
+| Interface       | Strengths                                                                               | Use Cases                                                                  |
+|:----------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
+| **Ozone Shell** | - Full feature access Advanced operations Detailed metadata                             | - Administrative tasks Bucket/volume management Quota/ACL management       |
 | **OFS**         | - Familiar HDFS-like commands Works with existing Hadoop applications Full cluster view | - Hadoop ecosystem integration Applications that need filesystem semantics |
-| **S3 API**      | - Industry standard Works with existing S3 clients Language-independent            | - Web applications Multi-language environments Existing S3 applications |
+| **S3 API**      | - Industry standard Works with existing S3 clients Language-independent                 | - Web applications Multi-language environments Existing S3 applications    |
 
 ## 1. Using Ozone Shell (`ozone sh`)
 
-The Ozone Shell provides direct access to all Ozone features through a command-line interface. All commands follow the pattern:
+The Ozone Shell provides direct access to all Ozone features through a command-line interface. All commands follow the
+pattern:
 
 ```bash
 ozone sh <object-type> <action> <path> [options]
@@ -125,7 +128,8 @@ ozone sh key delete /vol1/bucket1/test_shell.txt
 
 ## 2. Using OFS (Ozone File System)
 
-OFS provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed for HDFS.
+OFS provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
+for HDFS.
 
 ### Accessing OFS
 
@@ -195,7 +199,8 @@ ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
 
 ## 3. Using S3 API
 
-The S3 API provides compatibility with applications designed for Amazon S3. It's accessible via the S3 Gateway service, typically running on port `9878` in the Docker setup.
+The S3 API provides compatibility with applications designed for Amazon S3. It's accessible via the S3 Gateway service,
+typically running on port `9878` in the Docker setup.
 
 ### S3 Credentials
 
@@ -207,6 +212,7 @@ export AWS_ACCESS_KEY_ID=testuser
 export AWS_SECRET_ACCESS_KEY=testuser-secret
 export AWS_ENDPOINT_URL=http://localhost:9878
 ```
+
 *(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)*
 
 ### Using AWS CLI
@@ -245,10 +251,10 @@ Ozone allows accessing the same data through different interfaces.
 
 ### Namespace Mapping
 
-| Data Location        | Ozone Shell Path          | OFS Path                      | S3 Path (if linked/in s3v) |
-| :------------------- | :------------------------ | :---------------------------- | :------------------------- |
-| vol1/bucket1/file.txt | `/vol1/bucket1/file.txt`  | `ofs://om/vol1/bucket1/file.txt` | (Needs bucket link)        |
-| s3v/s3bucket/file.txt | `/s3v/s3bucket/file.txt`  | `ofs://om/s3v/s3bucket/file.txt` | `s3://s3bucket/file.txt`   |
+| Data Location         | Ozone Shell Path         | OFS Path                                         | S3 Path                                                        |
+|:----------------------|:-------------------------|:-------------------------------------------------|:---------------------------------------------------------------|
+| vol1/bucket1/file.txt | `/vol1/bucket1/file.txt` | `ofs://<ozone service id>/vol1/bucket1/file.txt` | `s3://bucket1/file.txt` <br/>(if S3V configured to serve vol1) |
+| s3v/s3bucket/file.txt | `/s3v/s3bucket/file.txt` | `ofs://<ozone service id>/s3v/s3bucket/file.txt` | `s3://s3bucket/file.txt`                                       |
 
 *(Note: `om` in `ofs://` path refers to the Ozone Manager service address)*
 
@@ -297,16 +303,21 @@ aws s3 ls s3://linkedbucket/
 
 Ozone buckets can have different internal layouts:
 
-1.  **FILE_SYSTEM_OPTIMIZED (FSO):** Default. Better for hierarchical operations (like `ozone fs -mkdir`), supports trash for `ozone fs -rm`. Recommended for Hadoop/filesystem workloads.
-2.  **OBJECT_STORE (OBS):** Legacy layout. May offer slight performance benefits for flat object access patterns. No trash support.
+1. **FILE_SYSTEM_OPTIMIZED (FSO):** Default. Better for hierarchical operations (like `ozone fs -mkdir`), supports trash
+   for `ozone fs -rm`. Recommended for Hadoop/filesystem workloads.
+2. **OBJECT_STORE (OBS):** Legacy layout. May offer slight performance benefits for flat object access patterns. No
+   trash support.
 
 ```bash
 # Create buckets with specific layouts (inside om/client container)
 # ozone sh bucket create /vol1/fso_bucket --layout FILE_SYSTEM_OPTIMIZED
 # ozone sh bucket create /vol1/obs_bucket --layout OBJECT_STORE
 ```
+
 Most operations work on both, but FSO is generally preferred unless specific OBS characteristics are needed.
 
 ## Summary
 
-You have learned how to perform basic read/write operations in Ozone using three different interfaces: Ozone Shell, OFS, and the S3 API. Each interface has its strengths, and Ozone's multi-protocol design allows you to choose the best tool for the job while accessing the same underlying data.
+You have learned how to perform basic read/write operations in Ozone using three different interfaces: Ozone Shell, OFS,
+and the S3 API. Each interface has its strengths, and Ozone's multi-protocol design allows you to choose the best tool
+for the job while accessing the same underlying data.

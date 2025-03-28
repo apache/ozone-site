@@ -35,10 +35,10 @@ const config = {
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3001.
-  url: 'https://ozone-site-v2.staged.apache.org',
+  url: 'https://kerneltime.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/ozone-site/',
 
   // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
@@ -140,8 +140,8 @@ const config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
 
-            // TODO Base URL must be updated when the new website's branch is merged.
-            const validUrlRegex = new RegExp('^https://ozone-site-v2\.staged\.apache\.org/([a-z0-9][a-z0-9\./-]*[a-z0-9/])?$');
+            // Updated for GitHub Pages deployment
+            const validUrlRegex = new RegExp('^https://kerneltime\\.github\\.io/ozone-site/([a-z0-9][a-z0-9\\./\\-]*[a-z0-9/])?$');
             items.forEach((item, index) => {
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);

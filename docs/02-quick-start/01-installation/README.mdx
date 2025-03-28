@@ -8,4 +8,58 @@ import DocCardList from '@theme/DocCardList';
 
 This section provides instructions to quickly install an Ozone instance on your local machine that can be used for testing and evaluation. For instructions to install a production Ozone instance, see the [Administrator Guide](../../administrator-guide/installation).
 
-<DocCardList/>
+<div className="container">
+  <div className="row">
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="docker">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/quickstart/docker.svg" 
+            alt="Docker" 
+            className="themedImage_W2dc"
+            width="80"
+            height="80"
+          />
+          <h3>Docker</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Run Ozone using Docker Compose for a quick and easy setup.</p>
+        </div>
+      </a>
+    </div>
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="kubernetes">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/quickstart/kubernetes.svg" 
+            alt="Kubernetes" 
+            className="themedImage_W2dc"
+            width="80"
+            height="80"
+          />
+          <h3>Kubernetes</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Deploy Ozone on Kubernetes for container orchestration.</p>
+        </div>
+      </a>
+    </div>
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="bare-metal">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/quickstart/baremetal.svg" 
+            alt="Bare Metal" 
+            className="themedImage_W2dc"
+            width="80"
+            height="80"
+          />
+          <h3>Bare Metal</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Install Ozone directly on servers for maximum performance.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
