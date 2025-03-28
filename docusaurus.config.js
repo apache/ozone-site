@@ -40,6 +40,11 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/ozone-site/',
 
+  // GitHub pages deployment config
+  organizationName: 'kerneltime', // Your GitHub username. Usually your GitHub org/user name.
+  projectName: 'ozone-site', // Usually your repo name.
+  deploymentBranch: 'gh-pages', // Branch that GitHub pages will deploy from.
+
   // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
