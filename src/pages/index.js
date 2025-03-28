@@ -152,40 +152,42 @@ import {
   Database
 } from 'react-bootstrap-icons';
 function Integrations() {
+  const base = useBaseUrl('');
+  
   const integrations = [
     { 
       name: 'Hive', 
-      icon: () => <img src={useBaseUrl('/img/integrations/hive.svg')} className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/hive.svg`} className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/hive') 
     },
     { 
       name: 'Spark', 
-      icon: () => <img src={useBaseUrl('/img/integrations/spark.svg')} className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/spark.svg`} className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/spark') 
     },
     { 
       name: 'Iceberg', 
-      icon: () => <img src={useBaseUrl('/img/integrations/iceberg.svg')} className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/iceberg.svg`} className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/iceberg') 
     },
     { 
       name: 'Trino', 
-      icon: () => <img src={useBaseUrl('/img/integrations/trino.svg')} className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/trino.svg`} className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/trino') 
     },
     { 
       name: 'Impala', 
-      icon: () => <img src={useBaseUrl('/img/integrations/impala.svg')} className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/impala.svg`} className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/impala') 
     },
     { 
       name: 'Ranger', 
-      icon: () => <img src={useBaseUrl('/img/integrations/ranger.svg')} className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/ranger.svg`} className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/administrator-guide/configuration/security/ranger') 
     },
     { 
       name: 'Knox', 
-      icon: () => <img src={useBaseUrl('/img/integrations/knox.svg')} className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/knox.svg`} className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/administrator-guide/configuration/security/knox') 
     },
     { 
@@ -195,22 +197,22 @@ function Integrations() {
     },
     { 
       name: 'Prometheus', 
-      icon: () => <img src={useBaseUrl('/img/integrations/prometheus.svg')} className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/prometheus.svg`} className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/administrator-guide/operations/observability/prometheus') 
     },
     { 
       name: 'Grafana', 
-      icon: () => <img src={useBaseUrl('/img/integrations/grafana.svg')} className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/grafana.svg`} className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/administrator-guide/operations/observability/grafana') 
     },
     { 
       name: 'Oozie', 
-      icon: () => <img src={useBaseUrl('/img/integrations/oozie.svg')} className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/oozie.svg`} className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/oozie') 
     },
     { 
       name: 'Hue', 
-      icon: () => <img src={useBaseUrl('/img/integrations/hue.svg')} className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
+      icon: () => <img src={`${base}/img/integrations/hue.svg`} className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: useBaseUrl('/docs/user-guide/integrations/hue') 
     },
   ];
