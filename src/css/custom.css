@@ -72,31 +72,49 @@
   font-family: var(--ifm-heading-font-family);
 }
 
-/* Additional typography improvements */
+/* Comprehensive typography improvements */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ifm-heading-font-family);
   letter-spacing: -0.02em;
   font-weight: 400;
 }
 
-/* Homepage heading styling */
-.hero__title {
-  font-size: 54px;
-  font-weight: 400;
+/* Specific heading size hierarchy */
+h1 {
+  font-size: 48px;
   margin-top: 24px;
 }
 
-/* Section heading styles */
 h2 {
   font-size: 42px;
-  font-weight: 400;
   margin-top: 24px;
 }
 
 h3 {
   font-size: 32px;
-  font-weight: 400;
   margin-top: 20px;
+}
+
+h4 {
+  font-size: 26px;
+  margin-top: 18px;
+}
+
+h5 {
+  font-size: 22px;
+  margin-top: 16px;
+}
+
+h6 {
+  font-size: 18px;
+  margin-top: 14px;
+}
+
+/* Homepage hero heading styling - larger than regular h1 */
+.hero__title {
+  font-size: 54px;
+  font-weight: 400;
+  margin-top: 24px;
 }
 
 /* Colored headings for markdown */
