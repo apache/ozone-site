@@ -72,32 +72,38 @@
   font-family: var(--ifm-heading-font-family);
 }
 
-/* Comprehensive typography improvements */
+/* Comprehensive typography improvements with increased contrast */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ifm-heading-font-family);
   letter-spacing: -0.02em;
-  font-weight: 400;
+  font-weight: 500; /* Slightly bolder for better contrast */
+  color: #14182B; /* Darker color for better contrast */
 }
 
 /* Specific heading size hierarchy */
 h1 {
   font-size: 48px;
   margin-top: 24px;
+  font-weight: 600; /* Bolder for main headings */
 }
 
 h2 {
   font-size: 42px;
   margin-top: 24px;
+  font-weight: 600; /* Bolder for section headings */
+  color: #1B2536; /* Slightly different shade for hierarchy */
 }
 
 h3 {
   font-size: 32px;
   margin-top: 20px;
+  color: #1F2942; /* Slightly different shade for hierarchy */
 }
 
 h4 {
   font-size: 26px;
   margin-top: 18px;
+  color: #232D4D; /* Slightly different shade for hierarchy */
 }
 
 h5 {
@@ -113,58 +119,69 @@ h6 {
 /* Homepage hero heading styling - larger than regular h1 */
 .hero__title {
   font-size: 54px;
-  font-weight: 400;
+  font-weight: 600; /* Bolder for hero title */
   margin-top: 24px;
+  color: var(--ozone-hero-text); /* Keep existing hero text color */
 }
 
-/* Colored headings for markdown */
+/* Dark mode heading colors adjustment */
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: #F5F7FC; /* Lighter color for dark mode */
+}
+
+/* Markdown headings - use heading colors with a touch of brand color */
 .markdown h1 {
-  color: var(--ifm-color-primary-darkest);
+  color: #0D3900; /* Even darker shade of primary for maximum contrast */
 }
 
 .markdown h2 {
-  color: var(--ifm-color-primary-darker);
+  color: #14490A; /* Dark shade of primary */
 }
 
 .markdown h3 {
-  color: var(--ifm-color-primary-dark);
+  color: #1A5913; /* Medium-dark shade of primary */
 }
 
 .markdown h4 {
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-dark);
 }
 
 .markdown h5 {
-  color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary);
 }
 
 .markdown h6 {
-  color: var(--ifm-color-primary-lighter);
+  color: var(--ifm-color-primary-dark);
 }
 
 /* Dark mode heading colors */
 [data-theme='dark'] .markdown h1 {
-  color: var(--ifm-color-primary-lightest);
+  color: #FFFFFF; /* Pure white for maximum contrast */
 }
 
 [data-theme='dark'] .markdown h2 {
-  color: var(--ifm-color-primary-lighter);
+  color: #D8FFC2; /* Very light green */
 }
 
 [data-theme='dark'] .markdown h3 {
-  color: var(--ifm-color-primary-light);
+  color: #B4E89C; /* Light green */
 }
 
 [data-theme='dark'] .markdown h4 {
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-lightest);
 }
 
 [data-theme='dark'] .markdown h5 {
-  color: var(--ifm-color-primary-dark);
+  color: var(--ifm-color-primary-lighter);
 }
 
 [data-theme='dark'] .markdown h6 {
-  color: var(--ifm-color-primary-darker);
+  color: var(--ifm-color-primary-light);
 }
 
 pre, code {
