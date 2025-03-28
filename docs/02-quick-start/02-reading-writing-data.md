@@ -22,7 +22,7 @@ the [Docker Installation Guide](./01-installation/01-docker.md).
 | **OFS**         | - Familiar HDFS-like commands Works with existing Hadoop applications Full cluster view | - Hadoop ecosystem integration Applications that need filesystem semantics |
 | **S3 API**      | - Industry standard Works with existing S3 clients Language-independent                 | - Web applications Multi-language environments Existing S3 applications    |
 
-## 1. Using Ozone Shell (`ozone sh`)
+## Using Ozone Shell (ozone sh)
 
 The Ozone Shell provides direct access to all Ozone features through a command-line interface. All commands follow the
 pattern:
@@ -126,7 +126,7 @@ ozone sh key delete /vol1/bucket1/test_shell.txt
 # In OBS buckets, deletion is permanent via Ozone Shell.
 ```
 
-## 2. Using OFS (Ozone File System)
+## Using OFS (Ozone File System)
 
 OFS provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
 for HDFS.
@@ -197,7 +197,7 @@ ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
 # Trash configuration is done in core-site.xml (see Ozone docs for details)
 ```
 
-## 3. Using S3 API
+## Using S3 API
 
 The S3 API provides compatibility with applications designed for Amazon S3. It's accessible via the S3 Gateway service,
 typically running on port `9878` in the Docker setup.
