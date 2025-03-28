@@ -257,10 +257,10 @@ const config = {
           alt: 'Ozone Logo',
           src: 'img/ozone-logo.svg',
         },
-        // Add accessibility attributes to the navbar
-        style: {
-          ariaLabel: 'Main',
-        },
+        // Navbar style can only be 'dark' or 'primary'
+        style: 'primary',
+        // Add ARIA attributes
+        hideOnScroll: false,
         items: [
           {
             label: 'Docs',
