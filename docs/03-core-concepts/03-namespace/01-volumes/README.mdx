@@ -4,8 +4,56 @@ sidebar_label: Volumes
 
 # Volumes
 
-import DocCardList from '@theme/DocCardList';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
 
-This section documents configuration and use cases for volumes: Ozone's highest level of namespace organization.
+Volumes are the top-level containers in the Ozone namespace, analogous to user accounts or top-level directories. They are used to group buckets and manage ownership and storage limits.
 
-<DocCardList/>
+<div className="container" style={{marginTop: '2rem'}}>
+  <div className="row">
+    {/* Overview Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="overview" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/overview.svg')}
+          alt="Volume Overview"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Overview</h3>
+      </Link>
+      <p>Basic concepts and characteristics of Ozone volumes.</p>
+    </div>
+
+    {/* Owners Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="owners" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/owner.svg')}
+          alt="Volume Owners"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Owners</h3>
+      </Link>
+      <p>How volume ownership is managed and its implications for access control.</p>
+    </div>
+
+    {/* Quotas Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="quotas" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/quota.svg')}
+          alt="Volume Quotas"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Quotas</h3>
+      </Link>
+      <p>Setting and managing storage space and namespace quotas for volumes.</p>
+    </div>
+  </div>
+</div>

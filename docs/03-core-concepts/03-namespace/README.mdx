@@ -4,8 +4,56 @@ sidebar_label: Namespace
 
 # Namespace Layout
 
-import DocCardList from '@theme/DocCardList';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
 
-This section documents the layout of Ozone's namespace.
+Ozone organizes data within a hierarchical namespace. Understanding this structure is key to managing your data effectively. The main components are:
 
-<DocCardList/>
+<div className="container" style={{marginTop: '2rem'}}>
+  <div className="row">
+    {/* Overview Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./namespace/overview" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/overview.svg')}
+          alt="Namespace Overview"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Overview</h3>
+      </Link>
+      <p>General concepts and the overall structure of the Ozone namespace.</p>
+    </div>
+
+    {/* Volumes Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./namespace/volumes/" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/hierarchy.svg')}
+          alt="Ozone Volumes"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Volumes</h3>
+      </Link>
+      <p>Top-level containers used to group buckets, similar to user accounts.</p>
+    </div>
+
+    {/* Buckets Card */}
+    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./namespace/buckets/" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/bucket.svg')}
+          alt="Ozone Buckets"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Buckets</h3>
+      </Link>
+      <p>Containers within volumes where keys (objects) are actually stored.</p>
+    </div>
+  </div>
+</div>

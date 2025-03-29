@@ -4,8 +4,130 @@ sidebar_label: Buckets
 
 # Buckets
 
-import DocCardList from '@theme/DocCardList';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
 
-This section documents configuration and use cases for buckets: the second level of organization in Ozone's namespace.
+Buckets reside within volumes and are the containers where keys (objects) are stored. They offer configurations for various features like versioning, replication, and encryption. Explore the key aspects of buckets below:
 
-<DocCardList/>
+<div className="container" style={{marginTop: '2rem'}}>
+  {/* First Row */}
+  <div className="row" style={{marginBottom: '1.5rem'}}>
+    {/* Overview Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="overview" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/overview.svg')}
+            alt="Bucket Overview"
+            width="60"
+            height="60"
+          />
+        </div>
+        <h4>Overview</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Basic concepts</p>
+    </div>
+
+    {/* Owners Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="owners" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/owner.svg')}
+            alt="Bucket Owners"
+            width="60"
+            height="60"
+          />
+        </div>
+        <h4>Owners</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Ownership and access control.</p>
+    </div>
+
+    {/* Quotas Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="quotas" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/quota.svg')}
+            alt="Bucket Quotas"
+            width="60"
+            height="60"
+          />
+        </div>
+        <h4>Quotas</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Setting storage and namespace limits.</p>
+    </div>
+
+    {/* Layouts Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="layouts" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/filesystem-vs-keys.svg')}
+            alt="Bucket Layouts"
+            width="120"
+            style={{maxHeight: '60px'}}
+          />
+        </div>
+        <h4>Layouts</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Filesystem Optimized vs. Object Store</p>
+    </div>
+  </div>
+
+  {/* Second Row */}
+  <div className="row">
+    {/* Replication Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="replication" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/replication.svg')}
+            alt="Bucket Default Replication"
+            width="120"
+            style={{maxHeight: '60px'}}
+          />
+        </div>
+        <h4>Replication</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Replication Settings</p>
+    </div>
+
+    {/* Encryption Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="encryption" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/security.svg')}
+            alt="Bucket Encryption"
+            width="60"
+            height="60"
+          />
+        </div>
+        <h4>Encryption</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Transparent Data Encryption (TDE).</p>
+    </div>
+
+    {/* Links Card */}
+    <div className="col col--3" style={{textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start'}}>
+      <Link to="links" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.8rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/links.svg')}
+            alt="Bucket Links"
+            width="60"
+            height="60"
+          />
+        </div>
+        <h4>Links</h4>
+      </Link>
+      <p style={{fontSize: '0.9em'}}>Linking buckets</p>
+    </div>
+
+     {/* Empty column for alignment if needed */}
+     <div className="col col--3"></div>
+  </div>
+</div>

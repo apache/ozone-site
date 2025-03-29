@@ -92,7 +92,7 @@ The Ozone community uses Apache Slack for real-time communication and quick ques
 4. **Work on an issue**:
    - Comment on the issue to express your interest
    - Assign it to yourself if you plan to work on it
-   - Follow the [contribution guidelines](how-to-contribute) to submit a fix
+   - Follow the [contribution guidelines](/ozone-site/community/how-to-contribute) to submit a fix
    - Update the Jira status as you make progress
 
 ## Community Meetings

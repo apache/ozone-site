@@ -18,7 +18,7 @@ Trace every part of a write request from beginning to end. This includes:
 - OM checking permissions (Ranger or Native ACLs)
 - OM allocating blocks from SCM
 - OM creating open key
-  - Mention open key cleanup service, and that if key is not committed within a given time it will be picked up for [deletion](./delete#deleting-data)
+  - Mention open key cleanup service, and that if key is not committed within a given time it will be picked up for [deletion](delete#deleting-data)
 - OM generating block tokens from the shared secret previously retrieved from SCM
 - OM returning container, blocks, pipeline, block tokens
 - Client sending checksums and Datanodes validating
@@ -27,7 +27,7 @@ Trace every part of a write request from beginning to end. This includes:
   - For Ratis:
     - Include topology choices of which Datanodes to use
     - Include failover handling
-  - For [EC](../features/erasure-coding) and Ratis Streaming, link to their feature pages.
+  - For [EC](../../07-features/04-erasure-coding.md) and Ratis Streaming, link to their feature pages.
 - Client allocating more blocks if needed
 - Client committing to OM
 - OM checking the current namespace

@@ -97,7 +97,7 @@ Share your artwork through the [GitHub Discussions](https://github.com/apache/oz
 
 ## Getting Help
 
-Details for how to [reach the community can be found here](communication-channels)
+Details for how to [reach the community can be found here](/ozone-site/community/communication-channels)
 
 ## Recognition
 

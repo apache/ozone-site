@@ -4,8 +4,46 @@ sidebar_label: ACLs
 
 # Authorization With ACLs
 
-import DocCardList from '@theme/DocCardList';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
 
-This section covers Ozone's ACL support, which can be used to restrict access to different portions of the namespace once a user has authenticated with [Kerberos](../kerberos). To configure access for administrator operations that do not involve the Ozone namespace, see the [Administrator Guide](../../../administrator-guide/configuration/security/administrators).
+Ozone provides Access Control Lists (ACLs) to manage user permissions within the namespace after authentication (e.g., via [Kerberos](../01-kerberos.md)). This allows fine-grained control over who can access specific volumes, buckets, and keys.
 
-<DocCardList/>
+Ozone supports two primary ACL systems:
+
+<div className="container" style={{marginTop: '2rem'}}>
+  <div className="row">
+    {/* Native ACLs Card */}
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./01-native-acls" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem'}}>
+          <img
+            src={useBaseUrl('/img/ozone-logo.svg')}
+            alt="Ozone Native ACLs"
+            width="120"
+            style={{maxHeight: '100px'}}
+          />
+        </div>
+        <h3>Native ACLs</h3>
+      </Link>
+      <p>Ozone's built-in ACL system, providing basic permission management.</p>
+    </div>
+
+    {/* Ranger ACLs Card */}
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./02-ranger-acls" style={{textDecoration: 'none', color: 'inherit'}}>
+        <div style={{height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem'}}>
+          <img
+            src={useBaseUrl('/img/namespace/ranger.svg')}
+            alt="Apache Ranger ACLs"
+            style={{maxHeight: '115px'}}
+          />
+        </div>
+        <h3>Ranger ACLs</h3>
+      </Link>
+      <p>Integration with Apache Ranger for centralized, policy-based authorization.</p>
+    </div>
+  </div>
+</div>
+
+*Note: For configuring access for administrator operations that do not involve the Ozone namespace (e.g., SCM or OM administrative commands), see the [Administrator Guide](../../../administrator-guide/02-configuration/03-security/01-administrators.md).*

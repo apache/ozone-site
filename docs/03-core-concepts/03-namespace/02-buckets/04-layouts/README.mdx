@@ -4,8 +4,41 @@ sidebar_label: Layouts
 
 # Bucket Layouts
 
-import DocCardList from '@theme/DocCardList';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
 
-This section documents the different bucket layouts supported by Ozone and their use cases.
+Ozone offers different internal layouts for buckets, optimizing performance for specific access patterns. Understanding these layouts helps you choose the best option for your workload.
 
-<DocCardList/>
+<div className="container" style={{marginTop: '2rem'}}>
+  <div className="row">
+    {/* Object Store (OBS) Card */}
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./01-object-store" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/bucket.svg')}
+          alt="Object Store Layout (OBS)"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>Object Store (OBS)</h3>
+      </Link>
+      <p>Legacy layout, optimized for flat object namespaces and simple PUT/GET operations.</p>
+    </div>
+
+    {/* File System Optimized (FSO) Card */}
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./02-file-system-optimized" style={{textDecoration: 'none', color: 'inherit'}}>
+        <img
+          src={useBaseUrl('/img/namespace/namespace.svg')}
+          alt="File System Optimized Layout (FSO)"
+          width="80"
+          height="80"
+          style={{marginBottom: '1rem'}}
+        />
+        <h3>File System Optimized (FSO)</h3>
+      </Link>
+      <p>Default layout, optimized for hierarchical structures and filesystem-like operations (mkdir, ls, rename).</p>
+    </div>
+  </div>
+</div>

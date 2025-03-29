@@ -24,5 +24,5 @@ Trace every part of a read request from beginning to end. This includes:
   - For replication:
     - Include topology choices of which Datanodes to use
     - Include failover handling
-  - For EC, link to the [EC feature page](../features/erasure-coding).
+  - For EC, link to the [EC feature page](../../07-features/04-erasure-coding.md).
 - Client validating checksums
