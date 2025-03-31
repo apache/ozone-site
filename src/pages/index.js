@@ -271,13 +271,19 @@ export default function Home() {
       description={`${siteConfig.tagline}`}>
       <div className="hero hero-banner">
         <div className="container">
-          <div className="row" style={{alignItems: 'center'}}>
-            <div className="col col--6">
+          <div className="row hero-row" style={{alignItems: 'center'}}>
+            {/* Logo first for mobile layout (order will be reversed on larger screens) */}
+            <div className="col col--6 logo-column">
+              <div className="hero-logo-container">
+                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
+              </div>
+            </div>
+            <div className="col col--6 text-column">
               <h1 className="hero__title">{siteConfig.title}</h1>
               <p className="hero__subtitle">
                 {siteConfig.tagline}
               </p>
-              <div>
+              <div className="hero-buttons">
                 <Link to={getStartedHref}>
                   <button className="button button--primary button--lg margin-right--sm">
                     Get Started
@@ -288,12 +294,6 @@ export default function Home() {
                     Download
                   </button>
                 </Link>
-              </div>
-            </div>
-            <div className="col col--6 text--center">
-              {/* Logo with increased size and positioned more to the right */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2rem' }}>
-                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
               </div>
             </div>
           </div>

@@ -275,3 +275,93 @@ html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos
   margin: 2rem auto;
   display: block;
 }
+
+/* Documentation card styles moved to docs-cards.css */
+
+/* Diagnostic: Force stacking of main content and ToC on narrow screens */
+@media (max-width: 996px) {
+  /* Target the row containing main doc content and right ToC */
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module > .container > .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ensure columns take full width when stacked */
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module > .container > .row > [class*='col--'] {
+    flex-basis: auto; /* Reset basis */
+    max-width: 100%; /* Allow full width */
+    margin-left: 0; /* Remove potential horizontal margins */
+  }
+
+  /* Center card columns within their row on narrow screens before they stack */
+  /* Increased specificity and !important for diagnosis */
+  main .markdown .container > .row {
+    display: flex; /* Ensure it's flex */
+    flex-wrap: wrap; /* Allow wrapping */
+    /* Removed justify-content as we will force column width */
+  }
+
+  /* Force columns within this specific context to be full width on narrow screens */
+   main .markdown .container > .row > .col[class*='col--'] {
+     margin-left: auto !important; /* Auto margins for centering if needed */
+     margin-right: auto !important;
+     flex-basis: 100% !important; /* Force full basis */
+     max-width: 100% !important; /* Force full width */
+     width: 100% !important; /* Explicit width */
+   }
+}
+
+/* Hero section responsive layout */
+.hero-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Mobile-first approach: on mobile, show logo first, then text */
+.hero-row {
+  flex-direction: column;
+}
+
+.logo-column {
+  order: 1;
+}
+
+.text-column {
+  order: 2;
+  text-align: center;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+/* On larger screens (tablets and up), reverse the order and make text left-aligned */
+@media (min-width: 768px) {
+  .hero-row {
+    flex-direction: row;
+  }
+  
+  .logo-column {
+    order: 2;
+  }
+  
+  .text-column {
+    order: 1;
+    text-align: left;
+  }
+  
+  .hero-logo-container {
+    justify-content: flex-end;
+    margin-bottom: 0;
+  }
+  
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+}

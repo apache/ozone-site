@@ -181,6 +181,7 @@ const config = {
             require.resolve('./src/css/header.css'),
             require.resolve('./src/css/footer.css'),
             require.resolve('./src/css/docs-layout.css'),
+            require.resolve('./src/css/docs-cards.css'),
           ],
         },
         sitemap: {
