@@ -8,7 +8,7 @@ Storage containers are fixed-size (typically 5GB configured by `ozone.scm.contai
 
 - Managed by the Storage Container Manager (SCM)
 - The primary unit of replication in the system
-- Self-contained units that include all necessary metadata and data for themselves.
+- Self-contained units that include all necessary metadata and data for themselves
 - Designed to contain multiple blocks across different buckets and volumes
 
 Containers provide a critical abstraction layer that separates the logical namespace management (handled by Ozone Manager) from the physical storage management (handled by Storage Container Manager).
@@ -33,7 +33,7 @@ Containers provide durability through two replication strategies:
 
 ![Replicated Container Structure](../../../static/img/ozone/ozone-storage-hierarchy-replicated.svg)
 
-2. **Erasure Coded Containers**: A more space-efficient approach that splits data across multiple datanodes with parity blocks, reducing storage overhead while maintaining durability.
+1. **Erasure Coded Containers**: A more space-efficient approach that splits data across multiple Datanodes with parity blocks, reducing storage overhead while maintaining durability.
 
 ![EC Container Structure](../../../static/img/ozone/ozone-storage-hierarchy-ec.svg)
 
@@ -44,14 +44,16 @@ Replication happens at the container level rather than the block or object level
 Containers follow a defined lifecycle with distinct states, the two major states are:
 
 ### 1. OPEN State
+
 - Newly created containers start in this state
 - Containers are mutable and can accept new blocks
-- Replicated using RAFT (Ratis) or Erasure Coded for storage efficient durability and availability. 
+- Replicated using RAFT (Ratis) or Erasure Coded for storage efficient durability and availability
 
 ### 2. CLOSED State
+
 - Triggered when a container reaches its capacity limit
 - Containers become immutable
-- Replicated via asynchronous container copy mechanisms or reconstructed via Erasure Code.
+- Replicated via asynchronous container copy mechanisms or reconstructed via Erasure Code
 - All replica nodes can serve READ operations, improving read performance
 
 ## Containers and Scaling
@@ -87,7 +89,6 @@ ozone debug datanode container export <container-id> <output-path> [options]
 ```
 
 Note: Since containers are primarily an internal storage concept, these commands are typically used by administrators and for debugging purposes.
-
 
 ## Conclusion
 

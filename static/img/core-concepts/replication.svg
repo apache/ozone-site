@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 20 20" fill="#357500">
   <g transform="translate(0, 0) scale(1.2)">
   <!-- Bottom rectangle -->
-  <rect x="0" y="9" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
+  <rect x="0.5" y="9" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
   
   <!-- Middle rectangle -->
-  <rect x="2" y="6" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
+  <rect x="2.5" y="6" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
   
   <!-- Top rectangle (most visible) -->
-  <rect x="4" y="3" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
+  <rect x="4.5" y="3" width="12" height="6" rx="1" fill="#84ca56" fill-opacity="0.3" stroke="#357500" stroke-width="0.5"/>
   </g>
 </svg>
