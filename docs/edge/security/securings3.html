@@ -516,6 +516,7 @@ The user needs to <code>kinit</code> first and once they have authenticated via 
 they can download the S3 access key ID and AWS secret. Just like AWS S3,
 both of these are secrets that needs to be protected by the client since it
 gives full access to the S3 buckets.</p>
+<h2 id="obtain-secrets">Obtain Secrets</h2>
 <ul>
 <li>S3 clients can get the secret access id and user secret from OzoneManager.</li>
 </ul>
@@ -541,6 +542,37 @@ against Ozone S3 buckets.</p>
 </span></span><span style="display:flex;"><span>aws configure set region us-west-1
 </span></span></code></pre></div><p>Please refer to AWS S3 documentation on how to use S3 via command line or via
 S3 API.</p>
+<h2 id="revoking-secrets-via-rest-api">Revoking Secrets via REST API</h2>
+<p>To invalidate/revoke the secret, use <code>ozone s3 revokesecret</code> command.
+Alternatively, you can use the REST API endpoint to revoke the secret.
+Ozone now provides a REST API endpoint that allows administrators to revoke S3 access secrets. This operation invalidates a secret, ensuring it can no longer be used for authentication.</p>
+<h3 id="endpoint-details">Endpoint Details</h3>
+<ul>
+<li><strong>URL:</strong> <code>http://localhost:9879/secret</code></li>
+<li><strong>HTTP Method:</strong> <code>DELETE</code></li>
+</ul>
+<h3 id="authentication">Authentication</h3>
+<p>The API leverages SPNEGO (Kerberos) authentication. The following curl options are used:</p>
+<ul>
+<li><code>--negotiate</code> enables SPNEGO.</li>
+<li><code>-u :</code> uses the current Kerberos ticket (an empty username is provided).</li>
+</ul>
+<h3 id="example-1-revoke-secret-for-the-current-user">Example 1: Revoke Secret for the Current User</h3>
+<p>This command revokes the secret for the currently authenticated user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X DELETE --negotiate -u : -v http://localhost:9879/secret
+</span></span></code></pre></div><h3 id="example-2-revoke-secret-by-username">Example 2: Revoke Secret by Username</h3>
+<p>This command revokes the secret for a specific user by appending the username as a query parameter. Replace <code>testuser</code> with the desired username:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X DELETE --negotiate -u : -v <span style="color:#e6db74">&#34;http://localhost:9879/secret?username=testuser&#34;</span>
+</span></span></code></pre></div><h3 id="response">Response</h3>
+<ul>
+<li><strong>Success:</strong> Returns HTTP <code>200 OK</code> along with a confirmation message in JSON format.</li>
+<li><strong>Failure:</strong> Returns an appropriate HTTP error status and message if there are issues (e.g., authentication failures).</li>
+</ul>
+<h3 id="testing-and-verification">Testing and Verification</h3>
+<p>For a working example of these operations, refer to the <a href="https://raw.githubusercontent.com/apache/ozone/refs/heads/master/hadoop-ozone/dist/src/main/smoketest/s3/secretrevoke.robot">Secret Revoke Robot Test</a>. This test demonstrates both the default secret revocation and the revocation by username.</p>
+<blockquote>
+<p><strong>Note:</strong> Ensure your Kerberos authentication is correctly configured, as secret revocation is a privileged operation.</p>
+</blockquote>
 
 
           
@@ -560,7 +592,7 @@ S3 API.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: October 21, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8568075ddb75b4a6785cdb31b00b4a592058dc78">8568075ddb</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: April 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ed0111582f913ea9d67de0c8bea6445b8a653759">ed0111582f</a>
     </span>
   </div>
 </footer>
