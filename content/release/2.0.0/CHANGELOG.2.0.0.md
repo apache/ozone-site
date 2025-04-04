@@ -1,6 +1,6 @@
 # Apache Ozone Changelog
 
-## Release 2.0.0 - 2025-03-27
+## Release 2.0.0 - 2025-04-04
 
 
 
@@ -11,6 +11,7 @@
 | [HDDS-7593](https://issues.apache.org/jira/browse/HDDS-7593) | Supporting HSync and lease recovery |  Major | . | Wei-Chiu Chuang | Wei-Chiu Chuang |
 | [HDDS-7852](https://issues.apache.org/jira/browse/HDDS-7852) | SCM Decommissioning Support |  Major | SCM | Nandakumar | Nandakumar |
 | [HDDS-11070](https://issues.apache.org/jira/browse/HDDS-11070) | Separate KeyCodec responsibilities of being a coder/decoder and handling persistence of keys |  Major | . | Szabolcs Gál | Szabolcs Gál |
+| [HDDS-9218](https://issues.apache.org/jira/browse/HDDS-9218) | S3 secret managment through HTTP |  Major | . | Sammi Chen | Ivan Zlenko |
 
 
 ### IMPROVEMENTS:
@@ -140,6 +141,7 @@
 | [HDDS-12591](https://issues.apache.org/jira/browse/HDDS-12591) | Include ContainerInfo in ContainerAttribute |  Major | SCM | Tsz-wo Sze | Tsz-wo Sze |
 | [HDDS-12582](https://issues.apache.org/jira/browse/HDDS-12582) | TypedTable support custom ValueCodec |  Major | Ozone Manager | Sumit Agrawal | Sumit Agrawal |
 | [HDDS-11754](https://issues.apache.org/jira/browse/HDDS-11754) | Drop support for non-Ratis OM and SCM |  Blocker | . | Ethan Rose |  |
+| [HDDS-12750](https://issues.apache.org/jira/browse/HDDS-12750) | Move StorageTypeProto from ScmServerDatanodeHeartbeatProtocol.proto to hdds.proto |  Major | common | Tsz-wo Sze | Tsz-wo Sze |
 
 
 ### BUG FIXES:
@@ -427,6 +429,8 @@
 | [HDDS-12668](https://issues.apache.org/jira/browse/HDDS-12668) | HSync upgrade test failure |  Blocker | test | Attila Doroszlai | Attila Doroszlai |
 | [HDDS-12662](https://issues.apache.org/jira/browse/HDDS-12662) | Rename upgrade callback directory 1.5.0 to 2.0.0 |  Blocker | . | Wei-Chiu Chuang | Chia-Chuan Yu |
 | [HDDS-12671](https://issues.apache.org/jira/browse/HDDS-12671) | Include .editorconfig and .run in source tarball |  Minor | build | Attila Doroszlai | Attila Doroszlai |
+| [HDDS-12703](https://issues.apache.org/jira/browse/HDDS-12703) | ozone admin pipeline close \<id\> silently fails |  Minor | SCM | Venkat Sambath | Venkat Sambath |
+| [HDDS-12751](https://issues.apache.org/jira/browse/HDDS-12751) | native build fails with CMake 4 |  Blocker | build | Attila Doroszlai | Attila Doroszlai |
 
 
 ### TESTS:
@@ -862,6 +866,8 @@
 | [HDDS-12602](https://issues.apache.org/jira/browse/HDDS-12602) | Intermittent failure in TestContainerStateMachine.testWriteFailure |  Major | . | Attila Doroszlai | Peter Lee |
 | [HDDS-12617](https://issues.apache.org/jira/browse/HDDS-12617) | Use DatanodeID as keys in NodeStateMap |  Major | SCM | Tsz-wo Sze | Tsz-wo Sze |
 | [HDDS-12327](https://issues.apache.org/jira/browse/HDDS-12327) | Restore non-HA (to HA) upgrade test |  Blocker | test | Attila Doroszlai | Chia-Chuan Yu |
+| [HDDS-12724](https://issues.apache.org/jira/browse/HDDS-12724) | hdds-rocks-native build fails if JAVA\_HOME not set |  Major | build | Attila Doroszlai | Attila Doroszlai |
+| [HDDS-12720](https://issues.apache.org/jira/browse/HDDS-12720) | Use DatanodeID in SimpleMockNodeManager |  Minor | test | Tsz-wo Sze | Peter Lee |
 
 
 ### OTHER:
@@ -904,5 +910,7 @@
 | [HDDS-12588](https://issues.apache.org/jira/browse/HDDS-12588) | Ozone Recon - Containers page has incorrect label for count for the number of blocks for various unhealthy states of containers |  Major | . | Devesh Kumar Singh | Devesh Kumar Singh |
 | [HDDS-12684](https://issues.apache.org/jira/browse/HDDS-12684) | Update NOTICE and LICENSE file |  Blocker | . | Wei-Chiu Chuang | Wei-Chiu Chuang |
 | [HDDS-1186](https://issues.apache.org/jira/browse/HDDS-1186) | Ozone S3 gateway (phase III) |  Major | S3 | Marton Elek |  |
+| [HDDS-12733](https://issues.apache.org/jira/browse/HDDS-12733) | Bump axios to 0.30.0 |  Major | build, Ozone Recon | Attila Doroszlai |  |
+| [HDDS-12736](https://issues.apache.org/jira/browse/HDDS-12736) | Bump hadoop-thirdparty to 1.4.0 |  Major | build | Attila Doroszlai | Attila Doroszlai |
 
 

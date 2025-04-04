@@ -103,7 +103,7 @@ The support will be removed in a future release.
 
 * [HDDS-12488](https://issues.apache.org/jira/browse/HDDS-12488) | *Major* | **S3G should handle the signature calculation with trailers**
 
-AWS Java SDK V2 2.30.0 introduced an incompatible protocol change that caused file upload to Ozone S3 Gateway to fail. S3G is now updated to support AWS Java SDK V2 2.30.0 and later.
+AWS Java SDK V2 2.30.0 introduced an incompatible protocol change that caused file upload to Ozone S3 Gateway to fail or append a trailer data silently. S3G is now updated to support AWS Java SDK V2 2.30.0 and later.
 
 
 ---
@@ -118,6 +118,28 @@ Non-HA 1.4.1 cluster (in a non-rolling fashion) upgrade to 2.0.0 is tested.
 * [HDDS-11754](https://issues.apache.org/jira/browse/HDDS-11754) | *Blocker* | **Drop support for non-Ratis OM and SCM**
 
 Ozone Manager and Storage Container Manager will always run in HA (Ratis) mode. Clusters upgrading from non-Ratis (Standalone) mode will automatically run in single node HA (Ratis) mode.
+
+
+---
+
+* [HDDS-12750](https://issues.apache.org/jira/browse/HDDS-12750) | *Major* | **Move StorageTypeProto from ScmServerDatanodeHeartbeatProtocol.proto to hdds.proto**
+
+Moved StorageTypeProto from OmClientProtocol.proto and ScmServerDatanodeHeartbeatProtocol.proto to hdds.proto.  As a result, the java\_outer\_classname changed from OzoneManagerProtocolProtos and StorageContainerDatanodeProtocolProtos to HddsProtos.
+
+This change is 
+- Proto wire/binary format: compatible (unchanged)
+- Proto text format: compatible (unchanged)
+- Java API: incompatible (changed java\_outer\_classname)
+
+
+---
+
+* [HDDS-9218](https://issues.apache.org/jira/browse/HDDS-9218) | *Major* | **S3 secret managment through HTTP**
+
+A set of S3 REST API endpoints are available to manage S3 secrets:
+/secret for getting a secret.
+/revoke for revoking an existing secret.
+For more details, check out Securing S3 user document https://ozone.apache.org/docs/edge/security/securings3.html
 
 
 
