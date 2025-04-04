@@ -17,7 +17,7 @@ In addition to the usual development tools required to work on Ozone, the follow
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
 
 :::note
-As of Ozone 2.0.0, we have optional JNI libraries for fault inject tool and Ozone Snapshot features. It is recommended to build on a Linux so users can use these features.
+As of Ozone 2.0.0, we have optional native libraries for fault inject tool and Ozone Snapshot features. It is recommended to build on a Linux so users can use these features.
 :::
 
 import Tabs from '@theme/Tabs';
@@ -34,14 +34,17 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 ```
 
 You may encounter problems regarding sqlite3 compatibility issues when installing Subversion on Mac. Use the following workaround to resolve it:
+
 ```bash title="Install Subversion on Mac"
 # fix svn sqlite3 incompatibility
 brew update
 brew remove sqlite svn
 brew reinstall sqlite svn --build-from-source
 ```
+
 </TabItem>
 <TabItem value="linux" label="Linux">
+
 ```bash title="Install pre-requisites"
 yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch
 ```
@@ -265,6 +268,7 @@ If the command fails, you may need to do the following additional steps:
   ```bash
   gpgconf --kill gpg-agent
   ```
+
 </TabItem>
 <TabItem value="linux" label="Linux">
 - Install a program to prompt you for your GPG key passphrase (example on Red Hat):
@@ -282,13 +286,13 @@ If the command fails, you may need to do the following additional steps:
 
 - add this to `~/.gnupg/gpg.conf`:
 
-  ```
+  ```bash
   use-agent
   ```
 
 - add this to `~/.gnupg/gpg-agent.conf`
 
-  ```
+  ```bash
   allow-loopback-pinentry
   ```
 
