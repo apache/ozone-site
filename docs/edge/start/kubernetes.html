@@ -532,7 +532,28 @@ Access the services
 </code></pre><p>Now you can access any of the services. By default the services are not published but you can access them with port-forward rules.</p>
 <pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
-</code></pre>
+</code></pre><h2 id="apache-ozone-helm-chart">Apache Ozone Helm Chart</h2>
+<p>For a streamlined deployment of Apache Ozone on Kubernetes, consider using the <a href="https://apache.github.io/ozone-helm-charts/">Apache Ozone Helm Chart</a>. This Helm Chart simplifies the installation and management of an Ozone cluster by packaging best practices into a set of configurable Kubernetes resources.</p>
+<ol>
+<li>
+<p><strong>Add the Ozone Helm Repository</strong></p>
+<p>First, add the Apache Ozone Helm repository and update your local Helm repo cache:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add ozone-helm https://apache.github.io/ozone-helm-charts/
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span></code></pre></div></li>
+<li>
+<p>Install the Chart</p>
+<p>Install the Ozone Helm Chart using the following command. This command deploys a default Ozone cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install my-ozone-cluster ozone-helm/ozone
+</span></span></code></pre></div></li>
+<li>
+<p>Customize Your Deployment</p>
+<p>To customize the configuration, create or modify a values.yaml file with your desired settings and install the chart as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install my-ozone-cluster -f values.yaml ozone-helm/ozone
+</span></span></code></pre></div></li>
+</ol>
+<p>For more detailed documentation and advanced configuration options, please refer to the <a href="https://apache.github.io/ozone-helm-charts/">Apache Ozone Helm Chart</a> documentation.</p>
+
 
           
           <a class="btn  btn-success btn-lg" href="../start/runningviadocker.html">Next >></a>
@@ -551,7 +572,7 @@ kubectl port-forward scm-0 9876:9876
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: April 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ebcece42720d34b5979f4b43b1f365d3231c3ac8">ebcece4272</a>
     </span>
   </div>
 </footer>
