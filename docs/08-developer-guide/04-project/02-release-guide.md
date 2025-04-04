@@ -10,11 +10,34 @@ This document describes the process to release Apache Ozone. The process is not 
 
 ### Install Required Packages
 
-In addition to the usual development tools required to work on Ozone, the following packages are required during the release process:
+The following packages are required during the release process:
 
+- JDK 8
+- [Maven](https://maven.apache.org/download.cgi) to build.
 - [Subversion](https://subversion.apache.org/) to publish release artifacts and GPG keys.
 - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
+
+:::note
+As of Ozone 2.0.0, we have optional native libraries for fault inject tool and Ozone Snapshot features. It is recommended to build on a Linux so users can use these features.
+:::
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="mac" label="Mac">
+Install pre-requisites using Homebrew.
+
+  ```bash
+  brew install svn git pinentry-mac cmake gcc coreutils gpatch
+
+  sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+  sudo ln -s /usr/local/bin/gsha512sum /usr/local/bin/sha512sum
+
+  # use GNU patch as patch
+  PATH="$HOMEBREW_PREFIX/opt/gpatch/libexec/gnubin:$PATH"
+  ```
 
 Make sure to use [GNU tar](https://www.gnu.org/software/tar/).  On Mac, built-in tar includes additional metadata in the archive, which appears as extra files when extracted on other platforms.  GNU tar can be installed e.g. via Homebrew:
 
@@ -23,6 +46,32 @@ brew install gnu-tar
 # to use it as "tar", not "gtar", add the "gnubin" directory to your PATH
 export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 ```
+
+You may encounter problems regarding sqlite3 compatibility issues when installing Subversion on Mac. Use the following workaround to resolve it:
+
+```bash title="Install Subversion on Mac"
+# fix svn sqlite3 incompatibility
+brew update
+brew remove sqlite svn
+brew reinstall sqlite svn --build-from-source
+```
+
+</TabItem>
+<TabItem value="rockylinux" label="Rocky Linux">
+
+```bash title="Install pre-requisites"
+yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch which
+```
+
+</TabItem>
+<TabItem value="ubuntulinux" label="Ubuntu Linux">
+
+```bash title="Install pre-requisites"
+apt update && apt install -y subversion git pinentry-tty openjdk-8-jdk cmake g++ patch gpg
+```
+
+</TabItem>
+</Tabs>
 
 ### Publish Your GPG Key
 
@@ -143,7 +192,13 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 
 ### Update the Ozone Version on the Master Branch
 
-Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 1.4.0, then the master branch's current version would be `1.4.0-SNAPSHOT`. Here you would increase it to `1.5.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/2863) for an example.
+Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 2.0.0, then the master branch's current version would be `2.0.0-SNAPSHOT`. Here you would increase it to `2.1.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/8065) for an example.
+
+```bash title="Update project version"
+mvn versions:set -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -Dproperty=ozone.version -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -Dproperty=ozone.release -DnewVersion="Joshua Tree”
+```
 
 :::note
 It is okay if there are commits that land between the `proto.lock` file updates and the SNAPSHOT version increase on the master branch, but they will not be part of the release unless they are manually cherry-picked after the release branch is created.
@@ -155,17 +210,19 @@ Once the previous two pull requests to update protolock files and the Ozone SNAP
 :::important
 The parent commit of the release branch should be the commit that was merged in the [proto.lock file update](#build-and-commit-protolock-files-to-the-master-branch).
 :::
-Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 1.2.0, create a branch called `ozone-1.2` . All release related changes will go to this branch until the release is complete.
+Name the branch after the major and minor version of the release, so patch releases can also be done off this branch. For example, If releasing 2.0.0, create a branch called `ozone-2.0` . All release related changes will go to this branch until the release is complete.
 
 ### Set Up Local Environment
 
 The following variables will be referenced in commands:
 
 ```bash
-export VERSION=1.1.0 # Set to the version of ozone being released.
+export VERSION=2.0.0 # Set to the version of ozone being released.
 export RELEASE_DIR=~/ozone-release/ # ozone-release needs to be created
 export CODESIGNINGKEY=<your_gpg_key_id>
 export RC=0 # Set to the number of the current release candidate, starting at 0.
+# Optional, if not specified, gpg will prompt during the build for passphrase.
+export MAVEN_GPG_PASSPHRASE=<PASSPHRASE> # Maven passes this environment variable to gpg for passphrase.
 ```
 
 It is probably best to clone a fresh Ozone repository locally to work on the release, and leave your existing repository intact for dev tasks you may be working on simultaneously. After cloning, make sure the git remote for the [apache/ozone](https://github.com/apache/ozone) upstream repo is named `origin`. This is required for release build metadata to be correctly populated.
@@ -183,23 +240,10 @@ Assume all following commands are executed from within this repo with your relea
 
 Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+```bash title="Update and Commit the Version Changes"
+mvn versions:set -DnewVersion=$VERSION
+mvn versions:set-property -Dproperty=ozone.version -DnewVersion=$VERSION
 
-<Tabs>
-<TabItem value="linux" label="Linux">
-```bash title="Update the Versions"
-find . -name pom.xml -type f | xargs sed -i "s/$VERSION-SNAPSHOT/$VERSION/g"
-```
-</TabItem>
-<TabItem value="mac" label="Mac">
-```bash title="Update the Versions (Mac)"
-find . -name pom.xml -type f -print0 | xargs -0 sed -i '' "s/$VERSION-SNAPSHOT/$VERSION/g"
-```
-</TabItem>
-</Tabs>
-
-```bash title="Commit the Version Changes "
 git commit -am "Update Ozone version to $VERSION"
 ```
 
@@ -212,26 +256,20 @@ git tag -s "ozone-$VERSION-RC$RC"
 ```
 
 :::tip
-If the command fails on MacOS, you may need to do the following additional steps:
+If the command fails, you may need to do the following additional steps:
+:::
 
-- Install a program to prompt you for your GPG key passphrase (example using homebrew):
-
-  ```bash
-  brew install pinentry-mac
-  ```
-
-- Tell git to use this program for signing:
+- Tell git to use this program for signing and which key to sign with:
 
   ```bash
   git config --global gpg.program "$(which gpg)"
+  git config --global user.signingKey $CODESIGNINGKEY
   ```
 
-- Tell git which key to sign with:
+- And then perform the following platform-dependent steps.
 
-  ```bash
-  git config --global user.signingKey <gpg_key_id>
-  ```
-
+<Tabs>
+<TabItem value="mac" label="Mac">
 - Tell GPG to use this program to prompt for passphrase:
 
   ```bash
@@ -244,7 +282,22 @@ If the command fails on MacOS, you may need to do the following additional steps
   gpgconf --kill gpg-agent
   ```
 
-:::
+</TabItem>
+<TabItem value="linux" label="Linux">
+- add this to `~/.gnupg/gpg.conf`:
+
+  ```bash
+  use-agent
+  ```
+
+- add this to `~/.gnupg/gpg-agent.conf`
+
+  ```bash
+  allow-loopback-pinentry
+  ```
+
+</TabItem>
+</Tabs>
 
 ### Perform Sanity Checks
 
@@ -266,7 +319,7 @@ If the command fails on MacOS, you may need to do the following additional steps
 Build the project to fetch dependencies.
 
   ```bash
-  mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
+  mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
   ```
 
 ### Create and Upload Maven Artifacts
@@ -274,7 +327,7 @@ Build the project to fetch dependencies.
 - Perform the final build and upload the release artifacts.
 
   ```bash
-  mvn deploy -DdeployAtEnd=true -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY"
+  mvn deploy -DdeployAtEnd=true -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
   ```
 
 - Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
@@ -319,7 +372,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - Verify each .tar.gz artifact:
 
       ```bash
-      gpg --verify <artifact>.tar.gz.asc <artifact>.tar.gz
+      for x in *.tar.gz; do gpg --verify $x.asc $x; done
       ```
 
 4. Verify checksums
@@ -368,9 +421,9 @@ git push origin "ozone-$VERSION-RC$RC"
 Send a vote email to the dev@ozone.apache.org mailing list. Include the following items in the email:
 
 - Link to the release candidate tag on Github
-- Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%201.4.0).
-- Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/1.2.0-rc0
-- Location where the Maven artifacts are staged. This link will look something like https://repository.apache.org/content/repositories/orgapacheozone-1001/
+- Link to a Jira query showing all resolved issues for this release. Something like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20fixVersion%20%3D%202.0.0).
+- Location of the source and binary tarballs. This link will look something like https://dist.apache.org/repos/dist/dev/ozone/2.0.0-rc0
+- Location where the Maven artifacts are staged. This link will look something like https://repository.apache.org/content/repositories/orgapacheozone-1029/
 - Link to the public key used to sign the artifacts. This should always be in the KEYS file and you can just link to that: https://dist.apache.org/repos/dist/release/ozone/KEYS
 - Fingerprint of the key used to sign the artifacts.
 
@@ -414,7 +467,7 @@ Write a haiku to the photo with Future font.
 
 ### Update the Ozone Website
 
-1. Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`.
+1. Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`. Please write the release notes in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. In particular, make sure it is human readable and not a simple commit log diffs.
 2. Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
 3. Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
 
@@ -425,6 +478,10 @@ git checkout "ozone-$VERSION-RC$RC"
 git tag -s "ozone-$VERSION" -m "Ozone $VERSION release"
 git push origin "ozone-$VERSION"
 ```
+
+### Update GitHub Releases page
+
+Update the [GitHub Releases](https://github.com/apache/ozone/releases/new) page with the release information. See the [1.4.1 Release page](https://github.com/apache/ozone/releases/tag/ozone-1.4.1) for an example.
 
 ### Publish a Docker Image for the Release
 
@@ -446,6 +503,10 @@ The Ozone Docker image is intended for testing purposes only, not production use
     git checkout -b "ozone-$VERSION"
     git push origin "ozone-$VERSION"
     ```
+
+### Update Helm Chart (Optional)
+
+Once Docker Image is published, we can also update Helm Chart. Check out this [Pull Request](https://github.com/apache/ozone-helm-charts/pull/11) for an example.
 
 ### Update Acceptance Tests on the Master Branch
 
