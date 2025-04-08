@@ -54,8 +54,9 @@ Access the OM web UI at `http://om-host:9874/` or `https://om-host:9875/` when H
 
 The SCM web UI focuses on container management and datanode coordination.
 
-**Default port:**
+**Default ports:**
 - HTTP: 9876
+- HTTPS: 9877
 
 **Port configuration:**
 ```xml
@@ -79,14 +80,15 @@ The SCM web UI focuses on container management and datanode coordination.
 - Replication and EC status
 - Leader/follower information in HA deployments
 
-Access the SCM web UI at `http://scm-host:9876/`.
+Access the SCM web UI at `http://scm-host:9876/` or `https://scm-host:9877/` when HTTPS is enabled.
 
 ### DataNode
 
 DataNode web UIs provide information about local container storage and operations.
 
-**Default port:**
+**Default ports:**
 - HTTP: 9882
+- HTTPS: 9883
 
 **Port configuration:**
 ```xml
@@ -110,7 +112,7 @@ DataNode web UIs provide information about local container storage and operation
 - Volume storage statistics
 - IO operations metrics
 
-Access the DataNode web UI at `http://datanode-host:9882/`.
+Access the DataNode web UI at `http://datanode-host:9882/` or `https://datanode-host:9883/` when HTTPS is enabled.
 
 ### S3 Gateway
 
@@ -147,8 +149,9 @@ Access the S3 Gateway web UI at `http://s3g-host:9878/` or `https://s3g-host:198
 
 The HTTPFS web UI provides information about REST API operations.
 
-**Default port:**
+**Default ports:**
 - HTTP: 14000
+- HTTPS: 14001
 
 **Port configuration:**
 ```xml
@@ -170,7 +173,7 @@ The HTTPFS web UI provides information about REST API operations.
 - Authentication status
 - Performance metrics
 
-Access the HTTPFS web UI at `http://httpfs-host:14000/`.
+Access the HTTPFS web UI at `http://httpfs-host:14000/` or `https://httpfs-host:14001/` when HTTPS is enabled.
 
 ### Recon
 
