@@ -120,7 +120,9 @@ The S3 Gateway web UI provides information about S3-compatible API operations.
 
 **Default ports:**
 - HTTP: 9878
-- HTTPS: 19878
+- HTTPS: 9879
+- Web Admin HTTP: 19878
+- Web Admin HTTPS: 19879
 
 **Port configuration:**
 ```xml
@@ -133,7 +135,19 @@ The S3 Gateway web UI provides information about S3-compatible API operations.
 <!-- Change the HTTPS port -->
 <property>
   <name>ozone.s3g.https-address</name>
+  <value>0.0.0.0:9879</value>
+</property>
+
+<!-- Change the Web Admin HTTP port -->
+<property>
+  <name>ozone.s3g.webadmin.http-address</name>
   <value>0.0.0.0:19878</value>
+</property>
+
+<!-- Change the Web Admin HTTPS port -->
+<property>
+  <name>ozone.s3g.webadmin.https-address</name>
+  <value>0.0.0.0:19879</value>
 </property>
 ```
 
@@ -143,7 +157,8 @@ The S3 Gateway web UI provides information about S3-compatible API operations.
 - Performance metrics for S3 API calls
 - Error statistics
 
-Access the S3 Gateway web UI at `http://s3g-host:9878/` or `https://s3g-host:19878/` when HTTPS is enabled.
+Access the S3 Gateway web UI at `http://s3g-host:9878/` or `https://s3g-host:9879/` when HTTPS is enabled.
+Access the S3 Gateway Web Admin UI at `http://s3g-host:19878/` or `https://s3g-host:19879/` when HTTPS is enabled.
 
 ### HTTP FileSystem Gateway
 
