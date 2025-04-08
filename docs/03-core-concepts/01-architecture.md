@@ -14,7 +14,7 @@ Volumes are the top-level entities in the Ozone namespace, conceptually similar 
 - Organizational divisions
 - Project groupings
 
-Volumes provide isolation and can have their own admins and quota limits. For more information, see [Volumes Overview](./03-namespace/01-volumes/01-overview.md).
+Volumes provide isolation and can have their own admins and quota limits. For more information, see [Volumes Overview](01-namespace/01-volumes/01-overview.md).
 
 ### Buckets
 
@@ -25,7 +25,7 @@ Buckets exist within volumes and act as containers for objects (keys). Each buck
 - Access control policies
 - Quota limits
 
-Buckets are analogous to directories in a filesystem or buckets in cloud object stores. For more information, see [Buckets Overview](./03-namespace/02-buckets/01-overview.md).
+Buckets are analogous to directories in a filesystem or buckets in cloud object stores. For more information, see [Buckets Overview](01-namespace/02-buckets/01-overview.md).
 
 ### Keys (Objects)
 
@@ -35,7 +35,7 @@ Keys are the actual data objects stored in buckets. They can be:
 - Binary data
 - Named using a path-like structure depending on bucket layout
 
-For more details about Ozone's namespace, see [Namespace Overview](./03-namespace/README.mdx).
+For more details about Ozone's namespace, see [Namespace Overview](01-namespace/README.mdx).
 
 ### Ozone Bucket Types
 
@@ -60,7 +60,7 @@ The File System Optimized layout (FSO) provides hierarchical directory structure
 - Better performance for filesystem-style workloads
 - Default layout type
 
-The bucket layout determines how data is organized and accessed within a bucket. For more information, see [Bucket Layouts](./03-namespace/02-buckets/04-layouts/README.mdx).
+The bucket layout determines how data is organized and accessed within a bucket. For more information, see [Bucket Layouts](01-namespace/02-buckets/04-layouts/README.mdx).
 
 ![Ozone Namespace Hierarchy](../../static/img/ozone/ozone-namespace.svg)
 

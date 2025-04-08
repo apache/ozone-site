@@ -20,7 +20,9 @@ Ozone includes features relevant to large-scale storage requirements:
 
 ### Scale
 
-Ozone's architecture separates metadata management from data storage. The Ozone Manager (OM) and Storage Container Manager (SCM) handle metadata operations, while Datanodes manage the physical storage of data blocks. This design allows for independent scaling of these components and supports incremental cluster growth.
+Ozone's architecture separates metadata management from data storage. The Ozone Manager (OM) and 
+Storage Container Manager (SCM) handle metadata operations, while Datanodes manage the physical storage of data blocks. 
+This design allows for independent scaling of these components and supports incremental cluster growth.
 
 ### Flexible Durability
 
