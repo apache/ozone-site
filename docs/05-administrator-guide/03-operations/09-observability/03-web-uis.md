@@ -166,20 +166,25 @@ The HTTPFS web UI provides information about REST API operations.
 
 **Default ports:**
 - HTTP: 14000
-- HTTPS: 14001
 
 **Port configuration:**
 ```xml
 <!-- Change the HTTP port -->
 <property>
-  <name>ozone.httpfs.http-address</name>
-  <value>0.0.0.0:14000</value>
+  <name>httpfs.http.port</name>
+  <value>14000</value>
 </property>
 
-<!-- Change the HTTPS port -->
+<!-- Change the hostname -->
 <property>
-  <name>ozone.httpfs.https-address</name>
-  <value>0.0.0.0:14001</value>
+  <name>httpfs.http.hostname</name>
+  <value>0.0.0.0</value>
+</property>
+
+<!-- Enable HTTPS -->
+<property>
+  <name>httpfs.ssl.enabled</name>
+  <value>true</value>
 </property>
 ```
 
@@ -188,7 +193,7 @@ The HTTPFS web UI provides information about REST API operations.
 - Authentication status
 - Performance metrics
 
-Access the HTTPFS web UI at `http://httpfs-host:14000/` or `https://httpfs-host:14001/` when HTTPS is enabled.
+Access the HTTPFS web UI at `http://httpfs-host:14000/` when using HTTP. For HTTPS access, enable SSL with the `httpfs.ssl.enabled` property.
 
 ### Recon
 
