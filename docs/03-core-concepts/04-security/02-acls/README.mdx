@@ -1,49 +1,14 @@
----
-sidebar_label: ACLs
----
+# Access Control Lists (ACLs)
 
-# Authorization With ACLs
+Authorization in Apache Ozone determines what actions an authenticated user can perform on specific resources like volumes, buckets, and keys. Ozone primarily uses Access Control Lists (ACLs) for this purpose, offering two main approaches:
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
+1.  **[Native ACLs](./01-native-acls.md):** Ozone's built-in ACL system, managed via Ozone CLI commands (`setacl`, `getacl`, etc.). This is the default mechanism if Apache Ranger is not integrated. It provides POSIX-like permissions for users and groups directly on Ozone resources.
 
-Ozone provides Access Control Lists (ACLs) to manage user permissions within the namespace after authentication (e.g., via [Kerberos](../01-kerberos.md)). This allows fine-grained control over who can access specific volumes, buckets, and keys.
+2.  **[Ranger Integration](./02-ranger-acls.md):** Ozone can delegate authorization decisions to Apache Ranger. When enabled, policies are managed centrally in the Ranger Admin UI, offering richer policy features and centralized auditing across multiple services.
 
-Ozone supports two primary ACL systems:
+## Choosing an Approach
 
-<div className="container" style={{marginTop: '2rem'}}>
-  <div className="row">
-    {/* Native ACLs Card */}
-    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./01-native-acls" style={{textDecoration: 'none', color: 'inherit'}}>
-        <div style={{height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem'}}>
-          <img
-            src={useBaseUrl('/img/ozone-logo.svg')}
-            alt="Ozone Native ACLs"
-            width="120"
-            style={{maxHeight: '100px'}}
-          />
-        </div>
-        <h3>Native ACLs</h3>
-      </Link>
-      <p>Ozone's built-in ACL system, providing basic permission management.</p>
-    </div>
+*   **Native ACLs** are simpler to set up initially and suitable for environments where Ranger is not deployed or required. Management is done directly via Ozone commands.
+*   **Ranger Integration** is recommended for environments already using Ranger, requiring centralized policy management, advanced policy features (like tag-based policies or deny conditions), or unified auditing across multiple Hadoop components.
 
-    {/* Ranger ACLs Card */}
-    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./02-ranger-acls" style={{textDecoration: 'none', color: 'inherit'}}>
-        <div style={{height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem'}}>
-          <img
-            src={useBaseUrl('/img/namespace/ranger.svg')}
-            alt="Apache Ranger ACLs"
-            style={{maxHeight: '115px'}}
-          />
-        </div>
-        <h3>Ranger ACLs</h3>
-      </Link>
-      <p>Integration with Apache Ranger for centralized, policy-based authorization.</p>
-    </div>
-  </div>
-</div>
-
-*Note: For configuring access for administrator operations that do not involve the Ozone namespace (e.g., SCM or OM administrative commands), see the [Administrator Guide](../../../administrator-guide/02-configuration/03-security/01-administrators.md).*
+The choice depends on your cluster's security requirements and existing infrastructure. Both systems ensure that only authorized users can access and manipulate data stored within Ozone.

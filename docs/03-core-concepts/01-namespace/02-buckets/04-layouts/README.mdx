@@ -1,44 +1,36 @@
----
-sidebar_label: Layouts
----
-
 # Bucket Layouts
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import Link from '@docusaurus/Link'; // Use Docusaurus Link for internal navigation
+Apache Ozone offers different **Bucket Layouts** that define how keys (objects, files) are organized and managed within a bucket. The chosen layout significantly impacts the bucket's behavior, performance characteristics, and compatibility with different access protocols like S3 and Hadoop Compatible File System (HCFS) interfaces (`ofs://`, `o3fs://`).
 
-Ozone offers different internal layouts for buckets, optimizing performance for specific access patterns. Understanding these layouts helps you choose the best option for your workload.
+Ozone's flexibility in bucket layouts allows a single cluster to serve as both a high-performance object store (like Amazon S3) and a scalable Hadoop Compatible File System (like HDFS), catering to diverse workloads and enabling multi-protocol access to data.
 
-<div className="container" style={{marginTop: '2rem'}}>
-  <div className="row">
-    {/* Object Store (OBS) Card */}
-    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./01-object-store" style={{textDecoration: 'none', color: 'inherit'}}>
-        <img
-          src={useBaseUrl('/img/namespace/bucket.svg')}
-          alt="Object Store Layout (OBS)"
-          width="80"
-          height="80"
-          style={{marginBottom: '1rem'}}
-        />
-        <h3>Object Store (OBS)</h3>
-      </Link>
-      <p>Legacy layout, optimized for flat object namespaces and simple PUT/GET operations.</p>
-    </div>
+## Available Layouts
 
-    {/* File System Optimized (FSO) Card */}
-    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./02-file-system-optimized" style={{textDecoration: 'none', color: 'inherit'}}>
-        <img
-          src={useBaseUrl('/img/namespace/namespace.svg')}
-          alt="File System Optimized Layout (FSO)"
-          width="80"
-          height="80"
-          style={{marginBottom: '1rem'}}
-        />
-        <h3>File System Optimized (FSO)</h3>
-      </Link>
-      <p>Default layout, optimized for hierarchical structures and filesystem-like operations (mkdir, ls, rename).</p>
-    </div>
-  </div>
-</div>
+Ozone provides the following bucket layouts:
+
+1.  **[Object Store (OBS)](object-store):**
+    *   **Namespace:** Flat (like S3).
+    *   **Compatibility:** Optimized for strict S3 compatibility.
+    *   **Use Case:** S3-native applications, cloud-native workloads, unstructured data storage (media, backups).
+    *   **HCFS Access (`ofs://`):** Not supported.
+
+2.  **[File System Optimized (FSO)](file-system-optimized):**
+    *   **Namespace:** Hierarchical (like HDFS).
+    *   **Compatibility:** Optimized for HCFS compatibility (`ofs://`, `o3fs://`). Supports atomic directory operations via HCFS.
+    *   **Use Case:** HDFS replacement, traditional analytics (Spark, Hive, Impala), workloads requiring filesystem semantics.
+    *   **S3 Access:** Supported, but directory operations are not atomic via S3.
+
+3.  **Legacy:**
+    *   This was the original layout before OBS and FSO were introduced.
+    *   It provides a flat namespace.
+    *   Its behavior, especially regarding S3 access and filesystem path interpretation, can depend on the `ozone.om.enable.filesystem.paths` configuration setting.
+    *   **Recommendation:** For all new buckets and use cases, prefer either **OBS** or **FSO** over the Legacy layout.
+
+## Choosing the Right Layout
+
+Selecting the appropriate bucket layout is crucial for optimal performance and compatibility:
+
+*   If your primary requirement is **S3 compatibility** for cloud-native applications or pure object storage, choose **OBS**.
+*   If your primary requirement is **HCFS compatibility** for analytics workloads or replacing HDFS, choose **FSO**.
+
+You can specify the layout during bucket creation or set a default layout cluster-wide. See the specific layout pages for details.
