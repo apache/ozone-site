@@ -365,3 +365,53 @@ html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos
     justify-content: flex-start;
   }
 }
+
+/* PWA Reload Popup styles */
+.pwa-reload-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: pwa-popup-slide-up 0.3s ease-out;
+}
+
+.pwa-reload-popup__content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pwa-reload-popup__content p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.pwa-reload-popup__button {
+  background-color: white;
+  color: var(--ifm-color-primary);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pwa-reload-popup__button:hover {
+  background-color: #f0f0f0;
+}
+
+@keyframes pwa-popup-slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
