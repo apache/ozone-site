@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="160" xmlns="http://www.w3.org/2000/svg">
+    <!-- This is a grid layout of all integration logos with transparent background -->
+    
+    <!-- Hive Logo -->
+    <g transform="translate(80, 80) scale(0.09)">
+        <use href="/ozone-site/img/integrations/hive.svg#svgView(viewBox(0,0,1000,900))" />
+    </g>
+    
+    <!-- Spark Logo -->
+    <g transform="translate(200, 80) scale(0.2)">
+        <use href="/ozone-site/img/integrations/spark.svg#svgView(viewBox(0,0,414,215))" />
+    </g>
+    
+    <!-- Impala Logo -->
+    <g transform="translate(320, 80) scale(0.16)">
+        <use href="/ozone-site/img/integrations/impala.svg#svgView(viewBox(0,0,500,500))" />
+    </g>
+    
+    <!-- Iceberg Logo -->
+    <g transform="translate(440, 80) scale(0.26)">
+        <use href="/ozone-site/img/integrations/iceberg.svg#svgView(viewBox(0,0,500,500))" />
+    </g>
+    
+    <!-- Trino Logo -->
+    <g transform="translate(560, 80) scale(0.26)">
+        <use href="/ozone-site/img/integrations/trino.svg#svgView(viewBox(0,0,500,500))" />
+    </g>
+
+    <!-- Hue Logo -->
+    <g transform="translate(680, 80) scale(0.16)">
+        <use href="/ozone-site/img/integrations/hue.svg#svgView(viewBox(0,0,500,500))" />
+    </g>
+    
+    <!-- Ranger Logo (if present) -->
+    <g transform="translate(720, 80) scale(0.16)">
+        <use href="/ozone-site/img/integrations/ranger.svg#svgView(viewBox(0,0,500,500))" />
+    </g>
+</svg>
