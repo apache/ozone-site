@@ -6,7 +6,7 @@ sidebar_label: Ozone
 
 Document how to install, configure and run Ozone's client. This should also include
 
-- Which interfaces it supports (ofs, o3, Java).
+- Which interfaces it supports (ofs, Java).
 - Information about configuration files it reads (core-site.xml, client log4j).
 - Environment variables and common JVM flags (`-D`) that can be used at the CLI.
 

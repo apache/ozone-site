@@ -1,7 +1,21 @@
 # Client Interfaces
 
-import DocCardList from '@theme/DocCardList';
+Apache Ozone provides multiple ways for users and applications to interact with the storage system. These interfaces cater to different use cases, ranging from command-line administration to big data analytics and cloud-native object storage access.
 
-This section documents the interfaces that clients can use to communicate with Ozone.
+Understanding these interfaces helps you choose the best way to integrate your applications with Ozone.
 
-<DocCardList/>
+## Available Interfaces
+
+*   **[Ozone Shell (`o3`)](./01-o3.md):** A command-line interface (CLI) primarily used for administrative tasks like managing volumes and buckets, setting ACLs, and basic key operations. It interacts directly with the Ozone Manager (OM) via its RPC protocol.
+
+*   **[Ozone File System (`ofs`)](./02-ofs.md):** A Hadoop Compatible File System (HCFS) implementation. It allows accessing Ozone using the `ofs://` scheme, providing filesystem semantics (directories, atomic renames/deletes) when used with [FSO buckets](../../03-core-concepts/01-namespace/02-buckets/04-layouts/02-file-system-optimized.md). Ideal for Hadoop ecosystem tools (Spark, Hive, Impala, etc.).
+
+*   **[S3 Protocol](./03-s3.md):** Ozone includes an S3-compatible gateway that translates Amazon S3 REST API calls into Ozone operations. This allows using standard S3 tools (AWS CLI, SDKs, Boto3) and applications designed for S3 to interact with Ozone, primarily with [OBS buckets](../../03-core-concepts/01-namespace/02-buckets/04-layouts/01-object-store.md).
+
+*   **[Hadoop S3A Connector (`s3a`)](./04-s3a.md):** While primarily designed for AWS S3, the Hadoop S3A connector can be configured to talk to Ozone's S3 gateway. This allows Hadoop ecosystem tools to access Ozone via the S3 protocol using the `s3a://` scheme, offering an alternative to `ofs://`, especially when S3 compatibility is preferred or required. Note that filesystem semantics might differ compared to `ofs://`.
+
+*   **[HTTPFS](./05-httpfs.md):** A REST API endpoint, similar to HDFS WebHDFS/HttpFS, that provides filesystem-like access over HTTP. It can be used for basic file operations via standard HTTP tools like `curl`.
+
+*   **[Java Client API](./06-java-client-api.md):** A native Java library for programmatic interaction with Ozone. It provides comprehensive access to Ozone features, including volume, bucket, and key management, as well as data read/write operations. This is the most direct way for Java applications to integrate deeply with Ozone.
+
+Choose the interface that best suits your application's needs, existing tooling, and desired access semantics (object store vs. filesystem).

@@ -147,7 +147,7 @@ The Ozone client is the software component that enables applications to interact
 - Handles communication with OM for namespace operations
 - Manages direct data transfer with datanodes
 - Implements client-side caching for improved performance
-- Offers pluggable interfaces for different protocols (O3, S3, OFS)
+- Offers pluggable interfaces for different protocols (S3, OFS)
 - Handles authentication and token management
 
 The client library abstracts away the complexity of the distributed system, providing applications with a simple, consistent interface to Ozone storage. For more information, see [Client Details](../07-system-internals/01-components/06-client/README.mdx).
@@ -285,7 +285,7 @@ Erasure coded pipelines distribute data and parity:
 
 Ozone supports multiple access protocols, making it versatile for different applications:
 
-### Native API (o3)
+### Native API
 
 - Command-line interface and Java API
 - Full feature access
