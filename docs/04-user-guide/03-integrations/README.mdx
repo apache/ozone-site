@@ -6,16 +6,18 @@ sidebar_label: Integrations
 
 import DocCardList from '@theme/DocCardList';
 
-This section provides instructions to configure other systems to use Ozone for storage.
+A key strength of Apache Ozone is its ability to serve as a unified storage platform accessible via multiple protocols. It functions both as a **Hadoop Compatible File System (HCFS)** through its `ofs://` and `o3fs://` interfaces, and as an **S3-compatible object store** via its S3 Gateway. This dual nature allows seamless integration with a wide range of big data processing frameworks, analytics engines, and data management tools.
+
+This section provides guides for configuring various systems within the data ecosystem to leverage Ozone as their storage backend, taking advantage of its scalability, performance, and protocol flexibility.
 
 <div className="container">
   <div className="row">
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="hive">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/hive.svg" 
-            alt="Apache Hive" 
+          <img
+            src="/ozone-site/img/integrations/hive.svg"
+            alt="Apache Hive"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -23,16 +25,16 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Hive</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Configure Hive to read and write data in Ozone.</p>
+          <p>Configure Hive to read and write data in Ozone using HCFS semantics.</p>
         </div>
       </a>
     </div>
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="hue">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/hue.svg" 
-            alt="Apache Hue" 
+          <img
+            src="/ozone-site/img/integrations/hue.svg"
+            alt="Apache Hue"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -40,16 +42,16 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Hue</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Use Hue as a web interface to browse and manage Ozone data.</p>
+          <p>Use Hue as a web interface to browse and manage Ozone data via HCFS or S3.</p>
         </div>
       </a>
     </div>
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="iceberg">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/iceberg.svg" 
-            alt="Apache Iceberg" 
+          <img
+            src="/ozone-site/img/integrations/iceberg.svg"
+            alt="Apache Iceberg"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -57,7 +59,7 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Iceberg</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Store Iceberg table data in Ozone for analytics workloads.</p>
+          <p>Store Iceberg table data and metadata in Ozone for analytics workloads.</p>
         </div>
       </a>
     </div>
@@ -66,9 +68,9 @@ This section provides instructions to configure other systems to use Ozone for s
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="impala">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/impala.svg" 
-            alt="Apache Impala" 
+          <img
+            src="/ozone-site/img/integrations/impala.svg"
+            alt="Apache Impala"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -76,16 +78,16 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Impala</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Run interactive SQL queries on data stored in Ozone.</p>
+          <p>Run interactive SQL queries on data stored in Ozone using HCFS.</p>
         </div>
       </a>
     </div>
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="oozie">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/oozie.svg" 
-            alt="Apache Oozie" 
+          <img
+            src="/ozone-site/img/integrations/oozie.svg"
+            alt="Apache Oozie"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -93,16 +95,16 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Oozie</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Schedule and coordinate workflow jobs on Ozone data.</p>
+          <p>Schedule and coordinate workflow jobs accessing data on Ozone.</p>
         </div>
       </a>
     </div>
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="spark">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/spark.svg" 
-            alt="Apache Spark" 
+          <img
+            src="/ozone-site/img/integrations/spark.svg"
+            alt="Apache Spark"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -110,7 +112,7 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Apache Spark</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Process Ozone data with Spark applications and analytics.</p>
+          <p>Process Ozone data with Spark applications using HCFS or S3A interfaces.</p>
         </div>
       </a>
     </div>
@@ -119,9 +121,9 @@ This section provides instructions to configure other systems to use Ozone for s
     <div className="col col--4 margin-bottom--lg">
       <a className="card padding--lg card--full-height" href="trino">
         <div className="text--center">
-          <img 
-            src="/ozone-site/img/integrations/trino.svg" 
-            alt="Trino" 
+          <img
+            src="/ozone-site/img/integrations/trino.svg"
+            alt="Trino"
             className="themedImage_W2dc"
             width="80"
             height="80"
@@ -129,9 +131,10 @@ This section provides instructions to configure other systems to use Ozone for s
           <h3>Trino</h3>
         </div>
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p>Use Trino (formerly PrestoSQL) to query data in Ozone.</p>
+          <p>Use Trino (formerly PrestoSQL) to query data in Ozone via Hive or Iceberg catalogs.</p>
         </div>
       </a>
     </div>
+    {/* Add other integration cards here as needed */}
   </div>
 </div>

@@ -4,8 +4,59 @@ sidebar_label: Build
 
 # Building Ozone
 
-import DocCardList from '@theme/DocCardList';
-
 This section provides instructions for developers to build Ozone from source.
 
-<DocCardList/>
+<div className="container">
+  <div className="row">
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="maven">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/maven.svg" 
+            alt="Maven" 
+            className="themedImage_W2dc"
+            style={{ height: '80px', width: 'auto' }}
+          />
+          <h3>Maven</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Build Ozone using Maven for full development capabilities.</p>
+        </div>
+      </a>
+    </div>
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="intellij">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/intellij.svg" 
+            alt="IntelliJ IDEA" 
+            className="themedImage_W2dc"
+            width="80"
+            height="80"
+          />
+          <h3>IntelliJ IDEA</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Set up Ozone project in IntelliJ IDEA for development.</p>
+        </div>
+      </a>
+    </div>
+    <div className="col col--4 margin-bottom--lg">
+      <a className="card padding--lg card--full-height" href="docker-images">
+        <div className="text--center">
+          <img 
+            src="/ozone-site/img/quickstart/docker.svg" 
+            alt="Docker" 
+            className="themedImage_W2dc"
+            width="80"
+            height="80"
+          />
+          <h3>Docker</h3>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <p>Build Ozone using Docker for containerized development.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
