@@ -481,7 +481,7 @@ git push origin "ozone-$VERSION"
 
 ### Update GitHub Releases page
 
-add the release information [GitHub Releases](https://github.com/apache/ozone/releases/new) page. See the [1.4.1 Release page](https://github.com/apache/ozone/releases/tag/ozone-1.4.1) for an example.
+Update the [GitHub Releases](https://github.com/apache/ozone/releases/new) page with the release information. See the [1.4.1 Release page](https://github.com/apache/ozone/releases/tag/ozone-1.4.1) for an example.
 
 ### Publish a Docker Image for the Release
 
