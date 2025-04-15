@@ -12,6 +12,8 @@ This document describes the process to release Apache Ozone. The process is not 
 
 In addition to the usual development tools required to work on Ozone, the following packages are required during the release process:
 
+- JDK 8
+- [Maven](https://maven.apache.org/download.cgi) to build.
 - [Subversion](https://subversion.apache.org/) to publish release artifacts and GPG keys.
 - [GnuPG](https://www.gnupg.org/) to manage your GPG keys.
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
@@ -25,6 +27,18 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
 <TabItem value="mac" label="Mac">
+Install pre-requisites using Homebrew.
+
+  ```bash
+  brew install svn git pinentry-mac cmake gcc coreutils gpatch
+
+  sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+  sudo ln -s /usr/local/bin/gsha512sum /usr/local/bin/sha512sum
+
+  # use GNU patch as patch
+  PATH="$HOMEBREW_PREFIX/opt/gpatch/libexec/gnubin:$PATH"
+  ```
+
 Make sure to use [GNU tar](https://www.gnu.org/software/tar/).  On Mac, built-in tar includes additional metadata in the archive, which appears as extra files when extracted on other platforms.  GNU tar can be installed e.g. via Homebrew:
 
 ```bash title="Install GNU tar on Mac"
@@ -43,10 +57,17 @@ brew reinstall sqlite svn --build-from-source
 ```
 
 </TabItem>
-<TabItem value="linux" label="Linux">
+<TabItem value="rockylinux" label="Rocky Linux">
 
 ```bash title="Install pre-requisites"
-yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch
+yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch which
+```
+
+</TabItem>
+<TabItem value="ubuntulinux" label="Ubuntu Linux">
+
+```bash title="Install pre-requisites"
+apt update && apt install -y subversion git pinentry-tty openjdk-8-jdk cmake g++ patch gpg
 ```
 
 </TabItem>
@@ -200,6 +221,7 @@ export VERSION=2.0.0 # Set to the version of ozone being released.
 export RELEASE_DIR=~/ozone-release/ # ozone-release needs to be created
 export CODESIGNINGKEY=<your_gpg_key_id>
 export RC=0 # Set to the number of the current release candidate, starting at 0.
+# Optional, if not specified, gpg will prompt during the build for passphrase.
 export MAVEN_GPG_PASSPHRASE=<PASSPHRASE> # Maven passes this environment variable to gpg for passphrase.
 ```
 
@@ -239,12 +261,6 @@ If the command fails, you may need to do the following additional steps:
 
 <Tabs>
 <TabItem value="mac" label="Mac">
-- Install a program to prompt you for your GPG key passphrase (example using homebrew):
-
-  ```bash
-  brew install pinentry-mac
-  ```
-
 - Tell git to use this program for signing:
 
   ```bash
@@ -271,12 +287,6 @@ If the command fails, you may need to do the following additional steps:
 
 </TabItem>
 <TabItem value="linux" label="Linux">
-- Install a program to prompt you for your GPG key passphrase (example on Red Hat):
-
-  ```bash
-  yum install -y pinentry
-  ```
-
 - Tell git to use this program for signing with which keys:
 
   ```bash
