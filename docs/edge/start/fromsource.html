@@ -513,10 +513,17 @@ s=d.getElementsByTagName('script')[0];
     <div class="panel-heading">Requirements</div>
     <div class="panel-body">
         <ul>
-<li>Java 1.8</li>
-<li>Maven</li>
+<li>x86 or ARM64</li>
+<li>Linux or MacOS</li>
+<li>JDK 1.8 or higher</li>
+<li><a href="https://maven.apache.org/download.cgi">Maven 3.6 or later</a></li>
+<li>Internet connection for first build (to fetch all Maven and Ozone dependencies)</li>
 </ul>
-
+<p>You will also need to install the following dependencies to build native code (optional):</p>
+<ul>
+<li>gcc</li>
+<li>cmake</li>
+</ul>
     </div>
 </div>
 
@@ -525,19 +532,72 @@ s=d.getElementsByTagName('script')[0];
 color="red">not</font>
 planning to build sources yourself, you can safely skip this page.</p>
 </div>
-<p>If you are a Hadoop ninja, and wise in the ways of Apache, you already know
-that a real Apache release is a source release.</p>
 <p>If you want to build from sources, Please untar the source tarball (or clone the latest code
-from the <a href="https://github.com/apache/ozone">git repository</a>) and run the ozone build command. This instruction assumes that you have all the
-dependencies to build Hadoop on your build machine. If you need instructions
-on how to build Hadoop, please look at the Apache Hadoop Website.</p>
+from the <a href="https://github.com/apache/ozone">git repository</a>).</p>
+<h2 id="arm-based-linux">ARM-based Linux</h2>
+<p>If you are using an ARM-based Linux, patch protobuf 2.5.0 and build it from source.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo yum install -y make cmake gcc g++ patch
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or for Ubuntu and Debian:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo apt-get install -y make cmake gcc g++ patch</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download protobuf 2.5.0 tarball</span>
+</span></span><span style="display:flex;"><span>curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz | tar zx
+</span></span><span style="display:flex;"><span>cd protobuf-2.5.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># patch protobuf 2.5.0</span>
+</span></span><span style="display:flex;"><span>curl -L -O https://gist.githubusercontent.com/liusheng/64aee1b27de037f8b9ccf1873b82c413/raw/118c2fce733a9a62a03281753572a45b6efb8639/protobuf-2.5.0-arm64.patch
+</span></span><span style="display:flex;"><span>patch -p1 &lt; protobuf-2.5.0-arm64.patch
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># build protobuf</span>
+</span></span><span style="display:flex;"><span>./configure --disable-shared
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># install protoc to the local Maven repository</span>
+</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span>2.5.0 -Dclassifier<span style="color:#f92672">=</span>linux-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x</span>
+</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64.exe
+</span></span></code></pre></div><h2 id="arm-based-apple-silicon-apple-m1--etc">ARM-based Apple Silicon (Apple M1 &hellip; etc)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3.7.1&#34;</span>
+</span></span><span style="display:flex;"><span>curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protobuf-all-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz | tar zx
+</span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>./configure --disable-shared
+</span></span><span style="display:flex;"><span>make -j
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># install protoc to the local Maven repository</span>
+</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
+</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd ..
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download protobuf 2.5.0 tarball</span>
+</span></span><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2.5.0&#34;</span>
+</span></span><span style="display:flex;"><span>curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz | tar zx
+</span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># patch protobuf 2.5.0</span>
+</span></span><span style="display:flex;"><span>curl -L -O https://gist.githubusercontent.com/liusheng/64aee1b27de037f8b9ccf1873b82c413/raw/118c2fce733a9a62a03281753572a45b6efb8639/protobuf-2.5.0-arm64.patch
+</span></span><span style="display:flex;"><span>patch -p1 &lt; protobuf-2.5.0-arm64.patch
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># build protobuf</span>
+</span></span><span style="display:flex;"><span>./configure --disable-shared
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># install protoc to the local Maven repository</span>
+</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
+</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
+</span></span></code></pre></div><h2 id="build-ozone">Build Ozone</h2>
+<p>Run the ozone build command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true
 </span></span></code></pre></div><p>This will build an <code>ozone-\&lt;version\&gt;</code> directory in your <code>hadoop-ozone/dist/target</code> directory.</p>
 <p>You can copy this tarball and use this instead of binary artifacts that are
 provided along with the official release.</p>
-<p>To create tar file distribution, use the <code>-Pdist</code> profile:</p>
+<p>Depending on the network speed, the build can take anywhere from 10 minutes to 20 minutes.</p>
+<p>To create tarball file distribution, use the <code>-Pdist</code> profile:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true -Pdist
-</span></span></code></pre></div><h2 id="how-to-run-ozone-from-build">How to run Ozone from build</h2>
+</span></span></code></pre></div><h2 id="other-useful-maven-build-options">Other useful Maven build options</h2>
+<ul>
+<li>Use <code>-DskipShade</code> to skip shaded Ozone FS jar file creation. Saves time, but you can&rsquo;t test integration with other software that uses Ozone as a Hadoop-compatible file system.</li>
+<li>Use <code>-DskipRecon</code> to skip building Recon Web UI. It saves about 2 minutes.</li>
+<li>Use <code>-Dmaven.javadoc.skip=true</code> to skip building javadocs.</li>
+<li>Use <code>-Drocks_tools_native</code> to build the RocksDB native code for the Ozone Snapshot feature. This is optional and not required for building Ozone. It is only needed if you want to build the RocksDB native code for Ozone.</li>
+</ul>
+<h2 id="how-to-run-ozone-from-build">How to run Ozone from build</h2>
 <p>When you have the new distribution, you can start a local cluster <a href="../start/runningviadocker.html">with docker-compose</a>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd hadoop-ozone/dist/target/ozone-X.X.X...
 </span></span><span style="display:flex;"><span>cd compose/ozone
@@ -561,7 +621,7 @@ provided along with the official release.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: November 4, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1cf43ace9603119b4895f1072ef828a5ae04514d">1cf43ace96</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: April 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/9e4da5bac25a356ff3704cc7d5f471757fbf08b2">9e4da5bac2</a>
     </span>
   </div>
 </footer>
