@@ -107,4 +107,4 @@ kubectl apply -k .
 
 This method requires more manual configuration and management compared to using the Helm chart.
 
-*(Refer to the [Administrator Guide > Installation](../administrator-guide/installation/kubernetes.md) for more advanced Kubernetes deployment topics like High Availability, security, and detailed configuration.)*
+*(Refer to the [Administrator Guide > Installation](/docs/05-administrator-guide/01-installation/01-deployment-architecture.md) for more advanced Kubernetes deployment topics like High Availability, security, and detailed configuration.)*

@@ -18,7 +18,7 @@ In Apache Ozone, a **Bucket** is the primary container for storing objects (keys
     *   **Replication:** The default replication configuration (type and factor) for data blocks belonging to objects in the bucket (see [Replication](./05-replication.md)).
     *   **Encryption:** Whether data written to the bucket is transparently encrypted at rest (see [Encryption](./06-encryption.md)).
     *   **Quotas:** Limits on the namespace usage (number of keys) and storage space (total bytes) consumed by the bucket (see [Quotas](./03-quotas.md)).
-    *   **ACLs:** Access Control Lists defining permissions for users and groups (see [Security](../../04-security/02-acls/01-overview.md)).
+    *   **ACLs:** Access Control Lists defining permissions for users and groups (see [Security](/docs/03-core-concepts/04-security/02-acls/README.mdx)).
 
 ## Analogy
 

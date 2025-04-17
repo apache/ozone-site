@@ -62,7 +62,7 @@ The File System Optimized layout (FSO) provides hierarchical directory structure
 
 The bucket layout determines how data is organized and accessed within a bucket. For more information, see [Bucket Layouts](01-namespace/02-buckets/04-layouts/README.mdx).
 
-![Ozone Namespace Hierarchy](../../static/img/ozone/ozone-namespace.svg)
+![Ozone Namespace Hierarchy showing Volumes containing Buckets containing Keys](../../static/img/ozone/ozone-namespace.svg)
 
 ## Core Components
 
@@ -156,7 +156,7 @@ The client library abstracts away the complexity of the distributed system, prov
 
 The components of Ozone interact in well-defined patterns for different operations:
 
-![Apache Ozone Client Interactions](../../static/img/ozone/ozone-client-interaction.svg)
+![Diagram illustrating Ozone client interactions with OM, SCM, and Datanodes for read/write operations.](../../static/img/ozone/ozone-client-interaction.svg)
 
 #### Write Path Sequence
 
@@ -176,7 +176,7 @@ For reads, the process is simpler:
 
 #### Monitoring and Management
 
-![Apache Ozone Client Interactions](../../static/img/ozone/recon.svg)
+![Diagram showing Recon collecting data from OM, SCM, and Datanodes for monitoring.](../../static/img/ozone/recon.svg)
 The Recon service continuously:
 - Collects metrics from the Ozone Manager, Storage Container Manager, and Datanodes
 - Provides consolidated views of system health and performance
@@ -221,7 +221,7 @@ Chunks are the physical data units stored on disk:
 
 Chunks are the smallest units of data stored on disk and include checksums for integrity verification.
 
-![Container Structure](../../static/img/ozone/container.svg)
+![Diagram showing the structure of an Ozone container with metadata and chunks.](../../static/img/ozone/container.svg)
 
 ### Replicated Containers
 
@@ -235,7 +235,7 @@ Ozone provides durability through container replication:
 
 Replicated containers ensure data durability by storing multiple copies of each container across different datanodes.
 
-![Replicated Container Structure](../../static/img/ozone/ozone-storage-hierarchy-replicated.svg)
+![Diagram illustrating how data blocks and chunks are stored across datanodes in a replicated container setup.](../../static/img/ozone/ozone-storage-hierarchy-replicated.svg)
 
 ### Erasure Encoded Containers
 
@@ -249,7 +249,7 @@ Erasure coding provides space-efficient durability:
 
 Erasure coding allows for data durability with less storage overhead than full replication.
 
-![EC Container Structure](../../static/img/ozone/ozone-storage-hierarchy-ec.svg)
+![Diagram illustrating how data and parity blocks are stored across datanodes in an erasure coded container setup.](../../static/img/ozone/ozone-storage-hierarchy-ec.svg)
 
 ### Pipelines
 
