@@ -18,108 +18,90 @@ Ozone's design is built on several key principles that influence deployment arch
 
 ## Component Architecture Overview
 
-Ozone deployment consists of several core components, each with distinct resource requirements and scaling characteristics:
+Ozone deployment consists of several core components, each with distinct roles in the overall architecture:
 
 ![Ozone Architecture Diagram](/img/ozone/ozone-client-interaction.svg)
 
-### Metadata Service Nodes
-
-Metadata services form the control plane of Ozone and require careful planning for performance and availability.
+### Metadata Service Components
 
 #### 1. Ozone Manager (OM)
 
 The Ozone Manager handles namespace operations (volumes, buckets, keys) and manages metadata in RocksDB.
 
+- **Primary Responsibilities**:
+  - Managing the namespace hierarchy (volumes, buckets, keys)
+  - Handling access control and security
+  - Allocating blocks for data storage
+  - Tracking key locations
+  - Processing client requests for metadata operations
+
 - **Deployment Pattern**: 
   - 3-node HA deployment using Ratis consensus protocol (minimum recommendation for production)
   - Single node for development/testing environments
-
-- **Hardware Recommendations**:
-  - CPU: 16+ cores (modern processors)
-  - Memory: 32GB+ RAM (at least 16GB heap size)
-  - Storage: SSD or NVMe drive(s) for metadata (minimum 100GB, scale with namespace size)
-  - Network: 10GbE or better, low latency
-
-- **Scaling Characteristics**:
-  - Scales with namespace operations (create/delete/list)
-  - Limited by metadata size and operation rate
-  - Vertical scaling preferred (more CPU/memory on same nodes)
 
 #### 2. Storage Container Manager (SCM)
 
 The SCM orchestrates container lifecycle and coordinates datanodes.
 
+- **Primary Responsibilities**:
+  - Managing datanodes and their health
+  - Orchestrating container creation and placement
+  - Managing write pipelines
+  - Coordinating container replication and erasure coding
+  - Handling block management
+
 - **Deployment Pattern**:
   - 3-node HA deployment using Ratis consensus protocol (minimum recommendation for production)
   - Single node for development/testing environments
 
-- **Hardware Recommendations**:
-  - CPU: 16+ cores (modern processors)
-  - Memory: 32GB+ RAM (at least 16GB heap size)
-  - Storage: SSD or NVMe drive(s) for metadata (minimum 100GB)
-  - Network: 10GbE or better, low latency
-
-- **Scaling Characteristics**:
-  - Scales with cluster size (number of datanodes/containers)
-  - Vertical scaling preferred (more CPU/memory on same nodes)
-
-### Data Service Nodes
-
-Data services store and serve actual content and can scale horizontally to meet capacity and throughput demands.
+### Data Service Components
 
 #### 3. Datanodes
 
 Datanodes store the actual data in containers on local disks.
+
+- **Primary Responsibilities**:
+  - Storing container data on local disks
+  - Serving read and write requests from clients
+  - Participating in data replication pipelines
+  - Reporting container status to SCM
+  - Managing local data integrity
 
 - **Deployment Pattern**:
   - Horizontal scaling from few to thousands of nodes
   - Distributed across racks for fault tolerance
   - Rack awareness enabled for topology-aware placement
 
-- **Hardware Recommendations**:
-  - CPU: 8+ cores per node
-  - Memory: 16-64GB RAM (at least 8GB heap)
-  - Storage: 
-    - Multiple HDDs for data storage
-    - One dedicated SSD or NVMe drive for container metadata and transaction logs (~100GB)
-    - Support for JBOD configurations (Just a Bunch Of Disks)
-  - Network: 10GbE or better, preferably with RDMA support for performance
-
-- **Scaling Characteristics**:
-  - Horizontal scaling to increase capacity and throughput
-  - Scales to thousands of nodes across multiple racks
-
-### Optional Service Nodes
-
-These services provide additional functionality but aren't required for basic Ozone operation.
+### Optional Service Components
 
 #### 4. Recon
 
 Recon provides analytics and monitoring for the cluster.
 
+- **Primary Responsibilities**:
+  - Collecting and aggregating metrics from OM, SCM, and Datanodes
+  - Providing a web UI for monitoring
+  - Offering insights into cluster health and performance
+  - Tracking resource utilization and anomalies
+
 - **Deployment Pattern**:
   - Single node deployment is typically sufficient
   - Can be deployed alongside other components on smaller clusters
-
-- **Hardware Recommendations**:
-  - CPU: 8+ cores
-  - Memory: 16GB+ RAM
-  - Storage: SSD/NVMe for database (50GB+)
-  - Network: Same network as metadata services
 
 #### 5. S3 Gateway
 
 S3 Gateway provides S3-compatible API access.
 
+- **Primary Responsibilities**:
+  - Translating S3 API requests to Ozone operations
+  - Managing authentication and authorization for S3 clients
+  - Supporting S3 multipart uploads
+  - Handling S3-specific features and compatibility
+
 - **Deployment Pattern**:
   - Deploy on each Datanode for distributed access
   - Alternatively, deploy on dedicated gateway nodes
   - Use a load balancer to distribute client requests
-
-- **Hardware Recommendations**:
-  - When co-located with Datanodes: Additional 4+ cores and 8GB+ RAM
-  - When on dedicated nodes: 8+ cores, 16GB+ RAM
-  - Network: Same as Datanodes or closer to clients
 
 ## Consolidated vs. Dedicated Node Deployments
 
@@ -203,6 +185,33 @@ Network architecture significantly impacts Ozone performance and reliability:
    - Datanodes: 10GbE minimum, 25/40/100GbE for high-throughput workloads
    - Consider network oversubscription ratios in rack design
 
+## Topology Awareness
+
+Ozone can be deployed with awareness of the physical infrastructure topology, which improves performance and reliability:
+
+1. **Rack Awareness**:
+   - Configurable via the `net.topology.node.switch.mapping.impl` property
+   - Ensures data is distributed across failure domains
+   - Improves read performance through locality
+   - Essential for proper erasure coding placement
+
+2. **Configuration Example**:
+
+```xml
+<property>
+  <name>net.topology.node.switch.mapping.impl</name>
+  <value>org.apache.hadoop.net.ScriptBasedMapping</value>
+</property>
+<property>
+  <name>net.topology.script.file.name</name>
+  <value>/etc/hadoop/conf/topology.script</value>
+</property>
+```
+
+3. **Standard Topology Format**:
+   - Typically `/rack/hostname` or `/datacenter/rack/hostname`
+   - More detailed topologies supported for complex deployments
+
 ## Deployment Examples
 
 ### Example 1: Consolidated 6-Node Production Cluster
@@ -227,10 +236,11 @@ A minimal production deployment with consolidated services:
 └─────────────────────────┘ └─────────────────────────┘ └─────────────────────────┘
 ```
 
-- **Hardware**:
-  - Metadata Nodes: 32 cores, 64GB RAM, 2x NVMe drives
-  - Datanodes: 16 cores, 32GB RAM, 12x HDDs + 1x SSD
-  - All nodes: 10GbE networking
+**Key Characteristics**:
+- OM and SCM services co-located on the same physical nodes
+- S3 Gateway running on each datanode
+- Single Recon instance for monitoring
+- Minimum viable configuration for full HA deployment
 
 ### Example 2: Large-Scale Production Cluster
 
@@ -251,12 +261,11 @@ A larger deployment with dedicated service nodes:
 └────────┘ └────────┘ └────────┘     └────────┘
 ```
 
-- **Hardware Specifications**:
-  - OM Nodes: 24 cores, 64GB RAM, NVMe drives
-  - SCM Nodes: 24 cores, 64GB RAM, NVMe drives
-  - Gateway Nodes: 16 cores, 32GB RAM
-  - Datanodes: 8-16 cores, 32-64GB RAM, 12-24 HDDs + 1 SSD per node
-  - Network: 25GbE for metadata nodes, 10GbE for datanodes
+**Key Characteristics**:
+- Dedicated nodes for each service type
+- Separate S3 Gateway nodes behind a load balancer
+- Multiple racks of datanodes
+- Optimized for large-scale production deployments
 
 ## Load Balancer Configuration
 
@@ -293,22 +302,54 @@ server {
    - Clients can directly use the OM HA service ID
    - For advanced scenarios, a load balancer can distribute initial client connections
 
+## Multi-Datacenter Deployments
+
+For geographically distributed deployments, consider these approaches:
+
+1. **Active-Passive Configuration**:
+   - Primary datacenter runs all Ozone services
+   - Secondary datacenter can host DR backup
+   - Asynchronous replication between sites (not built-in, requires additional tooling)
+
+2. **Independent Clusters with Cross-Replication**:
+   - Separate Ozone clusters in each datacenter
+   - Data synchronization using external tools or application-level replication
+   - Clients connect to local datacenter resources
+
+3. **Extended Topology Awareness**:
+   - Configure Ozone with datacenter-aware topology
+   - Ensure proper container placement across sites
+   - Note: While technically possible, cross-datacenter consensus has higher latency impact
+
+## Security Considerations
+
+When planning deployment architecture, consider security requirements:
+
+1. **Kerberos Integration**:
+   - Requires KDC (Kerberos Key Distribution Center) accessible to all nodes
+   - Configure secure communication between all components
+
+2. **TLS Encryption**:
+   - Configure certificates for all services
+   - Plan for certificate renewal and management
+
+3. **Authorization**:
+   - Ranger integration for fine-grained access control
+   - Knox integration for perimeter security and single sign-on
+
 ## Summary of Deployment Recommendations
 
 1. **Metadata Services**:
    - Deploy OM and SCM in 3-node HA configurations
-   - Use high-performance hardware with SSD/NVMe storage
    - For smaller clusters, consolidate OM and SCM on the same nodes
    - For larger clusters, use dedicated nodes for each service
 
 2. **Datanodes**:
    - Scale horizontally based on capacity and performance needs
-   - Each node should have dedicated SSD for metadata
    - S3 Gateway can be co-located with datanodes or deployed separately
 
 3. **Network Configuration**:
    - Ensure low latency between metadata nodes
-   - Use sufficient bandwidth for expected workload
    - Configure proper security and firewall rules
 
 4. **Load Balancing**:
