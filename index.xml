@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year} The Apache Software Foundation</copyright>
-    <lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release 2.0.0 available</title>
+      <link>https://ozone.apache.org/release/2.0.0/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/release/2.0.0/</guid>
+      <description>Release Notes Apache Ozone 2.0.0 adds 1708 new features, improvements and bug fixes on top of Ozone 1.4.
+  HDDS-10295 | Major | Provide an &amp;ldquo;ozone repair&amp;rdquo; subcommand to update the snapshot info in transactionInfoTable  A new command &amp;ldquo;ozone repair update-transaction&amp;rdquo; is added to update the highest index in OM transactionInfoTable.
+  HDDS-11258 | Blocker | [hsync] Add new OM layout version  A new layout version, HBASE_SUPPORT (7) is added to Ozone Manager that provides the guardrail for the full support of hsync, lease recovery and listOpenFiles APIs for HBase.</description>
+    </item>
+    
     <item>
       <title>Release 1.4.1 available</title>
       <link>https://ozone.apache.org/release/1.4.1/</link>
