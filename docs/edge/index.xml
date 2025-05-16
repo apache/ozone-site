@@ -267,6 +267,13 @@
       <description>Different tools for Ozone to increase Observability</description>
     </item>
     <item>
+      <title>Network Ports</title>
+      <link>/concept/networkports.html</link>
+      <pubDate>Thu, 03 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>/concept/networkports.html</guid>
+      <description>Understanding and correctly configuring the network ports used by Apache Ozone is essential for the successful deployment, operation, and maintenance of Apache Ozone clusters.</description>
+    </item>
+    <item>
       <title>Non-Rolling Upgrades and Downgrades</title>
       <link>/feature/nonrolling-upgrade.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
