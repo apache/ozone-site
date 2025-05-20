@@ -651,7 +651,19 @@ Following are the supported ACL actions.
 </span></span></code></pre></div><h3>removeacl</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone sh bucket removeacl -a user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> /vol1/bucket2
 </span></span><span style="display:flex;"><span>ACL user:testuser:r<span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span> removed successfully.
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="differences-between-ozone-acl-and-s3-acl">Differences Between Ozone ACL and S3 ACL</h2>
+<p>Ozone ACLs and S3 ACLs differ primarily in their scope and support.</p>
+<ul>
+<li><strong>S3 ACLs</strong>: Currently, only S3 Bucket ACL is implemented in Ozone (a beta feature). S3 Object ACL is not yet implemented. Any <code>PutObjectAcl</code> request will result in a <code>501: Not Implemented</code> response code.</li>
+<li><strong>Ozone ACLs</strong>: Ozone ACLs provide a more comprehensive and flexible access control mechanism. They are designed to work seamlessly with Ozone&rsquo;s native architecture and support various rights and scopes as mentioned above.</li>
+</ul>
+<h2 id="ozone-file-system-acl-api">Ozone File System ACL API</h2>
+<ul>
+<li>ACL-related APIs in Ozone file system implementation (<code>ofs</code> and <code>o3fs</code>), such as <code>getAclStatus</code>, <code>setAcl</code>, <code>modifyAclEntries</code>, <code>removeAclEntries</code>, <code>removeDefaultAcl</code>, and <code>removeAcl</code> are not supported. These operations will throw an UnsupportedOperationException.</li>
+<li>Similarly, HttpFS ACL-related APIs.</li>
+</ul>
+<p>These limitations should be taken into account when integrating Ozone with applications that rely on S3 or file system ACL operations.</p>
+
 
           
           <a class="btn  btn-success btn-lg" href="../security/securitywithranger.html">Next >></a>
@@ -670,7 +682,7 @@ Following are the supported ACL actions.
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: October 21, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8568075ddb75b4a6785cdb31b00b4a592058dc78">8568075ddb</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: May 19, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7035846377f524af8c2066153574e01de6b34950">7035846377</a>
     </span>
   </div>
 </footer>
