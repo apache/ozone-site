@@ -6,8 +6,15 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 29 Apr 2024 10:37:20 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 28 May 2025 10:07:28 +0530</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Minimum free space configuration for datanode volumes</title>
+      <link>/design/dn-min-space-configuration.html</link>
+      <pubDate>Mon, 05 May 2025 00:00:00 +0000</pubDate>
+      <guid>/design/dn-min-space-configuration.html</guid>
+      <description>Describe proposal for minimum free space configuration which volume must have to function correctly.</description>
+    </item>
     <item>
       <title>Overwriting an Ozone Key only if it has not changed.</title>
       <link>/design/overwrite-key-only-if-unchanged.html</link>

@@ -610,6 +610,12 @@
                 href="/start/fromsource.html"
                 />
   </url><url>
+    <loc>/design.html</loc>
+    <lastmod>2025-05-28T10:07:28+05:30</lastmod>
+  </url><url>
+    <loc>/design/dn-min-space-configuration.html</loc>
+    <lastmod>2025-05-28T10:07:28+05:30</lastmod>
+  </url><url>
     <loc>/tools/debug.html</loc>
     <lastmod>2024-10-30T12:13:52+05:30</lastmod>
     <xhtml:link
@@ -622,9 +628,6 @@
                 hreflang="en"
                 href="/tools/debug.html"
                 />
-  </url><url>
-    <loc>/design.html</loc>
-    <lastmod>2024-04-29T10:37:20+01:00</lastmod>
   </url><url>
     <loc>/design/overwrite-key-only-if-unchanged.html</loc>
     <lastmod>2024-04-29T10:37:20+01:00</lastmod>
