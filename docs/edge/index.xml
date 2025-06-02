@@ -358,6 +358,13 @@
       <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;x86 or ARM64&lt;/li&gt;&#xA;&lt;li&gt;Linux or MacOS&lt;/li&gt;&#xA;&lt;li&gt;JDK 1.8 or higher&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://maven.apache.org/download.cgi&#34;&gt;Maven 3.6 or later&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Internet connection for first build (to fetch all Maven and Ozone dependencies)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;You will also need to install the following dependencies to build native code (optional):&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Container Replica Debugger Tool</title>
+      <link>/tools/containerlogparser.html</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/containerlogparser.html</guid>
+      <description>The tool processes container log files from Ozone datanodes to track state transitions. It provides CLI commands for querying containers based on different attributes.</description>
+    </item>
+    <item>
       <title>Minimum free space configuration for datanode volumes</title>
       <link>/design/dn-min-space-configuration.html</link>
       <pubDate>Mon, 05 May 2025 00:00:00 +0000</pubDate>
