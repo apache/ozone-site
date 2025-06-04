@@ -635,7 +635,7 @@ adminuser is the admin username.</p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.trash.classname<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.om.TrashPolicyOzone<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneTrashPolicy<span style="color:#f92672">&lt;/value&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span></span></span></code></pre></div>
 <p>When keys are deleted with trash enabled, they are moved to a trash directory
 under each bucket, because keys aren&rsquo;t allowed to be moved(renamed) between
@@ -675,7 +675,7 @@ information.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: May 4, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ecaa76b669a44dfef53f3004b1b2937ca5440d16">ecaa76b669</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/315ef204d8370d3405dab60d1e057e6d22b8660b">315ef204d8</a>
     </span>
   </div>
 </footer>
