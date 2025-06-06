@@ -545,6 +545,52 @@ s=d.getElementsByTagName('script')[0];
 <h2 id="encrypted-data">Encrypted data</h2>
 <p>When data resides in an HDFS encryption zone or Ozone encrypted buckets, the file checksum will not match. This is because the underlying block data differs due to the use of a new EDEK (Encryption Data Encryption Key) at the destination. In such cases, specify the <code>-skipcrccheck</code> parameter to avoid job failures.</p>
 <p>For more information about using Hadoop DistCp, consult the <a href="https://hadoop.apache.org/docs/current/hadoop-distcp/DistCp.html">DistCp Guide</a>.</p>
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<h3 id="delegation-token-issues">Delegation Token Issues</h3>
+<p>If a DistCp command fails and the error output contains &ldquo;OzoneToken&rdquo;, indicating an issue with retrieving a delegation token from the destination (or source) Ozone cluster, ensure that Ozone&rsquo;s security is explicitly enabled in the client&rsquo;s configuration.</p>
+<p>Add the following property to <code>ozone-site.xml</code> on the node where you run the DistCp command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;name&gt;</span>ozone.security.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>This helps the client correctly engage in secure communication protocols with Ozone.</p>
+<h3 id="cross-realm-kerberos-ozone-1x">Cross-Realm Kerberos (Ozone 1.x)</h3>
+<p><strong>Affected Versions:</strong> Ozone 1.x</p>
+<p>When issuing DistCp commands (or other HDFS-compatible commands like <code>hdfs dfs -ls</code>) against an Ozone cluster in a different Kerberos realm than the client or source/destination cluster, Ozone 1.x versions may produce an error similar to:</p>
+<pre><code>24/02/07 18:47:36 INFO retry.RetryInvocationHandler: com.google.protobuf.ServiceException: java.io.IOException: DestHost:destPort host1.dst.example.com:9862, LocalHost:localPort host1.src.example.com/10.140.99.144:0. Failed on local exception: java.io.IOException: Couldn't set up IO streams: java.lang.IllegalArgumentException: Server has invalid Kerberos principal: om/host1.dst.example.com@DST.LOCAL, expecting: OM/host1.dst.example.com@REALM, while invoking $Proxy10.submitRequest over nodeId=om26,nodeAddress=host1.dst.example.com:9862 after 3 failover attempts. Trying to failover immediately.
+</code></pre>
+<p><strong>Cause:</strong>
+This typically occurs because the Ozone Manager&rsquo;s Kerberos principal (<code>ozone.om.kerberos.principal</code>) is not defined or interpreted in a way that accommodates cross-realm interactions. The client expects a principal from its own realm or a specifically trusted one, and a mismatch occurs. This issue is addressed in Ozone 2.0.</p>
+<p><strong>Workaround (for Ozone 1.x):</strong>
+To resolve this in Ozone 1.x, add the following property to the <code>ozone-site.xml</code> on the client machine running DistCp (and potentially on the Ozone Managers if they also need to inter-communicate across realms):</p>
+<pre><code>&lt;property&gt;
+  &lt;name&gt;ozone.om.kerberos.principal.pattern&lt;/name&gt;
+  &lt;value&gt;*&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+<p>This configuration relaxes the principal matching, allowing the client to accept Ozone Manager principals from different realms.</p>
+<p><strong>Fix:</strong>
+This bug is tracked by <a href="https://issues.apache.org/jira/browse/HDDS-10328">HDDS-10328</a> and is fixed in Ozone 2.0 and later versions. Upgrading to Ozone 2.0+ is the recommended long-term solution.</p>
+<h3 id="token-renewal-failures-in-bidirectional-cross-realm-trust-environments">Token Renewal Failures in Bidirectional Cross-Realm Trust Environments</h3>
+<p>In environments with bidirectional cross-realm Kerberos trust, DistCp jobs (which run as MapReduce jobs) may fail during execution due to errors renewing delegation tokens. An example error is:</p>
+<pre><code>24/02/08 00:35:00 ERROR tools.DistCp: Exception encountered
+java.io.IOException: org.apache.hadoop.yarn.exceptions.YarnException: Failed to submit application_1707350431298_0001 to YARN: Failed to renew token: Kind: HDFS_DELEGATION_TOKEN, Service: 10.140.99.144:8020, Ident: (token for systest: HDFS_DELEGATION_TOKEN owner=user1@SRC.EXAMPLE.COM, renewer=yarn, realUser=, issueDate=1707352474394, maxDate=1707957274394, sequenceNumber=44, masterKeyId=14)
+</code></pre>
+<p>This can happen when the MapReduce job attempts to renew a delegation token for a remote HDFS or Ozone filesystem, and the renewal fails due to cross-realm complexities. The <code>Service</code> field in the error (e.g., <code>10.140.99.144:8020</code>) usually indicates the filesystem whose token renewal failed.</p>
+<p><strong>Solution:</strong>
+You can prevent the DistCp MapReduce job from attempting to renew delegation tokens for specific HDFS-compatible filesystems by using the <code>-Dmapreduce.job.hdfs-servers.token-renewal.exclude</code> parameter. The value should be the authority (hostname or service ID) of the cluster whose tokens are causing renewal issues.</p>
+<p><strong>Parameter:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    -Dmapreduce.job.hdfs-servers.token-renewal.exclude<span style="color:#f92672">=</span>&lt;authority_of_filesystem_to_exclude&gt;
+</span></span></code></pre></div><p>For an HDFS cluster, <code>&lt;authority_of_filesystem_to_exclude&gt;</code> would be its NameNode address (e.g., <code>namenode.example.com:8020</code> or just <code>namenode.example.com</code> if the port is standard). For an Ozone cluster, it would be its service ID (e.g., <code>ozoneprod</code>).</p>
+<p><strong>Example:</strong>
+If you are running the DistCp command on a YARN cluster associated with the <em>destination</em> Ozone cluster (<code>ofs://ozone1707264383/...</code>) and copying data <em>from</em> a source HDFS cluster (<code>hdfs://host1.src.example.com:8020/...</code>), and the token renewal for the source HDFS cluster is failing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    hadoop distcp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -Dmapreduce.job.hdfs-servers.token-renewal.exclude<span style="color:#f92672">=</span>host1.src.example.com <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -Ddfs.checksum.combine.mode<span style="color:#f92672">=</span>COMPOSITE_CRC <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -Dozone.client.checksum.type<span style="color:#f92672">=</span>CRC32C <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      hdfs://host1.src.example.com:8020/tmp/ <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      ofs://ozone1707264383/tmp/dest
+</span></span></code></pre></div><p>In this example, <code>host1.src.example.com</code> is the authority of the source HDFS cluster, and its tokens will not be renewed by the DistCp MapReduce job. Adjust the value based on which cluster&rsquo;s (source or destination, HDFS or Ozone) token renewals are problematic.</p>
 
 
           
@@ -564,7 +610,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: January 19, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/98b4e55543549d3f47b5ccd95a8b4755e402d0b2">98b4e55543</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2a761f79bc4df44c3647cd7bbbd3a4ed4f7a0d0f">2a761f79bc</a>
     </span>
   </div>
 </footer>
