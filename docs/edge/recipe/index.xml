@@ -6,8 +6,29 @@
     <description>Recent content in Recipes on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 31 May 2021 10:12:49 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jun 2025 04:07:31 -0700</lastBuildDate>
     <atom:link href="/recipe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Access Ozone using PyArrow (Docker Quickstart)</title>
+      <link>/recipe/pyarrowtutorial.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/recipe/pyarrowtutorial.html</guid>
+      <description>Step-by-step tutorial for accessing Ozone from Python using PyArrow in a Docker environment.</description>
+    </item>
+    <item>
+      <title>Access Ozone using Boto3 (Docker Quickstart)</title>
+      <link>/recipe/boto3tutorial.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/recipe/boto3tutorial.html</guid>
+      <description>&lt;!--&#xA;Licensed to the Apache Software Foundation (ASF) under one or more&#xA;contributor license agreements.  See the NOTICE file distributed with&#xA;this work for additional information regarding copyright ownership.&#xA;The ASF licenses this file to You under the Apache License, Version 2.0&#xA;(the &#34;License&#34;); you may not use this file except in compliance with&#xA;the License.  You may obtain a copy of the License at&#xA;&#xA;    http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;See the License for the specific language governing permissions and&#xA;limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;This tutorial demonstrates how to access Apache Ozone from Python using &lt;strong&gt;Boto3&lt;/strong&gt;, via Ozone&amp;rsquo;s S3 Gateway, with Ozone running in Docker.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Access Ozone using HTTPFS REST API (Docker &#43; Python Requests)</title>
+      <link>/recipe/pythonrequestsozonehttpfs.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/recipe/pythonrequestsozonehttpfs.html</guid>
+      <description>Step-by-step tutorial for accessing Apache Ozone using the HTTPFS REST API via Python&amp;rsquo;s requests library in a Docker-based environment.</description>
+    </item>
     <item>
       <title>Access Ozone object store with Amazon Boto3 client</title>
       <link>/recipe/botoclient.html</link>

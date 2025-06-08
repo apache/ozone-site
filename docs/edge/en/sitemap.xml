@@ -394,6 +394,9 @@
                 href="/security.html"
                 />
   </url><url>
+    <loc>/interface/python.html</loc>
+    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
+  </url><url>
     <loc>/security/securityacls.html</loc>
     <lastmod>2025-05-19T12:47:52-07:00</lastmod>
     <xhtml:link
@@ -523,6 +526,9 @@
                 href="/start/startfromdockerhub.html"
                 />
   </url><url>
+    <loc>/recipe/pyarrowtutorial.html</loc>
+    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
+  </url><url>
     <loc>/feature/reconfigurability.html</loc>
     <lastmod>2024-02-23T23:49:21+08:00</lastmod>
     <xhtml:link
@@ -539,11 +545,17 @@
     <loc>/feature/s3-multi-tenancy-setup.html</loc>
     <lastmod>2022-07-13T11:21:00-07:00</lastmod>
   </url><url>
+    <loc>/recipe/boto3tutorial.html</loc>
+    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
+  </url><url>
     <loc>/feature/s3-tenant-commands.html</loc>
     <lastmod>2024-02-13T12:23:07+03:00</lastmod>
   </url><url>
     <loc>/feature/s3-multi-tenancy-access-control.html</loc>
     <lastmod>2022-04-20T11:07:50-07:00</lastmod>
+  </url><url>
+    <loc>/recipe/pythonrequestsozonehttpfs.html</loc>
+    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
   </url><url>
     <loc>/start/onprem.html</loc>
     <lastmod>2024-06-03T08:09:31-07:00</lastmod>

@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -471,175 +474,142 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-3331">[HDDS-3331]</a> Ozone Volume Management (accepted) </h1>
-                <div><i>Authors: Marton Elek, Arpit Agarwal, Sanjay Radia</i><div class="pull-right">2020-04-02</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        A simplified version of mapping between S3 buckets and Ozone volume/buckets
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../recipe.html">Recipes</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Access Ozone using PyArrow (Docker Quickstart)</li>
+                </ol>
+              </nav>
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Access Ozone using PyArrow (Docker Quickstart)</h1>
+
+            <!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 -->
-<h2 id="introduction">Introduction</h2>
-<p>This document explores how we can improve the Ozone volume semantics especially with respect to the S3 compatibility layer.</p>
-<h2 id="the-problems">The Problems</h2>
-<ol>
-<li>Unprivileged users cannot enumerate volumes.</li>
-<li>The mapping of S3 buckets to Ozone volumes is confusing. Based on external feedback it&rsquo;s hard to understand the exact Ozone URL to be used.</li>
-<li>The volume name is not friendly and cannot be remembered by humans.</li>
-<li>Ozone buckets created via the native object store interface are not visible via the S3 gateway.</li>
-<li>We don&rsquo;t support the revocation of access keys.</li>
-</ol>
-<p>We explore some of these in more detail in subsequent sections.</p>
-<h3 id="volume-enumeration-problem">Volume enumeration problem</h3>
-<p>Currently when a user enumerates volumes, they see the list of volumes that they own. This means that when an unprivileged user enumerates volumes, it always gets any empty list. Instead users should be able to see all volumes that they have been granted read or write access to.</p>
-<p>This also has an impact on <a href="https://issues.apache.org/jira/browse/HDDS-2665">ofs</a> which makes volumes appear as top-level directories.</p>
-<h3 id="s3-to-hcfs-path-mapping-problem">S3 to HCFS path mapping problem</h3>
-<p>Ozone has the semantics of volume <em>and</em> buckets while S3 has only buckets. To make it possible to use the same bucket both from Hadoop world and via S3 we need a mapping between them.</p>
-<p>Currently we maintain a map between the S3 buckets and Ozone volumes + buckets in <code>OmMetadataManagerImpl</code></p>
-<pre tabindex="0"><code>s3_bucket --&gt; ozone_volume/ozone_bucket
-</code></pre><p>The current implementation uses the <code>&quot;s3&quot; + s3UserName</code> string as the volume name and the <code>s3BucketName</code> as the bucket name. Where <code>s3UserName</code> is is the <code>DigestUtils.md5Hex(kerberosUsername.toLowerCase())</code></p>
-<p>To create an S3 bucket and use it from o3fs, you should:</p>
-<ol>
-<li>Get your personal secret based on your kerberos keytab</li>
-</ol>
-<pre tabindex="0"><code>&gt; kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm
-&gt; ozone s3 getsecret
-awsAccessKey=testuser/scm@EXAMPLE.COM
-awsSecret=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
-</code></pre><ol start="2">
-<li>Create the bucket with S3 cli</li>
-</ol>
-<pre tabindex="0"><code>&gt; export AWS_ACCESS_KEY_ID=testuser/scm@EXAMPLE.COM
-&gt; export AWS_SECRET_ACCESS_KEY=7a6d81dbae019085585513757b1e5332289bdbffa849126bcb7c20f2d9852092
-&gt; aws s3api --endpoint http://localhost:9878 create-bucket --bucket=bucket1
-</code></pre><ol start="3">
-<li>And identify the ozone path</li>
-</ol>
-<pre tabindex="0"><code>&gt; ozone s3 path bucket1
-Volume name for S3Bucket is : s3c89e813c80ffcea9543004d57b2a1239
-Ozone FileSystem Uri is : o3fs://bucket1.s3c89e813c80ffcea9543004d57b2a1239
-</code></pre><h2 id="proposed-solution1">Proposed solution[1]</h2>
-<h3 id="supporting-multiple-access-keys-5-from-the-problem-listing">Supporting multiple access keys (#5 from the problem listing)</h3>
-<p>Problem #5 can be easily supported with improving the <code>ozone s3</code> CLI. Ozone has a separated table for the S3 secrets and the API can be improved to handle multiple secrets for one specific kerberos user.</p>
-<h3 id="solving-the-mapping-problem-2-4-from-the-problem-listing">Solving the mapping problem (#2-4 from the problem listing)</h3>
-<ol>
-<li>Let&rsquo;s always use <code>s3v</code> volume for all the s3 buckets <strong>if the bucket is created from the s3 interface</strong>.</li>
-</ol>
-<p>This is an easy an fast method, but with this approach not all the volumes are available via the S3 interface. We need to provide a method to publish any of the ozone volumes / buckets.</p>
-<ol start="2">
-<li>Let&rsquo;s improve the existing toolset to expose <strong>any</strong> Ozone volume/bucket as an s3 bucket. (Eg. expose <code>o3:/vol1/bucketx</code> as an S3 bucket <code>s3://foobar</code> )</li>
-</ol>
-<p><strong>Implementation</strong>:</p>
-<p>The first part is easy compared to the current implementation. We don&rsquo;t need any mapping table any more.</p>
-<p>To implement the second (expose ozone buckets as s3 buckets) we have multiple options:</p>
-<ol>
-<li>Store some metadata (** s3 bucket name **) on each of the buckets</li>
-<li>Implement a <strong>symbolic link</strong> mechanism which makes it possible to <em>link</em> to any volume/buckets from the &ldquo;s3&rdquo; volume.</li>
-</ol>
-<p>The first approach required a secondary cache table and it violates the naming hierarchy. The s3 bucket name is a global unique name, therefore it&rsquo;s more than just a single attribute on a specific object. It&rsquo;s more like an element in the hierarchy. For this reason the second option is proposed:</p>
-<p>For example if the default s3 volume is <code>s3v</code></p>
-<ol>
-<li>Every new buckets created via s3 interface will be placed under the <code>/s3v</code> volume</li>
-<li>Any existing <strong>Ozone</strong> buckets can be exposed by linking to it from s3: <code>ozone sh bucket link /vol1/bucket1 /s3v/s3bucketname</code></li>
-</ol>
-<p><strong>Lock contention problem</strong></p>
-<p>One possible problem with using just one volume is using the locks of the same volume for all the S3 buckets (thanks Xiaoyu). But this shouldn&rsquo;t be a big problem.</p>
-<ol>
-<li>We hold only a READ lock. Most of the time it can acquired without any contention (writing lock is required only to change owner / set quota)</li>
-<li>For symbolic link the read lock is only required for the first read. After that the lock of the referenced volume will be used. In case of any performance problem multiple volumes and links can be used.</li>
-</ol>
-<p>Note: Sanjay is added to the authors as the original proposal of this approach.</p>
-<h4 id="implementation-details">Implementation details</h4>
+<p>This tutorial demonstrates how to access Apache Ozone from Python using <strong>PyArrow</strong>, with Ozone running in Docker.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li><code>bucket link</code> operation creates a link bucket.  Links are like regular buckets, stored in DB the same way, but with two new, optional pieces of information: source volume and bucket.  (The bucket being referenced by the link is called &ldquo;source&rdquo;, not &ldquo;target&rdquo;, to follow symlink terminology.)</li>
-<li>Link buckets share the namespace with regular buckets.  If a bucket or link with the same name already exists, a <code>BUCKET_ALREADY_EXISTS</code> result is returned.</li>
-<li>Link buckets are not inherently specific to a user, access is restricted only by ACL.</li>
-<li>Link buckets retain their owner ACLs, which are inherited from the default ACLs of their volume. Additionally, link buckets allow anyone to have READ and WRITE permissions, which is similar to Linux POSIX symbolic.</li>
-<li>All add/set/remove ACL operation proxy to the source bucket. Getacl operation of a link bucket shows link bucket&rsquo;s ACL.</li>
-<li>Links are persistent, ie. they can be used until they are deleted.</li>
-<li>Existing bucket operations (info, delete, ACL) work on the link object in the same way as they do on regular buckets.  No new link-specific RPC is required.</li>
-<li>Links are followed for key operations (list, get, put, etc.).  Read permission on the source bucket is required for this.</li>
-<li>Checks for existence of the source bucket, as well as ACL, are performed only when following the link (similar to symlinks).  Source bucket is not checked when operating on the link bucket itself (eg. deleting it).  This avoids the need for reverse checks for each bucket delete or ACL change.</li>
-<li>Bucket links are generic, not restricted to the <code>s3v</code> volume.</li>
+<li>Docker and Docker Compose installed.</li>
+<li>Python 3.x environment.</li>
 </ul>
-<h2 id="alternative-approaches-and-reasons-to-reject">Alternative approaches and reasons to reject</h2>
-<p>To solve the the <em>s3 bucket name to ozone bucket name mapping</em> problem some other approaches are also considered. They are rejected but keeping them in this section together with the reasons to reject.</p>
-<h3 id="1-predefined-volume-mapping">1. Predefined volume mapping</h3>
-<ol>
-<li>Let&rsquo;s support multiple <code>ACCESS_KEY_ID</code> for the same user.</li>
-<li>For each <code>ACCESS_KEY_ID</code> a volume name MUST be defined.</li>
-<li>Instead of using a specific mapping table, the <code>ACCESS_KEY_ID</code> would provide a <strong>view</strong> of the buckets in the specified volume.</li>
-</ol>
-<p>With this approach the used volume will be more visible and &ndash; hopefully &ndash; understandable.</p>
-<p>Instead of using <code>ozone s3 getsecret</code>, following commands would be used:</p>
-<ol>
-<li><code>ozone s3 secret create --volume=myvolume</code>: To create a secret and use myvolume for all of these buckets</li>
-<li><code>ozone s3 secret list</code>: To list all of the existing S3 secrets (available for the current user)</li>
-<li><code>ozone s3 secret delete &lt;ACCESS_KEY_ID</code>: To delete any secret</li>
-</ol>
-<p>The <code>AWS_ACCESS_KEY_ID</code> should be a random identifier instead of using a kerberos principal.</p>
+<h2 id="steps">Steps</h2>
+<h3 id="1-start-ozone-in-docker">1️⃣ Start Ozone in Docker</h3>
+<p>Download the latest Docker Compose file for Ozone and start the cluster with 3 DataNodes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/docker-compose.yaml
+</span></span><span style="display:flex;"><span>docker compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h3 id="2-connect-to-the-scm-container">2️⃣ Connect to the SCM Container</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec -it &lt;your-scm-container-name-or-id&gt; bash
+</span></span></code></pre></div><blockquote>
+<p>Change the container id <code>&lt;your-scm-container-name-or-id&gt;</code> to your actual container id.</p>
+</blockquote>
+<p>The rest of the tutorial will run on this container.</p>
+<p>Create a volume and a bucket inside Ozone:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create volume
+</span></span><span style="display:flex;"><span>ozone sh bucket create volume/bucket
+</span></span></code></pre></div><h3 id="3-install-pyarrow-in-your-python-environment">3️⃣ Install PyArrow in Your Python Environment</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install pyarrow
+</span></span></code></pre></div><h3 id="4-download-hadoop-native-libraries-for-libhdfs-support">4️⃣ Download Hadoop Native Libraries for libhdfs Support</h3>
+<p>Depending on your system architecture, run one of the following:</p>
+<p>For ARM64 (Apple Silicon, ARM servers):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L <span style="color:#e6db74">&#34;https://www.apache.org/dyn/closer.lua?action=download&amp;filename=hadoop/common/hadoop-3.4.0/hadoop-3.4.0-aarch64.tar.gz&#34;</span> | tar -xz --wildcards <span style="color:#e6db74">&#39;hadoop-3.4.0/lib/native/libhdfs.*&#39;</span>
+</span></span></code></pre></div><p>For x86_64 (most desktops and servers):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L <span style="color:#e6db74">&#34;https://www.apache.org/dyn/closer.lua?action=download&amp;filename=hadoop/common/hadoop-3.4.0/hadoop-3.4.0.tar.gz&#34;</span> | tar -xz --wildcards <span style="color:#e6db74">&#39;hadoop-3.4.0/lib/native/libhdfs.*&#39;</span>
+</span></span></code></pre></div><p>Set environment variables to point to the native libraries and Ozone classpath:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export ARROW_LIBHDFS_DIR<span style="color:#f92672">=</span>hadoop-3.4.0/lib/native/
+</span></span><span style="display:flex;"><span>export CLASSPATH<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ozone classpath ozone-tools<span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h3 id="5-configure-core-sitexml">5️⃣ Configure Core-Site.xml</h3>
+<p>Add the following to <code>/etc/hadoop/core-site.xml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;name&gt;</span>fs.defaultFS<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;value&gt;</span>ofs://om:9862<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;description&gt;</span>Ozone Manager endpoint<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><blockquote>
+<p>Note: the Docker container has environment variable <code>OZONE_CONF_DIR=/etc/hadoop/</code> so it knows where to locate the configuration files.</p>
+</blockquote>
+<h3 id="6-access-ozone-using-pyarrow">6️⃣ Access Ozone Using PyArrow</h3>
+<p>Create a Python script (<code>ozone_pyarrow_example.py</code>) with the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/python</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyarrow.fs <span style="color:#66d9ef">as</span> pafs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect to Ozone using HadoopFileSystem</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &#34;default&#34; tells PyArrow to use the fs.defaultFS property from core-site.xml</span>
+</span></span><span style="display:flex;"><span>fs <span style="color:#f92672">=</span> pafs<span style="color:#f92672">.</span>HadoopFileSystem(<span style="color:#e6db74">&#34;default&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a directory inside the bucket</span>
+</span></span><span style="display:flex;"><span>fs<span style="color:#f92672">.</span>create_dir(<span style="color:#e6db74">&#34;volume/bucket/aaa&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Write data to a file</span>
+</span></span><span style="display:flex;"><span>path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;volume/bucket/file1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> fs<span style="color:#f92672">.</span>open_output_stream(path) <span style="color:#66d9ef">as</span> stream:
+</span></span><span style="display:flex;"><span>    stream<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;data&#39;</span>)
+</span></span></code></pre></div><p>Run the script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python ozone_pyarrow_example.py
+</span></span></code></pre></div><p>✅ Congratulations! You’ve successfully accessed Ozone from Python using PyArrow and Docker.</p>
+<h2 id="troubleshooting-tips">Troubleshooting Tips</h2>
 <ul>
-<li><strong>pro</strong>: Easier to understand</li>
-<li><strong>con</strong>: We should either have global unique bucket names or it will be possible to see two different buckets with</li>
-<li><strong>con</strong>: It can be hard to remember which volumes are assigned to a specific ACCESS_KEY_ID</li>
+<li><strong>libhdfs Errors</strong>: Ensure <code>ARROW_LIBHDFS_DIR</code> is set and points to the correct native library path.</li>
+<li><strong>Connection Issues</strong>: Verify the Ozone Manager endpoint (<code>om:9862</code>) is correct and reachable.</li>
+<li><strong>Permissions</strong>: Ensure your Ozone user has the correct permissions for the volume and bucket.</li>
 </ul>
-<h3 id="3-string-magic">3. String Magic</h3>
-<p>We can try to make volume name visible for the S3 world by using some structured bucket names. Unfortunately the available separator characters are very limited:</p>
-<p>For example we can&rsquo;t use <code>/</code></p>
-<pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1/bucket1
-
-Parameter validation failed:
-Invalid bucket name &#34;vol1/bucket1&#34;: Bucket name must match the regex &#34;^[a-zA-Z0-9.\-_]{1,255}$&#34; or be an ARN matching the regex &#34;^arn:(aws).*:s3:[a-z\-0-9]+:[0-9]{12}:accesspoint[/:][a-zA-Z0-9\-]{1,63}$&#34;
-</code></pre><p>But it&rsquo;s possible to use <code>volume-bucket</code> notion:</p>
-<pre tabindex="0"><code>aws s3api create-bucket --bucket=vol1-bucket1
-</code></pre><ul>
-<li><strong>pro</strong>: Volume mapping is visible all the time.</li>
-<li><strong>con</strong>: Harder to use any external tool with defaults (all the buckets should have at least one <code>-</code>)</li>
-<li><strong>con</strong>: Hierarchy is not visble. The uniform way to separated elements in fs hierarchy is <code>/</code>. It can be confusing.</li>
-<li></li>
-</ul>
-<h3 id="4-remove-volume-from-ozonefs-paths">4. Remove volume From OzoneFs Paths</h3>
-<p>We can also make volumes a lightweight <em>bucket group</em> object by removing it from the ozonefs path. With this approach we can use all the benefits of the volumes as an administration object but it would be removed from the <code>o3fs</code> path.</p>
+<h2 id="references">References</h2>
 <ul>
-<li><strong>pro</strong>: can be the most simple solution. Easy to understand as there are no more volumes in the path.</li>
-<li><strong>con</strong>: Bigger change (all the API can&rsquo;t be modified to make volumes optional)</li>
-<li><strong>con</strong>: Harder to dis-joint namespaces based on volumes. (With the current scheme, it&rsquo;s easier to delegate the responsibilities for one volumes to a different OM).</li>
-<li><strong>con</strong>: We lose volumes as the top-level directories in <code>ofs</code> scheme.</li>
-<li><strong>con</strong>: One level of hierarchy might not be enough in case of multi-tenancy.</li>
-<li><strong>con</strong>: One level of hierarchy is not enough if we would like to provide separated level for users and admins</li>
-<li><strong>con</strong>: Hierarchical abstraction can be easier to manage and understand</li>
+<li><a href="https://github.com/apache/ozone-docker">Apache Ozone Docker</a></li>
+<li><a href="https://arrow.apache.org/docs/python/">PyArrow Documentation</a></li>
+<li><a href="https://arrow.apache.org/docs/python/generated/pyarrow.fs.HadoopFileSystem.html">PyArrow HadoopFileSystem Reference</a></li>
+<li><a href="https://ozone.apache.org/docs/edge/interface.html">Ozone Client Interfaces</a></li>
 </ul>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../recipe/boto3tutorial.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: May 24, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/4e32dbaacd80c6d39521579fda04444ea2a95418">4e32dbaacd</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 8, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/31d13de52a184cb3ca99f81d903cb0f9cb2df2ae">31d13de52a</a>
     </span>
   </div>
 </footer>
@@ -651,5 +621,6 @@ Invalid bucket name &#34;vol1/bucket1&#34;: Bucket name must match the regex &#3
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

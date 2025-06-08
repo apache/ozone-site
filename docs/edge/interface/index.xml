@@ -50,6 +50,13 @@
       <description>Ozone has a set of Native RPC based APIs. This is the lowest level API&amp;rsquo;s on which all other protocols are built. This is the most performant and feature-full of all Ozone protocols.</description>
     </item>
     <item>
+      <title>Accessing Apache Ozone from Python</title>
+      <link>/interface/python.html</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>/interface/python.html</guid>
+      <description>Access Apache Ozone from Python using PyArrow, Boto3, requests and fsspec WebHDFS libraries</description>
+    </item>
+    <item>
       <title>CSI Protocol</title>
       <link>/interface/csi.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
