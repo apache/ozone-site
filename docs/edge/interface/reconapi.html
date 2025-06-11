@@ -1034,7 +1034,7 @@ of objects under the path.</p>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">50</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>If any <code>num</code> field is <code>-1</code>, the path request is not applicable to such an entity type.</p>
-<h3 id="get-apiv1namespacedu">GET /api/v1/namespace/du</h3>
+<h3 id="get-apiv1namespaceusage">GET /api/v1/namespace/usage</h3>
 <p><strong>Parameters</strong></p>
 <ul>
 <li>
@@ -1043,21 +1043,21 @@ of objects under the path.</p>
 </li>
 <li>
 <p>files (optional)</p>
-<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes disk usage for keys
+<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes namespace usage for keys
 under the path.</p>
 </li>
 <li>
 <p>replica (optional)</p>
-<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes disk usage with replicated
+<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes namespace usage with replicated
 size of keys.</p>
 </li>
 </ul>
 <p><strong>Returns</strong></p>
-<p>Returns disk usage of all sub-paths under the path. Normalizes <code>path</code> fields, returns
+<p>Returns the namespace usage of all sub-paths under the path. Normalizes <code>path</code> fields, returns
 total size of keys directly under the path as <code>sizeDirectKey</code>, and returns
 <code>size</code>/<code>sizeWithReplica</code> in number of bytes.</p>
 <p><code>status</code> is <code>OK</code> if path exists, <code>PATH_NOT_FOUND</code> otherwise.</p>
-<p>Example: /api/v1/namespace/du?path=/vol1/bucket1&amp;files=true&amp;replica=true</p>
+<p>Example: /api/v1/namespace/usage?path=/vol1/bucket1&amp;files=true&amp;replica=true</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1&#34;</span>,
@@ -1466,7 +1466,7 @@ Example: /api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 11, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b5bec1cd74b590e910832fa31e510cd3c8a8b25e">b5bec1cd74</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 11, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/bbaf71e71e4d04397fb2d7013c30664028cd1241">bbaf71e71e</a>
     </span>
   </div>
 </footer>

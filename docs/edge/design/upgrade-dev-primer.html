@@ -559,10 +559,10 @@ This action will be run again if it fails partway through, and may be run again 
 <h2 id="prepare-the-ozone-manager">‘Prepare’ the Ozone Manager</h2>
 <p>Used to flush all transactions to disk, take a DB snapshot, and purge the logs, leaving Ratis in a clean state without unapplied log entries. This prepares the OM for upgrades/downgrades so that no request in the log is applied to the database in the old version of the code in one OM, and the new version of the code in another OM.</p>
 <p>To prepare an OM quorum, run</p>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; prepare
+<pre><code>ozone admin om prepare -id=&lt;om-sevice-id&gt;
 </code></pre>
 <p>To cancel preparation of an OM quorum, run</p>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; cancelprepare
+<pre><code>ozone admin om cancelprepare -id=&lt;om-service-id&gt;
 </code></pre>
 <h2 id="when-do-you-bring-in-a-change-as-a-layout-feature">When do you bring in a change as a Layout feature?</h2>
 <p>By using the new feature, if it creates a change in disk layout (RocksDB, HDDS Volume etc) that is incompatible with the older version, then that qualifies as a layout feature.</p>
@@ -601,7 +601,7 @@ functionality.</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 28, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5927bd26a61edf964c1ea429f61d27eec4713165">5927bd26a6</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 10, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5787135483c8539012c1e96a85cbc57e617c39aa">5787135483</a>
     </span>
   </div>
 </footer>

@@ -532,34 +532,76 @@ s=d.getElementsByTagName('script')[0];
     </div>
 </div>
 
-<h1 id="ozone-in-a-single-container">Ozone in a Single Container</h1>
-<p>The easiest way to start up an all-in-one ozone container is to use the latest
-docker image from docker hub:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 9878:9878 -p 9876:9876 apache/ozone
-</span></span></code></pre></div><p>This command will pull down the ozone image from docker hub and start all
-ozone services in a single container. <br>
-This container will run the required metadata servers (Ozone Manager, Storage
-Container Manager) one data node  and the S3 compatible REST server
-(S3 Gateway).</p>
 <h1 id="local-multi-container-cluster">Local multi-container cluster</h1>
-<p>If you would like to use a more realistic pseudo-cluster where each components
-run in own containers, you can start it with a docker-compose file.</p>
-<p>We have shipped a docker-compose and an environment file as part of the
-container image  that is uploaded to docker hub.</p>
-<p>The following commands can be used to extract these files from the image in the docker hub.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run apache/ozone cat docker-compose.yaml &gt; docker-compose.yaml
-</span></span><span style="display:flex;"><span>docker run apache/ozone cat docker-config &gt; docker-config
-</span></span></code></pre></div><p>Now you can start the cluster with docker-compose:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d
-</span></span></code></pre></div><p>If you need multiple datanodes, we can just scale it up:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</span></span></code></pre></div><h1 id="running-s3-clients">Running S3 Clients</h1>
-<p>Once the cluster is booted up and ready, you can verify its status by
+<h2 id="obtain-the-docker-compose-configuration">Obtain the Docker Compose Configuration</h2>
+<p>First, obtain Ozone&rsquo;s sample Docker Compose configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Download the latest Docker Compose configuration file</span>
+</span></span><span style="display:flex;"><span>curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/docker-compose.yaml
+</span></span></code></pre></div><h2 id="start-the-cluster">Start the Cluster</h2>
+<p>Start your Ozone cluster with three Datanodes using the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>This command will:</p>
+<ul>
+<li>Automatically pull required images from Docker Hub</li>
+<li>Create a multi-node cluster with the core Ozone services</li>
+<li>Start all components in detached mode</li>
+</ul>
+<h2 id="verify-the-deployment">Verify the Deployment</h2>
+<p>Check the status of your Ozone cluster components:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose ps
+</span></span></code></pre></div><p>You should see output similar to this:</p>
+<pre tabindex="0"><code>docker-datanode-1   apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   datanode   14 seconds ago   Up 13 seconds   0.0.0.0:32958-&gt;9864/tcp, :::32958-&gt;9864/tcp
+docker-datanode-2   apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   datanode   14 seconds ago   Up 13 seconds   0.0.0.0:32957-&gt;9864/tcp, :::32957-&gt;9864/tcp
+docker-datanode-3   apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   datanode   14 seconds ago   Up 12 seconds   0.0.0.0:32959-&gt;9864/tcp, :::32959-&gt;9864/tcp
+docker-om-1         apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   om         14 seconds ago   Up 13 seconds   0.0.0.0:9874-&gt;9874/tcp, :::9874-&gt;9874/tcp
+docker-recon-1      apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   recon      14 seconds ago   Up 13 seconds   0.0.0.0:9888-&gt;9888/tcp, :::9888-&gt;9888/tcp
+docker-s3g-1        apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   s3g        14 seconds ago   Up 13 seconds   0.0.0.0:9878-&gt;9878/tcp, :::9878-&gt;9878/tcp
+docker-scm-1        apache/ozone:2.0.0   &#34;/usr/local/bin/dumb…&#34;   scm        14 seconds ago   Up 13 seconds   0.0.0.0:9876-&gt;9876/tcp, :::9876-&gt;9876/tcp
+</code></pre><h2 id="check-the-ozone-version">Check the Ozone version</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose exec om ozone version
+</span></span></code></pre></div><p>Once the cluster is booted up and ready, you can verify its status by
 connecting to the SCM&rsquo;s UI at <a href="http://localhost:9876">http://localhost:9876</a>.</p>
+<p>
+
+<img src="ozone-scm.png" alt='SCM UI Screenshot'  class="img-responsive" /></p>
+<p>Navigate to the Recon server home page. The Ozone Recon server is at <a href="http://localhost:9888">http://localhost:9888</a>, which provides monitoring and management capabilities.</p>
+<p>
+
+<img src="ozone-recon.png" alt='Recon UI Screenshot'  class="img-responsive" /></p>
+<h2 id="other-commonly-used-commands">Other Commonly Used Commands</h2>
+<ul>
+<li><strong>View logs from the OM:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose logs om
+</span></span></code></pre></div></li>
+<li><strong>Stop and remove all containers:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose down
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>You can customize your Ozone deployment by modifying the configuration parameters in the <code>docker-compose.yaml</code> file:</p>
+<ul>
+<li><strong>Common Configurations:</strong> Located under the <code>x-common-config</code> section</li>
+<li><strong>Service-Specific Settings:</strong> Found under the <code>environment</code> section of individual services</li>
+</ul>
+<p>As an example, to update the port on which Recon listens to, append the following configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">x-common-config</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">OZONE-SITE.XML_ozone.recon.http-address</span>: <span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">9090</span>
+</span></span></code></pre></div><p><strong>Note:</strong> If you change the port Recon listens on (e.g., 9090), you must also update the ports mapping in the recon service definition within the docker-compose.yaml file. For example, change:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;9888:9888&#34;</span>
+</span></span></code></pre></div><p>to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;9090:9090&#34;</span>
+</span></span></code></pre></div><h1 id="running-s3-clients">Running S3 Clients</h1>
 <p>The S3 gateway endpoint will be exposed at port 9878. You can use Ozone&rsquo;s S3
 support as if you are working against the real S3.  S3 buckets are stored under
 the <code>/s3v</code> volume.</p>
-<p>Here is how you create buckets from command line:</p>
+<p>First, let&rsquo;s configure AWS access key and secret key. Because the cluster is not secured,
+you can use any arbitrary access key and secret key. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
+</span></span></code></pre></div><p>Here is how you create buckets from command line:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878/ create-bucket --bucket<span style="color:#f92672">=</span>bucket1
 </span></span></code></pre></div><p>Only notable difference in the above command line is the fact that you have
 to tell the <em>endpoint</em> address to the aws s3api command.</p>
@@ -571,8 +613,9 @@ we can upload to Ozone. The next command actually uploads to Ozone&rsquo;s S3
 bucket using the standard aws s3 command line interface.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 --endpoint http://localhost:9878 cp --storage-class REDUCED_REDUNDANCY  /tmp/testfile  s3://bucket1/testfile
 </span></span></code></pre></div><div class="alert alert-info" role="alert">
-Note: REDUCED_REDUNDANCY is required for the single container ozone, since it
- has a single datanode. </div>
+Note: Add --storage-class REDUCED_REDUNDANCY if only one DataNode is started.
+Since this example starts three DataNodes, this parameter is optional.
+</div>
 We can now verify that file got uploaded by running the list command against
 our bucket.
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 --endpoint http://localhost:9878 ls s3://bucket1/testfile
@@ -595,7 +638,7 @@ our bucket.
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 1, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/0262c8ac3abefd3df45d908f8316f9594a06051c">0262c8ac3a</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 11, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8c32363072e7c1757946ffff7d0de6fb1f255fc0">8c32363072</a>
     </span>
   </div>
 </footer>

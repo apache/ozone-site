@@ -516,13 +516,13 @@ Ratis snapshot (entire OM RocksDB) to get up to speed with the rest of the OMs a
 </ul>
 <h1 id="usage">Usage</h1>
 <h2 id="how-do-you-prepare-an-ozone-manager-quorum">How do you prepare an Ozone manager quorum</h2>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; prepare
+<pre><code>ozone admin om prepare -id=&lt;om-service-id&gt;
 </code></pre>
 <p>This leaves the Ozone manager in a state where it cannot accept new writes.</p>
 <h2 id="how-do-you-cancel-a-prepared-ozone-manager-quorum">How do you cancel a &ldquo;prepared&rdquo; Ozone manager quorum</h2>
 <p>In the case of a cancelled upgrade, the OM can be brought out off the
 prepared state by using the following command.</p>
-<pre><code>ozone admin om -id=&lt;om-sevice-id&gt; cancelprepare
+<pre><code>ozone admin om cancelprepare -id=&lt;om-service-id&gt;
 </code></pre>
 <h1 id="link">Link</h1>
 <p><a href="https://issues.apache.org/jira/secure/attachment/13015491/OM%20Prepare%20Upgrade.pdf">https://issues.apache.org/jira/secure/attachment/13015491/OM%20Prepare%20Upgrade.pdf</a></p>
@@ -539,7 +539,7 @@ prepared state by using the following command.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 13, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/6e027a1befda1004f81ff1d169ec25f98bd452e0">6e027a1bef</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 10, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5787135483c8539012c1e96a85cbc57e617c39aa">5787135483</a>
     </span>
   </div>
 </footer>
