@@ -666,7 +666,17 @@ s=d.getElementsByTagName('script')[0];
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket buckettest
 </span></span></code></pre></div><p>Or</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 ls --endpoint http://localhost:9878 s3://buckettest
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="compatible-third-party-applications">Compatible third-party applications</h2>
+<p>Ozone&rsquo;s S3 Gateway enables integration with a wide range of cloud-native and analytics applications. Here are some examples of tools and platforms known to work with Ozone (in alphabetical order):</p>
+<ul>
+<li><a href="https://clickhouse.com/docs/en/integrations/s3">Clickhouse</a></li>
+<li><a href="https://docs.fluentd.org/output/s3">Fluentd</a> can send logs directly to Ozone via the S3 Gateway.</li>
+<li><a href="https://juicefs.com/docs/community/s3_gateway/">JuiceFS</a></li>
+<li><a href="https://docs.starburst.io/latest/connector/starburst-ozone.html">Starburst</a> (Starburst also supports Ozone <code>ofs://</code>)</li>
+<li><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20">Teradata NOS</a></li>
+</ul>
+<p>This list is not exhaustive—any application that supports the S3 protocol can potentially connect to Ozone, making it easy to adopt Ozone in modern data pipelines and cloud-native workflows.</p>
+
 
           
           <a class="btn  btn-success btn-lg" href="../interface/cli.html">Next >></a>
@@ -685,7 +695,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: December 4, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cb0a402bea59da76fe51c51cd61ab4bfe99417cb">cb0a402bea</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: June 13, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3ecf3450b3e0fa0500ca990a672c9c103566c8f3">3ecf3450b3</a>
     </span>
   </div>
 </footer>
