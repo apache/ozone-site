@@ -71,6 +71,13 @@
       <description>Ozone HttpFS is a WebHDFS compatible interface implementation, as a separate role it provides an easy integration with Ozone.</description>
     </item>
     <item>
+      <title>Native C/C&#43;&#43; Client Access to Ozone</title>
+      <link>/interface/native-cpp.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/interface/native-cpp.html</guid>
+      <description>&lt;!--&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;h2 id=&#34;components-summary&#34;&gt;Components Summary&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;libhdfs&lt;/strong&gt;: The standard Hadoop C API. It is a JNI bridge between C/C++ and Java FileSystem implementations.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;libo3fs&lt;/strong&gt;: Lightweight wrapper exposing a simplified API for Ozone clients. It is built on top of &lt;code&gt;libhdfs&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;OFS (Ozone FileSystem)&lt;/strong&gt;: Java-based filesystem client used internally by &lt;code&gt;libhdfs&lt;/code&gt; to interact with Ozone.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Native C/C++ applications can access Ozone volumes and buckets using Hadoop HDFS&amp;rsquo;s &lt;code&gt;libhdfs&lt;/code&gt; JNI library.&#xA;As an example, Apache Impala uses this library to access Ozone.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Interactive Recon API Specification</title>
       <link>/interface/swaggerreconapi.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
