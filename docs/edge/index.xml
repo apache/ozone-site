@@ -407,6 +407,13 @@
       <description>Describe proposal for minimum free space configuration which volume must have to function correctly.</description>
     </item>
     <item>
+      <title>Datanode used space calculation</title>
+      <link>/design/dn-usedspace-calculation.html</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>/design/dn-usedspace-calculation.html</guid>
+      <description>Describe proposal for optimization in datanode used space calculation.</description>
+    </item>
+    <item>
       <title>Ozone Debug</title>
       <link>/tools/debug.html</link>
       <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
