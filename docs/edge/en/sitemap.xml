@@ -437,7 +437,7 @@
                 />
   </url><url>
     <loc>/concept/datanodes.html</loc>
-    <lastmod>2024-09-23T17:47:30+08:00</lastmod>
+    <lastmod>2024-12-18T11:22:00-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -652,6 +652,9 @@
   </url><url>
     <loc>/design/overwrite-key-only-if-unchanged.html</loc>
     <lastmod>2024-04-29T10:37:20+01:00</lastmod>
+  </url><url>
+    <loc>/design/container-reconciliation.html</loc>
+    <lastmod>2024-05-23T09:40:47-07:00</lastmod>
   </url><url>
     <loc>/design/symmetric-token-signatures.html</loc>
     <lastmod>2023-07-31T14:07:54-07:00</lastmod>

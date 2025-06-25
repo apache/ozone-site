@@ -428,6 +428,13 @@
       <description>A minimal design illustrating how to replace a key in Ozone only if it has not changes since it was read.</description>
     </item>
     <item>
+      <title>Container Reconciliation</title>
+      <link>/design/container-reconciliation.html</link>
+      <pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>/design/container-reconciliation.html</guid>
+      <description>Allow Datanodes to reconcile mismatched container contents regardless of their state.</description>
+    </item>
+    <item>
       <title>Ozone Token Signatures using Symmetric Keys</title>
       <link>/design/symmetric-token-signatures.html</link>
       <pubDate>Wed, 17 May 2023 00:00:00 +0000</pubDate>
