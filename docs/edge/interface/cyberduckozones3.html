@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -338,7 +341,7 @@ s=d.getElementsByTagName('script')[0];
                                </a>
                                <ul class="nav">
                                
-                                  <li class="">
+                                  <li class="active">
                                      <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
                                   </li>
                                
@@ -487,51 +490,159 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-1466">[HDDS-1466]</a> Type-safe configuration API (implemented) </h1>
-                <div><i>Authors: Anu Engineer, Marton Elek</i><div class="pull-right">2019-04-25</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Inject configuration values based on annotations instead of using constants and Hadoop API
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../interface.html">Client Interfaces</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Accessing Ozone S3 via CyberDuck</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Accessing Ozone S3 via CyberDuck</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
--->
-<h1 id="abstract">Abstract</h1>
-<p>Generate configuration from annotated plain Java objects to make configuration more structured and type safe.</p>
-<h1 id="link">Link</h1>
-<ul>
-<li><a href="https://issues.apache.org/jira/secure/attachment/12966991/typesafe.pdf">https://issues.apache.org/jira/secure/attachment/12966991/typesafe.pdf</a></li>
-</ul>
+  limitations under the License.
 
-            </div>
+-->
+<p>Here&rsquo;s a step‑by‑step guide to mounting and managing your Apache Ozone object store&rsquo;s S3 interface using Cyberduck.</p>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>
+<p><strong>Running Ozone S3 Gateway</strong>
+Make sure your Ozone cluster is up and the S3 Gateway (s3g) is running. By default it listens on port <strong>9878</strong> over HTTP (and 9879 for HTTPS) at the host where you started it.</p>
+</li>
+<li>
+<p><strong>Credentials</strong></p>
+<ul>
+<li><strong>No security:</strong> You can use any values for AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY.</li>
+<li><strong>With Kerberos security enabled:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kinit -kt /etc/security/keytabs/&lt;user&gt;.keytab &lt;user&gt;@YOUR.REALM
+</span></span><span style="display:flex;"><span>ozone s3 getsecret
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># → awsAccessKey=&lt;user&gt;@YOUR.REALM</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   awsSecret=&lt;long‑hex‑string&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>These exports give you the Access Key ID and Secret you&rsquo;ll plug into Cyberduck.</p>
+</li>
+</ol>
+<hr>
+<h2 id="1-install-cyberduck">1. Install Cyberduck</h2>
+<ol>
+<li>Download Cyberduck from <a href="https://cyberduck.io">https://cyberduck.io</a> and install it on your Mac or Windows machine.</li>
+<li>Launch Cyberduck.</li>
+</ol>
+<hr>
+<h2 id="2-create-a-new-s3-connection">2. Create a New S3 Connection</h2>
+<ol>
+<li>The bundled S3 profile in Cyberduck does not permit a custom network port, and does not allow HTTP. You may need to install additional profiles to allow those.
+<ol>
+<li>Select a profile from <a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-cyberduck-profiles-md">Ozone S3 Cyberduck profiles</a>.</li>
+<li>For example, download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-cyberduckprofile">Ozone S3 HTTP.cyberduckprofile</a></strong> if your gateway is HTTP.</li>
+<li>Or download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-with-path-style-addressing-cyberduckprofile">Ozone S3 (HTTP) with path-style addressing.cyberduckprofile</a></strong>.</li>
+<li>Installing the file by double-clicking a <code>.cyberduckprofile</code> file</li>
+<li>Check out the <a href="https://docs.cyberduck.io/protocols/s3">Cyberduck user documentation</a> for more details.</li>
+</ol>
+</li>
+<li>In Cyberduck, click <strong>Open Connection</strong> (or press ⌘ N).</li>
+<li>From the <strong>Protocol</strong> dropdown choose <strong>Ozone S3 (HTTP)</strong> if your gateway is configured for HTTP), or <strong>Apache Ozone S3 HTTP path style</strong> if the gateway is configured with Path-Style Addressing.</li>
+<li>Fill in the fields:
+<ul>
+<li><strong>Server:</strong> <code>&lt;ozone‑s3‑host&gt;</code> (e.g. <code>ozone.example.com</code>)</li>
+<li><strong>Port:</strong> <code>9878</code> (or <code>9879</code> for HTTPS)</li>
+<li><strong>Access Key ID:</strong> the <code>awsAccessKey</code> you obtained</li>
+<li><strong>Secret Access Key:</strong> the <code>awsSecret</code> you obtained</li>
+</ul>
+</li>
+<li>Click the little <strong>▶</strong> triangle next to <strong>More Options</strong> and ensure <strong>Use SSL</strong> is unchecked if you&rsquo;re connecting over plain HTTP.</li>
+<li><strong>Path‑Style Addressing</strong> (default) vs <strong>Virtual‑Host Style</strong>:
+<ul>
+<li>By default Ozone uses <strong>path‑style</strong> (<code>http://host:9878/bucket</code>).</li>
+<li>If you&rsquo;ve set <code>ozone.s3g.domain.name</code> in your <code>ozone-site.xml</code>, you can switch to virtual‑host style and Cyberduck will use <code>bucket.host:9878</code> URLs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="3-save-as-a-bookmark-optional">3. Save as a Bookmark (Optional)</h2>
+<ol>
+<li>Click the dropdown arrow next to the <strong>Connect</strong> button and choose <strong>Bookmark</strong> ▶ <strong>Add Bookmark</strong>.</li>
+<li>Give it a name like &ldquo;Ozone S3&rdquo; so you can reconnect quickly.</li>
+</ol>
+<hr>
+<h2 id="4-browsing-and-basic-operations">4. Browsing and Basic Operations</h2>
+<p>Once connected, your Cyberduck window will list all buckets in the default <code>/s3v</code> volume as top‑level entries.</p>
+<ul>
+<li><strong>List Buckets:</strong> All existing buckets appear as folders.</li>
+<li><strong>Create Bucket:</strong> Click the &ldquo;+&rdquo; (New Folder) icon, enter a bucket name, and press <strong>Return</strong>.</li>
+<li><strong>Upload Files:</strong> Drag‑and‑drop files from your desktop into a bucket folder.</li>
+<li><strong>Download Files:</strong> Right‑click an object and choose <strong>Download To…</strong></li>
+<li><strong>Delete Objects/Buckets:</strong> Select the file or bucket, press the <strong>Delete</strong> key, and confirm.</li>
+</ul>
+<hr>
+<h2 id="5-working-with-other-volumes">5. Working with Other Volumes</h2>
+<p>Ozone&rsquo;s namespace includes volumes beyond <code>/s3v</code>. To expose a bucket from another volume:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh volume create /vol1
+</span></span><span style="display:flex;"><span>ozone sh bucket create /vol1/bucket1
+</span></span><span style="display:flex;"><span>ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
+</span></span></code></pre></div><p>After linking, you&rsquo;ll see <code>common-bucket</code> in Cyberduck and can manage it just like any other S3 bucket.</p>
+<hr>
+<h2 id="6-tips--troubleshooting">6. Tips &amp; Troubleshooting</h2>
+<ul>
+<li><strong>Permissions:</strong> If you get &ldquo;Access Denied,&rdquo; double‑check that you&rsquo;ve generated or revoked/re‑generated your S3 secret correctly.</li>
+<li><strong>SSL Errors:</strong> If you enable HTTPS on the gateway, make sure you either trust the certificate in Cyberduck or use a CA‑signed cert.</li>
+<li><strong>Firewall/Network:</strong> Ensure your machine can reach <code>&lt;ozone‑s3‑host&gt;:9878</code> (e.g. <code>telnet hostname 9878</code>).</li>
+<li><strong>Bookmarks Sync:</strong> Cyberduck can sync bookmarks via Dropbox or iCloud so you can share connections across devices.</li>
+</ul>
+<hr>
+<p>You&rsquo;re all set! Enjoy browsing and managing your Ozone object store through a familiar S3 GUI.</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../interface/cli.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: October 9, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a1d53b0781f5a9c89b665210e6853ed551892e47">a1d53b0781</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 1, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b1c27bad3f184da4edf162aaed23bf74bab4c5dd">b1c27bad3f</a>
     </span>
   </div>
 </footer>
@@ -543,5 +654,6 @@ s=d.getElementsByTagName('script')[0];
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

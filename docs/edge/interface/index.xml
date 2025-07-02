@@ -29,6 +29,13 @@
       <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
     </item>
     <item>
+      <title>Accessing Ozone S3 via CyberDuck</title>
+      <link>/interface/cyberduckozones3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/interface/cyberduckozones3.html</guid>
+      <description>Instructions on how to access Ozone using CyberDuck, a popular S3 client.</description>
+    </item>
+    <item>
       <title>Command Line Interface</title>
       <link>/interface/cli.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
