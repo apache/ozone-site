@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -442,7 +445,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
                            
@@ -493,55 +496,86 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-1084">[HDDS-1084]</a> Recon server 1 (implemented) </h1>
-                <div><i>Authors: Sid Wagle, Vivek Subramanian and Aravindan</i><div class="pull-right">2019-02-19</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Second phase of Recon development. Recon acts as a passive SCM.
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../security.html">Security</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Protect In-Transit Traffic</li>
+                </ol>
+              </nav>
 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Protect In-Transit Traffic</h1>
+
+            <!---
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
-<h1 id="abstract">Abstract</h1>
-<p>Recon is a monitoring and analytics server for Ozone. It can retrieve data from
-other components and store it and do historical queries (eg. out-of-disk-space time estimation).</p>
-<blockquote>
-<p>Ozone Recon (short for reconnaissance) Service is, as the name suggests, meant to be eyes and ears of Ozone for the user. The first resort in understanding what is happening with Ozone.</p>
-</blockquote>
-<h1 id="link">Link</h1>
-<ul>
-<li><a href="https://issues.apache.org/jira/secure/attachment/12960258/Ozone_Recon_Design_V1_Draft.pdf">https://issues.apache.org/jira/secure/attachment/12960258/Ozone_Recon_Design_V1_Draft.pdf</a></li>
-</ul>
+<p>This document describes how to protect data in transit within Apache Ozone, both between the cluster and clients, and internally within the cluster.</p>
+<h2 id="hadoop-rpc-encryption">Hadoop RPC Encryption</h2>
+<p>Ozone traffic, whether between the cluster and client, or internal inside the cluster, may be transferred via Hadoop RPC (e.g. client to Ozone Manager). To encrypt client-OM (Ozone Manager) communication, configure <code>hadoop.rpc.protection</code> to <code>privacy</code> in your <code>core-site.xml</code>. This ensures that all data exchanged over Hadoop RPC is encrypted.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hadoop.rpc.protection<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>privacy<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h3 id="ozoneomtransportclass">ozone.om.transport.class</h3>
+<p>While the default is <code>org.apache.hadoop.ozone.om.protocolPB.Hadoop3OmTransportFactory</code>, it is possible to specify a gRPC based transport using the <code>ozone.om.transport.class</code> configuration property: <code>org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory</code>. In this case, the Hadoop RPC configuration is not applicable.</p>
+<h2 id="grpc-tls-encryption">gRPC TLS Encryption</h2>
+<p>Ozone traffic may also be transferred via gRPC (e.g., Ratis write pipeline or client reading blocks from DataNode). To enable TLS for gRPC traffic, set <code>hdds.grpc.tls.enabled</code> to <code>true</code>. This encrypts communication between Ozone services that use gRPC.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>hdds.grpc.tls.enabled<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h2 id="ozone-http-web-console">Ozone HTTP Web Console</h2>
+<p>For information on securing the Ozone HTTP web console, please refer to the <a href="../security/securingozonehttp.html">Securing HTTP</a> documentation.</p>
+<h2 id="further-reading">Further Reading</h2>
+<p>For details on the specific network ports used by Ozone roles and the types of transport between them, refer to the <a href="../concept/networkports.html">Network Ports</a> documentation.</p>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../security/securitywithranger.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/9872253e89377624dfea5fb9b321538fc70f91c4">9872253e89</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b9d4e6585bb7dabc186590ae4dd782834e0b022a">b9d4e6585b</a>
     </span>
   </div>
 </footer>
@@ -553,5 +587,6 @@ other components and store it and do historical queries (eg. out-of-disk-space t
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

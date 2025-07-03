@@ -126,7 +126,7 @@
     <lastmod>2024-02-27T17:33:44+05:30</lastmod>
   </url><url>
     <loc>/security/securingtde.html</loc>
-    <lastmod>2025-06-10T18:50:54-07:00</lastmod>
+    <lastmod>2025-07-02T11:15:53-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -426,6 +426,9 @@
                 href="/interface/csi.html"
                 />
   </url><url>
+    <loc>/security/protect-in-transit-traffic.html</loc>
+    <lastmod>2025-07-03T03:29:45-07:00</lastmod>
+  </url><url>
     <loc>/security/securitywithranger.html</loc>
     <lastmod>2025-06-09T12:50:19-07:00</lastmod>
     <xhtml:link
@@ -440,7 +443,7 @@
                 />
   </url><url>
     <loc>/concept/datanodes.html</loc>
-    <lastmod>2024-12-18T11:22:00-08:00</lastmod>
+    <lastmod>2025-07-03T03:05:33-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"

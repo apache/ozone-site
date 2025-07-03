@@ -447,6 +447,12 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
                            <a href="../security/securitywithranger.html">Apache Ranger</a>
                            
                         </li>
@@ -579,6 +585,54 @@ blocks that get reported. That is a 40x reduction in the block reports.</p>
 <p>This extra indirection helps tremendously with scaling Ozone. SCM has far
 less block data to process and the namespace service (Ozone Manager) as a
 different service are critical to scaling Ozone.</p>
+<h2 id="data-volume-management">Data Volume Management</h2>
+<h3 id="what-is-a-volume">What is a Volume?</h3>
+<p>In the context of an Ozone DataNode, a &ldquo;volume&rdquo; refers to a physical disk or storage device managed by the DataNode. Each volume can store many containers, which are the fundamental units of storage in Ozone. This is different from the &ldquo;volume&rdquo; concept in Ozone Manager, which refers to a namespace for organizing buckets and keys.</p>
+<p>The status of volumes, including used space, available space and whether or not they are operational (healthy) or failed, can be looked up from DataNode Web UI.</p>
+<h3 id="defining-volumes-with-hddsdatanodedir">Defining Volumes with hdds.datanode.dir</h3>
+<p>The property <code>hdds.datanode.dir</code> defines the set of volumes (disks) managed by a DataNode. You can specify one or more directories, separated by commas. Each directory represents a volume.
+For example: <code>/data1/disk1,/data2/disk2</code>, which configures the DataNode to manage two volumes.</p>
+<h3 id="volume-choosing-policy">Volume Choosing Policy</h3>
+<p>When a DataNode needs to select a volume to store new data, it uses a volume choosing policy. The policy is controlled by the property <code>hdds.datanode.volume.choosing.policy</code>. There are two main policies:</p>
+<ul>
+<li>
+<p><strong>CapacityVolumeChoosingPolicy (default):</strong>
+This policy randomly selects two volumes with enough available space and chooses the one with lower utilization (i.e., more free space). This approach increases the likelihood that less-used disks are chosen, helping to balance disk usage over time.</p>
+</li>
+<li>
+<p><strong>RoundRobinVolumeChoosingPolicy:</strong>
+This policy selects volumes in a round-robin order, cycling through all available volumes. It does not consider the current utilization of each disk, but ensures even distribution of new containers across all disks.</p>
+</li>
+</ul>
+<h3 id="volume-related-configuration-properties">Volume-Related Configuration Properties</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Property Name</th>
+          <th>Default Value</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>hdds.datanode.volume.choosing.policy</td>
+          <td>CapacityVolumeChoosingPolicy</td>
+          <td>The policy used to select a volume for new containers.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.volume.min.free.space</td>
+          <td>20GB</td>
+          <td>Minimum free space required on a volume to be eligible for new containers.</td>
+      </tr>
+      <tr>
+          <td>hdds.datanode.volume.min.free.space.percent</td>
+          <td>0.001</td>
+          <td>Minimum free space percentage required on a volume to be eligible for new containers.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="disk-balancer">Disk Balancer</h3>
+<p>Over time, operations like adding or replacing disks can cause uneven disk usage. The Ozone community is developing a Disk Balancer (see <a href="https://issues.apache.org/jira/browse/HDDS-5713">HDDS-5713</a>) to automatically balance disk usage across DataNode volumes. This feature is under active development.</p>
 <h2 id="notable-configurations">Notable configurations</h2>
 <table>
   <thead>
@@ -640,7 +694,7 @@ different service are critical to scaling Ozone.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: December 18, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7bcc943077097125e16d705ba1366139ba4c5871">7bcc943077</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5e72dd4e1efba98955300ff831311eb7fae6c0e9">5e72dd4e1e</a>
     </span>
   </div>
 </footer>
