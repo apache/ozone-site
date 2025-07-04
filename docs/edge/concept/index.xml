@@ -6,7 +6,7 @@
     <description>Recent content in Architecture on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Jul 2025 03:05:33 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 04 Jul 2025 05:45:02 -0700</lastBuildDate>
     <atom:link href="/concept/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
@@ -42,6 +42,13 @@
       <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
       <guid>/concept/datanodes.html</guid>
       <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
+    </item>
+    <item>
+      <title>Ozone S3 Gateway</title>
+      <link>/concept/ozones3gateway.html</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>/concept/ozones3gateway.html</guid>
+      <description>Apache Ozone’s S3 Gateway (often called S3G) is a component that provides an Amazon S3-compatible REST interface for Ozone’s object store.</description>
     </item>
     <item>
       <title>Recon</title>

@@ -274,6 +274,13 @@
       <description>Recon is the Web UI and analysis service for Ozone</description>
     </item>
     <item>
+      <title>Ozone S3 Gateway</title>
+      <link>/concept/ozones3gateway.html</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>/concept/ozones3gateway.html</guid>
+      <description>Apache Ozone’s S3 Gateway (often called S3G) is a component that provides an Amazon S3-compatible REST interface for Ozone’s object store.</description>
+    </item>
+    <item>
       <title>Recon</title>
       <link>/concept/recon.html</link>
       <pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate>
@@ -701,6 +708,13 @@
       <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&#xA;&lt;div id=&#34;swagger-ui&#34;&gt;&lt;/div&gt;&#xA;&lt;script src=&#34;./swagger-resources/swagger-ui-bundle.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;./swagger-resources/swagger-ui-standalone-preset.js&#34;&gt; &lt;/script&gt;&#xA;&lt;script&gt;&#xA;  window.onload = function () {&#xA;    const ui = SwaggerUIBundle({&#xA;      url: &#34;..\/swagger-resources\/recon-api.yaml&#34;,&#xA;      dom_id: &#39;#api-container&#39;,&#xA;      deepLinking: true,&#xA;      presets: [&#xA;        SwaggerUIBundle.presets.apis,&#xA;        SwaggerUIStandalonePreset&#xA;      ],&#xA;      plugins: [&#xA;        SwaggerUIBundle.plugins.DownloadUrl&#xA;      ],&#xA;      layout: &#34;StandaloneLayout&#34;,&#xA;      docExpansion: &#39;none&#39;&#xA;    })&#xA;    window.ui = ui;&#xA;  }&#xA;&lt;/script&gt;</description>
     </item>
     <item>
+      <title>Multi-Raft Support in Ozone</title>
+      <link>/feature/multi-raft-support.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/feature/multi-raft-support.html</guid>
+      <description>Enables each Datanode to participate in multiple Ratis pipelines concurrently to improve resource utilization and write throughput.</description>
+    </item>
+    <item>
       <title>Access Ozone object store with Amazon Boto3 client</title>
       <link>/recipe/botoclient.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -727,6 +741,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/tools/testtools.html</guid>
       <description>Ozone contains multiple test tools for load generation, partitioning test or acceptance tests.</description>
+    </item>
+    <item>
+      <title>Trash</title>
+      <link>/feature/trash.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/feature/trash.html</guid>
+      <description>How to use the trash feature in Ozone.</description>
     </item>
   </channel>
 </rss>
