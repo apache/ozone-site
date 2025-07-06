@@ -131,7 +131,7 @@ s=d.getElementsByTagName('script')[0];
                                </a>
                                <ul class="nav">
                                
-                                  <li class="">
+                                  <li class="active">
                                      <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
                                   </li>
                                
@@ -431,7 +431,7 @@ s=d.getElementsByTagName('script')[0];
                 </a>
                 <ul class="nav">
                     
-                        <li class="active">
+                        <li class="">
                            
                            <a href="../security/secureozone.html">Securing Ozone</a>
                            
@@ -532,8 +532,8 @@ s=d.getElementsByTagName('script')[0];
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../security.html">Security</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Securing Ozone</li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Volumes, Buckets, and Keys</li>
                 </ol>
               </nav>
 
@@ -543,18 +543,13 @@ s=d.getElementsByTagName('script')[0];
     
     
     
-    
-    
-    <a href="../zh/security/secureozone.html"><span class="label label-success">中文</span></a>
-    
-    
 </div>
 
 
           <div class="col-md-9">
-            <h1>Securing Ozone</h1>
+            <h1>Volumes, Buckets, and Keys</h1>
 
-            <!---
+            <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -570,170 +565,132 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<h1 id="kerberos">Kerberos</h1>
-<p>Ozone depends on <a href="https://web.mit.edu/kerberos/">Kerberos</a> to make the
-clusters secure. Historically, HDFS has supported running in an isolated
-secure networks where it is possible to deploy without securing the cluster.</p>
-<p>This release of Ozone follows that model, but soon will move to <em>secure by
-default.</em>  Today to enable security in ozone cluster, we need to set the
-configuration <strong>ozone.security.enabled</strong> to <em>true</em> and <strong>hadoop.security.authentication</strong>
-to <em>kerberos</em>.</p>
-<table>
-  <thead>
-      <tr>
-          <th>Property</th>
-          <th>Value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ozone.security.enabled</td>
-          <td><em>true</em></td>
-      </tr>
-      <tr>
-          <td>hadoop.security.authentication</td>
-          <td><em>kerberos</em></td>
-      </tr>
-  </tbody>
-</table>
-<h1 id="tokens">Tokens</h1>
-<p>Ozone uses a notion of tokens to avoid overburdening the Kerberos server.
-When you serve thousands of requests per second, involving Kerberos might not
-work well. Hence once an authentication is done, Ozone issues delegation
-tokens and block tokens to the clients. These tokens allow applications to do
-specified operations against the cluster, as if they have kerberos tickets
-with them. Ozone supports following kinds of tokens.</p>
-<h3 id="delegation-token">Delegation Token</h3>
-<p>Delegation tokens allow an application to impersonate a users kerberos
-credentials. This token is based on verification of kerberos identity and is
-issued by the Ozone Manager. Delegation tokens are enabled by default when
-security is enabled.</p>
-<h3 id="block-token">Block Token</h3>
-<p>Block tokens allow a client to read or write a block. This is needed so that
-data nodes know that the user/client has permission to read or make
-modifications to the block.</p>
-<h3 id="s3authinfo">S3AuthInfo</h3>
-<p>S3 uses a very different shared secret security scheme. Ozone supports the AWS Signature Version 4 protocol,
-and from the end users perspective Ozone&rsquo;s S3 feels exactly like AWS S3.</p>
-<p>The S3 credential tokens are called S3 auth info in the code. These tokens are
-also enabled by default when security is enabled.</p>
-<p>Each of the service daemons that make up Ozone needs a  Kerberos service
-principal name and a corresponding <a href="https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html">kerberos key tab</a> file.</p>
-<p>All these settings should be made in ozone-site.xml.</p>
-<div class="card-group">
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Storage Container Manager</h3>
-      <p class="card-text">
-      <br>
-        SCM requires two Kerberos principals, and the corresponding key tab files
-        for both of these principals.
-      <br>
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Property</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>hdds.scm.kerberos.principal</th>
-            <td>The SCM service principal. <br/> e.g. scm/_HOST@REALM.COM</td>
-          </tr>
-          <tr>
-            <td>hdds.scm.kerberos.keytab.file</th>
-            <td>The keytab file used by SCM daemon to login as its service principal.</td>
-          </tr>
-          <tr>
-            <td>hdds.scm.http.auth.kerberos.principal</th>
-            <td>SCM http server service principal if SPNEGO is enabled for SCM http server.</td>
-          </tr>
-          <tr>
-            <td>hdds.scm.http.auth.kerberos.keytab</th>
-            <td>The keytab file used by SCM http server to login as its service principal if SPNEGO is enabled for SCM http server</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Ozone Manager</h3>
-      <p class="card-text">
-      <br>
-        Like SCM, OM also requires two Kerberos principals, and the
-        corresponding key tab files for both of these principals.
-      <br>
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Property</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>ozone.om.kerberos.principal</th>
-            <td>The OzoneManager service principal. <br/> e.g. om/_HOST@REALM.COM</td>
-          </tr>
-          <tr>
-            <td>ozone.om.kerberos.keytab.file</th>
-            <td>The keytab file used by OM daemon to login as its service principal.</td>
-          </tr>
-          <tr>
-            <td>ozone.om.http.auth.kerberos.principal</th>
-            <td>Ozone Manager http server service principal if SPNEGO is enabled for om http server.</td>
-          </tr>
-          <tr>
-            <td>ozone.om.http.auth.kerberos.keytab</th>
-            <td>The keytab file used by OM http server to login as its service principal if SPNEGO is enabled for om http server.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">S3 Gateway</h3>
-      <p class="card-text">
-      <br>
-        S3 gateway requires one service principal and here the configuration values
-        needed in the ozone-site.xml.
-      <br>
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Property</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>ozone.s3g.kerberos.principal</th>
-            <td>S3 Gateway principal. <br/> e.g. s3g/_HOST@REALM</td>
-          </tr>
-          <tr>
-            <td>ozone.s3g.kerberos.keytab.file</th>
-            <td>The keytab file used by S3 gateway. <br/> e.g. /etc/security/keytabs/s3g.keytab</td>
-          </tr>
-          <tr>
-            <td>ozone.s3g.http.auth.kerberos.principal</th>
-            <td>S3 Gateway principal if SPNEGO is enabled for S3 Gateway http server. <br/> e.g. HTTP/_HOST@EXAMPLE.COM</td>
-          </tr>
-          <tr>
-            <td>ozone.s3g.http.auth.kerberos.keytab</th>
-            <td>The keytab file used by S3 gateway if SPNEGO is enabled for S3 Gateway http server.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<p>Apache Ozone organizes data in a three-level hierarchy: Volumes, Buckets, and Keys. This structure provides a flexible and scalable way to manage large datasets, similar to how traditional file systems use directories and files, but optimized for object storage.</p>
+<h2 id="overview-of-the-hierarchy">Overview of the Hierarchy</h2>
+<ul>
+<li><strong>Volumes:</strong> The top-level organizational unit, akin to user accounts or home directories.</li>
+<li><strong>Buckets:</strong> Reside within volumes, similar to directories or folders, and contain the actual data objects.</li>
+<li><strong>Keys:</strong> The fundamental data objects, analogous to files, stored inside buckets.</li>
+</ul>
+<pre tabindex="0"><code>Volume
+└─── Bucket
+    ├─── Key 1
+    ├─── Key 2
+    └─── ...
+</code></pre><p>This hierarchy is managed by the <a href="../concept/ozonemanager.html">Ozone Manager</a>, which is the principal namespace service of Ozone.</p>
+<h2 id="volumes">Volumes</h2>
+<h3 id="what-is-a-volume">What is a Volume?</h3>
+<p>A <strong>Volume</strong> in Ozone is the highest level of the namespace hierarchy. It serves as a logical container for one or more buckets. Conceptually, a volume can be thought of as a user&rsquo;s home directory or a project space, providing a clear separation of data ownership and management.</p>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li><strong>Administrative Control:</strong> Only administrators can create or delete volumes. This ensures proper resource allocation and access control at the highest level.</li>
+<li><strong>Storage Accounting:</strong> Volumes are used as the basis for storage accounting, allowing administrators to track resource usage per volume.</li>
+<li><strong>Container for Buckets:</strong> A volume can contain any number of buckets.</li>
+</ul>
+<h3 id="details">Details</h3>
+<h4 id="creation-and-management">Creation and Management</h4>
+<p>Volumes are typically created and managed using the Ozone command-line interface (CLI). For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /myvolume
+</span></span></code></pre></div><p>For more details on volume operations, refer to the <a href="../interface/cli.html#volume-operations">Ozone CLI documentation</a>.</p>
+<h4 id="quota-management">Quota Management</h4>
+<p>Volumes can have quotas applied to them, limiting the total storage space or the number of namespaces (buckets) they can consume. This is crucial for multi-tenant environments to prevent any single user or project from monopolizing resources.</p>
+<ul>
+<li><strong>Storage Space Quota:</strong> Limits the total data size within the volume.</li>
+<li><strong>Namespace Quota:</strong> Limits the number of buckets that can be created within the volume.</li>
+</ul>
+<p>For comprehensive information on configuring and managing quotas, see the <a href="../feature/quota.html">Quota Management documentation</a>.</p>
+<h4 id="access-control-lists-acls">Access Control Lists (ACLs)</h4>
+<p>Access to volumes is controlled via ACLs, which define permissions for users and groups. These permissions determine who can create buckets within a volume, list its contents, or perform other operations.</p>
+<ul>
+<li><strong>Create:</strong> Allows creating buckets within the volume.</li>
+<li><strong>List:</strong> Allows listing buckets within the volume.</li>
+<li><strong>Read:</strong> Allows reading metadata of the volume.</li>
+<li><strong>Write:</strong> Allows writing metadata of the volume.</li>
+<li><strong>Delete:</strong> Allows deleting the volume (if empty or recursively).</li>
+</ul>
+<p>ACLs can be set and managed using the Ozone CLI. Refer to the <a href="../security/securityacls.html">Security ACLs documentation</a> for more in-depth information.</p>
+<h4 id="s3-gateway-integration-s3v-volume">S3 Gateway Integration (<code>/s3v</code> Volume)</h4>
+<p>For compatibility with the S3 API, Ozone uses a special volume, typically <code>/s3v</code>. By default, all buckets accessed via the S3 interface are stored under this volume. It&rsquo;s also possible to expose buckets from other Ozone volumes via the S3 interface using &ldquo;bucket linking.&rdquo;
+For more details, refer to the <a href="../interface/s3.html">S3 Protocol documentation</a> and <a href="../feature/s3-multi-tenancy.html">S3 Multi-Tenancy documentation</a>.</p>
+<h4 id="datanode-physical-volumes-vs-ozone-manager-logical-volumes">DataNode Physical Volumes vs. Ozone Manager Logical Volumes</h4>
+<p>It&rsquo;s important to distinguish between the logical &ldquo;volumes&rdquo; managed by the Ozone Manager (as described above) and the physical &ldquo;volumes&rdquo; (disks) managed by the DataNodes.</p>
+<ul>
+<li><strong>Ozone Manager Volumes:</strong> Logical namespace containers for buckets and keys.</li>
+<li><strong>DataNode Volumes:</strong> Physical storage devices (disks) on a DataNode where actual data blocks are stored in containers.
+For more information on DataNode volume management, refer to the <a href="../concept/datanodes.html">DataNodes documentation</a>.</li>
+</ul>
+<h2 id="buckets">Buckets</h2>
+<h3 id="what-is-a-bucket">What is a Bucket?</h3>
+<p>A <strong>Bucket</strong> is the second level in the Ozone data hierarchy, residing within a volume. Buckets are analogous to directories or folders in a traditional file system. They serve as containers for keys (data objects).</p>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li><strong>Contained within Volumes:</strong> Every bucket must belong to a volume.</li>
+<li><strong>Container for Keys:</strong> A bucket can contain any number of keys.</li>
+<li><strong>No Nested Buckets:</strong> Unlike directories, buckets cannot contain other buckets.</li>
+</ul>
+<h3 id="details-1">Details</h3>
+<h4 id="creation-and-management-1">Creation and Management</h4>
+<p>Buckets are created within a specified volume.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh bucket create /myvolume/mybucket
+</span></span></code></pre></div><p>For more details on bucket operations, refer to the <a href="../interface/cli.html#bucket-operations">Ozone CLI documentation</a>.</p>
+<h4 id="bucket-layouts-object-store-vs-file-system-optimized">Bucket Layouts (Object Store vs. File System Optimized)</h4>
+<p>Ozone supports different bucket layouts, primarily:</p>
+<ul>
+<li><strong>Object Store (OBS):</strong> The traditional object storage layout, where keys are stored with their full path names. This is suitable for S3-like access patterns.</li>
+<li><strong>File System Optimized (FSO):</strong> An optimized layout for Hadoop Compatible File System (HCFS) semantics, where intermediate directories are stored separately, improving performance for file system operations like listing and renaming.
+For more details, refer to the <a href="../feature/prefixfso.html">Prefix FSO documentation</a>.</li>
+</ul>
+<h4 id="encryption-transparent-data-encryption---tde">Encryption (Transparent Data Encryption - TDE)</h4>
+<p>Buckets can be configured for Transparent Data Encryption (TDE) at the time of creation. When TDE is enabled, all data written to the bucket is automatically encrypted at rest using a specified encryption key.
+For detailed steps on setting up and using TDE, refer to the <a href="../security/securingtde.html">Securing TDE documentation</a>.</p>
+<h4 id="erasure-coding">Erasure Coding</h4>
+<p>Erasure Coding (EC) can be enabled at the bucket level to define data redundancy strategies. This allows for more efficient storage compared to replication, especially for large datasets.
+For more information, see the <a href="../feature/erasurecoding.html">Erasure Coding documentation</a>.</p>
+<h4 id="snapshots">Snapshots</h4>
+<p>Ozone&rsquo;s snapshot feature allows users to take point-in-time consistent images of a given bucket. These snapshots are immutable and can be used for backup, recovery, archival, and incremental replication purposes.
+For more details, refer to the <a href="../feature/snapshot.html">Ozone Snapshot documentation</a>.</p>
+<h4 id="gdpr-compliance">GDPR Compliance</h4>
+<p>Ozone provides features to support GDPR compliance, particularly the &ldquo;right to be forgotten.&rdquo; When a GDPR-compliant bucket is created, encryption keys for deleted data are immediately removed, making the data unreadable even if the underlying blocks haven&rsquo;t been physically purged yet.
+For more details, refer to the <a href="../security/gdpr.html">GDPR documentation</a>.</p>
+<h4 id="bucket-linking">Bucket Linking</h4>
+<p>Bucket linking allows exposing a bucket from one volume (or even another bucket) as if it were in a different location, particularly useful for S3 compatibility or cross-tenant access. This creates a symbolic link-like behavior.
+For more information, see the <a href="../interface/s3.html">S3 Protocol documentation</a> and <a href="../feature/s3-multi-tenancy.html">S3 Multi-Tenancy documentation</a>.</p>
+<h4 id="quota-management-1">Quota Management</h4>
+<p>Similar to volumes, buckets can also have storage space and namespace quotas applied to them.
+For comprehensive information on configuring and managing quotas, see the <a href="../feature/quota.html">Quota Management documentation</a>.</p>
+<h4 id="access-control-lists-acls-1">Access Control Lists (ACLs)</h4>
+<p>ACLs define permissions for buckets, controlling who can list keys, read/write data, or delete the bucket.
+For more details, refer to the <a href="../security/securityacls.html">Security ACLs documentation</a>.</p>
+<h2 id="keys">Keys</h2>
+<h3 id="what-is-a-key">What is a Key?</h3>
+<p>A <strong>Key</strong> is the fundamental data object in Ozone, analogous to a file in a traditional file system. Keys are stored within buckets and represent the actual data that users interact with.</p>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li><strong>Contained within Buckets:</strong> Every key must reside within a bucket.</li>
+<li><strong>Immutable Data Blocks:</strong> Once written, the underlying data blocks of a key are immutable. Updates or modifications to a key typically result in new versions or new data blocks being written, with the metadata pointing to the latest version.</li>
+</ul>
+<h3 id="details-2">Details</h3>
+<h4 id="creation-reading-and-management">Creation, Reading, and Management</h4>
+<p>Keys are created, read, and managed using the Ozone CLI or various client APIs (Java, S3, etc.).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh key put /myvolume/mybucket/mykey.txt /path/to/local/file.txt
+</span></span></code></pre></div><p>For more details on key operations, refer to the <a href="../interface/cli.html#key-operations">Ozone CLI documentation</a>.</p>
+<h4 id="key-write-and-read-process">Key Write and Read Process</h4>
+<p>When a client writes a key, the Ozone Manager handles the metadata (key name, location of data blocks), and the DataNodes store the actual data blocks. For reads, the Ozone Manager provides the client with the locations of the data blocks, which the client then retrieves directly from the DataNodes.
+For a deeper dive into the key write and read process, refer to the <a href="../concept/ozonemanager.html">Ozone Manager documentation</a>.</p>
+<h4 id="atomic-key-replacement">Atomic Key Replacement</h4>
+<p>Ozone supports atomic key replacement, ensuring that a key is only overwritten if it hasn&rsquo;t changed since it was last read. This prevents lost updates in concurrent write scenarios.
+For more details, refer to the <a href="../design/overwrite-key-only-if-unchanged.html">Overwriting Key Only If Unchanged design document</a>.</p>
+<h4 id="trash">Trash</h4>
+<p>When keys are deleted from File System Optimized (FSO) buckets, they are moved to a trash directory, allowing for recovery. For Object Store (OBS) buckets, keys are permanently deleted.
+For more information on the trash feature, refer to the <a href="../feature/trash.html">Trash documentation</a>.</p>
+<h4 id="encryption">Encryption</h4>
+<p>If the parent bucket is encrypted, all keys written to that bucket will be transparently encrypted.
+For more details, refer to the <a href="../security/securingtde.html">Securing TDE documentation</a>.</p>
+<h4 id="access-control-lists-acls-2">Access Control Lists (ACLs)</h4>
+<p>ACLs can also be applied to individual keys, providing fine-grained control over read and write permissions.
+For more details, refer to the <a href="../security/securityacls.html">Security ACLs documentation</a>.</p>
 
 
-          
-          <a class="btn  btn-success btn-lg" href="../security/securingtde.html">Next >></a>
           
           </div>
 
@@ -749,7 +706,7 @@ principal name and a corresponding <a href="https://web.mit.edu/kerberos/krb5-la
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: October 21, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8568075ddb75b4a6785cdb31b00b4a592058dc78">8568075ddb</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/65f0c09a4644505e793ccb2c6cdd7845af6cfc50">65f0c09a46</a>
     </span>
   </div>
 </footer>
