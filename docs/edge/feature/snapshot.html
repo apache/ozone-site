@@ -513,6 +513,18 @@ s=d.getElementsByTagName('script')[0];
             </li>
         
     
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
     <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
     <li class="visible-xs"><a href="#">References</a>
     <ul class="nav">
@@ -566,48 +578,153 @@ s=d.getElementsByTagName('script')[0];
   limitations under the License.
 -->
 <h2 id="introduction">Introduction</h2>
-<p>Snapshot feature for Apache Ozone object store allows users to take point-in-time consistent image of a given bucket. Snapshot feature enables various use cases, including:</p>
+<p>Ozone Snapshots let you create point-in-time, consistent, read-only images of a bucket. Key uses include:</p>
 <ul>
-<li>Backup and Restore: Create hourly, daily, weekly, monthly snapshots for backup and recovery when needed.</li>
-<li>Archival and Compliance: Take snapshots for compliance purpose and archive them as required.</li>
-<li>Replication and Disaster Recovery (DR): Snapshots provide frozen immutable images of the bucket on the source Ozone cluster. Snapshots can be used for replicating these immutable bucket images to remote DR sites.</li>
-<li>Incremental Replication: DistCp with SnapshotDiff offers an efficient way to incrementally sync up source and destination buckets.</li>
+<li><strong>Backup and Restore</strong>: For regular data protection and recovery.</li>
+<li><strong>Archival and Compliance</strong>: For long-term data retention.</li>
+<li><strong>Replication and Disaster Recovery (DR)</strong>: For copying bucket images to remote DR sites.</li>
+<li><strong>Incremental Replication</strong>: <code>DistCp</code> with <code>SnapshotDiff</code> efficiently syncs buckets.</li>
 </ul>
-<h2 id="snapshot-apis">Snapshot APIs</h2>
-<p>Snapshot feature is available through &lsquo;ozone fs&rsquo; and &lsquo;ozone sh&rsquo; CLI. This feature can also be programmatically accessed from Ozone <code>ObjectStore</code> Java client. The feature provides following functionalities:</p>
+<h2 id="architecture">Architecture</h2>
+<p>Ozone Snapshots provide point-in-time, read-only copies of buckets. This relies on Ozone&rsquo;s immutable data blocks. When a snapshot is taken, Ozone Manager (OM) copies the bucket&rsquo;s metadata (key namespace) using its RocksDB store. Data blocks aren&rsquo;t duplicated; they are preserved as long as any snapshot or the live bucket references them. Background services reclaim unreferenced blocks.</p>
+<p>The SnapshotDiff feature compares two snapshots (or a snapshot and the live bucket) to identify changes like added, deleted, modified, or renamed keys, caching results for speed.</p>
+<h2 id="system-architecture-deep-dive">System Architecture Deep Dive</h2>
+<p>Ozone snapshots version bucket metadata within the OM. A dedicated snapshot metadata table in RocksDB records the key directory tree at snapshot creation. This is an instant operation as it involves metadata pointers (via RocksDB checkpoints) rather than data copying. Each snapshot has a unique ID and name.</p>
+<p>When keys are changed or deleted in the live bucket, their data blocks are retained if a snapshot references them. Deleting a snapshot makes its exclusively referenced blocks reclaimable by background cleanup processes.</p>
+<p><strong>SnapshotDiff Implementation:</strong> Differences are computed using RocksDB key comparisons and a compaction DAG for recent changes (default: 30 days). For older snapshots or if DAG data is compacted, a full metadata scan is used. Diff results (<code>+</code> add, <code>-</code> delete, <code>M</code> modify, <code>R</code> rename) are cached.</p>
+<p><strong>Snapshot Data Storage:</strong> Snapshot metadata resides in OM&rsquo;s RocksDB. Diff job data is stored in <code>ozone.om.snapshot.diff.db.dir</code> (defaults to OM metadata directory).</p>
+<p>For more details, see Prashant Pogde’s <a href="https://medium.com/@prashantpogde/introducing-apache-ozone-snapshots-af82e976142f">Introducing Apache Ozone Snapshots</a>.</p>
+<h2 id="user-tutorial">User Tutorial</h2>
+<p>This guide shows how to use Ozone snapshots via CLI and Java.</p>
+<h3 id="using-snapshots-via-cli">Using Snapshots via CLI</h3>
+<p>Manage snapshots using <code>ozone sh</code> or <code>ozone fs</code> (Hadoop-compatible) commands:</p>
 <ul>
-<li>Create Snapshot: Create an instantaneous snapshot for a given bucket</li>
+<li>
+<p><strong>Create Snapshot:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot create /vol1/bucket1 <span style="color:#f92672">[</span>snapshotName<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or via Hadoop FS interface:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ozone fs -createSnapshot ofs://om-service/vol1/bucket1 [snapshotName]</span>
+</span></span></code></pre></div><p>Requires bucket owner or admin privilege. If <code>snapshotName</code> is omitted, it&rsquo;s auto-generated (e.g., <code>s20250530-005848.163</code>). Custom names must be unique, valid DNS names.</p>
+</li>
+<li>
+<p><strong>Delete Snapshot:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot delete /vol1/bucket1 &lt;snapshotName&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or via Hadoop FS interface:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ozone fs -deleteSnapshot ofs://om-service/vol1/bucket1 &lt;snapshotName&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>List Snapshots:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot list /vol1/bucket1
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or via Hadoop FS interface (list .snapshot directory):</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ozone fs -ls /vol1/bucket1/.snapshot</span>
+</span></span></code></pre></div><p>Snapshots appear in the bucket&rsquo;s read-only <code>.snapshot</code> directory.</p>
+</li>
+<li>
+<p><strong>Read from Snapshot:</strong>
+List keys:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh key list /vol1/bucket1/.snapshot/&lt;snapshotName&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or: ozone fs -ls /vol1/bucket1/.snapshot/&lt;snapshotName&gt;</span>
+</span></span></code></pre></div><p>Get a key:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh key get /vol1/bucket1/.snapshot/&lt;snapshotName&gt;/reports/Q1.csv ./Q1_snapshot.csv
+</span></span></code></pre></div><p>Requires read privileges on the bucket.</p>
+</li>
+<li>
+<p><strong>Snapshot Diff:</strong> Shows changes between two snapshots or a snapshot and the live bucket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot diff /vol1/bucket1 &lt;snap1&gt; &lt;snap2_or_live_bucket&gt;
+</span></span></code></pre></div><p>Output prefixes: <code>+</code> (add), <code>-</code> (delete), <code>M</code> (modify), <code>R</code> (rename). Use <code>-p</code>, <code>-t</code> for pagination.
+Manage diff jobs: <code>ozone sh snapshot listDiff /vol1/bucket1</code>, <code>ozone sh snapshot cancelDiff &lt;jobId&gt;</code>.</p>
+</li>
+<li>
+<p><strong>Rename Snapshot:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot rename /vol1/bucket1 &lt;oldName&gt; &lt;newName&gt;
+</span></span></code></pre></div><p>Requires bucket owner or admin.</p>
+</li>
+<li>
+<p><strong>Snapshot Info:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot info /vol1/bucket1 &lt;snapshotName&gt;
+</span></span></code></pre></div><p>Shows ID, creation time, status, and space usage (Reference and Exclusive Size).</p>
+</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot create <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; <span style="color:#f92672">[</span>&lt;snapshotName&gt;<span style="color:#f92672">]</span>
-</span></span></code></pre></div><ul>
-<li>List Snapshots: List all snapshots of a given bucket</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot list <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt;
-</span></span></code></pre></div><ul>
-<li>Delete snapshot: Delete a given snapshot for a given bucket</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot delete <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
-</span></span></code></pre></div><ul>
-<li>Snapshot Diff: Given two snapshots, list all the keys that are different between the them.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot diff <span style="color:#f92672">[</span>-chV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-p<span style="color:#f92672">=</span>&lt;pageSize&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t<span style="color:#f92672">=</span>&lt;continuation-token&gt;<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;fromSnapshot&gt; &lt;toSnapshot&gt;
-</span></span></code></pre></div><p>SnapshotDiff CLI/API is asynchronous. The first time the API is invoked, OM starts a background thread to calculate the SnapshotDiff, and returns &ldquo;Retry&rdquo; with suggested duration for the retry operation. Once the SnapshotDiff is computed, this API returns the diffs in multiple Pages. Within each Diff response, OM also returns a continuation token for the client to continue from the last batch of Diff results.  This API is safe to be called multiple times for a given snapshot source and destination pair. Internally each Ozone Manager computes Snapdiff only once and stores it for future invocations of the same Snapshot Diff API.</p>
+<p>CLI operations call Ozone Manager RPCs and enforce authorization.</p>
+<h3 id="programmatic-access-via-java">Programmatic Access via Java</h3>
+<p>Manage and access snapshots using Java APIs:</p>
+<p><strong>Hadoop Compatible FileSystem (HCFS) Interface:</strong> Use Ozone FileSystem (OFS) API (Hadoop <code>FileSystem</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Example: Create, list, read, rename, delete snapshots</span>
+</span></span><span style="display:flex;"><span>Configuration conf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> OzoneConfiguration();
+</span></span><span style="display:flex;"><span>FileSystem fs <span style="color:#f92672">=</span> FileSystem.<span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">new</span> Path(<span style="color:#e6db74">&#34;ofs://om-service/vol1/bucket1&#34;</span>).<span style="color:#a6e22e">toUri</span>(), conf);
+</span></span><span style="display:flex;"><span>Path bucketPath <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Path(<span style="color:#e6db74">&#34;/vol1/bucket1&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// fs.createSnapshot(bucketPath, &#34;snapshotName&#34;);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// fs.listStatus(new Path(bucketPath, &#34;.snapshot&#34;));</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// fs.open(new Path(bucketPath, &#34;.snapshot/snapshotName/key&#34;));</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// fs.rename(new Path(bucketPath, &#34;.snapshot/oldName&#34;), new Path(bucketPath, &#34;.snapshot/newName&#34;));</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// fs.deleteSnapshot(bucketPath, &#34;snapshotName&#34;);</span>
+</span></span></code></pre></div><p>Handle <code>OMException</code> or <code>IOException</code>. Snapshots are in the bucket&rsquo;s <code>.snapshot</code> directory.
+Refer to the <a href="https://ozone.apache.org/docs/edge/interface/ofs.html">Ozone File System API guide</a>.</p>
+<p><strong>Ozone ObjectStore Client API:</strong> Use <code>OzoneClient</code> and <code>ObjectStore</code> API.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">// Example: Create, list, get info, rename, delete snapshots</span>
+</span></span><span style="display:flex;"><span>OzoneClient ozClient <span style="color:#f92672">=</span> OzoneClientFactory.<span style="color:#a6e22e">getRpcClient</span>(conf);
+</span></span><span style="display:flex;"><span>ObjectStore store <span style="color:#f92672">=</span> ozClient.<span style="color:#a6e22e">getObjectStore</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// store.createSnapshot(&#34;vol1&#34;, &#34;bucket1&#34;, &#34;snapshotName&#34;);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// store.listSnapshot(&#34;vol1&#34;, &#34;bucket1&#34;, null, null);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// store.getSnapshotInfo(&#34;vol1&#34;, &#34;bucket1&#34;, &#34;snapshotName&#34;);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// store.renameSnapshot(&#34;vol1&#34;, &#34;bucket1&#34;, &#34;oldName&#34;, &#34;newName&#34;);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// store.deleteSnapshot(&#34;vol1&#34;, &#34;bucket1&#34;, &#34;snapshotName&#34;);</span>
+</span></span></code></pre></div><p>Handle exceptions for privilege or non-existent snapshot issues.</p>
+<p><strong>HTTP REST API Access:</strong> Use HttpFS Gateway (WebHDFS-compatible REST API) for filesystem operations on snapshots (e.g., reading from <code>.snapshot</code> paths). Create/delete/rename are supported; <code>getSnapshotDiff</code> is not yet.</p>
+<h2 id="system-administration-how-to">System Administration How-To</h2>
+<p>This section covers key configurations and monitoring for Ozone snapshots. Tune these in <strong>ozone-site.xml</strong>.</p>
+<p><strong>Snapshot-Related Configuration Parameters:</strong></p>
 <ul>
-<li>List SnapshotDiff Jobs: List all snapshotDiff jobs of a given bucket</li>
+<li><strong><code>ozone.om.fs.snapshot.max.limit</code></strong>: Max snapshots per bucket (Default: 10000). Safety limit.</li>
+<li><strong><code>ozone.om.snapshot.compaction.dag.max.time.allowed</code></strong>: Window for efficient SnapshotDiff (Default: 30 days). Older diffs may be slower.</li>
+<li><strong><code>ozone.om.snapshot.diff.db.dir</code></strong>: Directory for SnapshotDiff job data. Defaults to OM metadata dir. Use a spacious location for large diffs.</li>
+<li><strong><code>ozone.om.snapshot.rocksdb.metrics.enabled</code></strong>: Enable detailed RocksDB metrics for snapshots (Default: false). Use for debugging/monitoring.</li>
+<li><strong><code>ozone.om.snapshot.load.native.lib</code></strong>: Use native RocksDB library for snapshot operations (Default: true). Set to false as a workaround for native library issues.</li>
+<li><strong><code>ozone.om.snapshot.diff.concurrent.max</code></strong>: Max concurrent SnapshotDiff jobs per OM (Default: 10). Increase if OM resources allow.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot listDiff <span style="color:#f92672">[</span>-ahV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-s<span style="color:#f92672">=</span>&lt;jobStatus&gt;<span style="color:#f92672">]</span> &lt;bucket&gt;
-</span></span></code></pre></div><ul>
-<li>Snapshot Info: Returns information about an existing snapshot</li>
+<p>Monitor OM heap usage with many snapshots or large diffs. Enable Ozone Native ACLs or Ranger for access control.</p>
+<p><strong>Monitoring Snapshots:</strong> Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages.</p>
+<h2 id="authorization">Authorization</h2>
+<p>Snapshot operations require specific privileges:</p>
+<ul>
+<li><strong>Create, Delete, Rename Snapshot:</strong> Require admin or bucket owner privileges. Access is denied otherwise.</li>
+<li><strong>List Snapshots, Get Snapshot Info:</strong> Require read/list access to the bucket. Users who can list bucket contents can typically list its snapshots.</li>
+<li><strong>SnapshotDiff, Cancel/List SnapshotDiff Jobs:</strong> Require read access to the bucket, as diffs reveal key information.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot info <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> &lt;bucket&gt; &lt;snapshotName&gt;
-</span></span></code></pre></div><h2 id="architecture">Architecture</h2>
-<p>Ozone Snapshot architecture leverages the fact that data blocks once written, remain immutable for their lifetime. These data blocks are reclaimed only when the object key metadata that references them, is deleted from the Ozone namespace. All of this Ozone metadata is stored on the OM nodes in the Ozone cluster. When a user takes a snapshot of an Ozone bucket, internally the system takes snapshot of the Ozone metadata in OM nodes. Since Ozone doesn&rsquo;t allow updates to datanode blocks, integrity of data blocks referenced by Ozone metadata snapshot in OM nodes remains intact. Ozone key deletion service is also aware of Ozone snapshots.  Key deletion service does not reclaim any key as long as it is referenced by the active object store bucket or any of its snapshot. When the snapshots are deleted, a background garbage collection service reclaims any key that will not be part of any snapshot or active object store.
-Ozone also provides SnapshotDiff API. Whenever a user issues a SnapshotDiff between two snapshots, it efficiently calculates all the keys that are different between these two snapshots and returns paginated diff list result.</p>
-<h2 id="deployment">Deployment</h2>
-<hr>
-<h3 id="cluster-and-hardware-configuration">Cluster and Hardware Configuration</h3>
-<p>Snapshot feature places additional demands on the cluster in terms of CPU, memory and storage. Cluster nodes running Ozone Managers and Ozone Datanodes should be configured with extra storage capacity depending on the number of active snapshots that the user wants to keep. Ozone Snapshots consume an incremental amount of space per snapshot. e.g. if the active object store has 100 GB data (before replication) and a snapshot is taken, then the 100 GB of space will be locked in that snapshot. If the active object store consumes another 10 GB of space (before replication) subsequently then overall space requirement would be 100 GB + 10 GB = 110 GB in total (before replication). This is because common keys between Ozone snapshots and the active object store will share the storage space.</p>
-<p>Similarly, nodes running Ozone Manager should be configured with extra memory depending on how many snapshots are concurrently read from. This also depends on how many concurrent SnapshotDiff jobs are expected in the cluster. By default, an Ozone Manager allows 10 concurrent SnapshotDiff jobs at a time, which can be increased in config.</p>
+<p>Ozone supports native ACLs and optional Ranger policies for snapshot authorization. The behavior described assumes native ACLs. If using Ranger, ensure appropriate permissions are configured for snapshot operations.</p>
+<h2 id="comparison-to-hdfs-snapshots">Comparison to HDFS Snapshots</h2>
+<p>Ozone and HDFS snapshots are conceptually similar but differ in key aspects:</p>
+<ul>
+<li><strong>Granularity:</strong> Ozone snapshots are bucket-level; HDFS snapshots can be taken at any directory level (if snapshottable).</li>
+<li><strong>Metadata vs. Data Changes:</strong> Both track key/file changes. Ozone snapshots don&rsquo;t version bucket metadata changes (e.g., quotas, ACLs).</li>
+<li><strong>Access and Restore:</strong> Both use a <code>.snapshot</code> path for read-only access. Restoring in Ozone is a manual copy process (e.g., using DistCp); no automatic rollback.</li>
+<li><strong>Implementation:</strong> Ozone uses OM&rsquo;s key-value store (RocksDB) for O(1) metadata-pointer-based snapshots. HDFS also uses metadata manipulation but Ozone&rsquo;s object-store nature means no DataNode-level block tracking for snapshots; all intelligence is in OM.</li>
+</ul>
+<h2 id="known-issues-and-limitations">Known Issues and Limitations</h2>
+<p>Key limitations for Ozone snapshots include:</p>
+<ul>
+<li><strong>S3 Interface Support:</strong> Snapshot operations (create, list, delete) are not available via the S3 API or <code>s3a</code> connector. Manage snapshots using Ozone RPC (shell, <code>ozone fs</code>, Java API). Snapshotted data can be read via S3 using the <code>.snapshot/snapshotName/keyName</code> path.</li>
+<li><strong>Ratis &amp; EC Buckets:</strong> Snapshots work for both Ratis and EC buckets, managed via Ozone interfaces.</li>
+<li><strong>Snapshots During Ongoing Deletes:</strong> Taking a snapshot during a large delete operation will prevent space reclamation for the deleted keys until the snapshot is removed.</li>
+<li><strong>Reserved Namespace Name <code>.snapshot</code>:</strong> <code>.snapshot</code> is a reserved name at the root of a bucket and cannot be used for user-created keys or directories.</li>
+<li><strong>Snapshot Performance and Scale:</strong> While creating snapshots is fast, a very large number of snapshots per bucket (thousands) can increase OM metadata size and potentially slow down listing operations. Snapshot diff performance is generally not affected by the number of snapshots but by concurrent diff operations.</li>
+<li><strong>Space Utilization Reporting:</strong> Space used by snapshots (data no longer in the active bucket but retained by snapshots) is reported in <code>ozone sh snapshot info</code>. Deleting a snapshot frees space asynchronously.</li>
+<li><strong>Hard Link Upper Limit:</strong> RocksDB checkpoints use hard links, limited to 65,535 per file by the filesystem. This restricts the number of snapshots per bucket.</li>
+</ul>
+<p>Refer to project release notes for updates on these limitations.</p>
+<h2 id="linux-system-configuration">Linux System Configuration</h2>
+<p>For optimal performance and stability when using Ozone snapshots, especially in production, consider the following system configurations:</p>
+<ul>
+<li><strong>Open File Descriptors:</strong> Increase the <code>nofile</code> ulimit (e.g., to 64,000 or higher) for the Ozone Manager (OM) process to handle numerous RocksDB files and snapshot operations.</li>
+<li><strong>Metadata Storage:</strong> Use high-performance storage like NVMe SSDs for OM metadata directories (<code>ozone.metadata.dirs</code>) to improve I/O for snapshot and diff operations.</li>
+<li><strong>OM Resources:</strong> Allocate sufficient RAM (e.g., 16-32GB+, monitor GC) and CPU to the Ozone Manager, particularly for clusters with many snapshots or concurrent diff jobs.</li>
+<li><strong>DataNode Disk Space:</strong> Account for increased disk usage on DataNodes, as snapshots retain data blocks that would otherwise be deleted. Plan capacity based on snapshot retention policies and change rates.</li>
+<li><strong>Filesystem &amp; Kernel:</strong> Use filesystems like ext4 or xfs (often preferred for RocksDB) for OM metadata. Ensure disk schedulers and RAID configurations are optimized for low latency.</li>
+<li><strong>Networking:</strong> Ensure robust network connectivity to the OM, as snapshot diffs or HttpFS access can involve significant data transfer.</li>
+</ul>
+<p>Always test snapshot operations under your expected load to fine-tune these configurations.</p>
 
 
           
@@ -627,7 +744,7 @@ Ozone also provides SnapshotDiff API. Whenever a user issues a SnapshotDiff betw
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: February 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1a9cf6cfe0f288da76d5adbe7066998bae39ba33">1a9cf6cfe0</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 6, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f51bb1bed2a08cb6beb0e40c5d43522fe220e53e">f51bb1bed2</a>
     </span>
   </div>
 </footer>

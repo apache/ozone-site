@@ -81,7 +81,7 @@
                 />
   </url><url>
     <loc>/feature/om-ha.html</loc>
-    <lastmod>2025-06-14T00:08:47-07:00</lastmod>
+    <lastmod>2025-07-06T18:11:57-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -107,7 +107,7 @@
                 />
   </url><url>
     <loc>/feature/snapshot.html</loc>
-    <lastmod>2025-02-05T15:47:32+05:30</lastmod>
+    <lastmod>2025-07-06T09:02:35-07:00</lastmod>
   </url><url>
     <loc>/feature/scm-ha.html</loc>
     <lastmod>2025-01-21T00:21:41-08:00</lastmod>
@@ -554,11 +554,17 @@
     <loc>/feature/s3-multi-tenancy-setup.html</loc>
     <lastmod>2022-07-13T11:21:00-07:00</lastmod>
   </url><url>
+    <loc>/troubleshooting.html</loc>
+    <lastmod>2025-07-06T18:11:57-07:00</lastmod>
+  </url><url>
     <loc>/recipe/boto3tutorial.html</loc>
     <lastmod>2025-06-08T04:07:31-07:00</lastmod>
   </url><url>
     <loc>/feature/s3-tenant-commands.html</loc>
     <lastmod>2024-02-13T12:23:07+03:00</lastmod>
+  </url><url>
+    <loc>/troubleshooting/om-ha-snapshot-installation.html</loc>
+    <lastmod>2025-07-06T18:11:57-07:00</lastmod>
   </url><url>
     <loc>/feature/s3-multi-tenancy-access-control.html</loc>
     <lastmod>2022-04-20T11:07:50-07:00</lastmod>
@@ -641,7 +647,10 @@
     <lastmod>2025-06-02T13:47:02+05:30</lastmod>
   </url><url>
     <loc>/design.html</loc>
-    <lastmod>2025-06-18T14:19:25+05:30</lastmod>
+    <lastmod>2025-07-07T11:24:38+05:30</lastmod>
+  </url><url>
+    <loc>/design/full-volume-handling.html</loc>
+    <lastmod>2025-07-07T11:24:38+05:30</lastmod>
   </url><url>
     <loc>/design/dn-min-space-configuration.html</loc>
     <lastmod>2025-05-28T10:07:28+05:30</lastmod>

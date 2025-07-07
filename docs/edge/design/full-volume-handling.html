@@ -46,9 +46,8 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-<body>
+  <body>
 
-  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -76,11 +75,9 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-
-  <div class="wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      
+    <div class="container-fluid">
+      <div class="row">
+        
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -235,7 +232,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="active">
+                        <li class="">
                            
                            <a href="../feature/topology.html">Topology awareness</a>
                            
@@ -536,125 +533,179 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-12929">[HDDS-12929]</a> Full Volume Handling (implemented) </h1>
+                <div><i>Authors: Siddhant Sangwan, Sumit Agrawal</i><div class="pull-right">2025-05-12</div></div>
+                <p>&nbsp</p>
 
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        Immediately trigger Datanode heartbeat on detecting full volume
+                    </div>
+                </div>
 
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Topology awareness</li>
-                </ol>
-              </nav>
-
-          
-
-<div class="pull-right">
-    
-    
-    
-    
-    
-    <a href="../zh/feature/topology.html"><span class="label label-success">中文</span></a>
-    
-    
-</div>
-
-
-          <div class="col-md-9">
-            <h1>Topology awareness</h1>
-
-            <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License. See accompanying LICENSE file.
 -->
-<p>Ozone can use topology related information (for example rack placement) to optimize read and write pipelines. To get full rack-aware cluster, Ozone requires three different configuration.</p>
+<blockquote>
+<p><strong>Note</strong>: The feature described here was implemented in <a href="https://github.com/apache/ozone/pull/8590">pull request #8590</a>. This document reflects the final, merged design.</p>
+</blockquote>
+<h2 id="summary">Summary</h2>
+<p>Trigger datanode heartbeat immediately when the container being written to is (close) to full, or volume is full,
+or container is unhealthy, while handling a write request. The immediate heartbeat will contain close container action.
+The overall objective is to avoid Datanode disks from getting completely full and preventing degradation of write
+performance.</p>
+<h2 id="problem">Problem</h2>
+<p>When a Datanode volume is close to full, the SCM may not be immediately aware of this because storage reports are only
+sent to it every one minute (<code>HDDS_NODE_REPORT_INTERVAL_DEFAULT = &quot;60s&quot;</code>). Additionally, SCM only has stale
+information about the current size of a container because container size is only updated when an Incremental Container
+Report (event based, for example when a container transitions from open to closing state) is received or a Full
+Container Report (<code>HDDS_CONTAINER_REPORT_INTERVAL_DEFAULT = &quot;60m&quot;</code>) is received. This can lead to the SCM
+over-allocating blocks to containers on a Datanode volume that has already reached the min free space boundary.</p>
+<p>In the future, in <a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a> we plan to fail writes for containers on a volume
+that has reached the min free space boundary.
+So, in the future, when the Datanode fails writes for such a volume, overall write performance will drop because the
+client will have to request for a different set of blocks.</p>
+<p>Before this change, a close container action was queued to be sent in the next heartbeat, when:</p>
 <ol>
-<li>The topology information should be configured by Ozone.</li>
-<li>Topology related information should be used when Ozone chooses 3 different datanodes for a specific pipeline/container. (WRITE)</li>
-<li>When Ozone reads a Key it should prefer to read from the closest node.</li>
+<li>Container was at 90% capacity.</li>
+<li>Volume was full, <strong>counting committed space</strong>. That is <code>available - reserved - committed - min free space &lt;= 0</code>.</li>
+<li>Container was <code>UNHEALTHY</code>.</li>
 </ol>
-<div class="alert alert-warning" role="alert">
-<p>Ozone uses RAFT replication for Open containers (write), and an async replication for closed, immutable containers (cold data). As RAFT requires low-latency network, topology awareness placement is available only for closed containers. See the <a href="../concept/containers.html">page about Containers</a> about more information related to Open vs Closed containers.</p>
-</div>
-<h2 id="topology-hierarchy">Topology hierarchy</h2>
-<p>Topology hierarchy can be configured with using <code>net.topology.node.switch.mapping.impl</code> configuration key. This configuration should define an implementation of the <code>org.apache.hadoop.net.CachedDNSToSwitchMapping</code>. As this is a Hadoop class, the configuration is exactly the same as the Hadoop Configuration</p>
-<h3 id="static-list">Static list</h3>
-<p>Static list can be configured with the help of <code>TableMapping</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.table.file.name<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/opt/hadoop/compose/ozone-topology/network-config<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>The second configuration option should point to a text file. The file format is a two column text file, with columns separated by whitespace. The first column is IP address and the second column specifies the rack where the address maps. If no entry corresponding to a host in the cluster is found, then <code>/default-rack</code> is assumed.</p>
-<h3 id="dynamic-list">Dynamic list</h3>
-<p>Rack information can be identified with the help of an external script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.script.file.name<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/usr/local/bin/rack.sh<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>If implementing an external script, it will be specified with the <code>net.topology.script.file.name</code> parameter in the configuration files. Unlike the java class, the external topology script is not included with the Ozone distribution and is provided by the administrator. Ozone will send multiple IP addresses to ARGV when forking the topology script. The number of IP addresses sent to the topology script is controlled with <code>net.topology.script.number.args</code> and defaults to 100. If <code>net.topology.script.number.args</code> was changed to 1, a topology script would get forked for each IP submitted.</p>
-<h2 id="write-path">Write path</h2>
-<p>Placement of the closed containers can be configured with <code>ozone.scm.container.placement.impl</code> configuration key. The available container placement policies can be found in the <code>org.apache.hdds.scm.container.placement</code> <a href="https://github.com/apache/ozone/tree/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms">package</a>.</p>
-<p>By default the <code>SCMContainerPlacementRandom</code> is used for topology-awareness the <code>SCMContainerPlacementRackAware</code> can be used:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRackAware<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>This placement policy complies with the algorithm used in HDFS. With default 3 replica, two replicas will be on the same rack, the third one will on a different rack.</p>
-<p>This implementation applies to network topology like &ldquo;/rack/node&rdquo;. Don&rsquo;t recommend to use this if the network topology has more layers.</p>
-<h2 id="read-path">Read path</h2>
-<p>Finally the read path also should be configured to read the data from the closest pipeline.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.network.topology.aware.read<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><h2 id="references">References</h2>
+<p>But since the next heartbeat could be sent up to 30 seconds later in the worst case, this reaction time was too slow.
+This design proposes sending Datanode heartbeat immediately so SCM can get the close container action
+immediately. This will help in reducing performance drop because of write failures when
+<a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a> is implemented in the future.</p>
+<h3 id="the-definition-of-a-full-volume">The definition of a full volume</h3>
+<p>Previously, a volume was considered full if the following method returned true. It accounts for available space,
+committed space, min free space and reserved space (<code>available</code> already considers <code>reserved</code> space):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getUsableSpace</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">long</span> available, <span style="color:#66d9ef">long</span> committed, <span style="color:#66d9ef">long</span> minFreeSpace) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> available <span style="color:#f92672">-</span> committed <span style="color:#f92672">-</span> minFreeSpace;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Counting committed space here, <em>when sending close container action</em>, is a bug - we only want to close the container if
+<code>available - reserved - minFreeSpace &lt;= 0</code>.</p>
+<h2 id="non-goals">Non Goals</h2>
+<p>Failing the write if it exceeds the min free space boundary (<a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a>) is not
+discussed here.</p>
+<h2 id="proposed-solution">Proposed Solution</h2>
+<h3 id="proposal-for-immediately-triggering-datanode-heartbeat">Proposal for immediately triggering Datanode heartbeat</h3>
+<p>We will immediately trigger the heartbeat when:</p>
+<ol>
+<li>The container is (close) to full (this is existing behaviour, the container full check already exists).</li>
+<li>The volume is <strong>full EXCLUDING committed space</strong> (<code>available - reserved available - min free &lt;= 0</code>). This is because
+when a volume
+is full INCLUDING committed space (<code>available - reserved available - committed - min free &lt;= 0</code>), open containers
+can still accept writes. So the current behaviour of sending a close container action when volume is full including
+committed space is a bug.</li>
+<li>The container is unhealthy (this is existing behaviour).</li>
+</ol>
+<p>Logic to trigger a heartbeat immediately already exists - we just need to call the method when needed. So, in
+<code>HddsDispatcher</code>, when handling a request:</p>
+<ol>
+<li>For every write request:
+<ol>
+<li>Check the above three conditions
+<ol>
+<li>If true, queue the <code>ContainerAction</code> to the context as before, then immediately trigger the heartbeat using:</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<pre tabindex="0"><code>context.getParent().triggerHeartbeat();
+</code></pre><h4 id="throttling">Throttling</h4>
+<p>Throttling is required so the Datanode doesn&rsquo;t send multiple immediate heartbeats for the same container. We can have
+per-container throttling, where we trigger an immediate heartbeat once for a particular container, and after that
+container actions for that container can only be sent in the regular, scheduled heartbeats. Meanwhile, immediate
+heartbeats can still be triggered for different containers.</p>
+<p>Here&rsquo;s a visualisation to show this. The letters (A, B, C etc.) denote events and timestamp is the time at which
+an event occurs.</p>
+<pre tabindex="0"><code>Write Call 1:
+/ A, timestamp: 0/-------------/B, timestamp: 5/
+
+Write Call 2, in-parallel with 1:
+------------------------------ /C, timestamp: 5/
+
+Write Call 3, in-parallel with 1 and 2:
+---------------------------------------/D, timestamp: 7/
+
+Write Call 4:
+------------------------------------------------------------------------/E, timestamp: 30/
+
+Events:
+A: Last, regular heartbeat
+B: Volume 1 detected as full while writing to Container 1, heartbeat triggered
+C: Volume 1 again detected as full while writing to Container 2, heartbeat triggered
+D: Container 1 detected as full, heartbeat throttled
+E: Volume 1 detected as full while writing to Container 2, Container Action sent in regular heartbeat 
+</code></pre><p>A simple and thread safe way to implement this is to have an <code>AtomicBoolean</code> for each container in the <code>ContainerData</code>
+class that can be used to check if an immediate heartbeat has already been triggered for that container. The memory
+impact of introducing a new member variable in <code>ContainerData</code> for each container is quite small. Consider:</p>
 <ul>
-<li>Hadoop documentation about <code>net.topology.node.switch.mapping.impl</code>: <a href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html">https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html</a></li>
-<li><a href="../design/topology.html">Design doc</a></li>
+<li>A Datanode with 600 TB disk space.</li>
+<li>Container size is 5 GB.</li>
+<li>Number of containers = 600 TB / 5 GB = 120,000.</li>
+<li>For each container, we&rsquo;ll have an <code>AtomicBoolean</code>, which just has one field that counts: <code>private volatile int value</code>.
+<ul>
+<li>Static fields don&rsquo;t count.</li>
 </ul>
+</li>
+<li>An int is 4 bytes in Java. Assuming that other overhead for a Java object brings the size of the object to ~20 bytes.</li>
+<li>20 bytes * 120,000 = ~2.4 MB.</li>
+</ul>
+<p>For code implementation, see <a href="https://github.com/apache/ozone/pull/8590">https://github.com/apache/ozone/pull/8590</a>.</p>
+<h2 id="alternatives">Alternatives</h2>
+<h3 id="preventing-over-allocation-of-blocks-in-the-scm">Preventing over allocation of blocks in the SCM</h3>
+<p>The other part of the problem is that SCM has stale information about the size of the container and ends up
+over-allocating blocks (beyond the container&rsquo;s 5 GB size) to the same container. Solving this problem is complicated.
+We could track how much space we&rsquo;ve allocated to a container in the SCM - this is doable on the surface but won&rsquo;t
+actually work well. That&rsquo;s because SCM is asked for a block (256 MB), but SCM doesn&rsquo;t know how much data a client will
+actually write to that block file. The client may only write 1 MB, for example. So SCM could track that it has already
+allocated 5 GB to a container, and will open another container for incoming requests, but the client may actually only
+write 1GB. This would lead to a lot of open containers when we have 10k requests/second.</p>
+<p>At this point, we&rsquo;ve decided not to do anything about this.</p>
+<h3 id="regularly-sending-open-container-reports">Regularly sending open container reports</h3>
+<p>Sending open container reports regularly (every 30 seconds for example) can help a little bit, but won&rsquo;t solve the
+problem. We won&rsquo;t take this approach for now.</p>
+<h3 id="sending-storage-reports-in-immediate-heartbeats">Sending storage reports in immediate heartbeats</h3>
+<p>We considered triggering an immediate heartbeat every time the Datanode detects a volume is full
+while handling a write request, with per volume throttling. To each immediate heartbeat, we would the storage
+reports of all volumes in the Datanode + Close Container Action for the particular container being written to. While
+this would update the storage stats of a volume in the SCM faster, which the SCM can subsequently use to decide
+whether to include that Datanode in a new pipeline, the per volume throttling has a drawback. It wouldn&rsquo;t let us
+send close container actions for other containers. We decided not to take this approach.</p>
+<h2 id="implementation-plan">Implementation Plan</h2>
+<ol>
+<li>HDDS-13045: For triggering immediate heartbeat. Already merged - <a href="https://github.com/apache/ozone/pull/8590">https://github.com/apache/ozone/pull/8590</a>.</li>
+<li>HDDS-12151: Fail a write call if it exceeds min free space boundary (not the focus of this doc, just mentioned
+here).</li>
+</ol>
 
-
-          
-          <a class="btn  btn-success btn-lg" href="../feature/quota.html">Next >></a>
-          
-          </div>
+            </div>
 
         </div>
       </div>
     </div>
-  </div>
-    <div class="push"></div>
-  </div>
 
-  
+
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: March 29, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cce3c7ea79ec19657d10f011ddeaf3067a2f83bd">cce3c7ea79</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 7, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f7270513a5f848f7e43c6d33acfeb2d238393311">f7270513a5</a>
     </span>
   </div>
 </footer>
@@ -666,6 +717,5 @@ s=d.getElementsByTagName('script')[0];
 <script src="../js/bootstrap.min.js"></script>
 
 
-</body>
-
+  </body>
 </html>
