@@ -555,6 +555,11 @@ s=d.getElementsByTagName('script')[0];
     
     
     
+    
+    
+    <a href="../zh/tools/containerlogparser.html"><span class="label label-success">中文</span></a>
+    
+    
 </div>
 
 
@@ -582,16 +587,9 @@ In the past we have seen different issues on container state. To debug problems 
 <p>This component is responsible for processing log files, extracting relevant log entries, and storing them in batches to be inserted into the database.</p>
 <p><strong>The command is as follows:</strong></p>
 <p><code>ozone debug log container --db=&lt;path to db&gt; parse --path=&lt;path to logs folder&gt; --thread-count=&lt;n&gt;</code></p>
-<h4 id="concurrent-log-file-processing">Concurrent Log File Processing</h4>
-<ul>
-<li><strong>Directory Traversal</strong>: It recursively scans a specified directory for container log files using <code>Files.walk()</code>.</li>
-<li><strong>File Filtering</strong>: Only files with names matching the pattern <code>dn-container-&lt;roll&gt;.log.&lt;datanodeId&gt;</code> are considered. Files that do not satisfy this pattern are skipped.</li>
-<li><strong>Thread Pool Execution</strong>: A fixed-size thread pool is created using <code>ExecutorService</code>, where each thread is responsible for processing a single log file independently. This ensures no file-level concurrency issues.</li>
-<li><strong>Synchronization with <code>CountDownLatch</code></strong>: A <code>CountDownLatch</code> is used to block the main thread until all worker threads have finished processing their respective files.</li>
-<li><strong>Error Detection</strong>: An <code>AtomicBoolean</code> is used to record if any thread encounters a <code>SQLException</code>. If set, the entire operation is considered failed.</li>
-</ul>
 <h4 id="log-file-parsing-and-validation">Log File Parsing and Validation</h4>
 <ul>
+<li><strong>Directory Traversal</strong>: It recursively scans a specified directory for container log files,only files with names matching the pattern <code>dn-container-&lt;roll&gt;.log.&lt;datanodeId&gt;</code> are considered.Log files are parsed concurrently using multiple threads for efficient processing.</li>
 <li><strong>Line-by-Line Processing</strong>: Each log line is split using a pipe delimiter and parsed into key-value components.</li>
 <li><strong>Field Extraction</strong>: Key fields include:
 <ul>
@@ -603,16 +601,6 @@ In the past we have seen different issues on container state. To debug problems 
 <li><strong>Error Message Capture</strong>: Any remaining unstructured part of the log line is stored as <code>errorMessage</code>, especially relevant for WARN or ERROR level logs.</li>
 <li><strong>Replication Index Filtering</strong>: Only log entries with Index = 0 are processed. This limits current processing to Ratis-replicated containers. Future improvements may support EC replication.</li>
 </ul>
-<h4 id="log-entry-object-construction">Log Entry Object Construction</h4>
-<p>A builder pattern is used to create objects from parsed data. These objects represent a single log entry with structured fields.</p>
-<h4 id="batching-and-database-insertion">Batching and Database Insertion</h4>
-<ul>
-<li>Parsed entries are accumulated in a local batch list of size <code>MAX_OBJ_IN_LIST</code> (default: 5000).</li>
-<li>When the list reaches the threshold, it is flushed to the database.</li>
-<li>At the end of file processing, any remaining entries in the batch are also written to the database.</li>
-</ul>
-<h4 id="thread-safety-and-simplification">Thread Safety and Simplification</h4>
-<p>Each thread maintains its own batch list. There are no shared data structures between threads. The simplified concurrency model improves code maintainability and reduces potential for deadlocks or race conditions.</p>
 <h3 id="component-2-database">Component 2: Database</h3>
 <p>The tool uses a temporary SQLite database to store and manage information extracted from container logs. This helps organize the data so that both the complete history and the latest status of each container replica on a datanode can be analyzed easily.</p>
 <h4 id="there-are-2-major-tables-createdmaintained-by-the-tool">There are 2 major tables created/maintained by the tool:</h4>
@@ -722,6 +710,7 @@ Container 700 might be QUASI_CLOSED_STUCK.
 </ul>
 <p><code>ozone debug log container --db=&lt;path to db&gt; list --health=&lt;type&gt;  --all</code></p>
 <p><strong>Sample output:</strong></p>
+<p><code>ozone debug log container --db=path/to/db list --health=UNHEALTHY --all</code></p>
 <pre tabindex="0"><code>Container ID = 6002 - Count = 1
 Container ID = 6201 - Count = 1
 .
@@ -762,6 +751,7 @@ Number of containers listed: 25085
 </ul>
 <p><code>ozone debug log container --db=&lt;path to db&gt; list --lifecycle=&lt;state&gt; --all</code></p>
 <p><strong>Sample output:</strong></p>
+<p><code>ozone debug log container --db=path/to/db list --lifecycle=CLOSED --all</code></p>
 <pre tabindex="0"><code>Timestamp                 | Datanode ID | Container ID | BCSID  | Message        | Index Value
 ---------------------------------------------------------------------------------------------------
 2024-07-23 12:02:12,981   | 360         | 1            | 75654  | No error       | 0
@@ -800,7 +790,7 @@ Number of containers listed: 25085
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: June 2, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8e8c432bb7e893d140926fb7df4f316ac9265cbe">8e8c432bb7</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/bf9cdd0df95cee3ef8657596dcf237e83e913861">bf9cdd0df9</a>
     </span>
   </div>
 </footer>

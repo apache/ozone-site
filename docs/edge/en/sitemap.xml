@@ -644,7 +644,17 @@
     <lastmod>2025-07-05T08:18:07-07:00</lastmod>
   </url><url>
     <loc>/tools/containerlogparser.html</loc>
-    <lastmod>2025-06-02T13:47:02+05:30</lastmod>
+    <lastmod>2025-07-09T12:59:18+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/containerlogparser.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/containerlogparser.html"
+                />
   </url><url>
     <loc>/design.html</loc>
     <lastmod>2025-07-07T11:24:38+05:30</lastmod>

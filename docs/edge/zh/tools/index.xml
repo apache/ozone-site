@@ -6,8 +6,15 @@
     <description>Recent content in 工具 on Ozone</description>
     <generator>Hugo</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 13 Mar 2025 10:19:47 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 09 Jul 2025 12:59:18 +0530</lastBuildDate>
     <atom:link href="/zh/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Container Replica Debugger Tool</title>
+      <link>/zh/tools/containerlogparser.html</link>
+      <pubDate>Mon, 09 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/containerlogparser.html</guid>
+      <description>该工具处理来自 Ozone 数据节点的容器日志文件，以跟踪状态转换。它提供 CLI 命令，用于根据不同的属性查询容器。</description>
+    </item>
     <item>
       <title>Ozone Debug</title>
       <link>/zh/tools/debug.html</link>

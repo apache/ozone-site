@@ -574,6 +574,19 @@
                 href="/zh/start/fromsource.html"
                 />
   </url><url>
+    <loc>/zh/tools/containerlogparser.html</loc>
+    <lastmod>2025-07-09T12:59:18+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/containerlogparser.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/containerlogparser.html"
+                />
+  </url><url>
     <loc>/zh/tools/debug.html</loc>
     <lastmod>2024-10-30T12:13:52+05:30</lastmod>
     <xhtml:link
