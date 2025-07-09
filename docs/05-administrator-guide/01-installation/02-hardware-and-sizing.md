@@ -92,6 +92,25 @@ Datanodes store the actual data and can be scaled horizontally based on capacity
 - JBOD (Just a Bunch Of Disks) configurations are supported and common
 - Consider drive failure rates when sizing total capacity
 
+**Ratis Transaction Log Configuration:**
+
+Datanodes use the Apache Ratis consensus protocol for container operations which requires fast storage for transaction logs. Configure dedicated SSD storage for Ratis transaction logs using these properties in your `ozone-site.xml`:
+
+```
+dfs.container.ratis.datastream.storage.dir=/ssd/datanode/datastream
+dfs.container.ratis.snapshot.dir=/ssd/datanode/snapshot
+dfs.container.ratis.wal.storage.dir=/ssd/datanode/wal
+```
+
+These paths should point to directories on your SSD storage device. For high-performance production systems, we recommend:
+
+1. **Dedicated SSD**: Use a separate SSD dedicated to Ratis transaction logs
+2. **XFS File System**: Format the SSD with XFS for optimal performance
+3. **Direct I/O**: Enable direct I/O to bypass the page cache when appropriate
+4. **Redundancy**: For critical deployments, consider RAID1 for the SSD storing transaction logs
+
+For smaller deployments, these directories can share the same SSD as your general metadata disk, but they should be separated for enterprise workloads.
+
 ### Mixed Compute-Storage Datanode
 
 For workloads requiring compute capabilities alongside storage:
@@ -109,19 +128,133 @@ For workloads requiring compute capabilities alongside storage:
 
 ### Storage-Only Datanode
 
-For maximum storage density in large clusters:
+For storage-focused deployments with standard density:
 
 | Component | Specifications |
 |-----------|---------------|
 | CPU | 12-16 cores |
 | Memory | 32-64GB |
-| Storage | 24-90+ HDDs (up to maximum chassis capacity) |
-| Network | 25/40/100GbE |
+| Storage | 24-36 HDDs (up to chassis capacity) |
+| Network | 25/40GbE |
 
 **Use Cases:**
 - Cold/archive storage tiers
-- Maximum capacity deployments
+- Standard capacity deployments
 - Cost-optimized storage
+
+## High-Density Storage with Ozone
+
+Apache Ozone's architecture provides exceptional capabilities for high-density storage nodes - a significant advantage over traditional distributed filesystems like HDFS and other storage offerings. This section explores the benefits, design considerations, and reference architectures for deploying Ozone with high-density nodes.
+
+### Architectural Advantages for High Density
+
+Ozone's ability to support extremely dense storage nodes stems from several key architectural innovations:
+
+1. **Complete Separation of Metadata and Data Paths**
+   - Metadata services (OM and SCM) run on dedicated nodes
+   - Datanodes focus solely on data storage and retrieval operations
+   - Independent scaling of metadata and data planes
+
+2. **Container-Based Storage Model**
+   - Data stored in self-contained "containers" (typically 5GB)
+   - Containers include their own metadata and checksums
+   - Reduced metadata service load compared to per-file/block tracking
+
+3. **Efficient Replication Management**
+   - SCM manages replication at the container level, not individual blocks
+   - More efficient handling of replication for many small files
+   - Support for both replication and erasure coding
+
+4. **Scalable Datanode Architecture**
+   - HDFS typically struggles with >25-30 disks per datanode due to memory constraints
+   - Ozone can efficiently handle 60, 90, or even 100+ disks per datanode
+   - Optimized memory usage for disk tracking and metadata caching
+
+### High-Density Datanode Reference Architecture
+
+For maximum storage density in large-scale deployments:
+
+| Component | Specifications | Notes |
+|-----------|---------------|-------|
+| CPU | 16-32 cores | Modern server CPUs (AMD EPYC or Intel Xeon) |
+| Memory | 128-256GB | Higher memory needed for very large disk counts |
+| System Drives | 2x 480GB+ SSD (RAID1) | For OS and datanode service |
+| Metadata Disks | 2-4x NVMe drives (1-2TB) | For container metadata and Ratis logs |
+| Data Storage | 60-100+ HDDs (16-20TB each) | Enterprise or nearline HDDs |
+| Network | 2x 100GbE | Network capability must match aggregate disk bandwidth |
+| Form Factor | 4U-5U chassis | Dense storage servers with JBOD expansion |
+
+**Achievable Capacity:**
+- Single 4U chassis: 2-3 PB raw storage (with 100x 20TB HDDs)
+- Full rack (10x 4U servers): 20-30 PB raw storage
+- 10-rack datacenter pod: 200-300 PB raw storage
+
+### Business Value of High-Density Storage
+
+High-density storage nodes with Ozone offer substantial business advantages:
+
+1. **Dramatic Cost Reduction**
+   - Up to 60% lower TCO compared to traditional HDFS deployments
+   - Fewer servers required for the same storage capacity
+   - Reduced data center footprint, power, and cooling costs
+   - Fewer network ports and associated infrastructure
+
+2. **Simplified Management**
+   - Fewer physical nodes to manage
+   - Reduced operational complexity
+   - Lower software licensing costs for per-node licensed software
+   - Simplified procurement and deployment
+
+3. **Improved Performance**
+   - More efficient use of available server resources
+   - Reduced network traffic for data placement
+   - Faster recovery from node failures (fewer nodes to rebuild)
+   - Better I/O density per rack unit
+
+4. **Extreme Scalability**
+   - Practical deployments scaling to exabytes of storage
+   - Ability to grow clusters to thousands of nodes
+   - Gradual capacity expansion with consistent performance
+
+### Design Considerations for High-Density Nodes
+
+When deploying high-density datanodes with Ozone, consider these best practices:
+
+1. **Memory Allocation**
+   - Reserve at least 1GB of RAM per 8-10 HDDs for datanode processes
+   - Allocate 3-4GB of additional RAM for container metadata caching
+   - Use JVM heap sizes that optimize for garbage collection efficiency
+
+2. **I/O Path Optimization**
+   - Separate Ratis (transaction logs) to dedicated NVMe storage
+   - Configure appropriate I/O scheduler for HDDs (deadline or noop)
+   - Enable direct I/O where possible to bypass page cache
+   - Consider Linux kernel parameters tuning for large disk counts
+
+3. **Network Configuration**
+   - Ensure network bandwidth matches aggregate disk throughput
+   - Use multiple NICs with appropriate bonding configuration
+   - Configure jumbo frames (MTU 9000) for data network
+   - Implement appropriate QoS for different traffic types
+
+4. **Failure Domain Planning**
+   - Design topology with appropriate rack awareness
+   - Configure container placement policy for resilience
+   - Plan for efficient disk replacement procedures
+   - Consider failure impact when sizing very large nodes
+
+### Example High-Density Deployment
+
+**Ultra-Dense Storage Nodes (100PB Cluster):**
+- 2x AMD EPYC 9554 processors (64 cores total)
+- 256GB DDR5 RAM
+- 4x 3.2TB NVMe drives for container metadata and Ratis logs
+- 90x 20TB HDDs in JBOD configuration
+- 2x 100GbE network interfaces
+- Total raw capacity per node: ~1.8PB
+- Total cluster nodes: 60 datanodes, 6 metadata nodes (3 OM + 3 SCM)
+
+This configuration can deliver 100PB of raw storage capacity with only 66 physical servers, compared to 200+ servers that would be required with traditional HDFS-based architectures.
 
 ## Sizing Guidelines
 

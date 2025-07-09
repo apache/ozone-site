@@ -6,25 +6,27 @@ Ozone's flexibility in bucket layouts allows a single cluster to serve as both a
 
 ## Available Layouts
 
-Ozone provides the following bucket layouts:
+Ozone provides three bucket layouts, each optimized for different use cases and access patterns:
 
-1.  **[Object Store (OBS)](object-store):**
-    *   **Namespace:** Flat (like S3).
-    *   **Compatibility:** Optimized for strict S3 compatibility.
-    *   **Use Case:** S3-native applications, cloud-native workloads, unstructured data storage (media, backups).
-    *   **HCFS Access (`ofs://`):** Not supported.
+| Feature                             | **[Object Store (OBS)](object-store)**                                                                                   | **[File System Optimized (FSO)](file-system-optimized)**                                                                | **Legacy**                                              |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| **Namespace Structure**             | Flat (like S3)                                                                                                           | Hierarchical (like HDFS)                                                                                                | Flat                                                    |
+| **Primary Compatibility**           | S3 API                                                                                                                   | HCFS API (`ofs://`, `o3fs://`)                                                                                          | Mixed                                                   |
+| **S3 Access**                       | ✅ Native and fully optimized                                                                                             | ✅ Supported, but with limitations                                                                                       | ✅ Depends on config                                     |
+| **OFS/HCFS Access**                 | ❌ Not supported                                                                                                          | ✅ Native and fully optimized                                                                                            | ✅ Limited                                               |
+| **Atomic Directory Operations**     | ❌ Not applicable (flat namespace)                                                                                        | ✅ Via HCFS only (not via S3)                                                                                            | ❌ Limited                                               |
+| **Creation Command**                | `ozone sh bucket create --layout obs /volume/bucket`                                                                     | `ozone sh bucket create --layout fso /volume/bucket`                                                                    | `ozone sh bucket create --layout legacy /volume/bucket` |
+| **Best For**                        | • Cloud-native applications<br/>• S3-compatible workloads<br/>• Unstructured data storage<br/>• Media, backups, archives | • HDFS replacement<br/>• Analytics (Spark, Hive, Impala)<br/>• Directory-centric operations<br/>• File system semantics | • Legacy applications<br/>• Backwards compatibility     |
+| **Performance Characteristics**     | • Optimized for object operations<br/>                                                                                   | • Fast directory operations via HCFS<br/>• Atomic renames via HCFS<br/>• Enhanced metadata operations                   | Deprecated                                              |
+| **Recommended For New Deployments** | ✅ Yes, for S3-centric workloads                                                                                          | ✅ Yes, for HDFS-centric workloads                                                                                       | ❌ Deprecated, prefer OBS or FSO                         |
 
-2.  **[File System Optimized (FSO)](file-system-optimized):**
-    *   **Namespace:** Hierarchical (like HDFS).
-    *   **Compatibility:** Optimized for HCFS compatibility (`ofs://`, `o3fs://`). Supports atomic directory operations via HCFS.
-    *   **Use Case:** HDFS replacement, traditional analytics (Spark, Hive, Impala), workloads requiring filesystem semantics.
-    *   **S3 Access:** Supported, but directory operations are not atomic via S3.
+### Key Differences
 
-3.  **Legacy:**
-    *   This was the original layout before OBS and FSO were introduced.
-    *   It provides a flat namespace.
-    *   Its behavior, especially regarding S3 access and filesystem path interpretation, can depend on the `ozone.om.enable.filesystem.paths` configuration setting.
-    *   **Recommendation:** For all new buckets and use cases, prefer either **OBS** or **FSO** over the Legacy layout.
+- **OBS (Object Store)** provides a true S3-compatible object store experience with a flat namespace. It cannot be accessed through Hadoop filesystem interfaces.
+
+- **FSO (File System Optimized)** offers filesystem-like semantics with directories and atomic operations when accessed via `ofs://` or `o3fs://`. While it supports S3 access, directory operations through S3 are not atomic and may be significantly slower.
+
+- **Legacy** was the original bucket layout before OBS and FSO were introduced. Its behavior depends on configuration settings. For all new deployments, we recommend using either OBS or FSO.
 
 ## Choosing the Right Layout
 

@@ -49,7 +49,8 @@ FSO is one of the recommended layouts for new deployments, alongside OBS.
 You can specify the FSO layout during bucket creation using the Ozone CLI:
 
 ```bash
-ozone sh bucket create --layout FILE_SYSTEM_OPTIMIZED /volumeName/bucketName
+ozone sh bucket create --layout fso /volumeName/bucketName
+ozone sh bucket create --layout <FILE_SYSTEM_OPTIMIZED|fso> /volumeName/bucketName
 ```
 
 Alternatively, you can set FSO as the default layout for all new buckets in the Ozone Manager configuration (`ozone-site.xml`):
@@ -64,21 +65,5 @@ Alternatively, you can set FSO as the default layout for all new buckets in the 
   </description>
 </property>
 ```
-
-## Choosing FSO vs. OBS
-
-*   **Choose FSO (File System Optimized) when:**
-    *   Your primary access pattern involves **HCFS/OFS compatible tools** like Spark, Hive, Impala, Presto, Flink, etc.
-    *   You require **fast, atomic directory operations** (renames, deletes) for tasks like `INSERT OVERWRITE`, job commit phases, or large-scale directory restructuring.
-    *   You need **strong consistency** for directory modifications, especially in concurrent environments.
-    *   You are migrating workloads from HDFS and want similar directory semantics and performance characteristics.
-    *   Workloads involve frequent metadata operations or operations on large directories (thousands/millions of files).
-
-*   **Choose OBS (Object Store) when:**
-    *   Your primary access pattern is through the **S3 API** using S3-native tools, SDKs, or applications.
-    *   You prioritize **strict S3 compatibility** and behavior (e.g., for cloud-native applications).
-    *   Your workload involves mostly **object-level GET/PUT/DELETE** operations rather than frequent directory manipulations.
-    *   You are storing large amounts of unstructured data like media files, backups, or logs where filesystem hierarchy is less important than S3 API access.
-    *   You need features specific to object storage paradigms, such as object versioning or complex bucket policies managed via S3 APIs.
 
 See the [OBS documentation](../object-store) for more details on the alternative layout.

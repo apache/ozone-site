@@ -11,24 +11,9 @@ Ozone organizes data within a hierarchical namespace. Understanding this structu
 
 <div className="container" style={{marginTop: '2rem'}}>
   <div className="row">
-    {/* Overview Card */}
-    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./namespace/overview" style={{textDecoration: 'none', color: 'inherit'}}>
-        <img
-          src={useBaseUrl('/img/namespace/overview.svg')}
-          alt="Namespace Overview"
-          width="80"
-          height="80"
-          style={{marginBottom: '1rem'}}
-        />
-        <h3>Overview</h3>
-      </Link>
-      <p>General concepts and the overall structure of the Ozone namespace.</p>
-    </div>
-
     {/* Volumes Card */}
-    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./namespace/volumes/" style={{textDecoration: 'none', color: 'inherit'}}>
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./volumes/" style={{textDecoration: 'none', color: 'inherit'}}>
         <img
           src={useBaseUrl('/img/namespace/hierarchy.svg')}
           alt="Ozone Volumes"
@@ -42,8 +27,8 @@ Ozone organizes data within a hierarchical namespace. Understanding this structu
     </div>
 
     {/* Buckets Card */}
-    <div className="col col--4" style={{textAlign: 'center', padding: '1rem'}}>
-      <Link to="./namespace/buckets/" style={{textDecoration: 'none', color: 'inherit'}}>
+    <div className="col col--6" style={{textAlign: 'center', padding: '1rem'}}>
+      <Link to="./buckets/" style={{textDecoration: 'none', color: 'inherit'}}>
         <img
           src={useBaseUrl('/img/namespace/bucket.svg')}
           alt="Ozone Buckets"

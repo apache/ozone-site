@@ -24,6 +24,45 @@ In Apache Ozone, a **Bucket** is the primary container for storing objects (keys
 
 If a Volume is like a top-level user directory or tenant space, a Bucket can be thought of as a specific project folder or data category within that space. Keys within the bucket are the actual files or objects belonging to that project or category.
 
+## Bucket Name Limitations
+
+Bucket names in Ozone must adhere to specific naming conventions:
+
+* Length: 3-63 characters
+* Must start and end with a lowercase letter or number
+* Can contain lowercase letters, numbers, hyphens (-), and periods (.)
+* Cannot start or end with a hyphen or period
+* Cannot have two consecutive periods
+* Cannot have a period adjacent to a hyphen
+* Cannot be an IPv4 address or all numeric
+
+By default, Ozone adheres strictly to S3 naming conventions, which is important for S3 API compatibility. In this "strict S3" mode:
+
+* Uppercase letters are not allowed
+* Underscores (_) are not allowed
+
+### Hadoop Compatibility Trade-offs
+
+When using Ozone with Hadoop-compatible file systems (HCFS/OFS), you may want to use underscores in bucket names, which are common in Hadoop environments but not allowed in S3. 
+
+Ozone provides a configuration option to relax the S3 naming restrictions:
+
+```xml
+<property>
+  <name>ozone.om.namespace.s3.strict</name>
+  <value>false</value>
+</property>
+```
+
+When set to `false`, this configuration allows:
+* Underscores (_) in bucket names
+* More flexibility for working with Hadoop ecosystem tools
+
+**Trade-offs:**
+* Setting `ozone.om.namespace.s3.strict` to `false` enhances Hadoop compatibility
+* However, buckets with underscores will not be accessible through the S3 API
+* Choose based on your primary access pattern (S3 vs HCFS/OFS)
+
 ## Usage
 
 Buckets are created using Ozone tools (CLI, Java API) or compatible interfaces (S3 API, HCFS API).

@@ -32,6 +32,7 @@ You can specify the OBS layout during bucket creation using the Ozone CLI:
 
 ```bash
 ozone sh bucket create --layout OBJECT_STORE /volumeName/bucketName
+ozone sh bucket create --layout obs /volumeName/bucketName
 ```
 
 Alternatively, you can set OBS as the default layout for all new buckets in the Ozone Manager configuration (`ozone-site.xml`):
@@ -47,9 +48,5 @@ Alternatively, you can set OBS as the default layout for all new buckets in the 
 </property>
 ```
 
-## Choosing OBS vs. FSO
-
-*   Choose **OBS** if your primary need is **S3 compatibility** and a flat object namespace.
-*   Choose **FSO** if your primary need is **HCFS/OFS compatibility**, filesystem semantics (atomic renames/deletes via OFS), and integration with traditional Hadoop ecosystem tools (Spark, Hive, Impala).
 
 See the [FSO documentation](../file-system-optimized) for more details on the alternative layout.

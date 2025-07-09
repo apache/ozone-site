@@ -165,6 +165,7 @@ The typical write sequence follows these steps:
 1. **Namespace Operations**: The client contacts the Ozone Manager to create or locate the key in the namespace
 2. **Block Allocation**: The Ozone Manager requests blocks from the Storage Container Manager
 3. **Data Transfer**: The client directly writes data to the selected Datanodes according to the replication pipeline
+4. **Key Commit**: After successful data transfer, the client commits the key to the Ozone Manager
 
 #### Read Path Sequence
 

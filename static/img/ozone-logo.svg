@@ -36,10 +36,10 @@
 </g>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_5_70" transform="scale(0.00258398)"/>
+<use xlink:href="#image0_5_70" href="#image0_5_70" transform="scale(0.00258398)"/>
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image1_5_70" transform="scale(0.00248756 0.00246914)"/>
+<use xlink:href="#image1_5_70" href="#image1_5_70" transform="scale(0.00248756 0.00246914)"/>
 </pattern>
 <radialGradient id="paint0_radial_5_70" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(255.773 255.201) scale(249.201 249.201)">
 <stop stop-color="#474747"/>

@@ -18,7 +18,7 @@ Trace every part of a write request from beginning to end. This includes:
 - OM checking permissions (Ranger or Native ACLs)
 - OM allocating blocks from SCM
 - OM creating open key
-  - Mention open key cleanup service, and that if key is not committed within a given time it will be picked up for [deletion](delete#deleting-data)
+  - Mention open key cleanup service, and that if key is not committed within a given time it will be picked up for [deletion](03-delete.md#deleting-data)
 - OM generating block tokens from the shared secret previously retrieved from SCM
 - OM returning container, blocks, pipeline, block tokens
 - Client sending checksums and Datanodes validating

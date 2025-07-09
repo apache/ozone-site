@@ -366,6 +366,7 @@ html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos
   }
 }
 
+
 /* PWA Reload Popup styles */
 .pwa-reload-popup {
   position: fixed;

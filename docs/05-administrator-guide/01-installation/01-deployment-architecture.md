@@ -117,15 +117,7 @@ For smaller clusters, consolidation of services can be efficient:
   - Requires more powerful machines (32+ cores, 64GB+ RAM, multiple SSDs)
   - Example: 3 physical servers each running both OM and SCM instances
   
-  ```
-  ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐
-  │ Metadata Node 1   │ │ Metadata Node 2   │ │ Metadata Node 3   │
-  │                   │ │                   │ │                   │
-  │ • Ozone Manager   │ │ • Ozone Manager   │ │ • Ozone Manager   │
-  │ • SCM             │ │ • SCM             │ │ • SCM             │
-  │ • Recon (opt.)    │ │                   │ │                   │
-  └───────────────────┘ └───────────────────┘ └───────────────────┘
-  ```
+  ![Consolidated Metadata Nodes](/img/administrator-guide/consolidated-metadata-nodes.svg)
 
 - **Datanodes with Co-located Services**:
   - S3 Gateway on all or select Datanodes
@@ -140,11 +132,7 @@ For larger production environments, dedicated nodes are recommended:
   - 3 nodes running only SCM instances
   - Separate dedicated node for Recon
   
-  ```
-  ┌───────────┐ ┌───────────┐ ┌───────────┐   ┌───────────┐ ┌───────────┐ ┌───────────┐   ┌───────────┐
-  │ OM Node 1 │ │ OM Node 2 │ │ OM Node 3 │   │ SCM Node 1│ │ SCM Node 2│ │ SCM Node 3│   │   Recon   │
-  └───────────┘ └───────────┘ └───────────┘   └───────────┘ └───────────┘ └───────────┘   └───────────┘
-  ```
+  ![Dedicated Metadata Nodes](/img/administrator-guide/dedicated-metadata-nodes.svg)
 
 - **Dedicated Gateway Nodes**:
   - Separate nodes for S3 Gateway (and potentially HttpFS)
@@ -218,23 +206,7 @@ Ozone can be deployed with awareness of the physical infrastructure topology, wh
 
 A minimal production deployment with consolidated services:
 
-```
-┌─────────────────────────┐ ┌─────────────────────────┐ ┌─────────────────────────┐
-│ Metadata Node 1         │ │ Metadata Node 2         │ │ Metadata Node 3         │
-│                         │ │                         │ │                         │
-│ • Ozone Manager (om1)   │ │ • Ozone Manager (om2)   │ │ • Ozone Manager (om3)   │
-│ • SCM (scm1)            │ │ • SCM (scm2)            │ │ • SCM (scm3)            │
-│ • Recon                 │ │                         │ │                         │
-└─────────────────────────┘ └─────────────────────────┘ └─────────────────────────┘
-
-┌─────────────────────────┐ ┌─────────────────────────┐ ┌─────────────────────────┐
-│ Datanode 1              │ │ Datanode 2              │ │ Datanode 3              │
-│                         │ │                         │ │                         │
-│ • Datanode service      │ │ • Datanode service      │ │ • Datanode service      │
-│ • S3 Gateway            │ │ • S3 Gateway            │ │ • S3 Gateway            │
-│                         │ │                         │ │                         │
-└─────────────────────────┘ └─────────────────────────┘ └─────────────────────────┘
-```
+![Consolidated 6-Node Cluster](/img/administrator-guide/consolidated-6-node-cluster.svg)
 
 **Key Characteristics**:
 - OM and SCM services co-located on the same physical nodes
@@ -246,20 +218,7 @@ A minimal production deployment with consolidated services:
 
 A larger deployment with dedicated service nodes:
 
-```
-┌────────────┐ ┌────────────┐ ┌────────────┐   ┌────────────┐ ┌────────────┐ ┌────────────┐
-│ OM Node 1  │ │ OM Node 2  │ │ OM Node 3  │   │ SCM Node 1 │ │ SCM Node 2 │ │ SCM Node 3 │
-└────────────┘ └────────────┘ └────────────┘   └────────────┘ └────────────┘ └────────────┘
-
-┌────────────┐   ┌──────────────┐ ┌──────────────┐ ┌──────────────┐   ┌─────────────┐
-│ Recon Node │   │ Gateway Node │ │ Gateway Node │ │ Gateway Node │   │ Load        │
-│            │   │ (S3G/HttpFS) │ │ (S3G/HttpFS) │ │ (S3G/HttpFS) │ → │ Balancer    │ → Clients
-└────────────┘   └──────────────┘ └──────────────┘ └──────────────┘   └─────────────┘
-
-┌────────┐ ┌────────┐ ┌────────┐     ┌────────┐
-│ DN 1   │ │ DN 2   │ │ DN 3   │ ... │ DN 100+│  // Multiple racks with many datanodes
-└────────┘ └────────┘ └────────┘     └────────┘
-```
+![Large-Scale Production Cluster](/img/administrator-guide/large-scale-cluster.svg)
 
 **Key Characteristics**:
 - Dedicated nodes for each service type
