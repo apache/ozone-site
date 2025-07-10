@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)" sodipodi:docname="oozie.svg" version="1.1" viewBox="0 0 585.8 141" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="cvfa" x1="247" x2="247" y1="233.4" y2="369.7" gradientTransform="translate(-2.673 51.85)" gradientUnits="userSpaceOnUse" inkscape:collect="always">
+   <stop style="stop-color:#96c1f6" offset="0"/>
+   <stop style="stop-color:#4e93d6" offset="1"/>
+  </linearGradient>
+ </defs>
+ <sodipodi:namedview id="cvfb" bordercolor="#666666" borderopacity="1.0" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" inkscape:current-layer="layer1" inkscape:cx="-708.41036" inkscape:cy="1669.9077" inkscape:document-rotation="0" inkscape:document-units="mm" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="1014" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="0" inkscape:window-y="36" inkscape:zoom="0.175" pagecolor="#ffffff" showgrid="false">
+ </sodipodi:namedview>
+ <title>Apache Oozie logo</title>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(135.7 -281.2)" inkscape:groupmode="layer" inkscape:label="Layer 1">
+  <path d="m154.5 282.7c-1.961 0-3.922.7512-5.424 2.254l-61.32 61.32c-.3666.3666-.6876.7611-.9648 1.176h-6.379v-39.11c0-4.249-3.421-7.671-7.67-7.671h-86.71c-4.249 0-7.671 3.421-7.671 7.671v39.11h-10.58v-39.11c0-4.249-3.421-7.671-7.67-7.671h-86.71c-4.249 0-7.67 3.421-7.67 7.671v86.71c0 4.249 3.421 7.67 7.67 7.67h86.71c4.249 0 7.67-3.421 7.67-7.67v-38.01h10.58v38.01c0 4.249 3.421 7.67 7.671 7.67h86.71c4.249 0 7.67-3.421 7.67-7.67v-38.01h7.269c.02531.026.04918.0528.07493.0786l61.32 61.32c3.005 3.005 7.843 3.005 10.85 0l29.48-29.48h44.47v6.099c0 4.249 3.421 7.67 7.67 7.67h86.71c4.249 0 7.67-3.421 7.67-7.67v-38.17h10.58v38.17c0 4.249 3.421 7.67 7.67 7.67h86.71c4.249 0 7.67-3.421 7.67-7.67v-86.71c0-4.249-3.421-7.671-7.67-7.671h-86.71c-4.249 0-7.67 3.421-7.67 7.671v38.95h-10.58v-38.95c0-4.249-3.421-7.671-7.67-7.671h-86.71c-4.249 0-7.67 3.421-7.67 7.671v6.341h-44.23l-29.72-29.72c-1.502-1.502-3.463-2.254-5.424-2.254zm44.74 41.57h34.63v23.01h-11.78c-.2512-.3558-.5343-.6966-.8532-1.015zm22.22 32.61h12.41v22.48h-34.88l22.24-22.24c.0782-.0782.1532-.1581.2274-.2387z" style="fill:url(#cvfa);stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:.7882;stroke-width:3;stroke:#136cc3" inkscape:connector-curvature="0"/>
+  <g transform="translate(.2673 -1.604)" style="stroke-width:3">
+   <circle cx="-83.16" cy="352.7" r="29.4" style="fill:#fff001;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:.7882;stroke-width:3;stroke:#136cc3"/>
+   <circle cx="-83.16" cy="352.7" r="3.213" style="fill:#5397d8;stroke-linecap:round;stroke-linejoin:bevel;stroke-width:3;stroke:#136cc3"/>
+  </g>
+  <g transform="translate(.2673 -2.036)" style="stroke-width:3">
+   <circle cx="28.6" cy="353.1" r="29.4" style="fill:#fff001;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:.7882;stroke-width:3;stroke:#136cc3"/>
+   <circle cx="28.6" cy="353.1" r="3.213" style="fill:#5397d8;stroke-linecap:round;stroke-linejoin:bevel;stroke-width:3;stroke:#136cc3"/>
+   <circle cx="283.3" cy="327" r="12.2" style="fill:#fff001;stroke-linecap:round;stroke-linejoin:bevel;stroke-opacity:.7882;stroke-width:2.5;stroke:#136cc3"/>
+   <rect x="270.1" y="343.7" width="26.5" height="39.75" style="fill:#fff001;stroke-linecap:round;stroke-linejoin:bevel;stroke-width:2.697;stroke:#2a7bcc"/>
+  </g>
+  <path d="m183.6 381.2h-60.2l20.07-40.13h-20.07v-20.07h60.2l-25.08 45.15h25.08z" style="fill-rule:evenodd;fill:#fff001;stroke-width:3;stroke:#2a7bcc" inkscape:connector-curvature="0"/>
+  <path d="m375.4 382.1h50.27v-15.88h-23.81v-7.938h15.88v-15.88h-15.88v-7.938h23.81v-13.23h-50.27z" style="fill-rule:evenodd;fill:#fff001;stroke-width:2.5;stroke:#2a7bcc" inkscape:connector-curvature="0"/>
+ </g>
+</svg>
