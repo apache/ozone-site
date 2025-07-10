@@ -261,7 +261,7 @@ Pipelines are groups of datanodes that work together to store data:
 - Handle write operations as a unit
 - Support different replication strategies
 
-For detailed information, see [Write Pipelines](http://localhost:3001/docs/core-concepts/replication/write-pipelines).
+For detailed information, see [Write Pipelines](./02-data-replication/02-write-pipelines.md).
 
 #### Ratis Replicated
 
