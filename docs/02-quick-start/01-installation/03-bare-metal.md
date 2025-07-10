@@ -231,7 +231,8 @@ Check the log files in the `logs/` directory (usually under the Ozone installati
 
 Once services are started, perform some basic checks:
 
-*   **Check SCM Safe Mode:** SCM starts in Safe Mode and needs time to exit.
+- **Check SCM Safe Mode:** SCM starts in Safe Mode and needs time to exit.
+
     ```bash
     # Wait for SCM to exit safe mode (may take a few minutes)
     bin/ozone admin scm safemode wait
@@ -240,13 +241,14 @@ Once services are started, perform some basic checks:
     bin/ozone admin scm safemode status
     ```
 
-*   **Check Datanode Status:**
+- **Check Datanode Status:**
+
     ```bash
     bin/ozone admin datanode list
     ```
     Verify that all expected Datanodes are listed and in `HEALTHY` state.
 
-*   **Perform Basic I/O:**
+- **Perform Basic I/O:**
     ```bash
     # Create a volume
     bin/ozone sh volume create /vol1

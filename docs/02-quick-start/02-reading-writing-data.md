@@ -4,7 +4,7 @@ Apache Ozone provides multiple interfaces for reading and writing data, catering
 preferences. This guide explains how to use the three primary interfaces within a Docker environment:
 
 1. **Ozone Shell (`ozone sh`)** - The native command-line interface
-2. **OFS (Ozone File System)** - Hadoop-compatible file system interface
+2. **ofs (Ozone File System)** - Hadoop-compatible file system interface
 3. **S3 API** - Amazon S3 compatible REST interface
 
 All examples assume you already have a running Ozone cluster using Docker Compose as described in
@@ -15,7 +15,7 @@ the [Docker Installation Guide](./01-installation/01-docker.md).
 | Interface       | Strengths                                                                               | Use Cases                                                                  |
 |:----------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
 | **Ozone Shell** | - Full feature access Advanced operations Detailed metadata                             | - Administrative tasks Bucket/volume management Quota/ACL management       |
-| **OFS**         | - Familiar HDFS-like commands Works with existing Hadoop applications Full cluster view | - Hadoop ecosystem integration Applications that need filesystem semantics |
+| **ofs**         | - Familiar HDFS-like commands Works with existing Hadoop applications Full cluster view | - Hadoop ecosystem integration Applications that need filesystem semantics |
 | **S3 API**      | - Industry standard Works with existing S3 clients Language-independent                 | - Web applications Multi-language environments Existing S3 applications    |
 
 ## Using Ozone Shell (ozone sh)
@@ -122,12 +122,12 @@ ozone sh key delete /vol1/bucket1/test_shell.txt
 # In OBS buckets, deletion is permanent via Ozone Shell.
 ```
 
-## Using OFS (Ozone File System)
+## Using ofs (Ozone File System)
 
-OFS provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
+ofs provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
 for HDFS.
 
-### Accessing OFS
+### Accessing ofs
 
 You can use `ozone fs` commands (a wrapper around `hdfs dfs`) inside the `om` or `ozone-client` container:
 
@@ -138,9 +138,9 @@ docker compose exec om bash
 docker compose exec ozone-client bash
 ```
 
-### Basic OFS Operations
+### Basic ofs Operations
 
-OFS uses standard Hadoop filesystem commands.
+ofs uses standard Hadoop filesystem commands.
 
 ```bash
 # Create volume and bucket (using filesystem semantics)
@@ -181,7 +181,7 @@ ozone fs -rm /vol1/bucket_ofs/copy_ofs.txt
 ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
 ```
 
-### Advanced OFS Operations
+### Advanced ofs Operations
 
 ```bash
 # Get file checksum
@@ -247,14 +247,14 @@ Ozone allows accessing the same data through different interfaces.
 
 ### Namespace Mapping
 
-| Data Location         | Ozone Shell Path         | OFS Path                                         | S3 Path                                                        |
+| Data Location         | Ozone Shell Path         | ofs Path                                         | S3 Path                                                        |
 |:----------------------|:-------------------------|:-------------------------------------------------|:---------------------------------------------------------------|
 | vol1/bucket1/file.txt | `/vol1/bucket1/file.txt` | `ofs://<ozone service id>/vol1/bucket1/file.txt` | `s3://bucket1/file.txt` <br/>(if S3V configured to serve vol1) |
 | s3v/s3bucket/file.txt | `/s3v/s3bucket/file.txt` | `ofs://<ozone service id>/s3v/s3bucket/file.txt` | `s3://s3bucket/file.txt`                                       |
 
 *(Note: `om` in `ofs://` path refers to the Ozone Manager service address)*
 
-### Accessing S3 Data via Ozone Shell/OFS
+### Accessing S3 Data via Ozone Shell/ofs
 
 Objects created via S3 reside in the special `/s3v` volume.
 
@@ -267,7 +267,7 @@ ozone sh key list /s3v/s3bucket
 ozone sh key get /s3v/s3bucket/s3_test.txt /tmp/from_s3.txt
 exit
 
-# Access via OFS (inside om/client container)
+# Access via ofs (inside om/client container)
 docker compose exec om bash
 ozone fs -ls /s3v/s3bucket/
 ozone fs -cat /s3v/s3bucket/s3_test.txt
@@ -314,6 +314,6 @@ Most operations work on both, but FSO is generally preferred unless specific OBS
 
 ## Summary
 
-You have learned how to perform basic read/write operations in Ozone using three different interfaces: Ozone Shell, OFS,
+You have learned how to perform basic read/write operations in Ozone using three different interfaces: Ozone Shell, ofs,
 and the S3 API. Each interface has its strengths, and Ozone's multi-protocol design allows you to choose the best tool
 for the job while accessing the same underlying data.
