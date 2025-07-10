@@ -175,6 +175,12 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
                 </ul>
             </li>
         
@@ -657,6 +663,27 @@ token infrastructure depends on this certificate infrastructure.</p>
 <li>Valid cert</li>
 <li>Used by the internal Certificate Authority to authorize other Ozone services</li>
 </ul>
+<h2 id="safe-mode">Safe Mode</h2>
+<p>SCM (Storage Container Manager) enters safe mode on startup. This is a protective state that allows the system to become stable before it becomes fully operational. During safe mode, certain operations like block allocation are restricted.</p>
+<h3 id="how-to-exit-safe-mode">How to Exit Safe Mode</h3>
+<p>There are two ways to exit safe mode:</p>
+<ol>
+<li>
+<p><strong>Automatic Exit:</strong> SCM will automatically exit safe mode when a set of predefined <code>SafeModeExitRule</code>s are satisfied. These rules ensure that the cluster is in a healthy state. The primary rules are:</p>
+<ul>
+<li><strong><code>DataNodeSafeModeRule</code></strong>: Checks if a minimum number of DataNodes have registered with the SCM. This is configured by <code>hdds.scm.safemode.min.datanode</code> (default: <code>3</code>).</li>
+<li><strong><code>RatisContainerSafeModeRule</code></strong>: Checks if a certain percentage of containers with at least one replica reported are available. This is configured by <code>hdds.scm.safemode.threshold.pct</code> (default: <code>0.99</code>).</li>
+<li><strong><code>HealthyPipelineSafeModeRule</code></strong>: Checks if a certain percentage of pipelines are healthy. This is configured by <code>hdds.scm.safemode.healthy.pipeline.pct</code> (default: <code>0.10</code>).</li>
+<li><strong><code>OneReplicaPipelineSafeModeRule</code></strong>: Checks if a certain percentage of pipelines have at least one replica reported. This is configured by <code>hdds.scm.safemode.atleast.one.node.reported.pipeline.pct</code> (default: <code>0.90</code>).</li>
+<li><strong><code>ECContainerSafeModeRule</code></strong>: Checks if a certain percentage of erasure coded block groups are healthy. This is also configured by <code>hdds.scm.safemode.threshold.pct</code> (default: <code>0.99</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Manual Exit:</strong> You can force SCM to exit safe mode using the <code>ozone admin safemode --force-exit</code> command.</p>
+</li>
+</ol>
+<h3 id="safe-mode-pre-check">Safe Mode Pre-Check</h3>
+<p>There&rsquo;s also a &ldquo;pre-check&rdquo; phase. SCM will not exit safe mode until all pre-check rules are satisfied. The <code>DataNodeSafeModeRule</code> is a pre-check rule. This means that SCM will wait for a minimum number of DataNodes to be available before it even considers the other conditions for exiting safe mode.</p>
 <h2 id="notable-configurations">Notable configurations</h2>
 <table>
   <thead>
@@ -713,7 +740,7 @@ token infrastructure depends on this certificate infrastructure.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: May 21, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3bb8858598dcd32aac53eb1c6b38d22a622bcdc2">3bb8858598</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2ae8d6da2849286b044e9877a90fdd919c3653c4">2ae8d6da28</a>
     </span>
   </div>
 </footer>

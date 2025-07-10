@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -172,7 +175,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
                            
@@ -539,56 +542,293 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-3816">[HDDS-3816]</a> Erasure Coding in Ozone (draft) </h1>
-                <div><i>Authors: Uma Maheswara Rao Gangumalla, Marton Elek, Stephen O&#39;Donnell</i><div class="pull-right">2020-06-30</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Use Erasure Coding algorithm for efficient storage
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Comparison with Other Storage Technologies</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Comparison with Other Storage Technologies</h1>
+
+            <!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<h1 id="abstract">Abstract</h1>
-<p>Support Erasure Coding for read and write pipeline of Ozone.</p>
-<h1 id="status">Status</h1>
-<p>The design doc describes two main methods to implement EC:</p>
-<ul>
-<li>Container level, async Erasure Coding, to encode closed containers in the background</li>
-<li>Block level, striped Erasure Coding</li>
-</ul>
-<p>Second option can work only with new, dedicated write-path. Details of possible implementation will be included in the next version.</p>
-<h1 id="link">Link</h1>
-<p><a href="https://issues.apache.org/jira/secure/attachment/13006245/Erasure%20Coding%20in%20Apache%20Hadoop%20Ozone.pdf">https://issues.apache.org/jira/secure/attachment/13006245/Erasure%20Coding%20in%20Apache%20Hadoop%20Ozone.pdf</a></p>
+<p>This document provides a high-level comparison of Apache Ozone with other storage technologies.</p>
+<h2 id="open-source-scale-out-storage-comparison">Open Source Scale-out Storage Comparison</h2>
+<p>Ozone is most often compared against other open source storage systems.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tech</th>
+          <th>Type</th>
+          <th>Consistency</th>
+          <th>Scale</th>
+          <th>Big Data Integration</th>
+          <th>License</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Ozone</strong></td>
+          <td>Object / File</td>
+          <td>Strong</td>
+          <td>Exabyte scale, tens of billions keys</td>
+          <td>Native</td>
+          <td>Apache 2.0</td>
+          <td>Modern Hadoop-native object store with S3 API</td>
+      </tr>
+      <tr>
+          <td><strong>HDFS</strong></td>
+          <td>File</td>
+          <td>Strong</td>
+          <td>PBs, billions files</td>
+          <td>Native</td>
+          <td>Apache 2.0</td>
+          <td>Classic Hadoop FS, no S3 API, tight Hadoop integration</td>
+      </tr>
+      <tr>
+          <td><strong>Ceph</strong></td>
+          <td>Object / Block / File</td>
+          <td>Tunable / Eventual</td>
+          <td>Multi-PB, very large</td>
+          <td>Via S3 Gateway/CephFS</td>
+          <td>LGPLv2.1 / Ceph Foundation</td>
+          <td>General-purpose: underlying RADOS (object), RGW (object), CephFS (file)</td>
+      </tr>
+      <tr>
+          <td><strong>MinIO</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Petabyte scale</td>
+          <td>Via S3 connectors</td>
+          <td>AGPLv3 (SSPL-like)</td>
+          <td>Cloud-native S3 API, lightweight, fast, no FS semantics</td>
+      </tr>
+      <tr>
+          <td><strong>Lustre</strong></td>
+          <td>Parallel File (POSIX)</td>
+          <td>Strong</td>
+          <td>PB scale, HPC</td>
+          <td>None</td>
+          <td>GPLv2</td>
+          <td>HPC clusters, high-throughput parallel file system</td>
+      </tr>
+      <tr>
+          <td><strong>GlusterFS</strong></td>
+          <td>File (POSIX)</td>
+          <td>Eventually consistent</td>
+          <td>Large, multi-PB</td>
+          <td>None</td>
+          <td>GPLv3</td>
+          <td>General-purpose scale-out distributed file storage</td>
+      </tr>
+      <tr>
+          <td><strong>OpenStack Swift</strong></td>
+          <td>Object</td>
+          <td>Eventual</td>
+          <td>Large, multi-PB</td>
+          <td>Via connectors</td>
+          <td>Apache 2.0</td>
+          <td>S3-like multi-tenant object storage for private clouds</td>
+      </tr>
+  </tbody>
+</table>
+<p>Ozone shines when users are in need of an Apache licensed, strongly consistent storage system that can scale to billions of keys/files and hundreds of PBs to EBs.</p>
+<h2 id="proprietary-scale-out-storage-comparison">Proprietary Scale-Out Storage Comparison</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Tech</th>
+          <th>Type</th>
+          <th>Consistency</th>
+          <th>Scale</th>
+          <th>Big Data Integration</th>
+          <th>Performance Focus</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Isilon (Dell PowerScale)</strong></td>
+          <td>File (Scale-Out NAS)</td>
+          <td>Strong</td>
+          <td>PBs, billions of files</td>
+          <td>Indirect</td>
+          <td>High throughput, good mixed IO</td>
+          <td>Enterprise NAS, POSIX compliant, good for mixed workloads, backup, analytics</td>
+      </tr>
+      <tr>
+          <td><strong>VAST</strong></td>
+          <td>File / Object</td>
+          <td>Strong</td>
+          <td>PBs</td>
+          <td>Yes, AI workloads</td>
+          <td>Ultra-low latency, all-flash NVMe</td>
+          <td>All-flash, NFS/S3, great for AI/ML and large unstructured datasets</td>
+      </tr>
+      <tr>
+          <td><strong>WEKA</strong></td>
+          <td>Parallel File</td>
+          <td>Strong</td>
+          <td>PBs</td>
+          <td>HPC, AI</td>
+          <td>Ultra-low latency, high IOPS</td>
+          <td>High-performance file, GPU clusters, NFS/SMB/S3</td>
+      </tr>
+      <tr>
+          <td><strong>Spectrum Scale (GPFS)</strong></td>
+          <td>File (POSIX)</td>
+          <td>Strong</td>
+          <td>PBs</td>
+          <td>HPC, AI</td>
+          <td>High throughput, scale-out metadata</td>
+          <td>IBM, used in HPC/AI, policy tiering, good POSIX compliance</td>
+      </tr>
+      <tr>
+          <td><strong>Scality</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>PBs</td>
+          <td>Some</td>
+          <td>Good throughput for large objects</td>
+          <td>Enterprise S3 API, multi-region, backup archives, hybrid cloud</td>
+      </tr>
+      <tr>
+          <td><strong>Cloudian</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>PBs</td>
+          <td>Some</td>
+          <td>Good throughput for backup/archive</td>
+          <td>S3-compatible object storage, ransomware protection, hybrid cloud</td>
+      </tr>
+  </tbody>
+</table>
+<p>The proprietary systems offer enterprise-grade quality, but they often require proprietary or certified hardware.
+Ozone shines when users look for commodity hardware, open systems and embrace the vibrant Apache big data open source community.</p>
+<h2 id="cloud-native-object-storage-comparison">Cloud-Native Object Storage Comparison</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Tech</th>
+          <th>Type</th>
+          <th>Consistency</th>
+          <th>Scale</th>
+          <th>Big Data Integration</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>AWS S3</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Native to cloud ecosystem</td>
+          <td>The de-facto standard for object storage; massive durability, S3 API leader</td>
+      </tr>
+      <tr>
+          <td><strong>Azure ABFS</strong></td>
+          <td>File/Object (Data Lake Storage)</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Azure-native</td>
+          <td>HDFS-like semantics for Spark/Hadoop; optimized for analytics</td>
+      </tr>
+      <tr>
+          <td><strong>Google GCS</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Native to cloud ecosystem</td>
+          <td>Globally distributed; strong consistency; well-integrated with BigQuery</td>
+      </tr>
+      <tr>
+          <td><strong>OCI Object Storage</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Via S3 API &amp; native services</td>
+          <td>Oracle’s S3-compatible storage; integrates with OCI Data Flow</td>
+      </tr>
+      <tr>
+          <td><strong>Alibaba OSS</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Via S3 API &amp; native services</td>
+          <td>S3-compatible, huge China/APAC footprint</td>
+      </tr>
+      <tr>
+          <td><strong>IBM Cloud Object Storage</strong></td>
+          <td>Object</td>
+          <td>Strong</td>
+          <td>Exabyte+</td>
+          <td>Via S3 API &amp; native services</td>
+          <td>S3-compatible, geo-dispersed erasure coding for durability</td>
+      </tr>
+  </tbody>
+</table>
+<p>These cloud storage offerings are only available from their respective public cloud vendors. In contrast, Ozone runs on-prem or in your private cloud, giving you full control.</p>
+<h2 id="summary">Summary</h2>
+<p>In summary, Ozone is the best fit in the following scenarios:</p>
+<ol>
+<li>Large on-prem big data clusters migrating from HDFS.</li>
+<li>You want S3 APIs but need strong Hadoop integration.</li>
+<li>You want to avoid vendor lock-in and grow cost-effectively on commodity hardware.</li>
+<li>You’re building a private or hybrid cloud with other open-source tools.</li>
+</ol>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../concept/volumesbucketskeys.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab3</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7477431c93b3804af070a5b2f6d47f0bf02f7b73">7477431c93</a>
     </span>
   </div>
 </footer>
@@ -600,5 +840,6 @@ s=d.getElementsByTagName('script')[0];
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

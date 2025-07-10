@@ -309,6 +309,13 @@
       <description>How to do non-rolling upgrades and downgrades of Ozone</description>
     </item>
     <item>
+      <title>Comparison with Other Storage Technologies</title>
+      <link>/concept/comparison.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/concept/comparison.html</guid>
+      <description>&lt;!--&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;This document provides a high-level comparison of Apache Ozone with other storage technologies.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>S3 Multi-Tenancy</title>
       <link>/feature/s3-multi-tenancy.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -502,7 +509,7 @@
       <link>/tools/logsinozone.html</link>
       <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
       <guid>/tools/logsinozone.html</guid>
-      <description>Logs in Ozone.</description>
+      <description>An overview of logging in Apache Ozone.</description>
     </item>
     <item>
       <title>Merge Container RocksDB in DN</title>

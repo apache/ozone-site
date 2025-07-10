@@ -175,6 +175,12 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
                 </ul>
             </li>
         
@@ -601,10 +607,10 @@ OMs for scaling(pending future development).</p>
 <p>OM maintains a list of volumes, buckets, and keys.
 For each user, it maintains a list of volumes.
 For each volume, the list of buckets and for each bucket the list of keys.</p>
-<p>Ozone Manager will use Apache Ratis(A Raft protocol implementation) to
-replicate Ozone Manager state. This will ensure High Availability for Ozone.</p>
+<p>Ozone Manager will use <a href="https://ratis.apache.org/">Apache Ratis</a>(A Raft protocol implementation) to
+replicate Ozone Manager state. This will ensure <a href="../feature/om-ha.html">High Availability for Ozone Manager</a>.</p>
 <h2 id="ozone-manager-and-storage-container-manager">Ozone Manager and Storage Container Manager</h2>
-<p>The relationship between Ozone Manager and Storage Container Manager is best
+<p>The relationship between Ozone Manager and <a href="../concept/storagecontainermanager.html">Storage Container Manager (SCM)</a> is best
 understood if we trace what happens during a key write and key read.</p>
 <h3 id="key-write">Key Write</h3>
 <p>
@@ -619,13 +625,13 @@ OM needs to allocate a block for the client to write data.</p>
 </li>
 <li>
 <p>To allocate a block, Ozone Manager sends a request to Storage Container
-Manager (SCM); SCM is the manager of data nodes. SCM picks three data nodes
+Manager (SCM); SCM is the manager of <a href="../concept/datanodes.html">data nodes</a>. SCM picks three data nodes
 into which client can write data. SCM allocates the block and returns the
-block ID to Ozone Manager.</p>
+<a href="../concept/datanodes.html">block ID</a> to Ozone Manager.</p>
 </li>
 <li>
 <p>Ozone manager records this block information in its metadata and returns the
-block and a block token (a security permission to write data to the block)
+block and a <a href="../security/secureozone.html">block token</a> (a security permission to write data to the block)
 to the client.</p>
 </li>
 <li>
@@ -670,13 +676,13 @@ the data from the data node.</li>
 <li>Managing ACLs if <a href="../security/securityacls.html">internal ACLs</a> are used instead of <a href="../security/securitywithranger.html">Ranger</a></li>
 </ul>
 </li>
-<li>Delegation token (Get / Renew / Cancel)</li>
+<li><a href="../security/secureozone.html">Delegation token</a> (Get / Renew / Cancel)</li>
 <li>For security</li>
 <li>Admin APIs
 <ul>
 <li>Get S3 secret</li>
 <li>ServiceList (used for service discovery)</li>
-<li>DBUpdates (used by <a href="../feature/recon.html">Recon</a> downloads snapshots)</li>
+<li>DBUpdates (used by <a href="../concept/recon.html">Recon</a> downloads snapshots)</li>
 </ul>
 </li>
 </ul>
@@ -766,7 +772,7 @@ the data from the data node.</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: February 1, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/6c7af5c0b797b6d12a730e35304bc764dd1051f0">6c7af5c0b7</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/13af30cf43b65e97e584ba17c4736130170d6677">13af30cf43</a>
     </span>
   </div>
 </footer>

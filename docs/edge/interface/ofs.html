@@ -175,6 +175,12 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
                 </ul>
             </li>
         
@@ -630,7 +636,7 @@ For example:</p>
 <p>Or use the put command to write a file to the bucket.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hdfs dfs -put /etc/hosts /volume1/bucket1/test</span></span></code></pre></div>
 <p>For more usage, see: <a href="https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf">https://issues.apache.org/jira/secure/attachment/12987636/Design%20ofs%20v1.pdf</a></p>
-<h2 id="differences-from-o3fshahahugoshortcode107s5hbhb">Differences from <a href="../interface/o3fs.html">o3fs</a></h2>
+<h2 id="differences-from-o3fshahahugoshortcode108s5hbhb">Differences from <a href="../interface/o3fs.html">o3fs</a></h2>
 <h3 id="creating-files">Creating files</h3>
 <p>OFS doesn&rsquo;t allow creating keys(files) directly under root or volumes.
 Users will receive an error message when they try to do that:</p>
@@ -724,6 +730,452 @@ cluster.</p>
 <p>This feature wouldn&rsquo;t degrade server performance as the loop is on the client.
 Think it as a client is issuing multiple requests to the server to get all the
 information.</p>
+<h2 id="operation-support">Operation Support</h2>
+<p>lists the support status of Ofs operations</p>
+<h3 id="supported">Supported</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Description</th>
+          <th>Support</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>create</code></td>
+          <td>Creates a new file.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>open</code></td>
+          <td>Opens a file for reading.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>rename</code></td>
+          <td>Renames a file or directory.</td>
+          <td>Supported [1]</td>
+      </tr>
+      <tr>
+          <td><code>delete</code></td>
+          <td>Deletes a file or directory.</td>
+          <td>Supported [2]</td>
+      </tr>
+      <tr>
+          <td><code>listStatus</code></td>
+          <td>Lists the status of files in a directory.</td>
+          <td>Supported [3]</td>
+      </tr>
+      <tr>
+          <td><code>mkdirs</code></td>
+          <td>Creates a directory and its parents.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getFileStatus</code></td>
+          <td>Gets the status of a file.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>setTimes</code></td>
+          <td>Sets the modification and access times.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getLinkTarget</code></td>
+          <td>Gets the target of a symbolic link.</td>
+          <td>Supported [4]</td>
+      </tr>
+      <tr>
+          <td><code>getFileChecksum</code></td>
+          <td>Gets the checksum of a file.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>setSafeMode</code></td>
+          <td>Enters or leaves safe mode.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>recoverLease</code></td>
+          <td>Recovers a file lease.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>isFileClosed</code></td>
+          <td>Checks if a file is closed.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>createSnapshot</code></td>
+          <td>Creates a snapshot.</td>
+          <td>Supported [5]</td>
+      </tr>
+      <tr>
+          <td><code>deleteSnapshot</code></td>
+          <td>Deletes a snapshot.</td>
+          <td>Supported [5]</td>
+      </tr>
+      <tr>
+          <td><code>renameSnapshot</code></td>
+          <td>Renames a snapshot.</td>
+          <td>Supported [5]</td>
+      </tr>
+      <tr>
+          <td><code>getSnapshotDiffReport</code></td>
+          <td>Gets a snapshot diff report.</td>
+          <td>Supported [5]</td>
+      </tr>
+      <tr>
+          <td><code>copyFromLocalFile</code></td>
+          <td>Copies a file from the local filesystem.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>exists</code></td>
+          <td>Checks if a path exists.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getContentSummary</code></td>
+          <td>Gets the content summary of a path.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getDefaultBlockSize</code></td>
+          <td>Gets the default block size.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getDefaultReplication</code></td>
+          <td>Gets the default replication factor.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getDelegationToken</code></td>
+          <td>Gets a delegation token.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getFileBlockLocations</code></td>
+          <td>Gets file block locations.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getHomeDirectory</code></td>
+          <td>Gets the user&rsquo;s home directory.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getServerDefaults</code></td>
+          <td>Gets the server default values.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getTrashRoot</code></td>
+          <td>Gets the trash root for a path.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getTrashRoots</code></td>
+          <td>Gets all trash roots.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>getWorkingDirectory</code></td>
+          <td>Gets the current working directory.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>globStatus</code></td>
+          <td>Finds files matching a pattern.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>hasPathCapability</code></td>
+          <td>Queries for a path capability.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>isDirectory</code></td>
+          <td>Checks if a path is a directory.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>isFile</code></td>
+          <td>Checks if a path is a file.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>listFiles</code></td>
+          <td>Returns a remote iterator for files.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>listLocatedStatus</code></td>
+          <td>Returns a remote iterator for located file statuses.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>listStatusIterator</code></td>
+          <td>Returns a remote iterator for file statuses.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>setWorkingDirectory</code></td>
+          <td>Sets the current working directory.</td>
+          <td>Supported</td>
+      </tr>
+      <tr>
+          <td><code>supportsSymlinks</code></td>
+          <td>Checks if symbolic links are supported.</td>
+          <td>Supported</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="unsupported">Unsupported</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>append</code></td>
+          <td>Appends to an existing file.</td>
+      </tr>
+      <tr>
+          <td><code>setPermission</code></td>
+          <td>Sets the permission of a file.</td>
+      </tr>
+      <tr>
+          <td><code>setOwner</code></td>
+          <td>Sets the owner of a file.</td>
+      </tr>
+      <tr>
+          <td><code>setReplication</code></td>
+          <td>Sets the replication factor of a file.</td>
+      </tr>
+      <tr>
+          <td><code>createSymlink</code></td>
+          <td>Creates a symbolic link.</td>
+      </tr>
+      <tr>
+          <td><code>resolveLink</code></td>
+          <td>Resolves a symbolic link.</td>
+      </tr>
+      <tr>
+          <td><code>setXAttr</code></td>
+          <td>Sets an extended attribute.</td>
+      </tr>
+      <tr>
+          <td><code>getXAttr</code></td>
+          <td>Gets an extended attribute.</td>
+      </tr>
+      <tr>
+          <td><code>listXAttrs</code></td>
+          <td>Lists extended attributes.</td>
+      </tr>
+      <tr>
+          <td><code>removeXAttr</code></td>
+          <td>Removes an extended attribute.</td>
+      </tr>
+      <tr>
+          <td><code>setAcl</code></td>
+          <td>Sets an ACL.</td>
+      </tr>
+      <tr>
+          <td><code>getAclStatus</code></td>
+          <td>Gets an ACL status.</td>
+      </tr>
+      <tr>
+          <td><code>modifyAclEntries</code></td>
+          <td>Modifies ACL entries.</td>
+      </tr>
+      <tr>
+          <td><code>removeAclEntries</code></td>
+          <td>Removes ACL entries.</td>
+      </tr>
+      <tr>
+          <td><code>removeDefaultAcl</code></td>
+          <td>Removes the default ACL.</td>
+      </tr>
+      <tr>
+          <td><code>removeAcl</code></td>
+          <td>Removes an ACL.</td>
+      </tr>
+      <tr>
+          <td><code>truncate</code></td>
+          <td>Truncates a file.</td>
+      </tr>
+      <tr>
+          <td><code>concat</code></td>
+          <td>Concatenates files.</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Footnotes:</strong></p>
+<p>[1] Renaming across buckets is not supported. For File System Optimized (FSO) buckets, rename is an atomic metadata operation. For legacy buckets, renaming a directory is non-atomic, as it is implemented by renaming each file and subdirectory individually.</p>
+<p>[2] Deleting the root of the filesystem is not allowed. Recursive volume deletion is not supported.</p>
+<p>[3] Recursive listing at the root or volume level is not supported.</p>
+<p>[4] OFS supports &rsquo;linked buckets&rsquo;, where one bucket acts as a link to another. General-purpose symbolic links for files or directories are not supported.</p>
+<p>[5] Snapshots are only supported at the bucket level.</p>
+<h3 id="unsupported-hdfs-specific-operations">Unsupported HDFS-Specific Operations</h3>
+<p>The following operations are specific to HDFS and are not supported by Ofs.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Description</th>
+          <th>Support</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>setStoragePolicy</code></td>
+          <td>Sets a storage policy on a file or directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getStoragePolicy</code></td>
+          <td>Gets the storage policy of a file or directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getErasureCodingPolicy</code></td>
+          <td>Gets the erasure coding policy of a file or directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>setErasureCodingPolicy</code></td>
+          <td>Sets an erasure coding policy on a directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>unsetErasureCodingPolicy</code></td>
+          <td>Unsets an erasure coding policy on a directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>addCachePool</code></td>
+          <td>Adds a cache pool.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>modifyCachePool</code></td>
+          <td>Modifies a cache pool.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>removeCachePool</code></td>
+          <td>Removes a cache pool.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>listCachePools</code></td>
+          <td>Lists all cache pools.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>addCacheDirective</code></td>
+          <td>Adds a cache directive.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>modifyCacheDirective</code></td>
+          <td>Modifies a cache directive.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>removeCacheDirective</code></td>
+          <td>Removes a cache directive.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>listCacheDirectives</code></td>
+          <td>Lists cache directives.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>allowSnapshot</code></td>
+          <td>Allows snapshots to be taken on a directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>disallowSnapshot</code></td>
+          <td>Disallows snapshots to be taken on a directory.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>addErasureCodingPolicies</code></td>
+          <td>Adds erasure coding policies.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getErasureCodingPolicies</code></td>
+          <td>Gets the available erasure coding policies.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>removeErasureCodingPolicy</code></td>
+          <td>Removes an erasure coding policy.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>enableErasureCodingPolicy</code></td>
+          <td>Enables an erasure coding policy.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>disableErasureCodingPolicy</code></td>
+          <td>Disables an erasure coding policy.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getEZForPath</code></td>
+          <td>Gets the encryption zone for a path.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>listErasureCodingPolicies</code></td>
+          <td>Lists all erasure coding policies.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>listErasureCodingCodecs</code></td>
+          <td>Lists all erasure coding codecs.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getQuotaUsage</code></td>
+          <td>Gets the quota usage for a path.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>setQuotaByStorageType</code></td>
+          <td>Sets the quota by storage type for a path.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>getQuotaByStorageType</code></td>
+          <td>Gets the quota by storage type for a path.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>msync</code></td>
+          <td>Flushes out the data in client&rsquo;s user buffer.</td>
+          <td>Unsupported</td>
+      </tr>
+      <tr>
+          <td><code>satisfyStoragePolicy</code></td>
+          <td>Satisfies the storage policy of a file.</td>
+          <td>Unsupported</td>
+      </tr>
+  </tbody>
+</table>
 
 
           
@@ -743,7 +1195,7 @@ information.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: June 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/315ef204d8370d3405dab60d1e057e6d22b8660b">315ef204d8</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1ad1b2d58ad49f08b2202f6106853a97c1eefb41">1ad1b2d58a</a>
     </span>
   </div>
 </footer>

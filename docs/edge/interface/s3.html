@@ -175,6 +175,12 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
                 </ul>
             </li>
         
@@ -597,96 +603,194 @@ s=d.getElementsByTagName('script')[0];
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.s3g.domain.name<span style="color:#f92672">&lt;/name&gt;</span>
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>s3g.internal<span style="color:#f92672">&lt;/value&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><h2 id="implemented-rest-endpoints">Implemented REST endpoints</h2>
-<p>Operations on S3Gateway service:</p>
+</span></span></code></pre></div><h2 id="implemented-rest-endpoints">Implemented REST Endpoints</h2>
+<p>The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. The tables below summarize each API’s support status, its feature, and any relevant notes, including known deviations from AWS S3 behavior.</p>
+<h3 id="bucket-operations">Bucket Operations</h3>
 <table>
   <thead>
       <tr>
-          <th>Endpoint</th>
-          <th>Status</th>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>GET service</td>
-          <td>implemented</td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html">ListBuckets</a></td>
+          <td>Lists all buckets owned by the authenticated user.</td>
+          <td>Returns the full bucket list.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html">CreateBucket</a></td>
+          <td>Creates a new bucket.</td>
+          <td><strong>Non-compliant behavior:</strong> The default bucket ACL may include extra group permissions instead of being strictly private. Bucket names must adhere to S3 naming conventions.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html">HeadBucket</a></td>
+          <td>Checks for the existence of a bucket.</td>
+          <td>Returns a 200 status if the bucket exists.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html">DeleteBucket</a></td>
+          <td>Deletes a bucket.</td>
+          <td>Bucket must be empty before deletion.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html">GetBucketLocation</a></td>
+          <td>Retrieves the location (region) of a bucket.</td>
+          <td>Typically returns a default region (e.g., <code>us-east-1</code>), which may differ from AWS if region-specific responses are expected.</td>
       </tr>
   </tbody>
 </table>
-<p>Operations on Bucket:</p>
+<h3 id="object-operations">Object Operations</h3>
 <table>
   <thead>
       <tr>
-          <th>Endpoint</th>
-          <th>Status</th>
-          <th>Notes</th>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>GET Bucket (List Objects) Version 2</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a></td>
+          <td>Retrieves the contents of an object.</td>
+          <td><strong>Non-compliant behavior:</strong> For non-existent objects, Ozone may return a generic 404 without the structured XML error body defined by AWS S3.</td>
       </tr>
       <tr>
-          <td>HEAD Bucket</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html">HeadObject</a></td>
+          <td>Retrieves metadata for an object.</td>
+          <td>Similar to GET Object, error responses for missing objects might lack detailed AWS-style error XML.</td>
       </tr>
       <tr>
-          <td>DELETE Bucket</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html">PutObject</a></td>
+          <td>Uploads a new object.</td>
+          <td>Supports both single PUT and multipart uploads. <strong>Non-compliant behavior:</strong> Any ACL headers provided in the request are ignored.</td>
       </tr>
       <tr>
-          <td>PUT Bucket (Create bucket)</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html">DeleteObject</a></td>
+          <td>Deletes a single object.</td>
+          <td>Returns standard error codes for missing objects.</td>
       </tr>
       <tr>
-          <td>Delete Multiple Objects (POST)</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html">DeleteObjects</a></td>
+          <td>Deletes multiple objects in one request.</td>
+          <td>Bulk delete operation with aggregated error reporting.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a></td>
+          <td>Copies an object (intra- or inter-bucket).</td>
+          <td>Supports metadata directives (COPY/REPLACE). <strong>Non-compliant behavior:</strong> Self-copying for metadata updates may differ slightly from AWS S3.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html">ListObjectsV2</a></td>
+          <td>Lists objects in a bucket with filtering and pagination.</td>
+          <td>Supports prefix, delimiter, and continuation tokens.</td>
       </tr>
   </tbody>
 </table>
-<p>Operation on Objects:</p>
+<h3 id="object-tagging-operations">Object Tagging Operations</h3>
 <table>
   <thead>
       <tr>
-          <th>Endpoint</th>
-          <th>Status</th>
-          <th>Notes</th>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>PUT Object</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a></td>
+          <td>Adds or updates tags on an object.</td>
+          <td>Fully supported; updates replace any existing tag set.</td>
       </tr>
       <tr>
-          <td>GET Object</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html">GetObjectTagging</a></td>
+          <td>Retrieves the tag set of an object.</td>
+          <td>Returns the tag set as defined by the S3 API.</td>
       </tr>
       <tr>
-          <td>Multipart Upload</td>
-          <td>implemented</td>
-          <td>Except the listing of the current MultiPartUploads.</td>
-      </tr>
-      <tr>
-          <td>DELETE Object</td>
-          <td>implemented</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>HEAD Object</td>
-          <td>implemented</td>
-          <td></td>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a></td>
+          <td>Removes the tag set from an object.</td>
+          <td>Clears all tags associated with the object.</td>
       </tr>
   </tbody>
 </table>
+<h3 id="multipart-upload-operations">Multipart Upload Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html">CreateMultipartUpload</a></td>
+          <td>Starts a multipart upload session.</td>
+          <td>Returns an UploadId for subsequent parts.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html">UploadPart</a></td>
+          <td>Uploads an individual part for a multipart upload.</td>
+          <td>Part numbering and ETag computation follow AWS semantics.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html">ListMultipartUploads</a></td>
+          <td>Lists in-progress multipart uploads in a bucket.</td>
+          <td>Up to 1000 multipart uploads are returned in a batch by default.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html">ListParts</a></td>
+          <td>Lists uploaded parts for an in-progress multipart upload.</td>
+          <td>Supports pagination if many parts exist.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html">CompleteMultipartUpload</a></td>
+          <td>Assembles all uploaded parts into a final object.</td>
+          <td>Returns an ETag that follows AWS multipart rules.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html">AbortMultipartUpload</a></td>
+          <td>Aborts an in-progress multipart upload.</td>
+          <td>Frees up storage used by uploaded parts. Incomplete multipart uploads older than 7 days are automatically aborted by Ozone.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="additional-operations">Additional Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ Generate Presigned URL</td>
+          <td>Generates a temporary URL for accessing an object.</td>
+          <td>Uses AWS Signature V4. <strong>Non-compliant behavior:</strong> The generated URL may include a fixed default region rather than dynamically reflecting the bucket’s location. Currently, Ozone only supports generating presigned URLs for <code>GetObject</code>. Support for other operations is tracked in <a href="https://issues.apache.org/jira/browse/HDDS-5195">HDDS-5195</a> and <a href="https://issues.apache.org/jira/browse/HDDS-13393">HDDS-13393</a>.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<blockquote>
+<p><strong>Additional Notes:</strong></p>
+<ul>
+<li><strong>Advanced Features Not Supported:</strong>
+<ul>
+<li><strong>ACLs, Bucket Policies, CORS Configuration, and Website Hosting:</strong> These are not fully implemented; Ozone uses an internal permission model that deviates from AWS S3.</li>
+<li><strong>Bucket Versioning, Object Locking, Server-Side Encryption, and S3 Select:</strong> These features are currently not supported.</li>
+<li><strong>Conditional Requests:</strong> Support for conditional requests (e.g., <code>If-Match</code>, <code>If-None-Match</code>) is planned and tracked in <a href="https://issues.apache.org/jira/browse/HDDS-13117">HDDS-13117</a>.</li>
+<li><strong>Lifecycle configuration, cross region replication, S3 event notifications</strong> are being implemented and in the roadmap.</li>
+</ul>
+</li>
+<li>While Ozone S3 Gateway provides extensive support for common S3 operations, users should be aware of the above non-compliant behaviors and limitations when integrating with applications expecting full AWS S3 functionality.</li>
+<li>While Ozone S3 Gateway does not support S3 Server-Side Encryption, it does support encrypted buckets using Apache Ranger KMS. For more information, see the <a href="../security/securingtde.html">Transparent Data Encryption</a> documentation.</li>
+</ul>
+</blockquote>
 <h2 id="security">Security</h2>
 <p>If security is not enabled, you can <em>use</em> <strong>any</strong> AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY</p>
 <p>If security is enabled, you can get the key and the secret with the <code>ozone s3 getsecret</code> command (*Kerberos based authentication is required).</p>
@@ -758,7 +862,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 1, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b1c27bad3f184da4edf162aaed23bf74bab4c5dd">b1c27bad3f</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c3fe4586e4a590a14d2cdf6f9cc18005eaa1ae93">c3fe4586e4</a>
     </span>
   </div>
 </footer>

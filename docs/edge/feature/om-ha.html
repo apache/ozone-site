@@ -175,6 +175,12 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
                 </ul>
             </li>
         
@@ -640,7 +646,49 @@ they receive a bootstrap request from the bootstrapping node.</p>
 using the <em>force</em> option. The <em>force</em> option allows to continue with the bootstrap when one of the existing OMs is down or not responding.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone om <span style="color:#f92672">[</span>global options <span style="color:#f92672">(</span>optional<span style="color:#f92672">)]</span> --bootstrap --force
 </span></span></code></pre></div><p>Note that using the <em>force</em> option during bootstrap could crash the OM process if it does not have updated configurations.</p>
-<h2 id="automatic-snapshot-installation-for-stale-ozone-managers">Automatic Snapshot Installation for Stale Ozone Managers</h2>
+<h2 id="om-leader-transfer">OM Leader Transfer</h2>
+<p>The <code>ozone admin om transfer</code> command allows you to manually transfer the leadership of the Ozone Manager (OM) Raft group to a specific OM node or to a randomly chosen follower.</p>
+<h3 id="usage">Usage</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om transfer -id &lt;OM_SERVICE_ID&gt; -n &lt;NEW_LEADER_ID&gt;
+</span></span><span style="display:flex;"><span>ozone admin om transfer -id &lt;OM_SERVICE_ID&gt; -r
+</span></span></code></pre></div><ul>
+<li><code>-id, --service-id</code>: Specifies the Ozone Manager Service ID.</li>
+<li><code>-n, --newLeaderId, --new-leader-id</code>: The node ID of the OM to which leadership will be transferred (e.g., <code>om1</code>).</li>
+<li><code>-r, --random</code>: Randomly chooses a follower to transfer leadership to.</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>To transfer leadership to <code>om2</code> in a cluster with service ID <code>cluster1</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om transfer -id cluster1 -n om2
+</span></span></code></pre></div><p>To transfer leadership to a random follower:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om transfer -id cluster1 -r
+</span></span></code></pre></div><h2 id="om-service-roles-listing">OM Service Roles Listing</h2>
+<p>The <code>ozone admin om roles</code> command lists all Ozone Managers and their respective Raft server roles (leader, follower, or candidate).</p>
+<h3 id="usage-1">Usage</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om roles <span style="color:#f92672">[</span>-id &lt;OM_SERVICE_ID&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--json | --table<span style="color:#f92672">]</span>
+</span></span></code></pre></div><ul>
+<li><code>-id, --service-id</code>: (Optional) Specifies the Ozone Manager Service ID.</li>
+<li><code>--json</code>: (Optional) Formats the output as JSON.</li>
+<li><code>--table</code>: (Optional) Formats the output as a table.</li>
+</ul>
+<h3 id="example-1">Example</h3>
+<p>To list OM roles for <code>cluster1</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om roles -id cluster1
+</span></span></code></pre></div><p>Example output:</p>
+<pre tabindex="0"><code>om1 : LEADER (host1)
+om2 : FOLLOWER (host2)
+om3 : FOLLOWER (host3)
+</code></pre><p>To list OM roles as a table:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin om roles -id cluster1 --table
+</span></span></code></pre></div><p>Example table output:</p>
+<pre tabindex="0"><code>Ozone Manager Roles
+-------------------
+Host Name | Node ID | Role
+-------------------
+host1     | om1     | LEADER
+host2     | om2     | FOLLOWER
+host3     | om3     | FOLLOWER
+-------------------
+</code></pre><h2 id="automatic-snapshot-installation-for-stale-ozone-managers">Automatic Snapshot Installation for Stale Ozone Managers</h2>
 <p>Sometimes an OM follower node may be offline or fall far behind the OM leader&rsquo;s raft log.
 Then, it cannot easily catch up by replaying individual log entries.
 The OM HA implementation includes an automatic snapshot installation
@@ -688,7 +736,7 @@ accommodate the existing data and incoming snapshots, preventing disk space issu
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 6, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/39def5d50c919ef5a83aaf249c4c77f959b08829">39def5d50c</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a9755a0491de9f34f952482fca58246cef75b98a">a9755a0491</a>
     </span>
   </div>
 </footer>

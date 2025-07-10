@@ -42,7 +42,7 @@
                 />
   </url><url>
     <loc>/interface/ofs.html</loc>
-    <lastmod>2025-06-04T14:30:39+02:00</lastmod>
+    <lastmod>2025-07-09T22:31:24-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -81,7 +81,7 @@
                 />
   </url><url>
     <loc>/feature/om-ha.html</loc>
-    <lastmod>2025-07-06T18:11:57-07:00</lastmod>
+    <lastmod>2025-07-09T20:47:34-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -110,7 +110,7 @@
     <lastmod>2025-07-06T09:02:35-07:00</lastmod>
   </url><url>
     <loc>/feature/scm-ha.html</loc>
-    <lastmod>2025-01-21T00:21:41-08:00</lastmod>
+    <lastmod>2025-07-09T20:47:34-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -152,7 +152,7 @@
                 />
   </url><url>
     <loc>/concept/ozonemanager.html</loc>
-    <lastmod>2024-02-01T15:02:58+05:30</lastmod>
+    <lastmod>2025-07-09T18:05:15-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -243,7 +243,7 @@
                 />
   </url><url>
     <loc>/concept/storagecontainermanager.html</loc>
-    <lastmod>2025-05-21T20:13:44+03:00</lastmod>
+    <lastmod>2025-07-09T18:16:20-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -256,7 +256,7 @@
                 />
   </url><url>
     <loc>/interface/s3.html</loc>
-    <lastmod>2025-07-01T20:04:50-07:00</lastmod>
+    <lastmod>2025-07-09T16:48:17-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -519,6 +519,9 @@
     <loc>/feature/nonrolling-upgrade.html</loc>
     <lastmod>2024-06-27T23:37:16-04:00</lastmod>
   </url><url>
+    <loc>/concept/comparison.html</loc>
+    <lastmod>2025-07-09T22:30:37-07:00</lastmod>
+  </url><url>
     <loc>/feature/s3-multi-tenancy.html</loc>
     <lastmod>2022-03-07T12:09:51-08:00</lastmod>
   </url><url>
@@ -697,7 +700,7 @@
     <lastmod>2023-03-07T07:56:35+01:00</lastmod>
   </url><url>
     <loc>/tools/logsinozone.html</loc>
-    <lastmod>2023-02-06T13:08:14+08:00</lastmod>
+    <lastmod>2025-07-09T14:31:21-07:00</lastmod>
   </url><url>
     <loc>/design/dn-merge-rocksdb.html</loc>
     <lastmod>2022-05-26T10:38:25+08:00</lastmod>
