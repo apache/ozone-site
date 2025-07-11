@@ -301,7 +301,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../feature/maintenance.html">Maintenance Mode</a>
                            
@@ -313,7 +313,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="active">
+                        <li class="">
                            
                            <a href="../feature/trash.html">Trash</a>
                            
@@ -557,7 +557,7 @@ s=d.getElementsByTagName('script')[0];
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Trash</li>
+                  <li class="breadcrumb-item active" aria-current="page">Maintenance Mode</li>
                 </ol>
               </nav>
 
@@ -571,7 +571,7 @@ s=d.getElementsByTagName('script')[0];
 
 
           <div class="col-md-9">
-            <h1>Trash</h1>
+            <h1>Maintenance Mode</h1>
 
             <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
@@ -589,36 +589,46 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>The trash feature in Ozone provides a way to recover files that have been accidentally deleted. When enabled, deleted files are moved to a trash directory instead of being permanently removed.</p>
-<h2 id="enabling-the-trash-feature">Enabling the Trash Feature</h2>
-<p>To enable the trash feature, you need to add the following configuration properties to the Ozone Manager&rsquo;s <code>core-site.xml</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.trash.interval<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>360<span style="color:#f92672">&lt;/value&gt;</span> <span style="color:#75715e">&lt;!-- Time in minutes --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>fs.trash.classname<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.fs.ozone.OzoneTrashPolicy<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>The <code>fs.trash.interval</code> property specifies the minimum time, in minutes, for which a deleted file will be kept in the trash. After this interval, the trash emptier will permanently delete the file. A value of 0 disables the trash feature.</p>
-<p>The <code>fs.trash.classname</code> property should be set to <code>org.apache.hadoop.fs.ozone.OzoneTrashPolicy</code> to use Ozone&rsquo;s trash implementation.</p>
-<h2 id="using-the-trash">Using the Trash</h2>
-<p>When the trash feature is enabled, any file deleted using the <code>ozone fs -rm</code> command will be moved to the trash.</p>
-<h3 id="trash-location">Trash Location</h3>
-<p>The trash directory is located at <code>/&lt;volume&gt;/&lt;bucket&gt;/.Trash/&lt;username&gt;</code>. For example, if the user <code>testuser</code> deletes a file from <code>/vol1/bucket1</code>, the file will be moved to <code>/vol1/bucket1/.Trash/testuser/Current/</code>.</p>
-<h3 id="skipping-the-trash">Skipping the Trash</h3>
-<p>To permanently delete a file and bypass the trash, use the <code>-skipTrash</code> option with the <code>rm</code> command:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone fs -rm -skipTrash /&lt;volume&gt;/&lt;bucket&gt;/&lt;key&gt;
-</span></span></code></pre></div><h3 id="emptying-the-trash">Emptying the Trash</h3>
-<p>The trash emptier is a background process that periodically deletes files from the trash directory after the configured <code>fs.trash.interval</code> has passed. The interval at which the trash emptier runs can be configured with the <code>ozone.fs.trash.checkpoint.interval</code> property in <code>ozone-site.xml</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.fs.trash.checkpoint.interval<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>60<span style="color:#f92672">&lt;/value&gt;</span> <span style="color:#75715e">&lt;!-- Time in minutes --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>If this property is not set, it defaults to the value of <code>fs.trash.checkpoint.interval</code>.</p>
+<h1 id="datanode-maintenance-mode">DataNode Maintenance Mode</h1>
+<p>Maintenance mode is a feature in Apache Ozone that allows you to temporarily take a DataNode offline for maintenance operations (e.g., hardware upgrades, software updates) without triggering immediate data replication. Unlike decommissioning, which aims to permanently remove a DataNode and its data from the cluster, maintenance mode is designed for temporary outages.</p>
+<p>While in maintenance mode, a DataNode does not accept new writes but may still serve reads, assuming containers are healthy and online. Existing data on the DataNode will remain in place, and replication of its data will only be triggered if the DataNode remains in maintenance mode beyond a configurable timeout period. This allows for planned downtime without unnecessary data movement, reducing network overhead and cluster load.</p>
+<p>The DataNode transitions through the following operational states during maintenance:</p>
+<ol>
+<li><strong>IN_SERVICE</strong>: The DataNode is fully operational and participating in data writes and reads.</li>
+<li><strong>ENTERING_MAINTENANCE</strong>: The DataNode is transitioning into maintenance mode. New writes will be avoided.</li>
+<li><strong>IN_MAINTENANCE</strong>: The DataNode is in maintenance mode. Data will not be written to it. If the DataNode remains in this state beyond the configured maintenance window, its data will start to be replicated to other DataNodes to ensure data durability.</li>
+</ol>
+<h2 id="command-line-usage">Command Line Usage</h2>
+<p>To place a DataNode into maintenance mode, use the <code>ozone admin datanode maintenance</code> command. You can specify a duration for the maintenance period. If no duration is specified, a default duration will be used (this can be configured).</p>
+<p>To check the current state of the datanodes, including their operational state, you can execute the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode list
+</span></span></code></pre></div><p>To start maintenance mode for one or more DataNodes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode maintenance <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--end<span style="color:#f92672">=</span>&lt;hours&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><ul>
+<li><code>&lt;hosts&gt;</code>: A space-separated list of hostnames or IP addresses of the DataNodes to put into maintenance mode.</li>
+<li><code>--end=&lt;hours&gt;</code>: Optional. Automatically end maintenance after the given hours. By default, maintenance must be ended manually.</li>
+<li><code>--force</code>: Optional. Forcefully try to put the datanode(s) into maintenance mode.</li>
+</ul>
+<p>To take a DataNode out of maintenance mode and return it to <code>IN_SERVICE</code> state, you can use the <code>recommission</code> command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><h2 id="configuration-properties">Configuration Properties</h2>
+<p>The following properties, typically set in <code>ozone-site.xml</code>, are relevant to maintenance mode:</p>
+<ul>
+<li><code>hdds.scm.replication.maintenance.replica.minimum</code>: The minimum number of container replicas which must be available for a node to enter maintenance. Default value is <code>2</code>. If putting a node into maintenance reduces the available replicas for any container below this level, the node will remain in the <code>ENTERING_MAINTENANCE</code> state until a new replica is created.</li>
+<li><code>hdds.scm.replication.maintenance.remaining.redundancy</code>: The number of redundant containers in a group which must be available for a node to enter maintenance. Default value is <code>1</code>. If putting a node into maintenance reduces the redundancy below this value, the node will remain in the <code>ENTERING_MAINTENANCE</code> state until a new replica is created. For Ratis containers, the default value of 1 ensures at least two replicas are online, meaning 1 more can be lost without data becoming unavailable. For any EC container it will have at least dataNum + 1 online, allowing the loss of 1 more replica before data becomes unavailable. Currently only EC containers use this setting. Ratis containers use <code>hdds.scm.replication.maintenance.replica.minimum</code>. For EC, if nodes are in maintenance, it is likely reconstruction reads will be required if some of the data replicas are offline. This is seamless to the client, but will affect read performance.</li>
+</ul>
+<h2 id="metrics">Metrics</h2>
+<p>The following SCM metrics are relevant to DataNode maintenance mode:</p>
+<ul>
+<li><code>DecommissioningMaintenanceNodesTotal</code>: This metric reports the total number of DataNodes that are currently in either decommissioning or maintenance mode.</li>
+<li><code>RecommissionNodesTotal</code>: This metric reports the total number of DataNodes that are currently being recommissioned (i.e., returning to <code>IN_SERVICE</code> state from either decommissioning or maintenance mode).</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<p>For information on permanently removing a DataNode from the cluster, refer to the <a href="../feature/decommission.html">Decommissioning</a> user documentation.</p>
 
 
+          
+          <a class="btn  btn-success btn-lg" href="../feature/multi-raft-support.html">Next >></a>
           
           </div>
 
@@ -634,7 +644,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/627bebe774621c07529fe5fab1e6d8b0114f2f98">627bebe774</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 10, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1159d9b7b4521f39cda716079fbaf4acb9c2d730">1159d9b7b4</a>
     </span>
   </div>
 </footer>

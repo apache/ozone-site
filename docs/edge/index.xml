@@ -736,6 +736,13 @@
       <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&#xA;&lt;div id=&#34;swagger-ui&#34;&gt;&lt;/div&gt;&#xA;&lt;script src=&#34;./swagger-resources/swagger-ui-bundle.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;./swagger-resources/swagger-ui-standalone-preset.js&#34;&gt; &lt;/script&gt;&#xA;&lt;script&gt;&#xA;  window.onload = function () {&#xA;    const ui = SwaggerUIBundle({&#xA;      url: &#34;..\/swagger-resources\/recon-api.yaml&#34;,&#xA;      dom_id: &#39;#api-container&#39;,&#xA;      deepLinking: true,&#xA;      presets: [&#xA;        SwaggerUIBundle.presets.apis,&#xA;        SwaggerUIStandalonePreset&#xA;      ],&#xA;      plugins: [&#xA;        SwaggerUIBundle.plugins.DownloadUrl&#xA;      ],&#xA;      layout: &#34;StandaloneLayout&#34;,&#xA;      docExpansion: &#39;none&#39;&#xA;    })&#xA;    window.ui = ui;&#xA;  }&#xA;&lt;/script&gt;</description>
     </item>
     <item>
+      <title>Maintenance Mode</title>
+      <link>/feature/maintenance.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/feature/maintenance.html</guid>
+      <description>Maintenance mode for Datanodes.</description>
+    </item>
+    <item>
       <title>Multi-Raft Support in Ozone</title>
       <link>/feature/multi-raft-support.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
