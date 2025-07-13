@@ -32,6 +32,8 @@ header:
   - "**/*.md"
   - "**/*.mdx"
   - pnpm-lock.yaml
+  # SVG files from third-party sources don't need license headers
+  - "**/*.svg"
 
   # Do not comment on pull requests.
   comment: never

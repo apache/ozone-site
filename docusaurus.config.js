@@ -175,7 +175,8 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'light'
+        defaultMode: 'light',
+        respectPrefersColorScheme: true, // Automatically use dark mode when the user's system prefers it
       },
       // Optional: Add an announcement bar to the top of the website.
       // announcementBar: {
