@@ -58,6 +58,9 @@ flagWords:
 - quasi
 # RocksDB docs do not hyphenate this term.
 - column-family
+# Exclude CLAUDE.md from spell checking as it contains development-specific terms
+ignorePaths:
+- CLAUDE.md
 
 # List of words to be always considered correct.
 # Case insensitive.
@@ -129,3 +132,6 @@ words:
 - Passwordless
 - quickstart
 - baremetal
+- lakehouse
+- Flink
+- rebalancing
