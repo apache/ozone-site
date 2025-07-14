@@ -231,6 +231,10 @@ const config = {
                 label: 'Report An Issue',
               },
               {
+                to: 'community/ask-a-question',
+                label: 'Ask a Question',
+              },
+              {
                 to: 'community/how-to-contribute',
                 label: 'How to Contribute',
               },
