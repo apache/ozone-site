@@ -426,6 +426,19 @@
                 href="/interface/csi.html"
                 />
   </url><url>
+    <loc>/start/productiondeployment.html</loc>
+    <lastmod>2025-07-14T07:43:24-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/productiondeployment.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/productiondeployment.html"
+                />
+  </url><url>
     <loc>/security/protect-in-transit-traffic.html</loc>
     <lastmod>2025-07-03T03:29:45-07:00</lastmod>
   </url><url>

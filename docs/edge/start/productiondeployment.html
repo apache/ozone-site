@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -102,7 +105,7 @@ s=d.getElementsByTagName('script')[0];
                 </a>
                 <ul class="nav">
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../start/productiondeployment.html">Production Deployment</a>
                            
@@ -551,179 +554,137 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-12929">[HDDS-12929]</a> Full Volume Handling (implemented) </h1>
-                <div><i>Authors: Siddhant Sangwan, Sumit Agrawal</i><div class="pull-right">2025-05-12</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Immediately trigger Datanode heartbeat on detecting full volume
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../start.html">Getting Started</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Production Deployment</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/start/productiondeployment.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Production Deployment</h1>
+
+            <!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<blockquote>
-<p><strong>Note</strong>: The feature described here was implemented in <a href="https://github.com/apache/ozone/pull/8590">pull request #8590</a>. This document reflects the final, merged design.</p>
-</blockquote>
-<h2 id="summary">Summary</h2>
-<p>Trigger datanode heartbeat immediately when the container being written to is (close) to full, or volume is full,
-or container is unhealthy, while handling a write request. The immediate heartbeat will contain close container action.
-The overall objective is to avoid Datanode disks from getting completely full and preventing degradation of write
-performance.</p>
-<h2 id="problem">Problem</h2>
-<p>When a Datanode volume is close to full, the SCM may not be immediately aware of this because storage reports are only
-sent to it every one minute (<code>HDDS_NODE_REPORT_INTERVAL_DEFAULT = &quot;60s&quot;</code>). Additionally, SCM only has stale
-information about the current size of a container because container size is only updated when an Incremental Container
-Report (event based, for example when a container transitions from open to closing state) is received or a Full
-Container Report (<code>HDDS_CONTAINER_REPORT_INTERVAL_DEFAULT = &quot;60m&quot;</code>) is received. This can lead to the SCM
-over-allocating blocks to containers on a Datanode volume that has already reached the min free space boundary.</p>
-<p>In the future, in <a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a> we plan to fail writes for containers on a volume
-that has reached the min free space boundary.
-So, in the future, when the Datanode fails writes for such a volume, overall write performance will drop because the
-client will have to request for a different set of blocks.</p>
-<p>Before this change, a close container action was queued to be sent in the next heartbeat, when:</p>
-<ol>
-<li>Container was at 90% capacity.</li>
-<li>Volume was full, <strong>counting committed space</strong>. That is <code>available - reserved - committed - min free space &lt;= 0</code>.</li>
-<li>Container was <code>UNHEALTHY</code>.</li>
-</ol>
-<p>But since the next heartbeat could be sent up to 30 seconds later in the worst case, this reaction time was too slow.
-This design proposes sending Datanode heartbeat immediately so SCM can get the close container action
-immediately. This will help in reducing performance drop because of write failures when
-<a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a> is implemented in the future.</p>
-<h3 id="the-definition-of-a-full-volume">The definition of a full volume</h3>
-<p>Previously, a volume was considered full if the following method returned true. It accounts for available space,
-committed space, min free space and reserved space (<code>available</code> already considers <code>reserved</code> space):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getUsableSpace</span>(
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">long</span> available, <span style="color:#66d9ef">long</span> committed, <span style="color:#66d9ef">long</span> minFreeSpace) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> available <span style="color:#f92672">-</span> committed <span style="color:#f92672">-</span> minFreeSpace;
-</span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><p>Counting committed space here, <em>when sending close container action</em>, is a bug - we only want to close the container if
-<code>available - reserved - minFreeSpace &lt;= 0</code>.</p>
-<h2 id="non-goals">Non Goals</h2>
-<p>Failing the write if it exceeds the min free space boundary (<a href="https://issues.apache.org/jira/browse/HDDS-12151">https://issues.apache.org/jira/browse/HDDS-12151</a>) is not
-discussed here.</p>
-<h2 id="proposed-solution">Proposed Solution</h2>
-<h3 id="proposal-for-immediately-triggering-datanode-heartbeat">Proposal for immediately triggering Datanode heartbeat</h3>
-<p>We will immediately trigger the heartbeat when:</p>
-<ol>
-<li>The container is (close) to full (this is existing behaviour, the container full check already exists).</li>
-<li>The volume is <strong>full EXCLUDING committed space</strong> (<code>available - reserved available - min free &lt;= 0</code>). This is because
-when a volume
-is full INCLUDING committed space (<code>available - reserved available - committed - min free &lt;= 0</code>), open containers
-can still accept writes. So the current behaviour of sending a close container action when volume is full including
-committed space is a bug.</li>
-<li>The container is unhealthy (this is existing behaviour).</li>
-</ol>
-<p>Logic to trigger a heartbeat immediately already exists - we just need to call the method when needed. So, in
-<code>HddsDispatcher</code>, when handling a request:</p>
-<ol>
-<li>For every write request:
-<ol>
-<li>Check the above three conditions
-<ol>
-<li>If true, queue the <code>ContainerAction</code> to the context as before, then immediately trigger the heartbeat using:</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<pre tabindex="0"><code>context.getParent().triggerHeartbeat();
-</code></pre><h4 id="throttling">Throttling</h4>
-<p>Throttling is required so the Datanode doesn&rsquo;t send multiple immediate heartbeats for the same container. We can have
-per-container throttling, where we trigger an immediate heartbeat once for a particular container, and after that
-container actions for that container can only be sent in the regular, scheduled heartbeats. Meanwhile, immediate
-heartbeats can still be triggered for different containers.</p>
-<p>Here&rsquo;s a visualisation to show this. The letters (A, B, C etc.) denote events and timestamp is the time at which
-an event occurs.</p>
-<pre tabindex="0"><code>Write Call 1:
-/ A, timestamp: 0/-------------/B, timestamp: 5/
-
-Write Call 2, in-parallel with 1:
------------------------------- /C, timestamp: 5/
-
-Write Call 3, in-parallel with 1 and 2:
----------------------------------------/D, timestamp: 7/
-
-Write Call 4:
-------------------------------------------------------------------------/E, timestamp: 30/
-
-Events:
-A: Last, regular heartbeat
-B: Volume 1 detected as full while writing to Container 1, heartbeat triggered
-C: Volume 1 again detected as full while writing to Container 2, heartbeat triggered
-D: Container 1 detected as full, heartbeat throttled
-E: Volume 1 detected as full while writing to Container 2, Container Action sent in regular heartbeat 
-</code></pre><p>A simple and thread safe way to implement this is to have an <code>AtomicBoolean</code> for each container in the <code>ContainerData</code>
-class that can be used to check if an immediate heartbeat has already been triggered for that container. The memory
-impact of introducing a new member variable in <code>ContainerData</code> for each container is quite small. Consider:</p>
+<p>This document provides guidance on the requirements and best practices for a production deployment of Apache Ozone.</p>
+<h2 id="ozone-components">Ozone Components</h2>
+<p>A typical production Ozone cluster includes the following services:</p>
 <ul>
-<li>A Datanode with 600 TB disk space.</li>
-<li>Container size is 5 GB.</li>
-<li>Number of containers = 600 TB / 5 GB = 120,000.</li>
-<li>For each container, we&rsquo;ll have an <code>AtomicBoolean</code>, which just has one field that counts: <code>private volatile int value</code>.
+<li><strong>Ozone Manager (OM)</strong>: Manages the namespace and metadata of the Ozone cluster. A production cluster requires 3 OM instances for high availability.</li>
+<li><strong>Storage Container Manager (SCM)</strong>: Manages the data nodes and pipelines. A production cluster requires 3 SCM instances for high availability.</li>
+<li><strong>DataNode</strong>: Stores the actual data in containers. A production cluster requires at least 3 DataNodes.</li>
+<li><strong>Recon</strong>: A web-based UI for monitoring and managing the Ozone cluster. A Recon server is strongly recommended, though not required.</li>
+<li><strong>S3 Gateway (S3G)</strong>: An S3-compatible gateway for accessing Ozone. Multiple S3 Gateway instances are strongly recommended to load balance S3 traffic.</li>
+<li><strong>HttpFs</strong>: An HDFS-compatible API for accessing Ozone. This is an optional component.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<h3 id="system-requirements">System Requirements</h3>
 <ul>
-<li>Static fields don&rsquo;t count.</li>
+<li><strong>Hardware</strong>: Bare metal machines are recommended for optimal performance. Virtual machines or containers are not recommended for production deployments.</li>
+<li><strong>Operating System</strong>: Linux (recommended distributions: Red Hat 8/Rocky 8+, Ubuntu, SUSE; supported architectures: x86/ARM).</li>
+<li><strong>Java Development Kit (JDK)</strong>: Version 8 or higher.</li>
+<li><strong>Time Synchronization</strong>: A time synchronization service such as Chrony or ntpd must be enabled to prevent time drift.</li>
+</ul>
+<h3 id="memory-requirements">Memory Requirements</h3>
+<ul>
+<li><strong>Ozone Manager (OM), Storage Container Manager (SCM), and Recon</strong>: Recommended heap size in large production clusters is 64GB.</li>
+<li><strong>DataNode, S3 Gateway, and HttpFs</strong>: Recommended heap size is 31GB.</li>
+</ul>
+<h3 id="storage-requirements">Storage Requirements</h3>
+<ul>
+<li><strong>Ozone Manager (OM), Storage Container Manager (SCM), and Recon Metadata Storage</strong>: Use SAS SSD or NVMe SSD for metadata (RocksDB and Ratis) to ensure optimal performance. It is recommended to use RAID 1 (disk mirroring) for the metadata disks to protect against disk failures.</li>
+<li><strong>DataNode Storage</strong>:
+<ul>
+<li><strong>Ratis Log</strong>: Use SAS SSD or NVMe SSD for the Ratis log directory for low latency writes.</li>
+<li><strong>Container Data</strong>: Hard disks are acceptable for container data storage.</li>
+<li><strong>Disk Configuration</strong>: It is recommended to use a JBOD (Just a Bunch Of Disks) configuration instead of RAID. Ozone is a replicated distributed storage system and handles data redundancy. Using RAID can decrease performance without providing additional data protection benefits.</li>
 </ul>
 </li>
-<li>An int is 4 bytes in Java. Assuming that other overhead for a Java object brings the size of the object to ~20 bytes.</li>
-<li>20 bytes * 120,000 = ~2.4 MB.</li>
+<li><strong>Storage Type</strong>: Use direct-attached storage. Do not use Network Attached Storage (NAS) or Storage Area Network (SAN).</li>
 </ul>
-<p>For code implementation, see <a href="https://github.com/apache/ozone/pull/8590">https://github.com/apache/ozone/pull/8590</a>.</p>
-<h2 id="alternatives">Alternatives</h2>
-<h3 id="preventing-over-allocation-of-blocks-in-the-scm">Preventing over allocation of blocks in the SCM</h3>
-<p>The other part of the problem is that SCM has stale information about the size of the container and ends up
-over-allocating blocks (beyond the container&rsquo;s 5 GB size) to the same container. Solving this problem is complicated.
-We could track how much space we&rsquo;ve allocated to a container in the SCM - this is doable on the surface but won&rsquo;t
-actually work well. That&rsquo;s because SCM is asked for a block (256 MB), but SCM doesn&rsquo;t know how much data a client will
-actually write to that block file. The client may only write 1 MB, for example. So SCM could track that it has already
-allocated 5 GB to a container, and will open another container for incoming requests, but the client may actually only
-write 1GB. This would lead to a lot of open containers when we have 10k requests/second.</p>
-<p>At this point, we&rsquo;ve decided not to do anything about this.</p>
-<h3 id="regularly-sending-open-container-reports">Regularly sending open container reports</h3>
-<p>Sending open container reports regularly (every 30 seconds for example) can help a little bit, but won&rsquo;t solve the
-problem. We won&rsquo;t take this approach for now.</p>
-<h3 id="sending-storage-reports-in-immediate-heartbeats">Sending storage reports in immediate heartbeats</h3>
-<p>We considered triggering an immediate heartbeat every time the Datanode detects a volume is full
-while handling a write request, with per volume throttling. To each immediate heartbeat, we would the storage
-reports of all volumes in the Datanode + Close Container Action for the particular container being written to. While
-this would update the storage stats of a volume in the SCM faster, which the SCM can subsequently use to decide
-whether to include that Datanode in a new pipeline, the per volume throttling has a drawback. It wouldn&rsquo;t let us
-send close container actions for other containers. We decided not to take this approach.</p>
-<h2 id="implementation-plan">Implementation Plan</h2>
-<ol>
-<li>HDDS-13045: For triggering immediate heartbeat. Already merged - <a href="https://github.com/apache/ozone/pull/8590">https://github.com/apache/ozone/pull/8590</a>.</li>
-<li>HDDS-12151: Fail a write call if it exceeds min free space boundary (not the focus of this doc, just mentioned
-here).</li>
-</ol>
+<h3 id="network-requirements">Network Requirements</h3>
+<ul>
+<li><strong>Network Bandwidth</strong>: A minimum of 25Gbps network card bandwidth is recommended.</li>
+<li><strong>Network Topology</strong>: A leaf-spine network topology with an oversubscription ratio below 3:1 is recommended for predictable performance.</li>
+</ul>
+<h3 id="security-requirements-optional-but-recommended">Security Requirements (Optional but Recommended)</h3>
+<ul>
+<li><strong>Kerberos</strong>: A Kerberos environment, including a Key Distribution Center (KDC), is recommended for enhanced security.</li>
+</ul>
+<h2 id="recommended-configurations">Recommended Configurations</h2>
+<h3 id="linux-kernel">Linux Kernel</h3>
+<ul>
+<li><strong>CPU Governor</strong>: Set the CPU scaling driver to <code>performance</code> mode to maximize performance.</li>
+<li><strong>Transparent Hugepage</strong>: Disable Transparent Hugepage to avoid performance issues.</li>
+<li><strong>SELinux</strong>: Disable SELinux.</li>
+<li><strong>Swappiness</strong>: Set <code>vm.swappiness=1</code> to minimize swapping.</li>
+</ul>
+<h3 id="local-file-system">Local File System</h3>
+<ul>
+<li><strong>LVM</strong>: Disable Logical Volume Manager (LVM) for data drives.</li>
+<li><strong>File System</strong>: Use <code>ext4</code> or <code>xfs</code> file systems.</li>
+<li><strong>Mount Options</strong>: Mount drives with the <code>noatime</code> option to reduce unnecessary disk writes. For SSDs, also add the <code>discard</code> option.</li>
+</ul>
+<h3 id="ozone-configuration">Ozone Configuration</h3>
+<ul>
+<li><strong>Monitoring</strong>: Install Prometheus and Grafana for monitoring the Ozone cluster. For audit logs, consider using a log ingestion framework such as the ELK Stack (Elasticsearch, Logstash, and Kibana) with FileBeat, or other similar frameworks. Alternatively, you can use Apache Ranger to manage audit logs.</li>
+<li><strong>Pipeline Limits</strong>: Increase the number of allowed write pipelines to better suit your workload by adjusting <code>ozone.scm.datanode.pipeline.limit</code> and <code>ozone.scm.ec.pipeline.minimum</code>.</li>
+<li><strong>Heap Sizes</strong>: Configure sufficient heap sizes for Ozone Manager (OM), Storage Container Manager (SCM), Recon, DataNode, S3 Gateway (S3G), and HttpFs services to ensure stability.</li>
+</ul>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../start/startfromdockerhub.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 7, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f7270513a5f848f7e43c6d33acfeb2d238393311">f7270513a5</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d15e8a6347faccdc2df96db76dbe404eada360d8">d15e8a6347</a>
     </span>
   </div>
 </footer>
@@ -735,5 +696,6 @@ here).</li>
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>

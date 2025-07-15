@@ -418,6 +418,19 @@
                 href="/zh/security/securityacls.html"
                 />
   </url><url>
+    <loc>/zh/start/productiondeployment.html</loc>
+    <lastmod>2025-07-14T07:43:24-07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/start/productiondeployment.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/start/productiondeployment.html"
+                />
+  </url><url>
     <loc>/zh/security/securitywithranger.html</loc>
     <lastmod>2024-10-21T00:15:13+08:00</lastmod>
     <xhtml:link

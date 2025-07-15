@@ -105,7 +105,7 @@ s=d.getElementsByTagName('script')[0];
                 </a>
                 <ul class="nav">
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../../zh/start/productiondeployment.html">生产环境部署</a>
                            
@@ -405,7 +405,7 @@ s=d.getElementsByTagName('script')[0];
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href="../../zh/start.html">快速入门</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">在 Kubernetes 集群上部署 Ozone</li>
+                  <li class="breadcrumb-item active" aria-current="page">生产环境部署</li>
                 </ol>
               </nav>
 
@@ -415,7 +415,7 @@ s=d.getElementsByTagName('script')[0];
     
     
     
-    <a href="../../start/kubernetes.html"><span class="label label-success">English</span></a>
+    <a href="../../start/productiondeployment.html"><span class="label label-success">English</span></a>
     
     
     
@@ -424,9 +424,9 @@ s=d.getElementsByTagName('script')[0];
 
 
           <div class="col-md-9">
-            <h1>在 Kubernetes 集群上部署 Ozone</h1>
+            <h1>生产环境部署</h1>
 
-            <!---
+            <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -442,34 +442,53 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
-<div class="panel panel-default">
-    <div class="panel-heading">Requirements</div>
-    <div class="panel-body">
-        <ul>
-<li>可用的 kubernetes 集群（LoadBalancer 和 PersistentVolume 非必需）</li>
-<li>kubectl</li>
+<p>本文档旨在为 Apache Ozone 的生产环境部署提供需求和最佳实践的指导。</p>
+<h2 id="需求">需求</h2>
+<h3 id="系统需求">系统需求</h3>
+<ul>
+<li><strong>操作系统</strong>: Linux（推荐发行版：Red Hat 8/Rocky 8+、Ubuntu、SUSE；支持架构：x86/ARM）。</li>
+<li><strong>Java 开发工具包 (JDK)</strong>: 版本 8 或更高。</li>
+<li><strong>时间同步</strong>: 必须启用时间同步服务（如 Chrony 或 ntpd）以防止时间漂移。</li>
+</ul>
+<h3 id="存储需求">存储需求</h3>
+<ul>
+<li><strong>元数据存储</strong>: 为确保最佳性能，请使用 SAS SSD 或 NVMe SSD 存储元数据（RocksDB 和 Ratis）。</li>
+<li><strong>DataNode 存储</strong>: DataNode 数据存储可使用硬盘。</li>
+<li><strong>存储类型</strong>: 请使用直接附加存储。不要使用网络附加存储 (NAS) 或存储区域网络 (SAN)。</li>
+</ul>
+<h3 id="网络需求">网络需求</h3>
+<ul>
+<li><strong>网络带宽</strong>: 建议网卡带宽至少为 25Gbps。</li>
+<li><strong>网络拓扑</strong>: 为实现可预测的性能，建议采用超分比例低于 3:1 的叶脊网络拓扑。</li>
+</ul>
+<h3 id="安全需求-可选但推荐">安全需求 (可选但推荐)</h3>
+<ul>
+<li><strong>Kerberos</strong>: 为增强安全性，建议使用包括密钥分发中心 (KDC) 在内的 Kerberos 环境。</li>
+</ul>
+<h2 id="推荐配置">推荐配置</h2>
+<h3 id="linux-内核">Linux 内核</h3>
+<ul>
+<li><strong>CPU 调节器</strong>: 将 CPU 调节驱动设置为 <code>performance</code> 模式以最大化性能。</li>
+<li><strong>透明大页</strong>: 禁用透明大页以避免性能问题。</li>
+<li><strong>SELinux</strong>: 禁用 SELinux。</li>
+<li><strong>Swappiness</strong>: 设置 <code>vm.swappiness=1</code> 以最小化交换。</li>
+</ul>
+<h3 id="本地文件系统">本地文件系统</h3>
+<ul>
+<li><strong>LVM</strong>: 禁用数据驱动器的逻辑卷管理器 (LVM)。</li>
+<li><strong>文件系统</strong>: 使用 <code>ext4</code> 或 <code>xfs</code> 文件系统。</li>
+<li><strong>挂载选项</strong>: 使用 <code>noatime</code> 选项挂载驱动器以减少不必要的磁盘写入。对于 SSD，还需添加 <code>discard</code> 选项。</li>
+</ul>
+<h3 id="ozone-配置">Ozone 配置</h3>
+<ul>
+<li><strong>监控</strong>: 安装 Prometheus 和 Grafana 以监控 Ozone 集群。</li>
+<li><strong>管道限制</strong>: 通过调整 <code>ozone.scm.datanode.pipeline.limit</code> 和 <code>ozone.scm.ec.pipeline.minimum</code> 来增加允许的写入管道数量，以更好地适应您的工作负载。</li>
+<li><strong>堆大小</strong>: 为 Ozone Manager (OM)、Storage Container Manager (SCM)、Recon、DataNode、S3 Gateway (S3G) 和 HttpFs 服务配置足够的堆大小，以确保稳定性。</li>
 </ul>
 
-    </div>
-</div>
-
-<p>由于 <em>apache/ozone</em> 镜像可以从 Docker Hub 获取到，K8s 上的部署过程和 Minikube 上的部署过程十分相似，唯一的区别是我们为 K8s 部署准备了专门的配置
-文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。</p>
-<p>ozone 安装包中的 <code>kubernetes/examples</code> 目录包含了为不同用例设计的 Kubernetes 部署资源文件。</p>
-<p>使用 ozone 子目录进行部署：</p>
-<pre tabindex="0"><code>cd kubernetes/examples/ozone
-kubectl apply -f .
-</code></pre><p>用下面的命令检查结果：</p>
-<pre tabindex="0"><code>kubectl get pod
-访问 ozone 服务
-</code></pre><p>现在你可以访问 ozone 的各个服务，默认情况下它们的端口并没有向外开放，不过你可以通过设置端口转发规则来开放外部访问：</p>
-<pre tabindex="0"><code>kubectl port-forward s3g-0 9878:9878
-kubectl port-forward scm-0 9876:9876
-</code></pre>
 
           
-          <a class="btn  btn-success btn-lg" href="../../zh/start/runningviadocker.html">Next >></a>
+          <a class="btn  btn-success btn-lg" href="../../zh/start/startfromdockerhub.html">Next >></a>
           
           </div>
 
@@ -485,7 +504,7 @@ kubectl port-forward scm-0 9876:9876
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: February 6, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3d397239b07c61f98319902366db800f05769949">3d397239b0</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d15e8a6347faccdc2df96db76dbe404eada360d8">d15e8a6347</a>
     </span>
   </div>
 </footer>
