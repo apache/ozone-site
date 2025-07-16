@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -304,7 +307,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../feature/containerbalancer.html">Container Balancer</a>
                            
@@ -557,99 +560,227 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-12924">[HDDS-12924]</a> Datanode used space calculation (Implemented) </h1>
-                <div><i>Authors: Sumit Agrawal</i><div class="pull-right">2025-04-30</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Describe proposal for optimization in datanode used space calculation.
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-   http://www.apache.org/licenses/LICENSE-2.0
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Container Balancer</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Container Balancer</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<h1 id="abstract">Abstract</h1>
-<p>Datanode makes use of DU to identify disk space uses for ozone in the volume.
-DU is a time-consuming operation if run over large occupied disk, like when running over disk path having 10s of TB container data. This will be slow operation.</p>
-<h2 id="approach-1-run-du-over-non-ozone-path">Approach 1: Run DU over non-ozone path</h2>
-<p>Challenges:</p>
-<ul>
-<li>Root path is not known for the device mounted on. So this needs extra configuration.</li>
-<li>Permission problem: du will not count the space if permission is not there on a certain path.</li>
-</ul>
-<p>Based on the above concern, it&rsquo;s <code>not feasible</code> to do du over non-ozone path.</p>
-<h2 id="approach-2-run-du-over-meta-path-only-excluding-container-dir-path">Approach 2: Run DU over meta path only (excluding container dir path)</h2>
-<p>Ozone space usages includes summation of:</p>
-<ul>
-<li>Sum of all Container data size as present in memory</li>
-<li>DU over volume path as current (excluding container path)</li>
-</ul>
-<p><code>Used space = sum(&lt;all containers data size&gt;, &lt;du over ozone path excluding container data&gt;)</code></p>
-<h3 id="limitation">Limitation:</h3>
-<ul>
-<li>
-<p>Space is not counted as ozone space for below cases:</p>
-<ul>
-<li>Ozone used size for duplicate containers are not counted (ignored during startup for EC case)</li>
-<li>Ozone used size for containers corrupted are not counted, not deleted</li>
-<li>Container path meta files like container yaml, exported rocks db’s sst files, are not counted, which might result in few GB of data in a large cluster.</li>
-</ul>
-<p>These spaces will be added up to non-ozone used space, and especially un-accounted containers need to be cleaned up.</p>
-</li>
-</ul>
-<p>In future, the container space (due to duplicacy or corruption) needs to be removed based on error logs.</p>
-<h3 id="impact-of-inaccuracy-of-used-space">Impact of inaccuracy of Used Space</h3>
-<ol>
-<li>Used space in reporting (may be few GB as per above)</li>
-<li>Adjustment between Ozone available space and Reserved available space</li>
-</ol>
-<p>This inaccuracy does not have much impact over solution (as its present in existing) and due to nature of “du” running async and parallel write operation being in progress.</p>
-<p>Approach to fits better in this scenario, can be provided as <code>OptimizedDU</code> and keeping previous support as well.</p>
-<h2 id="approach-3--used-space-will-be-only-container-data">Approach 3 : Used space will be only container data</h2>
-<p>Hadoop also have similar concept, where used space is only the actual data blocks, and its calculation is simple,
-i.e.</p>
-<p><code>Used Space = number of blocks * block Size</code></p>
-<p>Similar to this, Ozone can also calculate Used space as,</p>
-<p><code>Used Space = Sum of all container data size</code></p>
-<h3 id="impact">Impact:</h3>
-<p>Space will <code>not</code> be counted:</p>
-<ol>
-<li>Meta space like rocks db, container yaml file and sst files of few KBs per container, which overall result in few GB of space in large volume.</li>
-<li>duplicate container not yet deleted and corrupted container present in container data path</li>
-<li>temp path having left over data which is not yet deleted</li>
-</ol>
-<p>These space will be counted in reserved space. And these data are small in nature (except container data).
-Container data are corrupted / <to be deleted> containers which needs to be removed manually or need fix in code to remove those automatic.</p>
-<p>So considering above impact, this might be one of simple solution providing higher performance.</p>
-<h1 id="conclusion">Conclusion</h1>
-<p><code>Approach 2</code> <code>Run DU over meta path only (excluding container dir path)</code> is preferred over other as
-it identify ozone used space more close in accuracy to DU implementation and handle the time issue.</p>
+<h2 id="overview">Overview</h2>
+<p>The Container Balancer is a tool in Apache Ozone that balances data containers across the cluster. Its primary goal is to ensure an even distribution of data based on disk space usage on datanodes. This helps to prevent some datanodes from becoming full while others remain underutilized.</p>
+<p>The balancer operates by moving <code>CLOSED</code> container replicas, which means it doesn&rsquo;t interfere with active I/O operations. It is designed to work with both regular and Erasure Coded (EC) containers. To maintain cluster stability, the Container Balancer&rsquo;s startup is delayed after a Storage Container Manager (SCM) failover.</p>
+<h2 id="command-line-usage">Command Line Usage</h2>
+<p>The Container Balancer is managed through the <code>ozone admin containerbalancer</code> command.</p>
+<h3 id="start">Start</h3>
+<p>To start the Container Balancer with default settings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin containerbalancer start
+</span></span></code></pre></div><p>You can also start the balancer with specific options:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin containerbalancer start <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><strong>Options:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-t</code>, <code>--threshold</code></td>
+          <td>The percentage deviation from the average utilization of the cluster after which a datanode will be rebalanced. Default is 10%.</td>
+      </tr>
+      <tr>
+          <td><code>-i</code>, <code>--iterations</code></td>
+          <td>The maximum number of consecutive iterations the balancer will run for. Default is 10. Use -1 for infinite iterations.</td>
+      </tr>
+      <tr>
+          <td><code>-d</code>, <code>--maxDatanodesPercentageToInvolvePerIteration</code></td>
+          <td>The maximum percentage of healthy, in-service datanodes that can be involved in balancing in one iteration. Default is 20%.</td>
+      </tr>
+      <tr>
+          <td><code>-s</code>, <code>--maxSizeToMovePerIterationInGB</code></td>
+          <td>The maximum size of data in GB to be moved in one iteration. Default is 500GB.</td>
+      </tr>
+      <tr>
+          <td><code>-e</code>, <code>--maxSizeEnteringTargetInGB</code></td>
+          <td>The maximum size in GB that can enter a target datanode in one iteration. Default is 26GB.</td>
+      </tr>
+      <tr>
+          <td><code>-l</code>, <code>--maxSizeLeavingSourceInGB</code></td>
+          <td>The maximum size in GB that can leave a source datanode in one iteration. Default is 26GB.</td>
+      </tr>
+      <tr>
+          <td><code>--balancing-iteration-interval-minutes</code></td>
+          <td>The interval in minutes between each iteration of the Container Balancer. Default is 70 minutes.</td>
+      </tr>
+      <tr>
+          <td><code>--move-timeout-minutes</code></td>
+          <td>The time in minutes to allow a single container to move from source to target. Default is 65 minutes.</td>
+      </tr>
+      <tr>
+          <td><code>--move-replication-timeout-minutes</code></td>
+          <td>The time in minutes to allow a single container&rsquo;s replication from source to target as part of a container move. Default is 50 minutes.</td>
+      </tr>
+      <tr>
+          <td><code>--move-network-topology-enable</code></td>
+          <td>Whether to consider network topology when selecting a target for a source. Default is false.</td>
+      </tr>
+      <tr>
+          <td><code>--include-datanodes</code></td>
+          <td>A comma-separated list of datanode hostnames or IP addresses to be included in balancing.</td>
+      </tr>
+      <tr>
+          <td><code>--exclude-datanodes</code></td>
+          <td>A comma-separated list of datanode hostnames or IP addresses to be excluded from balancing.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="status">Status</h3>
+<p>To check the status of the Container Balancer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin containerbalancer status
+</span></span></code></pre></div><p>To get a more detailed status, including the history of iterations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin containerbalancer status -v --history
+</span></span></code></pre></div><h3 id="stop">Stop</h3>
+<p>To stop the Container Balancer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone admin containerbalancer stop
+</span></span></code></pre></div><h2 id="configuration">Configuration</h2>
+<p>The Container Balancer can also be configured through the <code>ozone-site.xml</code> file.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Description</th>
+          <th>Default Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>hdds.container.balancer.utilization.threshold</code></td>
+          <td>A cluster is considered balanced if for each datanode, the utilization of the datanode differs from the utilization of the cluster no more than this threshold.</td>
+          <td>10%</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.datanodes.involved.max.percentage.per.iteration</code></td>
+          <td>Maximum percentage of healthy, in-service datanodes that can be involved in balancing in one iteration.</td>
+          <td>20%</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.size.moved.max.per.iteration</code></td>
+          <td>The maximum size of data that will be moved by Container Balancer in one iteration.</td>
+          <td>500GB</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.size.entering.target.max</code></td>
+          <td>The maximum size that can enter a target datanode in each iteration.</td>
+          <td>26GB</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.size.leaving.source.max</code></td>
+          <td>The maximum size that can leave a source datanode in each iteration.</td>
+          <td>26GB</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.iterations</code></td>
+          <td>The number of iterations that Container Balancer will run for.</td>
+          <td>10</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.exclude.containers</code></td>
+          <td>A comma-separated list of container IDs to exclude from balancing.</td>
+          <td>&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.move.timeout</code></td>
+          <td>The amount of time to allow a single container to move from source to target.</td>
+          <td>65m</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.move.replication.timeout</code></td>
+          <td>The amount of time to allow a single container&rsquo;s replication from source to target as part of a container move.</td>
+          <td>50m</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.balancing.iteration.interval</code></td>
+          <td>The interval period between each iteration of Container Balancer.</td>
+          <td>70m</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.include.datanodes</code></td>
+          <td>A comma-separated list of Datanode hostnames or IP addresses. Only the Datanodes specified in this list are balanced.</td>
+          <td>&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.exclude.datanodes</code></td>
+          <td>A comma-separated list of Datanode hostnames or IP addresses. The Datanodes specified in this list are excluded from balancing.</td>
+          <td>&quot;&quot;</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.move.networkTopology.enable</code></td>
+          <td>Whether to take network topology into account when selecting a target for a source.</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td><code>hdds.container.balancer.trigger.du.before.move.enable</code></td>
+          <td>Whether to send a command to all healthy and in-service data nodes to run <code>du</code> immediately before starting a balance iteration.</td>
+          <td>false</td>
+      </tr>
+  </tbody>
+</table>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../feature/maintenance.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: June 18, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b574709dd6df95e9aec250769da73969f8706b49">b574709dd6</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: July 15, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/293ccd6b1235281d23fc933aeb45fe8d47f96340">293ccd6b12</a>
     </span>
   </div>
 </footer>
@@ -661,5 +792,6 @@ it identify ozone used space more close in accuracy to DU implementation and han
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>
