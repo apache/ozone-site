@@ -14,10 +14,10 @@ Ownership is a fundamental aspect of Ozone volumes that determines who has admin
 - In secure clusters, ownership is tied to authentication mechanisms like Kerberos
 - Volume ownership enables delegation of administrative responsibilities
 - Only the volume owner and Ozone administrators can perform certain operations like:
-    - Creating buckets within the volume
-    - Setting volume properties
-    - Modifying volume quotas
-    - Deleting the volume
+  - Creating buckets within the volume
+  - Setting volume properties
+  - Modifying volume quotas
+  - Deleting the volume
 
 ### Ozone Administrators
 

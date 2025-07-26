@@ -10,14 +10,14 @@ Apache Ozone supports **Transparent Data Encryption (TDE)** at the bucket level,
 
 Ozone's TDE follows a standard envelope encryption strategy:
 
-1.  **Key Management Service (KMS):** You must configure Ozone to communicate with a KMS (e.g., Hadoop KMS, Ranger KMS). This KMS manages the primary encryption keys.
-2.  **Bucket Encryption Key (BEK):** When creating an encrypted bucket, you associate it with a specific key *already present* in the KMS. This key is known as the Bucket Encryption Key (BEK). You only provide the *name* of the BEK to Ozone.
-3.  **Data Encryption Key (DEK):** For each object written to the encrypted bucket, Ozone generates a unique, random Data Encryption Key (DEK).
-4.  **Envelope Encryption:**
-    *   The object's data is encrypted using its unique DEK.
-    *   The DEK itself is then encrypted using the bucket's BEK (retrieved from the KMS). This encrypted DEK (EDEK) is stored alongside the object's metadata.
-    *   The plaintext DEK is discarded.
-5.  **Decryption:** To read an object, Ozone retrieves the EDEK, sends it to the KMS for decryption (using the BEK), obtains the plaintext DEK, and uses it to decrypt the object's data.
+- **Key Management Service (KMS):** You must configure Ozone to communicate with a KMS (e.g., Hadoop KMS, Ranger KMS). This KMS manages the primary encryption keys.
+- **Bucket Encryption Key (BEK):** When creating an encrypted bucket, you associate it with a specific key *already present* in the KMS. This key is known as the Bucket Encryption Key (BEK). You only provide the *name* of the BEK to Ozone.
+- **Data Encryption Key (DEK):** For each object written to the encrypted bucket, Ozone generates a unique, random Data Encryption Key (DEK).
+- **Envelope Encryption:**
+  - The object's data is encrypted using its unique DEK.
+  - The DEK itself is then encrypted using the bucket's BEK (retrieved from the KMS). This encrypted DEK (EDEK) is stored alongside the object's metadata.
+  - The plaintext DEK is discarded.
+- **Decryption:** To read an object, Ozone retrieves the EDEK, sends it to the KMS for decryption (using the BEK), obtains the plaintext DEK, and uses it to decrypt the object's data.
 
 This process is "transparent" because applications writing to or reading from the bucket do not need to manage the encryption/decryption process themselves; Ozone handles it automatically based on the bucket's encryption setting.
 
@@ -65,6 +65,7 @@ ozone sh bucket create --encryption-key ozoneBucketKey1 /vol1/encrypted-bucket
 Once the bucket is created with an encryption key, all objects subsequently written to `/vol1/encrypted-bucket` will be automatically encrypted by Ozone using the envelope encryption strategy described above. Reads will be transparently decrypted.
 
 **Note:**
-*   You cannot enable encryption on an existing bucket after creation.
-*   You cannot disable encryption on a bucket once it's enabled.
-*   The BEK must exist in the KMS *before* you create the bucket referencing it.
+
+- You cannot enable encryption on an existing bucket after creation.
+- You cannot disable encryption on a bucket once it's enabled.
+- The BEK must exist in the KMS *before* you create the bucket referencing it.

@@ -82,7 +82,7 @@ The OM is the entry point for all namespace operations. It tracks which objects 
 
 ### Storage Container Manager (SCM)
 
-The Storage Container Manager orchestrates the container lifecycle and coordinates datanodes:
+The Storage Container Manager orchestrates the container lifecycle and coordinates Datanodes:
 
 - Manages container creation and allocation
 - Tracks datanode status and health
@@ -103,7 +103,7 @@ Datanodes are the workhorses that store the actual data:
 - Participate in replication pipelines
 - Handle data integrity checks
 
-Each datanode manages a set of containers and serves read/write requests from clients.
+Each Datanode manages a set of containers and serves read/write requests from clients.
 
 ### Recon
 
@@ -145,9 +145,9 @@ The Ozone client is the software component that enables applications to interact
 
 - Provides Java libraries for programmatic access
 - Handles communication with OM for namespace operations
-- Manages direct data transfer with datanodes
+- Manages direct data transfer with Datanodes
 - Implements client-side caching for improved performance
-- Offers pluggable interfaces for different protocols (S3, OFS)
+- Offers pluggable interfaces for different protocols (S3, ofs)
 - Handles authentication and token management
 
 The client library abstracts away the complexity of the distributed system, providing applications with a simple, consistent interface to Ozone storage.
@@ -178,7 +178,9 @@ For reads, the process is simpler:
 #### Monitoring and Management
 
 ![Diagram showing Recon collecting data from OM, SCM, and Datanodes for monitoring.](../../static/img/ozone/recon.svg)
+
 The Recon service continuously:
+
 - Collects metrics from the Ozone Manager, Storage Container Manager, and Datanodes
 - Provides consolidated views of system health and performance
 - Facilitates troubleshooting and management
@@ -193,7 +195,7 @@ Containers are the fundamental storage units in Ozone:
 
 - Fixed-size (typically 5GB) units of storage
 - Managed by the Storage Container Manager (SCM)
-- Replicated or erasure-coded across datanodes
+- Replicated or erasure-coded across Datanodes
 - Contain multiple blocks
 - Include metadata and chunk files
 
@@ -209,7 +211,7 @@ Blocks are logical units of data within containers:
 - Allocated by the Ozone Manager
 - Secured with block tokens
 
-When a client writes data, the OM allocates blocks from SCM, and the client writes data to these blocks through datanodes.
+When a client writes data, the OM allocates blocks from SCM, and the client writes data to these blocks through Datanodes.
 
 ### Chunks
 
@@ -230,19 +232,19 @@ Ozone provides durability through container replication:
 
 - Default replication factor is 3
 - Uses Ratis (Raft) consensus protocol
-- Synchronously replicates data across datanodes
+- Synchronously replicates data across Datanodes
 - Provides strong consistency guarantees
 - Handles node failures transparently
 
-Replicated containers ensure data durability by storing multiple copies of each container across different datanodes.
+Replicated containers ensure data durability by storing multiple copies of each container across different Datanodes.
 
-![Diagram illustrating how data blocks and chunks are stored across datanodes in a replicated container setup.](../../static/img/ozone/ozone-storage-hierarchy-replicated.svg)
+![Diagram illustrating how data blocks and chunks are stored across Datanodes in a replicated container setup.](../../static/img/ozone/ozone-storage-hierarchy-replicated.svg)
 
 ### Erasure Encoded Containers
 
 Erasure coding provides space-efficient durability:
 
-- Splits data across multiple datanodes with parity
+- Splits data across multiple Datanodes with parity
 - Supports various coding schemes (e.g., RS-3-2-1024k)
 - Reduces storage overhead compared to replication
 - Trades some performance for storage efficiency
@@ -250,14 +252,14 @@ Erasure coding provides space-efficient durability:
 
 Erasure coding allows for data durability with less storage overhead than full replication.
 
-![Diagram illustrating how data and parity blocks are stored across datanodes in an erasure coded container setup.](../../static/img/ozone/ozone-storage-hierarchy-ec.svg)
+![Diagram illustrating how data and parity blocks are stored across Datanodes in an erasure coded container setup.](../../static/img/ozone/ozone-storage-hierarchy-ec.svg)
 
 ### Pipelines
 
-Pipelines are groups of datanodes that work together to store data:
+Pipelines are groups of Datanodes that work together to store data:
 
 - Managed by SCM
-- Consist of multiple datanodes
+- Consist of multiple Datanodes
 - Handle write operations as a unit
 - Support different replication strategies
 
@@ -267,7 +269,7 @@ For detailed information, see [Write Pipelines](./02-data-replication/02-write-p
 
 Ratis pipelines use the Raft consensus protocol:
 
-- Typically three datanodes per pipeline
+- Typically three Datanodes per pipeline
 - One leader and multiple followers
 - Synchronous replication
 - Strong consistency guarantees
@@ -292,7 +294,7 @@ Ozone supports multiple access protocols, making it versatile for different appl
 - Full feature access
 - Highest performance
 
-### Ozone File System (OFS)
+### Ozone File System (ofs)
 
 - Hadoop-compatible filesystem interface
 - Works with all Hadoop ecosystem applications
@@ -309,6 +311,7 @@ Ozone supports multiple access protocols, making it versatile for different appl
 - REST API compatible with WebHDFS
 - Enables web applications to access Ozone
 - Path format: `http://httpfs-host/webhdfs/v1/volume/bucket/key`
+
 
 The multi-protocol architecture allows for flexible integration with existing applications and workflows.
 

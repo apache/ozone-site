@@ -4,7 +4,6 @@ sidebar_label: Quotas
 
 # Volume Quotas
 
-
 ## Quota Management
 
 Quotas provide a mechanism to control resource utilization at the volume level:
