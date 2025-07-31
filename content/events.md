@@ -16,6 +16,9 @@ The following was the list of agenda:
 
 
 # Past Conference Talks
+# 2025
+* Apache CoC Asia 2025: Apache Ozone: Balance Data Through Disk Balancer. Sammi Chen, Yiyang Zhou. [Slides](/assets/ApacheCoCAsia2025OzoneDiskBalancer.pdf)
+* Apache CoC Asia 2025: Apache Ozone Best Practices at Shopee. Hui Fei. [Slides](/assets/ApacheOzoneBestPracticesAtShopee.pdf)
 
 # 2022
 * ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla. [Slides](/assets/Apache%20Ozone%20Erasure%20Coding%28EC%29.pdf)
