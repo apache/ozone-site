@@ -18,6 +18,6 @@ For each section, indicate the network protocol that is used, why it is used, an
 | Ozone Client | Kerberos KDC | | | | | |
 | Ozone Client | Ranger KMS | | | | | |
 | REST Client | HttpFS Server | | | | | |
-| REST Client | Recon REST API | HTTPS | Kerberos + SPNEGO | [Configured Ozone Administrators](../../administrator-guide/configuration/security/administrators) | TLS | |
-| Web Browser | Recon UI | HTTPS | Kerberos + SPNEGO/Apache Knox | [Configured Ozone Administrators](../../administrator-guide/configuration/security/administrators) | TLS | |
+| REST Client | Recon REST API | HTTPS | Kerberos + SPNEGO | [Configured Ozone Administrators](/ozone-site/docs/administrator-guide/configuration/security/administrators) | TLS | |
+| Web Browser | Recon UI | HTTPS | Kerberos + SPNEGO/Apache Knox | [Configured Ozone Administrators](/ozone-site/docs/administrator-guide/configuration/security/administrators) | TLS | |
 | Web Browser | Ozone WebUIs | HTTPS | Kerberos + SPNEGO/Apache Knox | | TLS | |

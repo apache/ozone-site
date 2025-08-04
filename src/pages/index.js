@@ -23,6 +23,7 @@ import Layout from '@theme/Layout';
 import Logo from '@site/static/img/ozone-logo.svg';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // Import Bootstrap icons
 import { GraphUpArrow, Diagram3Fill, LockFill, Speedometer, Stack, HddRackFill, ShieldLock } from 'react-bootstrap-icons';
@@ -128,7 +129,7 @@ function UseCases() {
         </div>
         <div className="row">
           <div className="col col--12 text--center margin-top--lg">
-            <Link to="/community/who-uses-ozone">
+            <Link to={useBaseUrl('/community/who-uses-ozone')}>
               <button className="button button--primary button--lg">See Who Uses Ozone</button>
             </Link>
           </div>
@@ -151,83 +152,99 @@ import {
   Database
 } from 'react-bootstrap-icons';
 function Integrations() {
+  // Extract siteConfig to get baseUrl directly
+  const {siteConfig} = useDocusaurusContext();
+  
+  // Function to ensure images have the correct base URL
+  // Don't use useBaseUrl() for image paths as it's not handling them correctly on GitHub Pages
+  const getImagePath = (path) => {
+    // Use siteConfig.baseUrl directly
+    const baseUrl = siteConfig?.baseUrl || '/';
+    // Ensure no double slashes
+    return `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}img/integrations/${path}`;
+  };
+  
   const integrations = [
     { 
       name: 'Hive', 
-      icon: () => <img src="/img/integrations/hive.svg" className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/hive' 
+      icon: () => <img src={getImagePath('hive.svg')} className="integration-logo-img" data-logo="hive" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Hive logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/hive') 
     },
     { 
       name: 'Spark', 
-      icon: () => <img src="/img/integrations/spark.svg" className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/spark' 
+      icon: () => <img src={getImagePath('spark.svg')} className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Spark logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/spark') 
     },
     { 
       name: 'Iceberg', 
-      icon: () => <img src="/img/integrations/iceberg.svg" className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/iceberg' 
+      icon: () => <img src={getImagePath('iceberg.svg')} className="integration-logo-img" data-logo="iceberg" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Iceberg logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/iceberg') 
     },
     { 
       name: 'Trino', 
-      icon: () => <img src="/img/integrations/trino.svg" className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/trino' 
+      icon: () => <img src={getImagePath('trino.svg')} className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Trino logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/trino') 
     },
     { 
       name: 'Impala', 
-      icon: () => <img src="/img/integrations/impala.svg" className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/impala' 
+      icon: () => <img src={getImagePath('impala.svg')} className="integration-logo-img" data-logo="impala" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Impala logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/impala') 
     },
     { 
       name: 'Ranger', 
-      icon: () => <img src="/img/integrations/ranger.svg" className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/configuration/security/ranger' 
+      icon: () => <img src={getImagePath('ranger.svg')} className="integration-logo-img" data-logo="ranger" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Ranger logo" />, 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/ranger') 
     },
     { 
       name: 'Knox', 
-      icon: () => <img src="/img/integrations/knox.svg" className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/configuration/security/knox' 
+      icon: () => <img src={getImagePath('knox.svg')} className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Knox logo" />, 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/knox') 
     },
     { 
       name: 'Kerberos', 
-      icon: props => <ShieldLock {...props} size={28} style={{ color: '#212529' }} data-logo="kerberos-icon" />, 
-      link: '/docs/administrator-guide/configuration/security/kerberos' 
+      icon: props => <ShieldLock {...props} size={28} style={{ color: '#212529' }} data-logo="kerberos-icon" aria-hidden="true" />, 
+      link: useBaseUrl('/docs/administrator-guide/configuration/security/kerberos') 
     },
     { 
       name: 'Prometheus', 
-      icon: () => <img src="/img/integrations/prometheus.svg" className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/operations/observability/prometheus' 
+      icon: () => <img src={getImagePath('prometheus.svg')} className="integration-logo-img" data-logo="prometheus" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Prometheus logo" />, 
+      link: useBaseUrl('/docs/administrator-guide/operations/observability/prometheus') 
     },
     { 
       name: 'Grafana', 
-      icon: () => <img src="/img/integrations/grafana.svg" className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/operations/observability/grafana' 
+      icon: () => <img src={getImagePath('grafana.svg')} className="integration-logo-img" data-logo="grafana" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Grafana logo" />, 
+      link: useBaseUrl('/docs/administrator-guide/operations/observability/grafana') 
     },
     { 
       name: 'Oozie', 
-      icon: () => <img src="/img/integrations/oozie.svg" className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/oozie' 
+      icon: () => <img src={getImagePath('oozie.svg')} className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Oozie logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/oozie') 
     },
     { 
       name: 'Hue', 
-      icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/hue' 
+      icon: () => <img src={getImagePath('hue.svg')} className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} alt="Hue logo" />, 
+      link: useBaseUrl('/docs/user-guide/integrations/hue') 
     },
   ];
 
   return (
-    <section className="padding-vert--xl integrations-section">
+    <section className="padding-vert--xl integrations-section" aria-labelledby="integrations-heading" role="region">
       <div className="container">
         <div className="row">
           <div className="col">
-            <h2 className="text--center margin-bottom--lg">Integrations</h2>
+            <h2 id="integrations-heading" className="text--center margin-bottom--lg">Integrations</h2>
           </div>
         </div>
         <div className="row">
           {integrations.map((integration, idx) => (
             <div key={idx} className="col col--2 margin-bottom--lg">
-              <Link to={integration.link} className="text--center padding--md integration-item" style={{ display: 'block', textDecoration: 'none' }}>
-                <div className="margin-bottom--sm" style={{ 
-                  color: 'var(--ifm-color-primary)',
+              <Link 
+                to={integration.link} 
+                className="text--center padding--md integration-item" 
+                style={{ display: 'block', textDecoration: 'none' }}
+                aria-label={`Learn about ${integration.name} integration`}
+              >
+                <div className="margin-bottom--sm integration-icon-container" style={{ 
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
@@ -247,36 +264,36 @@ function Integrations() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
-  const getStartedHref = `docs/quick-start/installation/docker`;
+  const getStartedHref = useBaseUrl(`docs/quick-start/installation/docker`);
   return (
     <Layout
       title="Home"
       description={`${siteConfig.tagline}`}>
       <div className="hero hero-banner">
         <div className="container">
-          <div className="row" style={{alignItems: 'center'}}>
-            <div className="col col--6">
+          <div className="row hero-row" style={{alignItems: 'center'}}>
+            {/* Logo first for mobile layout (order will be reversed on larger screens) */}
+            <div className="col col--6 logo-column">
+              <div className="hero-logo-container">
+                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
+              </div>
+            </div>
+            <div className="col col--6 text-column">
               <h1 className="hero__title">{siteConfig.title}</h1>
               <p className="hero__subtitle">
                 {siteConfig.tagline}
               </p>
-              <div>
+              <div className="hero-buttons">
                 <Link to={getStartedHref}>
                   <button className="button button--primary button--lg margin-right--sm">
                     Get Started
                   </button>
                 </Link>
-                <Link to="/download">
+                <Link to={useBaseUrl('/download')}>
                   <button className="button button--secondary button--lg">
                     Download
                   </button>
                 </Link>
-              </div>
-            </div>
-            <div className="col col--6 text--center">
-              {/* Logo with increased size and positioned more to the right */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2rem' }}>
-                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
               </div>
             </div>
           </div>
@@ -315,7 +332,7 @@ export default function Home() {
                     Quick Start
                   </button>
                 </Link>
-                <Link to="/docs">
+                <Link to={useBaseUrl('/docs')}>
                   <button className="button button--secondary button--lg">
                     Documentation
                   </button>

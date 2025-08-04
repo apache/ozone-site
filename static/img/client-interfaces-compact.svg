@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64ab35" />
+        </marker>
+    </defs>
+
+    <style>
+        .user-icon { stroke: #64ab35; stroke-width: 2; fill: none; }
+        .interface-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 1.5; rx: 6; ry: 6; }
+        .interface-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .client-box { fill: #96d26e; stroke: #3a8100; stroke-width: 1.8; rx: 6; ry: 6; }
+        .client-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .arrow-line { stroke: #64ab35; stroke-width: 1.8; marker-end: url(#arrow); }
+        .gateway-box { fill: #e0edd2; stroke: #357500; stroke-width: 1.5; rx: 10; ry: 10; }
+        text { font-family: "JetBrains Mono", monospace; }
+    </style>
+
+    <!-- User Stick Figure - moved further left -->
+    <g transform="translate(25, 80) scale(0.5)">
+        <circle cx="0" cy="-20" r="10" class="user-icon" fill="#64ab35"/>
+        <line x1="0" y1="-10" x2="0" y2="10" class="user-icon"/>
+        <line x1="-15" y1="0" x2="15" y2="0" class="user-icon"/>
+        <line x1="0" y1="10" x2="-10" y2="30" class="user-icon"/>
+        <line x1="0" y1="10" x2="10" y2="30" class="user-icon"/>
+        <text x="0" y="50" text-anchor="middle" font-size="12" fill="#64ab35" font-weight="bold">User</text>
+    </g>
+
+    <!-- Protocol Gateways box - moved further left -->
+    <g transform="translate(55, 25)">
+        <!-- Main container -->
+        <rect x="0" y="0" width="90" height="50" class="gateway-box"/>
+        <text x="45" y="12" text-anchor="middle" font-size="7" fill="#357500" font-weight="bold">Protocol Gateways</text>
+        
+        <!-- S3 Gateway -->
+        <rect x="5" y="18" width="38" height="12" class="interface-box"/>
+        <text x="24" y="26" class="interface-text" font-size="5.5">S3 Gateway</text>
+        
+        <!-- HttpFS -->
+        <rect x="5" y="33" width="38" height="12" class="interface-box"/>
+        <text x="24" y="41" class="interface-text" font-size="5.5">HttpFS</text>
+        
+        <!-- Ozone Client Library -->
+        <rect x="48" y="18" width="37" height="27" class="client-box"/>
+        <text x="66.5" y="28" class="client-text" font-size="5">Ozone</text>
+        <text x="66.5" y="34" class="client-text" font-size="5">Client</text>
+        <text x="66.5" y="40" class="client-text" font-size="5">Library</text>
+    </g>
+
+    <!-- Client Application Box - moved further left -->
+    <g transform="translate(55, 85)">
+        <!-- Main container -->
+        <rect x="0" y="0" width="90" height="62" class="gateway-box"/>
+        <text x="45" y="12" text-anchor="middle" font-size="7" fill="#357500" font-weight="bold">Client Applications</text>
+        
+        <!-- Hive -->
+        <rect x="5" y="18" width="38" height="12" class="interface-box"/>
+        <text x="24" y="26" class="interface-text" font-size="5.5">Hive</text>
+        
+        <!-- Spark -->
+        <rect x="5" y="33" width="38" height="12" class="interface-box"/>
+        <text x="24" y="41" class="interface-text" font-size="5.5">Spark</text>
+        
+        <!-- Iceberg -->
+        <rect x="5" y="46" width="38" height="12" class="interface-box"/>
+        <text x="24" y="54" class="interface-text" font-size="5.5">Iceberg</text>
+        
+        <!-- Ozone Client Library -->
+        <rect x="48" y="18" width="37" height="40" class="client-box"/>
+        <text x="66.5" y="30" class="client-text" font-size="5">Ozone</text>
+        <text x="66.5" y="36" class="client-text" font-size="5">Client</text>
+        <text x="66.5" y="42" class="client-text" font-size="5">Library</text>
+    </g>
+
+    <!-- Updated Arrow lines -->
+    <path d="M 40 75 L 52 50" class="arrow-line"/>
+    <path d="M 40 85 L 52 110" class="arrow-line"/>
+</svg>

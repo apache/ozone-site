@@ -1,0 +1,94 @@
+<svg width="900" height="500" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="900" height="500" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="450" y="30" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Consolidated 6-Node Production Cluster</text>
+
+    <style>
+        .server-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .service-box-om { fill: #4c8c2b; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-scm { fill: #3a7a1a; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-recon { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-dn { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-s3g { fill: #96d26e; stroke: #3a8100; stroke-width: 2; rx: 4; ry: 4; }
+        .text-label { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .service-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+        .section-label { fill: #357500; text-anchor: middle; font-weight: bold; font-size: 16px; }
+    </style>
+
+    <!-- Section Label -->
+    <text x="450" y="70" class="section-label">Metadata Nodes</text>
+
+    <!-- Metadata Node 1 -->
+    <rect x="50" y="90" width="250" height="150" class="server-box"/>
+    <text x="175" y="115" font-size="16" class="text-label">Metadata Node 1</text>
+    
+    <!-- Services in Metadata Node 1 -->
+    <rect x="70" y="130" width="210" height="30" class="service-box-om"/>
+    <text x="175" y="150" font-size="14" class="service-text">Ozone Manager (om1)</text>
+    
+    <rect x="70" y="170" width="210" height="30" class="service-box-scm"/>
+    <text x="175" y="190" font-size="14" class="service-text">SCM (scm1)</text>
+    
+    <rect x="70" y="210" width="210" height="20" class="service-box-recon"/>
+    <text x="175" y="225" font-size="12" class="service-text">Recon</text>
+
+    <!-- Metadata Node 2 -->
+    <rect x="325" y="90" width="250" height="150" class="server-box"/>
+    <text x="450" y="115" font-size="16" class="text-label">Metadata Node 2</text>
+    
+    <!-- Services in Metadata Node 2 -->
+    <rect x="345" y="130" width="210" height="30" class="service-box-om"/>
+    <text x="450" y="150" font-size="14" class="service-text">Ozone Manager (om2)</text>
+    
+    <rect x="345" y="170" width="210" height="30" class="service-box-scm"/>
+    <text x="450" y="190" font-size="14" class="service-text">SCM (scm2)</text>
+
+    <!-- Metadata Node 3 -->
+    <rect x="600" y="90" width="250" height="150" class="server-box"/>
+    <text x="725" y="115" font-size="16" class="text-label">Metadata Node 3</text>
+    
+    <!-- Services in Metadata Node 3 -->
+    <rect x="620" y="130" width="210" height="30" class="service-box-om"/>
+    <text x="725" y="150" font-size="14" class="service-text">Ozone Manager (om3)</text>
+    
+    <rect x="620" y="170" width="210" height="30" class="service-box-scm"/>
+    <text x="725" y="190" font-size="14" class="service-text">SCM (scm3)</text>
+
+    <!-- Section Label -->
+    <text x="450" y="280" class="section-label">Datanodes</text>
+
+    <!-- Datanode 1 -->
+    <rect x="50" y="300" width="250" height="150" class="server-box"/>
+    <text x="175" y="325" font-size="16" class="text-label">Datanode 1</text>
+    
+    <!-- Services in Datanode 1 -->
+    <rect x="70" y="345" width="210" height="40" class="service-box-dn"/>
+    <text x="175" y="370" font-size="14" class="service-text">Datanode service</text>
+    
+    <rect x="70" y="395" width="210" height="40" class="service-box-s3g"/>
+    <text x="175" y="420" font-size="14" class="service-text">S3 Gateway</text>
+
+    <!-- Datanode 2 -->
+    <rect x="325" y="300" width="250" height="150" class="server-box"/>
+    <text x="450" y="325" font-size="16" class="text-label">Datanode 2</text>
+    
+    <!-- Services in Datanode 2 -->
+    <rect x="345" y="345" width="210" height="40" class="service-box-dn"/>
+    <text x="450" y="370" font-size="14" class="service-text">Datanode service</text>
+    
+    <rect x="345" y="395" width="210" height="40" class="service-box-s3g"/>
+    <text x="450" y="420" font-size="14" class="service-text">S3 Gateway</text>
+
+    <!-- Datanode 3 -->
+    <rect x="600" y="300" width="250" height="150" class="server-box"/>
+    <text x="725" y="325" font-size="16" class="text-label">Datanode 3</text>
+    
+    <!-- Services in Datanode 3 -->
+    <rect x="620" y="345" width="210" height="40" class="service-box-dn"/>
+    <text x="725" y="370" font-size="14" class="service-text">Datanode service</text>
+    
+    <rect x="620" y="395" width="210" height="40" class="service-box-s3g"/>
+    <text x="725" y="420" font-size="14" class="service-text">S3 Gateway</text>
+</svg>

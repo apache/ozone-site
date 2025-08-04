@@ -3,7 +3,10 @@
 <!-- markdownlint-disable -->
 import AskQuestionForm from '@site/src/components/AskQuestionForm';
 
-Have a question about Apache Ozone? Use the form below to submit your question to our GitHub Discussions. The form will redirect you to GitHub with your question pre-filled.
+Have a question about Apache Ozone?
+Use the form below to submit your question to our GitHub Discussions.
+The form will redirect you to GitHub with your question pre-filled
+or [you can head to posting a new topic on the FAQ section](https://github.com/apache/ozone/discussions/new?category=faq)
 
 <AskQuestionForm />
 <!-- markdownlint-enable -->

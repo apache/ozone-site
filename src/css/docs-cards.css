@@ -1,0 +1,90 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/**
+ * Documentation card layout
+ * This file contains styles for the documentation cards used in README.mdx files
+ * Using !important to ensure these styles override any theme defaults in both dev and prod
+ */
+
+/* Force the main container to have centered layout */
+.markdown article > .container,
+article[itemprop="blogPost"] > .container,
+.markdown div.container {
+  width: 100% !important; 
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* Force container to always center its rows */
+.markdown .container > .row,
+article .container > .row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  margin-left: -10px !important;
+  margin-right: -10px !important;
+  width: 100% !important;
+}
+
+/* Force columns to have consistent width and spacing */
+.markdown .container > .row > [class*='col--'],
+article .container > .row > [class*='col--'] {
+  flex: 0 0 calc(50% - 20px) !important;
+  max-width: calc(50% - 20px) !important;
+  margin: 10px !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure cards fill their containers */
+.markdown .card,
+article .card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+  overflow: hidden !important;
+}
+
+.markdown .card:hover,
+article .card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Small screens - single column layout */
+@media (max-width: 700px) {
+  .markdown .container > .row > [class*='col--'],
+  article .container > .row > [class*='col--'] {
+    flex: 0 0 100% !important;
+    max-width: 400px !important;
+  }
+}
+
+/* Specific hack for production build to force text centering */
+.text--center {
+  text-align: center !important;
+}

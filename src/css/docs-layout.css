@@ -1,0 +1,71 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/* 
+ * Documentation page layout customizations
+ * Keeps sidebar aligned to left edge of screen on wide monitors
+ */
+
+/* Custom sidebar positioning for all screen sizes */
+.docs-doc-page {
+  --doc-sidebar-width: 300px;
+}
+
+/* Fixed left sidebar on widescreen displays */
+@media (min-width: 997px) {
+  /* Adjust the main content container to allow for fixed sidebar */
+  .docs-doc-page .container {
+    max-width: calc(var(--ifm-container-width) + var(--doc-sidebar-width));
+  }
+
+  /* Ensure the sidebar stays at left edge */
+  .docs-doc-page .docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-styles-module {
+    border-right: 1px solid var(--ifm-toc-border-color);
+    position: fixed;
+    top: var(--ifm-navbar-height);
+    left: 0;
+    bottom: 0;
+    width: var(--doc-sidebar-width);
+    overflow-y: auto;
+    z-index: 10;
+  }
+
+  /* Ensure main content area doesn't overlap fixed sidebar */
+  .docs-doc-page .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module {
+    margin-left: var(--doc-sidebar-width);
+  }
+
+  /* Only show scrollbar when hovering */
+  .docs-doc-page .docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-styles-module::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .docs-doc-page .docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-styles-module::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-300);
+    border-radius: 10px;
+  }
+
+  /* Responsive adjustments for ultra-wide screens */
+  @media (min-width: 1700px) {
+    .docs-doc-page .container {
+      max-width: 1400px;
+      margin-left: var(--doc-sidebar-width);
+    }
+  }
+}

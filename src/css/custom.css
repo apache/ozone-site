@@ -72,10 +72,111 @@
   font-family: var(--ifm-heading-font-family);
 }
 
-/* Additional typography improvements */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--ifm-heading-font-family);
-  letter-spacing: -0.02em;
+
+/* Specific heading size hierarchy */
+h1 {
+  font-size: 48px;
+  margin-top: 24px;
+  font-weight: 400; /* Bolder for main headings */
+}
+
+/*
+h2 {
+  font-size: 42px;
+  margin-top: 24px;
+  font-weight: 600; !* Bolder for section headings *!
+  color: #1B2536; !* Slightly different shade for hierarchy *!
+}
+
+h3 {
+  font-size: 32px;
+  margin-top: 20px;
+  color: #1F2942; !* Slightly different shade for hierarchy *!
+}
+
+h4 {
+  font-size: 26px;
+  margin-top: 18px;
+  color: #232D4D; !* Slightly different shade for hierarchy *!
+}
+
+h5 {
+  font-size: 22px;
+  margin-top: 16px;
+}
+
+h6 {
+  font-size: 18px;
+  margin-top: 14px;
+}
+
+*/
+/* Homepage hero heading styling - larger than regular h1 */
+.hero__title {
+  font-size: 54px;
+  font-weight: 600; /* Bolder for hero title */
+  margin-top: 24px;
+  color: var(--ozone-hero-text); /* Keep existing hero text color */
+}
+
+/* Dark mode heading colors adjustment */
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: #F5F7FC; /* Lighter color for dark mode */
+}
+
+/* Markdown headings - use heading colors with a touch of brand color */
+.markdown h1 {
+  color: #0D3900; /* Even darker shade of primary for maximum contrast */
+}
+
+.markdown h2 {
+  color: #14490A; /* Dark shade of primary */
+}
+
+.markdown h3 {
+  color: #1A5913; /* Medium-dark shade of primary */
+}
+
+.markdown h4 {
+  color: var(--ifm-color-primary-dark);
+}
+
+.markdown h5 {
+  color: var(--ifm-color-primary);
+}
+
+.markdown h6 {
+  color: var(--ifm-color-primary-dark);
+}
+
+/* Dark mode heading colors */
+[data-theme='dark'] .markdown h1 {
+  color: #FFFFFF; /* Pure white for maximum contrast */
+}
+
+[data-theme='dark'] .markdown h2 {
+  color: #D8FFC2; /* Very light green */
+}
+
+[data-theme='dark'] .markdown h3 {
+  color: #B4E89C; /* Light green */
+}
+
+[data-theme='dark'] .markdown h4 {
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .markdown h5 {
+  color: var(--ifm-color-primary-lighter);
+}
+
+[data-theme='dark'] .markdown h6 {
+  color: var(--ifm-color-primary-light);
 }
 
 pre, code {
@@ -117,30 +218,201 @@ p, li, td, th {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Dark mode integration items styled to match the primary button */
+/* Dark mode integration items - white background for better icon visibility */
 html[data-theme='dark'] .integration-item {
-  background-color: var(--ifm-color-primary);
-  border: 1px solid var(--ifm-color-primary-darker);
-  color: var(--ifm-color-white);
+  background-color: #ffffff; /* White background for maximum icon visibility */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #333333; /* Dark text for contrast against white */
   transition: all 0.3s ease;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 html[data-theme='dark'] .integration-item:hover {
-  background-color: var(--ifm-color-primary-darker);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff; /* Stay white on hover */
+  box-shadow: 0 4px 10px rgba(var(--ifm-color-primary-rgb), 0.2);
   transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
 }
 
-/* Make integration names light in dark mode cards to match primary button text */
+/* Make integration names dark in dark mode for better readability on white background */
 html[data-theme='dark'] .integration-item .integration-name {
-  color: #ffffff;
+  color: #333333;
   font-weight: 500;
 }
 
-/* Adjust SVG icons for better visibility against primary button */
+html[data-theme='dark'] .integration-item:hover .integration-name {
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Keep original icon colors in dark mode against white background */
 html[data-theme='dark'] .integration-icon-container svg:not([data-logo="kerberos-icon"]) {
-  color: #ffffff;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  color: inherit; /* Use the icon's original color */
+  filter: none;
+}
+
+/* Enhance icons on hover */
+.integration-item:hover .integration-logo-img,
+.integration-item:hover svg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12));
+}
+
+/* Ensure clean layout for integration grid */
+.integrations-section .row {
+  margin: 0 -0.5rem; /* Compensate for margins inside items */
+}
+
+.integrations-section .col {
+  padding: 0 0.5rem; /* Even spacing */
+}
+
+/* Increased size for container architecture diagrams */
+.markdown img[src*="ozone-storage-hierarchy-replicated.svg"],
+.markdown img[src*="ozone-storage-hierarchy-ec.svg"] {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: block;
+}
+
+/* Documentation card styles moved to docs-cards.css */
+
+/* Diagnostic: Force stacking of main content and ToC on narrow screens */
+@media (max-width: 996px) {
+  /* Target the row containing main doc content and right ToC */
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module > .container > .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ensure columns take full width when stacked */
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module > .container > .row > [class*='col--'] {
+    flex-basis: auto; /* Reset basis */
+    max-width: 100%; /* Allow full width */
+    margin-left: 0; /* Remove potential horizontal margins */
+  }
+
+  /* Center card columns within their row on narrow screens before they stack */
+  /* Increased specificity and !important for diagnosis */
+  main .markdown .container > .row {
+    display: flex; /* Ensure it's flex */
+    flex-wrap: wrap; /* Allow wrapping */
+    /* Removed justify-content as we will force column width */
+  }
+
+  /* Force columns within this specific context to be full width on narrow screens */
+   main .markdown .container > .row > .col[class*='col--'] {
+     margin-left: auto !important; /* Auto margins for centering if needed */
+     margin-right: auto !important;
+     flex-basis: 100% !important; /* Force full basis */
+     max-width: 100% !important; /* Force full width */
+     width: 100% !important; /* Explicit width */
+   }
+}
+
+/* Hero section responsive layout */
+.hero-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Mobile-first approach: on mobile, show logo first, then text */
+.hero-row {
+  flex-direction: column;
+}
+
+.logo-column {
+  order: 1;
+}
+
+.text-column {
+  order: 2;
+  text-align: center;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+/* On larger screens (tablets and up), reverse the order and make text left-aligned */
+@media (min-width: 768px) {
+  .hero-row {
+    flex-direction: row;
+  }
+  
+  .logo-column {
+    order: 2;
+  }
+  
+  .text-column {
+    order: 1;
+    text-align: left;
+  }
+  
+  .hero-logo-container {
+    justify-content: flex-end;
+    margin-bottom: 0;
+  }
+  
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+}
+
+
+/* PWA Reload Popup styles */
+.pwa-reload-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: pwa-popup-slide-up 0.3s ease-out;
+}
+
+.pwa-reload-popup__content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pwa-reload-popup__content p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.pwa-reload-popup__button {
+  background-color: white;
+  color: var(--ifm-color-primary);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pwa-reload-popup__button:hover {
+  background-color: #f0f0f0;
+}
+
+@keyframes pwa-popup-slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

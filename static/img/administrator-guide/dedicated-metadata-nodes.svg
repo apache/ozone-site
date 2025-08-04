@@ -1,0 +1,50 @@
+<svg width="800" height="180" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="800" height="180" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="400" y="30" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Dedicated Metadata Nodes</text>
+
+    <style>
+        .server-box-om { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .server-box-scm { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .server-box-recon { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .service-box-om { fill: #4c8c2b; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-scm { fill: #3a7a1a; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-recon { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 4; ry: 4; }
+        .text-label { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .service-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+    </style>
+
+    <!-- OM Nodes -->
+    <rect x="40" y="70" width="100" height="80" class="server-box-om"/>
+    <text x="90" y="90" font-size="14" class="text-label">OM Node 1</text>
+    <rect x="50" y="100" width="80" height="40" class="service-box-om"/>
+    <text x="90" y="125" font-size="12" class="service-text">OM</text>
+    
+    <rect x="160" y="70" width="100" height="80" class="server-box-om"/>
+    <text x="210" y="90" font-size="14" class="text-label">OM Node 2</text>
+    <rect x="170" y="100" width="80" height="40" class="service-box-om"/>
+    <text x="210" y="125" font-size="12" class="service-text">OM</text>
+    
+    <rect x="280" y="70" width="100" height="80" class="server-box-om"/>
+    <text x="330" y="90" font-size="14" class="text-label">OM Node 3</text>
+    <rect x="290" y="100" width="80" height="40" class="service-box-om"/>
+    <text x="330" y="125" font-size="12" class="service-text">OM</text>
+
+    <!-- SCM Nodes -->
+    <rect x="430" y="70" width="100" height="80" class="server-box-scm"/>
+    <text x="480" y="90" font-size="14" class="text-label">SCM Node 1</text>
+    <rect x="440" y="100" width="80" height="40" class="service-box-scm"/>
+    <text x="480" y="125" font-size="12" class="service-text">SCM</text>
+    
+    <rect x="550" y="70" width="100" height="80" class="server-box-scm"/>
+    <text x="600" y="90" font-size="14" class="text-label">SCM Node 2</text>
+    <rect x="560" y="100" width="80" height="40" class="service-box-scm"/>
+    <text x="600" y="125" font-size="12" class="service-text">SCM</text>
+    
+    <rect x="670" y="70" width="100" height="80" class="server-box-scm"/>
+    <text x="720" y="90" font-size="14" class="text-label">SCM Node 3</text>
+    <rect x="680" y="100" width="80" height="40" class="service-box-scm"/>
+    <text x="720" y="125" font-size="12" class="service-text">SCM</text>
+</svg>

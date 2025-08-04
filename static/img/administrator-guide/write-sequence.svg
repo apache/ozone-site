@@ -1,0 +1,130 @@
+<svg width="800" height="750" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="800" height="750" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="400" y="30" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle" fill="#357500" font-weight="bold">Ozone Write Operation Sequence</text>
+
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#255200" />
+        </marker>
+        
+        <!-- Dashed arrowhead marker definition -->
+        <marker id="dashedArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#3a7a1a" />
+        </marker>
+    </defs>
+
+    <style>
+        .client-box { fill: #96d26e; stroke: #3a8100; stroke-width: 2.5; rx: 8; ry: 8; }
+        .client-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .arrow-line { stroke: #255200; stroke-width: 1.5; marker-end: url(#arrow); }
+        .dashed-arrow { stroke: #3a7a1a; stroke-width: 1.5; stroke-dasharray: 5,3; marker-end: url(#dashedArrow); }
+        .manager-box { fill: #4c8c2b; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .scm-box { fill: #3a7a1a; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .manager-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+        .datanode-box { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .lifeline { stroke: #255200; stroke-width: 1.5; stroke-dasharray: 4,4; }
+        .message-text { fill: #255200; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+        .step-circle { fill: #357500; stroke: none; }
+        .step-text { fill: white; text-anchor: middle; font-weight: bold; }
+        .activation-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 1.5; }
+    </style>
+
+    <!-- Actor boxes at the top -->
+    <rect x="80" y="60" width="120" height="50" class="client-box"/>
+    <text x="140" y="90" class="client-text" font-size="16">Client</text>
+    
+    <rect x="280" y="60" width="120" height="50" class="manager-box"/>
+    <text x="340" y="90" class="manager-text" font-size="16">Ozone Manager</text>
+    
+    <rect x="480" y="60" width="120" height="50" class="scm-box"/>
+    <text x="540" y="90" class="manager-text" font-size="16">SCM</text>
+    
+    <rect x="680" y="60" width="120" height="50" class="datanode-box"/>
+    <text x="740" y="90" class="manager-text" font-size="16">Datanodes</text>
+
+    <!-- Lifelines -->
+    <line x1="140" y1="110" x2="140" y2="650" class="lifeline" />
+    <line x1="340" y1="110" x2="340" y2="650" class="lifeline" />
+    <line x1="540" y1="110" x2="540" y2="650" class="lifeline" />
+    <line x1="740" y1="110" x2="740" y2="650" class="lifeline" />
+
+    <!-- Activation boxes -->
+    <!-- Client is active throughout -->
+    <rect x="135" y="150" width="10" height="500" class="activation-box" />
+    
+    <!-- OM is active during key creation and commit -->
+    <rect x="335" y="170" width="10" height="80" class="activation-box" />
+    <rect x="335" y="580" width="10" height="70" class="activation-box" />
+    
+    <!-- SCM is active during block allocation -->
+    <rect x="535" y="210" width="10" height="80" class="activation-box" />
+    
+    <!-- Datanodes are active during data transfer -->
+    <rect x="735" y="370" width="10" height="150" class="activation-box" />
+
+    <!-- Step 1: Create key request -->
+    <circle cx="40" cy="160" r="15" class="step-circle" />
+    <text x="40" y="165" class="step-text">1</text>
+    <line x1="145" y1="160" x2="335" y2="170" class="arrow-line" />
+    <text x="240" y="155" class="message-text" text-anchor="middle">createKey(volume/bucket/key)</text>
+
+    <!-- Step 2: OM requests blocks from SCM -->
+    <circle cx="40" cy="220" r="15" class="step-circle" />
+    <text x="40" y="225" class="step-text">2</text>
+    <line x1="345" y1="220" x2="535" y2="230" class="arrow-line" />
+    <text x="440" y="215" class="message-text" text-anchor="middle">allocateBlock()</text>
+
+    <!-- Step 3: SCM returns allocated blocks -->
+    <circle cx="40" cy="280" r="15" class="step-circle" />
+    <text x="40" y="285" class="step-text">3</text>
+    <line x1="535" y1="270" x2="345" y2="280" class="arrow-line" />
+    <text x="440" y="265" class="message-text" text-anchor="middle">blockLocationInfo</text>
+
+    <!-- Step 4: OM returns block info to client -->
+    <circle cx="40" cy="330" r="15" class="step-circle" />
+    <text x="40" y="335" class="step-text">4</text>
+    <line x1="335" y1="330" x2="145" y2="340" class="arrow-line" />
+    <text x="240" y="325" class="message-text" text-anchor="middle">keyInfo with allocated blocks</text>
+
+    <!-- Step 5: Client writes data to datanodes -->
+    <circle cx="40" cy="390" r="15" class="step-circle" />
+    <text x="40" y="395" class="step-text">5</text>
+    <line x1="145" y1="390" x2="735" y2="400" class="arrow-line" />
+    <text x="440" y="385" class="message-text" text-anchor="middle">writeBlock(blockID, data)</text>
+
+    <!-- Step 6: Datanodes replicate data (internal) -->
+    <circle cx="40" cy="450" r="15" class="step-circle" />
+    <text x="40" y="455" class="step-text">6</text>
+    <path d="M 745 450 C 780 450, 780 470, 745 470" class="arrow-line" />
+    <text x="800" y="460" class="message-text" text-anchor="start">replicate data</text>
+    <text x="800" y="475" class="message-text" text-anchor="start">across pipeline</text>
+
+    <!-- Step 7: Datanodes acknowledge write -->
+    <circle cx="40" cy="510" r="15" class="step-circle" />
+    <text x="40" y="515" class="step-text">7</text>
+    <line x1="735" y1="510" x2="145" y2="520" class="arrow-line" />
+    <text x="440" y="505" class="message-text" text-anchor="middle">writeAck</text>
+
+    <!-- Step 8: Client commits key to OM -->
+    <circle cx="40" cy="580" r="15" class="step-circle" />
+    <text x="40" y="585" class="step-text">8</text>
+    <line x1="145" y1="580" x2="335" y2="590" class="arrow-line" />
+    <text x="240" y="575" class="message-text" text-anchor="middle">commitKey(volume/bucket/key)</text>
+
+    <!-- Step 9: OM confirms key commit -->
+    <circle cx="40" cy="640" r="15" class="step-circle" />
+    <text x="40" y="645" class="step-text">9</text>
+    <line x1="335" y1="640" x2="145" y2="650" class="arrow-line" />
+    <text x="240" y="635" class="message-text" text-anchor="middle">commitAck</text>
+
+    <!-- Description Box -->
+    <rect x="50" y="670" width="700" height="70" rx="8" ry="8" fill="#e0edd2" stroke="#357500" stroke-width="1" />
+    <text x="60" y="685" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">Write Operation Flow:</text>
+    <text x="60" y="705" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">1-4. Client initiates key creation, OM allocates blocks from SCM and returns block locations</text>
+    <text x="60" y="720" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">5-7. Client writes data directly to datanodes, which replicate data across the pipeline</text>
+    <text x="60" y="735" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">8-9. Client commits the key to OM after successful data transfer to complete the operation</text>
+</svg>

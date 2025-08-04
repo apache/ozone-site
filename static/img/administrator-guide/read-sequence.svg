@@ -1,0 +1,91 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="400" y="30" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle" fill="#357500" font-weight="bold">Ozone Read Operation Sequence</text>
+
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#255200" />
+        </marker>
+        
+        <!-- Dashed arrowhead marker definition -->
+        <marker id="dashedArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#3a7a1a" />
+        </marker>
+    </defs>
+
+    <style>
+        .client-box { fill: #96d26e; stroke: #3a8100; stroke-width: 2.5; rx: 8; ry: 8; }
+        .client-text { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .arrow-line { stroke: #255200; stroke-width: 1.5; marker-end: url(#arrow); }
+        .dashed-arrow { stroke: #3a7a1a; stroke-width: 1.5; stroke-dasharray: 5,3; marker-end: url(#dashedArrow); }
+        .manager-box { fill: #4c8c2b; stroke: #306900; stroke-width: 2.5; rx: 8; ry: 8; }
+        .manager-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+        .datanode-box { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .lifeline { stroke: #255200; stroke-width: 1.5; stroke-dasharray: 4,4; }
+        .message-text { fill: #255200; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+        .step-circle { fill: #357500; stroke: none; }
+        .step-text { fill: white; text-anchor: middle; font-weight: bold; }
+        .activation-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 1.5; }
+    </style>
+
+    <!-- Actor boxes at the top -->
+    <rect x="80" y="60" width="120" height="50" class="client-box"/>
+    <text x="140" y="90" class="client-text" font-size="16">Client</text>
+    
+    <rect x="340" y="60" width="120" height="50" class="manager-box"/>
+    <text x="400" y="90" class="manager-text" font-size="16">Ozone Manager</text>
+    
+    <rect x="600" y="60" width="120" height="50" class="datanode-box"/>
+    <text x="660" y="90" class="manager-text" font-size="16">Datanodes</text>
+
+    <!-- Lifelines -->
+    <line x1="140" y1="110" x2="140" y2="550" class="lifeline" />
+    <line x1="400" y1="110" x2="400" y2="550" class="lifeline" />
+    <line x1="660" y1="110" x2="660" y2="550" class="lifeline" />
+
+    <!-- Activation boxes -->
+    <!-- Client is active throughout -->
+    <rect x="135" y="150" width="10" height="350" class="activation-box" />
+    
+    <!-- OM is active when handling metadata requests -->
+    <rect x="395" y="190" width="10" height="120" class="activation-box" />
+    
+    <!-- Datanodes are active when handling read requests -->
+    <rect x="655" y="370" width="10" height="100" class="activation-box" />
+
+    <!-- Step 1: Request key information -->
+    <circle cx="50" cy="170" r="15" class="step-circle" />
+    <text x="50" y="175" class="step-text">1</text>
+    <line x1="145" y1="170" x2="395" y2="190" class="arrow-line" />
+    <text x="270" y="165" class="message-text" text-anchor="middle">getKeyLocation(volume/bucket/key)</text>
+
+    <!-- Step 2: Return key metadata with block locations -->
+    <circle cx="50" cy="270" r="15" class="step-circle" />
+    <text x="50" y="275" class="step-text">2</text>
+    <line x1="395" y1="270" x2="145" y2="290" class="arrow-line" />
+    <text x="270" y="255" class="message-text" text-anchor="middle">keyInfo with block locations</text>
+    <text x="270" y="275" class="message-text" text-anchor="middle">and datanode addresses</text>
+
+    <!-- Step 3: Read data directly from datanodes -->
+    <circle cx="50" cy="370" r="15" class="step-circle" />
+    <text x="50" y="375" class="step-text">3</text>
+    <line x1="145" y1="370" x2="655" y2="390" class="arrow-line" />
+    <text x="400" y="365" class="message-text" text-anchor="middle">readBlock(blockID, token)</text>
+
+    <!-- Step 4: Return data from datanodes -->
+    <circle cx="50" cy="450" r="15" class="step-circle" />
+    <text x="50" y="455" class="step-text">4</text>
+    <line x1="655" y1="450" x2="145" y2="470" class="arrow-line" />
+    <text x="400" y="445" class="message-text" text-anchor="middle">blockData</text>
+
+    <!-- Description Box -->
+    <rect x="50" y="520" width="700" height="70" rx="8" ry="8" fill="#e0edd2" stroke="#357500" stroke-width="1" />
+    <text x="60" y="535" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">Read Operation Flow:</text>
+    <text x="60" y="555" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">1. Client requests key metadata from Ozone Manager</text>
+    <text x="60" y="570" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">2. OM returns key information with block locations and datanode addresses</text>
+    <text x="60" y="585" font-family="JetBrains Mono, monospace" font-size="12" fill="#255200">3-4. Client reads data blocks directly from datanodes using the location information</text>
+</svg>

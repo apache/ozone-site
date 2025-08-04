@@ -1,0 +1,52 @@
+<svg width="800" height="250" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
+    <!-- Background -->
+    <rect width="800" height="250" fill="#f7fcf0" />
+    
+    <!-- Title -->
+    <text x="400" y="30" font-family="JetBrains Mono, monospace" font-size="18" text-anchor="middle" fill="#357500" font-weight="bold">Consolidated Metadata Nodes</text>
+
+    <style>
+        .server-box { fill: #d1e4bc; stroke: #3a8100; stroke-width: 2; rx: 8; ry: 8; }
+        .service-box-om { fill: #4c8c2b; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-scm { fill: #3a7a1a; stroke: #306900; stroke-width: 2; rx: 4; ry: 4; }
+        .service-box-recon { fill: #5fa638; stroke: #3a8100; stroke-width: 2; rx: 4; ry: 4; }
+        .text-label { fill: #255200; text-anchor: middle; font-weight: bold; }
+        .service-text { fill: #ffffff; text-anchor: middle; font-weight: bold; }
+    </style>
+
+    <!-- Server 1 -->
+    <rect x="50" y="70" width="220" height="150" class="server-box"/>
+    <text x="160" y="95" font-size="16" class="text-label">Metadata Node 1</text>
+    
+    <!-- Services in Server 1 -->
+    <rect x="70" y="110" width="180" height="30" class="service-box-om"/>
+    <text x="160" y="130" font-size="14" class="service-text">Ozone Manager</text>
+    
+    <rect x="70" y="150" width="180" height="30" class="service-box-scm"/>
+    <text x="160" y="170" font-size="14" class="service-text">SCM</text>
+    
+    <rect x="70" y="190" width="180" height="20" class="service-box-recon"/>
+    <text x="160" y="205" font-size="12" class="service-text">Recon (opt.)</text>
+
+    <!-- Server 2 -->
+    <rect x="290" y="70" width="220" height="150" class="server-box"/>
+    <text x="400" y="95" font-size="16" class="text-label">Metadata Node 2</text>
+    
+    <!-- Services in Server 2 -->
+    <rect x="310" y="110" width="180" height="30" class="service-box-om"/>
+    <text x="400" y="130" font-size="14" class="service-text">Ozone Manager</text>
+    
+    <rect x="310" y="150" width="180" height="30" class="service-box-scm"/>
+    <text x="400" y="170" font-size="14" class="service-text">SCM</text>
+
+    <!-- Server 3 -->
+    <rect x="530" y="70" width="220" height="150" class="server-box"/>
+    <text x="640" y="95" font-size="16" class="text-label">Metadata Node 3</text>
+    
+    <!-- Services in Server 3 -->
+    <rect x="550" y="110" width="180" height="30" class="service-box-om"/>
+    <text x="640" y="130" font-size="14" class="service-text">Ozone Manager</text>
+    
+    <rect x="550" y="150" width="180" height="30" class="service-box-scm"/>
+    <text x="640" y="170" font-size="14" class="service-text">SCM</text>
+</svg>

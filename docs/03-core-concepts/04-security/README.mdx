@@ -1,11 +1,22 @@
----
-sidebar_label: Security
----
+# Security Overview
 
-# Using a Secure Ozone Cluster
+Apache Ozone provides a robust security framework to protect data and control access within the cluster. Security in Ozone encompasses several key areas:
 
-import DocCardList from '@theme/DocCardList';
+1.  **Authentication:** Verifying the identity of users and services interacting with Ozone.
+    *   **[Kerberos](./01-kerberos.md):** The primary mechanism for strong authentication in secure Hadoop environments. Ozone services (OM, SCM, Datanodes) and clients can use Kerberos principals and keytabs.
+    *   **Delegation Tokens:** Short-lived tokens issued by Ozone Manager (OM) to authenticated users (e.g., via Kerberos), allowing them to access Ozone services without repeatedly using their primary credentials. Used internally by frameworks like YARN.
+    *   **Block Tokens:** Used for authenticating client read/write operations directly with Datanodes, ensuring clients are authorized to access specific data blocks.
+    *   **S3 Authentication:** The S3 Gateway supports AWS Signature V4 for authenticating S3 client requests, typically mapping S3 access keys to internal Ozone users or Kerberos principals.
 
-This section documents the primary mechanisms Ozone uses for authentication and authorization of users and administrators. To configure encryption and other security mechanisms within an Ozone cluster, see the [Administrator Guide](../../administrator-guide/configuration/security).
+2.  **Authorization:** Determining what actions an authenticated user is allowed to perform on specific resources (volumes, buckets, keys).
+    *   **[ACLs (Access Control Lists)](./02-acls/README.mdx):** The primary authorization model, providing fine-grained control over permissions (READ, WRITE, DELETE, LIST, etc.) for users and groups on volumes, buckets, and keys/prefixes.
+    *   **Ranger Integration:** Ozone can integrate with Apache Ranger for centralized policy management and auditing.
+    *   **Native Authorizer:** Ozone's built-in authorizer based on ACLs stored within OM's metadata.
 
-<DocCardList/>
+3.  **Encryption:** Protecting data both in transit and at rest.
+    *   **TLS/SSL:** Securing communication between Ozone services (OM, SCM, Datanodes) and between clients and services using TLS encryption.
+    *   **Transparent Data Encryption (TDE):** Encrypting data at rest within buckets using keys managed by an external KMS (see [Bucket Encryption](../01-namespace/02-buckets/06-encryption.md)).
+
+4.  **Auditing:** Recording security-relevant events for monitoring and compliance. Ozone logs audit events for operations like access checks, data reads/writes, and administrative actions.
+
+Configuring security appropriately is essential for protecting data stored in Ozone and ensuring compliance with organizational policies. The specific mechanisms used (Kerberos, Ranger, TDE) depend on the cluster's deployment environment and requirements.
