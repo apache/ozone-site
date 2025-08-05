@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/snapshot.html">Ozone Snapshot</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../tools.html">Tools</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ozone Repair</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Ozone Repair</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone Repair (<code>ozone repair</code>) is an advanced tool to repair Ozone. The nodes being repaired must be stopped before the tool is run.
+Note: All repair commands support a <code>--dry-run</code> option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.
+Use the <code>--force</code> flag to override the running service check in false-positive cases.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">[</span>-D<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Advanced tool to repair Ozone. The nodes being repaired must be stopped before
+</span></span><span style="display:flex;"><span>the tool is run.
+</span></span><span style="display:flex;"><span>      -conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  -D, --set<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  -h, --help      Show this help message and exit.
+</span></span><span style="display:flex;"><span>  -V, --version   Print version information and exit.
+</span></span><span style="display:flex;"><span>      --verbose   More verbose output. Show the stack trace of the errors.
+</span></span><span style="display:flex;"><span>Commands:
+</span></span><span style="display:flex;"><span>  datanode  Tools to repair Datanode
+</span></span><span style="display:flex;"><span>  ldb       Operational tool to repair ldb.
+</span></span><span style="display:flex;"><span>  om        Operational tool to repair OM.
+</span></span><span style="display:flex;"><span>  scm       Operational tool to repair SCM.
+</span></span></code></pre></div><p>For more detailed usage see the output of <code>--help</code> for each of the subcommands.</p>
+<h2 id="ozone-repair-datanode">ozone repair datanode</h2>
+<p>Operational tool to repair datanode.</p>
+<h3 id="upgrade-container-schema">upgrade-container-schema</h3>
+<p>Upgrade all schema V2 containers to schema V3 for a datanode in offline mode.
+Optionally takes <code>--volume</code> option to specify which volume needs the upgrade.</p>
+<h2 id="ozone-repair-ldb">ozone repair ldb</h2>
+<p>Operational tool to repair ldb.</p>
+<h3 id="compact">compact</h3>
+<p>Compact a column family in the DB to clean up tombstones while the service is offline.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair ldb compact <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                --cf<span style="color:#f92672">=</span>&lt;columnFamilyName&gt; --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
+</span></span><span style="display:flex;"><span>CLI to compact a column-family in the DB <span style="color:#66d9ef">while</span> the service is offline.
+</span></span><span style="display:flex;"><span>Note: If om.db is compacted with this tool <span style="color:#66d9ef">then</span> it will negatively impact the
+</span></span><span style="display:flex;"><span>Ozone Manager<span style="color:#ae81ff">\&#39;</span>s efficient snapshot diff.
+</span></span><span style="display:flex;"><span>      --cf, --column-family, --column_family<span style="color:#f92672">=</span>&lt;columnFamilyName&gt;
+</span></span><span style="display:flex;"><span>                      Column family name
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
+</span></span></code></pre></div><h2 id="ozone-repair-om">ozone repair om</h2>
+<p>Operational tool to repair OM.</p>
+<h4 id="subcommands-under-om">Subcommands under OM</h4>
+<ul>
+<li>fso-tree</li>
+<li>snapshot</li>
+<li>update-transaction</li>
+<li>quota</li>
+<li>compact</li>
+<li>skip-ratis-transaction</li>
+</ul>
+<h3 id="fso-tree">fso-tree</h3>
+<p>Identify and repair a disconnected FSO tree by marking unreferenced entries for deletion.
+Reports the reachable, unreachable (pending delete) and unreferenced (orphaned) directories and files.
+OM should be stopped while this tool is run.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om fso-tree <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">[</span>-b<span style="color:#f92672">=</span>&lt;bucketFilter&gt;<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;omDBPath&gt;
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">[</span>-v<span style="color:#f92672">=</span>&lt;volumeFilter&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Identify and repair a disconnected FSO tree by marking unreferenced entries <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>deletion. OM should be stopped <span style="color:#66d9ef">while</span> this tool is run.
+</span></span><span style="display:flex;"><span>  -b, --bucket<span style="color:#f92672">=</span>&lt;bucketFilter&gt;
+</span></span><span style="display:flex;"><span>                        Filter by bucket name
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;omDBPath&gt;   Path to OM RocksDB
+</span></span><span style="display:flex;"><span>  -v, --volume<span style="color:#f92672">=</span>&lt;volumeFilter&gt;
+</span></span><span style="display:flex;"><span>                        Filter by volume name. Add <span style="color:#e6db74">&#39;/&#39;</span> before the volume name.
+</span></span></code></pre></div><h3 id="snapshot">snapshot</h3>
+<p>Subcommand for all snapshot related repairs.</p>
+<h4 id="chain">chain</h4>
+<p>Update global and path previous snapshot for a snapshot in case snapshot chain is corrupted.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om snapshot chain <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
+</span></span><span style="display:flex;"><span>                                      --gp<span style="color:#f92672">=</span>&lt;globalPreviousSnapshotId&gt;
+</span></span><span style="display:flex;"><span>                                      --pp<span style="color:#f92672">=</span>&lt;pathPreviousSnapshotId&gt; &lt;value&gt;
+</span></span><span style="display:flex;"><span>                                      &lt;snapshotName&gt;
+</span></span><span style="display:flex;"><span>CLI to update global and path previous snapshot <span style="color:#66d9ef">for</span> a snapshot in <span style="color:#66d9ef">case</span> snapshot
+</span></span><span style="display:flex;"><span>chain is corrupted.
+</span></span><span style="display:flex;"><span>      &lt;value&gt;          URI of the bucket <span style="color:#f92672">(</span>format: volume/bucket<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>      &lt;snapshotName&gt;   Snapshot name to update
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;    Database File Path
+</span></span><span style="display:flex;"><span>      --gp, --global-previous<span style="color:#f92672">=</span>&lt;globalPreviousSnapshotId&gt;
+</span></span><span style="display:flex;"><span>                       Global previous snapshotId to set <span style="color:#66d9ef">for</span> the given snapshot
+</span></span><span style="display:flex;"><span>      --pp, --path-previous<span style="color:#f92672">=</span>&lt;pathPreviousSnapshotId&gt;
+</span></span><span style="display:flex;"><span>                       Path previous snapshotId to set <span style="color:#66d9ef">for</span> the given snapshot
+</span></span></code></pre></div><h3 id="update-transaction">update-transaction</h3>
+<p>To avoid modifying Ratis logs and only update the latest applied transaction, use <code>update-transaction</code> command.
+This updates the highest transaction index in the OM transaction info table.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om update-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;dbPath&gt; --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
+</span></span><span style="display:flex;"><span>       --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
+</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table.
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
+</span></span><span style="display:flex;"><span>      --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
+</span></span><span style="display:flex;"><span>                      Highest index to set. The input should be non-zero long
+</span></span><span style="display:flex;"><span>                        integer.
+</span></span><span style="display:flex;"><span>      --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
+</span></span><span style="display:flex;"><span>                      Highest term to set. The input should be non-zero long
+</span></span><span style="display:flex;"><span>                        integer.
+</span></span></code></pre></div><h3 id="quota">quota</h3>
+<p>Operational tool to repair quota in OM DB.</p>
+<h4 id="start">start</h4>
+<p>To trigger quota repair use the <code>start</code> command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om quota start <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">[</span>--buckets<span style="color:#f92672">=</span>&lt;buckets&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">[</span>--service-host<span style="color:#f92672">=</span>&lt;omHost&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>CLI to trigger quota repair.
+</span></span><span style="display:flex;"><span>      --buckets<span style="color:#f92672">=</span>&lt;buckets&gt;   start quota repair <span style="color:#66d9ef">for</span> specific buckets. Input will
+</span></span><span style="display:flex;"><span>                              be list of uri separated by comma as
+</span></span><span style="display:flex;"><span>                              /&lt;volume&gt;/&lt;bucket&gt;<span style="color:#f92672">[</span>,...<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>      --service-host<span style="color:#f92672">=</span>&lt;omHost&gt;
+</span></span><span style="display:flex;"><span>                            Ozone Manager Host. If OM HA is enabled, use
+</span></span><span style="display:flex;"><span>                              --service-id instead. If you must use
+</span></span><span style="display:flex;"><span>                              --service-host with OM HA, this must point
+</span></span><span style="display:flex;"><span>                              directly to the leader OM. This option is
+</span></span><span style="display:flex;"><span>                              required when --service-id is not provided or
+</span></span><span style="display:flex;"><span>                              when HA is not enabled.
+</span></span><span style="display:flex;"><span>      --service-id, --om-service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
+</span></span><span style="display:flex;"><span>                            Ozone Manager Service ID
+</span></span></code></pre></div><h4 id="status">status</h4>
+<p>Get the status of last triggered quota repair.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om quota status <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--service-host<span style="color:#f92672">=</span>&lt;omHost&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>CLI to get the status of last trigger quota repair <span style="color:#66d9ef">if</span> available.
+</span></span><span style="display:flex;"><span>      --service-host<span style="color:#f92672">=</span>&lt;omHost&gt;
+</span></span><span style="display:flex;"><span>                  Ozone Manager Host. If OM HA is enabled, use --service-id
+</span></span><span style="display:flex;"><span>                    instead. If you must use --service-host with OM HA, this
+</span></span><span style="display:flex;"><span>                    must point directly to the leader OM. This option is
+</span></span><span style="display:flex;"><span>                    required when --service-id is not provided or when HA is
+</span></span><span style="display:flex;"><span>                    not enabled.
+</span></span><span style="display:flex;"><span>      --service-id, --om-service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
+</span></span><span style="display:flex;"><span>                  Ozone Manager Service ID
+</span></span></code></pre></div><h3 id="compact-1">compact</h3>
+<p>Compact a column family in the OM DB to clean up tombstones. The compaction happens asynchronously. Requires admin privileges.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om compact <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                               --cf<span style="color:#f92672">=</span>&lt;columnFamilyName&gt; <span style="color:#f92672">[</span>--node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                               <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>CLI to compact a column family in the om.db. The compaction happens
+</span></span><span style="display:flex;"><span>asynchronously. Requires admin privileges.
+</span></span><span style="display:flex;"><span>      --cf, --column-family, --column_family<span style="color:#f92672">=</span>&lt;columnFamilyName&gt;
+</span></span><span style="display:flex;"><span>                           Column family name
+</span></span><span style="display:flex;"><span>      --node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;   NodeID of the OM <span style="color:#66d9ef">for</span> which db needs to be compacted.
+</span></span><span style="display:flex;"><span>      --service-id, --om-service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
+</span></span><span style="display:flex;"><span>                           Ozone Manager Service ID
+</span></span></code></pre></div><h3 id="skip-ratis-transaction-srt">skip-ratis-transaction, srt</h3>
+<p>Omit a raft log in a ratis segment file by replacing the specified index with a dummy EchoOM command.
+This is an offline tool meant to be used only when all 3 OMs crash on the same transaction.
+If the issue is isolated to one OM, manually copy the DB from a healthy OM instead.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om skip-ratis-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> -b<span style="color:#f92672">=</span>&lt;backupDir&gt; --index<span style="color:#f92672">=</span>&lt;index&gt; <span style="color:#f92672">(</span>-s<span style="color:#f92672">=</span>&lt;segmentFile&gt; |
+</span></span><span style="display:flex;"><span>       -d<span style="color:#f92672">=</span>&lt;logDir&gt;<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>CLI to omit a raft log in a ratis segment file. The raft log at the index
+</span></span><span style="display:flex;"><span>specified is replaced with an EchoOM command <span style="color:#f92672">(</span>which is a dummy command<span style="color:#f92672">)</span>. It is
+</span></span><span style="display:flex;"><span>an offline command i.e., doesn<span style="color:#ae81ff">\&#39;</span>t require OM to be running. The command should
+</span></span><span style="display:flex;"><span>be run <span style="color:#66d9ef">for</span> the same transaction on all <span style="color:#ae81ff">3</span> OMs only when all the OMs are crashing
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> applying the same transaction. If only one OM is crashing and the other
+</span></span><span style="display:flex;"><span>OMs have executed the log successfully, <span style="color:#66d9ef">then</span> the DB should be manually copied
+</span></span><span style="display:flex;"><span>from one of the good OMs to the crashing OM instead.
+</span></span><span style="display:flex;"><span>  -b, --backup<span style="color:#f92672">=</span>&lt;backupDir&gt;   Directory to put the backup of the original
+</span></span><span style="display:flex;"><span>                               repaired segment file before the repair.
+</span></span><span style="display:flex;"><span>  -d, --ratis-log-dir<span style="color:#f92672">=</span>&lt;logDir&gt;
+</span></span><span style="display:flex;"><span>                             Path of the ratis log directory
+</span></span><span style="display:flex;"><span>      --index<span style="color:#f92672">=</span>&lt;index&gt;        Index of the failing transaction that should be
+</span></span><span style="display:flex;"><span>                               removed
+</span></span><span style="display:flex;"><span>  -s, --segment-path<span style="color:#f92672">=</span>&lt;segmentFile&gt;
+</span></span><span style="display:flex;"><span>                             Path of the input segment file
+</span></span></code></pre></div><h2 id="ozone-repair-scm">ozone repair scm</h2>
+<p>Operational tool to repair SCM.</p>
+<h4 id="subcommands-under-scm">Subcommands under SCM</h4>
+<ul>
+<li>cert</li>
+<li>update-transaction</li>
+</ul>
+<h3 id="cert">cert</h3>
+<p>Subcommand for all certificate related repairs on SCM</p>
+<h4 id="recover">recover</h4>
+<p>Recover Deleted SCM Certificate from RocksDB</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair scm cert recover <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                     --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
+</span></span><span style="display:flex;"><span>Recover Deleted SCM Certificate from RocksDB
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   SCM DB Path
+</span></span></code></pre></div><h3 id="update-transaction-1">update-transaction</h3>
+<p>To avoid modifying Ratis logs and only update the latest applied transaction, use <code>update-transaction</code> command.
+This updates the highest transaction index in the SCM transaction info table.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair scm update-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;dbPath&gt; --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
+</span></span><span style="display:flex;"><span>       --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
+</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table.
+</span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
+</span></span><span style="display:flex;"><span>      --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
+</span></span><span style="display:flex;"><span>                      Highest index to set. The input should be non-zero long
+</span></span><span style="display:flex;"><span>                        integer.
+</span></span><span style="display:flex;"><span>      --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
+</span></span><span style="display:flex;"><span>                      Highest term to set. The input should be non-zero long
+</span></span><span style="display:flex;"><span>                        integer.
+</span></span></code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../tools/containerlogparser.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0-SNAPSHOT, Last Modified: August 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a5cb560cb5a41f7bd9f9fe7c7f4ca3cd65aaf8e2">a5cb560cb5</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
