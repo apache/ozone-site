@@ -163,6 +163,15 @@ Why an Object Store? Object stores are more straightforward to build and use tha
     </item>
     
     <item>
+      <title>Ozone Blogs</title>
+      <link>https://ozone.apache.org/blogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/blogs/</guid>
+      <description> Apache Ozone Best Practices at Didi. Hongbing Wang, Shilun Fan, and Wei Ming. Blog  </description>
+    </item>
+    
+    <item>
       <title>Ozone Community</title>
       <link>https://ozone.apache.org/community/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
