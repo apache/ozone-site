@@ -293,7 +293,7 @@ s=d.getElementsByTagName('script')[0];
                                      <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
                                   </li>
                                
-                                  <li class="active">
+                                  <li class="">
                                      <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
                                   </li>
                                
@@ -569,7 +569,7 @@ s=d.getElementsByTagName('script')[0];
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Access Control</li>
+                  <li class="breadcrumb-item active" aria-current="page">OM Bootstrapping with Snapshots</li>
                 </ol>
               </nav>
 
@@ -583,108 +583,150 @@ s=d.getElementsByTagName('script')[0];
 
 
           <div class="col-md-9">
-            <h1>Access Control</h1>
+            <h1>OM Bootstrapping with Snapshots</h1>
 
-            <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
+            <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License. See accompanying LICENSE file.
 -->
-<h3 id="ranger-policies">Ranger Policies</h3>
-<p>When a tenant is created, Ozone will create a set of Ranger policies on the tenant&rsquo;s volume which allow the following:</p>
+<h1 id="om-bootstrapping-with-snapshots">OM Bootstrapping with Snapshots</h1>
+<h1 id="problem-statement">Problem Statement:</h1>
+<p>The current bootstrapping mechanism for OM has inconsistencies when dealing with Snapshotted OM RocksDBs. Bootstrapping occurs without locking mechanisms, and active transactions may still modify snapshots RocksDB during the process. This can lead to a corrupted RocksDB instance on the follower OM post-bootstrapping. To resolve this, the bootstrapping process must operate on a consistent system state.</p>
+<p>Jira Ticket : <a href="https://issues.apache.org/jira/browse/HDDS-12090">https://issues.apache.org/jira/browse/HDDS-12090</a></p>
+<h1 id="background-on-snapshots">Background on Snapshots</h1>
+<h2 id="snapshot-operations">Snapshot Operations</h2>
+<p>When a snapshot is taken on an Ozone bucket, the following steps occur:</p>
 <ol>
-<li>All users are able to create new buckets;</li>
-<li>Only the bucket owner (i.e. the user that creates the bucket) and tenant admins can access the bucket content.
-<ul>
-<li>Note: For Ozone admins, typically there would be other Ranger policies that grants them full access to the cluster, if this is case they should be able to access the buckets as well. Though it is still possible to create new Ranger policies to explicitly deny them access to buckets.</li>
-</ul>
-</li>
+<li>A RocksDB checkpoint of the active <code>om.db</code> is created.</li>
+<li>Deleted entries are removed from the <code>deletedKeyTable</code> and <code>deletedDirTable</code> in the Active Object Store (AOS) RocksDB. This is to just prevent the blocks from getting purged without checking for the key’s presence in the correct snapshot in the snapshot chain.</li>
+<li>A new entry is added to the <code>snapshotInfoTable</code> in the AOS RocksDB.</li>
 </ol>
-<p>Ranger admin is responsible for manually adding new policies to grant or deny any other access patterns. For example:</p>
+<h2 id="current-bootstrap-model">Current Bootstrap Model:</h2>
+<p>The current model involves the follower OM initiating an HTTP request to the leader OM, which provides a consistent view of its state. Before bucket snapshots were introduced, this process relied solely on an AOS RocksDB checkpoint. However, with snapshots, multiple RocksDB instances (AOS RocksDB + snapshot RocksDBs) must be handled, complicating the process.</p>
+<h3 id="workflow">Workflow:</h3>
 <ul>
-<li>Allow all users in a tenant read-only access to a bucket.
+<li>Follower Initiation:<br>
+Sends an exclude list of files already copied in previous batches.</li>
+<li>Leader Actions:
 <ul>
-<li>Corresponding Ranger policy Allow Condition: <code>Roles = tenantName-UserRole, Permissions = READ,LIST</code></li>
+<li>Creates an AOS RocksDB checkpoint.</li>
+<li>Performs a directory walk through:
+<ul>
+<li>AOS RocksDB checkpoint directory.</li>
+<li>Snapshot RocksDB directories.</li>
+<li>Backup SST file directory (compaction backup directory).</li>
+</ul>
+</li>
+<li>Identifies unique files to be copied in the next batch.</li>
+<li>Transfers files in batches, recreating hardlinks on the follower side as needed.</li>
 </ul>
 </li>
 </ul>
-<p>It is recommended to add new policies instead of editing the default tenant policies created by Ozone. <strong>DO NOT</strong> remove the <strong>Policy Label</strong> on those default tenant policies, or else the Ozone Manager might fail to sync with Ranger for those policies.</p>
-<h3 id="ranger-roles">Ranger Roles</h3>
-<p>These new Ranger policies would have the corresponding <strong>Ranger roles</strong> added in their <strong>Allow Conditions</strong>.</p>
-<p>Namely, <code>tenantName-UserRole</code> and <code>tenantName-AdminRole</code> Ranger roles are created when a tenant is created by an Ozone administrator under the CLI.</p>
-<p><code>tenantName-UserRole</code> contains a list of all user names that are assigned to this tenant.</p>
-<p><code>tenantName-AdminRole</code> contains a list of all tenant admins that are assigned to this tenant.</p>
-<p>We leverage Ranger roles mainly for the advantage of easier user management in a tenant:</p>
+<h3 id="issues-with-the-current-model">Issues with the Current Model</h3>
 <ol>
-<li>When new users are assigned to a tenant, Ozone Manager simply adds the new user to <code>tenantName-UserRole</code> Ranger role.</li>
-<li>When new tenant admins are assigned, Ozone Manager simply adds the user name to <code>tenantName-AdminRole</code> Ranger role. Delegated tenant admins will have the &ldquo;Role Admin&rdquo; checkbox checked, while non-delegated tenant admins won&rsquo;t.
-<ul>
-<li>Role admins in a Ranger role has the permission to edit that Ranger role.</li>
-</ul>
-</li>
-<li>And because <code>tenantName-AdminRole</code> is the &ldquo;Role Admin&rdquo; of <code>tenantName-UserRole</code>, whichever user in the <code>tenantName-AdminRole</code> automatically has the permission to add new users to the tenant, meaning all tenant admins (whether delegated or not) has the permission to assign and revoke users in this tenant.</li>
+<li>Active transactions during bootstrapping may modify snapshot RocksDBs, leading to inconsistencies.</li>
+<li>Partial data copies can occur when double-buffer flushes or other snapshot-related operations are in progress.</li>
+<li>Large snapshot data sizes (often in GBs) require multi-batch transfers, increasing the risk of data corruption.</li>
 </ol>
-<ul>
-<li><strong>DO NOT</strong> manually edit any Ranger roles created by Ozone. Any changes to them will be overwritten by the Ozone Manager&rsquo;s Ranger sync thread. Changes in tenant membership should be done using <a href="../feature/s3-tenant-commands.html">Multi-Tenancy CLI commands</a>.</li>
-</ul>
-<h3 id="ranger-sync">Ranger Sync</h3>
-<p>A Ranger Sync thread has been implemented to keep the Ranger policy and role states in-sync with Ozone Manager database in case of Ozone Manager crashes during tenant administrative operations.</p>
-<p>The Ranger Sync thread does the following:</p>
+<h1 id="proposed-fixes">Proposed Fixes</h1>
+<h2 id="locking-the-snapshot-cache">Locking the Snapshot Cache</h2>
+<p>Snapshot Cache is the class which is responsible for maintaining all rocksdb handles corresponding to a snapshot. The rocksdb handles are closed by the snapshot cache are closed from time to time if there are no references of the rocksdb being used by any of the threads in the system. Hence any operation on a snapshot would go through the snapshot cache increasing the reference count of that snapshot. Implementing a lock for this snapshot cache would prevent any newer threads from requesting a snapshot rocksdb handle from the snapshot cache. Thus any operation under this lock will have a consistent view of the entire snapshot. The only downside to this is that it would block the double buffer thread, hence any operation performed under this thread has to be lightweight so that it doesn’t end up running for a long period of time.(P.S. With Sumit’s implementation of optimized Gatekeeping model and getting rid of double buffer from OM would result in only blocking the snapshot operations which should be fine since these operations are only fired by background threads.)</p>
+<p>With the above implementation of a lock there is a way to get a consistent snapshot of the entire OM. Now lets dive into various approaches to overall bootstrap flow.</p>
+<h2 id="approach-1batching-files-over-multiple-tarballs">Approach 1(Batching files over multiple tarballs):</h2>
+<p>This approach builds on the current model by introducing size thresholds to manage locks and data transfers more efficiently.</p>
+<h3 id="workflow-1">Workflow:</h3>
 <ol>
-<li>Cleans up any default tenant policies if a tenant is already deleted.</li>
-<li>Checks if default tenant roles are out-of-sync (could be caused by OM crash during user assign/revoke operation). Overwrites them if this is the case.</li>
-<li>Performs all Ranger update (write) operations queued by Ozone tenant commands from the last sync, if any.
+<li>Follower Initiation:
 <ul>
-<li>This implies there will be a delay before Ranger policies and roles are updated for any tenant write operations (tenant create/delete, tenant user assign/revoke/assignadmin/revokeadmin, etc.).</li>
+<li>Sends an exclude list of previously copied files (identified by <code>inodeId</code>).</li>
 </ul>
 </li>
+<li>Leader Directory Walk:
+<ul>
+<li>Walks through AOS RocksDB, snapshot RocksDBs, and backup SST directories to identify files to transfer.</li>
+<li>Compares against the exclude list to avoid duplicate transfers.</li>
+</ul>
+</li>
+<li>If the total size of files to be copied is more than <strong>ozone.om.ratis.snapshot.lock.max.total.size.threshold</strong> then the files would be directly sent over the stream as a tarball where the name of the files is the inodeId of the file.</li>
+<li>If the total size of files to be copied is less than equal to <strong>ozone.om.ratis.snapshot.lock.max.total.size.threshold</strong> then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty(No snapshot rocksdb should be open). Under the lock following operations would be performed:
+<ul>
+<li>Take the AOS rocksdb checkpoint.</li>
+<li>A complete directory walk is done on AOS checkpoint rocksdb directory + all the snapshot rocksdb directories + backup sst file directory(compaction log directory) to figure out all the files to be copied and any file already present in the exclude list would be excluded.</li>
+<li>These files are added to the tarball where again the name of the file would be the inodeId of the file.</li>
+</ul>
+</li>
+<li>As the files are being iterated the path of each file and their corresponding inodeIds would be tracked. When it is the last batch this map would also be written as a text file in the final tarball to recreate all the hardlinks on the follower node.</li>
 </ol>
-<h2 id="adding-new-bucket-policies-when-sharing-a-bucket">Adding new bucket policies when sharing a bucket</h2>
-<p>By default, only the bucket owners have full access to the buckets they created. Other regular users won&rsquo;t be able to access the content of buckets they don&rsquo;t own.</p>
-<p>So in order to share a bucket with other users without relaxing the default bucket policy (e.g. allow all tenant users LIST and READ access to all buckets),
-a cluster admin or tenant admin will needs to manually create a new Ozone policy in Ranger for that bucket.</p>
-<p>Further, if a cluster admin or tenant admin wants the bucket owner (who is a regular tenant user without any superuser privileges) to be able to edit that bucket&rsquo;s policy,
-when manually creating a new Ozone policy in Ranger for that bucket,
-an admin will need to explicitly grant the bucket owner user ALL permission on the bucket AND tick the bucket owner user&rsquo;s &ldquo;Delegated Admin&rdquo; checkbox for that policy.</p>
-<p>Note:</p>
+<p>The only drawback with this approach is that we might end up sending more data over the network because some sst files sent over the network could have been replaced because of compaction running concurrently on the active object store. But at the same time since the entire bootstrap operation is supposed to finish in the order of a few minutes, the amount of extra data would be really minimal assuming we could utmost write 30 MBs of data assuming there are 30000 keys written in 2 mins each key would be around 1 KB.</p>
+<h2 id="approach-11">Approach 1.1:</h2>
+<p>This approach builds on the approach1 where along with introducing size thresholds under locks manage locks, we only rely on the number of files changed under the snapshot directory as the threshold.</p>
+<h3 id="workflow-2">Workflow:</h3>
 <ol>
-<li>An actual user name (e.g. <code>hive</code>) need to be specified here. The flexible <code>{OWNER}</code> tag will not work with Ranger&rsquo;s &ldquo;Delegated Admin&rdquo; checkbox. For more Technical details:</li>
-</ol>
+<li>Follower Initiation:
 <ul>
-<li>The <code>{OWNER}</code> tag is only meaningful when Ozone Manager (OM) is performing a permission check. And in that permission check process OM fills in what this <code>{OWNER}</code> tag actually stands for.
-<ul>
-<li>For example, <code>{OWNER}</code> will become user <code>hive</code> during a bucket list permission check in OM, assuming <code>hive</code> is the bucket owner;
-<ul>
-<li>Bonus: because of OM&rsquo;s hierarchical permission check, right before the bucket permission check, <code>{OWNER}</code> will become user <code>om</code> during a volume read permission check before this bucket permission check, assuming <code>om</code> is the bucket&rsquo;s parent volume&rsquo;s owner.</li>
+<li>Sends an exclude list of previously copied files (identified by <code>inodeId</code>).</li>
 </ul>
 </li>
+<li>Leader Directory Walk:
+<ul>
+<li>Walks through AOS RocksDB, snapshot RocksDBs, and backup SST directories to identify files to transfer.</li>
+<li>Compares against the exclude list to avoid duplicate transfers.</li>
 </ul>
 </li>
-</ul>
-<ol start="2">
-<li>Do not confuse the &ldquo;Delegated Admin&rdquo; checkbox in Ranger Web UI with tenant delegated admin. They are conceptually similar (have extra privilege), but different.</li>
-</ol>
+<li>If either the total size to be copied or the total number of files under the snapshot rocksdb directory to be copied is more than <strong>ozone.om.ratis.snapshot.max.total.sst.size</strong> respectively then the files would be directly sent over the stream as a tarball where the name of the files is the inodeId of the file.</li>
+<li>If the total number of file size  to be copied under the snapshot rocksdb directory is less than equal to <strong>ozone.om.ratis.snapshot.max.total.sst.size</strong> then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty(No snapshot rocksdb should be open). Under the lock following operations would be performed:
 <ul>
-<li>With Ranger policies&rsquo; &ldquo;Delegated Admin&rdquo; checkbox in a policy rule. That <strong>user</strong>, or users in that <strong>group</strong>, or users in that <strong>role</strong> will be able to edit that policy as long as the user can log in to Ranger Web UI.</li>
-<li>Tenant delegated admin has the permission to assign and revoke tenant admins from a tenant.</li>
+<li>Take the AOS rocksdb checkpoint.</li>
+<li>A complete directory walk is done on all the snapshot rocksdb directories to figure out all the files to be copied and any file already present in the exclude list would be excluded.</li>
+<li>Hard links of these files are added to tmp directory on the leader.</li>
+<li>Exit lock</li>
+<li>After the lock all files under the tmp directory, AOS Rocksdb checkpoint directory and compaction backup directory have to be written to the tarball. As the files are being iterated the path of each file and their corresponding inodeIds would be tracked. Since this is the last batch this map would also be written as a text file in the final tarball to recreate all the hardlinks on the follower node.</li>
 </ul>
-<p>With this new Ranger policy, as long as the bucket owners can log in to the Ranger Web UI,
-they could edit the bucket policies on their own, for example, to share the bucket with others without an administrator&rsquo;s manual intervention.</p>
+</li>
+</ol>
+<p>The drawbacks for this approach is the same as approach 1, but here we are optimizing on the amount of time lock is held by performing very lightweight operations under the lock. So this is a more optimal approach since it minimises the lock wait time on other threads.</p>
+<h2 id="approach-2single-tarball-creation-under-lock">Approach 2(Single tarball creation under lock):</h2>
+<p>The approach 2 here proposes to create a single tarball file on the disk and stream the chunks of the tarball over multiple http batch request from the follower.<br>
+Following is the flow for creating the tarball:</p>
+<ol>
+<li>Snapshot cache lock is taken after waiting for the snapshot cache to become completely empty(No snapshot rocksdb should be open). Under the lock following operations would be performed:
+<ul>
+<li>Take the AOS rocksdb checkpoint.</li>
+<li>A complete directory walk is done on AOS rocksdb directory + all the snapshot rocksdb directories + backup sst file directory(compaction log directory) to figure out all the files to be copied to create a single tarball.</li>
+</ul>
+</li>
+<li>This tarball should be streamed batch by batch to the follower in a paginated fashion.</li>
+</ol>
+<p>The drawback with this approach is that the double buffer would be blocked for a really long time if there is a lot of data to be tarballed. If the total snapshot size of the OM dbs put together is 1 TB, considering the tarball writes go to an NVMe and considering the write throughput for an NVMe drive is around 5 GB/sec then the tarball write might take a total of 1024/5 secs = 3 mins. Blocking the double buffer thread for 3 mins seems to be a bad idea, but at the same time this would only happen if there is snapshot operation in flight or in the double buffer queue already.</p>
+<h2 id="approach-3creating-a-checkpoint-of-the-snapshot-rocksdb-under-lock">Approach 3(Creating a checkpoint of the snapshot rocksdb under lock):</h2>
+<p>The approach 3 here proposes to create a rocksdb checkpoint for each and every snapshot rocksdb in the system along with the AOS rocksdb under the snapshot cache lock. Outside of the lock we could either create a single tarball file as done in approach 2 or stream the files in batches as multiple tarball file similar to approach 1 to the follower.<br>
+Following is the flow for creating the tarball:</p>
+<ol>
+<li>Snapshot cache lock is taken after waiting for the snapshot cache to become completely empty(No snapshot rocksdb should be open). Under the lock following operations would be performed:
+<ul>
+<li>Take the AOS rocksdb checkpoint.</li>
+<li>Take rocksdb checkpoint of each and every snapshot in the system by iterating through the snapshotInfo table of AOS checkpoint rocksdb.</li>
+</ul>
+</li>
+<li>Now the files in the checkpoint directories have to be streamed to the follower as done in either approach 1 or approach 2.</li>
+</ol>
+<p>The drawback with this approach is that this would double the number of hardlinks in the file system which could have potential impact on performance during bootstrap, considering the case in systems where the total number of files and hardlinks in the system order up to 5 million files.</p>
+<h2 id="recommendations">Recommendations</h2>
+<p>Approach 1 is the most optimized solution as it balances the amount of time under the lock by minimising the amount of IO ops inside the lock by introducing another threshold config to track this. Moreover taking this approach will also need the most minimal amount of code change as it doesn’t differ from the current approach by much. While approach 2 might look simpler but this would imply revamping the entire bootstrap logic currently in place and moreover this approach might increase the total amount of time inside the lock which would imply blocking the double buffer thread of extended amounts of time if it comes to this situation, which approach 1 tries to avoid.</p>
+<p>Final approach implemented is the Approach 1.1</p>
 
 
           
-          <a class="btn  btn-success btn-lg" href="../feature/om-bootstrapping-with-snapshots.html">Next >></a>
+          <a class="btn  btn-success btn-lg" href="../feature/faircallqueue.html">Next >></a>
           
           </div>
 
@@ -700,7 +742,7 @@ they could edit the bucket policies on their own, for example, to share the buck
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 20, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f127fa9944babae59b18a535993745ba698da3b9">f127fa9944</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: August 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/31cab30b6e49045872999fe24c4cdad9c6de9af5">31cab30b6e</a>
     </span>
   </div>
 </footer>
