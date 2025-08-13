@@ -587,30 +587,30 @@
                 href="/zh/start/fromsource.html"
                 />
   </url><url>
-    <loc>/zh/tools/containerlogparser.html</loc>
-    <lastmod>2025-07-09T12:59:18+05:30</lastmod>
+    <loc>/zh/tools/debug/containerlogparser.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/tools/containerlogparser.html"
+                href="/tools/debug/containerlogparser.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/tools/containerlogparser.html"
+                href="/zh/tools/debug/containerlogparser.html"
                 />
   </url><url>
-    <loc>/zh/tools/debug.html</loc>
-    <lastmod>2024-10-30T12:13:52+05:30</lastmod>
+    <loc>/zh/tools/debug/ldb.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/tools/debug.html"
+                href="/tools/debug/ldb.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/tools/debug.html"
+                href="/zh/tools/debug/ldb.html"
                 />
   </url><url>
     <loc>/zh/tools/admin.html</loc>
@@ -639,17 +639,17 @@
                 href="/zh/tools/genconf.html"
                 />
   </url><url>
-    <loc>/zh/tools/auditparser.html</loc>
-    <lastmod>2025-03-13T10:19:47+05:30</lastmod>
+    <loc>/zh/tools/debug/auditparser.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/tools/auditparser.html"
+                href="/tools/debug/auditparser.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/tools/auditparser.html"
+                href="/zh/tools/debug/auditparser.html"
                 />
   </url><url>
     <loc>/zh/tools.html</loc>

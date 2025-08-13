@@ -46,8 +46,7 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-<body>
-
+  <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -76,10 +75,8 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-
-<div class="wrapper">
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+      <div class="row">
         
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
@@ -560,217 +557,210 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
             <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/">[]</a> Improved Layout of Ozone Tools () </h1>
+                <div><i>Authors: Ethan Rose</i><div class="pull-right">2024-12-18</div></div>
+                <p>&nbsp</p>
 
-                
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        Proposal for an improved layout of Ozone tools CLI
+                    </div>
+                </div>
 
-<div class="pull-right">
-    
-    
-    
-</div>
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-                <h1>Debug Tools</h1>
-            </div>
-
-            <div class="col-md-9">
-                <!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License. See accompanying LICENSE file.
 -->
-<p>Ozone Debug command (<code>ozone debug</code>) is a collection of developer tools intended to help in debugging and get more information of various components of ozone.</p>
-<p>It includes the following tools:</p>
+<h1 id="improved-layout-of-ozone-tools">Improved Layout of Ozone Tools</h1>
+<p>The <code>ozone-tools</code> module currently contains utilities that can be used to troubleshoot and fix low level issues in an Ozone cluster through the <code>ozone debug</code> and <code>ozone repair</code> subcommands. These tools have traditionally been updated in an ad-hoc fashion and not well documented. As we continue to add more tools and their complexity increases, we should standardize the layout and function of these tools to make sure they are safe and easy to use.</p>
+<p>This document proposes a migration of the Ozone tools layout, and documents the commands available at the time of writing. It may be kept as a reference for the motivation behind the layout of the tools commands, but the CLI may change in the future beyond what this doc initially covers.</p>
+<h2 id="current-layout">Current Layout</h2>
+<p>This is the current layout of the first two levels of the <code>ozone-tools</code> command line:</p>
 <ul>
-<li><strong>ldb</strong> - Tools to debug RocksDB related issues.</li>
-<li><strong>om</strong> - Debug commands related to OM.</li>
-<li><strong>datanode</strong> - Debug commands related to Datanode.</li>
-<li><strong>replicas</strong> - Debug commands for key replica related issues.</li>
-<li><strong>ratislogparser</strong> - Shell of printing Ratis Log in understandable text</li>
-<li><strong>auditparser</strong> - A tool to parse and query Ozone audit logs.</li>
-<li><strong>log</strong> - A tool to parse and provide insights on logs, currently supports only the datanode&rsquo;s container logs.</li>
-<li><strong>checknative</strong> - Checks if native libraries are loaded</li>
-<li><strong>version</strong> - Show internal version of Ozone components</li>
+<li>ozone debug
+<ul>
+<li>print-log-dag</li>
+<li>find-missing-padding</li>
+<li>read-replicas</li>
+<li>recover</li>
+<li>prefix</li>
+<li>version</li>
+<li>chunkinfo</li>
+<li>container</li>
+<li>ldb</li>
+<li>ratislogparser</li>
 </ul>
-<p>For more information see the following subpages:</p>
+</li>
+<li>ozone repair
+<ul>
+<li>cert-recover</li>
+<li>ldb</li>
+<li>quota</li>
+</ul>
+</li>
+</ul>
+<h2 id="new-layout">New Layout</h2>
+<p>Since debug and repair tools are not meant to be scripted, we should be able to change the CLI layout without impact to compatibility. The following is a proposal to logically regroup all existing commands while leaving room for new additions.</p>
+<h3 id="debug">Debug</h3>
+<p>Invoked as <code>ozone debug</code>, these commands make no modifications to Ozone and can be run while the Ozone cluster is live. They can be broadly grouped into three categories:</p>
+<ul>
+<li>Commands that run locally on all components.
+<ul>
+<li>These include generic things like <code>ldb</code> and ratis log parsing.</li>
+</ul>
+</li>
+<li>Commands that run locally on a specific component.
+<ul>
+<li>This include things like repairing quota or snapshot chain on the OM.</li>
+</ul>
+</li>
+<li>Commands that run over the network.
+<ul>
+<li>This include things like reading all replicas and checking their integrity.</li>
+</ul>
+</li>
+</ul>
+<p>Commands from different categories should not exist under the same <code>ozone debug</code> subcommand. For example, <code>ozone debug ldb</code> should not have a mix of subcommands that work on all DB instances and some that only work on OM. All subcommands should clearly document where they are expected to run in their help message. We can use these guidelines to place subcommands based on their type:</p>
+<ul>
+<li>Commands that run locally or commands that run over the network may be top level subcommands of <code>ozone debug</code>.</li>
+<li>Commands that run locally on a specific component should be under a dedicated subcommand, like <code>ozone debug om</code>.</li>
+</ul>
+<p>We can then apply these rules to group the existing commands:</p>
+<ul>
+<li><code>ozone debug ldb</code>
+This command which provides RocksDB parsing for all components will remain in its original location.</li>
+<li><code>ozone debug version</code>
+Implemented in <a href="https://issues.apache.org/jira/browse/HDDS-11740">HDDS-11740</a>, this command prints the internal component versions of the Ozone instance installed on the current host. It will remain in its original location</li>
+<li><code>ozone debug om</code>
+A subcommand for all debug operations that run locally on an OM instance.
+<ul>
+<li><code>ozone debug om generate-compaction-dag</code>
+This will be the new location of <code>ozone debug print-log-dag</code>. Since it outputs a file locally to the leader OM, it should be modified to run locally as well. The current version goes over the network but does not return the result over the network. The name has been updated to better reflect its output. The command only works on the OM since we do not track RocksDB compactions for other components.</li>
+<li><code>ozone debug om prefix</code>
+The new location of <code>ozone debug prefix</code>.</li>
+</ul>
+</li>
+<li><code>ozone debug datanode</code>
+A subcommand for all debug operations that run locally on a datanode instance.
+<ul>
+<li><code>ozone debug datanode container</code>
+The new location of <code>ozone debug container</code> and all of its subcommands. These commands are used to inspect container replicas locally on datanodes. Currently <code>container</code> is the only debug subcommand on the datanodes.</li>
+</ul>
+</li>
+<li><code>ozone debug replicas</code>
+Currently all online debug tools fit under this category, where they get a listing from the OM and perform checks on the replica information retrieved. The help message for this subcommand should explicitly state that it runs over the network against a running cluster.
+<ul>
+<li><code>ozone debug replicas chunk-info</code>
+This is the new location of <code>ozone debug chunkinfo</code></li>
+<li><code>ozone debug replicas verify [--checksums] [--block-existence] [--container-state]</code>
+This is the combination of <code>ozone debug find-missing-padding</code>, <code>ozone debug read-replicas</code>, and the <a href="https://github.com/apache/ozone/pull/7548">proposed block metadata check tool</a>. The command takes  paths in the namespace and performs checks on the objects based on the flags given:
+<ul>
+<li>No flags: Error, at least one check must be specified.</li>
+<li><code>--blocks</code> checks block existence of all replicas as proposed in <a href="https://issues.apache.org/jira/browse/HDDS-11891">HDDS-11891</a>.
+<ul>
+<li>This also incorporates the <code>find-missing-padding</code> tool, which actually does a similar thing and is not EC specific.</li>
+<li>This command may support filtering by things like replication type in the future if only a certain type of key needs to be checked.</li>
+</ul>
+</li>
+<li><code>--checksums</code> Pulls data and verifies the checksums on the client side for all replicas. This is a thorough check but it will run very slowly.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>ozone debug ratis</code>
+This subcommand is where we can put Ratis related commands that are specific to Ozone. For bringing the Ratis shell into Ozone, see the <a href="../design/tools.html#ratis"><code>ozone ratis</code></a> subcommand.
+<ul>
+<li><code>ozone debug ratis parse &lt;--role={om,scm,datanode}&gt;</code>
+<ul>
+<li>Currently our only Ozone-specific subcommand, this can be used to parse any Ratis on-disk state and apply the Ozone specific schema to it if needed.</li>
+<li>The user will need to specify what type of Ozone role the Ratis information came from so it can apply the proper schema.</li>
+<li>This is tracked as <a href="https://issues.apache.org/jira/browse/HDDS-13518">HDDS-13518</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="repair">Repair</h3>
+<p>Invoked as <code>ozone repair</code>, these commands make modifications to an Ozone instance. Some commands, like quota repair, may go over the network and run while the cluster is online. Proper usage should be specified in each command&rsquo;s help message. All locally running commands will support a <code>--dry-run</code> flag to show what they will do without making any modifications. Subcommand grouping follows similar guidelines to <code>ozone debug</code>.</p>
+<ul>
+<li><code>ozone repair om</code>
+These commands make repairs to an individual OM instance.
+<ul>
+<li><code>ozone repair om quota</code>
+The new location of <code>ozone repair quota</code></li>
+<li><code>ozone repair om snapshot</code>
+A dedicated subcommand for all snapshot related repairs we may need to do now or in the future.
+<ul>
+<li><code>ozone repair om snapshot chain</code>
+Currently our only snapshot related repair tool, this is the new location of <code>ozone repair snapshot</code>, which only handles chain corruption despite the generic name.</li>
+</ul>
+</li>
+<li><code>ozone repair om update-transaction</code>
+The new location of <code>ozone repair ldb update-transaction</code>, which is currently only supported for OM.</li>
+<li><code>ozone repair om fso-tree</code>
+The FSO repair tool implemented in <a href="https://issues.apache.org/jira/browse/HDDS-11724">HDDS-11724</a>.</li>
+</ul>
+</li>
+<li><code>ozone repair scm</code>
+These commands make repairs to an individual SCM instance.
+<ul>
+<li><code>ozone repair scm update-transaction</code>
+A port of the existing <code>ozone repair ldb update-transaction</code> for SCM.</li>
+<li><code>ozone repair scm cert</code>
+A dedicated subcommand for all certificate related repairs on SCM we may need now or in the future.
+<ul>
+<li><code>ozone repair scm cert recover</code>
+The new location of <code>ozone repair cert-recover</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>ozone repair datanode</code>
+These commands make repairs to an individual datanode instance.
+<ul>
+<li><code>ozone repair datanode upgrade-container-schema</code>
+This is the new location of <code>ozone admin container upgrade</code>, which actually works offline on a single datanode instance so it does not fit with other <code>ozone admin container</code> commands.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ratis">Ratis</h3>
+<p>Invoked as <code>ozone ratis</code> starting from <a href="https://issues.apache.org/jira/browse/HDDS-10509">HDDS-10509</a>, this subcommand applies Ozone&rsquo;s TLS configuration and forwards all commands to the Ratis shell, meaning <code>ozone ratis sh</code> will work the same as <code>ratis sh</code> but will also work out of the box in a secure cluster. To avoid conflicts with commands that may be added to Ratis in the future, we should not add any new <code>ozone ratis</code> subcommands in Ozone. Custom Ozone subcommands related to Ratis, like log parsing with Ozone&rsquo;s schemas, will be added to <code>ozone debug ratis</code>.</p>
+<h3 id="misc">Misc</h3>
+<h4 id="lease-recovery">Lease Recovery</h4>
+<p>The <code>ozone debug recover</code> command that is currently used for lease recovery has a few problems:</p>
+<ul>
+<li>It modifies the cluster, so it should not be under <code>debug</code>.</li>
+<li>The name does not specify that it deals with leases.</li>
+<li>It uses a standard API from the <code>FileSystem</code> interface unlike other low level tools in this package.</li>
+</ul>
+<p>The command is unique because it goes through the <code>FileSystem</code> interface but is not exposed through the <code>fs</code> command line in Hadoop or Ozone. For these reasons, we propose moving this command to its own Ozone subcommand: <code>ozone admin om lease recover</code>. This also allows other lease related subcommands (like querying of existing leases) to be added in the future.</p>
+<h4 id="ldb-repair">LDB Repair</h4>
+<p>For now there are no plans to support arbitrary RocksDB modifications to RocksDB data per <a href="https://github.com/apache/ozone/pull/7177">this discussion</a>. The current set of <code>ozone repair ldb</code> subcommands only repair OM, so they should be moved to <code>ozone repair om</code> instead. Currently the only use case for <code>ozone repair ldb</code> is a wrapper around compaction, giving us the <code>ozone repair ldb compact</code> command in <a href="https://issues.apache.org/jira/browse/HDDS-12533">HDDS-12533</a>.</p>
 
-                
-                
-                
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    LDB Tool
-                                </h2>
-                                <p class="card-text">Parsing rocksDB and debugging related issues.</p>
-                                <a href="../tools/debug/ldb.html"
-                                   class=" btn btn-primary btn-lg">LDB Tool</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug OM
-                                </h2>
-                                <p class="card-text">Debug commands related to OM.</p>
-                                <a href="../tools/debug/debugom.html"
-                                   class=" btn btn-primary btn-lg">Debug OM</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug Datanode
-                                </h2>
-                                <p class="card-text">Debug commands related to datanode.</p>
-                                <a href="../tools/debug/debugdatanode.html"
-                                   class=" btn btn-primary btn-lg">Debug Datanode</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug Replicas
-                                </h2>
-                                <p class="card-text">Debug commands for replica-related issues.</p>
-                                <a href="../tools/debug/debugreplicas.html"
-                                   class=" btn btn-primary btn-lg">Debug Replicas</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ratis Log Parser
-                                </h2>
-                                <p class="card-text">Parse ratis logs to be in human understandable form.</p>
-                                <a href="../tools/debug/ratislogparser.html"
-                                   class=" btn btn-primary btn-lg">Ratis Log Parser</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Audit Parser
-                                </h2>
-                                <p class="card-text">Tool for querying the ozone audit logs.</p>
-                                <a href="../tools/debug/auditparser.html"
-                                   class=" btn btn-primary btn-lg">Audit Parser</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Container Replica Debugger Tool
-                                </h2>
-                                <p class="card-text">Processing and querying container log files from Ozone datanodes to track state transitions.</p>
-                                <a href="../tools/debug/containerlogparser.html"
-                                   class=" btn btn-primary btn-lg">Container Replica Debugger Tool</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-                
             </div>
+
         </div>
+      </div>
     </div>
-</div>
-    <div class="push"></div>
-</div>
 
 
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 12, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a59b573fdf30f6ae3e061f84b607d28d3a9c3601">a59b573fdf</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: August 12, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/89dcc4c732c31e66b5d7b7d97a968a54ed5936b4">89dcc4c732</a>
     </span>
   </div>
 </footer>
@@ -782,6 +772,5 @@ s=d.getElementsByTagName('script')[0];
 <script src="../js/bootstrap.min.js"></script>
 
 
-</body>
-
+  </body>
 </html>

@@ -6,7 +6,7 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Jul 2025 11:24:38 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 12 Aug 2025 14:24:23 -0400</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Full Volume Handling</title>
@@ -28,6 +28,13 @@
       <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
       <guid>/design/dn-usedspace-calculation.html</guid>
       <description>Describe proposal for optimization in datanode used space calculation.</description>
+    </item>
+    <item>
+      <title>Improved Layout of Ozone Tools</title>
+      <link>/design/tools.html</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>/design/tools.html</guid>
+      <description>Proposal for an improved layout of Ozone tools CLI</description>
     </item>
     <item>
       <title>Overwriting an Ozone Key only if it has not changed.</title>

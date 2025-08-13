@@ -282,16 +282,16 @@
     </item>
     <item>
       <title>Container Replica Debugger Tool</title>
-      <link>/zh/tools/containerlogparser.html</link>
+      <link>/zh/tools/debug/containerlogparser.html</link>
       <pubDate>Mon, 09 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>/zh/tools/containerlogparser.html</guid>
+      <guid>/zh/tools/debug/containerlogparser.html</guid>
       <description>该工具处理来自 Ozone 数据节点的容器日志文件，以跟踪状态转换。它提供 CLI 命令，用于根据不同的属性查询容器。</description>
     </item>
     <item>
       <title>Ozone Debug</title>
-      <link>/zh/tools/debug.html</link>
+      <link>/zh/tools/debug/ldb.html</link>
       <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>/zh/tools/debug.html</guid>
+      <guid>/zh/tools/debug/ldb.html</guid>
       <description>Ozone Debug 命令可用于所有与调试相关的任务。</description>
     </item>
     <item>
@@ -310,9 +310,9 @@
     </item>
     <item>
       <title>审计解析器</title>
-      <link>/zh/tools/auditparser.html</link>
+      <link>/zh/tools/debug/auditparser.html</link>
       <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>/zh/tools/auditparser.html</guid>
+      <guid>/zh/tools/debug/auditparser.html</guid>
       <description>审计解析器工具用来查看 Ozone 的审计日志。</description>
     </item>
     <item>

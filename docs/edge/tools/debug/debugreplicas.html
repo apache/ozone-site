@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../../index.html" class="navbar-left ozone-logo">
+        <img src="../../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/snapshot.html">Ozone Snapshot</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../tools/debug.html">Debug Tools</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Debug Replicas</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Debug Replicas</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Debug commands for retrieving information and performing various checks on the key replicas in datanodes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug replicas <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Debug commands <span style="color:#66d9ef">for</span> replica-related issues, retrieving replica information from
+</span></span><span style="display:flex;"><span>the OM and performing checks over the network against a running cluster.
+</span></span><span style="display:flex;"><span>      --verbose   More verbose output. Show the stack trace of the errors.
+</span></span><span style="display:flex;"><span>Commands:
+</span></span><span style="display:flex;"><span>  chunk-info  Returns chunk location information about an existing key
+</span></span><span style="display:flex;"><span>  verify      Run checks to verify data across replicas. By default prints only
+</span></span><span style="display:flex;"><span>                the keys with failed checks.
+</span></span></code></pre></div><h2 id="chunk-info">chunk-info</h2>
+<p>For a given URI of a key, the command returns all the chunks&rsquo; location information.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug replicas chunk-info <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> &lt;value&gt;
+</span></span><span style="display:flex;"><span>Returns chunk location information about an existing key
+</span></span><span style="display:flex;"><span>      &lt;value&gt;     URI of the key <span style="color:#f92672">(</span>format: volume/bucket/key<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>                  Ozone URI could either be a full URI or short URI.
+</span></span><span style="display:flex;"><span>                  Full URI should start with o3://, in <span style="color:#66d9ef">case</span> of non-HA
+</span></span><span style="display:flex;"><span>                  clusters it should be followed by the host name and
+</span></span><span style="display:flex;"><span>                  optionally the port number. In <span style="color:#66d9ef">case</span> of HA clusters
+</span></span><span style="display:flex;"><span>                  the service id should be used. Service id provides a
+</span></span><span style="display:flex;"><span>                  logical name <span style="color:#66d9ef">for</span> multiple hosts and it is defined
+</span></span><span style="display:flex;"><span>                  in the property ozone.om.service.ids.
+</span></span><span style="display:flex;"><span>                  Example of a full URI with host name and port number
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">for</span> a key:
+</span></span><span style="display:flex;"><span>                  o3://omhostname:9862/vol1/bucket1/key1
+</span></span><span style="display:flex;"><span>                  With a service id <span style="color:#66d9ef">for</span> a volume:
+</span></span><span style="display:flex;"><span>                  o3://omserviceid/vol1/
+</span></span><span style="display:flex;"><span>                  Short URI should start from the volume.
+</span></span><span style="display:flex;"><span>                  Example of a short URI <span style="color:#66d9ef">for</span> a bucket:
+</span></span><span style="display:flex;"><span>                  vol1/bucket1
+</span></span><span style="display:flex;"><span>                  Any unspecified information will be identified from
+</span></span><span style="display:flex;"><span>                  the config files.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  -h, --help      Show this help message and exit.
+</span></span><span style="display:flex;"><span>  -V, --version   Print version information and exit.
+</span></span><span style="display:flex;"><span>      --verbose   More verbose output. Show the stack trace of the errors.
+</span></span></code></pre></div><h2 id="verify">verify</h2>
+<p>Verify data across replicas. There are multiple checks available, which can be selected using the command line options:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug replicas verify <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--all-results<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">[</span>--container-cache-size<span style="color:#f92672">=</span>&lt;containerCacheSize&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">([</span>--checksums<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--block-existence<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                   <span style="color:#f92672">[</span>--container-state<span style="color:#f92672">])</span> &lt;uri&gt;
+</span></span><span style="display:flex;"><span>Run checks to verify data across replicas. By default prints only the keys with
+</span></span><span style="display:flex;"><span>failed checks.
+</span></span><span style="display:flex;"><span>      &lt;uri&gt;               Ozone URI could either be a full URI or short URI.
+</span></span><span style="display:flex;"><span>                          Full URI should start with o3://, in <span style="color:#66d9ef">case</span> of non-HA
+</span></span><span style="display:flex;"><span>                          clusters it should be followed by the host name and
+</span></span><span style="display:flex;"><span>                          optionally the port number. In <span style="color:#66d9ef">case</span> of HA clusters
+</span></span><span style="display:flex;"><span>                          the service id should be used. Service id provides a
+</span></span><span style="display:flex;"><span>                          logical name <span style="color:#66d9ef">for</span> multiple hosts and it is defined
+</span></span><span style="display:flex;"><span>                          in the property ozone.om.service.ids.
+</span></span><span style="display:flex;"><span>                          Example of a full URI with host name and port number
+</span></span><span style="display:flex;"><span>                          <span style="color:#66d9ef">for</span> a key:
+</span></span><span style="display:flex;"><span>                          o3://omhostname:9862/vol1/bucket1/key1
+</span></span><span style="display:flex;"><span>                          With a service id <span style="color:#66d9ef">for</span> a volume:
+</span></span><span style="display:flex;"><span>                          o3://omserviceid/vol1/
+</span></span><span style="display:flex;"><span>                          Short URI should start from the volume.
+</span></span><span style="display:flex;"><span>                          Example of a short URI <span style="color:#66d9ef">for</span> a bucket:
+</span></span><span style="display:flex;"><span>                          vol1/bucket1
+</span></span><span style="display:flex;"><span>                          Any unspecified information will be identified from
+</span></span><span style="display:flex;"><span>                          the config files.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      --all-results       Print results <span style="color:#66d9ef">for</span> all passing and failing keys
+</span></span><span style="display:flex;"><span>      --block-existence   Check <span style="color:#66d9ef">for</span> block existence on datanodes.
+</span></span><span style="display:flex;"><span>      --checksums         Do client side data checksum validation of all
+</span></span><span style="display:flex;"><span>                            replicas.
+</span></span><span style="display:flex;"><span>      --container-cache-size<span style="color:#f92672">=</span>&lt;containerCacheSize&gt;
+</span></span><span style="display:flex;"><span>                          Size <span style="color:#f92672">(</span>in number of containers<span style="color:#f92672">)</span> of the in-memory cache
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">for</span> container state verification
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#39;--container-state&#39;</span>. Default is <span style="color:#ae81ff">1</span> million
+</span></span><span style="display:flex;"><span>                            containers <span style="color:#f92672">(</span>which takes around 43MB<span style="color:#f92672">)</span>. Value must be
+</span></span><span style="display:flex;"><span>                            greater than zero, otherwise the default of <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                            million is considered. Note: This option is ignored
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;--container-state&#39;</span> option is not used.
+</span></span><span style="display:flex;"><span>      --container-state   Check the container and replica states. Containers in
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>DELETING, DELETED<span style="color:#f92672">]</span> states, or it<span style="color:#960050;background-color:#1e0010">&#39;</span>s replicas in
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">[</span>DELETED, UNHEALTHY, INVALID<span style="color:#f92672">]</span> states fail the check.
+</span></span><span style="display:flex;"><span>  -h, --help              Show this help message and exit.
+</span></span><span style="display:flex;"><span>      -id, --service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;
+</span></span><span style="display:flex;"><span>                          ServiceId of SCM HA Cluster
+</span></span><span style="display:flex;"><span>      --scm<span style="color:#f92672">=</span>&lt;scm&gt;         The destination scm <span style="color:#f92672">(</span>host:port<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  -V, --version           Print version information and exit.
+</span></span><span style="display:flex;"><span>      --verbose           More verbose output. Show the stack trace of the
+</span></span><span style="display:flex;"><span>                            errors.
+</span></span></code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../../tools/debug/ratislogparser.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0-SNAPSHOT, Last Modified: August 12, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a59b573fdf30f6ae3e061f84b607d28d3a9c3601">a59b573fdf</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../../js/jquery-3.5.1.min.js"></script>
+<script src="../../js/ozonedoc.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

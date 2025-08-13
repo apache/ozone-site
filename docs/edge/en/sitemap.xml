@@ -15,6 +15,19 @@
                 href="/"
                 />
   </url><url>
+    <loc>/tools/debug/ldb.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/debug/ldb.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/debug/ldb.html"
+                />
+  </url><url>
     <loc>/security/secureozone.html</loc>
     <lastmod>2024-10-21T00:15:13+08:00</lastmod>
     <xhtml:link
@@ -125,6 +138,9 @@
     <loc>/feature/streaming-write-pipeline.html</loc>
     <lastmod>2024-02-27T17:33:44+05:30</lastmod>
   </url><url>
+    <loc>/tools/debug/debugom.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+  </url><url>
     <loc>/security/securingtde.html</loc>
     <lastmod>2025-07-02T11:15:53-07:00</lastmod>
     <xhtml:link
@@ -203,6 +219,9 @@
                 href="/feature/topology.html"
                 />
   </url><url>
+    <loc>/tools/debug/debugdatanode.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+  </url><url>
     <loc>/security/gdpr.html</loc>
     <lastmod>2024-10-21T00:15:13+08:00</lastmod>
     <xhtml:link
@@ -267,6 +286,9 @@
                 hreflang="en"
                 href="/interface/s3.html"
                 />
+  </url><url>
+    <loc>/tools/debug/debugreplicas.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
   </url><url>
     <loc>/feature/quota.html</loc>
     <lastmod>2024-10-21T00:15:13+08:00</lastmod>
@@ -345,6 +367,9 @@
                 href="/interface/reconapi.html"
                 />
   </url><url>
+    <loc>/tools/debug/ratislogparser.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+  </url><url>
     <loc>/security/securings3.html</loc>
     <lastmod>2025-04-03T04:52:21-07:00</lastmod>
     <xhtml:link
@@ -413,6 +438,19 @@
                 href="/security/securityacls.html"
                 />
   </url><url>
+    <loc>/tools/debug/auditparser.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/debug/auditparser.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/debug/auditparser.html"
+                />
+  </url><url>
     <loc>/interface/csi.html</loc>
     <lastmod>2024-12-04T15:41:48-05:00</lastmod>
     <xhtml:link
@@ -441,6 +479,19 @@
   </url><url>
     <loc>/security/protect-in-transit-traffic.html</loc>
     <lastmod>2025-07-03T03:29:45-07:00</lastmod>
+  </url><url>
+    <loc>/tools/debug/containerlogparser.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tools/debug/containerlogparser.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tools/debug/containerlogparser.html"
+                />
   </url><url>
     <loc>/security/securitywithranger.html</loc>
     <lastmod>2025-06-09T12:50:19-07:00</lastmod>
@@ -659,27 +710,17 @@
     <loc>/feature/om-bootstrapping-with-snapshots.html</loc>
     <lastmod>2025-08-09T02:25:09+05:30</lastmod>
   </url><url>
+    <loc>/tools/debug.html</loc>
+    <lastmod>2025-08-12T20:20:41+05:30</lastmod>
+  </url><url>
     <loc>/tools/repair.html</loc>
     <lastmod>2025-08-05T06:58:27+05:30</lastmod>
   </url><url>
     <loc>/concept/volumesbucketskeys.html</loc>
     <lastmod>2025-07-05T08:18:07-07:00</lastmod>
   </url><url>
-    <loc>/tools/containerlogparser.html</loc>
-    <lastmod>2025-07-09T12:59:18+05:30</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tools/containerlogparser.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tools/containerlogparser.html"
-                />
-  </url><url>
     <loc>/design.html</loc>
-    <lastmod>2025-07-07T11:24:38+05:30</lastmod>
+    <lastmod>2025-08-12T14:24:23-04:00</lastmod>
   </url><url>
     <loc>/design/full-volume-handling.html</loc>
     <lastmod>2025-07-07T11:24:38+05:30</lastmod>
@@ -690,18 +731,8 @@
     <loc>/design/dn-usedspace-calculation.html</loc>
     <lastmod>2025-06-18T14:19:25+05:30</lastmod>
   </url><url>
-    <loc>/tools/debug.html</loc>
-    <lastmod>2024-10-30T12:13:52+05:30</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tools/debug.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tools/debug.html"
-                />
+    <loc>/design/tools.html</loc>
+    <lastmod>2025-08-12T14:24:23-04:00</lastmod>
   </url><url>
     <loc>/design/overwrite-key-only-if-unchanged.html</loc>
     <lastmod>2024-04-29T10:37:20+01:00</lastmod>
@@ -817,19 +848,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/tools/genconf.html"
-                />
-  </url><url>
-    <loc>/tools/auditparser.html</loc>
-    <lastmod>2025-03-13T10:19:47+05:30</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tools/auditparser.html"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tools/auditparser.html"
                 />
   </url><url>
     <loc>/design/topology.html</loc>

@@ -8,6 +8,13 @@
     <language>en</language>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>LDB Tool</title>
+      <link>/tools/debug/ldb.html</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/ldb.html</guid>
+      <description>Parsing rocksDB and debugging related issues.</description>
+    </item>
+    <item>
       <title>Securing Ozone</title>
       <link>/security/secureozone.html</link>
       <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
@@ -71,6 +78,13 @@
       <description>A new write pipeline using Ratis Streaming.</description>
     </item>
     <item>
+      <title>Debug OM</title>
+      <link>/tools/debug/debugom.html</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/debugom.html</guid>
+      <description>Debug commands related to OM.</description>
+    </item>
+    <item>
       <title>Transparent Data Encryption</title>
       <link>/security/securingtde.html</link>
       <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
@@ -113,6 +127,13 @@
       <description>Configuration for rack-awarness for improved read/write</description>
     </item>
     <item>
+      <title>Debug Datanode</title>
+      <link>/tools/debug/debugdatanode.html</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/debugdatanode.html</guid>
+      <description>Debug commands related to datanode.</description>
+    </item>
+    <item>
       <title>GDPR in Ozone</title>
       <link>/security/gdpr.html</link>
       <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
@@ -139,6 +160,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/interface/s3.html</guid>
       <description>Ozone supports Amazon&amp;rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</description>
+    </item>
+    <item>
+      <title>Debug Replicas</title>
+      <link>/tools/debug/debugreplicas.html</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/debugreplicas.html</guid>
+      <description>Debug commands for replica-related issues.</description>
     </item>
     <item>
       <title>Quota in Ozone</title>
@@ -197,6 +225,13 @@
       <description>Recon server supports HTTP endpoints to help troubleshoot and monitor Ozone cluster.</description>
     </item>
     <item>
+      <title>Ratis Log Parser</title>
+      <link>/tools/debug/ratislogparser.html</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/ratislogparser.html</guid>
+      <description>Parse ratis logs to be in human understandable form.</description>
+    </item>
+    <item>
       <title>Securing S3</title>
       <link>/security/securings3.html</link>
       <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
@@ -232,6 +267,13 @@
       <description>Native Ozone Authorizer provides Access Control List (ACL) support for Ozone without Ranger integration.</description>
     </item>
     <item>
+      <title>Audit Parser</title>
+      <link>/tools/debug/auditparser.html</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/auditparser.html</guid>
+      <description>Tool for querying the ozone audit logs.</description>
+    </item>
+    <item>
       <title>CSI Protocol</title>
       <link>/interface/csi.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -251,6 +293,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/security/protect-in-transit-traffic.html</guid>
       <description>&lt;!---&#xA;    Licensed to the Apache Software Foundation (ASF) under one or more&#xA;    contributor license agreements.  See the NOTICE file distributed with&#xA;    this work for additional information regarding copyright ownership.&#xA;    The ASF licenses this file to You under the Apache License, Version 2.0&#xA;    (the &#34;License&#34;); you may not use this file except in compliance with&#xA;    the License.  You may obtain a copy of the License at&#xA;&#xA;        http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;    Unless required by applicable law or agreed to in writing, software&#xA;    distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;    See the License for the specific language governing permissions and&#xA;    limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;This document describes how to protect data in transit within Apache Ozone, both between the cluster and clients, and internally within the cluster.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Container Replica Debugger Tool</title>
+      <link>/tools/debug/containerlogparser.html</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>/tools/debug/containerlogparser.html</guid>
+      <description>Processing and querying container log files from Ozone datanodes to track state transitions.</description>
     </item>
     <item>
       <title>Apache Ranger</title>
@@ -456,13 +505,6 @@
       <description>Understanding the fundamental data hierarchy in Apache Ozone: Volumes, Buckets, and Keys.</description>
     </item>
     <item>
-      <title>Container Replica Debugger Tool</title>
-      <link>/tools/containerlogparser.html</link>
-      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>/tools/containerlogparser.html</guid>
-      <description>The tool processes container log files from Ozone datanodes to track state transitions. It provides CLI commands for querying containers based on different attributes.</description>
-    </item>
-    <item>
       <title>Full Volume Handling</title>
       <link>/design/full-volume-handling.html</link>
       <pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate>
@@ -484,11 +526,11 @@
       <description>Describe proposal for optimization in datanode used space calculation.</description>
     </item>
     <item>
-      <title>Ozone Debug</title>
-      <link>/tools/debug.html</link>
-      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>/tools/debug.html</guid>
-      <description>Ozone Debug command can be used for all the debugging related tasks.</description>
+      <title>Improved Layout of Ozone Tools</title>
+      <link>/design/tools.html</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>/design/tools.html</guid>
+      <description>Proposal for an improved layout of Ozone tools CLI</description>
     </item>
     <item>
       <title>Overwriting an Ozone Key only if it has not changed.</title>
@@ -713,13 +755,6 @@
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
       <guid>/tools/genconf.html</guid>
       <description>Tool to generate default configuration</description>
-    </item>
-    <item>
-      <title>Audit Parser</title>
-      <link>/tools/auditparser.html</link>
-      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>/tools/auditparser.html</guid>
-      <description>Audit Parser tool can be used for querying the ozone audit logs.</description>
     </item>
     <item>
       <title>Topology-awareness</title>

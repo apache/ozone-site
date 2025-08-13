@@ -16,20 +16,6 @@
       <description>Advanced tool to repair Ozone.</description>
     </item>
     <item>
-      <title>Container Replica Debugger Tool</title>
-      <link>/tools/containerlogparser.html</link>
-      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>/tools/containerlogparser.html</guid>
-      <description>The tool processes container log files from Ozone datanodes to track state transitions. It provides CLI commands for querying containers based on different attributes.</description>
-    </item>
-    <item>
-      <title>Ozone Debug</title>
-      <link>/tools/debug.html</link>
-      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>/tools/debug.html</guid>
-      <description>Ozone Debug command can be used for all the debugging related tasks.</description>
-    </item>
-    <item>
       <title>Logs in Ozone</title>
       <link>/tools/logsinozone.html</link>
       <pubDate>Mon, 30 Jan 2023 00:00:00 +0000</pubDate>
@@ -49,13 +35,6 @@
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
       <guid>/tools/genconf.html</guid>
       <description>Tool to generate default configuration</description>
-    </item>
-    <item>
-      <title>Audit Parser</title>
-      <link>/tools/auditparser.html</link>
-      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>/tools/auditparser.html</guid>
-      <description>Audit Parser tool can be used for querying the ozone audit logs.</description>
     </item>
     <item>
       <title>Testing tools</title>
