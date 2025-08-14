@@ -606,59 +606,169 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>Ozone can use topology related information (for example rack placement) to optimize read and write pipelines. To get full rack-aware cluster, Ozone requires three different configuration.</p>
+<p>Apache Ozone uses topology information (e.g., rack placement) to optimize data access and improve resilience. A fully rack-aware cluster needs:</p>
 <ol>
-<li>The topology information should be configured by Ozone.</li>
-<li>Topology related information should be used when Ozone chooses 3 different datanodes for a specific pipeline/container. (WRITE)</li>
-<li>When Ozone reads a Key it should prefer to read from the closest node.</li>
+<li>Configured network topology.</li>
+<li>Topology-aware DataNode selection for container replica placement (write path).</li>
+<li>Prioritized reads from topologically closest DataNodes (read path).</li>
 </ol>
-<div class="alert alert-warning" role="alert">
-<p>Ozone uses RAFT replication for Open containers (write), and an async replication for closed, immutable containers (cold data). As RAFT requires low-latency network, topology awareness placement is available only for closed containers. See the <a href="../concept/containers.html">page about Containers</a> about more information related to Open vs Closed containers.</p>
-</div>
-<h2 id="topology-hierarchy">Topology hierarchy</h2>
-<p>Topology hierarchy can be configured with using <code>net.topology.node.switch.mapping.impl</code> configuration key. This configuration should define an implementation of the <code>org.apache.hadoop.net.CachedDNSToSwitchMapping</code>. As this is a Hadoop class, the configuration is exactly the same as the Hadoop Configuration</p>
-<h3 id="static-list">Static list</h3>
-<p>Static list can be configured with the help of <code>TableMapping</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.table.file.name<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/opt/hadoop/compose/ozone-topology/network-config<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>The second configuration option should point to a text file. The file format is a two column text file, with columns separated by whitespace. The first column is IP address and the second column specifies the rack where the address maps. If no entry corresponding to a host in the cluster is found, then <code>/default-rack</code> is assumed.</p>
-<h3 id="dynamic-list">Dynamic list</h3>
-<p>Rack information can be identified with the help of an external script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>net.topology.script.file.name<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>/usr/local/bin/rack.sh<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>If implementing an external script, it will be specified with the <code>net.topology.script.file.name</code> parameter in the configuration files. Unlike the java class, the external topology script is not included with the Ozone distribution and is provided by the administrator. Ozone will send multiple IP addresses to ARGV when forking the topology script. The number of IP addresses sent to the topology script is controlled with <code>net.topology.script.number.args</code> and defaults to 100. If <code>net.topology.script.number.args</code> was changed to 1, a topology script would get forked for each IP submitted.</p>
-<h2 id="write-path">Write path</h2>
-<p>Placement of the closed containers can be configured with <code>ozone.scm.container.placement.impl</code> configuration key. The available container placement policies can be found in the <code>org.apache.hdds.scm.container.placement</code> <a href="https://github.com/apache/ozone/tree/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms">package</a>.</p>
-<p>By default the <code>SCMContainerPlacementRandom</code> is used for topology-awareness the <code>SCMContainerPlacementRackAware</code> can be used:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRackAware<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>This placement policy complies with the algorithm used in HDFS. With default 3 replica, two replicas will be on the same rack, the third one will on a different rack.</p>
-<p>This implementation applies to network topology like &ldquo;/rack/node&rdquo;. Don&rsquo;t recommend to use this if the network topology has more layers.</p>
-<h2 id="read-path">Read path</h2>
-<p>Finally the read path also should be configured to read the data from the closest pipeline.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.network.topology.aware.read<span style="color:#f92672">&lt;/name&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><h2 id="references">References</h2>
+<h2 id="applicability-to-container-types">Applicability to Container Types</h2>
+<p>Ozone&rsquo;s topology-aware placement strategies vary by container replication type and state:</p>
 <ul>
-<li>Hadoop documentation about <code>net.topology.node.switch.mapping.impl</code>: <a href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html">https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/RackAwareness.html</a></li>
-<li><a href="../design/topology.html">Design doc</a></li>
+<li><strong>RATIS Replicated Containers:</strong> Ozone uses RAFT replication for Open containers (write), and an async replication for closed, immutable containers (cold data). Topology awareness placement is implemented for both open and closed RATIS containers, ensuring rack diversity and fault tolerance during both write and re-replication operations. See the <a href="../concept/containers.html">page about Containers</a> for more information related to Open vs Closed containers.</li>
 </ul>
+<h2 id="configuring-topology-hierarchy">Configuring Topology Hierarchy</h2>
+<p>Ozone determines DataNode network locations (e.g., racks) using Hadoop&rsquo;s rack awareness, configured via <code>net.topology.node.switch.mapping.impl</code> in <code>ozone-site.xml</code>. This key specifies a <code>org.apache.hadoop.net.CachedDNSToSwitchMapping</code> implementation. [1]</p>
+<p>Two primary methods exist:</p>
+<h3 id="1-static-list-tablemapping">1. Static List: <code>TableMapping</code></h3>
+<p>Maps IPs/hostnames to racks using a predefined file.</p>
+<ul>
+<li><strong>Configuration:</strong> Set <code>net.topology.node.switch.mapping.impl</code> to <code>org.apache.hadoop.net.TableMapping</code> and <code>net.topology.table.file.name</code> to the mapping file&rsquo;s path. [1]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.TableMapping<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>net.topology.table.file.name<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>/etc/ozone/topology.map<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div></li>
+<li><strong>File Format:</strong> A two-column text file (IP/hostname, rack path per line). Unlisted nodes go to <code>/default-rack</code>. [1]
+Example <code>topology.map</code>:
+<pre tabindex="0"><code>192.168.1.100 /rack1
+datanode101.example.com /rack1
+192.168.1.102 /rack2
+datanode103.example.com /rack2
+</code></pre></li>
+</ul>
+<h3 id="2-dynamic-list-scriptbasedmapping">2. Dynamic List: <code>ScriptBasedMapping</code></h3>
+<p>Uses an external script to resolve rack locations for IPs.</p>
+<ul>
+<li>
+<p><strong>Configuration:</strong> Set <code>net.topology.node.switch.mapping.impl</code> to <code>org.apache.hadoop.net.ScriptBasedMapping</code> and <code>net.topology.script.file.name</code> to the script&rsquo;s path. [1]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>net.topology.node.switch.mapping.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>net.topology.script.file.name<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>/etc/ozone/determine_rack.sh<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Script:</strong> Admin-provided, executable script. Ozone passes IPs (up to <code>net.topology.script.number.args</code>, default 100) as arguments; script outputs rack paths (one per line).
+Example <code>determine_rack.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># This is a simplified example. A real script might query a CMDB or use other logic.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span> $# -gt <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span> ; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  nodeAddress<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$nodeAddress<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;192.168.1.100&#34;</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;</span>$nodeAddress<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;datanode101.example.com&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;/rack1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$nodeAddress<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;192.168.1.102&#34;</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;</span>$nodeAddress<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;datanode103.example.com&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;/rack2&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;/default-rack&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  shift
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>Ensure the script is executable (<code>chmod +x /etc/ozone/determine_rack.sh</code>).</p>
+<p><strong>Note:</strong> For production environments, implement robust error handling and validation in your script. This should include handling network timeouts, invalid inputs, CMDB query failures, and logging errors appropriately. The example above is simplified for illustration purposes only.</p>
+</li>
+</ul>
+<p><strong>Topology Mapping Best Practices:</strong></p>
+<ul>
+<li><strong>Accuracy:</strong> Mappings must be accurate and current.</li>
+<li><strong>Static Mapping:</strong> Simpler for small, stable clusters; requires manual updates.</li>
+<li><strong>Dynamic Mapping:</strong> Flexible for large/dynamic clusters. Script performance, correctness, and reliability are vital; ensure it&rsquo;s idempotent and handles batch lookups efficiently.</li>
+</ul>
+<h2 id="pipeline-choosing-policies">Pipeline Choosing Policies</h2>
+<p>Ozone supports several policies for selecting a pipeline when placing containers. The policy for Ratis containers is configured by the property <code>hdds.scm.pipeline.choose.policy.impl</code> for SCM. The policy for EC (Erasure Coded) containers is configured by the property <code>hdds.scm.ec.pipeline.choose.policy.impl</code>. For both, the default value is <code>org.apache.hadoop.hdds.scm.pipeline.choose.algorithms.RandomPipelineChoosePolicy</code>.</p>
+<p>These policies help optimize for different goals such as load balancing, health, or simplicity:</p>
+<ul>
+<li>
+<p><strong>RandomPipelineChoosePolicy</strong> (Default): Selects a pipeline at random from the available list, without considering utilization or health. This policy is simple and does not optimize for any particular metric.</p>
+</li>
+<li>
+<p><strong>CapacityPipelineChoosePolicy</strong>: Picks two random pipelines and selects the one with lower utilization, favoring pipelines with more available capacity and helping to balance the load across the cluster.</p>
+</li>
+<li>
+<p><strong>RoundRobinPipelineChoosePolicy</strong>: Selects pipelines in a round-robin order. This policy is mainly used for debugging and testing, ensuring even distribution but not considering health or capacity.</p>
+</li>
+<li>
+<p><strong>HealthyPipelineChoosePolicy</strong>: Randomly selects pipelines but only returns a healthy one. If no healthy pipeline is found, it returns the last tried pipeline as a fallback.</p>
+</li>
+</ul>
+<p>These policies can be configured to suit different deployment needs and workloads.</p>
+<h2 id="container-placement-policies-for-replicated-ratis-containers">Container Placement Policies for Replicated (RATIS) Containers</h2>
+<p>SCM uses a pluggable policy to place additional replicas of <em>closed</em> RATIS-replicated containers. This is configured using the <code>ozone.scm.container.placement.impl</code> property in <code>ozone-site.xml</code>. Available policies are found in the <code>org.apache.hadoop.hdds.scm.container.placement.algorithms</code> package [1, 3].</p>
+<p>These policies are applied when SCM needs to re-replicate containers, such as during container balancing.</p>
+<h3 id="1-scmcontainerplacementrackaware-default">1. <code>SCMContainerPlacementRackAware</code> (Default)</h3>
+<ul>
+<li><strong>Function:</strong> Distributes replicas across racks for fault tolerance (e.g., for 3 replicas, aims for at least two racks). Similar to HDFS placement. [1]</li>
+<li><strong>Use Cases:</strong> Production clusters needing rack-level fault tolerance.</li>
+<li><strong>Configuration:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRackAware<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div></li>
+<li><strong>Best Practices:</strong> Requires accurate topology mapping.</li>
+<li><strong>Limitations:</strong> Designed for single-layer rack topologies (e.g., <code>/rack/node</code>). Not recommended for multi-layer hierarchies (e.g., <code>/dc/row/rack/node</code>) as it may not interpret deeper levels correctly. [1]</li>
+</ul>
+<h3 id="2-scmcontainerplacementrandom">2. <code>SCMContainerPlacementRandom</code></h3>
+<ul>
+<li><strong>Function:</strong> Randomly selects healthy, available DataNodes meeting basic criteria (space, no existing replica), ignoring rack topology. [1, 4]</li>
+<li><strong>Use Cases:</strong> Small/dev/test clusters, or if rack fault tolerance for closed replicas isn&rsquo;t critical.</li>
+<li><strong>Configuration:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementRandom<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div></li>
+<li><strong>Best Practices:</strong> Not for production needing rack failure resilience.</li>
+</ul>
+<h3 id="3-scmcontainerplacementcapacity">3. <code>SCMContainerPlacementCapacity</code></h3>
+<ul>
+<li><strong>Function:</strong> Selects DataNodes by available capacity (favors lower disk utilization) to balance disk usage. [5, 6]</li>
+<li><strong>Use Cases:</strong> Heterogeneous storage clusters or where even disk utilization is key.</li>
+<li><strong>Configuration:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.scm.container.placement.impl<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementCapacity<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div></li>
+<li><strong>Best Practices:</strong> Prevents uneven node filling.</li>
+<li><strong>Interaction:</strong> This container placement policy selects datanodes by randomly picking two nodes from a pool of healthy, available nodes and then choosing the one with lower utilization (more free space). This approach aims to distribute containers more evenly across the cluster over time, favoring less utilized nodes without overwhelming newly added nodes.</li>
+</ul>
+<h2 id="optimizing-read-paths">Optimizing Read Paths</h2>
+<p>Enable by setting <code>ozone.network.topology.aware.read</code> to <code>true</code> in <code>ozone-site.xml</code>. [1]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.network.topology.aware.read<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>This directs clients (replicated data) to read from topologically closest DataNodes, reducing latency and cross-rack traffic. Recommended with accurate topology.</p>
+<h2 id="summary-of-best-practices">Summary of Best Practices</h2>
+<ul>
+<li>
+<p><strong>Accurate Topology:</strong> Maintain an accurate, up-to-date topology map (static or dynamic script); this is foundational.</p>
+</li>
+<li>
+<p><strong>Replicated (RATIS) Containers:</strong> For production rack fault tolerance, use <code>SCMContainerPlacementRackAware</code> (mindful of its single-layer topology limitation) or <code>SCMContainerPlacementCapacity</code> (verify rack interaction) over <code>SCMContainerPlacementRandom</code>.</p>
+</li>
+<li>
+<p><strong>Read Operations:</strong> Enable <code>ozone.network.topology.aware.read</code> with accurate topology.</p>
+</li>
+<li>
+<p><strong>Monitor &amp; Validate:</strong> Regularly monitor placement and balance; use tools like Recon to verify topology awareness.</p>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/RackAwareness.html">Hadoop Documentation: Rack Awareness</a>.</li>
+<li><a href="https://github.com/apache/ozone/tree/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms">Ozone Source Code: container placement policies</a>. (For implementations of pluggable placement policies).</li>
+<li><a href="https://github.com/apache/ozone/blob/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms/SCMContainerPlacementRandom.java">Ozone Source Code: SCMContainerPlacementRandom.java</a>.</li>
+<li><a href="https://github.com/apache/ozone/blob/master/hadoop-hdds/server-scm/src/main/java/org/apache/hadoop/hdds/scm/container/placement/algorithms/SCMContainerPlacementCapacity.java">Ozone Source Code: SCMContainerPlacementCapacity.java</a>.</li>
+</ol>
 
 
           
@@ -678,7 +788,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: March 29, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cce3c7ea79ec19657d10f011ddeaf3067a2f83bd">cce3c7ea79</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: August 13, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cc2a42d80cabcf29ae60a87096fe59ef369a5d4a">cc2a42d80c</a>
     </span>
   </div>
 </footer>
