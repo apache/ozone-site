@@ -641,10 +641,10 @@ Ranger KMS supports both 128 and 256 bits. Hadoop KMS is also commonly used with
 <p>For example:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  hadoop key create enckey -size <span style="color:#ae81ff">256</span> -cipher AES/CTR/NoPadding -description <span style="color:#e6db74">&#34;Encryption key for my_bucket&#34;</span>
 </span></span></code></pre></div><h3 id="creating-an-encrypted-bucket">Creating an Encrypted Bucket</h3>
-<p>Use the Ozone shell <code>ozone sh bucket create</code> command with the <code>-k</code> (or <code>--key</code>) option to specify the encryption key:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --key &lt;key_name&gt; /&lt;volume_name&gt;/&lt;bucket_name&gt;
+<p>Use the Ozone shell <code>ozone sh bucket create</code> command with the <code>-k</code> (or <code>--bucketkey</code>) option to specify the encryption key:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --bucketkey &lt;key_name&gt; /&lt;volume_name&gt;/&lt;bucket_name&gt;
 </span></span></code></pre></div><p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --key enckey /vol1/encrypted_bucket
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --bucketkey enckey /vol1/encrypted_bucket
 </span></span></code></pre></div><p>Now, all data written to <code>/vol1/encrypted_bucket</code> will be encrypted at rest. As long as the client is configured correctly to use the key, such encryption is completely transparent to the end users.</p>
 <h3 id="performance-optimization-for-tde">Performance Optimization for TDE</h3>
 <p>Since Ozone leverages Hadoop&rsquo;s encryption library, performance optimization strategies similar to HDFS encryption apply:</p>
@@ -703,11 +703,11 @@ at org.apache.hadoop.crypto.OpensslAesCtrCryptoCodec.&lt;init&gt;(OpensslAesCtrC
 <li><strong>Create the bucket under the <code>/s3v</code> volume:</strong>
 The <code>/s3v</code> volume is the default volume for S3 buckets.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --key &lt;key_name&gt; /s3v/&lt;bucket_name&gt; --layout<span style="color:#f92672">=</span>OBJECT_STORE
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --bucketkey &lt;key_name&gt; /s3v/&lt;bucket_name&gt; --layout<span style="color:#f92672">=</span>OBJECT_STORE
 </span></span></code></pre></div><ol start="2">
 <li><strong>Alternatively, create an encrypted bucket elsewhere and link it:</strong></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --key &lt;key_name&gt; /&lt;volume_name&gt;/&lt;bucket_name&gt; --layout<span style="color:#f92672">=</span>OBJECT_STORE
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ozone sh bucket create --bucketkey &lt;key_name&gt; /&lt;volume_name&gt;/&lt;bucket_name&gt; --layout<span style="color:#f92672">=</span>OBJECT_STORE
 </span></span><span style="display:flex;"><span>  ozone sh bucket link /&lt;volume_name&gt;/&lt;bucket_name&gt; /s3v/&lt;link_name&gt;
 </span></span></code></pre></div><p>Note 1: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
 After creating an encrypted bucket, all the keys added to this bucket using s3g will be encrypted.</p>
@@ -799,7 +799,7 @@ See <a href="../feature/prefixfso.html">Prefix based File System Optimization</a
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 2, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f2ddbf6a474e0e0f2f16e4f79053ec5e985733c8">f2ddbf6a47</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: September 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/696978cc1e4639b98d2ad3f08f297999509bb5a6">696978cc1e</a>
     </span>
   </div>
 </footer>
