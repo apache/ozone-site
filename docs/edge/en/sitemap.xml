@@ -707,6 +707,12 @@
                 href="/start/fromsource.html"
                 />
   </url><url>
+    <loc>/design.html</loc>
+    <lastmod>2025-09-03T11:34:46-07:00</lastmod>
+  </url><url>
+    <loc>/design/listener-om.html</loc>
+    <lastmod>2025-09-03T11:34:46-07:00</lastmod>
+  </url><url>
     <loc>/feature/om-bootstrapping-with-snapshots.html</loc>
     <lastmod>2025-08-09T02:25:09+05:30</lastmod>
   </url><url>
@@ -718,9 +724,6 @@
   </url><url>
     <loc>/concept/volumesbucketskeys.html</loc>
     <lastmod>2025-07-05T08:18:07-07:00</lastmod>
-  </url><url>
-    <loc>/design.html</loc>
-    <lastmod>2025-08-12T14:24:23-04:00</lastmod>
   </url><url>
     <loc>/design/full-volume-handling.html</loc>
     <lastmod>2025-07-07T11:24:38+05:30</lastmod>

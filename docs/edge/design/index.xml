@@ -6,8 +6,15 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 12 Aug 2025 14:24:23 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 03 Sep 2025 11:34:46 -0700</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Listener Ozone Manager</title>
+      <link>/design/listener-om.html</link>
+      <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>/design/listener-om.html</guid>
+      <description>Read-only Ozone Manager to scale out read performance.</description>
+    </item>
     <item>
       <title>Full Volume Handling</title>
       <link>/design/full-volume-handling.html</link>
