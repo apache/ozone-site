@@ -601,18 +601,17 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>The Ratis log parser tool takes a segment file as input, and give the output in a human-readable format.
-It has the following subcommands, which can be used to parse the Ratis logs of different components:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug ratislogparser <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>Shell of printing Ratis Log in understandable text
-</span></span><span style="display:flex;"><span>  -h, --help      Show this help message and exit.
-</span></span><span style="display:flex;"><span>  -V, --version   Print version information and exit.
-</span></span><span style="display:flex;"><span>      --verbose   More verbose output. Show the stack trace of the errors.
-</span></span><span style="display:flex;"><span>Commands:
-</span></span><span style="display:flex;"><span>  datanode  dump datanode segment file
-</span></span><span style="display:flex;"><span>  generic   dump generic ratis segment file
-</span></span><span style="display:flex;"><span>  om        dump om ratis segment file
-</span></span><span style="display:flex;"><span>  scm       dump scm ratis segment file
+<p>The Ratis log parser tool takes a segment file as input and gives a human-readable output.
+It can be used to parse Ratis logs from different components by specifying the corresponding role.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone debug ratis parse <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--role<span style="color:#f92672">=</span>&lt;role&gt;<span style="color:#f92672">]</span> -s<span style="color:#f92672">=</span>&lt;segmentFile&gt;
+</span></span><span style="display:flex;"><span>Shell <span style="color:#66d9ef">for</span> printing Ratis Log in understandable text
+</span></span><span style="display:flex;"><span>  -h, --help          Show this help message and exit.
+</span></span><span style="display:flex;"><span>      --role<span style="color:#f92672">=</span>&lt;role&gt;   Component role <span style="color:#66d9ef">for</span> parsing. Values: om, scm, datanode
+</span></span><span style="display:flex;"><span>                        Default: generic
+</span></span><span style="display:flex;"><span>  -s, --segmentPath, --segment-path<span style="color:#f92672">=</span>&lt;segmentFile&gt;
+</span></span><span style="display:flex;"><span>                      Path of the segment file
+</span></span><span style="display:flex;"><span>  -V, --version       Print version information and exit.
+</span></span><span style="display:flex;"><span>      --verbose       More verbose output. Show the stack trace of the errors.
 </span></span></code></pre></div>
 
           
@@ -632,7 +631,7 @@ It has the following subcommands, which can be used to parse the Ratis logs of d
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 12, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a59b573fdf30f6ae3e061f84b607d28d3a9c3601">a59b573fdf</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: September 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b0960dfe20dca515198f9f06062852804c9215c1">b0960dfe20</a>
     </span>
   </div>
 </footer>
