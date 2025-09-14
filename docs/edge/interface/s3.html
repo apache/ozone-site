@@ -789,7 +789,7 @@ s=d.getElementsByTagName('script')[0];
       <tr>
           <td>✅ Generate Presigned URL</td>
           <td>Generates a temporary URL for accessing an object.</td>
-          <td>Uses AWS Signature V4. <strong>Non-compliant behavior:</strong> The generated URL may include a fixed default region rather than dynamically reflecting the bucket’s location. Currently, Ozone only supports generating presigned URLs for <code>GetObject</code>. Support for other operations is tracked in <a href="https://issues.apache.org/jira/browse/HDDS-5195">HDDS-5195</a> and <a href="https://issues.apache.org/jira/browse/HDDS-13393">HDDS-13393</a>.</td>
+          <td>Uses AWS Signature V4. <strong>Non-compliant behavior:</strong> The generated URL may include a fixed default region rather than dynamically reflecting the bucket’s location. Ozone now supports generating presigned URLs for all major S3 operations, including <code>GetObject</code>, <code>PutObject</code>, <code>DeleteObject</code>, <code>HeadObject</code>, <code>HeadBucket</code>, <code>MultipartUpload</code>.</td>
       </tr>
   </tbody>
 </table>
@@ -880,7 +880,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c3fe4586e4a590a14d2cdf6f9cc18005eaa1ae93">c3fe4586e4</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: September 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c6a19fbea2dd9d64687a1ad0c5dcc347f7261c56">c6a19fbea2</a>
     </span>
   </div>
 </footer>
