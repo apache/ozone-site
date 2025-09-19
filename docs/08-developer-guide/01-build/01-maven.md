@@ -107,7 +107,7 @@ cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${
 
 #### Compile Protobuf version 3.19.6 for ARM-based Mac
 
-Execute the following commands to compile and patch Protobuf version 2.5.0:
+Execute the following commands to compile Protobuf version 3.19.6:
 
 ```bash
 cd ..
