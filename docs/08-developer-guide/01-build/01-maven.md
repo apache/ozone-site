@@ -41,7 +41,22 @@ Choose one of the following methods to get the source code:
   </TabItem>
 </Tabs>
 
-## ARM-based Apple Silicon (Apple M1 ... etc)
+## Build the Project
+
+Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
+
+### Additional Steps Required For ARM-based Apple Silicon Macs (M1, etc)
+
+If you are running on an ARM-based Apple Silicon Mac, please perform the additional steps in this section.
+
+#### Prerequisites
+
+- [Gradle](https://gradle.org/) - Gradle 7.0 or higher
+- [Compatible JVM for gRPC Java v1.71.0](https://github.com/grpc/grpc-java/blob/v1.71.0/README.md) - Compatible JVM for gRPC and Gradle
+
+#### Compile Protobuf version 3.7.1 for ARM-based Mac
+
+Execute the following commands to compile Protobuf version 3.7.1:
 
 ```bash
 PROTOBUF_VERSION="3.7.1"
@@ -49,43 +64,77 @@ curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTO
 cd protobuf-${PROTOBUF_VERSION}
 ./configure --disable-shared
 make -j
-# install protoc to the local Maven repository
-mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
-# workaround for Maven 3.9.x. Not needed for 3.8.x or earlier
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
 
+Execute the following command to install `protoc` version 3.7.1 to the local Maven repository:
+
+```bash
+mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
+```
+
+If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
+
+```bash
+cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
+
+#### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
+
+Execute the following commands to compile and patch Protobuf version 2.5.0:
+
+```bash
 cd ..
-# Download protobuf 2.5.0 tarball
 PROTOBUF_VERSION="2.5.0"
 curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-${PROTOBUF_VERSION}.tar.gz | tar zx
 cd protobuf-${PROTOBUF_VERSION}
-
-# patch protobuf 2.5.0
 curl -L -O https://gist.githubusercontent.com/liusheng/64aee1b27de037f8b9ccf1873b82c413/raw/118c2fce733a9a62a03281753572a45b6efb8639/protobuf-2.5.0-arm64.patch
 patch -p1 < protobuf-2.5.0-arm64.patch
-# build protobuf
 ./configure --disable-shared
 make
-# install protoc to the local Maven repository
-mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
-# workaround for Maven 3.9.x. Not needed for 3.8.x or earlier
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
 
+Execute the following command to install `protoc` version 2.5.0 to the local Maven repository:
+
+```bash
+mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
+```
+
+If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
+
+```bash
+cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
+
+#### Compile Protobuf version 3.19.6 for ARM-based Mac
+
+Execute the following commands to compile and patch Protobuf version 2.5.0:
+
+```bash
 cd ..
-# Patch protobuf 3.19.6
 PROTOBUF_VERSION="3.19.6"
 curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-all-${PROTOBUF_VERSION}.tar.gz
 tar xzf protobuf-all-${PROTOBUF_VERSION}.tar.gz
 cd protobuf-${PROTOBUF_VERSION}
 ./configure --disable-shared
 make -j
-mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
-# workaround for Maven 3.9.x. Not needed for 3.8.x or earlier
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
 
+Execute the following command to install `protoc` version 3.19.6 to the local Maven repository:
+
+```bash
+mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
+```
+
+If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
+
+```bash
+cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
+
+#### Compile gRPC version 1.71.0 for ARM-based Mac
+
+```bash
 cd ..
-# Compile grpc
-# Pre-req: Manually install Gradle (version 7.0 or higher) and a compatible JVM (JDK 8 or higher) as required by gRPC Java v1.71.0. See https://github.com/grpc/grpc-java/blob/v1.71.0/README.md for details.
 git clone https://github.com/grpc/grpc-java.git
 cd grpc-java
 git checkout v1.71.0
@@ -97,13 +146,14 @@ export LDFLAGS="-L${PROTOBUF_ROOT}/src/.libs"
 ./gradlew :grpc-compiler:java_pluginExecutable -PskipAndroid=true
 PLUGIN="protoc-gen-grpc-java-1.71.0-osx-aarch_64.exe"
 cp compiler/build/exe/java_plugin/protoc-gen-grpc-java $PLUGIN
+```
+
+Execute the following commands to install `protoc-gen-grpc-java` version 1.71.0 to the local Maven repository:
+
+```bash
 mvn install:install-file -DgroupId=io.grpc -DartifactId=protoc-gen-grpc-java -Dversion=1.71.0 -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=$PLUGIN
 cd ..
 ```
-
-## Build the Project
-
-Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
 
 ### Build Options
 
