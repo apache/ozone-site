@@ -42,6 +42,7 @@ Choose one of the following methods to get the source code:
 </Tabs>
 
 ## ARM-based Apple Silicon (Apple M1 ... etc)
+
 ```bash
 PROTOBUF_VERSION="3.7.1"
 curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-all-${PROTOBUF_VERSION}.tar.gz | tar zx
