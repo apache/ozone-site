@@ -68,7 +68,7 @@
                 />
   </url><url>
     <loc>/feature/decommission.html</loc>
-    <lastmod>2025-02-05T18:57:09+05:30</lastmod>
+    <lastmod>2025-09-22T10:13:03-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -552,7 +552,7 @@
                 />
   </url><url>
     <loc>/feature/observability.html</loc>
-    <lastmod>2025-06-05T21:06:30-04:00</lastmod>
+    <lastmod>2025-09-22T21:20:12+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -708,13 +708,13 @@
                 />
   </url><url>
     <loc>/design.html</loc>
-    <lastmod>2025-09-03T11:34:46-07:00</lastmod>
+    <lastmod>2025-09-22T10:13:03-07:00</lastmod>
   </url><url>
     <loc>/design/listener-om.html</loc>
     <lastmod>2025-09-03T11:34:46-07:00</lastmod>
   </url><url>
-    <loc>/feature/om-bootstrapping-with-snapshots.html</loc>
-    <lastmod>2025-08-09T02:25:09+05:30</lastmod>
+    <loc>/design/om-bootstrapping-with-snapshots.html</loc>
+    <lastmod>2025-09-22T10:13:03-07:00</lastmod>
   </url><url>
     <loc>/tools/debug.html</loc>
     <lastmod>2025-09-04T19:14:00+05:30</lastmod>

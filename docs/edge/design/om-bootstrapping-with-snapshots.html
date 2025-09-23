@@ -46,9 +46,8 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-<body>
+  <body>
 
-  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -76,11 +75,9 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-
-  <div class="wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      
+    <div class="container-fluid">
+      <div class="row">
+        
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -560,32 +557,20 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-12090">[HDDS-12090]</a> OM Bootstrapping with Snapshots (implemented) </h1>
+                <div><i>Authors: Swaminathan Balachandran</i><div class="pull-right">2025-08-05</div></div>
+                <p>&nbsp</p>
 
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        Design for the OM bootstrapping process that is snapshot aware
+                    </div>
+                </div>
 
-
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">OM Bootstrapping with Snapshots</li>
-                </ol>
-              </nav>
-
-          
-
-<div class="pull-right">
-    
-    
-    
-</div>
-
-
-          <div class="col-md-9">
-            <h1>OM Bootstrapping with Snapshots</h1>
-
-            <!--
+              <!--
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
@@ -724,25 +709,18 @@ Following is the flow for creating the tarball:</p>
 <p>Approach 1 is the most optimized solution as it balances the amount of time under the lock by minimising the amount of IO ops inside the lock by introducing another threshold config to track this. Moreover taking this approach will also need the most minimal amount of code change as it doesn’t differ from the current approach by much. While approach 2 might look simpler but this would imply revamping the entire bootstrap logic currently in place and moreover this approach might increase the total amount of time inside the lock which would imply blocking the double buffer thread of extended amounts of time if it comes to this situation, which approach 1 tries to avoid.</p>
 <p>Final approach implemented is the Approach 1.1</p>
 
-
-          
-          <a class="btn  btn-success btn-lg" href="../feature/faircallqueue.html">Next >></a>
-          
-          </div>
+            </div>
 
         </div>
       </div>
     </div>
-  </div>
-    <div class="push"></div>
-  </div>
 
-  
+
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/31cab30b6e49045872999fe24c4cdad9c6de9af5">31cab30b6e</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: September 22, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3ddcd48228bb4c6f75b3effbf8959c75fe616bc0">3ddcd48228</a>
     </span>
   </div>
 </footer>
@@ -754,6 +732,5 @@ Following is the flow for creating the tarball:</p>
 <script src="../js/bootstrap.min.js"></script>
 
 
-</body>
-
+  </body>
 </html>

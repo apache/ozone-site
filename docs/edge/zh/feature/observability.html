@@ -462,18 +462,17 @@ s=d.getElementsByTagName('script')[0];
 </span></span><span style="display:flex;"><span>         - <span style="color:#e6db74">&#34;127.0.0.1:9876&#34;</span> 
 </span></span></code></pre></div><h2 id="分布式跟踪">分布式跟踪</h2>
 <p>分布式跟踪可以通过可视化端到端的性能来帮助了解性能瓶颈。</p>
-<p>Ozone 使用 <a href="https://jaegertracing.io">jaeger</a> 跟踪库收集跟踪，可以将跟踪数据发送到任何兼容的后端(Zipkin，…)。</p>
+<p>Ozone 使用 <a href="https://opentelemetry.io/">OpenTelemetry</a> API 进行跟踪，并使用 Grpc 格式的 otlp 发送跟踪信息。
+jaeger 跟踪库作为收集器可以通过默认端口 4317（默认）从 Ozone 收集跟踪信息。</p>
 <p>默认情况下，跟踪功能是关闭的，可以通过 <code>ozon-site.xml</code> 的 <code>hdds.tracing.enabled</code> 配置变量打开。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>hdds.tracing.enabled<span style="color:#f92672">&lt;/name&gt;</span>
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>true<span style="color:#f92672">&lt;/value&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
-</span></span></code></pre></div><p>Jaeger 客户端可以用环境变量进行配置，如<a href="https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-core/README.md">这份</a>文档所述。</p>
-<p>例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>JAEGER_SAMPLER_PARAM<span style="color:#f92672">=</span>0.01
-</span></span><span style="display:flex;"><span>JAEGER_SAMPLER_TYPE<span style="color:#f92672">=</span>probabilistic
-</span></span><span style="display:flex;"><span>JAEGER_AGENT_HOST<span style="color:#f92672">=</span>jaeger
-</span></span></code></pre></div><p>此配置将记录1%的请求，以限制性能开销。有关 Jaeger 抽样的更多信息，请查看<a href="https://www.jaegertracing.io/docs/1.18/sampling/#client-sampling-configuration">文档</a>。</p>
+</span></span></code></pre></div><p>以下是提供收集器端点和采样策略所需的配置。这些是需要为每个 Ozone 组件（OM、SCM、DataNode）和 Ozone 客户端设置的环境变量，以启用 Shell 等跟踪功能。</p>
+<pre tabindex="0"><code>OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
+OTEL_TRACES_SAMPLER_ARG=0.01
+</code></pre><p>此配置将记录1%的请求，以限制性能开销。</p>
 <h2 id="ozone-insight">Ozone Insight</h2>
 <p>Ozone Insight 是一个用于检查 Ozone 集群当前状态的工具，它可以显示特定组件的日志记录、指标和配置。</p>
 <p>请使用<code>ozone insight list</code>命令检查可用的组件：</p>
@@ -587,6 +586,7 @@ s=d.getElementsByTagName('script')[0];
 <p>实际上 <code>ozone insight</code> 是通过 HTTP 端点来检索所需的信息（<code>/conf</code>、<code>/prom</code>和<code>/logLevel</code>端点），它在安全环境中还不被支持。</p>
 </div>
 
+
           
           </div>
 
@@ -602,7 +602,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 11, 2022 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2522127b1c0bc12038265faeb667c9c0592e53bc">2522127b1c</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: September 22, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/8887a14030fcd0ad0e285b42f6b9fab5956200ea">8887a14030</a>
     </span>
   </div>
 </footer>
