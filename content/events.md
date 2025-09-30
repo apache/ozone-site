@@ -17,6 +17,7 @@ The following was the list of agenda:
 
 # Past Conference Talks
 # 2025
+* Apache CoC North America 2025: Apache Ozone 2.0. Wei-Chiu Chuang [Slides](/assets/Ozone2.pdf)
 * Apache CoC Asia 2025: Apache Ozone: Balance Data Through Disk Balancer. Sammi Chen, Yiyang Zhou. [Slides](/assets/ApacheCoCAsia2025OzoneDiskBalancer.pdf)
 * Apache CoC Asia 2025: Apache Ozone Best Practices at Shopee. Hui Fei. [Slides](/assets/ApacheOzoneBestPracticesAtShopee.pdf)
 
