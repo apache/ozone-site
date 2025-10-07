@@ -728,6 +728,26 @@ even new tenant admins (if delegated). Example commands for illustration:</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="get-tenant-user-secret-key">Get tenant user secret key</h3>
+<p>Get secret key by tenant user access ID.</p>
+<p>Unlike <code>ozone s3 getsecret</code>, it doesn’t generate a key if the access ID doesn’t exist.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone tenant user get-secret &lt;ACCESS_ID&gt;
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone tenant user getsecret &lt;ACCESS_ID&gt;
+</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bash-4.2$ ozone tenant user get-secret <span style="color:#e6db74">&#39;tenantone$testuser&#39;</span>
+</span></span><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tenantone$testuser&#39;</span>
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&lt;GENERATED_SECRET&gt;&#39;</span>
+</span></span></code></pre></div><h3 id="set-tenant-user-secret-key">Set tenant user secret key</h3>
+<p>Set secret key for a tenant user access ID.</p>
+<p>Secret key length should be at least 8 characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone tenant user set-secret &lt;ACCESS_ID&gt; --secret &lt;SECRET_KEY&gt;
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone tenant user setsecret &lt;ACCESS_ID&gt; --secret &lt;SECRET_KEY&gt;
+</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bash-4.2$ ozone tenant user set-secret <span style="color:#e6db74">&#39;tenantone$testuser&#39;</span> --secret <span style="color:#e6db74">&#39;NEW_SECRET&#39;</span>
+</span></span><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;tenantone$testuser&#39;</span>
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NEW_SECRET&#39;</span>
 </span></span></code></pre></div><h3 id="revoke-a-tenant-admin">Revoke a tenant admin</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone tenant <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> user revokeadmin &lt;ACCESS_ID&gt;
 </span></span></code></pre></div><p>Example:</p>
@@ -880,7 +900,7 @@ the <code>ozone sh volume delete</code> command would fail because the volume re
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: February 13, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7370676dcf476a01094f7efa97aba98780a5073f">7370676dcf</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 7, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5dbf8bfd40050ec7c66f75329930f5b34dfd4885">5dbf8bfd40</a>
     </span>
   </div>
 </footer>
