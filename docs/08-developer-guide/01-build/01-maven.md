@@ -49,48 +49,31 @@ Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The bu
 
 If you are running on an ARM-based Apple Silicon Mac, please perform the additional steps in this section.
 
-#### Prerequisites
-
-- [Gradle](https://gradle.org/) - Gradle 7.0 or higher
-- [Compatible JVM for gRPC Java v1.71.0](https://github.com/grpc/grpc-java/blob/v1.71.0/README.md) - Compatible JVM for gRPC and Gradle
-
-#### Compile Protobuf version 3.7.1 for ARM-based Mac
-
-Execute the following commands to compile Protobuf version 3.7.1:
-
-```bash
-PROTOBUF_VERSION="3.7.1"
-curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-all-${PROTOBUF_VERSION}.tar.gz | tar zx
-cd protobuf-${PROTOBUF_VERSION}
-./configure --disable-shared
-make -j
-```
-
-Execute the following command to install `protoc` version 3.7.1 to the local Maven repository:
-
-```bash
-mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
-```
-
-If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
-
-```bash
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
-```
-
 #### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
 
-Execute the following commands to compile and patch Protobuf version 2.5.0:
+Note: These steps are required for Hadoop 2 support.  Execute the following commands to compile and patch Protobuf version 2.5.0:
 
 ```bash
-cd ..
 PROTOBUF_VERSION="2.5.0"
-curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-${PROTOBUF_VERSION}.tar.gz | tar zx
+curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
+tar xzf protobuf-2.5.0.tar.gz
 cd protobuf-${PROTOBUF_VERSION}
-curl -L -O https://gist.githubusercontent.com/liusheng/64aee1b27de037f8b9ccf1873b82c413/raw/118c2fce733a9a62a03281753572a45b6efb8639/protobuf-2.5.0-arm64.patch
-patch -p1 < protobuf-2.5.0-arm64.patch
+```
+
+Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like `vim` and append the following lines after line 59.  Save the file when complete.
+
+```bash
+#elif defined(__arm64__)
+#define GOOGLE_PROTOBUF_ARCH_ARM 1
+#define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+```
+
+Execute the following commands to build `protoc`:
+
+```bash
 ./configure --disable-shared
-make
+make -j
+cd ..
 ```
 
 Execute the following command to install `protoc` version 2.5.0 to the local Maven repository:
@@ -102,57 +85,7 @@ mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dver
 If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
 
 ```bash
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
-```
-
-#### Compile Protobuf version 3.19.6 for ARM-based Mac
-
-Execute the following commands to compile Protobuf version 3.19.6:
-
-```bash
-cd ..
-PROTOBUF_VERSION="3.19.6"
-curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protobuf-all-${PROTOBUF_VERSION}.tar.gz
-tar xzf protobuf-all-${PROTOBUF_VERSION}.tar.gz
-cd protobuf-${PROTOBUF_VERSION}
-./configure --disable-shared
-make -j
-```
-
-Execute the following command to install `protoc` version 3.19.6 to the local Maven repository:
-
-```bash
-mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
-```
-
-If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
-
-```bash
-cp $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
-```
-
-#### Compile gRPC version 1.71.0 for ARM-based Mac
-
-```bash
-cd ..
-git clone https://github.com/grpc/grpc-java.git
-cd grpc-java
-git checkout v1.71.0
-PARENTDIR=$(cd .. && pwd)
-export PROTOBUF_ROOT="$PARENTDIR/protobuf-${PROTOBUF_VERSION}"
-export PATH="${PROTOBUF_ROOT}/src:$PATH"
-export CPPFLAGS="-I${PROTOBUF_ROOT}/src"
-export LDFLAGS="-L${PROTOBUF_ROOT}/src/.libs"
-./gradlew :grpc-compiler:java_pluginExecutable -PskipAndroid=true
-PLUGIN="protoc-gen-grpc-java-1.71.0-osx-aarch_64.exe"
-cp compiler/build/exe/java_plugin/protoc-gen-grpc-java $PLUGIN
-```
-
-Execute the following commands to install `protoc-gen-grpc-java` version 1.71.0 to the local Maven repository:
-
-```bash
-mvn install:install-file -DgroupId=io.grpc -DartifactId=protoc-gen-grpc-java -Dversion=1.71.0 -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=$PLUGIN
-cd ..
+mv $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
 ```
 
 ### Build Options
