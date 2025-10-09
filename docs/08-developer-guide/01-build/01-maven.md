@@ -47,7 +47,7 @@ Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The bu
 
 ### Additional Steps Required For ARM-based Apple Silicon Macs (M1, etc)
 
-If you are running on an ARM-based Apple Silicon Mac, please perform the additional steps in this section.
+If you are running on an ARM-based Apple silicon Mac, please perform the additional steps in this section.
 
 #### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
 
