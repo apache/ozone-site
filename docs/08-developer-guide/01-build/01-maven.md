@@ -45,6 +45,49 @@ Choose one of the following methods to get the source code:
 
 Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
 
+### Additional Steps Required For ARM-based Apple Silicon Macs (M1, etc)
+
+If you are running on an ARM-based Apple silicon Mac, please perform the additional steps in this section.
+
+#### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
+
+Note: These steps are required for Hadoop 2 support.  Execute the following commands to compile and patch Protobuf version 2.5.0:
+
+```bash
+PROTOBUF_VERSION="2.5.0"
+curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
+tar xzf protobuf-2.5.0.tar.gz
+cd protobuf-${PROTOBUF_VERSION}
+```
+
+Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like `vim` and append the following lines after line 59.  Save the file when complete.
+
+```bash
+#elif defined(__arm64__)
+#define GOOGLE_PROTOBUF_ARCH_ARM 1
+#define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+```
+
+Execute the following commands to build `protoc`:
+
+```bash
+./configure --disable-shared
+make -j
+cd ..
+```
+
+Execute the following command to install `protoc` version 2.5.0 to the local Maven repository:
+
+```bash
+mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=${PROTOBUF_VERSION} -Dclassifier=osx-aarch_64 -Dpackaging=exe -Dfile=src/protoc
+```
+
+If you are running Maven 3.9.x or higher, execute the following command.  This command is not needed for 3.8.x or earlier:
+
+```bash
+mv $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-osx-aarch_64.exe
+```
+
 ### Build Options
 
 The build system offers several options to customize the build process according to your requirements
