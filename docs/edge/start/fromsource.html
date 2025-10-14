@@ -219,7 +219,17 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="../feature/snapshot.html">Ozone Snapshot</a>
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
                            
                         </li>
                     
@@ -653,61 +663,27 @@ from the <a href="https://github.com/apache/ozone">git repository</a>).</p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x</span>
 </span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64.exe
 </span></span></code></pre></div><h2 id="arm-based-apple-silicon-apple-m1--etc">ARM-based Apple Silicon (Apple M1 &hellip; etc)</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3.7.1&#34;</span>
-</span></span><span style="display:flex;"><span>curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protobuf-all-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz | tar zx
-</span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
-</span></span><span style="display:flex;"><span>./configure --disable-shared
-</span></span><span style="display:flex;"><span>make -j
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># install protoc to the local Maven repository</span>
-</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
-</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cd ..
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download protobuf 2.5.0 tarball</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Patch protobuf 2.5.0 - this is needed for Hadoop 2 support</span>
 </span></span><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2.5.0&#34;</span>
-</span></span><span style="display:flex;"><span>curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz | tar zx
+</span></span><span style="display:flex;"><span>curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
+</span></span><span style="display:flex;"><span>tar xzf protobuf-2.5.0.tar.gz
 </span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># patch protobuf 2.5.0</span>
-</span></span><span style="display:flex;"><span>curl -L -O https://gist.githubusercontent.com/liusheng/64aee1b27de037f8b9ccf1873b82c413/raw/118c2fce733a9a62a03281753572a45b6efb8639/protobuf-2.5.0-arm64.patch
-</span></span><span style="display:flex;"><span>patch -p1 &lt; protobuf-2.5.0-arm64.patch
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># build protobuf</span>
-</span></span><span style="display:flex;"><span>./configure --disable-shared
-</span></span><span style="display:flex;"><span>make
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># install protoc to the local Maven repository</span>
-</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
-</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like vim and append the following lines after line 59 (include the #).  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the file when complete.</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cd ..
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Patch protobuf 3.19.6</span>
-</span></span><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3.19.6&#34;</span>
-</span></span><span style="display:flex;"><span>curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protobuf-all-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz
-</span></span><span style="display:flex;"><span>tar xzf protobuf-all-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>.tar.gz
-</span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#elif defined(__arm64__)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define GOOGLE_PROTOBUF_ARCH_ARM 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define GOOGLE_PROTOBUF_ARCH_64_BIT 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute the following commands to build `protoc`</span>
 </span></span><span style="display:flex;"><span>./configure --disable-shared
 </span></span><span style="display:flex;"><span>make -j
+</span></span><span style="display:flex;"><span>cd ..
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Install protoc to the local Maven repository</span>
 </span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
-</span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cd ..
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile grpc</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pre-req: Manually install Gradle (version 7.0 or higher) and a compatible JVM (JDK 8 or higher) as required by gRPC Java v1.71.0. See https://github.com/grpc/grpc-java/blob/v1.71.0/README.md for details.</span>
-</span></span><span style="display:flex;"><span>git clone https://github.com/grpc/grpc-java.git
-</span></span><span style="display:flex;"><span>cd grpc-java
-</span></span><span style="display:flex;"><span>git checkout v1.71.0
-</span></span><span style="display:flex;"><span>PARENTDIR<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cd .. <span style="color:#f92672">&amp;&amp;</span> pwd<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>export PROTOBUF_ROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PARENTDIR<span style="color:#e6db74">/protobuf-</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PROTOBUF_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/src:</span>$PATH<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>export CPPFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-I</span><span style="color:#e6db74">${</span>PROTOBUF_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/src&#34;</span>
-</span></span><span style="display:flex;"><span>export LDFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-L</span><span style="color:#e6db74">${</span>PROTOBUF_ROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/src/.libs&#34;</span>
-</span></span><span style="display:flex;"><span>./gradlew :grpc-compiler:java_pluginExecutable -PskipAndroid<span style="color:#f92672">=</span>true
-</span></span><span style="display:flex;"><span>PLUGIN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;protoc-gen-grpc-java-1.71.0-osx-aarch_64.exe&#34;</span>
-</span></span><span style="display:flex;"><span>cp compiler/build/exe/java_plugin/protoc-gen-grpc-java $PLUGIN
-</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>io.grpc -DartifactId<span style="color:#f92672">=</span>protoc-gen-grpc-java -Dversion<span style="color:#f92672">=</span>1.71.0 -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>$PLUGIN
-</span></span><span style="display:flex;"><span>cd ..
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
+</span></span><span style="display:flex;"><span>mv $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
 </span></span></code></pre></div><h2 id="build-ozone">Build Ozone</h2>
 <p>Run the ozone build command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true
@@ -748,7 +724,7 @@ provided along with the official release.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: September 19, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/abb47056d81165a65960570f5ba0c3ea88a1acfd">abb47056d8</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 13, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2ffd6565e1289b5c2027be4a5d0068cbb21d2228">2ffd6565e1</a>
     </span>
   </div>
 </footer>

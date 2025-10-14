@@ -219,7 +219,17 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="active">
                            
-                           <a href="../feature/snapshot.html">Ozone Snapshot</a>
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
                            
                         </li>
                     
@@ -698,76 +708,11 @@ Refer to the <a href="https://ozone.apache.org/docs/edge/interface/ofs.html">Ozo
 </span></span></code></pre></div><p>Handle exceptions for privilege or non-existent snapshot issues.</p>
 <p><strong>HTTP REST API Access:</strong> Use HttpFS Gateway (WebHDFS-compatible REST API) for filesystem operations on snapshots (e.g., reading from <code>.snapshot</code> paths). Create/delete/rename are supported; <code>getSnapshotDiff</code> is not yet.</p>
 <h2 id="system-administration-how-to">System Administration How-To</h2>
-<p>This section covers key configurations and monitoring for Ozone snapshots. Tune these in <strong>ozone-site.xml</strong>.</p>
-<p><strong>Snapshot-Related Configuration Parameters:</strong></p>
-<ul>
-<li>
-<p><strong>General Snapshot Management</strong></p>
-<ul>
-<li><code>ozone.om.fs.snapshot.max.limit</code>: Max snapshots per bucket (Default: 10000). Safety limit.</li>
-<li><code>ozone.om.ratis.snapshot.dir</code>: The directory where OM Ratis snapshots are stored (Default: ratis-snapshot under OM DB dir).</li>
-<li><code>ozone.om.ratis.snapshot.max.total.sst.size</code>: The maximum total size of SST files to be included in a Ratis snapshot (Default: 100000000).</li>
-<li><code>ozone.om.snapshot.load.native.lib</code>: Use native RocksDB library for snapshot operations (Default: true). Set to false as a workaround for native library issues.</li>
-<li><code>ozone.om.snapshot.checkpoint.dir.creation.poll.timeout</code>: Timeout for polling the creation of the snapshot checkpoint directory (Default: 20s).</li>
-</ul>
-</li>
-<li>
-<p><strong>SnapshotDiff Service</strong></p>
-<ul>
-<li><code>ozone.om.snapshot.diff.db.dir</code>: Directory for SnapshotDiff job data. Defaults to OM metadata dir. Use a spacious location for large diffs.</li>
-<li><code>ozone.om.snapshot.force.full.diff</code>: Force a full diff for all snapshot diff jobs (Default: false).</li>
-<li><code>ozone.om.snapshot.diff.disable.native.libs</code>: Disable native libraries for snapshot diff (Default: false).</li>
-<li><code>ozone.om.snapshot.diff.max.page.size</code>: Maximum page size for snapshot diff (Default: 1000).</li>
-<li><code>ozone.om.snapshot.diff.thread.pool.size</code>: Thread pool size for snapshot diff (Default: 10).</li>
-<li><code>ozone.om.snapshot.diff.job.default.wait.time</code>: Default wait time for a snapshot diff job (Default: 1m).</li>
-<li><code>ozone.om.snapshot.diff.max.allowed.keys.changed.per.job</code>: Maximum number of keys allowed to be changed per snapshot diff job (Default: 10000000).</li>
-</ul>
-</li>
-<li>
-<p><strong>Snapshot Compaction and Cleanup</strong></p>
-<ul>
-<li><code>ozone.snapshot.key.deleting.limit.per.task</code>: The maximum number of keys scanned by the snapshot deleting service in a single run (Default: 20000).</li>
-<li><code>ozone.om.snapshot.compact.non.snapshot.diff.tables</code>: When enabled, allows compaction of tables not tracked by snapshot diffs after snapshots are evicted from the cache (Default: false).</li>
-<li><code>ozone.om.snapshot.compaction.dag.max.time.allowed</code>: Window for efficient SnapshotDiff (Default: 30 days). Older diffs may be slower.</li>
-<li><code>ozone.om.snapshot.prune.compaction.backup.batch.size</code>: Batch size for pruning compaction backups (Default: 2000).</li>
-<li><code>ozone.om.snapshot.compaction.dag.prune.daemon.run.interval</code>: Interval for the compaction DAG pruning daemon (Default: 1h).</li>
-<li><code>ozone.om.snapshot.diff.max.jobs.purge.per.task</code>: Maximum number of snapshot diff jobs to purge per task (Default: 100).</li>
-<li><code>ozone.om.snapshot.diff.job.report.persistent.time</code>: Persistence time for snapshot diff job reports (Default: 7d).</li>
-<li><code>ozone.om.snapshot.diff.cleanup.service.run.interval</code>: Interval for the snapshot diff cleanup service (Default: 1m).</li>
-<li><code>ozone.om.snapshot.diff.cleanup.service.timeout</code>: Timeout for the snapshot diff cleanup service (Default: 5m).</li>
-<li><code>ozone.om.snapshot.cache.cleanup.service.run.interval</code>: Interval for the snapshot cache cleanup service (Default: 1m).</li>
-<li><code>ozone.snapshot.filtering.limit.per.task</code>: The maximum number of snapshots to be filtered in a single run of the snapshot filtering service (Default: 2).</li>
-<li><code>ozone.snapshot.deleting.limit.per.task</code>: The maximum number of snapshots to be deleted in a single run of the snapshot deleting service (Default: 10).</li>
-<li><code>ozone.snapshot.filtering.service.interval</code>: Interval for the snapshot filtering service (Default: 60s).</li>
-<li><code>ozone.snapshot.deleting.service.timeout</code>: Timeout for the snapshot deleting service (Default: 300s).</li>
-<li><code>ozone.snapshot.deleting.service.interval</code>: Interval for the snapshot deleting service (Default: 30s).</li>
-<li><code>ozone.snapshot.deep.cleaning.enabled</code>: Enable deep cleaning of snapshots (Default: false).</li>
-</ul>
-</li>
-<li>
-<p><strong>Performance and Resource Management</strong></p>
-<ul>
-<li><code>ozone.om.snapshot.rocksdb.metrics.enabled</code>: Enable detailed RocksDB metrics for snapshots (Default: false). Use for debugging/monitoring.</li>
-<li><code>ozone.om.snapshot.cache.max.size</code>: Maximum size of the snapshot cache soft limit (Default: 10).</li>
-<li><code>ozone.om.snapshot.db.max.open.files</code>: Maximum number of open files for the snapshot database (Default: 100).</li>
-</ul>
-</li>
-<li>
-<p><strong>Snapshot Provider (Internal)</strong></p>
-<ul>
-<li><code>ozone.om.snapshot.provider.socket.timeout</code>: Socket timeout for the snapshot provider (Default: 5s).</li>
-<li><code>ozone.om.snapshot.provider.connection.timeout</code>: Connection timeout for the snapshot provider (Default: 5s).</li>
-<li><code>ozone.om.snapshot.provider.request.timeout</code>: Request timeout for the snapshot provider (Default: 5m).</li>
-</ul>
-</li>
-</ul>
-<h3 id="recon-specific-settings">Recon-Specific Settings</h3>
-<p>These settings, defined in <code>ozone-default.xml</code>, apply specifically to Recon.</p>
-<ul>
-<li><code>ozone.recon.om.snapshot.task.initial.delay</code>: Initial delay for the OM snapshot task in Recon (Default: 1m).</li>
-<li><code>ozone.recon.om.snapshot.task.interval.delay</code>: Interval for the OM snapshot task in Recon (Default: 5s).</li>
-<li><code>ozone.recon.om.snapshot.task.flush.param</code>: Flush parameter for the OM snapshot task in Recon (Default: false).</li>
-</ul>
+<p>This section covers key configurations and monitoring for Ozone snapshots.</p>
+<h3 id="configuration-properties">Configuration Properties</h3>
+<p>See <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>.</p>
+<p>Note: Snapshot configuration may change over time. Check <code>ozone-default.xml</code> for the most up-to-date settings.</p>
+<h3 id="monitoring">Monitoring</h3>
 <p>Monitor OM heap usage with many snapshots or large diffs. Enable Ozone Native ACLs or Ranger for access control.</p>
 <p><strong>Monitoring Snapshots:</strong> Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages.</p>
 <h2 id="authorization">Authorization</h2>
@@ -828,7 +773,7 @@ Refer to the <a href="https://ozone.apache.org/docs/edge/interface/ofs.html">Ozo
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: September 16, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/9a377483cdc228e7f6d84dd4cceeec898a01d6c9">9a377483cd</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/812739ec8b232ed7a7baa19563f54f597a20dd9e">812739ec8b</a>
     </span>
   </div>
 </footer>

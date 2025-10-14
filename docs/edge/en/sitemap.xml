@@ -120,7 +120,7 @@
                 />
   </url><url>
     <loc>/feature/snapshot.html</loc>
-    <lastmod>2025-09-16T14:47:35-07:00</lastmod>
+    <lastmod>2025-10-14T06:48:37+08:00</lastmod>
   </url><url>
     <loc>/feature/scm-ha.html</loc>
     <lastmod>2025-07-09T20:47:34-07:00</lastmod>
@@ -205,6 +205,9 @@
                 hreflang="en"
                 href="/feature/prefixfso.html"
                 />
+  </url><url>
+    <loc>/feature/snapshot-configuration-properties.html</loc>
+    <lastmod>2025-10-14T06:48:37+08:00</lastmod>
   </url><url>
     <loc>/feature/topology.html</loc>
     <lastmod>2025-09-19T13:18:09-07:00</lastmod>
@@ -695,7 +698,7 @@
                 />
   </url><url>
     <loc>/start/fromsource.html</loc>
-    <lastmod>2025-09-19T10:28:49-07:00</lastmod>
+    <lastmod>2025-10-13T13:28:12-07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"

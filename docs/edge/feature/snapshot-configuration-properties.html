@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -222,7 +225,7 @@ s=d.getElementsByTagName('script')[0];
                                </a>
                                <ul class="nav">
                                
-                                  <li class="">
+                                  <li class="active">
                                      <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
                                   </li>
                                
@@ -567,56 +570,138 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-3816">[HDDS-3816]</a> Erasure Coding in Ozone (draft) </h1>
-                <div><i>Authors: Uma Maheswara Rao Gangumalla, Marton Elek, Stephen O&#39;Donnell</i><div class="pull-right">2020-06-30</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Use Erasure Coding algorithm for efficient storage
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Snapshot Configuration Properties</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Snapshot Configuration Properties</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<h1 id="abstract">Abstract</h1>
-<p>Support Erasure Coding for read and write pipeline of Ozone.</p>
-<h1 id="status">Status</h1>
-<p>The design doc describes two main methods to implement EC:</p>
+<p>Key configurations for Ozone snapshots.</p>
+<h2 id="snapshot-related-configuration-parameters">Snapshot-Related Configuration Parameters</h2>
+<p>These parameters, defined in <code>ozone-site.xml</code>, control how Ozone manages snapshots.</p>
 <ul>
-<li>Container level, async Erasure Coding, to encode closed containers in the background</li>
-<li>Block level, striped Erasure Coding</li>
+<li>
+<p><strong>General Snapshot Management</strong></p>
+<ul>
+<li><code>ozone.om.fs.snapshot.max.limit</code>: Max snapshots per bucket (Default: 10000). Safety limit.</li>
+<li><code>ozone.om.ratis.snapshot.dir</code>: The directory where OM Ratis snapshots are stored (Default: ratis-snapshot under OM DB dir).</li>
+<li><code>ozone.om.ratis.snapshot.max.total.sst.size</code>: The maximum total size of SST files to be included in a Ratis snapshot (Default: 100000000).</li>
+<li><code>ozone.om.snapshot.load.native.lib</code>: Use native RocksDB library for snapshot operations (Default: true). Set to false as a workaround for native library issues.</li>
+<li><code>ozone.om.snapshot.checkpoint.dir.creation.poll.timeout</code>: Timeout for polling the creation of the snapshot checkpoint directory (Default: 20s).</li>
 </ul>
-<p>Second option can work only with new, dedicated write-path. Details of possible implementation will be included in the next version.</p>
-<h1 id="link">Link</h1>
-<p><a href="https://issues.apache.org/jira/secure/attachment/13006245/Erasure%20Coding%20in%20Apache%20Hadoop%20Ozone.pdf">https://issues.apache.org/jira/secure/attachment/13006245/Erasure%20Coding%20in%20Apache%20Hadoop%20Ozone.pdf</a></p>
+</li>
+<li>
+<p><strong>SnapshotDiff Service</strong></p>
+<ul>
+<li><code>ozone.om.snapshot.diff.db.dir</code>: Directory for SnapshotDiff job data. Defaults to OM metadata dir. Use a spacious location for large diffs.</li>
+<li><code>ozone.om.snapshot.force.full.diff</code>: Force a full diff for all snapshot diff jobs (Default: false).</li>
+<li><code>ozone.om.snapshot.diff.disable.native.libs</code>: Disable native libraries for snapshot diff (Default: false).</li>
+<li><code>ozone.om.snapshot.diff.max.page.size</code>: Maximum page size for snapshot diff (Default: 1000).</li>
+<li><code>ozone.om.snapshot.diff.thread.pool.size</code>: Thread pool size for snapshot diff (Default: 10).</li>
+<li><code>ozone.om.snapshot.diff.job.default.wait.time</code>: Default wait time for a snapshot diff job (Default: 1m).</li>
+<li><code>ozone.om.snapshot.diff.max.allowed.keys.changed.per.job</code>: Maximum number of keys allowed to be changed per snapshot diff job (Default: 10000000).</li>
+</ul>
+</li>
+<li>
+<p><strong>Snapshot Compaction and Cleanup</strong></p>
+<ul>
+<li><code>ozone.snapshot.key.deleting.limit.per.task</code>: The maximum number of keys scanned by the snapshot deleting service in a single run (Default: 20000).</li>
+<li><code>ozone.om.snapshot.compact.non.snapshot.diff.tables</code>: When enabled, allows compaction of tables not tracked by snapshot diffs after snapshots are evicted from the cache (Default: false).</li>
+<li><code>ozone.om.snapshot.compaction.dag.max.time.allowed</code>: Window for efficient SnapshotDiff (Default: 30 days). Older diffs may be slower.</li>
+<li><code>ozone.om.snapshot.prune.compaction.backup.batch.size</code>: Batch size for pruning compaction backups (Default: 2000).</li>
+<li><code>ozone.om.snapshot.compaction.dag.prune.daemon.run.interval</code>: Interval for the compaction DAG pruning daemon (Default: 1h).</li>
+<li><code>ozone.om.snapshot.diff.max.jobs.purge.per.task</code>: Maximum number of snapshot diff jobs to purge per task (Default: 100).</li>
+<li><code>ozone.om.snapshot.diff.job.report.persistent.time</code>: Persistence time for snapshot diff job reports (Default: 7d).</li>
+<li><code>ozone.om.snapshot.diff.cleanup.service.run.interval</code>: Interval for the snapshot diff cleanup service (Default: 1m).</li>
+<li><code>ozone.om.snapshot.diff.cleanup.service.timeout</code>: Timeout for the snapshot diff cleanup service (Default: 5m).</li>
+<li><code>ozone.om.snapshot.cache.cleanup.service.run.interval</code>: Interval for the snapshot cache cleanup service (Default: 1m).</li>
+<li><code>ozone.snapshot.filtering.limit.per.task</code>: The maximum number of snapshots to be filtered in a single run of the snapshot filtering service (Default: 2).</li>
+<li><code>ozone.snapshot.deleting.limit.per.task</code>: The maximum number of snapshots to be deleted in a single run of the snapshot deleting service (Default: 10).</li>
+<li><code>ozone.snapshot.filtering.service.interval</code>: Interval for the snapshot filtering service (Default: 60s).</li>
+<li><code>ozone.snapshot.deleting.service.timeout</code>: Timeout for the snapshot deleting service (Default: 300s).</li>
+<li><code>ozone.snapshot.deleting.service.interval</code>: Interval for the snapshot deleting service (Default: 30s).</li>
+<li><code>ozone.snapshot.deep.cleaning.enabled</code>: Enable deep cleaning of snapshots (Default: false).</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance and Resource Management</strong></p>
+<ul>
+<li><code>ozone.om.snapshot.rocksdb.metrics.enabled</code>: Enable detailed RocksDB metrics for snapshots (Default: false). Use for debugging/monitoring.</li>
+<li><code>ozone.om.snapshot.cache.max.size</code>: Maximum size of the snapshot cache soft limit (Default: 10).</li>
+<li><code>ozone.om.snapshot.db.max.open.files</code>: Maximum number of open files for the snapshot database (Default: 100).</li>
+</ul>
+</li>
+<li>
+<p><strong>Snapshot Provider (Internal)</strong></p>
+<ul>
+<li><code>ozone.om.snapshot.provider.socket.timeout</code>: Socket timeout for the snapshot provider (Default: 5s).</li>
+<li><code>ozone.om.snapshot.provider.connection.timeout</code>: Connection timeout for the snapshot provider (Default: 5s).</li>
+<li><code>ozone.om.snapshot.provider.request.timeout</code>: Request timeout for the snapshot provider (Default: 5m).</li>
+</ul>
+</li>
+</ul>
+<h2 id="recon-specific-settings">Recon-Specific Settings</h2>
+<p>These settings, defined in <code>ozone-default.xml</code>, apply specifically to Recon.</p>
+<ul>
+<li><code>ozone.recon.om.snapshot.task.initial.delay</code>: Initial delay for the OM snapshot task in Recon (Default: 1m).</li>
+<li><code>ozone.recon.om.snapshot.task.interval.delay</code>: Interval for the OM snapshot task in Recon (Default: 5s).</li>
+<li><code>ozone.recon.om.snapshot.task.flush.param</code>: Flush parameter for the OM snapshot task in Recon (Default: false).</li>
+</ul>
 
-            </div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../feature/topology.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab3</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/812739ec8b232ed7a7baa19563f54f597a20dd9e">812739ec8b</a>
     </span>
   </div>
 </footer>
@@ -628,5 +713,6 @@ s=d.getElementsByTagName('script')[0];
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>
