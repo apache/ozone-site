@@ -505,6 +505,13 @@
       <description>Design for the OM bootstrapping process that is snapshot aware</description>
     </item>
     <item>
+      <title>Staged Reprocessing for Recon Task Data During Full Snapshot Recovery</title>
+      <link>/concept/hdds-13515-design-document.html</link>
+      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/concept/hdds-13515-design-document.html</guid>
+      <description>Staged reprocessing of Recon Task for data consistency shown over Recon UI</description>
+    </item>
+    <item>
       <title>Ozone Repair</title>
       <link>/tools/repair.html</link>
       <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
@@ -839,6 +846,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/recipe/prometheus.html</guid>
       <description>A Simple recipe to monitor Ozone using Prometheus</description>
+    </item>
+    <item>
+      <title>RocksDB in Apache Ozone</title>
+      <link>/concept/rocksdb.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/concept/rocksdb.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: This page covers advanced topics. Ozone administrators typically do not need to tinker with these settings.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Spark in Kubernetes with OzoneFS</title>

@@ -187,7 +187,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
                            
@@ -584,8 +584,8 @@ s=d.getElementsByTagName('script')[0];
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../recipe.html">Recipes</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Access Ozone using HTTPFS REST API (Docker &#43; Python Requests)</li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">RocksDB in Apache Ozone</li>
                 </ol>
               </nav>
 
@@ -599,124 +599,211 @@ s=d.getElementsByTagName('script')[0];
 
 
           <div class="col-md-9">
-            <h1>Access Ozone using HTTPFS REST API (Docker &#43; Python Requests)</h1>
+            <h1>RocksDB in Apache Ozone</h1>
 
-            <!--
-Licensed to the Apache Software Foundation (ASF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+      http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
 -->
-<p>This tutorial demonstrates how to access Apache Ozone using the HTTPFS REST API and Python’s <code>requests</code> library. It covers writing and reading a file via simple authentication.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li>Docker and Docker Compose installed</li>
-<li>Python 3.x environment</li>
-</ul>
-<h2 id="steps">Steps</h2>
-<h3 id="1-start-ozone-in-docker">1️⃣ Start Ozone in Docker</h3>
-<p>Download the latest Docker Compose file for Ozone and start the cluster with 3 DataNodes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -O https://raw.githubusercontent.com/apache/ozone-docker/latest/docker-compose.yaml
-</span></span><span style="display:flex;"><span>docker compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</span></span></code></pre></div><h3 id="2-create-a-volume-and-bucket">2️⃣ Create a Volume and Bucket</h3>
-<p>Connect to the SCM container:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec -it &lt;your-scm-container-name-or-id&gt; bash
-</span></span></code></pre></div><blockquote>
-<p>Change the container id <code>&lt;your-scm-container-name-or-id&gt;</code> to your actual container id.</p>
+<blockquote>
+<p>Note: This page covers advanced topics. Ozone administrators typically do not need to tinker with these settings.</p>
 </blockquote>
-<p>The rest of the tutorial will run on this container.</p>
-<p>Create a volume and a bucket:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create vol1
-</span></span><span style="display:flex;"><span>ozone sh bucket create vol1/bucket1
-</span></span></code></pre></div><h3 id="3-install-required-python-library">3️⃣ Install Required Python Library</h3>
-<p>Install the <code>requests</code> library:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install requests
-</span></span></code></pre></div><h3 id="4-access-ozone-httpfs-via-python">4️⃣ Access Ozone HTTPFS via Python</h3>
-<p>Create a script (<code>ozone_httpfs_example.py</code>) with the following content:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/python</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ozone HTTPFS endpoint and file path</span>
-</span></span><span style="display:flex;"><span>host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://httpfs:14000&#34;</span>
-</span></span><span style="display:flex;"><span>volume <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vol1&#34;</span>
-</span></span><span style="display:flex;"><span>bucket <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bucket1&#34;</span>
-</span></span><span style="display:flex;"><span>filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello.txt&#34;</span>
-</span></span><span style="display:flex;"><span>path <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/webhdfs/v1/</span><span style="color:#e6db74">{</span>volume<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>bucket<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>filename<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>user <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ozone&#34;</span>  <span style="color:#75715e"># can be any value in simple auth mode</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step 1: Initiate file creation (responds with 307 redirect)</span>
-</span></span><span style="display:flex;"><span>params_create <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;CREATE&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;overwrite&#34;</span>: <span style="color:#e6db74">&#34;true&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;user.name&#34;</span>: user
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Creating file...&#34;</span>)
-</span></span><span style="display:flex;"><span>resp_create <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(host <span style="color:#f92672">+</span> path, params<span style="color:#f92672">=</span>params_create, allow_redirects<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> resp_create<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">307</span>:
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Unexpected response: </span><span style="color:#e6db74">{</span>resp_create<span style="color:#f92672">.</span>status_code<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    print(resp_create<span style="color:#f92672">.</span>text)
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>redirect_url <span style="color:#f92672">=</span> resp_create<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#39;Location&#39;</span>]
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Redirected to: </span><span style="color:#e6db74">{</span>redirect_url<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step 2: Write data to the redirected location with correct headers</span>
-</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/octet-stream&#34;</span>}
-</span></span><span style="display:flex;"><span>content <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;Hello from Ozone HTTPFS!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>resp_upload <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(redirect_url, data<span style="color:#f92672">=</span>content, headers<span style="color:#f92672">=</span>headers)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> resp_upload<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">201</span>:
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Upload failed: </span><span style="color:#e6db74">{</span>resp_upload<span style="color:#f92672">.</span>status_code<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    print(resp_upload<span style="color:#f92672">.</span>text)
-</span></span><span style="display:flex;"><span>    exit(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;File created successfully.&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step 3: Read the file back</span>
-</span></span><span style="display:flex;"><span>params_open <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;user.name&#34;</span>: user
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Reading file...&#34;</span>)
-</span></span><span style="display:flex;"><span>resp_read <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(host <span style="color:#f92672">+</span> path, params<span style="color:#f92672">=</span>params_open, allow_redirects<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> resp_read<span style="color:#f92672">.</span>ok:
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;File contents:&#34;</span>)
-</span></span><span style="display:flex;"><span>    print(resp_read<span style="color:#f92672">.</span>text)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Read failed: </span><span style="color:#e6db74">{</span>resp_read<span style="color:#f92672">.</span>status_code<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    print(resp_read<span style="color:#f92672">.</span>text)
-</span></span></code></pre></div><p>Run the script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python ozone_httpfs_example.py
-</span></span></code></pre></div><p>✅ If everything is configured correctly, this will create a file in Ozone using the REST API and read it back.</p>
-<h2 id="troubleshooting-tips">Troubleshooting Tips</h2>
+<p>RocksDB is a critical component of Apache Ozone, providing a high-performance embedded key-value store. It is used by various Ozone services to persist metadata and state.</p>
+<h2 id="1-introduction-to-rocksdb">1. Introduction to RocksDB</h2>
+<p>RocksDB is a log-structured merge-tree (LSM-tree) based key-value store developed by Facebook. It is optimized for fast storage environments like SSDs and offers high write throughput and efficient point lookups. For more details, refer to the <a href="https://github.com/facebook/rocksdb">RocksDB GitHub project</a> and the <a href="https://github.com/facebook/rocksdb/wiki">RocksDB Wiki</a>.</p>
+<h2 id="2-how-ozone-uses-rocksdb">2. How Ozone uses RocksDB</h2>
+<p>RocksDB is utilized in the following Ozone components to store critical metadata:</p>
 <ul>
-<li><strong>401 Unauthorized</strong>: Make sure <code>user.name</code> is passed as a query parameter and that proxy user settings are correct in <code>core-site.xml</code>.</li>
-<li><strong>400 Bad Request</strong>: Add <code>Content-Type: application/octet-stream</code> to the request header.</li>
-<li><strong>Connection Refused</strong>: Ensure <code>httpfs</code> container is running and accessible at port 14000.</li>
-<li><strong>Volume or Bucket Not Found</strong>: Confirm you created <code>vol1/bucket1</code> in step 2.</li>
+<li>
+<p><strong>Ozone Manager (OM):</strong> The OM uses RocksDB as its primary metadata store, holding the entire namespace and related information. As defined in <code>OMDBDefinition.java</code>, this includes tables for:</p>
+<ul>
+<li><strong>Namespace:</strong> <code>volumeTable</code>, <code>bucketTable</code>, <code>keyTable</code> (for object store layout), <code>directoryTable</code>, and <code>fileTable</code> (for file system layout).</li>
+<li><strong>Security:</strong> <code>userTable</code>, <code>dTokenTable</code> (delegation tokens), and <code>s3SecretTable</code>.</li>
+<li><strong>State Management:</strong> <code>transactionInfoTable</code> for tracking transactions, <code>deletedTable</code> for pending key deletions, and <code>snapshotInfoTable</code> for managing Ozone snapshots.</li>
 </ul>
-<h2 id="references">References</h2>
+</li>
+<li>
+<p><strong>Storage Container Manager (SCM):</strong> The SCM persists the state of the storage layer in RocksDB. The structure, defined in <code>SCMDBDefinition.java</code>, includes tables for:</p>
 <ul>
-<li><a href="https://ozone.apache.org/docs/edge/interface/httpfs.html">Apache Ozone HTTPFS Docs</a></li>
-<li><a href="https://requests.readthedocs.io/">Python requests Documentation</a></li>
-<li><a href="https://ozone.apache.org/docs/edge/interface.html">Ozone Client Interfaces</a></li>
+<li><code>pipelines</code>: Manages the state and composition of data pipelines.</li>
+<li><code>containers</code>: Stores information about all storage containers in the cluster.</li>
+<li><code>deletedBlocks</code>: Tracks blocks that are marked for deletion and awaiting garbage collection.</li>
+<li><code>move</code>: Coordinates container movements for data rebalancing.</li>
+<li><code>validCerts</code>: Stores certificates for validating datanodes.</li>
+<li><code>validSCMCerts</code>: Stores certificates for validating SCMs.</li>
+<li><code>scmTransactionInfos</code>: Tracks SCM transactions.</li>
+<li><code>sequenceId</code>: Manages sequence IDs for various SCM operations.</li>
+<li><code>meta</code>: Stores miscellaneous SCM metadata, like upgrade status.</li>
+<li><code>statefulServiceConfig</code>: Stores configurations for stateful services.</li>
+</ul>
+</li>
+<li>
+<p><strong>Datanode:</strong> A Datanode utilizes RocksDB for two main purposes:</p>
+<ol>
+<li><strong>Per-Volume Metadata:</strong> It maintains one RocksDB instance per storage volume. Each of these instances manages metadata for the containers and blocks stored on that specific volume. As specified in <code>DatanodeSchemaThreeDBDefinition.java</code>, this database is structured with column families for <code>block_data</code>, <code>metadata</code>, <code>delete_txns</code>, <code>finalize_blocks</code>, and <code>last_chunk_info</code>. To optimize performance, it uses a fixed-length prefix based on the container ID, enabling efficient lookups with RocksDB&rsquo;s prefix seek feature.</li>
+<li><strong>Global Container Tracking:</strong> Additionally, each Datanode has a single, separate RocksDB instance to record the set of all containers it manages. This database, defined in <code>WitnessedContainerDBDefinition.java</code>, contains a <code>ContainerCreateInfoTable</code> table that provides a complete index of the containers hosted on that Datanode.</li>
+</ol>
+</li>
+<li>
+<p><strong>Recon:</strong> Ozone&rsquo;s administration and monitoring tool, Recon, maintains its own RocksDB database to store aggregated and historical data for analysis. The <code>ReconDBDefinition.java</code> outlines tables for:</p>
+<ul>
+<li><code>containerKeyTable</code>: Maps containers to the keys they contain.</li>
+<li><code>namespaceSummaryTable</code>: Stores aggregated namespace information for quick reporting.</li>
+<li><code>replica_history</code>: Tracks the historical locations of container replicas, which is essential for auditing and diagnostics.</li>
+<li><code>keyContainerTable</code>: Maps keys to the containers they are in.</li>
+<li><code>containerKeyCountTable</code>: Stores the number of keys in each container.</li>
+<li><code>replica_history_v2</code>: Tracks the historical locations of container replicas with BCSID, which is essential for auditing and diagnostics.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-tunings-applicable-to-rocksdb">3. Tunings applicable to RocksDB</h2>
+<p>Effective tuning of RocksDB can significantly impact Ozone&rsquo;s performance. Ozone exposes several configuration properties to tune RocksDB behavior. These properties are typically found in <code>ozone-default.xml</code> and can be overridden in <code>ozone-site.xml</code>.</p>
+<h3 id="general-settings">General Settings</h3>
+<p>Ozone provides a set of general RocksDB configurations that apply to all services (OM, SCM, and Datanodes) unless overridden by more specific settings. With the exception of <code>hdds.db.profile</code> and <code>ozone.metastore.rocksdb.cf.write.buffer.size</code>, these properties are defined in <code>RocksDBConfiguration.java</code>.</p>
+<ul>
+<li>
+<p><code>hdds.db.profile</code>: Specifies the RocksDB profile to use, which determines the default <code>DBOptions</code> and <code>ColumnFamilyOptions</code>. Default value: <code>DISK</code>.</p>
+<ul>
+<li>Possible values include <code>SSD</code> and <code>DISK</code>.</li>
+<li>For example, setting this to <code>SSD</code> will apply tunings optimized for SSD storage.</li>
+</ul>
+</li>
+<li>
+<p><strong>Write Options:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.writeoption.sync</code>: If set to <code>true</code>, writes are synchronized to persistent storage, ensuring durability at the cost of performance. If <code>false</code>, writes are flushed asynchronously. Default: <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>ozone.metastore.rocksdb.cf.write.buffer.size</code>: The write buffer (memtable) size for each column family of the rocksdb store. Default: <code>128MB</code>.</p>
+</li>
+<li>
+<p><strong>Write-Ahead Log (WAL) Management:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.WAL_ttl_seconds</code>: The time-to-live for WAL files in seconds. Default: <code>1200</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.WAL_size_limit_MB</code>: The total size limit for WAL files in megabytes. When this limit is exceeded, the oldest WAL files are deleted. A value of <code>0</code> means no limit. Default: <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Logging:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.logging.enabled</code>: Enables or disables RocksDB&rsquo;s own logging. Default: <code>false</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.logging.level</code>: The logging level for RocksDB (INFO, DEBUG, WARN, ERROR, FATAL). Default: <code>INFO</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.max.log.file.size</code>: The maximum size of a single RocksDB log file. Default: <code>100MB</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.keep.log.file.num</code>: The maximum number of RocksDB log files to retain. Default: <code>10</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ozone-manager-om-specific-settings">Ozone Manager (OM) Specific Settings</h3>
+<p>These settings, defined in <code>ozone-default.xml</code>, apply specifically to the Ozone Manager.</p>
+<ul>
+<li><code>ozone.om.db.max.open.files</code>: The total number of files that a RocksDB can open in the OM. Default: <code>-1</code> (unlimited).</li>
+<li><code>ozone.om.compaction.service.enabled</code>: Enable or disable a background job that periodically compacts rocksdb tables flagged for compaction. Default: <code>false</code>.</li>
+<li><code>ozone.om.compaction.service.run.interval</code>: The interval for the OM&rsquo;s compaction service. Default: <code>6h</code>.</li>
+<li><code>ozone.om.compaction.service.timeout</code>: Timeout for the OM&rsquo;s compaction service. Default: <code>10m</code>.</li>
+<li><code>ozone.om.compaction.service.columnfamilies</code>: A comma-separated list of column families to be compacted by the service. Default: <code>keyTable,fileTable,directoryTable,deletedTable,deletedDirectoryTable,multipartInfoTable</code>.</li>
+</ul>
+<h3 id="datanode-specific-settings">DataNode-Specific Settings</h3>
+<p>These settings, defined in <code>DatanodeConfiguration.java</code>, apply specifically to Datanodes and will override the general settings where applicable.</p>
+<p>Key tuning parameters for the DataNode often involve:</p>
+<ul>
+<li><strong>Memory usage:</strong> Configuring block cache, write buffer manager, and other memory-related settings.
+<ul>
+<li><code>hdds.datanode.metadata.rocksdb.cache.size</code>: Configures the block cache size for RocksDB instances on Datanodes. Default value: <code>1GB</code>.</li>
+</ul>
+</li>
+<li><strong>Compaction strategies:</strong> Optimizing how data is merged and organized on disk. For more details, refer to the <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN Documentation</a>.
+<ul>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file</code>: Enables or disables auto-compaction for small SST files. Default value: <code>true</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold</code>: Threshold for small SST file size for auto-compaction. Default value: <code>1MB</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold</code>: Threshold for the number of small SST files for auto-compaction. Default value: <code>512</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.interval.minutes</code>: Auto compact small SST files interval in minutes. Default value: <code>120</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.threads</code>: Auto compact small SST files threads. Default value: <code>1</code>.</li>
+</ul>
+</li>
+<li><strong>Write-ahead log (WAL) settings:</strong> Balancing durability and write performance.
+<ul>
+<li><code>hdds.datanode.rocksdb.log.max-file-size</code>: The max size of each user log file of RocksDB. O means no size limit. Default value: <code>32MB</code>.</li>
+<li><code>hdds.datanode.rocksdb.log.max-file-num</code>: The max user log file number to keep for each RocksDB. Default value: <code>64</code>.</li>
+</ul>
+</li>
+<li><strong>Logging:</strong>
+<ul>
+<li><code>hdds.datanode.rocksdb.log.level</code>: The user log level of RocksDB(DEBUG/INFO/WARN/ERROR/FATAL)). Default: <code>INFO</code>.</li>
+</ul>
+</li>
+<li><strong>Other Settings:</strong>
+<ul>
+<li><code>hdds.datanode.rocksdb.delete-obsolete-files-period</code>: Periodicity when obsolete files get deleted. Default is 1h.</li>
+<li><code>hdds.datanode.rocksdb.max-open-files</code>: The total number of files that a RocksDB can open. Default: <code>1024</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-troubleshooting-and-repair-tools-relevant-to-rocksdb">4. Troubleshooting and repair tools relevant to RocksDB</h2>
+<p>Troubleshooting RocksDB issues in Ozone often involves:</p>
+<ul>
+<li>Analyzing RocksDB logs for errors and warnings.</li>
+<li>Using RocksDB&rsquo;s built-in tools for inspecting database files:
+<ul>
+<li><a href="https://github.com/facebook/rocksdb/wiki/Administration-and-Data-Access-Tool#ldb-tool"><strong>ldb</strong></a>: A command-line tool for inspecting and manipulating the contents of a RocksDB database.</li>
+<li><a href="https://github.com/facebook/rocksdb/wiki/Administration-and-Data-Access-Tool#sst-dump-tool"><strong>sst_dump</strong></a>: A command-line tool for inspecting the contents of SST (Static Table) files, which are the files that store the data in RocksDB.</li>
+</ul>
+</li>
+<li>Understanding common RocksDB error codes and their implications.</li>
+</ul>
+<h2 id="5-version-compatibility">5. Version Compatibility</h2>
+<p>Apache Ozone uses RocksDB version 7.7.3. It is recommended to use RocksDB tools of this version to ensure compatibility and avoid any potential issues.</p>
+<h2 id="6-monitoring-and-metrics">6. Monitoring and Metrics</h2>
+<p>Monitoring RocksDB performance is crucial for maintaining a healthy Ozone cluster.</p>
+<ul>
+<li><strong>RocksDB Statistics:</strong> Ozone can expose detailed RocksDB statistics. Enable this by setting <code>ozone.metastore.rocksdb.statistics</code> to <code>ALL</code> or <code>EXCEPT_DETAILED_TIMERS</code> in <code>ozone-site.xml</code>. Be aware that enabling detailed statistics can incur a performance penalty (5-10%).</li>
+<li><strong>Grafana Dashboards:</strong> Ozone provides Grafana dashboards that visualize low-level RocksDB statistics. Refer to the <a href="../feature/observability.html">Ozone Monitoring Documentation</a> for details on setting up monitoring and using these dashboards.</li>
+</ul>
+<h2 id="7-storage-sizing">7. Storage Sizing</h2>
+<p>Properly sizing the storage for RocksDB instances is essential to prevent performance bottlenecks and out-of-disk errors. The requirements vary significantly for each Ozone component, and using dedicated, fast storage (SSDs) is highly recommended.</p>
+<ul>
+<li>
+<p><strong>Ozone Manager (OM):</strong></p>
+</li>
+<li>
+<p><strong>Baseline:</strong> A minimum of <strong>100 GB</strong> should be reserved for the OM&rsquo;s RocksDB instance. The OM stores the entire namespace metadata (volumes, buckets, keys), so this is the most critical database in the cluster.</p>
+</li>
+<li>
+<p><strong>With Snapshots:</strong> Enabling Ozone Snapshots will substantially increase storage needs. Each snapshot preserves a view of the metadata, and the underlying data files (SSTs) cannot be deleted by compaction until a snapshot is removed. The exact requirement depends on the number of retained snapshots and the rate of change (creations/deletions) in the namespace. Monitor disk usage closely after enabling snapshots. For more details, refer to the <a href="../feature/snapshot.html">Ozone Snapshot Documentation</a>.</p>
+</li>
+<li>
+<p><strong>Storage Container Manager (SCM):</strong></p>
+</li>
+<li>
+<p>SCM&rsquo;s metadata footprint (pipelines, containers, Datanode heartbeats) is much smaller than the OM&rsquo;s. A baseline of <strong>20-50 GB</strong> is typically sufficient for its RocksDB instance.</p>
+</li>
+<li>
+<p><strong>Datanode:</strong></p>
+</li>
+<li>
+<p>The Datanode&rsquo;s RocksDB stores metadata for all containers and their blocks. Its size grows proportionally with the number of containers and blocks hosted on that Datanode.</p>
+</li>
+<li>
+<p><strong>Rule of Thumb:</strong> A good starting point is to reserve <strong>0.1% to 0.5%</strong> of the total data disk capacity for RocksDB metadata. For example, a Datanode with 100 TB of data disks should reserve between 100 GB and 500 GB for its RocksDB metadata.</p>
+</li>
+<li>
+<p>Workloads with many small files will result in a higher block count and will require space on the higher end of this range.</p>
+</li>
 </ul>
 
 
-          
-          <a class="btn  btn-success btn-lg" href="../recipe/botoclient.html">Next >></a>
           
           </div>
 
@@ -732,7 +819,7 @@ limitations under the License.
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: June 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ce288b6ed0c835dfbe5fe32589bc043db385bbe1">ce288b6ed0</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f4337adef548a148673a62c70076d93e6bdd2471">f4337adef5</a>
     </span>
   </div>
 </footer>

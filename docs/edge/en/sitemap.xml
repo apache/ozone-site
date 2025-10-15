@@ -510,7 +510,7 @@
                 />
   </url><url>
     <loc>/concept/datanodes.html</loc>
-    <lastmod>2025-07-03T03:05:33-07:00</lastmod>
+    <lastmod>2025-10-15T16:16:50+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -718,6 +718,9 @@
   </url><url>
     <loc>/design/om-bootstrapping-with-snapshots.html</loc>
     <lastmod>2025-09-22T10:13:03-07:00</lastmod>
+  </url><url>
+    <loc>/concept/hdds-13515-design-document.html</loc>
+    <lastmod>2025-10-15T11:26:42+05:30</lastmod>
   </url><url>
     <loc>/tools/debug.html</loc>
     <lastmod>2025-09-04T19:14:00+05:30</lastmod>
@@ -934,6 +937,9 @@
                 hreflang="en"
                 href="/recipe/prometheus.html"
                 />
+  </url><url>
+    <loc>/concept/rocksdb.html</loc>
+    <lastmod>2025-10-14T22:47:12-07:00</lastmod>
   </url><url>
     <loc>/recipe/sparkozonefsk8s.html</loc>
     <lastmod>2021-05-31T10:12:49+08:00</lastmod>

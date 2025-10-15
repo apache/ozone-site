@@ -1,0 +1,1026 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Staged Reprocessing for Recon Task Data During Full Snapshot Recovery</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Staged Reprocessing for Recon Task Data During Full Snapshot Recovery</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Currently, when Recon falls back to full snapshot recovery (due to SequenceNumberNotFoundException (OM DB Compaction) or any other error thrown by OM), all underlying downstream ReconOmTasks truncates their existing processed data tables before rebuilding from the new snapshot. This causes some Recon APIs to return empty/blank data during the reprocessing period affecting the visualization of OM metadata, creating a poor user experience in the Recon UI until respective tasks complete their full snapshot re-processing.</p>
+<h3 id="proposed-solution">Proposed Solution</h3>
+<p>Implement a <strong>Staged Reprocessing Architecture</strong> that leverages the existing staging pattern (similar to TarExtractor) to maintain data availability during full snapshot recovery. The solution involves:</p>
+<ol>
+<li><strong>Staging Database Creation</strong>: Create staging instance of Recon rocksDB where ReconOmTask data tables will be processed without impacting production rocksDB tables.</li>
+<li><strong>Parallel Reprocessing</strong>: Process full snapshot data into staging tables while production tables remain accessible</li>
+<li><strong>Atomic Switchover</strong>: Atomically replace production tables with staging tables once all respective concurrently running tasks complete successfully.</li>
+<li><strong>Rollback Capability</strong>: Provide a rollback mechanism in case of reprocessing failures</li>
+<li><strong>Enhanced Monitoring</strong>: Introduce metrics and health checks to monitor staging operations</li>
+</ol>
+<h3 id="benefits">Benefits</h3>
+<ul>
+<li><strong>Zero Downtime</strong>: Recon APIs remain functional even during full snapshot recovery and bootstrapping.</li>
+<li><strong>Data Consistency</strong>: Atomic switchover ensures a consistent view across all task data, because once all the tasks complete their reprocessing and success, then the staging tables are switched to production tables, else failure of one task which is related, may provide data inconsistency. E.g. OmTableInsightTask (Number of keys, Number of buckets etc) and NSSummary tree. This is how the current architecture works as well.</li>
+<li><strong>Failure Resilience</strong>: Rollback capability ensures system stability during failures</li>
+<li><strong>Performance Isolation</strong>: Reprocessing load doesn&rsquo;t impact API query performance</li>
+<li><strong>Minimal Disk Usage</strong>: Staging tables can be cleaned up after successful switch, minimizing disk usage. Full OM DB tar ball is already stored in the Recon OM DB, so no need to store it again in the staging area.</li>
+</ul>
+<hr>
+<h2 id="2-current-architecture-analysis">2. Current Architecture Analysis</h2>
+<h3 id="21-current-sync-flow">2.1 Current Sync Flow</h3>
+<p>
+
+<img src="flowchart.png" alt='Recon OM DB Processing &amp; Fallback Flow'  class="img-responsive" /></p>
+<blockquote>
+<p><strong>Figure:</strong> Full‐snapshot fallback path: OM DB delta error → fetch full snapshot → concurrently trigger tasks (<code>OmTableInsightTask</code>, <code>NSSummaryTask</code>, <code>ContainerKeyMapperTask</code>, <code>FileSizeCountTask</code>) → each task clears its Recon metadata tables → API reads from those cleared tables (empty) → <strong>User Experience Impacted</strong></p>
+</blockquote>
+<h3 id="22-current-reconomtask-data-management">2.2 Current ReconOmTask Data Management</h3>
+<h4 id="task-data-tables-overview">Task Data Tables Overview</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Task Class</th>
+          <th>Data Tables</th>
+          <th>Storage Type</th>
+          <th>Clear Method</th>
+          <th>Impact on APIs</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>NSSummaryTask</strong></td>
+          <td><code>nsSummaryTable</code></td>
+          <td>RocksDB</td>
+          <td><code>clearNSSummaryTable()</code></td>
+          <td>Namespace browsing, path construction</td>
+      </tr>
+      <tr>
+          <td><strong>OmTableInsightTask</strong></td>
+          <td><code>GlobalStats</code> (SQL)</td>
+          <td>SQL</td>
+          <td>Reinitialize maps</td>
+          <td>Table statistics, counts</td>
+      </tr>
+      <tr>
+          <td><strong>FileSizeCountTaskFSO/OBS</strong></td>
+          <td><code>FILE_COUNT_BY_SIZE</code> (SQL)</td>
+          <td>SQL</td>
+          <td><code>delete().execute()</code></td>
+          <td>File size distribution charts</td>
+      </tr>
+      <tr>
+          <td><strong>ContainerKeyMapperTask</strong></td>
+          <td><code>CONTAINER_KEY</code>, <code>KEY_CONTAINER</code>, <code>CONTAINER_KEY_COUNT</code></td>
+          <td>RocksDB</td>
+          <td><code>reinitWithNewContainerDataFromOm()</code></td>
+          <td>Container content browsing</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="current-reprocess-flow">Current Reprocess Flow</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Current problematic pattern across all tasks</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> TaskResult <span style="color:#a6e22e">reprocess</span>(OMMetadataManager omMetadataManager) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// STEP 1: Clear existing data (USER IMPACT STARTS HERE)</span>
+</span></span><span style="display:flex;"><span>        clearExistingData(); 
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// STEP 2: Process full snapshot (TAKES SIGNIFICANT TIME)</span>
+</span></span><span style="display:flex;"><span>        processFullSnapshot(omMetadataManager);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// STEP 3: Commit new data (USER IMPACT ENDS HERE)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> buildTaskResult(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> buildTaskResult(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="23-current-recon-om-task-interface">2.3 Current Recon OM Task Interface</h3>
+<h4 id="reconomtask">ReconOmTask</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ReconOmTask</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Current operations</span>
+</span></span><span style="display:flex;"><span>    String <span style="color:#a6e22e">getTaskName</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() { }
+</span></span><span style="display:flex;"><span>    TaskResult <span style="color:#a6e22e">process</span>(OMUpdateEventBatch events,
+</span></span><span style="display:flex;"><span>                       Map<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> subTaskSeekPosMap);
+</span></span><span style="display:flex;"><span>    TaskResult <span style="color:#a6e22e">reprocess</span>(OMMetadataManager omMetadataManager);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="sql-based-storage-globalstatsdao-filecountbysizedao">SQL-based Storage (GlobalStatsDao, FileCountBySizeDao)</h4>
+<h2 id="3-proposed-staged-reprocessing-architecture">3. Proposed Staged Reprocessing Architecture</h2>
+<h3 id="31-high-level-architecture">3.1 High-Level Architecture</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    %% Source of truth
+    OMDB[Ozone Manager DB]
+    Fetch[/Fetch Full OM DB Snapshot/]
+    OMDB --&gt;|Full Snapshot Fetch| Fetch
+
+    %% Recon writes into staging
+    ReconTasks[ReconOMTask Processing]
+    Fetch --&gt;|Reprocess of ReconOMTasks | ReconTasks
+
+    subgraph Staging
+      StagingDB[Staging DB]
+    end
+    ReconTasks --&gt; StagingDB
+
+    %% Management layer
+    subgraph Manager
+      SM_State[Tracks reprocess state]
+      SM_Swap[Controls atomic swap]
+      EH[Error Handler]
+    end
+    StagingDB --&gt;|Reprocess complete?| SM_State
+    SM_State --&gt; SM_Swap
+    SM_State --&gt;|On failure| EH
+    SM_Swap --&gt; ProdDB[Production DB]
+
+    %% Live API/UI
+    subgraph API_UI
+      UI[Recon APIs / UI]
+    end
+    UI --&gt;|Reads/Writes| ProdDB
+    
+</code></pre><h3 id="32-core-components">3.2 Core Components</h3>
+<h4 id="321-updated-recon-om-task-interface">3.2.1 Updated Recon OM Task Interface</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ReconOmTask</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Current operations</span>
+</span></span><span style="display:flex;"><span>  String <span style="color:#a6e22e">getTaskName</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() { }
+</span></span><span style="display:flex;"><span>  TaskResult <span style="color:#a6e22e">process</span>(OMUpdateEventBatch events,
+</span></span><span style="display:flex;"><span>                     Map<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> subTaskSeekPosMap);
+</span></span><span style="display:flex;"><span>  TaskResult <span style="color:#a6e22e">reprocess</span>(OMMetadataManager omMetadataManager);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Returns a staged task that can be used to reprocess events.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">default</span> ReconOmTask <span style="color:#a6e22e">getStagedTask</span>(ReconOMMetadataManager stagedOmMetadataManager, DBStore stagedReconDbStore)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="4-detailed-design">4. Detailed Design</h2>
+<h3 id="41-staging-state-management">4.1 Staging State Management</h3>
+<h4 id="411-staging-state-enum">4.1.1 Staging State Enum</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> StagingState {
+</span></span><span style="display:flex;"><span>    NONE,              <span style="color:#75715e">// No staging operation in progress</span>
+</span></span><span style="display:flex;"><span>    INITIALIZING,      <span style="color:#75715e">// Creating staging area and storage interfaces  </span>
+</span></span><span style="display:flex;"><span>    PROCESSING,        <span style="color:#75715e">// Tasks are reprocessing into staging area</span>
+</span></span><span style="display:flex;"><span>    READY_TO_COMMIT,   <span style="color:#75715e">// All tasks completed successfully, ready for switch</span>
+</span></span><span style="display:flex;"><span>    COMMITTING,        <span style="color:#75715e">// Atomic switch in progress</span>
+</span></span><span style="display:flex;"><span>    COMMITTED,         <span style="color:#75715e">// Switch completed successfully</span>
+</span></span><span style="display:flex;"><span>    ROLLING_BACK,      <span style="color:#75715e">// Rollback in progress due to failure</span>
+</span></span><span style="display:flex;"><span>    FAILED             <span style="color:#75715e">// Operation failed, manual intervention needed</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="412-staging-state-transitions">4.1.2 Staging State Transitions</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    NONE --&gt; INITIALIZING
+    INITIALIZING --&gt; PROCESSING
+    PROCESSING --&gt; READY_TO_COMMIT
+    READY_TO_COMMIT --&gt; COMMITTING
+    COMMITTING --&gt; COMMITTED
+    COMMITTED --&gt; NONE
+
+    PROCESSING     --&gt; ROLLING_BACK
+    READY_TO_COMMIT --&gt; ROLLING_BACK
+    COMMITTING     --&gt; ROLLING_BACK
+
+    ROLLING_BACK --&gt; FAILED
+</code></pre><h3 id="42-orchestrated-staging-reprocess-flow">4.2 Orchestrated Staging Reprocess Flow</h3>
+<h4 id="421-enhanced-recontaskcontroller">4.2.1 Enhanced ReconTaskController</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReconTaskControllerImpl</span> <span style="color:#66d9ef">implements</span> ReconTaskController {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">volatile</span> StagingState currentStagingState <span style="color:#f92672">=</span> StagingState.<span style="color:#a6e22e">NONE</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Enhanced reInitializeTasks with staging support
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reInitializeTasksWithStaging</span>(ReconOMMetadataManager omMetadataManager,
+</span></span><span style="display:flex;"><span>                                                         Map<span style="color:#f92672">&lt;</span>String, ReconOmTask<span style="color:#f92672">&gt;</span> reconOmTaskMap) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Phase 1: Initialize staging DB area</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Phase 2: Execute staging reprocess</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>allTasksSucceeded) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(<span style="color:#e6db74">&#34;One or more tasks failed during staging reprocess&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Phase 3: Validate staging data</span>
+</span></span><span style="display:flex;"><span>                        
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Phase 4: Atomic commit</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            currentStagingState <span style="color:#f92672">=</span> StagingState.<span style="color:#a6e22e">COMMITTED</span>;
+</span></span><span style="display:flex;"><span>            LOG.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Staging reprocess completed successfully with stagingId: {}&#34;</span>, stagingId);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Notify all tasks of successful staging completion</span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            LOG.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Staging reprocess failed&#34;</span>, e);
+</span></span><span style="display:flex;"><span>            currentStagingState <span style="color:#f92672">=</span> StagingState.<span style="color:#a6e22e">ROLLING_BACK</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (currentStagingState <span style="color:#f92672">!=</span> StagingState.<span style="color:#a6e22e">FAILED</span>) {
+</span></span><span style="display:flex;"><span>                currentStagingState <span style="color:#f92672">=</span> StagingState.<span style="color:#a6e22e">NONE</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="5-implementation-scenarios">5. Implementation Scenarios</h2>
+<h3 id="51-success-scenario-smooth-staging-operation">5.1 Success Scenario: Smooth Staging Operation</h3>
+<h4 id="timeline">Timeline</h4>
+<pre tabindex="0"><code>T0: SequenceNumberNotFoundException occurs or any other runtime error thrown at OM → Full snapshot triggered
+T1: Staging area creation begins
+    - Create staging RocksDB instances  
+    - Create staging SQL tables
+    - Initialize staging storage interfaces
+    
+T2: Parallel staging reprocess begins (Production APIs remain functional)
+    - NSSummaryTask 
+    - ContainerKeyMapperTask  
+    - FileSizeCountTask 
+    - OmTableInsightTask 
+    
+T3: All tasks complete staging reprocess successfully
+    - Staging data validation passes
+    - System ready for atomic switch
+    
+T4: Atomic switchover (Brief API unavailability ~seconds)
+    - RocksDB: Atomic directory moves
+    - SQL: Atomic table renames in transaction
+    - Storage interface reinitialization
+    
+T5: System operational with fresh data
+    - All APIs using new processed data
+    - Staging cleanup completed
+    - Old backup data retained for rollback if needed
+</code></pre><h4 id="user-experience">User Experience</h4>
+<ul>
+<li><strong>T0-T4</strong>: Recon UI continues to show existing data (slightly stale but functional)</li>
+<li><strong>T4</strong>: Brief loading indicators during atomic switch (~1-5 seconds)</li>
+<li><strong>T5+</strong>: Fresh data from new OM snapshot available</li>
+</ul>
+<h3 id="52-failure-scenario-task-failure-during-staging">5.2 Failure Scenario: Task Failure During Staging</h3>
+<h4 id="timeline-1">Timeline</h4>
+<pre tabindex="0"><code>T0: SequenceNumberNotFoundException occurs → Full snapshot triggered
+T1: Staging area creation successful
+T2: Staging reprocess begins
+T3: One task fails (e.g., NSSummaryTask encounters corruption)
+    - Task failure detected
+    - Rollback procedure initiated
+    - Other tasks stopped gracefully
+    
+T4: Cleanup completed
+    - Staging data deleted
+    - System returns to previous state
+    - Error logged for investigation
+    
+T5: Retry mechanism or manual intervention
+    - Automatic retry after delay (configurable)
+    - Or manual intervention based on error type
+</code></pre><h4 id="user-experience-1">User Experience</h4>
+<ul>
+<li><strong>T0-T3</strong>: Normal operation continues with existing data</li>
+<li><strong>T4+</strong>: System continues with previous data, error logged</li>
+<li><strong>Admin notification</strong>: Alert sent for manual investigation</li>
+</ul>
+<h3 id="53-failure-scenario-atomic-switch-failure">5.3 Failure Scenario: Atomic Switch Failure</h3>
+<h4 id="timeline-2">Timeline</h4>
+<pre tabindex="0"><code>T0-T3: Normal staging process completes successfully
+T4: Atomic switch begins but fails (e.g., filesystem error, DB lock)
+    - Partial switch detected
+    - Immediate rollback initiated
+    - Production data restored from backup
+    
+T5: System recovery
+    - Production services restored
+    - Staging data preserved for analysis
+    - Fallback to old data until next retry
+</code></pre><h4 id="user-experience-2">User Experience</h4>
+<ul>
+<li><strong>T0-T4</strong>: Normal operation continues</li>
+<li><strong>T4</strong>: Brief service disruption (seconds to minutes)</li>
+<li><strong>T5+</strong>: Service restored with previous data, retry scheduled</li>
+</ul>
+<h3 id="54-high-load-scenario-large-dataset-processing">5.4 High Load Scenario: Large Dataset Processing</h3>
+<h4 id="timeline-3">Timeline</h4>
+<pre tabindex="0"><code>T0: Full snapshot with 100M+ keys triggered
+T1: Staging area created with enhanced resources
+    - Increased memory allocation for staging tasks
+    - Separate thread pools for staging vs production
+    
+T2: Intelligent processing strategies
+    - Batch size optimization based on available memory
+    - Periodic progress reporting
+    - Circuit breaker for resource exhaustion
+    
+T3: Extended processing time (30-60 minutes)
+    - Production APIs remain responsive
+    - Staging progress monitored and reported
+    - Resource utilization tracked
+    
+T4: Successful completion and switch
+    - Large dataset successfully processed
+    - Atomic switch with minimal downtime
+</code></pre><h4 id="user-experience-3">User Experience</h4>
+<ul>
+<li><strong>T0-T4</strong>: Normal operation with progress indicators in admin UI</li>
+<li><strong>T4</strong>: Standard brief switch period</li>
+<li><strong>T5+</strong>: Fresh data available with improved performance</li>
+</ul>
+<hr>
+<h2 id="6-monitoring">6. Monitoring</h2>
+<h3 id="61-metrics-and-monitoring">6.1 Metrics and Monitoring</h3>
+<h4 id="staging-metrics">Staging Metrics</h4>
+<p>REPROCESS_STAGING will be a new task to track staging operations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ReconTaskStatusUpdater reprocessTaskStatus <span style="color:#f92672">=</span> taskStatusUpdaterManager.<span style="color:#a6e22e">getTaskStatusUpdater</span>(REPROCESS_STAGING);
+</span></span></code></pre></div><hr>
+<h2 id="6-testing-strategy">6. Testing Strategy</h2>
+<h3 id="61-unit-testing">6.1 Unit Testing</h3>
+<h4 id="component-tests">Component Tests</h4>
+<ul>
+<li><strong>StagingManager</strong>: Mock storage interfaces, test state transitions</li>
+<li><strong>Enhanced Storage Interfaces</strong>: Test staging operations in isolation</li>
+<li><strong>Task Implementations</strong>: Test staging-aware reprocess methods</li>
+</ul>
+<h4 id="mock-based-testing">Mock-based Testing</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>TestNSSummaryTaskControllerIntegration.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestNSSummaryTaskControllerIntegration.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestOMUpdateEventBuffer.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestReconTaskControllerImpl.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestReconOmMetadataManagerImpl.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestOzoneManagerServiceProviderImpl.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestEventBufferOverflow.<span style="color:#a6e22e">java</span>
+</span></span></code></pre></div><h3 id="72-integration-testing">7.2 Integration Testing</h3>
+<h4 id="end-to-end-staging-tests">End-to-End Staging Tests</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>TestReconInsightsForDeletedDirectories.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestReconWithOzoneManagerFSO.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestReconContainerEndpoint.<span style="color:#a6e22e">java</span>
+</span></span><span style="display:flex;"><span>TestReconWithOzoneManagerHA.<span style="color:#a6e22e">java</span>
+</span></span></code></pre></div><h3 id="73-performance-testing">7.3 Performance Testing</h3>
+<h4 id="load-testing-scenarios">Load Testing Scenarios</h4>
+<ol>
+<li><strong>Large Dataset Processing</strong>: 100M+ keys with staging</li>
+<li><strong>Concurrent API Load</strong>: High API traffic during staging</li>
+<li><strong>Resource Constraint Testing</strong>: Limited memory/disk scenarios</li>
+<li><strong>Failure Recovery</strong>: Performance after rollback operations</li>
+</ol>
+<hr>
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>The Staged Reprocessing Architecture for HDDS-13515 provides a robust solution to eliminate the data availability gap during Recon&rsquo;s full snapshot recovery operations. By leveraging the proven staging pattern from TarExtractor and extending it to all ReconOmTask data tables, we can maintain continuous API availability while ensuring data consistency and system reliability.</p>
+<h3 id="key-benefits-delivered">Key Benefits Delivered:</h3>
+<ol>
+<li><strong>Zero Downtime</strong>: APIs remain functional during reprocessing</li>
+<li><strong>Data Consistency</strong>: Atomic switchover ensures consistent state</li>
+<li><strong>Failure Resilience</strong>: Comprehensive rollback and retry mechanisms</li>
+<li><strong>Performance Isolation</strong>: Staging operations don&rsquo;t impact API performance</li>
+<li><strong>Operational Visibility</strong>: Complete monitoring through metrics and health checks</li>
+</ol>
+<h3 id="implementation-readiness">Implementation Readiness:</h3>
+<ul>
+<li><strong>Low Risk</strong>: Builds on existing proven patterns</li>
+<li><strong>Backward Compatible</strong>: Feature flags enable gradual rollout</li>
+<li><strong>Well Tested</strong>: Comprehensive testing strategy covers all scenarios</li>
+<li><strong>Monitoring Ready</strong>: Built-in metrics and health checks</li>
+<li><strong>Operationally Sound</strong>: Clear procedures for all scenarios</li>
+</ul>
+<p>This design provides a production-ready foundation for eliminating one of Recon&rsquo;s most significant user experience issues while maintaining the robustness and reliability expected in enterprise Apache Ozone deployments.</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../concept/volumesbucketskeys.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 15, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a9371f638fd1bc144a29798f8ac05f0fcc4034cf">a9371f638f</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
