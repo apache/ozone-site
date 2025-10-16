@@ -6,8 +6,15 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Sep 2025 10:13:03 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 16 Oct 2025 09:06:36 +0530</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distributed Tracing using OpenTelemetry for Ozone</title>
+      <link>/design/distributed-tracing-opentelemetry.html</link>
+      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>/design/distributed-tracing-opentelemetry.html</guid>
+      <description>Use of OpenTelemetry for distributed tracing in Ozone.</description>
+    </item>
     <item>
       <title>Listener Ozone Manager</title>
       <link>/design/listener-om.html</link>
