@@ -687,6 +687,156 @@ Ozone now provides a REST API endpoint that allows administrators to revoke S3 a
 <blockquote>
 <p><strong>Note:</strong> Ensure your Kerberos authentication is correctly configured, as secret revocation is a privileged operation.</p>
 </blockquote>
+<h2 id="external-s3-secret-storage-with-hashicorp-vault">External S3 Secret Storage with HashiCorp Vault</h2>
+<p>By default, S3 secrets are stored in the Ozone Manager&rsquo;s RocksDB. For enhanced security, Ozone can be configured to use HashiCorp Vault as an external secret storage backend.</p>
+<h3 id="configuration">Configuration</h3>
+<p>To enable Vault integration, you need to configure the following properties in <code>ozone-site.xml</code>:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ozone.secret.s3.store.provider</code></td>
+          <td>The S3 secret storage provider to use. Set this to <code>org.apache.hadoop.ozone.s3.remote.vault.VaultS3SecretStorageProvider</code> to enable Vault.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.address</code></td>
+          <td>The address of the Vault server (e.g., <code>http://vault:8200</code>).</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.namespace</code></td>
+          <td>The Vault namespace to use.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.enginever</code></td>
+          <td>The version of the Vault secrets engine (e.g., <code>2</code>).</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.secretpath</code></td>
+          <td>The path where the secrets are stored in Vault.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.auth</code></td>
+          <td>The authentication method to use with Vault. Supported values are <code>TOKEN</code> and <code>APPROLE</code>.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.auth.token</code></td>
+          <td>The Vault authentication token. Required if <code>ozone.secret.s3.store.remote.vault.auth</code> is set to <code>TOKEN</code>.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.auth.approle.id</code></td>
+          <td>The AppRole RoleID. Required if <code>ozone.secret.s3.store.remote.vault.auth</code> is set to <code>APPROLE</code>.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.auth.approle.secret</code></td>
+          <td>The AppRole SecretID. Required if <code>ozone.secret.s3.store.remote.vault.auth</code> is set to <code>APPROLE</code>.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.auth.approle.path</code></td>
+          <td>The AppRole path. Required if <code>ozone.secret.s3.store.remote.vault.auth</code> is set to <code>APPROLE</code>.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.trust.store.type</code></td>
+          <td>The type of the trust store (e.g., <code>JKS</code>).</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.trust.store.path</code></td>
+          <td>The path to the trust store file.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.trust.store.password</code></td>
+          <td>The password for the trust store.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.key.store.type</code></td>
+          <td>The type of the key store (e.g., <code>JKS</code>).</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.key.store.path</code></td>
+          <td>The path to the key store file.</td>
+      </tr>
+      <tr>
+          <td><code>ozone.secret.s3.store.remote.vault.key.store.password</code></td>
+          <td>The password for the key store.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="example">Example</h3>
+<p>Here is an example of how to configure Ozone to use Vault for S3 secret storage with token authentication:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.provider<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.s3.remote.vault.VaultS3SecretStorageProvider<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>http://localhost:8200<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.enginever<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>2<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.secretpath<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>secret<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.auth<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>TOKEN<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.auth.token<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>your-vault-token<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h3 id="example-with-ssl">Example with SSL</h3>
+<p>Here is an example of how to configure Ozone to use Vault for S3 secret storage with SSL:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.provider<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>org.apache.hadoop.ozone.s3.remote.vault.VaultS3SecretStorageProvider<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.address<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>https://localhost:8200<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.enginever<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>2<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.secretpath<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>secret<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.auth<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>TOKEN<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.auth.token<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>your-vault-token<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.trust.store.path<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>/path/to/truststore.jks<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.trust.store.password<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>truststore-password<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.key.store.path<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>/path/to/keystore.jks<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>ozone.secret.s3.store.remote.vault.key.store.password<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>keystore-password<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h3 id="references">References</h3>
+<ul>
+<li><a href="https://developer.hashicorp.com/vault/docs">HashiCorp Vault Documentation</a></li>
+</ul>
 
 
           
@@ -706,7 +856,7 @@ Ozone now provides a REST API endpoint that allows administrators to revoke S3 a
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: April 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ed0111582f913ea9d67de0c8bea6445b8a653759">ed0111582f</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 23, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c33f8e013e74db702a9d826b70a1618a133e9550">c33f8e013e</a>
     </span>
   </div>
 </footer>
