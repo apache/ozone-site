@@ -631,14 +631,17 @@ they can download the S3 access key ID and AWS secret. Just like AWS S3,
 both of these are secrets that needs to be protected by the client since it
 gives full access to the S3 buckets.</p>
 <h2 id="obtain-secrets">Obtain Secrets</h2>
-<ul>
-<li>S3 clients can get the secret access id and user secret from OzoneManager.</li>
-</ul>
+<p>S3 clients can get the secret access id and user secret from OzoneManager.</p>
+<h3 id="using-the-command-line">Using the command line</h3>
+<p>For a regular user to get their own secret:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 getsecret
-</span></span></code></pre></div><ul>
-<li>Or by sending request to /secret S3 REST endpoint.</li>
-</ul>
+</span></span></code></pre></div><p>An Ozone administrator can get a secret for a specific user by using the <code>-u</code> flag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 getsecret -u &lt;username&gt;
+</span></span></code></pre></div><h3 id="using-the-rest-api">Using the REST API</h3>
+<p>A user can get their own secret by making a <code>PUT</code> request to the <code>/secret</code> endpoint:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X PUT --negotiate -u : https://localhost:9879/secret
+</span></span></code></pre></div><p>An Ozone administrator can get a secret for a specific user by appending the username to the path:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X PUT --negotiate -u : https://localhost:9879/secret/&lt;username&gt;
 </span></span></code></pre></div><p>This command will talk to ozone, validate the user via Kerberos and generate
 the AWS credentials. The values will be printed out on the screen. You can
 set these values up in your <em>.aws</em> file for automatic access while working
@@ -856,7 +859,7 @@ Ozone now provides a REST API endpoint that allows administrators to revoke S3 a
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.1.0-SNAPSHOT, Last Modified: October 23, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c33f8e013e74db702a9d826b70a1618a133e9550">c33f8e013e</a>
+      Version: 2.1.0-SNAPSHOT, Last Modified: October 23, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/cc730871b27f2e5300bb8a0166736731d05f96e7">cc730871b2</a>
     </span>
   </div>
 </footer>
