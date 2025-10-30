@@ -627,21 +627,69 @@ s=d.getElementsByTagName('script')[0];
 <p>HttpFS has built-in security supporting Hadoop pseudo authentication and Kerberos SPNEGO and other pluggable authentication mechanisms. It also provides Hadoop proxy user support.</p>
 <h2 id="getting-started">Getting started</h2>
 <p>HttpFS service itself is a Jetty based web-application that uses the Hadoop FileSystem API to talk to the cluster, it is a separate service which provides access to Ozone via a REST APIs. It should be started in addition to other regular Ozone components.</p>
-<p>To try it out, you can start a Docker Compose dev cluster that has an HttpFS gateway.</p>
-<p>Extract the release tarball, go to the <code>compose/ozone</code> directory and start the cluster:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
-</span></span></code></pre></div><p>You can/should find now the HttpFS gateway in docker with the name <code>ozone_httpfs</code>.
-HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file system operation. For example, using the <code>curl</code> Unix command.</p>
-<p>E.g. in the docker cluster you can execute commands like these:</p>
-<ul>
-<li>
-<p><code>curl -i -X PUT &quot;http://httpfs:14000/webhdfs/v1/vol1?op=MKDIRS&amp;user.name=hdfs&quot;</code> creates a volume called <code>vol1</code>.</p>
-</li>
-<li>
-<p><code>$ curl 'http://httpfs-host:14000/webhdfs/v1/user/foo/README.txt?op=OPEN&amp;user.name=foo'</code> returns the content of the key <code>/user/foo/README.txt</code>.</p>
-</li>
-</ul>
-<h2 id="supported-operations">Supported operations</h2>
+<p>To try it out, follow the instructions from the link below to start the Ozone cluster with Docker Compose.</p>
+<p><a href="https://ozone.apache.org/docs/edge/start/startfromdockerhub.html">https://ozone.apache.org/docs/edge/start/startfromdockerhub.html</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>You can/should find now the HttpFS gateway in docker with the name like <code>ozone_httpfs</code>,
+and it can be accessed through <code>localhost:14000</code>.
+HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file system operation.</p>
+<p>Here&rsquo;s some example usage:</p>
+<h3 id="create-a-volume">Create a volume</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># creates a volume called `volume1`.</span>
+</span></span><span style="display:flex;"><span>curl -i -X PUT <span style="color:#e6db74">&#34;http://localhost:14000/webhdfs/v1/volume1?op=MKDIRS&amp;user.name=hdfs&#34;</span>
+</span></span></code></pre></div><p>Example Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>HTTP/1.1 <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Date: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 07:51:21 GMT
+</span></span><span style="display:flex;"><span>Cache-Control: no-cache
+</span></span><span style="display:flex;"><span>Expires: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 07:51:21 GMT
+</span></span><span style="display:flex;"><span>Pragma: no-cache
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>X-Content-Type-Options: nosniff
+</span></span><span style="display:flex;"><span>X-XSS-Protection: 1; mode<span style="color:#f92672">=</span>block
+</span></span><span style="display:flex;"><span>Set-Cookie: hadoop.auth<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;u=hdfs&amp;p=hdfs&amp;t=simple-dt&amp;e=1760809881100&amp;s=OCdVOi8eyMguFySkmEJxm5EkRfj6NbAM9agi5Gue1Iw=&#34;</span>; Path<span style="color:#f92672">=</span>/; HttpOnly
+</span></span><span style="display:flex;"><span>Content-Length: <span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;boolean&#34;</span>:true<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="create-a-bucket">Create a bucket</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># creates a bucket called `bucket1`.</span>
+</span></span><span style="display:flex;"><span>curl -i -X PUT <span style="color:#e6db74">&#34;http://localhost:14000/webhdfs/v1/volume1/bucket1?op=MKDIRS&amp;user.name=hdfs&#34;</span>
+</span></span></code></pre></div><p>Example Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>HTTP/1.1 <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Date: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 07:52:06 GMT
+</span></span><span style="display:flex;"><span>Cache-Control: no-cache
+</span></span><span style="display:flex;"><span>Expires: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 07:52:06 GMT
+</span></span><span style="display:flex;"><span>Pragma: no-cache
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>X-Content-Type-Options: nosniff
+</span></span><span style="display:flex;"><span>X-XSS-Protection: 1; mode<span style="color:#f92672">=</span>block
+</span></span><span style="display:flex;"><span>Set-Cookie: hadoop.auth<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;u=hdfs&amp;p=hdfs&amp;t=simple-dt&amp;e=1760809926682&amp;s=yvOaeaRCVJZ+z+nZQ/rM/Y01pzEmS9Pe2mE9f0b+TWw=&#34;</span>; Path<span style="color:#f92672">=</span>/; HttpOnly
+</span></span><span style="display:flex;"><span>Content-Length: <span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;boolean&#34;</span>:true<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="upload-a-file">Upload a file</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;hello&#34;</span> &gt;&gt; ./README.txt
+</span></span><span style="display:flex;"><span>curl -i -X PUT <span style="color:#e6db74">&#34;http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=CREATE&amp;data=true&amp;user.name=hdfs&#34;</span> -T ./README.txt -H <span style="color:#e6db74">&#34;Content-Type: application/octet-stream&#34;</span> 
+</span></span></code></pre></div><p>Example Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>HTTP/1.1 <span style="color:#ae81ff">100</span> Continue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>HTTP/1.1 <span style="color:#ae81ff">201</span> Created
+</span></span><span style="display:flex;"><span>Date: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 08:33:33 GMT
+</span></span><span style="display:flex;"><span>Cache-Control: no-cache
+</span></span><span style="display:flex;"><span>Expires: Sat, <span style="color:#ae81ff">18</span> Oct <span style="color:#ae81ff">2025</span> 08:33:33 GMT
+</span></span><span style="display:flex;"><span>Pragma: no-cache
+</span></span><span style="display:flex;"><span>X-Content-Type-Options: nosniff
+</span></span><span style="display:flex;"><span>X-XSS-Protection: 1; mode<span style="color:#f92672">=</span>block
+</span></span><span style="display:flex;"><span>Set-Cookie: hadoop.auth<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;u=hdfs&amp;p=hdfs&amp;t=simple-dt&amp;e=1760812413286&amp;s=09t7xKu/p/fjCJiQNL3bvW/Q7mTw28IbeNqDGlslZ6w=&#34;</span>; Path<span style="color:#f92672">=</span>/; HttpOnly
+</span></span><span style="display:flex;"><span>Location: http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt
+</span></span><span style="display:flex;"><span>Content-Type: application/json
+</span></span><span style="display:flex;"><span>Content-Length: <span style="color:#ae81ff">84</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;Location&#34;</span>:<span style="color:#e6db74">&#34;http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt&#34;</span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="read-the-file-content">Read the file content</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># returns the content of the key `/user/foo/README.txt`.</span>
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=OPEN&amp;user.name=foo&#39;</span>
+</span></span><span style="display:flex;"><span>hello
+</span></span></code></pre></div><h2 id="supported-operations">Supported operations</h2>
 <p>Here are the tables of WebHDFS REST APIs and their state of support in Ozone.</p>
 <h3 id="file-and-directory-operations">File and Directory Operations</h3>
 <table>
@@ -817,7 +865,7 @@ HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: March 21, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d70d247a494a69cad28e96d003b25ae4856b8641">d70d247a49</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: October 29, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d4e7d94239ab709841353bf411bb11c9feea5a85">d4e7d94239</a>
     </span>
   </div>
 </footer>
