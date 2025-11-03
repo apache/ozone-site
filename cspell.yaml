@@ -124,6 +124,14 @@ words:
 - UX
 - devs
 - CLI
+# Technical terms
+- frontmatter
+- backporting
+- ajv
+- JDK
+- Passwordless
+- quickstart
+- baremetal
 - lakehouse
 - Flink
 - rebalancing
