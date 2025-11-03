@@ -675,6 +675,26 @@ List keys:</p>
 Manage diff jobs: <code>ozone sh snapshot listDiff /vol1/bucket1</code>, <code>ozone sh snapshot cancelDiff &lt;jobId&gt;</code>.</p>
 </li>
 <li>
+<p><strong>List Snapshot Diff Jobs:</strong> Lists snapshot diff jobs for a bucket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot listDiff /vol1/bucket1
+</span></span></code></pre></div><p>By default, lists jobs with <code>in_progress</code> status. Use <code>--job-status</code> to filter by specific status:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># List jobs with specific status (queued, in_progress, done, failed, rejected)</span>
+</span></span><span style="display:flex;"><span>ozone sh snapshot listDiff /vol1/bucket1 --job-status <span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>Use <code>--all-status</code> to list all jobs regardless of status:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># List all snapshot diff jobs regardless of status</span>
+</span></span><span style="display:flex;"><span>ozone sh snapshot listDiff /vol1/bucket1 --all-status
+</span></span></code></pre></div><p><strong>Note:</strong> The difference between <code>--all-status</code> and <code>-all</code> (or <code>-a</code>):</p>
+<ul>
+<li><code>--all-status</code>: Controls which jobs to show based on status (lists all jobs regardless of status)</li>
+<li><code>-all</code> (or <code>-a</code>): Controls the number of results returned (pagination option, removes pagination limit, <strong>not related to snapshot diff job status</strong>)</li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># List all jobs regardless of status, with pagination limit removed</span>
+</span></span><span style="display:flex;"><span>ozone sh snapshot listDiff /vol1/bucket1 --all-status -all
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or limit results to 10 items</span>
+</span></span><span style="display:flex;"><span>ozone sh snapshot listDiff /vol1/bucket1 --all-status -l <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div></li>
+<li>
 <p><strong>Rename Snapshot:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone sh snapshot rename /vol1/bucket1 &lt;oldName&gt; &lt;newName&gt;
 </span></span></code></pre></div><p>Requires bucket owner or admin.</p>
@@ -779,7 +799,7 @@ Refer to the <a href="https://ozone.apache.org/docs/edge/interface/ofs.html">Ozo
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: October 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/812739ec8b232ed7a7baa19563f54f597a20dd9e">812739ec8b</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: November 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/1de5c2f77aa5558c7aa88cab3e57b0204abbea82">1de5c2f77a</a>
     </span>
   </div>
 </footer>
