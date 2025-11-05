@@ -751,7 +751,40 @@ Argument <code>--prefix</code> could be root (<code>/</code>), path to a bucket 
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;contToken&#34;</span> : <span style="color:#e6db74">&#34;/-9223372036854775552/-9223372036854775040/-9223372036854774527/key2/111726344441233411&#34;</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Note in JSON output mode, field <code>contToken</code> won&rsquo;t show up at all in the result if there are no more entries after the batch (i.e. when <code>hasMore</code> is <code>false</code>).</p>
-
+<h2 id="snapshot-defragmentation-trigger">Snapshot Defragmentation Trigger</h2>
+<p>The snapshot defrag command triggers the Snapshot Defragmentation Service to run immediately on a specific Ozone Manager node.
+This command manually initiates the snapshot defragmentation process which compacts snapshot data and removes fragmentation to improve storage efficiency.</p>
+<p>This command only works on Ozone Manager HA clusters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone admin om snapshot defrag --help
+</span></span><span style="display:flex;"><span>Usage: ozone admin om snapshot defrag <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--no-wait<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                                      <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Triggers the Snapshot Defragmentation Service to run immediately. This command
+</span></span><span style="display:flex;"><span>manually initiates the snapshot defragmentation process which compacts
+</span></span><span style="display:flex;"><span>snapshot data and removes fragmentation to improve storage efficiency. This
+</span></span><span style="display:flex;"><span>command works only on OzoneManager HA cluster.
+</span></span><span style="display:flex;"><span>  -h, --help                Show this help message and exit.
+</span></span><span style="display:flex;"><span>      --no-wait             Do not wait <span style="color:#66d9ef">for</span> the defragmentation task to
+</span></span><span style="display:flex;"><span>                              complete. The command will <span style="color:#66d9ef">return</span> immediately
+</span></span><span style="display:flex;"><span>                              after triggering the task.
+</span></span><span style="display:flex;"><span>      --node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;    NodeID of the OM to trigger snapshot
+</span></span><span style="display:flex;"><span>                              defragmentation on.
+</span></span><span style="display:flex;"><span>  -id, --service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
+</span></span><span style="display:flex;"><span>                            Ozone Manager Service ID
+</span></span><span style="display:flex;"><span>  -V, --version             Print version information and exit.
+</span></span></code></pre></div><h3 id="example-usages-1">Example usages</h3>
+<ul>
+<li>Trigger snapshot defragmentation on OM node <code>om3</code> in service <code>omservice</code> and wait for completion:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone admin om snapshot defrag --service-id<span style="color:#f92672">=</span>omservice --node-id<span style="color:#f92672">=</span>om3
+</span></span><span style="display:flex;"><span>Triggering Snapshot Defrag Service ...
+</span></span><span style="display:flex;"><span>Snapshot defragmentation completed successfully.
+</span></span></code></pre></div><ul>
+<li>Trigger snapshot defragmentation without waiting for completion:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone admin om snapshot defrag --service-id<span style="color:#f92672">=</span>omservice --node-id<span style="color:#f92672">=</span>om3 --no-wait
+</span></span><span style="display:flex;"><span>Triggering Snapshot Defrag Service ...
+</span></span><span style="display:flex;"><span>Snapshot defragmentation task has been triggered successfully and is running in the background.
+</span></span></code></pre></div>
 
           
           <a class="btn  btn-success btn-lg" href="../tools/genconf.html">Next >></a>
@@ -770,7 +803,7 @@ Argument <code>--prefix</code> could be root (<code>/</code>), path to a bucket 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: January 18, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/082d759448e3995b9330f8e914bb5bab171acaf2">082d759448</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: November 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/af123a5e5ca58052782e10bcd65864b69de803a3">af123a5e5c</a>
     </span>
   </div>
 </footer>
