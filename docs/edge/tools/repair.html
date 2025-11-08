@@ -617,13 +617,13 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>Ozone Repair (<code>ozone repair</code>) is an advanced tool to repair Ozone. The nodes being repaired must be stopped before the tool is run.
+<p>Ozone Repair (<code>ozone repair</code>) is an advanced tool to repair Ozone. Check the <code>--help</code> output of the subcommand for the respective role status requirements.
 Note: All repair commands support a <code>--dry-run</code> option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.
 Use the <code>--force</code> flag to override the running service check in false-positive cases.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                    <span style="color:#f92672">[</span>-D<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>COMMAND<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>Advanced tool to repair Ozone. The nodes being repaired must be stopped before
-</span></span><span style="display:flex;"><span>the tool is run.
+</span></span><span style="display:flex;"><span>Advanced tool to repair Ozone. Check the --help output of the subcommand <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>the respective role status requirements.
 </span></span><span style="display:flex;"><span>      -conf<span style="color:#f92672">=</span>&lt;configurationPath&gt;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  -D, --set<span style="color:#f92672">=</span>&lt;String<span style="color:#f92672">=</span>String&gt;
@@ -641,16 +641,19 @@ Use the <code>--force</code> flag to override the running service check in false
 <p>Operational tool to repair datanode.</p>
 <h3 id="upgrade-container-schema">upgrade-container-schema</h3>
 <p>Upgrade all schema V2 containers to schema V3 for a datanode in offline mode.
-Optionally takes <code>--volume</code> option to specify which volume needs the upgrade.</p>
+Optionally takes <code>--volume</code> option to specify which volume needs the upgrade.
+Datanode should be stopped before running this tool.</p>
 <h2 id="ozone-repair-ldb">ozone repair ldb</h2>
 <p>Operational tool to repair ldb.</p>
 <h3 id="compact">compact</h3>
-<p>Compact a column family in the DB to clean up tombstones while the service is offline.</p>
+<p>Compact a column family in the DB to clean up tombstones while the service is offline.
+The corresponding OM, SCM or Datanode role should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair ldb compact <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                                --cf<span style="color:#f92672">=</span>&lt;columnFamilyName&gt; --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
 </span></span><span style="display:flex;"><span>CLI to compact a column-family in the DB <span style="color:#66d9ef">while</span> the service is offline.
 </span></span><span style="display:flex;"><span>Note: If om.db is compacted with this tool <span style="color:#66d9ef">then</span> it will negatively impact the
-</span></span><span style="display:flex;"><span>Ozone Manager<span style="color:#ae81ff">\&#39;</span>s efficient snapshot diff.
+</span></span><span style="display:flex;"><span>Ozone Manager<span style="color:#ae81ff">\&#39;</span>s efficient snapshot diff. The corresponding OM, SCM or Datanode
+</span></span><span style="display:flex;"><span>role should be stopped <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>      --cf, --column-family, --column_family<span style="color:#f92672">=</span>&lt;columnFamilyName&gt;
 </span></span><span style="display:flex;"><span>                      Column family name
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
@@ -668,12 +671,12 @@ Optionally takes <code>--volume</code> option to specify which volume needs the 
 <h3 id="fso-tree">fso-tree</h3>
 <p>Identify and repair a disconnected FSO tree by marking unreferenced entries for deletion.
 Reports the reachable, unreachable (pending delete) and unreferenced (orphaned) directories and files.
-OM should be stopped while this tool is run.</p>
+OM should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om fso-tree <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                                <span style="color:#f92672">[</span>-b<span style="color:#f92672">=</span>&lt;bucketFilter&gt;<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;omDBPath&gt;
 </span></span><span style="display:flex;"><span>                                <span style="color:#f92672">[</span>-v<span style="color:#f92672">=</span>&lt;volumeFilter&gt;<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>Identify and repair a disconnected FSO tree by marking unreferenced entries <span style="color:#66d9ef">for</span>
-</span></span><span style="display:flex;"><span>deletion. OM should be stopped <span style="color:#66d9ef">while</span> this tool is run.
+</span></span><span style="display:flex;"><span>deletion. OM should be stopped <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>  -b, --bucket<span style="color:#f92672">=</span>&lt;bucketFilter&gt;
 </span></span><span style="display:flex;"><span>                        Filter by bucket name
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;omDBPath&gt;   Path to OM RocksDB
@@ -682,14 +685,15 @@ OM should be stopped while this tool is run.</p>
 </span></span></code></pre></div><h3 id="snapshot">snapshot</h3>
 <p>Subcommand for all snapshot related repairs.</p>
 <h4 id="chain">chain</h4>
-<p>Update global and path previous snapshot for a snapshot in case snapshot chain is corrupted.</p>
+<p>Update global and path previous snapshot for a snapshot in case snapshot chain is corrupted.
+OM should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om snapshot chain <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                                      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
 </span></span><span style="display:flex;"><span>                                      --gp<span style="color:#f92672">=</span>&lt;globalPreviousSnapshotId&gt;
 </span></span><span style="display:flex;"><span>                                      --pp<span style="color:#f92672">=</span>&lt;pathPreviousSnapshotId&gt; &lt;value&gt;
 </span></span><span style="display:flex;"><span>                                      &lt;snapshotName&gt;
 </span></span><span style="display:flex;"><span>CLI to update global and path previous snapshot <span style="color:#66d9ef">for</span> a snapshot in <span style="color:#66d9ef">case</span> snapshot
-</span></span><span style="display:flex;"><span>chain is corrupted.
+</span></span><span style="display:flex;"><span>chain is corrupted. OM should be stopped <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>      &lt;value&gt;          URI of the bucket <span style="color:#f92672">(</span>format: volume/bucket<span style="color:#f92672">)</span>.
 </span></span><span style="display:flex;"><span>      &lt;snapshotName&gt;   Snapshot name to update
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;    Database File Path
@@ -699,11 +703,12 @@ OM should be stopped while this tool is run.</p>
 </span></span><span style="display:flex;"><span>                       Path previous snapshotId to set <span style="color:#66d9ef">for</span> the given snapshot
 </span></span></code></pre></div><h3 id="update-transaction">update-transaction</h3>
 <p>To avoid modifying Ratis logs and only update the latest applied transaction, use <code>update-transaction</code> command.
-This updates the highest transaction index in the OM transaction info table.</p>
+This updates the highest transaction index in the OM transaction info table. The OM role should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om update-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;dbPath&gt; --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
 </span></span><span style="display:flex;"><span>       --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
-</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table.
+</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table. The corresponding OM
+</span></span><span style="display:flex;"><span>or SCM role should be stopped <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
 </span></span><span style="display:flex;"><span>      --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
 </span></span><span style="display:flex;"><span>                      Highest index to set. The input should be non-zero long
@@ -712,7 +717,7 @@ This updates the highest transaction index in the OM transaction info table.</p>
 </span></span><span style="display:flex;"><span>                      Highest term to set. The input should be non-zero long
 </span></span><span style="display:flex;"><span>                        integer.
 </span></span></code></pre></div><h3 id="quota">quota</h3>
-<p>Operational tool to repair quota in OM DB.</p>
+<p>Operational tool to repair quota in OM DB. OM should be running for this tool.</p>
 <h4 id="start">start</h4>
 <p>To trigger quota repair use the <code>start</code> command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om quota start <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
@@ -746,12 +751,13 @@ This updates the highest transaction index in the OM transaction info table.</p>
 </span></span><span style="display:flex;"><span>      --service-id, --om-service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;
 </span></span><span style="display:flex;"><span>                  Ozone Manager Service ID
 </span></span></code></pre></div><h3 id="compact-1">compact</h3>
-<p>Compact a column family in the OM DB to clean up tombstones. The compaction happens asynchronously. Requires admin privileges.</p>
+<p>Compact a column family in the OM DB to clean up tombstones. The compaction happens asynchronously. Requires admin privileges.
+OM should be running for this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om compact <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                               --cf<span style="color:#f92672">=</span>&lt;columnFamilyName&gt; <span style="color:#f92672">[</span>--node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                               <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;omServiceId&gt;<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>CLI to compact a column family in the om.db. The compaction happens
-</span></span><span style="display:flex;"><span>asynchronously. Requires admin privileges.
+</span></span><span style="display:flex;"><span>asynchronously. Requires admin privileges. OM should be running <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>      --cf, --column-family, --column_family<span style="color:#f92672">=</span>&lt;columnFamilyName&gt;
 </span></span><span style="display:flex;"><span>                           Column family name
 </span></span><span style="display:flex;"><span>      --node-id<span style="color:#f92672">=</span>&lt;nodeId&gt;   NodeID of the OM <span style="color:#66d9ef">for</span> which db needs to be compacted.
@@ -760,7 +766,8 @@ This updates the highest transaction index in the OM transaction info table.</p>
 </span></span></code></pre></div><h3 id="skip-ratis-transaction-srt">skip-ratis-transaction, srt</h3>
 <p>Omit a raft log in a ratis segment file by replacing the specified index with a dummy EchoOM command.
 This is an offline tool meant to be used only when all 3 OMs crash on the same transaction.
-If the issue is isolated to one OM, manually copy the DB from a healthy OM instead.</p>
+If the issue is isolated to one OM, manually copy the DB from a healthy OM instead.
+OM should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair om skip-ratis-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> -b<span style="color:#f92672">=</span>&lt;backupDir&gt; --index<span style="color:#f92672">=</span>&lt;index&gt; <span style="color:#f92672">(</span>-s<span style="color:#f92672">=</span>&lt;segmentFile&gt; |
 </span></span><span style="display:flex;"><span>       -d<span style="color:#f92672">=</span>&lt;logDir&gt;<span style="color:#f92672">)</span>
@@ -770,7 +777,8 @@ If the issue is isolated to one OM, manually copy the DB from a healthy OM inste
 </span></span><span style="display:flex;"><span>be run <span style="color:#66d9ef">for</span> the same transaction on all <span style="color:#ae81ff">3</span> OMs only when all the OMs are crashing
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> applying the same transaction. If only one OM is crashing and the other
 </span></span><span style="display:flex;"><span>OMs have executed the log successfully, <span style="color:#66d9ef">then</span> the DB should be manually copied
-</span></span><span style="display:flex;"><span>from one of the good OMs to the crashing OM instead.
+</span></span><span style="display:flex;"><span>from one of the good OMs to the crashing OM instead. OM should be stopped <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span>this tool.
 </span></span><span style="display:flex;"><span>  -b, --backup<span style="color:#f92672">=</span>&lt;backupDir&gt;   Directory to put the backup of the original
 </span></span><span style="display:flex;"><span>                               repaired segment file before the repair.
 </span></span><span style="display:flex;"><span>  -d, --ratis-log-dir<span style="color:#f92672">=</span>&lt;logDir&gt;
@@ -789,18 +797,20 @@ If the issue is isolated to one OM, manually copy the DB from a healthy OM inste
 <h3 id="cert">cert</h3>
 <p>Subcommand for all certificate related repairs on SCM</p>
 <h4 id="recover">recover</h4>
-<p>Recover Deleted SCM Certificate from RocksDB</p>
+<p>Recover Deleted SCM Certificate from RocksDB. SCM should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair scm cert recover <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                                     --db<span style="color:#f92672">=</span>&lt;dbPath&gt;
-</span></span><span style="display:flex;"><span>Recover Deleted SCM Certificate from RocksDB
+</span></span><span style="display:flex;"><span>Recover Deleted SCM Certificate from RocksDB. SCM should be stopped <span style="color:#66d9ef">for</span> this
+</span></span><span style="display:flex;"><span>tool.
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   SCM DB Path
 </span></span></code></pre></div><h3 id="update-transaction-1">update-transaction</h3>
 <p>To avoid modifying Ratis logs and only update the latest applied transaction, use <code>update-transaction</code> command.
-This updates the highest transaction index in the SCM transaction info table.</p>
+This updates the highest transaction index in the SCM transaction info table. The SCM role should be stopped before running this tool.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Usage: ozone repair scm update-transaction <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--dry-run<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--force<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--verbose<span style="color:#f92672">]</span> --db<span style="color:#f92672">=</span>&lt;dbPath&gt; --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
 </span></span><span style="display:flex;"><span>       --term<span style="color:#f92672">=</span>&lt;highestTransactionTerm&gt;
-</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table.
+</span></span><span style="display:flex;"><span>CLI to update the highest index in transaction info table. The corresponding OM
+</span></span><span style="display:flex;"><span>or SCM role should be stopped <span style="color:#66d9ef">for</span> this tool.
 </span></span><span style="display:flex;"><span>      --db<span style="color:#f92672">=</span>&lt;dbPath&gt;   Database File Path
 </span></span><span style="display:flex;"><span>      --index<span style="color:#f92672">=</span>&lt;highestTransactionIndex&gt;
 </span></span><span style="display:flex;"><span>                      Highest index to set. The input should be non-zero long
@@ -827,7 +837,7 @@ This updates the highest transaction index in the SCM transaction info table.</p
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: August 5, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a5cb560cb5a41f7bd9f9fe7c7f4ca3cd65aaf8e2">a5cb560cb5</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: November 7, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c5da9e2a86dd55e9d0d8aaa5f3849e7a3008568e">c5da9e2a86</a>
     </span>
   </div>
 </footer>
