@@ -699,9 +699,9 @@ s=d.getElementsByTagName('script')[0];
 <p>These metrics are available on the SCM and provide a cluster-wide view of the replication process. During decommissioning, you should see an increase in these metrics. The name in parentheses is the corresponding Prometheus metric name.</p>
 <ul>
 <li><code>InflightReplication</code> (<code>replication_manager_metrics_inflight_replication</code>): The number of container replication requests currently in progress.</li>
-<li><code>replicationCmdsSentTotal</code> (<code>replication_manager_metrics_replication_cmds_sent_total</code>): The total number of replication commands sent to datanodes.</li>
+<li><code>replicationCmdsSentTotal</code> (<code>replication_manager_metrics_replication_cmds_sent_total</code>): The total number of replication commands sent to DataNodes.</li>
 <li><code>replicasCreatedTotal</code> (<code>replication_manager_metrics_replicas_created_total</code>): The total number of container replicas successfully created.</li>
-<li><code>replicateContainerCmdsDeferredTotal</code> (<code>replication_manager_metrics_replicate_container_cmds_deferred_total</code>): The number of replication commands deferred because source datanodes were overloaded. If this value is high, it might indicate that the source datanodes (including the decommissioning one) are too busy.</li>
+<li><code>replicateContainerCmdsDeferredTotal</code> (<code>replication_manager_metrics_replicate_container_cmds_deferred_total</code>): The number of replication commands deferred because source DataNodes were overloaded. If this value is high, it might indicate that the source DataNodes (including the decommissioning one) are too busy.</li>
 </ul>
 <h5 id="datanode-side-metrics-measuredreplicator-metrics">Datanode-side Metrics (<code>MeasuredReplicator</code> metrics)</h5>
 <p>These metrics are available on each DataNode. For a decommissioning node, they show its activity as a source of replicas. For other nodes, they show their activity as targets. The name in parentheses is the corresponding Prometheus metric name.</p>
@@ -712,7 +712,7 @@ s=d.getElementsByTagName('script')[0];
 <li><code>failure</code> (<code>measured_replicator_failure</code>): The number of failed replication tasks.</li>
 <li><code>failureTime</code> (<code>measured_replicator_failure_time</code>): The total time spent on failed replication tasks.</li>
 <li><code>failureBytes</code> (<code>measured_replicator_failure_bytes</code>): The total bytes that failed to be transferred.</li>
-<li><code>queueTime</code> (<code>measured_replicator_queue_time</code>): The total time tasks spend in the replication queue. A high value might indicate the datanode is overloaded.</li>
+<li><code>queueTime</code> (<code>measured_replicator_queue_time</code>): The total time tasks spend in the replication queue. A high value might indicate the DataNode is overloaded.</li>
 </ul>
 <p>By monitoring these metrics, administrators can get a clear picture of the decommissioning progress and identify potential bottlenecks.</p>
 <h1 id="om-decommission">OM Decommission</h1>
@@ -760,7 +760,7 @@ other OMs.</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: September 22, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3ddcd48228bb4c6f75b3effbf8959c75fe616bc0">3ddcd48228</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: November 11, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/6d0288bea7f339effb0d9f790e0c35e4efc8d449">6d0288bea7</a>
     </span>
   </div>
 </footer>
