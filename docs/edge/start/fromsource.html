@@ -673,7 +673,7 @@ from the <a href="https://github.com/apache/ozone">git repository</a>).</p>
 </span></span><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2.5.0&#34;</span>
 </span></span><span style="display:flex;"><span>curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
 </span></span><span style="display:flex;"><span>tar xzf protobuf-2.5.0.tar.gz
-</span></span><span style="display:flex;"><span>cd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>pushd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like vim and append the following lines after line 59 (include the #).  </span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the file when complete.</span>
@@ -685,11 +685,11 @@ from the <a href="https://github.com/apache/ozone">git repository</a>).</p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute the following commands to build `protoc`</span>
 </span></span><span style="display:flex;"><span>./configure --disable-shared
 </span></span><span style="display:flex;"><span>make -j
-</span></span><span style="display:flex;"><span>cd ..
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Install protoc to the local Maven repository</span>
 </span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
 </span></span><span style="display:flex;"><span>mv $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
+</span></span><span style="display:flex;"><span>popd
 </span></span></code></pre></div><h2 id="build-ozone">Build Ozone</h2>
 <p>Run the ozone build command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mvn clean package -DskipTests<span style="color:#f92672">=</span>true
@@ -730,7 +730,7 @@ provided along with the official release.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: October 13, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/2ffd6565e1289b5c2027be4a5d0068cbb21d2228">2ffd6565e1</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: November 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/367e6252d8b8f762af5999ec06c9357a00fe66ff">367e6252d8</a>
     </span>
   </div>
 </footer>
