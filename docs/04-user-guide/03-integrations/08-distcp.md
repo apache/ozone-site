@@ -1,3 +1,7 @@
+---
+sidebar_label: DistCp
+---
+
 # Hadoop DistCp
 
 Hadoop DistCp is a command-line, MapReduce-based tool for bulk data copying.
