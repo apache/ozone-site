@@ -331,3 +331,50 @@ div .row {
   padding-right: 30px;
 
 }
+
+
+.faq-item {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item details {
+  padding: 0;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 20px;
+  background-color: #fffbfb7e;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+
+.faq-item summary::after {
+  content: "▼";
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.faq-item details[open] summary::after {
+  transform: rotate(-180deg);
+}
+
+.faq-item p {
+  padding: 20px;
+  margin: 0;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
