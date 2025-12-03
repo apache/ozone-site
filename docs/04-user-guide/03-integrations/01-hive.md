@@ -9,6 +9,7 @@ Apache Hive has supported Apache Ozone since Hive 4.0. To enable Hive to work wi
 ## Supported Access Protocols
 
 Hive supports the following protocols for accessing Ozone data:
+
 - ofs
 - o3fs
 - s3a
@@ -16,12 +17,14 @@ Hive supports the following protocols for accessing Ozone data:
 ## Supported Replication Types
 
 Hive is compatible with Ozone buckets configured with either:
+
 - RATIS (Replication)
 - Erasure Coding
 
 ## Accessing Ozone Data in Hive
 
 Hive provides two methods to interact with data in Ozone:
+
 - Managed Tables
 - External Tables
 
