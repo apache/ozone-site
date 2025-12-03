@@ -66,6 +66,7 @@ CREATE DATABASE d1 MANAGEDLOCATION 'ofs://ozone1/vol1/bucket1/data';
 ```
 
 Tables created in the database d1 will be stored under the specified path:
+
 `ofs://ozone1/vol1/bucket1/data`
 
 #### Verifying the Ozone Path
