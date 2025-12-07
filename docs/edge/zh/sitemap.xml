@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/zh/</loc>
+    <loc>/zh/index.html</loc>
     <lastmod>2020-12-08T21:45:19+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/"
+                href="/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/"
+                href="/zh/index.html"
                 />
   </url><url>
     <loc>/zh/security/secureozone.html</loc>
@@ -119,17 +119,17 @@
                 href="/zh/feature/erasurecoding.html"
                 />
   </url><url>
-    <loc>/zh/start.html</loc>
+    <loc>/zh/start/index.html</loc>
     <lastmod>2020-02-06T14:59:14-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/start.html"
+                href="/start/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/start.html"
+                href="/zh/start/index.html"
                 />
   </url><url>
     <loc>/zh/security/securingtde.html</loc>
@@ -236,17 +236,17 @@
                 href="/zh/security/securingdatanodes.html"
                 />
   </url><url>
-    <loc>/zh/concept.html</loc>
+    <loc>/zh/concept/index.html</loc>
     <lastmod>2020-10-05T21:30:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/concept.html"
+                href="/concept/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/concept.html"
+                href="/zh/concept/index.html"
                 />
   </url><url>
     <loc>/zh/concept/storagecontainermanager.html</loc>
@@ -353,17 +353,17 @@
                 href="/zh/interface/cli.html"
                 />
   </url><url>
-    <loc>/zh/feature.html</loc>
+    <loc>/zh/feature/index.html</loc>
     <lastmod>2021-08-16T19:11:12+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/feature.html"
+                href="/feature/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/feature.html"
+                href="/zh/feature/index.html"
                 />
   </url><url>
     <loc>/zh/security/securings3.html</loc>
@@ -392,17 +392,17 @@
                 href="/zh/concept/containers.html"
                 />
   </url><url>
-    <loc>/zh/security.html</loc>
+    <loc>/zh/security/index.html</loc>
     <lastmod>2020-05-29T11:52:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/security.html"
+                href="/security/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/security.html"
+                href="/zh/security/index.html"
                 />
   </url><url>
     <loc>/zh/security/securityacls.html</loc>
@@ -496,17 +496,17 @@
                 href="/zh/feature/observability.html"
                 />
   </url><url>
-    <loc>/zh/recipe.html</loc>
+    <loc>/zh/recipe/index.html</loc>
     <lastmod>2020-04-22T07:46:38+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/recipe.html"
+                href="/recipe/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/recipe.html"
+                href="/zh/recipe/index.html"
                 />
   </url><url>
     <loc>/zh/start/startfromdockerhub.html</loc>
@@ -652,17 +652,17 @@
                 href="/zh/tools/debug/auditparser.html"
                 />
   </url><url>
-    <loc>/zh/tools.html</loc>
+    <loc>/zh/tools/index.html</loc>
     <lastmod>2023-03-01T09:32:46+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/tools.html"
+                href="/tools/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/tools.html"
+                href="/zh/tools/index.html"
                 />
   </url><url>
     <loc>/zh/recipe/botoclient.html</loc>
@@ -717,17 +717,17 @@
                 href="/zh/tools/testtools.html"
                 />
   </url><url>
-    <loc>/zh/interface.html</loc>
+    <loc>/zh/interface/index.html</loc>
     <lastmod>2024-04-05T15:15:49+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/interface.html"
+                href="/interface/index.html"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/interface.html"
+                href="/zh/interface/index.html"
                 />
   </url>
 </urlset>

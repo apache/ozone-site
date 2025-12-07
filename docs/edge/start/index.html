@@ -98,8 +98,8 @@ s=d.getElementsByTagName('script')[0];
         
     
         
-            <li class="">
-                <a href="../start.html">
+            <li class="active">
+                <a href="../start/index.html">
                     
                     <span>Getting Started</span>
                 </a>
@@ -117,7 +117,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../concept.html">
+                <a href="../concept/index.html">
                     
                     <span>Architecture</span>
                 </a>
@@ -199,7 +199,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../feature.html">
+                <a href="../feature/index.html">
                     
                     <span>Features</span>
                 </a>
@@ -353,7 +353,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../integration.html">
+                <a href="../integration/index.html">
                     
                     <span>Application Integrations</span>
                 </a>
@@ -383,7 +383,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../interface.html">
+                <a href="../interface/index.html">
                     
                     <span>Client Interfaces</span>
                 </a>
@@ -465,7 +465,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../security.html">
+                <a href="../security/index.html">
                     
                     <span>Security</span>
                 </a>
@@ -532,7 +532,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../tools.html">
+                   <a href="../tools/index.html">
                 
 
                     
@@ -544,7 +544,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../recipe.html">
+                   <a href="../recipe/index.html">
                 
 
                     
@@ -556,7 +556,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../troubleshooting.html">
+                   <a href="../troubleshooting/index.html">
                 
 
                     
@@ -585,9 +585,14 @@ s=d.getElementsByTagName('script')[0];
     
     
     
+    
+    
+    <a href="../zh/start/index.html"><span class="label label-success">中文</span></a>
+    
+    
 </div>
 
-                <h1>Debug Tools</h1>
+                <h1>Getting Started</h1>
             </div>
 
             <div class="col-md-9">
@@ -607,171 +612,196 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>Ozone Debug command (<code>ozone debug</code>) is a collection of developer tools intended to help in debugging and get more information of various components of ozone.</p>
-<p>It includes the following tools:</p>
-<ul>
-<li><strong>ldb</strong> - Tools to debug RocksDB related issues.</li>
-<li><strong>om</strong> - Debug commands related to OM.</li>
-<li><strong>datanode</strong> - Debug commands related to Datanode.</li>
-<li><strong>replicas</strong> - Debug commands for key replica related issues.</li>
-<li><strong>ratis</strong> - Debug commands related to Ratis.</li>
-<li><strong>auditparser</strong> - A tool to parse and query Ozone audit logs.</li>
-<li><strong>log</strong> - A tool to parse and provide insights on logs, currently supports only the datanode&rsquo;s container logs.</li>
-<li><strong>checknative</strong> - Checks if native libraries are loaded</li>
-<li><strong>version</strong> - Show internal version of Ozone components</li>
-</ul>
-<p>For more information see the following subpages:</p>
 
-                
-                
-                
-                
 
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    LDB Tool
-                                </h2>
-                                <p class="card-text">Parsing rocksDB and debugging related issues.</p>
-                                <a href="../tools/debug/ldb.html"
-                                   class=" btn btn-primary btn-lg">LDB Tool</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">Installing Ozone </h3>
+        <p class="lead">
+            
+There are many ways to install and run Ozone. Starting from simple docker
+deployments on
+local nodes, to full scale multi-node cluster deployment on
+Kubernetes or bare-metal.
 
-                    
-                
+        </p>
+    </div>
+</div>
+<section class="row cardgroup">
+<p><span class="label label-warning label-">Easy Start</span></p>
+<h2>Running Ozone from Docker Hub</h2>
+<p>You can try out Ozone using docker hub without downloading the official release. This makes it easy to explore Ozone.
+<br />
 
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug OM
-                                </h2>
-                                <p class="card-text">Debug commands related to OM.</p>
-                                <a href="../tools/debug/debugom.html"
-                                   class=" btn btn-primary btn-lg">Debug OM</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    
-                        </div>
-                    
-                
 
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug Datanode
-                                </h2>
-                                <p class="card-text">Debug commands related to datanode.</p>
-                                <a href="../tools/debug/debugdatanode.html"
-                                   class=" btn btn-primary btn-lg">Debug Datanode</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="col-sm-6">
 
-                    
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/docker.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
                 
+                Starting ozone inside a single container
+            </h4>
+            
+  The simplest and easiest way to start an ozone cluster
+      to explore what it can do is to start ozone via docker.
+  
+            
+            <p><a href="../start/startfromdockerhub.html" class=" btn btn-primary btn-lg">Ozone In Docker</a></p>
+            
+        </div>
+    </div>
+</div>
+</p>
+</section>
+<section class="row cardgroup">
+<p><span class="label label-success">Recommended</span></p>
+<h2>Running Ozone from an Official Release</h2>
+<p>Apache Ozone can also be run from the official release packages. Along with the official source releases, we also release a set of convenience binary packages. It is easy to run these binaries in different configurations.
+<br />
 
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Debug Replicas
-                                </h2>
-                                <p class="card-text">Debug commands for replica-related issues.</p>
-                                <a href="../tools/debug/debugreplicas.html"
-                                   class=" btn btn-primary btn-lg">Debug Replicas</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    
-                        </div>
-                    
-                
 
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ratis Log Parser
-                                </h2>
-                                <p class="card-text">Parse ratis logs to be in human understandable form.</p>
-                                <a href="../tools/debug/ratislogparser.html"
-                                   class=" btn btn-primary btn-lg">Ratis Log Parser</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="col-sm-6">
 
-                    
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/hadoop.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
                 
+                Ozone on a physical cluster
+            </h4>
+            
+Ozone is optimized for physical hosts. The physical cluster instructions explain each component of Ozone and how to deploy with maximum control.
+  
+            
+            <p><a href="../start/onprem.html" class=" btn btn-primary btn-lg">On-Prem Ozone Cluster</a></p>
+            
+        </div>
+    </div>
+</div>
+</p>
 
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Audit Parser
-                                </h2>
-                                <p class="card-text">Tool for querying the ozone audit logs.</p>
-                                <a href="../tools/debug/auditparser.html"
-                                   class=" btn btn-primary btn-lg">Audit Parser</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    
-                        </div>
-                    
-                
 
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Container Replica Debugger Tool
-                                </h2>
-                                <p class="card-text">Processing and querying container log files from Ozone datanodes to track state transitions.</p>
-                                <a href="../tools/debug/containerlogparser.html"
-                                   class=" btn btn-primary btn-lg">Container Replica Debugger Tool</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="col-sm-6">
 
-                    
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/k8s.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
+                
+                Ozone on K8s
+            </h4>
+            
+Ozone is designed to work well under Kubernetes. These are instructions to deploy Ozone on K8s. Ozone provides a replicated storage solution for K8s based apps.
+  
+            
+            <p><a href="../start/kubernetes.html" class=" btn btn-primary btn-lg">Kubernetes</a></p>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-sm-6">
+
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/minikube.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
+                
+                Ozone using MiniKube
+            </h4>
+            
+Ozone comes with a standard set of K8s resources. You can deploy them to MiniKube and experiment with the K8s based deployments.
+  
+            
+            <p><a href="../start/minikube.html" class=" btn btn-primary btn-lg">Minikube cluster</a></p>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-sm-6">
+
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/docker.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
+                
+                Ozone cluster in Local Node
+            </h4>
+            
+ We also ship standard docker files with official release. These are part of official release and not depend upon Docker Hub.
+  
+            
+            <p><a href="../start/runningviadocker.html" class=" btn btn-primary btn-lg">docker-compose</a></p>
+            
+        </div>
+    </div>
+</div>
+
+</section>
+<section class="row cardgroup">
+<p><span class="label label-danger">Hadoop Ninja</span></p>
+<h2>Building From Sources </h2>
+<p>Instructions to build Ozone from source to create deployment packages.</p>
+
+
+
+<div class="col-sm-6">
+
+    <div class="media">
+        
+        <div class="media-left media-top">
+            <img src="start/hadoop.png"></img>
+        </div>
+        
+        <div class="media-body">
+            <h4 class="media-title">
+                
+                Building From Sources
+            </h4>
+            
+If you are a Hadoop ninja, and wise in the ways of Apache, you already know that a real Apache release is a source release. We believe that even ninjas need help at times.
+  
+            
+            <p><a href="../start/fromsource.html" class=" btn btn-primary btn-lg">Build ozone from source</a></p>
+            
+        </div>
+    </div>
+</div>
+
+</section>
+
                 
                 
             </div>
@@ -786,7 +816,7 @@ s=d.getElementsByTagName('script')[0];
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: September 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/b0960dfe20dca515198f9f06062852804c9215c1">b0960dfe20</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: June 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/a9271131c7dd94238f18aa2bb853ed6490c31677">a9271131c7</a>
     </span>
   </div>
 </footer>

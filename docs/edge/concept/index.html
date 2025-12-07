@@ -48,7 +48,7 @@ s=d.getElementsByTagName('script')[0];
 
 <body>
 
-  
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -77,10 +77,10 @@ s=d.getElementsByTagName('script')[0];
 </nav>
 
 
-  <div class="wrapper">
-  <div class="container-fluid">
+<div class="wrapper">
+<div class="container-fluid">
     <div class="row">
-      
+        
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -116,7 +116,7 @@ s=d.getElementsByTagName('script')[0];
         
     
         
-            <li class="">
+            <li class="active">
                 <a href="../concept/index.html">
                     
                     <span>Architecture</span>
@@ -163,7 +163,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="active">
+                        <li class="">
                            
                            <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
                            
@@ -576,32 +576,27 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+            <div class="col-md-9">
 
-
-
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../concept/index.html">Architecture</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Ozone S3 Gateway</li>
-                </ol>
-              </nav>
-
-          
+                
 
 <div class="pull-right">
     
     
     
+    
+    
+    <a href="../zh/concept/index.html"><span class="label label-success">中文</span></a>
+    
+    
 </div>
 
+                <h1>Architecture</h1>
+            </div>
 
-          <div class="col-md-9">
-            <h1>Ozone S3 Gateway</h1>
-
-            <!---
+            <div class="col-md-9">
+                <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
@@ -617,104 +612,327 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<p>Apache Ozone’s S3 Gateway (often called <strong>S3G</strong>) is a component that provides an Amazon S3-compatible REST interface for Ozone’s object store. In essence, it allows any S3 client or tool to read and write data in Ozone as if it were talking to AWS S3. The S3 Gateway runs as a <strong>separate, stateless service</strong> on top of Ozone, translating HTTP S3 API calls into Ozone’s native storage operations.</p>
-<p>This design lets users leverage the rich ecosystem of S3-compatible applications with Ozone, without modifying those applications.</p>
-<h2 id="high-level-overview-of-the-s3-gateway">High-Level Overview of the S3 Gateway</h2>
-<p>Ozone’s S3 Gateway acts as a <strong>REST front-end</strong> that speaks the S3 protocol and bridges it to the Ozone backend. It is <strong>stateless</strong>, meaning it does not persist data or metadata locally between requests – all state is stored in the Ozone cluster itself.</p>
-<p>Being stateless allows multiple S3 Gateway instances to run in parallel behind a load balancer for scaling and high availability. The idea of stateless also allows S3G to be deployed in Kubernetes quite easily. The gateway supports a broad set of S3 operations – create/delete buckets, PUT/GET objects, list objects, perform multipart uploads – using standard S3 SDKs or CLI tools.</p>
-<p>Under the hood, each operation is translated into the appropriate Ozone calls:</p>
-<ul>
-<li>A PUT object request becomes a <code>putKey</code> write operation.</li>
-<li>A GET object becomes a <code>getKey</code> read operation.</li>
-</ul>
-<h3 id="mapping-s3-to-ozone-concepts">Mapping S3 to Ozone Concepts</h3>
-<p>In Ozone, data is organized into <strong>volumes</strong>, <strong>buckets</strong>, and <strong>keys</strong>. By default, the S3 Gateway uses a special
-volume named <code>/s3v</code> to store all S3 buckets (this is configurable via the <code>ozone.s3g.volume.name</code> property).</p>
-<p>Each S3 bucket created is represented as a bucket under the <code>/s3v</code> volume in Ozone. Objects (keys) are stored within those buckets. This mapping is transparent to the end user.</p>
-<p>The default bucket layout for S3 buckets (<code>OBJECT_STORE</code>) can be configured using the <code>ozone.s3g.default.bucket.layout</code> property. This property defines the storage layout for buckets created via the S3 gateway.</p>
-<h2 id="s3-gateway-in-the-ozone-architecture">S3 Gateway in the Ozone Architecture</h2>
-<p>The S3 Gateway does the following:</p>
-<ul>
-<li>It receives S3 REST API calls from clients.</li>
-<li>It translates them and forwards metadata operations to OM.</li>
-<li>It streams data directly to and from DataNodes.</li>
-</ul>
-<p>This stateless gateway can be scaled horizontally.</p>
-<h2 id="internal-components-and-design">Internal Components and Design</h2>
-<h3 id="http-server-and-rest-api-layer">HTTP Server and REST API Layer</h3>
-<p>Runs an embedded HTTP server exposing REST endpoints like:</p>
-<ul>
-<li><code>PUT /&lt;bucket&gt;/&lt;key&gt;</code></li>
-<li><code>GET /&lt;bucket&gt;/&lt;key&gt;</code></li>
-</ul>
-<p>Handles authentication headers, content length, and routing.</p>
-<h3 id="request-handlers--protocol-translation">Request Handlers / Protocol Translation</h3>
-<p>Each S3 operation is mapped to Ozone APIs:</p>
-<ul>
-<li>Create Bucket → create in <code>/s3v</code> volume</li>
-<li>List Buckets → query all user-owned buckets under <code>/s3v</code></li>
-<li>Put/Get Object → <code>putKey</code> / <code>getKey</code></li>
-</ul>
-<p>It also assembles proper S3-compliant response formats.</p>
-<h3 id="ozone-client-integration">Ozone Client Integration</h3>
-<p>Uses Ozone client libraries to:</p>
-<ul>
-<li>Call OM for metadata operations</li>
-<li>Stream data to/from DataNodes</li>
-</ul>
-<p>Bulk data does not flow through OM – it goes directly between gateway and DataNodes.</p>
-<h3 id="statelessness-and-caching">Statelessness and Caching</h3>
-<p>The gateway:</p>
-<ul>
-<li>Does not persist state</li>
-<li>Uses lightweight in-memory caches</li>
-<li>Depends on OM for coordination and user/token validation</li>
-</ul>
-<p>This simplifies scaling and failure recovery.</p>
-<h3 id="authentication-and-security">Authentication and Security</h3>
-<p>Supports AWS Signature-style authentication (if enabled):</p>
-<ul>
-<li>Only AWS Signature V4 is supported (the older AWS Signature V2 is not).</li>
-<li>Validates access/secret keys via OM</li>
-<li>Uses OM’s stored credentials</li>
-<li>Relies on OM for final authorization</li>
-</ul>
-<p>Supports Kerberos authentication for secure clusters;  In unsecured mode, allows anonymous or dummy access.</p>
-<h2 id="summary">Summary</h2>
-<p>The Ozone S3 Gateway is a <strong>protocol adapter</strong>:</p>
-<ul>
-<li>It translates REST S3 operations into native Ozone calls.</li>
-<li>It doesn’t store or manage data – it delegates to OM and DataNodes.</li>
-<li>Its stateless, scalable design enables multiple instances behind load balancers.</li>
-<li>It enables seamless use of existing S3-compatible clients and tools.</li>
-</ul>
-<p>For more details, refer to the other documentation:</p>
-<ul>
-<li><a href="../interface/s3.html">Ozone S3 Gateway Interface</a></li>
-<li><a href="../feature/s3-multi-tenancy.html">S3 Multi-Tenancy</a></li>
-<li><a href="../security/securings3.html">Securing S3</a></li>
-<li><a href="../concept/networkports.html">Network Ports</a></li>
-</ul>
 
 
-          
-          <a class="btn  btn-success btn-lg" href="../concept/recon.html">Next >></a>
-          
-          </div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h3 class="display-4">Ozone Architecture </h3>
+        <p class="lead">
+            
 
-        </div>
-      </div>
+Ozone's architectural elements are explained in the following pages. The
+metadata layer, data layer, protocol bus, replication layer and Recon  are
+discussed in the following pages. These concepts are useful if you want to
+understand how ozone works in depth.
+
+
+        </p>
     </div>
-  </div>
-    <div class="push"></div>
-  </div>
+</div>
 
-  
+                
+                
+                
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Overview
+                                </h2>
+                                <p class="card-text">Ozone&rsquo;s overview and components that make up Ozone.</p>
+                                <a href="../concept/overview.html"
+                                   class=" btn btn-primary btn-lg">Overview</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Ozone Manager
+                                </h2>
+                                <p class="card-text">Ozone Manager is the principal name space service of Ozone. OM manages the life cycle of volumes, buckets and Keys.</p>
+                                <a href="../concept/ozonemanager.html"
+                                   class=" btn btn-primary btn-lg">Ozone Manager</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Storage Container Manager
+                                </h2>
+                                <p class="card-text">Storage Container Manager or SCM is the core metadata service of Ozone. SCM provides a distributed block layer for Ozone.</p>
+                                <a href="../concept/storagecontainermanager.html"
+                                   class=" btn btn-primary btn-lg">Storage Container Manager</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Containers
+                                </h2>
+                                <p class="card-text">Description of the Containers, the replication unit of Ozone.</p>
+                                <a href="../concept/containers.html"
+                                   class=" btn btn-primary btn-lg">Containers</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Datanodes
+                                </h2>
+                                <p class="card-text">Ozone supports Amazon&rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</p>
+                                <a href="../concept/datanodes.html"
+                                   class=" btn btn-primary btn-lg">Datanodes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Ozone S3 Gateway
+                                </h2>
+                                <p class="card-text">Apache Ozone’s S3 Gateway (often called S3G) is a component that provides an Amazon S3-compatible REST interface for Ozone’s object store.</p>
+                                <a href="../concept/ozones3gateway.html"
+                                   class=" btn btn-primary btn-lg">Ozone S3 Gateway</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Recon
+                                </h2>
+                                <p class="card-text">Recon serves as a management and monitoring console for Ozone.</p>
+                                <a href="../concept/recon.html"
+                                   class=" btn btn-primary btn-lg">Recon</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Network Ports
+                                </h2>
+                                <p class="card-text">Understanding and correctly configuring the network ports used by Apache Ozone is essential for the successful deployment, operation, and maintenance of Apache Ozone clusters.</p>
+                                <a href="../concept/networkports.html"
+                                   class=" btn btn-primary btn-lg">Network Ports</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Comparison with Other Storage Technologies
+                                </h2>
+                                <p class="card-text"><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>This document provides a high-level comparison of Apache Ozone with other storage technologies.</p></p>
+                                <a href="../concept/comparison.html"
+                                   class=" btn btn-primary btn-lg">Comparison with Other Storage Technologies</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Staged Reprocessing for Recon Task Data During Full Snapshot Recovery
+                                </h2>
+                                <p class="card-text">Staged reprocessing of Recon Task for data consistency shown over Recon UI</p>
+                                <a href="../concept/hdds-13515-design-document.html"
+                                   class=" btn btn-primary btn-lg">Staged Reprocessing for Recon Task Data During Full Snapshot Recovery</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Volumes, Buckets, and Keys
+                                </h2>
+                                <p class="card-text">Understanding the fundamental data hierarchy in Apache Ozone: Volumes, Buckets, and Keys.</p>
+                                <a href="../concept/volumesbucketskeys.html"
+                                   class=" btn btn-primary btn-lg">Volumes, Buckets, and Keys</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    RocksDB in Apache Ozone
+                                </h2>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<blockquote>
+<p>Note: This page covers advanced topics. Ozone administrators typically do not need to tinker with these settings.</p></p>
+                                <a href="../concept/rocksdb.html"
+                                   class=" btn btn-primary btn-lg">RocksDB in Apache Ozone</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="push"></div>
+</div>
+
+
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: July 4, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d9daba0ee808f7923ac58ea59e5ffc53d1fbb1bd">d9daba0ee8</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab3</a>
     </span>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>An Introduction to Apache Ozone on Ozone</title>
-    <link>/</link>
+    <link>/index.html</link>
     <description>Recent content in An Introduction to Apache Ozone on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
@@ -180,7 +180,7 @@
       <link>/feature/quota.html</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       <guid>/feature/quota.html</guid>
-      <description>Introduction to Ozone Quota</description>
+      <description>Quota in Ozone</description>
     </item>
     <item>
       <title>Securing HTTP</title>

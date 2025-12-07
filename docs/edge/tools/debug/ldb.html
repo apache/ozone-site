@@ -99,7 +99,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../start.html">
+                <a href="../../start/index.html">
                     
                     <span>Getting Started</span>
                 </a>
@@ -117,7 +117,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../concept.html">
+                <a href="../../concept/index.html">
                     
                     <span>Architecture</span>
                 </a>
@@ -199,7 +199,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../feature.html">
+                <a href="../../feature/index.html">
                     
                     <span>Features</span>
                 </a>
@@ -353,7 +353,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../integration.html">
+                <a href="../../integration/index.html">
                     
                     <span>Application Integrations</span>
                 </a>
@@ -383,7 +383,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../interface.html">
+                <a href="../../interface/index.html">
                     
                     <span>Client Interfaces</span>
                 </a>
@@ -465,7 +465,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../security.html">
+                <a href="../../security/index.html">
                     
                     <span>Security</span>
                 </a>
@@ -532,7 +532,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../tools.html">
+                   <a href="../../tools/index.html">
                 
 
                     
@@ -544,7 +544,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../recipe.html">
+                   <a href="../../recipe/index.html">
                 
 
                     
@@ -556,7 +556,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../troubleshooting.html">
+                   <a href="../../troubleshooting/index.html">
                 
 
                     
@@ -584,7 +584,7 @@ s=d.getElementsByTagName('script')[0];
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../../tools/debug.html">Debug Tools</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../tools/debug/index.html">Debug Tools</a></li>
                   <li class="breadcrumb-item active" aria-current="page">LDB Tool</li>
                 </ol>
               </nav>
@@ -705,7 +705,7 @@ Below is the usage:</p>
 <div class="alert alert-success" role="alert">
   Multiple filtering options can be used together in a single command.
 </div>
-<h4 id="--startkey-and---endkey">&ndash;startkey and &ndash;endkey</h4>
+<h4 id="startkey-and-endkey">&ndash;startkey and &ndash;endkey</h4>
 <p>As the names suggest, these options specify the keys from/until which the iteration needs to happen.  <br>
 <code>--startkey</code> specifies which key to start iterating from, it is inclusive. <code>--endkey</code> specifies which key to stop iterating at, it is exclusive.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --startkey<span style="color:#f92672">=</span>vol3 --endkey<span style="color:#f92672">=</span>vol5
@@ -748,7 +748,7 @@ Below is the usage:</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><h4 id="--fields">&ndash;fields</h4>
+</span></span></code></pre></div><h4 id="fields">&ndash;fields</h4>
 <p>There are multiple fields in each record. <code>--fields</code> option allows us to choose the specific fields to display.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>keyTable -l<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volumeName,bucketName,keyName,keyLocationVersions.version,acls.name&#34;</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;/vol1/ozone-legacy-bucket/10T-1-terasort-input/&#34;</span>: {
@@ -767,7 +767,7 @@ Below is the usage:</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="--filter">&ndash;filter</h4>
+</span></span></code></pre></div><h4 id="filter">&ndash;filter</h4>
 <p><code>--filter</code> can be used to select records whose value matches a given condition. The filter is given in this format: <code>&lt;field&gt;:&lt;operator&gt;:&lt;value&gt;</code>,
 where <code>&lt;field&gt;</code> is any valid field from the value of the record, <code>&lt;operator&gt;</code> is one of the 4 supported operations <code>[equals, regex, lesser, greater]</code>, <code>&lt;value&gt;</code> is the value used for the comparison. <br>
 &lsquo;Equals&rsquo; and &lsquo;regex&rsquo; work with string, bool and numerical fields, &rsquo;lesser&rsquo; and &lsquo;greater&rsquo; work only with numerical values.  <br>

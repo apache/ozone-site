@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Getting Started on Ozone</title>
-    <link>/start.html</link>
+    <link>/start/index.html</link>
     <description>Recent content in Getting Started on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>

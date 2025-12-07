@@ -99,7 +99,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../zh/start.html">
+                <a href="../../zh/start/index.html">
                     
                     <span>快速入门</span>
                 </a>
@@ -117,7 +117,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../zh/concept.html">
+                <a href="../../zh/concept/index.html">
                     
                     <span>概念</span>
                 </a>
@@ -165,7 +165,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../zh/feature.html">
+                <a href="../../zh/feature/index.html">
                     
                     <span>特性</span>
                 </a>
@@ -237,7 +237,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../zh/security.html">
+                <a href="../../zh/security/index.html">
                     
                     <span>安全</span>
                 </a>
@@ -297,7 +297,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../zh/interface.html">
+                <a href="../../zh/interface/index.html">
                     
                     <span>客户端接口</span>
                 </a>
@@ -316,7 +316,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../zh/tools.html">
+                   <a href="../../zh/tools/index.html">
                 
 
                     
@@ -328,7 +328,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../zh/recipe.html">
+                   <a href="../../zh/recipe/index.html">
                 
 
                     
@@ -404,7 +404,7 @@ s=d.getElementsByTagName('script')[0];
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../../zh/index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/concept.html">概念</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../zh/concept/index.html">概念</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Recon</li>
                 </ol>
               </nav>
@@ -463,7 +463,7 @@ s=d.getElementsByTagName('script')[0];
 
 <br/>
 <p>Recon 还充当数据节点的被动 SCM。在集群中配置 Recon 时，所有数据节点都向 Recon 注册，并像 SCM 一样向 Recon 发送心跳、容器报告、增量容器报告等。Recon 使用它从数据节点得到的所有信息在本地构建自己的 SCM rocks DB 副本。Recon 从不向数据节点发送任何命令作为响应，而只是充当被动 SCM 以更快地查找 SCM 元数据。</p>
-<h2 id="a-nametask-frameworka-任务框架"><a name="task-framework"></a> 任务框架</h2>
+<h2 id="任务框架"><a name="task-framework"></a> 任务框架</h2>
 <p>Recon 有其自己的任务框架，可对从 OM 和 SCM 获得的数据进行批处理。一个任务可以在 OM DB 或 SCM DB 上监听和操作数据库事件，如<code>PUT</code>、<code>DELETE</code>、<code>UPDATE</code>等。在此基础上，任务实现<code>org.apache.hadoop.ozone.recon.tasks.ReconOmTask</code>或者扩展<code>org.apache.hadoop.ozone.recon.scm.ReconScmTask</code>。</p>
 <p><code>ReconOmTask</code>的一个示例是<code>ContainerKeyMapperTask</code>，它在 RocksDB 中持久化保留了容器 -&gt; 键映射。当容器被报告丢失或处于不健康的运行状态时，这有助于了解哪些键是容器的一部分。另一个示例是<code>FileSizeCountTask</code>，它跟踪 SQL 数据库中给定文件大小范围内的文件计数。这些任务有两种情况的实现：</p>
 <ul>

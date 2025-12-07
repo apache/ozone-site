@@ -99,7 +99,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../../zh/start.html">
+                <a href="../../../zh/start/index.html">
                     
                     <span>快速入门</span>
                 </a>
@@ -117,7 +117,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../../zh/concept.html">
+                <a href="../../../zh/concept/index.html">
                     
                     <span>概念</span>
                 </a>
@@ -165,7 +165,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../../zh/feature.html">
+                <a href="../../../zh/feature/index.html">
                     
                     <span>特性</span>
                 </a>
@@ -237,7 +237,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../../zh/security.html">
+                <a href="../../../zh/security/index.html">
                     
                     <span>安全</span>
                 </a>
@@ -297,7 +297,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="../../../zh/interface.html">
+                <a href="../../../zh/interface/index.html">
                     
                     <span>客户端接口</span>
                 </a>
@@ -316,7 +316,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../../zh/tools.html">
+                   <a href="../../../zh/tools/index.html">
                 
 
                     
@@ -328,7 +328,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="../../../zh/recipe.html">
+                   <a href="../../../zh/recipe/index.html">
                 
 
                     
@@ -404,7 +404,7 @@ s=d.getElementsByTagName('script')[0];
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../../../zh/index.html">Home</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="../../../zh/tools.html">工具</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../../../zh/tools/index.html">工具</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Ozone Debug</li>
                 </ol>
               </nav>
@@ -547,7 +547,7 @@ ratislogparser             解析Ratis Log 成用户可理解的文字形式。<
 <div class="alert alert-success" role="alert">
   多个过滤选项可以在单个命令中一起使用。
 </div>
-<h4 id="--startkey-and---endkey">&ndash;startkey and &ndash;endkey</h4>
+<h4 id="startkey-and-endkey">&ndash;startkey and &ndash;endkey</h4>
 <p>顾名思义，这些选项指定迭代需要发生的键。  <br>
 <code>--startkey</code> 指定从哪个键开始迭代，包含该键。 <code>--endkey</code> 指定停止迭代的键，不包含该键。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>volumeTable --startkey<span style="color:#f92672">=</span>vol3 --endkey<span style="color:#f92672">=</span>vol5
@@ -590,7 +590,7 @@ ratislogparser             解析Ratis Log 成用户可理解的文字形式。<
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;refCount&#34;</span> : <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><h4 id="--fields">&ndash;fields</h4>
+</span></span></code></pre></div><h4 id="fields">&ndash;fields</h4>
 <p>每条记录中有多个字段。 <code>--fields</code> 选项允许我们选择要显示的特定字段。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ozone debug ldb --db<span style="color:#f92672">=</span>/path/to/om.db scan --cf<span style="color:#f92672">=</span>keyTable -l<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;volumeName,bucketName,keyName,keyLocationVersions.version,acls.name&#34;</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;/vol1/ozone-legacy-bucket/10T-1-terasort-input/&#34;</span>: {
@@ -609,7 +609,7 @@ ratislogparser             解析Ratis Log 成用户可理解的文字形式。<
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;volumeName&#34;</span> : <span style="color:#e6db74">&#34;vol1&#34;</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="--filter">&ndash;filter</h4>
+</span></span></code></pre></div><h4 id="filter">&ndash;filter</h4>
 <p><code>--filter</code> 可用于选择值与给定条件匹配的记录。过滤器按以下格式给出：<code>&lt;field&gt;:&lt;operator&gt;:&lt;value&gt;</code>，
 其中“<field>”是记录值中的任何有效字段，“<operator>”是 4 个支持的操作 <code>[equals, regex, lesser, greater]</code> 之一，“<value>”是使用的值用于比较。<br>
 <code>Equals</code> 和 <code>regex</code> 适用于字符串、布尔值和数字字段，<code>lesser</code> 和 <code>greater</code> 仅适用于数字值。  <br>

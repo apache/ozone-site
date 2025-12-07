@@ -12,14 +12,14 @@
     <title>Documentation for Apache Ozone</title>
 
     
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     
-    <link href="./css/ozonedoc.css" rel="stylesheet">
+    <link href="../css/ozonedoc.css" rel="stylesheet">
 
     
     
-    <link href="./swagger-resources/swagger-ui.css" rel="stylesheet">
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
 
     
     <script>
@@ -58,10 +58,10 @@ s=d.getElementsByTagName('script')[0];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="./index.html" class="navbar-left ozone-logo">
-        <img src="./ozone-logo-small.png"/>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
       </a>
-      <a class="navbar-brand hidden-xs" href="./index.html">
+      <a class="navbar-brand hidden-xs" href="../index.html">
         Apache Ozone/HDDS Documentation
       </a>
       <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
@@ -88,7 +88,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="./index.html">
+                   <a href="../index.html">
                 
 
                     
@@ -99,7 +99,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="./start.html">
+                <a href="../start/index.html">
                     
                     <span>Getting Started</span>
                 </a>
@@ -107,7 +107,7 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./start/productiondeployment.html">Production Deployment</a>
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
                            
                         </li>
                     
@@ -117,7 +117,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="./concept.html">
+                <a href="../concept/index.html">
                     
                     <span>Architecture</span>
                 </a>
@@ -125,20 +125,20 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./concept/overview.html">Overview</a>
+                           <a href="../concept/overview.html">Overview</a>
                            
                         </li>
                     
                         <li class="">
                            
-                               <a href="./concept/ozonemanager.html">
+                               <a href="../concept/ozonemanager.html">
                                  
                                  <span>Ozone Manager</span>
                                </a>
                                <ul class="nav">
                                
                                   <li class="">
-                                     <a href="./concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
                                   </li>
                                
                                </ul>
@@ -147,49 +147,233 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./concept/storagecontainermanager.html">Storage Container Manager</a>
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/containers.html">Containers</a>
+                           <a href="../concept/containers.html">Containers</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/datanodes.html">Datanodes</a>
+                           <a href="../concept/datanodes.html">Datanodes</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/recon.html">Recon</a>
+                           <a href="../concept/recon.html">Recon</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/networkports.html">Network Ports</a>
+                           <a href="../concept/networkports.html">Network Ports</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature/index.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration/index.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
                            
                         </li>
                     
@@ -199,191 +383,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="active">
-                <a href="./feature.html">
-                    
-                    <span>Features</span>
-                </a>
-                <ul class="nav">
-                    
-                        <li class="">
-                           
-                           <a href="./feature/decommission.html">Decommissioning</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/om-ha.html">OM High Availability</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/erasurecoding.html">Ozone Erasure Coding</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                               <a href="./feature/snapshot.html">
-                                 
-                                 <span>Ozone Snapshot</span>
-                               </a>
-                               <ul class="nav">
-                               
-                                  <li class="">
-                                     <a href="./feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
-                                  </li>
-                               
-                               </ul>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/scm-ha.html">SCM High Availability</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/prefixfso.html">Prefix based File System Optimization</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/topology.html">Topology awareness</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/quota.html">Quota in Ozone</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/recon.html">Recon Server</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/observability.html">Observability</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                               <a href="./feature/s3-multi-tenancy.html">
-                                 
-                                 <span>S3 Multi-Tenancy</span>
-                               </a>
-                               <ul class="nav">
-                               
-                                  <li class="">
-                                     <a href="./feature/s3-multi-tenancy-setup.html">Setup</a>
-                                  </li>
-                               
-                                  <li class="">
-                                     <a href="./feature/s3-tenant-commands.html">Tenant commands</a>
-                                  </li>
-                               
-                                  <li class="">
-                                     <a href="./feature/s3-multi-tenancy-access-control.html">Access Control</a>
-                                  </li>
-                               
-                               </ul>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/reconfigurability.html">Reconfigurability</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/containerbalancer.html">Container Balancer</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/maintenance.html">Maintenance Mode</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./feature/trash.html">Trash</a>
-                           
-                        </li>
-                    
-                </ul>
-            </li>
-        
-    
-        
-            <li class="">
-                <a href="./integration.html">
-                    
-                    <span>Application Integrations</span>
-                </a>
-                <ul class="nav">
-                    
-                        <li class="">
-                           
-                           <a href="./integration/distcp.html">Hadoop DistCp</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./integration/hive.html">Hive</a>
-                           
-                        </li>
-                    
-                        <li class="">
-                           
-                           <a href="./integration/impala.html">Impala</a>
-                           
-                        </li>
-                    
-                </ul>
-            </li>
-        
-    
-        
-            <li class="">
-                <a href="./interface.html">
+                <a href="../interface/index.html">
                     
                     <span>Client Interfaces</span>
                 </a>
@@ -391,26 +391,26 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
                            
                         </li>
                     
                         <li class="">
                            
-                               <a href="./interface/s3.html">
+                               <a href="../interface/s3.html">
                                  
                                  <span>S3 Protocol</span>
                                </a>
                                <ul class="nav">
                                
                                   <li class="">
-                                     <a href="./interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
                                   </li>
                                
                                </ul>
@@ -419,43 +419,43 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./interface/cli.html">Command Line Interface</a>
+                           <a href="../interface/cli.html">Command Line Interface</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/reconapi.html">Recon API</a>
+                           <a href="../interface/reconapi.html">Recon API</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/javaapi.html">Java API</a>
+                           <a href="../interface/javaapi.html">Java API</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/python.html">Accessing Apache Ozone from Python</a>
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/csi.html">CSI Protocol</a>
+                           <a href="../interface/csi.html">CSI Protocol</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/httpfs.html">HttpFS Gateway</a>
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
                            
                         </li>
                     
@@ -465,7 +465,7 @@ s=d.getElementsByTagName('script')[0];
     
         
             <li class="">
-                <a href="./security.html">
+                <a href="../security/index.html">
                     
                     <span>Security</span>
                 </a>
@@ -473,55 +473,55 @@ s=d.getElementsByTagName('script')[0];
                     
                         <li class="">
                            
-                           <a href="./security/secureozone.html">Securing Ozone</a>
+                           <a href="../security/secureozone.html">Securing Ozone</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securingtde.html">Transparent Data Encryption</a>
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/gdpr.html">GDPR in Ozone</a>
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securingdatanodes.html">Securing Datanodes</a>
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securingozonehttp.html">Securing HTTP</a>
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securings3.html">Securing S3</a>
+                           <a href="../security/securings3.html">Securing S3</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securityacls.html">Ozone ACLs</a>
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
                            
                         </li>
                     
                         <li class="">
                            
-                           <a href="./security/securitywithranger.html">Apache Ranger</a>
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
                            
                         </li>
                     
@@ -532,7 +532,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="./tools.html">
+                   <a href="../tools/index.html">
                 
 
                     
@@ -544,7 +544,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="./recipe.html">
+                   <a href="../recipe/index.html">
                 
 
                     
@@ -556,7 +556,7 @@ s=d.getElementsByTagName('script')[0];
         
             <li class="">
                 
-                   <a href="./troubleshooting.html">
+                   <a href="../troubleshooting/index.html">
                 
 
                     
@@ -565,7 +565,7 @@ s=d.getElementsByTagName('script')[0];
             </li>
         
     
-    <li><a href="./design.html"><span><b>Design docs</b></span></a></li>
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
     <li class="visible-xs"><a href="#">References</a>
     <ul class="nav">
         <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
@@ -587,39 +587,40 @@ s=d.getElementsByTagName('script')[0];
     
     
     
-    <a href="./zh/feature.html"><span class="label label-success">中文</span></a>
+    <a href="../zh/interface/index.html"><span class="label label-success">中文</span></a>
     
     
 </div>
 
-                <h1>Features</h1>
+                <h1>Client Interfaces</h1>
             </div>
 
             <div class="col-md-9">
                 <!---
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
 
-        http://www.apache.org/licenses/LICENSE-2.0
+      http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-    -->
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
 
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h3 class="display-4">Ozone Features </h3>
+        <h3 class="display-4">Multi-Protocol Support </h3>
         <p class="lead">
             
-          Ozone features are explained in the following pages. Features such as high availability, topology awareness, metrics tools are detailed in next pages.
+Ozone is a multi-protocol file system. There are different protocols by which
+ users can access data on Ozone.
 
         </p>
     </div>
@@ -639,11 +640,11 @@ s=d.getElementsByTagName('script')[0];
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Decommissioning
+                                    Ofs (Hadoop compatible)
                                 </h2>
-                                <p class="card-text">Decommissioning of SCM, OM and Datanode.</p>
-                                <a href="./feature/decommission.html"
-                                   class=" btn btn-primary btn-lg">Decommissioning</a>
+                                <p class="card-text">Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. <strong>Global level view.</strong></p>
+                                <a href="../interface/ofs.html"
+                                   class=" btn btn-primary btn-lg">Ofs (Hadoop compatible)</a>
                             </div>
                         </div>
                     </div>
@@ -658,53 +659,11 @@ s=d.getElementsByTagName('script')[0];
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    OM High Availability
+                                    O3fs (Hadoop compatible)
                                 </h2>
-                                <p class="card-text">HA setup for Ozone Manager to avoid any single point of failure.</p>
-                                <a href="./feature/om-ha.html"
-                                   class=" btn btn-primary btn-lg">OM High Availability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ozone Erasure Coding
-                                </h2>
-                                <p class="card-text">Erasure Coding Support for Ozone.</p>
-                                <a href="./feature/erasurecoding.html"
-                                   class=" btn btn-primary btn-lg">Ozone Erasure Coding</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ozone Snapshot
-                                </h2>
-                                <p class="card-text">Ozone Snapshot</p>
-                                <a href="./feature/snapshot.html"
-                                   class=" btn btn-primary btn-lg">Ozone Snapshot</a>
+                                <p class="card-text">Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. <strong>Bucket level view.</strong></p>
+                                <a href="../interface/o3fs.html"
+                                   class=" btn btn-primary btn-lg">O3fs (Hadoop compatible)</a>
                             </div>
                         </div>
                     </div>
@@ -723,11 +682,11 @@ s=d.getElementsByTagName('script')[0];
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    SCM High Availability
+                                    S3 Protocol
                                 </h2>
-                                <p class="card-text">HA setup for Storage Container Manager to avoid any single point of failure.</p>
-                                <a href="./feature/scm-ha.html"
-                                   class=" btn btn-primary btn-lg">SCM High Availability</a>
+                                <p class="card-text">Ozone supports Amazon&rsquo;s Simple Storage Service (S3) protocol. In fact, You can use S3 clients and S3 SDK based applications without any modifications with Ozone.</p>
+                                <a href="../interface/s3.html"
+                                   class=" btn btn-primary btn-lg">S3 Protocol</a>
                             </div>
                         </div>
                     </div>
@@ -742,220 +701,7 @@ s=d.getElementsByTagName('script')[0];
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Streaming Write Pipeline
-                                </h2>
-                                <p class="card-text">A new write pipeline using Ratis Streaming.</p>
-                                <a href="./feature/streaming-write-pipeline.html"
-                                   class=" btn btn-primary btn-lg">Streaming Write Pipeline</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Merge Container RocksDB in DN
-                                </h2>
-                                <p class="card-text">Introduction to Ozone Datanode Container Schema V3</p>
-                                <a href="./feature/dn-merge-rocksdb.html"
-                                   class=" btn btn-primary btn-lg">Merge Container RocksDB in DN</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Prefix based File System Optimization
-                                </h2>
-                                <p class="card-text">Supports atomic rename and delete operation.</p>
-                                <a href="./feature/prefixfso.html"
-                                   class=" btn btn-primary btn-lg">Prefix based File System Optimization</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Topology awareness
-                                </h2>
-                                <p class="card-text">Configuration for rack-awarness for improved read/write</p>
-                                <a href="./feature/topology.html"
-                                   class=" btn btn-primary btn-lg">Topology awareness</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    <span class="glyphicon glyphicon-user"
-                                          aria-hidden="true"></span>
-                                    
-                                    Quota in Ozone
-                                </h2>
-                                <p class="card-text">Introduction to Ozone Quota</p>
-                                <a href="./feature/quota.html"
-                                   class=" btn btn-primary btn-lg">Quota in Ozone</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Recon Server
-                                </h2>
-                                <p class="card-text">Recon is the Web UI and analysis service for Ozone</p>
-                                <a href="./feature/recon.html"
-                                   class=" btn btn-primary btn-lg">Recon Server</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Observability
-                                </h2>
-                                <p class="card-text">Different tools for Ozone to increase Observability</p>
-                                <a href="./feature/observability.html"
-                                   class=" btn btn-primary btn-lg">Observability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Non-Rolling Upgrades and Downgrades
-                                </h2>
-                                <p class="card-text">How to do non-rolling upgrades and downgrades of Ozone</p>
-                                <a href="./feature/nonrolling-upgrade.html"
-                                   class=" btn btn-primary btn-lg">Non-Rolling Upgrades and Downgrades</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    S3 Multi-Tenancy
-                                </h2>
-                                <p class="card-text">Ozone Multi-Tenancy that allows multiple tenants to share the same Ozone cluster. Compatible with S3 API.</p>
-                                <a href="./feature/s3-multi-tenancy.html"
-                                   class=" btn btn-primary btn-lg">S3 Multi-Tenancy</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Reconfigurability
-                                </h2>
-                                <p class="card-text">Dynamic reloading configuration.</p>
-                                <a href="./feature/reconfigurability.html"
-                                   class=" btn btn-primary btn-lg">Reconfigurability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    
+                                    Command Line Interface
                                 </h2>
                                 <p class="card-text"><!---
   Licensed to the Apache Software Foundation (ASF) under one or more
@@ -973,13 +719,9 @@ s=d.getElementsByTagName('script')[0];
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<h1 id="faircallqueue">FairCallQueue</h1>
-<p>This document contains information for setting up the <code>FairCallQueue</code> feature with Ozone.
-In order for <code>FairCallQueue</code> to be enabled and used,
-Hadoop RPC must be used as transport protocol for OM - S3G communication.
-There is no implementation for gRPC yet.</p></p>
-                                <a href="./feature/faircallqueue.html"
-                                   class=" btn btn-primary btn-lg"></a>
+<p>Ozone shell is the primary interface to interact with Ozone from the command line. Behind the scenes it uses the <a href="../interface/javaapi.html">Java API</a>.</p></p>
+                                <a href="../interface/cli.html"
+                                   class=" btn btn-primary btn-lg">Command Line Interface</a>
                             </div>
                         </div>
                     </div>
@@ -998,11 +740,11 @@ There is no implementation for gRPC yet.</p></p>
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Container Balancer
+                                    Recon API
                                 </h2>
-                                <p class="card-text">How to use the Container Balancer in Ozone.</p>
-                                <a href="./feature/containerbalancer.html"
-                                   class=" btn btn-primary btn-lg">Container Balancer</a>
+                                <p class="card-text">Recon server supports HTTP endpoints to help troubleshoot and monitor Ozone cluster.</p>
+                                <a href="../interface/reconapi.html"
+                                   class=" btn btn-primary btn-lg">Recon API</a>
                             </div>
                         </div>
                     </div>
@@ -1017,11 +759,11 @@ There is no implementation for gRPC yet.</p></p>
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Maintenance Mode
+                                    Java API
                                 </h2>
-                                <p class="card-text">Maintenance mode for Datanodes.</p>
-                                <a href="./feature/maintenance.html"
-                                   class=" btn btn-primary btn-lg">Maintenance Mode</a>
+                                <p class="card-text">Ozone has a set of Native RPC based APIs. This is the lowest level API&rsquo;s on which all other protocols are built. This is the most performant and feature-full of all Ozone protocols.</p>
+                                <a href="../interface/javaapi.html"
+                                   class=" btn btn-primary btn-lg">Java API</a>
                             </div>
                         </div>
                     </div>
@@ -1040,11 +782,11 @@ There is no implementation for gRPC yet.</p></p>
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Multi-Raft Support in Ozone
+                                    Accessing Apache Ozone from Python
                                 </h2>
-                                <p class="card-text">Enables each Datanode to participate in multiple Ratis pipelines concurrently to improve resource utilization and write throughput.</p>
-                                <a href="./feature/multi-raft-support.html"
-                                   class=" btn btn-primary btn-lg">Multi-Raft Support in Ozone</a>
+                                <p class="card-text">Access Apache Ozone from Python using PyArrow, Boto3, requests and fsspec WebHDFS libraries</p>
+                                <a href="../interface/python.html"
+                                   class=" btn btn-primary btn-lg">Accessing Apache Ozone from Python</a>
                             </div>
                         </div>
                     </div>
@@ -1059,17 +801,143 @@ There is no implementation for gRPC yet.</p></p>
                             <div class="card-body">
                                 <h2 class="card-title">
                                     
-                                    Trash
+                                    CSI Protocol
                                 </h2>
-                                <p class="card-text">How to use the trash feature in Ozone.</p>
-                                <a href="./feature/trash.html"
-                                   class=" btn btn-primary btn-lg">Trash</a>
+                                <p class="card-text">Ozone supports Container Storage Interface(CSI) protocol. You can use Ozone by mounting an Ozone volume by Ozone CSI.</p>
+                                <a href="../interface/csi.html"
+                                   class=" btn btn-primary btn-lg">CSI Protocol</a>
                             </div>
                         </div>
                     </div>
 
                     
                         </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    HttpFS Gateway
+                                </h2>
+                                <p class="card-text">Ozone HttpFS is a WebHDFS compatible interface implementation, as a separate role it provides an easy integration with Ozone.</p>
+                                <a href="../interface/httpfs.html"
+                                   class=" btn btn-primary btn-lg">HttpFS Gateway</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                
+
+                
+                
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Native C/C&#43;&#43; Client Access to Ozone
+                                </h2>
+                                <p class="card-text"><!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h2 id="components-summary">Components Summary</h2>
+<ul>
+<li><strong>libhdfs</strong>: The standard Hadoop C API. It is a JNI bridge between C/C++ and Java FileSystem implementations.</li>
+<li><strong>libo3fs</strong>: Lightweight wrapper exposing a simplified API for Ozone clients. It is built on top of <code>libhdfs</code>.</li>
+<li><strong>OFS (Ozone FileSystem)</strong>: Java-based filesystem client used internally by <code>libhdfs</code> to interact with Ozone.</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Native C/C++ applications can access Ozone volumes and buckets using Hadoop HDFS&rsquo;s <code>libhdfs</code> JNI library.
+As an example, Apache Impala uses this library to access Ozone.</p></p>
+                                <a href="../interface/native-cpp.html"
+                                   class=" btn btn-primary btn-lg">Native C/C&#43;&#43; Client Access to Ozone</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                    
+                
+
+                
+                
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    Interactive Recon API Specification
+                                </h2>
+                                <p class="card-text"><!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<div id="swagger-ui"></div>
+<script src="../swagger-resources/swagger-ui-bundle.js"></script>
+<script src="../swagger-resources/swagger-ui-standalone-preset.js"> </script>
+<script>
+  window.onload = function () {
+    const ui = SwaggerUIBundle({
+      url: "..\/swagger-resources\/recon-api.yaml",
+      dom_id: '#api-container',
+      deepLinking: true,
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      plugins: [
+        SwaggerUIBundle.plugins.DownloadUrl
+      ],
+      layout: "StandaloneLayout",
+      docExpansion: 'none'
+    })
+    window.ui = ui;
+  }
+</script></p>
+                                <a href="../interface/swaggerreconapi.html"
+                                   class=" btn btn-primary btn-lg">Interactive Recon API Specification</a>
+                            </div>
+                        </div>
+                    </div>
+
                     
                 
                 
@@ -1085,16 +953,16 @@ There is no implementation for gRPC yet.</p></p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: February 2, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/23d21827560e79e939a902dee8396bf6f7b2c6d8">23d2182756</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: August 7, 2020 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5ce6f0eab381389fd04c3130531b3ec626acbc65">5ce6f0eab3</a>
     </span>
   </div>
 </footer>
 
 
 
-<script src="./js/jquery-3.5.1.min.js"></script>
-<script src="./js/ozonedoc.js"></script>
-<script src="./js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 
 </body>
