@@ -72,8 +72,8 @@ The following was the list of agenda:
   <TabItem value="2023" label="2023">
     - Apache CoC 2023 North America: Data Integrity Guarantees in Erasure Coding Storage Systems. Aswin Shakil Balasubramanian, Uma Maheswara Rao Gangumalla. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/tuesdayoctober102023_bigdata_storage_track_data_integrity_guarantees_in_erasure_coding_storage_systems_by_uma_gangumalla_aswin_swami-uma-maheswara-rao-gangumalla.pdf)
     - Apache CoC 2023 North America: Improving concurrency for a Hadoop Compatible Filesystem. Ritesh Shukla, Duong Nguyen, Tanvi Penumudy
-    - Apache CoC 2023 North America: When Hardware Fails, Ozone Prevails. Ethan Rose. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/sun_bigdata_rose-ethan-rose.pdf)
-    - Apache CoC 2023 North America: The making of an Exabyte-scale Data Lakehouse. Saketa Chalamchala
+    - Apache CoC 2023 North America: When Hardware Fails, Ozone Prevails. Ethan Rose. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/sun_bigdata_rose-ethan-rose.pdf) [Recording](https://www.youtube.com/watch?v=qRpDF7Bl45A)
+    - Apache CoC 2023 North America: The making of an Exabyte-scale Data Lakehouse. Saketa Chalamchala [Recording](https://www.youtube.com/watch?v=RfzjBDliINE)
     - Apache CoC 2023 North America: Compatibility witchcraft in distributed systems. Istvan Fajth
     - Apache CoC 2023 North America: Forget about that certificate. Istvan Fajth
     - Apache CoC 2023 North America: Design patterns and then the road to realize billions of objects, and exabytes of capacity, while preserving performance in Apache Ozone. Ritesh H Shukla, Duong Nguyen, Tanvi Penumudy
