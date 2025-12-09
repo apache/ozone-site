@@ -7,8 +7,7 @@ import TabItem from '@theme/TabItem';
 
 ## Past Meetups
 
-The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
-
+### March 27, 2025
 Another Ozone meetup was held on March 27, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
 
 The following was the list of agenda:
@@ -19,6 +18,17 @@ The following was the list of agenda:
 -   **AWS STS Design for Ozone S3** - Fabian Morgan & Madhan Neethiraj: Learn how Ozone’s STS design enables scalable and secure data sharing.
 -   **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
 -   **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
+
+### Nov 10, 2022
+The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
+
+The following was the list of agenda:
+
+- Opening, Karthik Krishnamoorthy [Recording](https://youtu.be/3aEpeSXMMzw?t=8)
+- Apache Ozone - Scalable, redundant distributed object store [Recording](https://youtu.be/3aEpeSXMMzw?t=583)
+- Bucket types and FSO improvements, Ethan Rose [Recording](https://youtu.be/3aEpeSXMMzw?t=1220)
+- Apache Ozone snapshots - new design, Prashant Pogde, Siyao Meng [Recording](https://youtu.be/3aEpeSXMMzw?t=3128)
+- Apache Ozone Performance, Ritesh Shukla, [Recording](https://youtu.be/3aEpeSXMMzw?t=5474)
 
 ## Past Conference Talks
 
