@@ -89,7 +89,7 @@ The following was the list of agenda:
     - China Apache Hadoop Meetup 2022: What's new in Apache Ozone 1.3. Sammi Chen. [Slides](/What%27sNewInApacheOzone-v3.pdf)
     - ApacheCon Asia 2022: [Sharing Of Recent Progress And Practices In Apache Ozone](https://www.youtube.com/watch?v=SB4lgATn-s8). Yan Liu, Sammi Chen. [Slides](/ApacheConAsia2022_Yan_Sammi.pdf)
     - ApacheCon Asia 2022: [Disaster Recovery In Apache Ozone](https://www.youtube.com/watch?v=E97fYFZJ2LQ). Sadanand Shenoy, Rakesh Radhakrishnan.
-    - ApacheCon Asia 2022: [Apache Ozone Behind Simulation And Ai Industries](https://www.youtube.com/watch?v=EmpHluBOesg). Kota Uenishi.
+    - ApacheCon Asia 2022: [Apache Ozone Behind Simulation And Ai Industries](https://www.youtube.com/watch?v=EmpHluBOesg). Kota Uenishi. [Slides](https://speakerdeck.com/kuenishi/apache-ozone-behind-simulation-and-ai-industries)
     - ApacheCon Asia 2022: [Apache Ozone: Multi-Protocol Aware System Handles Both Files And Objects Efficiently](https://www.youtube.com/watch?v=HN7PWX9TdAE). Radhakrishnan Rakesh, Singh Mukul Kumar.
     - SDC India 2022: [Apache Ozone: Multi-protocol aware system handles both files and objects efficiently](https://www.youtube.com/watch?v=lzPrL2I_2VU). Radhakrishnan Rakesh, Singh Mukul Kumar.
   </TabItem>
