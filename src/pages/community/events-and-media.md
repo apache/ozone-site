@@ -13,11 +13,12 @@ Another Ozone meetup was held on March 27, 2025. [Meetup link](https://www.meetu
 
 The following was the list of agenda:
 
-- Opening, Karthik Krishnamoorthy [Recording](https://youtu.be/3aEpeSXMMzw?t=8)
-- Apache Ozone - Scalable, redundant distributed object store [Recording](https://youtu.be/3aEpeSXMMzw?t=583)
-- Bucket types and FSO improvements, Ethan Rose [Recording](https://youtu.be/3aEpeSXMMzw?t=1220)
-- Apache Ozone snapshots - new design, Prashant Pogde, Siyao Meng [Recording](https://youtu.be/3aEpeSXMMzw?t=3128)
-- Apache Ozone Performance, Ritesh Shukla, [Recording](https://youtu.be/3aEpeSXMMzw?t=5474)
+-   **Apache Ozone Adoption Growth** - Shiv Moorthy: Insights into Ozone’s growing adoption and impact.
+-   **Apache Ozone Best Practices at Shopee** - Yiyang Zhou: Learn how Shopee manages billions of objects in Ozone production environments with lifecycle and storage class optimization.
+-   **Event Notifications for Distributed Storage (Ozone)** - Paul Scott-Murphy: Exploring design choices, optimizations, and downstream use cases for event-driven storage systems.
+-   **AWS STS Design for Ozone S3** - Fabian Morgan & Madhan Neethiraj: Learn how Ozone’s STS design enables scalable and secure data sharing.
+-   **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
+-   **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
 
 ## Past Conference Talks
 
