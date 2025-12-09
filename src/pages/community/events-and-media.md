@@ -8,18 +8,20 @@ import TabItem from '@theme/TabItem';
 ## Past Meetups
 
 ### March 27, 2025
+
 Another Ozone meetup was held on March 27, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
 
 The following was the list of agenda:
 
--   **Apache Ozone Adoption Growth** - Shiv Moorthy: Insights into Ozone’s growing adoption and impact.
--   **Apache Ozone Best Practices at Shopee** - Yiyang Zhou: Learn how Shopee manages billions of objects in Ozone production environments with lifecycle and storage class optimization.
--   **Event Notifications for Distributed Storage (Ozone)** - Paul Scott-Murphy: Exploring design choices, optimizations, and downstream use cases for event-driven storage systems.
--   **AWS STS Design for Ozone S3** - Fabian Morgan & Madhan Neethiraj: Learn how Ozone’s STS design enables scalable and secure data sharing.
--   **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
--   **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
+- **Apache Ozone Adoption Growth** - Shiv Moorthy: Insights into Ozone’s growing adoption and impact.
+- **Apache Ozone Best Practices at Shopee** - Yiyang Zhou: Learn how Shopee manages billions of objects in Ozone production environments with lifecycle and storage class optimization.
+- **Event Notifications for Distributed Storage (Ozone)** - Paul Scott-Murphy: Exploring design choices, optimizations, and downstream use cases for event-driven storage systems.
+- **AWS STS Design for Ozone S3** - Fabian Morgan & Madhan Neethiraj: Learn how Ozone’s STS design enables scalable and secure data sharing.
+- **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
+- **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
 
 ### October 24, 2024
+
 An Ozone meetup was held on October 24, 2024. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/304006267/) [YouTube recording](https://www.youtube.com/watch?v=u9GncxfMG5M)
 
 The following was the list of agenda:
@@ -31,17 +33,19 @@ The following was the list of agenda:
 - **Ozone Performance and Scale** - Ritesh Shukla & Duong Nguyen (Cloudera): Architectural benefits of Ozone for scale and performance over other S3/HDFS Object Stores.
 
 ### October 25, 2023
+
 An Ozone meetup was held on October 25, 2023. [Meetup link](https://www.meetup.com/futureofdata-sanfrancisco/events/295917033/) [YouTube recording](https://www.youtube.com/watch?v=DgzEZFlkvco&list=PLogLR070z-lDkgyoGu51bZ7MHDhVa59pK)
 
 The following was the list of agenda:
 
 - **Apache Ozone User adoptions** - Shiv Moorthy, Cloudera
 - **Apache Ozone State of the Union** - Aswin Shakil Balasubramanian, Cloudera
-- **Optimizing HDFS with DataNode Local Cache for High-Density HDD Adoption** - Fengnan Li, Jing Zhao from Uber
+- **Optimizing HDFS with Datanode Local Cache for High-Density HDD Adoption** - Fengnan Li, Jing Zhao from Uber
 - **Snapshots new innovations** - Swaminathan Balachandran, Dave Teng from Cloudera
 - **Apache Iceberg on Ozone** - Vince Kulandaisamy, Prashant Pogde from Cloudera
 
 ### Nov 10, 2022
+
 The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
 
 The following was the list of agenda:
@@ -78,7 +82,7 @@ The following was the list of agenda:
     - Apache CoC 2023 North America: Compatibility witchcraft in distributed systems. Istvan Fajth
     - Apache CoC 2023 North America: Forget about that certificate. Istvan Fajth
     - Apache CoC 2023 North America: Design patterns and then the road to realize billions of objects, and exabytes of capacity, while preserving performance in Apache Ozone. Ritesh H Shukla, Duong Nguyen, Tanvi Penumudy
-    - Apache CoC Asia 2023: Deep dive into resource manageability in ozone storage. Sumit Agrawal. [Recording](https://www.youtube.com/watch?v=HfEH8eeNN-I)
+    - Apache CoC Asia 2023: Deep dive into resource manageability in Ozone storage. Sumit Agrawal. [Recording](https://www.youtube.com/watch?v=HfEH8eeNN-I)
     - Apache CoC Asia 2023: Resilient Data: Exploring Replication and Recovery in Apache Ozone. Sadanand Shenoy. [Recording](https://www.youtube.com/watch?v=0_9voSeFnbc)
     - Apache CoC Asia 2023: Data Security: How Apache Ozone Ensures Storage and Access Security of Data. Sammi Chen. [Recording](https://www.youtube.com/watch?v=1lQcsYQpEBA)
   </TabItem>
