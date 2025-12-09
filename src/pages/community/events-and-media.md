@@ -19,6 +19,17 @@ The following was the list of agenda:
 -   **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
 -   **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
 
+### October 25, 2023
+An Ozone meetup was held on October 25, 2023. [Meetup link](https://www.meetup.com/futureofdata-sanfrancisco/events/295917033/) [YouTube recording](https://www.youtube.com/watch?v=DgzEZFlkvco&list=PLogLR070z-lDkgyoGu51bZ7MHDhVa59pK)
+
+The following was the list of agenda:
+
+- **Apache Ozone User adoptions** - Shiv Moorthy, Cloudera
+- **Apache Ozone State of the Union** - Aswin Shakil Balasubramanian, Cloudera
+- **Optimizing HDFS with DataNode Local Cache for High-Density HDD Adoption** - Fengnan Li, Jing Zhao from Uber
+- **Snapshots new innovations** - Swaminathan Balachandran, Dave Teng from Cloudera
+- **Apache Iceberg on Ozone** - Vince Kulandaisamy, Prashant Pogde from Cloudera
+
 ### Nov 10, 2022
 The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
 
