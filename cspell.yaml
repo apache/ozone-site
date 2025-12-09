@@ -61,6 +61,7 @@ flagWords:
 # Exclude CLAUDE.md from spell checking as it contains development-specific terms
 ignorePaths:
 - CLAUDE.md
+- src/pages/community/events-and-media.md
 
 # List of words to be always considered correct.
 # Case insensitive.
