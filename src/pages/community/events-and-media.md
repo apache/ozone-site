@@ -65,6 +65,8 @@ The following was the list of agenda:
     - Apache CoC North America 2024: Recognize, Reconcile, Repeat: The Path to Uniform Replicas in Apache Ozone. Ethan Rose, Ritesh Shukla
     - Apache CoC North America 2024: Ozone Replication - Bringing Ozone Closer to Enterprise Adoption. István Gansperger, Zsuzsanna Szabó, Andras Piros
     - Apache CoC North America 2024: Enhancing Data Processing Efficiency in GenAI RAG Applications using Apache Ozone Snapshots. Uma Maheswara Rao Gangumalla, Swaminathan Balachandran
+    - Apache CoC 2024 Asia: Overview of tools, techniques and tips - Scaling Ozone performance to max out CPU, Network and Disk. Ritesh Shukla, Tanvi Penumudy
+    - Apache CoC 2024 Asia: Apache HBase on Ozone. Sammi Chen. [Recording](https://www.youtube.com/watch?v=1jkO8QM7yOo&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
   </TabItem>
   <TabItem value="2023" label="2023">
     - Apache CoC 2023 North America: Data Integrity Guarantees in Erasure Coding Storage Systems. Aswin Shakil Balasubramanian, Uma Maheswara Rao Gangumalla. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/tuesdayoctober102023_bigdata_storage_track_data_integrity_guarantees_in_erasure_coding_storage_systems_by_uma_gangumalla_aswin_swami-uma-maheswara-rao-gangumalla.pdf)
@@ -74,7 +76,9 @@ The following was the list of agenda:
     - Apache CoC 2023 North America: Compatibility witchcraft in distributed systems. Istvan Fajth
     - Apache CoC 2023 North America: Forget about that certificate. Istvan Fajth
     - Apache CoC 2023 North America: Design patterns and then the road to realize billions of objects, and exabytes of capacity, while preserving performance in Apache Ozone. Ritesh H Shukla, Duong Nguyen, Tanvi Penumudy
-  </TabItem>
+    - Apache CoC Asia 2023: Deep dive into resource manageability in ozone storage. Sumit Agrawal. [Recording](https://www.youtube.com/watch?v=HfEH8eeNN-I)
+    - Apache CoC Asia 2023: Resilient Data: Exploring Replication and Recovery in Apache Ozone. Sadanand Shenoy. [Recording](https://www.youtube.com/watch?v=0_9voSeFnbc)
+    - Apache CoC Asia 2023: Data Security: How Apache Ozone Ensures Storage and Access Security of Data. Sammi Chen. [Recording](https://www.youtube.com/watch?v=1lQcsYQpEBA)
   <TabItem value="2022" label="2022">
     - ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla. [Slides](/Apache%20Ozone%20Erasure%20Coding(EC).pdf)
     - ApacheCon North America 2022: Inside an Apache Ozone Upgrade. Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/01_Rose_Inside_Ozone_Upgrade.pdf)
