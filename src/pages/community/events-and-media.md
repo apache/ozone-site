@@ -74,6 +74,7 @@ The following was the list of agenda:
     - Apache CoC 2023 North America: Improving concurrency for a Hadoop Compatible Filesystem. Ritesh Shukla, Duong Nguyen, Tanvi Penumudy
     - Apache CoC 2023 North America: When Hardware Fails, Ozone Prevails. Ethan Rose. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/sun_bigdata_rose-ethan-rose.pdf) [Recording](https://www.youtube.com/watch?v=qRpDF7Bl45A)
     - Apache CoC 2023 North America: The making of an Exabyte-scale Data Lakehouse. Saketa Chalamchala [Recording](https://www.youtube.com/watch?v=RfzjBDliINE)
+    - Apache CoC North America 2023: Starting my career The Apache Way. Zita Dombi. [Slide deck](https://communityovercode.org/wp-content/uploads/2023/10/mon_community_dombi-zita-dombi.pdf)
     - Apache CoC 2023 North America: Compatibility witchcraft in distributed systems. Istvan Fajth
     - Apache CoC 2023 North America: Forget about that certificate. Istvan Fajth
     - Apache CoC 2023 North America: Design patterns and then the road to realize billions of objects, and exabytes of capacity, while preserving performance in Apache Ozone. Ritesh H Shukla, Duong Nguyen, Tanvi Penumudy
