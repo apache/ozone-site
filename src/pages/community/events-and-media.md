@@ -57,8 +57,8 @@ The following was the list of agenda:
 <Tabs>
   <TabItem value="2025" label="2025" default>
     - Apache CoC North America 2025: Apache Ozone 2.0. Wei-Chiu Chuang [Slides](/Ozone2.pdf)
-    - Apache CoC Asia 2025: Apache Ozone: Balance Data Through Disk Balancer. Sammi Chen, Yiyang Zhou. [Slides](/ApacheCoCAsia2025OzoneDiskBalancer.pdf)
-    - Apache CoC Asia 2025: Apache Ozone Best Practices at Shopee. Hui Fei. [Slides](/ApacheOzoneBestPracticesAtShopee.pdf)
+    - Apache CoC Asia 2025: Apache Ozone: Balance Data Through Disk Balancer. Sammi Chen, Yiyang Zhou. [Slides](/ApacheCoCAsia2025OzoneDiskBalancer.pdf) [Recording](https://www.youtube.com/watch?v=1h6jULeB368)
+    - Apache CoC Asia 2025: Apache Ozone Best Practices at Shopee. Hui Fei. [Slides](/ApacheOzoneBestPracticesAtShopee.pdf) [Recording](https://www.youtube.com/watch?v=AiuWz5dkcS8)
   </TabItem>
   <TabItem value="2024" label="2024">
     - Apache CoC North America 2024: Overview of tools, techniques and tips - Scaling Ozone performance to max out CPU, Network and Disk. Ritesh Shukla, Tanvi Penumudy
