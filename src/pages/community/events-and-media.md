@@ -19,6 +19,17 @@ The following was the list of agenda:
 -   **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
 -   **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
 
+### October 24, 2024
+An Ozone meetup was held on October 24, 2024. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/304006267/) [YouTube recording](https://www.youtube.com/watch?v=u9GncxfMG5M)
+
+The following was the list of agenda:
+
+- **Ozone + GenAI Applications** - Swaminathan Balachandran (Cloudera): In this talk, we will explore how GenAI applications can be beneficial with the Apache Ozone's unique potential in object storage space.
+- **Simplifying Orchestration of GenAI Applications Across Multi-Cluster Kubernetes Environments** - Selvi Kadirvel (Elotl): Running Gen-AI applications at scale is operationally complex - it requires the management of application workloads; infrastructure services, data pipelines and datasets across a multi-cluster, multi-cloud environment.
+- **Scaling Multi-GPU Multi-Node Deployments with Triton Inference Server** - Ryan McCormick (Nvidia): NVIDIA Triton Inference Server is an open-source inference serving solution that simplifies the production deployment of AI models at scale.
+- **Ozone CSI Primer** - Prashant Pogde (Cloudera): This talk covers how Apache Ozone would be an option for read-write-many semantic persistent volume claims in Kubernetes environments.
+- **Ozone Performance and Scale** - Ritesh Shukla & Duong Nguyen (Cloudera): Architectural benefits of Ozone for scale and performance over other S3/HDFS Object Stores.
+
 ### October 25, 2023
 An Ozone meetup was held on October 25, 2023. [Meetup link](https://www.meetup.com/futureofdata-sanfrancisco/events/295917033/) [YouTube recording](https://www.youtube.com/watch?v=DgzEZFlkvco&list=PLogLR070z-lDkgyoGu51bZ7MHDhVa59pK)
 
