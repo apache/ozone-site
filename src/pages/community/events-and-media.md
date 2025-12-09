@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
 
+Another Ozone meetup was held on March 27, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
+
 The following was the list of agenda:
 
 - Opening, Karthik Krishnamoorthy [Recording](https://youtu.be/3aEpeSXMMzw?t=8)
