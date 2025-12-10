@@ -83,6 +83,7 @@ SHOW CREATE DATABASE d1;
 Output Example:
 
 ```text
++----------------------------------------------------+
 |                   createdb_stmt                    |
 +----------------------------------------------------+
 | CREATE DATABASE `d1`                               |
