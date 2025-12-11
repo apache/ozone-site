@@ -668,27 +668,38 @@ from the <a href="https://github.com/apache/ozone">git repository</a>).</p>
 </span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span>2.5.0 -Dclassifier<span style="color:#f92672">=</span>linux-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># workaround for Maven 3.9.x</span>
 </span></span><span style="display:flex;"><span>cp $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-linux-aarch_64.exe
-</span></span></code></pre></div><h2 id="arm-based-apple-silicon-apple-m1--etc">ARM-based Apple Silicon (Apple M1 &hellip; etc)</h2>
+</span></span></code></pre></div><h2 id="arm-based-apple-silicon-apple-m1-m2-etc">ARM-based Apple silicon (Apple M1, M2, etc.)</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Patch protobuf 2.5.0 - this is needed for Hadoop 2 support</span>
-</span></span><span style="display:flex;"><span>PROTOBUF_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2.5.0&#34;</span>
 </span></span><span style="display:flex;"><span>curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
 </span></span><span style="display:flex;"><span>tar xzf protobuf-2.5.0.tar.gz
-</span></span><span style="display:flex;"><span>pushd protobuf-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>pushd protobuf-2.5.0
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like vim and append the following lines after line 59 (include the #).  </span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the file when complete.</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#elif defined(__arm64__)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#define GOOGLE_PROTOBUF_ARCH_ARM 1</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#define GOOGLE_PROTOBUF_ARCH_64_BIT 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Patch to insert arm64 macro</span>
+</span></span><span style="display:flex;"><span>patch -p1 <span style="color:#e6db74">&lt;&lt; EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">diff --git a/src/google/protobuf/stubs/platform_macros.h b/src/google/protobuf/stubs/platform_macros.h
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">index b1df60e..8a68655 100644
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">--- a/src/google/protobuf/stubs/platform_macros.h
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+++ b/src/google/protobuf/stubs/platform_macros.h
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">@@ -57,6 +57,9 @@
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #elif defined(__ppc__)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #define GOOGLE_PROTOBUF_ARCH_PPC 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #define GOOGLE_PROTOBUF_ARCH_32_BIT 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+#elif defined(__arm64__)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+#define GOOGLE_PROTOBUF_ARCH_ARM 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+#define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #else
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #error Host architecture was not detected as supported by protobuf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> #endif
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute the following commands to build `protoc`</span>
 </span></span><span style="display:flex;"><span>./configure --disable-shared
 </span></span><span style="display:flex;"><span>make -j
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Install protoc to the local Maven repository</span>
-</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span> -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Workaround for Maven 3.9.x. Not needed for 3.8.x or earlier</span>
-</span></span><span style="display:flex;"><span>mv $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>/protoc-<span style="color:#e6db74">${</span>PROTOBUF_VERSION<span style="color:#e6db74">}</span>-osx-aarch_64.exe
+</span></span><span style="display:flex;"><span>mvn install:install-file -DgroupId<span style="color:#f92672">=</span>com.google.protobuf -DartifactId<span style="color:#f92672">=</span>protoc -Dversion<span style="color:#f92672">=</span>2.5.0 -Dclassifier<span style="color:#f92672">=</span>osx-aarch_64 -Dpackaging<span style="color:#f92672">=</span>exe -Dfile<span style="color:#f92672">=</span>src/protoc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Workaround for Maven 3.9.x. Not needed for 3.8.x and earlier</span>
+</span></span><span style="display:flex;"><span>mv $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-osx-aarch_64 $HOME/.m2/repository/com/google/protobuf/protoc/2.5.0/protoc-2.5.0-osx-aarch_64.exe
 </span></span><span style="display:flex;"><span>popd
 </span></span></code></pre></div><h2 id="build-ozone">Build Ozone</h2>
 <p>Run the ozone build command.</p>
@@ -730,7 +741,7 @@ provided along with the official release.</p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: November 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/367e6252d8b8f762af5999ec06c9357a00fe66ff">367e6252d8</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: December 10, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/667057285730c2c85ba6835b11177c9b477c0790">6670572857</a>
     </span>
   </div>
 </footer>
