@@ -65,10 +65,11 @@ ignorePaths:
 # List of words to be always considered correct.
 # Case insensitive.
 words:
-- HCFS
+# Apache Software Foundation words
 - ASF
 - PMC
 # Ozone specific words
+- HCFS
 - HDDS
 - ratis
 - OM
@@ -117,7 +118,7 @@ words:
 - javadoc
 - JVM
 - distcp
-- weichiu
+# Misc words
 - acking
 - dashboarding
 - UI
