@@ -10,21 +10,21 @@ Apache Ozone provides a native Java client API that allows developers to interac
 
 The Ozone Java client library (`hadoop-ozone-client`) allows applications to perform various operations, including:
 
-*   **Volume Operations:** Create, delete, list, and manage volumes.
-*   **Bucket Operations:** Create, delete, list, and manage buckets, including setting properties like versioning and replication factor.
-*   **Key Operations:** Write (put), read (get), delete, list, and manage metadata for keys (objects) within buckets.
-*   **Multipart Upload:** Efficiently upload large objects in parts.
-*   **File System Semantics:** Interact with Ozone's hierarchical namespace using familiar file system concepts like directories and files, especially when using File System Optimized (FSO) buckets.
+- **Volume Operations:** Create, delete, list, and manage volumes.
+- **Bucket Operations:** Create, delete, list, and manage buckets, including setting properties like versioning and replication factor.
+- **Key Operations:** Write (put), read (get), delete, list, and manage metadata for keys (objects) within buckets.
+- **Multipart Upload:** Efficiently upload large objects in parts.
+- **File System Semantics:** Interact with Ozone's hierarchical namespace using familiar file system concepts like directories and files, especially when using File System Optimized (FSO) buckets.
 
 ## Key Concepts & Classes
 
-*   **`OzoneClientFactory`:** Used to create instances of `OzoneClient`. Requires configuration details like the OM service ID or host/port.
-*   **`OzoneClient`:** The main entry point for interacting with Ozone. Provides methods for volume and bucket operations.
-*   **`OzoneVolume`:** Represents a volume in Ozone. Obtained via `OzoneClient`.
-*   **`OzoneBucket`:** Represents a bucket within a volume. Obtained via `OzoneVolume`.
-*   **`OzoneKey`:** Represents a key (object) within a bucket.
-*   **`OzoneOutputStream` / `OzoneInputStream`:** Standard Java output/input streams for writing/reading key data.
-*   **`OzoneMultipartUpload`:** Classes for managing multipart uploads (`OzoneMultipartUploadPartList`, `OzoneMultipartUpload`).
+- **`OzoneClientFactory`:** Used to create instances of `OzoneClient`. Requires configuration details like the OM service ID or host/port.
+- **`OzoneClient`:** The main entry point for interacting with Ozone. Provides methods for volume and bucket operations.
+- **`OzoneVolume`:** Represents a volume in Ozone. Obtained via `OzoneClient`.
+- **`OzoneBucket`:** Represents a bucket within a volume. Obtained via `OzoneVolume`.
+- **`OzoneKey`:** Represents a key (object) within a bucket.
+- **`OzoneOutputStream`/`OzoneInputStream`:** Standard Java output/input streams for writing/reading key data.
+- **`OzoneMultipartUpload`:** Classes for managing multipart uploads (`OzoneMultipartUploadPartList`, `OzoneMultipartUpload`).
 
 ## Maven Dependency
 
@@ -99,9 +99,9 @@ try (OzoneClient ozoneClient = OzoneClientFactory.getRpcClient(conf)) {
 
 The Java client API is the recommended choice for:
 
-*   **Performance-critical applications:** Offers the most efficient way to interact with Ozone.
-*   **Complex interactions:** Provides full access to Ozone's features and configurations.
-*   **Integration with Java-based frameworks:** Seamless integration with applications built on the JVM.
-*   **Fine-grained control:** Allows precise management of object creation, versioning, and metadata.
+- **Performance-critical applications:** Offers the most efficient way to interact with Ozone.
+- **Complex interactions:** Provides full access to Ozone's features and configurations.
+- **Integration with Java-based frameworks:** Seamless integration with applications built on the JVM.
+- **Fine-grained control:** Allows precise management of object creation, versioning, and metadata.
 
-For simple scripting or basic file operations, the command-line interface  might be sufficient. For integration with non-Java applications or S3-compatible tools, the S3 Gateway (`s3a` or `s3://`) is the appropriate choice.
+For simple scripting or basic file operations, the command-line interface  might be sufficient. For integration with non-Java applications or S3-compatible tools, the S3 Gateway (`s3a`or`s3://`) is the appropriate choice.

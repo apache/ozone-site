@@ -8,16 +8,16 @@ The Ozone File System (`ofs`) provides a **Hadoop Compatible File System (HCFS)*
 
 ## Overview
 
-`ofs` enables accessing Ozone data using the `ofs://` URI scheme. It's particularly designed to work seamlessly with File System Optimized (FSO) buckets, which maintain an internal hierarchical directory structure.
+`ofs`enables accessing Ozone data using the`ofs://` URI scheme. It's particularly designed to work seamlessly with File System Optimized (FSO) buckets, which maintain an internal hierarchical directory structure.
 
 **Key Features:**
 
-*   **HCFS Compatibility:** Implements the Hadoop `FileSystem` API, making it compatible with a wide range of Hadoop ecosystem tools (Spark, Hive, Impala, MapReduce, YARN, etc.) out-of-the-box.
-*   **Filesystem Semantics:** Provides standard filesystem operations like creating directories (`mkdir`), listing directories (`ls`), renaming files/directories (`mv`), and deleting files/directories (`rm`).
-*   **Atomic Operations:** When used with FSO buckets, directory renames and deletes performed via `ofs://` are atomic operations handled efficiently by the Ozone Manager. This is crucial for the correctness of many analytics workloads (e.g., job committers).
-*   **Trash Support:** Supports the standard Hadoop trash mechanism (`fs.trash.interval`) for safe deletion when enabled in the configuration.
-*   **Path Format:** Uses a path format like `ofs://<om_service_id>/<volumeName>/<bucketName>/path/to/file`.
-    *   `<om_service_id>`: The logical name configured for the Ozone Manager service (required for HA setups, optional for non-HA where OM host/port can be used).
+- **HCFS Compatibility:** Implements the Hadoop `FileSystem` API, making it compatible with a wide range of Hadoop ecosystem tools (Spark, Hive, Impala, MapReduce, YARN, etc.) out-of-the-box.
+- **Filesystem Semantics:** Provides standard filesystem operations like creating directories (`mkdir`), listing directories (`ls`), renaming files/directories (`mv`), and deleting files/directories (`rm`).
+- **Atomic Operations:** When used with FSO buckets, directory renames and deletes performed via `ofs://` are atomic operations handled efficiently by the Ozone Manager. This is crucial for the correctness of many analytics workloads (e.g., job committers).
+- **Trash Support:** Supports the standard Hadoop trash mechanism (`fs.trash.interval`) for safe deletion when enabled in the configuration.
+- **Path Format:** Uses a path format like `ofs://<om_service_id>/<volumeName>/<bucketName>/path/to/file`.
+- `<om_service_id>`: The logical name configured for the Ozone Manager service (required for HA setups, optional for non-HA where OM host/port can be used).
 
 ## Configuration
 
@@ -95,9 +95,9 @@ LOAD DATA LOCAL INPATH '/local/data.csv' INTO TABLE my_table;
 
 `ofs://` is the recommended interface when:
 
-*   You need **HCFS compatibility** for Hadoop ecosystem tools.
-*   You require **atomic directory renames and deletes** (use with FSO buckets).
-*   You are migrating workloads from HDFS to Ozone.
-*   Filesystem semantics are preferred over object storage semantics.
+- You need **HCFS compatibility** for Hadoop ecosystem tools.
+- You require **atomic directory renames and deletes** (use with FSO buckets).
+- You are migrating workloads from HDFS to Ozone.
+- Filesystem semantics are preferred over object storage semantics.
 
 It provides the most seamless integration for traditional big data analytics workloads running on Ozone.

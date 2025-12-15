@@ -84,10 +84,10 @@ This provides visibility into the progress of the release for the community. Tas
 
 Issue a Jira query like [this](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HDDS%20AND%20resolution%20%3D%20Unresolved%20AND%20(cf%5B12310320%5D%20%3D%201.3.0%20OR%20fixVersion%20%3D%201.3.0)%20ORDER%20BY%20priority%20DESC%2C%20updated%20DESC), modified for the release number you are working with, to find all unresolved Jiras that have the target version field set to this release. Note that some people incorrectly use Fix Version as the Target Version, so Fix Version is included in this search. Use the following steps to issue a bulk update to these Jiras:
 
-1. In the top right corner, click `Tools` and under `Bulk Change` , select `all ... issues`.
+1. In the top right corner, click `Tools`and under`Bulk Change`, select`all ... issues`.
 2. Click the top check box to select all the issues. Click `Next`.
-3. Select `Edit Issues` , then click `Next`.
-4. Select `Change Fix Version/s` , and in the drop down select `Clear field`.
+3. Select `Edit Issues`, then click`Next`.
+4. Select `Change Fix Version/s`, and in the drop down select`Clear field`.
     :::note
     This corrects unresolved issues which incorrectly set a fix version for this release.
     :::
@@ -181,7 +181,7 @@ Assume all following commands are executed from within this repo with your relea
 
 ### Update the Ozone Version on the Release Branch
 
-Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
+Use the commands below or your IDE to replace `$VERSION-SNAPSHOT`with`$VERSION`.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -205,7 +205,7 @@ git commit -am "Update Ozone version to $VERSION"
 
 ### Tag the Commit for the Release Candidate
 
-This will sign the tag with the GPG key matching the git mailing address. Make sure that the email given by `git config user.email` matches the email for the key you want to use shown by `gpg --list-secret-keys`.
+This will sign the tag with the GPG key matching the git mailing address. Make sure that the email given by `git config user.email`matches the email for the key you want to use shown by`gpg --list-secret-keys`.
 
 ```bash
 git tag -s "ozone-$VERSION-RC$RC"
@@ -337,9 +337,9 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     - A non-snapshot version of Ratis.
     - A link to the [apache/ozone](https://github.com/apache/ozone) GitHub repository (not your fork).
     - The git hash of the last commit the release was built on.
-7. Run the upgrade compatibility acceptance tests by running `test.sh` from the `compose/upgrade` directory in the extracted release tarball.
+7. Run the upgrade compatibility acceptance tests by running `test.sh`from the`compose/upgrade` directory in the extracted release tarball.
     :::note
-    The `test.sh` file committed to the master branch only checks upgrade compatibility against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
+    The `test.sh`file committed to the master branch only checks upgrade compatibility against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all`run_test`lines in the`test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
     :::
 
 ### Upload the Artifacts to Dev Staging
@@ -415,8 +415,8 @@ Write a haiku to the photo with Future font.
 ### Update the Ozone Website
 
 1. Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`.
-2. Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
-3. Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
+2. Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site`, and that the`docs/current` symlink has been updated to point to the latest release's directory.
+3. Test the website locally by running `hugo serve`from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the`asf-site` branch is merged.
 
 ### Add the Final Git Tag and Push It
 
@@ -430,7 +430,7 @@ git push origin "ozone-$VERSION"
 
 The Ozone Docker image is intended for testing purposes only, not production use. An example pull request to update the Docker image is [here](https://github.com/apache/ozone-docker/pull/22/files). The target branch for your pull request should be `latest`. After the pull request is merged, it can be published to [Docker Hub](https://hub.docker.com/r/apache/ozone) by updating the branches that correspond to [Docker image tags](https://hub.docker.com/r/apache/ozone/tags).
 
-1. Publish the image with the `latest` tag by fast-forwarding the `ozone-latest` branch to match the `latest` branch.
+1. Publish the image with the `latest`tag by fast-forwarding the`ozone-latest`branch to match the`latest` branch.
 
     ```bash
     git checkout ozone-latest
@@ -439,7 +439,7 @@ The Ozone Docker image is intended for testing purposes only, not production use
     git push origin ozone-latest
     ```
 
-2. Publish the image with a version specific tag by creating a new branch with a name like `ozone-1.5.0` (replace this with the current version) from the `latest` branch and push it to [GitHub](https://github.com/apache/ozone-docker).
+2. Publish the image with a version specific tag by creating a new branch with a name like `ozone-1.5.0`(replace this with the current version) from the`latest` branch and push it to [GitHub](https://github.com/apache/ozone-docker).
 
     ```bash
     git checkout ozone-latest

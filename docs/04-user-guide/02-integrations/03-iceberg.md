@@ -1,4 +1,5 @@
-# Apache Iceberg 
+# Apache Iceberg
+
 Apache Iceberg is an open table format for huge analytic datasets that provides high-performance format for large data tables built on top of distributed storage systems such as Apache Ozone. This integration allows users to combine Iceberg's powerful table management capabilities with Ozone's scalable and resilient storage.
 
 ## How Iceberg Works with Storage
@@ -11,6 +12,7 @@ Iceberg's architecture relies on storage systems for several key components:
 - **Manifest Lists**: Files that track table snapshots and their corresponding manifests
 
 Iceberg requires storage systems to provide:
+
 - File-level operations (create, read, update, delete)
 - Atomic operations for metadata updates
 - Consistent reads for reliable table access
@@ -18,9 +20,10 @@ Iceberg requires storage systems to provide:
 
 ## How Ozone Enables Iceberg Integration
 
-Ozone provides native compatibility with Iceberg through the Ozone File System (OFS) interface, which implements the Hadoop Compatible File System (HCFS) API. This enables Iceberg to work with Ozone without code modifications.
+Ozone provides native compatibility with Iceberg through the Ozone File System (ofs) interface, which implements the Hadoop Compatible File System (HCFS) API. This enables Iceberg to work with Ozone without code modifications.
 
 The key enabler is the `ofs://` protocol, which:
+
 - Provides HDFS-like file system semantics
 - Supports atomic directory operations with File System Optimized (FSO) buckets
 - Maintains hierarchical namespace required by Iceberg's table structure
@@ -94,6 +97,7 @@ iceberg.catalog.warehouse=ofs://ozone1/vol1/bucket1/warehouse/iceberg
 ## Bucket Layout Considerations
 
 For Iceberg workloads, use **File System Optimized (FSO)** bucket layout, which:
+
 - Maintains a hierarchical directory structure in Ozone
 - Enables atomic operations needed for reliable metadata updates
 - Provides optimal performance for table operations
@@ -148,13 +152,15 @@ SELECT * FROM ozone_catalog.db.table.snapshots;
 ### Optimizing Read Performance
 
 1. **Utilize Metadata Pruning**: Iceberg's metadata pruning works effectively with Ozone.
+
    ```sql
    -- Efficient pruning using partition and filter pushdown
-   SELECT * FROM ozone_catalog.db.table 
+   SELECT * FROM ozone_catalog.db.table
    WHERE ts > timestamp('2022-01-01') AND ts < timestamp('2022-02-01');
    ```
 
 2. **Optimize for Concurrent Reads**: Ozone's distributed nature supports high concurrency.
+
    ```scala
    // Set higher parallelism for reads
    spark.read
@@ -166,12 +172,14 @@ SELECT * FROM ozone_catalog.db.table.snapshots;
 ### Optimizing Write Performance
 
 1. **Tuning File Sizes**: Optimize file sizes for Ozone's block size.
+
    ```sql
-   ALTER TABLE ozone_catalog.db.table SET 
+   ALTER TABLE ozone_catalog.db.table SET
    TBLPROPERTIES ('write.target-file-size-bytes'='134217728');
    ```
 
 2. **Optimizing Partitioning**: Choose partitioning schemes appropriate for your query patterns and Ozone's characteristics.
+
    ```sql
    -- Partitioning by date with proper cardinality
    CREATE TABLE ozone_catalog.db.table (
@@ -252,11 +260,12 @@ A typical data lakehouse architecture with Iceberg on Ozone consists of:
 A common pattern is building a multi-zone data lakehouse using Iceberg tables stored in Ozone:
 
 1. **Landing Zone**: Store raw data as-is in Ozone using the S3 API
+
    ```bash
-   # Ingest data through the S3 gateway
+   # Ingest data through the S3 Gateway
    aws s3 cp --endpoint-url http://ozone-s3g:9878 data.csv s3://landing-bucket/data/
-   
-   # Or using the OFS interface for direct ingestion
+
+   # Or using the ofs interface for direct ingestion
    hadoop fs -put data.csv ofs://ozone1/vol1/landing-bucket/data/
    ```
 
@@ -271,7 +280,7 @@ A common pattern is building a multi-zone data lakehouse using Iceberg tables st
    ) USING iceberg
    PARTITIONED BY (days(ingest_time))
    LOCATION 'ofs://ozone1/vol1/lakehouse/bronze/sales';
-   
+
    -- Silver: Cleansed and transformed data with proper schema
    CREATE TABLE ozone_catalog.silver.sales (
      transaction_id STRING,
@@ -284,7 +293,7 @@ A common pattern is building a multi-zone data lakehouse using Iceberg tables st
    ) USING iceberg
    PARTITIONED BY (days(transaction_time))
    LOCATION 'ofs://ozone1/vol1/lakehouse/silver/sales';
-   
+
    -- Gold: Business-ready, aggregated data for analytics
    CREATE TABLE ozone_catalog.gold.daily_sales_by_region (
      date DATE,
@@ -303,7 +312,7 @@ A common pattern is building a multi-zone data lakehouse using Iceberg tables st
    // Spark example: Bronze to Silver transformation
    spark.sql("""
      INSERT INTO ozone_catalog.silver.sales
-     SELECT 
+     SELECT
        CAST(get_json_object(data, '$.transaction_id') AS STRING) as transaction_id,
        CAST(get_json_object(data, '$.product_id') AS STRING) as product_id,
        CAST(get_json_object(data, '$.customer_id') AS STRING) as customer_id,
@@ -320,7 +329,7 @@ A common pattern is building a multi-zone data lakehouse using Iceberg tables st
 
    ```sql
    -- Business analytics on gold layer
-   SELECT 
+   SELECT
      region,
      SUM(total_sales) as quarterly_sales,
      SUM(transaction_count) as quarterly_transactions
@@ -346,7 +355,7 @@ This open data lakehouse approach with Iceberg on Ozone provides several key ben
 
 For optimal performance in a production environment:
 
-1. **Network Topology**: Ensure Ozone datanodes are on the same network as compute nodes
+1. **Network Topology**: Ensure Ozone Datanodes are on the same network as compute nodes
 2. **Storage Configuration**: Use high-performance storage (NVMe SSDs) for Ozone metadata (OM and SCM)
 3. **Memory Allocation**: Provide sufficient memory for RocksDB caches in Ozone Manager
 4. **Compute Resources**: Size Spark/Trino clusters appropriately for your workloads

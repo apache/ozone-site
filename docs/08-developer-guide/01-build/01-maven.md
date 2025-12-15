@@ -60,7 +60,7 @@ tar xzf protobuf-2.5.0.tar.gz
 cd protobuf-${PROTOBUF_VERSION}
 ```
 
-Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like `vim` and append the following lines after line 59.  Save the file when complete.
+Open the file `src/google/protobuf/stubs/platform_macros.h`with an editor like`vim` and append the following lines after line 59.  Save the file when complete.
 
 ```bash
 #elif defined(__arm64__)
@@ -117,20 +117,20 @@ This command does not run acceptance tests. Refer to the [acceptance tests](/doc
 | Command                       | Description                                                                                                                                                             |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-DskipTests=true`            | Skip all tests                                                                                                                                                          |
-| `-Pdist`                      | This creates a tarball in `hadoop-ozone/dist/target` that contains all necessary files for deployment                                                                   |
+| `-Pdist`                     | This creates a tarball in`hadoop-ozone/dist/target` that contains all necessary files for deployment                                                                   |
 | `-DskipRecon`                 | Skip building the Javascript frontend for Recon                                                                                                                         |
 | `-T 4`                        | Use 4 threads for parallel building (adjust number based on your CPU)                                                                                                   |
 | `-T 2C`                       | Use 2 threads per core for parallel building                                                                                          |
 | `-am -pl :<module-name>`      | Build a specific module and its dependencies when run from the root of the project                                                                                      |
-| `-DskipShade`                 | Skip shading. This saves a ton of time by skipping the `ozone-filesystem-hadoop3` fat jar build used by the client                                                      |
+| `-DskipShade`                | Skip shading. This saves a ton of time by skipping the`ozone-filesystem-hadoop3` fat jar build used by the client                                                      |
 | `-Dmaven.artifact.threads=30` | Allow Maven to download 30 artifacts at once. The default value is 5. This could speed up the build process by a lot when the Maven cache was not previously populated. |
-| `-Pnative`                    | Build native module(s). So far it only affects `hdds-rocks-native`                                                                                                      |
+| `-Pnative`                   | Build native module(s). So far it only affects`hdds-rocks-native`                                                                                                      |
 
 ### Build Output
 
 The build process creates several important artifacts:
 
-- **Distribution Tarball**: `hadoop-ozone/dist/target/ozone-<version>.tar.gz` (when using `-Pdist`)
+- **Distribution Tarball**: `hadoop-ozone/dist/target/ozone-<version>.tar.gz`(when using`-Pdist`)
 - **Distribution Directory**: `hadoop-ozone/dist/target/ozone-<version>/`
 - **Individual Module JARs**: `hadoop-ozone/dist/target/ozone-<version>/share/ozone/lib`
 

@@ -28,7 +28,7 @@ The image can be built simply by running the helper script `build.sh`:
 
 ### Tagging
 
-Images are tagged by date, and come in two flavors: `jdk21` (for Ozone 2.0+) and `jdk11` (for Ozone 1.x).
+Images are tagged by date, and come in two flavors: `jdk21`(for Ozone 2.0+) and`jdk11` (for Ozone 1.x).
 
 Publishing Docker tags:
 
@@ -53,7 +53,7 @@ The image can be built simply by running the helper script `build.sh`:
 ./build.sh
 ```
 
-This will create a single-platform image for your architecture.  Build automation in GitHub Actions creates multi-platform image for `amd64` and `arm64`.
+This will create a single-platform image for your architecture.  Build automation in GitHub Actions creates multi-platform image for `amd64`and`arm64`.
 
 It can be customized via environment variables defined at build time.
 
@@ -73,9 +73,9 @@ OZONE_RUNNER_VERSION
 
 ### Tagging
 
-Images are tagged by Ozone version numbers and optional flavor.  Flavor `-rocky` was introduced when `ozone-runner` was changed from CentOS to Rocky Linux due to CentOS end-of-life, to avoid breaking things for existing users.  Future images will be published only with Rocky Linux, with and without flavor suffix.
+Images are tagged by Ozone version numbers and optional flavor.  Flavor `-rocky`was introduced when`ozone-runner` was changed from CentOS to Rocky Linux due to CentOS end-of-life, to avoid breaking things for existing users.  Future images will be published only with Rocky Linux, with and without flavor suffix.
 
-Image tags are derived from branch names: push to the branch `ozone-<tag>` gets published with `<tag>` (e.g. `ozone-1.4.1 -> 1.4.1`).
+Image tags are derived from branch names: push to the branch `ozone-<tag>`gets published with`<tag>`(e.g.`ozone-1.4.1 -> 1.4.1`).
 
 Publishing Docker tags:
 
