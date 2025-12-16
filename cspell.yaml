@@ -144,3 +144,9 @@ words:
 - Boto
 - Tez
 - Flink
+- configmap
+- df
+- INPATH
+- ozonecluster
+- pyspark
+- setacl
