@@ -1,4 +1,6 @@
 ---
+sidebar_label: Spark
+---
 
 # Using Apache Spark with Ozone
 
