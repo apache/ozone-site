@@ -24,33 +24,7 @@ Key benefits include:
 
 ### 1. Core Site (`core-site.xml`)
 
-Ensure your Hadoop `core-site.xml` (accessible by Spark) includes the necessary Ozone configurations:
-
-```xml
-<configuration>
-  <property>
-    <name>fs.ofs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
-    <description>Ozone FileSystem implementation.</description>
-  </property>
-  <property>
-    <name>fs.o3fs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.OzoneFileSystem</value>
-    <description>Legacy Ozone FileSystem implementation.</description>
-  </property>
-  <property>
-    <name>ozone.om.service.ids</name>
-    <value>ozone1</value> <!-- Replace with your OM Service ID -->
-    <description>Logical identifier for the Ozone Manager service.</description>
-  </property>
-  <property>
-    <name>ozone.om.nodes.ozone1</name> <!-- Use your OM Service ID -->
-    <value>om_host1,om_host2,om_host3</value> <!-- Replace with your OM addresses -->
-    <description>Address list for Ozone Manager nodes.</description>
-  </property>
-  <!-- Add other necessary Ozone client configurations -->
-</configuration>
-```
+For `core-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).```
 
 ### 2. Spark Configuration (`spark-defaults.conf`or`--conf`)
 
@@ -63,7 +37,7 @@ spark.hadoop.fs.o3fs.impl=org.apache.hadoop.fs.ozone.OzoneFileSystem
 
 ### 3. Client JAR Placement
 
-Copy the `hadoop-ozone-filesystem-*.jar`to the`$SPARK_HOME/jars/`directory on all nodes where Spark driver and executors run. Alternatively, provide it using the`--jars`option in`spark-submit`.
+Copy the `hadoop-ozone-filesystem-*.jar`to the`$SPARK_HOME/jars/`directory on all nodes where Spark driver and executors run. Alternatively, provide it using the`--jars`option in`Spark-submit`.
 
 ### 4. Security (Kerberos)
 
@@ -160,7 +134,7 @@ spark.stop()
 To run Spark jobs on Kubernetes accessing Ozone:
 
 1. **Build a Custom Spark Image:** Create a Docker image based on your desired Spark version. Add the `hadoop-ozone-filesystem-*.jar` and the necessary Ozone configuration files (`core-site.xml`, `ozone-site.xml`) into the image (e.g., under `/opt/hadoop/conf`).
-2. **Configure `spark-submit`:**
+2. **Configure `Spark-submit`:**
     - Set `--master k8s://<kubernetes-api-server>`.
     - Specify the custom image: `--conf spark.kubernetes.container.image=<your-repo>/spark-ozone:latest`.
     - Point to the config directory: `--conf spark.kubernetes.hadoop.configMapName=<configmap-name>`(if using ConfigMap) or ensure the image has the files and potentially set`HADOOP_CONF_DIR`.
@@ -170,10 +144,10 @@ To run Spark jobs on Kubernetes accessing Ozone:
     Example using `o3fs`(adapt for`ofs`):
 
     ```bash
-    ./bin/spark-submit \
+    ./bin/Spark-submit \
       --master k8s://https://<KUBERNETES_MASTER_IP>:<PORT> \
       --deploy-mode cluster \
-      --name spark-ozone-test \
+      --name Spark-Ozone-Test \
       --class org.apache.spark.examples.SparkPi \
       --conf spark.executor.instances=1 \
       --conf spark.kubernetes.container.image=<your-docker-repo>/spark-ozone:latest \

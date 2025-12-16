@@ -61,57 +61,7 @@ The exact method depends on your deployment:
 
 ### 2. Configure `core-site.xml`
 
-Add the following properties to the `core-site.xml`used by Hive components and clients to enable the`ofs://` filesystem implementation and specify how to connect to the Ozone Manager (OM).
-
-```xml
-<configuration>
-
-  <property>
-    <name>fs.ofs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
-    <description>Ozone File System implementation for ofs scheme.</description>
-  </property>
-
-  <property>
-    <name>fs.o3fs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.OzoneFileSystem</value>
-    <description>Ozone File System implementation for o3fs scheme.</description>
-  </property>
-
-  <!-- === OM HA Configuration (Recommended for Production) === -->
-  <property>
-    <name>ozone.om.service.ids</name>
-    <value>ozonecluster</value> <!-- Logical name for the OM service -->
-    <description>Logical name for the Ozone Manager service for HA.</description>
-  </property>
-
-  <property>
-    <name>ozone.om.nodes.ozonecluster</name> <!-- Use the service ID from ozone.om.service.ids -->
-    <value>om1,om2,om3</value>
-    <description>Comma-separated list of OM node IDs for the service ID.</description>
-  </property>
-  <!-- ======================================================= -->
-
-  <!-- === Non-HA OM Configuration (For testing/simple setups ONLY) === -->
-  <!--
-  <property>
-    <name>ozone.om.address</name>
-    <value>om.example.com:9862</value>
-    <description>Address of the single Ozone Manager.</description>
-  </property>
-  -->
-  <!-- ============================================================== -->
-
-  <!-- Optional: Set ofs as the default filesystem -->
-  <!--
-  <property>
-    <name>fs.defaultFS</name>
-    <value>ofs://ozonecluster</value> <!- Use your OM Service ID ->
-  </property>
-  -->
-
-</configuration>
-```
+For `core-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).```
 
 - Replace `ozonecluster`, `om1`, etc., with your actual OM service ID and node ID.
 - Ensure this `core-site.xml` is accessible to all Hive components.
