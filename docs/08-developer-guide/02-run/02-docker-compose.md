@@ -20,7 +20,7 @@ Before you begin, ensure you have installed:
 
 ### Step 1: Build from Source
 
-First, build Ozone from source following our [Build with Maven](/docs/08-developer-guide/01-build/02-maven.md) guide.
+First, build Ozone from source following our [Build with Maven](/docs/08-developer-guide/01-build/01-maven.md) guide.
 
 ### Step 2: Locate Docker Compose Files
 
