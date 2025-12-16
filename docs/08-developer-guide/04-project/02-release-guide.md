@@ -319,7 +319,7 @@ If the command fails, you may need to do the following additional steps:
 Build the project to fetch dependencies.
 
   ```bash
-  mvn clean install -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
+  mvn clean install -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
   ```
 
 ### Create and Upload Maven Artifacts
@@ -327,7 +327,7 @@ Build the project to fetch dependencies.
 - Perform the final build and upload the release artifacts.
 
   ```bash
-  mvn deploy -DdeployAtEnd=true -Dmaven.javadoc.skip=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
+  mvn deploy -DdeployAtEnd=true -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
   ```
 
 - Go to https://repository.apache.org/#stagingRepositories and **close** the newly created `orgapacheozone` repository.
