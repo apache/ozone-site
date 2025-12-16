@@ -8,7 +8,7 @@ Apache Ozone provides a native Java client API that allows developers to interac
 
 ## Overview
 
-The Ozone Java client library (`hadoop-ozone-client`) allows applications to perform various operations, including:
+The Ozone Java client library (`ozone-filesystem-hadoop3` or `ozone-filesystem-hadoop2`) allows applications to perform various operations, including:
 
 - **Volume Operations:** Create, delete, list, and manage volumes.
 - **Bucket Operations:** Create, delete, list, and manage buckets, including setting properties like versioning and replication factor.
@@ -33,7 +33,7 @@ To use the Ozone Java client, add the following dependency to your `pom.xml` (ad
 ```xml
 <dependency>
   <groupId>org.apache.hadoop</groupId>
-  <artifactId>hadoop-ozone-client</artifactId>
+  <artifactId>ozone-filesystem-hadoop3</artifactId>
   <version>${ozone.version}</version> <!-- Replace with your Ozone version -->
 </dependency>
 ```

@@ -21,7 +21,9 @@ The Ozone File System (`ofs`) provides a **Hadoop Compatible File System (HCFS)*
 
 ## Configuration
 
-To use `ofs://`, Hadoop clients need the Ozone filesystem client JARs on their classpath and the following configuration in `core-site.xml`:
+To use `ofs://`, Hadoop clients need the Ozone filesystem client JARs on their classpath. The `fs.ofs.impl` and `fs.defaultFS` properties are configured in `core-site.xml`, while the remaining Ozone-specific properties are configured in `ozone-site.xml`.
+
+### `core-site.xml` Configuration
 
 ```xml
 <property>
@@ -38,8 +40,12 @@ To use `ofs://`, Hadoop clients need the Ozone filesystem client JARs on their c
     with your OM Service ID (e.g., ozonecluster).
   </description>
 </property>
+```
 
-<!-- For OM HA (Recommended) -->
+### `ozone-site.xml` Configuration
+
+#### For OM HA (Recommended)
+```xml
 <!--
 One Ozone configuration (ozone-site.xml) can support multiple Ozone HA clusters. To select between the available HA clusters, a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.
 
@@ -72,15 +78,15 @@ This logical name is called serviceId and can be configured in the ozone-site.xm
    <value>host3:9862</value> <!-- e.g., for cluster1.om3: host3:9862 -->
    <description>Address of OM node 'om3' for the service ID.</description>
 </property>
+```
 
-<!-- For Non-HA OM (Simpler setups, not recommended for production) -->
-<!--
+#### For Non-HA OM (Simpler setups, not recommended for production)
+```xml
 <property>
   <name>ozone.om.address</name>
   <value>om.host:9862</value>
   <description>Address of the Ozone Manager.</description>
 </property>
--->
 ```
 
 ## Usage Examples

@@ -40,7 +40,7 @@ To configure Hive to use Ozone:
 
 ### 1. Add Ozone Client JARs to Classpath
 
-The Ozone filesystem client JAR (`ozone-filesystem-hadoop3-*.jar`or`ozone-filesystem-*.jar` depending on the version) and its dependencies must be available on the classpath of all relevant Hive components.
+The Ozone filesystem client JAR (`ozone-filesystem-hadoop3-*.jar`or`ozone-filesystem-hadoop2-*.jar` depending on the version) and its dependencies must be available on the classpath of all relevant Hive components.
 
 - **HiveServer2**
 - **Hive Metastore Server**
@@ -59,12 +59,12 @@ The exact method depends on your deployment:
     # Start Hive services with this environment variable set
     ```
 
-### 2. Configure `core-site.xml`
+### 2. Configure `core-site.xml` and `ozone-site.xml`
 
-For `core-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).```
+For `core-site.xml` and `ozone-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).```
 
 - Replace `ozonecluster`, `om1`, etc., with your actual OM service ID and node ID.
-- Ensure this `core-site.xml` is accessible to all Hive components.
+- Ensure the configuration files are accessible to all Hive components.
 
 ### 3. Configure `hive-site.xml`
 

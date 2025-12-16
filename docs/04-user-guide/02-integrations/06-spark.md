@@ -19,7 +19,7 @@ Key benefits include:
 ## Prerequisites
 
 1. **Ozone Cluster:** A running Ozone cluster.
-2. **Ozone Client JARs:** The `hadoop-ozone-filesystem-hadoop3.jar` (or hadoop2 variant depending on your Spark's Hadoop version) must be available on the Spark driver and executor classpaths.
+2. **Ozone Client JARs:** The `hadoop-ozone-filesystem-hadoop3.jar` must be available on the Spark driver and executor classpaths.
 3. **Configuration:** Spark needs access to Ozone configuration (`core-site.xml`and potentially`ozone-site.xml`) to connect to the Ozone cluster.
 
 ## Configuration

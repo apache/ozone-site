@@ -39,26 +39,9 @@ Ensure the Ozone filesystem JAR is added to the classpath of all services that w
 export HADOOP_CLASSPATH=/opt/ozone/share/ozone/lib/ozone-filesystem-hadoop3-*.jar:$HADOOP_CLASSPATH
 ```
 
-### 2. Configure Hadoop Core Site
+### 2. Configure Ozone client side properties
 
-Add Ozone filesystem implementation to your Hadoop configuration:
-
-```xml
-<property>
-  <name>fs.ofs.impl</name>
-  <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
-</property>
-
-<!-- For OM HA (Recommended for Production) -->
-<property>
-  <name>ozone.om.service.ids</name>
-  <value>ozone1</value>
-</property>
-<property>
-  <name>ozone.om.nodes.ozone1</name>
-  <value>om1.host:9862,om2.host:9862,om3.host:9862</value>
-</property>
-```
+For Ozone client configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).
 
 ### 3. Configure Iceberg Catalog
 
