@@ -45,6 +45,7 @@ To use `ofs://`, Hadoop clients need the Ozone filesystem client JARs on their c
 ### `ozone-site.xml` Configuration
 
 #### For OM HA (Recommended)
+
 ```xml
 <!--
 One Ozone configuration (ozone-site.xml) can support multiple Ozone HA clusters. To select between the available HA clusters, a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.
@@ -81,6 +82,7 @@ This logical name is called serviceId and can be configured in the ozone-site.xm
 ```
 
 #### For Non-HA OM (Simpler setups, not recommended for production)
+
 ```xml
 <property>
   <name>ozone.om.address</name>
