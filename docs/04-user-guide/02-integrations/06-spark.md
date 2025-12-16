@@ -1,5 +1,4 @@
 ---
----
 
 # Using Apache Spark with Ozone
 
@@ -31,7 +30,7 @@ Ensure your Hadoop `core-site.xml` (accessible by Spark) includes the necessary 
 <configuration>
   <property>
     <name>fs.ofs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.OzoneFileSystem</value>
+    <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
     <description>Ozone FileSystem implementation.</description>
   </property>
   <property>
@@ -45,8 +44,8 @@ Ensure your Hadoop `core-site.xml` (accessible by Spark) includes the necessary 
     <description>Logical identifier for the Ozone Manager service.</description>
   </property>
   <property>
-    <name>ozone.om.address.ozone1</name> <!-- Use your OM Service ID -->
-    <value>om_host1:9862,om_host2:9862,om_host3:9862</value> <!-- Replace with your OM addresses -->
+    <name>ozone.om.nodes.ozone1</name> <!-- Use your OM Service ID -->
+    <value>om_host1,om_host2,om_host3</value> <!-- Replace with your OM addresses -->
     <description>Address list for Ozone Manager nodes.</description>
   </property>
   <!-- Add other necessary Ozone client configurations -->
@@ -58,7 +57,7 @@ Ensure your Hadoop `core-site.xml` (accessible by Spark) includes the necessary 
 While Spark often picks up settings from `core-site.xml` on the classpath, explicitly setting the implementation can sometimes be necessary:
 
 ```properties
-spark.hadoop.fs.ofs.impl=org.apache.hadoop.fs.ozone.OzoneFileSystem
+spark.hadoop.fs.ofs.impl=org.apache.hadoop.fs.ozone.RootedOzoneFileSystem
 spark.hadoop.fs.o3fs.impl=org.apache.hadoop.fs.ozone.OzoneFileSystem
 ```
 
@@ -73,9 +72,6 @@ If your Ozone and Spark clusters are Kerberos-enabled, Spark needs permission to
 ```properties
 # For YARN deployments
 spark.yarn.access.hadoopFileSystems=ofs://ozone1/
-
-# For non-YARN deployments or general access
-spark.kerberos.access.hadoopFileSystems=ofs://ozone1/
 ```
 
 Replace `ozone1` with your OM Service ID. Ensure the user running the Spark job has a valid Kerberos ticket (`kinit`).

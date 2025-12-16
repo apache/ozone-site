@@ -51,7 +51,6 @@ import org.apache.hadoop.ozone.client.OzoneKeyDetails;
 import org.apache.hadoop.ozone.client.io.OzoneOutputStream;
 import org.apache.hadoop.ozone.client.io.OzoneInputStream;
 import org.apache.hadoop.ozone.om.client.OzoneClientFactory;
-import org.apache.hadoop.ozone.om.client.OMClient; // Assuming OM address is known
 
 // Assume configuration is loaded or set appropriately
 OzoneConfiguration conf = new OzoneConfiguration();

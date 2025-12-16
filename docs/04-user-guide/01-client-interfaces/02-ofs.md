@@ -40,15 +40,37 @@ To use `ofs://`, Hadoop clients need the Ozone filesystem client JARs on their c
 </property>
 
 <!-- For OM HA (Recommended) -->
+<!--
+One Ozone configuration (ozone-site.xml) can support multiple Ozone HA clusters. To select between the available HA clusters, a logical name is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Ozone Managers.
+
+This logical name is called serviceId and can be configured in the ozone-site.xml.
+-->
 <property>
-  <name>ozone.om.service.ids</name>
-  <value><om_service_id></value>
-  <description>Logical name for the Ozone Manager service.</description>
+   <name>ozone.om.service.ids</name>
+   <value><om_service_id></value> <!-- e.g., cluster1 -->
+   <description>Logical name for the Ozone Manager service.</description>
+</property>
+<!-- For each of the defined serviceId, a logical configuration name should be defined for each of the servers. -->
+<property>
+   <name>ozone.om.nodes.<om_service_id></name>
+   <value>om1,om2,om3</value> <!-- e.g., for cluster1: om1,om2,om3 -->
+   <description>List of logical OM node names for the service ID.</description>
+</property>
+<!-- The defined prefixes can be used to define the address of each of the OM services: -->
+<property>
+   <name>ozone.om.address.<om_service_id>.om1</name>
+   <value>host1:9862</value> <!-- e.g., for cluster1.om1: host1:9862 -->
+   <description>Address of OM node 'om1' for the service ID.</description>
 </property>
 <property>
-  <name>ozone.om.nodes.<om_service_id></name>
-  <value>om1.host:9862,om2.host:9862,om3.host:9862</value>
-  <description>List of OM node addresses for the service ID.</description>
+   <name>ozone.om.address.<om_service_id>.om2</name>
+   <value>host2:9862</value> <!-- e.g., for cluster1.om2: host2:9862 -->
+   <description>Address of OM node 'om2' for the service ID.</description>
+</property>
+<property>
+   <name>ozone.om.address.<om_service_id>.om3</name>
+   <value>host3:9862</value> <!-- e.g., for cluster1.om3: host3:9862 -->
+   <description>Address of OM node 'om3' for the service ID.</description>
 </property>
 
 <!-- For Non-HA OM (Simpler setups, not recommended for production) -->

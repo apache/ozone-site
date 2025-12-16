@@ -87,8 +87,8 @@ Add the following properties to the `core-site.xml`used by Hive components and c
 
   <property>
     <name>ozone.om.nodes.ozonecluster</name> <!-- Use the service ID from ozone.om.service.ids -->
-    <value>om1.example.com:9862,om2.example.com:9862,om3.example.com:9862</value>
-    <description>List of OM node addresses (hostname:rpc_port) for the service ID.</description>
+    <value>om1,om2,om3</value>
+    <description>Comma-separated list of OM node IDs for the service ID.</description>
   </property>
   <!-- ======================================================= -->
 
@@ -113,7 +113,7 @@ Add the following properties to the `core-site.xml`used by Hive components and c
 </configuration>
 ```
 
-- Replace `ozonecluster`, `om1.example.com`, etc., with your actual OM service ID and hostnames/ports.
+- Replace `ozonecluster`, `om1`, etc., with your actual OM service ID and node ID.
 - Ensure this `core-site.xml` is accessible to all Hive components.
 
 ### 3. Configure `hive-site.xml`
@@ -154,8 +154,8 @@ While multiple protocols *can* interact with Ozone, for Hive, the choice signifi
 
 | Protocol | URI Format                     | Recommended for Hive? | Key Considerations                                                                                                |
 | :------- | :----------------------------- | :-------------------- | :---------------------------------------------------------------------------------------------------------------- |
-| **ofs**  | `ofs://<om-svc-id>/vol/bucket/path` | **Yes (Strongly)*- | Provides global namespace view. **Requires FSO buckets.** Enables atomic directory operations. Best performance. |
-| **o3fs** | `o3fs://bucket.vol/path`       | **Yes*-          | Limits access to a single bucket. **Requires FSO buckets.** Enables atomic directory operations. Good performance. |
+| **ofs**  | `ofs://<om-svc-id>/vol/bucket/path` | **Yes (Strongly)** | Provides global namespace view. **Requires FSO buckets.** Enables atomic directory operations. Best performance. |
+| **o3fs** | `o3fs://bucket.vol/path`       | **Yes**          | Limits access to a single bucket. **Requires FSO buckets.** Enables atomic directory operations. Good performance. |
 | **s3a**  | `s3a://bucket/path`            | **No (Discouraged)**  | Accesses via S3 Gateway. Directory operations are **NOT atomic** and slow. High risk of inconsistency for Hive.    |
 
 **Always use `ofs://`or`o3fs://` with FSO buckets for Hive.**

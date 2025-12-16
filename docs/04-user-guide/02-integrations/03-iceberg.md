@@ -45,17 +45,17 @@ Add Ozone filesystem implementation to your Hadoop configuration:
 
 ```xml
 <property>
-  <n>fs.ofs.impl</n>
+  <name>fs.ofs.impl</name>
   <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
 </property>
 
 <!-- For OM HA (Recommended for Production) -->
 <property>
-  <n>ozone.om.service.ids</n>
+  <name>ozone.om.service.ids</name>
   <value>ozone1</value>
 </property>
 <property>
-  <n>ozone.om.nodes.ozone1</n>
+  <name>ozone.om.nodes.ozone1</name>
   <value>om1.host:9862,om2.host:9862,om3.host:9862</value>
 </property>
 ```
