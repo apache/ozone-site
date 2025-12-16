@@ -7,9 +7,9 @@ import TabItem from '@theme/TabItem';
 
 ## Past Meetups
 
-### March 27, 2025
+### November 20, 2025
 
-Another Ozone meetup was held on March 27, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
+Another Ozone meetup was held on November 20, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
 
 The following was the list of agenda:
 
