@@ -8,6 +8,13 @@
     <language>en</language>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>S3 Gateway Load Balancing</title>
+      <link>/concept/s3-gateway-load-balancing.html</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>/concept/s3-gateway-load-balancing.html</guid>
+      <description>This document describes how to set up multiple S3 gateways with a proxy for load balancing.</description>
+    </item>
+    <item>
       <title>LDB Tool</title>
       <link>/tools/debug/ldb.html</link>
       <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
