@@ -45,27 +45,43 @@ Choose one of the following methods to get the source code:
 
 Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The build process compiles the source code, runs tests, and creates deployable artifacts. The project supports various build configurations to accommodate different development and deployment needs.
 
-### Additional Steps Required For ARM-based Apple Silicon Macs (M1, etc)
+### Additional Steps Required For ARM-based Apple silicon (Apple M1, M2, etc.)
 
 If you are running on an ARM-based Apple silicon Mac, please perform the additional steps in this section.
 
 #### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
 
-Note: These steps are required for Hadoop 2 support.  Execute the following commands to compile and patch Protobuf version 2.5.0:
+Note: These steps are required for Hadoop 2 support in Ozone 2.1.x and earlier. This won't be needed in Ozone 2.2.0 and later since protobuf 2.5.0's removal in HDDS-5407.
+
+Execute the following commands to compile and patch Protobuf version 2.5.0:
 
 ```bash
 PROTOBUF_VERSION="2.5.0"
 curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
 tar xzf protobuf-2.5.0.tar.gz
-pushd protobuf-${PROTOBUF_VERSION}
+pushd protobuf-2.5.0
 ```
 
-Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like `vim` and append the following lines after line 59.  Save the file when complete.
+Next, patch to insert arm64 macro in `src/google/protobuf/stubs/platform_macros.h`:
 
 ```bash
-#elif defined(__arm64__)
-#define GOOGLE_PROTOBUF_ARCH_ARM 1
-#define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+# Patch to insert arm64 macro
+patch -p1 << EOF
+diff --git a/src/google/protobuf/stubs/platform_macros.h b/src/google/protobuf/stubs/platform_macros.h
+index b1df60e..8a68655 100644
+--- a/src/google/protobuf/stubs/platform_macros.h
++++ b/src/google/protobuf/stubs/platform_macros.h
+@@ -57,6 +57,9 @@
+ #elif defined(__ppc__)
+ #define GOOGLE_PROTOBUF_ARCH_PPC 1
+ #define GOOGLE_PROTOBUF_ARCH_32_BIT 1
++#elif defined(__arm64__)
++#define GOOGLE_PROTOBUF_ARCH_ARM 1
++#define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+ #else
+ #error Host architecture was not detected as supported by protobuf
+ #endif
+EOF
 ```
 
 Execute the following commands to build `protoc`:
