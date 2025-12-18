@@ -57,7 +57,7 @@ Note: These steps are required for Hadoop 2 support.  Execute the following comm
 PROTOBUF_VERSION="2.5.0"
 curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz
 tar xzf protobuf-2.5.0.tar.gz
-cd protobuf-${PROTOBUF_VERSION}
+pushd protobuf-${PROTOBUF_VERSION}
 ```
 
 Open the file `src/google/protobuf/stubs/platform_macros.h` with an editor like `vim` and append the following lines after line 59.  Save the file when complete.
@@ -73,7 +73,6 @@ Execute the following commands to build `protoc`:
 ```bash
 ./configure --disable-shared
 make -j
-cd ..
 ```
 
 Execute the following command to install `protoc` version 2.5.0 to the local Maven repository:
