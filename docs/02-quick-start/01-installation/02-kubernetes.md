@@ -20,7 +20,7 @@ sidebar_label: Kubernetes
 
 # Try Ozone With Kubernetes
 
-Ozone is designed to work well under Kubernetes. This document provides a guide for deploying and experimenting with Ozone on K8s, using MiniKube or a self-hosted Kubernetes cluster.
+Ozone is designed to work well under Kubernetes. This document provides a guide for deploying and experimenting with Ozone on K8s, using Helm Chart, MiniKube or a self-hosted Kubernetes cluster.
 
 ## Helm Chart
 
