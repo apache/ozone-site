@@ -14,11 +14,11 @@ and create a design document *before* you start coding.
 
 ## OEP Process
 
-1.  **Create a Jira:** Open a dedicated Jira ticket for the proposal. The ticket ID should start with the component prefix (e.g., `HDDS-`) and the title should be prefixed with `[OEP]`.
-2.  **Write the Design Doc:** Create the design document in Markdown format using the template below. Place the new file in the `hadoop-hdds/docs/content/design` directory.
-3.  **Submit a Pull Request:** Create a pull request to add the design document to the documentation.
-4.  **Discuss:** The community will discuss the proposal on the pull request. The discussion follows a lazy consensus model unless a formal vote is called.
-5.  **Update:** The design document can be updated based on feedback and changes during implementation.
+1. **Create a Jira:** Open a dedicated Jira ticket for the proposal. The ticket ID should start with the component prefix (e.g., `HDDS-`) and the title should be prefixed with `[OEP]`.
+2. **Write the Design Doc:** Create the design document in Markdown format using the template below. Place the new file in the `hadoop-hdds/docs/content/design` directory.
+3. **Submit a Pull Request:** Create a pull request to add the design document to the documentation.
+4. **Discuss:** The community will discuss the proposal on the pull request. The discussion follows a lazy consensus model unless a formal vote is called.
+5. **Update:** The design document can be updated based on feedback and changes during implementation.
 
 ## Document Template
 
@@ -47,7 +47,8 @@ author: Wei-Chiu Chuang
   limitations under the License. See accompanying LICENSE file.
 -->
 
-### Summary
+# Summary
+
 Provide a one-sentence summary of the proposal, similar to a Jira title.
 This will be displayed on the main documentation page and should be concise and informative.
 
@@ -83,7 +84,7 @@ How the new proposed solution would solve the problem? Architectural design.
 Implementation details. What should be changed in the code. Is it a huge change?
 Do we need to change wire protocol? Backward compatibility?
 
-### Alternatives
+# Alternatives
 What other alternatives were considered, and why is the proposed solution preferred?
 The goal of this section is to help people understand why this is the best solution now,
 and also to prevent churn in the future when old alternatives are reconsidered.
@@ -92,7 +93,7 @@ Note: In some cases 4/5 can be combined. For example if you have multiple propos
 the first version may include multiple solutions. At the end ot the discussion we can move the alternatives to 5.
 and explain why the community is decided to use the selected option.
 
-### Plan
+# Plan
 What is the plan for implementing this feature? What is the estimated effort? Does it require a feature branch,
 a migration plan, or have other dependencies? This section can be a single sentence or omitted for minor features.
 
