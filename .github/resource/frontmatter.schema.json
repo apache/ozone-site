@@ -23,9 +23,6 @@
     "date": {
         "type": "object"
     },
-    "author": {
-        "type": "string"
-    },
     "authors": {
         "type": "array",
         "items": {
