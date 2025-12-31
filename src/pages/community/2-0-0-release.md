@@ -1,0 +1,43 @@
+---
+---
+
+# Apache Ozone 2.0.0 Release
+
+Apache Ozone 2.0.0 was released on April 30th, 2025. This release includes 1700 new features, improvements, and bug fixes on top of Ozone 1.4.
+
+Notable features in this release include:
+
+*   Supporting HSync and lease recovery (HDDS-7593).
+*   SCM Decommissioning Support (HDDS-7852).
+*   Symmetric Keys for Delegation Tokens (HDDS-8829).
+*   Atomic Key Overwrite and Key Replacement (HDDS-10656).
+
+Other noteworthy changes include:
+
+*   ARM64 support (HDDS-6263).
+*   Java 11/17/21 Support and Testing (HDDS-8246).
+*   AWS SDK v2 client support (HDDS-11577).
+
+Observability improvements are:
+
+*   Ozone performance and operational dashboards (HDDS-9307).
+*   Recon UI Improvements (HDDS-11153).
+*   Support for interactive mode for ozone CLI (HDDS-11825).
+
+Developer-focused changes include:
+
+*   JUnit 4 to 5 upgrade (HDDS-6729).
+*   Dropped Hadoop 2.7 ~ 2.9 support (HDDS-8113).
+*   Publish SBOM artifacts (HDDS-10986).
+*   Hadoop dependency updated to 3.4.1 (HDDS-11617).
+
+Incompatible changes are:
+
+*   Move S3 Gateway web admin to separate port (HDDS-7307).
+*   Deprecate file per chunk layout from datanode code (HDDS-11753).
+*   Drop support for non-Ratis OM and SCM (HDDS-11754).
+*   Remove LegacyReplicationManager (HDDS-11759).
+
+Detailed release notes are available at https://ozone.apache.org/release/2.0.0/.
+Downloads can be found at https://ozone.apache.org/downloads/.
+Documentation for this release is available at https://ozone.apache.org/docs/2.0.0/.

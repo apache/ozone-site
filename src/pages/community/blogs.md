@@ -1,5 +1,5 @@
 # Blogs
 
-**TODO [HDDS-9619](https://issues.apache.org/jira/browse/HDDS-9619) Fill in this page.**
+Here you can find the latest news and updates about Apache Ozone.
 
-Add links to blogs on Ozone published by various sources.
+- [Apache Ozone 2.0.0 Release](./2-0-0-release) - April 30, 2025
