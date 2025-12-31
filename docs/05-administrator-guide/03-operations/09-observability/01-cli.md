@@ -91,7 +91,7 @@ Message type counters
 `ozone insight logs` can connect to the required service and show the DEBUG/TRACE log related to one specific component. For example to display RPC message:
 
 ```shell
->ozone insight logs om.protocol.client
+> ozone insight logs om.protocol.client
 
 [OM] 2020-07-28 12:31:49,988 [DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher] OzoneProtocol ServiceList request is received
 [OM] 2020-07-28 12:31:50,095 [DEBUG|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher] OzoneProtocol CreateVolume request is received
@@ -100,7 +100,7 @@ Message type counters
 Using `-v` flag the content of the protobuf message can also be displayed (TRACE level log):
 
 ```shell
-ozone insight logs -v om.protocol.client
+> ozone insight logs -v om.protocol.client
 
 [OM] 2020-07-28 12:33:28,463 [TRACE|org.apache.hadoop.ozone.protocolPB.OzoneManagerProtocolServerSideTranslatorPB|OzoneProtocolMessageDispatcher] [service=OzoneProtocol] [type=CreateVolume] request is received:
 cmdType: CreateVolume
