@@ -6,13 +6,13 @@ sidebar_label: Audit Logs
 
 Audit logs record security-sensitive operations, providing a trail of actions performed on the cluster. The following services produce audit logs:
 
-*   Ozone Manager
+- Ozone Manager
 
-*   Storage Container Manager
+- Storage Container Manager
 
-*   Datanode
+- Datanode
 
-*   S3 Gateway
+- S3 Gateway
 
 Audit log configurations are set in `*-audit-log4j2.properties` files. You can change the corresponding files to update the audit log policies for each component.
 
@@ -20,7 +20,7 @@ Audit log configurations are set in `*-audit-log4j2.properties` files. You can c
 
 Here is an example of an audit log entry from the Ozone Manager:
 
-```
+```text
 INFO  | OMAudit | ? | user=hdfs | ip=127.0.0.1 | op=CREATE_VOLUME | params={volume=vol1, admin=hdfs, owner=hdfs} | result=SUCCESS
 ```
 
@@ -30,7 +30,7 @@ This entry shows that the user `hdfs` successfully created a volume named `vol1`
 
 The default log appender is a rolling appender. The following configurations can be added for the deletion of out-of-date AuditLogs.
 
-```
+```properties
 appender.rolling.strategy.type=DefaultRolloverStrategy
 
 appender.rolling.strategy.max=3000
