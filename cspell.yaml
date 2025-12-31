@@ -95,6 +95,8 @@ words:
 - HDFS
 - Protolock
 - CSI
+- Quantcast
+- Xceiver
 - matomo
 - qube
 - proto

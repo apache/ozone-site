@@ -38,8 +38,8 @@ If the application is continuing to write beyond the size of `6 * BLOCK_SIZE`, t
 
 ### Erasure Coding Write
 
-The core logic of erasure coding writes are placed at ozone client.
-When client creates the file, ozone manager allocates the block group(`d + p`)
+The core logic of erasure coding writes are placed at Ozone client.
+When client creates the file, Ozone Manager allocates the block group(`d + p`)
 number of nodes from the pipeline provider and return the same to client.
 As data is coming in from the application, client will write first d number of chunks
 to d number of data nodes in block group. It will also cache the d number chunks
@@ -52,16 +52,15 @@ For interest of space, we assumed EC(3, 2) Replication Config for the diagram.
 
 ![EC Block Allocation in Containers](EC-Write-Block-Allocation-in-Containers.png)
 
-
 Let's zoom out the blockID: 1 data layout from the above picture, that showed in the following picture.
-This picture shows how the chunks will be layed out in data node blocks.
+This picture shows how the chunks will be laid out in data node blocks.
 
 ![EC Chunk Layout](EC-Chunk-Layout.png)
 
 Currently, the EC client re-used the data transfer end-points to transfer the data to data nodes.
 The XceiverClientGRPC client used for writing data and putBlock info.
-The datanode side changes are minimal as we reused the same existing transfer protocols.
-The EC data block written at the datanode is same as any other block in non-EC mode.
+The Datanode side changes are minimal as we reused the same existing transfer protocols.
+The EC data block written at the Datanode is same as any other block in non-EC mode.
 In a single block group, container id numbers are same in all nodes. A file can have multiple block groups.
 Each block group will have `d+p` number of block and all ids are same.
 
@@ -102,14 +101,16 @@ eco system projects still uses file system APIs. To provide both worlds best acc
 it's provided both faces of interfaces. In both cases, keys/files would be written into buckets under the hood.
 So, EC Replication Configs can be set at bucket level.
 The EC policy encapsulates how to encode/decode a file.
+
 Each EC Replication Config defined by the following pieces of information:
+
  1. **data:** Data blocks number in an EC block group.
  2. **parity:** Parity blocks number in an EC block group.
  3. **ecChunkSize:** The size of a striping chunk. This determines the granularity of striped reads and writes.
  4. **codec:** This is to indicate the type of EC algorithms (e.g., `RS`(Reed-Solomon), `XOR`).
 
 To pass the EC Replication Config in command line or configuration files, we need to use the following format:
-*codec*-*num data blocks*-*num parity blocks*-*ec chunk size*
+*codec*-*num data blocks*-*num parity blocks*-*EC chunk size*
 
 Currently, there are three built-in EC Replication Configs supported: `RS-3-2-1024k`, `RS-6-3-1024k`, `XOR-2-1-1024k`.
 The most recommended option is `RS-6-3-1024k`. When a key/file created without specifying the Replication Config,
