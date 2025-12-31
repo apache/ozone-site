@@ -2,4 +2,4 @@ apache-ozone-community:
   name: The Apache Ozone Community
   title: Apache Ozone Project
   url: https://ozone.apache.org
-  image_url: https://ozone.apache.org/img/ozone-logo.svg
+  image_url: /img/ozone-logo.svg
