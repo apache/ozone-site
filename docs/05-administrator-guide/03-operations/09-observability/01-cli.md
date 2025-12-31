@@ -2,7 +2,7 @@
 sidebar_label: CLI
 ---
 
-# Admin CLI
+# CLI
 
 ## ozone insight
 
