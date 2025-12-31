@@ -193,7 +193,7 @@ For example, when using Ranger KMS for authorization, to allow the user `om` (th
 - **Policy for S3 Gateway proxy user (e.g., the user specified in `ozone.s3g.kerberos.principal`, typically `s3g`):**
   - Resource: `keyname=enckey` (or specific keys for S3 buckets)
   - Permissions: `DECRYPT_EEK`
-- **Policy for administrative users (e.g., `hdfs` or a keyadmin group):**
+- **Policy for administrative users (e.g., `hdfs` or a key admin group):**
   - Resource: `keyname=*` (or specific keys)
   - Permissions: `CREATE_KEY`, `DELETE_KEY`, `GET_KEYS`, `ROLL_NEW_VERSION`
 
