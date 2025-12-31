@@ -127,8 +127,9 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/blog/',
+            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/',
         },
         theme: {
           customCss: [

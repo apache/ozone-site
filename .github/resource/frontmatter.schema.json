@@ -16,6 +16,27 @@
     "draft": {
       "description": "Makes pages for incomplete features only visible in development mode.",
       "type": "boolean"
+    },
+    "title": {
+        "type": "string"
+    },
+    "date": {
+        "type": "object"
+    },
+    "author": {
+        "type": "string"
+    },
+    "authors": {
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    },
+    "tags": {
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
     }
   },
   "additionalProperties": false
