@@ -109,6 +109,8 @@ words:
 - trino
 - oozie
 - spnego
+- keytab
+- Keytab
 - RocksDB
 - hsync
 - SASL
