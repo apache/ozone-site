@@ -121,6 +121,9 @@ words:
 - javadoc
 - JVM
 - distcp
+- Boto3
+- fsspec
+- libhdfs
 # Misc words
 - acking
 - dashboarding
