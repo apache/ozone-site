@@ -12,7 +12,7 @@ The SCM Web UI exposes the runtime state and health of the storage layer
 managed by SCM. At a high level, it provides:
 
 - Service overview: SCM identity, version, JVM runtime, and cluster identifiers
-- Cluster summaries: Aggregate statistics for datanode usage, capacity,
+- Cluster summaries: Aggregate statistics for Datanode usage, capacity,
   pipelines, and containers
 - Datanode visibility: Per-node operational state, capacity usage, and
   heartbeat status
@@ -24,7 +24,7 @@ average latency, and success/failure statistics for SCM RPC calls.
 
 ## OM Web UI
 
-![OM Web UI](/img/om-ui.png)
+![OM Web UI](om-ui.png)
 
 The Ozone Manager (OM) Web UI focuses on the metadata and namespace management
 layer. It provides:
