@@ -13,6 +13,6 @@ Ozone traffic, whether between the cluster and client, or internal inside the cl
 </property>
 ```
 
-## ozone.om.transport.class
+## OM Transport Class
 
 While the default is `org.apache.hadoop.ozone.om.protocolPB.Hadoop3OmTransportFactory`, it is possible to specify a gRPC based transport using the `ozone.om.transport.class` configuration property: `org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory`. In this case, the Hadoop RPC configuration is not applicable.
