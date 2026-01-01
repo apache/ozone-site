@@ -95,6 +95,8 @@ words:
 - HDFS
 - Protolock
 - CSI
+- Quantcast
+- Xceiver
 - matomo
 - qube
 - proto
@@ -131,3 +133,9 @@ words:
 - Flink
 - rebalancing
 - JDK
+- CMDB
+# Company names for "Who Uses Ozone" page
+- Shopee
+- Qihoo360
+- Meituan
+- Unicom
