@@ -17,8 +17,8 @@ For more information, check out [Hadoop in Secure Mode](https://hadoop.apache.or
 </property>
 ```
 
-## ozone.om.transport.class
+## OM Transport Class
 
 The default transport class for communication with the Ozone Manager (OM) is `org.apache.hadoop.ozone.om.protocolPB.Hadoop3OmTransportFactory`. However, users can configure the system to use a gRPC-based transport class for client-to-OM communication by setting the `ozone.om.transport.class` configuration property to `org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory`.
 
-In this case, the Hadoop RPC encryption configuration is not applicable. Refer to the [Configuring gRPC With TLS]({{< ref "administrator-guide/configuration/security/encryption/network-encryption/grpc-tls" >}}) page to encrypt gRPC-based communication.
+In this case, the Hadoop RPC encryption configuration is not applicable. Refer to the [Configuring gRPC With TLS]({{< ref "administrator-guide/configuration/security/encryption/network-encryption/grpc" >}}) page to encrypt gRPC-based communication.
