@@ -69,7 +69,7 @@ Now we can create a Key.
 
 ### Reading and Writing a Key
 
-With a bucket object the users can now read and write keys. The following code reads a video called intro.mp4 from the local disk and stores in the _video_ bucket that we just created.
+With a bucket object the users can now read and write keys. The following code reads a video called intro.mp4 from the local disk and stores in the *video* bucket that we just created.
 
 ```java
 // read data from the file, this is a user provided function.
