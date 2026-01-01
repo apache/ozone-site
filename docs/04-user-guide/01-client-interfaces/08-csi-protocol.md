@@ -70,4 +70,4 @@ kubectl port-forward ozone-csi-test-webserver-7cbdc5d65c-h5mnn 8000:8000
 
 Eventually, we can see the result from `http://localhost:8000/`
 
-![persistent-volume-test-web-ui](pvtest-webui.png)
+![persistent-volume-test-web-ui](./persistent-volume-test-web-ui.png)
