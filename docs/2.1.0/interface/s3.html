@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../interface.html">Client Interfaces</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">S3 Protocol</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/interface/s3.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>S3 Protocol</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone provides S3 compatible REST interface to use the object store data with any S3 compatible tools.</p>
+<p>S3 buckets are stored under the <code>/s3v</code> volume.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>S3 Gateway is a separated component which provides the S3 compatible APIs. It should be started additional to the regular Ozone components.</p>
+<p>You can start a docker based cluster, including the S3 gateway from the release package.</p>
+<p>Go to the <code>compose/ozone</code> directory, and start the server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d --scale datanode<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>You can access the S3 gateway at <code>http://localhost:9878</code></p>
+<h2 id="url-schema">URL Schema</h2>
+<p>Ozone S3 gateway supports both the virtual-host-style URL s3 bucket addresses (eg. <a href="http://bucketname.host:9878">http://bucketname.host:9878</a>) and the path-style addresses (eg. http://host:9878/bucketname)</p>
+<p>By default it uses the path-style addressing. To use virtual host style URLs set your main domain name in your <code>ozone-site.xml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;name&gt;</span>ozone.s3g.domain.name<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>s3g.internal<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><h2 id="implemented-rest-endpoints">Implemented REST Endpoints</h2>
+<p>The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. The tables below summarize each API’s support status, its feature, and any relevant notes, including known deviations from AWS S3 behavior.</p>
+<h3 id="bucket-operations">Bucket Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html">ListBuckets</a></td>
+          <td>Lists all buckets owned by the authenticated user.</td>
+          <td>Returns the full bucket list.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html">CreateBucket</a></td>
+          <td>Creates a new bucket.</td>
+          <td><strong>Non-compliant behavior:</strong> The default bucket ACL may include extra group permissions instead of being strictly private. Bucket names must adhere to S3 naming conventions.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html">HeadBucket</a></td>
+          <td>Checks for the existence of a bucket.</td>
+          <td>Returns a 200 status if the bucket exists.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html">DeleteBucket</a></td>
+          <td>Deletes a bucket.</td>
+          <td>Bucket must be empty before deletion.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html">GetBucketLocation</a></td>
+          <td>Retrieves the location (region) of a bucket.</td>
+          <td>Typically returns a default region (e.g., <code>us-east-1</code>), which may differ from AWS if region-specific responses are expected.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="object-operations">Object Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a></td>
+          <td>Retrieves the contents of an object.</td>
+          <td><strong>Non-compliant behavior:</strong> For non-existent objects, Ozone may return a generic 404 without the structured XML error body defined by AWS S3.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html">HeadObject</a></td>
+          <td>Retrieves metadata for an object.</td>
+          <td>Similar to GET Object, error responses for missing objects might lack detailed AWS-style error XML.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html">PutObject</a></td>
+          <td>Uploads a new object.</td>
+          <td>Supports both single PUT and multipart uploads. <strong>Non-compliant behavior:</strong> Any ACL headers provided in the request are ignored.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html">DeleteObject</a></td>
+          <td>Deletes a single object.</td>
+          <td>Returns standard error codes for missing objects.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html">DeleteObjects</a></td>
+          <td>Deletes multiple objects in one request.</td>
+          <td>Bulk delete operation with aggregated error reporting.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a></td>
+          <td>Copies an object (intra- or inter-bucket).</td>
+          <td>Supports metadata directives (COPY/REPLACE). <strong>Non-compliant behavior:</strong> Self-copying for metadata updates may differ slightly from AWS S3.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html">ListObjectsV2</a></td>
+          <td>Lists objects in a bucket with filtering and pagination.</td>
+          <td>Supports prefix, delimiter, and continuation tokens.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="object-tagging-operations">Object Tagging Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a></td>
+          <td>Adds or updates tags on an object.</td>
+          <td>Fully supported; updates replace any existing tag set.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html">GetObjectTagging</a></td>
+          <td>Retrieves the tag set of an object.</td>
+          <td>Returns the tag set as defined by the S3 API.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a></td>
+          <td>Removes the tag set from an object.</td>
+          <td>Clears all tags associated with the object.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="multipart-upload-operations">Multipart Upload Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html">CreateMultipartUpload</a></td>
+          <td>Starts a multipart upload session.</td>
+          <td>Returns an UploadId for subsequent parts.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html">UploadPart</a></td>
+          <td>Uploads an individual part for a multipart upload.</td>
+          <td>Part numbering and ETag computation follow AWS semantics.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html">ListMultipartUploads</a></td>
+          <td>Lists in-progress multipart uploads in a bucket.</td>
+          <td>Up to 1000 multipart uploads are returned in a batch by default.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html">ListParts</a></td>
+          <td>Lists uploaded parts for an in-progress multipart upload.</td>
+          <td>Supports pagination if many parts exist.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html">CompleteMultipartUpload</a></td>
+          <td>Assembles all uploaded parts into a final object.</td>
+          <td>Returns an ETag that follows AWS multipart rules.</td>
+      </tr>
+      <tr>
+          <td>✅ <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html">AbortMultipartUpload</a></td>
+          <td>Aborts an in-progress multipart upload.</td>
+          <td>Frees up storage used by uploaded parts. Incomplete multipart uploads older than 7 days are automatically aborted by Ozone.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="additional-operations">Additional Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>API Name</strong></th>
+          <th><strong>Feature</strong></th>
+          <th><strong>Note</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ Generate Presigned URL</td>
+          <td>Generates a temporary URL for accessing an object.</td>
+          <td>Uses AWS Signature V4. <strong>Non-compliant behavior:</strong> The generated URL may include a fixed default region rather than dynamically reflecting the bucket’s location. Ozone now supports generating presigned URLs for all major S3 operations, including <code>GetObject</code>, <code>PutObject</code>, <code>DeleteObject</code>, <code>HeadObject</code>, <code>HeadBucket</code>, <code>MultipartUpload</code>.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<blockquote>
+<p><strong>Additional Notes:</strong></p>
+<ul>
+<li><strong>Advanced Features Not Supported:</strong>
+<ul>
+<li><strong>ACLs, Bucket Policies, CORS Configuration, and Website Hosting:</strong> These are not fully implemented; Ozone uses an internal permission model that deviates from AWS S3.</li>
+<li><strong>Bucket Versioning, Object Locking, Server-Side Encryption, and S3 Select:</strong> These features are currently not supported.</li>
+<li><strong>Conditional Requests:</strong> Support for conditional requests (e.g., <code>If-Match</code>, <code>If-None-Match</code>) is planned and tracked in <a href="https://issues.apache.org/jira/browse/HDDS-13117">HDDS-13117</a>.</li>
+<li><strong>Lifecycle configuration, cross region replication, S3 event notifications</strong> are being implemented and in the roadmap.</li>
+</ul>
+</li>
+<li>While Ozone S3 Gateway provides extensive support for common S3 operations, users should be aware of the above non-compliant behaviors and limitations when integrating with applications expecting full AWS S3 functionality.</li>
+<li>While Ozone S3 Gateway does not support S3 Server-Side Encryption, it does support encrypted buckets using Apache Ranger KMS. For more information, see the <a href="../security/securingtde.html">Transparent Data Encryption</a> documentation.</li>
+</ul></blockquote>
+<h2 id="security">Security</h2>
+<p>If security is not enabled, you can <em>use</em> <strong>any</strong> AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY</p>
+<p>If security is enabled, you can get the key and the secret with the <code>ozone s3 getsecret</code> command (*Kerberos based authentication is required).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>ozone s3 getsecret
+</span></span><span style="display:flex;"><span>awsAccessKey<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>awsSecret<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
+</span></span></code></pre></div><p>Note: Starting in Ozone 1.4.0, the secret will be <strong>shown only once</strong> when generated with <code>getsecret</code>. If the secret is lost, the user would have to <code>revokesecret</code> first before regenerating a new secret with <code>getsecret</code>.</p>
+<p>Now, you can use the key and the secret to access the S3 endpoint:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>testuser/scm@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
+</span></span><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket bucket1
+</span></span></code></pre></div><p>To invalidate/revoke the secret, use <code>ozone s3 revokesecret</code> command. Parameter &lsquo;-y&rsquo; can be appended to skip the interactive confirmation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone s3 revokesecret
+</span></span><span style="display:flex;"><span>Enter <span style="color:#e6db74">&#39;y&#39;</span> to confirm S3 secret revocation <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;testuser/scm@EXAMPLE.COM&#39;</span>: y
+</span></span><span style="display:flex;"><span>S3 secret revoked.
+</span></span></code></pre></div><p>Ozone Manager administrators can run <code>ozone s3 getsecret</code> and <code>ozone s3 revokesecret</code> command with <code>-u</code> parameter to specify another users.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Obtained Kerberos TGT for testuser/scm@EXAMPLE.COM with kinit,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># testuser/scm@EXAMPLE.COM is an OM admin.</span>
+</span></span><span style="display:flex;"><span>ozone s3 getsecret -u om/om@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>awsAccessKey<span style="color:#f92672">=</span>om/om@EXAMPLE.COM
+</span></span><span style="display:flex;"><span>awsSecret<span style="color:#f92672">=</span>1e9379d0424cce6669b1a501ff14834e46dee004ee868b41a313b49eabcfb68f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ozone s3 revokesecret -u om/om@EXAMPLE.COM -y
+</span></span><span style="display:flex;"><span>S3 secret revoked.
+</span></span></code></pre></div><h2 id="expose-any-volume">Expose any volume</h2>
+<p>Ozone has one more element in the name-space hierarchy compared to S3: the volumes. By default, all the buckets of the <code>/s3v</code> volume can be accessed with S3 interface but only the (Ozone) buckets of the <code>/s3v</code> volumes are exposed.</p>
+<p>To make any other buckets available with the S3 interface a &ldquo;symbolic linked&rdquo; bucket can be created:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone sh volume create /s3v
+</span></span><span style="display:flex;"><span>ozone sh volume create /vol1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ozone sh bucket create /vol1/bucket1
+</span></span><span style="display:flex;"><span>ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
+</span></span></code></pre></div><p>This example expose the <code>/vol1/bucket1</code> Ozone bucket as an S3 compatible <code>common-bucket</code> via the S3 interface.</p>
+<p>(Note: the implementation details of the bucket-linking feature can be found in the <a href="../design/volume-management.html">design doc</a>)</p>
+<h2 id="clients">Clients</h2>
+<h3 id="aws-cli">AWS Cli</h3>
+<p><code>aws</code> CLI could be used by specifying the custom REST endpoint.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3api --endpoint http://localhost:9878 create-bucket --bucket buckettest
+</span></span></code></pre></div><p>Or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 ls --endpoint http://localhost:9878 s3://buckettest
+</span></span></code></pre></div><h2 id="compatible-third-party-applications">Compatible third-party applications</h2>
+<p>Ozone&rsquo;s S3 Gateway enables integration with a wide range of cloud-native and analytics applications. Here are some examples of tools and platforms known to work with Ozone (in alphabetical order):</p>
+<ul>
+<li><a href="https://clickhouse.com/docs/en/integrations/s3">Clickhouse</a></li>
+<li><a href="https://docs.fluentd.org/output/s3">Fluentd</a> can send logs directly to Ozone via the S3 Gateway.</li>
+<li><a href="https://juicefs.com/docs/community/s3_gateway/">JuiceFS</a></li>
+<li><a href="https://docs.starburst.io/latest/connector/starburst-ozone.html">Starburst</a> (Starburst also supports Ozone <code>ofs://</code>)</li>
+<li><a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20">Teradata NOS</a></li>
+<li><a href="https://cyberduck.io/">CyberDuck</a> See the <a href="../interface/cyberduckozones3.html">tutorial page</a></li>
+</ul>
+<p>This list is not exhaustive—any application that supports the S3 protocol can potentially connect to Ozone, making it easy to adopt Ozone in modern data pipelines and cloud-native workflows.</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../interface/cyberduckozones3.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0, Last Modified: September 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c6a19fbea2dd9d64687a1ad0c5dcc347f7261c56">c6a19fbea2</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

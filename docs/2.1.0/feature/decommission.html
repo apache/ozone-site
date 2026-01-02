@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="active">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Decommissioning</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/feature/decommission.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Decommissioning</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<h1 id="datanode-decommission">DataNode Decommission</h1>
+<p>The DataNode decommission is the process that removes the existing DataNode from the Ozone cluster while ensuring that the new data should not be written to the decommissioned DataNode. When you initiate the process of decommissioning a DataNode, Ozone automatically ensures that all the storage containers on that DataNode have an additional copy created on another DataNode before the decommission completes. So, datanode will keep running after it has been decommissioned and may be used for reads, but not for writes until it is stopped manually.</p>
+<p>When we initiate the process of decommissioning, first we check the current state of the node, ideally it should be &ldquo;IN_SERVICE&rdquo;, then we change it&rsquo;s state to &ldquo;DECOMMISSIONING&rdquo; and start the process of decommissioning, it goes through a workflow where the following happens:</p>
+<ol>
+<li>
+<p>First an event is fired to close any pipelines on the node, which will also close any containers.</p>
+</li>
+<li>
+<p>Next the containers on the node are obtained and checked to see if new replicas are needed. If so, the new replicas are scheduled.</p>
+</li>
+<li>
+<p>After scheduling replication, the node remains pending until replication has completed.</p>
+</li>
+<li>
+<p>At this stage the node will complete the decommission process and the state of the node will be changed to &ldquo;DECOMMISSIONED&rdquo;.</p>
+</li>
+</ol>
+<p>To check the current state of the datanodes we can execute the following command,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode list
+</span></span></code></pre></div><p>To decommission a datanode you can execute the following command in cli,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>You can enter multiple hosts to decommission multiple datanodes together.</p>
+<p>To view the status of a decommissioning datanode, you can execute the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode status decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--id<span style="color:#f92672">=</span>&lt;uuid&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--ip<span style="color:#f92672">=</span>&lt;ipAddress&gt;<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>You can pass the IP address or UUID of one datanode to view only the details related to that datanode.</p>
+<p><strong>Note:</strong> To recommission a datanode you may execute the below command in cli,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin datanode recommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">[</span>--scm<span style="color:#f92672">=</span>&lt;scm&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;hosts&gt;...<span style="color:#f92672">]</span>
+</span></span></code></pre></div><h3 id="tuning-and-monitoring-decommissioning">Tuning and Monitoring Decommissioning</h3>
+<p>The process of decommissioning a DataNode involves replicating all its containers to other DataNodes in the cluster. The speed of this process can be tuned, and its progress can be monitored using several configuration properties and metrics.</p>
+<h4 id="configuration-properties">Configuration Properties</h4>
+<p>Administrators can adjust the following properties in <code>ozone-site.xml</code> to control the container replication speed during decommissioning. They are grouped by the component where they are primarily configured.</p>
+<h5 id="scm-side-properties">SCM-Side Properties</h5>
+<ul>
+<li><strong><code>hdds.scm.replication.datanode.replication.limit</code></strong>
+<ul>
+<li><strong>Purpose</strong>: Defines the base limit for concurrent replication commands that the SCM will <em>send</em> to a single DataNode.</li>
+<li><strong>Default</strong>: <code>20</code>.</li>
+<li><strong>Details</strong>: The effective limit for a decommissioning DataNode is this value multiplied by <code>hdds.datanode.replication.outofservice.limit.factor</code>.</li>
+</ul>
+</li>
+</ul>
+<h5 id="datanode-side-properties">DataNode-Side Properties</h5>
+<ul>
+<li>
+<p><strong><code>hdds.datanode.replication.outofservice.limit.factor</code></strong></p>
+<ul>
+<li><strong>Purpose</strong>: A multiplier to increase replication capacity for <code>DECOMMISSIONING</code> or <code>MAINTENANCE</code> nodes. This is a key property for tuning decommission speed.</li>
+<li><strong>Default</strong>: <code>2.0</code>.</li>
+<li><strong>Details</strong>: Although this is a DataNode property, it must also be set in the SCM&rsquo;s configuration. The SCM uses it to send more replication commands, and the DataNode uses it to increase its internal resources (threads and queues) to handle the increased load.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>hdds.datanode.replication.queue.limit</code></strong></p>
+<ul>
+<li><strong>Purpose</strong>: Sets the base size of the queue for incoming replication requests on a DataNode.</li>
+<li><strong>Default</strong>: <code>4096</code>.</li>
+<li><strong>Details</strong>: For decommissioning nodes, this limit is scaled by <code>hdds.datanode.replication.outofservice.limit.factor</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>hdds.datanode.replication.streams.limit</code></strong></p>
+<ul>
+<li><strong>Purpose</strong>: Sets the base number of threads for the replication thread pool on a DataNode.</li>
+<li><strong>Default</strong>: <code>10</code>.</li>
+<li><strong>Details</strong>: For decommissioning nodes, this limit is also scaled by <code>hdds.datanode.replication.outofservice.limit.factor</code>.</li>
+</ul>
+</li>
+</ul>
+<p>By tuning these properties, administrators can balance the decommissioning speed against the impact on the cluster&rsquo;s performance.</p>
+<h4 id="metrics">Metrics</h4>
+<p>The following metrics can be used to monitor the progress of DataNode decommissioning. The names in parentheses are the corresponding Prometheus metric names, which may vary slightly depending on the metrics sink configuration.</p>
+<h5 id="scm-side-metrics-replicationmanagermetrics">SCM-side Metrics (<code>ReplicationManagerMetrics</code>)</h5>
+<p>These metrics are available on the SCM and provide a cluster-wide view of the replication process. During decommissioning, you should see an increase in these metrics. The name in parentheses is the corresponding Prometheus metric name.</p>
+<ul>
+<li><code>InflightReplication</code> (<code>replication_manager_metrics_inflight_replication</code>): The number of container replication requests currently in progress.</li>
+<li><code>replicationCmdsSentTotal</code> (<code>replication_manager_metrics_replication_cmds_sent_total</code>): The total number of replication commands sent to datanodes.</li>
+<li><code>replicasCreatedTotal</code> (<code>replication_manager_metrics_replicas_created_total</code>): The total number of container replicas successfully created.</li>
+<li><code>replicateContainerCmdsDeferredTotal</code> (<code>replication_manager_metrics_replicate_container_cmds_deferred_total</code>): The number of replication commands deferred because source datanodes were overloaded. If this value is high, it might indicate that the source datanodes (including the decommissioning one) are too busy.</li>
+</ul>
+<h5 id="datanode-side-metrics-measuredreplicator-metrics">Datanode-side Metrics (<code>MeasuredReplicator</code> metrics)</h5>
+<p>These metrics are available on each DataNode. For a decommissioning node, they show its activity as a source of replicas. For other nodes, they show their activity as targets. The name in parentheses is the corresponding Prometheus metric name.</p>
+<ul>
+<li><code>success</code> (<code>measured_replicator_success</code>): The number of successful replication tasks.</li>
+<li><code>successTime</code> (<code>measured_replicator_success_time</code>): The total time spent on successful replication tasks.</li>
+<li><code>transferredBytes</code> (<code>measured_replicator_transferred_bytes</code>): The total bytes transferred for successful replications.</li>
+<li><code>failure</code> (<code>measured_replicator_failure</code>): The number of failed replication tasks.</li>
+<li><code>failureTime</code> (<code>measured_replicator_failure_time</code>): The total time spent on failed replication tasks.</li>
+<li><code>failureBytes</code> (<code>measured_replicator_failure_bytes</code>): The total bytes that failed to be transferred.</li>
+<li><code>queueTime</code> (<code>measured_replicator_queue_time</code>): The total time tasks spend in the replication queue. A high value might indicate the datanode is overloaded.</li>
+</ul>
+<p>By monitoring these metrics, administrators can get a clear picture of the decommissioning progress and identify potential bottlenecks.</p>
+<h1 id="om-decommission">OM Decommission</h1>
+<p>Ozone Manager (OM) decommissioning is the process in which you gracefully remove one of the OM from the OM HA Ring.</p>
+<p>To decommission an OM and remove the node from the OM HA ring, the following steps need to be executed.</p>
+<ol>
+<li>Add the <em>OM NodeId</em> of the OM Node to be decommissioned to the <em>ozone.om.decommissioned.nodes.<omServiceId></em> property in <em>ozone-site.xml</em> of all
+other OMs.</li>
+<li>Run the following command to decommission an OM node.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin om decommission -id<span style="color:#f92672">=</span>&lt;om-service-id&gt; -nodeid<span style="color:#f92672">=</span>&lt;decommissioning-om-node-id&gt; -hostname<span style="color:#f92672">=</span>&lt;decommissioning-om-node-address&gt; <span style="color:#f92672">[</span>optional --force<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>The _force_option will skip checking whether OM configurations in <em>ozone-site.xml</em> have been updated with the decommissioned node added to
+<em><strong>ozone.om.decommissioned.nodes</strong></em> property. <p><strong>Note -</strong> It is recommended to bootstrap another OM node before decommissioning one to maintain HA.</p></p>
+<h1 id="scm-decommission">SCM Decommission</h1>
+<p>Storage Container Manager (SCM) decommissioning is the process in which you can gracefully remove one of the SCM from the SCM HA Ring.</p>
+<p>To decommission a SCM and remove the node from the SCM HA ring, the following steps need to be executed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin scm decommission <span style="color:#f92672">[</span>-hV<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -nodeid<span style="color:#f92672">=</span>&lt;nodeId&gt;
+</span></span></code></pre></div><p>You can obtain the &rsquo;nodeId&rsquo; by executing this command, <strong>&ldquo;ozone admin scm roles&rdquo;</strong></p>
+<h3 id="leader-scm">Leader SCM</h3>
+<p>If you want to decommission the <strong>leader</strong> scm, you must first transfer the leadership to a different scm and then decommission the node.</p>
+<p>To transfer the leader, we can excute below command,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin scm transfer <span style="color:#f92672">[</span>--service-id<span style="color:#f92672">=</span>&lt;scmServiceId&gt;<span style="color:#f92672">]</span> -n<span style="color:#f92672">=</span>&lt;nodeId&gt;
+</span></span></code></pre></div><p>After successful leadership change you can proceed with decommissioning.</p>
+<h3 id="primordial-scm">Primordial SCM</h3>
+<p>If you want to decommission the <strong>primordial</strong> scm, you have to change the <em>ozone.scm.primordial.node.id</em> property to point to a different SCM and then proceed with decommissioning.</p>
+<h3 id="note">Note</h3>
+<p>During SCM decommissioning the private key of the decommissioned SCM should be manually deleted. The private keys can be found inside <em>hdds.metadata.dir</em>.</p>
+<p>Manual deletion is needed until we have certificate revocation support (HDDS-8399)</p>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../feature/om-ha.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0, Last Modified: September 22, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/3ddcd48228bb4c6f75b3effbf8959c75fe616bc0">3ddcd48228</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

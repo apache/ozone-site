@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Object store for Hadoop">
+    <meta name="keywords" content="hadoop, ozone, hdds, objectstore, scale"/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="language" content="en"/>
+
+    <title>Apache Ozone</title>
+
+    <base href="//localhost:1313/">
+
+    <link rel="canonical" href="https://ozone.apache.org">
+
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+</head>
+
+<body>
+
+
+<div class="topnav">
+    <div class="container">
+        <ul class="breadcrumb col-md-4">
+            <li>
+                <img class="asf-logo" src="asf_feather.png"/>
+                <a href="https://www.apache.org">Apache Software Foundation</a>
+            </li>
+        </ul>
+        <div class="col-md-8">
+            <ul class="pull-right breadcrumb">
+                <li><a href="https://www.apache.org/licenses/">License</a></li>
+                <li><a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+                <li><a href="https://www.apache.org/events/current-event">Events</a></li>
+                <li><a href="https://www.apache.org/foundation/thanks.html">Thanks</a></li>
+                <li><a href="https://www.apache.org/security/">Security</a></li>
+                <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a></li>
+        </ul>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav navbar-brand">
+                    <li>
+                        <img src="ozone-logo.png" alt="Ozone logo"/>
+                        <a href="//localhost:1313/">Apache Ozone&trade;</a>
+                    </li>
+                </ul>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#ozone-menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div id="ozone-menu" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="faq">FAQ</a></li>
+                    <li><a href="downloads">Download</a></li>
+                    <li><a href="docs">Documentation</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
+                         <ul class="dropdown-menu">
+                            <li><a href="community">Get involved</a></li>
+                            <li><a href="events">Events</a></li>
+                            <li><a href="blogs">Blogs</a></li>
+                         </ul>
+                    </li>
+                    <li><a href="https://github.com/apache/ozone">Source</a></li>
+                    <li><a href="https://cwiki.apache.org/confluence/display/OZONE">Wiki</a></li>
+                </ul>
+            </div>
+
+    </nav>
+
+    <div style="max-height: 200px; overflow: hidden;">
+      <img src="sunrise-ozone.jpg" style="width: 100%; left:0px;"/>
+    </div>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<section id="main">
+  <div>
+    <h1 id="title">Releases Archive</h1>
+        <ul id="list">
+            
+            <h1><a href="/release/2.1.0/">Release 2.1.0 available</a></h1>
+            <p><small>2025 Dec 31 </small></p>
+
+            <p><img src="releases/2.1.0.jpg" alt="Joshua-Trees-haiku"></p>
+<h1 id="release-note">Release Note</h1>
+<p>Apache Ozone 2.1.0 adds 805 new features, improvements and bug fixes on top of Ozone 2.0.</p>
+<h2 id="notable-changes">Notable Changes</h2>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-10239">HDDS-10239</a> | <strong>Storage Container Reconciliation</strong></li>
+</ul>
+<p>Introduced a container reconciliation protocol to resolve mismatched container states and verify replica integrity.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12940">HDDS-12940</a> | <strong>Ozone Snapshot Phase 3: Scale up Snapshot Operations</strong></li>
+</ul>
+<p>Enhanced Ozone Snapshot scalability and continued stability improvements.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-8387">HDDS-8387</a> | <strong>Container and volume scanners phase II</strong></li>
+</ul>
+<p>Enhanced storage volume failure handling by introducing a &lsquo;degraded&rsquo; state to preserve data availability, along with improved health observability.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12564">HDDS-12564</a> | <strong>Handling disk issues in Datanodes - Phase II</strong></li>
+</ul>
+<p>Enhanced Datanode disk space management to prevent out-of-space failures.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-13323">HDDS-13323</a> | <strong>STS - temporary, limited-privilege credentials service</strong>
+Implemented AWS STS AssumeRole support to generate short-lived temporary credentials.</li>
+</ul>
+<hr>
+<h2 id="new-configuration-options">New Configuration Options</h2>
+<ul>
+<li>OZONE_SERVER_OPTS: A new environment variable was added to allow setting common Java options for all Ozone server processes at once.</li>
+<li>ozone.compaction.service.enabled: Enable or disable a background job that periodically compacts rocksdb tables flagged for compaction. The default is false.</li>
+<li>ozone.om.compaction.service.run.interval: A background job that periodically compacts rocksdb tables flagged for compaction. The default is 6 hours.</li>
+<li>ozone.om.compaction.service.timeout: A timeout value of compaction service. If this is set greater than 0, the service will stop waiting for compaction completion after this time. Unit could be defined with postfix (ns,ms,s,m,h,d). The default is 10 min.</li>
+<li>ozone.om.compaction.service.columnfamilies: A comma separated, no spaces list of all the column families that are compacted by the compaction service. If this is empty, no column families are compacted. The default is &ldquo;keyTable,fileTable,directoryTable,deletedTable,deletedDirectoryTable,multipartInfoTable&rdquo;.</li>
+<li>ozone.om.snapshot.prune.compaction.backup.batch.size: This property controls Prune SST files in Compaction backup directory in batches every <code>ozone.om.snapshot.compaction.dag.prune.daemon.run.interval</code>. The default is 2000.</li>
+</ul>
+<p>These properties provide more control over the Ratis write buffer, which can be adjusted to optimize performance based on workload and
+hardware.</p>
+<ul>
+<li>ozone.om.ratis.server.pending.write.byte-limit: Sets the maximum byte size of all pending write requests. The default is 64MB.</li>
+<li>ozone.om.ratis.server.pending.write.element-limit: Sets the maximum number of pending write requests. The default is 4096.</li>
+</ul>
+<h2 id="incompatible-change">Incompatible change</h2>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12152">HDDS-12152</a> | Ozone now requires the Hadoop 3.4 runtime. Support for Hadoop 3.1.2 is deprecated.</li>
+</ul>
+<h3 id="default-value-changes">Default Value Changes</h3>
+<ul>
+<li>hdds.scm.block.deletion.per-interval.max: Default is now 500,000 blocks per interval.</li>
+<li>hdds.datanode.volume.choosing.policy: Default changed from RoundRobinVolumeChoosingPolicy to CapacityVolumeChoosingPolicy.</li>
+<li>hdds.datanode.volume.min.free.space.percent: Default changed to 0.1%.</li>
+<li>hdds.datanode.block.deleting.limit.per.interval: Default is now 20,000 blocks per interval.</li>
+<li>hdds.scm.safemode.min.datanode: Default changed from 1 to 3.</li>
+<li>hdds.secret.key.expiry.duration: Default is now 9 days. This change ensures that tokens remain valid for their full configured duration, preventing premature key invalidation and improving stable authentication.</li>
+<li>fs.trash.classname: Class name updated to org.apache.hadoop.fs.ozone.OzoneTrashPolicy.</li>
+<li>ozone.key.deleting.limit.per.task: Default is now 50,000 keys per task.</li>
+<li>ozone.s3g.https-address: Default changed from None to 0.0.0.0:9879.</li>
+<li>ozone.om.fs.snapshot.max.limit: Default is now 10,000 snapshots.</li>
+<li>ozone.om.ratis.segment.size: Default is now 64MB (was 4MB).</li>
+<li>ozone.scm.ha.dbtransactionbuffer.flush.interval: Default is now 1 min.</li>
+<li>ozone.scm.ha.ratis.segment.size: Default is now 64MB (was 4MB).</li>
+</ul>
+<h3 id="removed-configurations">Removed Configurations:</h3>
+<ul>
+<li>hdds.datanode.volume.min.free.space: This configuration is removed since <a href="https://issues.apache.org/jira/browse/HDDS-12928">HDDS-12928</a>.</li>
+<li>hdds.rest.http-address: This configuration is removed since <a href="https://issues.apache.org/jira/browse/HDDS-12761">HDDS-12761</a>.</li>
+<li>hdds.scm.safemode.pipeline-availability.check: This configuration is removed since <a href="https://issues.apache.org/jira/browse/HDDS-11799">HDDS-11799</a>.</li>
+</ul>
+<h1 id="changelog">Changelog</h1>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,<br>
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="210---2025-12-31">[2.1.0] - 2025-12-31</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Merged the HSync feature branch to support low-latency writes, including lease recovery and client-side metrics. (HDDS-11342) (HDDS-11407) (HDDS-10733)</li>
+<li>Switched to Recon v2 UI as the default user interface. (HDDS-11609)</li>
+<li>Introduced ozone repair CLI commands for quota repair, certificate operations, and snapshot info updates. (HDDS-12039) (HDDS-12041) (HDDS-10295)</li>
+<li>Added design documentation and initial integration steps for OpenTelemetry. (HDDS-13679)</li>
+<li>Implemented an in-memory manager for Snapshot Local Data. (HDDS-13627)</li>
+<li>Added support for Ranger to authorize STS tokens. (HDDS-13848)</li>
+<li>Added latency metrics for key creation operations and deletion services to Grafana dashboards. (HDDS-13510) (HDDS-12442)</li>
+<li>Include openssl native library check in the ozone debug checknative command output. (HDDS-13266) (HDDS-12056)</li>
+<li>Apache Ozone is migrated from OpenTracing to OpenTelemetry for distributed tracing. (HDDS-13680)</li>
+<li>Enable rpm builds for Ozone. To build rpm packages, do: mvn clean package -DskipTests=true -Prpm. Optionally specify -Drpm.targetArch=aarch64 for ARM builds. (HDDS-13439)</li>
+<li>Ozone supports creating deb package for Debian. Example command: mvn clean package -Pdeb The package file ozone_&lt;ozone_version&gt;-&lt;linux_distro&gt;_<!-- raw HTML omitted -->.deb will be created under folder path hadoop-ozone/dist/target. The Ozone binary will be installed under /opt/ozone directory. (HDDS-13414)</li>
+<li>Added a &ldquo;Deletion Progress&rdquo; section to the OM Web UI to track Key Deleting Service metrics (count and size) from the last 24 hours, along with service status and schedule details. (HDDS-12887)</li>
+<li>Added a throttling mechanism to SCM to prevent excessive memory usage and long GC pauses during large-scale block deletions. (HDDS-12087)</li>
+<li>Added support for Listener Ozone Managers (OM). Listener OMs are read-only, non-voting nodes that replicate logs from the leader to serve read requests, improving read performance and offloading voting OMs.(HDDS-11523)</li>
+<li>Exposed new metrics under <code>StorageVolumeScannerMetrics</code> and <code>VolumeInfoMetrics</code> on DataNodes to improve observability of storage volume scanning activity and health. (HDDS-8783)</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Metadata Storage: Moved container-related metadata and OM task metadata from Derby DB to Ozone Manager (OM) RocksDB. (HDDS-13669)</li>
+<li>Locking: Refactored OzoneManagerLock to handle hierarchical resource locking and implemented a pool-based lock manager. (HDDS-13797) (HDDS-13798)</li>
+<li>Bootstrapping: Updated the OM bootstrapping process to use InodeID to identify SST files inside tarballs. (HDDS-12984)</li>
+<li>Bumped Apache Ratis to version 3.1.1. (HDDS-11504)</li>
+<li>Bumped AWS SDK to version 2.35.5. (HDDS-13793)</li>
+<li>Bumped Jetty to 9.4.58. (HDDS-13585)</li>
+<li>Bumped minimum Maven version to 3.6.3. (HDDS-13364)</li>
+<li>Recon Sync: Separated Recon OM synchronization from task processing to improve stability. (HDDS-8633)</li>
+<li>Container Balancer: Updated ContainerBalancer to avoid sending delete commands with expiration times in the past. (HDDS-13067)</li>
+<li>The default backup SST pruning interval is now <strong>10 minutes</strong>. This means old backup files will be deleted more frequently, improving disk space usage if Ozone Snapshot is enabled. (HDDS-13638)</li>
+<li>Ozone now requires the Hadoop 3.4 runtime. Support for Hadoop 3.1.2 is deprecated. (HDDS-12152)</li>
+<li>Renamed the previous functionality of the <code>--all</code> option in <code>ozone sh snapshot lsDiff</code> to <code>--all-status</code>. The <code>--all</code> option now behaves as a listing limit, setting the count to <code>Integer.MAX_VALUE</code>. (HDDS-8802)</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Snapshot Locking: Fixed OMLockDetails usage where it incorrectly returned a ThreadLocal Object. (HDDS-13978) (HDDS-13004)</li>
+<li>Recon Startup: Improved Recon bootup times by handling failed delta tasks from previous runs and making task reprocessing non-blocking. (HDDS-13791)</li>
+<li>S3 Gateway: Fixed an internal error in CompleteMultipartUpload when parts are not specified. (HDDS-11457)</li>
+<li>Container Balancer: Fixed multithreading bugs in ContainerBalancerTask. (HDDS-11386)</li>
+<li>Recursion bugs: Fixed ozone fs CLI giving incorrect prompts for recursive volume deletion. (HDDS-11346)</li>
+<li>Data Integrity: Fixed issues where ozone debug chunkinfo output was missing block location data for EC containers. (HDDS-11069)</li>
+<li>Lease Recovery: Fixed NullPointerException in LeaseRecovery during finalization block failure. (HDDS-10626) (HDDS-10632)</li>
+<li>Overhauled the Snapshot Garbage Collection system to resolve performance issues and ensure storage is reclaimed in a timely manner. No configuration changes or special upgrade procedures are required. (HDDS-12558)</li>
+</ul>
+<h3 id="security">Security</h3>
+<ul>
+<li>Tokens: Implemented Symmetric Keys for Delegation Tokens. (HDDS-8829)</li>
+<li>Ranger: Added artifacts for Ranger to authorize STS tokens. (HDDS-13848)</li>
+<li>HTTP: Fixed HttpServer2 to infer MIME types correctly to prevent potential security misconfigurations. (HDDS-11180)</li>
+</ul>
+
+
+            
+            <h1><a href="/release/2.0.0/">Release 2.0.0 available</a></h1>
+            <p><small>2025 Apr 30 </small></p>
+
+            <p><img src="releases/2.0.0.jpg" alt="Indiana-Dunes-haiku"></p>
+<h1 id="release-notes">Release Notes</h1>
+<p>Apache Ozone 2.0.0 adds 1708 new features, improvements and bug fixes on top of Ozone 1.4.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-10295">HDDS-10295</a> | <em>Major</em> | <strong>Provide an &ldquo;ozone repair&rdquo; subcommand to update the snapshot info in transactionInfoTable</strong></li>
+</ul>
+<p>A new command &ldquo;ozone repair update-transaction&rdquo; is added to update the highest index in OM transactionInfoTable.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11258">HDDS-11258</a> | <em>Blocker</em> | <strong>[hsync] Add new OM layout version</strong></li>
+</ul>
+<p>A new layout version, HBASE_SUPPORT (7) is added to Ozone Manager that provides the guardrail for the full support of hsync, lease recovery and listOpenFiles APIs for HBase.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11227">HDDS-11227</a> | <em>Major</em> | <strong>Use OM&rsquo;s KMS from client side when connecting to a cluster and dealing with encrypted data</strong></li>
+</ul>
+<p>Ozone clients can now interact with multiple encrypted Ozone clusters. This improvement enables distcp to copy from one encrypted source Ozone cluster to another encrypted destination Ozone cluster.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11375">HDDS-11375</a> | <em>Major</em> | <strong>DN Startup fails with Illegal configuration</strong></li>
+</ul>
+<p>Remove the predefined hdds.ratis.raft.grpc.message.size. Its default value is determined by hdds.container.ratis.log.appender.queue.byte-limit + 1MB = 33MB.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11342">HDDS-11342</a> | <em>Major</em> | <strong>[hsync] Add a config as HBase-related features master switch</strong></li>
+</ul>
+<p>It is now required to toggle an extra config switch to allow HBase-related enhancements to be enabled.</p>
+<p>Server-side (OM): Set ozone.hbase.enhancements.allowed to true.
+Client-side: Set ozone.client.hbase.enhancements.allowed to true.</p>
+<p>For more details, see their respective config description.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-7593">HDDS-7593</a> | <em>Major</em> | <strong>Supporting HSync and lease recovery</strong></li>
+</ul>
+<p>Ozone 2.0 added support for output stream hsync/hflush API support. In addition, lease recovery (recoverLease()), setSafeMode(), file system API support are added.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11329">HDDS-11329</a> | <em>Major</em> | <strong>Update Ozone images to Rocky Linux-based runner</strong></li>
+</ul>
+<p>Provide Rocky Linux-based convenience Ozone docker image</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11705">HDDS-11705</a> | <em>Critical</em> | <strong>Snapshot operations on linked buckets should work on actual underlying bucket</strong></li>
+</ul>
+<p>Ozone did not support snapshots on linked buckets before this release. However, a user could have inadvertently created snapshots on linked buckets. Hence when upgrading from an older version that doesn&rsquo;t support snapshots on linked buckets to a newer version that supports snapshots on linked buckets, it is essential to ensure that there are no snapshots on linked buckets otherwise they will linger around. If there are any snapshots on linked buckets, those snapshots need to be deleted by using snapshot delete command:</p>
+<p>ozone sh snapshot delete &lt;vol&gt;/&lt;linked bucket name&gt; &lt;snapshot name&gt;</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11617">HDDS-11617</a> | <em>Blocker</em> | <strong>Update hadoop to 3.4.1</strong></li>
+</ul>
+<p>Ozone&rsquo;s Hadoop dependency version was updated from 3.3.6 to 3.4.1.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-8101">HDDS-8101</a> | <em>Major</em> | <strong>Add FSO repair tool to ozone CLI in read-only and repair modes</strong></li>
+</ul>
+<p>Added a new command &ldquo;ozone repair om fso-tree&rdquo; to detect and repair broken FSO trees caused by bugs such as HDDS-7592, which can orphan data in the OM.</p>
+<p>Usage:
+ozone repair om fso-tree &ndash;db &lt;dbPath&gt; [&ndash;repair | &ndash;r] [&ndash;volume | -v &lt;volName&gt;] [&ndash;bucket | -b &lt;bucketName&gt;] [&ndash;verbose]</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-7852">HDDS-7852</a> | <em>Major</em> | <strong>SCM Decommissioning Support</strong></li>
+</ul>
+<p>A Storage Container Manager can now be decommissioned from a set of SCM nodes. Check out user doc for usage and more details: <a href="https://ozone.apache.org/docs/edge/feature/decommission.html">https://ozone.apache.org/docs/edge/feature/decommission.html</a></p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11753">HDDS-11753</a> | <em>Blocker</em> | <strong>Deprecate file per chunk layout from datanode code</strong></li>
+</ul>
+<p>FILE_PER_CHUNK container layout (ozone.scm.container.layout) is deprecated. Starting from Apache Ozone 2.0, users will not be able to create new FILE_PER_CHUNK containers.</p>
+<p>The support will be removed in a future release.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12488">HDDS-12488</a> | <em>Major</em> | <strong>S3G should handle the signature calculation with trailers</strong></li>
+</ul>
+<p>AWS Java SDK V2 2.30.0 introduced an incompatible protocol change that caused file upload to Ozone S3 Gateway to fail or append a trailer data silently. S3G is now updated to support AWS Java SDK V2 2.30.0 and later.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12327">HDDS-12327</a> | <em>Blocker</em> | <strong>Restore non-HA (to HA) upgrade test</strong></li>
+</ul>
+<p>Non-HA 1.4.1 cluster (in a non-rolling fashion) upgrade to 2.0.0 is tested.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11754">HDDS-11754</a> | <em>Blocker</em> | <strong>Drop support for non-Ratis OM and SCM</strong></li>
+</ul>
+<p>Ozone Manager and Storage Container Manager will always run in HA (Ratis) mode. Clusters upgrading from non-Ratis (Standalone) mode will automatically run in single node HA (Ratis) mode.</p>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-12750">HDDS-12750</a> | <em>Major</em> | <strong>Move StorageTypeProto from ScmServerDatanodeHeartbeatProtocol.proto to hdds.proto</strong></li>
+</ul>
+<p>Moved StorageTypeProto from OmClientProtocol.proto and ScmServerDatanodeHeartbeatProtocol.proto to hdds.proto.  As a result, the java_outer_classname changed from OzoneManagerProtocolProtos and StorageContainerDatanodeProtocolProtos to HddsProtos.</p>
+<p>This change is</p>
+<ul>
+<li>Proto wire/binary format: compatible (unchanged)</li>
+<li>Proto text format: compatible (unchanged)</li>
+<li>Java API: incompatible (changed java_outer_classname)</li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-9218">HDDS-9218</a> | <em>Major</em> | <strong>S3 secret managment through HTTP</strong></li>
+</ul>
+<p>A set of S3 REST API endpoints are available to manage S3 secrets:
+/secret for getting a secret.
+/revoke for revoking an existing secret.
+For more details, check out Securing S3 user document <a href="https://ozone.apache.org/docs/edge/security/securings3.html">https://ozone.apache.org/docs/edge/security/securings3.html</a></p>
+<hr>
+<h1 id="changelog">Changelog</h1>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,<br>
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="200---2025-04-04">[2.0.0] - 2025-04-04</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>New pipeline choosing policy: CapacityPipelineChoosePolicy. This policy randomly chooses pipelines with relatively lower utilization. To use, configure <code>hdds.scm.pipeline.choose.policy.impl</code> to <code>org.apache.hadoop.hdds.scm.pipeline.choose.algorithms.CapacityPipelineChoosePolicy</code>. (HDDS-9345)</li>
+<li>APIs to fetch single datanode specific information, reducing data transfer from server to client. (HDDS-9648)</li>
+<li>Support for symmetric keys for delegation tokens. (HDDS-8829)</li>
+<li>A Storage Container Manager (SCM) can now be decommissioned from a set of SCM nodes. (HDDS-7852)</li>
+<li>Option to close all pipelines via CLI (<code>ozone admin pipeline close --all</code>). (HDDS-10742)</li>
+<li>Metrics to monitor bucket state including usage, quota, and available space. (HDDS-10476)</li>
+<li>Unit tests and documentation for creating keys/files with EC replication config using ofs/o3fs. (HDDS-10553)</li>
+<li>Support for passing Kerberos credentials in GrpcOmTransport. (HDDS-11041)</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>S3 Gateway endpoints for static content and admin purposes (/prom, /logs, etc.) are now served on a separate port (default: 19878). Config keys are under <code>ozone.s3g.webadmin</code>. (HDDS-7307)</li>
+<li>Improved logging for container not found in CloseContainerCommandHandler to INFO level. (HDDS-9958)</li>
+<li>Container scanner (<code>hdds.datanode.container.scrub.enabled</code>) is now enabled by default. (HDDS-10485)</li>
+<li>Upgraded jgrapht to 1.4.0. (HDDS-10503)</li>
+<li>Bumped follow-redirects to 1.15.6 in Ozone Recon. (HDDS-10526)</li>
+<li>Bumped axios to 0.28.0 in Ozone Recon. (HDDS-10669)</li>
+<li>Bumped es5-ext to 0.10.64 in Ozone Recon. (HDDS-10673)</li>
+<li>Bumped ip to 1.1.9 in Ozone Recon. (HDDS-10674)</li>
+<li>Bumped browserify-sign to 4.2.3 in Ozone Recon. (HDDS-10676)</li>
+<li>Bumped plotly.js to 2.25.2 in Ozone Recon. (HDDS-10677)</li>
+<li>Replaced ConcurrentHashMap with HashMap protected by ReadWriteLock in NodeStateMap for potential performance improvement. (HDDS-10830)</li>
+<li>Replaced ConcurrentHashMap with HashMap in PipelineStateMap as access is already protected by locks. (HDDS-10971)</li>
+<li>Bumped express to 4.21.0 in Ozone Recon. (HDDS-11460)</li>
+<li>Bumped vite to 4.5.5 in Ozone Recon. (HDDS-11467)</li>
+<li>Improved array handling efficiency, avoiding legacy conversions and double conversions. (HDDS-11544)</li>
+<li>Extracted common Kubernetes definitions for HttpFS and Recon from getting-started example. (HDDS-11845)</li>
+<li>Reverted workaround added by HDDS-8715 for thread renaming, as the underlying Hadoop issue HDFS-13566 is fixed in the current Hadoop version. (HDDS-12470)</li>
+<li>Migrated Ozone Recon UI build process from react-scripts/Jest to Vite/vitest. (HDDS-11017)</li>
+<li>Added wrapper methods for getting/setting port details (Standalone, Ratis, Rest) in DatanodeDetails, replacing direct usage. (HDDS-117)</li>
+<li>Refactored OMRequest building in TrashOzoneFileSystem to reduce code duplication. (HDDS-6796)</li>
+<li>Switched chunk file reading in Datanode to use Netty&rsquo;s ChunkedNioFile for potential performance improvement. (HDDS-7188)</li>
+<li>Improved multipart upload part ETag generation to use MD5 hash of content for consistency. (HDDS-9680)</li>
+<li>Pipeline failure now triggers an immediate heartbeat to SCM to minimize client impact. (HDDS-9823)</li>
+<li>Improved performance of processing IncrementalContainerReport requests from DN in Recon by batching SCM lookups and reducing client timeouts. (HDDS-9883)</li>
+<li>Changed Recon datanode &lsquo;Last Heartbeat&rsquo; display to show relative time values (e.g., &ldquo;2s ago&rdquo;) instead of absolute timestamps. (HDDS-9933)</li>
+<li>SCM UI now shows cluster storage usage percentage in addition to absolute values. (HDDS-9988)</li>
+<li>Added functionality to freon OmMetadataGenerator (ommg) Test. (HDDS-10025)</li>
+<li>Improved logs for SCMDeletedBlockTransactionStatusManager. (HDDS-10029)</li>
+<li>OzoneManagerRatisServer.getServer() now returns the specific Ratis <code>Division</code> for the group. (HDDS-10036)</li>
+<li>Reduced buffer copying in OMRatisHelper by using ByteBuffer. (HDDS-10037)</li>
+<li>Consolidated and added tests for the Ratis write path for prefix ACL operations. (HDDS-10066)</li>
+<li>Refined SCM start-up logs for clarity and reduced noise (removed duplicate balancer config, reduced cert info verbosity). (HDDS-10271)</li>
+<li>Removed unnecessary sorting when excluding Datanodes during Ratis Pipeline Creation based on pipeline limits. (HDDS-10345)</li>
+<li>CopyObjectResponse ETag is now based on the content hash of the copied key, consistent with PutObject. (HDDS-10403)</li>
+<li>Avoided unnecessary creation of ChunkInfo objects in container-service code by directly accessing proto fields. (HDDS-10410)</li>
+<li>Prefix ACL checks now correctly resolve bucket links. (HDDS-10412)</li>
+<li>Refined audit logging for bucket property update operations to include quota and replication details. (HDDS-10460)</li>
+<li>Implemented logic to fail Datanode decommission early if the cluster doesn&rsquo;t have enough nodes to maintain replication requirements. (HDDS-10462)</li>
+<li>Refined audit logging for bucket creation to include quota, owner, and replication details. (HDDS-10475)</li>
+<li>Standardized byte array to String conversion for RocksDB LiveFileMetaData using UTF-8 and StringUtils.bytes2String, removing BouncyCastle dependency. (HDDS-10744)</li>
+<li>Tool <code>ozone admin find-ec-missing-padding-blocks</code> added to detect keys affected by missing EC padding blocks (HDDS-10681). (HDDS-10751)</li>
+<li>Improved logging for signature verification failures in OzoneDelegationTokenSecretManager to aid debugging. (HDDS-10802)</li>
+<li>Implemented <code>getHomeDirectory</code> in OzoneFileSystem implementations to correctly return <code>/user/&lt;ugi user&gt;</code> in secure clusters, respecting impersonation. (HDDS-10905)</li>
+<li>Reduced client watch requests by using CommitInfoProto from NotReplicatedException (requires Ratis 3.1.0+ and config tuning). (HDDS-10932)</li>
+<li>Added Netty off-heap memory usage metrics to OM and SCM for better monitoring. (HDDS-11100)</li>
+<li>Enhanced <code>ozone admin containerbalancer status</code> output with richer information including start time, parameters, progress details, and involved datanodes using <code>-v</code> or <code>--verbose</code>. (HDDS-11120)</li>
+<li>Improved SCM WebUI display: formatted JVM properties, added DN version/UUID to list, formatted SCM HA info as a list. (HDDS-11196)</li>
+<li>Added statistical indicators (min, max, median, stdev) for DataNode storage usage to SCM UI/metrics. (HDDS-11206)</li>
+<li>Added statistics for Capacity, ScmUsed, Remaining, NonScmUsed storage space indicators. (HDDS-11252)</li>
+<li>Improved CLI display for OM/SCM roles with a <code>--table</code> option. (HDDS-11268)</li>
+<li>Added statistics for node status counts (Healthy, Dead, Decommissioning, EnteringMaintenance). (HDDS-11272)</li>
+<li>Allowed disabling OM version-specific features via internal config (e.g., atomic rewrite key). (HDDS-11378)</li>
+<li>Introduced schema versioning for Recon DB to handle upgrades and distinguish schema changes. (HDDS-11465)</li>
+<li>Added statistics for Pipeline and Container counts/states to SCM UI/metrics. (HDDS-11469)</li>
+<li>Improved <code>--duration</code> option handling in freon tests (ombg, ommg) for consistency with <code>-n</code> limit. (HDDS-11494)</li>
+<li>Made SCMDBDefinition a singleton to reflect its immutability. (HDDS-11555)</li>
+<li>Simplified DBColumnFamilyDefinition by removing redundant keyType/valueType fields (relying on Codec). (HDDS-11557)</li>
+<li>Made ReconSCMDBDefinition a singleton. (HDDS-11589)</li>
+<li>Clarified OM Ratis configuration change log message to avoid confusion about peer roles. (HDDS-11623)</li>
+<li>Optimized <code>OmUtils.normalizeKey</code> to check <code>isDebugEnabled</code> before performing string comparison. (HDDS-11669)</li>
+<li>Enhanced Recon metrics for background task status (lastRunStatus, currentTaskStatus) and queue monitoring. (HDDS-11680)</li>
+<li>Implemented OM-side filtering for ranged GET requests for specific MPU parts to reduce network overhead. (HDDS-11699)</li>
+<li>Refactored S3 request unmarshalling logic to reduce code duplication. (HDDS-11739)</li>
+<li>Improved efficiency of <code>BufferUtils.writeFully</code> for <code>ByteBuffer[]</code> using <code>GatheringByteChannel</code>. (HDDS-11860)</li>
+<li>The ozonefs-hadoop3-client jar may be optionally relocated to a different classpath fix by specifying the Maven properties <code>proto.shaded.prefix</code>. (HDDS-12116)</li>
+<li>Changed default Replication Manager command deadline to 12 minutes (SCM) and Datanode offset to 6 minutes. (HDDS-12135)</li>
+<li>Improved error messages in Ozone CLI for FileSystemExceptions (e.g., NoSuchFileException, AccessDeniedException) when not in verbose mode. (HDDS-12241)</li>
+<li>Returned explicit QUOTA_EXCEEDED S3 error code instead of a generic 500 internal error. (HDDS-12329)</li>
+<li>Optimized <code>listMultipartUploads</code> by removing duplicate key scanning in <code>OmMetadataManagerImpl</code>. (HDDS-12371)</li>
+<li>Changed ContainerID to be a value-based class, enforcing factory methods and improving efficiency with cached proto/hash. (HDDS-12541)</li>
+<li>Combined <code>containerMap</code> and <code>replicaMap</code> in SCM&rsquo;s <code>ContainerStateMap</code> into a single map for simplicity and efficiency. (HDDS-12555)</li>
+<li>Moved <code>StorageTypeProto</code> enum from OM/SCM specific proto files to the common <code>hdds.proto</code>. This is a Java API incompatible change for internal protocols but wire compatible. (HDDS-12750)</li>
+<li>Added configuration (<code>ozone.client.ratis.watch.type</code>) to tune the replication level (ALL_COMMITTED or MAJORITY_COMMITTED) for client watch requests. (HDDS-2887)</li>
+<li>SCM StateMachine now uses Ratis <code>notifyLeaderReady</code> API instead of relying solely on <code>notifyTermIndexUpdated</code>. (HDDS-10690)</li>
+<li>Refactored OM request <code>validateAndUpdateCache</code> methods to pass <code>ExecutionContext</code> instead of just <code>TermIndex</code>. (HDDS-11975)</li>
+<li>Reduced unnecessary object creation (RunningDatanodeState, EndpointTasks) during Datanode heartbeat processing when state is RUNNING. (HDDS-11083)</li>
+<li>Improved replication metrics consistency across Datanode commands handled by ReplicationSupervisor and those handled directly. (HDDS-11376)</li>
+<li>Improved logging in Container Balancer&rsquo;s AbstractFindTargetGreedy to detail why potential targets are excluded. (HDDS-10198)</li>
+<li>Refined <code>ozone admin containerbalancer status</code> output for better readability and detail, including time consumption and data units (MB/GB). (HDDS-11367)</li>
+<li>Added Pipeline count to <code>ozone admin datanode usageinfo</code> output. (HDDS-11357)</li>
+<li>Removed redundant <code>CommandHandler</code> thread pool size methods (already covered by ReplicationSupervisor metrics). (HDDS-11304)</li>
+<li>Replaced <code>clusterId</code> parameter in <code>KeyValueHandler</code> with initialization via <code>setClusterId</code> to prevent potential NPE during concurrent container creation under high load. (HDDS-11396)</li>
+<li>Added <code>ozone.om.ratis.leader.election.minimum.timeout.duration.key</code> config to OM RaftProperties for leader election timeout. (HDDS-10761)</li>
+<li>Added configuration (<code>ozone.om.rocksdb.max_open_files</code>) to set RocksDB <code>max_open_files</code> option for OM DB. (HDDS-11191)</li>
+<li>Standardized Datanode command metrics tracking across ReplicationSupervisor and direct command handlers. (HDDS-11444)</li>
+<li>Optimized Recon List Keys API by reusing calculated path prefix for consecutive keys with the same parent ID. (HDDS-11668)</li>
+<li>Optimized Recon List Keys API response generation by reducing object creation (avoiding OmKeyInfo) and memory buffering. (HDDS-11660)</li>
+<li>Optimized Recon List Keys API filtering logic by replacing predicate lambdas with simple IF statements for performance. (HDDS-11649)</li>
+<li>Added foundational schema upgrade action (<code>InitialConstraintUpgradeAction</code>) for Recon to handle constraints on existing tables (e.g., Unhealthy Containers) upon first upgrade to schema versioning. (HDDS-11615)</li>
+<li>Added Ozone wrapper configurations (<code>ozone.scm.ipc.server.read.threadpool.size</code>, <code>ozone.hdds.datanode.ipc.server.read.threadpool.size</code>) to increase <code>ipc.server.read.threadpool.size</code> for SCM and Datanode RPC servers (default 10). (HDDS-11302)</li>
+<li>Refactored <code>ContainerStateMap</code> to restrict <code>ContainerAttribute</code> generic type T to Enum, removing unused ownerMap/repConfigMap. (HDDS-12532)</li>
+<li>Refactored <code>ContainerStateManager</code> interface to remove redundant <code>ContainerID</code> parameters when <code>ContainerReplica</code> (which contains the ID) is already passed. (HDDS-12572)</li>
+<li>Refactored DB/Table classes to use the DB name as the thread name prefix implicitly, removing the explicit parameter. (HDDS-12590)</li>
+<li>Included <code>ContainerInfo</code> within <code>ContainerAttribute</code> to avoid extra map lookups in <code>ContainerStateManager</code> methods. (HDDS-12591)</li>
+<li>Enabled custom <code>ValueCodec</code> for <code>TypedTable</code> to allow performance optimizations like partial deserialization (e.g., OmKeyInfo without ACLs/locations). (HDDS-12582)</li>
+<li>Made <code>ozone admin scm safemode --verbose</code> show rule status even when SCM is not in safe mode. (HDDS-12548)</li>
+<li>Addressed thread safety issue in <code>BlockOutputStream#failedServers</code> by using a concurrent collection. (HDDS-12331)</li>
+<li>Added DatanodeID validation for incoming ContainerCommandRequests and on Ratis group joins to prevent operations on incorrect nodes. (HDDS-11667)</li>
+<li>Persisted the list of container IDs created on a Datanode to prevent recreation after volume failures, ensuring consistency for both Ratis and EC containers. (HDDS-11650)</li>
+<li>Added check for rocks_tools native library in <code>ozone checknative</code> CLI command output. (HDDS-11347)</li>
+<li>Added Ozone cluster growth rate metric (based on <code>scm_node_manager_total_used</code> rate) to Grafana dashboard using PromQL. (HDDS-12168)</li>
+<li>Added robust error handling for Recon OM background tasks (e.g., NSSummary) to prevent data inconsistencies if Recon crashes during partial event processing. (HDDS-12062)</li>
+</ul>
+<h3 id="deprecated">Deprecated</h3>
+<ul>
+<li>LegacyReplicationManager (<code>hdds.scm.replication.enable.legacy=true</code>) is removed and no longer supported. (HDDS-11759)</li>
+<li>FILE_PER_CHUNK container layout (<code>ozone.scm.container.layout</code>) is deprecated. New containers cannot be created with this layout. Support will be removed in a future release. (HDDS-11753)</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>Removed LegacyReplicationManager implementation and the <code>hdds.scm.replication.enable.legacy</code> config property. (HDDS-11759)</li>
+<li>Removed unused <code>resultCache</code> and <code>getMatchingContainerIDs</code> method from <code>ContainerStateMap</code>. (HDDS-12445)</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>TriggerDBSyncEndpoint admin-only API handling in Recon fixed. (HDDS-11436)</li>
+<li>Fixed potential <code>NullPointerException</code> in <code>OzoneManagerProtocolClientSideTranslatorPB.listStatusLight</code> when startKey is null (e.g., via s3a). (HDDS-10367)</li>
+<li>Addressed memory leak caused by ThreadLocal usage in <code>OMClientRequest</code> (OMLockDetails). (HDDS-10385)</li>
+<li>Fixed Container Balancer incorrectly selecting containers with 0 or negative size for moving. (HDDS-10483)</li>
+<li>Fixed inability to write files when Datanode chunk data validation (<code>hdds.datanode.chunk.data.validation.check</code>) is enabled due to buffer position issue. (HDDS-10547)</li>
+<li>Fixed Recon startup failure (&ldquo;used space cannot be negative&rdquo;) by handling Datanode reports with negative used space gracefully. (HDDS-10614)</li>
+<li>Fixed <code>IOException: ParentKeyInfo ... is null</code> in Recon Namespace Summary task by handling cases where parent info might be missing. (HDDS-10855)</li>
+<li>Fixed EC Reconstruction failure (<code>IllegalArgumentException: The chunk list has X entries, but the checksum chunks has Y entries</code>) potentially caused by out-of-order EC stripe writes leading to inaccurate chunk lists. (HDDS-10985)</li>
+<li>Fixed OM crash (<code>SnapshotChainManager: Failure while loading snapshot chain</code>) caused by SstFilteringService directly updating snapshot info DB entries, potentially corrupting the chain if OM restarts before DoubleBuffer flush. (HDDS-11068)</li>
+<li>Resolved <code>ClassCastException</code> (RepeatedOmKeyInfo to OmKeyInfo) in Recon&rsquo;s FileSizeCountTask due to improper event handling in OMDBUpdatesHandler for conflicting keys across tables (e.g., file and directory with the same name). (HDDS-11187)</li>
+<li>Fixed <code>ContainerSizeCountTask</code> in Recon logging ERROR for negative-sized containers; reduced log level as these are ignored functionally. (HDDS-12227)</li>
+<li>Fixed duplicate key violation in Recon&rsquo;s <code>FileSizeCountTask</code> by correctly handling the <code>isDbTruncated</code> flag to allow updates instead of only inserts. (HDDS-12228)</li>
+<li>Made OzoneClientException extend IOException. (HDDS-64)</li>
+<li>Fixed various S3 gateway issues including multipart upload and other improvements. (HDDS-1186)</li>
+<li>Fixed SCM Decommissioning issue causing <code>InvalidStateTransitionException</code> after recommissioning the same SCM node. (HDDS-9608)</li>
+<li>Fixed Recon Disk Usage page UI issues with large numbers of keys/buckets/volumes (pie chart usability, axis ticks, path overflow). (HDDS-9626)</li>
+<li>Fixed Ozone admin namespace CLI <code>du</code> command printing incorrect validation error messages for root (&quot;&quot;/&quot;&quot;) or volume paths. (HDDS-9644)</li>
+<li>Fixed Recon incorrectly including out-of-service (decommissioned, maintenance) nodes when checking container health status (over/under/mis-replication). (HDDS-9645)</li>
+<li>Fixed potential <code>NullPointerException</code> in <code>ContainerStateMap.ContainerAttribute</code> due to race condition between update and get operations. (HDDS-9527)</li>
+<li>Fixed Recon potentially showing duplicate DEAD datanodes after decommission/reformat/recommission cycles. (HDDS-10409) -&gt; Now only allows removing DEAD nodes. (HDDS-11032)</li>
+<li>Fixed potential memory overflow in Recon&rsquo;s Container Health Task due to unbounded list growth. (HDDS-9819)</li>
+<li>Reduced Ozone client heap memory utilization during writes by using pooled direct buffers for chunks. (HDDS-9843)</li>
+<li>Fixed <code>Pipeline.nodesInOrder</code> using ThreadLocal, making it inaccessible to other threads after being set. (HDDS-9848)</li>
+<li>Switched <code>KeyValueContainerCheck.verifyChecksum</code> to use direct/mapped buffers instead of heap buffers. (HDDS-9941)</li>
+<li>Fixed <code>TokenRenewer</code> implementations (O3FS, OFS) not closing the created <code>OzoneClient</code>. Removed duplicate implementation. (HDDS-9943)</li>
+<li>Fixed NSSummaryAdmin CLI commands not closing created OzoneClient instances and creating multiple instances unnecessarily. (HDDS-9944)</li>
+<li>Fixed incorrect synchronization in <code>RatisSnapshotInfo</code>, potentially leading to inconsistent term/index values. Class removed as redundant to TransactionInfo. (HDDS-9984)</li>
+<li>Fixed <code>Options</code> and <code>ReadOptions</code> instances not being closed properly in <code>rocksdb-checkpoint-differ</code>. (HDDS-10001)</li>
+<li>Renamed <code>ManagedSstFileReader</code> in <code>rocksdb-checkpoint-differ</code> to <code>SstFileSetReader</code> to avoid name collision with the class in <code>hdds-managed-rocksdb</code>. (HDDS-10007)</li>
+<li>Fixed potential <code>NullPointerException</code> in <code>VolumeInfoMetrics.getCommitted()</code> if <code>HddsVolume.committedBytes</code> is null. (HDDS-10027)</li>
+<li>Refined SCM RPC handler counts to be configurable per protocol (Client, Block, Datanode) instead of a single global count. (HDDS-10088)</li>
+<li>Removed static <code>dbNameToCfHandleMap</code> from RocksDatabase, using non-static <code>columnFamilies</code> map instead. (HDDS-10107)</li>
+<li>Fixed potential <code>NullPointerException</code> in OMDBCheckpointServlet lock acquisition when SstFilteringService is accessed before initialization. (HDDS-10138)</li>
+<li>Enabled Zero-Copy reads during container replication for improved performance. (HDDS-10144)</li>
+<li>Corrected metric names <code>createOmResoonseLatencyNs</code> and <code>validateAndUpdateCacneLatencyNs</code> in <code>OMPerformanceMetrics</code>. (HDDS-10162)</li>
+<li>Fixed <code>OmMetadataManagerImpl</code> creating a new <code>S3Batcher</code> instance for each S3 secret operation instead of reusing one. (HDDS-10202)</li>
+<li>Ensured atomic updates in <code>StateContext#updateCommandStatus</code> using <code>computeIfPresent</code> to prevent race conditions. (HDDS-10210)</li>
+<li>Fixed Grafana dashboards: removed UID/hostnames, included secure/unsecure ports, corrected datastore count. (HDDS-10229)</li>
+<li>Prevented V3 Schema DatanodeStore from creating container DBs in incorrect locations under certain initialization paths. (HDDS-10230)</li>
+<li>Fixed <code>ContainerStateManager</code> finalizing OPEN containers without a healthy pipeline on follower SCMs; moved logic to leader-only path via Ratis. (HDDS-10231)</li>
+<li>Improved JSON response for Deleted Directories and Open Keys Insight Endpoints in Recon for better clarity (using actual names instead of Object IDs). (HDDS-10241)</li>
+<li>Fixed <code>ContainerReport</code> admin command showing incorrect values immediately after SCM restart before Replication Manager runs. (HDDS-10272)</li>
+<li>Fixed pagination on the OM DB Insights page in Recon. (HDDS-10282)</li>
+<li>Added support for direct ByteBuffers in Checksum calculations, using reflection for Java 9+ API while maintaining Java 8 compatibility. (HDDS-10288)</li>
+<li>Fixed <code>ECReconstructionCoordinator</code> ignoring <code>ozone-site.xml</code> client configurations and using default <code>OzoneClientConfig</code>. (HDDS-10294)</li>
+<li>Fixed potential orphan blocks during key overwrite operations, especially involving the deleted key table. (HDDS-10296)</li>
+<li>Fixed <code>KeyManagerImpl#listKeys</code> path normalization to correctly handle OBS/LEGACY buckets when <code>ozone.om.enable.filesystem.paths</code> is true. (HDDS-10319)</li>
+<li>Fixed metadata not being updated when overwriting existing keys via S3 PutObject. (HDDS-10324)</li>
+<li>Fixed <code>SetTimes</code> API not working with linked buckets due to missing link resolution. (HDDS-10369)</li>
+<li>Fixed Recon not handling pre-existing MISSING_EMPTY containers correctly (introduced in HDDS-9695), leaving them marked as missing indefinitely. (HDDS-10370)</li>
+<li>Fixed S3 listParts incompatibility for keys created before HDDS-9680 (missing ETag metadata) and NPE when ETag is null. (HDDS-10395)</li>
+<li>Restricted directory deletion in LEGACY buckets via <code>ozone sh key delete</code>; users must use <code>ozone fs</code> interface. (HDDS-10397)</li>
+<li>Fixed <code>ArrayIndexOutOfBoundsException</code> when listing keys in OBS buckets via S3/s3a under certain conditions. (HDDS-10399)</li>
+<li>Fixed <code>ozone admin</code> CLI having hard-coded INFO log level, ignoring environment/config settings. (HDDS-10405)</li>
+<li>Fixed Datanode startup failure (&ldquo;Illegal configuration: raft.grpc.message.size.max must be 1m larger than &hellip;&rdquo;) when using latest Ratis due to default config mismatch. (HDDS-11375)</li>
+<li>Fixed Datanode startup failure (&ldquo;checksum size setting 1024 is not in expected format&rdquo;) due to incorrect type validation for <code>hdds.ratis.raft.server.snapshot.creation.gap</code>. (HDDS-10423)</li>
+<li>Fixed Grafana dashboard Prometheus endpoint configuration for Datanodes and added missing Recon endpoint. (HDDS-10433)</li>
+<li>Fixed Datanode Maintenance failing early incorrectly (logic refined). (HDDS-10463)</li>
+<li>Fixed OM potentially crashing or failing requests if the configured S3 secret storage (Vault) is unavailable. (HDDS-10469)</li>
+<li>Fixed audit log for key creation missing EC replication config details (parity, chunk size, codec). (HDDS-10472)</li>
+<li>Fixed potential <code>NullPointerException</code> in <code>OmUtils.getAllOMHAAddresses</code> if OM HA config keys are missing. (HDDS-10508)</li>
+<li>Fixed S3 GetObject ETag header returning <code>&quot;null&quot;</code> for objects without an ETag, causing issues with AWS SDK validation. Now omits the header if ETag is missing. (HDDS-10521)</li>
+<li>Fixed <code>MessageDigest</code> instance in S3 endpoint potentially not being reset after exceptions (e.g., client cancellation), leading to incorrect ETags on subsequent requests using the same thread. (HDDS-10587)</li>
+<li>Fixed issue where client might attempt Ratis streaming for keys defaulted to EC replication if bucket replication isn&rsquo;t explicitly set. (HDDS-10832)</li>
+<li>Fixed freon read/mixed operations failing with &ldquo;Key not found&rdquo; if prefix is unspecified; stopped adding random prefix. Fixed misleading random prefix log in <code>ommg</code>. (HDDS-10845)</li>
+<li>Fixed Ozone CLI not respecting default <code>ozone.om.service.id</code> when only one service ID is configured. (HDDS-10861)</li>
+<li>Fixed <code>ClosePipelineCommandHandler</code> potentially causing <code>GroupMismatchException</code> by calling <code>removeGroup</code> before getting peer list for propagation. (HDDS-10875)</li>
+<li>Fixed Recon <code>ReconContainerManager</code> potentially throwing <code>DuplicatedPipelineIdException</code> when checking/adding containers due to race conditions or stale data. (HDDS-10880)</li>
+<li>Improved logging clarity in Recon&rsquo;s <code>ReconNodeManager</code> regarding datanode finalization status checks during upgrades. (HDDS-10883)</li>
+<li>Fixed OM startup failure in single-node Docker container due to Ratis group directory mismatch when using default service ID. (HDDS-10909)</li>
+<li>Fixed Recon startup failing silently or logging incorrect errors in non-HA SCM scenarios due to inability to fetch SCM roles or snapshot. (HDDS-10937)</li>
+<li>Fixed OM decommission config (<code>ozone.om.decommissioned.nodes</code>) not working without service ID suffix when only one OM service ID is configured. (HDDS-10942)</li>
+<li>Fixed EC key read corruption potentially occurring if a container&rsquo;s replica index on a DN mismatches the index expected by the client (e.g., after container move). Added validation. (HDDS-10983)</li>
+<li>Fixed S3 gateway potentially throwing exceptions (<code>javax.xml.xpath.XPathExpressionException</code>) during concurrent XML parsing (e.g., CompleteMultipartUpload, DeleteObjects). (HDDS-10777)</li>
+<li>Fixed <code>NullPointerException</code> in <code>XceiverClientRatis.watchForCommit</code> when <code>updateCommitInfosMap</code> encounters a new Datanode ID in the response after a previous timeout removed it from <code>commitInfoMap</code>. (HDDS-10780)</li>
+<li>Fixed potential <code>OMLeaderNotReadyException</code> after leader switch if transactions were pending in the double buffer, preventing <code>lastNotifiedTermIndex</code> update. (HDDS-10798)</li>
+<li>Fixed various HTTP server components (Recon, SCM, OM, DN) failing to start if configured with a wildcard Kerberos principal (<code>*</code>) due to missing <code>kerb-core</code> dependency. (HDDS-10803)</li>
+<li>Fixed S3 <code>setBucketAcl</code> causing <code>UnsupportedOperationException</code> due to attempting to modify an immutable list returned by <code>OzoneVolume.getAcls()</code>. (HDDS-11737)</li>
+<li>Fixed SCM leadership metric (<code>SCMLeader</code>) potentially being reset to null by HTTP server initialization after the Raft server has already determined leadership. (HDDS-11742)</li>
+<li>Fixed <code>SnapshotDiffManager</code> logging <code>NativeLibraryNotLoadedException</code> as ERROR even when native tools are optional; changed to WARN. (HDDS-11486)</li>
+<li>Fixed potential <code>NullPointerException</code> when checking container balancer status (<code>ozone admin containerbalancer status</code>) if balancer is started but not fully initialized (e.g., waiting for DU info). (HDDS-11350)</li>
+<li>Fixed <code>ozone fs -rm -r</code> prompt for volume deletion suggesting incorrect <code>ozone sh volume delete</code> options (<code>-skipTrash</code>, <code>-id</code>). (HDDS-11346)</li>
+<li>Fixed <code>ozone sh key list -h</code> showing duplicate options (<code>--all</code>, <code>--length</code>) due to picocli version issue (reverted). (HDDS-11446) -&gt; Reverted picocli upgrade.</li>
+<li>Fixed S3 CompleteMultipartUpload returning 500 Internal Server Error instead of S3-compliant InvalidRequest error when no parts are specified in the request body. (HDDS-11457)</li>
+<li>Fixed multiple <code>IOzoneAuthorizer</code> instances potentially being created and leaked if Ratis snapshot installation fails repeatedly after stopping the metadata manager. (HDDS-11472)</li>
+<li>Fixed <code>ozone sh volume delete</code> command line parsing error for <code>-r</code> option. (HDDS-11535) -&gt; Resolved as part of HDDS-11346 fix.</li>
+<li>Fixed <code>NullPointerException</code> in OM when overwriting an empty file using multipart upload in FSO buckets (versioning disabled). (HDDS-12131)</li>
+<li>Fixed Replication Manager (<code>hdds.scm.replication.thread.interval</code>) interval configuration description to correctly state milliseconds instead of seconds. (HDDS-12144) -&gt; Resolved by removing unsupported types.</li>
+<li>Fixed Grafana dashboard for Chunk read/write rates using incorrect interval variable (<code>$__interval</code> instead of <code>$__rate_interval</code>). (HDDS-12112)</li>
+<li>Fixed Replication Manager potentially expiring pending container deletes incorrectly instead of retrying them if the Datanode doesn&rsquo;t confirm deletion within the deadline. (HDDS-12127)</li>
+<li>Fixed Replication Manager non-deterministically selecting replicas for deletion if preferred target nodes are overloaded, potentially deleting required replicas. (HDDS-12115)</li>
+<li>Fixed delete container commands potentially running indefinitely or past their deadline due to long lock waits or slow disk I/O; added lock timeout and moved ICR earlier. (HDDS-12114)</li>
+<li>Fixed Recon UI potentially switching from old UI to new UI automatically upon page refresh. (HDDS-12084)</li>
+<li>Fixed missing local refresh button in new Recon UI&rsquo;s Disk Usage page to reload data for the current path without navigating back to root. (HDDS-12085)</li>
+<li>Fixed unnecessary parameters &ldquo;Source Volume&rdquo; &amp; &ldquo;Source Bucket&rdquo; appearing in the metadata table for non-link buckets in the new Recon UI Disk Usage page. (HDDS-12073)</li>
+<li>Fixed Recon API endpoints <code>/api/v1/volumes</code> and <code>/api/v1/buckets</code> missing from Swagger documentation. (HDDS-11300)</li>
+<li>Fixed potential <code>NullPointerException</code> in Recon <code>/api/v1/volumes</code> and <code>/api/v1/buckets</code> endpoints if accessed before Recon tables are fully initialized after startup. (HDDS-11349)</li>
+<li>Fixed <code>ozone freon cr</code> (closed container replication) command failing with NPE due to metrics map lookup failure in ReplicationSupervisor. (HDDS-12040)</li>
+<li>Fixed incorrect display of Ozone Service ID name in Recon UI (New UI showed &ldquo;OM ID&rdquo;, Old UI showed &ldquo;OM Service&rdquo;). Corrected to &ldquo;Ozone Service ID&rdquo;. (HDDS-12049)</li>
+<li>Fixed difference in Cluster Capacity % calculation (floor vs round) and Container Pre-Allocated Size display (committed vs 0) between new and old Recon UI. (HDDS-12042)</li>
+<li>Fixed long path names wrapping to the next line in the new Recon UI Disk Usage page; made it scrollable instead. (HDDS-11957)</li>
+<li>Fixed Recon failing to update <code>version_number</code> in <code>RECON_SCHEMA_VERSION</code> table (always -1), causing upgrade actions to run unnecessarily on fresh installs. (HDDS-11846)</li>
+<li>Fixed serialization error (<code>Conflicting/ambiguous property name</code>) in Recon&rsquo;s listKeys API due to Jackson ambiguity between <code>key</code> field and <code>isKey()</code> getter. Renamed getter. (HDDS-11848)</li>
+<li>Fixed potential deadlock in OM between DoubleBuffer flush thread (waiting for DeletedTable lock during snapshot checkpoint) and KeyDeletingService (holding DeletedTable lock, waiting for Ratis future). (HDDS-11124)</li>
+<li>Fixed OM crashing with <code>IOException: Rocks Database is closed</code> during <code>SnapshotMoveDeletedKeys</code> request processing if the snapshot was purged concurrently. (HDDS-11152)</li>
+<li>Fixed containers potentially stuck in DELETING state after upgrade if they were affected by HDDS-8129 (incorrect block counts) and datanodes rejected delete commands due to negative counts. Added recovery logic. (HDDS-11136)</li>
+<li>Fixed <code>fs -mkdir</code> incorrectly creating directories in OBS buckets (bypassing layout validation added in HDDS-11235). Reverted the optimization for mkdir. (HDDS-11348)</li>
+<li>Fixed Datanode potentially failing heartbeats or other operations due to deadlock on <code>StateContext#pipelineActions</code> map under high load. Replaced with concurrent map. (HDDS-11331)</li>
+<li>Fixed S3 gateway returning 403 Forbidden instead of 302 Redirect for root path (<code>/</code>) requests containing <code>Authorization: Negotiate</code> header (used by newer curl versions). (HDDS-11096)</li>
+<li>Fixed <code>DELETE_TENANT</code> request logging an unnecessary and uninformative <code>UPDATE_VOLUME</code> audit entry, even on failure. (HDDS-11119)</li>
+<li>Fixed intermittent timeout in <code>TestBlockDeletion.testBlockDeletion</code> potentially caused by race conditions or slow command processing. (HDDS-9962)</li>
+<li>Fixed &ldquo;Bad file descriptor&rdquo; error in <code>TestOmSnapshotFsoWithNativeLib.testSnapshotCompactionDag</code> when using native RocksDB tools library. (HDDS-10149)</li>
+<li>Fixed <code>ManagedStatistics</code> objects not being closed properly in OM and DN when RocksDB statistics are enabled, leading to resource leaks. (HDDS-10184)</li>
+<li>Fixed race condition in <code>RocksDatabase</code> where a close operation could occur between <code>assertClose()</code> check and database operation, causing JVM crash. (HDDS-9527)</li>
+<li>Fixed ReplicationManager metrics not being re-registered after RM restart via CLI (<code>stop</code>/<code>start</code>), causing metrics to stop reporting. (HDDS-9235)</li>
+<li>Fixed infinite loop in <code>WritableRatisContainerProvider.getContainer</code> if SCM restarts and existing pipeline nodes are not found (e.g., DNs stopped), causing log flooding. (HDDS-8982)</li>
+<li>Fixed SCM follower nodes logging <code>NotLeaderException</code> errors when processing Pipeline Reports, which is expected behavior for followers. Suppressed error logging. (HDDS-11695)</li>
+<li>Fixed <code>FileNotFoundException: ... (Too many open files)</code> and subsequent DN crashes during OM+DN decommission under heavy Freon load, likely due to excessive open file handles. (HDDS-11391) -&gt; Addressed potential causes.</li>
+<li>Fixed Recon showing incorrect (zero) count for DELETED containers in cluster state summary API (<code>/api/v1/clusterState</code>). (HDDS-11389)</li>
+<li>Fixed issue where OM could fail if <code>IOzoneAuthorizer</code> (e.g., Ranger plugin) fails to initialize during snapshot installation and reload attempts create multiple instances, leading to heap exhaustion. (HDDS-11472)</li>
+<li>Fixed <code>NoSuchUpload</code> error when aborting multipart uploads for keys where the parent directory was missing (potentially due to FSO-related bugs or cleanup issues). (HDDS-11784)</li>
+<li>Fixed secure acceptance tests failing on arm64 due to keytab checksum mismatch when using keytabs generated on amd64. Regenerated keytabs for multi-arch compatibility. (HDDS-11810)</li>
+<li>Fixed race condition in datanode VERSION file creation where multiple threads could attempt to write using the same temporary file via <code>AtomicFileOutputStream</code>. (HDDS-12608)</li>
+<li>Fixed SCM logging an error when updating sequence ID for a CLOSED container based on a replica report with higher BCSID; changed log level and added context. (HDDS-12409)</li>
+</ul>
+<h3 id="security">Security</h3>
+<ul>
+<li>Disabled REST endpoint for S3 secret manipulation by username for non-admin users via S3Gateway Secret REST endpoint. (HDDS-11040)</li>
+</ul>
+<p>For more details, check out <a href="https://issues.apache.org/jira/projects/HDDS/versions/12353070">Apache Ozone 2.0.0 JIRA list</a></p>
+<p>This is a generally available (GA) release.
+It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Generated-by: Google AI Studio + Gemini 2.5 Pro Preview 03-25, with input data from a <a href="https://issues.apache.org/jira/issues/?filter=12353885">filtered JIRA list</a> using <a href="https://gist.github.com/jojochuang/f36bcdf135b2df26c2f0ab1b9e8c0c27">this prompt</a>.</p>
+<p>Image credit: <a href="https://commons.wikimedia.org/wiki/File:Indiana_Dunes_National_Lakeshore,_Michigan_City,_Indiana,_Estados_Unidos,_2012-10-20,_DD_03.jpg">Indiana Dunes National Lakeshore, Michigan City, Indiana, USA</a> by <a href="https://delso.photo/">Diego Delso</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a> / Text added to original</p>
+
+
+            
+            <h1><a href="/release/1.4.1/">Release 1.4.1 available</a></h1>
+            <p><small>2024 Nov 24 </small></p>
+
+            <p>Apache Ozone 1.4.1 is a minor bug fix release that addresses several issues to enhance stability and reliability compared to version 1.4.0.
+For a detailed list of commits and resolved JIRA issues in this release, please refer to <a href="https://github.com/apache/ozone/compare/ozone-1.4.0...ozone-1.4.1">Changes between ozone-1.4.0 and ozone-1.4.1 on GitHub</a>.</p>
+
+
+            
+            <h1><a href="/release/1.4.0/">Release 1.4.0 available</a></h1>
+            <p><small>2024 Jan 19 </small></p>
+
+            <p><img src="releases/1.4.0.jpg" alt="Hot-Springs-haiku"></p>
+<p>Apache Ozone 1.4.0 is released with following features:</p>
+<ul>
+<li>Snapshots</li>
+<li>Erasure Coding V2: offline reconstruction, container balancer support</li>
+<li>Recon: heat maps, more diagnose info</li>
+<li>Certificate auto-rotation</li>
+<li>SCM decommissioning</li>
+<li>Improved OM decommissioning</li>
+<li>Symmetric key-based block/container token implementation</li>
+<li>Quota on FSO bucket</li>
+</ul>
+<p>This is a generally available (GA) release.
+It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Image credit: <a href="https://www.flickr.com/photos/rollercoasterphilosophy/52894005148">Hot Springs Mountain Tower</a> by <a href="https://www.flickr.com/photos/rollercoasterphilosophy/">Jeremy Thompson</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a> / Text added to original</p>
+
+
+            
+            <h1><a href="/release/1.3.0/">Release 1.3.0 available</a></h1>
+            <p><small>2022 Dec 18 </small></p>
+
+            <p><img src="releases/1.3.0.jpg" alt="Grand-Canyon"></p>
+<p>Apache Ozone 1.3.0 is released with following features:</p>
+<ul>
+<li>Erasure Coding - V1 support (Online reconstruction support)</li>
+<li>Container balancer</li>
+<li>Limit number of rocksdb instances to 1 per disk on high-density datanodes</li>
+<li>Ozone S3 Multi-tenancy Support</li>
+<li>S3 Grpc improvements for metadata path</li>
+<li>Filesystem Optimized and Object Store bucket layout types</li>
+</ul>
+<p>This is a generally available (GA) release.
+It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Image credit: <a href="https://www.flickr.com/photos/geewhypics/50720710687">Grand Canyon - South Rim - Mather Point</a> by <a href="https://www.flickr.com/photos/geewhypics">G. Lamar</a>, <a href="https://creativecommons.org/licenses/by/2.0/deed.en">CC BY 2.0</a> / Text added to original</p>
+
+
+            
+            <h1><a href="/release/1.2.1/">Release 1.2.1 available</a></h1>
+            <p><small>2021 Dec 22 </small></p>
+
+            <p><img src="releases/1.2.0.jpg" alt="glacier-haiku"></p>
+<p>Apache Ozone 1.2.1 is released with following features:</p>
+<ul>
+<li>Non-rolling downgrade support to 1.1.0</li>
+<li>Storage Container Manager high availability for new clusters</li>
+<li>Filesystem prefix optimization for new clusters</li>
+<li>Transparent data encryption for S3 buckets</li>
+<li>Security enhancements</li>
+</ul>
+<p>This is a generally available (GA) release.
+It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Image credit: <a href="https://www.flickr.com/photos/hisgett/8047686029/">Glacier National Park 8</a> by <a href="https://www.flickr.com/people/37804979@N00">Tony Hisgett</a>, <a href="https://creativecommons.org/licenses/by/2.0/deed.en">CC BY 2.0</a> / Text added to original</p>
+
+
+            
+            <h1><a href="/release/1.1.0/">Release 1.1.0 available</a></h1>
+            <p><small>2021 Apr 17 </small></p>
+
+            <p><img src="releases/1.1.0.jpg" alt="Everglades-national-part-haiku"></p>
+<p>Apache Hadoop Ozone 1.1.0 is released with following features:</p>
+<ul>
+<li>Volume/Bucket Quota Support</li>
+<li>Security related enhancements</li>
+<li>ofs/o3fs performance improvements with Teragen and Spark</li>
+<li>Recon improvements</li>
+</ul>
+<p>This is a generally available (GA) release.
+It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Image credit: <a href="https://www.flickr.com/photos/62501682@N00"> diana_robinson </a>, <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">CC BY-NC-ND 2.0</a></p>
+
+
+            
+            <h1><a href="/release/1.0.0/">Release 1.0.0 available</a></h1>
+            <p><small>2020 Sep 2 </small></p>
+
+            <p><img src="releases/1.0.0.jpg" alt="denali-national-part-haiku"></p>
+<p>Apache Hadoop Ozone 1.0.0 is released with following features:</p>
+<ul>
+<li>OM HA - HA support for Ozone Manager</li>
+<li>Security Phase II</li>
+<li>Support Hadoop 2.7 &amp; security enabled Hadoop 2.x</li>
+<li>Ozone OFS new Filesystem scheme</li>
+<li>Ozone Filesystem performance improvement</li>
+<li>Recon &amp; Recon UI improvements</li>
+<li>Bucket link &amp; S3 volume/bucket mapping changes</li>
+</ul>
+<p>This is a generally available (GA) release. It represents a point of API stability and quality that we consider production-ready.</p>
+<p>Image credit: <a href="https://www.flickr.com/people/57557144@N06">Denali National Park and Preserve</a>, <a href="https://commons.wikimedia.org/wiki/File:Caribou_and_Denali_%2811330240034%29.jpg">Caribou and Denali</a>, <a href="https://creativecommons.org/licenses/by/2.0/deed.en">CC-BY-2.0</a></p>
+
+
+            
+            <h1><a href="/release/0.5.0-beta/">Release 0.5.0-beta available</a></h1>
+            <p><small>2020 Mar 24 </small></p>
+
+            <p><img src="releases/0.5.0.jpg" alt="crater-lake-haiku"></p>
+<p>Apache Hadoop Ozone 0.5.0-beta is released with following features:</p>
+<ul>
+<li>O3FS - S3A based file system semantics</li>
+<li>Able to handle 1 billion objects</li>
+<li>Network topology awareness for block placement</li>
+<li>GDPR Right to Erasure</li>
+</ul>
+<p>This is a beta release and not production ready.</p>
+<!-- raw HTML omitted -->
+
+
+            
+            <h1><a href="/release/0.4.1-alpha/">Release 0.4.1-alpha available</a></h1>
+            <p><small>2019 Oct 13 </small></p>
+
+            <p><img src="releases/0.4.1.png" alt="biscayne-haiku"></p>
+<p>Apache Hadoop Ozone 0.4.1-alpha is released with following features:</p>
+<ul>
+<li>Ozone Native ACL support</li>
+<li>First class K8s support</li>
+<li>Stability improvements</li>
+</ul>
+<p>This is an alpha release and not production ready.</p>
+<!-- raw HTML omitted -->
+
+
+            
+        </ul>
+  </div>
+
+    <ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/release/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/release/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/release/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+</section>
+</div>
+
+<footer>
+    <div class="container">
+
+        <div class="col-md-12 trademark">
+            <p>© 2026 The Apache Software Foundation <a href="http://apache.org">The Apache Software Foundation</a>,<br/>
+                Apache, Apache Hadoop, Apache Ozone, the Apache feather logo, are trademarks of The Apache Software Foundation.
+            <p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+
+</body>
+</html>
+
