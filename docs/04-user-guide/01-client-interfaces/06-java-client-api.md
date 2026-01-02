@@ -4,6 +4,9 @@ sidebar_label: Java Client API
 
 # Java Client API
 
+The Apache Ozone Java Client API provides programmatic access to Ozone storage.
+
+For detailed API documentation, refer to the [OzoneClient Javadoc](https://javadoc.io/doc/org.apache.ozone/ozone-client/latest/org/apache/hadoop/ozone/client/OzoneClient.html).
 Ozone ships with its own client library that supports RPC. For generic use cases the S3
 compatible REST interface also can be used instead of the Ozone client.
 
