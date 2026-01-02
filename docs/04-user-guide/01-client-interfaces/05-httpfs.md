@@ -1,3 +1,166 @@
-# HttpFS
+---
+sidebar_label: HttpFS Gateway
+---
 
-**TODO:** File a subtask under [HDDS-9858](https://issues.apache.org/jira/browse/HDDS-9858) and complete this page or section.
+# HttpFS Gateway
+
+Ozone HttpFS can be used to integrate Ozone with other tools via REST API.
+
+## Introduction
+
+HttpFS is a service that provides a REST HTTP gateway supporting File System operations (read and write).
+It is interoperable with the **WebHDFS** REST HTTP API.
+
+HttpFS can be used to access data on an Ozone cluster behind of a firewall.
+For example, the HttpFS service acts as a gateway and is the only system that is allowed to cross the firewall into the cluster.
+
+HttpFS can be used to access data in Ozone using HTTP utilities (such as curl and wget) and HTTP libraries Perl from other languages than Java.
+
+The **WebHDFS** client FileSystem implementation can be used to access HttpFS using the Ozone filesystem command line tool (`ozone fs`) as well as from Java applications using the Hadoop FileSystem Java API.
+
+## Getting started
+
+To try it out, follow the [instructions](../../02-quick-start/01-installation/01-docker.md) to start the Ozone cluster with Docker Compose.
+
+```bash
+docker compose up -d --scale datanode=3
+```
+
+You can/should find now the HttpFS gateway in Docker with the name like `ozone_httpfs`,
+and it can be accessed through `localhost:14000`.
+HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file system operation.
+
+Here's some example usage:
+
+### Create a volume
+
+```bash
+# creates a volume called `volume1`.
+curl -i -X PUT "http://localhost:14000/webhdfs/v1/volume1?op=MKDIRS&user.name=hdfs"
+```
+
+Example Output:
+
+```bash
+HTTP/1.1 200 OK
+Date: Sat, 18 Oct 2025 07:51:21 GMT
+Cache-Control: no-cache
+Expires: Sat, 18 Oct 2025 07:51:21 GMT
+Pragma: no-cache
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Set-Cookie: hadoop.auth="u=hdfs&p=hdfs&t=simple-dt&e=1760809881100&s=OCdVOi8eyMguFySkmEJxm5EkRfj6NbAM9agi5Gue1Iw="; Path=/; HttpOnly
+Content-Length: 17
+
+{"boolean":true}
+```
+
+### Create a bucket
+
+```bash
+# creates a bucket called `bucket1`.
+curl -i -X PUT "http://localhost:14000/webhdfs/v1/volume1/bucket1?op=MKDIRS&user.name=hdfs"
+```
+
+Example Output:
+
+```bash
+HTTP/1.1 200 OK
+Date: Sat, 18 Oct 2025 07:52:06 GMT
+Cache-Control: no-cache
+Expires: Sat, 18 Oct 2025 07:52:06 GMT
+Pragma: no-cache
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Set-Cookie: hadoop.auth="u=hdfs&p=hdfs&t=simple-dt&e=1760809926682&s=yvOaeaRCVJZ+z+nZQ/rM/Y01pzEmS9Pe2mE9f0b+TWw="; Path=/; HttpOnly
+Content-Length: 17
+
+{"boolean":true}
+```
+
+### Upload a file
+
+```bash
+echo "hello" >> ./README.txt
+curl -i -X PUT "http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=CREATE&data=true&user.name=hdfs" -T ./README.txt -H "Content-Type: application/octet-stream" 
+```
+
+Example Output:
+
+```bash
+HTTP/1.1 100 Continue
+
+HTTP/1.1 201 Created
+Date: Sat, 18 Oct 2025 08:33:33 GMT
+Cache-Control: no-cache
+Expires: Sat, 18 Oct 2025 08:33:33 GMT
+Pragma: no-cache
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Set-Cookie: hadoop.auth="u=hdfs&p=hdfs&t=simple-dt&e=1760812413286&s=09t7xKu/p/fjCJiQNL3bvW/Q7mTw28IbeNqDGlslZ6w="; Path=/; HttpOnly
+Location: http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt
+Content-Type: application/json
+Content-Length: 84
+
+{"Location":"http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt"}
+```
+
+### Read the file content
+
+```bash
+# returns the content of the key `/user/foo/README.txt`.
+curl 'http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=OPEN&user.name=foo'
+hello
+```
+
+## Supported operations
+
+Here are the tables of WebHDFS REST APIs and their state of support in Ozone.
+
+### File and Directory Operations
+
+| Operation                       | Support                      |
+|-------------------------------- | ---------------------------  |
+| Create and Write to a File      | supported                    |
+| Append to a File                | not implemented in Ozone     |
+| Concat File(s)                  | not implemented in Ozone     |
+| Open and Read a File            | supported                    |
+| Make a Directory                | supported                    |
+| Create a Symbolic Link          | not implemented in Ozone     |
+| Rename a File/Directory         | supported (with limitations) |
+| Delete a File/Directory         | supported                    |
+| Truncate a File                 | not implemented in Ozone.    |
+| Status of a File/Directory      | supported                    |
+| List a Directory                | supported                    |
+| List a File                     | supported                    |
+| Iteratively List a Directory    | unsupported                  |
+
+### Other File System Operations
+
+| Operation                             | Support                                 |
+| ------------------------------------- | --------------------------------------- |
+| Get Content Summary of a Directory    | supported                               |
+| Get Quota Usage of a Directory        | supported                               |
+| Set Quota                             | not implemented in Ozone FileSystem API |
+| Set Quota By Storage Type             | not implemented in Ozone                |
+| Get File Checksum                     | unsupported (to be fixed)               |
+| Get Home Directory                    | unsupported (to be fixed)               |
+| Get Trash Root                        | unsupported                             |
+| Set Permission                        | not implemented in Ozone FileSystem API |
+| Set Owner                             | not implemented in Ozone FileSystem API |
+| Set Replication Factor                | not implemented in Ozone FileSystem API |
+| Set Access or Modification Time       | not implemented in Ozone FileSystem API |
+| Modify ACL Entries                    | not implemented in Ozone FileSystem API |
+| Remove ACL Entries                    | not implemented in Ozone FileSystem API |
+| Remove Default ACL                    | not implemented in Ozone FileSystem API |
+| Remove ACL                            | not implemented in Ozone FileSystem API |
+| Set ACL                               | not implemented in Ozone FileSystem API |
+| Get ACL Status                        | not implemented in Ozone FileSystem API |
+| Check access                          | not implemented in Ozone FileSystem API |
+
+## Hadoop user and developer documentation about HttpFS
+
+- [HttpFS Server Setup](https://hadoop.apache.org/docs/stable/hadoop-hdfs-httpfs/ServerSetup.html)
+- [Using HTTP Tools](https://hadoop.apache.org/docs/stable/hadoop-hdfs-httpfs/ServerSetup.html)

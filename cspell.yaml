@@ -123,6 +123,7 @@ words:
 - javadoc
 - JVM
 - distcp
+- WebHDFS
 # Misc words
 - acking
 - dashboarding
