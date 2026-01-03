@@ -123,6 +123,9 @@ words:
 - javadoc
 - JVM
 - distcp
+- Boto3
+- fsspec
+- libhdfs
 - WebHDFS
 # Misc words
 - acking
