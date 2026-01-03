@@ -4,21 +4,7 @@ sidebar_label: Flink
 
 # Apache Flink
 
-This tutorial shows how to connect Apache Flink to Apache Ozone using the S3 Gateway, with Docker and Docker Compose.
-
-We intentionally use:
-
-- S3 (Option A) instead of Hadoop FS
-- Pattern C: manually copy the Flink S3 plugin JAR
-- A shared Docker network between Flink and Ozone
-
-This avoids rebuilding images and keeps the setup explicit and debuggable.
-
-## Prerequisites
-
-- Docker + Docker Compose
-- An Ozone cluster already running with S3 Gateway enabled. For a quick setup, you can refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md).
-- Ozone S3 access key and secret key
+This tutorial shows how to connect Apache Flink to Apache Ozone using the S3 Gateway, with Docker Compose.
 
 First, obtain Ozone's sample Docker Compose configuration and save it as `docker-compose.yaml`:
 
@@ -26,15 +12,17 @@ First, obtain Ozone's sample Docker Compose configuration and save it as `docker
 curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/docker-compose.yaml
 ```
 
+Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md) for details.
+
 ## Assumptions
 
+- Access Ozone through S3 Gateway instead of Ofs.
 - Ozone S3G listens on port 9878
-- An Ozone bucket already exists (e.g. `warehouse`)
+- Enables path style access.
+- Ozone S3G does not enable security, therefore any S3 access key and secret key is accepted.
 - Flink version: `flink:scala_2.12-java17`
 
 ## Step 1 — Create docker-compose.yml for Flink
-
-Attach Flink to the same network as Ozone.
 
 ```yaml
 services:
@@ -72,8 +60,6 @@ services:
         fs.s3a.secret.key: ozone
 ```
 
-Replace `ozone_default` and `s3g` with the actual network name and S3G service name if different.
-
 ## Step 2 — Start Flink and Ozone together
 
 With both `docker-compose.yaml` (for Ozone) and `docker-compose.yml` (for Flink) in the same directory,
@@ -100,7 +86,7 @@ docker exec -it <s3g_container_name> ozone sh bucket create s3g/bucket1 -l obs
 
 ## Step 4 — Copy the Flink S3 filesystem plugin (Pattern C)
 
-Flink does not enable S3 by default.
+The official Flink docker image does not enable S3 by default.
 You must copy the plugin JAR into both JobManager and TaskManager.
 
 Copy into JobManager
@@ -148,7 +134,7 @@ Flink SQL>
 
 ## Step 7 — Create a table backed by Ozone S3
 
-Important: Use `s3a://` (not `s3://`).
+Important: Must use BATCH mode otherwise multi-part upload fails.
 
 ```sql
 SET 'execution.runtime-mode' = 'BATCH';
@@ -158,7 +144,7 @@ CREATE TABLE ozone_sink (
   ts TIMESTAMP(3)
 ) WITH (
   'connector' = 'filesystem',
-  'path' = 's3a://s3g/bucket1/ozone_sink',
+  'path' = 's3a://s3g/bucket1/ozone_sink/',
   'format' = 'parquet'
 );
 ```
