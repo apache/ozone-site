@@ -32,18 +32,19 @@ For more details on bucket operations, refer to the [Ozone CLI documentation](..
 Ozone supports different bucket layouts, primarily:
 
 - **Object Store (OBS):** The traditional object storage layout, where keys are stored with their full path names. This is suitable for S3-like access patterns.
+For more details, refer to the [Object Store documentation](./04-layouts/01-object-store.md).
 - **File System Optimized (FSO):** An optimized layout for Hadoop Compatible File System (HCFS) semantics, where intermediate directories are stored separately, improving performance for file system operations like listing and renaming.
-For more details, refer to the [Prefix FSO documentation](../../../07-system-internals/07-features/01-filesystem-optimization.md).
+For more details, refer to the [Prefix FSO documentation](./04-layouts/02-file-system-optimized.md).
 
 ### Erasure Coding
 
 Erasure Coding (EC) can be enabled at the bucket level to define data redundancy strategies. This allows for more efficient storage compared to replication, especially for large datasets.
-For more information, see the [Erasure Coding documentation](../../../07-system-internals/07-features/04-erasure-coding.md).
+For more information, see the [Erasure Coding documentation](../../02-replication/04-erasure-coding.md).
 
 ### Snapshots
 
 Ozone's snapshot feature allows users to take point-in-time consistent images of a given bucket. These snapshots are immutable and can be used for backup, recovery, archival, and incremental replication purposes.
-For more details, refer to the [Ozone Snapshot documentation](../../../07-system-internals/07-features/03-bucket-snapshots.md).
+For more details, refer to the [Ozone Snapshot documentation](./08-snapshots.md).
 
 ### GDPR Compliance
 
