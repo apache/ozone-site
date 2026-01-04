@@ -161,8 +161,8 @@ ozone fs -copyFromLocal local_ofs.txt /vol1/bucket_ofs/remote_file.txt
 # List files in a bucket
 ozone fs -ls /vol1/bucket_ofs/
 
-# List recursively
-# ozone fs -ls -R /vol1/
+# List recursively (lists all buckets and keys under /vol1/)
+ozone fs -ls -R /vol1/
 
 # Download a file
 ozone fs -get /vol1/bucket_ofs/local_ofs.txt ./downloaded_ofs.txt
