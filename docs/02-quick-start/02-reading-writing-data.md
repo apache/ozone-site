@@ -243,7 +243,7 @@ aws s3 cp s3://s3bucket/s3_test.txt ./downloaded_s3.txt
 aws s3 rm s3://s3bucket/s3_test.txt
 
 # Delete a bucket (must be empty)
-# aws s3api delete-bucket --bucket=s3bucket
+aws s3api delete-bucket --bucket=s3bucket
 ```
 
 ## Cross-Interface Operations
