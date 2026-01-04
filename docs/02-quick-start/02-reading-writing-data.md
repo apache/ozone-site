@@ -156,7 +156,7 @@ echo "Hello from OFS" > local_ofs.txt
 ozone fs -put local_ofs.txt /vol1/bucket_ofs/
 
 # Copy from local with explicit destination path
-# ozone fs -copyFromLocal /path/to/local/file.txt /vol1/bucket_ofs/remote_file.txt
+ozone fs -copyFromLocal local_ofs.txt /vol1/bucket_ofs/remote_file.txt
 
 # List files in a bucket
 ozone fs -ls /vol1/bucket_ofs/
