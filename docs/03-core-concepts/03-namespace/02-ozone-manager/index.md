@@ -20,11 +20,11 @@ Ozone's namespace is a collection of volumes or is a forest instead of a single 
 
 OM maintains a list of volumes, buckets, and keys. For each user, it maintains a list of volumes. For each volume, the list of buckets and for each bucket the list of keys.
 
-Ozone Manager will use [Apache Ratis](https://ratis.apache.org/) (A Raft protocol implementation) to replicate Ozone Manager state. This will ensure High Availability for Ozone Manager.
+Ozone Manager will use [Apache Ratis](https://ratis.apache.org/) (A Raft protocol implementation) to replicate Ozone Manager state. <!-- TODO: Link to OM HA page when created --> This will ensure High Availability for Ozone Manager.
 
 ## Ozone Manager and Storage Container Manager
 
-The relationship between Ozone Manager and Storage Container Manager (SCM) is best understood if we trace what happens during a key write and key read.
+<!-- TODO: Link to SCM page when created --> The relationship between Ozone Manager and Storage Container Manager (SCM) is best understood if we trace what happens during a key write and key read.
 
 ### Key Write
 
@@ -32,9 +32,9 @@ The relationship between Ozone Manager and Storage Container Manager (SCM) is be
 
 - To write a key to Ozone, a client tells Ozone manager that it would like to write a key into a bucket that lives inside a specific volume. Once Ozone Manager determines that you are allowed to write a key to the specified bucket, OM needs to allocate a block for the client to write data.
 
-- To allocate a block, Ozone Manager sends a request to Storage Container Manager (SCM); SCM is the manager of data nodes. SCM picks three data nodes into which client can write data. SCM allocates the block and returns the block ID to Ozone Manager.
+- To allocate a block, Ozone Manager sends a request to Storage Container Manager (SCM); <!-- TODO: Link to Datanodes page when created --> SCM is the manager of data nodes. SCM picks three data nodes into which client can write data. SCM allocates the block and returns the block ID to Ozone Manager.
 
-- Ozone manager records this block information in its metadata and returns the block and a block token (a security permission to write data to the block) to the client.
+- Ozone manager records this block information in its metadata and returns the block and a <!-- TODO: Link to block token/security page when created --> block token (a security permission to write data to the block) to the client.
 
 - The client uses the block token to prove that it is allowed to write data to the block and writes data to the data node.
 
@@ -62,13 +62,13 @@ Ozone provides a network service for the client and for administration commands.
 - FS related calls (optimized for hierarchical queries instead of a flat ObjectStore namespace)
   - GetFileStatus, CreateDirectory, CreateFile, LookupFile
 - ACL related
-  - Managing ACLs if internal ACLs are used instead of Ranger
-- Delegation token (Get / Renew / Cancel)
+  - <!-- TODO: Link to internal ACLs and Ranger pages when created --> Managing ACLs if internal ACLs are used instead of Ranger
+- <!-- TODO: Link to delegation token/security page when created --> Delegation token (Get / Renew / Cancel)
   - For security
 - Admin APIs
   - Get S3 secret
   - ServiceList (used for service discovery)
-  - DBUpdates (used by Recon downloads snapshots)
+  - <!-- TODO: Link to Recon page when created --> DBUpdates (used by Recon downloads snapshots)
 
 ### Persisted State
 
