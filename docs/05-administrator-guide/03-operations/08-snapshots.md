@@ -25,6 +25,7 @@ When keys are changed or deleted in the live bucket, their data blocks are retai
 
 **Snapshot Data Storage:** Snapshot metadata resides in OM's RocksDB. Diff job data is stored in `ozone.om.snapshot.diff.db.dir` (defaults to OM metadata directory).
 
+<!-- cspell:ignore Prashant Pogde -->
 For more details, see Prashant Pogde's [Introducing Apache Ozone Snapshots](https://medium.com/@prashantpogde/introducing-apache-ozone-snapshots-af82e976142f).
 
 ## Managing Snapshots
@@ -114,6 +115,7 @@ ozone sh snapshot listDiff /vol1/bucket1 --all-status
 ```
 
 **Note:** The difference between `--all-status` and `-all` (or `-a`):
+
 - `--all-status`: Controls which jobs to show based on status (lists all jobs regardless of status)
 - `-all` (or `-a`): Controls the number of results returned (pagination option, removes pagination limit, **not related to snapshot diff job status**)
 
@@ -150,7 +152,7 @@ Manage and access snapshots using Java APIs:
 
 #### Hadoop Compatible FileSystem (HCFS) Interface
 
-Use Ozone FileSystem (OFS) API (Hadoop `FileSystem`).
+Use Ozone FileSystem (ofs) API (Hadoop `FileSystem`).
 
 ```java
 // Example: Create, list, read, rename, delete snapshots
@@ -224,10 +226,11 @@ Ozone supports native ACLs and optional Ranger policies for snapshot authorizati
 
 Ozone and HDFS snapshots are conceptually similar but differ in key aspects:
 
+<!-- cspell:ignore snapshottable -->
 - **Granularity:** Ozone snapshots are bucket-level; HDFS snapshots can be taken at any directory level (if snapshottable).
 - **Metadata vs. Data Changes:** Both track key/file changes. Ozone snapshots don't version bucket metadata changes (e.g., quotas, ACLs).
 - **Access and Restore:** Both use a `.snapshot` path for read-only access. Restoring in Ozone is a manual copy process (e.g., using DistCp); no automatic rollback.
-- **Implementation:** Ozone uses OM's key-value store (RocksDB) for O(1) metadata-pointer-based snapshots. HDFS also uses metadata manipulation but Ozone's object-store nature means no DataNode-level block tracking for snapshots; all intelligence is in OM.
+- **Implementation:** Ozone uses OM's key-value store (RocksDB) for O(1) metadata-pointer-based snapshots. HDFS also uses metadata manipulation but Ozone's object-store nature means no Datanode-level block tracking for snapshots; all intelligence is in OM.
 
 ## Known Issues and Limitations
 
@@ -250,7 +253,7 @@ For optimal performance and stability when using Ozone snapshots, especially in 
 - **Open File Descriptors:** Increase the `nofile` ulimit (e.g., to 64,000 or higher) for the Ozone Manager (OM) process to handle numerous RocksDB files and snapshot operations.
 - **Metadata Storage:** Use high-performance storage like NVMe SSDs for OM metadata directories (`ozone.metadata.dirs`) to improve I/O for snapshot and diff operations.
 - **OM Resources:** Allocate sufficient RAM (e.g., 16-32GB+, monitor GC) and CPU to the Ozone Manager, particularly for clusters with many snapshots or concurrent diff jobs.
-- **DataNode Disk Space:** Account for increased disk usage on DataNodes, as snapshots retain data blocks that would otherwise be deleted. Plan capacity based on snapshot retention policies and change rates.
+- **Datanode Disk Space:** Account for increased disk usage on Datanodes, as snapshots retain data blocks that would otherwise be deleted. Plan capacity based on snapshot retention policies and change rates.
 - **Filesystem & Kernel:** Use filesystems like ext4 or xfs (often preferred for RocksDB) for OM metadata. Ensure disk schedulers and RAID configurations are optimized for low latency.
 - **Networking:** Ensure robust network connectivity to the OM, as snapshot diffs or HttpFS access can involve significant data transfer.
 
