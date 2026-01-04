@@ -311,6 +311,11 @@ Ozone buckets can have different internal layouts:
 
 ```bash
 # Create buckets with specific layouts (inside om/client container)
+# Short form
+ozone sh bucket create /vol1/fso_bucket --layout fso
+ozone sh bucket create /vol1/obs_bucket --layout obs
+
+# Long form
 # ozone sh bucket create /vol1/fso_bucket --layout FILE_SYSTEM_OPTIMIZED
 # ozone sh bucket create /vol1/obs_bucket --layout OBJECT_STORE
 ```
