@@ -190,9 +190,9 @@ ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
 
 ```bash
 # Get file checksum
-# ozone fs -checksum /vol1/bucket_ofs/moved_ofs.txt
+ozone fs -checksum /vol1/bucket_ofs/moved_ofs.txt
 
-# Set replication factor for a file (use 'ozone sh key put' for setting on write)
+# Set replication factor for a file (NOT SUPPORTED - use 'ozone sh key put' with -t and -r flags for setting replication on write)
 # ozone fs -setrep -w 3 /vol1/bucket_ofs/important_file
 
 # Trash configuration is done in core-site.xml (see Ozone docs for details)
