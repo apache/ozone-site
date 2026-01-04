@@ -97,8 +97,11 @@ echo "Hello Ozone via Shell" > test_shell.txt
 # Upload a file (put source to destination)
 ozone sh key put /vol1/bucket1/test_shell.txt test_shell.txt
 
-# Upload with specific replication type (Example: RATIS/THREE)
-# ozone sh key put -t RATIS -r THREE /vol1/bucket1/key1_ratis /path/to/local/file
+# Upload with specific replication type
+# For RATIS: use -r ONE or THREE
+ozone sh key put -t RATIS -r THREE /vol1/bucket1/key1_ratis test_shell.txt
+# For EC: use format CODEC-DATA-PARITY-CHUNKSIZE (e.g., rs-3-2-1024k, rs-6-3-1024k, rs-10-4-1024k)
+ozone sh key put -t EC -r rs-3-2-1024k /vol1/bucket1/key1_ec test_shell.txt
 
 # Download a file (get source to destination)
 ozone sh key get /vol1/bucket1/test_shell.txt ./downloaded_shell.txt
