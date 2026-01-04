@@ -166,6 +166,7 @@ Path bucketPath = new Path("/vol1/bucket1");
 ```
 
 Handle `OMException` or `IOException`. Snapshots are in the bucket's `.snapshot` directory.
+<!-- TODO: Link to Ozone File System API guide when created --> Refer to the Ozone File System API guide for more details.
 
 #### Ozone ObjectStore Client API
 
@@ -219,19 +220,6 @@ Snapshot operations require specific privileges:
 
 Ozone supports native ACLs and optional Ranger policies for snapshot authorization. The behavior described assumes native ACLs. If using Ranger, ensure appropriate permissions are configured for snapshot operations.
 
-## Linux System Configuration
-
-For optimal performance and stability when using Ozone snapshots, especially in production, consider the following system configurations:
-
-- **Open File Descriptors:** Increase the `nofile` ulimit (e.g., to 64,000 or higher) for the Ozone Manager (OM) process to handle numerous RocksDB files and snapshot operations.
-- **Metadata Storage:** Use high-performance storage like NVMe SSDs for OM metadata directories (`ozone.metadata.dirs`) to improve I/O for snapshot and diff operations.
-- **OM Resources:** Allocate sufficient RAM (e.g., 16-32GB+, monitor GC) and CPU to the Ozone Manager, particularly for clusters with many snapshots or concurrent diff jobs.
-- **DataNode Disk Space:** Account for increased disk usage on DataNodes, as snapshots retain data blocks that would otherwise be deleted. Plan capacity based on snapshot retention policies and change rates.
-- **Filesystem & Kernel:** Use filesystems like ext4 or xfs (often preferred for RocksDB) for OM metadata. Ensure disk schedulers and RAID configurations are optimized for low latency.
-- **Networking:** Ensure robust network connectivity to the OM, as snapshot diffs or HttpFS access can involve significant data transfer.
-
-Always test snapshot operations under your expected load to fine-tune these configurations.
-
 ## Comparison to HDFS Snapshots
 
 Ozone and HDFS snapshots are conceptually similar but differ in key aspects:
@@ -254,3 +242,16 @@ Key limitations for Ozone snapshots include:
 - **Hard Link Upper Limit:** RocksDB checkpoints use hard links, limited to 65,535 per file by the filesystem. This restricts the number of snapshots per bucket.
 
 Refer to project release notes for updates on these limitations.
+
+## Linux System Configuration
+
+For optimal performance and stability when using Ozone snapshots, especially in production, consider the following system configurations:
+
+- **Open File Descriptors:** Increase the `nofile` ulimit (e.g., to 64,000 or higher) for the Ozone Manager (OM) process to handle numerous RocksDB files and snapshot operations.
+- **Metadata Storage:** Use high-performance storage like NVMe SSDs for OM metadata directories (`ozone.metadata.dirs`) to improve I/O for snapshot and diff operations.
+- **OM Resources:** Allocate sufficient RAM (e.g., 16-32GB+, monitor GC) and CPU to the Ozone Manager, particularly for clusters with many snapshots or concurrent diff jobs.
+- **DataNode Disk Space:** Account for increased disk usage on DataNodes, as snapshots retain data blocks that would otherwise be deleted. Plan capacity based on snapshot retention policies and change rates.
+- **Filesystem & Kernel:** Use filesystems like ext4 or xfs (often preferred for RocksDB) for OM metadata. Ensure disk schedulers and RAID configurations are optimized for low latency.
+- **Networking:** Ensure robust network connectivity to the OM, as snapshot diffs or HttpFS access can involve significant data transfer.
+
+Always test snapshot operations under your expected load to fine-tune these configurations.
