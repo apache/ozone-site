@@ -10,4 +10,8 @@ To avoid any single point of failure the metadata-manager nodes also should have
 
 Both Ozone Manager and Storage Container Manager supports HA. In this mode the internal state is replicated via RAFT (with Apache Ratis)
 
-This document explains the HA setup of Storage Container Manager (SCM). <!-- TODO: Link to OM HA page when created --> Please check the OM HA documentation for HA setup of Ozone Manager (OM). While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.
+<!-- TODO: Link to OM HA page when created --> Please check the OM HA documentation for HA setup of Ozone Manager (OM). While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.
+
+## Service ID and SCM Host Mapping
+
+To select between the available SCM nodes, a logical name (a `serviceId`) is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Storage Container Managers. <!-- TODO: Link to SCM HA configuration doc when created --> Check out the SCM HA configuration documentation for details on how to configure the service ID and map it to individual SCM nodes.
