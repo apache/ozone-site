@@ -179,8 +179,8 @@ ozone fs -cp /vol1/bucket_ofs/moved_ofs.txt /vol1/bucket_ofs/copy_ofs.txt
 # Delete a file (moves to trash if enabled and bucket is FSO)
 ozone fs -rm /vol1/bucket_ofs/copy_ofs.txt
 
-# Delete a file and skip trash
-# ozone fs -rm -skipTrash /vol1/bucket_ofs/moved_ofs.txt
+# Delete a file and skip trash (permanently delete without moving to trash)
+ozone fs -rm -skipTrash /vol1/bucket_ofs/moved_ofs.txt
 
 # Create an empty file
 ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
