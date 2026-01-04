@@ -777,6 +777,42 @@ any replication config or bucket does not have any default values.</p>
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;value&gt;</span>rs-3-2-1024k<span style="color:#f92672">&lt;/value&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
 </span></span></code></pre></div><p>In the case bucket already has default EC Replication Config, there is no need of passing EC Replication Config while creating key.</p>
+<h4 id="calculating-ec-pipeline-limits">Calculating EC Pipeline Limits</h4>
+<p>The target number of open EC pipelines SCM aims to maintain is calculated dynamically for each EC replication configuration (e.g., RS-6-3, RS-3-2). The calculation is based on the following two properties, with the final target being the greater of the two resulting values.</p>
+<ul>
+<li>
+<p><code>ozone.scm.ec.pipeline.minimum</code></p>
+<ul>
+<li><strong>Description</strong>: The guaranteed minimum number of open pipelines to maintain for each EC configuration, regardless of other factors.</li>
+<li><strong>Default Value</strong>: <code>5</code></li>
+</ul>
+</li>
+<li>
+<p><code>ozone.scm.ec.pipeline.per.volume.factor</code></p>
+<ul>
+<li><strong>Description</strong>: A factor used to calculate a target number of pipelines based on the total number of healthy volumes across all datanodes in the cluster.</li>
+<li><strong>Default Value</strong>: <code>1.0</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Calculation Logic:</strong></p>
+<p>SCM first calculates a volume-based target using the formula:
+<code>(&lt;pipeline.per.volume.factor&gt; * &lt;total healthy volumes&gt;) / &lt;required nodes for EC config&gt;</code></p>
+<p>The final target number of pipelines is then determined by:
+<code>max(&lt;volume-based target&gt;, &lt;pipeline.minimum&gt;)</code></p>
+<p><strong>Example:</strong></p>
+<p>Consider a cluster with <strong>200 total healthy volumes</strong> across all datanodes and an EC policy of <strong>RS-6-3</strong> (which requires 9 nodes).</p>
+<ul>
+<li><code>ozone.scm.ec.pipeline.minimum</code> = <strong>5</strong> (default)</li>
+<li><code>ozone.scm.ec.pipeline.per.volume.factor</code> = <strong>1.0</strong> (default)</li>
+</ul>
+<ol>
+<li>The volume-based target is: <code>(1.0 * 200) / 9 = 22</code></li>
+<li>The final target is: <code>max(22, 5) = 22</code></li>
+</ol>
+<p>SCM will attempt to create and maintain approximately <strong>22</strong> open, RS-6-3 EC pipelines.</p>
+<p><strong>Production Recommendation:</strong></p>
+<p>The default values are a good starting point for most clusters. If you have a very high number of volumes and a write-heavy EC workload, you might consider slightly increasing the <code>pipeline.per.volume.factor</code>. Conversely, for read-heavy workloads, the default minimum of 5 pipelines is often sufficient.</p>
 <h3 id="enable-intel-isa-l">Enable Intel ISA-L</h3>
 <p>Intel Intelligent Storage Acceleration Library (ISA-L) is an open-source collection of optimized low-level functions used for
 storage applications. Enabling ISA-L allows significantly improve EC performance.</p>
@@ -807,7 +843,12 @@ The default value of java.library.path depends on the OS and Java version. For e
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: March 27, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ce003e898bcb8256127e0bbb88351db123b10786">ce003e898b</a>
+      Version: [ERROR] Error executing Maven.
+[ERROR] Extension com.gradle:develocity-maven-extension:1.22.2 or one of its dependencies could not be resolved: Plugin com.gradle:develocity-maven-extension:1.22.2 or one of its dependencies could not be resolved:
+	Failed to read artifact descriptor for com.gradle:develocity-maven-extension:jar:1.22.2
+
+[ERROR] Caused by: Plugin com.gradle:develocity-maven-extension:1.22.2 or one of its dependencies could not be resolved:
+	Failed to read artifact descriptor for com.gradle:develocity-maven-extension:jar:1.22.2, Last Modified: January 3, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/ac7a9a90f205c742c711b08c879d0a0c72385d44">ac7a9a90f2</a>
     </span>
   </div>
 </footer>
