@@ -106,8 +106,8 @@ ozone sh key put -t EC -r rs-3-2-1024k /vol1/bucket1/key1_ec test_shell.txt
 # Download a file (get source to destination)
 ozone sh key get /vol1/bucket1/test_shell.txt ./downloaded_shell.txt
 
-# Force overwrite when downloading
-# ozone sh key get --force /vol1/bucket1/test_shell.txt ./downloaded_shell.txt
+# Force overwrite when downloading (use -f or --force)
+ozone sh key get --force /vol1/bucket1/test_shell.txt ./downloaded_shell.txt
 
 # Get key information
 ozone sh key info /vol1/bucket1/test_shell.txt
