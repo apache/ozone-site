@@ -38,7 +38,7 @@ Note that for mounts, only temp mount `/tmp` is supported at the moment.
 
 ## Configuration
 
-Please add the following entry to the core-site.xml.
+Please add the following entry to the `core-site.xml`.
 
 ```xml
 <property>
@@ -99,7 +99,7 @@ ozone fs -touch /volume1/key1
 
 ### Simplify fs.defaultFS
 
-With ofs, fs.defaultFS (in core-site.xml) no longer needs to have a specific volume and bucket in its path like o3fs did.
+With ofs, fs.defaultFS (in `core-site.xml`) no longer needs to have a specific volume and bucket in its path like o3fs did.
 Simply put the OM host or service ID (in case of HA):
 
 ```xml
@@ -137,7 +137,7 @@ mkdir: Bucket or Volume name has an unsupported character : _
 In order to be compatible with legacy Hadoop applications that use /tmp/, we have a special temp mount located at the root of the FS.
 This feature may be expanded in the feature to support custom mount paths.
 
-Currently Ozone supports two configurations for /tmp. The first (default), is a tmp directory for each user comprised of a mount volume with a user specific temp bucket. The second (configurable through Ozone-site.xml), a sticky-bit like tmp directory common to all users comprised of a mount volume and a common temp bucket.
+Currently Ozone supports two configurations for /tmp. The first (default), is a tmp directory for each user comprised of a mount volume with a user specific temp bucket. The second (configurable through `ozone-site.xml`), a sticky-bit like tmp directory common to all users comprised of a mount volume and a common temp bucket.
 
 Important: To use it, first, an **admin** needs to create the volume tmp (the volume name is hardcoded for now) and set its ACL to world ALL access.
 Namely:
@@ -166,7 +166,7 @@ ozone fs -touch /tmp/key1
 
 ### For a sharable /tmp directory common to all users
 
-To enable the sticky-bit common /tmp directory, update the Ozone-site.xml with the following property
+To enable the sticky-bit common /tmp directory, update the `ozone-site.xml` with the following property
 
 ```xml
 <property>
@@ -193,7 +193,7 @@ ozone fs -put ./NOTICE.txt ofs://om/tmp/key1
 
 ## Delete with trash enabled
 
-In order to enable trash in Ozone, Please add these configs to core-site.xml
+In order to enable trash in Ozone, Please add these configs to `core-site.xml`
 
 ```xml
 <property>
