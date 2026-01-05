@@ -16,13 +16,13 @@ Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-d
 
 ## Assumptions
 
-- Flink accesses Ozone through S3 Gateway instead of Ofs.
+- Flink accesses Ozone through S3 Gateway instead of ofs.
 - Ozone S3G listens on port 9878
 - Ozone S3G enables path style access.
 - Ozone S3G does not enable security, therefore any S3 access key and secret key is accepted.
-- Flink docker image tag `flink:scala_2.12-java17`
+- Flink Docker image tag `flink:scala_2.12-java17`
 
-## Step 1 — Create docker-compose-flink.yml for Flink
+## Step 1 — Create `docker-compose-flink.yml` for Flink
 
 ```yaml
 services:
@@ -86,7 +86,7 @@ docker compose exec -it s3g ozone sh bucket create s3v/bucket1 -l obs
 
 ## Step 4 — Copy the Flink S3 filesystem plugin
 
-The official Flink docker image does not enable S3 by default.
+The official Flink Docker image does not enable S3 by default.
 You must copy the plugin JAR into both JobManager and TaskManager.
 
 Copy into JobManager
@@ -128,7 +128,7 @@ docker compose exec -it jobmanager ./bin/sql-client.sh
 
 You should now be in:
 
-```
+```text
 Flink SQL>
 ```
 
@@ -167,7 +167,7 @@ If this works, Flink is successfully reading/writing Ozone via S3.
 
 Open your browser:
 
-```
+```text
 http://localhost:8081/
 ```
 
