@@ -23,59 +23,59 @@ ozone admin reconfig --service=[OM|SCM|DATANODE] --address=<ip:port> <operation>
 
 ### Options
 
-| Option | Description |
-|--------|-------------|
-| `--service` | The service type: `OM`, `SCM`, or `DATANODE` |
-| `--address` | RPC address of the target server (e.g., `hadoop1:9862`) |
-| `--in-service-datanodes` | (DataNode only) Apply to all IN_SERVICE datanodes |
+| Option                     | Description                                               |
+| -------------------------- | --------------------------------------------------------- |
+| `--service`                | The service type: `OM`, `SCM`, or `DATANODE`              |
+| `--address`                | RPC address of the target server (e.g., `hadoop1:9862`)   |
+| `--in-service-datanodes`   | (Datanode only) Apply to all IN_SERVICE Datanodes         |
 
 ### Operations
 
-| Operation | Description |
-|-----------|-------------|
-| `start` | Execute reconfiguration asynchronously |
-| `status` | Check the status of a reconfiguration task |
+| Operation    | Description                                        |
+| ------------ | -------------------------------------------------- |
+| `start`      | Execute reconfiguration asynchronously             |
+| `status`     | Check the status of a reconfiguration task         |
 | `properties` | List all reconfigurable properties for the service |
 
 ## Reconfigurable Properties
 
 ### Ozone Manager (OM)
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `ozone.administrators` | - | Comma-separated list of Ozone administrators |
-| `ozone.om.server.list.max.size` | `1000` | Maximum server-side response size for list operations |
-| `ozone.om.volume.listall.allowed` | `true` | Allow all users to list all volumes |
-| `ozone.om.follower.read.local.lease.enabled` | `false` | Enable local lease for follower read optimization |
-| `ozone.om.follower.read.local.lease.lag.limit` | `10000` | Maximum log lag for follower reads |
-| `ozone.om.follower.read.local.lease.time.ms` | `5000` | Lease time in milliseconds for follower reads |
+| Property                                       | Default   | Description                                               |
+| ---------------------------------------------- | --------- | --------------------------------------------------------- |
+| `ozone.administrators`                         | -         | Comma-separated list of Ozone administrators              |
+| `ozone.om.server.list.max.size`                | `1000`    | Maximum server-side response size for list operations     |
+| `ozone.om.volume.listall.allowed`              | `true`    | Allow all users to list all volumes                       |
+| `ozone.om.follower.read.local.lease.enabled`   | `false`   | Enable local lease for follower read optimization         |
+| `ozone.om.follower.read.local.lease.lag.limit` | `10000`   | Maximum log lag for follower reads                        |
+| `ozone.om.follower.read.local.lease.time.ms`   | `5000`    | Lease time in milliseconds for follower reads             |
 
 ### Storage Container Manager (SCM)
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `ozone.administrators` | - | Comma-separated list of Ozone administrators |
-| `hdds.scm.block.deletion.per-interval.max` | `500000` | Maximum blocks SCM processes per deletion interval |
-| `hdds.scm.replication.thread.interval` | `300s` | Interval for the replication monitor thread |
-| `hdds.scm.replication.under.replicated.interval` | `30s` | Frequency to check the under-replicated queue |
-| `hdds.scm.replication.over.replicated.interval` | `30s` | Frequency to check the over-replicated queue |
-| `hdds.scm.replication.event.timeout` | `12m` | Timeout for replication/deletion commands |
-| `hdds.scm.replication.event.timeout.datanode.offset` | `6m` | Offset subtracted from event timeout for datanode deadline |
-| `hdds.scm.replication.maintenance.replica.minimum` | `2` | Minimum replicas required for node maintenance |
-| `hdds.scm.replication.maintenance.remaining.redundancy` | `1` | Remaining redundancy required for maintenance (EC) |
-| `hdds.scm.replication.datanode.replication.limit` | `20` | Max replication commands queued per datanode |
-| `hdds.scm.replication.datanode.reconstruction.weight` | `3` | Weight multiplier for reconstruction commands |
-| `hdds.scm.replication.datanode.delete.container.limit` | `40` | Max delete container commands queued per datanode |
-| `hdds.scm.replication.inflight.limit.factor` | `0.75` | Factor to scale cluster-wide replication limit |
-| `hdds.scm.replication.container.sample.limit` | `100` | Number of containers sampled per state for debugging |
-| `ozone.scm.ec.pipeline.minimum` | `5` | Minimum EC pipelines to keep open |
-| `ozone.scm.ec.pipeline.per.volume.factor` | `1` | Factor for calculating EC pipelines based on volumes |
+| Property                                                  | Default    | Description                                                   |
+| --------------------------------------------------------- | ---------- | ------------------------------------------------------------- |
+| `ozone.administrators`                                    | -          | Comma-separated list of Ozone administrators                  |
+| `hdds.scm.block.deletion.per-interval.max`                | `500000`   | Maximum blocks SCM processes per deletion interval            |
+| `hdds.scm.replication.thread.interval`                    | `300s`     | Interval for the replication monitor thread                   |
+| `hdds.scm.replication.under.replicated.interval`          | `30s`      | Frequency to check the under-replicated queue                 |
+| `hdds.scm.replication.over.replicated.interval`           | `30s`      | Frequency to check the over-replicated queue                  |
+| `hdds.scm.replication.event.timeout`                      | `12m`      | Timeout for replication/deletion commands                     |
+| `hdds.scm.replication.event.timeout.datanode.offset`      | `6m`       | Offset subtracted from event timeout for Datanode deadline    |
+| `hdds.scm.replication.maintenance.replica.minimum`        | `2`        | Minimum replicas required for node maintenance                |
+| `hdds.scm.replication.maintenance.remaining.redundancy`   | `1`        | Remaining redundancy required for maintenance (EC)            |
+| `hdds.scm.replication.datanode.replication.limit`         | `20`       | Max replication commands queued per Datanode                  |
+| `hdds.scm.replication.datanode.reconstruction.weight`     | `3`        | Weight multiplier for reconstruction commands                 |
+| `hdds.scm.replication.datanode.delete.container.limit`    | `40`       | Max delete container commands queued per Datanode             |
+| `hdds.scm.replication.inflight.limit.factor`              | `0.75`     | Factor to scale cluster-wide replication limit                |
+| `hdds.scm.replication.container.sample.limit`             | `100`      | Number of containers sampled per state for debugging          |
+| `ozone.scm.ec.pipeline.minimum`                           | `5`        | Minimum EC pipelines to keep open                             |
+| `ozone.scm.ec.pipeline.per.volume.factor`                 | `1`        | Factor for calculating EC pipelines based on volumes          |
 
-### DataNode
+### Datanode
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.block.deleting.limit.per.interval` | `20000` | Maximum blocks deleted per interval on a datanode |
+| Property                                          | Default   | Description                                            |
+| ------------------------------------------------- | --------- | ------------------------------------------------------ |
+| `hdds.datanode.block.deleting.limit.per.interval` | `20000`   | Maximum blocks deleted per interval on a Datanode      |
 
 ## Usage Examples
 
@@ -121,7 +121,7 @@ From: "hadoop"
 To: "hadoop,bigdata"
 ```
 
-### DataNode Reconfiguration
+### Datanode Reconfiguration
 
 Modify `hdds.datanode.block.deleting.limit.per.interval` in `ozone-site.xml`, then execute:
 
@@ -136,9 +136,9 @@ From: "20000"
 To: "30000"
 ```
 
-### Batch Operations (DataNode Only)
+### Batch Operations (Datanode Only)
 
-To perform reconfiguration on all IN_SERVICE datanodes simultaneously:
+To perform reconfiguration on all IN_SERVICE Datanodes simultaneously:
 
 ```shell
 $ ozone admin reconfig --service=DATANODE --in-service-datanodes start
@@ -148,7 +148,7 @@ Datanode: Started reconfiguration task on node [hadoop3:19864].
 Reconfig successfully 3 nodes, failure 0 nodes.
 ```
 
-To list properties across all datanodes:
+To list properties across all Datanodes:
 
 ```shell
 $ ozone admin reconfig --service=DATANODE --in-service-datanodes properties

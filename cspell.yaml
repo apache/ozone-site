@@ -87,6 +87,8 @@ words:
 - mis-replicated
 - BCSID
 - EC
+- reconfig
+- reconfigurable
 - quasi-close
 - quasi-closed
 - HCFS
