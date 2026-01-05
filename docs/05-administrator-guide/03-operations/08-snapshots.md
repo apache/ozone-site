@@ -19,7 +19,7 @@ The SnapshotDiff feature compares two snapshots (or a snapshot and the live buck
 
 Ozone snapshots version bucket metadata within the OM. A dedicated snapshot metadata table in RocksDB records the key directory tree at snapshot creation. This is an instant operation as it involves metadata pointers (via RocksDB checkpoints) rather than data copying. Each snapshot has a unique ID and name.
 
-When keys are changed or deleted in the live bucket, their data blocks are retained if a snapshot references them. Deleting a snapshot makes its exclusively referenced blocks reclaimable by background cleanup processes.
+When keys are changed or deleted in the live bucket, their data blocks are retained if a snapshot references them. This means that taking a snapshot during a large delete operation will preserve the deleted keys in the snapshot, preventing space reclamation until the snapshot is removed. This is by design to maintain snapshot consistency. Deleting a snapshot makes its exclusively referenced blocks reclaimable by background cleanup processes.
 
 **SnapshotDiff Implementation:** Differences are computed using RocksDB key comparisons and a compaction DAG for recent changes (default: 30 days). For older snapshots or if DAG data is compacted, a full metadata scan is used. Diff results (`+` add, `-` delete, `M` modify, `R` rename) are cached.
 
@@ -238,7 +238,6 @@ Key limitations for Ozone snapshots include:
 
 - **S3 Interface Support:** Snapshot operations (create, list, delete) are not available via the S3 API or `s3a` connector. Manage snapshots using Ozone RPC (shell, `ozone fs`, Java API). Snapshotted data can be read via S3 using the `.snapshot/snapshotName/keyName` path.
 - **Ratis & EC Buckets:** Snapshots work for both Ratis and EC buckets, managed via Ozone interfaces.
-- **Snapshots During Ongoing Deletes:** Taking a snapshot during a large delete operation will prevent space reclamation for the deleted keys until the snapshot is removed.
 - **Reserved Namespace Name `.snapshot`:** `.snapshot` is a reserved name at the root of a bucket and cannot be used for user-created keys or directories.
 - **Snapshot Performance and Scale:** While creating snapshots is fast, a very large number of snapshots per bucket (thousands) can increase OM metadata size and potentially slow down listing operations. Snapshot diff performance is generally not affected by the number of snapshots but by concurrent diff operations.
 - **Space Utilization Reporting:** Space used by snapshots (data no longer in the active bucket but retained by snapshots) is reported in `ozone sh snapshot info`. Deleting a snapshot frees space asynchronously.
