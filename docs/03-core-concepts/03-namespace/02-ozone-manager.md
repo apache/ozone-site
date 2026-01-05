@@ -62,7 +62,7 @@ Ozone provides a network service for the client and for administration commands.
 - FS related calls (optimized for hierarchical queries instead of a flat ObjectStore namespace)
   - GetFileStatus, CreateDirectory, CreateFile, LookupFile
 - ACL related
-  - <!-- TODO: Link to internal ACLs and Ranger pages when created --> Managing ACLs if internal ACLs are used instead of Ranger
+  - Managing ACLs if [Native ACLs](/docs/core-concepts/security/acls/native-acls) are used instead of [Ranger ACLs](/docs/core-concepts/security/acls/ranger-acls)
 - <!-- TODO: Link to delegation token/security page when created --> Delegation token (Get / Renew / Cancel)
   - For security
 - Admin APIs
