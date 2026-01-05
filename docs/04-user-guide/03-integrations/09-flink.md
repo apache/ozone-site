@@ -16,13 +16,13 @@ Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-d
 
 ## Assumptions
 
-- Access Ozone through S3 Gateway instead of Ofs.
+- Flink accesses Ozone through S3 Gateway instead of Ofs.
 - Ozone S3G listens on port 9878
-- Enables path style access.
+- Ozone S3G enables path style access.
 - Ozone S3G does not enable security, therefore any S3 access key and secret key is accepted.
-- Flink version: `flink:scala_2.12-java17`
+- Flink docker image tag `flink:scala_2.12-java17`
 
-## Step 1 — Create docker-compose.yml for Flink
+## Step 1 — Create docker-compose-flink.yml for Flink
 
 ```yaml
 services:
@@ -62,11 +62,11 @@ services:
 
 ## Step 2 — Start Flink and Ozone together
 
-With both `docker-compose.yaml` (for Ozone) and `docker-compose.yml` (for Flink) in the same directory,
+With both `docker-compose.yaml` (for Ozone) and `docker-compose-flink.yml` (for Flink) in the same directory,
 you can start both services together, sharing the same network, using:
 
 ```bash
-export COMPOSE_FILE=docker-compose.yaml:docker-compose.yml
+export COMPOSE_FILE=docker-compose.yaml:docker-compose-flink.yml
 docker compose up -d
 ```
 
@@ -78,13 +78,13 @@ docker ps
 
 ## Step 3 — Create an Ozone bucket
 
-You need to connect to Ozone (for example, `s3g`) to create a bucket:
+You need to connect to Ozone (for example, `s3g`) to create a OBS bucket:
 
 ```bash
-docker exec -it <s3g_container_name> ozone sh bucket create s3g/bucket1 -l obs
+docker compose exec -it s3g ozone sh bucket create s3v/bucket1 -l obs
 ```
 
-## Step 4 — Copy the Flink S3 filesystem plugin (Pattern C)
+## Step 4 — Copy the Flink S3 filesystem plugin
 
 The official Flink docker image does not enable S3 by default.
 You must copy the plugin JAR into both JobManager and TaskManager.
@@ -92,24 +92,24 @@ You must copy the plugin JAR into both JobManager and TaskManager.
 Copy into JobManager
 
 ```bash
-docker exec -it <jobmanager_container> bash -lc \
-  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \ 
+docker compose exec -it jobmanager bash -lc \
+  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \\
    cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/"
 ```
 
 Copy into TaskManager
 
 ```bash
-docker exec -it <taskmanager_container> bash -lc \
-  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \ 
+docker compose exec -it taskmanager bash -lc \
+  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \\
    cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/"
 ```
 
 Verify:
 
 ```bash
-docker exec -it <jobmanager_container> ls /opt/flink/plugins/s3-fs-hadoop
-docker exec -it <taskmanager_container> ls /opt/flink/plugins/s3-fs-hadoop
+docker compose exec -it jobmanager ls /opt/flink/plugins/s3-fs-hadoop
+docker compose exec -it taskmanager ls /opt/flink/plugins/s3-fs-hadoop
 ```
 
 ## Step 5 — Restart Flink containers (required)
@@ -117,13 +117,13 @@ docker exec -it <taskmanager_container> ls /opt/flink/plugins/s3-fs-hadoop
 Plugins are loaded only at startup.
 
 ```bash
-docker restart <jobmanager_container> <taskmanager_container>
+docker compose restart jobmanager taskmanager
 ```
 
 ## Step 6 — Start Flink SQL client
 
 ```bash
-docker exec -it <jobmanager_container> ./bin/sql-client.sh
+docker compose exec -it jobmanager ./bin/sql-client.sh
 ```
 
 You should now be in:
@@ -144,7 +144,7 @@ CREATE TABLE ozone_sink (
   ts TIMESTAMP(3)
 ) WITH (
   'connector' = 'filesystem',
-  'path' = 's3a://s3g/bucket1/ozone_sink/',
+  'path' = 's3a://bucket1/ozone_sink/',
   'format' = 'parquet'
 );
 ```
