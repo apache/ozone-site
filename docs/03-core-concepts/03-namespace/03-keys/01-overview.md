@@ -43,15 +43,13 @@ For more details, refer to the Overwriting Key Only If Unchanged design document
 
 When keys are deleted from File System Optimized (FSO) buckets, they are moved to a trash directory, allowing for recovery. For Object Store (OBS) buckets, keys are permanently deleted.
 
-<!-- TODO: Link to Trash documentation when created -->
-For more information on the trash feature, refer to the Trash documentation.
+For more information on the trash feature, refer to the [Trash documentation](/docs/administrator-guide/operations/trash).
 
 ### Encryption
 
 If the parent bucket is encrypted, all keys written to that bucket will be transparently encrypted.
 
-<!-- TODO: Link to Securing TDE documentation when created -->
-For more details, refer to the Securing TDE documentation.
+For more details, refer to the [Transparent Data Encryption documentation](/docs/administrator-guide/configuration/security/encryption/transparent-data-encryption).
 
 ### Access Control Lists (ACLs)
 
