@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../tools.html">Tools</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Logs in Ozone</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Logs in Ozone</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Apache Ozone produces different types of logs to help users monitor and troubleshoot the cluster. This document provides an overview of the available logs, their configuration, and how to use them for debugging.</p>
+<h2 id="service-logs">Service Logs</h2>
+<p>Each Ozone service (Ozone Manager, Storage Container Manager, Datanode, S3 Gateway, and Recon) generates its own log file. These logs contain detailed information about the service&rsquo;s operations, including errors and warnings.</p>
+<p>By default, log files are stored in the <code>$OZONE_LOG_DIR</code> directory, which is usually set to the <code>logs</code> directory under the Ozone installation. The log file names are specific to each service, for example:</p>
+<ul>
+<li><code>ozone-om-....log</code> for Ozone Manager</li>
+<li><code>ozone-scm-....log</code> for Storage Container Manager</li>
+<li><code>ozone-datanode-....log</code> for Datanode</li>
+</ul>
+<p>The logging behavior for each service is controlled by its <code>log4j.properties</code> file, located in the service&rsquo;s <code>$OZONE_CONF_DIR</code> directory, usually <code>etc/hadoop</code>. You can modify this file to change the log level, appenders, and other logging parameters.</p>
+<h2 id="audit-logs">Audit Logs</h2>
+<p>Audit logs record security-sensitive operations, providing a trail of actions performed on the cluster. The following services produce audit logs:</p>
+<ul>
+<li>Ozone Manager</li>
+<li>Storage Container Manager</li>
+<li>Datanode</li>
+<li>S3 Gateway</li>
+</ul>
+<p>Audit log configurations are set in <code>*-audit-log4j2.properties</code> files. You can change the corresponding files to update the audit log policies for each component.</p>
+<h3 id="sample-audit-log-entry">Sample Audit Log Entry</h3>
+<p>Here is an example of an audit log entry from the Ozone Manager:</p>
+<pre tabindex="0"><code>INFO  | OMAudit | ? | user=hdfs | ip=127.0.0.1 | op=CREATE_VOLUME | params={volume=vol1, admin=hdfs, owner=hdfs} | result=SUCCESS
+</code></pre><p>This entry shows that the user <code>hdfs</code> successfully created a volume named <code>vol1</code>.</p>
+<h3 id="deletion-of-audit-logs">Deletion of Audit Logs</h3>
+<p>The default log appender is a rolling appender. The following configurations can be added for the deletion of out-of-date AuditLogs.</p>
+<pre tabindex="0"><code>appender.rolling.strategy.type=DefaultRolloverStrategy
+appender.rolling.strategy.delete.type=Delete
+appender.rolling.strategy.delete.basePath=${sys:hadoop.log.dir}
+appender.rolling.strategy.delete.maxDepth=1
+appender.rolling.strategy.delete.ifFileName.type=IfFileName
+appender.rolling.strategy.delete.ifFileName.glob=om-audit-*.log.gz
+appender.rolling.strategy.delete.ifLastModified.type=IfLastModified
+appender.rolling.strategy.delete.ifLastModified.age=30d
+</code></pre><p>For more details, please check <a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#CustomDeleteOnRollover">Log4j2 Delete on Rollover</a>.</p>
+<h2 id="debugging">Debugging</h2>
+<p>You can increase the log verbosity for debugging purposes for both services and CLI tools.</p>
+<h3 id="enabling-debug-logs-for-services">Enabling Debug Logs for Services</h3>
+<p>To enable debug logging for a service, you need to modify its <code>log4j.properties</code> file. Change the log level for the desired logger from <code>INFO</code> to <code>DEBUG</code>. For example, to enable debug logging for the Ozone Manager, you would edit its <code>log4j.properties</code> and change the following line:</p>
+<pre tabindex="0"><code>rootLogger.level = info
+</code></pre><p>to:</p>
+<pre tabindex="0"><code>rootLogger.level = debug
+</code></pre><p>After saving the file and restarting the service, the service will start logging more detailed debug information.</p>
+<h3 id="enabling-debug-logs-for-cli-tools">Enabling Debug Logs for CLI Tools</h3>
+<p>To enable debug logging for Ozone CLI tools (e.g., <code>ozone sh volume create</code>), you can set the <code>OZONE_ROOT_LOGGER</code> environment variable to <code>debug</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export OZONE_ROOT_LOGGER<span style="color:#f92672">=</span>DEBUG,console
+</span></span><span style="display:flex;"><span>ozone sh volume create /vol1
+</span></span></code></pre></div><p>Alternatively, you can use the <code>--loglevel</code> option with the <code>ozone</code> command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ozone --loglevel debug sh volume create /vol1
+</span></span></code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../tools/admin.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0, Last Modified: July 9, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/03fade02d0b6cbb612764d2945e6c7ea3f8b89fa">03fade02d0</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

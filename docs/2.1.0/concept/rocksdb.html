@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozones3gateway.html">Ozone S3 Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../concept.html">Architecture</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">RocksDB in Apache Ozone</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>RocksDB in Apache Ozone</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<blockquote>
+<p>Note: This page covers advanced topics. Ozone administrators typically do not need to tinker with these settings.</p></blockquote>
+<p>RocksDB is a critical component of Apache Ozone, providing a high-performance embedded key-value store. It is used by various Ozone services to persist metadata and state.</p>
+<h2 id="1-introduction-to-rocksdb">1. Introduction to RocksDB</h2>
+<p>RocksDB is a log-structured merge-tree (LSM-tree) based key-value store developed by Facebook. It is optimized for fast storage environments like SSDs and offers high write throughput and efficient point lookups. For more details, refer to the <a href="https://github.com/facebook/rocksdb">RocksDB GitHub project</a> and the <a href="https://github.com/facebook/rocksdb/wiki">RocksDB Wiki</a>.</p>
+<h2 id="2-how-ozone-uses-rocksdb">2. How Ozone uses RocksDB</h2>
+<p>RocksDB is utilized in the following Ozone components to store critical metadata:</p>
+<ul>
+<li>
+<p><strong>Ozone Manager (OM):</strong> The OM uses RocksDB as its primary metadata store, holding the entire namespace and related information. As defined in <code>OMDBDefinition.java</code>, this includes tables for:</p>
+<ul>
+<li><strong>Namespace:</strong> <code>volumeTable</code>, <code>bucketTable</code>, <code>keyTable</code> (for object store layout), <code>directoryTable</code>, and <code>fileTable</code> (for file system layout).</li>
+<li><strong>Security:</strong> <code>userTable</code>, <code>dTokenTable</code> (delegation tokens), and <code>s3SecretTable</code>.</li>
+<li><strong>State Management:</strong> <code>transactionInfoTable</code> for tracking transactions, <code>deletedTable</code> for pending key deletions, and <code>snapshotInfoTable</code> for managing Ozone snapshots.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storage Container Manager (SCM):</strong> The SCM persists the state of the storage layer in RocksDB. The structure, defined in <code>SCMDBDefinition.java</code>, includes tables for:</p>
+<ul>
+<li><code>pipelines</code>: Manages the state and composition of data pipelines.</li>
+<li><code>containers</code>: Stores information about all storage containers in the cluster.</li>
+<li><code>deletedBlocks</code>: Tracks blocks that are marked for deletion and awaiting garbage collection.</li>
+<li><code>move</code>: Coordinates container movements for data rebalancing.</li>
+<li><code>validCerts</code>: Stores certificates for validating datanodes.</li>
+<li><code>validSCMCerts</code>: Stores certificates for validating SCMs.</li>
+<li><code>scmTransactionInfos</code>: Tracks SCM transactions.</li>
+<li><code>sequenceId</code>: Manages sequence IDs for various SCM operations.</li>
+<li><code>meta</code>: Stores miscellaneous SCM metadata, like upgrade status.</li>
+<li><code>statefulServiceConfig</code>: Stores configurations for stateful services.</li>
+</ul>
+</li>
+<li>
+<p><strong>Datanode:</strong> A Datanode utilizes RocksDB for two main purposes:</p>
+<ol>
+<li><strong>Per-Volume Metadata:</strong> It maintains one RocksDB instance per storage volume. Each of these instances manages metadata for the containers and blocks stored on that specific volume. As specified in <code>DatanodeSchemaThreeDBDefinition.java</code>, this database is structured with column families for <code>block_data</code>, <code>metadata</code>, <code>delete_txns</code>, <code>finalize_blocks</code>, and <code>last_chunk_info</code>. To optimize performance, it uses a fixed-length prefix based on the container ID, enabling efficient lookups with RocksDB&rsquo;s prefix seek feature.</li>
+<li><strong>Global Container Tracking:</strong> Additionally, each Datanode has a single, separate RocksDB instance to record the set of all containers it manages. This database, defined in <code>WitnessedContainerDBDefinition.java</code>, contains a <code>ContainerCreateInfoTable</code> table that provides a complete index of the containers hosted on that Datanode.</li>
+</ol>
+</li>
+<li>
+<p><strong>Recon:</strong> Ozone&rsquo;s administration and monitoring tool, Recon, maintains its own RocksDB database to store aggregated and historical data for analysis. The <code>ReconDBDefinition.java</code> outlines tables for:</p>
+<ul>
+<li><code>containerKeyTable</code>: Maps containers to the keys they contain.</li>
+<li><code>namespaceSummaryTable</code>: Stores aggregated namespace information for quick reporting.</li>
+<li><code>replica_history</code>: Tracks the historical locations of container replicas, which is essential for auditing and diagnostics.</li>
+<li><code>keyContainerTable</code>: Maps keys to the containers they are in.</li>
+<li><code>containerKeyCountTable</code>: Stores the number of keys in each container.</li>
+<li><code>replica_history_v2</code>: Tracks the historical locations of container replicas with BCSID, which is essential for auditing and diagnostics.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-tunings-applicable-to-rocksdb">3. Tunings applicable to RocksDB</h2>
+<p>Effective tuning of RocksDB can significantly impact Ozone&rsquo;s performance. Ozone exposes several configuration properties to tune RocksDB behavior. These properties are typically found in <code>ozone-default.xml</code> and can be overridden in <code>ozone-site.xml</code>.</p>
+<h3 id="general-settings">General Settings</h3>
+<p>Ozone provides a set of general RocksDB configurations that apply to all services (OM, SCM, and Datanodes) unless overridden by more specific settings. With the exception of <code>hdds.db.profile</code> and <code>ozone.metastore.rocksdb.cf.write.buffer.size</code>, these properties are defined in <code>RocksDBConfiguration.java</code>.</p>
+<ul>
+<li>
+<p><code>hdds.db.profile</code>: Specifies the RocksDB profile to use, which determines the default <code>DBOptions</code> and <code>ColumnFamilyOptions</code>. Default value: <code>DISK</code>.</p>
+<ul>
+<li>Possible values include <code>SSD</code> and <code>DISK</code>.</li>
+<li>For example, setting this to <code>SSD</code> will apply tunings optimized for SSD storage.</li>
+</ul>
+</li>
+<li>
+<p><strong>Write Options:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.writeoption.sync</code>: If set to <code>true</code>, writes are synchronized to persistent storage, ensuring durability at the cost of performance. If <code>false</code>, writes are flushed asynchronously. Default: <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>ozone.metastore.rocksdb.cf.write.buffer.size</code>: The write buffer (memtable) size for each column family of the rocksdb store. Default: <code>128MB</code>.</p>
+</li>
+<li>
+<p><strong>Write-Ahead Log (WAL) Management:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.WAL_ttl_seconds</code>: The time-to-live for WAL files in seconds. Default: <code>1200</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.WAL_size_limit_MB</code>: The total size limit for WAL files in megabytes. When this limit is exceeded, the oldest WAL files are deleted. A value of <code>0</code> means no limit. Default: <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Logging:</strong></p>
+<ul>
+<li><code>hadoop.hdds.db.rocksdb.logging.enabled</code>: Enables or disables RocksDB&rsquo;s own logging. Default: <code>false</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.logging.level</code>: The logging level for RocksDB (INFO, DEBUG, WARN, ERROR, FATAL). Default: <code>INFO</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.max.log.file.size</code>: The maximum size of a single RocksDB log file. Default: <code>100MB</code>.</li>
+<li><code>hadoop.hdds.db.rocksdb.keep.log.file.num</code>: The maximum number of RocksDB log files to retain. Default: <code>10</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ozone-manager-om-specific-settings">Ozone Manager (OM) Specific Settings</h3>
+<p>These settings, defined in <code>ozone-default.xml</code>, apply specifically to the Ozone Manager.</p>
+<ul>
+<li><code>ozone.om.db.max.open.files</code>: The total number of files that a RocksDB can open in the OM. Default: <code>-1</code> (unlimited).</li>
+<li><code>ozone.om.compaction.service.enabled</code>: Enable or disable a background job that periodically compacts rocksdb tables flagged for compaction. Default: <code>false</code>.</li>
+<li><code>ozone.om.compaction.service.run.interval</code>: The interval for the OM&rsquo;s compaction service. Default: <code>6h</code>.</li>
+<li><code>ozone.om.compaction.service.timeout</code>: Timeout for the OM&rsquo;s compaction service. Default: <code>10m</code>.</li>
+<li><code>ozone.om.compaction.service.columnfamilies</code>: A comma-separated list of column families to be compacted by the service. Default: <code>keyTable,fileTable,directoryTable,deletedTable,deletedDirectoryTable,multipartInfoTable</code>.</li>
+</ul>
+<h3 id="datanode-specific-settings">DataNode-Specific Settings</h3>
+<p>These settings, defined in <code>DatanodeConfiguration.java</code>, apply specifically to Datanodes and will override the general settings where applicable.</p>
+<p>Key tuning parameters for the DataNode often involve:</p>
+<ul>
+<li><strong>Memory usage:</strong> Configuring block cache, write buffer manager, and other memory-related settings.
+<ul>
+<li><code>hdds.datanode.metadata.rocksdb.cache.size</code>: Configures the block cache size for RocksDB instances on Datanodes. Default value: <code>1GB</code>.</li>
+</ul>
+</li>
+<li><strong>Compaction strategies:</strong> Optimizing how data is merged and organized on disk. For more details, refer to the <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN Documentation</a>.
+<ul>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file</code>: Enables or disables auto-compaction for small SST files. Default value: <code>true</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold</code>: Threshold for small SST file size for auto-compaction. Default value: <code>1MB</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold</code>: Threshold for the number of small SST files for auto-compaction. Default value: <code>512</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.interval.minutes</code>: Auto compact small SST files interval in minutes. Default value: <code>120</code>.</li>
+<li><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.threads</code>: Auto compact small SST files threads. Default value: <code>1</code>.</li>
+</ul>
+</li>
+<li><strong>Write-ahead log (WAL) settings:</strong> Balancing durability and write performance.
+<ul>
+<li><code>hdds.datanode.rocksdb.log.max-file-size</code>: The max size of each user log file of RocksDB. O means no size limit. Default value: <code>32MB</code>.</li>
+<li><code>hdds.datanode.rocksdb.log.max-file-num</code>: The max user log file number to keep for each RocksDB. Default value: <code>64</code>.</li>
+</ul>
+</li>
+<li><strong>Logging:</strong>
+<ul>
+<li><code>hdds.datanode.rocksdb.log.level</code>: The user log level of RocksDB(DEBUG/INFO/WARN/ERROR/FATAL)). Default: <code>INFO</code>.</li>
+</ul>
+</li>
+<li><strong>Other Settings:</strong>
+<ul>
+<li><code>hdds.datanode.rocksdb.delete-obsolete-files-period</code>: Periodicity when obsolete files get deleted. Default is 1h.</li>
+<li><code>hdds.datanode.rocksdb.max-open-files</code>: The total number of files that a RocksDB can open. Default: <code>1024</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-troubleshooting-and-repair-tools-relevant-to-rocksdb">4. Troubleshooting and repair tools relevant to RocksDB</h2>
+<p>Troubleshooting RocksDB issues in Ozone often involves:</p>
+<ul>
+<li>Analyzing RocksDB logs for errors and warnings.</li>
+<li>Using RocksDB&rsquo;s built-in tools for inspecting database files:
+<ul>
+<li><a href="https://github.com/facebook/rocksdb/wiki/Administration-and-Data-Access-Tool#ldb-tool"><strong>ldb</strong></a>: A command-line tool for inspecting and manipulating the contents of a RocksDB database.</li>
+<li><a href="https://github.com/facebook/rocksdb/wiki/Administration-and-Data-Access-Tool#sst-dump-tool"><strong>sst_dump</strong></a>: A command-line tool for inspecting the contents of SST (Static Table) files, which are the files that store the data in RocksDB.</li>
+</ul>
+</li>
+<li>Understanding common RocksDB error codes and their implications.</li>
+</ul>
+<h2 id="5-version-compatibility">5. Version Compatibility</h2>
+<p>Apache Ozone uses RocksDB version 7.7.3. It is recommended to use RocksDB tools of this version to ensure compatibility and avoid any potential issues.</p>
+<h2 id="6-monitoring-and-metrics">6. Monitoring and Metrics</h2>
+<p>Monitoring RocksDB performance is crucial for maintaining a healthy Ozone cluster.</p>
+<ul>
+<li><strong>RocksDB Statistics:</strong> Ozone can expose detailed RocksDB statistics. Enable this by setting <code>ozone.metastore.rocksdb.statistics</code> to <code>ALL</code> or <code>EXCEPT_DETAILED_TIMERS</code> in <code>ozone-site.xml</code>. Be aware that enabling detailed statistics can incur a performance penalty (5-10%).</li>
+<li><strong>Grafana Dashboards:</strong> Ozone provides Grafana dashboards that visualize low-level RocksDB statistics. Refer to the <a href="../feature/observability.html">Ozone Monitoring Documentation</a> for details on setting up monitoring and using these dashboards.</li>
+</ul>
+<h2 id="7-storage-sizing">7. Storage Sizing</h2>
+<p>Properly sizing the storage for RocksDB instances is essential to prevent performance bottlenecks and out-of-disk errors. The requirements vary significantly for each Ozone component, and using dedicated, fast storage (SSDs) is highly recommended.</p>
+<ul>
+<li>
+<p><strong>Ozone Manager (OM):</strong></p>
+</li>
+<li>
+<p><strong>Baseline:</strong> A minimum of <strong>100 GB</strong> should be reserved for the OM&rsquo;s RocksDB instance. The OM stores the entire namespace metadata (volumes, buckets, keys), so this is the most critical database in the cluster.</p>
+</li>
+<li>
+<p><strong>With Snapshots:</strong> Enabling Ozone Snapshots will substantially increase storage needs. Each snapshot preserves a view of the metadata, and the underlying data files (SSTs) cannot be deleted by compaction until a snapshot is removed. The exact requirement depends on the number of retained snapshots and the rate of change (creations/deletions) in the namespace. Monitor disk usage closely after enabling snapshots. For more details, refer to the <a href="../feature/snapshot.html">Ozone Snapshot Documentation</a>.</p>
+</li>
+<li>
+<p><strong>Storage Container Manager (SCM):</strong></p>
+</li>
+<li>
+<p>SCM&rsquo;s metadata footprint (pipelines, containers, Datanode heartbeats) is much smaller than the OM&rsquo;s. A baseline of <strong>20-50 GB</strong> is typically sufficient for its RocksDB instance.</p>
+</li>
+<li>
+<p><strong>Datanode:</strong></p>
+</li>
+<li>
+<p>The Datanode&rsquo;s RocksDB stores metadata for all containers and their blocks. Its size grows proportionally with the number of containers and blocks hosted on that Datanode.</p>
+</li>
+<li>
+<p><strong>Rule of Thumb:</strong> A good starting point is to reserve <strong>0.1% to 0.5%</strong> of the total data disk capacity for RocksDB metadata. For example, a Datanode with 100 TB of data disks should reserve between 100 GB and 500 GB for its RocksDB metadata.</p>
+</li>
+<li>
+<p>Workloads with many small files will result in a higher block count and will require space on the higher end of this range.</p>
+</li>
+</ul>
+
+
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.1.0, Last Modified: October 14, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/f4337adef548a148673a62c70076d93e6bdd2471">f4337adef5</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
