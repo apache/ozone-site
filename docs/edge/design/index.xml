@@ -6,8 +6,15 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Oct 2025 09:06:36 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 04 Jan 2026 23:22:18 -0800</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS STS Design for Ozone S3</title>
+      <link>/design/ozone-sts.html</link>
+      <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>/design/ozone-sts.html</guid>
+      <description>STS Support in Ozone</description>
+    </item>
     <item>
       <title>Distributed Tracing using OpenTelemetry for Ozone</title>
       <link>/design/distributed-tracing-opentelemetry.html</link>

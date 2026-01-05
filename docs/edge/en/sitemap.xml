@@ -713,8 +713,11 @@
                 href="/start/fromsource.html"
                 />
   </url><url>
+    <loc>/design/ozone-sts.html</loc>
+    <lastmod>2026-01-04T23:22:18-08:00</lastmod>
+  </url><url>
     <loc>/design/index.html</loc>
-    <lastmod>2025-10-16T09:06:36+05:30</lastmod>
+    <lastmod>2026-01-04T23:22:18-08:00</lastmod>
   </url><url>
     <loc>/design/distributed-tracing-opentelemetry.html</loc>
     <lastmod>2025-10-16T09:06:36+05:30</lastmod>

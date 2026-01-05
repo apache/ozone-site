@@ -46,8 +46,7 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-<body>
-
+  <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -76,10 +75,8 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-
-<div class="wrapper">
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+      <div class="row">
         
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
@@ -208,7 +205,7 @@ s=d.getElementsByTagName('script')[0];
         
     
         
-            <li class="active">
+            <li class="">
                 <a href="../feature/index.html">
                     
                     <span>Features</span>
@@ -586,516 +583,215 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
             <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-13323">[HDDS-13323]</a> AWS STS Design for Ozone S3 (implementing) </h1>
+                <div><i>Authors: Madhan Neethiraj, Ren Koike, Fabian Morgan, Stephen O&#39;Donnell, Istvan Fajth, Uma Maheswara Rao Gangumalla</i><div class="pull-right">2025-10-30</div></div>
+                <p>&nbsp</p>
 
-                
-
-<div class="pull-right">
-    
-    
-    
-    
-    
-    <a href="../zh/feature/index.html"><span class="label label-success">中文</span></a>
-    
-    
-</div>
-
-                <h1>Features</h1>
-            </div>
-
-            <div class="col-md-9">
-                <!---
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-    -->
-
-
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h3 class="display-4">Ozone Features </h3>
-        <p class="lead">
-            
-          Ozone features are explained in the following pages. Features such as high availability, topology awareness, metrics tools are detailed in next pages.
-
-        </p>
-    </div>
-</div>
-
-                
-                
-                
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Decommissioning
-                                </h2>
-                                <p class="card-text">Decommissioning of SCM, OM and Datanode.</p>
-                                <a href="../feature/decommission.html"
-                                   class=" btn btn-primary btn-lg">Decommissioning</a>
-                            </div>
-                        </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        STS Support in Ozone
                     </div>
+                </div>
 
-                    
-                
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    OM High Availability
-                                </h2>
-                                <p class="card-text">HA setup for Ozone Manager to avoid any single point of failure.</p>
-                                <a href="../feature/om-ha.html"
-                                   class=" btn btn-primary btn-lg">OM High Availability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ozone Erasure Coding
-                                </h2>
-                                <p class="card-text">Erasure Coding Support for Ozone.</p>
-                                <a href="../feature/erasurecoding.html"
-                                   class=" btn btn-primary btn-lg">Ozone Erasure Coding</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Ozone Snapshot
-                                </h2>
-                                <p class="card-text">Ozone Snapshot</p>
-                                <a href="../feature/snapshot.html"
-                                   class=" btn btn-primary btn-lg">Ozone Snapshot</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    SCM High Availability
-                                </h2>
-                                <p class="card-text">HA setup for Storage Container Manager to avoid any single point of failure.</p>
-                                <a href="../feature/scm-ha.html"
-                                   class=" btn btn-primary btn-lg">SCM High Availability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Streaming Write Pipeline
-                                </h2>
-                                <p class="card-text">A new write pipeline using Ratis Streaming.</p>
-                                <a href="../feature/streaming-write-pipeline.html"
-                                   class=" btn btn-primary btn-lg">Streaming Write Pipeline</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Merge Container RocksDB in DN
-                                </h2>
-                                <p class="card-text">Introduction to Ozone Datanode Container Schema V3</p>
-                                <a href="../feature/dn-merge-rocksdb.html"
-                                   class=" btn btn-primary btn-lg">Merge Container RocksDB in DN</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Prefix based File System Optimization
-                                </h2>
-                                <p class="card-text">Supports atomic rename and delete operation.</p>
-                                <a href="../feature/prefixfso.html"
-                                   class=" btn btn-primary btn-lg">Prefix based File System Optimization</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Topology awareness
-                                </h2>
-                                <p class="card-text">Configuration for rack-awarness for improved read/write</p>
-                                <a href="../feature/topology.html"
-                                   class=" btn btn-primary btn-lg">Topology awareness</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    <span class="glyphicon glyphicon-user"
-                                          aria-hidden="true"></span>
-                                    
-                                    Quota in Ozone
-                                </h2>
-                                <p class="card-text">Quota in Ozone</p>
-                                <a href="../feature/quota.html"
-                                   class=" btn btn-primary btn-lg">Quota in Ozone</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Recon Server
-                                </h2>
-                                <p class="card-text">Recon is the Web UI and analysis service for Ozone</p>
-                                <a href="../feature/recon.html"
-                                   class=" btn btn-primary btn-lg">Recon Server</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Observability
-                                </h2>
-                                <p class="card-text">Different tools for Ozone to increase Observability</p>
-                                <a href="../feature/observability.html"
-                                   class=" btn btn-primary btn-lg">Observability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Non-Rolling Upgrades and Downgrades
-                                </h2>
-                                <p class="card-text">How to do non-rolling upgrades and downgrades of Ozone</p>
-                                <a href="../feature/nonrolling-upgrade.html"
-                                   class=" btn btn-primary btn-lg">Non-Rolling Upgrades and Downgrades</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    S3 Multi-Tenancy
-                                </h2>
-                                <p class="card-text">Ozone Multi-Tenancy that allows multiple tenants to share the same Ozone cluster. Compatible with S3 API.</p>
-                                <a href="../feature/s3-multi-tenancy.html"
-                                   class=" btn btn-primary btn-lg">S3 Multi-Tenancy</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Reconfigurability
-                                </h2>
-                                <p class="card-text">Dynamic reloading configuration.</p>
-                                <a href="../feature/reconfigurability.html"
-                                   class=" btn btn-primary btn-lg">Reconfigurability</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    
-                                </h2>
-                                <p class="card-text"><!---
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License. See accompanying LICENSE file.
 -->
-<h1 id="faircallqueue">FairCallQueue</h1>
-<p>This document contains information for setting up the <code>FairCallQueue</code> feature with Ozone.
-In order for <code>FairCallQueue</code> to be enabled and used,
-Hadoop RPC must be used as transport protocol for OM - S3G communication.
-There is no implementation for gRPC yet.</p></p>
-                                <a href="../feature/faircallqueue.html"
-                                   class=" btn btn-primary btn-lg"></a>
-                            </div>
-                        </div>
-                    </div>
+<h1 id="aws-sts-design-for-ozone-s3">AWS STS Design for Ozone S3</h1>
+<h1 id="1-introduction">1. Introduction</h1>
+<p>S3 credentials used to communicate with Ozone S3 APIs are based on a Kerberos identity.</p>
+<p>Historically, the Ozone community has had interest in a REST API capable of programmatically generating
+temporary S3 credentials.</p>
+<p>Amazon AWS has the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html">Security Token Service (STS)</a> which
+provides the ability to generate short-lived access to resources.</p>
+<p>The primary scope of this document is to detail the initial implementation of STS within the Ozone ecosystem.</p>
+<h1 id="2-why-use-sts-tokens">2. Why Use STS Tokens?</h1>
+<p>Providing short-lived access to various resources in Ozone is useful in scenarios such as Data Lake
+solutions that want to aggregate data across multiple cloud providers.</p>
+<h1 id="3-how-ozone-sts-works">3. How Ozone STS Works</h1>
+<p>The initial implementation of Ozone STS supports only the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>
+API from the AWS specification.  A new STS endpoint <code>/sts</code> on port <code>9880</code> (port <code>9881</code> for https) will be created to service STS requests in the S3 Gateway.
+We use a separate port for STS to align with AWS so we don&rsquo;t have conflicts at a later time.  This means we have:</p>
+<ul>
+<li>Admin port for Ozone specific S3 admin operations</li>
+<li>STS port for STS APIs, analogous to AWS&rsquo; separate STS endpoint</li>
+<li>Existing dedicated port/endpoint for S3 object APIs.</li>
+</ul>
+<p>Furthermore, the initial implementation of Ozone STS focuses only on Apache Ranger for authorization in the first phase,
+as it aligns more with IAM policies.  Support for the Ozone Native Authorizer may be provided in a future phase.</p>
+<h2 id="31-capabilities">3.1 Capabilities</h2>
+<p>The Ozone STS implementation has the following capabilities:</p>
+<ul>
+<li>Create temporary credentials that last from a minimum of 15 minutes to a maximum of 12 hours. The
+return value of the AssumeRole call will be temporary credentials consisting of 3 components:
+<ul>
+<li>accessKeyId - a generated String identifier (cryptographically strong using SecureRandom) beginning with the sequence &ldquo;ASIA&rdquo;</li>
+<li>secretAccessKey - a generated String password (cryptographically strong using SecureRandom)</li>
+<li>sessionToken - a Base64-encoded opaque String identifier</li>
+</ul>
+</li>
+<li>The temporary credentials will have the permissions associated with a role. Furthermore, an
+<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">AWS IAM Session Policy</a> can
+<strong>optionally</strong> be sent in the AssumeRole API call to limit the scope of the permissions further.  If
+an IAM policy is specified, the temporary credential will have the permissions comprising the intersection of the role permissions
+and the IAM policy permissions. <strong>Note:</strong> If the IAM policy is specified and does not grant any permissions, then
+the generated temporary credentials won&rsquo;t have any permissions and will essentially be useless.</li>
+</ul>
+<h2 id="32-limitations-in-assumerole-api-support">3.2 Limitations in AssumeRole API Support</h2>
+<p>The AWS AssumeRole API has various required and optional fields.  We will support the two required fields, i.e. <code>RoleArn</code>
+and <code>RoleSessionName</code>.  Additionally, we will support the following optional fields (all others will be rejected):</p>
+<ul>
+<li><code>DurationSeconds</code></li>
+<li><code>Policy</code></li>
+</ul>
+<h2 id="33-limitations-in-iam-session-policy-support">3.3 Limitations in IAM Session Policy Support</h2>
+<p>The AWS IAM policy specification is vast and wide-ranging.  The initial Ozone STS implementation supports a limited
+subset of its capabilities.  The restrictions are outlined below:</p>
+<ul>
+<li>The only supported prefix in ResourceArn is <code>arn:aws:s3:::</code> - all others will be rejected.  <strong>Note</strong>: a ResourceArn
+of <code>*</code> is supported as well.</li>
+<li>The only supported Condition operator is <code>StringEquals</code> - all others will be rejected.</li>
+<li>The only supported Condition key is <code>s3:prefix</code> - all others will be rejected.</li>
+<li>Only one Condition operator per Statement is supported - a Statement with more than one Condition will be rejected.</li>
+<li>The only supported Effect is <code>Allow</code> - all others will be rejected.</li>
+<li>If a (currently) unsupported S3 action is requested, such as <code>s3:GetAccelerateConfiguration</code>, it will be silently ignored.
+Similarly, an invalid S3 action will be silently ignored.</li>
+<li>Supported wildcard expansions in Actions are: <code>s3:*</code>, <code>s3:Get*</code>, <code>s3:Put*</code>, <code>s3:List*</code>,
+<code>s3:Create*</code>, and <code>s3:Delete*</code>.</li>
+</ul>
+<p>A sample IAM policy that allows read access to all objects in the <code>example-bucket</code> bucket is shown below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Action&#34;</span>: <span style="color:#e6db74">&#34;s3:GetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:s3:::example-bucket/*&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="331-additional-context-on-design-behavior">3.3.1 Additional Context on Design Behavior</h3>
+<p>As mentioned above, some limitations in IAM Session Policy support result in API calls being rejected, while others are
+silently ignored.  This design behavior came after (much) discussion with external teams. One external team will send
+S3 actions that Ozone doesn&rsquo;t support, and they don&rsquo;t have flexibility to change what they are sending, so that&rsquo;s one
+reason for the silent ignore. This external team also mentioned that some research indicates AWS also does not fail
+the AssumeRole request just because the inline session policy references unknown or unsupported actions, but rather
+it will fail when the temporary credentials are used, so this design is accordance with that finding. Another external
+team agreed that behavior is fine for actions, but does not work for Conditions, because one can have a Condition to
+restrict calls by sourceIp, and if we silently ignore this, the client may incorrectly think the temporary credentials
+are restricted for use by that IP address, so the consensus was to reject the request for that scenario.</p>
+<h2 id="34-sessiontoken-format">3.4 SessionToken Format</h2>
+<p>As mentioned above, one of the return values from the AssumeRole call will be the sessionToken. To support not
+storing temporary credentials server-side in Ozone, the sessionToken will comprise various components needed to validate
+subsequent S3 calls that use the token.  The sessionToken will have the following information encoded:</p>
+<ul>
+<li>originalAccessKeyId - this is the Kerberos identity of the user that created the sessionToken via the AssumeRole call.
+When the temporary credentials are used to make S3 API calls, this Kerberos identity (in conjunction with the role permissions and
+optional session policy) will be used to authorize the call.  This identity is included in the sessionToken because
+S3 API calls (such as PutObject) require a Kerberos identity, but the temporary credentials don&rsquo;t have a
+Kerberos identity associated to them, therefore the Kerberos identity of the user that created the token will be used in
+these cases.</li>
+<li>roleArn - the role used in the original AssumeRole call</li>
+<li>encrypted secretAccessKey - this will be used to validate the AWS signature when the temporary credentials are used
+to make S3 API calls</li>
+<li>sessionPolicy - when using the RangerOzoneAuthorizer, if Ranger successfully authorizes the AssumeRole call,
+it will return a String representing the role the token was authorized for.  Furthermore, if an AWS IAM Session Policy
+was included with the AssumeRole request, the String return value will also include resources (i.e. buckets, keys, etc.)
+and permissions (i.e. ACLType) corresponding to the AWS IAM Session Policy.  These resources and permissions, if present,
+would further limit the scope of the permissions and resources granted by the role in Ranger, such that the temporary
+credential will have the permissions comprising the intersection of the role permissions and the sessionPolicy permissions.</li>
+<li>HMAC-SHA256 signature - used to ensure the sessionToken was created by Ozone and was not altered since it was created.</li>
+<li>expiration time of the token (via <code>ShortLivedTokenIdentifier#getExpiry()</code>)</li>
+<li>UUID of the OzoneManager secret key used to sign the sessionToken and encrypt the secretAccessKey (via <code>ShortLivedTokenIdentifier#getSecretKeyId()</code>)</li>
+</ul>
+<h2 id="35-sts-token-revocation">3.5 STS Token Revocation</h2>
+<p>In the rare event temporary credentials need to be revoked (ex. for security reasons), a table in the OzoneManager RocksDB will be created
+to store revoked tokens, and a command-line utility will be created to add tokens to the table.  A background cleaner service
+will be created to run every 3 hours to delete revoked tokens that have been in the table for more than 12 hours.  The
+input parameter for the command-line utility will be the sessionToken - this value is returned in plain text as a result
+of the AssumeRole call (mentioned above).  In this way, specific STS tokens can be revoked as opposed to all tokens.  Furthermore,
+AWS doesn&rsquo;t have a standard API to revoke tokens therefore we are creating our own system.
+Note: STS token revocation checks are strictly enforced and will fail-closed if there are internal errors such as not
+being able to communicate with the revocation database table, etc.
+Note: The creator of the STS token or an S3/tenant admin are the only ones allowed to revoke a token.</p>
+<h2 id="36-prerequisites">3.6 Prerequisites</h2>
+<p>A user must be configured with a Kerberos identity in Ozone and the S3 <code>getSecret</code> command
+must be called to issue permanent S3 credentials.  With these credentials, the AssumeRole API call can be made, but additional
+steps below are needed for the call to be successfully authorized.<br>
+When using RangerOzoneAuthorizer, a role must be configured in Ranger UI for each role the AssumeRole API
+can be used with.  Further, Apache Ranger policies should be in place to grant the user permission to assume the role.</p>
+<h3 id="361-additions-to-rangerozoneauthorizer">3.6.1 Additions to RangerOzoneAuthorizer</h3>
+<p>The <code>IAccessAuthorizer</code> interface that both the RangerOzoneAuthorizer and OzoneNativeAuthorizer implement, will have a
+new method:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">default</span> String <span style="color:#a6e22e">generateAssumeRoleSessionPolicy</span>(AssumeRoleRequest assumeRoleRequest) <span style="color:#66d9ef">throws</span> OMException {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> OMException(<span style="color:#e6db74">&#34;The generateAssumeRoleSessionPolicy call is not supported&#34;</span>, NOT_SUPPORTED_OPERATION);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>When using RangerOzoneAuthorizer, the AssumeRole API call must invoke this method to ensure the caller is authorized to create
+temporary credentials, given the criteria in the AssumeRoleRequest.  The AssumeRoleRequest input parameter will have the
+components:</p>
+<ul>
+<li><code>String</code> host - hostname of caller</li>
+<li><code>InetAddress</code> ip - IP address of caller</li>
+<li><code>UserGroupInformation</code> ugi - the user making the call</li>
+<li><code>String</code> targetRoleName - what role is being assumed</li>
+<li><code>Set&lt;AssumeRoleRequest.OzoneGrant&gt;</code> grants - further limiting the scope of the role according to the grants</li>
+</ul>
+<p>The grants parameter is optional, and would only be present if the AssumeRole API call had an IAM session policy JSON
+parameter supplied.  A conversion utility, <code>IamSessionPolicyResolver</code> will process the IAM policy and convert it to a
+<code>Set&lt;AssumeRoleRequest.OzoneGrant&gt;</code>, in effect translating from S3 nomenclature for resources and actions to Ozone nomenclature of
+<code>IOzoneObj</code> and <code>ACLType</code>.  Ranger would use all of this information to determine if the AssumeRole call should be
+successfully authorized, and if so, it will return a String representation of the granted permissions and paths.</p>
+<p>The format of this String is entirely up to the Ranger team.  What is required from the Ozone side is to supply this String to Ranger when any
+subsequent S3 API calls are made that use STS tokens.  In order to achieve this, the sessionPolicy String from Ranger will
+be included in the sessionToken response to the AssumeRole API call (as mentioned above), and Ozone will supply this String
+to Ranger whenever STS tokens are used on S3 API calls via a new <code>RequestContext.sessionPolicy</code> field in the
+<code>IAccessAuthorizer#checkAccess(IOzoneObj, RequestContext)</code> call.</p>
+<h2 id="37-overall-flow">3.7 Overall Flow</h2>
+<p>The following section outlines the overall flow when using STS in Ozone:</p>
+<ul>
+<li>An authorized user for AssumeRole API calls must be configured in Ozone, and if using RangerOzoneAuthorizer, the role
+created in Ranger as per the Prerequisites above.</li>
+<li>This authorized user (having permanent S3 credentials) makes the AssumeRole STS call to Ozone.</li>
+<li>If successful, Ozone responds with the temporary credentials.</li>
+<li>A client makes S3 API calls with the temporary credentials for up to as long as the credentials last.</li>
+<li>When Ozone receives an S3 api call using temporary credentials, it will use the Kerberos identity associated with the
+originalAccessKeyId in the session token and perform the following checks:
+<ul>
+<li>Ensure that if the accessKeyId starts with &ldquo;ASIA&rdquo;, that a sessionToken was included in the <code>x-amz-security-token</code> header</li>
+<li>Ensure the sessionToken is not expired</li>
+<li>Ensure the sessionToken is not revoked via a <code>keyMayExist</code> check in OzoneManager RocksDB</li>
+<li>Validate the HMAC-SHA256 signature in the sessionToken</li>
+<li>Decrypt the secretAccessKey from the sessionToken and validate the AWS signature</li>
+<li>Authorize the call with either RangerOzoneAuthorizer or OzoneNativeAuthorizer</li>
+</ul>
+</li>
+</ul>
+<p>Assuming all these checks pass, the S3 API call will be invoked.</p>
 
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Container Balancer
-                                </h2>
-                                <p class="card-text">How to use the Container Balancer in Ozone.</p>
-                                <a href="../feature/containerbalancer.html"
-                                   class=" btn btn-primary btn-lg">Container Balancer</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Maintenance Mode
-                                </h2>
-                                <p class="card-text">Maintenance mode for Datanodes.</p>
-                                <a href="../feature/maintenance.html"
-                                   class=" btn btn-primary btn-lg">Maintenance Mode</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-
-                
-                
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Multi-Raft Support in Ozone
-                                </h2>
-                                <p class="card-text">Enables each Datanode to participate in multiple Ratis pipelines concurrently to improve resource utilization and write throughput.</p>
-                                <a href="../feature/multi-raft-support.html"
-                                   class=" btn btn-primary btn-lg">Multi-Raft Support in Ozone</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                
-
-                
-                
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    
-                                    Trash
-                                </h2>
-                                <p class="card-text">How to use the trash feature in Ozone.</p>
-                                <a href="../feature/trash.html"
-                                   class=" btn btn-primary btn-lg">Trash</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                        </div>
-                    
-                
-                
             </div>
+
         </div>
+      </div>
     </div>
-</div>
-    <div class="push"></div>
-</div>
 
 
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: February 2, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/23d21827560e79e939a902dee8396bf6f7b2c6d8">23d2182756</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 4, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/58a9fb813ee44b5aae772980a7932608308362b6">58a9fb813e</a>
     </span>
   </div>
 </footer>
@@ -1107,6 +803,5 @@ There is no implementation for gRPC yet.</p></p>
 <script src="../js/bootstrap.min.js"></script>
 
 
-</body>
-
+  </body>
 </html>
