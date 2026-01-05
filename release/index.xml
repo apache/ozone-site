@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year} The Apache Software Foundation</copyright>
-    <lastBuildDate>Wed, 30 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/release/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://ozone.apache.org/release/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release 2.1.0 available</title>
+      <link>https://ozone.apache.org/release/2.1.0/</link>
+      <pubDate>Wed, 31 Dec 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://ozone.apache.org/release/2.1.0/</guid>
+      <description>Release Note Apache Ozone 2.1.0 adds 805 new features, improvements and bug fixes on top of Ozone 2.0.
+Notable Changes   HDDS-10239 | Storage Container Reconciliation  Introduced a container reconciliation protocol to resolve mismatched container states and verify replica integrity.
+  HDDS-12940 | Ozone Snapshot Phase 3: Scale up Snapshot Operations  Enhanced Ozone Snapshot scalability and continued stability improvements.
+  HDDS-8387 | Container and volume scanners phase II  Enhanced storage volume failure handling by introducing a &amp;lsquo;degraded&amp;rsquo; state to preserve data availability, along with improved health observability.</description>
+    </item>
+    
     <item>
       <title>Release 2.0.0 available</title>
       <link>https://ozone.apache.org/release/2.0.0/</link>
