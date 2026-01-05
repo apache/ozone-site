@@ -128,14 +128,6 @@ ozone sh snapshot listDiff /vol1/bucket1 --all-status -all
 ozone sh snapshot listDiff /vol1/bucket1 --all-status -l 10
 ```
 
-#### Rename Snapshot
-
-```bash
-ozone sh snapshot rename /vol1/bucket1 <oldName> <newName>
-```
-
-Requires bucket owner or admin.
-
 #### Snapshot Info
 
 ```bash
