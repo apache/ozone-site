@@ -89,9 +89,11 @@ words:
 - EC
 - quasi-close
 - quasi-closed
+- HCFS
 # Other systems' words
 - KDC
 - classpath
+- DS
 - HDFS
 - Protolock
 - CSI
@@ -99,11 +101,14 @@ words:
 - Xceiver
 - matomo
 - qube
+- PKI
 - proto
 - protolock
 - protolocks
 - intellij
 - TDE
+- Teragen
+- TPC
 - RPC
 - aarch
 - trino
@@ -116,7 +121,9 @@ words:
 - SASL
 - jira
 - jiras
+- LLAP
 - mvn
+- NIFI
 - gpg
 - sed
 - mds
