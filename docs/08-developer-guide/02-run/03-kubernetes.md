@@ -1,7 +1,6 @@
 ---
 sidebar_label: Kubernetes
 ---
-<!-- cspell:ignore flekszible -->
 
 # Ozone on Kubernetes
 
