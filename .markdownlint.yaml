@@ -41,6 +41,7 @@ ol-prefix:
 no-inline-html:
   allowed_elements:
   - br
+  - a
   - Tabs
   - TabItem
   - DocCardList
