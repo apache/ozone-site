@@ -44,7 +44,7 @@ For more information, see the [Erasure Coding documentation](../../02-replicatio
 ### Snapshots
 
 Ozone's snapshot feature allows users to take point-in-time consistent images of a given bucket. These snapshots are immutable and can be used for backup, recovery, archival, and incremental replication purposes.
-For more details, refer to the [Ozone Snapshot documentation](/docs/administrator-guide/operations/snapshots).
+For more details, refer to the [Ozone Snapshot documentation](./08-snapshots.md).
 
 ### GDPR Compliance
 
