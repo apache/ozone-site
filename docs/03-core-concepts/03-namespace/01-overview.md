@@ -10,7 +10,7 @@ Apache Ozone organizes data in a three-level hierarchy: Volumes, Buckets, and Ke
 
 - **[Volumes](volumes/overview):** The top-level organizational unit, akin to user accounts or home directories.
 - **[Buckets](buckets/overview):** Reside within volumes, similar to directories or folders, and contain the actual data objects.
-- **Keys:** The fundamental data objects, analogous to files, stored inside buckets.
+- **[Keys](keys/overview):** The fundamental data objects, analogous to files, stored inside buckets.
 
 ```text
 Volume
