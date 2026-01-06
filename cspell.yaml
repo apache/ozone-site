@@ -90,6 +90,7 @@ words:
 - quasi-close
 - quasi-closed
 - HCFS
+- libo3fs
 # Other systems' words
 - KDC
 - classpath
@@ -106,6 +107,7 @@ words:
 - protolock
 - protolocks
 - intellij
+- flekszible
 - TDE
 - Teragen
 - TPC
@@ -146,6 +148,7 @@ words:
 - rebalancing
 - JDK
 - CMDB
+- JNI
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
