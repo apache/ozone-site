@@ -2,7 +2,7 @@
 sidebar_label: HTTPS
 ---
 
-# HTTPS
+# Configuring  HTTPS
 
 This document describes how to configure Ozone HTTP web-consoles to require user authentication.
 
