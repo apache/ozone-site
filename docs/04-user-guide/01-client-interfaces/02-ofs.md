@@ -1,7 +1,6 @@
 ---
 sidebar_label: ofs
 ---
-<!-- cspell:ignore Unsets snapshottable reencryption -->
 
 # ofs: Hadoop Compatible Interface
 

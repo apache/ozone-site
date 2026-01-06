@@ -146,6 +146,9 @@ words:
 - rebalancing
 - JDK
 - CMDB
+- Unsets
+- snapshottable
+- reencryption
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
