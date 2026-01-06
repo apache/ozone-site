@@ -375,40 +375,33 @@ The following APIs are specific to HDFS's `DistributedFileSystem` implementation
 
 **Footnotes:**
 
-<div id="footnote-1">
+#### [1] {#footnote-1}
 
-**[1]** Renaming files or directories across different buckets is not supported. Within a File System Optimized (FSO) bucket, rename is an atomic metadata operation. For legacy buckets, renaming a directory is a non-atomic operation that renames each file and subdirectory individually.
-</div>
+Renaming files or directories across different buckets is not supported. Within a File System Optimized (FSO) bucket, rename is an atomic metadata operation. For legacy buckets, renaming a directory is a non-atomic operation that renames each file and subdirectory individually.
 
-<div id="footnote-2">
+#### [2] {#footnote-2}
 
-**[2]** Deleting the filesystem root is not allowed. Recursively deleting a volume is also not supported.
-</div>
+Deleting the filesystem root is not allowed. Recursively deleting a volume is also not supported.
 
-<div id="footnote-3">
+#### [3] {#footnote-3}
 
-**[3]** Recursive listing is not supported at the root or volume level.
-</div>
+Recursive listing is not supported at the root or volume level.
 
-<div id="footnote-4">
+#### [4] {#footnote-4}
 
-**[4]** ofs supports "linked buckets," where one bucket serves as a reference to another. However, general-purpose symbolic links for files or directories are not supported.
-</div>
+ofs supports "linked buckets," where one bucket serves as a reference to another. However, general-purpose symbolic links for files or directories are not supported.
 
-<div id="footnote-5">
+#### [5] {#footnote-5}
 
-**[5]** Snapshots are supported at the bucket level only.
-</div>
+Snapshots are supported at the bucket level only.
 
-<div id="footnote-6">
+#### [6] {#footnote-6}
 
-**[6]** For operations related to encryption zones, erasure coding, snapshots, and quotas, use the corresponding Ozone bucket-level APIs instead.
-</div>
+For operations related to encryption zones, erasure coding, snapshots, and quotas, use the corresponding Ozone bucket-level APIs instead.
 
-<div id="footnote-7">
+#### [7] {#footnote-7}
 
-**[7]** Replace with `OzoneManagerProtocol.finalizeUpgrade()` and `OzoneManagerProtocol.listOpenFiles()`.
-</div>
+Replace with `OzoneManagerProtocol.finalizeUpgrade()` and `OzoneManagerProtocol.listOpenFiles()`.
 
 *The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`.*
 
