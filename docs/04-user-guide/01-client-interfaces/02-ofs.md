@@ -254,21 +254,21 @@ The following standard `FileSystem` APIs are supported by ofs.
 | `access`                | `checkAccess`             | Checks if the user can access a path.               | Supported     |
 | `create`                | `create`                  | Creates a new file.                                 | Supported     |
 | `open`                  | `open`                    | Opens a file for reading.                           | Supported     |
-| `rename`                | `rename`                  | Renames a file or directory.                        | Supported [1] |
-| `delete`                | `delete`                  | Deletes a file or directory.                        | Supported [2] |
-| `listStatus`            | `listStatus`              | Lists the status of files in a directory.           | Supported [3] |
+| `rename`                | `rename`                  | Renames a file or directory.                        | Supported [[1]](#footnote-1) |
+| `delete`                | `delete`                  | Deletes a file or directory.                        | Supported [[2]](#footnote-2) |
+| `listStatus`            | `listStatus`              | Lists the status of files in a directory.           | Supported [[3]](#footnote-3) |
 | `mkdirs`                | `mkdirs`                  | Creates a directory and its parents.                | Supported     |
 | `getFileStatus`         | `getfileinfo`             | Gets the status of a file.                          | Supported     |
 | `setTimes`              | `setTimes`                | Sets the modification and access times.             | Supported     |
-| `getLinkTarget`         | `getfileinfo`             | Gets the target of a symbolic link.                 | Supported [4] |
+| `getLinkTarget`         | `getfileinfo`             | Gets the target of a symbolic link.                 | Supported [[4]](#footnote-4) |
 | `getFileChecksum`       | `open`                    | Gets the checksum of a file.                        | Supported     |
 | `setSafeMode`           | `safemode_leave`, `safemode_enter`, `safemode_get`, `safemode_force_exit` | Enters or leaves safe mode.                         | Supported     |
 | `recoverLease`          | `recoverLease`            | Recovers a file lease.                              | Supported     |
 | `isFileClosed`          | `isFileClosed`            | Checks if a file is closed.                         | Supported     |
-| `createSnapshot`        | `createSnapshot`          | Creates a snapshot.                                 | Supported [5] |
-| `deleteSnapshot`        | `deleteSnapshot`          | Deletes a snapshot.                                 | Supported [5] |
-| `renameSnapshot`        | `renameSnapshot`          | Renames a snapshot.                                 | Supported [5] |
-| `getSnapshotDiffReport` | `computeSnapshotDiff`     | Gets a snapshot diff report.                        | Supported [5] |
+| `createSnapshot`        | `createSnapshot`          | Creates a snapshot.                                 | Supported [[5]](#footnote-5) |
+| `deleteSnapshot`        | `deleteSnapshot`          | Deletes a snapshot.                                 | Supported [[5]](#footnote-5) |
+| `renameSnapshot`        | `renameSnapshot`          | Renames a snapshot.                                 | Supported [[5]](#footnote-5) |
+| `getSnapshotDiffReport` | `computeSnapshotDiff`     | Gets a snapshot diff report.                        | Supported [[5]](#footnote-5) |
 | `getContentSummary`     | `contentSummary`          | Gets the content summary of a path.                 | Supported     |
 | `getDelegationToken`    | `getDelegationToken`      | Gets a delegation token.                            | Supported     |
 | `globStatus`            | `listStatus`              | Finds files matching a pattern.                     | Supported     |
@@ -327,30 +327,30 @@ The following APIs are specific to HDFS's `DistributedFileSystem` implementation
 
 | Operation                      | NameNode audit log           | Description                                         | Support        |
 |--------------------------------|------------------------------|-----------------------------------------------------|----------------|
-| `getErasureCodingPolicy`       | `getErasureCodingPolicy`     | Gets the erasure coding policy of a file/dir.       | Unsupported [6]|
-| `setErasureCodingPolicy`       | `setErasureCodingPolicy`     | Sets an erasure coding policy on a directory.       | Unsupported [6]|
-| `unsetErasureCodingPolicy`     | `unsetErasureCodingPolicy`   | Unsets an erasure coding policy on a directory.     | Unsupported [6]|
-| `addErasureCodingPolicies`     | `addErasureCodingPolicies`   | Adds erasure coding policies.                       | Unsupported [6]|
-| `getErasureCodingPolicies`     | `getErasureCodingPolicies`   | Gets the available erasure coding policies.         | Unsupported [6]|
-| `removeErasureCodingPolicy`    | `removeErasureCodingPolicy`  | Removes an erasure coding policy.                   | Unsupported [6]|
-| `enableErasureCodingPolicy`    | `enableErasureCodingPolicy`  | Enables an erasure coding policy.                   | Unsupported [6]|
-| `disableErasureCodingPolicy`   | `disableErasureCodingPolicy` | Disables an erasure coding policy.                  | Unsupported [6]|
-| `getErasureCodingCodecs`       | `getErasureCodingCodecs`     | Lists all erasure coding codecs.                    | Unsupported [6]|
-| `getECTopologyResultForPolicies` | `getECTopologyResultForPolicies` | Get erasure coding topology result for policies.    | Unsupported [6]|
-| `getSnapshotListing`           | `ListSnapshot`               | List all snapshots of a snapshottable directory.    | Unsupported [6]|
-| `allowSnapshot`                | `allowSnapshot`              | Allows snapshots to be taken on a directory.        | Unsupported [6]|
-| `disallowSnapshot`             | `disallowSnapshot`           | Disallows snapshots to be taken on a directory.     | Unsupported [6]|
-| `provisionSnapshotTrash`       | `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for a snapshottable directory.      | Unsupported [6]|
-| `createEncryptionZone`         | `createEncryptionZone`       | Creates an encryption zone.                         | Unsupported [6]|
-| `getEZForPath`                 | `getEZForPath`               | Gets the encryption zone for a path.                | Unsupported [6]|
-| `listEncryptionZones`          | `listEncryptionZones`        | Lists all encryption zones.                         | Unsupported [6]|
-| `reencryptEncryptionZone`      | `reencryptEncryptionZone`    | Reencrypt an encryption zone.                       | Unsupported [6]|
-| `listReencryptionStatus`       | `listReencryptionStatus`     | List reencryption status.                           | Unsupported [6]|
-| `getFileEncryptionInfo`        | `getfileinfo`      | Get file encryption info.                           | Unsupported [6]|
-| `provisionEZTrash`             | `getEZForPath`, `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for an encryption zone.             | Unsupported [6]|
-| `setQuota`                     | `clearQuota` or `clearSpaceQuota` or `setQuota` or `setSpaceQuota` | Sets the quota usage for a path.                    | Unsupported [6]|
-| `getQuotaUsage`                | `quotaUsage`              | Gets the quota usage for a path.                    | Unsupported [6]|
-| `setQuotaByStorageType`        | `setSpaceQuota`      | Sets quota by storage type for a path.              | Unsupported [6]|
+| `getErasureCodingPolicy`       | `getErasureCodingPolicy`     | Gets the erasure coding policy of a file/dir.       | Unsupported [[6]](#footnote-6)|
+| `setErasureCodingPolicy`       | `setErasureCodingPolicy`     | Sets an erasure coding policy on a directory.       | Unsupported [[6]](#footnote-6)|
+| `unsetErasureCodingPolicy`     | `unsetErasureCodingPolicy`   | Unsets an erasure coding policy on a directory.     | Unsupported [[6]](#footnote-6)|
+| `addErasureCodingPolicies`     | `addErasureCodingPolicies`   | Adds erasure coding policies.                       | Unsupported [[6]](#footnote-6)|
+| `getErasureCodingPolicies`     | `getErasureCodingPolicies`   | Gets the available erasure coding policies.         | Unsupported [[6]](#footnote-6)|
+| `removeErasureCodingPolicy`    | `removeErasureCodingPolicy`  | Removes an erasure coding policy.                   | Unsupported [[6]](#footnote-6)|
+| `enableErasureCodingPolicy`    | `enableErasureCodingPolicy`  | Enables an erasure coding policy.                   | Unsupported [[6]](#footnote-6)|
+| `disableErasureCodingPolicy`   | `disableErasureCodingPolicy` | Disables an erasure coding policy.                  | Unsupported [[6]](#footnote-6)|
+| `getErasureCodingCodecs`       | `getErasureCodingCodecs`     | Lists all erasure coding codecs.                    | Unsupported [[6]](#footnote-6)|
+| `getECTopologyResultForPolicies` | `getECTopologyResultForPolicies` | Get erasure coding topology result for policies.    | Unsupported [[6]](#footnote-6)|
+| `getSnapshotListing`           | `ListSnapshot`               | List all snapshots of a snapshottable directory.    | Unsupported [[6]](#footnote-6)|
+| `allowSnapshot`                | `allowSnapshot`              | Allows snapshots to be taken on a directory.        | Unsupported [[6]](#footnote-6)|
+| `disallowSnapshot`             | `disallowSnapshot`           | Disallows snapshots to be taken on a directory.     | Unsupported [[6]](#footnote-6)|
+| `provisionSnapshotTrash`       | `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for a snapshottable directory.      | Unsupported [[6]](#footnote-6)|
+| `createEncryptionZone`         | `createEncryptionZone`       | Creates an encryption zone.                         | Unsupported [[6]](#footnote-6)|
+| `getEZForPath`                 | `getEZForPath`               | Gets the encryption zone for a path.                | Unsupported [[6]](#footnote-6)|
+| `listEncryptionZones`          | `listEncryptionZones`        | Lists all encryption zones.                         | Unsupported [[6]](#footnote-6)|
+| `reencryptEncryptionZone`      | `reencryptEncryptionZone`    | Reencrypt an encryption zone.                       | Unsupported [[6]](#footnote-6)|
+| `listReencryptionStatus`       | `listReencryptionStatus`     | List reencryption status.                           | Unsupported [[6]](#footnote-6)|
+| `getFileEncryptionInfo`        | `getfileinfo`      | Get file encryption info.                           | Unsupported [[6]](#footnote-6)|
+| `provisionEZTrash`             | `getEZForPath`, `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for an encryption zone.             | Unsupported [[6]](#footnote-6)|
+| `setQuota`                     | `clearQuota` or `clearSpaceQuota` or `setQuota` or `setSpaceQuota` | Sets the quota usage for a path.                    | Unsupported [[6]](#footnote-6)|
+| `getQuotaUsage`                | `quotaUsage`              | Gets the quota usage for a path.                    | Unsupported [[6]](#footnote-6)|
+| `setQuotaByStorageType`        | `setSpaceQuota`      | Sets quota by storage type for a path.              | Unsupported [[6]](#footnote-6)|
 | `unsetStoragePolicy`           | `unsetStoragePolicy`         | Unsets a storage policy on a file or directory.     | Unsupported    |
 | `setStoragePolicy`             | `setStoragePolicy`           | Sets a storage policy on a file or directory.       | Unsupported    |
 | `getStoragePolicy`             | `getStoragePolicy`           | Gets the storage policy of a file or directory.     | Unsupported    |
@@ -370,23 +370,30 @@ The following APIs are specific to HDFS's `DistributedFileSystem` implementation
 | `setBalancerBandwidth`         | `setBalancerBandwidth`       | Set balancer bandwidth.                             | Unsupported    |
 | `metaSave`                     | `metaSave`                   | Meta save.                                          | Unsupported    |
 | `rollingUpgrade`               | `queryRollingUpgrade`, `startRollingUpgrade`, `finalizeRollingUpgrade` | Rolling upgrade. | Unsupported    |
-| `finalizeUpgrade`              | `finalizeUpgrade`            | Finalize upgrade.                                   | Unsupported [7] |
-| `listOpenFiles`                | `listOpenFiles`              | List open files.                                    | Unsupported [7] |
+| `finalizeUpgrade`              | `finalizeUpgrade`            | Finalize upgrade.                                   | Unsupported [[7]](#footnote-7) |
+| `listOpenFiles`                | `listOpenFiles`              | List open files.                                    | Unsupported [[7]](#footnote-7) |
 
 **Footnotes:**
 
+<a id="footnote-1"></a>
 [1] Renaming files or directories across different buckets is not supported. Within a File System Optimized (FSO) bucket, rename is an atomic metadata operation. For legacy buckets, renaming a directory is a non-atomic operation that renames each file and subdirectory individually.
 
+<a id="footnote-2"></a>
 [2] Deleting the filesystem root is not allowed. Recursively deleting a volume is also not supported.
 
+<a id="footnote-3"></a>
 [3] Recursive listing is not supported at the root or volume level.
 
+<a id="footnote-4"></a>
 [4] ofs supports "linked buckets," where one bucket serves as a reference to another. However, general-purpose symbolic links for files or directories are not supported.
 
+<a id="footnote-5"></a>
 [5] Snapshots are supported at the bucket level only.
 
+<a id="footnote-6"></a>
 [6] For operations related to encryption zones, erasure coding, snapshots, and quotas, use the corresponding Ozone bucket-level APIs instead.
 
+<a id="footnote-7"></a>
 [7] Replace with `OzoneManagerProtocol.finalizeUpgrade()` and `OzoneManagerProtocol.listOpenFiles()`.
 
 *The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`.*
