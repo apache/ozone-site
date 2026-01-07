@@ -14,4 +14,4 @@ Both Ozone Manager and Storage Container Manager supports HA. In this mode the i
 
 ## Service ID and SCM Host Mapping
 
-To select between the available SCM nodes, a logical name (a `serviceId`) is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Storage Container Managers. <!-- TODO: Link to SCM HA configuration documentation when created --> Check out the SCM HA configuration documentation for details on how to configure the service ID and map it to individual SCM nodes.
+To select between the available SCM nodes, a logical name (a `serviceId`) is required for each of the clusters which can be resolved to the IP addresses (and domain names) of the Storage Container Managers. Check out the [SCM HA configuration documentation](/docs/administrator-guide/configuration/high-availability/scm-ha) for details on how to configure the service ID and map it to individual SCM nodes.
