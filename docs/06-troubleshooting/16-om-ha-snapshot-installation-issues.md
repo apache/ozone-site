@@ -17,6 +17,9 @@ By setting it to a high value, you can prevent the leader from purging the logs 
 2. Set `ozone.om.ratis.log.purge.upto.snapshot.index` to `false`.
 This property prevents the leader OM from purging any logs until all followers have installed the latest snapshot.
 This ensures that the new OM will have enough time to download and install the snapshot without the logs being purged. This is a more risky approach since it might cause the Raft logs to increase indefinitely when the OM follower is down for a long time, which can cause OM metadata dir to be full.
-<br/>Note: If `ozone.om.ratis.log.purge.preservation.log.num` is set to a non-zero number, it is recommended to keep `ozone.om.ratis.log.purge.upto.snapshot.index` to `true` (default value) since `ozone.om.ratis.log.purge.upto.snapshot.index` will override the preservation configuration. Therefore, these two properties should not be set together.
+
+:::note
+If `ozone.om.ratis.log.purge.preservation.log.num` is set to a non-zero number, it is recommended to keep `ozone.om.ratis.log.purge.upto.snapshot.index` to `true` (default value) since `ozone.om.ratis.log.purge.upto.snapshot.index` will override the preservation configuration. Therefore, these two properties should not be set together.
 
 By tuning these two parameters, you can avoid the OM snapshot installation loop and successfully add new OMs to your HA cluster.
+:::
