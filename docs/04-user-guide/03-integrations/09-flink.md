@@ -145,7 +145,7 @@ CREATE TABLE ozone_sink (
 ) WITH (
   'connector' = 'filesystem',
   'path' = 's3a://bucket1/ozone_sink/',
-  'format' = 'parquet'
+  'format' = 'csv'
 );
 ```
 
