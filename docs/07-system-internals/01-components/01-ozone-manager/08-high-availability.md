@@ -53,7 +53,7 @@ Note that this `Raft Snapshot`, used for OM HA state synchronization, is distinc
 In most scenarios, stale OMs will recover automatically, even if they have missed a large number of operations.
 Manual intervention (such as running `ozone om --bootstrap`) is only required when adding a new OM node to the cluster.
 
-**Important Note on Ozone Manager (OM) Disk Space for Snapshots**
+### Important Note on Ozone Manager (OM) Disk Space for Snapshots
 
 When an Ozone Manager (OM) acts as a follower in an HA setup, it downloads snapshot tarballs from the leader to its
 local metadata directory. Therefore, always ensure your OM disks have at least 2x the current OM database size to
