@@ -75,6 +75,7 @@ proper-names:
   # Acronyms:
   - FSO
   - OBS
+  - OFS
   - ofs
   - HttpFS
   - CLI

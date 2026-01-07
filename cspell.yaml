@@ -89,9 +89,12 @@ words:
 - EC
 - quasi-close
 - quasi-closed
+- HCFS
+- libo3fs
 # Other systems' words
 - KDC
 - classpath
+- DS
 - HDFS
 - Protolock
 - CSI
@@ -99,28 +102,39 @@ words:
 - Xceiver
 - matomo
 - qube
+- PKI
 - proto
 - protolock
 - protolocks
 - intellij
+- flekszible
 - TDE
+- Teragen
+- TPC
 - RPC
 - aarch
 - trino
 - oozie
 - spnego
+- keytab
+- Keytab
 - RocksDB
 - hsync
 - SASL
 - jira
 - jiras
+- LLAP
 - mvn
+- NIFI
 - gpg
 - sed
 - mds
 - javadoc
 - JVM
 - distcp
+- Boto3
+- fsspec
+- libhdfs
 - goofys
 # Misc words
 - acking
@@ -135,6 +149,7 @@ words:
 - rebalancing
 - JDK
 - CMDB
+- JNI
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
