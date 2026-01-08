@@ -150,6 +150,9 @@ words:
 - rebalancing
 - JDK
 - CMDB
+- Unsets
+- snapshottable
+- reencryption
 - JNI
 # Company names for "Who Uses Ozone" page
 - Shopee
