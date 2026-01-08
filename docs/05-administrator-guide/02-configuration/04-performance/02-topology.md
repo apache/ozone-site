@@ -23,11 +23,15 @@ See the [page about Containers](../../../core-concepts/replication/storage-conta
 
 Ozone determines Datanode network locations (e.g., racks) using Hadoop's rack awareness, configured via `net.topology.node.switch.mapping.impl` in `ozone-site.xml`. This key specifies a `org.apache.hadoop.net.CachedDNSToSwitchMapping` implementation. [1]
 
+:::note
+Both Ozone Manager (OM) and Storage Container Manager (SCM) use network topology information. It is critical to maintain a consistent topology assignment across all OM and SCM instances in the cluster.
+:::
+
 Two primary methods exist:
 
-### 1. Static List: `TableMapping`
+### 1. Static List: `TableMapping` (Default)
 
-Maps IPs/hostnames to racks using a predefined file.
+This is the default implementation. It maps IPs/hostnames to racks using a predefined file. If no mapping file is specified, or if a Datanode is not found in the file, it is assigned to `/default-rack`.
 
 - **Configuration:** Set `net.topology.node.switch.mapping.impl` to `org.apache.hadoop.net.TableMapping` and `net.topology.table.file.name` to the mapping file's path. [1]
 
@@ -42,7 +46,7 @@ Maps IPs/hostnames to racks using a predefined file.
   </property>
   ```
 
-- **File Format:** A two-column text file (IP/hostname, rack path per line). Unlisted nodes go to `/default-rack`. [1]
+- **File Format:** A two-column text file (IP/hostname, rack path per line). [1]
   Example `topology.map`:
 
   ```text
@@ -117,7 +121,7 @@ The policy is configured by the `ozone.scm.pipeline.placement.impl` property in 
 
 After a pool of healthy, open, and rack-aware pipelines has been created, this policy is used to **select one** of them to handle a client's write request. Its purpose is **load balancing**, not topology awareness, as the topology has already been handled during pipeline creation.
 
-The policy is configured by `hdds.scm.pipeline.choose.policy.impl` in `ozone-site.xml`.
+The policy is configured by `hdds.scm.pipeline.choose.policy.impl` in `ozone-site.xml` for Ratis containers, and `hdds.scm.ec.pipeline.choose.policy.impl` for EC containers. All of the following policies are supported by both Ratis and EC containers.
 
 - **`RandomPipelineChoosePolicy` (Default):** Selects a pipeline at random from the available list. This policy is simple and distributes load without considering other metrics.
 - **`CapacityPipelineChoosePolicy`:** Picks two random pipelines and selects the one with lower utilization, favoring pipelines with more available capacity.
@@ -128,7 +132,9 @@ Note: When configuring these values, include the full class name prefix: for exa
 
 ### 3. Closed Container Replication Policy
 
-This is configured using the `ozone.scm.container.placement.impl` property in `ozone-site.xml`. The available policies are:
+#### Ratis containers
+
+This is configured using the `ozone.scm.container.placement.impl` property in `ozone-site.xml` for Ratis containers. The available policies are:
 
 - **`SCMContainerPlacementRackAware` (Default)**
 
@@ -148,15 +154,15 @@ This is configured using the `ozone.scm.container.placement.impl` property in `o
 
 Note: When configuring these values, include the full class name prefix: for example, `org.apache.hadoop.hdds.scm.container.placement.algorithms.SCMContainerPlacementCapacity`
 
-## Container Placement for Erasure Coded (EC) Containers
+#### EC containers
 
 For Erasure Coded (EC) containers, SCM employs a specialized placement policy to ensure data resilience and availability by distributing data and parity blocks across multiple racks. This is configured using the `ozone.scm.container.placement.ec.impl.key` property in `ozone-site.xml`.
 
-### 1. `SCMContainerPlacementRackScatter` (Default)
+- **`SCMContainerPlacementRackScatter` (Default)**
 
-- **Function:** This is the default policy for EC containers. It attempts to place each block (both data and parity) of an EC container on a different rack. For example, for an RS-6-3-1024k container (6 data blocks + 3 parity blocks), this policy will try to place the 9 blocks on 9 different racks. This "scatter" approach maximizes the fault tolerance, as the loss of a single rack will not impact more than one block of the container. [5]
-- **Use Cases:** This policy is highly recommended for production clusters using Erasure Coding to protect against rack-level failures.
-- **Configuration:**
+  - **Function:** This is the default policy for EC containers. It attempts to place each block (both data and parity) of an EC container on a different rack. For example, for an RS-6-3-1024k container (6 data blocks + 3 parity blocks), this policy will try to place the 9 blocks on 9 different racks. This "scatter" approach maximizes the fault tolerance, as the loss of a single rack will not impact more than one block of the container. [5]
+  - **Use Cases:** This policy is highly recommended for production clusters using Erasure Coding to protect against rack-level failures.
+  - **Configuration:**
 
     ```xml
     <property>
@@ -165,21 +171,21 @@ For Erasure Coded (EC) containers, SCM employs a specialized placement policy to
     </property>
     ```
 
-- **Behavior:** If the number of available racks is less than the number of blocks in the EC group, the policy will start placing more than one block on the same rack, while trying to keep the distribution as even as possible.
-- **Limitations:** Similar to `SCMContainerPlacementRackAware`, this policy is designed for single-layer rack topologies (e.g., `/rack/node`) and is not recommended for multi-layer hierarchies.
+  - **Behavior:** If the number of available racks is less than the number of blocks in the EC group, the policy will start placing more than one block on the same rack, while trying to keep the distribution as even as possible.
+  - **Limitations:** Similar to `SCMContainerPlacementRackAware`, this policy is designed for single-layer rack topologies (e.g., `/rack/node`) and is not recommended for multi-layer hierarchies.
 
 ## Optimizing Read Paths
 
-Enable by setting `ozone.network.topology.aware.read` to `true` in `ozone-site.xml`. [1]
+This feature, enabled by default since Ozone 1.4.0 (HDDS-8300), directs clients to read from the topologically closest Datanodes for replicated data, reducing latency and cross-rack traffic. It is recommended to keep this enabled when you have an accurate topology configuration.
+
+If you need to disable it, set `ozone.network.topology.aware.read` to `false` in `ozone-site.xml`:
 
 ```xml
 <property>
   <name>ozone.network.topology.aware.read</name>
-  <value>true</value>
+  <value>false</value>
 </property>
 ```
-
-This directs clients (replicated data) to read from topologically closest Datanodes, reducing latency and cross-rack traffic. Recommended with accurate topology.
 
 ## Summary of Best Practices
 
