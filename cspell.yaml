@@ -135,6 +135,7 @@ words:
 - Boto3
 - fsspec
 - libhdfs
+- goofys
 - WebHDFS
 # Misc words
 - acking
