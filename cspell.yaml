@@ -156,3 +156,6 @@ words:
 - Qihoo360
 - Meituan
 - Unicom
+# S3 Compatible third-party applications
+- Clickhouse
+- Teradata
