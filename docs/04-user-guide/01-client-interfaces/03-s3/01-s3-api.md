@@ -1,4 +1,3 @@
-import DocCardList from '@theme/DocCardList';
 ---
 sidebar_label: Overview
 ---
@@ -189,5 +188,3 @@ Ozone's S3 Gateway enables integration with a wide range of cloud-native and ana
 - [CyberDuck](https://cyberduck.io/) See the [tutorial page](https://ozone.apache.org/docs/edge/interface/cyberduckozones3.html)
 
 This list is not exhaustive—any application that supports the S3 protocol can potentially connect to Ozone, making it easy to adopt Ozone in modern data pipelines and cloud-native workflows.
-
-<DocCardList />
