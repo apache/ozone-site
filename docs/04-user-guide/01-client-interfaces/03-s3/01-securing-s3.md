@@ -64,6 +64,7 @@ aws configure set aws_access_key_id ${accessId}
 aws configure set aws_secret_access_key ${secret}
 aws configure set region us-west-1
 ```
+
 Please refer to AWS S3 documentation on how to use S3 via command line or via
 S3 API.
 
