@@ -1,5 +1,6 @@
 ---
 sidebar_label: Securing S3
+sidebar_position: 2
 ---
 
 # Securing S3
