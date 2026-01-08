@@ -50,7 +50,7 @@ ACLs can be set and managed using the Ozone CLI. Refer to the [Security ACLs doc
 ### S3 Gateway Integration (`/s3v` Volume)
 
 For compatibility with the S3 API, Ozone uses a special volume, typically `/s3v`. By default, all buckets accessed via the S3 interface are stored under this volume. It's also possible to expose buckets from other Ozone volumes via the S3 interface using "bucket linking."
-For more details, refer to the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3.md) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy.md).
+For more details, refer to the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3/) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy.md).
 
 ### Datanode Physical Volumes vs. Ozone Manager Logical Volumes
 
