@@ -1,7 +1,7 @@
+import DocCardList from '@theme/DocCardList';
 ---
 sidebar_label: Overview
 ---
-import DocCardList from '@theme/DocCardList';
 
 # Overview
 
