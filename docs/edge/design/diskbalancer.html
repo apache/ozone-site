@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start/index.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept/index.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozones3gateway.html">
+                                 
+                                 <span>Ozone S3 Gateway</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/s3-gateway-load-balancing.html">S3 Gateway Load Balancing</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature/index.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/diskbalancer.html">DiskBalancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration/index.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface/index.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security/index.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools/index.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe/index.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting/index.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
+            <div class="col-md-9">
+                <h1><a href="https://issues.apache.org/jira/browse/HDDS-5713">[HDDS-5713]</a> DiskBalancer for Datanode (implementing) </h1>
+                <div><i>Authors: Janus Chow, Sammi Chen, Gargi Jaiswal, Stephen O&#39; Donnell</i><div class="pull-right">2025-07-21</div></div>
+                <p>&nbsp</p>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Summary</div>
+                    <div class="panel-body">
+                        DiskBalancer is a feature to evenly distribute data across all disks within a Datanode for even disk utilisation.
+                    </div>
+                </div>
+
+              <!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<h1 id="hdds-5713-diskbalancer-for-datanode-implementing"><a href="https://issues.apache.org/jira/browse/HDDS-5713">HDDS-5713</a> DiskBalancer for Datanode (implementing)</h1>
+<h2 id="background">Background</h2>
+<p><strong>Apache Ozone</strong> works well to distribute all containers evenly
+across all multiple disks on each Datanode. This initial spread
+ensures that I/O load is balanced from the start. However,
+over the operational lifetime of a cluster <strong>disk imbalance</strong> can
+occur due to the following reasons:</p>
+<ul>
+<li><strong>Adding new disks</strong> to expand datanode storage space.</li>
+<li><strong>Replacing old broken disks</strong> with new disks.</li>
+<li>Massive <strong>block</strong> or <strong>replica deletions</strong>.</li>
+</ul>
+<p>This uneven utilisation of disks can create performance bottlenecks, as
+<strong>over-utilised disks</strong> become <strong>hotspots</strong> limiting the overall throughput of the
+Datanode. As a result, this new feature, <strong>DiskBalancer</strong>, is introduced to
+ensure even data distribution across disks within a Datanode.</p>
+<h2 id="proposed-solution">Proposed Solution</h2>
+<p>The DiskBalancer is a feature which evenly distributes data across
+different disks of a Datanode.</p>
+<p>It detects an imbalance within datanode, using the term from
+<a href="https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSDiskbalancer.html">HDFS DiskBalancer</a>
+metric called <strong>Volume Data Density</strong>. This metric is calculated for
+each disk using following formula:</p>
+<pre tabindex="0"><code>AverageUtilization = TotalUsed / TotalCapacity
+VolumeUtilization = diskUsedSpace / diskCapacity
+VolumeDensity = | VolumeUtilization - AverageUtilization |
+</code></pre><p>Here, <strong>VolumeUtilization</strong> is each disk&rsquo;s individual utilization and
+<strong>AverageUtilization</strong> is the ideal utilization for all disks to maintain
+eveness.</p>
+<p>A disk is considered a candidate for balancing if its <code>VolumeDataDensity</code> exceeds a configurable
+<code>threshold</code>. The DiskBalancer then moves the containers from most
+utilised disk to the least utilised disk. DiskBalancer can be triggered manually by <strong>CLI commands</strong>.</p>
+<h2 id="high-level-diskbalancer-implementation">High-Level DiskBalancer Implementation</h2>
+<p>The general view of this design consists of 2 parts as follows:</p>
+<p><strong>Client &amp; DN - Direct Communication:</strong></p>
+<p>Administrators use the <code>ozone admin datanode diskbalancer</code> CLI to manage and monitor the feature.</p>
+<ul>
+<li>Clients communicate <strong>directly</strong> with datanodes via RPC using the <code>DiskBalancerProtocol</code> interface, bypassing SCM.</li>
+<li>Clients can control the DiskBalancer job by sending requests directly to datanodes, including:
+<ul>
+<li>Start/stop DiskBalancer operations</li>
+<li>Update configuration parameters</li>
+<li>Query DiskBalancer status and volume density reports</li>
+</ul>
+</li>
+<li>Each datanode performs its own <strong>authentication</strong> (via RPC) and <strong>authorization</strong> checks (using <code>OzoneAdmins</code> based on <code>ozone.administrators</code> configuration).</li>
+<li>For batch operations, clients can use the <code>--in-service-datanodes</code> flag to automatically query SCM for all IN_SERVICE datanodes and execute commands on all of them.</li>
+</ul>
+<p><strong>DN - DiskBalancer Service:</strong></p>
+<p>All balance operations are done in dataNodes.</p>
+<p>A daemon thread, the <strong>Scheduler</strong>, runs periodically on each Datanode.</p>
+<ol>
+<li>It calculates the <code>VolumeDataDensity</code> for all volumes.</li>
+<li>If an imbalance is detected (i.e., density &gt; threshold), it moves a set of closed containers
+from the most over-utilized disk (source) to the least utilized disk (destination).</li>
+<li>The scheduler dispatches these move tasks to a pool of <strong>Worker</strong> threads for parallel execution.</li>
+</ol>
+<p><strong>Note:</strong> SCM is used <strong>only</strong> for datanode discovery when using the <code>--in-service-datanodes</code> flag. SCM provides a list of IN_SERVICE datanodes for batch operations but
+does <strong>not</strong> participate in DiskBalancer control operations (start/stop/update/status/report). All DiskBalancer operations are performed directly between client and datanode.</p>
+<h2 id="container-move-process">Container Move Process</h2>
+<p>Suppose, we are moving container C1 <strong>(CLOSED state)</strong> from Source Disk d1 to Destination disk d2 :</p>
+<ol>
+<li>
+<p>A temporary copy, <code>Temp C1-CLOSED</code>, is created in the <code>temp directory</code> of the destination disk D2.</p>
+</li>
+<li>
+<p><code>Temp C1-CLOSED</code> is transitioned to <code>Temp C1-RECOVERING</code> state. This <strong>Temp C1-RECOVERING</strong> container is now
+atomically moved to the <strong>final destination</strong> directory of D2 as <code>C1-RECOVERING</code>.</p>
+</li>
+<li>
+<p>Now <strong>new container</strong> import is initiated for <code>C1-RECOVERING</code> container.</p>
+</li>
+<li>
+<p>Once the import is successful, all the metadata updates are done for this new container created on D2.</p>
+</li>
+<li>
+<p>Finally, the original container <code>C1-CLOSED</code> on D1 is deleted.</p>
+</li>
+</ol>
+<pre tabindex="0"><code>D1     ----&gt; C1-CLOSED  --- (5) ---&gt; C1-DELETED
+        |
+        |
+       (1)
+        |
+D2      ----&gt; Temp C1-CLOSED  --- (2) ---&gt; Temp C1-RECOVERING --- (3) ---&gt; C1-RECOVERING --- (4) ---&gt; C1-CLOSED
+</code></pre><h2 id="diskbalancing-policies">DiskBalancing Policies</h2>
+<p>By default, the DiskBalancer uses specific policies to decide which disks to balance and which containers to move. These
+are configurable, but the default implementations provide robust and safe behavior.</p>
+<ul>
+<li>
+<p><strong><code>DefaultVolumeChoosingPolicy</code></strong>: This is the default policy for selecting the source and destination volumes. It
+identifies the most over-utilized volume as the source and the most under-utilized volume as the destination by comparing
+each volume&rsquo;s utilization against the Datanode&rsquo;s average. The calculation is smart enough to account for data that is
+already in the process of being moved, ensuring it makes accurate decisions based on the future state of the volumes.</p>
+</li>
+<li>
+<p><strong><code>DefaultContainerChoosingPolicy</code></strong>: This is the default policy for selecting which container to move from a source
+volume. It iterates through the containers on the source disk and picks the first one that is in a <strong>CLOSED</strong> state
+and is not already being moved by another balancing operation. To optimize performance and avoid re-scanning the same
+containers repeatedly, it caches the list of containers for each volume which auto expires after one hour of its last
+used time or if the container iterator for that is invalidated on full utilisation.</p>
+</li>
+</ul>
+<h2 id="security-design">Security Design</h2>
+<p>DiskBalancer follows the same security model as other services:</p>
+<ul>
+<li>
+<p><strong>Authentication</strong>: Clients communicate directly with datanodes via RPC. In secure clusters, RPC authentication is required (Kerberos).</p>
+</li>
+<li>
+<p><strong>Authorization</strong>: After successful authentication, each datanode performs authorization checks using <code>OzoneAdmins</code> based on the <code>ozone.administrators</code> configuration:</p>
+<ul>
+<li><strong>Admin operations</strong> (start, stop, update): Require the authenticated user to be in <code>ozone.administrators</code> or belong to a group in <code>ozone.administrators.groups</code></li>
+<li><strong>Read-only operations</strong> (status, report): Do not require admin privileges - any authenticated user can query status and reports</li>
+</ul>
+</li>
+</ul>
+<p>By default, if <code>ozone.administrators</code> is not configured, only the user who launched the datanode service has admin privileges. This ensures that DiskBalancer operations are restricted to authorized administrators while allowing read-only access for monitoring purposes.</p>
+<h2 id="cli-interface-design">CLI Interface Design</h2>
+<p>The DiskBalancer CLI provides five main commands that communicate directly with datanodes:</p>
+<ol>
+<li><strong>start</strong> - Initiates DiskBalancer on <code>specified datanodes</code> or all <code>in-service-datanodes</code> with optional configuration parameters</li>
+<li><strong>stop</strong> - Stops DiskBalancer operations on specified datanodes.</li>
+<li><strong>update</strong> - Updates DiskBalancer configuration.</li>
+<li><strong>status</strong> - Retrieves current DiskBalancer status including running state, metrics, and configuration.</li>
+<li><strong>report</strong> - Retrieves volume density report showing imbalance analysis.</li>
+</ol>
+<p>The CLI supports:</p>
+<ul>
+<li><strong>Direct datanode addressing</strong>: Commands can target specific datanodes by hostname or IP address</li>
+<li><strong>Batch operations</strong>: The <code>--in-service-datanodes</code> flag queries SCM for all IN_SERVICE and HEALTHY datanodes and executes commands on all of them</li>
+<li><strong>Flexible input</strong>: Datanode addresses can be provided as positional arguments or read from stdin</li>
+<li><strong>Output formats</strong>: Results can be displayed in human-readable format or JSON for programmatic access</li>
+</ul>
+<h3 id="operational-state-awareness">Operational State Awareness</h3>
+<p>DiskBalancer automatically responds to datanode operational state changes:</p>
+<ul>
+<li>When a datanode enters <strong>DECOMMISSIONING</strong> or <strong>MAINTENANCE</strong> state, DiskBalancer automatically <strong>pauses</strong> (transitions to <code>PAUSED</code> state).</li>
+<li>When a datanode returns to <strong>IN_SERVICE</strong> state, DiskBalancer automatically <strong>resumes</strong> (if it was previously <code>RUNNING</code>).</li>
+<li>If DiskBalancer was explicitly <strong>stopped</strong> (via CLI), it remains <code>STOPPED</code> even after the datanode returns to <code>IN_SERVICE</code> state.</li>
+</ul>
+<p>This ensures DiskBalancer respects datanode lifecycle management and does not interfere with maintenance or decommissioning operations.</p>
+<h2 id="feature-flag">Feature Flag</h2>
+<p>The DiskBalancer feature is gated behind a feature flag (<code>hdds.datanode.disk.balancer.enabled</code>) to allow controlled rollout. By default, the feature is disabled. When disabled, the DiskBalancer service is not initialized on datanodes, and the CLI commands are hidden from the main help output to prevent accidental usage.</p>
+<h2 id="diskbalancer-metrics">DiskBalancer Metrics</h2>
+<p>The DiskBalancer service exposes JMX metrics on each Datanode for real-time monitoring. These metrics provide insights
+into the balancer&rsquo;s activity, progress, and overall health.</p>
+<table>
+  <thead>
+      <tr>
+          <th>DiskBalancer Service Metrics</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>SuccessCount</code></td>
+          <td>The number  of successful balance jobs.</td>
+      </tr>
+      <tr>
+          <td><code>SuccessBytes</code></td>
+          <td>The total bytes for successfully balanced jobs.</td>
+      </tr>
+      <tr>
+          <td><code>FailureCount</code></td>
+          <td>The number of failed balance jobs.</td>
+      </tr>
+      <tr>
+          <td><code>moveSuccessTime</code></td>
+          <td>The time spent on successful container moves.</td>
+      </tr>
+      <tr>
+          <td><code>moveFailureTime</code></td>
+          <td>The time spent on failed container moves.</td>
+      </tr>
+      <tr>
+          <td><code>runningLoopCount</code></td>
+          <td>The total number of times the balancer&rsquo;s main loop has run.</td>
+      </tr>
+      <tr>
+          <td><code>idleLoopNoAvailableVolumePairCount </code></td>
+          <td>The number of loops where balancing did not run because no suitable source/destination volume pair could be found.</td>
+      </tr>
+      <tr>
+          <td><code>idleLoopExceedsBandwidthCount</code></td>
+          <td>The number of loops where balancing did not run due to bandwidth limits.</td>
+      </tr>
+  </tbody>
+</table>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.2.0-SNAPSHOT, Last Modified: December 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5a1997fcb6657770ed4e61770caf7c8951e2d475">5a1997fcb6</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

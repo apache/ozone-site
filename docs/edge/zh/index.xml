@@ -43,6 +43,13 @@
       <description>Decommissioning of SCM, OM and Datanode.</description>
     </item>
     <item>
+      <title>磁盘均衡器</title>
+      <link>/zh/feature/diskbalancer.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/diskbalancer.html</guid>
+      <description>数据节点的磁盘平衡器.</description>
+    </item>
+    <item>
       <title>高可用 OM</title>
       <link>/zh/feature/om-ha.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

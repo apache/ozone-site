@@ -37,6 +37,13 @@
       <description>Design for the OM bootstrapping process that is snapshot aware</description>
     </item>
     <item>
+      <title>DiskBalancer for Datanode</title>
+      <link>/design/diskbalancer.html</link>
+      <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>/design/diskbalancer.html</guid>
+      <description>DiskBalancer is a feature to evenly distribute data across all disks within a Datanode for even disk utilisation.</description>
+    </item>
+    <item>
       <title>Full Volume Handling</title>
       <link>/design/full-volume-handling.html</link>
       <pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate>

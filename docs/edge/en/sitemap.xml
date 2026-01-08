@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/index.html</loc>
-    <lastmod>2025-07-23T08:20:27-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -58,7 +58,7 @@
                 />
   </url><url>
     <loc>/interface/ofs.html</loc>
-    <lastmod>2025-07-10T19:02:05-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -83,6 +83,19 @@
                 href="/feature/decommission.html"
                 />
   </url><url>
+    <loc>/feature/diskbalancer.html</loc>
+    <lastmod>2025-12-31T07:54:20+05:30</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/feature/diskbalancer.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/feature/diskbalancer.html"
+                />
+  </url><url>
     <loc>/start/index.html</loc>
     <lastmod>2025-06-14T00:32:50-07:00</lastmod>
     <xhtml:link
@@ -97,7 +110,7 @@
                 />
   </url><url>
     <loc>/feature/om-ha.html</loc>
-    <lastmod>2025-07-09T20:47:34-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -126,7 +139,7 @@
     <lastmod>2025-11-03T01:47:45+08:00</lastmod>
   </url><url>
     <loc>/feature/scm-ha.html</loc>
-    <lastmod>2025-07-09T20:47:34-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -171,7 +184,7 @@
                 />
   </url><url>
     <loc>/concept/ozonemanager.html</loc>
-    <lastmod>2025-07-09T18:05:15-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -268,7 +281,7 @@
                 />
   </url><url>
     <loc>/concept/storagecontainermanager.html</loc>
-    <lastmod>2025-07-09T18:16:20-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -352,7 +365,7 @@
                 />
   </url><url>
     <loc>/integration/distcp.html</loc>
-    <lastmod>2025-07-30T08:36:43-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
   </url><url>
     <loc>/integration/hive.html</loc>
     <lastmod>2025-01-11T09:27:03-08:00</lastmod>
@@ -590,7 +603,7 @@
     <lastmod>2024-06-27T23:37:16-04:00</lastmod>
   </url><url>
     <loc>/concept/comparison.html</loc>
-    <lastmod>2025-07-09T22:30:37-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
   </url><url>
     <loc>/feature/s3-multi-tenancy.html</loc>
     <lastmod>2022-03-07T12:09:51-08:00</lastmod>
@@ -728,6 +741,9 @@
     <loc>/design/om-bootstrapping-with-snapshots.html</loc>
     <lastmod>2025-09-22T10:13:03-07:00</lastmod>
   </url><url>
+    <loc>/feature/om-bootstrapping-with-snapshots.html</loc>
+    <lastmod>2025-09-22T10:13:03-07:00</lastmod>
+  </url><url>
     <loc>/concept/hdds-13515-design-document.html</loc>
     <lastmod>2025-10-15T11:26:42+05:30</lastmod>
   </url><url>
@@ -736,6 +752,9 @@
   </url><url>
     <loc>/tools/repair.html</loc>
     <lastmod>2025-11-07T20:34:41+05:30</lastmod>
+  </url><url>
+    <loc>/design/diskbalancer.html</loc>
+    <lastmod>2025-12-03T11:43:07+05:30</lastmod>
   </url><url>
     <loc>/concept/volumesbucketskeys.html</loc>
     <lastmod>2025-07-05T08:18:07-07:00</lastmod>
@@ -910,13 +929,13 @@
                 />
   </url><url>
     <loc>/feature/containerbalancer.html</loc>
-    <lastmod>2025-07-15T12:06:20-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
   </url><url>
     <loc>/interface/swaggerreconapi.html</loc>
     <lastmod>2023-11-15T14:55:19+05:30</lastmod>
   </url><url>
     <loc>/feature/maintenance.html</loc>
-    <lastmod>2025-07-10T18:43:40-07:00</lastmod>
+    <lastmod>2025-08-12T10:23:47+05:30</lastmod>
   </url><url>
     <loc>/feature/multi-raft-support.html</loc>
     <lastmod>2025-07-03T11:46:58-07:00</lastmod>
