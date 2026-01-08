@@ -33,12 +33,12 @@ Ratis pipelines use the [Apache Ratis](https://ratis.apache.org/) implementation
 
 #### Ratis Pipeline V1: Async API
 
-The original Ozone replication pipeline (V1) uses the Ratis Async API for data replication across multiple datanodes:
+The original Ozone replication pipeline (V1) uses the Ratis Async API for data replication across multiple Datanodes:
 
 1. Client buffers data locally until a certain threshold is reached
-2. Data is sent to the leader datanode in the pipeline
-3. Leader replicates data to follower datanodes
-4. Once a quorum of datanodes acknowledge the write, the operation is considered successful
+2. Data is sent to the leader Datanode in the pipeline
+3. Leader replicates data to follower Datanodes
+4. Once a quorum of Datanodes acknowledge the write, the operation is considered successful
 
 This approach ensures data consistency but has some limitations in terms of network topology awareness and buffer handling efficiency.
 
@@ -50,10 +50,10 @@ The newer Streaming Write Pipeline (V2) in Ozone leverages the Ratis Streaming A
 
 - Better network topology awareness
 - Elimination of unnecessary buffer copying (Netty zero copy)
-- Improved CPU and disk utilization on datanodes
+- Improved CPU and disk utilization on Datanodes
 - More efficient parallelism in data processing
 
-The Streaming Write Pipeline introduces a new network protocol that enables direct streaming of data from client to datanodes, reducing overhead and improving throughput.
+The Streaming Write Pipeline introduces a new network protocol that enables direct streaming of data from client to Datanodes, reducing overhead and improving throughput.
 
 **Configuration:**
 
@@ -97,13 +97,14 @@ EC in Ozone uses a striping data model where:
 1. Data is divided into fixed-size chunks (typically 1MB)
 2. The chunks are organized into stripes
 3. For each stripe, parity chunks are computed
-4. The chunks are distributed across datanodes
+4. The chunks are distributed across Datanodes
 
 For example, with an RS (Reed-Solomon) 6-3 configuration:
+
 - Data is split into 6 data chunks
 - 3 parity chunks are computed
 - These 9 chunks together form a "Stripe"
-- Multiple stripes using the same set of datanodes form a "BlockGroup"
+- Multiple stripes using the same set of Datanodes form a "BlockGroup"
 
 This approach provides 50% storage overhead compared to 200% with 3x replication, while maintaining similar durability guarantees.
 
@@ -130,6 +131,7 @@ ozone sh key put <Ozone Key Object Path> <Local File> --type EC --replication rs
 ```
 
 Supported EC configurations include:
+
 - `RS-3-2-1024k`: Reed-Solomon with 3 data chunks, 2 parity chunks, 1MB chunk size
 - `RS-6-3-1024k`: Reed-Solomon with 6 data chunks, 3 parity chunks, 1MB chunk size (recommended)
 - `XOR-2-1-1024k`: XOR coding with 2 data chunks, 1 parity chunk, 1MB chunk size
@@ -152,7 +154,7 @@ The write operation in Ozone follows these steps through the pipeline:
 2. **Block Allocation**: OM requests block allocation from SCM
 3. **Pipeline Selection**: SCM selects an appropriate pipeline for the write operation
 4. **Data Transfer**: Client streams data directly to the leader Datanode in the pipeline
-5. **Replication**: For Ratis pipelines, the leader replicates data to followers using the Raft protocol; for EC pipelines, the client distributes different chunks to different datanodes
+5. **Replication**: For Ratis pipelines, the leader replicates data to followers using the Raft protocol; for EC pipelines, the client distributes different chunks to different Datanodes
 6. **Acknowledgment**: Once all replicas are written, the client receives confirmation
 
 ![Write Pipeline Flow](../../../static/img/replication/pipelines.svg)
@@ -165,14 +167,14 @@ The replication write pipeline is implemented through several key classes:
 
 - **BlockOutputStream**: Base class that manages the overall write process
 - **RatisBlockOutputStream**: Implements the Ratis-specific functionality for replication
-- **CommitWatcher**: Tracks commit status across all datanodes in the pipeline
-- **XceiverClient**: Handles communication with datanodes
+- **CommitWatcher**: Tracks commit status across all Datanodes in the pipeline
+- **XceiverClient**: Handles communication with Datanodes
 
 The write process follows these steps:
 
 1. Client creates a `BlockOutputStream` for the allocated block
 2. Data is written in chunks, which are buffered locally
-3. When buffer fills or flush is triggered, data is written to datanodes
+3. When buffer fills or flush is triggered, data is written to Datanodes
 4. Each chunk is assigned a sequential index and checksummed
 5. After all data is written, a putBlock operation finalizes the block
 
@@ -182,14 +184,14 @@ EC write pipeline implementation involves several key components:
 
 - **ECKeyOutputStream**: Main client-side class that manages EC writes
 - **ECChunkBuffers**: Maintains buffers for both data and parity chunks
-- **ECBlockOutputStreamEntry**: Manages datanode connections and write operations
+- **ECBlockOutputStreamEntry**: Manages Datanode connections and write operations
 - **RawErasureEncoder**: Performs the mathematical encoding to generate parity chunks
 
 The EC write process follows these steps:
 
 1. **Data Buffering**: Client buffers incoming data into chunks
 2. **Stripe Formation**: When all data chunks for a stripe are filled, parity is generated
-3. **Parallel Write**: Data and parity chunks are written to different datanodes
+3. **Parallel Write**: Data and parity chunks are written to different Datanodes
 4. **Commit**: After all chunks are written, the stripe is committed
 
 ## Containers and Pipelines
@@ -204,7 +206,7 @@ Containers are the fundamental storage units in Ozone, and their relationship wi
 ## Comparing Replication and Erasure Coding
 
 | Feature | Replication (RATIS/THREE) | Erasure Coding (RS-6-3) |
-|---------|---------------------------|-------------------------|
+| ------- | ------------------------- | ----------------------- |
 | Storage Overhead | 200% (3x copies) | 50% (9 chunks for 6 data chunks) |
 | Write Performance | Higher throughput for small writes | Better for large sequential writes |
 | Read Performance | Consistent performance, any replica can serve | Slightly lower for intact data, reconstruction penalty for lost chunks |
@@ -214,12 +216,14 @@ Containers are the fundamental storage units in Ozone, and their relationship wi
 | Use Cases | Hot data, random access, small files | Warm/cold data, large files, archival |
 
 **When to use Replication:**
+
 - For frequently accessed "hot" data
 - For workloads with small random writes
 - When raw write performance is critical
 - When CPU resources are limited
 
 **When to use Erasure Coding:**
+
 - For "warm" or "cold" data with lower access frequency
 - For large files with sequential access patterns
 - To optimize storage costs while maintaining durability
@@ -232,26 +236,30 @@ Containers are the fundamental storage units in Ozone, and their relationship wi
 Both write pipelines implement sophisticated error handling:
 
 **Replication Pipeline:**
+
 - Uses Ratis consensus protocol to handle failures
-- Automatically recovers from minority datanode failures
+- Automatically recovers from minority Datanode failures
 - Supports pipeline reconstruction if leader fails
 - Implements idempotent operations for retries
 
 **EC Pipeline:**
+
 - Tracks failures at the individual chunk level
-- Can retry specific chunk writes to failed datanodes
+- Can retry specific chunk writes to failed Datanodes
 - Maintains stripe status to ensure consistency
 - Implements checksum validation for data integrity
 
 ### Performance Considerations
 
 **Optimizing Replication Write Pipeline:**
+
 - Adjust buffer sizes based on workload (`hdds.client.buffer.size.max`)
 - Configure flush periods for write-heavy workloads
 - Use Streaming Pipeline (V2) for high-throughput scenarios
-- Consider network topology when placing datanodes
+- Consider network topology when placing Datanodes
 
 **Optimizing EC Write Pipeline:**
+
 - Choose EC configuration based on workload characteristics
 - Enable ISA-L hardware acceleration for better performance
 - Adjust chunk size for optimal performance
@@ -262,12 +270,14 @@ Both write pipelines implement sophisticated error handling:
 Both write pipelines expose metrics that can be monitored through Ozone's Prometheus endpoint or JMX interface:
 
 **Key Metrics for Replication Pipeline:**
+
 - Write throughput
 - Average chunk write latency
 - Pipeline creation time
 - Ratis consensus latency
 
 **Key Metrics for EC Pipeline:**
+
 - Encode time per stripe
 - Chunk distribution latency
 - Success rate of first-time stripe writes

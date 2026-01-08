@@ -149,6 +149,8 @@ words:
 - JDK
 - CMDB
 - JNI
+- checksummed
+- ISA
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
