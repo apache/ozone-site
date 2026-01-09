@@ -1,4 +1,6 @@
-# Architecture
+---
+sidebar_label: Overview
+---
 <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -16,7 +18,7 @@
   limitations under the License.
 -->
 
-## Overview
+# Overview
 
 Ozone is a fault-tolerant, distributed object store optimized for Big Data workloads. Its primary design goal is scalability, aiming to support billions of objects.
 
