@@ -1,5 +1,5 @@
 ---
-sidebar_label: Schema v3
+sidebar_label: Datanode Container Schema v3
 ---
 
 # Datanode Container Schema v3
