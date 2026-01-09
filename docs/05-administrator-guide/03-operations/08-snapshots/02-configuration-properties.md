@@ -61,8 +61,8 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 
 | Property | Default Value | Description |
 |----------|---------------|-------------|
-| `ozone.om.snapshot.provider.socket.timeout` | 5s | Socket timeout for the snapshot provider. |
-| `ozone.om.snapshot.provider.connection.timeout` | 5s | Connection timeout for the snapshot provider. |
+| `ozone.om.snapshot.provider.socket.timeout` | 5000s | Socket timeout for the snapshot provider. |
+| `ozone.om.snapshot.provider.connection.timeout` | 5000s | Connection timeout for the snapshot provider. |
 | `ozone.om.snapshot.provider.request.timeout` | 5m | Request timeout for the snapshot provider. |
 
 ## Recon-Specific Settings
