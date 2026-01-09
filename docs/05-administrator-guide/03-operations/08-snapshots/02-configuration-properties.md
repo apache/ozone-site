@@ -36,7 +36,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 | `ozone.om.snapshot.compact.non.snapshot.diff.tables` | false | When enabled, allows compaction of tables not tracked by snapshot diffs after snapshots are evicted from the cache. |
 | `ozone.om.snapshot.compaction.dag.max.time.allowed` | 30 days | Window for efficient SnapshotDiff. Older diffs may be slower. |
 | `ozone.om.snapshot.prune.compaction.backup.batch.size` | 2000 | Batch size for pruning compaction backups. |
-| `ozone.om.snapshot.compaction.dag.prune.daemon.run.interval` | 1h | Interval for the compaction DAG pruning daemon. |
+| `ozone.om.snapshot.compaction.dag.prune.daemon.run.interval` | 10m | Interval for the compaction DAG pruning daemon. |
 | `ozone.om.snapshot.diff.max.jobs.purge.per.task` | 100 | Maximum number of snapshot diff jobs to purge per task. |
 | `ozone.om.snapshot.diff.job.report.persistent.time` | 7d | Persistence time for snapshot diff job reports. |
 | `ozone.om.snapshot.diff.cleanup.service.run.interval` | 1m | Interval for the snapshot diff cleanup service. |
