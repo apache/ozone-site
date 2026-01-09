@@ -155,6 +155,7 @@ words:
 - snapshottable
 - reencryption
 - JNI
+- doublebuffer
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
