@@ -174,3 +174,5 @@ words:
 # S3 Compatible third-party applications
 - Clickhouse
 - Teradata
+# Regional terms
+- APAC
