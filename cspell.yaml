@@ -138,6 +138,17 @@ words:
 - libhdfs
 - goofys
 - WebHDFS
+- RADOS
+- RGW
+- HPC
+- Gluster
+- Isilon
+- NAS
+- GPFS
+- Scality
+- Cloudian
+- ABFS
+- OCI
 # Misc words
 - acking
 - dashboarding
