@@ -160,5 +160,5 @@ In addition to ofs, Hive can access Ozone using the S3 Gateway via the S3A file 
 
 For more information, consult:
 
-- The [S3 Protocol](../01-client-interfaces/03-s3.md)
+- The [S3 Protocol](../01-client-interfaces/03-s3/01-s3-api.md)
 - The [Hadoop S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) documentation.
