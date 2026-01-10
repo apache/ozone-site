@@ -160,7 +160,7 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --startkey=vol3 --endk
 
 ### `--fields`
 
-There are multiple fields in each record. `--fields` option allows us to choose the specific fields to display. 
+There are multiple fields in each record. `--fields` option allows us to choose the specific fields to display.
 
 ```bash
 ozone debug ldb --db=/path/to/om.db scan --cf=keyTable -l=1 --fields="volumeName,bucketName,keyName,keyLocationVersions.version,acls.name"
@@ -342,7 +342,7 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
 
 ## value-schema command
 
-`value-schema` command shows the schema of the value stored in a column-family of a rocksdb, i.e., it shows the fields stored in the value and it's datatype.
+`value-schema` command shows the schema of the value stored in a column-family of a RocksDB, i.e., it shows the fields stored in the value and it's datatype.
 `--depth` can be used optionally to limit the level until which the fields are fetched.
 
 ```bash
