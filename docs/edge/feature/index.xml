@@ -120,11 +120,11 @@
       <description>Ozone Multi-Tenancy that allows multiple tenants to share the same Ozone cluster. Compatible with S3 API.</description>
     </item>
     <item>
-      <title>Reconfigurability</title>
+      <title>Dynamic Property Reload</title>
       <link>/feature/reconfigurability.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/feature/reconfigurability.html</guid>
-      <description>Dynamic reloading configuration.</description>
+      <description>Dynamically reload configuration properties without restarting Ozone services.</description>
     </item>
     <item>
       <title>Setup</title>

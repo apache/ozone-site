@@ -514,17 +514,17 @@ ozone.administrators</p>
 </blockquote>
 <h2 id="datanode-动态配置">Datanode 动态配置</h2>
 <blockquote>
-<p>例如, 在<code>ozone-site.xml</code>文件中修改<code>ozone.example.config</code>的值并执行:</p>
+<p>例如, 在<code>ozone-site.xml</code>文件中修改<code>hdds.datanode.block.deleting.limit.per.interval</code>的值并执行:</p>
 <p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 start</code><br>
 Datanode: Started reconfiguration task on node [hadoop1:19864].</p>
 <p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 status</code><br>
 Datanode: Reconfiguring status for node [hadoop1:19864]: started at Wed Dec 28 19:04:44 CST 2022 and finished at Wed Dec 28 19:04:44 CST 2022.<br>
-SUCCESS: Changed property ozone.example.config<br>
+SUCCESS: Changed property hdds.datanode.block.deleting.limit.per.interval<br>
 From: &ldquo;old&rdquo;<br>
 To: &ldquo;new&rdquo;</p>
 <p>$ <code>ozone admin reconfig --service=DATANODE --address=hadoop1:19864 properties</code><br>
 Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
-ozone.example.config</p>
+hdds.datanode.block.deleting.limit.per.interval</p>
 </blockquote>
 <h3 id="批量操作">批量操作</h3>
 <p>如果要对 Datanode 执行批操作，你可以设置 <code>--in-service-datanodes</code> 标志.
@@ -534,11 +534,11 @@ ozone.example.config</p>
 <p>例如, 列出 Datanode 所有可配置的属性:<br>
 $ <code>ozone admin reconfig --service=DATANODE --in-service-datanodes properties</code><br>
 Datanode: Node [hadoop1:19864] Reconfigurable properties:<br>
-ozone.example.config<br>
+hdds.datanode.block.deleting.limit.per.interval<br>
 Datanode: Node [hadoop2:19864] Reconfigurable properties:<br>
-ozone.example.config<br>
+hdds.datanode.block.deleting.limit.per.interval<br>
 Datanode: Node [hadoop3:19864] Reconfigurable properties:<br>
-ozone.example.config<br>
+hdds.datanode.block.deleting.limit.per.interval<br>
 Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 </blockquote>
 
@@ -560,7 +560,7 @@ Reconfig successfully 3 nodes, failure 0 nodes.<br></p>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: February 23, 2024 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/e9f11f0b5fe07acc380eb3f5dfea544d794d4812">e9f11f0b5f</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 9, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7cd8e4812a841579ba16bbc66b5f19377d989dad">7cd8e4812a</a>
     </span>
   </div>
 </footer>

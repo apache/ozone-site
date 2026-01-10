@@ -407,18 +407,18 @@
       <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working docker setup&lt;/li&gt;&#xA;&lt;li&gt;AWS CLI (optional)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;local-multi-container-cluster&#34;&gt;Local multi-container cluster&lt;/h1&gt;&#xA;&lt;h2 id=&#34;obtain-the-docker-compose-configuration&#34;&gt;Obtain the Docker Compose Configuration&lt;/h2&gt;&#xA;&lt;p&gt;First, obtain Ozone&amp;rsquo;s sample Docker Compose configuration:&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Dynamic Property Reload</title>
+      <link>/feature/reconfigurability.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/feature/reconfigurability.html</guid>
+      <description>Dynamically reload configuration properties without restarting Ozone services.</description>
+    </item>
+    <item>
       <title>Access Ozone using PyArrow (Docker Quickstart)</title>
       <link>/recipe/pyarrowtutorial.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/recipe/pyarrowtutorial.html</guid>
       <description>Step-by-step tutorial for accessing Ozone from Python using PyArrow in a Docker environment.</description>
-    </item>
-    <item>
-      <title>Reconfigurability</title>
-      <link>/feature/reconfigurability.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/feature/reconfigurability.html</guid>
-      <description>Dynamic reloading configuration.</description>
     </item>
     <item>
       <title>Setup</title>

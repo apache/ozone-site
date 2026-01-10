@@ -621,11 +621,8 @@
                 href="/start/startfromdockerhub.html"
                 />
   </url><url>
-    <loc>/recipe/pyarrowtutorial.html</loc>
-    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
-  </url><url>
     <loc>/feature/reconfigurability.html</loc>
-    <lastmod>2024-02-23T23:49:21+08:00</lastmod>
+    <lastmod>2026-01-09T15:51:04-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -636,6 +633,9 @@
                 hreflang="en"
                 href="/feature/reconfigurability.html"
                 />
+  </url><url>
+    <loc>/recipe/pyarrowtutorial.html</loc>
+    <lastmod>2025-06-08T04:07:31-07:00</lastmod>
   </url><url>
     <loc>/feature/s3-multi-tenancy-setup.html</loc>
     <lastmod>2022-07-13T11:21:00-07:00</lastmod>
