@@ -77,6 +77,7 @@ words:
 - SCM
 - datanode
 - datanodes
+- DN
 - ofs
 - FSO
 - OBS
@@ -137,6 +138,17 @@ words:
 - libhdfs
 - goofys
 - WebHDFS
+- RADOS
+- RGW
+- HPC
+- Gluster
+- Isilon
+- NAS
+- GPFS
+- Scality
+- Cloudian
+- ABFS
+- OCI
 # Misc words
 - acking
 - dashboarding
@@ -154,6 +166,7 @@ words:
 - snapshottable
 - reencryption
 - JNI
+- doublebuffer
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
@@ -162,3 +175,5 @@ words:
 # S3 Compatible third-party applications
 - Clickhouse
 - Teradata
+# Regional terms
+- APAC

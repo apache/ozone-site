@@ -1,4 +1,4 @@
-# Snapshots
+# Snapshots Overview
 
 ## Introduction
 
@@ -196,7 +196,7 @@ Key snapshot-related configuration properties include:
 - Configuration for snapshot retention policies
 - Snapshot cleanup and background service settings
 
-For detailed configuration options, refer to the Ozone configuration documentation.
+For detailed snapshot configuration properties, see [Snapshot Configuration Properties](./02-configuration-properties.md).
 
 ### Monitoring
 
