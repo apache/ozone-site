@@ -1,8 +1,8 @@
 ---
-sidebar_label: Data Balancing
+sidebar_label: Balancing Data Among Datanodes
 ---
 
-# Balancing Data Among Datanodes
+# Container Balancer
 
 ## Overview
 
