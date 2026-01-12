@@ -120,6 +120,7 @@ words:
 - keytab
 - Keytab
 - RocksDB
+- LDB
 - hsync
 - SASL
 - jira
