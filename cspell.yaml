@@ -121,6 +121,7 @@ words:
 - Keytab
 - RocksDB
 - LDB
+- memtable
 - hsync
 - SASL
 - jira
