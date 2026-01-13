@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdoc_site=self.webpackChunkdoc_site||[]).push([[7472],{55513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Apache Ozone 2.0.0 Release","permalink":"/blog/2025/04/30/ozone-2.0.0-release","unlisted":false,"date":"2025-04-30T00:00:00.000Z"}]}')}}]);

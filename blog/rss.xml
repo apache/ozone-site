@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Apache Ozone Blog</title>
+        <link>https://ozone-site-v2.staged.apache.org/blog</link>
+        <description>Apache Ozone Blog</description>
+        <lastBuildDate>Wed, 30 Apr 2025 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Apache Ozone 2.0.0 Release]]></title>
+            <link>https://ozone-site-v2.staged.apache.org/blog/2025/04/30/ozone-2.0.0-release</link>
+            <guid>https://ozone-site-v2.staged.apache.org/blog/2025/04/30/ozone-2.0.0-release</guid>
+            <pubDate>Wed, 30 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Apache Ozone 2.0.0 was released on April 30th, 2025. This release includes 1700 new features, improvements, and bug fixes on top of Ozone 1.4.]]></description>
+            <content:encoded><![CDATA[<p>Apache Ozone 2.0.0 was released on April 30th, 2025. This release includes 1700 new features, improvements, and bug fixes on top of Ozone 1.4.</p>
+<p>Notable features in this release include:</p>
+<ul>
+<li>Supporting HSync and lease recovery (HDDS-7593).</li>
+<li>SCM Decommissioning Support (HDDS-7852).</li>
+<li>Symmetric Keys for Delegation Tokens (HDDS-8829).</li>
+<li>Atomic Key Overwrite and Key Replacement (HDDS-10656).</li>
+</ul>
+<p>Other noteworthy changes include:</p>
+<ul>
+<li>ARM64 support (HDDS-6263).</li>
+<li>Java 11/17/21 Support and Testing (HDDS-8246).</li>
+<li>AWS SDK v2 client support (HDDS-12488).</li>
+</ul>
+<p>Observability improvements are:</p>
+<ul>
+<li>Ozone performance and operational dashboards (HDDS-9307).</li>
+<li>Recon UI Improvements (HDDS-11153).</li>
+<li>Support for interactive mode for Ozone CLI (HDDS-11825).</li>
+</ul>
+<p>Developer-focused changes include:</p>
+<ul>
+<li>JUnit 4 to 5 upgrade (HDDS-6729).</li>
+<li>Dropped Hadoop 2.7 ~ 2.9 support (HDDS-8113).</li>
+<li>Publish SBOM artifacts (HDDS-10986).</li>
+<li>Hadoop dependency updated to 3.4.1 (HDDS-11617).</li>
+</ul>
+<p>Incompatible changes are:</p>
+<ul>
+<li>Move S3 Gateway web admin to separate port (HDDS-7307).</li>
+<li>Deprecate file per chunk layout from Datanode code (HDDS-11753).</li>
+<li>Drop support for non-Ratis OM and SCM (HDDS-11754).</li>
+<li>Remove LegacyReplicationManager (HDDS-11759).</li>
+</ul>
+<p>Detailed release notes are available at <a href="https://ozone.apache.org/release/2.0.0/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/release/2.0.0/</a>.
+Downloads can be found at <a href="https://ozone.apache.org/downloads/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/downloads/</a>.
+Documentation for this release is available at <a href="https://ozone.apache.org/docs/2.0.0/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/docs/2.0.0/</a>.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ozone-2.0.0</category>
+        </item>
+    </channel>
+</rss>

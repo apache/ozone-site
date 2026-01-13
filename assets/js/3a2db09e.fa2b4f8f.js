@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdoc_site=self.webpackChunkdoc_site||[]).push([[8121],{68070:e=>{e.exports=JSON.parse('{"tags":[{"label":"release","permalink":"/blog/tags/release","count":1},{"label":"ozone-2.0.0","permalink":"/blog/tags/ozone-2-0-0","count":1}]}')}}]);

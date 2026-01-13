@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdoc_site=self.webpackChunkdoc_site||[]).push([[8947],{56600:e=>{e.exports=JSON.parse('{"authors":[{"name":"The Apache Ozone Community","title":"Apache Ozone Project","url":"https://ozone.apache.org","imageURL":"/img/ozone-logo.svg","key":"apache-ozone-community","page":null,"count":1}]}')}}]);
