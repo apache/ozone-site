@@ -172,6 +172,8 @@ words:
 - snapshottable
 - reencryption
 - JNI
+- checksummed
+- ISA
 - doublebuffer
 # Company names for "Who Uses Ozone" page
 - Shopee
