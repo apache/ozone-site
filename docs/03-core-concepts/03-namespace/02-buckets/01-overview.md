@@ -54,7 +54,7 @@ For more details, refer to the [GDPR documentation](https://ozone.apache.org/doc
 ### Bucket Linking
 
 Bucket linking allows exposing a bucket from one volume (or even another bucket) as if it were in a different location, particularly useful for S3 compatibility or cross-tenant access. This creates a symbolic link-like behavior.
-For more information, see the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3/01-s3-api.md) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy.md).
+For more information, see the [Bucket Links documentation](./07-links.md).
 
 ### Access Control Lists (ACLs)
 
