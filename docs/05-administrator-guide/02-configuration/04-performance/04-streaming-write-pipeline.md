@@ -4,7 +4,11 @@ sidebar_label: Streaming Write Pipeline
 
 # Streaming Write Pipeline
 
-This document discusses the Streaming Write Pipeline feature in Ozone. It is implemented with the Ratis Streaming API. Note that the existing Ozone Write Pipeline is implemented with the Ratis Async API. We refer the new Streaming Write Pipeline as Write Pipeline V2 and the existing Async Write Pipeline as Write Pipeline V1.
+This document discusses the Streaming Write Pipeline feature in Ozone. It is implemented with the Ratis Streaming API.
+
+:::note Write Pipeline Versions
+Note that the existing Ozone Write Pipeline is implemented with the Ratis Async API. We refer to the new Streaming Write Pipeline as Write Pipeline V2 and the existing Async Write Pipeline as Write Pipeline V1.
+:::
 
 The Streaming Write Pipeline V2 increases the performance by providing better network topology awareness and removing the performance bottlenecks in V1. The V2 implementation also avoids unnecessary buffer copying (by Netty zero copy) and has a better utilization of the CPUs and the disks in each Datanode.
 
@@ -16,12 +20,12 @@ Set the following properties to the Ozone configuration file `ozone-site.xml`.
 
 ### Enable Streaming Write Pipeline
 
-To enable the Streaming Write Pipeline feature, set the following property to true:
+To enable the Streaming Write Pipeline feature, set the following property to **true**:
 
 ```xml
 <property>
   <name>hdds.container.ratis.datastream.enabled</name>
-  <value>false</value>
+  <value>true</value>
   <description>Enable data stream of container</description>
 </property>
 ```
@@ -40,12 +44,12 @@ Datanodes listen to the following port for the streaming traffic:
 
 ### Enable Filesystem Streaming
 
-To use Streaming in FileSystem API, set the following property to true:
+To use Streaming in FileSystem API, set the following property to **true**:
 
 ```xml
 <property>
   <name>ozone.fs.datastream.enabled</name>
-  <value>false</value>
+  <value>true</value>
   <description>
     Enable filesystem write via ratis streaming.
   </description>
@@ -87,6 +91,12 @@ public OzoneDataStreamOutput createStreamKey(String key, long size)
 public OzoneDataStreamOutput createStreamKey(String key, long size,
     ReplicationConfig replicationConfig, Map<String, String> keyMetadata)
     throws IOException;
+```
+
+```java
+public OzoneDataStreamOutput createStreamKey(String key, long size,
+    ReplicationConfig replicationConfig, Map<String, String> keyMetadata,
+    Map<String, String> tags) throws IOException;
 ```
 
 #### createMultipartStreamKey
