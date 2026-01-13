@@ -10,7 +10,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.a9c7d58c.css">
-<script src="/assets/js/runtime~main.a1fd3aca.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c0b8640a.js" defer="defer"></script>
 <script src="/assets/js/main.5637a6ae.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,6 +24,16 @@ They serve as containers for keys (data objects).</p>
 <li><strong>Container for Keys:</strong> A bucket can contain any number of keys.</li>
 <li><strong>No Nested Buckets:</strong> Unlike directories, buckets cannot contain other buckets.</li>
 </ul>
+<div class="theme-admonition theme-admonition-note admonition_Em3B alert alert--secondary"><div class="admonitionHeading_URJN"><span class="admonitionIcon_lmb2"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Volume/Bucket Naming Convention</div><div class="admonitionContent_sa0_"><p>To maintain S3 compatibility, Ozone volume and bucket name follows S3 naming convention.</p><p>This means volume/bucket names in Ozone:</p><p>Allowed Characters and Length:</p><ul>
+<li>Allowed characters: Lowercase letters (a-z), numbers (0-9), dots (.), and hyphens (-)</li>
+<li>Length: Must be between 3 and 63 characters long</li>
+<li>Start and End: Must begin and end with a letter or a number</li>
+</ul><p>Prohibitions:</p><ul>
+<li>Cannot contain uppercase letters or underscores (_)</li>
+<li>Cannot be formatted as an IP address (e.g., 192.168.5.4)</li>
+<li>Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)</li>
+<li>Cannot end with a dash</li>
+</ul><p>This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.</p><p>To relax the compliance check, configure the property <code>ozone.om.namespace.s3.strict</code> to <code>false</code> in the <code>ozone-site.xml</code> of Ozone Manager.</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_e_9H" id="details">Details<a href="#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_e_9H" id="creation-and-management">Creation and Management<a href="#creation-and-management" class="hash-link" aria-label="Direct link to Creation and Management" title="Direct link to Creation and Management">​</a></h3>
 <p>Buckets are created within a specified volume.</p>
