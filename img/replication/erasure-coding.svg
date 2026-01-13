@@ -1,0 +1,26 @@
+<svg width="150" height="70" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+  <title>Erasure Coding Icon - Object Split</title>
+  <desc>Abstract representation of an object being split into data and parity blocks.</desc>
+  <g transform="translate(5, -1)">
+
+  <!-- Original Object -->
+  <rect x="35" y="5" width="30" height="15" fill="#306900" rx="2"/>
+
+  <!-- Lines showing splitting from the object -->
+  <line x1="40" y1="20" x2="15" y2="40" stroke="#357500" stroke-width="1.5"/> <!-- Data line -->
+  <line x1="45" y1="20" x2="35" y2="40" stroke="#357500" stroke-width="1.5"/> <!-- Data line -->
+  <line x1="50" y1="20" x2="55" y2="40" stroke="#357500" stroke-width="1.5"/> <!-- Data line -->
+  <line x1="55" y1="20" x2="75" y2="40" stroke="#96d26e" stroke-width="1.5"/> <!-- Parity line -->
+  <line x1="60" y1="20" x2="95" y2="40" stroke="#96d26e" stroke-width="1.5"/> <!-- Parity line -->
+
+  <!-- Data Fragments -->
+  <rect x="10" y="40" width="10" height="12" fill="#357500" rx="1"/>
+  <rect x="30" y="40" width="10" height="12" fill="#357500" rx="1"/>
+  <rect x="50" y="40" width="10" height="12" fill="#357500" rx="1"/>
+
+  <!-- Parity Fragments -->
+  <rect x="70" y="40" width="10" height="12" fill="none" stroke="#96d26e" stroke-width="1.5" rx="1"/>
+  <rect x="90" y="40" width="10" height="12" fill="none" stroke="#96d26e" stroke-width="1.5" rx="1"/>
+  </g>
+
+</svg>
