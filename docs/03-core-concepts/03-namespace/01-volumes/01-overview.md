@@ -14,6 +14,31 @@ A **Volume** in Ozone is the highest level of the namespace hierarchy. It serves
 - **Storage Accounting:** Volumes are used as the basis for storage accounting, allowing administrators to track resource usage per volume.
 - **Container for Buckets:** A volume can contain any number of buckets.
 
+:::note Volume/Bucket Naming Convention
+
+To maintain S3 compatibility, Ozone volume and bucket name follows S3 naming convention.
+
+This means volume/bucket names in Ozone:
+
+Allowed Characters and Length:
+
+- Allowed characters: Lowercase letters (a-z), numbers (0-9), dots (.), and hyphens (-)
+- Length: Must be between 3 and 63 characters long
+- Start and End: Must begin and end with a letter or a number
+
+Prohibitions:
+
+- Cannot contain uppercase letters or underscores (_)
+- Cannot be formatted as an IP address (e.g., 192.168.5.4)
+- Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)
+- Cannot end with a dash
+
+This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.
+
+To relax the compliance check, configure the property `ozone.om.namespace.s3.strict` to `false` in the `ozone-site.xml` of Ozone Manager.
+
+:::
+
 ## Details
 
 ### Creation and Management
