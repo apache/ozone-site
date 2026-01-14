@@ -10,7 +10,7 @@ preferences. This guide explains how to use the three primary interfaces within 
 All examples assume you already have a running Ozone cluster using Docker Compose as described in
 the [Docker Installation Guide](./01-installation/01-docker.md).
 
-Let's start 5 DataNodes because the Erasure Coding example below requires at least 5 replicas:
+Let's start 5 Datanodes because the Erasure Coding example below requires at least 5 replicas:
 
 ```bash
 docker compose up -d --scale datanode=5
@@ -71,6 +71,7 @@ ozone sh volume delete -r /vol1
 ### Working with Buckets
 
 First, create a volume (skip this step if the `volume` vol1 exists)
+
 ```bash
 ozone sh volume create /vol1
 ```
@@ -98,6 +99,7 @@ ozone sh bucket delete -r /vol1/bucket1
 ### Working with Keys (Objects)
 
 First, create a bucket (skip this step if the bucket bucket1 exists)
+
 ```bash
 ozone sh bucket create /vol1/bucket1
 ```
@@ -261,7 +263,7 @@ Ozone allows accessing the same data through different interfaces.
 
 Objects created via S3 reside in the special `/s3v` volume.
 
-##### Access via Ozone Shell (inside om/client container)
+#### Access via Ozone Shell (inside OM/client container)
 
 ```bash
 # Assuming 's3bucket' was created via S3 API and contains 's3_test.txt'
@@ -272,23 +274,28 @@ ozone sh key get /s3v/s3bucket/s3_test.txt /tmp/from_s3.txt
 exit
 ```
 
-#### Access via ofs (inside om/client container)
+#### Access via ofs (inside OM/client container)
 
 Create a FSO bucket in the /s3v
+
 ```bash
 ozone sh bucket create /s3v/fsobucket --layout fso
 ```
 
 Upload a file using AWS CLI
+
 ```bash
 aws s3 cp s3_test.txt s3://fsobucket/
 ```
 
 Access the file via ofs
+
 ```bash
 
 ozone fs -ls ofs://om/s3v/fsobucket/
+
 ozone fs -cat ofs://om/s3v/fsobucket/s3_test.txt
+
 ```
 
 ### Exposing Non-S3 Buckets via S3 (Bucket Linking)
