@@ -29,9 +29,9 @@ Both Ozone Manager (OM) and Storage Container Manager (SCM) use network topology
 
 Two primary methods exist:
 
-### 1. Static List: `TableMapping` (Default)
+### 1. Static List: `TableMapping`
 
-This is the default implementation. It maps IPs/hostnames to racks using a predefined file. If no mapping file is specified, or if a Datanode is not found in the file, it is assigned to `/default-rack`.
+This is the non-default implementation for static mapping. It maps IPs/hostnames to racks using a predefined file. If no mapping file is specified, or if a Datanode is not found in the file, it is assigned to `/default-rack`.
 
 - **Configuration:** Set `net.topology.node.switch.mapping.impl` to `org.apache.hadoop.net.TableMapping` and `net.topology.table.file.name` to the mapping file's path. [1]
 
@@ -56,9 +56,9 @@ This is the default implementation. It maps IPs/hostnames to racks using a prede
   datanode103.example.com /rack2
   ```
 
-### 2. Dynamic List: `ScriptBasedMapping`
+### 2. Dynamic List: `ScriptBasedMapping` (Default)
 
-Uses an external script to resolve rack locations for IPs.
+This is the default implementation. It uses an external script to resolve rack locations for IPs.
 
 - **Configuration:** Set `net.topology.node.switch.mapping.impl` to `org.apache.hadoop.net.ScriptBasedMapping` and `net.topology.script.file.name` to the script's path. [1]
 
