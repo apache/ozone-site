@@ -14,6 +14,31 @@ A **Volume** in Ozone is the highest level of the namespace hierarchy. It serves
 - **Storage Accounting:** Volumes are used as the basis for storage accounting, allowing administrators to track resource usage per volume.
 - **Container for Buckets:** A volume can contain any number of buckets.
 
+:::note Volume/Bucket Naming Convention
+
+To maintain S3 compatibility, Ozone volume and bucket name follows S3 naming convention.
+
+This means volume/bucket names in Ozone:
+
+Allowed Characters and Length:
+
+- Allowed characters: Lowercase letters (a-z), numbers (0-9), dots (.), and hyphens (-)
+- Length: Must be between 3 and 63 characters long
+- Start and End: Must begin and end with a letter or a number
+
+Prohibitions:
+
+- Cannot contain uppercase letters or underscores (_)
+- Cannot be formatted as an IP address (e.g., 192.168.5.4)
+- Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)
+- Cannot end with a dash
+
+This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.
+
+To relax the compliance check, configure the property `ozone.om.namespace.s3.strict` to `false` in the `ozone-site.xml` of Ozone Manager.
+
+:::
+
 ## Details
 
 ### Creation and Management
@@ -50,7 +75,7 @@ ACLs can be set and managed using the Ozone CLI. Refer to the [Security ACLs doc
 ### S3 Gateway Integration (`/s3v` Volume)
 
 For compatibility with the S3 API, Ozone uses a special volume, typically `/s3v`. By default, all buckets accessed via the S3 interface are stored under this volume. It's also possible to expose buckets from other Ozone volumes via the S3 interface using "bucket linking."
-For more details, refer to the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3/01-s3-api.md) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy.md).
+For more details, refer to the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3/01-s3-api.md) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy/01-overview.md).
 
 ### Datanode Physical Volumes vs. Ozone Manager Logical Volumes
 

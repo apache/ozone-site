@@ -106,6 +106,6 @@ The Ozone S3 Gateway is a **protocol adapter**:
 For more details, refer to the other documentation:
 
 - [Ozone S3 Gateway Interface](../../04-user-guide/01-client-interfaces/03-s3/01-s3-api.md)
-- [S3 Multi-Tenancy](../../05-administrator-guide/03-operations/07-s3-multi-tenancy.md)
+- [S3 Multi-Tenancy](../../05-administrator-guide/03-operations/07-s3-multi-tenancy/01-overview.md)
 - [Securing S3](../../04-user-guide/01-client-interfaces/03-s3/02-securing-s3.md)
 - [Network Ports](../../05-administrator-guide/02-configuration/01-basic/02-network/07-default-ports.md)

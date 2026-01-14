@@ -120,6 +120,7 @@ words:
 - keytab
 - Keytab
 - RocksDB
+- LDB
 - hsync
 - SASL
 - jira
@@ -136,6 +137,11 @@ words:
 - Boto3
 - fsspec
 - libhdfs
+- awscli
+- TGT
+- Kerberized
+- assignadmin
+- revokeadmin
 - goofys
 - WebHDFS
 - RADOS
@@ -166,6 +172,8 @@ words:
 - snapshottable
 - reencryption
 - JNI
+- checksummed
+- ISA
 - doublebuffer
 # Company names for "Who Uses Ozone" page
 - Shopee
@@ -177,3 +185,7 @@ words:
 - Teradata
 # Regional terms
 - APAC
+# British English spellings
+- utilisation
+- utilised
+- hotspots
