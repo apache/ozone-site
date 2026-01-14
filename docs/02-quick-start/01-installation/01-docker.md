@@ -6,6 +6,8 @@ sidebar_label: Docker
 
 Apache Ozone can be quickly deployed using Docker Compose, making it ideal for development, testing, and evaluation purposes. This guide walks you through setting up a multi-node Ozone cluster using pre-built Docker images.
 
+![Quickstart](quickstart.gif)
+
 ## Prerequisites
 
 - [Docker Engine](https://docs.docker.com/engine/install/) - Latest stable version
