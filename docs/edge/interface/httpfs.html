@@ -853,6 +853,54 @@ HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file 
       </tr>
   </tbody>
 </table>
+<h2 id="proxy-user-configuration">Proxy User Configuration</h2>
+<p>HttpFS supports proxy user (user impersonation) functionality, which allows a user to perform operations on behalf of another user. This is useful when HttpFS is used as a gateway and you want to allow certain users to impersonate other users.</p>
+<p>To configure proxy users, you need to add the following properties to <code>httpfs-site.xml</code>.</p>
+<h3 id="configuration-properties">Configuration Properties</h3>
+<p>For each user that should be allowed to perform impersonation, you need to configure two properties:</p>
+<ol>
+<li><strong><code>httpfs.proxyuser.#USER#.hosts</code></strong>: List of hosts from which the user is allowed to perform impersonation operations.</li>
+<li><strong><code>httpfs.proxyuser.#USER#.groups</code></strong>: List of groups whose users can be impersonated by the specified user.</li>
+</ol>
+<p>Replace <code>#USER#</code> with the actual username of the user who should be allowed to perform impersonation.</p>
+<h3 id="example-configuration">Example Configuration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>httpfs.proxyuser.knoxuser.hosts<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>*<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;description&gt;</span>
+</span></span><span style="display:flex;"><span>    List of hosts the &#39;knoxuser&#39; user is allowed to perform &#39;doAs&#39;
+</span></span><span style="display:flex;"><span>    operations.
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    The value can be the &#39;*&#39; wildcard or a comma-separated list of hostnames.
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    For multiple users, copy this property and replace the user name
+</span></span><span style="display:flex;"><span>    in the property name.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;property&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>httpfs.proxyuser.knoxuser.groups<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;value&gt;</span>*<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;description&gt;</span>
+</span></span><span style="display:flex;"><span>    List of groups the &#39;knoxuser&#39; user is allowed to impersonate users
+</span></span><span style="display:flex;"><span>    from to perform &#39;doAs&#39; operations.
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    The value can be the &#39;*&#39; wildcard or a comma-separated list of group names.
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    For multiple users, copy this property and replace the user name
+</span></span><span style="display:flex;"><span>    in the property name.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/property&gt;</span>
+</span></span></code></pre></div><p>In this example, the user <code>knoxuser</code> is allowed to impersonate any user from any host. For production environments, it&rsquo;s recommended to restrict these values to specific hosts and groups instead of using the wildcard <code>*</code>.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you encounter an error like:</p>
+<pre tabindex="0"><code>User: user/host@REALM is not allowed to impersonate user01
+</code></pre><p>This indicates that the proxy user configuration is missing or incorrect. Ensure that:</p>
+<ol>
+<li>The <code>httpfs.proxyuser.#USER#.hosts</code> property is set with appropriate host values</li>
+<li>The <code>httpfs.proxyuser.#USER#.groups</code> property is set with appropriate group values</li>
+<li>The HttpFS service has been restarted after configuration changes</li>
+</ol>
 <h2 id="hadoop-user-and-developer-documentation-about-httpfs">Hadoop user and developer documentation about HttpFS</h2>
 <ul>
 <li>
@@ -881,7 +929,7 @@ HttpFS HTTP web-service API calls are HTTP REST calls that map to an Ozone file 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: October 29, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d4e7d94239ab709841353bf411bb11c9feea5a85">d4e7d94239</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 13, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/643b80abf5a77cbf4bca2e493d0965d466d28b7d">643b80abf5</a>
     </span>
   </div>
 </footer>
