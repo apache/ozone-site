@@ -73,6 +73,7 @@ Ozone provides a set of general RocksDB configurations that apply to all service
 | Property | Default | Description |
 |----------|---------|-------------|
 | `hdds.db.profile` | `DISK` | Specifies the RocksDB profile to use, which determines the default DBOptions and ColumnFamilyOptions. Possible values include `SSD` and `DISK`. For example, setting this to `SSD` will apply tunings optimized for SSD storage. |
+| `ozone.metastore.rocksdb.statistics` | `OFF` | The statistics level of the RocksDB store. If set to any value from org.rocksdb.StatsLevel (e.g., ALL or EXCEPT_DETAILED_TIMERS), RocksDB statistics will be exposed over JMX. Set to OFF to disable statistics collection. Note: collecting statistics can have a 5–10% performance penalty. |
 
 **Write Options:**
 
@@ -147,7 +148,10 @@ Key tuning parameters for the Datanode often involve:
 **Other Settings:**
 
 | Property | Default | Description |
-|----------|---------|-------------|
+|----------|--------|------------|
+| `hdds.datanode.db.config.path` | empty (not configured) | Path to an INI configuration file for advanced RocksDB tuning on datanodes. |
+| `hdds.datanode.container.schema.v3.enabled` | `true` | Enable container schema v3 (one RocksDB per disk). |
+| `hdds.datanode.container.schema.v3.key.separator` | &#124; | The separator between Container ID and container meta key name in schema v3. |
 | `hdds.datanode.rocksdb.delete-obsolete-files-period` | `1h` | Periodicity when obsolete files get deleted. |
 | `hdds.datanode.rocksdb.max-open-files` | `1024` | The total number of files that a RocksDB can open. |
 
