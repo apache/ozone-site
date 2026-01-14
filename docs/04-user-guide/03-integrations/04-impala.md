@@ -76,7 +76,7 @@ LOCATION 'ofs://ozone1/vol1/bucket1/table1';
 
 In addition to ofs, Impala can access Ozone via the S3 Gateway using the S3A file system. For more details, refer to
 
-- The [S3 Protocol]({{< ref "interface/S3.md">}})
+- The [S3 Protocol](../01-client-interfaces/03-s3.md)
 - The [Hadoop S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) documentation.
 
 For additional information, consult the Apache Impala User Documentation
