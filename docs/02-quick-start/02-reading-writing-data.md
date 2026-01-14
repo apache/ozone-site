@@ -10,6 +10,12 @@ preferences. This guide explains how to use the three primary interfaces within 
 All examples assume you already have a running Ozone cluster using Docker Compose as described in
 the [Docker Installation Guide](./01-installation/01-docker.md).
 
+Let's start 5 DataNodes because the Erasure Coding example below requires at least 5 replicas:
+
+```bash
+docker compose up -d --scale datanode=5
+```
+
 ## Interface Comparison
 
 | Interface       | Strengths                                                                               | Use Cases                                                                  |
@@ -31,13 +37,11 @@ Where `<object-type>` is `volume`, `bucket`, or `key`.
 
 ### Accessing the Ozone Shell
 
-To use the Ozone Shell in your Docker environment, execute commands inside the `om` or `ozone-client` container:
+To use the Ozone Shell in your Docker environment, execute commands inside the `om` container:
 
 ```bash
 # Example for Docker Compose
 docker compose exec om bash
-# or
-docker compose exec ozone-client bash
 
 # Now you can run 'ozone sh' commands
 ```
@@ -66,6 +70,11 @@ ozone sh volume delete -r /vol1
 
 ### Working with Buckets
 
+First, create a volume (skip this step if the `volume` vol1 exists)
+```bash
+ozone sh volume create /vol1
+```
+
 Buckets are containers for keys (objects) within volumes.
 
 ```bash
@@ -87,6 +96,11 @@ ozone sh bucket delete -r /vol1/bucket1
 ```
 
 ### Working with Keys (Objects)
+
+First, create a bucket (skip this step if the bucket bucket1 exists)
+```bash
+ozone sh bucket create /vol1/bucket1
+```
 
 Keys are the actual data objects stored in Ozone.
 
@@ -121,7 +135,7 @@ ozone sh key list /vol1/bucket1
 ozone sh key rename /vol1/bucket1 test_shell.txt renamed_shell.txt
 
 # Delete a key
-ozone sh key delete /vol1/bucket1/test_shell.txt
+ozone sh key delete /vol1/bucket1/renamed_shell.txt
 
 # Note: In FSO buckets, deleted keys are moved to trash at /<volume>/<bucket>/.Trash/<user>
 # In OBS buckets, deletion is permanent.
@@ -132,70 +146,54 @@ ozone sh key delete /vol1/bucket1/test_shell.txt
  ofs provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
 for HDFS.
 
-### Accessing ofs
-
-You can use `ozone fs` commands (a wrapper around `hdfs dfs`) inside the `om` or `ozone-client` container:
-
-```bash
-# Inside the OM or ozone-client container
-docker compose exec om bash
-# or
-docker compose exec ozone-client bash
-```
-
 ### Basic ofs Operations
 
 ofs uses standard Hadoop filesystem commands.
 
 ```bash
 # Create volume and bucket (using filesystem semantics)
-ozone fs -mkdir -p /vol1/bucket_ofs
+ozone fs -mkdir -p ofs://om/vol1/bucketofs
 
 # Upload a file
 echo "Hello from OFS" > local_ofs.txt
-ozone fs -put local_ofs.txt /vol1/bucket_ofs/
+ozone fs -put local_ofs.txt ofs://om/vol1/bucketofs/
 
 # Copy from local with explicit destination path
-ozone fs -copyFromLocal local_ofs.txt /vol1/bucket_ofs/remote_file.txt
+ozone fs -copyFromLocal local_ofs.txt ofs://om/vol1/bucketofs/remote_file.txt
 
 # List files in a bucket
-ozone fs -ls /vol1/bucket_ofs/
+ozone fs -ls ofs://om/vol1/bucketofs/
 
-# List recursively (lists all buckets and keys under /vol1/)
-ozone fs -ls -R /vol1/
+# List recursively (lists all keys under /vol1/bucketofs)
+ozone fs -ls -R ofs://om/vol1/bucketofs/
 
 # Download a file
-ozone fs -get /vol1/bucket_ofs/local_ofs.txt ./downloaded_ofs.txt
+ozone fs -get ofs://om/vol1/bucketofs/local_ofs.txt ./downloaded_ofs.txt
 
 # Display file contents
-ozone fs -cat /vol1/bucket_ofs/local_ofs.txt
+ozone fs -cat ofs://om/vol1/bucketofs/local_ofs.txt
 
 # Move a file (rename)
-ozone fs -mv /vol1/bucket_ofs/local_ofs.txt /vol1/bucket_ofs/moved_ofs.txt
+ozone fs -mv ofs://om/vol1/bucketofs/local_ofs.txt ofs://om/vol1/bucketofs/moved_ofs.txt
 
 # Copy a file within the filesystem
-ozone fs -cp /vol1/bucket_ofs/moved_ofs.txt /vol1/bucket_ofs/copy_ofs.txt
+ozone fs -cp ofs://om/vol1/bucketofs/moved_ofs.txt ofs://om/vol1/bucketofs/copy_ofs.txt
 
 # Delete a file (moves to trash if enabled and bucket is FSO)
-ozone fs -rm /vol1/bucket_ofs/copy_ofs.txt
+ozone fs -rm ofs://om/vol1/bucketofs/copy_ofs.txt
 
 # Delete a file and skip trash (permanently delete without moving to trash)
-ozone fs -rm -skipTrash /vol1/bucket_ofs/moved_ofs.txt
+ozone fs -rm -skipTrash ofs://om/vol1/bucketofs/moved_ofs.txt
 
 # Create an empty file
-ozone fs -touchz /vol1/bucket_ofs/empty_file.txt
+ozone fs -touchz ofs://om/vol1/bucketofs/empty_file.txt
 ```
 
 ### Advanced ofs Operations
 
 ```bash
 # Get file checksum
-ozone fs -checksum /vol1/bucket_ofs/moved_ofs.txt
-
-# Set replication factor for a file (NOT SUPPORTED - use 'ozone sh key put' with -t and -r flags for setting replication on write)
-# ozone fs -setrep -w 3 /vol1/bucket_ofs/important_file
-
-# Trash configuration is done in core-site.xml (see Ozone docs for details)
+ozone fs -checksum ofs://om/vol1/bucketofs/empty_file.txt
 ```
 
 ## Using S3 API
@@ -211,7 +209,7 @@ In the default non-secure Docker setup, you can use any values for credentials.
 # Set environment variables (can be done outside the containers)
 export AWS_ACCESS_KEY_ID=testuser
 export AWS_SECRET_ACCESS_KEY=testuser-secret
-export AWS_ENDPOINT_URL=http://localhost:9878
+export AWS_ENDPOINT_URL=http://s3g:9878
 ```
 
 *(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)*
@@ -263,20 +261,34 @@ Ozone allows accessing the same data through different interfaces.
 
 Objects created via S3 reside in the special `/s3v` volume.
 
+##### Access via Ozone Shell (inside om/client container)
+
 ```bash
 # Assuming 's3bucket' was created via S3 API and contains 's3_test.txt'
 
-# Access via Ozone Shell (inside om/client container)
 docker compose exec om bash
 ozone sh key list /s3v/s3bucket
 ozone sh key get /s3v/s3bucket/s3_test.txt /tmp/from_s3.txt
 exit
+```
 
-# Access via ofs (inside om/client container)
-docker compose exec om bash
-ozone fs -ls /s3v/s3bucket/
-ozone fs -cat /s3v/s3bucket/s3_test.txt
-exit
+#### Access via ofs (inside om/client container)
+
+Create a FSO bucket in the /s3v
+```bash
+ozone sh bucket create /s3v/fsobucket --layout fso
+```
+
+Upload a file using AWS CLI
+```bash
+aws s3 cp s3_test.txt s3://fsobucket/
+```
+
+Access the file via ofs
+```bash
+
+ozone fs -ls ofs://om/s3v/fsobucket/
+ozone fs -cat ofs://om/s3v/fsobucket/s3_test.txt
 ```
 
 ### Exposing Non-S3 Buckets via S3 (Bucket Linking)
@@ -312,12 +324,12 @@ Ozone buckets can have different internal layouts:
 ```bash
 # Create buckets with specific layouts (inside om/client container)
 # Short form
-ozone sh bucket create /vol1/fso_bucket --layout fso
-ozone sh bucket create /vol1/obs_bucket --layout obs
+ozone sh bucket create /vol1/fsobucket --layout fso
+ozone sh bucket create /vol1/obsbucket --layout obs
 
 # Long form
-# ozone sh bucket create /vol1/fso_bucket --layout FILE_SYSTEM_OPTIMIZED
-# ozone sh bucket create /vol1/obs_bucket --layout OBJECT_STORE
+# ozone sh bucket create /vol1/fsobucket --layout FILE_SYSTEM_OPTIMIZED
+# ozone sh bucket create /vol1/obsbucket --layout OBJECT_STORE
 ```
 
 Most operations work on both, but FSO is generally preferred unless specific OBS characteristics are needed.
