@@ -164,4 +164,4 @@ host3     | om3     | FOLLOWER
 ## References
 
 - OM HA - Conceptual overview and implementation details <!-- TODO: Link to OM HA conceptual documentation when created -->
-- [SCM HA Configuration](./01-scm-ha) - Storage Container Manager High Availability configuration
+- [SCM HA Configuration](./scm-ha) - Storage Container Manager High Availability configuration
