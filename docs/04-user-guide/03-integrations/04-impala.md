@@ -81,4 +81,3 @@ In addition to ofs, Impala can access Ozone via the S3 Gateway using the S3A fil
 
 For additional information, consult the Apache Impala User Documentation
 [Using Impala with Apache Ozone Storage](https://impala.apache.org/docs/build/html/topics/impala_ozone.html).
-
