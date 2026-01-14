@@ -57,4 +57,3 @@ sha512sum -c ozone-2.1.0-src.tar.gz.sha512
 ## License
 
 The Apache Ozone software is licensed under the Apache License, Version 2.0. See the `LICENSE.txt` file in the root of the distribution for the full license text.
-```
