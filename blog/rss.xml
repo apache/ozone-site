@@ -4,10 +4,108 @@
         <title>Apache Ozone Blog</title>
         <link>https://ozone-site-v2.staged.apache.org/blog</link>
         <description>Apache Ozone Blog</description>
-        <lastBuildDate>Wed, 30 Apr 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 02 Jul 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Accessing Ozone S3 via CyberDuck]]></title>
+            <link>https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck</link>
+            <guid>https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck</guid>
+            <pubDate>Wed, 02 Jul 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Here's a step‑by‑step guide to mounting and managing your Apache Ozone object store's S3 interface using CyberDuck.]]></description>
+            <content:encoded><![CDATA[<p>Here's a step‑by‑step guide to mounting and managing your Apache Ozone object store's S3 interface using CyberDuck.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="prerequisites">Prerequisites<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites">​</a></h2>
+<ol>
+<li>
+<p><strong>Running Ozone S3 Gateway</strong>
+Make sure your Ozone cluster is up and the S3 Gateway (s3g) is running. By default it listens on port <strong>9878</strong> over HTTP (and 9879 for HTTPS) at the host where you started it.</p>
+</li>
+<li>
+<p><strong>Credentials</strong></p>
+<ul>
+<li>
+<p><strong>No security:</strong> You can use any values for AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY.</p>
+</li>
+<li>
+<p><strong>With Kerberos security enabled:</strong></p>
+<div class="language-bash codeBlockContainer_mZR4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_rIoO"><pre tabindex="0" class="prism-code language-bash codeBlock_kDDR thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_SQL2"><span class="token-line" style="color:#393A34"><span class="token plain">kinit </span><span class="token parameter variable" style="color:#36acaa">-kt</span><span class="token plain"> /etc/security/keytabs/</span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">user</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain">.keytab </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">user</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain">@YOUR.REALM</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone s3 getsecret</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># → awsAccessKey=&lt;user&gt;@YOUR.REALM</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">#   awsSecret=&lt;long‑hex‑string&gt;</span><br></span></code></pre><div class="buttonGroup_QU8l"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_PE_v" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_bUEh"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_DKrM"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<p>These exports give you the Access Key ID and Secret you'll plug into CyberDuck.</p>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="1-install-cyberduck">1. Install CyberDuck<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#1-install-cyberduck" class="hash-link" aria-label="Direct link to 1. Install CyberDuck" title="Direct link to 1. Install CyberDuck">​</a></h2>
+<ol>
+<li>Download CyberDuck from <a href="https://cyberduck.io/" target="_blank" rel="noopener noreferrer">https://cyberduck.io</a> and install it on your Mac or Windows machine.</li>
+<li>Launch CyberDuck.</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="2-create-a-new-s3-connection">2. Create a New S3 Connection<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#2-create-a-new-s3-connection" class="hash-link" aria-label="Direct link to 2. Create a New S3 Connection" title="Direct link to 2. Create a New S3 Connection">​</a></h2>
+<ol>
+<li>The bundled S3 profile in CyberDuck does not permit a custom network port, and does not allow HTTP. You may need to install additional profiles to allow those.<!-- -->
+<ol>
+<li>Select a profile from <a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-cyberduck-profiles-md" target="_blank" rel="noopener noreferrer">Ozone S3 CyberDuck profiles</a>.</li>
+<li>For example, download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-cyberduckprofile" target="_blank" rel="noopener noreferrer">Ozone S3 <code>HTTP.cyberduckprofile</code></a></strong> if your gateway is HTTP.</li>
+<li>Or download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-with-path-style-addressing-cyberduckprofile" target="_blank" rel="noopener noreferrer">Ozone S3 (HTTP) with path-style <code>addressing.cyberduckprofile</code></a></strong>.</li>
+<li>Installing the file by double-clicking a <code>.cyberduckprofile</code> file</li>
+<li>Check out the <a href="https://docs.cyberduck.io/protocols/s3" target="_blank" rel="noopener noreferrer">CyberDuck user documentation</a> for more details.</li>
+</ol>
+</li>
+<li>In CyberDuck, click <strong>Open Connection</strong> (or press ⌘ N).</li>
+<li>From the <strong>Protocol</strong> dropdown choose <strong>Ozone S3 (HTTP)</strong> if your gateway is configured for HTTP), or <strong>Apache Ozone S3 HTTP path style</strong> if the gateway is configured with Path-Style Addressing.</li>
+<li>Fill in the fields:<!-- -->
+<ul>
+<li><strong>Server:</strong> <code>&lt;ozone‑s3‑host&gt;</code> (e.g. <code>ozone.example.com</code>)</li>
+<li><strong>Port:</strong> <code>9878</code> (or <code>9879</code> for HTTPS)</li>
+<li><strong>Access Key ID:</strong> the <code>awsAccessKey</code> you obtained</li>
+<li><strong>Secret Access Key:</strong> the <code>awsSecret</code> you obtained</li>
+</ul>
+</li>
+<li>Click the little <strong>▶</strong> triangle next to <strong>More Options</strong> and ensure <strong>Use SSL</strong> is unchecked if you're connecting over plain HTTP.</li>
+<li><strong>Path‑Style Addressing</strong> (default) vs <strong>Virtual‑Host Style</strong>:<!-- -->
+<ul>
+<li>By default Ozone uses <strong>path‑style</strong> (<code>http://host:9878/bucket</code>).</li>
+<li>If you've set <code>ozone.s3g.domain.name</code> in your <code>ozone-site.xml</code>, you can switch to virtual‑host style and CyberDuck will use <code>bucket.host:9878</code> URLs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="3-save-as-a-bookmark-optional">3. Save as a Bookmark (Optional)<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#3-save-as-a-bookmark-optional" class="hash-link" aria-label="Direct link to 3. Save as a Bookmark (Optional)" title="Direct link to 3. Save as a Bookmark (Optional)">​</a></h2>
+<ol>
+<li>Click the dropdown arrow next to the <strong>Connect</strong> button and choose <strong>Bookmark</strong> ▶ <strong>Add Bookmark</strong>.</li>
+<li>Give it a name like "Ozone S3" so you can reconnect quickly.</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="4-browsing-and-basic-operations">4. Browsing and Basic Operations<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#4-browsing-and-basic-operations" class="hash-link" aria-label="Direct link to 4. Browsing and Basic Operations" title="Direct link to 4. Browsing and Basic Operations">​</a></h2>
+<p>Once connected, your CyberDuck window will list all buckets in the default <code>/s3v</code> volume as top‑level entries.</p>
+<ul>
+<li><strong>List Buckets:</strong> All existing buckets appear as folders.</li>
+<li><strong>Create Bucket:</strong> Click the "+" (New Folder) icon, enter a bucket name, and press <strong>Return</strong>.</li>
+<li><strong>Upload Files:</strong> Drag‑and‑drop files from your desktop into a bucket folder.</li>
+<li><strong>Download Files:</strong> Right‑click an object and choose <strong>Download To…</strong></li>
+<li><strong>Delete Objects/Buckets:</strong> Select the file or bucket, press the <strong>Delete</strong> key, and confirm.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="5-working-with-other-volumes">5. Working with Other Volumes<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#5-working-with-other-volumes" class="hash-link" aria-label="Direct link to 5. Working with Other Volumes" title="Direct link to 5. Working with Other Volumes">​</a></h2>
+<p>Ozone's namespace includes volumes beyond <code>/s3v</code>. To expose a bucket from another volume:</p>
+<div class="language-shell codeBlockContainer_mZR4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_rIoO"><pre tabindex="0" class="prism-code language-shell codeBlock_kDDR thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_SQL2"><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> volume create /vol1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> bucket create /vol1/bucket1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> bucket </span><span class="token function" style="color:#d73a49">link</span><span class="token plain"> /vol1/bucket1 /s3v/common-bucket</span><br></span></code></pre><div class="buttonGroup_QU8l"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_PE_v" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_bUEh"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_DKrM"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>After linking, you'll see <code>common-bucket</code> in CyberDuck and can manage it just like any other S3 bucket.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="6-tips--troubleshooting">6. Tips &amp; Troubleshooting<a href="https://ozone-site-v2.staged.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#6-tips--troubleshooting" class="hash-link" aria-label="Direct link to 6. Tips &amp; Troubleshooting" title="Direct link to 6. Tips &amp; Troubleshooting">​</a></h2>
+<ul>
+<li><strong>Permissions:</strong> If you get "Access Denied," double‑check that you've generated or revoked/re‑generated your S3 secret correctly.</li>
+<li><strong>SSL Errors:</strong> If you enable HTTPS on the gateway, make sure you either trust the certificate in CyberDuck or use a CA‑signed cert.</li>
+<li><strong>Firewall/Network:</strong> Ensure your machine can reach <code>&lt;ozone‑s3‑host&gt;:9878</code> (e.g. <code>telnet hostname 9878</code>).</li>
+<li><strong>Bookmarks Sync:</strong> CyberDuck can sync bookmarks via Dropbox or iCloud so you can share connections across devices.</li>
+</ul>
+<hr>
+<p>You're all set! Enjoy browsing and managing your Ozone object store through a familiar S3 GUI.</p>]]></content:encoded>
+            <category>Ozone</category>
+            <category>S3</category>
+            <category>CyberDuck</category>
+        </item>
         <item>
             <title><![CDATA[Apache Ozone 2.0.0 Release]]></title>
             <link>https://ozone-site-v2.staged.apache.org/blog/2025/04/30/ozone-2.0.0-release</link>
