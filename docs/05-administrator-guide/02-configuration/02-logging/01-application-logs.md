@@ -30,7 +30,7 @@ rootLogger.level = info
 
 to
 
-```
+```properties
 rootLogger.level = debug
 ```
 
