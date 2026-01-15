@@ -14,7 +14,7 @@ By default, log files are stored in the `$OZONE_LOG_DIR` directory, which is usu
 - `ozone-scm-....log` for Storage Container Manager
 - `ozone-datanode-....log` for Datanode
 
-The logging behavior for each service is controlled by its `log4j.properties` file, located in the service’s `$OZONE_CONF_DIR` directory, usually `etc/hadoop`. You can modify this file to change the log level, appenders, and other logging parameters.
+The logging behavior for each service is controlled by its `log4j.properties` file, located in the service’s `$OZONE_CONF_DIR` directory, usually `etc/hadoop`. You can modify this file to change the log level, logging outputs, and other logging parameters.
 
 ## Debugging
 
@@ -45,7 +45,7 @@ export OZONE_ROOT_LOGGER=DEBUG,console
 ozone sh volume create /vol1
 ```
 
-Alternatively, you can use the --loglevel option with the ozone command:
+Alternatively, you can use the --loglevel option with the Ozone command:
 
 ```bash
 ozone --loglevel debug sh volume create /vol1
