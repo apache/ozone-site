@@ -6,8 +6,15 @@
     <description>Recent content in Designs on Ozone</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Jan 2026 23:22:18 -0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 09:25:11 +0800</lastBuildDate>
     <atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>S3 Conditional Requests</title>
+      <link>/design/s3-conditional-requests.html</link>
+      <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>/design/s3-conditional-requests.html</guid>
+      <description>Design to support S3 conditional requests for atomic operations.</description>
+    </item>
     <item>
       <title>AWS STS Design for Ozone S3</title>
       <link>/design/ozone-sts.html</link>

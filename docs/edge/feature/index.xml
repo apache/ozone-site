@@ -22,6 +22,13 @@
       <description>DiskBalancer For DataNodes.</description>
     </item>
     <item>
+      <title>Improve Ozone Snapshot Scale with Snapshot Defragmentation</title>
+      <link>/feature/snapshotdefragmentation.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/feature/snapshotdefragmentation.html</guid>
+      <description>Reduce the disk usage occupied by Ozone Snapshot metadata.</description>
+    </item>
+    <item>
       <title>OM High Availability</title>
       <link>/feature/om-ha.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

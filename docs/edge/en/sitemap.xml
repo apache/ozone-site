@@ -109,6 +109,9 @@
                 href="/start/index.html"
                 />
   </url><url>
+    <loc>/feature/snapshotdefragmentation.html</loc>
+    <lastmod>2026-01-14T20:59:38+01:00</lastmod>
+  </url><url>
     <loc>/feature/om-ha.html</loc>
     <lastmod>2025-08-12T10:23:47+05:30</lastmod>
     <xhtml:link
@@ -726,10 +729,13 @@
                 href="/start/fromsource.html"
                 />
   </url><url>
-    <loc>/design/ozone-sts.html</loc>
-    <lastmod>2026-01-04T23:22:18-08:00</lastmod>
-  </url><url>
     <loc>/design/index.html</loc>
+    <lastmod>2026-01-15T09:25:11+08:00</lastmod>
+  </url><url>
+    <loc>/design/s3-conditional-requests.html</loc>
+    <lastmod>2026-01-15T09:25:11+08:00</lastmod>
+  </url><url>
+    <loc>/design/ozone-sts.html</loc>
     <lastmod>2026-01-04T23:22:18-08:00</lastmod>
   </url><url>
     <loc>/design/distributed-tracing-opentelemetry.html</loc>

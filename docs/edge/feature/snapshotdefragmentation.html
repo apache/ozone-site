@@ -46,8 +46,9 @@ s=d.getElementsByTagName('script')[0];
   </head>
 
 
-  <body>
+<body>
 
+  
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -75,9 +76,11 @@ s=d.getElementsByTagName('script')[0];
   </div>
 </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
 <div class="col-sm-2 col-md-2 sidebar" id="sidebar">
   <ul class="nav nav-sidebar">
     
@@ -224,7 +227,7 @@ s=d.getElementsByTagName('script')[0];
                            
                         </li>
                     
-                        <li class="">
+                        <li class="active">
                            
                            <a href="../feature/snapshotdefragmentation.html">Improve Ozone Snapshot Scale with Snapshot Defragmentation</a>
                            
@@ -595,222 +598,232 @@ s=d.getElementsByTagName('script')[0];
 
 </div>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content">
-            <div class="col-md-9">
-                <h1><a href="https://issues.apache.org/jira/browse/HDDS-4440">[HDDS-4440]</a> Proposed persistent OM connection for S3 gateway (accepted) </h1>
-                <div><i>Authors: Márton Elek</i><div class="pull-right">2020-11-09</div></div>
-                <p>&nbsp</p>
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
 
-                <div class="panel panel-success">
-                    <div class="panel-heading">Summary</div>
-                    <div class="panel-body">
-                        Proposal to use per-request authentication and persistent connections between S3g and OM
-                    </div>
-                </div>
 
-              <!--
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature/index.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Improve Ozone Snapshot Scale with Snapshot Defragmentation</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Improve Ozone Snapshot Scale with Snapshot Defragmentation</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License. See accompanying LICENSE file.
+  limitations under the License.
 -->
-<h1 id="overview">Overview</h1>
+<h1 id="improving-snapshot-scale">Improving Snapshot Scale</h1>
+<p><a href="https://issues.apache.org/jira/browse/HDDS-13003">HDDS-13003</a></p>
+<h1 id="problem-statement">Problem Statement</h1>
+<p>In Apache Ozone, snapshots currently take a checkpoint of the Active Object Store (AOS) RocksDB each time a snapshot is created and track the compaction of SST files over time. This model works efficiently when snapshots are short-lived, as they merely serve as hard links to the AOS RocksDB. However, over time, if an older snapshot persists while significant churn occurs in the AOS RocksDB (due to compactions and writes), the snapshot RocksDB may diverge significantly from both the AOS RocksDB and other snapshot RocksDB instances. This divergence increases storage requirements linearly with the number of snapshots.</p>
+<h1 id="solution-proposal">Solution Proposal</h1>
+<p>The primary inefficiency in the current snapshot mechanism stems from constant RocksDB compactions in AOS, which can cause a key, file, or directory entry to appear in multiple SST files. Ideally, each unique key, file, or directory entry should reside in only one SST file, eliminating redundant storage and mitigating the multiplier effect caused by snapshots. If implemented correctly, the total RocksDB size would be proportional to the total number of unique keys in the system rather than the number of snapshots.</p>
+<h2 id="snapshot-defragmentation">Snapshot Defragmentation</h2>
+<p>Currently, snapshot RocksDBs has automatic RocksDB compaction disabled intentionally to preserve snapshot diff performance, preventing any form of compaction. However, snapshots can be defragmented in the way that the next active snapshot in the chain is a checkpoint of its previous active snapshot plus a diff stored in separate SST files (one SST for each column family changed). The proposed approach involves rewriting snapshots iteratively from the beginning of the snapshot chain and restructuring them in a separate directory.</p>
+<p>Note: Snapshot Defragmentation was previously called Snapshot Compaction earlier during the design phase. It is not RocksDB compaction. Thus the rename to avoid such confusion. We are also not going to enable RocksDB auto compaction on snapshot RocksDBs.</p>
+<ol>
+<li>
+<h3 id="introducing-last-defragmentation-time">Introducing last defragmentation time</h3>
+<p>A new boolean flag (<code>needsDefrag</code>), timestamp (<code>lastDefragTime</code>), int <code>version</code> would be added to snapshot metadata.
+<code>needsDefrag</code> tells the system whether a snapshot is pending defrag (<code>true</code>) or if it is already defragged and up to date (<code>false</code>). This helps manage and automate the defrag workflow, ensuring snapshots are efficiently stored and maintained. <code>needsDefrag</code> defaults to <code>false</code> during initialization and when absent.
+A new list of Map&lt;String, List&lt;Longs&gt;&gt; (<code>notDefraggedSstFileList</code>) also would be added to snapshot meta as part of snapshot create operation; this would be storing the original list of SST files in the not defragged copy of the snapshot corresponding to keyTable/fileTable/DirectoryTable. This should be done as part of the snapshot create operation.
+Since this is not going to be consistent across all OMs this would have to be written to a local yaml file inside the snapshot directory and this can be maintained in the SnapshotChainManager in memory on startup. So all updates should not go through Ratis.<br>
+An additional Map&lt;Integer, Map&lt;String, List&lt;Long&gt;&gt;&gt; (<code>defraggedSstFileList</code>) also would be added to snapshotMeta. This will be maintaining a list of sstFiles of different versions of defragged snapshots. The key here would be the version number of snapshot DBs.</p>
+</li>
+<li>
+<h3 id="snapshot-cache-lock-for-read-prevention">Snapshot Cache Lock for Read Prevention</h3>
+<p>A snapshot lock will be introduced in the snapshot cache to prevent reads on a specific snapshot during the last step of defragmentation. This ensures no active reads occur while we are replacing the underlying RocksDB instance. The swap should be instantaneous.</p>
+</li>
+<li>
+<h3 id="directory-structure-changes">Directory Structure Changes</h3>
+<p>Snapshots currently reside under <code>db.snapshots/checkpointState/</code> directory. The proposal introduces a <code>db.snapshots/checkpointStateDefragged/</code> directory for defragged snapshots. The directory format should be as follows:</p>
+</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">om.db-&lt;snapshot_id&gt;-&lt;version&gt;</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<ol start="4">
+<li>
+<h3 id="optimized-snapshot-diff-computation">Optimized Snapshot Diff Computation</h3>
+</li>
+</ol>
+<p>To compute a snapshot diff:</p>
 <ul>
-<li>Hadoop RPC authenticate the calls at the beginning of the connections. All the subsequent messages on the same call will use existing, initialized authentication.</li>
-<li>S3 gateway sends the authentication as Hadoop RPC delegation token for <strong>each requests</strong>.</li>
-<li>To authenticate each of the S3 REST requests Ozone creates a new <code>OzoneClient</code> for eac HTTP requests, which introduces problems with performance and error handling.</li>
-<li>This proposal suggests to create a new transport (<strong>in addition</strong> to the existing Hadoop RPC) for the OMClientProtocol where the requests can be authenticated per-request.</li>
+<li>If both snapshots are defragged, their defragged versions will be used. The diff between two defragged snapshot should be present in one SST file.</li>
+<li>If the target snapshot is not defragged &amp; the source snapshot is defragged (other way is not possible as we always defrag snapshots in order) and if the DAG has all the sst files corresponding to the not defragged snapshot version of the defragged snapshot which would be captured as part of the snapshot metadata, then an efficient diff can be performed with the information present in the DAG. Use <code>notDefraggedSstFileList</code> from each of the snapshot&rsquo;s meta</li>
+<li>Otherwise, a full diff will be computed between the defragged source and the defragged target snapshot. Delta SST files would be computed corresponding to the latest version number of the target snapshot(version number of target snapshot would always be greater)</li>
+<li>Changes in the full diff logic is required to check inode ids of sst files and remove the common sst files b/w source and target snapshots.</li>
 </ul>
-<h1 id="authentication-with-s3-gateway">Authentication with S3 gateway</h1>
-<p>AWS S3 request authentication based on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html">signing the REST messages</a>. Each of the HTTP requests must include and authentication header which contains the used the <em>access key id</em> and a signatures created with the help of the <em>secret key</em>.</p>
-<pre tabindex="0"><code>Authorization: AWS AWSAccessKeyId:Signature
-</code></pre><p>Ozone S3g is a REST gateway for Ozone which receives AWS compatible HTTP calls and forwards the requests to the Ozone Manager and Datanode services. Ozone S3g is <strong>stateless</strong>, it couldn&rsquo;t check any authentication information which are stored on the Ozone Manager side. It can check only the format of the signature.</p>
-<p>For the authentication S3g parses the HTTP header and sends all the relevant (and required) information to Ozone Manager which can check the signature with the help of stored <em>secret key</em>.</p>
-<p>This is implemented with the help of the delegation token mechanism of Hadoop RPC. Hadoop RPC supports Kerberos and token based authentication where tokens can be customized. The Ozone specific implementation <code>OzoneTokenIdentifier</code> contains a <code>type</code> field which can <code>DELEGATION_TOKEN</code> or <code>S3AUTHINFO</code>. The later one is used to authenticate the request based on S3 REST header (signature + required information).</p>
-<p>Both token and Kerberos based authentication are checked by Hadoop RPC during the connection initialization phase using the SASL standard. SASL defines the initial handshake of the creation where server can check the authentication information with a challenge-response mechanism.</p>
-<p>As a result Ozone S3g requires to create a new Hadoop RPC client for each of the HTTP requests as each requests may have different AWS authentication   information / signature. Ozone S3g creates a new <code>OzoneClient</code> for each of the requests which includes the creation of Hadoop RPC client.</p>
-<p>There are two problems with this approach:</p>
-<ol>
-<li><strong>performance</strong>: Creating a new <code>OzoneClient</code> requires to create new connection, to perform the SASL handshake and to send the initial discovery call to the OzoneManager to get the list of available services. It makes S3 performance very slow.</li>
-<li><strong>error handling:</strong> Creating new <code>OzoneClient</code> for each requests makes the propagation of error code harder with CDI.</li>
-</ol>
-<p><a href="http://cdi-spec.org/">CDI</a> is the specification of <em>Contexts and  Dependency Injection</em> for Java. Can be used for both JavaEE and JavaSE and it&rsquo;s integrated with most web frameworks. Ozone S3g uses this specification to inject different services to to REST handlers using <code>@Inject</code> annotation.</p>
-<p><code>OzoneClient</code> is created by the <code>OzoneClientProducer</code>:</p>
-<pre tabindex="0"><code>@RequestScoped
-public class OzoneClientProducer {
-
-  private OzoneClient client;
-
-  @Inject
-  private SignatureProcessor signatureParser;
-
-  @Inject
-  private OzoneConfiguration ozoneConfiguration;
-
-  @Inject
-  private Text omService;
-
-  @Inject
-  private String omServiceID;
-
-
-  @Produces
-  public OzoneClient createClient() throws OS3Exception, IOException {
-    client = getClient(ozoneConfiguration);
-    return client;
-  }
-...
-}
-</code></pre><p>As we can see here, the producer is <em>request</em> scoped (see the annotation on the class), which means that the <code>OzoneClient</code> bean will be created for each request. If the client couldn&rsquo;t be created a specific exception will be thrown by the CDI framework (!) as one bean couldn&rsquo;t be injected with CDI. This error is different from the regular business exceptions therefore the normal exception handler (<code>OS3ExceptionMapper</code> implements <code>javax.ws.rs.ext.ExceptionMapper</code>) &ndash; which can transform exceptions to HTTP error code &ndash; doesn&rsquo;t apply. It can cause strange 500 error instead of some authentication error.</p>
-<h2 id="caching">Caching</h2>
-<p>Hadoop RPC has a very specific caching layer which is <strong>not used</strong> by Ozone S3g. This section describe the caching of the Hadoop RPC, but safe to skip (It explain how is the caching ignored).</p>
-<p>As creating new Hadoop RPC connection is an expensive operation Hadoop RPC has an internal caching mechanism to cache client and connections (!). This caching is hard-coded and based on static fields (couldn&rsquo;t be adjusted easily).</p>
-<p>Hadoop RPC client is usually created by <code>RPC.getProcolProxy</code>. For example:</p>
-<pre tabindex="0"><code>HelloWorldServicePB proxy = RPC.getProtocolProxy(
-            HelloWorldServicePB.class,
-            scmVersion,
-            new InetSocketAddress(1234),
-            UserGroupInformation.getCurrentUser(),
-            configuration,
-            new StandardSocketFactory(),
-            Client.getRpcTimeout(configuration),
-            retryPolicy).getProxy();
-</code></pre><p>This code fragment creates a new client which can be used from the code, and it uses multiple caches for client creation.</p>
-<ol>
+<ol start="5">
 <li>
-<p>Protocol engines are cached by <code>RPC.PROTOCOL_ENGINES</code> static field, but it&rsquo;s safe to assume that the <code>ProtobufRpcEngine</code> is used for most of the current applications.</p>
+<h3 id="snapshot-defragmentation-workflow">Snapshot Defragmentation Workflow</h3>
+<p>A background snapshot defragmentation service should be added which would be done by iterating through the snapshot chain in the same order as the global snapshot chain. This is to ensure the snapshot created after is always defragged after all the snapshots previously created are defragged. Snapshot defragmentation should only occur once the snapshot has undergone SST filtering. The following steps outline the process:</p>
 </li>
 <li>
-<p><code>ProtobufRpcEngine</code> has a static <code>ClientCache</code> field which caches the client instances with the <code>socketFactory</code> and <code>protocol</code> as the key.</p>
+<p><strong>Create a RocksDB checkpoint</strong> of the path previous snapshot corresponding to the bucket in the chain (if it exists). <code>version</code> of previous snapshot should be strictly greater than the current snapshot’s <code>version</code> otherwise skip compacting this snapshot in this iteration.</p>
 </li>
 <li>
-<p>Finally the <code>Client.getConnection</code> method uses a cache to cache the connections:</p>
-<pre tabindex="0"><code>connection = connections.computeIfAbsent(remoteId,
-    id -&gt; new Connection(id, serviceClass, removeMethod));
-</code></pre><p>The key for the cache is the <code>remoteId</code> which includes all the configuration, connection parameters (like destination host) and <code>UserGroupInformation</code> (UGI).</p>
+<p><strong>Acquire the <code>SNAPSHOT_GC_LOCK</code></strong> for the snapshot ID to prevent garbage collection during defragmentation[This is to keep contents of deleted Table contents same while defragmentation consistent].</p>
+<ol>
+<li>If there is no path previous snapshot then
+<ol>
+<li>Take a checkpoint of the same RocksDB instance remove keys that don’t correspond to the bucket from tables <code>keyTable</code>, <code>fileTable</code>, <code>directoryTable,deletedTable,deletedDirectoryTable</code> by running RocksDB delete range api. This should be done if the snapshot has never been defragged before i.e. if <code>lastDefragTime</code> is zero or null. Otherwise just update the <code>needsDefrag</code> to False.</li>
+<li>We can trigger a forced manual compaction on the RocksDB instance(i &amp; ii can be behind a flag where in we can just work with the checkpoint of the RocksDB if the flag is disabled).</li>
+</ol>
+</li>
+<li>If path previous snapshot exists:
+<ol>
+<li><strong>Compute the diff</strong> between tables (<code>keyTable</code>, <code>fileTable</code>, <code>directoryTable</code>) of the checkpoint and the current snapshot using snapshot diff functionality.</li>
+<li><strong>Flush changed objects</strong> into separate SST files using the SST file writer, categorizing them by table type.</li>
+<li><strong>Ingest these SST files</strong> into the RocksDB checkpoint using the <code>ingestFile</code> API.</li>
+</ol>
 </li>
 </ol>
-<p>The caching of the connections can cause very interesting cases. As an example, let&rsquo;s assume that delegation token is invalidated with an RPC call. The workflow can be something like this:</p>
-<ol>
-<li>create protocol proxy (with token authentication)</li>
-<li>invalidate token (rpc call)</li>
-<li>close protocol proxy (connection may not be closed. depends from the cache)</li>
-<li>create a new protocol proxy</li>
-<li>If connection is cached (same UGI) services can be used even if the token is invalidated earlier (as the token is checked during the initialization of the tokens).</li>
+</li>
+<li>
+<p>Check if the entire current snapshot has been flushed to disk otherwise wait for the flush to happen.</p>
+</li>
+<li>
+<p>Truncate <code>deletedTable,deletedDirectoryTable,snapshotRenamedTable etc. (All tables excepting keyTable/fileTable/directoryTable)</code> in checkpointed RocksDB and ingest the entire table from deletedTable and deletedDirectoryTable from the current snapshot RocksDB.</p>
+</li>
+<li>
+<p><strong>Acquire the snapshot cache lock</strong> to prevent snapshot access during directory updates.[While performing the snapshot RocksDB directory switch there should be no RocksDB handle with read happening on it].</p>
+</li>
+<li>
+<p><strong>Move the checkpoint directory</strong> into <code>checkpointStateDefragged</code> with the format:</p>
+</li>
 </ol>
-<p>Fortunately this behavior doesn&rsquo;t cause any problem in case of Ozone and S3g. UGI (which is part of the cache key of the connection cache) equals if (and only if) the underlying <code>Subject</code> is the same.</p>
-<pre tabindex="0"><code>public class UserGroupInformation {
-  
-  ...
-  
-  @Override
-  public boolean equals(Object o) {
-    if (o == this) {
-      return true;
-    } else if (o == null || getClass() != o.getClass()) {
-      return false;
-    } else {
-      return subject == ((UserGroupInformation) o).subject;
-    }
-  }
-}
-</code></pre><p>But the UGI initialization of Ozone always creates a new <code>Subject</code> instance for each request (even if the subject name is the same). In <code>OzoneClientProducer</code>:</p>
-<pre tabindex="0"><code>  UserGroupInformation remoteUser =
-          UserGroupInformation.createRemoteUser(awsAccessId); // &lt;-- new Subject is created
-      
-      if (OzoneSecurityUtil.isSecurityEnabled(config)) {
-        try {
-          OzoneTokenIdentifier identifier = new OzoneTokenIdentifier();
-          //setup identifier
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">om.db-&lt;snapshot_id&gt;-&lt;version&gt;</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<ol start="7">
+<li><strong>Update snapshot metadata</strong>, setting <code>lastDefragTime</code> and marking <code>needsDefrag = false</code> and set the next snapshot in the chain is marked for defragmentation. If there is no path previous snapshot in the chain then increase <code>version</code>  by 1 otherwise set <code>version</code> which is equal to the previous snapshot in the chain. Based on the sstFiles in the RocksDB compute Map&lt;String, List&lt;Long&gt;&gt; and add this Map to <code>defraggedSstFileList</code> corresponding to the <code>version</code> of the snapshot.</li>
+<li><strong>Delete old not defragged/defragged snapshots</strong>, ensuring unreferenced not defragged/defragged snapshots are purged during OM startup(This is to handle jvm crash after viii).</li>
+<li><strong>Release the snapshot cache lock</strong> on the snapshot id. Now the snapshot is ready to be used to read.</li>
+</ol>
+<h4 id="visualization">Visualization</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    A[Start: Not defragged Snapshot Exists] --&gt; B[Has SST Filtering Occurred?]
+    B -- No --&gt; Z[Wait for SST Filtering]
+    B -- Yes --&gt; C[Create RocksDB Checkpoint of Previous Snapshot]
+    C --&gt; D{Defragged Copy Exists?}
+    D -- Yes --&gt; E[Update defragTime, set needsDefrag=false]
+    D -- No --&gt; F[Create Checkpoint in Temp Directory]
+    E --&gt; G[Acquire SNAPSHOT_GC_LOCK]
+    F --&gt; G
+    G --&gt; H[Compute Diff between Checkpoint &amp; Current Snapshot]
+    H --&gt; I[Flush Changed Objects into SST Files by table]
+    I --&gt; J[Ingest SST Files into Checkpointed RocksDB]
+    J --&gt; K[Truncate/Replace deletedTable, etc.]
+    K --&gt; L[Acquire Snapshot Cache Lock]
+    L --&gt; M[Move Checkpoint Dir to checkpointStateDefragged]
+    M --&gt; N[Update Snapshot Metadata: lastDefragTime, needsDefrag=false, set next snapshot needsDefrag=true, set sstFiles]
+    N --&gt; O[Delete old snapshot DB dir]
+    O --&gt; P[Release Snapshot Cache Lock]
+    P --&gt; Q[Defragged Snapshot Ready]
+</code></pre><h3 id="computing-changed-objects-between-snapshots">Computing Changed Objects Between Snapshots</h3>
+<p>The following steps outline how to compute changed objects:</p>
+<ol>
+<li><strong>Determine delta SST files</strong>:
+<ul>
+<li>Retrieve from DAG if the snapshot was not defragged previously and the previous snapshot has an not defragged copy.</li>
+<li>Otherwise, compute delta SST files by comparing SST files in both defragged RocksDBs.</li>
+</ul>
+</li>
+<li><strong>Initialize SST file writers</strong> for <code>keyTable</code>, <code>directoryTable</code>, and <code>fileTable</code>.</li>
+<li><strong>Iterate SST files in parallel</strong>, reading and merging keys to maintain sorted order.(Similar to the MinHeapIterator instead of iterating through multiple tables we would be iterating through multiple sst files concurrently).</li>
+<li><strong>Compare keys</strong> between snapshots to determine changes and write updated objects if and only if they have changed into the SST file.
+<ul>
+<li>If the object is present in the target snapshot then do an sstFileWriter.put().
+<ul>
+<li>If the object is present in source snapshot but not present in target snapshot then we just have to write a tombstone entry by calling sstFileWriter.delete().</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Ingest these SST files</strong> into the checkpointed RocksDB.</li>
+</ol>
+<h4 id="visualization-1">Visualization</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    A[Start: Need Diff Between Snapshots] --&gt; B[Determine delta SST files]
+    B -- DAG Info available --&gt; C[Retrieve from DAG]
+    B -- Otherwise --&gt; D[Compute delta by comparing SST files in both RocksDBs]
+    C --&gt; E[Initialize SST file writers: keyTable, directoryTable, fileTable]
+    D --&gt; E
+    E --&gt; F[Iterate SST files in parallel, merge keys: MinHeapIterator-like]
+    F --&gt; G[Compare keys between snapshots]
+    G --&gt; H{Object in Target?}
+    H -- Yes --&gt; I[sstFileWriter.put]
+    H -- No --&gt; J[sstFileWriter.delete tombstone]
+    I --&gt; K[Ingest SST Files into Checkpointed RocksDB]
+    J --&gt; K
+</code></pre><h3 id="handling-snapshot-purge">Handling Snapshot Purge</h3>
+<p>Upon snapshot deletion, the <code>needsDefrag</code> flag for the next snapshot in the chain is set to <code>true</code>, ensuring defragmentation propagates incrementally across the snapshot chain.</p>
+<h4 id="visualization-2">Visualization</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    A[Snapshot Deletion Requested] --&gt; B[Set needsDefrag=true for next snapshot in chain]
+    B --&gt; C[Next snapshots will be defragged incrementally]
+</code></pre><h1 id="conclusion">Conclusion</h1>
+<p>This approach effectively reduces storage overhead while maintaining efficient snapshot retrieval and diff computation. The total storage would be in the order of total number of keys in the snapshots + AOS by reducing overall redundancy of the objects while also making the snapshot diff computation for even older snapshots more computationally efficient.</p>
+
+
           
-          Token&lt;OzoneTokenIdentifier&gt; token = new Token(identifier.getBytes(),
-              identifier.getSignature().getBytes(UTF_8),
-              identifier.getKind(),
-              omService);
-          remoteUser.addToken(token);
-          ....
-</code></pre><p><strong>As a result Hadoop RPC caching doesn&rsquo;t apply to Ozone S3g</strong>. It&rsquo;s a good news because it&rsquo;s secure, but bad news as the performance is bad.</p>
-<h1 id="proposed-change">Proposed change</h1>
-<p>We need an RPC mechanism between the Ozone S3g service and Ozone Manager service which can support per-request authentication and accepts</p>
-<p>The  Ozone Manager client already has a pluggable transport interface: <code>OmTransport</code> is a simple interface which can deliver <code>OMRequest</code> messages:</p>
-<pre tabindex="0"><code>public interface OmTransport {
-
-  /**
-   * The main method to send out the request on the defined transport.
-   */
-  OMResponse submitRequest(OMRequest payload) throws IOException;
-  ...
-</code></pre><p>The proposal is to create a new <strong>additional</strong> transport, based on GRPC, which can do the per-request authentication. <strong>Existing Hadoop clients will use the well-known Hadoop RPC client</strong>, but S3g can start to use this specific transport to achieve better performance.</p>
-<p>As this is nothing more, just a transport: exactly the same messages (<code>OmRequest</code>) will be used, it&rsquo;s not a new RPC interface.</p>
-<p>Only one modification is required in the RPC interface: a new per-request<code>token</code> field should be introduced in <code>OMRequest</code> which is optional.</p>
-<p>A new GRPC service should be started in Ozone Manager, which receives <code>OMRequest</code> and for each request, the Hadoop <code>UserGroupInformation</code> is set based on the new token field (after authentication).</p>
-<p><code>OzoneToken</code> identifier can be simplified (after deprecation period) with removing the S3 specific part, as it won&rsquo;t be required any more.</p>
-<p>With this approach the <code>OzoneClient</code> instances can be cached on S3g side (with persistent GRPC connections) as the authentication information is not part of the OzoneClient any more (added by the <code>OmTransport</code> implementation per request (in case of GRPC) or per connection (in case of HadoopRPC)).</p>
-<p>To make it easier to understand the implementation of this approach, let&rsquo;s compare the old (existing) and new (proposed) approach.</p>
-<h3 id="old-approach">Old approach</h3>
-<ol>
-<li>
-<p>OzoneClientProvider creates a new OzoneClient for each of the HTTP requests (@RequestScope)</p>
-</li>
-<li>
-<p>OzoneToken is created based on the authentication header (signature, string to sign)</p>
-</li>
-<li>
-<p>OzoneClient creates new OM connection (Hadoop RPC) with the new OzoneToken</p>
-</li>
-<li>
-<p>OM extracts the information from OzoneToken and validates the signature</p>
-</li>
-<li>
-<p>OzoneClient is injected to the REST endpoints</p>
-</li>
-<li>
-<p>OzoneClient is used for any client calls</p>
-</li>
-<li>
-<p>When HTTP request is handled, the OzoneClient is closed</p>
-<p>
-
-<img src="s3-performance-old.png" alt='old approach'  class="img-responsive" /></p>
-</li>
-</ol>
-<h3 id="new-approach">New approach</h3>
-<ol>
-<li>OzoneClientProvider creates client with @ApplicationScope. Connection is always open to the OM (clients can be pooled)</li>
-<li>OM doesn&rsquo;t authentication the connection, each of the requests should be authenticated one-by-one</li>
-<li>OzoneClients are always injected to the REST endpoints</li>
-<li>For each new HTTP request the authorization header is extracted and added to the outgoing GRPC request as a token</li>
-<li>OM authenticate each of the request and calls the same request handler as before</li>
-<li>OzoneClient can be open long-term</li>
-</ol>
-<p>
-
-<img src="s3-performance-new.png" alt='new approach'  class="img-responsive" /></p>
-<h1 id="possible-alternatives">Possible alternatives</h1>
-<ul>
-<li>It&rsquo;s possible to use pure Hadoop RPC client instead of Ozone Client which would make the client connection slightly cheaper (service discovery call is not required) but it&rsquo;s still require to create new connections for each requests (and downloading data without OzoneClient may have own challenges).</li>
-<li>CDI error handling can be improved with using other dependency injection (eg. Guice, which is already used by Recon) or some additional wrappers and manual connection creation. But it wouldn&rsquo;t solve the performance problem.</li>
-</ul>
-
-            </div>
+          <a class="btn  btn-success btn-lg" href="../feature/om-ha.html">Next >></a>
+          
+          </div>
 
         </div>
       </div>
     </div>
+  </div>
+    <div class="push"></div>
+  </div>
 
-
+  
 
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: March 9, 2021 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/45eee3fa5d29f49eaed0758d1703d446d56e70fb">45eee3fa5d</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 14, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/c24dff8d14be1076533a1709a0acd668e698069d">c24dff8d14</a>
     </span>
   </div>
 </footer>
@@ -822,5 +835,6 @@ public class OzoneClientProducer {
 <script src="../js/bootstrap.min.js"></script>
 
 
-  </body>
+</body>
+
 </html>
