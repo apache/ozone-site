@@ -8,7 +8,7 @@
 
 ## Archives
 
-Older releases are available from the [Apache Ozone archive](https://archive.apache.org/dist/ozone/) and the [Apache Hadoop archive](https://archive.apache.org/dist/hadoop/ozone/).
+Older releases are available from the [Apache Ozone archive](https://archive.apache.org/dist/ozone/).
 
 ## Verify
 
