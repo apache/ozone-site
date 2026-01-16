@@ -8,7 +8,8 @@ Apache Ozone uses topology information (e.g., rack placement) to optimize data a
 
 1. Configured network topology.
 2. Topology-aware Datanode selection for container replica placement (write path).
-3. Prioritized reads from topologically closest Datanodes (read path).
+3. Pipeline choosing policy to load balance write traffic.
+4. Prioritized reads from topologically closest Datanodes (read path).
 
 ## Applicability to Container Types
 
@@ -176,7 +177,7 @@ For Erasure Coded (EC) containers, SCM employs a specialized placement policy to
 
 ## Optimizing Read Paths
 
-This feature, enabled by default since Ozone 1.4.0 (HDDS-8300), directs clients to read from the topologically closest Datanodes for replicated data, reducing latency and cross-rack traffic. It is recommended to keep this enabled when you have an accurate topology configuration.
+This feature, enabled by default since Ozone 1.4.0 ([HDDS-8300](https://issues.apache.org/jira/browse/HDDS-8300)), directs clients to read from the topologically closest Datanodes for replicated data, reducing latency and cross-rack traffic. It is recommended to keep this enabled when you have an accurate topology configuration.
 
 If you need to disable it, set `ozone.network.topology.aware.read` to `false` in `ozone-site.xml`:
 
