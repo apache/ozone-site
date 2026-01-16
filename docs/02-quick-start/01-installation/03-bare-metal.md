@@ -10,7 +10,7 @@ This guide describes how to install and run Apache Ozone directly on a cluster o
 
 Before starting, ensure the following requirements are met on **all** machines intended to run Ozone services (Ozone Manager, Storage Container Manager, Datanode):
 
-- **Java Development Kit (JDK):** Version 8 or 11 (check the specific Ozone release notes for recommended versions). Verify with `java -version`. Ensure `JAVA_HOME` is set correctly in the environment.
+- **Java Development Kit (JDK):** Version 8, 11 or 17 (check the specific Ozone release notes for recommended versions). Verify with `java -version`. Ensure `JAVA_HOME` is set correctly in the environment.
 - **Operating System:** A compatible Linux distribution (e.g., CentOS, RHEL, Ubuntu, Debian).
 - **User Account:** A dedicated user account (e.g., `ozone`) to run the Ozone services is recommended for security and manageability. Ensure this user exists on all nodes.
 - **SSH Access:** Passwordless SSH access should be configured between the node where you will run start/stop scripts and all other nodes running Ozone services, using the dedicated Ozone user account. This is required for the cluster management scripts.
@@ -73,16 +73,31 @@ Create or edit `etc/hadoop/ozone-site.xml` on **all nodes**. Add the following e
 
   <!-- General Cluster ID -->
   <property>
-    <name>ozone.scm.cluster.id</name>
+    <name>ozone.scm.service.ids</name>
     <value>myOzoneCluster</value> <!-- Choose a unique ID for your cluster -->
-    <description>The cluster ID identifies the SCM instance. All OMs and Datanodes should have the same cluster ID.</description>
+    <description>Comma-separated list of SCM service Ids. All OMs and Datanodes should have the same cluster ID.</description>
   </property>
 
   <!-- SCM Configuration -->
   <property>
-    <name>ozone.scm.names</name>
-    <value>scm-host1.example.com,scm-host2.example.com,scm-host3.example.com</value> <!-- List of SCM hostnames (comma-separated for HA) -->
+    <name>ozone.scm.nodes.myOzoneCluster</name>
+    <value>scm1,scm2,scm3</value> <!-- List of SCM hostnames (comma-separated for HA) -->
     <description>Hostnames or IP addresses of the SCM nodes.</description>
+  </property>
+  <property>
+    <name>ozone.scm.address.myOzoneCluster.scm1</name>
+    <value>scm-host1.example.com</value>
+    <description>Hostnames or IP addresses of the SCM node scm1.</description>
+  </property>
+  <property>
+    <name>ozone.scm.address.myOzoneCluster.scm2</name>
+    <value>scm-host2.example.com</value>
+    <description>Hostnames or IP addresses of the SCM node scm1.</description>
+  </property>
+  <property>
+    <name>ozone.scm.address.myOzoneCluster.scm3</name>
+    <value>scm-host3.example.com</value>
+    <description>Hostnames or IP addresses of the SCM node scm1.</description>
   </property>
   <property>
     <name>hdds.scm.db.dirs</name>
@@ -99,17 +114,23 @@ Create or edit `etc/hadoop/ozone-site.xml` on **all nodes**. Add the following e
   </property>
   <property>
     <name>ozone.om.nodes.omservice</name> <!-- Use the service ID from ozone.om.service.ids -->
-    <value>om1=OM-host1.example.com:9862,om2=OM-host2.example.com:9862,om3=OM-host3.example.com:9862</value>
-    <description>List of OM nodes in the HA ring: nodeID=hostname:rpc_port,...</description>
+    <value>om1,om2,om3</value>
+    <description>List of OM nodes in the HA ring</description>
   </property>
   <property>
-    <name>ozone.om.node.id</name>
-    <!-- THIS MUST BE SET DIFFERENTLY ON EACH OM NODE -->
-    <!-- Example for OM-host1: <value>om1</value> -->
-    <!-- Example for OM-host2: <value>om2</value> -->
-    <!-- Example for OM-host3: <value>om3</value> -->
-    <value>om1</value> <!-- Set the unique node ID for THIS specific OM node -->
-    <description>Unique identifier for this OM node within the HA service.</description>
+    <name>ozone.om.address.omservice.om1</name>
+    <value>om1.example.com</value>
+    <description>Host name of om1 within the omservice OM HA service.</description>
+  </property>
+  <property>
+    <name>ozone.om.address.omservice.om2</name>
+    <value>om2.example.com</value>
+    <description>Host name of om1 within the omservice OM HA service.</description>
+  </property>
+  <property>
+    <name>ozone.om.address.omservice.om3</name>
+    <value>om3.example.com</value>
+    <description>Host name of om1 within the omservice OM HA service.</description>
   </property>
   <property>
     <name>ozone.om.db.dirs</name>
@@ -141,7 +162,7 @@ Create or edit `etc/hadoop/ozone-site.xml` on **all nodes**. Add the following e
 ```
 
 - **Replace placeholders:** Update hostnames (`*.example.com`), paths (`/path/to/...`), and the cluster ID (`myOzoneCluster`) according to your environment.
-- **HA Configuration:** The example above shows OM HA configuration. For SCM HA, configure `hdds.scm.service.ids` and `hdds.scm.nodes.<service-id>` similarly. Refer to the detailed HA documentation for more options.
+- **HA Configuration:** The example above shows a 3-OM HA + 3-SCM HA configuration. Refer to the detailed HA documentation for more options.
 - **Distribute:** Ensure the finalized `ozone-site.xml` is identical across all nodes in the cluster.
 
 **b) `ozone-env.sh` (Optional):**
@@ -153,19 +174,22 @@ Edit `etc/hadoop/ozone-env.sh` to set environment variables, primarily Java opti
 # export JAVA_HOME=/path/to/your/java
 
 # Set Heap Size for Ozone Manager (adjust based on expected metadata size)
-export OZONE_MANAGER_HEAP_OPTS="-Xmx4g" # Example: 4GB
+export OZONE_OM_OPTS="-Xmx4g" # Example: 4GB
 
 # Set Heap Size for Storage Container Manager
-export HDFS_STORAGECONTAINERMANAGER_HEAP_OPTS="-Xmx4g" # Example: 4GB
+export OZONE_SCM_OPTS="-Xmx4g" # Example: 4GB
 
 # Set Heap Size for Datanode
-export HDDS_DATANODE_HEAP_OPTS="-Xmx2g" # Example: 2GB
+export OZONE_DATANODE_OPTS="-Xmx2g" # Example: 2GB
 
 # Set Heap Size for S3 Gateway (if used)
-# export OZONE_S3G_HEAP_OPTS="-Xmx2g"
+# export OZONE_S3G_OPTS="-Xmx2g"
 
 # Set Heap Size for Recon (if used)
-# export RECON_HEAP_OPTS="-Xmx4g"
+# export OZONE_RECON_OPTS="-Xmx4g"
+
+# Set Heap Size for Httpfs (if used)
+# export OZONE_HTTPFS_OPTS="-Xmx4g"
 ```
 
 - Adjust heap sizes (`-Xmx`) based on your available RAM and expected workload.
