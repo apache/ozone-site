@@ -26,13 +26,13 @@ Commands:
 
 For more detailed usage see the output of --help for each of the subcommands.
 
-## ozone repair datanode
+## ozone repair Datanode
 
-Operational tool to repair datanode.
+Operational tool to repair Datanode.
 
 ### upgrade-container-schema
 
-Upgrade all schema V2 containers to schema V3 for a datanode in offline mode.
+Upgrade all schema V2 containers to schema V3 for a Datanode in offline mode.
 Optionally takes `--volume` option to specify which volume needs the upgrade.
 
 ## ozone repair ldb
@@ -54,13 +54,13 @@ Ozone Manager's efficient snapshot diff.
       --db=<dbPath>   Database File Path
 ```
 
-## ozone repair om
+## ozone repair OM
 
 Operational tool to repair OM.
 
-**Subcommands under OM**
+### Subcommands under OM
 
-- fso-tree
+- FSO-tree
 
 - snapshot
 
@@ -72,7 +72,7 @@ Operational tool to repair OM.
 
 - skip-ratis-transaction
 
-### fso-tree
+### FSO-tree
 
 Identify and repair a disconnected FSO tree by marking unreferenced entries for deletion.
 Reports the reachable, unreachable (pending delete) and unreferenced (orphaned) directories and files.
@@ -206,7 +206,7 @@ asynchronously. Requires admin privileges.
 
 #### skip-ratis-transaction, srt
 
-Omit a raft log in a ratis segment file by replacing the specified index with a dummy EchoOM command.
+Omit a raft log in a Ratis segment file by replacing the specified index with a dummy EchoOM command.
 This is an offline tool meant to be used only when all 3 OMs crash on the same transaction.
 If the issue is isolated to one OM, manually copy the DB from a healthy OM instead.
 
@@ -231,7 +231,7 @@ from one of the good OMs to the crashing OM instead.
                              Path of the input segment file
 ```
 
-## ozone repair scm
+## ozone repair SCM
 
 Operational tool to repair SCM.
 
