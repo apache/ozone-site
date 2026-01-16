@@ -20,6 +20,7 @@ A single Ozone Manager uses [RocksDB](https://github.com/facebook/rocksdb/) to p
 
 Client connects to the Leader Ozone Manager which processes the request and schedules the replication with RAFT. When the request is replicated to all the followers the leader can return with the response.
 
-## Configuration
+## Learn More
 
-For detailed configuration instructions on setting up OM HA, see the [OM HA Configuration](/docs/administrator-guide/configuration/high-availability/om-ha) documentation.
+- **Configuration**: For detailed configuration instructions on setting up OM HA, see the [OM HA Configuration](/docs/administrator-guide/configuration/high-availability/om-ha) documentation.
+- **Implementation Details**: For in-depth technical details about the OM HA implementation, including the double buffer approach and automatic snapshot installation, see the [OM HA Implementation Details](/docs/system-internals/components/ozone-manager/high-availability) documentation.
