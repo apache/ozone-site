@@ -10,24 +10,25 @@ This guide describes how to install and run Apache Ozone directly on a cluster o
 
 Before starting, ensure the following requirements are met on **all** machines intended to run Ozone services (Ozone Manager, Storage Container Manager, Datanode):
 
-*   **Java Development Kit (JDK):** Version 8 or 11 (check the specific Ozone release notes for recommended versions). Verify with `java -version`. Ensure `JAVA_HOME` is set correctly in the environment.
-*   **Operating System:** A compatible Linux distribution (e.g., CentOS, RHEL, Ubuntu, Debian).
-*   **User Account:** A dedicated user account (e.g., `ozone`) to run the Ozone services is recommended for security and manageability. Ensure this user exists on all nodes.
-*   **SSH Access:** Passwordless SSH access should be configured between the node where you will run start/stop scripts and all other nodes running Ozone services, using the dedicated Ozone user account. This is required for the cluster management scripts.
-*   **Network Configuration:**
-    *   All nodes must be reachable from each other over the network.
-    *   Hostnames must be resolvable (either via DNS or `/etc/hosts` entries on all nodes).
-    *   Firewalls must allow traffic on the configured Ozone ports (see Configuration section).
-*   **Disk Storage:** Sufficient disk space allocated for:
-    *   Ozone Manager (OM) metadata (`ozone.om.db.dirs`). SSDs are highly recommended.
-    *   Storage Container Manager (SCM) metadata (`hdds.scm.db.dirs`). SSDs are recommended.
-    *   Datanode data storage (`hdds.datanode.dir`). Multiple disks are recommended for performance and capacity.
+- **Java Development Kit (JDK):** Version 8 or 11 (check the specific Ozone release notes for recommended versions). Verify with `java -version`. Ensure `JAVA_HOME` is set correctly in the environment.
+- **Operating System:** A compatible Linux distribution (e.g., CentOS, RHEL, Ubuntu, Debian).
+- **User Account:** A dedicated user account (e.g., `ozone`) to run the Ozone services is recommended for security and manageability. Ensure this user exists on all nodes.
+- **SSH Access:** Passwordless SSH access should be configured between the node where you will run start/stop scripts and all other nodes running Ozone services, using the dedicated Ozone user account. This is required for the cluster management scripts.
+- **Network Configuration:**
+  - All nodes must be reachable from each other over the network.
+  - Hostnames must be resolvable (either via DNS or `/etc/hosts` entries on all nodes).
+  - Firewalls must allow traffic on the configured Ozone ports (see Configuration section).
+- **Disk Storage:**
+  - Ozone Manager (OM) metadata (`ozone.om.db.dirs`). SSDs are highly recommended.
+  - Storage Container Manager (SCM) metadata (`hdds.scm.db.dirs`). SSDs are recommended.
+  - Datanode data storage (`hdds.datanode.dir`). Multiple disks are recommended for performance and capacity).
 
 ## 1. Download and Unpack Ozone
 
-1.  **Download:** Obtain the **binary** distribution tarball (`ozone-<version>.tar.gz`) for your desired Ozone release from the official [Apache Ozone Downloads Page](/download). Do **not** download the source tarball (`-src.tar.gz`).
-2.  **Distribute:** Copy the downloaded tarball to a designated installation directory on **all** nodes in your cluster (e.g., `/opt/ozone`, `/usr/local/ozone`). Ensure the dedicated Ozone user has ownership or write permissions.
-3.  **Unpack:** On **each node**, unpack the tarball using the dedicated Ozone user:
+1. **Download:** Obtain the **binary** distribution tarball (`ozone-<version>.tar.gz`) for your desired Ozone release from the official [Apache Ozone Downloads Page](/download). Do **not** download the source tarball (`-src.tar.gz`).
+2. **Distribute:** Copy the downloaded tarball to a designated installation directory on **all** nodes in your cluster (e.g., `/opt/ozone`, `/usr/local/ozone`). Ensure the dedicated Ozone user has ownership or write permissions.
+3. **Unpack:** On **each node**, unpack the tarball using the dedicated Ozone user:
+
     ```bash
     # Example using /opt/ozone as the installation base
     sudo mkdir -p /opt/ozone
@@ -47,6 +48,7 @@ Before starting, ensure the following requirements are met on **all** machines i
     ln -s ozone-<version> current
     # Use /opt/ozone/current as OZONE_HOME later
     ```
+
     Replace `<version>` with the actual version number.
 
 ## 2. Configure Ozone
@@ -54,6 +56,7 @@ Before starting, ensure the following requirements are met on **all** machines i
 Configuration files are located in the `etc/hadoop/` directory within the unpacked Ozone distribution (e.g., `/opt/ozone/current/etc/hadoop/`). You need to configure at least `ozone-site.xml` and potentially `ozone-env.sh`.
 
 **Tip:** You can generate a template `ozone-site.xml` file containing all available configuration keys with their default values using the `genconf` command. Run this *before* creating your final `ozone-site.xml`:
+
 ```bash
 cd /opt/ozone/current # Or your Ozone installation directory
 bin/ozone genconf /path/to/generate/template/config
@@ -96,15 +99,15 @@ Create or edit `etc/hadoop/ozone-site.xml` on **all nodes**. Add the following e
   </property>
   <property>
     <name>ozone.om.nodes.omservice</name> <!-- Use the service ID from ozone.om.service.ids -->
-    <value>om1=om-host1.example.com:9862,om2=om-host2.example.com:9862,om3=om-host3.example.com:9862</value>
+    <value>om1=OM-host1.example.com:9862,om2=OM-host2.example.com:9862,om3=OM-host3.example.com:9862</value>
     <description>List of OM nodes in the HA ring: nodeID=hostname:rpc_port,...</description>
   </property>
   <property>
     <name>ozone.om.node.id</name>
     <!-- THIS MUST BE SET DIFFERENTLY ON EACH OM NODE -->
-    <!-- Example for om-host1: <value>om1</value> -->
-    <!-- Example for om-host2: <value>om2</value> -->
-    <!-- Example for om-host3: <value>om3</value> -->
+    <!-- Example for OM-host1: <value>om1</value> -->
+    <!-- Example for OM-host2: <value>om2</value> -->
+    <!-- Example for OM-host3: <value>om3</value> -->
     <value>om1</value> <!-- Set the unique node ID for THIS specific OM node -->
     <description>Unique identifier for this OM node within the HA service.</description>
   </property>
@@ -137,9 +140,9 @@ Create or edit `etc/hadoop/ozone-site.xml` on **all nodes**. Add the following e
 </configuration>
 ```
 
-*   **Replace placeholders:** Update hostnames (`*.example.com`), paths (`/path/to/...`), and the cluster ID (`myOzoneCluster`) according to your environment.
-*   **HA Configuration:** The example above shows OM HA configuration. For SCM HA, configure `hdds.scm.service.ids` and `hdds.scm.nodes.<service-id>` similarly. Refer to the detailed HA documentation for more options.
-*   **Distribute:** Ensure the finalized `ozone-site.xml` is identical across all nodes in the cluster.
+- **Replace placeholders:** Update hostnames (`*.example.com`), paths (`/path/to/...`), and the cluster ID (`myOzoneCluster`) according to your environment.
+- **HA Configuration:** The example above shows OM HA configuration. For SCM HA, configure `hdds.scm.service.ids` and `hdds.scm.nodes.<service-id>` similarly. Refer to the detailed HA documentation for more options.
+- **Distribute:** Ensure the finalized `ozone-site.xml` is identical across all nodes in the cluster.
 
 **b) `ozone-env.sh` (Optional):**
 
@@ -165,37 +168,43 @@ export HDDS_DATANODE_HEAP_OPTS="-Xmx2g" # Example: 2GB
 # export RECON_HEAP_OPTS="-Xmx4g"
 ```
 
-*   Adjust heap sizes (`-Xmx`) based on your available RAM and expected workload.
-*   Distribute this file consistently if modified.
+- Adjust heap sizes (`-Xmx`) based on your available RAM and expected workload.
+- Distribute this file consistently if modified.
 
 ## 3. Initialize Metadata
 
 Before starting the services for the first time, you need to initialize the metadata directories on the respective nodes. Perform these steps using the dedicated Ozone user.
 
-*   **On the SCM node(s):**
-    ```bash
-    cd /opt/ozone/current # Or your Ozone installation directory
-    bin/ozone admin scm --init
-    ```
-    *Note: In an HA setup, run `--init` on one SCM, then use `--bootstrap` on the others.*
+- **On the SCM node(s):**
 
-*   **On the OM nodes (HA Setup):**
-    1.  **On the *first* OM node only:** Run the `--init` command. This initializes the cluster metadata and Ratis group.
-        ```bash
-        # On OM node 1 (e.g., om-host1)
-        cd /opt/ozone/current
-        bin/ozone om --init
-        ```
-    2.  **On *all other* OM nodes (e.g., om-host2, om-host3):** Run the `--bootstrap` command. This makes the OM contact the initialized OM (now the Ratis leader) to get the latest state and join the replication group. Ensure the first OM is running before bootstrapping others.
-        ```bash
-        # On OM node 2 (e.g., om-host2)
-        cd /opt/ozone/current
-        bin/ozone om --bootstrap
+  ```bash
+  cd /opt/ozone/current # Or your Ozone installation directory
+  bin/ozone admin scm --init
+  ```
 
-        # On OM node 3 (e.g., om-host3)
-        cd /opt/ozone/current
-        bin/ozone om --bootstrap
-        ```
+  *Note: In an HA setup, run `--init` on one SCM, then use `--bootstrap` on the others.*
+
+- **On the OM nodes (HA Setup):**
+
+  1. **On the *first* OM node only:** Run the `--init` command. This initializes the cluster metadata and Ratis group.
+
+      ```bash
+      # On OM node 1 (e.g., OM-host1)
+      cd /opt/ozone/current
+      bin/ozone om --init
+      ```
+
+  2. **On *all other* OM nodes (e.g., OM-host2, OM-host3):** Run the `--bootstrap` command. This makes the OM contact the initialized OM (now the Ratis leader) to get the latest state and join the replication group. Ensure the first OM is running before bootstrapping others.
+
+      ```bash
+      # On OM node 2 (e.g., OM-host2)
+      cd /opt/ozone/current
+      bin/ozone om --bootstrap
+
+      # On OM node 3 (e.g., OM-host3)
+      cd /opt/ozone/current
+      bin/ozone om --bootstrap
+      ```
 
 Initialization creates the necessary database files and writes the `VERSION` file in the metadata directories. This only needs to be done once for the cluster.
 
@@ -219,7 +228,7 @@ Alternatively, you can start services individually using `ozone-daemon.sh`:
 sbin/ozone-daemon.sh start scm
 
 # Start OM on the OM host(s)
-sbin/ozone-daemon.sh start om
+sbin/ozone-daemon.sh start OM
 
 # Start Datanode on the Datanode host(s)
 sbin/ozone-daemon.sh start datanode
@@ -233,46 +242,48 @@ Once services are started, perform some basic checks:
 
 - **Check SCM Safe Mode:** SCM starts in Safe Mode and needs time to exit.
 
-    ```bash
-    # Wait for SCM to exit safe mode (may take a few minutes)
-    bin/ozone admin scm safemode wait
+  ```bash
+  # Wait for SCM to exit safe mode (may take a few minutes)
+  bin/ozone admin scm safemode wait
 
-    # Check status (should report "SCM is out of safe mode.")
-    bin/ozone admin scm safemode status
-    ```
+  # Check status (should report "SCM is out of safe mode.")
+  bin/ozone admin scm safemode status
+  ```
 
 - **Check Datanode Status:**
 
-    ```bash
-    bin/ozone admin datanode list
-    ```
-    Verify that all expected Datanodes are listed and in `HEALTHY` state.
+  ```bash
+  bin/ozone admin datanode list
+  ```
+
+  Verify that all expected Datanodes are listed and in `HEALTHY` state.
 
 - **Perform Basic I/O:**
-    ```bash
-    # Create a volume
-    bin/ozone sh volume create /vol1
 
-    # Create a bucket
-    bin/ozone sh bucket create /vol1/bucket1
+  ```bash
+  # Create a volume
+  bin/ozone sh volume create /vol1
 
-    # Create a test file locally
-    echo "Hello Ozone" > /tmp/test.txt
+  # Create a bucket
+  bin/ozone sh bucket create /vol1/bucket1
 
-    # Put the file into Ozone
-    bin/ozone sh key put /vol1/bucket1/test.txt /tmp/test.txt
+  # Create a test file locally
+  echo "Hello Ozone" > /tmp/test.txt
 
-    # Get the file back
-    bin/ozone sh key get /vol1/bucket1/test.txt /tmp/test_download.txt
+  # Put the file into Ozone
+  bin/ozone sh key put /vol1/bucket1/test.txt /tmp/test.txt
 
-    # Verify content
-    cat /tmp/test_download.txt
-    # Expected output: Hello Ozone
+  # Get the file back
+  bin/ozone sh key get /vol1/bucket1/test.txt /tmp/test_download.txt
 
-    # Cleanup
-    bin/ozone sh key delete /vol1/bucket1/test.txt
-    rm /tmp/test.txt /tmp/test_download.txt
-    ```
+  # Verify content
+  cat /tmp/test_download.txt
+  # Expected output: Hello Ozone
+
+  # Cleanup
+  bin/ozone sh key delete /vol1/bucket1/test.txt
+  rm /tmp/test.txt /tmp/test_download.txt
+  ```
 
 If these steps complete successfully, your basic Ozone cluster is running on bare metal.
 
@@ -288,7 +299,7 @@ sbin/stop-ozone.sh
 
 # Or stop individually
 # sbin/ozone-daemon.sh stop datanode
-# sbin/ozone-daemon.sh stop om
+# sbin/ozone-daemon.sh stop OM
 # sbin/ozone-daemon.sh stop scm
 ```
 
