@@ -24,7 +24,7 @@ printf '%s\n' 'Checking document content...'
 pnpm cspell lint --root="$root" --no-progress --show-context '**/*.md' '**/*.mdx' || rc="$?"
 
 printf '\n%s\n' 'Checking file names...'
-find "$root"/docs "$root"/src/pages | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
+find "$root"/docs "$root"/src/pages | xargs -n 1 basename | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
 
 if [ "$rc" != 0 ]; then
   # TODO Update this link to master when the new website's branch is merged.
