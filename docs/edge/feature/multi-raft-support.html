@@ -732,6 +732,42 @@ The Ratis pipelines will be distributed accordingly.
 </ul>
 </li>
 </ul>
+<h2 id="advanced-ratis-configuration">Advanced Ratis Configuration</h2>
+<p>Any Ratis configuration properties can be set by prepending a corresponding prefix.
+The following table shows the prefixes in each Ozone component.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Ozone Components</th>
+          <th>Configuration Prefixes</th>
+          <th>Examples: To set <code>raft.server.write.byte-limit</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Ozone Manager (OM)</td>
+          <td><code>ozone.om.ha.</code></td>
+          <td>Use <code>ozone.om.ha.raft.server.write.byte-limit</code></td>
+      </tr>
+      <tr>
+          <td>Storage Container Manager (SCM)</td>
+          <td><code>ozone.scm.ha.</code></td>
+          <td>Use <code>ozone.scm.ha.raft.server.write.byte-limit</code></td>
+      </tr>
+      <tr>
+          <td>Datanode</td>
+          <td><code>hdds.ratis.</code></td>
+          <td>Use <code>hdds.ratis.raft.server.write.byte-limit</code></td>
+      </tr>
+      <tr>
+          <td>Ozone Client</td>
+          <td><code>hdds.ratis.</code></td>
+          <td>Use <code>hdds.ratis.raft.server.write.byte-limit</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>See also <a href="https://github.com/apache/ratis/blob/ratis-3.2.1/ratis-docs/src/site/markdown/configurations.md">Apache Ratis configuration
+documentation</a>.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li>Global configuration: cannot set per-node limits</li>
@@ -761,7 +797,7 @@ The Ratis pipelines will be distributed accordingly.
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: July 3, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/d80589388ec68ba69885cae8638b9fea5a00eec4">d80589388e</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 16, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/e5d3f04ff26ae76317ac3b9743d854363a387b9a">e5d3f04ff2</a>
     </span>
   </div>
 </footer>
