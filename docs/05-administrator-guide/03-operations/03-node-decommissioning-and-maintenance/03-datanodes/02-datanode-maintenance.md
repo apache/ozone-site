@@ -44,12 +44,26 @@ ozone admin datanode recommission [-hV] [-id=<scmServiceId>] [--scm=<scm>] [<hos
 
 The following properties, typically set in `ozone-site.xml`, are relevant to maintenance mode:
 
-- `hdds.scm.replication.maintenance.replica.minimum`: The minimum number of container replicas which must be available for a node to enter maintenance. Default value is `2`. If putting a node into maintenance reduces the available replicas for any container below this level, the node will remain in the `ENTERING_MAINTENANCE` state until a new replica is created.
-- `hdds.scm.replication.maintenance.remaining.redundancy`: The number of redundant containers in a group which must be available for a node to enter maintenance. Default value is `1`. If putting a node into maintenance reduces the redundancy below this value, the node will remain in the `ENTERING_MAINTENANCE` state until a new replica is created. For Ratis containers, the default value of 1 ensures at least two replicas are online, meaning 1 more can be lost without data becoming unavailable. For any EC container it will have at least dataNum + 1 online, allowing the loss of 1 more replica before data becomes unavailable. Currently only EC containers use this setting. Ratis containers use `hdds.scm.replication.maintenance.replica.minimum`. For EC, if nodes are in maintenance, it is likely reconstruction reads will be required if some of the data replicas are offline. This is seamless to the client, but will affect read performance.
+| Property | Default Value | Description |
+| -------- |---------------|-------------|
+| `hdds.scm.replication.maintenance.replica.minimum` | `2` | The minimum number of container replicas which must be available for a node to enter maintenance. If putting a node into maintenance reduces the available replicas for any container below this level, the node will remain in the ENTERING_MAINTENANCE state until a new replica is created. |
+| `hdds.scm.replication.maintenance.remaining.redundancy` | `1` | The number of redundant containers in a group which must be available for a node to enter maintenance. If putting a node into maintenance reduces the redundancy below this value, the node will remain in the `ENTERING_MAINTENANCE` state until a new replica is created. For Ratis containers, the default value of 1 ensures at least two replicas are online, meaning 1 more can be lost without data becoming unavailable. For any EC container it will have at least dataNum + 1 online, allowing the loss of 1 more replica before data becomes unavailable. Currently only EC containers use this setting. Ratis containers use `hdds.scm.replication.maintenance.replica.minimum`. For EC, if nodes are in maintenance, it is likely reconstruction reads will be required if some of the data replicas are offline. This is seamless to the client, but will affect read performance. |
 
 ## Metrics
 
-The following SCM metrics are relevant to Datanode maintenance mode:
+The following SCM metrics are relevant to Datanode decommissioning and maintenance across all tracked nodes.
 
 - `DecommissioningMaintenanceNodesTotal`: This metric reports the total number of Datanodes that are currently in either decommissioning or maintenance mode.
 - `RecommissionNodesTotal`: This metric reports the total number of Datanodes that are currently being recommissioned (i.e., returning to `IN_SERVICE` state from either decommissioning or maintenance mode).
+- `PipelinesWaitingToCloseTotal`: This metric reports the total number of Datanodes tracked with pipelines waiting to close.
+- `ContainersUnderReplicatedTotal`: This metric reports the total number of containers under replicated in tracked nodes.
+- `ContainersUnClosedTotal`: This metric reports the total number of containers not fully closed in tracked nodes.
+- `ContainersSufficientlyReplicatedTotal`: This metric reports the total number of containers sufficiently replicated in tracked nodes.
+
+The following SCM metrics are relevant to Datanode decommissioning and maintenance per node.
+
+- `UnderReplicatedDN`: Number of under-replicated containers for the specific host
+- `PipelinesWaitingToCloseDN`: Number of pipelines waiting to close for the specific host
+- `SufficientlyReplicatedDN`: Number of sufficiently replicated containers for the specific host
+- `UnclosedContainersDN`: Number of containers not fully closed for the specific host
+- `StartTimeDN`: Timestamp when decommissioning was started for the specific host
