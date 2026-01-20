@@ -15,7 +15,7 @@ A typical production Ozone cluster includes the following services:
 - **Datanode**: Stores the actual data in containers. A production cluster requires at least 3 Datanodes.
 - **Recon**: A web-based UI for monitoring and managing the Ozone cluster. A Recon server is strongly recommended, though not required.
 - **S3 Gateway (S3G)**: An S3-compatible gateway for accessing Ozone. Multiple S3 Gateway instances are strongly recommended to load balance S3 traffic.
-- **HttpFs**: An HDFS-compatible API for accessing Ozone. This is an optional component.
+- **HttpFS**: An HDFS-compatible API for accessing Ozone. This is an optional component.
 
 ## Requirements
 
@@ -29,7 +29,7 @@ A typical production Ozone cluster includes the following services:
 ### Memory Requirements
 
 - **Ozone Manager (OM), Storage Container Manager (SCM), and Recon**: Recommended heap size in large production clusters is 64GB.
-- **Datanode, S3 Gateway, and HttpFs**: Recommended heap size is 31GB.
+- **Datanode, S3 Gateway, and HttpFS**: Recommended heap size is 31GB.
 
 ### Storage Requirements
 
@@ -68,4 +68,4 @@ A typical production Ozone cluster includes the following services:
 
 - **Monitoring**: Install Prometheus and Grafana for monitoring the Ozone cluster. For audit logs, consider using a log ingestion framework such as the ELK Stack (Elasticsearch, Logstash, and Kibana) with FileBeat, or other similar frameworks. Alternatively, you can use Apache Ranger to manage audit logs.
 - **Pipeline Limits**: Increase the number of allowed write pipelines to better suit your workload by adjusting `ozone.scm.datanode.pipeline.limit` and `ozone.scm.ec.pipeline.minimum`.
-- **Heap Sizes**: Configure sufficient heap sizes for Ozone Manager (OM), Storage Container Manager (SCM), Recon, Datanode, S3 Gateway (S3G), and HttpFs services to ensure stability.
+- **Heap Sizes**: Configure sufficient heap sizes for Ozone Manager (OM), Storage Container Manager (SCM), Recon, Datanode, S3 Gateway (S3G), and HttpFS services to ensure stability.
