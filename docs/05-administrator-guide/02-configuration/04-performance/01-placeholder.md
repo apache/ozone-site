@@ -15,7 +15,7 @@ A typical production Ozone cluster includes the following services:
 - **Datanode**: Stores the actual data in containers. A production cluster requires at least 3 Datanodes.
 - **Recon**: A web-based UI for monitoring and managing the Ozone cluster. A Recon server is strongly recommended, though not required.
 - **S3 Gateway (S3G)**: An S3-compatible gateway for accessing Ozone. Multiple S3 Gateway instances are strongly recommended to load balance S3 traffic.
-- **HttpFS**: An HDFS-compatible API for accessing Ozone. This is an optional component.
+- **HttpFS**: An WebHDFS-compatible API for accessing Ozone. This is an optional component.
 
 ## Requirements
 
