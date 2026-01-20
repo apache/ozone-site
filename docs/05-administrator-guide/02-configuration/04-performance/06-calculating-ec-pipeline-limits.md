@@ -11,10 +11,10 @@ The target number of open EC pipelines SCM aims to maintain is calculated dynami
   - **Default Value**: `5`
 
 - `ozone.scm.ec.pipeline.per.volume.factor`
-  - **Description**: A factor used to calculate a target number of pipelines based on the total number of healthy volumes across all datanodes in the cluster.
+  - **Description**: A factor used to calculate a target number of pipelines based on the total number of healthy volumes across all Datanodes in the cluster.
   - **Default Value**: `1.0`
 
-## Calculation Logic:
+## Calculation Logic
 
 SCM first calculates a volume-based target using the formula:
 `(<pipeline.per.volume.factor> * <total healthy volumes>) / <required nodes for EC config>`
@@ -22,18 +22,18 @@ SCM first calculates a volume-based target using the formula:
 The final target number of pipelines is then determined by:
 `max(<volume-based target>, <pipeline.minimum>)`
 
-## Example:
+## Example
 
-Consider a cluster with **200 total healthy volumes** across all datanodes and an EC policy of **RS-6-3** (which requires 9 nodes).
+Consider a cluster with **200 total healthy volumes** across all Datanodes and an EC policy of **RS-6-3** (which requires 9 nodes).
 
 - `ozone.scm.ec.pipeline.minimum` = **5** (default)
 - `ozone.scm.ec.pipeline.per.volume.factor` = **1.0** (default)
 
-1.  The volume-based target is: `(1.0 * 200) / 9 = 22`
-2.  The final target is: `max(22, 5) = 22`
+1. The volume-based target is: `(1.0 * 200) / 9 = 22`
+2. The final target is: `max(22, 5) = 22`
 
 SCM will attempt to create and maintain approximately **22** open, RS-6-3 EC pipelines.
 
-## Production Recommendation:
+## Production Recommendation
 
 The default values are a good starting point for most clusters. If you have a very high number of volumes and a write-heavy EC workload, you might consider slightly increasing the `pipeline.per.volume.factor`. Conversely, for read-heavy workloads, the default minimum of 5 pipelines is often sufficient.
