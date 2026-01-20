@@ -33,7 +33,7 @@ For a detailed view of Storage Container Manager this section gives a quick over
 ### Network services provided by Storage Container Manager
 
 - Pipelines: List/Delete/Activate/Deactivate
-  - pipelines are set of Datanodes to form replication groups
+  - Pipelines are set of Datanodes to form replication groups
   - Raft groups are planned by SCM
 - Containers: Create / List / Delete containers
 - Admin related requests
@@ -88,7 +88,7 @@ This means that SCM will wait for a minimum number of Datanodes to be available 
 
 ## Notable configurations
 
-| key | default | description |
+| Key | Default | Description |
 | --- | ------- | ----------- |
 | `ozone.scm.container.size` | 5GB | Default container size used by Ozone |
 | `ozone.scm.block.size` | 256MB | The default size of a data block. |
