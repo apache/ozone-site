@@ -1,5 +1,5 @@
 ---
-sidebar_label: gRPC
+sidebar_label: gRPC TLS
 ---
 
 # Configuring gRPC With TLS
@@ -17,12 +17,6 @@ Add the following property to your `ozone-site.xml` configuration file:
   <description>Enable TLS for gRPC traffic</description>
 </property>
 ```
-
-When enabled, this property encrypts:
-
-- Ratis write pipeline communication
-- Client-to-Datanode block read operations
-- Other internal gRPC-based communication between Ozone services
 
 ## Related Configuration
 
