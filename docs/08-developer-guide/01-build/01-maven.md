@@ -141,6 +141,16 @@ This command does not run acceptance tests. Refer to the [acceptance tests](/doc
 | `-Dmaven.artifact.threads=30` | Allow Maven to download 30 artifacts at once. The default value is 5. This could speed up the build process by a lot when the Maven cache was not previously populated. |
 | `-Pnative`                    | Build native module(s). So far it only affects `hdds-rocks-native`                                                                                                      |
 
+### OzoneFS Hadoop3 Client Shading
+
+The `ozonefs-hadoop3-client` jar is designed for use with Spark. It is a shaded uber jar with relocated classpath compatible with Spark.
+
+It may be optionally relocated to a different classpath by specifying the Maven property `proto.shaded.prefix`. For example, to build for Trino:
+
+```bash
+mvn clean package -Dproto.shaded.prefix='io.trino.hadoop.$internal'
+```
+
 ### Build Output
 
 The build process creates several important artifacts:
