@@ -192,3 +192,12 @@ words:
 - utilisation
 - utilised
 - hotspots
+# Infrastructure and hardware terms
+- Chrony
+- SAS
+- JBOD
+- Gbps
+- Hugepage
+- LVM
+- NVMe
+- ntpd
