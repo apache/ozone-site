@@ -22,7 +22,7 @@ ozone --daemon start om
 
 At this point Ozone's name services, the Ozone Manager, and the block service SCM are both running.
 
-Now we need to start the data nodes. Please run the following command on each Datanode.
+Now we need to start the Datanodes. Please run the following command on each Datanode.
 
 ```bash
 ozone --daemon start datanode
@@ -34,7 +34,7 @@ Wait until SCM exits safe mode
 ozone admin safemode wait -t 240
 ```
 
-At this point SCM, Ozone Manager and data nodes are up and running and are ready to serve requests.
+At this point SCM, Ozone Manager and Datanodes are up and running and are ready to serve requests.
 
 ### Starting Optional Services
 
@@ -54,7 +54,7 @@ If you want to make your life simpler, you can just run:
 start-ozone.sh
 ```
 
-This assumes that you have set up the `workers` file correctly and ssh configuration that allows ssh-ing to all data nodes.
+This assumes that you have set up the `workers` file correctly and ssh configuration that allows ssh-ing to all Datanodes.
 
 1. You are expected to list all hostnames or IP addresses in your `${OZONE_CONF_DIR}/workers` file, one per line.
 2. You have passwordless SSH access configured from the control node to all other nodes in the cluster.
