@@ -1,0 +1,54 @@
+# Tools
+
+import DocCardList from "@theme/DocCardList";
+
+Ozone provides a set of command-line tools that can be used to manage and operate an Ozone cluster.
+
+All commands are invoked via the `ozone` script.
+
+---
+
+## Daemon commands
+
+Commands used to start or stop Ozone services.
+
+- **`scm`** – Storage Container Manager service
+- **`om`** – Ozone Manager service
+- **`datanode`** – HDDS DataNode service
+- **`s3g`** – S3-compatible REST gateway
+- **`recon`** – Recon Web UI service
+- **`httpfs`** – HttpFS gateway
+
+---
+
+## Client commands
+
+- **`sh`** – Manage volumes, buckets, and keys
+- **`fs`** – Ozone filesystem commands (similar to `hdfs dfs`)
+- **`version`** – Print Ozone and HDDS version information
+
+---
+
+## Admin commands
+
+- **`admin`** – Admin and developer commands for Ozone components
+- **`insight`** – Display filtered logs, metrics, or configs for debugging
+- **`classpath`** – Print Hadoop classpath
+- **`dtutil`** – Delegation token operations
+- **`envvars`** – Display computed Hadoop environment variables
+- **`getconf`** – Read Ozone configuration values
+- **`genconf`** – Generate minimal `ozone-site.xml`
+
+---
+
+## Test tools
+
+- **`freon`** – Ozone load generator
+
+---
+
+## Snapshots
+
+This section documents how to manage and configure Ozone snapshots.
+
+<DocCardList />
