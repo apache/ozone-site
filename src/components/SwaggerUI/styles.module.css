@@ -1,0 +1,363 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+.swaggerWrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Remove white bars and extra spacing */
+.swaggerWrapper :global(.swagger-ui .information-container) {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container) {
+  margin: 0;
+  padding: 20px 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .info) {
+  margin: 0 0 20px 0;
+  padding: 0;
+  background: transparent;
+}
+
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  padding: 0;
+}
+
+/* Match Swagger UI with Docusaurus theme */
+.swaggerWrapper :global(.swagger-ui) {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Match heading fonts */
+.swaggerWrapper :global(.swagger-ui .info .title),
+.swaggerWrapper :global(.swagger-ui h1),
+.swaggerWrapper :global(.swagger-ui h2),
+.swaggerWrapper :global(.swagger-ui h3),
+.swaggerWrapper :global(.swagger-ui h4),
+.swaggerWrapper :global(.swagger-ui h5) {
+  font-family: var(--ifm-heading-font-family);
+  letter-spacing: -0.02em;
+}
+
+/* Make main title white */
+.swaggerWrapper :global(.swagger-ui .info .title) {
+  color: #ffffff !important;
+  background: var(--ifm-color-primary);
+  padding: 15px 20px;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info .title) {
+  color: #1a1a1a !important;
+  background: var(--ifm-color-primary);
+}
+
+/* Fix OAS version text visibility */
+.swaggerWrapper :global(.swagger-ui .info .main .version),
+.swaggerWrapper :global(.swagger-ui .info hgroup.main a),
+.swaggerWrapper :global(.swagger-ui .info hgroup.main span) {
+  color: var(--ifm-font-color-base) !important;
+  background: transparent !important;
+}
+
+.swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info .main .version),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info hgroup.main a),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info hgroup.main span) {
+  color: var(--ifm-font-color-base) !important;
+  background: transparent !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+}
+
+/* Style the spec file URL to match Apache License (green) */
+.swaggerWrapper :global(.swagger-ui .information-container .info .url) {
+  color: var(--ifm-color-primary) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .information-container .info .url) {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Style server URL section to match license */
+.swaggerWrapper :global(.swagger-ui .scheme-container) {
+  background: transparent;
+  padding: 0;
+  margin: 15px 0 20px 0;
+  box-shadow: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers-title) {
+  display: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers > label) {
+  color: var(--ifm-color-primary) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .scheme-container .servers select) {
+  border-color: #444;
+}
+
+/* Match code/monospace fonts */
+.swaggerWrapper :global(.swagger-ui code),
+.swaggerWrapper :global(.swagger-ui pre) {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 14px;
+}
+
+/* Match link colors with Docusaurus theme */
+.swaggerWrapper :global(.swagger-ui a) {
+  color: var(--ifm-link-color) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui a:hover) {
+  color: var(--ifm-link-hover-color) !important;
+}
+
+/* Fix link text visibility in response links column */
+.swaggerWrapper :global(.swagger-ui .response-col_links),
+.swaggerWrapper :global(.swagger-ui .response-col_links a),
+.swaggerWrapper :global(.swagger-ui .response-col_links span),
+.swaggerWrapper :global(.swagger-ui .response-col_links .response-undocumented) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_links a) {
+  color: var(--ifm-link-color) !important;
+  text-decoration: underline;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links a),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links span),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links .response-undocumented) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links a) {
+  color: var(--ifm-link-color) !important;
+  text-decoration: underline;
+}
+
+/* Use Docusaurus primary color for GET operations */
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-get .opblock-summary-method) {
+  background: var(--ifm-color-primary) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-get) {
+  border-color: var(--ifm-color-primary) !important;
+  background: rgba(53, 117, 0, 0.1);
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-get .opblock-summary) {
+  border-color: var(--ifm-color-primary) !important;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock.opblock-get) {
+  background: rgba(150, 210, 110, 0.1);
+}
+
+/* Match background colors */
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  background: var(--ifm-background-color);
+}
+
+/* Improve body text readability */
+.swaggerWrapper :global(.swagger-ui p),
+.swaggerWrapper :global(.swagger-ui li),
+.swaggerWrapper :global(.swagger-ui td),
+.swaggerWrapper :global(.swagger-ui th) {
+  font-family: var(--ifm-font-family-base);
+  line-height: 1.6;
+}
+
+/* Improve visibility of ALL grey/muted text */
+.swaggerWrapper :global(.swagger-ui .opblock-description-wrapper p),
+.swaggerWrapper :global(.swagger-ui .opblock-external-docs-wrapper p),
+.swaggerWrapper :global(.swagger-ui .opblock-title_normal p),
+.swaggerWrapper :global(.swagger-ui .parameter__name),
+.swaggerWrapper :global(.swagger-ui .parameter__type),
+.swaggerWrapper :global(.swagger-ui .parameter__in),
+.swaggerWrapper :global(.swagger-ui .prop-type),
+.swaggerWrapper :global(.swagger-ui .prop-format),
+.swaggerWrapper :global(.swagger-ui .response-col_description),
+.swaggerWrapper :global(.swagger-ui .response-col_status),
+.swaggerWrapper :global(.swagger-ui .model),
+.swaggerWrapper :global(.swagger-ui .model-title),
+.swaggerWrapper :global(.swagger-ui table thead tr th),
+.swaggerWrapper :global(.swagger-ui table tbody tr td),
+.swaggerWrapper :global(.swagger-ui .tab li),
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown p),
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Dark mode text visibility */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-description-wrapper p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-external-docs-wrapper p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-title_normal p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__name),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__type),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__in),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-type),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-format),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_status),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model-title),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui table thead tr th),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui table tbody tr td),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .tab li),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .renderedMarkdown p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .renderedMarkdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Improve description text visibility */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-description),
+.swaggerWrapper :global(.swagger-ui .opblock-description),
+.swaggerWrapper :global(.swagger-ui .markdown p),
+.swaggerWrapper :global(.swagger-ui .markdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-summary-description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .markdown p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .markdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Fix alignment issues when API is expanded */
+.swaggerWrapper :global(.swagger-ui .opblock-body) {
+  padding: 20px;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-section) {
+  padding: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-section-header) {
+  padding: 15px 20px;
+  margin: 0;
+}
+
+/* Fix table alignment */
+.swaggerWrapper :global(.swagger-ui table) {
+  width: 100%;
+  margin: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .table-container) {
+  padding: 0;
+  margin: 0;
+}
+
+/* Fix parameter table alignment - ALL columns */
+.swaggerWrapper :global(.swagger-ui .parameters-col_name),
+.swaggerWrapper :global(.swagger-ui .parameters-col_description),
+.swaggerWrapper :global(.swagger-ui table.parameters tbody tr td) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+.swaggerWrapper :global(.swagger-ui table.parameters thead tr th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+/* Make Parameters and Responses headers black in both modes */
+.swaggerWrapper :global(.swagger-ui .opblock-section-header h4),
+.swaggerWrapper :global(.swagger-ui .opblock-section-header label) {
+  color: #000000 !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-section-header h4),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-section-header label) {
+  color: #000000 !important;
+}
+
+/* Fix response section alignment - ALL columns */
+.swaggerWrapper :global(.swagger-ui .responses-wrapper) {
+  padding: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .responses-inner) {
+  padding: 20px;
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_status),
+.swaggerWrapper :global(.swagger-ui .response-col_description),
+.swaggerWrapper :global(.swagger-ui .response-col_links),
+.swaggerWrapper :global(.swagger-ui .responses-table tbody tr td) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .responses-header th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+/* Fix ALL table cells alignment */
+.swaggerWrapper :global(.swagger-ui table tbody tr td),
+.swaggerWrapper :global(.swagger-ui table thead tr th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+  vertical-align: top;
+}
+
+/* Fix code block alignment */
+.swaggerWrapper :global(.swagger-ui .highlight-code) {
+  margin: 0;
+  text-align: left;
+}
+
+.swaggerWrapper :global(.swagger-ui .microlight) {
+  text-align: left;
+}
