@@ -67,5 +67,5 @@ A typical production Ozone cluster includes the following services:
 ### Ozone Configuration
 
 - **Monitoring**: Install Prometheus and Grafana for monitoring the Ozone cluster. For audit logs, consider using a log ingestion framework such as the ELK Stack (Elasticsearch, Logstash, and Kibana) with FileBeat, or other similar frameworks. Alternatively, you can use Apache Ranger to manage audit logs.
-- **Pipeline Limits**: Increase the number of allowed write pipelines to better suit your workload by adjusting `ozone.scm.datanode.pipeline.limit` and `ozone.scm.ec.pipeline.minimum`.
+- **Pipeline Limits**: Increase the number of allowed write pipelines to better suit your workload by adjusting `ozone.scm.datanode.pipeline.limit`. See the [Multi-Raft](./multi-raft) documentation for the formula to calculate appropriate pipeline limits based on your metadata disk configuration.
 - **Heap Sizes**: Configure sufficient heap sizes for Ozone Manager (OM), Storage Container Manager (SCM), Recon, Datanode, S3 Gateway (S3G), and HttpFS services to ensure stability.
