@@ -29,4 +29,4 @@ When enabled, this property encrypts:
 For information on protecting other types of in-transit traffic in Ozone, see:
 
 - [Hadoop RPC Encryption](./hadoop-rpc) - For client-to-Ozone Manager communication
-- [Network Ports](../../../../core-concepts/architecture/network-ports) - For details on network ports and transport types <!-- TODO: Link to network ports documentation when created -->
+- [Default Ports](../../../basic/network/default-ports) - For details on network ports and transport types
