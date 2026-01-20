@@ -361,3 +361,30 @@
 .swaggerWrapper :global(.swagger-ui .microlight) {
   text-align: left;
 }
+
+/* Fix input field text visibility in Try it out */
+.swaggerWrapper :global(.swagger-ui input[type="text"]),
+.swaggerWrapper :global(.swagger-ui input[type="number"]),
+.swaggerWrapper :global(.swagger-ui input[type="email"]),
+.swaggerWrapper :global(.swagger-ui input[type="password"]),
+.swaggerWrapper :global(.swagger-ui input[type="search"]),
+.swaggerWrapper :global(.swagger-ui input[type="url"]),
+.swaggerWrapper :global(.swagger-ui textarea),
+.swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border: 1px solid #ccc !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="text"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="number"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="email"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="password"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="search"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="url"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui textarea),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border-color: #444 !important;
+}
