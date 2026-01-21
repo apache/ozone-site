@@ -49,6 +49,10 @@ The defined prefixes can be used to define the address of each of the OM service
 </property>
 ```
 
+:::warning
+Updating the OM service ID after the cluster is set up is not supported and will cause the OM startup process to abort. This value should be considered immutable after initial deployment.
+:::
+
 The defined `serviceId` can be used instead of a single OM host using client interfaces.
 
 For example with `o3fs://`
