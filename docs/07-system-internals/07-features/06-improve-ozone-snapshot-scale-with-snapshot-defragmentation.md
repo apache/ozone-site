@@ -25,7 +25,7 @@ Note: Snapshot Defragmentation was previously called Snapshot Compaction earlier
 A new boolean flag (`needsDefrag`), timestamp (`lastDefragTime`), int `version` would be added to snapshot metadata.  
 `needsDefrag` tells the system whether a snapshot is pending defrag (`true`) or if it is already defragged and up to date (`false`). This helps manage and automate the defrag workflow, ensuring snapshots are efficiently stored and maintained. `needsDefrag` defaults to `false` during initialization and when absent.  
 A new list of `Map<String, List<Longs>>` (`notDefraggedSstFileList`) also would be added to snapshot meta as part of snapshot create operation; this would be storing the original list of SST files in the not defragged copy of the snapshot corresponding to keyTable/fileTable/DirectoryTable. This should be done as part of the snapshot create operation.  
-Since this is not going to be consistent across all OMs this would have to be written to a local yaml file inside the snapshot directory and this can be maintained in the SnapshotChainManager in memory on startup. So all updates should not go through Ratis.  
+Since this is not going to be consistent across all OMs this would have to be written to a local YAML file inside the snapshot directory and this can be maintained in the SnapshotChainManager in memory on startup. So all updates should not go through Ratis.  
 An additional `Map<Integer, Map<String, List<Long>>>` (`defraggedSstFileList`) also would be added to snapshotMeta. This will be maintaining a list of sstFiles of different versions of defragged snapshots. The key here would be the version number of snapshot DBs.
 
 ### 2. Snapshot Cache Lock for Read Prevention
@@ -83,7 +83,7 @@ om.db-<snapshot_id>-<version>
 
 - **Update snapshot metadata**, setting `lastDefragTime` and marking `needsDefrag = false` and set the next snapshot in the chain is marked for defragmentation. If there is no path previous snapshot in the chain then increase `version` by 1 otherwise set `version` which is equal to the previous snapshot in the chain. Based on the sstFiles in the RocksDB compute `Map<String, List<Long>>` and add this Map to `defraggedSstFileList` corresponding to the `version` of the snapshot.
 
-- **Delete old not defragged/defragged snapshots**, ensuring unreferenced not defragged/defragged snapshots are purged during OM startup(This is to handle jvm crash after viii).
+- **Delete old not defragged/defragged snapshots**, ensuring unreferenced not defragged/defragged snapshots are purged during OM startup(This is to handle JVM crash after viii).
 
 - **Release the snapshot cache lock** on the snapshot id. Now the snapshot is ready to be used to read
 
