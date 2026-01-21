@@ -6,7 +6,7 @@ sidebar_label: Kerberos
 
 Ozone depends on [Kerberos](https://web.mit.edu/kerberos/) to make the clusters secure. Historically, HDFS has supported running in an isolated secure networks where it is possible to deploy without securing the cluster.
 
-This release of Ozone follows that model, but soon will move to _secure by default._ Today to enable security in Ozone cluster, we need to set the configuration `ozone.security.enabled` to `true` and `hadoop.security.authentication` to `kerberos`.
+This release of Ozone follows that model, but soon will move to *secure by default.* Today to enable security in Ozone cluster, we need to set the configuration `ozone.security.enabled` to `true` and `hadoop.security.authentication` to `kerberos`.
 
 | Property                         | Value      |
 | -------------------------------- | ---------- |
