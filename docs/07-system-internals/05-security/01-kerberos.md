@@ -22,10 +22,22 @@ S3 uses a very different shared secret security scheme. Ozone supports the AWS S
 
 The S3 credential tokens are called S3 auth info in the code. These tokens are also enabled by default when security is enabled.
 
+Each of the service daemons that make up Ozone needs a Kerberos service principal name and a corresponding [kerberos key tab](https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html) file.
+
+All these settings should be made in `ozone-site.xml`.
+
 ## Securing Datanodes
 
 Datanodes under Hadoop is traditionally secured by creating a Keytab file on the Datanodes. With Ozone, we have moved away to using Datanode certificates. That is, Kerberos on Datanodes is not needed in case of a secure Ozone cluster.
-However, we support the legacy Kerberos based Authentication to make it easy for the current set of users.
+
+However, we support the legacy Kerberos based Authentication to make it easy for the current set of users. The HDFS configuration keys are the following that is setup in `hdfs-site.xml`.
+
+| Property                                     | Description                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| `dfs.datanode.kerberos.principal`            | The Datanode service principal. e.g. `dn/_HOST@REALM.COM`                       |
+| `dfs.datanode.kerberos.keytab.file`          | The keytab file used by Datanode daemon to login as its service principal.      |
+| `hdds.datanode.http.auth.kerberos.principal` | Datanode HTTP server service principal.                                         |
+| `hdds.datanode.http.auth.kerberos.keytab`    | The keytab file used by Datanode HTTP server to login as its service principal. |
 
 ### How a Datanode becomes secure
 
