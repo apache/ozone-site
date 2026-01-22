@@ -29,7 +29,7 @@ Let us look at the settings inside the generated file (`ozone-site.xml`) and how
        </property>
     ```
 
-- **ozone.scm.names**  Storage Container Manager (SCM) is a distributed block service which is used by Ozone. This property allows Datanodes to discover SCM's address. Datanodes send heartbeat to SCM. Until HA feature is complete, we configure `ozone.scm.names` to be a single machine.
+- **`ozone.scm.names`**  Storage Container Manager (SCM) is a distributed block service which is used by Ozone. This property allows Datanodes to discover SCM's address. Datanodes send heartbeat to SCM. Until HA feature is complete, we configure `ozone.scm.names` to be a single machine.
 
     Here is an example,
 
@@ -40,7 +40,7 @@ Let us look at the settings inside the generated file (`ozone-site.xml`) and how
         </property>
     ```
 
-- **ozone.scm.datanode.id.dir** Datanodes generate a Unique ID called Datanode ID. This identity is written to the file `datanode.id` in a directory specified by this path. *Datanodes will create this path if it doesn't exist already.*
+- **`ozone.scm.datanode.id.dir`** Datanodes generate a Unique ID called Datanode ID. This identity is written to the file `datanode.id` in a directory specified by this path. *Datanodes will create this path if it doesn't exist already.*
 
     Here is an  example,
 
@@ -51,9 +51,9 @@ Let us look at the settings inside the generated file (`ozone-site.xml`) and how
        </property>
     ```
 
-- **ozone.om.address** OM server address. This is used by OzoneClient and Ozone File System.
+- **`ozone.om.address`** OM server address. This is used by OzoneClient and Ozone File System.
 
-    Here is an  example,
+    Here is an example,
 
     ```xml
         <property>
