@@ -94,6 +94,7 @@ words:
 - quasi-closed
 - HCFS
 - libo3fs
+- AOS
 # Other systems' words
 - KDC
 - classpath
@@ -178,6 +179,7 @@ words:
 - checksummed
 - ISA
 - doublebuffer
+- defragged
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
