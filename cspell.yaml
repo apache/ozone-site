@@ -99,6 +99,7 @@ words:
 - classpath
 - DS
 - HDFS
+- dfs
 - Protolock
 - CSI
 - Quantcast
