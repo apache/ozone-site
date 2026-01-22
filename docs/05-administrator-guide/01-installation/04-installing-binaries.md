@@ -37,5 +37,5 @@ rpm -ivh ozone-<version>-1.noarch.rpm
 For DEB:
 
 ```bash
-apt install ozone_<ozone_version>-<linux_distro>_.deb
+apt install ozone_<version>-<linux_distro>_.deb
 ```
