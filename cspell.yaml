@@ -178,6 +178,10 @@ words:
 - checksummed
 - ISA
 - doublebuffer
+- untars
+- jdbc
+- JDBC
+- MIS
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
