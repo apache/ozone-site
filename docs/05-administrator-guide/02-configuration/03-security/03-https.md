@@ -2,7 +2,7 @@
 sidebar_label: HTTPS
 ---
 
-# Configuring HTTPS
+# Configuring HTTP authentication using Kerberos SPNEGO
 
 This document describes how to configure Ozone HTTP web-consoles to require user authentication.
 
