@@ -31,8 +31,13 @@ To use an RPM or DEB package, execute the appropriate command:
 For RPM:
 
 ```bash
-rpm -ivh ozone-<version>-1.noarch.rpm
+dnf install ozone-<version>-1.noarch.rpm
 ```
+or
+```bash
+yum install ozone-<version>-1.noarch.rpm
+```
+
 
 For DEB:
 
