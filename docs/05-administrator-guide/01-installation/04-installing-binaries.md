@@ -33,11 +33,12 @@ For RPM:
 ```bash
 dnf install ozone-<version>-1.noarch.rpm
 ```
+
 or
+
 ```bash
 yum install ozone-<version>-1.noarch.rpm
 ```
-
 
 For DEB:
 
