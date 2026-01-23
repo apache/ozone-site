@@ -39,16 +39,16 @@ You can set both space and namespace quotas at the same time:
 
 ```bash
 # Set both space (1TB) and namespace (1 million objects) quotas simultaneously
-ozone sh volume setquota --space=1TB --count=1000000 /volume1
+ozone sh volume setquota --space-quota=1TB --namespace-quota=1000000 /volume1
 
 # Check current quota settings and usage
 ozone sh volume info /volume1
 
 # Clear the space quota (set space limit to unlimited)
-ozone sh volume clrquota --space /volume1
+ozone sh volume clrquota --space-quota /volume1
 
 # Clear the namespace quota (set object count limit to unlimited)
-ozone sh volume clrquota --count /volume1
+ozone sh volume clrquota --namespace-quota /volume1
 ```
 
 For detailed information on how to set and manage both types of volume quotas using CLI commands separately, see the [Quota Operations Guide](/docs/administrator-guide/operations/quota).
