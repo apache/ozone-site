@@ -1,6 +1,6 @@
 # Debug Datanode
 
-Debug commands related to datanode. Currently, only container replica related commands are available.  
+Debug commands related to Datanode. Currently, only container replica related commands are available.  
 Following is the usage and the subcommands available under the `ozone debug datanode container` command:
 
 ```bash

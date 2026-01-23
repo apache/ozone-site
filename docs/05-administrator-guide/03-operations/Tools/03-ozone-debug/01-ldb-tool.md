@@ -1,7 +1,7 @@
 # LDB Tool
 
 Ozone heavily uses RocksDB for storing metadata. This tool helps parse the contents of RocksDB belonging to Ozone Roles.
-Supported DB’s : Ozone Manager (om.db) , StorageContainerManager (scm.db), Datanode/Container (container.db)
+Supported DB’s : Ozone Manager (OM.db) , StorageContainerManager (SCM.db), Datanode/Container (container.db)
 Below is the usage:
 
 ```bash
@@ -40,7 +40,7 @@ move
 
 ## scan command
 
-`scan` command parses a particular column family of a rocksdb provided and prints the records.
+`scan` command parses a particular column family of a RocksDB provided and prints the records.
 
 ```bash
 Usage: ozone debug ldb scan [--compact] [--count] [--with-keys]
@@ -103,7 +103,7 @@ As the names suggest, these options specify the keys from/until which the iterat
 `--startkey` specifies which key to start iterating from, it is inclusive. `--endkey` specifies which key to stop iterating at, it is exclusive.
 
 ```bash
-$ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --startkey=vol3 --endkey=vol5
+ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --startkey=vol3 --endkey=vol5
 ```
 
 ```json
@@ -158,7 +158,7 @@ $ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --startkey=vol3 --en
 There are multiple fields in each record. `--fields` option allows us to choose the specific fields to display.
 
 ```bash
-$ ozone debug ldb --db=/path/to/om.db scan --cf=keyTable -l=1 --fields="volumeName,bucketName,keyName,keyLocationVersions.version,acls.name"
+ozone debug ldb --db=/path/to/om.db scan --cf=keyTable -l=1 --fields="volumeName,bucketName,keyName,keyLocationVersions.version,acls.name"
 ```
 
 ```json
@@ -187,7 +187,7 @@ Multiple filters can also be given in one command, they need to be separated by 
 Using `equals` operator:
 
 ```bash
-$ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespace:equals:2"
+ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespace:equals:2"
 ```
 
 ```json
@@ -218,10 +218,10 @@ $ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamesp
 
 ## checkpoint command
 
-`checkpoint` command takes a checkpoint of a rocksdb, at a provided path.
+`checkpoint` command takes a checkpoint of a RocksDB, at a provided path.
 
 ```bash
-$ ozone debug ldb --db=/data/metadata/om.db checkpoint --output=/tmp/om-checkpoint
+ozone debug ldb --db=/data/metadata/om.db checkpoint --output=/tmp/om-checkpoint
 ```
 
 [Next >>](/docs/administrator-guide/operations/Tools/ozone-debug/debug-om)

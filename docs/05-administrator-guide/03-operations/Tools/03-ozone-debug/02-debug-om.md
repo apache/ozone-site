@@ -5,7 +5,7 @@ It has the following subcommands:
 
 ## generate-compaction-dag
 
-Creates a DAG image of the current compaction log of an om.db instance. It is downloaded to the specified location.
+Creates a DAG image of the current compaction log of an OM.db instance. It is downloaded to the specified location.
 
 ```bash
 Usage: ozone debug om generate-compaction-dag [-hV] [--verbose] --db=<dbPath>

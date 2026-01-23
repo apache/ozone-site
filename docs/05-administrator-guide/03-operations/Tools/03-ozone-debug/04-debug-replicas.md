@@ -1,6 +1,6 @@
 # Debug Replicas
 
-Debug commands for retrieving information and performing various checks on the key replicas in datanodes.
+Debug commands for retrieving information and performing various checks on the key replicas in Datanodes.
 
 ```bash
 Usage: ozone debug replicas [--verbose] [COMMAND]

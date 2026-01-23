@@ -1,15 +1,15 @@
 # Container Replica Debugger Tool
 
-The tool processes container log files from Ozone datanodes to track state transitions. It provides CLI commands for querying containers based on different attributes.
+The tool processes container log files from Ozone Datanodes to track state transitions. It provides CLI commands for querying containers based on different attributes.
 
 ## Background
 
-Containers are the most important part of ozone. Most of the ozone operations happen on them. Containers in ozone go through different states in their lifecycle.
+Containers are the most important part of Ozone. Most of the Ozone operations happen on them. Containers in ozone go through different states in their lifecycle.
 In the past we have seen different issues on container state. To debug problems we always use manual steps and identify problems w.r.t containers and this takes a lot of time. To optimize debugability we can show historical timeline and other information w.r.t containers.
 
 ## Solution Approach
 
-An offline tool that would analyse the dn-container log files and help us find issues related to the containers across the datanodes in the cluster.
+An offline tool that would analyse the dn-container log files and help us find issues related to the containers across the Datanodes in the cluster.
 
 ### Component 1: Parser
 
@@ -17,7 +17,7 @@ This component is responsible for processing log files, extracting relevant log 
 
 **The command is as follows:**
 
-```
+```bash
 ozone debug log container --db=<path to db> parse --path=<path to logs folder> --thread-count=<n>
 ```
 
@@ -34,12 +34,12 @@ ozone debug log container --db=<path to db> parse --path=<path to logs folder> -
 
 ### Component 2: Database
 
-The tool uses a temporary SQLite database to store and manage information extracted from container logs. This helps organize the data so that both the complete history and the latest status of each container replica on a datanode can be analyzed easily.
+The tool uses a temporary SQLite database to store and manage information extracted from container logs. This helps organize the data so that both the complete history and the latest status of each container replica on a Datanode can be analyzed easily.
 
-#### There are 2 major tables created/maintained by the tool:
+#### There are 2 major tables created/maintained by the tool
 
 1. **DatanodeContainerLogTable — Detailed Log History**  
-   This table stores a complete history of state changes for each container replica on every datanode.
+   This table stores a complete history of state changes for each container replica on every Datanode.
    - Container ID
    - Datanode ID
    - State (such as OPEN, CLOSED, etc.)
@@ -52,7 +52,7 @@ The tool uses a temporary SQLite database to store and manage information extrac
    The data in this table shows a complete timeline of state transitions and BCSID changes, helping to trace how each container replica evolved over time.
 
 2. **ContainerLogTable — Latest Status Summary**  
-   This table contains only the most recent state and BCSID for each unique container and datanode pair.
+   This table contains only the most recent state and BCSID for each unique container and Datanode pair.
    - Container ID
    - Datanode ID
    - Latest State
@@ -64,19 +64,19 @@ The tool uses a temporary SQLite database to store and manage information extrac
 
 #### **To List Containers Having Duplicate Open States**
 
-This Ozone debug CLI command helps to identify containers that were opened more than the required number (for Ratis, it is 3) by tracking the first three “OPEN” states and flagging any subsequent “OPEN” state as problematic if it occurs on the same datanode or on a different datanode after the initial events.
+This Ozone debug CLI command helps to identify containers that were opened more than the required number (for Ratis, it is 3) by tracking the first three “OPEN” states and flagging any subsequent “OPEN” state as problematic if it occurs on the same Datanode or on a different Datanode after the initial events.
 
 This command displays the **Container ID** along with the count of replicas in the ‘OPEN’ state for each listed container. It also provides the total number of containers that have duplicate ‘OPEN’ state entries.
 
 **The command is as follows:**
 
-```
+```bash
 ozone debug log container --db=<path to db> duplicate-open
 ```
 
 **Sample output:**
 
-```
+```bash
 Container ID: 2187256 - OPEN state count: 4
 .
 .
@@ -99,7 +99,7 @@ Total containers that might have duplicate OPEN state : 1579
 
 #### **To Display Details of a Single Container Along with Analysis**
 
-This ozone debug CLI command provides a complete state transition history for each replica of the container whose ID is provided via the command.
+This Ozone debug CLI command provides a complete state transition history for each replica of the container whose ID is provided via the command.
 The command also provides analysis over the container such as if the container has issues like:
 
 - Duplicate OPEN states
@@ -120,13 +120,13 @@ The command provides key details such as:
 
 **The command is as follows:**
 
-```
+```bash
 ozone debug log container --db=<path to database> info <containerID>
 ```
 
 **Sample output:**
 
-```
+```bash
 Timestamp               | Container ID | Datanode ID | Container State  | BCSID   | Message             | Index Value
 ----------------------------------------------------------------------------------------------------------------------
 2024-06-04 15:07:55,390 | 700          | 100         | QUASI_CLOSED     | 353807 | No error             | 0
@@ -142,7 +142,7 @@ Container 700 might be QUASI_CLOSED_STUCK.
 
 #### **To List Containers Based on Health State**
 
-This ozone debug CLI command lists all the containers which are either UNDER-REPLICATED, OVER-REPLICATED, UNHEALTHY, or QUASI_CLOSED stuck.
+This Ozone debug CLI command lists all the containers which are either UNDER-REPLICATED, OVER-REPLICATED, UNHEALTHY, or QUASI_CLOSED stuck.
 
 This command displays the **Container ID** along with the count of replicas in the specified health state for each listed container.
 
@@ -150,29 +150,29 @@ This command displays the **Container ID** along with the count of replicas in t
 
 - List containers by health type: this by default provides only 100 rows in the result
 
-```
+```bash
 ozone debug log container --db=<path to db> list --health=<type>
 ```
 
 - List containers by health type with a specified row limit:
 
-```
+```bash
 ozone debug log container --db=<path to db> list --health=<type>  --length=<limit>
 ```
 
 - List all containers by health type, overriding the row limit:
 
-```
+```bash
 ozone debug log container --db=<path to db> list --health=<type>  --all
 ```
 
 **Sample output:**
 
-```
+```bash
 ozone debug log container --db=path/to/db list --health=UNHEALTHY --all
 ```
 
-```
+```bash
 Container ID = 6002 - Count = 1
 Container ID = 6201 - Count = 1
 .
@@ -191,7 +191,7 @@ Number of containers listed: 25085
 
 #### **To List Containers Based on Final State**
 
-This ozone debug CLI command helps to list replicas of all the containers which have the state provided via the CLI command as their latest state.
+This Ozone debug CLI command helps to list replicas of all the containers which have the state provided via the CLI command as their latest state.
 
 The command provides key details such as:
 
@@ -206,29 +206,29 @@ The command provides key details such as:
 
 - List containers by state: this by default provides only 100 rows in the result
 
-```
+```bash
 ozone debug log container --db=<path to db> list --lifecycle=<state>
 ```
 
 - List containers by state with a specified row limit:
 
-```
+```bash
 ozone debug log container --db=<path to db> list --lifecycle=<state> --length=<limit>
 ```
 
 - List all containers by state, overriding the row limit:
 
-```
+```bash
 ozone debug log container --db=<path to db> list --lifecycle=<state> --all
 ```
 
 **Sample output:**
 
-```
+```bash
 ozone debug log container --db=path/to/db list --lifecycle=CLOSED --all
 ```
 
-```
+```bash
 Timestamp                 | Datanode ID | Container ID | BCSID  | Message        | Index Value
 ---------------------------------------------------------------------------------------------------
 2024-07-23 12:02:12,981   | 360         | 1            | 75654  | No error       | 0
@@ -245,6 +245,6 @@ Timestamp                 | Datanode ID | Container ID | BCSID  | Message       
 
 ## NOTE
 
-- This tool assumes that all dn-container log files are already extracted from the datanodes and placed into a directory.
+- This tool assumes that all dn-container log files are already extracted from the Datanodes and placed into a directory.
 - For the parsing command, if the DB path is not provided, a new database will be created in the current working directory with the default filename `container_datanode.db`.
 - For all other commands, if the DB path is not provided, it will look for a default database (`container_datanode.db`) file in the current directory. If it doesn’t exist, it will throw an error asking to provide a valid path.

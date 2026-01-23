@@ -13,10 +13,10 @@ A quick overview of the available functionalities:
   Subcommands help debug the current container state (list / get / create / …).
 
 - `ozone admin pipeline`  
-  Helps check available pipelines (datanode sets).
+  Helps check available pipelines (Datanodes sets).
 
 - `ozone admin datanode`  
-  Provides information about datanodes.
+  Provides information about Datanodes.
 
 - `ozone admin printTopology`  
   Displays rack-awareness related information.

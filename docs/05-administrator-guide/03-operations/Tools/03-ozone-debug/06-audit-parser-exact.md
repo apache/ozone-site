@@ -1,12 +1,12 @@
 # Audit Parser
 
-Audit Parser tool can be used for querying the ozone audit logs.
+Audit Parser tool can be used for querying the Ozone audit logs.
 This tool creates a sqlite database at the specified path. If the database
 already exists, it will avoid creating a database.
 
 The database contains only one table called `audit` defined as:
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS audit (
 datetime text,
 level varchar(7),
