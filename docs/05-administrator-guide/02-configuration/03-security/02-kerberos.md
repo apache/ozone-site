@@ -25,7 +25,7 @@ SCM requires two Kerberos principals, and the corresponding key tab files for bo
 | `hdds.scm.http.auth.kerberos.keytab`    | The keytab file used by SCM HTTP server to login as its service principal if SPNEGO is enabled for SCM HTTP server. |
 
 :::note
-For general configuration on enabling Kerberos based SPNEGO authentication for HTTP web-consoles, refer to [Configuring HTTPS](/docs/05-administrator-guide/02-configuration/03-security/03-https.md).
+For general configuration on enabling Kerberos based SPNEGO authentication for HTTP web-consoles, refer to [Configuring HTTP authentication using Kerberos SPNEGO](/docs/05-administrator-guide/02-configuration/03-security/03-https.md).
 :::
 
 ## Ozone Manager
