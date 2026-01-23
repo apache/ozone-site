@@ -6,6 +6,8 @@ sidebar_label: Environment Variables
 
 The `ozone-env.sh` script, located at `$OZONE_HOME/etc/hadoop`, defines the environment variables used by Ozone processes.
 
+> Note: The following list is not exhaustive but includes the most commonly used environment variables.
+
 Below is a list of environment variables that can be used to configure Apache Ozone processes.
 
 ## Common Environment Variables
