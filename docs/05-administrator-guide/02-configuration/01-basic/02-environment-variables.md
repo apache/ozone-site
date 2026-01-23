@@ -50,6 +50,7 @@ There are several ways to set these environment variables, depending on your nee
 For multi-user environments, creating a system-wide profile file ensures that variables are set for all users. A common practice is to create a file in `/etc/profile.d/`, which is loaded by most shells on login.
 
 **Example for `/etc/profile.d/ozone.sh`:**
+
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export OZONE_HOME=/opt/ozone
@@ -66,6 +67,7 @@ If you only need to set variables for a single user, you can add them to their p
 - For other shells, consult their documentation.
 
 **Example for `~/.bashrc`:**
+
 ```bash
 export OZONE_HOME=/opt/ozone
 export OZONE_CONF_DIR=/etc/ozone
@@ -76,7 +78,13 @@ After editing, you must reload the profile (e.g., `source ~/.bashrc`) or open a 
 
 For quick tests or one-off commands, you can set an environment variable for a single command's execution.
 
+
+
 ```bash
+
 OZONE_HEAPSIZE_MAX=16G ozone sh volume create /vol1
+
 ```
+
+
 
