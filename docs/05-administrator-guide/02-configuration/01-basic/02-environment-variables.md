@@ -26,6 +26,8 @@ Below is a list of environment variables that can be used to configure Apache Oz
 | `OZONE_S3G_OPTS`   | (empty)                            | Specifies Java properties for the S3 Gateway.                                                                     |
 | `OZONE_RECON_OPTS` | (empty)                            | Specifies Java properties for the Recon server.
 
+> Note: The HTTPFS Gateway does not use an OZONE_HTTPFS_OPTS variable. Its specific JVM properties must be added to the global OZONE_OPTS variable.
+
 ## System-wide Configuration
 
 Instead of updating `ozone-env.sh` directly, you can create a system-wide profile file, for example `/etc/profile.d/ozone.sh`. Here is an example:
