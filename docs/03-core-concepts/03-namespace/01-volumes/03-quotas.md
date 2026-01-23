@@ -50,5 +50,5 @@ ozone sh volume clrquota --space /volume1
 # Clear the namespace quota (set object count limit to unlimited)
 ozone sh volume clrquota --count /volume1
 ```
-For detailed information on how to set and manage both types of volume quotas using CLI commands separately, see the [Quota Operations Guide](/docs/administrator-guide/operations/quota).
 
+For detailed information on how to set and manage both types of volume quotas using CLI commands separately, see the [Quota Operations Guide](/docs/administrator-guide/operations/quota).
