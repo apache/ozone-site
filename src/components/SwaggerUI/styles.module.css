@@ -183,25 +183,6 @@
   text-decoration: underline;
 }
 
-/* Use Docusaurus primary color for GET operations */
-.swaggerWrapper :global(.swagger-ui .opblock.opblock-get .opblock-summary-method) {
-  background: var(--ifm-color-primary) !important;
-}
-
-.swaggerWrapper :global(.swagger-ui .opblock.opblock-get) {
-  border-color: var(--ifm-color-primary) !important;
-  background: rgba(53, 117, 0, 0.1);
-}
-
-.swaggerWrapper :global(.swagger-ui .opblock.opblock-get .opblock-summary) {
-  border-color: var(--ifm-color-primary) !important;
-}
-
-/* Dark mode adjustments */
-[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock.opblock-get) {
-  background: rgba(150, 210, 110, 0.1);
-}
-
 /* Match background colors */
 .swaggerWrapper :global(.swagger-ui .wrapper) {
   background: var(--ifm-background-color);
