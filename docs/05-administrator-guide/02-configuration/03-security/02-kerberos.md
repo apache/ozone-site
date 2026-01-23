@@ -8,65 +8,72 @@ Ozone depends on [Kerberos](https://web.mit.edu/kerberos/) to make the clusters 
 
 This release of Ozone follows that model, but soon will move to *secure by default.* Today to enable security in Ozone cluster, we need to set the configuration `ozone.security.enabled` to `true` and `hadoop.security.authentication` to `kerberos`.
 
-| Property | Value |
-|----------|-------|
-| `ozone.security.enabled` | `true` |
+| Property                         | Value      |
+| -------------------------------- | ---------- |
+| `ozone.security.enabled`         | `true`     |
 | `hadoop.security.authentication` | `kerberos` |
-
-## Tokens
-
-Ozone uses a notion of tokens to avoid overburdening the Kerberos server. When you serve thousands of requests per second, involving Kerberos might not work well. Hence once an authentication is done, Ozone issues delegation tokens and block tokens to the clients. These tokens allow applications to do specified operations against the cluster, as if they have kerberos tickets with them. Ozone supports following kinds of tokens.
-
-### Delegation Token
-
-Delegation tokens allow an application to impersonate a users kerberos credentials. This token is based on verification of kerberos identity and is issued by the Ozone Manager. Delegation tokens are enabled by default when security is enabled.
-
-### Block Token
-
-Block tokens allow a client to read or write a block. This is needed so that Datanodes know that the user/client has permission to read or make modifications to the block.
-
-### S3AuthInfo
-
-S3 uses a very different shared secret security scheme. Ozone supports the AWS Signature Version 4 protocol, and from the end users perspective Ozone's S3 feels exactly like AWS S3.
-
-The S3 credential tokens are called S3 auth info in the code. These tokens are also enabled by default when security is enabled.
-
-Each of the service daemons that make up Ozone needs a Kerberos service principal name and a corresponding [kerberos key tab](https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html) file.
-
-All these settings should be made in `ozone-site.xml`.
 
 ## Storage Container Manager
 
 SCM requires two Kerberos principals, and the corresponding key tab files for both of these principals.
 
-| Property | Description |
-|----------|-------------|
-| `hdds.scm.kerberos.principal` | The SCM service principal. e.g. `scm/_HOST@REALM.COM` |
-| `hdds.scm.kerberos.keytab.file` | The keytab file used by SCM daemon to login as its service principal. |
-| `hdds.scm.http.auth.kerberos.principal` | SCM HTTP server service principal if SPNEGO is enabled for SCM HTTP server. |
-| `hdds.scm.http.auth.kerberos.keytab` | The keytab file used by SCM HTTP server to login as its service principal if SPNEGO is enabled for SCM HTTP server. |
+| Property                                | Description                                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `hdds.scm.kerberos.principal`           | The SCM service principal. e.g. `scm/_HOST@REALM.COM`                                                               |
+| `hdds.scm.kerberos.keytab.file`         | The keytab file used by SCM daemon to login as its service principal.                                               |
+| `hdds.scm.http.auth.kerberos.principal` | SCM HTTP server service principal if SPNEGO is enabled for SCM HTTP server.                                         |
+| `hdds.scm.http.auth.kerberos.keytab`    | The keytab file used by SCM HTTP server to login as its service principal if SPNEGO is enabled for SCM HTTP server. |
+
+:::note
+For general configuration on enabling Kerberos based SPNEGO authentication for HTTP web-consoles, refer to [Configuring HTTPS](/docs/05-administrator-guide/02-configuration/03-security/05-encryption/01-network-encryption/03-https.md).
+:::
 
 ## Ozone Manager
 
 Like SCM, OM also requires two Kerberos principals, and the corresponding key tab files for both of these principals.
 
-| Property | Description |
-|----------|-------------|
-| `ozone.om.kerberos.principal` | The OzoneManager service principal. e.g. `om/_HOST@REALM.COM` |
-| `ozone.om.kerberos.keytab.file` | The keytab file used by OM daemon to login as its service principal. |
-| `ozone.om.http.auth.kerberos.principal` | Ozone Manager HTTP server service principal if SPNEGO is enabled for OM HTTP server. |
-| `ozone.om.http.auth.kerberos.keytab` | The keytab file used by OM HTTP server to login as its service principal if SPNEGO is enabled for OM HTTP server. |
+| Property                                | Description                                                                                                       |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `ozone.om.kerberos.principal`           | The OzoneManager service principal. e.g. `om/_HOST@REALM.COM`                                                     |
+| `ozone.om.kerberos.keytab.file`         | The keytab file used by OM daemon to login as its service principal.                                              |
+| `ozone.om.http.auth.kerberos.principal` | Ozone Manager HTTP server service principal if SPNEGO is enabled for OM HTTP server.                              |
+| `ozone.om.http.auth.kerberos.keytab`    | The keytab file used by OM HTTP server to login as its service principal if SPNEGO is enabled for OM HTTP server. |
 
 ## S3 Gateway
 
 S3 Gateway requires one service principal and here the configuration values needed in the `ozone-site.xml`.
 
-| Property | Description |
-|----------|-------------|
-| `ozone.s3g.kerberos.principal` | S3 Gateway principal. e.g. `s3g/_HOST@REALM` |
-| `ozone.s3g.kerberos.keytab.file` | The keytab file used by S3 Gateway. e.g. `/etc/security/keytabs/s3g.keytab` |
+| Property                                 | Description                                                                                         |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `ozone.s3g.kerberos.principal`           | S3 Gateway principal. e.g. `s3g/_HOST@REALM`                                                        |
+| `ozone.s3g.kerberos.keytab.file`         | The keytab file used by S3 Gateway. e.g. `/etc/security/keytabs/s3g.keytab`                         |
 | `ozone.s3g.http.auth.kerberos.principal` | S3 Gateway principal if SPNEGO is enabled for S3 Gateway HTTP server. e.g. `HTTP/_HOST@EXAMPLE.COM` |
-| `ozone.s3g.http.auth.kerberos.keytab` | The keytab file used by S3 Gateway if SPNEGO is enabled for S3 Gateway HTTP server. |
+| `ozone.s3g.http.auth.kerberos.keytab`    | The keytab file used by S3 Gateway if SPNEGO is enabled for S3 Gateway HTTP server.                 |
+
+## HttpFS Gateway
+
+The HttpFS gateway offers an HDFS-compatible REST API (`webhdfs`). It requires Kerberos for its client-facing HTTP endpoint and for its internal connection to the Ozone Manager (which acts as an HDFS NameNode proxy).
+
+| Property | Description |
+|---|---|
+| `hadoop.http.authentication.type` | Defines the authentication mechanism used by HttpFS for its HTTP clients. Valid values are `simple` or `kerberos`. Set to `kerberos` for SPNEGO. |
+| `hadoop.http.authentication.kerberos.principal` | The HTTP Kerberos principal used by HttpFS for its client-facing HTTP endpoint. This MUST start with `HTTP/` (e.g., `HTTP/${httpfs.hostname}@${kerberos.realm}`). |
+| `hadoop.http.authentication.kerberos.keytab` | The Kerberos keytab file for the client-facing HTTP principal. e.g., `${user.home}/httpfs.keytab`. |
+| `httpfs.hadoop.authentication.type` | Defines the authentication mechanism used by HttpFS to connect to the HDFS NameNode (Ozone Manager). Valid values are `simple` (default) or `kerberos`. |
+| `httpfs.hadoop.authentication.kerberos.principal` | The Kerberos principal used by HttpFS to connect to the HDFS NameNode (Ozone Manager). e.g., `${user.name}/${httpfs.hostname}@${kerberos.realm}`. |
+| `httpfs.hadoop.authentication.kerberos.keytab` | The Kerberos keytab file for the principal used to connect to the HDFS NameNode (Ozone Manager). e.g., `${user.home}/httpfs.keytab`. |
+
+## Recon Server
+
+Recon provides monitoring and management capabilities and can be secured using Kerberos authentication for its web UI and REST endpoints.
+
+| Property | Description |
+|---|---|
+| `ozone.recon.http.auth.type` | Sets Recon's HTTP authentication type. Set to `kerberos` for SPNEGO. |
+| `ozone.recon.http.auth.kerberos.principal` | The service principal for the Recon HTTP endpoint. e.g., `HTTP/_HOST@REALM`. |
+| `ozone.recon.http.auth.kerberos.keytab` | The keytab file for the Recon HTTP principal. e.g., `/path/to/HTTP.keytab`. |
+
+Access to Recon's admin-only APIs is controlled by `ozone.administrators` or `ozone.recon.administrators` lists. Refer to [Configuring Ozone Administrators](/docs/administrator-guide/configuration/security/administrators) for more details.
 
 ## Securing Datanodes
 
@@ -74,27 +81,9 @@ Datanodes under Hadoop is traditionally secured by creating a Keytab file on the
 
 However, we support the legacy Kerberos based Authentication to make it easy for the current set of users. The HDFS configuration keys are the following that is setup in `hdfs-site.xml`.
 
-| Property | Description |
-|----------|-------------|
-| `dfs.datanode.kerberos.principal` | The Datanode service principal. e.g. `dn/_HOST@REALM.COM` |
-| `dfs.datanode.kerberos.keytab.file` | The keytab file used by Datanode daemon to login as its service principal. |
-| `hdds.datanode.http.auth.kerberos.principal` | Datanode HTTP server service principal. |
-| `hdds.datanode.http.auth.kerberos.keytab` | The keytab file used by Datanode HTTP server to login as its service principal. |
-
-### How a Datanode becomes secure
-
-Under Ozone, when a Datanode boots up and discovers SCM's address, the first thing that Datanode does is to create a private key and send a certificate request to the SCM.
-
-#### Certificate Approval via Kerberos
-
-SCM has a built-in CA, and SCM has to approve this request. If the Datanode already has a Kerberos key tab, then SCM will trust Kerberos credentials and issue a certificate automatically.
-
-#### Manual Approval
-
-If these are brand new Datanodes and Kerberos key tabs are not present at the Datanodes, then this request for the Datanodes identity certificate is queued up for approval from the administrator (This is work in progress, not committed in Ozone yet). In other words, the chain of trust is established by the administrator of the cluster.
-
-#### Automatic Approval
-
-If you running under an container orchestrator like Kubernetes, we rely on Kubernetes to create a one-time token that will be given to Datanode during boot time to prove the identity of the Datanode container (This is also work in progress.)
-
-Once a certificate is issued, a Datanode is secure and Ozone Manager can issue block tokens. If there is no Datanode certificates or the SCM's root certificate is not present in the Datanode, then Datanode will register itself and download the SCM's root certificate as well get the certificates for itself.
+| Property                                     | Description                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| `dfs.datanode.kerberos.principal`            | The Datanode service principal. e.g. `dn/_HOST@REALM.COM`                       |
+| `dfs.datanode.kerberos.keytab.file`          | The keytab file used by Datanode daemon to login as its service principal.      |
+| `hdds.datanode.http.auth.kerberos.principal` | Datanode HTTP server service principal.                                         |
+| `hdds.datanode.http.auth.kerberos.keytab`    | The keytab file used by Datanode HTTP server to login as its service principal. |
