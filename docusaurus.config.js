@@ -86,6 +86,7 @@ const config = {
   ],
 
   markdown: {
+    mermaid: true,
     /*
     Validate markdown frontmatter against a more restrictive schema than what Docusaurus allows.
     This ensures all pages are using a minimal set of consistent keys.
@@ -123,6 +124,12 @@ const config = {
           // TODO update this link when the new website's branch is merged.
           editUrl:
             'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
+        },
+        blog: {
+          showReadingTime: true,
+          // TODO update this link when the new website's branch is merged.
+          editUrl:
+            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/',
         },
         theme: {
           customCss: [
@@ -171,6 +178,7 @@ const config = {
     ]
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -212,8 +220,8 @@ const config = {
             label: 'FAQ',
           },
           {
-            to: 'community/blogs',
-            label: 'Blogs',
+            to: '/blog',
+            label: 'Blog',
           },
           {
             label: 'Community',

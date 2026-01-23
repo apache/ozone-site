@@ -41,6 +41,8 @@ ol-prefix:
 no-inline-html:
   allowed_elements:
   - br
+  - a
+  - div
   - Tabs
   - TabItem
   - DocCardList
@@ -75,6 +77,7 @@ proper-names:
   # Acronyms:
   - FSO
   - OBS
+  - OFS
   - ofs
   - HttpFS
   - CLI

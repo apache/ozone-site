@@ -1,6 +1,131 @@
-# Events and Media
+---
+---
+# Ozone Events
 
-**TODO [HDDS-9620](https://issues.apache.org/jira/browse/HDDS-9620) Fill in this page.**
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-- Document upcoming and past Ozone related events here. Include links to slides or recorded presentations given at these events.
-- We can also link to the new [Ozone YouTube channel](https://www.youtube.com/@ApacheOzone)
+## Past Meetups
+
+### November 20, 2025
+
+Another Ozone meetup was held on November 20, 2025. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/311673631/) [YouTube recording](https://www.youtube.com/watch?v=RK68AiYdMqw)
+
+The following was the list of agenda:
+
+- **Apache Ozone Adoption Growth** - Shiv Moorthy: Insights into Ozone’s growing adoption and impact.
+- **Apache Ozone Best Practices at Shopee** - Yiyang Zhou: Learn how Shopee manages billions of objects in Ozone production environments with lifecycle and storage class optimization.
+- **Event Notifications for Distributed Storage (Ozone)** - Paul Scott-Murphy: Exploring design choices, optimizations, and downstream use cases for event-driven storage systems.
+- **AWS STS Design for Ozone S3** - Fabian Morgan & Madhan Neethiraj: Learn how Ozone’s STS design enables scalable and secure data sharing.
+- **GenAI: S3Vector Buckets API Support in Ozone** - Swaminathan Balachandran & Saketa Chandra Chalamchala: Discover how Ozone delivers fast vector-store backend capabilities with S3Vector compatibility.
+- **Apache Ozone State of the Union** - Rishabh Patel & Sammi Chen: Highlights of new features, releases, and roadmap updates.
+
+### October 24, 2024
+
+An Ozone meetup was held on October 24, 2024. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/304006267/) [YouTube recording](https://www.youtube.com/watch?v=u9GncxfMG5M)
+
+The following was the list of agenda:
+
+- **Ozone + GenAI Applications** - Swaminathan Balachandran (Cloudera): In this talk, we will explore how GenAI applications can be beneficial with the Apache Ozone's unique potential in object storage space.
+- **Simplifying Orchestration of GenAI Applications Across Multi-Cluster Kubernetes Environments** - Selvi Kadirvel (Elotl): Running Gen-AI applications at scale is operationally complex - it requires the management of application workloads; infrastructure services, data pipelines and datasets across a multi-cluster, multi-cloud environment.
+- **Scaling Multi-GPU Multi-Node Deployments with Triton Inference Server** - Ryan McCormick (Nvidia): NVIDIA Triton Inference Server is an open-source inference serving solution that simplifies the production deployment of AI models at scale.
+- **Ozone CSI Primer** - Prashant Pogde (Cloudera): This talk covers how Apache Ozone would be an option for read-write-many semantic persistent volume claims in Kubernetes environments.
+- **Ozone Performance and Scale** - Ritesh Shukla & Duong Nguyen (Cloudera): Architectural benefits of Ozone for scale and performance over other S3/HDFS Object Stores.
+
+### October 25, 2023
+
+An Ozone meetup was held on October 25, 2023. [Meetup link](https://www.meetup.com/futureofdata-sanfrancisco/events/295917033/) [YouTube recording](https://www.youtube.com/watch?v=DgzEZFlkvco&list=PLogLR070z-lDkgyoGu51bZ7MHDhVa59pK)
+
+The following was the list of agenda:
+
+- **Apache Ozone User adoptions** - Shiv Moorthy, Cloudera
+- **Apache Ozone State of the Union** - Aswin Shakil Balasubramanian, Cloudera
+- **Optimizing HDFS with Datanode Local Cache for High-Density HDD Adoption** - Fengnan Li, Jing Zhao from Uber
+- **Snapshots new innovations** - Swaminathan Balachandran, Dave Teng from Cloudera
+- **Apache Iceberg on Ozone** - Vince Kulandaisamy, Prashant Pogde from Cloudera
+
+### Nov 10, 2022
+
+The first ever Apache Ozone User Group Summit was held at Cloudera's headquarter on Nov 10, 2022. This event was live streamed on LinkedIn and on YouTube. [Meetup link](https://www.meetup.com/futureofdata-siliconvalley/events/289201001/) [YouTube recording](https://www.youtube.com/watch?v=3aEpeSXMMzw) [Slide deck](/Ozone_meetup_Nov102022.pdf)
+
+The following was the list of agenda:
+
+- Opening, Karthik Krishnamoorthy [Recording](https://youtu.be/3aEpeSXMMzw?t=8)
+- Apache Ozone - Scalable, redundant distributed object store [Recording](https://youtu.be/3aEpeSXMMzw?t=583)
+- Bucket types and FSO improvements, Ethan Rose [Recording](https://youtu.be/3aEpeSXMMzw?t=1220)
+- Apache Ozone snapshots - new design, Prashant Pogde, Siyao Meng [Recording](https://youtu.be/3aEpeSXMMzw?t=3128)
+- Apache Ozone Performance, Ritesh Shukla, [Recording](https://youtu.be/3aEpeSXMMzw?t=5474)
+
+### Feb 20, 2019
+
+A Hadoop community meetup was held on January 30, 2019. [YouTube recording](https://www.youtube.com/watch?v=3aX6yu1LZlI) [Slide deck](https://www.slideshare.net/slideshow/hadoop-meetup-jan-2019-overview-of-ozone/130161688)
+
+- **Overview of Ozone** - Anu Engineer
+
+## Past Conference Talks
+
+<Tabs>
+  <TabItem value="2025" label="2025" default>
+    - Apache CoC North America 2025: Apache Ozone 2.0. Wei-Chiu Chuang [Slides](/Ozone2.pdf)
+    - Apache CoC Asia 2025: Apache Ozone: Balance Data Through Disk Balancer. Sammi Chen, Yiyang Zhou. [Slides](/ApacheCoCAsia2025OzoneDiskBalancer.pdf) [Recording](https://www.youtube.com/watch?v=1h6jULeB368)
+    - Apache CoC Asia 2025: Apache Ozone Best Practices at Shopee. Hui Fei. [Slides](/ApacheOzoneBestPracticesAtShopee.pdf) [Recording](https://www.youtube.com/watch?v=AiuWz5dkcS8)
+  </TabItem>
+  <TabItem value="2024" label="2024">
+    - Apache CoC North America 2024: Overview of tools, techniques and tips - Scaling Ozone performance to max out CPU, Network and Disk. Ritesh Shukla, Tanvi Penumudy
+    - Apache CoC North America 2024: Recognize, Reconcile, Repeat: The Path to Uniform Replicas in Apache Ozone. Ethan Rose, Ritesh Shukla
+    - Apache CoC North America 2024: Ozone Replication - Bringing Ozone Closer to Enterprise Adoption. István Gansperger, Zsuzsanna Szabó, Andras Piros
+    - Apache CoC North America 2024: Enhancing Data Processing Efficiency in GenAI RAG Applications using Apache Ozone Snapshots. Uma Maheswara Rao Gangumalla, Swaminathan Balachandran
+    - Apache CoC 2024 Asia: Overview of tools, techniques and tips - Scaling Ozone performance to max out CPU, Network and Disk. Ritesh Shukla, Tanvi Penumudy
+    - Apache CoC 2024 Asia: Apache HBase on Ozone. Sammi Chen. [Recording](https://www.youtube.com/watch?v=1jkO8QM7yOo&list=PLU2OcwpQkYCw-J71WjgmeD9BYOK67xjG2)
+    - Apache CoC EU 2024: Elevating Scalable Object Storage: A Comprehensive Exploration of Ozone’s Trailblazing Capabilities. Ritesh Shukla, Uma Maheswara Rao Gangumalla. [Recording](https://www.youtube.com/watch?v=0emawKJGtRM)
+  </TabItem>
+  <TabItem value="2023" label="2023">
+    - Apache CoC 2023 North America: Data Integrity Guarantees in Erasure Coding Storage Systems. Aswin Shakil Balasubramanian, Uma Maheswara Rao Gangumalla. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/tuesdayoctober102023_bigdata_storage_track_data_integrity_guarantees_in_erasure_coding_storage_systems_by_uma_gangumalla_aswin_swami-uma-maheswara-rao-gangumalla.pdf)
+    - Apache CoC 2023 North America: Improving concurrency for a Hadoop Compatible Filesystem. Ritesh Shukla, Duong Nguyen, Tanvi Penumudy
+    - Apache CoC 2023 North America: When Hardware Fails, Ozone Prevails. Ethan Rose. [Slides](https://communityovercode.org/wp-content/uploads/2023/10/sun_bigdata_rose-ethan-rose.pdf) [Recording](https://www.youtube.com/watch?v=qRpDF7Bl45A)
+    - Apache CoC 2023 North America: The making of an Exabyte-scale Data Lakehouse. Saketa Chalamchala [Recording](https://www.youtube.com/watch?v=RfzjBDliINE)
+    - Apache CoC North America 2023: Starting my career The Apache Way. Zita Dombi. [Slide deck](https://communityovercode.org/wp-content/uploads/2023/10/mon_community_dombi-zita-dombi.pdf)
+    - Apache CoC 2023 North America: Compatibility witchcraft in distributed systems. Istvan Fajth
+    - Apache CoC 2023 North America: Forget about that certificate. Istvan Fajth
+    - Apache CoC 2023 North America: Design patterns and then the road to realize billions of objects, and exabytes of capacity, while preserving performance in Apache Ozone. Ritesh H Shukla, Duong Nguyen, Tanvi Penumudy
+    - Apache CoC Asia 2023: Deep dive into resource manageability in Ozone storage. Sumit Agrawal. [Recording](https://www.youtube.com/watch?v=HfEH8eeNN-I)
+    - Apache CoC Asia 2023: Resilient Data: Exploring Replication and Recovery in Apache Ozone. Sadanand Shenoy. [Recording](https://www.youtube.com/watch?v=0_9voSeFnbc)
+    - Apache CoC Asia 2023: Data Security: How Apache Ozone Ensures Storage and Access Security of Data. Sammi Chen. [Recording](https://www.youtube.com/watch?v=1lQcsYQpEBA)
+  </TabItem>
+  <TabItem value="2022" label="2022">
+    - ApacheCon North America 2022: Reduce Your Storage Footprint with Apache Ozone Erasure Coding. Uma Maheswara Rao Gangumalla. [Slides](/Apache%20Ozone%20Erasure%20Coding(EC).pdf)
+    - ApacheCon North America 2022: Inside an Apache Ozone Upgrade. Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/01_Rose_Inside_Ozone_Upgrade.pdf)
+    - ApacheCon North America 2022: Apache Ozone - State of the Union. Siyao Meng, Ethan Rose. [Slides](https://www.apachecon.com/acna2022/slides/02_Meng_Rose_Apache_Ozone_SOTU.pdf)
+    - ApacheCon North America 2022: Performance of Apache Ozone on NVMe. Wei-Chiu Chuang, Ritesh Shukla. [Slides](/04_Chuang_Performance_of_Apache.pdf)
+    - China Apache Hadoop Meetup 2022: What's new in Apache Ozone 1.3. Sammi Chen. [Slides](/What%27sNewInApacheOzone-v3.pdf)
+    - ApacheCon Asia 2022: [Sharing Of Recent Progress And Practices In Apache Ozone](https://www.youtube.com/watch?v=SB4lgATn-s8). Yan Liu, Sammi Chen. [Slides](/ApacheConAsia2022_Yan_Sammi.pdf)
+    - ApacheCon Asia 2022: [Disaster Recovery In Apache Ozone](https://www.youtube.com/watch?v=E97fYFZJ2LQ). Sadanand Shenoy, Rakesh Radhakrishnan.
+    - ApacheCon Asia 2022: [Apache Ozone Behind Simulation And Ai Industries](https://www.youtube.com/watch?v=EmpHluBOesg). Kota Uenishi. [Slides](https://speakerdeck.com/kuenishi/apache-ozone-behind-simulation-and-ai-industries)
+    - ApacheCon Asia 2022: [Apache Ozone: Multi-Protocol Aware System Handles Both Files And Objects Efficiently](https://www.youtube.com/watch?v=HN7PWX9TdAE). Radhakrishnan Rakesh, Singh Mukul Kumar.
+    - SDC India 2022: [Apache Ozone: Multi-protocol aware system handles both files and objects efficiently](https://www.youtube.com/watch?v=lzPrL2I_2VU). Radhakrishnan Rakesh, Singh Mukul Kumar.
+  </TabItem>
+  <TabItem value="2021" label="2021">
+    - ApacheCon@Home 2021: [Secure Apache Ozone with High Availability](https://www.youtube.com/watch?v=tGEjS4lSbbY). Bharat Viswanadham, Xiaoyu Yao.
+    - ApacheCon@Home 2021: [Apache Ozone - State of the Union](https://www.youtube.com/watch?v=O0u4p_PlwDU). Dinesh Chitlangia, Aravindan Vijayan
+    - ApacheCon@Home 2021: [Balancing data in Apache Ozone](https://www.youtube.com/watch?v=l6L3E6q0dpk). Lokesh Jain, Siddhant Sangwan.
+    - ApacheCon@Home 2021: [Ozone - Performance at billions’ scale](https://www.youtube.com/watch?v=xAAMWyE0cpg). Lokesh Jain.
+    - ApacheCon Asia 2021: [How Security Is Implemented In Apache Ozone](https://www.youtube.com/watch?v=yw3HoM57168). Bharat Viswanadham, Shashikant Banerjee.
+    - ApacheCon Asia 2021: [Apache Ozone: A High Performance Object Store For Analytics Workloads](https://www.youtube.com/watch?v=dXrDhe8h7gQ). Rakesh Radhakrishnan, Mukul Kumar Singh.
+    - ApacheCon Asia 2021: [How Apache Ozone Builds Up High Availablity With Raft Protocol](https://www.youtube.com/watch?v=jeJ519NTVHo). Shashikant Banerjee, Nandakumar Vadivelu, Li Cheng.
+    - SDC India 2021: [Apache Ozone: A High Performance Object Store For Analytics Workloads](https://www.youtube.com/watch?v=riRbSbmxFQE). Rakesh Radhakrishnan, Mukul Kumar Singh.
+    - SDC India 2021: [Apache Ozone - Balancing and Deleting Data At Scale](https://www.youtube.com/watch?v=BccR07ChxtA). Lokesh Jain. [Link](https://www.snia.org/educational-library/apache-ozone-balancing-and-deleting-data-scale-2021)
+    - SDC India 2021: [Architecture and Performance at billions’ scale](https://www.youtube.com/watch?v=PHYcExPv8W4). Lokesh Jain. [Link](https://www.snia.org/educational-library/ozone-architecture-and-performance-billions%E2%80%99-scale-2021)
+    - COSCUP Taiwan 2021: [My Journey with Apache Ozone](https://www.youtube.com/watch?v=DZq6Pz7RLj8). Yi-Sheng Lien.
+  </TabItem>
+  <TabItem value="2018" label="2018">
+    - Dataworks Summit - San Jose 2018: [Ozone: scaling HDFS to trillions of objects](https://www.youtube.com/watch?v=WvEu6d76EIw)
+    - Dataworks summit - Berlin 2018: [Ozone and HDFS’s evolution](https://www.youtube.com/watch?v=3A9caebey1s)
+  </TabItem>
+</Tabs>
+
+## External Blog Posts
+
+- October 2018 - [Apache Hadoop Ozone – Object Store Architecture](https://www.cloudera.com/blog/technical/apache-hadoop-ozone-object-store-architecture.html)
+- October 2018 - [Apache Hadoop Ozone – Object Store Overview](https://www.cloudera.com/blog/technical/apache-hadoop-ozone-object-store-overview.html)
+- October 2018 - [Introducing Apache Hadoop Ozone: An Object Store for Apache Hadoop](https://www.cloudera.com/blog/technical/introducing-apache-hadoop-ozone-object-store-apache-hadoop.html)
+- October 2021 - [Apache Ozone – A High Performance Object Store for Private Cloud](https://www.cloudera.com/blog/technical/apache-ozone-a-high-performance-object-store-for-cdp-private-cloud.html)

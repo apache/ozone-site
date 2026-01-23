@@ -61,6 +61,8 @@ flagWords:
 # Exclude CLAUDE.md from spell checking as it contains development-specific terms
 ignorePaths:
 - CLAUDE.md
+# Exclude events page  from spelling check due to author names.
+- src/pages/community/events-and-media.md
 
 # List of words to be always considered correct.
 # Case insensitive.
@@ -75,6 +77,7 @@ words:
 - SCM
 - datanode
 - datanodes
+- DN
 - ofs
 - FSO
 - OBS
@@ -85,38 +88,76 @@ words:
 - mis-replicated
 - BCSID
 - EC
+- reconfig
+- reconfigurable
 - quasi-close
 - quasi-closed
+- HCFS
+- libo3fs
 # Other systems' words
 - KDC
 - classpath
+- DS
 - HDFS
 - Protolock
 - CSI
+- Quantcast
+- Xceiver
 - matomo
 - qube
+- PKI
 - proto
 - protolock
 - protolocks
 - intellij
+- flekszible
 - TDE
+- Teragen
+- TPC
 - RPC
 - aarch
 - trino
 - oozie
 - spnego
+- keytab
+- Keytab
 - RocksDB
+- LDB
+- memtable
 - hsync
 - SASL
 - jira
 - jiras
+- LLAP
 - mvn
+- NIFI
 - gpg
 - sed
 - mds
 - javadoc
 - JVM
 - distcp
+- Boto3
+- fsspec
+- libhdfs
+- awscli
+- TGT
+- Kerberized
+- assignadmin
+- revokeadmin
+- goofys
+- WebHDFS
+- RADOS
+- RGW
+- HPC
+- Gluster
+- Isilon
+- NAS
+- GPFS
+- Scality
+- Cloudian
+- ABFS
+- OCI
 # Misc words
 - acking
 - dashboarding
@@ -128,3 +169,35 @@ words:
 - lakehouse
 - Flink
 - rebalancing
+- JDK
+- CMDB
+- Unsets
+- snapshottable
+- reencryption
+- JNI
+- checksummed
+- ISA
+- doublebuffer
+# Company names for "Who Uses Ozone" page
+- Shopee
+- Qihoo360
+- Meituan
+- Unicom
+# S3 Compatible third-party applications
+- Clickhouse
+- Teradata
+# Regional terms
+- APAC
+# British English spellings
+- utilisation
+- utilised
+- hotspots
+# Infrastructure and hardware terms
+- Chrony
+- SAS
+- JBOD
+- Gbps
+- Hugepage
+- LVM
+- NVMe
+- ntpd

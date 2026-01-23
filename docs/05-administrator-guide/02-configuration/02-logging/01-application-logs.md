@@ -4,12 +4,49 @@ sidebar_label: Application Logs
 
 # Configuring Application Logs
 
-Document Ozone's use of log4j for application logging, including:
+## Service Logs
 
-- Default configuration
-- Examples of common configurations
-- Where Ozone looks for log4j configuration files.
+Each Ozone service (Ozone Manager, Storage Container Manager, Datanode, S3 Gateway, and Recon) generates its own log file. These logs contain detailed information about the service’s operations, including errors and warnings.
 
-Link to existing Log4j docs as necessary.
+By default, log files are stored in the `$OZONE_LOG_DIR` directory, which is usually set to the `logs` directory under the Ozone installation. The log file names are specific to each service, for example:
 
-**TODO:** File a subtask under [HDDS-9859](https://issues.apache.org/jira/browse/HDDS-9859) and complete this page or section.
+- `ozone-om-....log` for Ozone Manager
+- `ozone-scm-....log` for Storage Container Manager
+- `ozone-datanode-....log` for Datanode
+
+The logging behavior for each service is controlled by its `log4j.properties` file, located in the service’s `$OZONE_CONF_DIR` directory, usually `etc/hadoop`. You can modify this file to change the log level, logging outputs, and other logging parameters.
+
+## Debugging
+
+You can increase the log verbosity for debugging purposes for both services and CLI tools.
+
+### Enabling Debug Logs for Services
+
+To enable debug logging for a service, you need to modify its `log4j.properties` file. Change the log level for the desired logger from `INFO` to `DEBUG`. For example, to enable debug logging for the Ozone Manager, you would edit its `log4j.properties` and change the following line:
+
+```properties
+rootLogger.level = info
+```
+
+to
+
+```properties
+rootLogger.level = debug
+```
+
+After saving the file and restarting the service, the service will start logging more detailed debug information.
+
+### Enabling Debug Logs for CLI Tools
+
+To enable debug logging for Ozone CLI tools (e.g., `ozone sh volume create`), you can set the `OZONE_ROOT_LOGGER` environment variable to `debug`:
+
+```bash
+export OZONE_ROOT_LOGGER=DEBUG,console
+ozone sh volume create /vol1
+```
+
+Alternatively, you can use the --loglevel option with the Ozone command:
+
+```bash
+ozone --loglevel debug sh volume create /vol1
+```
