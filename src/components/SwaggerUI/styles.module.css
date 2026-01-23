@@ -22,6 +22,63 @@
   margin-bottom: 2rem;
 }
 
+/* Server configuration input */
+.serverConfig {
+  background: var(--ifm-color-primary-lightest);
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+[data-theme='dark'] .serverConfig {
+  background: rgba(150, 210, 110, 0.1);
+  border-color: var(--ifm-color-primary-dark);
+}
+
+.serverLabel {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  font-size: 14px;
+  margin: 0;
+}
+
+.serverInput {
+  flex: 1;
+  min-width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .serverInput {
+  border-color: #444;
+}
+
+.serverInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(53, 117, 0, 0.1);
+}
+
+[data-theme='dark'] .serverInput:focus {
+  box-shadow: 0 0 0 2px rgba(150, 210, 110, 0.2);
+}
+
+.serverHint {
+  font-size: 13px;
+  color: var(--ifm-font-color-base);
+  font-style: italic;
+}
+
 /* Remove white bars and extra spacing */
 .swaggerWrapper :global(.swagger-ui .information-container) {
   margin: 0;
