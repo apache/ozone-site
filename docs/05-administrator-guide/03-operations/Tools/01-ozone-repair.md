@@ -2,8 +2,11 @@
 
 Ozone Repair (`ozone repair`) is an advanced tool to repair Ozone. The nodes being repaired must be stopped before the tool is run.
 
-**Note:** All repair commands support a `--dry-run` option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.  
+:::note
+All repair commands support a `--dry-run` option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.
+
 Use the `--force` flag to override the running service check in false-positive cases.
+:::
 
 ```bash
 Usage: ozone repair [-hV] [--verbose] [-conf=<configurationPath>]
@@ -61,15 +64,10 @@ Operational tool to repair OM.
 ### Subcommands under OM
 
 - FSO-tree
-
 - snapshot
-
 - update-transaction
-
 - quota
-
 - compact
-
 - skip-ratis-transaction
 
 ### FSO-tree
