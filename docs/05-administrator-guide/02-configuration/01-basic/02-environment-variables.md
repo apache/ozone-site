@@ -8,6 +8,10 @@ The `ozone-env.sh` script, located at `$OZONE_HOME/etc/hadoop`, defines the envi
 
 Below is a list of environment variables that can be used to configure Apache Ozone processes.
 
+## Common Environment Variables
+
+These environment variables apply to all Ozone processes.
+
 | Variable           | Default Value                      | Description                                                                                                       |
 | :----------------- | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
 | `JAVA_HOME`        | (none)                             | The path to the Java installation. Must be set on most platforms, but is auto-detected on macOS.                  |
@@ -15,10 +19,17 @@ Below is a list of environment variables that can be used to configure Apache Oz
 | `OZONE_CONF_DIR`   | `$OZONE_HOME/etc/hadoop`           | The directory containing Ozone configuration files.                                                               |
 | `OZONE_LOG_DIR`    | `$OZONE_HOME/logs`                 | The directory where Ozone log files are stored.                                                                   |
 | `OZONE_PID_DIR`    | `/tmp`                             | The directory where daemon PID files are stored.                                                                  |
-
 | `OZONE_OPTS`       | `"-Djava.net.preferIPv4Stack=true"`| Universal Java options applied to all Ozone processes.                                                            |
 | `OZONE_HEAPSIZE_MAX`| (JVM default)                      | The maximum JVM heap size (`-Xmx`). If not set, the JVM auto-scales.                                              |
 | `OZONE_HEAPSIZE_MIN`| (JVM default)                      | The minimum JVM heap size (`-Xms`). If not set, the JVM auto-scales.                                              |
+
+## Role-Specific Environment Variables
+
+These environment variables apply only to certain Ozone services or roles.
+
+| Variable           | Default Value                      | Description                                                                                                       |
+| :----------------- | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| `OZONE_SERVER_OPTS`| (none)                             | Options for all Ozone server daemons (appended to `OZONE_OPTS`).                                                  |
 | `OZONE_CLIENT_OPTS`| (empty)                            | Specifies Java properties for Ozone commands and clients.                                                         |
 | `OZONE_OM_OPTS`    | (empty)                            | Specifies Java properties for the Ozone Manager (OM).                                                             |
 | `OZONE_SCM_OPTS`   | (empty)                            | Specifies Java properties for the Storage Container Manager (SCM).                                                |
@@ -35,5 +46,5 @@ Instead of updating `ozone-env.sh` directly, you can create a system-wide profil
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export OZONE_HOME=/opt/ozone
-export OZONE_CONF_DIR=/etc/ozone/conf
+export OZONE_CONF_DIR=/etc/ozone
 ```
