@@ -37,8 +37,8 @@ These environment variables apply only to certain Ozone services or roles.
 | `OZONE_S3G_OPTS`   | (empty)                            | Specifies Java properties for the S3 Gateway.                                                                     |
 | `OZONE_RECON_OPTS` | (empty)                            | Specifies Java properties for the Recon server.
 
-:::note HTTPFS Gateway Configuration
-The HTTPFS Gateway does not use an `OZONE_HTTPFS_OPTS` variable. Its specific JVM properties must be added to the global `OZONE_OPTS` variable.
+:::note HttpFS Gateway Configuration
+The HttpFS Gateway does not use an `OZONE_HTTPFS_OPTS` variable. Its specific JVM properties must be added to the global `OZONE_OPTS` variable.
 :::
 
 ## Configuration Methods
@@ -61,9 +61,9 @@ After creating this file, users must log out and log back in for the changes to 
 
 If you only need to set variables for a single user, you can add them to their personal shell profile.
 
-*   For Bash users, add to `~/.bashrc` or `~/.bash_profile`.
-*   For Zsh users, add to `~/.zshrc`.
-*   For other shells, consult their documentation.
+- For Bash users, add to `~/.bashrc` or `~/.bash_profile`.
+- For Zsh users, add to `~/.zshrc`.
+- For other shells, consult their documentation.
 
 **Example for `~/.bashrc`:**
 ```bash
