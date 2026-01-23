@@ -41,7 +41,6 @@ These environment variables apply only to certain Ozone services or roles.
 
 > Note: The HTTPFS Gateway does not use an OZONE_HTTPFS_OPTS variable. Its specific JVM properties must be added to the global OZONE_OPTS variable.
 
-> Connecting to an HA SCM Cluster: Most Ozone commands connect to the SCM by reading the service ID from ozone-site.xml. However, some administrative and debug commands (like ozone admin scm ...) also accept a `--service-id` command-line option to override the configuration.
 
 ## System-wide Configuration
 
