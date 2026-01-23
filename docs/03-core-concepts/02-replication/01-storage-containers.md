@@ -18,7 +18,7 @@
 
 Storage Containers, or Containers (not to be confused with Docker containers) are the fundamental replication unit of Ozone, they are managed by the Storage Container Manager (SCM) service.
 
-Containers are big binary units (5Gb by default) which can contain multiple blocks:
+Containers are big binary units (5GB by default) which can contain multiple blocks:
 
 ![Containers](Containers.png)
 
