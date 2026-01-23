@@ -21,7 +21,7 @@ These environment variables apply to all Ozone processes.
 | `OZONE_CONF_DIR`   | `$OZONE_HOME/etc/hadoop`           | The directory containing Ozone configuration files.                                                               |
 | `OZONE_LOG_DIR`    | `$OZONE_HOME/logs`                 | The directory where Ozone log files are stored.                                                                   |
 | `OZONE_PID_DIR`    | `/tmp`                             | The directory where daemon PID files are stored.                                                                  |
-| `OZONE_OPTS`       | `"-Djava.net.preferIPv4Stack=true"`| Universal Java options applied to all Ozone processes.                                                            |
+| `OZONE_OPTS`       | `-Djava.net.preferIPv4Stack=true`| Universal Java options applied to all Ozone processes.                                                            |
 | `OZONE_HEAPSIZE_MAX`| (JVM default)                      | The maximum JVM heap size (`-Xmx`). If not set, the JVM auto-scales.                                              |
 | `OZONE_HEAPSIZE_MIN`| (JVM default)                      | The minimum JVM heap size (`-Xms`). If not set, the JVM auto-scales.                                              |
 
@@ -42,12 +42,57 @@ These environment variables apply only to certain Ozone services or roles.
 > Note: The HTTPFS Gateway does not use an OZONE_HTTPFS_OPTS variable. Its specific JVM properties must be added to the global OZONE_OPTS variable.
 
 
-## System-wide Configuration
+## Configuration Methods
 
-Instead of updating `ozone-env.sh` directly, you can create a system-wide profile file, for example `/etc/profile.d/ozone.sh`. Here is an example:
+There are several ways to set these environment variables, depending on your needs.
 
+### System-Wide Configuration
+
+For multi-user environments, creating a system-wide profile file ensures that variables are set for all users. A common practice is to create a file in `/etc/profile.d/`, which is loaded by most shells on login.
+
+**Example for `/etc/profile.d/ozone.sh`:**
 ```bash
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export OZONE_HOME=/opt/ozone
 export OZONE_CONF_DIR=/etc/ozone
+```
+After creating this file, users will need to log out and log back in, or source the file manually (`source /etc/profile.d/ozone.sh`), for the changes to take effect.
+
+### User-Specific Configuration
+
+If you only need to set variables for a single user, you can add them to their personal shell profile.
+
+*   For Bash users, add to `~/.bashrc` or `~/.bash_profile`.
+*   For Zsh users, add to `~/.zshrc`.
+*   For other shells, consult their documentation.
+
+**Example for `~/.bashrc`:**
+```bash
+export OZONE_HOME=/home/user/ozone
+export OZONE_CONF_DIR=$OZONE_HOME/etc/hadoop
+```
+
+### Per-Command Configuration
+
+For quick tests or one-off commands, you can set an environment variable for a single command's execution.
+
+```bash
+OZONE_HEAPSIZE_MAX=16G ozone sh volume create /vol1
+```
+
+### Systemd Service Configuration
+
+When running Ozone components as `systemd` services, you can define environment variables directly in the service's unit file using the `Environment` directive.
+
+**Example in a `datanode.service` file:**
+```ini
+[Service]
+Environment="OZONE_DATANODE_OPTS=-Djava.net.preferIPv4Stack=false"
+ExecStart=/opt/ozone/bin/ozone datanode
+...
+```
+After modifying a service file, you must reload the `systemd` configuration and restart the service:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart datanode
 ```
