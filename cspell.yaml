@@ -180,6 +180,10 @@ words:
 - checksummed
 - ISA
 - doublebuffer
+- untars
+- jdbc
+- JDBC
+- MIS
 - defragged
 # Company names for "Who Uses Ozone" page
 - Shopee
