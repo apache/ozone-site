@@ -15,7 +15,7 @@ Below is a list of environment variables that can be used to configure Apache Oz
 | `OZONE_CONF_DIR`   | `$OZONE_HOME/etc/hadoop`           | The directory containing Ozone configuration files.                                                               |
 | `OZONE_LOG_DIR`    | `$OZONE_HOME/logs`                 | The directory where Ozone log files are stored.                                                                   |
 | `OZONE_PID_DIR`    | `/tmp`                             | The directory where daemon PID files are stored.                                                                  |
-| `OZONE_IDENT_STRING`| Current shell user (`$USER`)       | A string identifier used in log and PID filenames to distinguish processes.                                       |
+
 | `OZONE_OPTS`       | `"-Djava.net.preferIPv4Stack=true"`| Universal Java options applied to all Ozone processes.                                                            |
 | `OZONE_HEAPSIZE_MAX`| (JVM default)                      | The maximum JVM heap size (`-Xmx`). If not set, the JVM auto-scales.                                              |
 | `OZONE_HEAPSIZE_MIN`| (JVM default)                      | The minimum JVM heap size (`-Xms`). If not set, the JVM auto-scales.                                              |
