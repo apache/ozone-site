@@ -20,7 +20,7 @@
 ignore:
 - pnpm-lock.yaml
 - node_modules
-- "**/static/docs"
+- static/recon-api.yaml
 
 rules:
   anchors: enable
