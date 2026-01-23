@@ -67,8 +67,8 @@ If you only need to set variables for a single user, you can add them to their p
 
 **Example for `~/.bashrc`:**
 ```bash
-export OZONE_HOME=~/ozone-3.4.0
-export OZONE_CONF_DIR=$OZONE_HOME/etc/hadoop
+export OZONE_HOME=/opt/ozone
+export OZONE_CONF_DIR=/etc/ozone
 ```
 After editing, you must reload the profile (e.g., `source ~/.bashrc`) or open a new shell session.
 
