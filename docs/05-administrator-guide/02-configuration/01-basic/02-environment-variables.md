@@ -68,8 +68,8 @@ If you only need to set variables for a single user, you can add them to their p
 
 **Example for `~/.bashrc`:**
 ```bash
-export OZONE_HOME=/home/user/ozone
-export OZONE_CONF_DIR=$OZONE_HOME/etc/hadoop
+export OZONE_HOME=/opt/ozone
+export OZONE_CONF_DIR=/etc/ozone
 ```
 
 ### Per-Command Configuration
