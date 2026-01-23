@@ -6,31 +6,25 @@ sidebar_label: Environment Variables
 
 The `ozone-env.sh` script, located at `$OZONE_HOME/etc/hadoop`, defines the environment variables used by Ozone processes.
 
-## Required Environment Variables
+Below is a list of environment variables that can be used to configure Apache Ozone processes.
 
-The only required environment variable is `JAVA_HOME`.
-
-## Common Environment Variables
-
-Some environment variables apply to all Ozone processes:
-
-*   `JAVA_HOME`: The path to the Java installation.
-*   `OZONE_HOME`: The path to the Ozone installation directory.
-*   `OZONE_CONF_DIR`: The directory containing Ozone configuration files.
-*   `OZONE_LOG_DIR`: The directory where Ozone log files are stored.
-*   `OZONE_HEAPSIZE_MAX`: The maximum heap size for Ozone processes.
-*   `OZONE_HEAPSIZE_MIN`: The minimum heap size for Ozone processes.
-
-## Service-Specific Environment Variables
-
-Other environment variables apply only to certain services:
-
-*   `OZONE_CLIENT_OPTS`: Specifies Java properties for Ozone commands and clients.
-*   `OZONE_OM_OPTS`: Specifies Java properties for the Ozone Manager (OM).
-*   `OZONE_SCM_OPTS`: Specifies Java properties for the Storage Container Manager (SCM).
-*   `OZONE_DATANODE_OPTS`: Specifies Java properties for Datanodes.
-*   `OZONE_S3G_OPTS`: Specifies Java properties for the S3 Gateway.
-*   `OZONE_RECON_OPTS`: Specifies Java properties for the Recon server.
+| Variable           | Default Value                      | Description                                                                                                       |
+| :----------------- | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| `JAVA_HOME`        | (none)                             | The path to the Java installation. Must be set on most platforms, but is auto-detected on macOS.                  |
+| `OZONE_HOME`       | Auto-detected from script location | The path to the Ozone installation directory.                                                                     |
+| `OZONE_CONF_DIR`   | `$OZONE_HOME/etc/hadoop`           | The directory containing Ozone configuration files.                                                               |
+| `OZONE_LOG_DIR`    | `$OZONE_HOME/logs`                 | The directory where Ozone log files are stored.                                                                   |
+| `OZONE_PID_DIR`    | `/tmp`                             | The directory where daemon PID files are stored.                                                                  |
+| `OZONE_IDENT_STRING`| Current shell user (`$USER`)       | A string identifier used in log and PID filenames to distinguish processes.                                       |
+| `OZONE_OPTS`       | `"-Djava.net.preferIPv4Stack=true"`| Universal Java options applied to all Ozone processes.                                                            |
+| `OZONE_HEAPSIZE_MAX`| (JVM default)                      | The maximum JVM heap size (`-Xmx`). If not set, the JVM auto-scales.                                              |
+| `OZONE_HEAPSIZE_MIN`| (JVM default)                      | The minimum JVM heap size (`-Xms`). If not set, the JVM auto-scales.                                              |
+| `OZONE_CLIENT_OPTS`| (empty)                            | Specifies Java properties for Ozone commands and clients.                                                         |
+| `OZONE_OM_OPTS`    | (empty)                            | Specifies Java properties for the Ozone Manager (OM).                                                             |
+| `OZONE_SCM_OPTS`   | (empty)                            | Specifies Java properties for the Storage Container Manager (SCM).                                                |
+| `OZONE_DATANODE_OPTS`| (empty)                            | Specifies Java properties for Datanodes.                                                                          |
+| `OZONE_S3G_OPTS`   | (empty)                            | Specifies Java properties for the S3 Gateway.                                                                     |
+| `OZONE_RECON_OPTS` | (empty)                            | Specifies Java properties for the Recon server.
 
 ## System-wide Configuration
 
