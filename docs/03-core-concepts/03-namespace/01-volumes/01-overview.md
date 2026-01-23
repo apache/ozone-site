@@ -84,4 +84,4 @@ It's important to distinguish between the logical "volumes" managed by the Ozone
 - **Ozone Manager Volumes:** Logical namespace containers for buckets and keys.
 - **Datanode Volumes:** Physical storage devices (disks) on a Datanode where actual data blocks are stored in containers.
 
-For more information on Datanode volume management, refer to the [Datanodes documentation](https://ozone.apache.org/docs/edge/concept/datanodes.html).
+For more information on Datanode volume management, refer to the [Datanodes documentation](../../01-architecture/05-datanodes.md).
