@@ -83,6 +83,3 @@ For quick tests or one-off commands, you can set an environment variable for a s
 ```bash
 OZONE_HEAPSIZE_MAX=16G ozone sh volume create /vol1
 ```
-
-
-
