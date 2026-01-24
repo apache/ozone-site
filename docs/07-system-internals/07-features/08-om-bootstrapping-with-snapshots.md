@@ -54,7 +54,7 @@ instances (AOS RocksDB + snapshot RocksDBs) must be handled, complicating the pr
 ### Locking the Snapshot Cache
 
 Snapshot Cache is the class which is responsible for maintaining all RocksDB handles corresponding to a snapshot.
-The RocksDB handles are closed by the snapshot cache are closed from time to time if there are no references of the
+The RocksDB handles are closed by the snapshot cache from time to time if there are no references of the
 RocksDB being used by any of the threads in the system. Hence any operation on a snapshot would go through the snapshot
 cache increasing the reference count of that snapshot. Implementing a lock for this snapshot cache would prevent any newer
 threads from requesting a snapshot RocksDB handle from the snapshot cache. Thus any operation under this lock will have a
