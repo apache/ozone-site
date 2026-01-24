@@ -94,11 +94,13 @@ words:
 - quasi-closed
 - HCFS
 - libo3fs
+- AOS
 # Other systems' words
 - KDC
 - classpath
 - DS
 - HDFS
+- dfs
 - Protolock
 - CSI
 - Quantcast
@@ -178,6 +180,11 @@ words:
 - checksummed
 - ISA
 - doublebuffer
+- untars
+- jdbc
+- JDBC
+- MIS
+- defragged
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
@@ -200,3 +207,12 @@ words:
 - checknative
 - subpages
 - analyse
+# Infrastructure and hardware terms
+- Chrony
+- SAS
+- JBOD
+- Gbps
+- Hugepage
+- LVM
+- NVMe
+- ntpd
