@@ -731,6 +731,16 @@
   </url><url>
     <loc>/design/index.html</loc>
     <lastmod>2026-01-15T09:25:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/design/index.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/design/index.html"
+                />
   </url><url>
     <loc>/design/s3-conditional-requests.html</loc>
     <lastmod>2026-01-15T09:25:11+08:00</lastmod>
@@ -867,6 +877,16 @@
   </url><url>
     <loc>/design/configless.html</loc>
     <lastmod>2020-04-07T06:58:59+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/design/configless.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/design/configless.html"
+                />
   </url><url>
     <loc>/design/multiraft.html</loc>
     <lastmod>2020-07-27T16:46:41+08:00</lastmod>

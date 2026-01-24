@@ -309,6 +309,13 @@
       <description>Ozone Admin 命令可以用于所有与管理有关的任务。</description>
     </item>
     <item>
+      <title>最小化配置Ozone服务管理</title>
+      <link>/zh/design/configless.html</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/design/configless.html</guid>
+      <description>仅分发最小配置，并在启动前下载所有剩余配置</description>
+    </item>
+    <item>
       <title>配置生成</title>
       <link>/zh/tools/genconf.html</link>
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
