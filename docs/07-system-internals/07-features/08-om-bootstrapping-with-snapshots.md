@@ -121,7 +121,7 @@ Under the lock following operations would be performed:
 
 #### Drawback
 
-The drawbacks for this approach is the same as approach 1, but here we are optimizing on the amount of time lock is held
+The drawbacks for this approach are the same as approach 1, but here we are optimizing on the amount of time lock is held
 by performing very lightweight operations under the lock. So this is a more optimal approach since it minimises the lock wait time on other threads.
 
 ### Approach 2 (Single tarball creation under lock)
