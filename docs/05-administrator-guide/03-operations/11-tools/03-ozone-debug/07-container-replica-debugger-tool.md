@@ -4,7 +4,7 @@ The tool processes container log files from Ozone Datanodes to track state trans
 
 ## Background
 
-Containers are the most important part of Ozone. Most of the Ozone operations happen on them. Containers in ozone go through different states in their lifecycle.
+Containers are the most important part of Ozone. Most of the Ozone operations happen on them. Containers in Ozone go through different states in their lifecycle.
 In the past we have seen different issues on container state. To debug problems we always use manual steps and identify problems w.r.t containers and this takes a lot of time. To optimize debugability we can show historical timeline and other information w.r.t containers.
 
 ## Solution Approach
