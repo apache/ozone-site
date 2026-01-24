@@ -110,7 +110,7 @@ on the number of files changed under the snapshot directory as the threshold.
 3. If either the total size to be copied or the total number of files under the snapshot RocksDB directory to be copied is
 more than `ozone.om.ratis.snapshot.max.total.sst.size` respectively then the files would be directly sent over the stream as
 a tarball where the name of the files is the inodeId of the file.
-4. If the total number of file size to be copied under the snapshot RocksDB directory is less than equal to `ozone.om.ratis.snapshot.max.total.sst.size`
+4. If the total file size to be copied under the snapshot RocksDB directory is less than or equal to `ozone.om.ratis.snapshot.max.total.sst.size`
 then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty (No snapshot RocksDB should be open).
 Under the lock following operations would be performed:
    - Take the AOS RocksDB checkpoint.
