@@ -56,6 +56,12 @@ The following was the list of agenda:
 - Apache Ozone snapshots - new design, Prashant Pogde, Siyao Meng [Recording](https://youtu.be/3aEpeSXMMzw?t=3128)
 - Apache Ozone Performance, Ritesh Shukla, [Recording](https://youtu.be/3aEpeSXMMzw?t=5474)
 
+### Feb 20, 2019
+
+A Hadoop community meetup was held on January 30, 2019. [YouTube recording](https://www.youtube.com/watch?v=3aX6yu1LZlI) [Slide deck](https://www.slideshare.net/slideshow/hadoop-meetup-jan-2019-overview-of-ozone/130161688)
+
+- **Overview of Ozone** - Anu Engineer
+
 ## Past Conference Talks
 
 <Tabs>
@@ -111,4 +117,15 @@ The following was the list of agenda:
     - SDC India 2021: [Architecture and Performance at billions’ scale](https://www.youtube.com/watch?v=PHYcExPv8W4). Lokesh Jain. [Link](https://www.snia.org/educational-library/ozone-architecture-and-performance-billions%E2%80%99-scale-2021)
     - COSCUP Taiwan 2021: [My Journey with Apache Ozone](https://www.youtube.com/watch?v=DZq6Pz7RLj8). Yi-Sheng Lien.
   </TabItem>
+  <TabItem value="2018" label="2018">
+    - Dataworks Summit - San Jose 2018: [Ozone: scaling HDFS to trillions of objects](https://www.youtube.com/watch?v=WvEu6d76EIw)
+    - Dataworks summit - Berlin 2018: [Ozone and HDFS’s evolution](https://www.youtube.com/watch?v=3A9caebey1s)
+  </TabItem>
 </Tabs>
+
+## External Blog Posts
+
+- October 2018 - [Apache Hadoop Ozone – Object Store Architecture](https://www.cloudera.com/blog/technical/apache-hadoop-ozone-object-store-architecture.html)
+- October 2018 - [Apache Hadoop Ozone – Object Store Overview](https://www.cloudera.com/blog/technical/apache-hadoop-ozone-object-store-overview.html)
+- October 2018 - [Introducing Apache Hadoop Ozone: An Object Store for Apache Hadoop](https://www.cloudera.com/blog/technical/introducing-apache-hadoop-ozone-object-store-apache-hadoop.html)
+- October 2021 - [Apache Ozone – A High Performance Object Store for Private Cloud](https://www.cloudera.com/blog/technical/apache-ozone-a-high-performance-object-store-for-cdp-private-cloud.html)

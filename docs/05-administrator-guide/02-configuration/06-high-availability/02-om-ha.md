@@ -7,7 +7,7 @@ sidebar_label: OM HA Configuration
 Ozone Manager (OM) High Availability ensures that there is no single point of failure for the metadata-manager node responsible for key space management. In HA mode, the internal state is replicated via RAFT (with Apache Ratis) across multiple Ozone Manager instances.
 
 :::info
-For conceptual information about OM HA, see the OM HA documentation. <!-- TODO: Link to OM HA conceptual documentation when created -->
+For conceptual information about OM HA, see the [OM HA documentation](/docs/core-concepts/high-availability/om-ha).
 :::
 
 ## Configuration
@@ -48,6 +48,10 @@ The defined prefixes can be used to define the address of each of the OM service
    <value>host3</value>
 </property>
 ```
+
+:::warning
+Updating the OM service ID after the cluster is set up is not supported and will cause the OM startup process to abort. This value should be considered immutable after initial deployment.
+:::
 
 The defined `serviceId` can be used instead of a single OM host using client interfaces.
 
@@ -163,5 +167,6 @@ host3     | om3     | FOLLOWER
 
 ## References
 
-- OM HA - Conceptual overview and implementation details <!-- TODO: Link to OM HA conceptual documentation when created -->
+- [Ozone Manager High Availability](/docs/core-concepts/high-availability/om-ha) - Conceptual overview
+- [OM HA Implementation Details](/docs/system-internals/components/ozone-manager/high-availability) - Technical implementation details including double buffer and automatic snapshot installation
 - [SCM HA Configuration](./scm-ha) - Storage Container Manager High Availability configuration
