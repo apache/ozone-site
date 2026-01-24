@@ -224,4 +224,4 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
 ozone debug ldb --db=/data/metadata/om.db checkpoint --output=/tmp/om-checkpoint
 ```
 
-[Next >>](/docs/administrator-guide/operations/Tools/ozone-debug/debug-om)
+[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/debug-om)

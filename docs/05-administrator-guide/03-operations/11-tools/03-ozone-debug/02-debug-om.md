@@ -39,4 +39,4 @@ Parse prefix contents
       --volume=<volume>   volume name
 ```
 
-[Next >>](/docs/administrator-guide/operations/Tools/ozone-debug/debug-datanode)
+[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/debug-datanode)

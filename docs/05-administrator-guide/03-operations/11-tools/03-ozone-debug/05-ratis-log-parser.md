@@ -15,4 +15,4 @@ Shell for printing Ratis Log in understandable text
       --verbose       More verbose output. Show the stack trace of the errors.
 ```
 
-[Next >>](/docs/administrator-guide/operations/Tools/ozone-debug/audit-parser-exact)
+[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/audit-parser-exact)

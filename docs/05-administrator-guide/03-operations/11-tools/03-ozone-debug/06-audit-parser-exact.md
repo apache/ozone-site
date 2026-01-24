@@ -56,4 +56,4 @@ Following templates are available:
 | top5cmds                | Top 5 commands                         | select op,count(\*) as total from audit group by op order by total DESC limit 5                                                       |
 | top5activetimebyseconds | Top 5 active times, grouped by seconds | select substr(datetime,1,charindex(',',datetime)-1) as dt,count(\*) as thecount from audit group by dt order by thecount DESC limit 5 |
 
-[Next >>](/docs/administrator-guide/operations/Tools/ozone-debug/container-replica-debugger-tool)
+[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/container-replica-debugger-tool)
