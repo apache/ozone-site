@@ -47,9 +47,10 @@ The source Datanode streams the tarball to the destination via gRPC:
 
 - Establishes gRPC stream connection
 - Streams data in chunks via `SendContainerRequest` messages
-- Destination writes chunks to temporary file in the temp dir of the volume: `/tmp/container-copy/`
+- Destination writes chunks to temporary file in the temp dir of the volume chosen: `<volume-root>/tmp/container-copy/`.
+  That way, datanode parallelizes container download, and does not block on the system root drive.
 
-Before receiving, the destination selects a volume, **reserves space (2x container size)**, and creates the temporary directory.
+Before receiving, the destination selects a volume, **reserves space (2x container size)** to accommodate both the tarball and the extracted files, and creates the temporary directory.
 
 ### Step 3: Untar and Store Container Files
 
