@@ -183,6 +183,7 @@ words:
 - ISA
 - doublebuffer
 - untars
+- Untar
 - jdbc
 - JDBC
 - MIS
