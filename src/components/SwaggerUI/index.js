@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -26,23 +26,20 @@ import styles from './styles.module.css';
 export default function SwaggerUIComponent({ spec, defaultServer }) {
   const specUrl = useBaseUrl(spec);
   const [serverUrl, setServerUrl] = useState(defaultServer || 'http://localhost:9888');
-  const [specData, setSpecData] = useState(null);
+  const swaggerSystemRef = useRef(null);
 
+  // Update the server URL in Swagger whenever serverUrl changes
   useEffect(() => {
-    // Fetch the spec and modify the servers array
-    fetch(specUrl)
-      .then(response => response.text())
-      .then(text => {
-        // Parse YAML to JSON (simple approach for this case)
-        // Since swagger-ui-react can handle YAML, we'll pass the URL
-        // but configure servers via the spec modification
-        return fetch(specUrl).then(r => r.json().catch(() => {
-          // If JSON parsing fails, it's YAML, use the URL directly
-          return null;
-        }));
-      })
-      .catch(() => null);
-  }, [specUrl]);
+    if (swaggerSystemRef.current) {
+      const spec = swaggerSystemRef.current.getState().getIn(['spec', 'json']);
+      if (spec) {
+        swaggerSystemRef.current.specActions.updateJsonSpec({
+          ...spec.toJS(),
+          servers: [{ url: serverUrl, description: 'Configured Recon Server' }]
+        });
+      }
+    }
+  }, [serverUrl]);
 
   return (
     <div className={styles.swaggerWrapper}>
@@ -68,7 +65,9 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
         defaultModelsExpandDepth={1}
         defaultModelExpandDepth={1}
         onComplete={(system) => {
-          // Override the servers in the spec with the user-configured URL
+          // Store the system reference for later updates
+          swaggerSystemRef.current = system;
+          // Set initial server URL
           const spec = system.getState().getIn(['spec', 'json']);
           if (spec) {
             system.specActions.updateJsonSpec({
