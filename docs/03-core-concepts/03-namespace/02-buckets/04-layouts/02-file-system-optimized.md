@@ -28,7 +28,7 @@ ozone sh bucket create /<volume-name>/<bucket-name> --layout FILE_SYSTEM_OPTIMIZ
 
 :::
 
-## Why FSO for Hadoop?
+## Why FSO for Ozone?
 
 ### 1. Atomic Operations (The O(1) Factor)
 
@@ -51,6 +51,7 @@ Deleting a directory with millions of files is efficient because all child entri
 Choose **File System Optimized (FSO)** when:
 
 - Using Hadoop Compatible File System interfaces
+- Storing data for analytics workloads (Hive, Spark ...)
 - Working with hierarchical directory structures
 - Requiring atomic directory operations (rename, delete)
 - Needing trash/recycle bin functionality
@@ -59,5 +60,15 @@ Choose **Object Store (OBS)** when:
 
 - Primarily using S3-compatible APIs
 - Working with flat object access patterns
+
+## Configuration
+
+To update the default layout when creating buckets, configure these properties in `ozone-site.xml`:
+
+| Property | Default Value | Description |
+|----------|---------------|-------------|
+| `ozone.default.bucket.layout` | none | Sets the default layout for all buckets if no layout is specified during creation by the client |
+| `ozone.client.fs.default.bucket.layout` | `FILE_SYSTEM_OPTIMIZED` | Sets the default layout for buckets created using the OFS client |
+| `ozone.s3g.default.bucket.layout` | `OBJECT_STORE` | Defines the default layout for buckets created through the S3 API |
 
 For detailed technical information about the internal metadata structure and implementation, see the [File System Optimization System Internals](../../../../07-system-internals/07-features/01-filesystem-optimization.md) documentation.
