@@ -15,9 +15,6 @@ sidebar_label: Recon
 - **Purpose:**
   This guide provides the straightforward procedure for replacing a failed disk on an Ozone Recon node.
 
-- **Role of Recon:**
-  Recon is an auxiliary service that provides insights, visualization, and management for an Ozone cluster. It maintains a copy of metadata from the Ozone Manager (OM) and Storage Container Manager (SCM) to build its own database for analysis.
-
 - **Impact of Recon Disk Failure:**
   A failure of the Recon disk will cause the Recon service to stop functioning. However, because Recon is not in the critical path for data I/O, this failure has **no impact on the core operations of your Ozone cluster**. Client reads and writes will continue normally. All data on the Recon disk can be fully rebuilt from OM and SCM.
 
