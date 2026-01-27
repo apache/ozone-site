@@ -122,19 +122,19 @@ The volume owner receives special privileges that provide comprehensive access t
 
 The volume owner can perform operations on buckets, keys, and prefixes within their volume **without requiring explicit ACL permissions**. This means the owner has **implicit access** to all resources in their volume, regardless of ACL settings on those resources. The owner check happens before any ACL evaluation, providing a fast-path for owner operations.
 
-:::note
-Volume creation and deletion are **administrative operations** that require administrator privileges, regardless of ownership. Even the volume owner cannot delete their own volume unless they have administrator privileges.
-:::
-
 ### Volume Deletion by Owner
 
-While the volume owner has full access to all resources within their volume, **volume deletion is a restricted operation** that requires specific conditions to be met:
+Volume owners **can delete their own volumes** because volumes are created with default ACLs that grant the owner `ALL` permissions, which includes `DELETE` permission.
 
 **Requirements for Volume Deletion:**
 
-- **DELETE Permission:** The requester must have `DELETE` ACL permission on the volume. Ownership alone is not sufficient - even volume owners cannot delete their own volumes unless they have `DELETE` permission (typically granted to administrators).
+- **DELETE Permission:** The requester must have `DELETE` ACL permission on the volume.
 - **Empty Volume:** The volume must contain no buckets. All buckets must be deleted before the volume can be deleted.
 - **Zero Reference Count:** The volume's `refCount` must be 0. If `refCount > 0`, it indicates that Ozone features (like multi-tenancy) hold a "lock" on the volume. The lock must be released first (e.g., via `ozone tenant delete <tenantId>`).
+
+:::note
+Volume creation is still an **administrative operation** that requires administrator privileges. Only administrators can create volumes.
+:::
 
 ### Maximum User Volume Count
 
