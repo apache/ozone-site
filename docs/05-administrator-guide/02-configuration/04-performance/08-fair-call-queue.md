@@ -6,20 +6,11 @@ sidebar_label: Fairness
 
 ## What is FairCallQueue?
 
-Fair Call Queue (FCQ) is a multi-level priority queue that schedules RPC requests based on user identity.
-It organizes incoming RPC calls into multiple priority queues, allowing the system to process requests from different users in a fair and balanced manner.
+Fair Call Queue (FCQ) is a multi-level priority queue that schedules RPC requests based on user identity. It works with a scheduler (typically `DecayRpcScheduler`) to track each user's call volume over time, assign priority levels based on usage patterns, and distribute processing capacity fairly across all users using a weighted round-robin multiplexer.
 
-FCQ works in conjunction with a scheduler (typically `DecayRpcScheduler`) to:
+This document contains information for setting up the `FairCallQueue` feature with Ozone. In order for FairCallQueue to be enabled and used, Hadoop RPC must be used as transport protocol for `OM - S3G communication`. There is no implementation for gRPC yet.
 
-- Track the call volume and cost per user identity over time
-- Assign priority levels to requests based on each user's recent usage patterns
-- Distribute processing capacity fairly across all users, preventing any single user from monopolizing system resources
-
-The queue uses a weighted round-robin multiplexer to select which priority queue to service next, ensuring that high-priority queues get more attention while still allowing lower-priority requests to be processed.
-
-In order for `FairCallQueue` to be enabled and used, Hadoop RPC must be used as transport protocol for OM - S3G communication. There is no implementation for gRPC yet.
-There is a custom `IdentityProvider` implementation for Ozone that must be specified in the configuration, otherwise there is no S3G impersonation which
-makes the `FairCallQueue` ineffective since it's only reading one user, the S3G special user instead of the S3G client user.
+There is a custom `IdentityProvider` implementation for Ozone that must be specified in the configuration, otherwise there is no S3G impersonation which makes the FairCallQueue ineffective since it’s only reading one user, the S3G special user instead of the S3G client user.
 
 ## Why is Fairness Important?
 
@@ -34,15 +25,9 @@ By implementing fair call queuing, Ozone ensures that all users receive equitabl
 
 ## Where FCQ should be applied?
 
-FCQ should be applied at the **Ozone Manager (OM)** level, specifically for the communication path between **S3 Gateway (S3G) and Ozone Manager**.
-
-### Communication path: S3G → OM
-
-When S3 Gateway receives requests from S3 clients, it forwards these requests to the Ozone Manager for processing. This is where FCQ provides the most value:
-
-- **Multiple S3 Clients**: Multiple S3 clients connect through one or more S3 Gateway instances, and all their requests ultimately reach the Ozone Manager.
-- **User Identification**: Each S3 request is associated with an S3 access ID, which represents a specific user or application. FCQ uses this identity to track and schedule requests per user.
-- **Request Prioritization**: The Ozone Manager can prioritize requests based on each user's recent call volume, ensuring fair resource distribution.
+FCQ should be applied at the **Ozone Manager (OM)** level for the **S3 Gateway (S3G) → Ozone Manager** communication path.
+When S3 Gateway forwards requests from multiple S3 clients to the Ozone Manager, FCQ uses each request's S3 access ID to
+identify users and prioritize requests based on their recent call volume, ensuring fair resource distribution across all users.
 
 ## Hadoop FCQ Framework
 
@@ -119,8 +104,6 @@ Port used for below examples : 9862
 2. **Verify Metrics**: Check that FCQ metrics are being collected (via JMX or metrics endpoint):
     - `FairCallQueueSize_p<N>` for each priority level
     - `FairCallQueueOverflowedCalls_p<N>` for overflow statistics
-
-3. **Test User Identification**: Send requests from different S3 access IDs and verify that the scheduler is tracking them separately.
 
 ## Troubleshooting
 
