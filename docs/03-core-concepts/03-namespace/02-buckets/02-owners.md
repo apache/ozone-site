@@ -8,36 +8,7 @@ sidebar_label: Owners
 
 Every bucket in Ozone has an **owner** property that identifies the user who owns the bucket. A bucket has a single owner. The bucket owner plays a role in access control and property management, particularly when using Ozone's native ACL authorization.
 
-## 2. Bucket Owner Property
-
-### Storage and Metadata
-
-The bucket owner is stored as part of the bucket's metadata in the Ozone Manager's metadata store. Specifically:
-
-- **Bucket Table:** The owner name is stored in the `OmBucketInfo` object within the Bucket Table, accessible via `OmBucketInfo.getOwner()`.
-- **Metadata Fields:** The owner is stored alongside other bucket properties such as:
-  - Volume name
-  - Bucket name
-  - Creation and modification timestamps
-  - Quotas (space and namespace)
-  - Access Control Lists (ACLs)
-  - Bucket layout
-  - Storage type
-
-### Owner Identification
-
-The bucket owner is stored as a **plain string identifier**. It does not need to correspond to an actual system user account - any string can be used (e.g., `user1`, `alice`).
-
-**Owner Matching:**
-
-Ozone checks if the current user matches the bucket owner by comparing the stored owner string against:
-
-- `callerUgi.getUserName()` (full principal name, e.g., `alice@REALM`)
-- `callerUgi.getShortUserName()` (short username, e.g., `alice`)
-
-If either matches the stored owner string, the user is considered the owner. The comparison is case-sensitive and exact.
-
-## 3. Setting the Bucket Owner
+## 2. Setting the Bucket Owner
 
 ### During Bucket Creation
 
@@ -96,33 +67,12 @@ $ ozone sh bucket update /myvol1/buck1 --user bob
 **Requirements for Changing Ownership:**
 
 - **Permissions:** The user attempting to change ownership must have `WRITE_ACL` permission on the bucket. This ensures that only authorized users can transfer ownership.
-- **ACL Check:** When ACLs are enabled, Ozone performs an ACL check before allowing the ownership change:
-
-  ```java
-  checkAcls(ozoneManager, OzoneObj.ResourceType.BUCKET,
-      OzoneObj.StoreType.OZONE, IAccessAuthorizer.ACLType.WRITE_ACL,
-      volumeName, bucketName, null);
-  ```
-
-**Ownership Transfer Process:**
-
-When ownership is transferred, Ozone performs the following operations atomically:
-
-1. **Validation:** Checks if the new owner is different from the current owner (no-op if same).
-2. **Permission Check:** Verifies the requester has `WRITE_ACL` permission.
-3. **Bucket Metadata Update:** Updates the bucket's owner property and modification timestamp.
-4. **Transaction Logging:** Records the change in the transaction log for consistency and recovery.
-
-**Error Conditions:**
-
-- If the requester lacks `WRITE_ACL` permission, an `OMException` with `PERMISSION_DENIED` is thrown.
-- If the bucket doesn't exist, a `BUCKET_NOT_FOUND` exception is thrown.
 
 **Owner vs. ACLs:**
 
 Changing the bucket owner via `ozone sh bucket update -u <new_owner>` updates the ownership metadata but **does not automatically modify ACLs**. The previous owner's ACL entries remain unchanged. If you need to revoke the old owner's access entirely, you must manage ACLs separately using ACL update commands.
 
-## 4. Bucket Owner Privileges
+## 3. Bucket Owner Privileges
 
 ### Property Updates
 
