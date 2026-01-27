@@ -21,7 +21,6 @@ This guide details the procedure for replacing a failed disk on an SCM node.
 
 - **Impact of SCM Disk Failure :**
 The SCM disk is critical, as it stores the RocksDB database containing the state of the entire cluster's physical storage, including:
-  - Datanode registration and heartbeat status.
   - Pipeline information and states.
   - Container locations and replica information.
   - A failure of this disk without a proper recovery plan can render the cluster unable to manage storage or allocate new blocks.
