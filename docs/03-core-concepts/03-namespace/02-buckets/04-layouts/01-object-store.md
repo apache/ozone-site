@@ -177,4 +177,3 @@ When using Object Store bucket layout, be aware of the following limitations:
 
 - Use Object Store layout for S3 APIs; use FSO for file system operations
 - Organize keys with consistent prefixes (e.g., `year/month/day/file.txt`)
-- Enable versioning for critical data
