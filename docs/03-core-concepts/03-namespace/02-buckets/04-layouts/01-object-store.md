@@ -9,6 +9,7 @@ sidebar_label: Object Store (OBS)
 Object Store bucket layout stores keys with their full path names in a flat namespace, optimized for S3-compatible access patterns. Each key is stored independently with its complete path (e.g., `dir1/dir2/file.txt`), similar to Amazon S3.
 
 Unlike File System Optimized (FSO) buckets, Object Store buckets:
+
 - Do not create intermediate directory entries
 - Preserve key names exactly as provided (no path normalization)
 - Prioritize S3 API compatibility over file system semantics
@@ -28,7 +29,7 @@ Apache Ozone supports three bucket layout types:
 
 - Object Store is the **default layout** for buckets created through the **S3 Gateway**, ensuring S3 API compatibility.
 
-#### Example: Creating Keys
+### Example: Creating Keys
 
 When you create keys in an Object Store bucket:
 
