@@ -77,9 +77,11 @@ This procedure is much safer, leverages the built-in redundancy of the OM HA clu
 4. **RE-INITIALIZE THE OM:**
    - This is the key step. Since the local database is gone, the OM needs to be "reborn" by getting a complete copy of the latest state from the current OM leader.
    - Run the OM with the `--bootstrap` parameter to trigger this process. For example:
+
      ```bash
      ozone om --bootstrap
      ```
+
      This command will detect that the OM belongs to an existing Ratis ring but has no local state.
 
 5. **START THE OM AND MONITOR:**
