@@ -8,7 +8,8 @@ Ozone uses token-based authentication to secure access to data stored in contain
 Tokens are short-lived credentials that authorize specific operations without requiring clients to repeatedly
 authenticate with the central authority.
 
-Ozone implements two types of tokens: 
+Ozone implements two types of tokens:
+
 - **Delegation Tokens** for namespace operations
 - **Block Tokens** for fine-grained data access,
 - **Container Tokens** for container-level administrative operations.
