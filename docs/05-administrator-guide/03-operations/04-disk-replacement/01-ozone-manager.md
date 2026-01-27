@@ -27,6 +27,8 @@ The recovery procedure depends entirely on whether your OM is a single, standalo
 
 ## 2. Pre-flight Checks
 
+> **Important:** The following steps assume Ozone configuration files are intact. If the configuration files are corrupt, they need to be restored from a backup (if applicable) before proceeding with the disk replacement procedure.
+
 Before starting, the administrator should:
 
 1. **Identify the Failed Disk:** Use system tools (`dmesg`, `smartctl`, etc.) to confirm which disk has failed and its mount point.
@@ -74,8 +76,11 @@ This procedure is much safer, leverages the built-in redundancy of the OM HA clu
 
 4. **RE-INITIALIZE THE OM:**
    - This is the key step. Since the local database is gone, the OM needs to be "reborn" by getting a complete copy of the latest state from the current OM leader.
-   - Simply starting the OM process on the repaired node with an empty DB directory will trigger this process automatically. The OM process is designed
-     to detect that it belongs to an existing Ratis ring but has no local state.
+   - Run the OM with the `--bootstrap` parameter to trigger this process. For example:
+     ```bash
+     ozone om --bootstrap
+     ```
+     This command will detect that the OM belongs to an existing Ratis ring but has no local state.
 
 5. **START THE OM AND MONITOR:**
    - Start the Ozone Manager service on the repaired node (if not already started by the bootstrap command).
