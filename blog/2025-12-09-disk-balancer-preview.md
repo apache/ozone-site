@@ -63,6 +63,6 @@ It complements the existing Container Balancer: one works across nodes, the othe
 
 Disk Balancer is small but impactful. It brings Ozone closer to being a fully self-healing, self-balancing object store — reducing hotspots, simplifying maintenance, and improving cluster longevity.
 
-Ozone 2.2 will ship with this feature enabled via simple CLI controls and safe defaults. If you run long-lived clusters, this is a feature to watch.
+Ozone 2.2 will ship with this feature available via simple CLI controls and safe defaults. If you run long-lived clusters, this is a feature to watch.
 
 For more information, check out [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713).
