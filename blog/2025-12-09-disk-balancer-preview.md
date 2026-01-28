@@ -1,5 +1,5 @@
 ---
-title: "Disk Balancer in Apache Ozone: A Preview"
+title: "No More Hotspots: Introducing the Automatic Disk Balancer in Apache Ozone"
 authors: ["apache-ozone-community"]
 date: 2025-12-09
 tags: [Ozone, Disk Balancer, Ozone 2.2, Datanode]
