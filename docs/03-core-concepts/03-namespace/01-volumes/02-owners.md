@@ -8,7 +8,7 @@ sidebar_label: Owners
 
 Every volume in Ozone has an **owner** property that identifies the user who owns the volume. The volume owner is a fundamental concept in Ozone's access control and resource management system. It plays a crucial role in determining permissions, storage accounting, and multi-tenant isolation.
 
-The volume owner is distinct from the volume administrator (`admin`). While both have elevated privileges, the **owner** typically represents the user who "owns" the data and resources within the volume, while the **admin** is responsible for administrative tasks. In many cases, these may be the same user, but they serve different purposes in the access control model.
+While volumes also have an `admin` field in their metadata structure, this field is stored but not functionally used by Ozone Manager for authorization or access control purposes.
 
 ## 2. Setting the Volume Owner
 
@@ -153,22 +153,3 @@ Ozone enforces a configurable limit on the number of volumes a user can own. Thi
   <description>Maximum number of volumes a user can own</description>
 </property>
 ```
-
-## 4. Volume Owner vs. Volume Administrator
-
-It's important to understand the distinction between the volume **owner** and volume **administrator** (`admin`):
-
-| Aspect | Volume Owner | Volume Administrator |
-|--------|--------------|---------------------|
-| **Purpose** | Identifies the user who "owns" the data | Identifies the user responsible for administrative tasks |
-| **Privileges** | Bypasses ACL checks for resources in volume | Has administrative privileges for volume operations |
-| **Scope** | Full access to volume and all resources within it | Administrative control over volume properties |
-| **Storage Accounting** | Used for per-user volume tracking and limits | Not used for storage accounting |
-| **Can be Different** | Yes, owner and admin can be different users | Yes, admin can be different from owner |
-| **Typical Use Case** | Data owner, tenant representative | System administrator, delegated admin |
-
-**Common Scenarios:**
-
-- **Same User:** In many cases, the owner and admin are the same user, simplifying management.
-- **Different Users:** In enterprise environments, the owner might be a data steward while the admin is an IT administrator.
-- **Delegation:** An admin might create volumes for other users, setting them as owners while retaining admin privileges.
