@@ -49,7 +49,7 @@ Volumes are typically created and managed using the Ozone command-line interface
 ozone sh volume create /myvolume
 ```
 
-For more details on volume operations, refer to the [Ozone CLI documentation](../../../04-user-guide/01-client-interfaces/01-o3.md#volume-operations).
+For more details on volume operations, refer to the [Ozone CLI documentation](../../../user-guide/client-interfaces/o3#volume-operations).
 
 ### Quota Management
 
@@ -58,7 +58,7 @@ Volumes can have quotas applied to them, limiting the total storage space or the
 - **Storage Space Quota:** Limits the total data size within the volume.
 - **Namespace Quota:** Limits the number of buckets that can be created within the volume.
 
-For comprehensive information on configuring and managing quotas, see the [Quota Management documentation](../../../05-administrator-guide/03-operations/11-quota.md).
+For comprehensive information on configuring and managing quotas, see the [Quota Management documentation](../../../administrator-guide/operations/quota).
 
 ### Access Control Lists (ACLs)
 
@@ -70,12 +70,12 @@ Access to volumes is controlled via ACLs, which define permissions for users and
 - **Write:** Allows writing metadata of the volume.
 - **Delete:** Allows deleting the volume (if empty or recursively).
 
-ACLs can be set and managed using the Ozone CLI. Refer to the [Security ACLs documentation](../../04-security/02-acls/01-native-acls.md) for more in-depth information.
+ACLs can be set and managed using the Ozone CLI. Refer to the [Security ACLs documentation](../../security/acls/native-acls) for more in-depth information.
 
 ### S3 Gateway Integration (`/s3v` Volume)
 
 For compatibility with the S3 API, Ozone uses a special volume, typically `/s3v`. By default, all buckets accessed via the S3 interface are stored under this volume. It's also possible to expose buckets from other Ozone volumes via the S3 interface using "bucket linking."
-For more details, refer to the [S3 Protocol documentation](../../../04-user-guide/01-client-interfaces/03-s3/01-s3-api.md) and [S3 Multi-Tenancy documentation](../../../05-administrator-guide/03-operations/07-s3-multi-tenancy/01-overview.md).
+For more details, refer to the [S3 Protocol documentation](../../../user-guide/client-interfaces/s3/s3-api) and [S3 Multi-Tenancy documentation](../../../administrator-guide/operations/s3-multi-tenancy/overview).
 
 ### Datanode Physical Volumes vs. Ozone Manager Logical Volumes
 
@@ -84,4 +84,4 @@ It's important to distinguish between the logical "volumes" managed by the Ozone
 - **Ozone Manager Volumes:** Logical namespace containers for buckets and keys.
 - **Datanode Volumes:** Physical storage devices (disks) on a Datanode where actual data blocks are stored in containers.
 
-For more information on Datanode volume management, refer to the [Datanodes documentation](../../01-architecture/05-datanodes.md).
+For more information on Datanode volume management, refer to the [Datanodes documentation](../../architecture/datanodes).

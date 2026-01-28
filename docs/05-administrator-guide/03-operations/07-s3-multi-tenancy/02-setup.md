@@ -69,4 +69,4 @@ Finally restart all OzoneManagers to apply the new configs.
 
 ## Next Steps
 
-After configuration is complete, proceed to [Tenant Commands](./03-tenant-commands.md) to learn how to create and manage tenants.
+After configuration is complete, proceed to [Tenant Commands](./tenant-commands) to learn how to create and manage tenants.

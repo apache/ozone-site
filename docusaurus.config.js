@@ -112,6 +112,59 @@ const config = {
 
       return result;
     },
+    /*
+    Validate internal markdown links to ensure they don't contain number prefixes or file extensions.
+    These can break when the ordering or format of the target page is updated.
+    Docusaurus can resolve links without these.
+    See https://docusaurus.io/docs/api/docusaurus-config#markdown for reference.
+    */
+    preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
+      const {filePath, fileContent} = params;
+
+      // Validate internal links format
+      const internalLinkPattern = /\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)/g;
+      const numberPrefixPattern = /\/\d{2}-[^/]+/;
+
+      let matches;
+      const invalidLinks = [];
+
+      while ((matches = internalLinkPattern.exec(fileContent)) !== null) {
+        const linkText = matches[1];
+        const linkPath = matches[2];
+
+        // Skip external links (http://, https://, mailto:, etc.)
+        if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
+          continue;
+        }
+
+        // Skip absolute paths from site root (starting with /)
+        if (linkPath.startsWith('/')) {
+          continue;
+        }
+
+        // Check for number prefixes or .md extensions
+        if (numberPrefixPattern.test(linkPath) || linkPath.includes('.md')) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: fileContent.substring(0, matches.index).split('\n').length
+          });
+        }
+      }
+
+      if (invalidLinks.length > 0) {
+        const errorMsg = invalidLinks.map(link =>
+          `  Line ${link.line}: [${link.text}](${link.path})`
+        ).join('\n');
+
+        console.error('Invalid internal links found in', filePath + ':\n' + errorMsg);
+        console.error('\nInternal links should not include number prefixes or .md extensions.');
+        console.error('Example: use \'./ozone-manager#persisted-state\' instead of \'./02-ozone-manager.md#persisted-state\'');
+        process.exit(1);
+      }
+
+      return fileContent;
+    },
   },
 
   presets: [

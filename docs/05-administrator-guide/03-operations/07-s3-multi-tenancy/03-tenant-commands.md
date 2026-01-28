@@ -4,7 +4,7 @@ sidebar_label: Tenant Commands
 
 # Tenant Commands
 
-For a higher level understanding of multi-tenancy architecture, see the [Multi-Tenancy Overview](./01-overview.md).
+For a higher level understanding of multi-tenancy architecture, see the [Multi-Tenancy Overview](./overview).
 
 All Multi-Tenancy subcommands are located under CLI `ozone tenant`.
 

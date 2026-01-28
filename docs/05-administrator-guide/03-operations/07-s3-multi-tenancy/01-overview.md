@@ -27,7 +27,7 @@ This multi-tenant support will also allow users to access Ozone volumes over AWS
    - A key pair is tied to the user name it is assigned to. If a user is assigned key pairs in multiple tenants, all key pairs point to the same user name internally in Ozone Manager.
    - A user can be only assigned one key pair in a same tenant. Ozone Manager rejects the tenant user assign request if a user is already assigned to the same tenant (i.e. when the user has already been assigned an Access ID in this tenant).
    - One user can be assigned to multiple tenants. The user will have a different key pair to access each tenant. For instance, `testuser` could use `tenantone$testuser` to access `tenantone` buckets, and use `tenanttwo$testuser` to access `tenanttwo` buckets via S3 Gateway.
-     - A bucket link can be set up if cross-tenant (cross-volume) access is desired. See the [Creating bucket links](./03-tenant-commands.md#creating-bucket-links) section.
+     - A bucket link can be set up if cross-tenant (cross-volume) access is desired. See the [Creating bucket links](./tenant-commands#creating-bucket-links) section.
 3. The Ozone cluster admin can then assign tenant admin roles to that user.
 4. Tenant admin are able to assign new users to the tenant.
    - They can even assign new tenant admins in their tenant, if they are delegated tenant admins, which is the default.
@@ -37,9 +37,9 @@ This multi-tenant support will also allow users to access Ozone volumes over AWS
 
 ## Next Steps
 
-- [Multi-Tenancy Setup](./02-setup.md) - Configure multi-tenancy in your cluster
-- [Tenant Commands](./03-tenant-commands.md) - Learn tenant CLI commands
-- [Access Control](./04-access-control.md) - Understand access control with Ranger
+- [Multi-Tenancy Setup](./setup) - Configure multi-tenancy in your cluster
+- [Tenant Commands](./tenant-commands) - Learn tenant CLI commands
+- [Access Control](./access-control) - Understand access control with Ranger
 
 ## References
 
