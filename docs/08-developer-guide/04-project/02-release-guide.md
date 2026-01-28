@@ -322,6 +322,54 @@ Build the project to fetch dependencies.
   mvn clean install -DskipTests -Psign,dist,src -Dtar -Dgpg.keyname="$CODESIGNINGKEY" -Drocks_tools_native
   ```
 
+#### Build RPM and DEB packages (Ozone 2.1.0+)
+
+Starting from Ozone 2.1.0, the release branch can also produce native Linux packages for some distributions ([HDDS-13439](https://issues.apache.org/jira/browse/HDDS-13439)).
+
+- **Build RPM packages**
+
+  ```bash
+  mvn clean package -DskipTests=true -Prpm
+  ```
+
+  For ARM builds, specify the target architecture:
+
+  ```bash
+  mvn clean package -DskipTests=true -Prpm -Drpm.targetArch=aarch64
+  ```
+
+  The RPM will be produced under:
+
+  ```text
+  hadoop-ozone/dist/target/rpm/ozone/RPMS/noarch/
+  ```
+
+  with a filename like:
+
+  ```text
+  ozone-<ozone_version>-1.noarch.rpm
+  ```
+
+- **Build Debian packages**
+
+  ```bash
+  mvn clean package -Pdeb
+  ```
+
+  The `.deb` file will be created under:
+
+  ```text
+  hadoop-ozone/dist/target/
+  ```
+
+  with a filename pattern derived from the Maven build:
+
+  ```text
+  ozone_<ozone_version>-<linux_distro>_<deb_arch>.deb
+  ```
+
+These packages are intended for convenience for Linux users. The official release artifacts remain the source and binary tarballs and the Maven artifacts described in the following sections.
+
 ### Create and Upload Maven Artifacts
 
 - Perform the final build and upload the release artifacts.
