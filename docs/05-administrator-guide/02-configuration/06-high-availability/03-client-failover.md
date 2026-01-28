@@ -47,7 +47,7 @@ The failover configuration properties are:
 
 ## Client to Datanode Failover and Retry
 
-Clients retry Datanodes in the pipeline in order upon failure, in other words clients attempting to access a block belonging to a RATIS/3 pipeline may retry up to 3 datanodes. The retry behavior differs for read and write operations:
+Clients retry Datanodes in the pipeline in order upon failure, in other words clients attempting to access a block belonging to a RATIS/3 pipeline may retry up to 3 Datanodes. The retry behavior differs for read and write operations:
 
 **Read Operations:**
 
