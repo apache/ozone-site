@@ -5,7 +5,10 @@ date: 2025-12-09
 tags: [Ozone, Disk Balancer, Ozone 2.2, Datanode]
 ---
 
-**Disk Balancer** — a lightweight, automatic way to keep disk usage within each Datanode evenly distributed.
+Ever replaced a drive on a Datanode only to watch it become an I/O hotspot?
+Or seen one disk hit 95% usage while others on the same machine sit idle?
+These imbalances create performance bottlenecks and increase failure risk.
+Apache Ozone's new intra-node Disk Balancer is designed to fix this—automatically.
 
 <!-- truncate -->
 
