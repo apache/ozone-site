@@ -329,19 +329,15 @@ Starting from Ozone 2.1.0, the release branch can also produce native Linux pack
 - **Build RPM packages**
 
   ```bash
-  mvn clean package -DskipTests=true -Prpm
+  mvn clean package -Prpm -DskipTests=true -Drpm.release=<number> [-Drpm.needArch=<bool>]
   ```
 
-  For ARM builds, specify the target architecture:
-
-  ```bash
-  mvn clean package -DskipTests=true -Prpm -Drpm.targetArch=aarch64
-  ```
+  Here, `rpm.release` sets the RPM release field (for example, `1` for the first build of a given Ozone version), and the optional `rpm.needArch` flag controls whether the build automatically detects the target architecture (see HDDS-14052 for details).
 
   The RPM will be produced under:
 
   ```text
-  hadoop-ozone/dist/target/rpm/ozone/RPMS/noarch/
+  hadoop-ozone/dist/target/rpm/ozone/RPMS/
   ```
 
   with a filename like:
