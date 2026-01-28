@@ -12,7 +12,7 @@ For authentication (Kerberos/SIMPLE) of the HTTP endpoints, see the **Securing H
 
 HTTPS for Web UIs is controlled globally by the `ozone.http.policy` property.
 
-**Configuration key**
+### Configuration key
 
 | Property | Default | Description |
 |----------|---------|--------------|
@@ -46,7 +46,7 @@ Or, to keep both HTTP and HTTPS available:
 
 Each service has separate configuration keys for its HTTP and HTTPS Web UI endpoints. HTTPS uses different ports than HTTP.
 
-**Example: Ozone Manager (OM)**
+### Example: Ozone Manager (OM)
 
 From `ozone-default.xml` and the Network Ports reference:
 
@@ -69,7 +69,7 @@ Example in `ozone-site.xml`:
 
 When HA is enabled, append the service ID and node ID to each property, for example: `ozone.om.https-address.service1.om1`.
 
-**Other services**
+### Other services
 
 The same pattern is used for other Web UIs:
 
@@ -85,7 +85,7 @@ See the [Default Ports](../../../basic/network/default-ports) reference for the 
 
 Ozone uses standard Hadoop SSL configuration. The main entry point is the server keystore resource.
 
-**Configuration keys**
+### Configuration keys
 
 From [`ozone-default.xml`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/resources/ozone-default.xml):
 
@@ -98,7 +98,7 @@ From [`ozone-default.xml`](https://github.com/apache/ozone/blob/master/hadoop-hd
 | `ssl.server.truststore.location` | *(empty)* | Filesystem path to the server truststore file |
 | `ssl.server.truststore.password` | *(empty)* | Password for the server truststore |
 
-**Step 1 – Point Ozone to the server SSL resource**
+### Step 1 – Point Ozone to the server SSL resource
 
 In `ozone-site.xml`, you can override the server SSL resource file name:
 
@@ -111,7 +111,7 @@ In `ozone-site.xml`, you can override the server SSL resource file name:
 
 This resource is usually found on the classpath and contains the keystore/truststore definitions.
 
-**Step 2 – Define keystore and truststore in the SSL resource**
+### Step 2 – Define keystore and truststore in the SSL resource
 
 In the referenced `ssl-server.xml` (or the file named by `ozone.https.server.keystore.resource`), configure the keystore and truststore locations and passwords:
 
@@ -144,7 +144,7 @@ In the referenced `ssl-server.xml` (or the file named by `ozone.https.server.key
 </configuration>
 ```
 
-**Requirements**
+### Requirements
 
 - The keystore must contain a certificate whose hostname matches the Web UI URL.
 - All hosts running Ozone Web UI roles must be able to read the keystore and truststore files.
@@ -154,7 +154,7 @@ In the referenced `ssl-server.xml` (or the file named by `ozone.https.server.key
 
 By default, the server does **not** require a client certificate.
 
-**Configuration keys**
+### Configuration keys
 
 From [`ozone-default.xml`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/resources/ozone-default.xml):
 
@@ -207,7 +207,7 @@ In `ssl-client.xml`, define the client keystore and truststore, for example:
 </configuration>
 ```
 
-**mTLS considerations**
+### mTLS considerations
 
 - The server truststore (`ssl.server.truststore.location`) must trust the CA that signed client certificates.
 - The client truststore must trust the server certificate's CA.
