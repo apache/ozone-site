@@ -130,6 +130,7 @@ words:
 - memtable
 - hsync
 - SASL
+- GSS
 - jira
 - jiras
 - LLAP
