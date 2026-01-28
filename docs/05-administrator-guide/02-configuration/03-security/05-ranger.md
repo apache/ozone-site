@@ -20,7 +20,17 @@ To use the `RangerOzoneAuthorizer`, you also need to add the following environme
 ```bash
 export OZONE_MANAGER_CLASSPATH="${OZONE_HOME}/share/ozone/lib/libext/*"
 ```
+### About the ranger-ozone-plugin JARs
 
-- The location of the ranger-ozone-plugin jars depends on where the Ranger Plugin is installed.
+The *ranger-ozone-plugin JARs* are the Java libraries that come with the **Apache Ranger Ozone plugin**. They contain the implementation classes (for example `RangerOzoneAuthorizer`) that allow Ozone Manager to delegate authorization checks to Ranger.
 
-- If the ranger-ozone-plugin jars is installed on another node, copy it to the Ozone installation directory.
+You obtain these JARs when you install Apache Ranger and enable the Ozone plugin; see the [Apache Ranger documentation](https://ranger.apache.org/) for installation steps. To make the plugin available to Ozone Manager, ensure that these JARs are on the Ozone Manager classpath. In the example above, the JARs are copied into `${OZONE_HOME}/share/ozone/lib/libext/` and that directory is added to `OZONE_MANAGER_CLASSPATH`.
+
+If your distribution installs the Ranger Ozone plugin into another directory, point `OZONE_MANAGER_CLASSPATH` to that location instead, for example:
+
+```bash
+export OZONE_MANAGER_CLASSPATH=/opt/ranger/ozone-plugin/lib/*
+```
+
+If Ranger is installed on a different host, copy the Ranger Ozone plugin JARs from that installation to a directory on the Ozone Manager host (such as `share/ozone/lib/libext/`) and reference that directory from `OZONE_MANAGER_CLASSPATH` so that Ozone Manager can load the plugin at startup.
+
