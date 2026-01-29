@@ -21,14 +21,14 @@
 :root {
   --footer-background-color: #202020;
   --footer-foreground-color: #ccc;
-  --copyright-link-color: #96d26e
+  --copyright-link-color: #96d26e;
 }
 
-html[data-theme='dark'] .footer {
+html[data-theme="dark"] .footer {
   background-color: var(--footer-background-color);
 }
 
-html[data-theme='light'] .footer {
+html[data-theme="light"] .footer {
   background-color: var(--footer-background-color);
 }
 
@@ -56,10 +56,9 @@ footer.footer .footer__copyright {
 
 /* Keep copyright links in the footer the same color regardless of light or dark theme. */
 .copyright-link {
-  color: var(--copyright-link-color)
+  color: var(--copyright-link-color);
 }
 
 .copyright-link:hover {
-  color: var(--copyright-link-color)
+  color: var(--copyright-link-color);
 }
-

@@ -22,32 +22,33 @@
  */
 
 .scrollCustom {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    margin-top: var(--ifm-navbar-height);
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: var(--ifm-navbar-height);
 }
 
 #sidebarCssSelector > div {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 aside .customSidebarVersion {
-    padding: 0.5rem 0 0 0.5rem;
+  padding: 0.5rem 0 0 0.5rem;
 }
 
 aside .customSidebarInner {
-    align-items: center;
-    border: 1px solid #eee;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.03);
-    display: flex;
-    margin: 1rem;
-    padding: 4px 1rem;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  display: flex;
+  margin: 1rem;
+  padding: 4px 1rem;
 }
 
 aside .customSidebarVersion p {
-    margin-bottom: 0;
-    font-size: var(--fbc-font-size: 13px;);
-    padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+  margin-bottom: 0;
+  font-size: var(--fbc-font-size, 13px);
+  padding: var(--ifm-menu-link-padding-vertical)
+    var(--ifm-menu-link-padding-horizontal);
 }

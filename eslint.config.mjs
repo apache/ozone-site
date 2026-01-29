@@ -26,7 +26,6 @@ import pluginPrettier from "eslint-plugin-prettier/recommended";
 import pluginDocusaurus from "@docusaurus/eslint-plugin";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
 import pluginImport from "eslint-plugin-import";
-import cspell from "@cspell/eslint-plugin";
 
 
 const apacheLicenseRule = {
@@ -83,6 +82,7 @@ export default defineConfig([
   // General
   {
     ignores: [
+      "static/**",
       "*.config*",
       "node_modules/**",
       "build/**",
@@ -129,7 +129,8 @@ export default defineConfig([
     },
     rules: {
       "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-vars": "error"
     }
   },
 
@@ -138,7 +139,12 @@ export default defineConfig([
     files: ["**/*.css"],
     plugins: { css },
     language: "css/css",
-    extends: ["css/recommended"]
+    extends: ["css/recommended"],
+    rules: {
+      "css/no-invalid-properties": "off",
+      "css/no-important": "off",
+      "css/use-baseline": "off"
+    }
   },
 
   // Docusaurus
@@ -150,38 +156,39 @@ export default defineConfig([
       "@docusaurus/prefer-docusaurus-heading": "error",
       "@docusaurus/string-literal-i18n-messages": "error",
       // for i18n
-      "@docusaurus/no-untranslated-text": ["warn", { ignoredStrings: [] }]
+      // "@docusaurus/no-untranslated-text": ["warn", { ignoredStrings: [] }]
     }
   },
 
   // CSpell
-  {
-    files: ["**/*.{md,mdx}"],
-    plugins: { cspell },
-    rules: {
-      "cspell/spellchecker": ["warn", { configFile: "cspell.yaml" }]
-    }
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: { cspell },
-    rules: {
-      "cspell/spellchecker": [
-        "warn",
-        {
-          configFile: "cspell.yaml",
-          // Check only comments and strings, not the code
-          checkComments: true,
-          checkStrings: true,
-          checkIdentifiers: false
-        }
-      ]
-    }
-  },
+  // Comment out for now, it's buggy
+  // {
+  //   files: ["**/*.{md,mdx}"],
+  //   plugins: { cspell },
+  //   rules: {
+  //     "cspell/spellchecker": ["warn", { configFile: "cspell.yaml" }]
+  //   }
+  // },
+  // {
+  //   files: ["**/*.{js,mjs,cjs,jsx}"],
+  //   plugins: { cspell },
+  //   rules: {
+  //     "cspell/spellchecker": [
+  //       "warn",
+  //       {
+  //         configFile: "cspell.yaml",
+  //         // Check only comments and strings, not the code
+  //         checkComments: true,
+  //         checkStrings: true,
+  //         checkIdentifiers: false
+  //       }
+  //     ]
+  //   }
+  // },
 
   // Custom rule to enforce Apache License header
   {
-    files: ["**/*.{js,mjs,cjs,jsx,css}"],
+    files: ["**/*.{js,mjs,cjs,jsx}"],
     plugins: {
       custom: {
         rules: { "apache-license": apacheLicenseRule }

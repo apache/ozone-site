@@ -17,36 +17,44 @@
  * under the License.
  */
 
-import React, { useState } from 'react';
-import styles from './styles.module.css';
+import { useState } from "react";
+import styles from "./styles.module.css";
+import Heading from "@theme/Heading";
 
 export default function AskQuestionForm() {
-  const [question, setQuestion] = useState('');
-  const [title, setTitle] = useState('');
+  const [question, setQuestion] = useState("");
+  const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Create the GitHub Discussions URL with query parameters
-    const baseUrl = 'https://github.com/apache/ozone/discussions/new';
-    const category = 'faq ';
+    const baseUrl = "https://github.com/apache/ozone/discussions/new";
+    const category = "faq ";
     const titleEncoded = encodeURIComponent(title);
     const bodyEncoded = encodeURIComponent(question);
-    
+
     const redirectUrl = `${baseUrl}?category=${category}&title=${titleEncoded}&body=${bodyEncoded}`;
-    
+
     // Redirect to GitHub Discussions with the pre-filled question
     window.location.href = redirectUrl;
   };
 
   return (
     <div className={styles.formContainer}>
-      <h2 className={styles.formTitle}>Ask a Question</h2>
-      <p className={styles.formDescription}>Have a question about Apache Ozone? Fill out this form and we'll redirect you to GitHub Discussions with your question pre-filled.</p>
-      
+      <Heading as="h2" className={styles.formTitle}>
+        Ask a Question
+      </Heading>
+      <p className={styles.formDescription}>
+        Have a question about Apache Ozone? Fill out this form and we'll
+        redirect you to GitHub Discussions with your question pre-filled.
+      </p>
+
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="title" className={styles.label}>Question Title:</label>
+          <label htmlFor="title" className={styles.label}>
+            Question Title:
+          </label>
           <input
             type="text"
             id="title"
@@ -57,9 +65,11 @@ export default function AskQuestionForm() {
             className={styles.input}
           />
         </div>
-        
+
         <div className={styles.formGroup}>
-          <label htmlFor="question" className={styles.label}>Your Question:</label>
+          <label htmlFor="question" className={styles.label}>
+            Your Question:
+          </label>
           <textarea
             id="question"
             value={question}
@@ -70,14 +80,14 @@ export default function AskQuestionForm() {
             rows={5}
           />
         </div>
-        
+
         <div className={styles.submitGroup}>
           <button type="submit" className={styles.button}>
             Submit to GitHub Discussions
           </button>
           <p className={styles.submitNote}>
-            Your question will be redirected to the official Apache Ozone GitHub Discussions board.
-            A GitHub account is required to participate.
+            Your question will be redirected to the official Apache Ozone GitHub
+            Discussions board. A GitHub account is required to participate.
           </p>
         </div>
       </form>
