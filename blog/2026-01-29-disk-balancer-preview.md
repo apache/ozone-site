@@ -39,7 +39,7 @@ Balancing is local and safe:
 
 This runs independently on each Datanode. To use it, first enable the feature by setting `hdds.datanode.disk.balancer.enabled = true` in `ozone-site.xml` on your Datanodes. Once enabled, clients use `ozone admin datanode diskbalancer` commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE datanodes when running batch operations with `--in-service-datanodes`.
 
-### Disk Balancing Policies
+## How DiskBalancer Decides What to Move
 
 DiskBalancer uses simple but robust policies to decide **which disks to balance** and **which containers to move** (see the design doc for details: `diskbalancer.md` in [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)).
 
