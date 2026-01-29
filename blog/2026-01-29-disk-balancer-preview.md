@@ -85,6 +85,17 @@ ozone admin datanode diskbalancer update --in-service-datanodes
 
 Key settings include the density threshold, per-task throughput cap, parallel thread count, and whether to auto-stop once balanced.
 
+### Configuration Parameters
+
+The following parameters can be specified during **start** or **update configuration** Disk Balancer:
+
+| Parameter | Short Flag | Default Value | Description |
+| --------- | ---------- |---------------| ----------- |
+| `--threshold` | `-t` | `10.0`        | Percentage deviation from average utilization of the disks after which a datanode will be rebalanced. |
+| `--bandwidth-in-mb` | `-b` | `10`          | Maximum bandwidth for DiskBalancer per second. |
+| `--parallel-thread` | `-p` | `5`           | Max parallel thread count for DiskBalancer. |
+| `--stop-after-disk-even` | `-s` | `true`        | Stop DiskBalancer automatically after disk utilization is even. |
+
 ## Benefits for operators
 
 - **Even I/O load** across disks → more stable performance.
