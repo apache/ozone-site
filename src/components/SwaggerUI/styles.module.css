@@ -63,13 +63,30 @@
   border-color: #444;
 }
 
-.serverInput:focus {
+.versionInput {
+  width: 100px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .versionInput {
+  border-color: #444;
+}
+
+.serverInput:focus,
+.versionInput:focus {
   outline: none;
   border-color: var(--ifm-color-primary);
   box-shadow: 0 0 0 2px rgba(53, 117, 0, 0.1);
 }
 
-[data-theme='dark'] .serverInput:focus {
+[data-theme='dark'] .serverInput:focus,
+[data-theme='dark'] .versionInput:focus {
   box-shadow: 0 0 0 2px rgba(150, 210, 110, 0.2);
 }
 
