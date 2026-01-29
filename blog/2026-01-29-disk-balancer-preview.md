@@ -64,26 +64,51 @@ First, enable the Disk Balancer feature on each Datanode by setting the followin
 
 - `hdds.datanode.disk.balancer.enabled = true`
 
-CLI examples:
+The Disk Balancer CLI supports two command patterns:
+
+- `ozone admin datanode diskbalancer <command> --in-service-datanodes` - Operate on all **IN_SERVICE and HEALTHY** datanodes
+- `ozone admin datanode diskbalancer <command> <dn-hostname/dn-ipaddress:port>` - Operate on a specific datanode
+
+Available commands:
+
+- **start** - Start the Disk Balancer on the target datanode(s)
+- **stop** - Stop the Disk Balancer on the target datanode(s)
+- **status** - Check the current Disk Balancer status
+- **report** - Get a volume density report showing imbalance across disks
+- **update** - Update Disk Balancer configuration settings
+
+Examples:
 
 ```bash
-# Start DiskBalancer on all IN_SERVICE datanodes
+# Start Disk Balancer
 ozone admin datanode diskbalancer start --in-service-datanodes
+or
+ozone admin datanode diskbalancer start ozone-datanode-1 ozone-datanode-5
 
-# Stop DiskBalancer on all IN_SERVICE datanodes
+# user can also specifiy configuration parameters during start
+ozone admin datanode diskbalancer start -t <value> -b <value> -p <value> -s <value> --in-service-datanodes
+or
+ozone admin datanode diskbalancer start -t <value> -b <value> -p <value> -s <value> ozone-datanode-1
+
+# Stop Disk Balancer
 ozone admin datanode diskbalancer stop --in-service-datanodes
+or
+ozone admin datanode diskbalancer stop 192.168.1.100:9860
 
-# Check DiskBalancer status on all IN_SERVICE datanodes
+# Check status
 ozone admin datanode diskbalancer status --in-service-datanodes
+or
+ozone admin datanode diskbalancer status ozone-datanode-1
 
-# Get a volume density report to see imbalance across disks
+# Get volume density report
 ozone admin datanode diskbalancer report --in-service-datanodes
+or
+ozone admin datanode diskbalancer report 192.168.1.100:9860
 
-# Update DiskBalancer configuration on all IN_SERVICE datanodes
-ozone admin datanode diskbalancer update --in-service-datanodes
-```
-
-Key settings include the density threshold, per-task throughput cap, parallel thread count, and whether to auto-stop once balanced.
+# Update configuration
+ozone admin datanode diskbalancer update -t <value> -b <value> -p <value> -s <value> --in-service-datanodes
+or
+ozone admin datanode diskbalancer update -t <value> -b <value> -p <value> -s <value> ozone-datanode-1
 
 ### Configuration Parameters
 
