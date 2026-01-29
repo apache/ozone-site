@@ -50,7 +50,7 @@ These defaults aim to make safe, incremental moves that converge the disks towar
 
 ### Container Move Process
 
-When DiskBalancer moves a container from one disk to another on the **same Datanode**, it follows a careful copy‑and‑import flow (summarized from the design doc for [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)):
+When DiskBalancer moves a container from one disk to another on the **same Datanode**, it follows a careful **"Copy-Validate-Replace"** flow (summarized from the design doc for [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)):
 
 1. Create a temporary copy of the CLOSED container on the destination disk.
 2. Transition that copy into a **RECOVERING** state and import it as a new container on the destination.
