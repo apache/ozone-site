@@ -1,7 +1,7 @@
 ---
 title: "No More Hotspots: Introducing the Automatic Disk Balancer in Apache Ozone"
 authors: ["apache-ozone-community"]
-date: 2025-12-09
+date: 2026-01-29
 tags: [Ozone, Disk Balancer, Ozone 2.2, Datanode]
 ---
 
@@ -37,18 +37,50 @@ Balancing is local and safe:
 - A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.
 - Bandwidth and concurrency are **operator-tunable** to avoid interfering with production I/O.
 
-This runs independently on each Datanode; SCM just receives reports.
+This runs independently on each Datanode. To use it, first enable the feature by setting `hdds.datanode.disk.balancer.enabled = true` in `ozone-site.xml` on your Datanodes. Once enabled, clients use `ozone admin datanode diskbalancer` commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE datanodes when running batch operations with `--in-service-datanodes`.
+
+### Disk Balancing Policies
+
+DiskBalancer uses simple but robust policies to decide **which disks to balance** and **which containers to move** (see the design doc for details: `diskbalancer.md` in [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)).
+
+- **Default Volume Choosing Policy**: Picks the most over‑utilized volume as the source and the most under‑utilized volume as the destination, based on each disk’s **Volume Data Density** and the Datanode’s average utilization.
+- **Default Container Choosing Policy**: Scans containers on the source volume and moves only **CLOSED** containers that are not already being moved. To avoid repeatedly scanning the same list, it caches container metadata with automatic expiry.
+
+These defaults aim to make safe, incremental moves that converge the disks toward an even utilization state.
+
+### Container Move Process
+
+When DiskBalancer moves a container from one disk to another on the **same Datanode**, it follows a careful copy‑and‑import flow (summarized from the design doc for [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)):
+
+1. Create a temporary copy of the CLOSED container on the destination disk.
+2. Transition that copy into a **RECOVERING** state and import it as a new container on the destination.
+3. Once import and metadata updates succeed, delete the original CLOSED container from the source disk.
+
+This ensures that data is always consistent: the destination copy is fully validated before the original is removed, minimizing risk during balancing.
 
 ## Using Disk Balancer
+
+First, enable the Disk Balancer feature on each Datanode by setting the following in `ozone-site.xml`:
+
+- `hdds.datanode.disk.balancer.enabled = true`
 
 CLI examples:
 
 ```bash
-# Start on all datanodes
-ozone admin datanode diskbalancer start -a
+# Start DiskBalancer on all IN_SERVICE datanodes
+ozone admin datanode diskbalancer start --in-service-datanodes
 
-# Check status
-ozone admin datanode diskbalancer status
+# Stop DiskBalancer on all IN_SERVICE datanodes
+ozone admin datanode diskbalancer stop --in-service-datanodes
+
+# Check DiskBalancer status on all IN_SERVICE datanodes
+ozone admin datanode diskbalancer status --in-service-datanodes
+
+# Get a volume density report to see imbalance across disks
+ozone admin datanode diskbalancer report --in-service-datanodes
+
+# Update DiskBalancer configuration on all IN_SERVICE datanodes
+ozone admin datanode diskbalancer update --in-service-datanodes
 ```
 
 Key settings include the density threshold, per-task throughput cap, parallel thread count, and whether to auto-stop once balanced.
