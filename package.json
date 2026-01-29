@@ -32,10 +32,22 @@
     "@cspell/dict-java": "^5.0.11",
     "@cspell/dict-markdown": "^2.0.9",
     "@cspell/dict-shell": "^1.1.0",
+    "@cspell/eslint-plugin": "^9.6.2",
+    "@docusaurus/eslint-plugin": "^3.9.2",
     "@docusaurus/module-type-aliases": "3.7.0",
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^9.39.2",
     "ajv-cli": "^5.0.0",
     "cspell": "^8.17.5",
-    "markdownlint-cli": "^0.39.0"
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "globals": "^17.2.0",
+    "markdownlint-cli": "^0.39.0",
+    "prettier": "3.8.1"
   },
   "browserslist": {
     "production": [
