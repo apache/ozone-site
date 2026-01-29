@@ -109,6 +109,7 @@ ozone admin datanode diskbalancer report 192.168.1.100:9860
 ozone admin datanode diskbalancer update -t <value> -b <value> -p <value> -s <value> --in-service-datanodes
 or
 ozone admin datanode diskbalancer update -t <value> -b <value> -p <value> -s <value> ozone-datanode-1
+```
 
 ### Configuration Parameters
 
