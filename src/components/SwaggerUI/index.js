@@ -26,20 +26,24 @@ import styles from './styles.module.css';
 export default function SwaggerUIComponent({ spec, defaultServer }) {
   const specUrl = useBaseUrl(spec);
   const [serverUrl, setServerUrl] = useState(defaultServer || 'http://localhost:9888');
+  const [apiVersion, setApiVersion] = useState('v1');
   const swaggerSystemRef = useRef(null);
 
-  // Update the server URL in Swagger whenever serverUrl changes
+  // Update the server URL in Swagger whenever serverUrl or apiVersion changes
   useEffect(() => {
     if (swaggerSystemRef.current) {
       const spec = swaggerSystemRef.current.getState().getIn(['spec', 'json']);
       if (spec) {
+        // Construct full URL: {serverUrl}/api/{version}/
+        const baseUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+        const fullServerUrl = `${baseUrl}/api/${apiVersion}/`;
         swaggerSystemRef.current.specActions.updateJsonSpec({
           ...spec.toJS(),
-          servers: [{ url: serverUrl, description: 'Configured Recon Server' }]
+          servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
         });
       }
     }
-  }, [serverUrl]);
+  }, [serverUrl, apiVersion]);
 
   return (
     <div className={styles.swaggerWrapper}>
@@ -55,6 +59,17 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
           placeholder="http://localhost:9888"
           className={styles.serverInput}
         />
+        <label htmlFor="recon-api-version" className={styles.serverLabel}>
+          API Version:
+        </label>
+        <input
+          id="recon-api-version"
+          type="text"
+          value={apiVersion}
+          onChange={(e) => setApiVersion(e.target.value)}
+          placeholder="v1"
+          className={styles.versionInput}
+        />
         <span className={styles.serverHint}>
           (Default for Docker quick start. Change to match your Recon instance.)
         </span>
@@ -67,12 +82,14 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
         onComplete={(system) => {
           // Store the system reference for later updates
           swaggerSystemRef.current = system;
-          // Set initial server URL
+          // Set initial server URL with API version
           const spec = system.getState().getIn(['spec', 'json']);
           if (spec) {
+            const baseUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+            const fullServerUrl = `${baseUrl}/api/${apiVersion}/`;
             system.specActions.updateJsonSpec({
               ...spec.toJS(),
-              servers: [{ url: serverUrl, description: 'Configured Recon Server' }]
+              servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
             });
           }
         }}
