@@ -75,6 +75,7 @@ words:
 - ratis
 - OM
 - SCM
+- Recon
 - datanode
 - datanodes
 - DN
@@ -94,11 +95,15 @@ words:
 - quasi-closed
 - HCFS
 - libo3fs
+- AOS
+- FCQ
+- QoS
 # Other systems' words
 - KDC
 - classpath
 - DS
 - HDFS
+- dfs
 - Protolock
 - CSI
 - Quantcast
@@ -158,6 +163,8 @@ words:
 - Cloudian
 - ABFS
 - OCI
+- untar
+- Untar
 # Misc words
 - acking
 - dashboarding
@@ -178,6 +185,19 @@ words:
 - checksummed
 - ISA
 - doublebuffer
+- untars
+- Untar
+- jdbc
+- JDBC
+- MIS
+- defragged
+- hardlinks
+- Gatekeeping
+- minimises
+- minimising
+- tarballed
+# Apache Ozone community member names
+- Sumit
 # Company names for "Who Uses Ozone" page
 - Shopee
 - Qihoo360
@@ -198,6 +218,14 @@ words:
 - Gargi
 - jais
 - lai
+- activetimebyseconds
+- charindex
+- thecount
+- debugability
+- auditparser
+- checknative
+- subpages
+- analyse
 # Infrastructure and hardware terms
 - Chrony
 - SAS
@@ -207,3 +235,4 @@ words:
 - LVM
 - NVMe
 - ntpd
+- hotswap
