@@ -4,7 +4,7 @@ sidebar_label: Bare Metal
 
 # Try Ozone on Bare Metal
 
-This guide covers setting up Apache Ozone on physical or virtual machines. Choose between manual installation or automated deployment using the ozone-installer tool.
+This guide covers setting up Apache Ozone on physical or virtual machines. Choose between manual installation or automated deployment using the Ozone Installer tool.
 
 ## Ozone Components
 
@@ -19,6 +19,7 @@ Learn more: [Ozone Architecture Overview](https://ozone.apache.org/docs/edge/con
 ## Prerequisites
 
 **All Nodes:**
+
 - Linux OS (RHEL/CentOS 7+, Ubuntu 20.04+)
 - Java 11 or Java 17 (OpenJDK)
 - Minimum 4 GB RAM
@@ -26,10 +27,12 @@ Learn more: [Ozone Architecture Overview](https://ozone.apache.org/docs/edge/con
 - Network connectivity between nodes
 
 **For Manual Installation:**
+
 - Root/sudo access on all nodes
 - wget or curl for downloading binaries
 
 **For Automated Installation:**
+
 - **Controller node:** Python 3.10-3.12, Ansible Community 10.x
 - **Managed nodes:** Python 3.7+, sudo access
 
@@ -37,8 +40,9 @@ Learn more: [Ozone Architecture Overview](https://ozone.apache.org/docs/edge/con
 
 ## Method 1: Manual Installation
 
-We will be using /opt/ozone as the base directory for ozone configs and binaries, and /data/ozone for the application data and metadata in all of our examples.
-Feel free to use any path as per your environment.
+:::note
+We will be using `/opt/ozone` as the base directory for Ozone configs and binaries, and `/data/ozone` for the application data and metadata in all of our examples. Feel free to use any path as per your environment.
+:::
 
 ### Step 1: Install Java
 
@@ -150,6 +154,7 @@ Edit `/opt/ozone/etc/hadoop/ozone-site.xml`:
 ```
 
 **Configuration Resources:**
+
 - [Configuration Properties Reference](https://ozone.apache.org/docs/edge/start/onprem.html#ozone-settings-summary)
 - [Network Ports Reference](https://ozone.apache.org/docs/edge/concept/ports.html)
 - [S3 Gateway Setup Guide](https://ozone.apache.org/docs/edge/interface/s3.html)
@@ -247,36 +252,32 @@ python3 ozone_installer.py -H hosts -v 2.1.0 --python-interpreter /usr/bin/pytho
 python3 ozone_installer.py --clean -H hosts -v 2.1.0
 ```
 
-**Host file format** (`hosts.txt`):
-```
-host1.example.com
-host2.example.com
-user@host3.example.com:2222
-```
-
 ### What Gets Installed
 
 **Automated setup includes:**
+
 - Java 11 or 17 installation (if not present)
 - Service user (`ozone`) creation
 - Directory structure setup
 - Ozone binary installation and configuration
-- Optional S3 Gateway setup
+- S3 Gateway setup
 
 **Non-HA (1-2 nodes):**
+
 - First host: OM + SCM + Recon (+ S3G if enabled)
 - All hosts: Datanodes
 
 **HA (3+ nodes):**
+
 - First 3 hosts: OM + SCM (HA)
 - First host: Recon + S3G (if enabled)
 - All hosts: Datanodes
 
 **Default paths:**
+
 - Install: `/opt/ozone`
 - Data: `/data/ozone`
 - Service user: `ozone:ozone`
-- S3 Gateway port: `9878` (HTTP)
 
 **For more details, see the [ozone-installer repository](https://github.com/apache/ozone-installer).**
 
