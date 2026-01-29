@@ -37,7 +37,7 @@ Balancing is local and safe:
 - A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.
 - Bandwidth and concurrency are **operator-tunable** to avoid interfering with production I/O.
 
-This runs independently on each Datanode. To use it, first enable the feature by setting `hdds.datanode.disk.balancer.enabled = true` in `ozone-site.xml` on your Datanodes. Once enabled, clients use `ozone admin datanode diskbalancer` commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE datanodes when running batch operations with `--in-service-datanodes`.
+This runs independently on each Datanode. To use it, first enable the feature by setting `hdds.datanode.disk.balancer.enabled = true` in `ozone-site.xml` on your Datanodes. Once enabled, clients use `ozone admin datanode diskbalancer` commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE Datanodes when running batch operations with `--in-service-datanodes`.
 
 ## How DiskBalancer Decides What to Move
 
@@ -66,13 +66,13 @@ First, enable the Disk Balancer feature on each Datanode by setting the followin
 
 The Disk Balancer CLI supports two command patterns:
 
-- `ozone admin datanode diskbalancer <command> --in-service-datanodes` - Operate on all **IN_SERVICE and HEALTHY** datanodes
-- `ozone admin datanode diskbalancer <command> <dn-hostname/dn-ipaddress:port>` - Operate on a specific datanode
+- `ozone admin datanode diskbalancer <command> --in-service-datanodes` - Operate on all **IN_SERVICE and HEALTHY** Datanodes
+- `ozone admin datanode diskbalancer <command> <dn-hostname/dn-ipaddress:port>` - Operate on a specific Datanode
 
 Available commands:
 
-- **start** - Start the Disk Balancer on the target datanode(s)
-- **stop** - Stop the Disk Balancer on the target datanode(s)
+- **start** - Start the Disk Balancer on the target Datanode(s)
+- **stop** - Stop the Disk Balancer on the target Datanode(s)
 - **status** - Check the current Disk Balancer status
 - **report** - Get a volume density report showing imbalance across disks
 - **update** - Update Disk Balancer configuration settings
@@ -117,7 +117,7 @@ The following parameters can be specified during **start** or **update configura
 
 | Parameter | Short Flag | Default Value | Description |
 | --------- | ---------- |---------------| ----------- |
-| `--threshold` | `-t` | `10.0`        | Percentage deviation from average utilization of the disks after which a datanode will be rebalanced. |
+| `--threshold` | `-t` | `10.0`        | Percentage deviation from average utilization of the disks after which a Datanode will be rebalanced. |
 | `--bandwidth-in-mb` | `-b` | `10`          | Maximum bandwidth for DiskBalancer per second. |
 | `--parallel-thread` | `-p` | `5`           | Max parallel thread count for DiskBalancer. |
 | `--stop-after-disk-even` | `-s` | `true`        | Stop DiskBalancer automatically after disk utilization is even. |
