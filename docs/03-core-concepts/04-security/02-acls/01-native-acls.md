@@ -175,3 +175,54 @@ Ozone ACLs and S3 ACLs differ primarily in their scope and support.
 - Similarly, HttpFS ACL-related APIs.
 
 These limitations should be taken into account when integrating Ozone with applications that rely on S3 or file system ACL operations.
+
+## Permission comparison table
+
+The table below shows the mapping between Ozone operations and the required Native ACL permissions.
+
+`<admin>`: for native ACL, all access is granted for all operations
+
+`<owner>`: for native ACL, owner of volume / bucket have all access to further hierarchy
+
+### Volume related operation
+
+| `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
+|--------------------------|---------------------|---------------------|------------------|
+| `Create volume` | `<admin>` | | |
+| `List volume` | `<admin>, <configuration: listall>` | | |
+| `Get volume info` | `READ, <admin>, <owner>` | | |
+| `Delete volume` | `DELETE, <admin>, <owner>` | | |
+| `Set Quota` | `WRITE, <admin>, <owner>` | | |
+| `Set Owner` | `WRITE_ACL, <admin>, <owner>` | | |
+| `Create Tenant (and volume)` | `CREATE, <admin>, <owner>` | | |
+| `Delete Tenant` | `WRITE_ACL, <admin>, <owner>` | | |
+| `Read ACL` | `READ_ACL, <admin>, <owner>` | | |
+| `Write ACL` | `WRITE_ACL, <admin>, <owner>` | | |
+
+### Bucket related operation
+
+| `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
+|--------------------------|---------------------|---------------------|------------------|
+| `Create bucket` | `WRITE, <admin>, <owner>` | | |
+| `List bucket` | `LIST, <admin>, <owner>` | | |
+| `Get bucket info` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | |
+| `Delete bucket` | `READ, <admin>, <owner>` | `DELETE, <admin>, <owner>` | |
+| `Update bucket property (quota, replication, ...)` | `READ` | `<admin>, <owner>` | |
+| `List Snapshot` | `READ, <admin>, <owner>` | `LIST, <admin>, <owner>` | |
+| `List Trash` | `READ, <admin>, <owner>` | `LIST, <admin>, <owner>` | |
+| `Trash Recover` | `READ, <admin>, <owner>` | `WRITE, <admin>, <owner>` | |
+| `Set Owner` | `READ, <admin>, <owner>` | `WRITE_ACL, <admin>, <owner>` | |
+| `Read ACL` | `READ, <admin>, <owner>` | `READ_ACL, <admin>, <owner>` | |
+| `Write ACL` | `READ, <admin>, <owner>` | `WRITE_ACL, <admin>, <owner>` | |
+
+### FSO / OBS related operation for key and files
+
+| `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
+|--------------------------|---------------------|---------------------|------------------|
+| `List key` | `READ, <admin>, <owner>` | `LIST, READ, <admin>, <owner>` | |
+| `Write key` | `READ, <admin>, <owner>` | `WRITE, <admin>, <owner>` | `CREATE, WRITE, <admin>` |
+| `Delete key` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `DELETE (*recursive check all child), <admin>` |
+| `Read key` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` |
+| `Read ACL` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `READ_ACL, <admin>, <owner>` |
+| `Write ACL` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `WRITE_ACL, <admin>, <owner>` | |
+
