@@ -78,6 +78,34 @@
   border-color: #444;
 }
 
+.applyButton {
+  padding: 8px 20px;
+  background: var(--ifm-color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.applyButton:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.applyButton:active {
+  background: var(--ifm-color-primary-darker);
+}
+
+[data-theme='dark'] .applyButton {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .applyButton:hover {
+  background: var(--ifm-color-primary-light);
+}
+
 .serverInput:focus,
 .versionInput:focus {
   outline: none;

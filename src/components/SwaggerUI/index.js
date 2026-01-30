@@ -27,23 +27,30 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
   const specUrl = useBaseUrl(spec);
   const [serverUrl, setServerUrl] = useState(defaultServer || 'http://localhost:9888');
   const [apiVersion, setApiVersion] = useState('v1');
+  const [appliedServerUrl, setAppliedServerUrl] = useState(defaultServer || 'http://localhost:9888');
+  const [appliedApiVersion, setAppliedApiVersion] = useState('v1');
   const swaggerSystemRef = useRef(null);
 
-  // Update the server URL in Swagger whenever serverUrl or apiVersion changes
+  // Update the server URL in Swagger only when applied values change
   useEffect(() => {
     if (swaggerSystemRef.current) {
       const spec = swaggerSystemRef.current.getState().getIn(['spec', 'json']);
       if (spec) {
         // Construct full URL: {serverUrl}/api/{version}/
-        const baseUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
-        const fullServerUrl = `${baseUrl}/api/${apiVersion}/`;
+        const baseUrl = appliedServerUrl.endsWith('/') ? appliedServerUrl.slice(0, -1) : appliedServerUrl;
+        const fullServerUrl = `${baseUrl}/api/${appliedApiVersion}/`;
         swaggerSystemRef.current.specActions.updateJsonSpec({
           ...spec.toJS(),
           servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
         });
       }
     }
-  }, [serverUrl, apiVersion]);
+  }, [appliedServerUrl, appliedApiVersion]);
+
+  const handleApply = () => {
+    setAppliedServerUrl(serverUrl);
+    setAppliedApiVersion(apiVersion);
+  };
 
   return (
     <div className={styles.swaggerWrapper}>
@@ -70,8 +77,15 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
           placeholder="v1"
           className={styles.versionInput}
         />
+        <button
+          onClick={handleApply}
+          className={styles.applyButton}
+          type="button"
+        >
+          Apply
+        </button>
         <span className={styles.serverHint}>
-          (Default for Docker quick start. Change to match your Recon instance.)
+          (Default for Docker quick start. Change server/version and click Apply.)
         </span>
       </div>
       <SwaggerUI 
@@ -85,8 +99,8 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
           // Set initial server URL with API version
           const spec = system.getState().getIn(['spec', 'json']);
           if (spec) {
-            const baseUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
-            const fullServerUrl = `${baseUrl}/api/${apiVersion}/`;
+            const baseUrl = appliedServerUrl.endsWith('/') ? appliedServerUrl.slice(0, -1) : appliedServerUrl;
+            const fullServerUrl = `${baseUrl}/api/${appliedApiVersion}/`;
             system.specActions.updateJsonSpec({
               ...spec.toJS(),
               servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
