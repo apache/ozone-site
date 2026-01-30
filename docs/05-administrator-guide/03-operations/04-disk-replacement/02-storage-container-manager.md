@@ -121,11 +121,11 @@ This is the recommended production procedure. It leverages the HA quorum for rec
 
 ### 5.1 Primordial SCM Node
 
-- In an HA setup, the first SCM started with `scm --init` is the "primordial" node, which generates the cluster's unique ID.
-- If the primordial node's disk fails, the recovery procedure is the same (`scm --bootstrap`).
-- The cluster ID is preserved by the surviving SCMs and will be replicated to the repaired node during the bootstrap process.
-- If you have configured `ozone.scm.primordial.node.id` in your configuration, the bootstrap command will automatically detect if it's being run on the primordial node and skip the bootstrap operation (since primordial nodes should use `scm --init`).
-- However, after a disk replacement, even the primordial node should use `scm --bootstrap` to recover from the surviving SCMs.
+- In an HA setup, the first SCM started with `scm --init` is the "primordial" node, which generates the cluster's unique ID and (in secure clusters) the root CA for SCM certificates.
+- The primordial node is only required during initial SCM HA establishment. After the cluster is running, the primordial SCM can fail or be decommissioned with no impact to the cluster; the leader SCM's sub-CA issues certificates to OM and Datanodes.
+- The cluster ID is preserved by the surviving SCMs and will be replicated to the repaired node when that node successfully runs bootstrap.
+- If `ozone.scm.primordial.node.id` is set, bootstrap **skips** on that node (no cluster ID fetch, no storage init). So on a repaired primordial node, `scm --bootstrap` alone does **not** recover from other SCMs.
+- **Primordial disk replaced:** On the repaired node, temporarily set `ozone.scm.primordial.node.id` to another SCM (or unset it), then run `scm --bootstrap` and `ozone --daemon start scm`. Optionally set the property back after the node rejoins the ring.
 
 ### 5.2 Disk Space Requirements for Snapshots
 
