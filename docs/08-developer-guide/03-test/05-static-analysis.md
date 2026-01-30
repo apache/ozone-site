@@ -6,12 +6,12 @@ Apache Ozone uses static code analysis tools to identify potential bugs, code sm
 
 ## SonarQube Overview
 [SonarQube](https://www.sonarqube.org/) is an open-source platform for continuous inspection of code quality. It performs automatic reviews with static analysis to detect:
-* Bugs and logic errors
-* Code smells (maintainability issues)
-* Security vulnerabilities
-* Duplicated code
-* Test coverage gaps
-* Coding standard violations
+- Bugs and logic errors
+- Code smells (maintainability issues)
+- Security vulnerabilities
+- Duplicated code
+- Test coverage gaps
+- Coding standard violations
 
 ## SonarCloud for Apache Ozone
 Apache Ozone uses SonarCloud, a cloud-based version of SonarQube, for continuous code quality analysis.
@@ -22,9 +22,9 @@ The Ozone project's SonarCloud dashboard is publicly available at: https://sonar
 ### When Analysis Runs
 SonarCloud analysis is triggered automatically on:
 
-* Pull Request submissions
-* Merges to the main branch
-* Release branch creation
+- Pull Request submissions
+- Merges to the main branch
+- Release branch creation
 
 The analysis is integrated into the GitHub Actions CI workflow in .github/workflows/ci.yml.
 
@@ -32,21 +32,21 @@ The analysis is integrated into the GitHub Actions CI workflow in .github/workfl
 ### Dashboard Overview
 The SonarCloud dashboard provides high-level metrics including:
 
-* **Quality Gate Status**: Overall pass/fail status based on quality thresholds
-* **Bugs**: Logic errors and potential runtime issues
-* **Vulnerabilities**: Security issues
-* **Code Smells**: Maintainability issues
-* **Coverage**: Percentage of code covered by tests
-* **Duplications**: Percentage of duplicated code
+- **Quality Gate Status**: Overall pass/fail status based on quality thresholds
+- **Bugs**: Logic errors and potential runtime issues
+- **Vulnerabilities**: Security issues
+- **Code Smells**: Maintainability issues
+- **Coverage**: Percentage of code covered by tests
+- **Duplications**: Percentage of duplicated code
 
 ### Issue Severity Levels
 SonarQube categorizes issues by severity:
 
-* **Blocker**: Issues that must be fixed immediately (risk of system failure)
-* **Critical**: High-impact issues requiring urgent attention
-* **Major**: Default severity for most issues
-* **Minor**: Low-impact issues with minimal risk
-* **Info**: Non-critical issues that represent best practice violations
+- **Blocker**: Issues that must be fixed immediately (risk of system failure)
+- **Critical**: High-impact issues requiring urgent attention
+- **Major**: Default severity for most issues
+- **Minor**: Low-impact issues with minimal risk
+- **Info**: Non-critical issues that represent best practice violations
 
 ## Addressing SonarQube Issues
 ### Viewing PR-Specific Issues
@@ -137,7 +137,7 @@ cd hadoop-ozone/dev-support/checks
 ./rat.sh
 ```
 ## Resources
-* [SonarSource Rules](https://rules.sonarsource.com/java/) - Detailed explanations of Java rules
-* [SpotBugs Bug Patterns](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html) - Explanations of bug patterns
-* [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html) - Complete list of PMD rules
-* [Checkstyle Checks](Checkstyle Checks) - Available Checkstyle checks
+- [SonarSource Rules](https://rules.sonarsource.com/java/) - Detailed explanations of Java rules
+- [SpotBugs Bug Patterns](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html) - Explanations of bug patterns
+- [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html) - Complete list of PMD rules
+- [Checkstyle Checks](Checkstyle Checks) - Available Checkstyle checks
