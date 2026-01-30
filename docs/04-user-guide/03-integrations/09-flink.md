@@ -53,7 +53,10 @@ services:
 
   taskmanager:
     image: flink:scala_2.12-java17
-    command: taskmanager
+    command: >
+      bash -c "mkdir -p /opt/flink/plugins/s3-fs-hadoop &&
+      cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/ &&
+      /docker-entrypoint.sh taskmanager"
     depends_on:
       - jobmanager
     environment:
