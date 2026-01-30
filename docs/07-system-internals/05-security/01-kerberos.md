@@ -110,7 +110,7 @@ Like SCM, OM also requires **two Kerberos principals**, and the corresponding ke
 
 ### S3 Gateway
 
-S3 Gateway requires **one service principal** and here the configuration values needed in the `ozone-site.xml`.
+S3 Gateway requires at least one Kerberos principal for the gateway service (`ozone.s3g.kerberos.principal` and `ozone.s3g.kerberos.keytab.file`). If SPNEGO is enabled for the S3 Gateway HTTP server, configure a second principal and keytab via `ozone.s3g.http.auth.kerberos.principal` and `ozone.s3g.http.auth.kerberos.keytab`. All of these are set in `ozone-site.xml`.
 
 | Property                                 | Default Value                      | Description                                                                                         |
 | ---------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
