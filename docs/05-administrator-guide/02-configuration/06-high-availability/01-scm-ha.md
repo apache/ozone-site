@@ -55,13 +55,13 @@ The initialization of the **first** SCM-HA node is the same as a non-HA SCM:
 ozone scm --init
 ```
 
-Second and third nodes should be *bootstrapped* instead of init. These clusters will join to the configured RAFT quorum. The id of the current server is identified by DNS name or can be set explicitly by `ozone.scm.node.id`. Most of the time you don't need to set it as DNS based id detection can work well.
+Second and third nodes should be _bootstrapped_ instead of init. These clusters will join to the configured RAFT quorum. The id of the current server is identified by DNS name or can be set explicitly by `ozone.scm.node.id`. Most of the time you don't need to set it as DNS based id detection can work well.
 
 ```bash
 ozone scm --bootstrap
 ```
 
-Note: both commands perform one-time initialization.  SCM still needs to be started by running `ozone --daemon start scm`.
+Note: both commands perform one-time initialization. SCM still needs to be started by running `ozone --daemon start scm`.
 
 ## SCM Leader Transfer
 
@@ -83,7 +83,7 @@ This can be improved: primordial SCM can be configured by setting `ozone.scm.pri
 </property>
 ```
 
-With this configuration both `scm --init` and `scm --bootstrap` can be safely executed on **all** SCM nodes.  Each node will only perform the action applicable to it based on the `ozone.scm.primordial.node.id` and its own node ID.
+With this configuration both `scm --init` and `scm --bootstrap` can be safely executed on **all** SCM nodes. Each node will only perform the action applicable to it based on the `ozone.scm.primordial.node.id` and its own node ID.
 
 Note: SCM still needs to be started after the init/bootstrap process.
 
@@ -162,7 +162,7 @@ SCM HA uses Apache Ratis to replicate state between the members of the SCM HA qu
 
 This replication process is a simpler version of OM HA replication process as it doesn't use any double buffer (as the overall db thourghput of SCM requests are lower)
 
-Datanodes are sending all the reports (Container reports, Pipeline reports...) to *all* SCM nodes in parallel. Only the leader node can assign/create new containers, and only the leader node sends commands back to the Datanodes.
+Datanodes are sending all the reports (Container reports, Pipeline reports...) to _all_ SCM nodes in parallel. Only the leader node can assign/create new containers, and only the leader node sends commands back to the Datanodes.
 
 ## Verify SCM HA setup
 

@@ -28,7 +28,7 @@ Allowed Characters and Length:
 
 Prohibitions:
 
-- Cannot contain uppercase letters or underscores (_)
+- Cannot contain uppercase letters or underscores (\_)
 - Cannot be formatted as an IP address (e.g., 192.168.5.4)
 - Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)
 - Cannot end with a dash

@@ -13,8 +13,8 @@
     "serve": "docusaurus serve --port 3001",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . && prettier \"**/*.{md,mdx}\"",
+    "lint:fix": "eslint . --fix && prettier -w \"**/*.{md,mdx}\""
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",

@@ -7,20 +7,20 @@ Once the KMS is configured, users can create an encryption key and then create a
 ## Configuring TDE
 
 1. **Set up a Key Management Server (KMS):**
-    - **Hadoop KMS:** Follow the instructions in the [Hadoop KMS documentation](https://hadoop.apache.org/docs/r3.4.1/hadoop-kms/index.html).
-    - **Ranger KMS:** Ranger KMS can also be used. For Ranger KMS, encryption keys can be managed via the Ranger KMS management console or its [REST API](https://ranger.apache.org/kms/apidocs/index.html), in addition to the `hadoop key` command line interface.
+   - **Hadoop KMS:** Follow the instructions in the [Hadoop KMS documentation](https://hadoop.apache.org/docs/r3.4.1/hadoop-kms/index.html).
+   - **Ranger KMS:** Ranger KMS can also be used. For Ranger KMS, encryption keys can be managed via the Ranger KMS management console or its [REST API](https://ranger.apache.org/kms/apidocs/index.html), in addition to the `hadoop key` command line interface.
 
 2. **Configure Ozone:**
-    Add the following property to Ozone’s `core-site.xml`:
-  
-    ```xml
-    <property>
-      <name>hadoop.security.key.provider.path</name>
-      <value>kms://http@kms-host:9600/kms</value>
-    </property>
-    ```
+   Add the following property to Ozone’s `core-site.xml`:
 
-    Replace `kms://http@kms-host:9600/kms` with the actual URI of your KMS. For example, `kms://http@kms1.example.com:9600/kms`
+   ```xml
+   <property>
+     <name>hadoop.security.key.provider.path</name>
+     <value>kms://http@kms-host:9600/kms</value>
+   </property>
+   ```
+
+   Replace `kms://http@kms-host:9600/kms` with the actual URI of your KMS. For example, `kms://http@kms1.example.com:9600/kms`
 
 ## Creating an Encryption Key
 
@@ -32,7 +32,7 @@ hadoop key create <key_name> [-size <key_bit_length>] [-cipher <cipher_suite>] [
 
 - `<key_name>`: The name of the encryption key.
 - **`-size <key_bit_length>` (Optional):** Specifies the key bit length. The default is 128 bits (defined by `hadoop.security.key.default.bitlength`).
-Ranger KMS supports both 128 and 256 bits. Hadoop KMS is also commonly used with 128 and 256 bit keys; for specific version capabilities, consult the Hadoop KMS documentation. Valid AES key lengths are 128, 192, and 256 bits.
+  Ranger KMS supports both 128 and 256 bits. Hadoop KMS is also commonly used with 128 and 256 bit keys; for specific version capabilities, consult the Hadoop KMS documentation. Valid AES key lengths are 128, 192, and 256 bits.
 - **`-cipher <cipher_suite>` (Optional):** Specifies the cipher suite. Currently, only **`AES/CTR/NoPadding`** (the default) is supported.
 - `-description <description>` (Optional): A description for the key.
 
@@ -67,42 +67,42 @@ The OpenSSL-based hardware acceleration discussed below is currently only suppor
 :::
 
 1. **Enable AES-NI Hardware Acceleration:**
-    - Install OpenSSL development libraries: On most Linux distributions, install `openssl-devel` (or `libssl-dev` on Debian/Ubuntu) to provide `libcrypto.so`, which is utilized by the Hadoop native library for hardware-accelerated encryption.
-    - Use servers with CPUs that support the AES-NI instruction set and RDRAND instruction (most modern Intel and AMD CPUs do)
+   - Install OpenSSL development libraries: On most Linux distributions, install `openssl-devel` (or `libssl-dev` on Debian/Ubuntu) to provide `libcrypto.so`, which is utilized by the Hadoop native library for hardware-accelerated encryption.
+   - Use servers with CPUs that support the AES-NI instruction set and RDRAND instruction (most modern Intel and AMD CPUs do)
 
 2. **Install and Configure Native Libraries:**
-    - Ensure that the native `libhadoop.so` library is properly installed
+   - Ensure that the native `libhadoop.so` library is properly installed
 
-      ```shell
-      ozone debug checknative
-      ```
-  
-    - The output should show "true" for the Hadoop library
-    - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the libhadoop native library fails to load:
+     ```shell
+     ozone debug checknative
+     ```
 
-      ```bash
-      25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...
-      25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: no hadoop in java.library.path
-      25/06/14 01:25:21 DEBUG util.NativeCodeLoader: java.library.path=/opt/hadoop/lib/native:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
-      25/06/14 01:25:21 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-      ```
+   - The output should show "true" for the Hadoop library
+   - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the libhadoop native library fails to load:
 
-    - And the following log message indicates OpenSSL library fails to load:
-  
-      ```bash
-      25/06/14 01:18:53 DEBUG crypto.OpensslCipher: Failed to load OpenSSL Cipher.
-      java.lang.UnsatisfiedLinkError: Cannot load libcrypto.so (libcrypto.so: cannot open shared object file: No such file or directory)!
-      at org.apache.hadoop.crypto.OpensslCipher.initIDs(Native Method)
-      at org.apache.hadoop.crypto.OpensslCipher.<clinit>(OpensslCipher.java:89)
-      at org.apache.hadoop.crypto.OpensslAesCtrCryptoCodec.<init>(OpensslAesCtrCryptoCodec.java:50)
-      ```
+     ```bash
+     25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...
+     25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Failed to load native-hadoop with error: java.lang.UnsatisfiedLinkError: no hadoop in java.library.path
+     25/06/14 01:25:21 DEBUG util.NativeCodeLoader: java.library.path=/opt/hadoop/lib/native:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+     25/06/14 01:25:21 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+     ```
+
+   - And the following log message indicates OpenSSL library fails to load:
+
+     ```bash
+     25/06/14 01:18:53 DEBUG crypto.OpensslCipher: Failed to load OpenSSL Cipher.
+     java.lang.UnsatisfiedLinkError: Cannot load libcrypto.so (libcrypto.so: cannot open shared object file: No such file or directory)!
+     at org.apache.hadoop.crypto.OpensslCipher.initIDs(Native Method)
+     at org.apache.hadoop.crypto.OpensslCipher.<clinit>(OpensslCipher.java:89)
+     at org.apache.hadoop.crypto.OpensslAesCtrCryptoCodec.<init>(OpensslAesCtrCryptoCodec.java:50)
+     ```
 
 3. **Validate Hardware Acceleration:**
-    - To verify if AES-NI is being utilized, check OpenSSL acceleration:
-  
-      ```shell
-      openssl speed -evp aes-256-ctr
-      ```
+   - To verify if AES-NI is being utilized, check OpenSSL acceleration:
+
+     ```shell
+     openssl speed -evp aes-256-ctr
+     ```
 
 ## Using Transparent Data Encryption from S3G
 
@@ -111,18 +111,18 @@ Ozone’s S3 Gateway (S3G) allows you to access encrypted buckets. However, it's
 When creating an encrypted bucket that will be accessed via S3G:
 
 1. **Create the bucket under the `/s3v` volume:**
-    The `/s3v` volume is the default volume for S3 buckets.
+   The `/s3v` volume is the default volume for S3 buckets.
 
-    ```shell
-    ozone sh bucket create --bucketkey <key_name> /s3v/<bucket_name> --layout=OBJECT_STORE
-    ```
+   ```shell
+   ozone sh bucket create --bucketkey <key_name> /s3v/<bucket_name> --layout=OBJECT_STORE
+   ```
 
 2. **Alternatively, create an encrypted bucket elsewhere and link it:**
 
-    ```shell
-    ozone sh bucket create --bucketkey <key_name> /<volume_name>/<bucket_name> --layout=OBJECT_STORE
-    ozone sh bucket link /<volume_name>/<bucket_name> /s3v/<link_name>
-    ```
+   ```shell
+   ozone sh bucket create --bucketkey <key_name> /<volume_name>/<bucket_name> --layout=OBJECT_STORE
+   ozone sh bucket link /<volume_name>/<bucket_name> /s3v/<link_name>
+   ```
 
 Note 1: An encrypted bucket cannot be created via S3 APIs. It must be done using Ozone shell commands as shown above.
 After creating an encrypted bucket, all the keys added to this bucket using s3g will be encrypted.

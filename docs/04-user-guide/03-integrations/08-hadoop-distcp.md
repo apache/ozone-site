@@ -63,7 +63,7 @@ When copying files from Ozone to HDFS, similar issues can occur due to differenc
 hadoop distcp \
   -Ddfs.checksum.combine.mode=COMPOSITE_CRC \
   -Ddfs.checksum.type=CRC32 \
-  ofs://ozone1/vol1/bucket1/src hdfs://ns1/tmp/dst 
+  ofs://ozone1/vol1/bucket1/src hdfs://ns1/tmp/dst
 ```
 
 By specifying the appropriate checksum configuration or skipping the validation, you can ensure that DistCp jobs complete successfully when transferring data between HDFS and Ozone.

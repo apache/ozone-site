@@ -34,14 +34,14 @@ the unique identifier of its parent directory, `<parent unique-id>/<filename>`.
 ### Directory delete operation with prefix layout
 
 Following picture describes the OM metadata changes while performing a delete
- operation on a directory.
+operation on a directory.
 
 ![Prefix FSO Delete](PrefixFSO-Delete.png)
 
 ### Directory rename operation with prefix layout
 
 Following picture describes the OM metadata changes while performing a rename
- operation on a directory.
+operation on a directory.
 
 ![Prefix FSO Rename](PrefixFSO-Rename.png)
 

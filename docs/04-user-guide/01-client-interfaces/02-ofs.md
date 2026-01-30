@@ -248,129 +248,129 @@ Once you have a list of APIs, compare it against the tables below to identify an
 
 The following standard `FileSystem` APIs are supported by ofs.
 
-| Operation               | NameNode audit log        | Description                                         | Support       |
-|-------------------------|---------------------------|-----------------------------------------------------|---------------|
-| `access`                | `checkAccess`             | Checks if the user can access a path.               | Supported     |
-| `create`                | `create`                  | Creates a new file.                                 | Supported     |
-| `open`                  | `open`                    | Opens a file for reading.                           | Supported     |
-| `rename`                | `rename`                  | Renames a file or directory.                        | Supported [[1]](#footnote-1) |
-| `delete`                | `delete`                  | Deletes a file or directory.                        | Supported [[2]](#footnote-2) |
-| `listStatus`            | `listStatus`              | Lists the status of files in a directory.           | Supported [[3]](#footnote-3) |
-| `mkdirs`                | `mkdirs`                  | Creates a directory and its parents.                | Supported     |
-| `getFileStatus`         | `getfileinfo`             | Gets the status of a file.                          | Supported     |
-| `setTimes`              | `setTimes`                | Sets the modification and access times.             | Supported     |
-| `getLinkTarget`         | `getfileinfo`             | Gets the target of a symbolic link.                 | Supported [[4]](#footnote-4) |
-| `getFileChecksum`       | `open`                    | Gets the checksum of a file.                        | Supported     |
-| `setSafeMode`           | `safemode_leave`, `safemode_enter`, `safemode_get`, `safemode_force_exit` | Enters or leaves safe mode.                         | Supported     |
-| `recoverLease`          | `recoverLease`            | Recovers a file lease.                              | Supported     |
-| `isFileClosed`          | `isFileClosed`            | Checks if a file is closed.                         | Supported     |
-| `createSnapshot`        | `createSnapshot`          | Creates a snapshot.                                 | Supported [[5]](#footnote-5) |
-| `deleteSnapshot`        | `deleteSnapshot`          | Deletes a snapshot.                                 | Supported [[5]](#footnote-5) |
-| `renameSnapshot`        | `renameSnapshot`          | Renames a snapshot.                                 | Supported [[5]](#footnote-5) |
-| `getSnapshotDiffReport` | `computeSnapshotDiff`     | Gets a snapshot diff report.                        | Supported [[5]](#footnote-5) |
-| `getContentSummary`     | `contentSummary`          | Gets the content summary of a path.                 | Supported     |
-| `getDelegationToken`    | `getDelegationToken`      | Gets a delegation token.                            | Supported     |
-| `globStatus`            | `listStatus`              | Finds files matching a pattern.                     | Supported     |
-| `copyFromLocalFile`     | `getfileinfo`             | Copies a file from the local filesystem.            | Supported     |
-| `exists`                | `getfileinfo`             | Checks if a path exists.                            | Supported     |
-| `getFileBlockLocations` | `open`                    | Gets file block locations.                          | Supported     |
-| `getTrashRoot`          | `listSnapshottableDirectory`, `getEZForPath` | Gets the trash root for a path.                     | Supported     |
-| `getTrashRoots`         | `listStatus`, `listEncryptionZones` | Gets all trash roots.                     | Supported     |
-| `isDirectory`           | `getfileinfo`             | Checks if a path is a directory.                    | Supported     |
-| `isFile`                | `getfileinfo`             | Checks if a path is a file.                         | Supported     |
-| `listFiles`             | `listStatus`              | Returns a remote iterator for files.                | Supported     |
-| `listLocatedStatus`     | `listStatus`              | Returns a remote iterator for located file statuses.| Supported     |
-| `listStatusIterator`    | `listStatus`              | Returns a remote iterator for file statuses.        | Supported     |
-| `getDefaultBlockSize`   | N/A                       | Gets the default block size.                        | Supported     |
-| `getDefaultReplication` | N/A                       | Gets the default replication factor.                | Supported     |
-| `getHomeDirectory`      | N/A                       | Gets the user's home directory.                     | Supported     |
-| `getServerDefaults`     | N/A                       | Gets the server default values.                     | Supported     |
-| `getWorkingDirectory`   | N/A                       | Gets the current working directory.                 | Supported     |
-| `hasPathCapability`     | N/A                       | Queries for a path capability.                      | Supported     |
-| `setWorkingDirectory`   | N/A                       | Sets the current working directory.                 | Supported     |
-| `supportsSymlinks`      | N/A                       | Checks if symbolic links are supported.             | Supported     |
+| Operation               | NameNode audit log                                                        | Description                                          | Support                      |
+| ----------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------- |
+| `access`                | `checkAccess`                                                             | Checks if the user can access a path.                | Supported                    |
+| `create`                | `create`                                                                  | Creates a new file.                                  | Supported                    |
+| `open`                  | `open`                                                                    | Opens a file for reading.                            | Supported                    |
+| `rename`                | `rename`                                                                  | Renames a file or directory.                         | Supported [[1]](#footnote-1) |
+| `delete`                | `delete`                                                                  | Deletes a file or directory.                         | Supported [[2]](#footnote-2) |
+| `listStatus`            | `listStatus`                                                              | Lists the status of files in a directory.            | Supported [[3]](#footnote-3) |
+| `mkdirs`                | `mkdirs`                                                                  | Creates a directory and its parents.                 | Supported                    |
+| `getFileStatus`         | `getfileinfo`                                                             | Gets the status of a file.                           | Supported                    |
+| `setTimes`              | `setTimes`                                                                | Sets the modification and access times.              | Supported                    |
+| `getLinkTarget`         | `getfileinfo`                                                             | Gets the target of a symbolic link.                  | Supported [[4]](#footnote-4) |
+| `getFileChecksum`       | `open`                                                                    | Gets the checksum of a file.                         | Supported                    |
+| `setSafeMode`           | `safemode_leave`, `safemode_enter`, `safemode_get`, `safemode_force_exit` | Enters or leaves safe mode.                          | Supported                    |
+| `recoverLease`          | `recoverLease`                                                            | Recovers a file lease.                               | Supported                    |
+| `isFileClosed`          | `isFileClosed`                                                            | Checks if a file is closed.                          | Supported                    |
+| `createSnapshot`        | `createSnapshot`                                                          | Creates a snapshot.                                  | Supported [[5]](#footnote-5) |
+| `deleteSnapshot`        | `deleteSnapshot`                                                          | Deletes a snapshot.                                  | Supported [[5]](#footnote-5) |
+| `renameSnapshot`        | `renameSnapshot`                                                          | Renames a snapshot.                                  | Supported [[5]](#footnote-5) |
+| `getSnapshotDiffReport` | `computeSnapshotDiff`                                                     | Gets a snapshot diff report.                         | Supported [[5]](#footnote-5) |
+| `getContentSummary`     | `contentSummary`                                                          | Gets the content summary of a path.                  | Supported                    |
+| `getDelegationToken`    | `getDelegationToken`                                                      | Gets a delegation token.                             | Supported                    |
+| `globStatus`            | `listStatus`                                                              | Finds files matching a pattern.                      | Supported                    |
+| `copyFromLocalFile`     | `getfileinfo`                                                             | Copies a file from the local filesystem.             | Supported                    |
+| `exists`                | `getfileinfo`                                                             | Checks if a path exists.                             | Supported                    |
+| `getFileBlockLocations` | `open`                                                                    | Gets file block locations.                           | Supported                    |
+| `getTrashRoot`          | `listSnapshottableDirectory`, `getEZForPath`                              | Gets the trash root for a path.                      | Supported                    |
+| `getTrashRoots`         | `listStatus`, `listEncryptionZones`                                       | Gets all trash roots.                                | Supported                    |
+| `isDirectory`           | `getfileinfo`                                                             | Checks if a path is a directory.                     | Supported                    |
+| `isFile`                | `getfileinfo`                                                             | Checks if a path is a file.                          | Supported                    |
+| `listFiles`             | `listStatus`                                                              | Returns a remote iterator for files.                 | Supported                    |
+| `listLocatedStatus`     | `listStatus`                                                              | Returns a remote iterator for located file statuses. | Supported                    |
+| `listStatusIterator`    | `listStatus`                                                              | Returns a remote iterator for file statuses.         | Supported                    |
+| `getDefaultBlockSize`   | N/A                                                                       | Gets the default block size.                         | Supported                    |
+| `getDefaultReplication` | N/A                                                                       | Gets the default replication factor.                 | Supported                    |
+| `getHomeDirectory`      | N/A                                                                       | Gets the user's home directory.                      | Supported                    |
+| `getServerDefaults`     | N/A                                                                       | Gets the server default values.                      | Supported                    |
+| `getWorkingDirectory`   | N/A                                                                       | Gets the current working directory.                  | Supported                    |
+| `hasPathCapability`     | N/A                                                                       | Queries for a path capability.                       | Supported                    |
+| `setWorkingDirectory`   | N/A                                                                       | Sets the current working directory.                  | Supported                    |
+| `supportsSymlinks`      | N/A                                                                       | Checks if symbolic links are supported.              | Supported                    |
 
-*Note: An audit log of N/A means the API is client-side only and does not access the NameNode.*
+_Note: An audit log of N/A means the API is client-side only and does not access the NameNode._
 
 ### Unsupported FileSystem APIs
 
 The following standard `FileSystem` APIs are not supported by ofs.
 
-| Operation          | NameNode audit log   | Description                    |
-|--------------------|----------------------|--------------------------------|
-| `append`           | `append`             | Appends to an existing file.   |
-| `setPermission`    | `setPermission`      | Sets the permission of a file. |
-| `setOwner`         | `setOwner`           | Sets the owner of a file.      |
-| `setReplication`   | `setReplication`     | Sets the replication factor.   |
-| `createSymlink`    | `createSymlink`      | Creates a symbolic link.       |
-| `resolveLink`      | `getfileinfo`        | Resolves a symbolic link.      |
-| `setXAttr`         | `setXAttr`           | Sets an extended attribute.    |
-| `getXAttr`         | `getXAttrs`          | Gets an extended attribute.    |
-| `getXAttrs`        | `getXAttrs`          | Gets extended attributes.      |
-| `listXAttrs`       | `listXAttrs`         | Lists extended attributes.     |
-| `removeXAttr`      | `removeXAttr`        | Removes an extended attribute. |
-| `setAcl`           | `setAcl`             | Sets an ACL.                   |
-| `getAclStatus`     | `getAclStatus`       | Gets an ACL status.            |
-| `modifyAclEntries` | `modifyAclEntries`   | Modifies ACL entries.          |
-| `removeAclEntries` | `removeAclEntries`   | Removes ACL entries.           |
-| `removeDefaultAcl` | `removeDefaultAcl`   | Removes the default ACL.       |
-| `removeAcl`        | `removeAcl`          | Removes an ACL.                |
-| `truncate`         | `truncate`           | Truncates a file.              |
-| `concat`           | `concat`             | Concatenates files.            |
-| `listCorruptFileBlocks` | `listCorruptFileBlocks` | List corrupted file blocks |
-| `msync`            | N/A                  | Does not have a corresponding HDFS audit log. |
+| Operation               | NameNode audit log      | Description                                   |
+| ----------------------- | ----------------------- | --------------------------------------------- |
+| `append`                | `append`                | Appends to an existing file.                  |
+| `setPermission`         | `setPermission`         | Sets the permission of a file.                |
+| `setOwner`              | `setOwner`              | Sets the owner of a file.                     |
+| `setReplication`        | `setReplication`        | Sets the replication factor.                  |
+| `createSymlink`         | `createSymlink`         | Creates a symbolic link.                      |
+| `resolveLink`           | `getfileinfo`           | Resolves a symbolic link.                     |
+| `setXAttr`              | `setXAttr`              | Sets an extended attribute.                   |
+| `getXAttr`              | `getXAttrs`             | Gets an extended attribute.                   |
+| `getXAttrs`             | `getXAttrs`             | Gets extended attributes.                     |
+| `listXAttrs`            | `listXAttrs`            | Lists extended attributes.                    |
+| `removeXAttr`           | `removeXAttr`           | Removes an extended attribute.                |
+| `setAcl`                | `setAcl`                | Sets an ACL.                                  |
+| `getAclStatus`          | `getAclStatus`          | Gets an ACL status.                           |
+| `modifyAclEntries`      | `modifyAclEntries`      | Modifies ACL entries.                         |
+| `removeAclEntries`      | `removeAclEntries`      | Removes ACL entries.                          |
+| `removeDefaultAcl`      | `removeDefaultAcl`      | Removes the default ACL.                      |
+| `removeAcl`             | `removeAcl`             | Removes an ACL.                               |
+| `truncate`              | `truncate`              | Truncates a file.                             |
+| `concat`                | `concat`                | Concatenates files.                           |
+| `listCorruptFileBlocks` | `listCorruptFileBlocks` | List corrupted file blocks                    |
+| `msync`                 | N/A                     | Does not have a corresponding HDFS audit log. |
 
 ### Unsupported HDFS-Specific APIs
 
 The following APIs are specific to HDFS's `DistributedFileSystem` implementation and are not part of the generic `org.apache.hadoop.fs.FileSystem` API. Therefore, they are not supported by ofs. However, see the footnotes below for equivalent APIs.
 
-| Operation                      | NameNode audit log           | Description                                         | Support        |
-|--------------------------------|------------------------------|-----------------------------------------------------|----------------|
-| `getErasureCodingPolicy`       | `getErasureCodingPolicy`     | Gets the erasure coding policy of a file/dir.       | Unsupported [[6]](#footnote-6)|
-| `setErasureCodingPolicy`       | `setErasureCodingPolicy`     | Sets an erasure coding policy on a directory.       | Unsupported [[6]](#footnote-6)|
-| `unsetErasureCodingPolicy`     | `unsetErasureCodingPolicy`   | Unsets an erasure coding policy on a directory.     | Unsupported [[6]](#footnote-6)|
-| `addErasureCodingPolicies`     | `addErasureCodingPolicies`   | Adds erasure coding policies.                       | Unsupported [[6]](#footnote-6)|
-| `getErasureCodingPolicies`     | `getErasureCodingPolicies`   | Gets the available erasure coding policies.         | Unsupported [[6]](#footnote-6)|
-| `removeErasureCodingPolicy`    | `removeErasureCodingPolicy`  | Removes an erasure coding policy.                   | Unsupported [[6]](#footnote-6)|
-| `enableErasureCodingPolicy`    | `enableErasureCodingPolicy`  | Enables an erasure coding policy.                   | Unsupported [[6]](#footnote-6)|
-| `disableErasureCodingPolicy`   | `disableErasureCodingPolicy` | Disables an erasure coding policy.                  | Unsupported [[6]](#footnote-6)|
-| `getErasureCodingCodecs`       | `getErasureCodingCodecs`     | Lists all erasure coding codecs.                    | Unsupported [[6]](#footnote-6)|
-| `getECTopologyResultForPolicies` | `getECTopologyResultForPolicies` | Get erasure coding topology result for policies.    | Unsupported [[6]](#footnote-6)|
-| `getSnapshotListing`           | `ListSnapshot`               | List all snapshots of a snapshottable directory.    | Unsupported [[6]](#footnote-6)|
-| `allowSnapshot`                | `allowSnapshot`              | Allows snapshots to be taken on a directory.        | Unsupported [[6]](#footnote-6)|
-| `disallowSnapshot`             | `disallowSnapshot`           | Disallows snapshots to be taken on a directory.     | Unsupported [[6]](#footnote-6)|
-| `provisionSnapshotTrash`       | `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for a snapshottable directory.      | Unsupported [[6]](#footnote-6)|
-| `createEncryptionZone`         | `createEncryptionZone`       | Creates an encryption zone.                         | Unsupported [[6]](#footnote-6)|
-| `getEZForPath`                 | `getEZForPath`               | Gets the encryption zone for a path.                | Unsupported [[6]](#footnote-6)|
-| `listEncryptionZones`          | `listEncryptionZones`        | Lists all encryption zones.                         | Unsupported [[6]](#footnote-6)|
-| `reencryptEncryptionZone`      | `reencryptEncryptionZone`    | Reencrypt an encryption zone.                       | Unsupported [[6]](#footnote-6)|
-| `listReencryptionStatus`       | `listReencryptionStatus`     | List reencryption status.                           | Unsupported [[6]](#footnote-6)|
-| `getFileEncryptionInfo`        | `getfileinfo`      | Get file encryption info.                           | Unsupported [[6]](#footnote-6)|
-| `provisionEZTrash`             | `getEZForPath`, `getfileinfo`, `mkdirs`, `setPermission` | Provision trash for an encryption zone.             | Unsupported [[6]](#footnote-6)|
-| `setQuota`                     | `clearQuota` or `clearSpaceQuota` or `setQuota` or `setSpaceQuota` | Sets the quota usage for a path.                    | Unsupported [[6]](#footnote-6)|
-| `getQuotaUsage`                | `quotaUsage`              | Gets the quota usage for a path.                    | Unsupported [[6]](#footnote-6)|
-| `setQuotaByStorageType`        | `setSpaceQuota`      | Sets quota by storage type for a path.              | Unsupported [[6]](#footnote-6)|
-| `unsetStoragePolicy`           | `unsetStoragePolicy`         | Unsets a storage policy on a file or directory.     | Unsupported    |
-| `setStoragePolicy`             | `setStoragePolicy`           | Sets a storage policy on a file or directory.       | Unsupported    |
-| `getStoragePolicy`             | `getStoragePolicy`           | Gets the storage policy of a file or directory.     | Unsupported    |
-| `satisfyStoragePolicy`         | `satisfyStoragePolicy`       | Satisfies the storage policy of a file.             | Unsupported    |
-| `addCachePool`                 | `addCachePool`               | Adds a cache pool.                                  | Unsupported    |
-| `modifyCachePool`              | `modifyCachePool`            | Modifies a cache pool.                              | Unsupported    |
-| `removeCachePool`              | `removeCachePool`            | Removes a cache pool.                               | Unsupported    |
-| `listCachePools`               | `listCachePools`             | Lists all cache pools.                              | Unsupported    |
-| `addCacheDirective`            | `addCacheDirective`          | Adds a cache directive.                             | Unsupported    |
-| `modifyCacheDirective`         | `modifyCacheDirective`       | Modifies a cache directive.                         | Unsupported    |
-| `removeCacheDirective`         | `removeCacheDirective`       | Removes a cache directive.                          | Unsupported    |
-| `listCacheDirectives`          | `listCacheDirectives`        | Lists cache directives.                             | Unsupported    |
-| `getSlowDatanodeStats`         | `datanodeReport`             | Get slow Datanode stats.                            | Unsupported    |
-| `saveNamespace`                | `saveNamespace`              | Save the namespace.                                 | Unsupported    |
-| `restoreFailedStorage`         | `checkRestoreFailedStorage`, `enableRestoreFailedStorage`, `disableRestoreFailedStorage` | Restore failed storage. | Unsupported    |
-| `refreshNodes`                 | `refreshNodes`               | Refresh nodes.                                      | Unsupported    |
-| `setBalancerBandwidth`         | `setBalancerBandwidth`       | Set balancer bandwidth.                             | Unsupported    |
-| `metaSave`                     | `metaSave`                   | Meta save.                                          | Unsupported    |
-| `rollingUpgrade`               | `queryRollingUpgrade`, `startRollingUpgrade`, `finalizeRollingUpgrade` | Rolling upgrade. | Unsupported    |
-| `finalizeUpgrade`              | `finalizeUpgrade`            | Finalize upgrade.                                   | Unsupported [[7]](#footnote-7) |
-| `listOpenFiles`                | `listOpenFiles`              | List open files.                                    | Unsupported [[7]](#footnote-7) |
+| Operation                        | NameNode audit log                                                                       | Description                                      | Support                        |
+| -------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------ |
+| `getErasureCodingPolicy`         | `getErasureCodingPolicy`                                                                 | Gets the erasure coding policy of a file/dir.    | Unsupported [[6]](#footnote-6) |
+| `setErasureCodingPolicy`         | `setErasureCodingPolicy`                                                                 | Sets an erasure coding policy on a directory.    | Unsupported [[6]](#footnote-6) |
+| `unsetErasureCodingPolicy`       | `unsetErasureCodingPolicy`                                                               | Unsets an erasure coding policy on a directory.  | Unsupported [[6]](#footnote-6) |
+| `addErasureCodingPolicies`       | `addErasureCodingPolicies`                                                               | Adds erasure coding policies.                    | Unsupported [[6]](#footnote-6) |
+| `getErasureCodingPolicies`       | `getErasureCodingPolicies`                                                               | Gets the available erasure coding policies.      | Unsupported [[6]](#footnote-6) |
+| `removeErasureCodingPolicy`      | `removeErasureCodingPolicy`                                                              | Removes an erasure coding policy.                | Unsupported [[6]](#footnote-6) |
+| `enableErasureCodingPolicy`      | `enableErasureCodingPolicy`                                                              | Enables an erasure coding policy.                | Unsupported [[6]](#footnote-6) |
+| `disableErasureCodingPolicy`     | `disableErasureCodingPolicy`                                                             | Disables an erasure coding policy.               | Unsupported [[6]](#footnote-6) |
+| `getErasureCodingCodecs`         | `getErasureCodingCodecs`                                                                 | Lists all erasure coding codecs.                 | Unsupported [[6]](#footnote-6) |
+| `getECTopologyResultForPolicies` | `getECTopologyResultForPolicies`                                                         | Get erasure coding topology result for policies. | Unsupported [[6]](#footnote-6) |
+| `getSnapshotListing`             | `ListSnapshot`                                                                           | List all snapshots of a snapshottable directory. | Unsupported [[6]](#footnote-6) |
+| `allowSnapshot`                  | `allowSnapshot`                                                                          | Allows snapshots to be taken on a directory.     | Unsupported [[6]](#footnote-6) |
+| `disallowSnapshot`               | `disallowSnapshot`                                                                       | Disallows snapshots to be taken on a directory.  | Unsupported [[6]](#footnote-6) |
+| `provisionSnapshotTrash`         | `getfileinfo`, `mkdirs`, `setPermission`                                                 | Provision trash for a snapshottable directory.   | Unsupported [[6]](#footnote-6) |
+| `createEncryptionZone`           | `createEncryptionZone`                                                                   | Creates an encryption zone.                      | Unsupported [[6]](#footnote-6) |
+| `getEZForPath`                   | `getEZForPath`                                                                           | Gets the encryption zone for a path.             | Unsupported [[6]](#footnote-6) |
+| `listEncryptionZones`            | `listEncryptionZones`                                                                    | Lists all encryption zones.                      | Unsupported [[6]](#footnote-6) |
+| `reencryptEncryptionZone`        | `reencryptEncryptionZone`                                                                | Reencrypt an encryption zone.                    | Unsupported [[6]](#footnote-6) |
+| `listReencryptionStatus`         | `listReencryptionStatus`                                                                 | List reencryption status.                        | Unsupported [[6]](#footnote-6) |
+| `getFileEncryptionInfo`          | `getfileinfo`                                                                            | Get file encryption info.                        | Unsupported [[6]](#footnote-6) |
+| `provisionEZTrash`               | `getEZForPath`, `getfileinfo`, `mkdirs`, `setPermission`                                 | Provision trash for an encryption zone.          | Unsupported [[6]](#footnote-6) |
+| `setQuota`                       | `clearQuota` or `clearSpaceQuota` or `setQuota` or `setSpaceQuota`                       | Sets the quota usage for a path.                 | Unsupported [[6]](#footnote-6) |
+| `getQuotaUsage`                  | `quotaUsage`                                                                             | Gets the quota usage for a path.                 | Unsupported [[6]](#footnote-6) |
+| `setQuotaByStorageType`          | `setSpaceQuota`                                                                          | Sets quota by storage type for a path.           | Unsupported [[6]](#footnote-6) |
+| `unsetStoragePolicy`             | `unsetStoragePolicy`                                                                     | Unsets a storage policy on a file or directory.  | Unsupported                    |
+| `setStoragePolicy`               | `setStoragePolicy`                                                                       | Sets a storage policy on a file or directory.    | Unsupported                    |
+| `getStoragePolicy`               | `getStoragePolicy`                                                                       | Gets the storage policy of a file or directory.  | Unsupported                    |
+| `satisfyStoragePolicy`           | `satisfyStoragePolicy`                                                                   | Satisfies the storage policy of a file.          | Unsupported                    |
+| `addCachePool`                   | `addCachePool`                                                                           | Adds a cache pool.                               | Unsupported                    |
+| `modifyCachePool`                | `modifyCachePool`                                                                        | Modifies a cache pool.                           | Unsupported                    |
+| `removeCachePool`                | `removeCachePool`                                                                        | Removes a cache pool.                            | Unsupported                    |
+| `listCachePools`                 | `listCachePools`                                                                         | Lists all cache pools.                           | Unsupported                    |
+| `addCacheDirective`              | `addCacheDirective`                                                                      | Adds a cache directive.                          | Unsupported                    |
+| `modifyCacheDirective`           | `modifyCacheDirective`                                                                   | Modifies a cache directive.                      | Unsupported                    |
+| `removeCacheDirective`           | `removeCacheDirective`                                                                   | Removes a cache directive.                       | Unsupported                    |
+| `listCacheDirectives`            | `listCacheDirectives`                                                                    | Lists cache directives.                          | Unsupported                    |
+| `getSlowDatanodeStats`           | `datanodeReport`                                                                         | Get slow Datanode stats.                         | Unsupported                    |
+| `saveNamespace`                  | `saveNamespace`                                                                          | Save the namespace.                              | Unsupported                    |
+| `restoreFailedStorage`           | `checkRestoreFailedStorage`, `enableRestoreFailedStorage`, `disableRestoreFailedStorage` | Restore failed storage.                          | Unsupported                    |
+| `refreshNodes`                   | `refreshNodes`                                                                           | Refresh nodes.                                   | Unsupported                    |
+| `setBalancerBandwidth`           | `setBalancerBandwidth`                                                                   | Set balancer bandwidth.                          | Unsupported                    |
+| `metaSave`                       | `metaSave`                                                                               | Meta save.                                       | Unsupported                    |
+| `rollingUpgrade`                 | `queryRollingUpgrade`, `startRollingUpgrade`, `finalizeRollingUpgrade`                   | Rolling upgrade.                                 | Unsupported                    |
+| `finalizeUpgrade`                | `finalizeUpgrade`                                                                        | Finalize upgrade.                                | Unsupported [[7]](#footnote-7) |
+| `listOpenFiles`                  | `listOpenFiles`                                                                          | List open files.                                 | Unsupported [[7]](#footnote-7) |
 
 **Footnotes:**
 
@@ -402,8 +402,8 @@ For operations related to encryption zones, erasure coding, snapshots, and quota
 
 Replace with `OzoneManagerProtocol.finalizeUpgrade()` and `OzoneManagerProtocol.listOpenFiles()`.
 
-*The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`.*
+_The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`._
 
-*The following audit logs are produced by the HDFS output stream: `getAdditionalBlock`, `getAdditionalDatanode`, `abandonBlock`, `completeFile`, `fsync`.*
+_The following audit logs are produced by the HDFS output stream: `getAdditionalBlock`, `getAdditionalDatanode`, `abandonBlock`, `completeFile`, `fsync`._
 
-*The `getPreferredBlockSize` audit log is used in testing only.*
+_The `getPreferredBlockSize` audit log is used in testing only._

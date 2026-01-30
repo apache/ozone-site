@@ -205,15 +205,15 @@ Containers are the fundamental storage units in Ozone, and their relationship wi
 
 ## Comparing Replication and Erasure Coding
 
-| Feature | Replication (RATIS/THREE) | Erasure Coding (RS-6-3) |
-| ------- | ------------------------- | ----------------------- |
-| Storage Overhead | 200% (3x copies) | 50% (9 chunks for 6 data chunks) |
-| Write Performance | Higher throughput for small writes | Better for large sequential writes |
-| Read Performance | Consistent performance, any replica can serve | Slightly lower for intact data, reconstruction penalty for lost chunks |
-| CPU Usage | Lower | Higher (encoding/decoding overhead) |
-| Network Bandwidth | Higher during writes | Lower during writes |
-| Minimum Nodes | 3 | Depends on config (9 for RS-6-3) |
-| Use Cases | Hot data, random access, small files | Warm/cold data, large files, archival |
+| Feature           | Replication (RATIS/THREE)                     | Erasure Coding (RS-6-3)                                                |
+| ----------------- | --------------------------------------------- | ---------------------------------------------------------------------- |
+| Storage Overhead  | 200% (3x copies)                              | 50% (9 chunks for 6 data chunks)                                       |
+| Write Performance | Higher throughput for small writes            | Better for large sequential writes                                     |
+| Read Performance  | Consistent performance, any replica can serve | Slightly lower for intact data, reconstruction penalty for lost chunks |
+| CPU Usage         | Lower                                         | Higher (encoding/decoding overhead)                                    |
+| Network Bandwidth | Higher during writes                          | Lower during writes                                                    |
+| Minimum Nodes     | 3                                             | Depends on config (9 for RS-6-3)                                       |
+| Use Cases         | Hot data, random access, small files          | Warm/cold data, large files, archival                                  |
 
 **When to use Replication:**
 

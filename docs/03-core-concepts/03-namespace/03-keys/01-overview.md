@@ -30,6 +30,7 @@ For more details on key operations, refer to the [Ozone CLI documentation](/docs
 When a client writes a key, the Ozone Manager handles the metadata (key name, location of data blocks), and the Datanodes store the actual data blocks. For reads, the Ozone Manager provides the client with the locations of the data blocks, which the client then retrieves directly from the Datanodes.
 
 <!-- TODO: Link to Ozone Manager documentation -->
+
 For a deeper dive into the key write and read process, refer to the Ozone Manager documentation.
 
 ### Atomic Key Replacement
@@ -37,6 +38,7 @@ For a deeper dive into the key write and read process, refer to the Ozone Manage
 Ozone supports atomic key replacement, ensuring that a key is only overwritten if it hasn't changed since it was last read. This prevents lost updates in concurrent write scenarios.
 
 <!-- TODO: Link to overwrite-key-only-if-unchanged design document when created -->
+
 For more details, refer to the Overwriting Key Only If Unchanged design document.
 
 ### Trash

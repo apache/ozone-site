@@ -92,8 +92,8 @@ The following data is persisted in Ozone Manager side in a specific RocksDB dire
 
 ## Notable Configurations
 
-| Key | Default | Description |
-|-----|---------|-------------|
-| `ozone.om.address` | 0.0.0.0:9862 | RPC address of the OM. Required by the client. |
-| `ozone.om.http-address` | 0.0.0.0:9874 | Default port of the HTTP server. |
-| `ozone.metadata.dirs` | none | Directory to store persisted data (RocksDB). |
+| Key                     | Default      | Description                                    |
+| ----------------------- | ------------ | ---------------------------------------------- |
+| `ozone.om.address`      | 0.0.0.0:9862 | RPC address of the OM. Required by the client. |
+| `ozone.om.http-address` | 0.0.0.0:9874 | Default port of the HTTP server.               |
+| `ozone.metadata.dirs`   | none         | Directory to store persisted data (RocksDB).   |

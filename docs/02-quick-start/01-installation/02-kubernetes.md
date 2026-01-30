@@ -50,14 +50,14 @@ The `kubernetes/examples` directory of the Ozone distribution contains Kubernete
 
 To deploy it to minikube, use the minikube configuration set:
 
-``` bash
+```bash
 cd kubernetes/examples/minikube
 kubectl apply -k .
 ```
 
 And you can check the results with
 
-``` bash
+```bash
 kubectl get pod
 kubectl exec scm-0 -- ozone version
 ```
@@ -75,7 +75,7 @@ the `kubernetes/examples/minikube` resource set is optimized for minikube usage:
 
 Now you can access any of the services. For each web endpoint an additional NodeType service is defined in the minikube k8s resource set. NodeType services are available via a generated port on any of the host nodes:
 
-``` bash
+```bash
 kubectl get svc
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 datanode     ClusterIP   None            <none>        <none>           27s
@@ -90,7 +90,7 @@ scm-public   NodePort    10.105.231.28   <none>        9876:32171/TCP   27s
 
 Minikube provides a convenience command to access any of the NodePort services:
 
-``` bash
+```bash
 minikube service s3g-public
 Opening kubernetes service default/s3g-public in default browser...
 ```
@@ -110,14 +110,14 @@ As [apache/ozone](https://hub.docker.com/r/apache/ozone) images are available fr
 
 To deploy to a hosted cluster, use the Ozone subdirectory:
 
-``` bash
+```bash
 cd kubernetes/examples/ozone
 kubectl apply -k .
 ```
 
 And you can check the results with
 
-``` bash
+```bash
 kubectl get pod
 kubectl exec scm-0 -- ozone version
 ```
@@ -126,7 +126,7 @@ kubectl exec scm-0 -- ozone version
 
 Now you can access any of the services. By default the services are not published but you can access them with port-forward rules.
 
-``` bash
+```bash
 kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 ```

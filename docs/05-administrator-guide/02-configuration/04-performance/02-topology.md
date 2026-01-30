@@ -114,7 +114,6 @@ This policy selects a set of Datanodes to form a new pipeline. Its purpose is to
 The policy is configured by the `ozone.scm.pipeline.placement.impl` property in `ozone-site.xml`.
 
 - **`PipelinePlacementPolicy` (Default)**
-
   - **Function:** This is the default and only supported policy for pipeline creation. It chooses Datanodes based on load balancing (pipeline count per node) and network topology. It filters out nodes that are too heavily engaged in other pipelines and then selects nodes to ensure rack diversity. This policy is recommended for most production environments.
   - **Use Cases:** General purpose pipeline creation in a rack-aware cluster.
 
@@ -138,18 +137,15 @@ Note: When configuring these values, include the full class name prefix: for exa
 This is configured using the `ozone.scm.container.placement.impl` property in `ozone-site.xml` for Ratis containers. The available policies are:
 
 - **`SCMContainerPlacementRackAware` (Default)**
-
   - **Function:** Distributes the Datanodes of a pipeline across racks for fault tolerance (e.g., for a 3-node pipeline, it aims for at least two racks). Similar to HDFS placement. [1]
   - **Use Cases:** Production clusters needing rack-level fault tolerance.
   - **Limitations:** Designed for single-layer rack topologies (e.g., `/rack/node`). Not recommended for multi-layer hierarchies (e.g., `/dc/row/rack/node`) as it may not interpret deeper levels correctly. [1]
 
 - **`SCMContainerPlacementRandom`**
-
   - **Function:** Randomly selects healthy, available Datanodes, ignoring rack topology. [3]
   - **Use Cases:** Small/dev/test clusters where rack fault tolerance is not critical.
 
 - **`SCMContainerPlacementCapacity`**
-  
   - **Function:** Selects Datanodes by available capacity (favors lower disk utilization) to balance disk usage across the cluster. [4]
   - **Use Cases:** Heterogeneous storage clusters or where even disk utilization is key.
 
@@ -160,7 +156,6 @@ Note: When configuring these values, include the full class name prefix: for exa
 For Erasure Coded (EC) containers, SCM employs a specialized placement policy to ensure data resilience and availability by distributing data and parity blocks across multiple racks. This is configured using the `ozone.scm.container.placement.ec.impl.key` property in `ozone-site.xml`.
 
 - **`SCMContainerPlacementRackScatter` (Default)**
-
   - **Function:** This is the default policy for EC containers. It attempts to place each block (both data and parity) of an EC container on a different rack. For example, for an RS-6-3-1024k container (6 data blocks + 3 parity blocks), this policy will try to place the 9 blocks on 9 different racks. This "scatter" approach maximizes the fault tolerance, as the loss of a single rack will not impact more than one block of the container. [5]
   - **Use Cases:** This policy is highly recommended for production clusters using Erasure Coding to protect against rack-level failures.
   - **Configuration:**

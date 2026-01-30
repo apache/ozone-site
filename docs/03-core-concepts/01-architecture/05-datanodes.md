@@ -31,7 +31,7 @@ The authoritative information about where a container is located is with the Sto
 the container location will be cached by Ozone Manager and will be returned along with the Ozone blocks.
 
 Once the client is able to locate the container, the client will connect to the Datanode and read the data stream specified
-by *Container ID:Local ID*. In other words, the local ID serves as index into the container which describes what data stream to read from.
+by _Container ID:Local ID_. In other words, the local ID serves as index into the container which describes what data stream to read from.
 
 ## Discovering Container Locations
 
@@ -73,11 +73,11 @@ the property `hdds.datanode.volume.choosing.policy`. There are two main policies
 
 ### Volume-Related Configuration Properties
 
-| Property Name | Default Value | Description |
-|---------------|---------------|-------------|
-| `hdds.datanode.volume.choosing.policy` | `CapacityVolumeChoosingPolicy` | The policy used to select a volume for new containers. |
-| `hdds.datanode.volume.min.free.space` | `20GB` | Minimum free space required on a volume to be eligible for new containers. |
-| `hdds.datanode.volume.min.free.space.percent` | `0.02` | Minimum free space percentage required on a volume to be eligible for new containers. |
+| Property Name                                 | Default Value                  | Description                                                                           |
+| --------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------- |
+| `hdds.datanode.volume.choosing.policy`        | `CapacityVolumeChoosingPolicy` | The policy used to select a volume for new containers.                                |
+| `hdds.datanode.volume.min.free.space`         | `20GB`                         | Minimum free space required on a volume to be eligible for new containers.            |
+| `hdds.datanode.volume.min.free.space.percent` | `0.02`                         | Minimum free space percentage required on a volume to be eligible for new containers. |
 
 ### Disk Balancer
 
@@ -87,11 +87,11 @@ For more information on using the Disk Balancer, refer to the [Disk Balancer doc
 
 ## Notable Configurations
 
-| Key | Default | Description |
-|-----|---------|-------------|
-| `dfs.container.ratis.datanode.storage.dir` | none | This directory is used for storing Ratis metadata like logs. |
-| `ozone.scm.datanode.id.dir` | none | The path that Datanodes will use to store the Datanode ID. |
-| `hdds.datanode.dir` | none | Determines where HDDS data will be stored on the local filesystem. |
-| `hdds.datanode.dir.du.reserved` | none | Reserved space in bytes per volume. Always leave this much space free for non dfs use. |
-| `ozone.metadata.dirs` | none | Directory to store persisted data (RocksDB). |
-| `ozone.recon.address` | 0.0.0.0:9891 | RPC address of the Recon. Use host:port to connect Recon. |
+| Key                                        | Default      | Description                                                                            |
+| ------------------------------------------ | ------------ | -------------------------------------------------------------------------------------- |
+| `dfs.container.ratis.datanode.storage.dir` | none         | This directory is used for storing Ratis metadata like logs.                           |
+| `ozone.scm.datanode.id.dir`                | none         | The path that Datanodes will use to store the Datanode ID.                             |
+| `hdds.datanode.dir`                        | none         | Determines where HDDS data will be stored on the local filesystem.                     |
+| `hdds.datanode.dir.du.reserved`            | none         | Reserved space in bytes per volume. Always leave this much space free for non dfs use. |
+| `ozone.metadata.dirs`                      | none         | Directory to store persisted data (RocksDB).                                           |
+| `ozone.recon.address`                      | 0.0.0.0:9891 | RPC address of the Recon. Use host:port to connect Recon.                              |

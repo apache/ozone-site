@@ -28,8 +28,8 @@ Before starting, ensure the following:
 
 ## Method 1: Access Ozone via PyArrow and libhdfs
 
-This approach leverages PyArrow's HadoopFileSystem API, which requires *libhdfs.so* native library.
-The *libhdfs.so* is not packaged within PyArrow and you must download it separately from Hadoop.
+This approach leverages PyArrow's HadoopFileSystem API, which requires _libhdfs.so_ native library.
+The _libhdfs.so_ is not packaged within PyArrow and you must download it separately from Hadoop.
 
 ### Configuration
 

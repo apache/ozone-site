@@ -23,11 +23,11 @@ ozone admin reconfig --service=[OM|SCM|DATANODE] --address=<ip:port|hostname:por
 
 ### Options
 
-| Option                     | Description                                                                                                            |
-| -------------------------- |------------------------------------------------------------------------------------------------------------------------|
-| `--service`                | The service type: `OM`, `SCM`, or `DATANODE`                                                                           |
-| `--address` | RPC address of the target server (e.g., `hadoop1:9862` or `192.168.1.10:9862`). Required unless `--in-service-datanodes` is specified. |
-| `--in-service-datanodes`   | (Datanode only) Apply to all IN_SERVICE Datanodes                                                                      |
+| Option                   | Description                                                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `--service`              | The service type: `OM`, `SCM`, or `DATANODE`                                                                                           |
+| `--address`              | RPC address of the target server (e.g., `hadoop1:9862` or `192.168.1.10:9862`). Required unless `--in-service-datanodes` is specified. |
+| `--in-service-datanodes` | (Datanode only) Apply to all IN_SERVICE Datanodes                                                                                      |
 
 ### Operations
 
@@ -41,52 +41,52 @@ ozone admin reconfig --service=[OM|SCM|DATANODE] --address=<ip:port|hostname:por
 
 ### Ozone Manager (OM)
 
-| Property                                       | Default   | Description                                               |
-| ---------------------------------------------- | --------- | --------------------------------------------------------- |
-| `ozone.administrators`                         | -         | Comma-separated list of Ozone administrators              |
-| `ozone.readonly.administrators`                | -         | Comma-separated list of read-only administrators          |
-| `ozone.om.server.list.max.size`                | `1000`    | Maximum server-side response size for list operations     |
-| `ozone.om.volume.listall.allowed`              | `true`    | Allow all users to list all volumes                       |
-| `ozone.om.follower.read.local.lease.enabled`   | `false`   | Enable local lease for follower read optimization         |
-| `ozone.om.follower.read.local.lease.lag.limit` | `10000`   | Maximum log lag for follower reads                        |
-| `ozone.om.follower.read.local.lease.time.ms`   | `5000`    | Lease time in milliseconds for follower reads             |
-| `ozone.key.deleting.limit.per.task`            | `50000`   | Maximum keys to delete per task                           |
-| `ozone.directory.deleting.service.interval`    | `60s`     | Directory deletion service run interval                   |
-| `ozone.thread.number.dir.deletion`             | `10`      | Number of threads for directory deletion                  |
-| `ozone.snapshot.filtering.service.interval`    | `60s`     | Snapshot SST filtering service run interval               |
+| Property                                       | Default | Description                                           |
+| ---------------------------------------------- | ------- | ----------------------------------------------------- |
+| `ozone.administrators`                         | -       | Comma-separated list of Ozone administrators          |
+| `ozone.readonly.administrators`                | -       | Comma-separated list of read-only administrators      |
+| `ozone.om.server.list.max.size`                | `1000`  | Maximum server-side response size for list operations |
+| `ozone.om.volume.listall.allowed`              | `true`  | Allow all users to list all volumes                   |
+| `ozone.om.follower.read.local.lease.enabled`   | `false` | Enable local lease for follower read optimization     |
+| `ozone.om.follower.read.local.lease.lag.limit` | `10000` | Maximum log lag for follower reads                    |
+| `ozone.om.follower.read.local.lease.time.ms`   | `5000`  | Lease time in milliseconds for follower reads         |
+| `ozone.key.deleting.limit.per.task`            | `50000` | Maximum keys to delete per task                       |
+| `ozone.directory.deleting.service.interval`    | `60s`   | Directory deletion service run interval               |
+| `ozone.thread.number.dir.deletion`             | `10`    | Number of threads for directory deletion              |
+| `ozone.snapshot.filtering.service.interval`    | `60s`   | Snapshot SST filtering service run interval           |
 
 ### Storage Container Manager (SCM)
 
-| Property                                                  | Default    | Description                                                   |
-| --------------------------------------------------------- | ---------- | ------------------------------------------------------------- |
-| `ozone.administrators`                                    | -          | Comma-separated list of Ozone administrators                  |
-| `ozone.readonly.administrators`                           | -          | Comma-separated list of read-only administrators              |
-| `hdds.scm.block.deletion.per-interval.max`                | `500000`   | Maximum blocks SCM processes per deletion interval            |
-| `hdds.scm.replication.thread.interval`                    | `300s`     | Interval for the replication monitor thread                   |
-| `hdds.scm.replication.under.replicated.interval`          | `30s`      | Frequency to check the under-replicated queue                 |
-| `hdds.scm.replication.over.replicated.interval`           | `30s`      | Frequency to check the over-replicated queue                  |
-| `hdds.scm.replication.event.timeout`                      | `12m`      | Timeout for replication/deletion commands                     |
-| `hdds.scm.replication.event.timeout.datanode.offset`      | `6m`       | Offset subtracted from event timeout for Datanode deadline    |
-| `hdds.scm.replication.maintenance.replica.minimum`        | `2`        | Minimum replicas required for node maintenance                |
-| `hdds.scm.replication.maintenance.remaining.redundancy`   | `1`        | Remaining redundancy required for maintenance (EC)            |
-| `hdds.scm.replication.datanode.replication.limit`         | `20`       | Max replication commands queued per Datanode                  |
-| `hdds.scm.replication.datanode.reconstruction.weight`     | `3`        | Weight multiplier for reconstruction commands                 |
-| `hdds.scm.replication.datanode.delete.container.limit`    | `40`       | Max delete container commands queued per Datanode             |
-| `hdds.scm.replication.inflight.limit.factor`              | `0.75`     | Factor to scale cluster-wide replication limit                |
-| `hdds.scm.replication.container.sample.limit`             | `100`      | Number of containers sampled per state for debugging          |
-| `ozone.scm.ec.pipeline.minimum`                           | `5`        | Minimum EC pipelines to keep open                             |
-| `ozone.scm.ec.pipeline.per.volume.factor`                 | `1`        | Factor for calculating EC pipelines based on volumes          |
+| Property                                                | Default  | Description                                                |
+| ------------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| `ozone.administrators`                                  | -        | Comma-separated list of Ozone administrators               |
+| `ozone.readonly.administrators`                         | -        | Comma-separated list of read-only administrators           |
+| `hdds.scm.block.deletion.per-interval.max`              | `500000` | Maximum blocks SCM processes per deletion interval         |
+| `hdds.scm.replication.thread.interval`                  | `300s`   | Interval for the replication monitor thread                |
+| `hdds.scm.replication.under.replicated.interval`        | `30s`    | Frequency to check the under-replicated queue              |
+| `hdds.scm.replication.over.replicated.interval`         | `30s`    | Frequency to check the over-replicated queue               |
+| `hdds.scm.replication.event.timeout`                    | `12m`    | Timeout for replication/deletion commands                  |
+| `hdds.scm.replication.event.timeout.datanode.offset`    | `6m`     | Offset subtracted from event timeout for Datanode deadline |
+| `hdds.scm.replication.maintenance.replica.minimum`      | `2`      | Minimum replicas required for node maintenance             |
+| `hdds.scm.replication.maintenance.remaining.redundancy` | `1`      | Remaining redundancy required for maintenance (EC)         |
+| `hdds.scm.replication.datanode.replication.limit`       | `20`     | Max replication commands queued per Datanode               |
+| `hdds.scm.replication.datanode.reconstruction.weight`   | `3`      | Weight multiplier for reconstruction commands              |
+| `hdds.scm.replication.datanode.delete.container.limit`  | `40`     | Max delete container commands queued per Datanode          |
+| `hdds.scm.replication.inflight.limit.factor`            | `0.75`   | Factor to scale cluster-wide replication limit             |
+| `hdds.scm.replication.container.sample.limit`           | `100`    | Number of containers sampled per state for debugging       |
+| `ozone.scm.ec.pipeline.minimum`                         | `5`      | Minimum EC pipelines to keep open                          |
+| `ozone.scm.ec.pipeline.per.volume.factor`               | `1`      | Factor for calculating EC pipelines based on volumes       |
 
 ### Datanode
 
-| Property                                          | Default   | Description                                            |
-| ------------------------------------------------- | --------- | ------------------------------------------------------ |
-| `hdds.datanode.block.deleting.limit.per.interval` | `20000`   | Maximum blocks deleted per interval on a Datanode      |
-| `hdds.datanode.block.delete.threads.max`          | `5`       | Maximum threads for block deletion                     |
-| `ozone.block.deleting.service.workers`            | `10`      | Number of block deletion service workers               |
-| `ozone.block.deleting.service.interval`           | `60s`     | Block deletion service run interval                    |
-| `ozone.block.deleting.service.timeout`            | `300s`    | Block deletion service timeout                         |
-| `hdds.datanode.replication.streams.limit`         | `10`      | Maximum replication streams per Datanode               |
+| Property                                          | Default | Description                                       |
+| ------------------------------------------------- | ------- | ------------------------------------------------- |
+| `hdds.datanode.block.deleting.limit.per.interval` | `20000` | Maximum blocks deleted per interval on a Datanode |
+| `hdds.datanode.block.delete.threads.max`          | `5`     | Maximum threads for block deletion                |
+| `ozone.block.deleting.service.workers`            | `10`    | Number of block deletion service workers          |
+| `ozone.block.deleting.service.interval`           | `60s`   | Block deletion service run interval               |
+| `ozone.block.deleting.service.timeout`            | `300s`  | Block deletion service timeout                    |
+| `hdds.datanode.replication.streams.limit`         | `10`    | Maximum replication streams per Datanode          |
 
 ## Usage Examples
 

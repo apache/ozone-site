@@ -128,13 +128,13 @@ This configures disk checks to run every 30 minutes instead of the default 60 mi
 
 Additional properties control disk health check behavior:
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.disk.check.io.test.count` | `3` | Number of IO tests required to determine failure. Set to `0` to disable IO checks. |
-| `hdds.datanode.disk.check.io.failures.tolerated` | `1` | IO test failures allowed before marking volume as failed |
-| `hdds.datanode.disk.check.io.file.size` | `100B` | Size of temporary file used for I/O health checks |
-| `hdds.datanode.disk.check.min.gap` | `10m` | Minimum time gap between successive checks of the same volume |
-| `hdds.datanode.disk.check.timeout` | `10m` | Maximum time allowed for a disk check to complete |
+| Property                                         | Default | Description                                                                        |
+| ------------------------------------------------ | ------- | ---------------------------------------------------------------------------------- |
+| `hdds.datanode.disk.check.io.test.count`         | `3`     | Number of IO tests required to determine failure. Set to `0` to disable IO checks. |
+| `hdds.datanode.disk.check.io.failures.tolerated` | `1`     | IO test failures allowed before marking volume as failed                           |
+| `hdds.datanode.disk.check.io.file.size`          | `100B`  | Size of temporary file used for I/O health checks                                  |
+| `hdds.datanode.disk.check.min.gap`               | `10m`   | Minimum time gap between successive checks of the same volume                      |
+| `hdds.datanode.disk.check.timeout`               | `10m`   | Maximum time allowed for a disk check to complete                                  |
 
 ## Failed Volume Handling
 
@@ -183,7 +183,7 @@ Ozone Datanodes do not currently support hotswap of disks. To update the disk li
      <name>hdds.datanode.dir</name>
      <value>/data1,/data2,/data3</value>
    </property>
-   
+
    <!-- After -->
    <property>
      <name>hdds.datanode.dir</name>

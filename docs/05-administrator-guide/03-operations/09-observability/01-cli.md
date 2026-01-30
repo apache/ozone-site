@@ -24,7 +24,7 @@ Available insight points:
   om.key-manager                       OM Key Manager
   om.protocol.client                   Ozone Manager RPC endpoint
   datanode.pipeline                    More information about one ratis datanode ring.
-```  
+```
 
 ### Configuration
 

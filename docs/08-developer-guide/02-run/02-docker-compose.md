@@ -71,12 +71,12 @@ graph TB
         s3g["S3G<br/>S3 Gateway<br/>(Port: 9878)"]
         recon["Recon<br/>Monitoring Service<br/>(Port: 9888)"]
         httpfs["HttpFS<br/>HTTP FileSystem<br/>(Port: 14000)"]
-        
+
         subgraph "Data Nodes"
             dn1["DataNode 1<br/>(Port: 19864, 9882)"]
             dnN["DataNode N<br/>(Port: 19864, 9882)"]
         end
-        
+
         %% Connections
         scm --> dn1
         scm --> dnN
@@ -93,7 +93,7 @@ graph TB
     classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
     classDef datanode fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
     classDef manager fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
-    
+
     class dn1,dnN datanode;
     class scm,om manager;
 ```
@@ -153,7 +153,7 @@ The compose directory includes several specialized configurations for different 
 <!-- cspell:word  ozonesecure -->
 
 | Configuration  | Purpose                                 |
-|----------------|-----------------------------------------|
+| -------------- | --------------------------------------- |
 | ozone-ha       | High availability deployment setup      |
 | ozonesecure    | Security features with SSL and Kerberos |
 | ozone-topology | Rack-aware deployment configuration     |

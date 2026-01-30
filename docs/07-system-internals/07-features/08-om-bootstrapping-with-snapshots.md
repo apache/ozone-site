@@ -21,7 +21,7 @@ When a snapshot is taken on an Ozone bucket, the following steps occur:
 
 1. A RocksDB checkpoint of the active `om.db` is created.
 2. Deleted entries are removed from the `deletedKeyTable` and `deletedDirTable` in the Active Object Store (AOS) RocksDB.
-This is to just prevent the blocks from getting purged without checking for the key's presence in the correct snapshot in the snapshot chain.
+   This is to just prevent the blocks from getting purged without checking for the key's presence in the correct snapshot in the snapshot chain.
 3. A new entry is added to the `snapshotInfoTable` in the AOS RocksDB.
 
 ### Current Bootstrap Model
@@ -77,15 +77,15 @@ This approach builds the current model by introducing size thresholds to manage 
    - Walks through AOS RocksDB, snapshot RocksDBs, and backup SST directories to identify files to transfer.
    - Compares against the exclude list to avoid duplicate transfers.
 3. If the total size of files to be copied is more than `ozone.om.ratis.snapshot.lock.max.total.size.threshold` then the
-files would be directly sent over the stream as a tarball where the name of the files is the inodeId of the file.
+   files would be directly sent over the stream as a tarball where the name of the files is the inodeId of the file.
 4. If the total size of files to be copied is less than equal to `ozone.om.ratis.snapshot.lock.max.total.size.threshold`
-then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty (No snapshot RocksDB should be open). Under the lock following operations would be performed:
+   then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty (No snapshot RocksDB should be open). Under the lock following operations would be performed:
    - Take the AOS RocksDB checkpoint.
    - A complete directory walk is done on AOS checkpoint RocksDB directory + all the snapshot RocksDB directories + backup sst
      file directory (compaction log directory) to figure out all the files to be copied and any file already present in the exclude list would be excluded.
    - These files are added to the tarball where again the name of the file would be the inodeId of the file.
 5. As the files are being iterated the path of each file and their corresponding inodeIds would be tracked. When it is the
-last batch this map would also be written as a text file in the final tarball to recreate all the hardlinks on the follower node.
+   last batch this map would also be written as a text file in the final tarball to recreate all the hardlinks on the follower node.
 
 #### Drawback
 
@@ -108,11 +108,11 @@ on the number of files changed under the snapshot directory as the threshold.
    - Walks through AOS RocksDB, snapshot RocksDBs, and backup SST directories to identify files to transfer.
    - Compares against the exclude list to avoid duplicate transfers.
 3. If either the total size to be copied or the total number of files under the snapshot RocksDB directory to be copied is
-more than `ozone.om.ratis.snapshot.max.total.sst.size` respectively then the files would be directly sent over the stream as
-a tarball where the name of the files is the inodeId of the file.
+   more than `ozone.om.ratis.snapshot.max.total.sst.size` respectively then the files would be directly sent over the stream as
+   a tarball where the name of the files is the inodeId of the file.
 4. If the total file size to be copied under the snapshot RocksDB directory is less than or equal to `ozone.om.ratis.snapshot.max.total.sst.size`
-then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty (No snapshot RocksDB should be open).
-Under the lock following operations would be performed:
+   then the snapshot cache lock is taken after waiting for the snapshot cache to completely get empty (No snapshot RocksDB should be open).
+   Under the lock following operations would be performed:
    - Take the AOS RocksDB checkpoint.
    - A complete directory walk is done on all the snapshot RocksDB directories to figure out all the files to be copied and any file already present in the exclude list would be excluded.
    - Hard links of these files are added to tmp directory on the leader.
@@ -150,7 +150,7 @@ in approach 2 or stream the files in batches as multiple tarball file similar to
 Following is the flow for creating the tarball:
 
 1. Snapshot cache lock is taken after waiting for the snapshot cache to become completely empty (No snapshot RocksDB should be open).
-Under the lock following operations would be performed:
+   Under the lock following operations would be performed:
    - Take the AOS RocksDB checkpoint.
    - Take RocksDB checkpoint of each and every snapshot in the system by iterating through the snapshotInfo table of AOS checkpoint RocksDB.
 2. Now the files in the checkpoint directories have to be streamed to the follower as done in either approach 1 or approach 2.

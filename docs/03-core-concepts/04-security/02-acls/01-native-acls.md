@@ -8,64 +8,63 @@ Ozone supports a set of native ACLs.
 These ACLs can be used independently of Ozone ACL plugin such as Ranger.
 Add the following properties to the `ozone-site.xml` to enable native ACLs.
 
-| Property | Value |
-| -------- | ----- |
-| `ozone.acl.enabled` | `true` |
+| Property                     | Value                                                        |
+| ---------------------------- | ------------------------------------------------------------ |
+| `ozone.acl.enabled`          | `true`                                                       |
 | `ozone.acl.authorizer.class` | `org.apache.hadoop.ozone.security.acl.OzoneNativeAuthorizer` |
 
 Ozone ACLs are a super set of Posix and S3 ACLs.
 
-The general format of an ACL is *object*:*who*:*rights*:*scope*.
+The general format of an ACL is _object_:_who_:_rights_:_scope_.
 
-Where an *object* can be:
+Where an _object_ can be:
 
-1. **Volume** - An Ozone volume.  e.g. */volume*
-2. **Bucket** - An Ozone bucket. e.g. */volume/bucket*
-3. **Key** - An object key or an object. e.g. */volume/bucket/key*
-4. **Prefix** - A path prefix for a specific key. e.g. */volume/bucket/prefix1/prefix2*
+1. **Volume** - An Ozone volume. e.g. _/volume_
+2. **Bucket** - An Ozone bucket. e.g. _/volume/bucket_
+3. **Key** - An object key or an object. e.g. _/volume/bucket/key_
+4. **Prefix** - A path prefix for a specific key. e.g. _/volume/bucket/prefix1/prefix2_
 
-Where a *who* can be:
+Where a _who_ can be:
 
 1. **User** - A user in the Kerberos domain. User like in Posix world can be
-named or unnamed.
+   named or unnamed.
 2. **Group** - A group in the Kerberos domain. Group also like in Posix world
-can be named or unnamed.
+   can be named or unnamed.
 3. **World** - All authenticated users in the Kerberos domain. This maps to
-others in the Posix domain.
+   others in the Posix domain.
 4. **Anonymous** - Ignore the user field completely. This is an extension to
-the Posix semantics, This is needed for S3 protocol, where we express that
-we have no way of knowing who the user is or we don't care.
+   the Posix semantics, This is needed for S3 protocol, where we express that
+   we have no way of knowing who the user is or we don't care.
 
 :::tip
 A S3 user accessing Ozone via AWS v4 signature protocol will be translated to the appropriate Kerberos user by Ozone Manager.
 :::
 
-Where a *right* can be:
+Where a _right_ can be:
 
 1. **Create** – This ACL provides a user the ability to create buckets in a
-volume and keys in a bucket. Please note: Under Ozone, Only admins can create volumes.
+   volume and keys in a bucket. Please note: Under Ozone, Only admins can create volumes.
 2. **List** – This ACL allows listing of buckets and keys. This ACL is attached
- to the volume and buckets which allow listing of the child objects. Please note: The user and admins can list the volumes owned by the user.
+   to the volume and buckets which allow listing of the child objects. Please note: The user and admins can list the volumes owned by the user.
 3. **Delete** – Allows the user to delete a volume, bucket or key.
 4. **Read** – Allows the user to read the metadata of a Volume and Bucket and
-data stream and metadata of a key.
+   data stream and metadata of a key.
 5. **Write** - Allows the user to write the metadata of a Volume and Bucket and
-allows the user to overwrite an existing Ozone key.
+   allows the user to overwrite an existing Ozone key.
 6. **Read_ACL** – Allows a user to read the ACL on a specific object.
 7. **Write_ACL** – Allows a user to write the ACL on a specific object.
 
-Where an *scope* can be:
+Where an _scope_ can be:
 
 1. **ACCESS** – Access ACL is applied only to the specific object and not inheritable. It controls the access to the object itself.
 2. **DEFAULT** - Default ACL is applied to the specific object and will be inherited by object's descendants. Default ACLs cannot be set on keys (as there can be no objects under a key).
 
-    :::note
-    ACLs inherited from parent's Default ACLs will follow the following rules based on different bucket layout:
+   :::note
+   ACLs inherited from parent's Default ACLs will follow the following rules based on different bucket layout:
+   - **Legacy with EnableFileSystem or FSO**: inherit the immediate parent's DEFAULT ACLs. If none, inherit the bucket DEFAULT ACLs.
+   - **Legacy with DisableFileSystem or OBS**: inherit the bucket DEFAULT ACLs.
 
-    - **Legacy with EnableFileSystem or FSO**: inherit the immediate parent's DEFAULT ACLs. If none, inherit the bucket DEFAULT ACLs.
-    - **Legacy with DisableFileSystem or OBS**: inherit the bucket DEFAULT ACLs.
-
-    :::
+   :::
 
 ## Ozone Native ACL APIs
 
@@ -128,7 +127,7 @@ $ ozone sh bucket setacl -a world::a /vol1/bucket4
 ### `getacl`
 
 ```shell
-$ ozone sh bucket getacl /vol1/bucket2 
+$ ozone sh bucket getacl /vol1/bucket2
 [ {
   "type" : "USER",
   "name" : "om/om@EXAMPLE.COM",

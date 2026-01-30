@@ -7,19 +7,19 @@ This document summarizes the contribution process.
 ## Quick Start
 
 1. Review the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications). Contributing to the new website follows a similar process with a few differences:
-    - You should fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo instead of the main [apache/ozone](https://github.com/apache/ozone) repo.
-    - You should enable the `ci` workflow on your fork, which will run tests on your changes before submitting a pull request.
-    - Your local branch containing changes for the new website should be based off of the [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) branch.
+   - You should fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo instead of the main [apache/ozone](https://github.com/apache/ozone) repo.
+   - You should enable the `ci` workflow on your fork, which will run tests on your changes before submitting a pull request.
+   - Your local branch containing changes for the new website should be based off of the [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) branch.
 
 2. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
-    - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
+   - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
 
 3. Preview your changes locally by running `docker compose up` and opening `localhost:3001` in your browser.
-    - Make sure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your system.
-    - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
+   - Make sure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your system.
+   - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
 
 4. Follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository.
-    - The target branch for the PR should be [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) for changes targeting this new unreleased version of the website.
+   - The target branch for the PR should be [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) for changes targeting this new unreleased version of the website.
 
 ⬇️ Continue reading for more details, helpful tips, and advanced usage. ⬇️
 
@@ -46,7 +46,7 @@ If you are migrating a page from the old website to the new website, please foll
 1. Verify that the content of the original page is clear and accurate.
 2. If there are issues with the original page, raise a PR with your fixes to the [current Ozone website](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs) to fix the page first.
 3. Once the page is merged into the current website, migrate it to the new website and raise a PR.
-    - Pages being brought in from the current website may be enhanced with [additional markdown functionality](#page-format) supported by the new website.
+   - Pages being brought in from the current website may be enhanced with [additional markdown functionality](#page-format) supported by the new website.
 
 ## Modifying the Website
 
@@ -194,25 +194,25 @@ As part of the GitHub Actions CI, all markdown pages will be checked for spellin
 
 **If spell check fails for words that are correct but not recognized:**
 
-- **Option 1:** If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid.
+- **Option 1:** If the word is relevant for the whole Ozone project, add it to the `words` list in _cspell.yaml_ so that it is considered valid.
 
 - **Option 2:** If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown front matter of that page only.
 
 #### Documentation Sidebar
 
-Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website configures this using a *README.mdx* file in each documentation directory. This gives a one to one mapping of subdirectories of the *docs* directory to sidebar dropdown sections.
+Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website configures this using a _README.mdx_ file in each documentation directory. This gives a one to one mapping of subdirectories of the _docs_ directory to sidebar dropdown sections.
 
-When creating a new *docs* subdirectory (which will be rendered as a sidebar section), add a *README.mdx* file to that directory. In this file:
+When creating a new _docs_ subdirectory (which will be rendered as a sidebar section), add a _README.mdx_ file to that directory. In this file:
 
 1. Use the `sidebar_label` front matter key to give the section a brief title that will be shown in the sidebar.
 2. Add a descriptive title on the markdown page itself.
-    - This should be more verbose than the sidebar label as described in [Best Practices](#best-practices) for documentation pages.
+   - This should be more verbose than the sidebar label as described in [Best Practices](#best-practices) for documentation pages.
 3. Write a brief summary (usually just one sentence) about the content in that section.
-    - Avoid placing actual documentation on these pages, since it may be missed by readers clicking through the sidebar.
-    - If an overview of content in a section is required, add a dedicated "Overview" page to the section.
+   - Avoid placing actual documentation on these pages, since it may be missed by readers clicking through the sidebar.
+   - If an overview of content in a section is required, add a dedicated "Overview" page to the section.
 4. Add an automatically generated index of the content in this section as the last line in the markdown file. Adding this index is described in the [Docusaurus docs](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page), but in summary it only requires two lines:
-    1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the *README.mdx* file.
-    2. Add the `<DocCardList/>` tag at the end of the file.
+   1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the _README.mdx_ file.
+   2. Add the `<DocCardList/>` tag at the end of the file.
 
 ### Updating Graphics
 
@@ -256,42 +256,37 @@ This file contains exact version information of all dependencies required to bui
 
 #### Version Pinning
 
-*package.json* allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
+_package.json_ allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
 
 - `~` means to allow all patch updates (last semantic versioning digit)
 - `^` means to allow all minor version updates (second semantic versioning digit)
-- A version with no specifier means only the exact version declared in *package.json* is allowed.
+- A version with no specifier means only the exact version declared in _package.json_ is allowed.
 
 Currently all `@docusaurus/*` packages are pinned to an exact version for website stability.
 
 #### `pnpm` Command Cheat-Sheet
 
 - **To install all packages after cloning the repo**: `pnpm install`
+  - This will read the metadata for the packages and their transitive dependencies from _pnpm-lock.yaml_, which is generated from _package.json_ - and install the required dependencies for the project in the _node_modules_ folder.
 
-  - This will read the metadata for the packages and their transitive dependencies from *pnpm-lock.yaml*, which is generated from *package.json* - and install the required dependencies for the project in the *node_modules* folder.
-
-  - This should make no modifications to *package.json* or *pnpm-lock.yaml* if all explicit versions in *pnpm-lock.yaml* comply with the version specifiers in *package.json*.
-
+  - This should make no modifications to _package.json_ or _pnpm-lock.yaml_ if all explicit versions in _pnpm-lock.yaml_ comply with the version specifiers in _package.json_.
     - This should always be true for committed code, because the CI build of the website uses `pnpm install --frozen-lockfile` to fail the build if the two files do not match.
 
 - **To update all packages to their latest versions allowed by package.json**: `pnpm update`
-
-  - This will update *package.json* to match the exact versions that were installed, but this is for reference only. Exact version information still comes from *pnpm-lock.yaml*
+  - This will update _package.json_ to match the exact versions that were installed, but this is for reference only. Exact version information still comes from _pnpm-lock.yaml_
     - Version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
 
-  - This will update *pnpm-lock.yaml* to reflect the exact versions of all top level and transitive dependencies installed.
+  - This will update _pnpm-lock.yaml_ to reflect the exact versions of all top level and transitive dependencies installed.
 
 - **To update docusaurus to a specific version**:
-
-  1. Update the version of all `@docusaurus/*` packages in *package.json* to the desired docusaurus version.
+  1. Update the version of all `@docusaurus/*` packages in _package.json_ to the desired docusaurus version.
 
   2. Run `pnpm update '@docusaurus/*'` to update to the new version.
+     - This should modify _pnpm-lock.yaml_ with the exact versions of docusaurus and its transitive dependencies that were installed.
 
-      - This should modify *pnpm-lock.yaml* with the exact versions of docusaurus and its transitive dependencies that were installed.
+     - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify _package.json_ as well.
 
-      - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify *package.json* as well.
-
-  3. Commit *package.json* and *pnpm-lock.yaml* to git.
+  3. Commit _package.json_ and _pnpm-lock.yaml_ to git.
 
 ### Previewing Your Modifications Locally
 
@@ -308,13 +303,11 @@ The project includes a `Dockerfile` and a `compose.yml` file to build and run th
 2. Install [Docker Compose](https://docs.docker.com/compose/install/).
 
 3. Run `docker compose up` from the repository root.
-
-    - **Note**: This will continue to use the last locally built version of the `ozone-site-dev` image, which saves time on future runs.
-      - Run `docker compose up --build` to rebuild the image and incorporate any package dependency updates that may have been committed since the last build.
+   - **Note**: This will continue to use the last locally built version of the `ozone-site-dev` image, which saves time on future runs.
+     - Run `docker compose up --build` to rebuild the image and incorporate any package dependency updates that may have been committed since the last build.
 
 4. Preview the website at `localhost:3001` in your browser.
-
-    - Any changes made in the repository will be reflected in the preview.
+   - Any changes made in the repository will be reflected in the preview.
 
 5. Press `Ctrl+C` or run `docker compose down` to stop the preview.
 
@@ -327,7 +320,6 @@ Build and run the website locally with the `pnpm` package manager.
 2. Install dependencies required to build the website by running `pnpm install` at the website root.
 
 - [**Development Server**](https://docusaurus.io/docs/installation#running-the-development-server): This option will start the Docusaurus development server, which allows updates to website files to be displayed in the browser in real time. It will not produce a `build` directory with build artifacts.
-
   1. Run `pnpm start` from the repository root to start the development server.
 
   2. Preview the website at `localhost:3001` in your browser.
@@ -335,7 +327,6 @@ Build and run the website locally with the `pnpm` package manager.
   3. Press `Ctrl+C` to stop the preview.
 
 - [**Local Build**](https://docusaurus.io/docs/installation#build): This option will do a production build, putting artifacts in the `build` directory. This can still be previewed locally, but will not automatically reflect changes to website files.
-
   1. Run `pnpm build` from the repository root to build the content.
 
   2. Run `pnpm serve` to preview the built website locally.

@@ -84,7 +84,7 @@ Content-Length: 17
 
 ```bash
 echo "hello" >> ./README.txt
-curl -i -X PUT "http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=CREATE&data=true&user.name=hdfs" -T ./README.txt -H "Content-Type: application/octet-stream" 
+curl -i -X PUT "http://localhost:14000/webhdfs/v1/volume1/bucket1/user/foo/README.txt?op=CREATE&data=true&user.name=hdfs" -T ./README.txt -H "Content-Type: application/octet-stream"
 ```
 
 Example Output:
@@ -121,44 +121,44 @@ Here are the tables of WebHDFS REST APIs and their state of support in Ozone.
 
 ### File and Directory Operations
 
-| Operation                       | Support                      |
-|-------------------------------- | ---------------------------  |
-| Create and Write to a File      | supported                    |
-| Append to a File                | not implemented in Ozone     |
-| Concat File(s)                  | not implemented in Ozone     |
-| Open and Read a File            | supported                    |
-| Make a Directory                | supported                    |
-| Create a Symbolic Link          | not implemented in Ozone     |
-| Rename a File/Directory         | supported (with limitations) |
-| Delete a File/Directory         | supported                    |
-| Truncate a File                 | not implemented in Ozone.    |
-| Status of a File/Directory      | supported                    |
-| List a Directory                | supported                    |
-| List a File                     | supported                    |
-| Iteratively List a Directory    | unsupported                  |
+| Operation                    | Support                      |
+| ---------------------------- | ---------------------------- |
+| Create and Write to a File   | supported                    |
+| Append to a File             | not implemented in Ozone     |
+| Concat File(s)               | not implemented in Ozone     |
+| Open and Read a File         | supported                    |
+| Make a Directory             | supported                    |
+| Create a Symbolic Link       | not implemented in Ozone     |
+| Rename a File/Directory      | supported (with limitations) |
+| Delete a File/Directory      | supported                    |
+| Truncate a File              | not implemented in Ozone.    |
+| Status of a File/Directory   | supported                    |
+| List a Directory             | supported                    |
+| List a File                  | supported                    |
+| Iteratively List a Directory | unsupported                  |
 
 ### Other File System Operations
 
-| Operation                             | Support                                 |
-| ------------------------------------- | --------------------------------------- |
-| Get Content Summary of a Directory    | supported                               |
-| Get Quota Usage of a Directory        | supported                               |
-| Set Quota                             | not implemented in Ozone FileSystem API |
-| Set Quota By Storage Type             | not implemented in Ozone                |
-| Get File Checksum                     | unsupported (to be fixed)               |
-| Get Home Directory                    | unsupported (to be fixed)               |
-| Get Trash Root                        | unsupported                             |
-| Set Permission                        | not implemented in Ozone FileSystem API |
-| Set Owner                             | not implemented in Ozone FileSystem API |
-| Set Replication Factor                | not implemented in Ozone FileSystem API |
-| Set Access or Modification Time       | not implemented in Ozone FileSystem API |
-| Modify ACL Entries                    | not implemented in Ozone FileSystem API |
-| Remove ACL Entries                    | not implemented in Ozone FileSystem API |
-| Remove Default ACL                    | not implemented in Ozone FileSystem API |
-| Remove ACL                            | not implemented in Ozone FileSystem API |
-| Set ACL                               | not implemented in Ozone FileSystem API |
-| Get ACL Status                        | not implemented in Ozone FileSystem API |
-| Check access                          | not implemented in Ozone FileSystem API |
+| Operation                          | Support                                 |
+| ---------------------------------- | --------------------------------------- |
+| Get Content Summary of a Directory | supported                               |
+| Get Quota Usage of a Directory     | supported                               |
+| Set Quota                          | not implemented in Ozone FileSystem API |
+| Set Quota By Storage Type          | not implemented in Ozone                |
+| Get File Checksum                  | unsupported (to be fixed)               |
+| Get Home Directory                 | unsupported (to be fixed)               |
+| Get Trash Root                     | unsupported                             |
+| Set Permission                     | not implemented in Ozone FileSystem API |
+| Set Owner                          | not implemented in Ozone FileSystem API |
+| Set Replication Factor             | not implemented in Ozone FileSystem API |
+| Set Access or Modification Time    | not implemented in Ozone FileSystem API |
+| Modify ACL Entries                 | not implemented in Ozone FileSystem API |
+| Remove ACL Entries                 | not implemented in Ozone FileSystem API |
+| Remove Default ACL                 | not implemented in Ozone FileSystem API |
+| Remove ACL                         | not implemented in Ozone FileSystem API |
+| Set ACL                            | not implemented in Ozone FileSystem API |
+| Get ACL Status                     | not implemented in Ozone FileSystem API |
+| Check access                       | not implemented in Ozone FileSystem API |
 
 ## Proxy User Configuration
 
@@ -184,9 +184,9 @@ Replace `#USER#` with the actual username of the user who should be allowed to p
   <description>
     List of hosts the 'knoxuser' user is allowed to perform 'doAs'
     operations.
-    
+
     The value can be the '*' wildcard or a comma-separated list of hostnames.
-    
+
     For multiple users, copy this property and replace the user name
     in the property name.
   </description>
@@ -198,9 +198,9 @@ Replace `#USER#` with the actual username of the user who should be allowed to p
   <description>
     List of groups the 'knoxuser' user is allowed to impersonate users
     from to perform 'doAs' operations.
-    
+
     The value can be the '*' wildcard or a comma-separated list of group names.
-    
+
     For multiple users, copy this property and replace the user name
     in the property name.
   </description>

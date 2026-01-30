@@ -26,6 +26,7 @@ When keys are changed or deleted in the live bucket, their data blocks are retai
 **Snapshot Data Storage:** Snapshot metadata resides in OM's RocksDB. Diff job data is stored in `ozone.om.snapshot.diff.db.dir` (defaults to OM metadata directory).
 
 <!-- cspell:ignore Prashant Pogde -->
+
 For more details, see Prashant Pogde's [Introducing Apache Ozone Snapshots](https://medium.com/@prashantpogde/introducing-apache-ozone-snapshots-af82e976142f).
 
 ## Managing Snapshots
@@ -160,6 +161,7 @@ Path bucketPath = new Path("/vol1/bucket1");
 ```
 
 Handle `OMException` or `IOException`. Snapshots are in the bucket's `.snapshot` directory.
+
 <!-- TODO: Link to Ozone File System API guide when created --> Refer to the Ozone File System API guide for more details.
 
 #### Ozone ObjectStore Client API
@@ -219,6 +221,7 @@ Ozone supports native ACLs and optional Ranger policies for snapshot authorizati
 Ozone and HDFS snapshots are conceptually similar but differ in key aspects:
 
 <!-- cspell:ignore snapshottable -->
+
 - **Granularity:** Ozone snapshots are bucket-level; HDFS snapshots can be taken at any directory level (if snapshottable).
 - **Metadata vs. Data Changes:** Both track key/file changes. Ozone snapshots don't version bucket metadata changes (e.g., quotas, ACLs).
 - **Access and Restore:** Both use a `.snapshot` path for read-only access. Restoring in Ozone is a manual copy process (e.g., using DistCp); no automatic rollback.

@@ -70,45 +70,45 @@ Effective tuning of RocksDB can significantly impact Ozone's performance. Ozone 
 
 Ozone provides a set of general RocksDB configurations that apply to all services (OM, SCM, and Datanodes) unless overridden by more specific settings. With the exception of `hdds.db.profile` and `ozone.metastore.rocksdb.cf.write.buffer.size`, these properties are defined in `RocksDBConfiguration.java`.
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.db.profile` | `DISK` | Specifies the RocksDB profile to use, which determines the default DBOptions and ColumnFamilyOptions. Possible values include `SSD` and `DISK`. For example, setting this to `SSD` will apply tunings optimized for SSD storage. |
-| `ozone.metastore.rocksdb.statistics` | `OFF` | The statistics level of the RocksDB store. If set to any value from `org.rocksdb.StatsLevel` (e.g., ALL or EXCEPT_DETAILED_TIMERS), RocksDB statistics will be exposed over JMX. Set to OFF to disable statistics collection. Note: collecting statistics can have a 5–10% performance penalty. |
+| Property                             | Default | Description                                                                                                                                                                                                                                                                                     |
+| ------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hdds.db.profile`                    | `DISK`  | Specifies the RocksDB profile to use, which determines the default DBOptions and ColumnFamilyOptions. Possible values include `SSD` and `DISK`. For example, setting this to `SSD` will apply tunings optimized for SSD storage.                                                                |
+| `ozone.metastore.rocksdb.statistics` | `OFF`   | The statistics level of the RocksDB store. If set to any value from `org.rocksdb.StatsLevel` (e.g., ALL or EXCEPT_DETAILED_TIMERS), RocksDB statistics will be exposed over JMX. Set to OFF to disable statistics collection. Note: collecting statistics can have a 5–10% performance penalty. |
 
 **Write Options:**
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hadoop.hdds.db.rocksdb.writeoption.sync` | `false` | If set to `true`, writes are synchronized to persistent storage, ensuring durability at the cost of performance. If `false`, writes are flushed asynchronously. |
-| `ozone.metastore.rocksdb.cf.write.buffer.size` | `128MB` | The write buffer (memtable) size for each column family of the RocksDB store. |
+| Property                                       | Default | Description                                                                                                                                                     |
+| ---------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hadoop.hdds.db.rocksdb.writeoption.sync`      | `false` | If set to `true`, writes are synchronized to persistent storage, ensuring durability at the cost of performance. If `false`, writes are flushed asynchronously. |
+| `ozone.metastore.rocksdb.cf.write.buffer.size` | `128MB` | The write buffer (memtable) size for each column family of the RocksDB store.                                                                                   |
 
 **Write-Ahead Log (WAL) Management:**
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hadoop.hdds.db.rocksdb.WAL_ttl_seconds` | `1200` | The time-to-live for WAL files in seconds. |
-| `hadoop.hdds.db.rocksdb.WAL_size_limit_MB` | `0` | The total size limit for WAL files in megabytes. When this limit is exceeded, the oldest WAL files are deleted. A value of `0` means no limit. |
+| Property                                   | Default | Description                                                                                                                                    |
+| ------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hadoop.hdds.db.rocksdb.WAL_ttl_seconds`   | `1200`  | The time-to-live for WAL files in seconds.                                                                                                     |
+| `hadoop.hdds.db.rocksdb.WAL_size_limit_MB` | `0`     | The total size limit for WAL files in megabytes. When this limit is exceeded, the oldest WAL files are deleted. A value of `0` means no limit. |
 
 **Logging:**
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hadoop.hdds.db.rocksdb.logging.enabled` | `false` | Enables or disables RocksDB's own logging. |
-| `hadoop.hdds.db.rocksdb.logging.level` | `INFO` | The logging level for RocksDB (INFO, DEBUG, WARN, ERROR, FATAL). |
-| `hadoop.hdds.db.rocksdb.max.log.file.size` | `100MB` | The maximum size of a single RocksDB log file. |
-| `hadoop.hdds.db.rocksdb.keep.log.file.num` | `10` | The maximum number of RocksDB log files to retain. |
+| Property                                   | Default | Description                                                      |
+| ------------------------------------------ | ------- | ---------------------------------------------------------------- |
+| `hadoop.hdds.db.rocksdb.logging.enabled`   | `false` | Enables or disables RocksDB's own logging.                       |
+| `hadoop.hdds.db.rocksdb.logging.level`     | `INFO`  | The logging level for RocksDB (INFO, DEBUG, WARN, ERROR, FATAL). |
+| `hadoop.hdds.db.rocksdb.max.log.file.size` | `100MB` | The maximum size of a single RocksDB log file.                   |
+| `hadoop.hdds.db.rocksdb.keep.log.file.num` | `10`    | The maximum number of RocksDB log files to retain.               |
 
 ### Ozone Manager (OM) Specific Settings
 
 These settings, defined in `ozone-default.xml`, apply specifically to the Ozone Manager.
 
-| Property | Default                                                                                   | Description |
-|----------|-------------------------------------------------------------------------------------------|-------------|
-| `ozone.om.db.max.open.files` | `-1` (unlimited)                                                                          | The total number of files that a RocksDB can open in the OM. |
-| `ozone.om.compaction.service.enabled` | `false`                                                                                   | Enable or disable a background job that periodically compacts RocksDB tables flagged for compaction. |
-| `ozone.om.compaction.service.run.interval` | `6h`                                                                                      | The interval for the OM's compaction service. |
-| `ozone.om.compaction.service.timeout` | `10m`                                                                                     | Timeout for the OM's compaction service. |
-| `ozone.om.compaction.service.columnfamilies` | `keyTable`<br />`fileTable`<br />`directoryTable`<br />`deletedTable`<br />`deletedDirectoryTable`<br />`multipartInfoTable` | A comma-separated list of column families to be compacted by the service. |
+| Property                                     | Default                                                                                                                      | Description                                                                                          |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ozone.om.db.max.open.files`                 | `-1` (unlimited)                                                                                                             | The total number of files that a RocksDB can open in the OM.                                         |
+| `ozone.om.compaction.service.enabled`        | `false`                                                                                                                      | Enable or disable a background job that periodically compacts RocksDB tables flagged for compaction. |
+| `ozone.om.compaction.service.run.interval`   | `6h`                                                                                                                         | The interval for the OM's compaction service.                                                        |
+| `ozone.om.compaction.service.timeout`        | `10m`                                                                                                                        | Timeout for the OM's compaction service.                                                             |
+| `ozone.om.compaction.service.columnfamilies` | `keyTable`<br />`fileTable`<br />`directoryTable`<br />`deletedTable`<br />`deletedDirectoryTable`<br />`multipartInfoTable` | A comma-separated list of column families to be compacted by the service.                            |
 
 ### Datanode-Specific Settings
 
@@ -118,42 +118,42 @@ Key tuning parameters for the Datanode often involve:
 
 **Memory usage:** Configuring block cache, write buffer manager, and other memory-related settings.
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.metadata.rocksdb.cache.size` | `1GB` | Configures the block cache size for RocksDB instances on Datanodes. |
+| Property                                    | Default | Description                                                         |
+| ------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `hdds.datanode.metadata.rocksdb.cache.size` | `1GB`   | Configures the block cache size for RocksDB instances on Datanodes. |
 
 **Compaction strategies:** Optimizing how data is merged and organized on disk. For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/datanode/rocksdb-schema/).
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.rocksdb.auto-compaction-small-sst-file` | `true` | Enables or disables auto-compaction for small SST files. |
-| `hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold` | `1MB` | Threshold for small SST file size for auto-compaction. |
-| `hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold` | `512` | Threshold for the number of small SST files for auto-compaction. |
-| `hdds.datanode.rocksdb.auto-compaction-small-sst-file.interval.minutes` | `120` | Auto compact small SST files interval in minutes. |
-| `hdds.datanode.rocksdb.auto-compaction-small-sst-file.threads` | `1` | Auto compact small SST files threads. |
+| Property                                                                | Default | Description                                                      |
+| ----------------------------------------------------------------------- | ------- | ---------------------------------------------------------------- |
+| `hdds.datanode.rocksdb.auto-compaction-small-sst-file`                  | `true`  | Enables or disables auto-compaction for small SST files.         |
+| `hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold`   | `1MB`   | Threshold for small SST file size for auto-compaction.           |
+| `hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold`    | `512`   | Threshold for the number of small SST files for auto-compaction. |
+| `hdds.datanode.rocksdb.auto-compaction-small-sst-file.interval.minutes` | `120`   | Auto compact small SST files interval in minutes.                |
+| `hdds.datanode.rocksdb.auto-compaction-small-sst-file.threads`          | `1`     | Auto compact small SST files threads.                            |
 
 **Write-ahead log (WAL) settings:** Balancing durability and write performance.
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.rocksdb.log.max-file-size` | `32MB` | The max size of each user log file of RocksDB. O means no size limit. |
-| `hdds.datanode.rocksdb.log.max-file-num` | `64` | The max user log file number to keep for each RocksDB. |
+| Property                                  | Default | Description                                                           |
+| ----------------------------------------- | ------- | --------------------------------------------------------------------- |
+| `hdds.datanode.rocksdb.log.max-file-size` | `32MB`  | The max size of each user log file of RocksDB. O means no size limit. |
+| `hdds.datanode.rocksdb.log.max-file-num`  | `64`    | The max user log file number to keep for each RocksDB.                |
 
 **Logging:**
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.rocksdb.log.level` | `INFO` | The user log level of RocksDB(DEBUG/INFO/WARN/ERROR/FATAL)). |
+| Property                          | Default | Description                                                  |
+| --------------------------------- | ------- | ------------------------------------------------------------ |
+| `hdds.datanode.rocksdb.log.level` | `INFO`  | The user log level of RocksDB(DEBUG/INFO/WARN/ERROR/FATAL)). |
 
 **Other Settings:**
 
-| Property | Default | Description |
-|----------|--------|------------|
-| `hdds.datanode.db.config.path` | empty (not configured) | Path to an INI configuration file for advanced RocksDB tuning on Datanodes. |
-| `hdds.datanode.container.schema.v3.enabled` | `true` | Enable container schema v3 (one RocksDB per disk). |
-| `hdds.datanode.container.schema.v3.key.separator` | &#124; | The separator between Container ID and container meta key name in schema v3. |
-| `hdds.datanode.rocksdb.delete-obsolete-files-period` | `1h` | Periodicity when obsolete files get deleted. |
-| `hdds.datanode.rocksdb.max-open-files` | `1024` | The total number of files that a RocksDB can open. |
+| Property                                             | Default                | Description                                                                  |
+| ---------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------- |
+| `hdds.datanode.db.config.path`                       | empty (not configured) | Path to an INI configuration file for advanced RocksDB tuning on Datanodes.  |
+| `hdds.datanode.container.schema.v3.enabled`          | `true`                 | Enable container schema v3 (one RocksDB per disk).                           |
+| `hdds.datanode.container.schema.v3.key.separator`    | &#124;                 | The separator between Container ID and container meta key name in schema v3. |
+| `hdds.datanode.rocksdb.delete-obsolete-files-period` | `1h`                   | Periodicity when obsolete files get deleted.                                 |
+| `hdds.datanode.rocksdb.max-open-files`               | `1024`                 | The total number of files that a RocksDB can open.                           |
 
 ## 4. Troubleshooting and repair tools relevant to RocksDB
 

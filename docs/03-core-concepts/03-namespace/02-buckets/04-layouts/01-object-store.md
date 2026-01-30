@@ -101,13 +101,13 @@ The output will include the `bucketLayout` field:
 
 ```json
 {
-  "volumeName" : "myvolume",
-  "name" : "mybucket",
-  "bucketLayout" : "OBJECT_STORE",
-  "storageType" : "DISK",
-  "versioning" : false,
-  "creationTime" : "2024-01-15T10:30:00.000Z",
-  "modificationTime" : "2024-01-15T10:30:00.000Z"
+  "volumeName": "myvolume",
+  "name": "mybucket",
+  "bucketLayout": "OBJECT_STORE",
+  "storageType": "DISK",
+  "versioning": false,
+  "creationTime": "2024-01-15T10:30:00.000Z",
+  "modificationTime": "2024-01-15T10:30:00.000Z"
 }
 ```
 

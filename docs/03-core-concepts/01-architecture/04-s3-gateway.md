@@ -92,7 +92,7 @@ Supports AWS Signature-style authentication (if enabled):
 - Uses OM’s stored credentials
 - Relies on OM for final authorization
 
-Supports Kerberos authentication for secure clusters;  In unsecured mode, allows anonymous or dummy access.
+Supports Kerberos authentication for secure clusters; In unsecured mode, allows anonymous or dummy access.
 
 ## Summary
 

@@ -19,7 +19,7 @@ docker compose up -d --scale datanode=5
 ## Interface Comparison
 
 | Interface       | Strengths                                                                               | Use Cases                                                                  |
-|:----------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
+| :-------------- | :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
 | **Ozone Shell** | - Full feature access Advanced operations Detailed metadata                             | - Administrative tasks Bucket/volume management Quota/ACL management       |
 | **ofs**         | - Familiar HDFS-like commands Works with existing Hadoop applications Full cluster view | - Hadoop ecosystem integration Applications that need filesystem semantics |
 | **S3 API**      | - Industry standard Works with existing S3 clients Language-independent                 | - Web applications Multi-language environments Existing S3 applications    |
@@ -145,7 +145,7 @@ ozone sh key delete /vol1/bucket1/renamed_shell.txt
 
 ## Using ofs (Ozone File System)
 
- ofs provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
+ofs provides a Hadoop-compatible file system interface (`ofs://`), making it seamless to use with applications designed
 for HDFS.
 
 ### Basic ofs Operations
@@ -214,7 +214,7 @@ export AWS_SECRET_ACCESS_KEY=testuser-secret
 export AWS_ENDPOINT_URL=http://s3g:9878
 ```
 
-*(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)*
+_(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)_
 
 ### Using AWS CLI
 
@@ -253,11 +253,11 @@ Ozone allows accessing the same data through different interfaces.
 ### Namespace Mapping
 
 | Data Location         | Ozone Shell Path         | ofs Path                                         | S3 Path                                                        |
-|:----------------------|:-------------------------|:-------------------------------------------------|:---------------------------------------------------------------|
+| :-------------------- | :----------------------- | :----------------------------------------------- | :------------------------------------------------------------- |
 | vol1/bucket1/file.txt | `/vol1/bucket1/file.txt` | `ofs://<ozone service id>/vol1/bucket1/file.txt` | `s3://bucket1/file.txt` <br/>(if S3V configured to serve vol1) |
 | s3v/s3bucket/file.txt | `/s3v/s3bucket/file.txt` | `ofs://<ozone service id>/s3v/s3bucket/file.txt` | `s3://s3bucket/file.txt`                                       |
 
-*(Note: `om` in `ofs://` path refers to the Ozone Manager service address)*
+_(Note: `om` in `ofs://` path refers to the Ozone Manager service address)_
 
 ### Accessing S3 Data via Ozone Shell/ofs
 

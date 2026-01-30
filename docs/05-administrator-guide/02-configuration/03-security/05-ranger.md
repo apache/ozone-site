@@ -10,9 +10,9 @@ To use Apache Ranger, you must have Apache Ranger installed in your Hadoop Clust
 
 If you have a working Apache Ranger installation that is aware of Ozone, then configuring Ozone to work with Apache Ranger is trivial. You have to enable the ACLs support and set the acl authorizer class inside Ozone to be Ranger authorizer. Please add the following properties to the `ozone-site.xml`.
 
-| Property | Value |
-|----------|-------|
-| `ozone.acl.enabled` | `true` |
+| Property                     | Value                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| `ozone.acl.enabled`          | `true`                                                                   |
 | `ozone.acl.authorizer.class` | `org.apache.ranger.authorization.ozone.authorizer.RangerOzoneAuthorizer` |
 
 To use the `RangerOzoneAuthorizer`, you also need to add the following environment variables to `ozone-env.sh`:

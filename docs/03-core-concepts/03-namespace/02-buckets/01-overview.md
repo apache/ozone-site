@@ -29,7 +29,7 @@ Allowed Characters and Length:
 
 Prohibitions:
 
-- Cannot contain uppercase letters or underscores (_)
+- Cannot contain uppercase letters or underscores (\_)
 - Cannot be formatted as an IP address (e.g., 192.168.5.4)
 - Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)
 - Cannot end with a dash
@@ -57,9 +57,9 @@ For more details on bucket operations, refer to the [Ozone CLI documentation](..
 Ozone supports different bucket layouts, primarily:
 
 - **Object Store (OBS):** The traditional object storage layout, where keys are stored with their full path names. This is suitable for S3-like access patterns.
-For more details, refer to the [Object Store documentation](./04-layouts/01-object-store.md).
+  For more details, refer to the [Object Store documentation](./04-layouts/01-object-store.md).
 - **File System Optimized (FSO):** An optimized layout for Hadoop Compatible File System (HCFS) semantics, where intermediate directories are stored separately, improving performance for file system operations like listing and renaming.
-For more details, refer to the [Prefix FSO documentation](./04-layouts/02-file-system-optimized.md).
+  For more details, refer to the [Prefix FSO documentation](./04-layouts/02-file-system-optimized.md).
 
 ### Erasure Coding
 

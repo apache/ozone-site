@@ -4,7 +4,7 @@ sidebar_label: Storage Container Manager
 
 # Storage Container Manager
 
-Storage Container Manager (SCM) is the leader node of the *block space management*.
+Storage Container Manager (SCM) is the leader node of the _block space management_.
 The main responsibility is to create and manage [containers](../02-replication/01-storage-containers.md) which is the main replication unit of Ozone.
 
 ![Storage Container Manager](StorageContainerManager.png)
@@ -21,10 +21,10 @@ SCM is in charge of creating an Ozone cluster. When an SCM is booted up via `ini
 2. SCM keeps track of all the block replicas. If there is a loss of data node or a disk, SCM detects it and instructs data nodes to make copies of the missing blocks to ensure high availability.
 
 3. **SCM's Certificate Authority** is in
-charge of issuing identity certificates for each and every
-service in the cluster. This certificate infrastructure makes
-it easy to enable mTLS at network layer and the block
-token infrastructure depends on this certificate infrastructure.
+   charge of issuing identity certificates for each and every
+   service in the cluster. This certificate infrastructure makes
+   it easy to enable mTLS at network layer and the block
+   token infrastructure depends on this certificate infrastructure.
 
 ## Main components
 
@@ -88,10 +88,10 @@ This means that SCM will wait for a minimum number of Datanodes to be available 
 
 ## Notable configurations
 
-| Key | Default | Description |
-| --- | ------- | ----------- |
-| `ozone.scm.container.size` | 5GB | Default container size used by Ozone |
-| `ozone.scm.block.size` | 256MB | The default size of a data block. |
-| `hdds.scm.safemode.min.datanode` | 3 | Minimum number of Datanodes to start the real work. |
-| `ozone.scm.http-address` | 0.0.0.0:9876 | HTTP address of the SCM server |
-| `ozone.metadata.dirs` | none | Directory to store persisted data (RocksDB). |
+| Key                              | Default      | Description                                         |
+| -------------------------------- | ------------ | --------------------------------------------------- |
+| `ozone.scm.container.size`       | 5GB          | Default container size used by Ozone                |
+| `ozone.scm.block.size`           | 256MB        | The default size of a data block.                   |
+| `hdds.scm.safemode.min.datanode` | 3            | Minimum number of Datanodes to start the real work. |
+| `ozone.scm.http-address`         | 0.0.0.0:9876 | HTTP address of the SCM server                      |
+| `ozone.metadata.dirs`            | none         | Directory to store persisted data (RocksDB).        |

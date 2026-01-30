@@ -6,7 +6,7 @@ sidebar_label: LDB Tool
 
 Ozone heavily uses RocksDB for storing metadata.
 This tool helps parse the contents of RocksDB belonging to Ozone Roles.
-Supported DB's : Ozone Manager (`om.db`) , StorageContainerManager (`scm.db`),  Datanode/Container (`container.db`)
+Supported DB's : Ozone Manager (`om.db`) , StorageContainerManager (`scm.db`), Datanode/Container (`container.db`)
 Below is the usage:
 
 ```bash
@@ -117,45 +117,50 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --startkey=vol3 --endk
 ```
 
 ```json
-{ "/vol3": {
-  "metadata" : { },
-  "objectID" : -9999,
-  "updateID" : 4000,
-  "adminName" : "om",
-  "ownerName" : "om",
-  "volume" : "vol3",
-  "creationTime" : 1707192335309,
-  "modificationTime" : 1714057412205,
-  "quotaInBytes" : 22854448694951936,
-  "quotaInNamespace" : 100000000,
-  "usedNamespace" : 1,
-  "acls" : [ {
-    "type" : "USER",
-    "name" : "om",
-    "aclScope" : "ACCESS"
-  } ],
-  "refCount" : 0
-}
-, "/vol4": {
-    "metadata" : { },
-    "objectID" : -888,
-    "updateID" : 5000,
-    "adminName" : "om",
-    "ownerName" : "om",
-    "volume" : "vol4",
-    "creationTime" : 1696280979907,
-    "modificationTime" : 1696280979907,
-    "quotaInBytes" : 2251799813685250,
-    "quotaInNamespace" : 100000000,
-    "usedNamespace" : 2,
-    "acls" : [ {
-      "type" : "USER",
-      "name" : "om",
-      "aclScope" : "ACCESS"
-    } ],
-    "refCount" : 0
-}
+{
+  "/vol3": {
+    "metadata": {},
+    "objectID": -9999,
+    "updateID": 4000,
+    "adminName": "om",
+    "ownerName": "om",
+    "volume": "vol3",
+    "creationTime": 1707192335309,
+    "modificationTime": 1714057412205,
+    "quotaInBytes": 22854448694951936,
+    "quotaInNamespace": 100000000,
+    "usedNamespace": 1,
+    "acls": [
+      {
+        "type": "USER",
+        "name": "om",
+        "aclScope": "ACCESS"
+      }
+    ],
+    "refCount": 0
+  },
+  "/vol4": {
+    "metadata": {},
+    "objectID": -888,
+    "updateID": 5000,
+    "adminName": "om",
+    "ownerName": "om",
+    "volume": "vol4",
+    "creationTime": 1696280979907,
+    "modificationTime": 1696280979907,
+    "quotaInBytes": 2251799813685250,
+    "quotaInNamespace": 100000000,
+    "usedNamespace": 2,
+    "acls": [
+      {
+        "type": "USER",
+        "name": "om",
+        "aclScope": "ACCESS"
+      }
+    ],
+    "refCount": 0
   }
+}
 ```
 
 ### `--fields`
@@ -167,21 +172,28 @@ ozone debug ldb --db=/path/to/om.db scan --cf=keyTable -l=1 --fields="volumeName
 ```
 
 ```json
-{ "/vol1/ozone-legacy-bucket/10T-1-terasort-input/": {
-  "keyLocationVersions" : [ {
-    "version" : 0
-  } ],
-  "keyName" : "10T-1-terasort-input/",
-  "bucketName" : "ozone-legacy-bucket",
-  "acls" : [ {
-    "name" : "om"
-  }, {
-    "name" : "scm"
-  }, {
-    "name" : "testuser"
-  } ],
-  "volumeName" : "vol1"
-}
+{
+  "/vol1/ozone-legacy-bucket/10T-1-terasort-input/": {
+    "keyLocationVersions": [
+      {
+        "version": 0
+      }
+    ],
+    "keyName": "10T-1-terasort-input/",
+    "bucketName": "ozone-legacy-bucket",
+    "acls": [
+      {
+        "name": "om"
+      },
+      {
+        "name": "scm"
+      },
+      {
+        "name": "testuser"
+      }
+    ],
+    "volumeName": "vol1"
+  }
 }
 ```
 
@@ -221,27 +233,29 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
       }
     ],
     "refCount": 0
+  },
+  "/vol5": {
+    "metadata": {},
+    "objectID": -956599,
+    "updateID": 45600,
+    "adminName": "om",
+    "ownerName": "om",
+    "volume": "vol5",
+    "creationTime": 1807192332309,
+    "modificationTime": 1914057410005,
+    "quotaInBytes": 7785494951936,
+    "quotaInNamespace": 100000000,
+    "usedNamespace": 2,
+    "acls": [
+      {
+        "type": "USER",
+        "name": "om",
+        "aclScope": "ACCESS"
+      }
+    ],
+    "refCount": 0
   }
-, "/vol5": {
-  "metadata" : { },
-  "objectID" : -956599,
-  "updateID" : 45600,
-  "adminName" : "om",
-  "ownerName" : "om",
-  "volume" : "vol5",
-  "creationTime" : 1807192332309,
-  "modificationTime" : 1914057410005,
-  "quotaInBytes" : 7785494951936,
-  "quotaInNamespace" : 100000000,
-  "usedNamespace" : 2,
-  "acls" : [ {
-    "type" : "USER",
-    "name" : "om",
-    "aclScope" : "ACCESS"
-  } ],
-  "refCount" : 0
 }
- }
 ```
 
 Using `lesser` operator (`greater` operator can also be used in the same way):
@@ -273,7 +287,7 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
     ],
     "refCount": 0
   }
- }
+}
 ```
 
 Using `regex` operator:
@@ -305,7 +319,7 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="volume:regex
     ],
     "refCount": 0
   }
- }
+}
 ```
 
 Using multiple filters:
@@ -337,7 +351,7 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
     ],
     "refCount": 0
   }
- }
+}
 ```
 
 ## value-schema command
@@ -351,28 +365,28 @@ ozone debug ldb --db=/data/metadata/om.db value-schema --cf=keyTable --depth=1
 
 ```json
 {
-  "OmKeyInfo" : {
-    "bucketName" : "String", 
-    "metadata" : "struct", 
-    "fileName" : "String", 
-    "creationTime" : "long",
-    "isFile" : "boolean", 
-    "acls" : "struct", 
-    "keyName" : "String",
-    "replicationConfig" : "struct", 
-    "encInfo" : "struct", 
-    "dataSize" : "long", 
-    "tags" : "struct", 
-    "keyLocationVersions" : "struct", 
-    "updateID" : "long", 
-    "ownerName" : "String", 
-    "modificationTime" : "long", 
-    "parentObjectID" : "long", 
-    "volumeName" : "String", 
-    "fileChecksum" : "struct", 
-    "objectID" : "long"
+  "OmKeyInfo": {
+    "bucketName": "String",
+    "metadata": "struct",
+    "fileName": "String",
+    "creationTime": "long",
+    "isFile": "boolean",
+    "acls": "struct",
+    "keyName": "String",
+    "replicationConfig": "struct",
+    "encInfo": "struct",
+    "dataSize": "long",
+    "tags": "struct",
+    "keyLocationVersions": "struct",
+    "updateID": "long",
+    "ownerName": "String",
+    "modificationTime": "long",
+    "parentObjectID": "long",
+    "volumeName": "String",
+    "fileChecksum": "struct",
+    "objectID": "long"
+  }
 }
- }
 ```
 
 ```bash
@@ -381,66 +395,66 @@ ozone debug ldb --db=/data/metadata/om.db value-schema --cf=keyTable
 
 ```json
 {
-  "OmKeyInfo" : {
-    "bucketName" : "String",
-    "metadata" : { },
-    "fileName" : "String",
-    "creationTime" : "long",
-    "isFile" : "boolean",
-    "acls" : {
-      "toStringMethod" : { },
-      "hashCodeMethod" : { },
-      "name" : "String",
-      "type" : {
-        "name" : "String",
-        "value" : "String",
-        "ordinal" : "int"
+  "OmKeyInfo": {
+    "bucketName": "String",
+    "metadata": {},
+    "fileName": "String",
+    "creationTime": "long",
+    "isFile": "boolean",
+    "acls": {
+      "toStringMethod": {},
+      "hashCodeMethod": {},
+      "name": "String",
+      "type": {
+        "name": "String",
+        "value": "String",
+        "ordinal": "int"
       },
-      "aclScope" : {
-        "name" : "String",
-        "ordinal" : "int"
+      "aclScope": {
+        "name": "String",
+        "ordinal": "int"
       },
-      "aclBits" : "int"
+      "aclBits": "int"
     },
-    "keyName" : "String",
-    "replicationConfig" : { },
-    "encInfo" : {
-      "ezKeyVersionName" : "String",
-      "keyName" : "String",
-      "edek" : { },
-      "cipherSuite" : {
-        "unknownValue" : {
-          "value" : "int"
+    "keyName": "String",
+    "replicationConfig": {},
+    "encInfo": {
+      "ezKeyVersionName": "String",
+      "keyName": "String",
+      "edek": {},
+      "cipherSuite": {
+        "unknownValue": {
+          "value": "int"
         },
-        "name" : "String",
-        "algoBlockSize" : "int",
-        "ordinal" : "int"
+        "name": "String",
+        "algoBlockSize": "int",
+        "ordinal": "int"
       },
-      "version" : {
-        "unknownValue" : {
-          "value" : "int"
+      "version": {
+        "unknownValue": {
+          "value": "int"
         },
-        "name" : "String",
-        "description" : "String",
-        "version" : "int",
-        "ordinal" : "int"
+        "name": "String",
+        "description": "String",
+        "version": "int",
+        "ordinal": "int"
       },
-      "iv" : { }
+      "iv": {}
     },
-    "dataSize" : "long",
-    "tags" : { },
-    "keyLocationVersions" : {
-      "isMultipartKey" : "boolean",
-      "locationVersionMap" : { },
-      "version" : "long"
+    "dataSize": "long",
+    "tags": {},
+    "keyLocationVersions": {
+      "isMultipartKey": "boolean",
+      "locationVersionMap": {},
+      "version": "long"
     },
-    "updateID" : "long",
-    "ownerName" : "String",
-    "modificationTime" : "long",
-    "parentObjectID" : "long",
-    "volumeName" : "String",
-    "fileChecksum" : { },
-    "objectID" : "long"
+    "updateID": "long",
+    "ownerName": "String",
+    "modificationTime": "long",
+    "parentObjectID": "long",
+    "volumeName": "String",
+    "fileChecksum": {},
+    "objectID": "long"
   }
 }
 ```

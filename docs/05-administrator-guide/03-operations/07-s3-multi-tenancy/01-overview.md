@@ -8,7 +8,7 @@ Before Ozone multi-tenancy, all S3 access to Ozone (via [S3 Gateway](/docs/user-
 
 Ozone multi-tenancy allows **multiple** S3-accessible volumes to be created. Each volume can be managed separately by their own tenant admins via CLI for user operations, and via Apache Ranger for access control.
 
-The concept **tenant** is introduced to Ozone by multi-tenancy. Each tenant has its own designated volume. Each user assigned to a tenant will be able to access the associated volume with an *Access ID & Secret Key* pair generated when an Ozone cluster admin or tenant admin assigns the user to the tenant using CLI.
+The concept **tenant** is introduced to Ozone by multi-tenancy. Each tenant has its own designated volume. Each user assigned to a tenant will be able to access the associated volume with an _Access ID & Secret Key_ pair generated when an Ozone cluster admin or tenant admin assigns the user to the tenant using CLI.
 
 :::note
 
@@ -21,7 +21,7 @@ This multi-tenant support will also allow users to access Ozone volumes over AWS
 ## Basics
 
 1. Initial tenant creation has to be done by an Ozone cluster admin under the CLI.
-2. The Ozone cluster admin will have to assign the first user of a tenant. Once assigned, an *Access ID & Secret Key pair* (key pair) will be generated for that user for access via S3 Gateway.
+2. The Ozone cluster admin will have to assign the first user of a tenant. Once assigned, an _Access ID & Secret Key pair_ (key pair) will be generated for that user for access via S3 Gateway.
    - The key pair serves to authenticate the end user to the Ozone Manager (via client requests from S3 Gateway). Tenant volume is selected based on the Access ID.
    - After successful authentication, Ozone Manager uses the underlying user name (not the Access ID) to identify the user. The user name is used to perform authorization checks in Apache Ranger.
    - A key pair is tied to the user name it is assigned to. If a user is assigned key pairs in multiple tenants, all key pairs point to the same user name internally in Ozone Manager.

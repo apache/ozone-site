@@ -39,7 +39,7 @@ bin/ozone sh bucket create --space-quota 5MB /volume1/bucket1
 That means bucket1 allows us to use 5MB of storage.
 
 ```shell
-bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1 
+bin/ozone sh bucket setquota  --space-quota 10GB /volume1/bucket1
 ```
 
 This behavior changes the quota for Bucket1 to 10GB
@@ -89,7 +89,7 @@ bin/ozone sh bucket create --namespace-quota 100 /volume1/bucket1
 That means bucket1 allows us to use 100 of namespace.
 
 ```shell
-bin/ozone sh bucket setquota --namespace-quota 1000 /volume1/bucket1 
+bin/ozone sh bucket setquota --namespace-quota 1000 /volume1/bucket1
 ```
 
 This behavior changes the quota for Bucket1 to 1000.

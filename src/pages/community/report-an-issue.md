@@ -8,7 +8,7 @@ import AskQuestionForm from '@site/src/components/AskQuestionForm';
 
 If you have a question about Apache Ozone, you can use the form below to submit it to our GitHub Discussions. This will redirect you to GitHub where you can continue the conversation with the community.
 
-{/*We're using a special Docusaurus comment style to allow the React component*/}
+{/_We're using a special Docusaurus comment style to allow the React component_/}
 <AskQuestionForm />
 
 <!-- markdownlint-enable -->

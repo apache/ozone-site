@@ -102,8 +102,8 @@ Port used for below examples : 9862
    ```
 
 2. **Verify Metrics**: Check that FCQ metrics are being collected (via JMX or metrics endpoint):
-    - `FairCallQueueSize_p<N>` for each priority level
-    - `FairCallQueueOverflowedCalls_p<N>` for overflow statistics
+   - `FairCallQueueSize_p<N>` for each priority level
+   - `FairCallQueueOverflowedCalls_p<N>` for overflow statistics
 
 ## Troubleshooting
 

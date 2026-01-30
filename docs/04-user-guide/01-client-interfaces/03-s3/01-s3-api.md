@@ -38,49 +38,49 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
 
 ### Bucket Operations
 
-| **API Name** | **Feature** | **Note** |
-| --------------------------------------------------------------------------------------------------- | ------------- | ---------- |
-| ✅ [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html) | Lists all buckets owned by the authenticated user. | Returns the full bucket list. |
-| ✅ [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) | Creates a new bucket. | **Non-compliant behavior:** The default bucket ACL may include extra group permissions instead of being strictly private. Bucket names must adhere to S3 naming conventions. |
-| ✅ [HeadBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html) | Checks for the existence of a bucket. | Returns a 200 status if the bucket exists. |
-| ✅ [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html) | Deletes a bucket. | Bucket must be empty before deletion. |
-| ✅ [GetBucketLocation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html) | Retrieves the location (region) of a bucket. | Typically returns a default region (e.g., `us-east-1`), which may differ from AWS if region-specific responses are expected. |
+| **API Name**                                                                                       | **Feature**                                        | **Note**                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)             | Lists all buckets owned by the authenticated user. | Returns the full bucket list.                                                                                                                                                |
+| ✅ [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)           | Creates a new bucket.                              | **Non-compliant behavior:** The default bucket ACL may include extra group permissions instead of being strictly private. Bucket names must adhere to S3 naming conventions. |
+| ✅ [HeadBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html)               | Checks for the existence of a bucket.              | Returns a 200 status if the bucket exists.                                                                                                                                   |
+| ✅ [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)           | Deletes a bucket.                                  | Bucket must be empty before deletion.                                                                                                                                        |
+| ✅ [GetBucketLocation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html) | Retrieves the location (region) of a bucket.       | Typically returns a default region (e.g., `us-east-1`), which may differ from AWS if region-specific responses are expected.                                                 |
 
 ### Object Operations
 
-| **API Name** | **Feature** | **Note** |
-| ------------------------------------------------------------------------------------------- | ------------- | ---------- |
-| ✅ [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html) | Retrieves the contents of an object. | **Non-compliant behavior:** For non-existent objects, Ozone may return a generic 404 without the structured XML error body defined by AWS S3. |
-| ✅ [HeadObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html) | Retrieves metadata for an object. | Similar to GET Object, error responses for missing objects might lack detailed AWS-style error XML. |
-| ✅ [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html) | Uploads a new object. | Supports both single PUT and multipart uploads. **Non-compliant behavior:** Any ACL headers provided in the request are ignored. |
-| ✅ [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html) | Deletes a single object. | Returns standard error codes for missing objects. |
-| ✅ [DeleteObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html) | Deletes multiple objects in one request. | Bulk delete operation with aggregated error reporting. |
-| ✅ [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) | Copies an object (intra- or inter-bucket). | Supports metadata directives (COPY/REPLACE). **Non-compliant behavior:** Self-copying for metadata updates may differ slightly from AWS S3. |
-| ✅ [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) | Lists objects in a bucket with filtering and pagination. | Supports prefix, delimiter, and continuation tokens. |
+| **API Name**                                                                               | **Feature**                                              | **Note**                                                                                                                                      |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)         | Retrieves the contents of an object.                     | **Non-compliant behavior:** For non-existent objects, Ozone may return a generic 404 without the structured XML error body defined by AWS S3. |
+| ✅ [HeadObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html)       | Retrieves metadata for an object.                        | Similar to GET Object, error responses for missing objects might lack detailed AWS-style error XML.                                           |
+| ✅ [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)         | Uploads a new object.                                    | Supports both single PUT and multipart uploads. **Non-compliant behavior:** Any ACL headers provided in the request are ignored.              |
+| ✅ [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)   | Deletes a single object.                                 | Returns standard error codes for missing objects.                                                                                             |
+| ✅ [DeleteObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html) | Deletes multiple objects in one request.                 | Bulk delete operation with aggregated error reporting.                                                                                        |
+| ✅ [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)       | Copies an object (intra- or inter-bucket).               | Supports metadata directives (COPY/REPLACE). **Non-compliant behavior:** Self-copying for metadata updates may differ slightly from AWS S3.   |
+| ✅ [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) | Lists objects in a bucket with filtering and pagination. | Supports prefix, delimiter, and continuation tokens.                                                                                          |
 
 ### Object Tagging Operations
 
-| **API Name** | **Feature** | **Note** |
-| ------------ | ----------- | -------- |
-| ✅ [PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html) | Adds or updates tags on an object. | Fully supported; updates replace any existing tag set. |
-| ✅ [GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html) | Retrieves the tag set of an object. | Returns the tag set as defined by the S3 API. |
-| ✅ [DeleteObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html) | Removes the tag set from an object. | Clears all tags associated with the object. |
+| **API Name**                                                                                           | **Feature**                         | **Note**                                               |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------ |
+| ✅ [PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)       | Adds or updates tags on an object.  | Fully supported; updates replace any existing tag set. |
+| ✅ [GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)       | Retrieves the tag set of an object. | Returns the tag set as defined by the S3 API.          |
+| ✅ [DeleteObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html) | Removes the tag set from an object. | Clears all tags associated with the object.            |
 
 ### Multipart Upload Operations
 
-| **API Name** | **Feature** | **Note** |
-| ------------ | ----------- | -------- |
-| ✅ [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html) | Starts a multipart upload session. | Returns an UploadId for subsequent parts. |
-| ✅ [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) | Uploads an individual part for a multipart upload. | Part numbering and ETag computation follow AWS semantics. |
-| ✅ [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html) | Lists in-progress multipart uploads in a bucket. | Up to 1000 multipart uploads are returned in a batch by default. |
-| ✅ [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html) | Lists uploaded parts for an in-progress multipart upload. | Supports pagination if many parts exist. |
-| ✅ [CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html) | Assembles all uploaded parts into a final object. | Returns an ETag that follows AWS multipart rules. |
-| ✅ [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html) | Aborts an in-progress multipart upload. | Frees up storage used by uploaded parts. Incomplete multipart uploads older than 7 days are automatically aborted by Ozone. |
+| **API Name**                                                                                                   | **Feature**                                               | **Note**                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| ✅ [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)     | Starts a multipart upload session.                        | Returns an UploadId for subsequent parts.                                                                                   |
+| ✅ [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)                           | Uploads an individual part for a multipart upload.        | Part numbering and ETag computation follow AWS semantics.                                                                   |
+| ✅ [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)       | Lists in-progress multipart uploads in a bucket.          | Up to 1000 multipart uploads are returned in a batch by default.                                                            |
+| ✅ [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)                             | Lists uploaded parts for an in-progress multipart upload. | Supports pagination if many parts exist.                                                                                    |
+| ✅ [CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html) | Assembles all uploaded parts into a final object.         | Returns an ETag that follows AWS multipart rules.                                                                           |
+| ✅ [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)       | Aborts an in-progress multipart upload.                   | Frees up storage used by uploaded parts. Incomplete multipart uploads older than 7 days are automatically aborted by Ozone. |
 
 ### Additional Operations
 
-| **API Name** | **Feature** | **Note** |
-| -------------------------- | ------------- | ---------- |
+| **API Name**              | **Feature**                                        | **Note**                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ✅ Generate Presigned URL | Generates a temporary URL for accessing an object. | Uses AWS Signature V4. **Non-compliant behavior:** The generated URL may include a fixed default region rather than dynamically reflecting the bucket’s location. Ozone now supports generating presigned URLs for all major S3 operations, including `GetObject`, `PutObject`, `DeleteObject`, `HeadObject`, `HeadBucket`, `MultipartUpload`. |
 
 :::note Additional Notes
@@ -92,13 +92,13 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
   - **Lifecycle configuration, cross region replication, S3 event notifications** are being implemented and in the roadmap.
 - While Ozone S3 Gateway provides extensive support for common S3 operations, users should be aware of the above non-compliant behaviors and limitations when integrating with applications expecting full AWS S3 functionality.
 - While Ozone S3 Gateway does not support S3 Server-Side Encryption, it does support encrypted buckets using Apache Ranger KMS. For more information, see the [Transparent Data Encryption](../../../05-administrator-guide/02-configuration/03-security/05-encryption/02-transparent-data-encryption.md) documentation.
-:::
+  :::
 
 ## Security
 
-If security is not enabled, you can *use* **any** AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+If security is not enabled, you can _use_ **any** AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 
-If security is enabled, you can get the key and the secret with the `ozone s3 getsecret` command (*Kerberos based authentication is required).
+If security is enabled, you can get the key and the secret with the `ozone s3 getsecret` command (\*Kerberos based authentication is required).
 
 ```bash
 kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM

@@ -15,13 +15,13 @@ sidebar_label: Ozone Manager
 When a disk containing the Ozone Manager (OM) metadata directory fails, proper recovery procedures are critical to maintain cluster availability and prevent data loss. This document provides comprehensive, step-by-step guidance for safely replacing failed disks on OM nodes, with distinct procedures for standalone and High-Availability (HA) configurations. Following these procedures correctly ensures minimal downtime and maintains the integrity of your Ozone cluster's metadata.
 
 - **Purpose**
-This guide provides the steps required to safely replace a failed disk on an Ozone Manager (OM) node.
+  This guide provides the steps required to safely replace a failed disk on an Ozone Manager (OM) node.
 
 - **Impact of OM Disk Failure**
-The OM disk is critical as it stores the RocksDB database containing the entire object store namespace (volumes, buckets, keys) and block locations. A failure of this disk can lead to metadata loss if not handled correctly.
+  The OM disk is critical as it stores the RocksDB database containing the entire object store namespace (volumes, buckets, keys) and block locations. A failure of this disk can lead to metadata loss if not handled correctly.
 
 - **Crucial Distinction: HA vs. Non-HA**
-The recovery procedure depends entirely on whether your OM is a single, standalone instance or part of a High-Availability (HA) Ratis-based quorum. The HA procedure is significantly safer and results in no cluster downtime. Running a standalone OM is not recommended for production environments.
+  The recovery procedure depends entirely on whether your OM is a single, standalone instance or part of a High-Availability (HA) Ratis-based quorum. The HA procedure is significantly safer and results in no cluster downtime. Running a standalone OM is not recommended for production environments.
 
 ---
 
