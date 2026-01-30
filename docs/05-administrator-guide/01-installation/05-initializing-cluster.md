@@ -13,10 +13,10 @@ export OZONE_HOME=/path/to/ozone
 export PATH=$PATH:$OZONE_HOME/bin
 export OZONE_CONF_DIR=$OZONE_HOME/etc/ozone
 
-ozone genconf <path>
+ozone genconf $OZONE_CONF_DIR
 ```
 
-Let us look at the settings inside the generated file (`ozone-site.xml`) and how they control Ozone. Once the right values are defined, this file needs to be copied to `$OZONE_CONF_DIR`.
+Let us look at the settings inside the generated file (`ozone-site.xml`) and how they control Ozone. Once the right values are defined, this file is ready for use.
 
 - **ozone.metadata.dirs** Allows Administrators to specify where the metadata must reside. Usually you pick your fastest disk (SSD if you have them on your nodes). OzoneManager, SCM and Datanode will write the metadata to this path. This is a required setting, if this is missing Ozone will fail to come up.
 
@@ -78,6 +78,10 @@ Let us look at the settings inside the generated file (`ozone-site.xml`) and how
 
 :::info
 For simplicity, here we show the steps for non-HA cluster (1 OM, 1 SCM). To configure OM HA or to convert from non-HA to HA, see the [OM HA documentation](/docs/administrator-guide/configuration/high-availability/om-ha). To configure SCM HA or to convert from non-HA to HA, see the [SCM HA documentation](/docs/administrator-guide/configuration/high-availability/scm-ha).
+:::
+
+:::tip For Production Deployments
+It is highly recommended to set up an HA-enabled cluster from the beginning for production environments. While it is possible to convert a non-HA cluster to an HA cluster, it is a complex procedure.
 :::
 
 Before we boot up the Ozone cluster, we need to initialize both SCM and Ozone Manager.
