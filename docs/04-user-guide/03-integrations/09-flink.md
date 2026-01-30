@@ -28,7 +28,7 @@ curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/
 
 Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md) for details.
 
-## Step 1 — Create `docker-compose-flink.yml` for Flink
+### Step 2 — Create `docker-compose-flink.yml` for Flink
 
 ```yaml
 services:
