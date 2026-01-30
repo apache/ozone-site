@@ -29,7 +29,7 @@ They chose Apache Ozone as their next-generation storage engine because it addre
 
 Today, Ozone has been running in production at Didi for over two years, managing hundreds of PB of storage.
 
-Figure 1: Ozone Cluster Scale at Didi
+![Figure 1: Ozone Cluster Scale at Didi](/img/blog/ozone-cluster-scale-at-didi.png)
 
 ## Architecture & Key Optimizations
 
@@ -50,7 +50,7 @@ They introduced a "probe task" in the client (e.g. every 3 seconds) that evaluat
 
 **Result:** The P90 latency for S3G metadata requests (GetMetaLatency) dropped from a weekly average of ~90ms to ~17ms; in best cases, from tens of milliseconds to under 3ms.
 
-Figure 2: Significant drop in S3G latency after enabling Follower Reads
+![Figure 2: Significant drop in S3G latency after enabling Follower Reads](/img/blog/s3g-latency-follower-reads.png)
 
 ### 3. Heterogeneous Caching (HDD + NVMe)
 

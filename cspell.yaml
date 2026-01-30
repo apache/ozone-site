@@ -165,6 +165,8 @@ words:
 - OCI
 - untar
 - Untar
+- LRU
+- SPDK
 # Misc words
 - acking
 - dashboarding
@@ -204,8 +206,6 @@ words:
 - Qihoo360
 - Meituan
 - Unicom
-- LRU
-- SPDK
 # S3 Compatible third-party applications
 - Clickhouse
 - Teradata
