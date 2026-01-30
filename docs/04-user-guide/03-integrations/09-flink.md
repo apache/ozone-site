@@ -96,42 +96,6 @@ You need to connect to Ozone (for example, `s3g`) to create a OBS bucket:
 docker compose exec -it s3g ozone sh bucket create s3v/bucket1 -l obs
 ```
 
-## Step 4 — Copy the Flink S3 filesystem plugin
-
-The official Flink Docker image does not enable S3 by default.
-You must copy the plugin JAR into both JobManager and TaskManager.
-
-Copy into JobManager
-
-```bash
-docker compose exec -it jobmanager bash -lc \
-  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \\
-   cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/"
-```
-
-Copy into TaskManager
-
-```bash
-docker compose exec -it taskmanager bash -lc \
-  "mkdir -p /opt/flink/plugins/s3-fs-hadoop && \\
-   cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/"
-```
-
-Verify:
-
-```bash
-docker compose exec -it jobmanager ls /opt/flink/plugins/s3-fs-hadoop
-docker compose exec -it taskmanager ls /opt/flink/plugins/s3-fs-hadoop
-```
-
-## Step 5 — Restart Flink containers (required)
-
-Plugins are loaded only at startup.
-
-```bash
-docker compose restart jobmanager taskmanager
-```
-
 ## Step 6 — Start Flink SQL client
 
 ```bash
