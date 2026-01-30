@@ -161,32 +161,6 @@ export default defineConfig([
     }
   },
 
-  // CSpell
-  // Comment out for now, it's buggy
-  // {
-  //   files: ["**/*.{md,mdx}"],
-  //   plugins: { cspell },
-  //   rules: {
-  //     "cspell/spellchecker": ["warn", { configFile: "cspell.yaml" }]
-  //   }
-  // },
-  // {
-  //   files: ["**/*.{js,mjs,cjs,jsx}"],
-  //   plugins: { cspell },
-  //   rules: {
-  //     "cspell/spellchecker": [
-  //       "warn",
-  //       {
-  //         configFile: "cspell.yaml",
-  //         // Check only comments and strings, not the code
-  //         checkComments: true,
-  //         checkStrings: true,
-  //         checkIdentifiers: false
-  //       }
-  //     ]
-  //   }
-  // },
-
   // Custom rule to enforce Apache License header
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],

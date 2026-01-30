@@ -52,6 +52,20 @@ If you are migrating a page from the old website to the new website, please foll
 
 The Apache Ozone Website uses [Docusaurus](https://docusaurus.io/) as a static site generator. Most simple updates to the website can be done with little knowledge of Docusaurus, but for more complex modifications to the website or a better understanding of how it is built, see the Docusaurus [documentation](https://docusaurus.io/docs) and [API](https://docusaurus.io/docs/cli).
 
+### Linting and Formatting
+
+The website uses ESLint and Prettier for JavaScript/CSS linting and formatting, and markdownlint for Markdown/MDX linting. There is one intentional style conflict: Prettier uses `_underscores_` for emphasis, while markdownlint is configured to require `*asterisks*`. To keep markdownlint as the source of truth for Markdown emphasis, run markdownlint *after* Prettier.
+
+Use these commands when working on the site:
+
+```bash
+pnpm run lint
+pnpm run lint:fix
+```
+
+- `pnpm run lint` runs checks only (no files are modified).
+- `pnpm run lint:fix` applies auto-fixes from ESLint, markdownlint, and Prettier.
+
 ### Directory Layout
 
 - [docusaurus.config.js](https://docusaurus.io/docs/configuration)

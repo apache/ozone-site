@@ -73,7 +73,7 @@ jobs:
       if: ${{ failure() }}
       run: |
         cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
-  lint-markdown:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
@@ -89,10 +89,8 @@ jobs:
         cache: pnpm
     - name: Install pnpm dependencies
       run: pnpm install --dev
-    - name: Run markdownlint
-      working-directory: ${{ env.script_dir }}
-      run: |
-        ./markdownlint.sh
+    - name: Run lint
+      run: pnpm run lint
   check-sidebar:
     runs-on: ubuntu-latest
     steps:
