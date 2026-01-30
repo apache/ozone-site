@@ -72,7 +72,7 @@ services:
         fs.s3a.secret.key: ozone
 ```
 
-## Step 2 — Start Flink and Ozone together
+### Step 3 — Start Flink and Ozone together
 
 With both `docker-compose.yaml` (for Ozone) and `docker-compose-flink.yml` (for Flink) in the same directory,
 you can start both services together, sharing the same network, using:
