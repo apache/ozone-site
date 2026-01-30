@@ -64,14 +64,16 @@ SonarQube categorizes issues by severity:
 
 For Pull Requests, SonarCloud posts a comment with analysis results directly in the PR conversation. This includes:
 
-* New issues introduced by the PR
-* Code coverage changes
-* Overall status of the quality gate
+- New issues introduced by the PR
+- Code coverage changes
+- Overall status of the quality gate
 
 ### Fixing Common Issues
 
 #### 1. Code Smells
+
 Typically maintenance-related issues like:
+
 ```
 // Before: Magic number
 if (retryCount > 5) {
@@ -102,6 +104,7 @@ String value = rawValue != null ? rawValue.toString() : "";
 #### 3. Security Vulnerabilities
 
 Issues that could expose security weaknesses:
+
 ```
 // Before: Hardcoded credentials
 private static final String PASSWORD = "p@ssw0rd";
