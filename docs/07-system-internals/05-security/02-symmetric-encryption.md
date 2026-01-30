@@ -4,7 +4,7 @@ sidebar_label: Symmetric Encryption
 
 # Symmetric Encryption Within Ozone
 
-In secure mode, Ozone issues tokens to authorize and verify each block and container access. Traditionally, each token is signed by Ozone Manager (OM) or Storage Container Manager (SCM) using RSA private keys and verified by DataNodes using public keys and certificates. However, with RSA private key sizes of 2048 bits, the signing operation is computationally expensive and can contribute more than 80% to the latency of read/write operations in Ozone Manager.
+In secure mode, Ozone issues tokens to authorize and verify each block and container access. Traditionally, each token is signed by Ozone Manager (OM) or Storage Container Manager (SCM) using RSA private keys and verified by Datanodes using public keys and certificates. However, with RSA private key sizes of 2048 bits, the signing operation is computationally expensive and can contribute more than 80% to the latency of read/write operations in Ozone Manager.
 
 Since Ozone Manager is not horizontally scalable by design, minimizing operational costs is critical for achieving sub-millisecond latencies. Asymmetric key signing cannot meet this requirement. The solution is to use symmetric-key algorithms, such as HMAC with SHA256, to sign tokens—similar to how HDFS operates. This approach reduces signature generation costs from milliseconds to microseconds.
 
@@ -19,7 +19,7 @@ Since Ozone Manager is not horizontally scalable by design, minimizing operation
 
 ## Shared Secret Model
 
-Symmetric key algorithms require both the signer (OM) and the verifier (DataNodes) to share the same SecretKey. This necessitates managing SecretKey distribution and lifecycle across Ozone components.
+Symmetric key algorithms require both the signer (OM) and the verifier (Datanodes) to share the same SecretKey. This necessitates managing SecretKey distribution and lifecycle across Ozone components.
 
 ### Architecture Overview
 
@@ -29,11 +29,11 @@ Symmetric key algorithms require both the signer (OM) and the verifier (DataNode
 |-----------|------|
 | **SCM** | Source of truth. Generates, rotates, stores, and distributes SecretKeys. |
 | **OM** | Fetches current SecretKey from SCM, caches it, and signs block tokens using HMAC. |
-| **DataNodes** | Receive SecretKeys via heartbeat/register, verify tokens using cached keys. |
+| **Datanodes** | Receive SecretKeys via heartbeat/register, verify tokens using cached keys. |
 
 **SecretKey Flow:**
 
-```
+```text
                         Fetch Current Key
             ┌─────────────────────────────────────┐
             │                                     │
@@ -50,7 +50,7 @@ Symmetric key algorithms require both the signer (OM) and the verifier (DataNode
           │                              │     Client      │
           ▼                              └────────┬────────┘
 ┌───────────────────┐                             │
-│    DataNodes      │◄────────────────────────────┘
+│    Datanodes      │◄────────────────────────────┘
 │                   │        Read/Write with Token
 │  Verify Token     │
 └───────────────────┘
@@ -61,6 +61,7 @@ Symmetric key algorithms require both the signer (OM) and the verifier (DataNode
 ### Key Structure
 
 Each SecretKey encapsulates:
+
 - **ID**: Unique identifier for the SecretKey
 - **creationTime**: Timestamp of key creation
 - **expiryTime**: creationTime + X days (configurable expiry duration)
@@ -76,7 +77,7 @@ Each SecretKey encapsulates:
 
 ### Key Rotation
 
-SCM proactively generates and distributes the next SecretKey to ensure the current active key is always available on DataNodes before it becomes active:
+SCM proactively generates and distributes the next SecretKey to ensure the current active key is always available on Datanodes before it becomes active:
 
 ```java
 // When SCM first starts
@@ -93,6 +94,7 @@ filterExpiredSecretKeys(allKeys);
 ```
 
 During each rotation cycle:
+
 1. The previously generated `nextKey` becomes the `currentKey`
 2. A new `nextKey` is generated for the upcoming cycle
 3. Expired SecretKeys are removed from the active set
@@ -103,17 +105,17 @@ During each rotation cycle:
 
 - OM retrieves the current SecretKey from SCM (leader) via RPC
 - For performance, OM caches the SecretKey in memory with a configurable TTL
-- Signed tokens include the SecretKey ID, allowing DataNodes to identify which key to use for verification
+- Signed tokens include the SecretKey ID, allowing Datanodes to identify which key to use for verification
 
-### To DataNodes
+### To Datanodes
 
-DataNodes receive SecretKeys through two mechanisms:
+Datanodes receive SecretKeys through two mechanisms:
 
-1. **Registration**: When a DataNode joins or rejoins a cluster, it registers with all SCM instances and fetches all current non-expired SecretKeys
+1. **Registration**: When a Datanode joins or rejoins a cluster, it registers with all SCM instances and fetches all current non-expired SecretKeys
 
 2. **Heartbeat**: During heartbeat processing, SCM checks if new SecretKeys need to be distributed and includes them in the heartbeat response
 
-DataNodes store SecretKeys in memory using a HashMap for fast lookup by ID. They also periodically remove expired keys.
+Datanodes store SecretKeys in memory using a HashMap for fast lookup by ID. They also periodically remove expired keys.
 
 ## Handling Special Events
 
@@ -124,6 +126,7 @@ After restarting, OM calls SCM to fetch and cache the current SecretKey.
 ### SCM Restart
 
 After restarting, SCM:
+
 1. Reads the stored file to load non-expired SecretKeys
 2. Removes any expired keys
 3. Assigns the `currentKey` based on timestamps of loaded keys
@@ -142,6 +145,7 @@ The following table illustrates SCM key restoration behavior with a 7-day key ex
 | k1-k7 | Day 14 | `currentKey` = generateNewKey(), `nextKey` = generateNewKey(), `allKeys` = [currentKey, nextKey] |
 
 **Notes:**
+
 - Day 6: Same day as shutdown, keys restored as-is
 - Day 7: k7 promoted to current, new nextKey generated
 - Day 8: k1 expired (generated Day 1 + 7 days = Day 8), removed from allKeys
@@ -151,13 +155,15 @@ The following table illustrates SCM key restoration behavior with a 7-day key ex
 ### SCM Failover
 
 When SCM leadership transfers to a new instance:
-- The new SCM's SecretKeys should already be present on DataNodes (since DataNodes register with all SCM instances)
+
+- The new SCM's SecretKeys should already be present on Datanodes (since Datanodes register with all SCM instances)
 - OM can continue using its cached SecretKey until the cache expires
-- Edge cases where a DataNode lacks a required SecretKey are handled through eventual consistency mechanisms
+- Edge cases where a Datanode lacks a required SecretKey are handled through eventual consistency mechanisms
 
-### Missing SecretKey on DataNode
+### Missing SecretKey on Datanode
 
-If a DataNode cannot find a required SecretKey:
+If a Datanode cannot find a required SecretKey:
+
 1. It triggers an immediate heartbeat to update SecretKeys from all SCMs
 2. Returns a `SecretKeyNotFound` error to the client
 3. The client retries with other nodes in the pipeline
@@ -169,6 +175,7 @@ If a DataNode cannot find a required SecretKey:
 ### Algorithm Selection
 
 Following NIST SP 800-133 recommendations for Message Authentication Codes, Ozone uses **HMAC** as it is:
+
 - Highly performant
 - Supported by Java Security Core
 - Compliant with security standards
@@ -187,7 +194,7 @@ SecretKeys are generated using Java's `SecureRandom`, which complies with FIPS 1
 
 ### Key Transfer
 
-SecretKeys are transferred between SCM, OM, and DataNodes via TLS-protected RPC connections, ensuring confidentiality during transit.
+SecretKeys are transferred between SCM, OM, and Datanodes via TLS-protected RPC connections, ensuring confidentiality during transit.
 
 ## Related Resources
 
