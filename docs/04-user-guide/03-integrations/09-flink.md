@@ -34,7 +34,10 @@ Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-d
 services:
   jobmanager:
     image: flink:scala_2.12-java17
-    command: jobmanager
+    command: >
+      bash -c "mkdir -p /opt/flink/plugins/s3-fs-hadoop &&
+      cp /opt/flink/opt/flink-s3-fs-hadoop-*.jar /opt/flink/plugins/s3-fs-hadoop/ &&
+      /docker-entrypoint.sh jobmanager"
     ports:
       - "8081:8081"
     environment:
