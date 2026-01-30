@@ -199,10 +199,13 @@ words:
 # Apache Ozone community member names
 - Sumit
 # Company names for "Who Uses Ozone" page
+- Didi
 - Shopee
 - Qihoo360
 - Meituan
 - Unicom
+- LRU
+- SPDK
 # S3 Compatible third-party applications
 - Clickhouse
 - Teradata

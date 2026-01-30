@@ -29,7 +29,7 @@ They chose Apache Ozone as their next-generation storage engine because it addre
 
 Today, Ozone has been running in production at Didi for over two years, managing hundreds of PB of storage.
 
-**Figure 1: Ozone Cluster Scale at Didi**
+Figure 1: Ozone Cluster Scale at Didi
 
 ## Architecture & Key Optimizations
 
@@ -50,15 +50,15 @@ They introduced a "probe task" in the client (e.g. every 3 seconds) that evaluat
 
 **Result:** The P90 latency for S3G metadata requests (GetMetaLatency) dropped from a weekly average of ~90ms to ~17ms; in best cases, from tens of milliseconds to under 3ms.
 
-**Figure 2: Significant drop in S3G latency after enabling Follower Reads**
+Figure 2: Significant drop in S3G latency after enabling Follower Reads
 
 ### 3. Heterogeneous Caching (HDD + NVMe)
 
-Didi's clusters use cost-effective HDDs, but random reads on small files (tens of MBs) suffered from disk latency. They designed a heterogeneous caching layer:
+Didi's clusters use cost-effective hard disk drives, but random reads on small files (tens of MBs) suffered from disk latency. They designed a heterogeneous caching layer:
 
 - **Strategy:** They cache the first Chunk (1MB) of each block on high-speed NVMe SSDs; for EC (e.g. RS-6-3-1024k) they cache the first stripe (9MB: 6 data + 3 parity) to cover first-frame needs.
 - **Impact:** The 6MB of actual data in that stripe is sufficient for most first-frame requests, dramatically improving read speeds without the cost of all-flash storage.
-- **Implementation:** A custom LRU cache on the DataNode manages this hot data, ensuring efficient space utilization. This caching optimization brought at least 100ms latency improvement in first-frame reads.
+- **Implementation:** A custom LRU cache on the Datanode manages this hot data, ensuring efficient space utilization. This caching optimization brought at least 100ms latency improvement in first-frame reads.
 
 ### 4. Concurrency & Lock Optimization
 
@@ -78,7 +78,7 @@ With data growing at >1PB per day, the 3-replica cost model was unsustainable. T
 Didi's journey with Ozone has been deeply collaborative. We are proud to highlight that Didi's contributors have brought several key fixes and improvements back to the Apache Ozone community:
 
 - [HDDS-11483](https://issues.apache.org/jira/browse/HDDS-11483): Increased S3G buffer size (e.g. to 4MB) to reduce network I/O and improve first-frame latency.
-- [HDDS-11209](https://issues.apache.org/jira/browse/HDDS-11209): Avoid insufficient EC pipelines in the container pipeline cache (OM must not cache EC pipelines with incomplete datanodes).
+- [HDDS-11209](https://issues.apache.org/jira/browse/HDDS-11209): Avoid insufficient EC pipelines in the container pipeline cache (OM must not cache EC pipelines with incomplete Datanodes).
 - [HDDS-9342](https://issues.apache.org/jira/browse/HDDS-9342): Fixed OM HA crash and restart failure caused by timing inconsistency between applyTransactionMap and double-buffer.
 - [HDDS-10985](https://issues.apache.org/jira/browse/HDDS-10985): EC Reconstruction failed because the size of currentChunks was not equal to checksumBlockDataChunks.
 
