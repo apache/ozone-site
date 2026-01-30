@@ -108,7 +108,7 @@ You should now be in:
 Flink SQL>
 ```
 
-## Step 7 — Create a table backed by Ozone S3
+### Step 6 — Create and Query a table backed by Ozone S3
 
 Important: Must use BATCH mode otherwise multi-part upload fails.
 
