@@ -88,7 +88,7 @@ Verify containers are running:
 docker ps
 ```
 
-## Step 3 — Create an Ozone bucket
+### Step 4 — Create an Ozone bucket
 
 You need to connect to Ozone (for example, `s3g`) to create a OBS bucket:
 
