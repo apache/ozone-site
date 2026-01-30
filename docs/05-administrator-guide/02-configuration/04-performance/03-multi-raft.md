@@ -45,13 +45,13 @@ Ratis handles concurrent logs per node.
 - `ozone.scm.datanode.pipeline.limit` (default: 2)
   - The maximum number of pipelines per Datanode can be engaged in.
     The value 0 means that the pipeline limit per Datanode will be determined
-      by the number of metadata disks reported per Datanode;
-      see the next property.
+    by the number of metadata disks reported per Datanode;
+    see the next property.
 - `ozone.scm.pipeline.per.metadata.disk` (default: 2)
   - The maximum number of pipelines for a Datanode is determined
-      by the number of disks in that Datanode.
-      This property is effective only when the previous property is set to 0.
-      The value of this property must be greater than 0.
+    by the number of disks in that Datanode.
+    This property is effective only when the previous property is set to 0.
+    The value of this property must be greater than 0.
 
 ## How to Use
 
@@ -94,6 +94,21 @@ Ratis handles concurrent logs per node.
   with paths on multiple distinct physical disks.
   The Ratis pipelines will be distributed accordingly.
   - Be cautious with very high pipeline counts due to memory/CPU overhead.
+
+## Advanced Ratis Configuration
+
+Any Ratis configuration properties can be set by prepending a corresponding prefix.
+The following table shows the prefixes in each Ozone component.
+
+| Ozone Components                | Configuration Prefixes | Examples: To set `raft.server.write.byte-limit` |
+| ------------------------------- | ---------------------- | ----------------------------------------------- |
+| Ozone Manager (OM)              | `ozone.om.ha.`         | Use `ozone.om.ha.raft.server.write.byte-limit`  |
+| Storage Container Manager (SCM) | `ozone.scm.ha.`        | Use `ozone.scm.ha.raft.server.write.byte-limit` |
+| Datanode                        | `hdds.ratis.`          | Use `hdds.ratis.raft.server.write.byte-limit`   |
+| Ozone Client                    | `hdds.ratis.`          | Use `hdds.ratis.raft.server.write.byte-limit`   |
+
+See also [Apache Ratis configuration
+documentation](https://github.com/apache/ratis/blob/ratis-3.2.1/ratis-docs/src/site/markdown/configurations.md).
 
 ## Limitations
 
