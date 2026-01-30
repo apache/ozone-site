@@ -361,7 +361,7 @@ As long as the user running this command has the permission to create a bucket i
 - The link bucket command will not even check if the source volume and bucket exists.
 - Permission check will be performed when the bucket symlink is actually accessed.
   - In order to grant a user in tenant `tenantone` access the bucket, a new policy should be added by a Ranger admin that allow that user intended permissions (`READ, WRITE, LIST, CREATE, DELETE, ...`) to the source bucket `bucket1` in volume `vol1`.
-- At the moment, `ozone tenant linkbucket` command is equivalent to `ozone sh bucket link` command. See the [Bucket Links](/docs/core-concepts/namespace/buckets/links) documentation for more details.
+- At the moment, `ozone tenant linkbucket` command is equivalent to `ozone sh bucket link` command. See the [Bucket Links](../../../core-concepts/namespace/buckets/links) documentation for more details.
 
 ## Example: Accessing a bucket via S3 Gateway
 

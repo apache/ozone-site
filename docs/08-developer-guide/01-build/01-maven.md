@@ -119,11 +119,11 @@ This command will:
 - Compile the source code
 - Package the compiled code into JAR files
 - Create a distribution in `hadoop-ozone/dist/target/ozone-<version>`
-- Run [unit](/docs/developer-guide/test/unit-tests) and [integration](/docs/developer-guide/test/integration-tests) tests during the build
+- Run [unit](../../developer-guide/test/unit-tests) and [integration](../../developer-guide/test/integration-tests) tests during the build
 
 :::note
 
-This command does not run acceptance tests. Refer to the [acceptance tests](/docs/developer-guide/test/acceptance-tests) page for test execution instructions.
+This command does not run acceptance tests. Refer to the [acceptance tests](../../developer-guide/test/acceptance-tests) page for test execution instructions.
 
 :::
 

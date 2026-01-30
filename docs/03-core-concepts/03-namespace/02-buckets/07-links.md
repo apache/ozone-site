@@ -4,7 +4,7 @@ sidebar_label: Links
 
 # Bucket Links
 
-Bucket linking allows exposing a bucket from one volume (or even another bucket) as if it were in a different location, particularly useful for S3 compatibility or cross-tenant access. This creates a symbolic link-like behavior. For more information, see the [S3 Protocol documentation](/docs/user-guide/client-interfaces/s3) and [S3 Multi-Tenancy documentation](/docs/administrator-guide/operations/s3-multi-tenancy).
+Bucket linking allows exposing a bucket from one volume (or even another bucket) as if it were in a different location, particularly useful for S3 compatibility or cross-tenant access. This creates a symbolic link-like behavior. For more information, see the [S3 Protocol documentation](../../../user-guide/client-interfaces/s3) and [S3 Multi-Tenancy documentation](../../../administrator-guide/operations/s3-multi-tenancy).
 
 ## Overview
 

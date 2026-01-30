@@ -121,9 +121,10 @@ const config = {
     preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
       const {filePath, fileContent} = params;
 
-      // Validate internal links format
-      const internalLinkPattern = /\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)/g;
-      const numberPrefixPattern = /\/\d{2}-[^/]+/;
+      // Match all markdown links (supports parentheses in URLs via %28/%29 encoding or balanced parens)
+      const internalLinkPattern = /\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
+      // Match two-digit number prefixes at start or after slash
+      const numberPrefixPattern = /(^|\/)\d{2}-/;
 
       let matches;
       const invalidLinks = [];
@@ -137,13 +138,31 @@ const config = {
           continue;
         }
 
-        // Skip absolute paths from site root (starting with /)
-        if (linkPath.startsWith('/')) {
+        const pathWithoutFragment = linkPath.split('#')[0];
+
+        // Skip images (allowed in docs/ for versioning)
+        const isImage = /\.(png|jpe?g|gif|svg)$/i.test(pathWithoutFragment);
+        if (isImage) {
           continue;
         }
 
-        // Check for number prefixes or .md extensions
-        if (numberPrefixPattern.test(linkPath) || linkPath.includes('.md')) {
+        // Skip absolute paths to pages/static (e.g., /download, /foo.pdf) since they are not versioned
+        // Only check absolute paths to /docs/ which breaks versioning
+        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        if (isAbsoluteNonDocsPath) {
+          continue;
+        }
+
+        // Check for absolute paths to docs (breaks versioning)
+        const isAbsoluteDocsPath = linkPath.startsWith('/docs/');
+
+        // Check for number prefixes
+        const hasNumberPrefix = numberPrefixPattern.test(linkPath);
+
+        // Check for extensions that Docusaurus converts to routes (should be omitted in links)
+        const hasDocExtension = /\.(mdx?|jsx?|tsx)$/.test(pathWithoutFragment);
+
+        if (isAbsoluteDocsPath || hasNumberPrefix || hasDocExtension) {
           invalidLinks.push({
             text: linkText,
             path: linkPath,
@@ -158,7 +177,7 @@ const config = {
         ).join('\n');
 
         console.error('Invalid internal links found in', filePath + ':\n' + errorMsg);
-        console.error('\nInternal links should not include number prefixes or .md extensions.');
+        console.error('\nInternal links should not include absolute paths to docs, number prefixes, or route file extensions (.md, .mdx, .js, .jsx, .tsx).');
         console.error('Example: use \'./ozone-manager#persisted-state\' instead of \'./02-ozone-manager.md#persisted-state\'');
         process.exit(1);
       }

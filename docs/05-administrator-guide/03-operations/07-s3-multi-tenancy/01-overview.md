@@ -4,7 +4,7 @@ sidebar_label: Overview
 
 # S3 Multi-Tenancy Overview
 
-Before Ozone multi-tenancy, all S3 access to Ozone (via [S3 Gateway](/docs/user-guide/client-interfaces/s3)) were confined to a **single** designated S3 volume (that is volume `s3v`, by default).
+Before Ozone multi-tenancy, all S3 access to Ozone (via [S3 Gateway](../../../user-guide/client-interfaces/s3)) were confined to a **single** designated S3 volume (that is volume `s3v`, by default).
 
 Ozone multi-tenancy allows **multiple** S3-accessible volumes to be created. Each volume can be managed separately by their own tenant admins via CLI for user operations, and via Apache Ranger for access control.
 

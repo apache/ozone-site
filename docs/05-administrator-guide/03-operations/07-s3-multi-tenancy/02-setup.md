@@ -10,9 +10,9 @@ Steps to enable S3 Multi-Tenancy feature in Ozone clusters.
 
 S3 Multi-Tenancy requires the following components to be configured:
 
-1. **Secure cluster**: The cluster must be Kerberized (secured). Follow the [Kerberos](/docs/administrator-guide/configuration/security/kerberos) guide if the cluster is not Kerberized yet.
-2. **S3 Gateway**: At least one S3 Gateway must be set up. Follow the [S3 Gateway](/docs/user-guide/client-interfaces/s3) guide if the cluster doesn't have a S3 Gateway yet.
-3. **Apache Ranger**: ACL must be enabled with `RangerOzoneAuthorizer` as the effective ACL authorizer implementation. If not configured, follow the [Security with Ranger](/docs/administrator-guide/configuration/security/ranger) guide.
+1. **Secure cluster**: The cluster must be Kerberized (secured). Follow the [Kerberos](../../../administrator-guide/configuration/security/kerberos) guide if the cluster is not Kerberized yet.
+2. **S3 Gateway**: At least one S3 Gateway must be set up. Follow the [S3 Gateway](../../../user-guide/client-interfaces/s3) guide if the cluster doesn't have a S3 Gateway yet.
+3. **Apache Ranger**: ACL must be enabled with `RangerOzoneAuthorizer` as the effective ACL authorizer implementation. If not configured, follow the [Security with Ranger](../../../administrator-guide/configuration/security/ranger) guide.
 
 ## Configuration
 

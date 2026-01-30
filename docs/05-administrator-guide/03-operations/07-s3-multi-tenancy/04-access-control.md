@@ -4,7 +4,7 @@ sidebar_label: Access Control
 
 # Access Control with Ranger
 
-Ozone multi-tenancy relies on [Apache Ranger](/docs/administrator-guide/configuration/security/ranger) to enforce access control to resources.
+Ozone multi-tenancy relies on [Apache Ranger](../../../administrator-guide/configuration/security/ranger) to enforce access control to resources.
 
 ## Ranger Policies
 
