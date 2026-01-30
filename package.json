@@ -13,7 +13,7 @@
     "serve": "docusaurus serve --port 3001",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "eslint . && prettier \"**/*.{md,mdx}\" && markdownlint .",
+    "lint": "eslint . && markdownlint .",
     "lint:fix": "eslint . --fix && prettier -w \"**/*.{md,mdx}\" && markdownlint --fix ."
   },
   "dependencies": {

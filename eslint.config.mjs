@@ -87,7 +87,8 @@ export default defineConfig([
       "node_modules/**",
       "build/**",
       "dist/**",
-      ".docusaurus/**"
+      ".docusaurus/**",
+      ".github/**"
     ]
   },
 
