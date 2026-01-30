@@ -174,5 +174,5 @@ cd hadoop-ozone/dev-support/checks
 - [SonarSource Rules](https://rules.sonarsource.com/java/) - Detailed explanations of Java rules
 - [SpotBugs Bug Patterns](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html) - Explanations of bug patterns
 - [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html) - Complete list of PMD rules
-- [Checkstyle Checks](Checkstyle Checks) - Available Checkstyle checks
+- [Checkstyle Checks](https://checkstyle.sourceforge.io/checks.html) - Available Checkstyle checks
 cspell.yaml
