@@ -143,4 +143,4 @@ This is the recommended production procedure. It leverages the HA quorum for rec
 - The `scm --bootstrap` command is different from `scm --init`:
   - `scm --init`: Used only for the first SCM node (primordial node) to initialize a new cluster. Creates a new cluster ID.
   - `scm --bootstrap`: Used for additional SCM nodes joining an existing HA cluster, or for recovering a failed SCM node. Fetches the cluster ID from existing SCM instances.
-- After a disk replacement, always use `scm --bootstrap`, even if the node was originally the primordial node.
+- After a disk replacement on a **non-primordial** SCM node, use `scm --bootstrap` then start the SCM. If the disk was replaced on the **primordial** node, see [§5.1 Primordial SCM Node](#51-prordial-scm-node) for the required temporary configuration change before running bootstrap.
