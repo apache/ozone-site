@@ -74,7 +74,7 @@ For Pull Requests, SonarCloud posts a comment with analysis results directly in 
 
 Typically maintenance-related issues like:
 
-```
+```java
 // Before: Magic number
 if (retryCount > 5) {
 // Retry logic
@@ -92,7 +92,7 @@ if (retryCount > MAX_RETRY_COUNT) {
 
 Logic errors that could cause runtime issues:
 
-```
+```java
 // Before: Potential NullPointerException
 String value = map.get("key").toString();
 
@@ -105,7 +105,7 @@ String value = rawValue != null ? rawValue.toString() : "";
 
 Issues that could expose security weaknesses:
 
-```
+```java
 // Before: Hardcoded credentials
 private static final String PASSWORD = "p@ssw0rd";
 
@@ -121,18 +121,19 @@ In addition to SonarQube, Ozone uses several other static analysis tools:
 
 Detects potential bugs in Java code through bytecode analysis.
 
-```
+```shell
 # Run SpotBugs
 cd hadoop-ozone/dev-support/checks
 ./findbugs.sh
 ```
+
 Configuration is `in hadoop-ozone/dev-support/checks/findbugs.sh`
 
 ### 2. PMD
 
 Source code analyzer that finds common programming flaws.
 
-```
+```shell
 # Run PMD
 cd hadoop-ozone
 mvn pmd:check
@@ -144,7 +145,7 @@ Rules are defined in `hadoop-ozone/dev-support/pmd/pmd-ruleset.xml`
 
 Enforces coding standards and conventions.
 
-```
+```shell
 # Run Checkstyle
 cd hadoop-ozone/dev-support/checks
 ./checkstyle.sh
@@ -160,7 +161,7 @@ Ozone's checkstyle rules ensure consistent code formatting and structure.
 4. **Understand false positives**: Some issues may be false alarms; use `@SuppressWarnings` with care
 5. **Run locally before pushing**: Run static analysis checks locally to catch issues early
 
-```
+```shell
 # Run all static analysis checks
 cd hadoop-ozone/dev-support/checks
 ./findbugs.sh
@@ -174,3 +175,4 @@ cd hadoop-ozone/dev-support/checks
 - [SpotBugs Bug Patterns](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html) - Explanations of bug patterns
 - [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html) - Complete list of PMD rules
 - [Checkstyle Checks](Checkstyle Checks) - Available Checkstyle checks
+cspell.yaml
