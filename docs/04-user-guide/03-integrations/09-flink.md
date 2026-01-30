@@ -12,6 +12,14 @@ Apache Flink can use Apache Ozone for reading and writing data, and for storing 
 
 This tutorial shows how to get started with connecting Apache Flink to Apache Ozone using the S3 Gateway, with Docker Compose.
 
+### Quickstart environment 
+
+- Unsecure Ozone and Flink clusters.
+- Ozone S3G enables path style access. To enable virtual-host style addressing see [here](../../01-client-interfaces/03-s3/01-s3-api.md#url-schema).
+- Flink accesses Ozone via S3 Gateway.
+
+### Step 1 — Download Ozone's `docker-compose.yaml`
+
 First, obtain Ozone's sample Docker Compose configuration and save it as `docker-compose.yaml`:
 
 ```bash
