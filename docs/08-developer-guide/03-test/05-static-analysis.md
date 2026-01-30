@@ -1,11 +1,15 @@
 ---
 sidebar_label: Static Analysis
 ---
+
 # Static Code Analysis
+
 Apache Ozone uses static code analysis tools to identify potential bugs, code smells, security vulnerabilities, and other issues before they make it into production. SonarQube is the primary tool used for comprehensive code quality analysis.
 
 ## SonarQube Overview
+
 [SonarQube](https://www.sonarqube.org/) is an open-source platform for continuous inspection of code quality. It performs automatic reviews with static analysis to detect:
+
 - Bugs and logic errors
 - Code smells (maintainability issues)
 - Security vulnerabilities
@@ -14,12 +18,15 @@ Apache Ozone uses static code analysis tools to identify potential bugs, code sm
 - Coding standard violations
 
 ## SonarCloud for Apache Ozone
+
 Apache Ozone uses SonarCloud, a cloud-based version of SonarQube, for continuous code quality analysis.
 
 ### Accessing SonarCloud
+
 The Ozone project's SonarCloud dashboard is publicly available at: https://sonarcloud.io/project/overview?id=apache_ozone
 
 ### When Analysis Runs
+
 SonarCloud analysis is triggered automatically on:
 
 - Pull Request submissions
@@ -29,7 +36,9 @@ SonarCloud analysis is triggered automatically on:
 The analysis is integrated into the GitHub Actions CI workflow in .github/workflows/ci.yml.
 
 ## Understanding SonarQube Results
+
 ### Dashboard Overview
+
 The SonarCloud dashboard provides high-level metrics including:
 
 - **Quality Gate Status**: Overall pass/fail status based on quality thresholds
@@ -40,6 +49,7 @@ The SonarCloud dashboard provides high-level metrics including:
 - **Duplications**: Percentage of duplicated code
 
 ### Issue Severity Levels
+
 SonarQube categorizes issues by severity:
 
 - **Blocker**: Issues that must be fixed immediately (risk of system failure)
@@ -49,13 +59,17 @@ SonarQube categorizes issues by severity:
 - **Info**: Non-critical issues that represent best practice violations
 
 ## Addressing SonarQube Issues
+
 ### Viewing PR-Specific Issues
+
 For Pull Requests, SonarCloud posts a comment with analysis results directly in the PR conversation. This includes:
 
 * New issues introduced by the PR
 * Code coverage changes
 * Overall status of the quality gate
+
 ### Fixing Common Issues
+
 #### 1. Code Smells
 Typically maintenance-related issues like:
 ```
@@ -71,7 +85,9 @@ if (retryCount > MAX_RETRY_COUNT) {
 // Retry logic
 }
 ```
+
 #### 2. Bugs
+
 Logic errors that could cause runtime issues:
 
 ```
@@ -84,7 +100,8 @@ String value = rawValue != null ? rawValue.toString() : "";
 ```
 
 #### 3. Security Vulnerabilities
-   Issues that could expose security weaknesses:
+
+Issues that could expose security weaknesses:
 ```
 // Before: Hardcoded credentials
 private static final String PASSWORD = "p@ssw0rd";
@@ -94,10 +111,13 @@ private String password = configuration.get("security.password");
 ```
 
 ## Other Static Analysis Tools
+
 In addition to SonarQube, Ozone uses several other static analysis tools:
 
 ### 1. SpotBugs (Formerly FindBugs)
-   Detects potential bugs in Java code through bytecode analysis.
+
+Detects potential bugs in Java code through bytecode analysis.
+
 ```
 # Run SpotBugs
 cd hadoop-ozone/dev-support/checks
@@ -106,29 +126,37 @@ cd hadoop-ozone/dev-support/checks
 Configuration is `in hadoop-ozone/dev-support/checks/findbugs.sh`
 
 ### 2. PMD
-   Source code analyzer that finds common programming flaws.
+
+Source code analyzer that finds common programming flaws.
+
 ```
 # Run PMD
 cd hadoop-ozone
 mvn pmd:check
 ```
+
 Rules are defined in `hadoop-ozone/dev-support/pmd/pmd-ruleset.xml`
 
 ### 3. Checkstyle
-   Enforces coding standards and conventions.
+
+Enforces coding standards and conventions.
+
 ```
 # Run Checkstyle
 cd hadoop-ozone/dev-support/checks
 ./checkstyle.sh
 ```
+
 Ozone's checkstyle rules ensure consistent code formatting and structure.
 
 ## Best Practices
+
 1. **Fix issues early**: Address static analysis findings as you develop
 2. **Prioritize by severity**: Focus on Blocker and Critical issues first
 3. **Maintain test coverage**: Keep coverage high to catch regressions
 4. **Understand false positives**: Some issues may be false alarms; use `@SuppressWarnings` with care
 5. **Run locally before pushing**: Run static analysis checks locally to catch issues early
+
 ```
 # Run all static analysis checks
 cd hadoop-ozone/dev-support/checks
@@ -136,7 +164,9 @@ cd hadoop-ozone/dev-support/checks
 ./checkstyle.sh
 ./rat.sh
 ```
+
 ## Resources
+
 - [SonarSource Rules](https://rules.sonarsource.com/java/) - Detailed explanations of Java rules
 - [SpotBugs Bug Patterns](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html) - Explanations of bug patterns
 - [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html) - Complete list of PMD rules
