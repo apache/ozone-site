@@ -4,7 +4,7 @@ sidebar_label: Consistency Guarantees
 
 # Consistency Guarantees
 
-## 1. **OM (Ozone Manager) HA Consistency**
+## OM (Ozone Manager) HA Consistency
 
 :::info
 Notice: Before Ozone 2.2.0 (current is 2.1.0), all operations in OM are linearizable. After [HDDS-14424](https://issues.apache.org/jira/browse/HDDS-14424) is done and released in Ozone 2.2.0, users will have more options to configure the consistency guarantees for OM based on the tradeoff across scalability, throughput and staleness.
@@ -43,7 +43,7 @@ Notice: Before Ozone 2.2.0 (current is 2.1.0), all operations in OM are lineariz
 - Leader serves committed reads locally without ReadIndex
 - Lower latency but may not reflect uncommitted writes
 
-## 2. **SCM (Storage Container Manager) HA Consistency**
+## SCM (Storage Container Manager) HA Consistency
 
 ### Consistency Model
 - **Strong consistency** via Apache Ratis (Raft consensus)
@@ -67,7 +67,7 @@ Notice: Before Ozone 2.2.0 (current is 2.1.0), all operations in OM are lineariz
 | Complexity   | Simpler                           | More flexible                    |
 | Use case     | Metadata for containers/pipelines | High-volume namespace operations |
 
-## 3. **DN (DataNode) ContainerStateMachine Consistency**
+## DN (DataNode) ContainerStateMachine Consistency
 
 ### Concurrent Execution Model
 This is the **key differentiator** from OM/SCM:
