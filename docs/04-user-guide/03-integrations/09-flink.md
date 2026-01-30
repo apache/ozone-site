@@ -96,7 +96,7 @@ You need to connect to Ozone (for example, `s3g`) to create a OBS bucket:
 docker compose exec -it s3g ozone sh bucket create s3v/bucket1 -l obs
 ```
 
-## Step 6 — Start Flink SQL client
+### Step 5 — Start Flink SQL client
 
 ```bash
 docker compose exec -it jobmanager ./bin/sql-client.sh
