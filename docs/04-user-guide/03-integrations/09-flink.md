@@ -4,7 +4,13 @@ sidebar_label: Flink
 
 # Apache Flink
 
-This tutorial shows how to connect Apache Flink to Apache Ozone using the S3 Gateway, with Docker Compose.
+[Apache Flink](https://flink.apache.org/) is a powerful, open-source distributed processing framework designed for stateful computations over both bounded and unbounded data streams at any scale. It enables high-throughput, low-latency, and fault-tolerant processing while offering elastic scaling capabilities to handle millions of events per second across thousands of cores. 
+
+Apache Flink can use Apache Ozone for reading and writing data, and for storing essential operational components like application state checkpoints and savepoints.
+
+## Quickstart
+
+This tutorial shows how to get started with connecting Apache Flink to Apache Ozone using the S3 Gateway, with Docker Compose.
 
 First, obtain Ozone's sample Docker Compose configuration and save it as `docker-compose.yaml`:
 
