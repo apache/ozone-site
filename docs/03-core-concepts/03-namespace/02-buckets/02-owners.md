@@ -66,7 +66,7 @@ $ ozone sh bucket update /myvol1/buck1 --user bob
 
 **Requirements for Changing Ownership:**
 
-- **Permissions:** The user attempting to change ownership must have `WRITE_ACL` permission on the bucket. This ensures that only authorized users can transfer ownership.
+- **Permissions:** When Ozone ACL is enabled, the user attempting to change ownership must have `WRITE_ACL` permission on the bucket. This ensures that only authorized users can transfer ownership.
 
 **Owner vs. ACLs:**
 
