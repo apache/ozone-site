@@ -48,7 +48,7 @@ curl -X PUT --negotiate -u : https://localhost:9879/secret/<username>
 
 This command will talk to Ozone, validate the user via Kerberos and generate
 the AWS credentials. The values will be printed out on the screen. You can
-set these values up in your _.aws_ file for automatic access while working
+set these values up in your *.aws* file for automatic access while working
 against Ozone S3 buckets.
 
 :::caution

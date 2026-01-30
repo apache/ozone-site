@@ -31,7 +31,7 @@ The authoritative information about where a container is located is with the Sto
 the container location will be cached by Ozone Manager and will be returned along with the Ozone blocks.
 
 Once the client is able to locate the container, the client will connect to the Datanode and read the data stream specified
-by _Container ID:Local ID_. In other words, the local ID serves as index into the container which describes what data stream to read from.
+by *Container ID:Local ID*. In other words, the local ID serves as index into the container which describes what data stream to read from.
 
 ## Discovering Container Locations
 

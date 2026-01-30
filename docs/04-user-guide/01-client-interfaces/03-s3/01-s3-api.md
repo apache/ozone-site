@@ -96,7 +96,7 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
 
 ## Security
 
-If security is not enabled, you can _use_ **any** AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+If security is not enabled, you can *use* **any** AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 
 If security is enabled, you can get the key and the secret with the `ozone s3 getsecret` command (\*Kerberos based authentication is required).
 

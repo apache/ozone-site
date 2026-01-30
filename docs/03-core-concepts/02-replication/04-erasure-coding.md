@@ -104,13 +104,13 @@ The EC policy encapsulates how to encode/decode a file.
 
 Each EC Replication Config defined by the following pieces of information:
 
-1.  **data:** Data blocks number in an EC block group.
-2.  **parity:** Parity blocks number in an EC block group.
-3.  **ecChunkSize:** The size of a striping chunk. This determines the granularity of striped reads and writes.
-4.  **codec:** This is to indicate the type of EC algorithms (e.g., `RS`(Reed-Solomon), `XOR`).
+1. **data:** Data blocks number in an EC block group.
+2. **parity:** Parity blocks number in an EC block group.
+3. **ecChunkSize:** The size of a striping chunk. This determines the granularity of striped reads and writes.
+4. **codec:** This is to indicate the type of EC algorithms (e.g., `RS`(Reed-Solomon), `XOR`).
 
 To pass the EC Replication Config in command line or configuration files, we need to use the following format:
-_codec_-_num data blocks_-_num parity blocks_-_EC chunk size_
+*codec*-*num data blocks*-*num parity blocks*-*EC chunk size*
 
 Currently, there are three built-in EC Replication Configs supported: `RS-3-2-1024k`, `RS-6-3-1024k`, `XOR-2-1-1024k`.
 The most recommended option is `RS-6-3-1024k`. When a key/file created without specifying the Replication Config,

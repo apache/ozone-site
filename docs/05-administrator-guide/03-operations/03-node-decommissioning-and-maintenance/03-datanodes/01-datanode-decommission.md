@@ -54,7 +54,7 @@ Administrators can adjust the following properties in `ozone-site.xml` to contro
 #### SCM-Side Properties
 
 - `hdds.scm.replication.datanode.replication.limit`
-  - **Purpose**: Defines the base limit for concurrent replication commands that the SCM will _send_ to a single Datanode.
+  - **Purpose**: Defines the base limit for concurrent replication commands that the SCM will *send* to a single Datanode.
   - **Default**: `20`.
   - **Details**: The effective limit for a decommissioning Datanode is this value multiplied by `hdds.datanode.replication.outofservice.limit.factor`.
 

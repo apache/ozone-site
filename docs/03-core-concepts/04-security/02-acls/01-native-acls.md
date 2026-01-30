@@ -15,16 +15,16 @@ Add the following properties to the `ozone-site.xml` to enable native ACLs.
 
 Ozone ACLs are a super set of Posix and S3 ACLs.
 
-The general format of an ACL is _object_:_who_:_rights_:_scope_.
+The general format of an ACL is *object*:*who*:*rights*:*scope*.
 
-Where an _object_ can be:
+Where an *object* can be:
 
-1. **Volume** - An Ozone volume. e.g. _/volume_
-2. **Bucket** - An Ozone bucket. e.g. _/volume/bucket_
-3. **Key** - An object key or an object. e.g. _/volume/bucket/key_
-4. **Prefix** - A path prefix for a specific key. e.g. _/volume/bucket/prefix1/prefix2_
+1. **Volume** - An Ozone volume. e.g. */volume*
+2. **Bucket** - An Ozone bucket. e.g. */volume/bucket*
+3. **Key** - An object key or an object. e.g. */volume/bucket/key*
+4. **Prefix** - A path prefix for a specific key. e.g. */volume/bucket/prefix1/prefix2*
 
-Where a _who_ can be:
+Where a *who* can be:
 
 1. **User** - A user in the Kerberos domain. User like in Posix world can be
    named or unnamed.
@@ -40,7 +40,7 @@ Where a _who_ can be:
 A S3 user accessing Ozone via AWS v4 signature protocol will be translated to the appropriate Kerberos user by Ozone Manager.
 :::
 
-Where a _right_ can be:
+Where a *right* can be:
 
 1. **Create** – This ACL provides a user the ability to create buckets in a
    volume and keys in a bucket. Please note: Under Ozone, Only admins can create volumes.
@@ -54,7 +54,7 @@ Where a _right_ can be:
 6. **Read_ACL** – Allows a user to read the ACL on a specific object.
 7. **Write_ACL** – Allows a user to write the ACL on a specific object.
 
-Where an _scope_ can be:
+Where an *scope* can be:
 
 1. **ACCESS** – Access ACL is applied only to the specific object and not inheritable. It controls the access to the object itself.
 2. **DEFAULT** - Default ACL is applied to the specific object and will be inherited by object's descendants. Default ACLs cannot be set on keys (as there can be no objects under a key).

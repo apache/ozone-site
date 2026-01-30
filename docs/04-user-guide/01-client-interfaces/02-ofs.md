@@ -290,7 +290,7 @@ The following standard `FileSystem` APIs are supported by ofs.
 | `setWorkingDirectory`   | N/A                                                                       | Sets the current working directory.                  | Supported                    |
 | `supportsSymlinks`      | N/A                                                                       | Checks if symbolic links are supported.              | Supported                    |
 
-_Note: An audit log of N/A means the API is client-side only and does not access the NameNode._
+*Note: An audit log of N/A means the API is client-side only and does not access the NameNode.*
 
 ### Unsupported FileSystem APIs
 
@@ -402,8 +402,8 @@ For operations related to encryption zones, erasure coding, snapshots, and quota
 
 Replace with `OzoneManagerProtocol.finalizeUpgrade()` and `OzoneManagerProtocol.listOpenFiles()`.
 
-_The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`._
+*The following audit logs are typically produced by HDFS internal services and are not relevant for application migration: `slowDataNodesReport`, `getDatanodeStorageReport`, `rollEditLog`, `renewDelegationToken`, `cancelDelegationToken`, `gcDeletedSnapshot`.*
 
-_The following audit logs are produced by the HDFS output stream: `getAdditionalBlock`, `getAdditionalDatanode`, `abandonBlock`, `completeFile`, `fsync`._
+*The following audit logs are produced by the HDFS output stream: `getAdditionalBlock`, `getAdditionalDatanode`, `abandonBlock`, `completeFile`, `fsync`.*
 
-_The `getPreferredBlockSize` audit log is used in testing only._
+*The `getPreferredBlockSize` audit log is used in testing only.*

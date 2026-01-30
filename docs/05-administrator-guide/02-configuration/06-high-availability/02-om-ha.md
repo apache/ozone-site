@@ -79,13 +79,13 @@ To bootstrap an OM, the following command needs to be run:
 ozone om [global options (optional)] --bootstrap
 ```
 
-The bootstrap command will first verify that all the OMs have the updated configuration file and fail the command otherwise. This check can be skipped using the _force_ option. The _force_ option allows to continue with the bootstrap when one of the existing OMs is down or not responding.
+The bootstrap command will first verify that all the OMs have the updated configuration file and fail the command otherwise. This check can be skipped using the *force* option. The *force* option allows to continue with the bootstrap when one of the existing OMs is down or not responding.
 
 ```bash
 ozone om [global options (optional)] --bootstrap --force
 ```
 
-Note that using the _force_ option during bootstrap could crash the OM process if it does not have updated configurations.
+Note that using the *force* option during bootstrap could crash the OM process if it does not have updated configurations.
 
 ## OM Leader Transfer
 

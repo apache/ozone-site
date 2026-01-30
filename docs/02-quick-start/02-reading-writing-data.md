@@ -214,7 +214,7 @@ export AWS_SECRET_ACCESS_KEY=testuser-secret
 export AWS_ENDPOINT_URL=http://s3g:9878
 ```
 
-_(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)_
+*(Note: Setting `AWS_ENDPOINT_URL` simplifies the `aws` commands below)*
 
 ### Using AWS CLI
 
@@ -257,7 +257,7 @@ Ozone allows accessing the same data through different interfaces.
 | vol1/bucket1/file.txt | `/vol1/bucket1/file.txt` | `ofs://<ozone service id>/vol1/bucket1/file.txt` | `s3://bucket1/file.txt` <br/>(if S3V configured to serve vol1) |
 | s3v/s3bucket/file.txt | `/s3v/s3bucket/file.txt` | `ofs://<ozone service id>/s3v/s3bucket/file.txt` | `s3://s3bucket/file.txt`                                       |
 
-_(Note: `om` in `ofs://` path refers to the Ozone Manager service address)_
+*(Note: `om` in `ofs://` path refers to the Ozone Manager service address)*
 
 ### Accessing S3 Data via Ozone Shell/ofs
 

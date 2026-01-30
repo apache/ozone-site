@@ -194,15 +194,15 @@ As part of the GitHub Actions CI, all markdown pages will be checked for spellin
 
 **If spell check fails for words that are correct but not recognized:**
 
-- **Option 1:** If the word is relevant for the whole Ozone project, add it to the `words` list in _cspell.yaml_ so that it is considered valid.
+- **Option 1:** If the word is relevant for the whole Ozone project, add it to the `words` list in *cspell.yaml* so that it is considered valid.
 
 - **Option 2:** If the word is only relevant for one specific page, add an [inline directive](https://cspell.org/configuration/document-settings/) as a comment in the markdown front matter of that page only.
 
 #### Documentation Sidebar
 
-Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website configures this using a _README.mdx_ file in each documentation directory. This gives a one to one mapping of subdirectories of the _docs_ directory to sidebar dropdown sections.
+Docusaurus provides a few different options to configure the documentation sidebar that organizes documentation pages into dropdown sections. The Ozone website configures this using a *README.mdx* file in each documentation directory. This gives a one to one mapping of subdirectories of the *docs* directory to sidebar dropdown sections.
 
-When creating a new _docs_ subdirectory (which will be rendered as a sidebar section), add a _README.mdx_ file to that directory. In this file:
+When creating a new *docs* subdirectory (which will be rendered as a sidebar section), add a *README.mdx* file to that directory. In this file:
 
 1. Use the `sidebar_label` front matter key to give the section a brief title that will be shown in the sidebar.
 2. Add a descriptive title on the markdown page itself.
@@ -211,7 +211,7 @@ When creating a new _docs_ subdirectory (which will be rendered as a sidebar sec
    - Avoid placing actual documentation on these pages, since it may be missed by readers clicking through the sidebar.
    - If an overview of content in a section is required, add a dedicated "Overview" page to the section.
 4. Add an automatically generated index of the content in this section as the last line in the markdown file. Adding this index is described in the [Docusaurus docs](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page), but in summary it only requires two lines:
-   1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the _README.mdx_ file.
+   1. Add `import DocCardList from '@theme/DocCardList';` anywhere in the *README.mdx* file.
    2. Add the `<DocCardList/>` tag at the end of the file.
 
 ### Updating Graphics
@@ -256,37 +256,37 @@ This file contains exact version information of all dependencies required to bui
 
 #### Version Pinning
 
-_package.json_ allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
+*package.json* allows [version specifiers](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) to put limits on which versions are installed. The following specifiers are currently used for the website:
 
 - `~` means to allow all patch updates (last semantic versioning digit)
 - `^` means to allow all minor version updates (second semantic versioning digit)
-- A version with no specifier means only the exact version declared in _package.json_ is allowed.
+- A version with no specifier means only the exact version declared in *package.json* is allowed.
 
 Currently all `@docusaurus/*` packages are pinned to an exact version for website stability.
 
 #### `pnpm` Command Cheat-Sheet
 
 - **To install all packages after cloning the repo**: `pnpm install`
-  - This will read the metadata for the packages and their transitive dependencies from _pnpm-lock.yaml_, which is generated from _package.json_ - and install the required dependencies for the project in the _node_modules_ folder.
+  - This will read the metadata for the packages and their transitive dependencies from *pnpm-lock.yaml*, which is generated from *package.json* - and install the required dependencies for the project in the *node_modules* folder.
 
-  - This should make no modifications to _package.json_ or _pnpm-lock.yaml_ if all explicit versions in _pnpm-lock.yaml_ comply with the version specifiers in _package.json_.
+  - This should make no modifications to *package.json* or *pnpm-lock.yaml* if all explicit versions in *pnpm-lock.yaml* comply with the version specifiers in *package.json*.
     - This should always be true for committed code, because the CI build of the website uses `pnpm install --frozen-lockfile` to fail the build if the two files do not match.
 
 - **To update all packages to their latest versions allowed by package.json**: `pnpm update`
-  - This will update _package.json_ to match the exact versions that were installed, but this is for reference only. Exact version information still comes from _pnpm-lock.yaml_
+  - This will update *package.json* to match the exact versions that were installed, but this is for reference only. Exact version information still comes from *pnpm-lock.yaml*
     - Version specifiers like `^` and `~` will not be modified, and the new version will be the latest that still complies with the existing version specifiers.
 
-  - This will update _pnpm-lock.yaml_ to reflect the exact versions of all top level and transitive dependencies installed.
+  - This will update *pnpm-lock.yaml* to reflect the exact versions of all top level and transitive dependencies installed.
 
 - **To update docusaurus to a specific version**:
-  1. Update the version of all `@docusaurus/*` packages in _package.json_ to the desired docusaurus version.
+  1. Update the version of all `@docusaurus/*` packages in *package.json* to the desired docusaurus version.
 
   2. Run `pnpm update '@docusaurus/*'` to update to the new version.
-     - This should modify _pnpm-lock.yaml_ with the exact versions of docusaurus and its transitive dependencies that were installed.
+     - This should modify *pnpm-lock.yaml* with the exact versions of docusaurus and its transitive dependencies that were installed.
 
-     - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify _package.json_ as well.
+     - If pnpm needed to update other top level dependencies when updating docusaurus, this command may modify *package.json* as well.
 
-  3. Commit _package.json_ and _pnpm-lock.yaml_ to git.
+  3. Commit *package.json* and *pnpm-lock.yaml* to git.
 
 ### Previewing Your Modifications Locally
 

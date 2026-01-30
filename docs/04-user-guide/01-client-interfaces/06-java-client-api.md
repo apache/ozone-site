@@ -66,13 +66,13 @@ assets.createBucket("videos");
 OzoneBucket video = assets.getBucket("videos");
 ```
 
-At this point we have a usable volume and a bucket. Our volume is called _assets_ and bucket is called _videos_.
+At this point we have a usable volume and a bucket. Our volume is called *assets* and bucket is called *videos*.
 
 Now we can create a Key.
 
 ### Reading and Writing a Key
 
-With a bucket object the users can now read and write keys. The following code reads a video called intro.mp4 from the local disk and stores in the _video_ bucket that we just created.
+With a bucket object the users can now read and write keys. The following code reads a video called intro.mp4 from the local disk and stores in the *video* bucket that we just created.
 
 ```java
 // read data from the file, this is a user provided function.

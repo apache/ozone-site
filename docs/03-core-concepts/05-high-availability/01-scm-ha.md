@@ -4,7 +4,7 @@ sidebar_label: SCM High Availability
 
 # SCM High Availability
 
-Ozone has two metadata-manager nodes (_Ozone Manager_ for key space management and _Storage Container Management_ for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
+Ozone has two metadata-manager nodes (*Ozone Manager* for key space management and *Storage Container Management* for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
 
 To avoid any single point of failure the metadata-manager nodes also should have a HA setup.
 

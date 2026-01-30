@@ -4,7 +4,7 @@ sidebar_label: High Availability
 
 # Ozone Manager High Availability
 
-Ozone has two metadata-manager nodes (_Ozone Manager_ for key space management and _Storage Container Manager_ for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
+Ozone has two metadata-manager nodes (*Ozone Manager* for key space management and *Storage Container Manager* for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
 
 To avoid any single point of failure the metadata-manager nodes also should have a HA setup.
 
@@ -20,7 +20,7 @@ A single Ozone Manager uses [RocksDB](https://github.com/facebook/rocksdb/) to p
 
 Client connects to the Leader Ozone Manager which process the request and schedule the replication with RAFT. When the request is replicated to all the followers the leader can return with the response.
 
-## Implementation details
+## Implementation de tails
 
 Raft can guarantee the replication of any request if the request is persisted to the RAFT log on the majority of the nodes. To achieve high throughput with Ozone Manager, it returns with the response even if the request is persisted only to the RAFT logs.
 
