@@ -28,14 +28,6 @@ curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/
 
 Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md) for details.
 
-## Assumptions
-
-- Flink accesses Ozone through S3 Gateway instead of ofs.
-- Ozone S3G listens on port 9878
-- Ozone S3G enables path style access.
-- Ozone S3G does not enable security, therefore any S3 access key and secret key is accepted.
-- Flink Docker image tag `flink:scala_2.12-java17`
-
 ## Step 1 — Create `docker-compose-flink.yml` for Flink
 
 ```yaml
