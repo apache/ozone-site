@@ -161,6 +161,5 @@ This is the first place to look if something goes wrong.
 - The S3 plugin must exist in both JM and TM
 - Flink and Ozone should be started using a combined Docker Compose file (`COMPOSE_FILE`) to ensure they share the same network.
 - Always use `s3a://` with `flink-s3-fs-hadoop`
-- Restart Flink after copying plugins
 - Check `http://localhost:8081/` to confirm jobs are running
 - **Batch mode is required** for Flink SQL to avoid multipart upload failures to Ozone. Use `SET 'execution.runtime-mode' = 'BATCH';`
