@@ -139,7 +139,7 @@ SELECT * FROM ozone_sink;
 
 If this works, Flink is successfully reading/writing Ozone via S3.
 
-## Step 8 — Check Flink job status in the Web UI
+### Step 7 — Check Flink job status in the Web UI
 
 Open your browser:
 
