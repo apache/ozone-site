@@ -123,6 +123,10 @@ Docusaurus provides many options for laying out documentation pages and their me
 - Use relative file paths for all links between pages.
   - This keeps page links pointing to the current version of the documentation.
   - See [Markdown Links](https://docusaurus.io/docs/markdown-features/links) in Docusaurus for more information.
+  - **Link format requirements** (enforced by build validation):
+    - Do not include number prefixes in links. Use `./ozone-manager` instead of `./02-ozone-manager`.
+    - Do not include file extensions. Use `./ozone-manager` instead of `./ozone-manager.md`.
+    - Do not use absolute paths to docs (e.g., `/docs/...`). Use relative paths to maintain version compatibility.
 
 - Use short, succinct labels in the sidebar.
   - For example, the pages on bucket layouts may be organized as:

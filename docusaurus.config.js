@@ -121,8 +121,9 @@ const config = {
     preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
       const {filePath, fileContent} = params;
 
-      // Match all markdown links (supports parentheses in URLs via %28/%29 encoding or balanced parens)
-      const internalLinkPattern = /\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
+      // Match markdown links but exclude images (which start with !)
+      // Uses negative lookbehind (?<!!) to skip ![alt](url) image syntax
+      const internalLinkPattern = /(?<!!)\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
       // Match two-digit number prefixes at start or after slash
       const numberPrefixPattern = /(^|\/)\d{2}-/;
 
@@ -139,12 +140,6 @@ const config = {
         }
 
         const pathWithoutFragment = linkPath.split('#')[0];
-
-        // Skip images (allowed in docs/ for versioning)
-        const isImage = /\.(png|jpe?g|gif|svg)$/i.test(pathWithoutFragment);
-        if (isImage) {
-          continue;
-        }
 
         // Skip absolute paths to pages/static (e.g., /download, /foo.pdf) since they are not versioned
         // Only check absolute paths to /docs/ which breaks versioning
