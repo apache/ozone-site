@@ -11,8 +11,8 @@ When planning an Ozone deployment, consider these key principles:
 - **Separate Metadata and Data Hardware**: Metadata services (OM, SCM) have different requirements than data services (Datanodes).
 - **SSD/NVMe for Metadata**: All metadata services require fast storage for RocksDB.
 - **Scale Metadata Vertically**: Add more resources to existing metadata nodes rather than more nodes.
-- **Scale Datanodes Horizontally**: Add more datanode machines as capacity and throughput needs grow.
-- **Plan for Failure**: Size the cluster to handle expected failures of drives and nodes. Do not exceed 400 TB raw datanode capacity. 
+- **Scale Datanodes Horizontally**: Add more Datanode machines as capacity and throughput needs grow.
+- **Plan for Failure**: Size the cluster to handle expected failures of drives and nodes. Do not exceed 400 TB raw Datanode capacity.
 
 ## Guidelines
 
@@ -23,8 +23,8 @@ When planning an Ozone deployment, consider these key principles:
 - Use enterprise-class drives in production environments
 - Use SAS HDD drives for data nodes
 - Use SSD/NVMe optimized for mixed workloads as system drives
-- Use NVMe or SAS SSD optimized for heavy write workloads for metadata and ratis logs  
-- Use hardware RAID1 for system drives and metadata storage 
+- Use NVMe or SAS SSD optimized for heavy write workloads for metadata and Ratis logs  
+- Use hardware RAID1 for system drives and metadata storage
 - Leave at least 20% free space on metadata drives for RocksDB compaction
 - Factor in drive failure rates (typically 1–5% annually) for capacity planning and use SMART to monitor drive health.
 
@@ -65,21 +65,21 @@ A minimal production-ready deployment should include:
 - 3 nodes for OM HA (can be co-located with SCM)
 - 3 nodes for SCM HA (can be co-located with OM)
 - At least a single Recon instance
-- Minimum 10 datanodes for RS-6-3 encoding, 15 datanodes for RS-10-4 encoding
+- Minimum 10 Datanodes for RS-6-3 encoding, 15 Datanodes for RS-10-4
 
-#### Total Hardware (Consolidated):
- 
+#### Total Hardware (Consolidated)
+
 - 3 metadata nodes (running both OM and SCM)
-- 10+ datanodes
-
+- 10+ Datanodes
 
 ## Reference Configurations
 
 ### Small Enterprise Deployment (3 - 20PB)
 
-Consolidated architecture with 3 metadata nodes and 10+ datanodes:
+Consolidated architecture with 3 metadata nodes and 10+ Datanodes.
 
 #### Metadata Nodes (3x)
+
 - 2x 16-core CPUs (32 cores total)
 - 128GB RAM
 - 31GB JVM heap per service (OM and SCM)
@@ -87,7 +87,8 @@ Consolidated architecture with 3 metadata nodes and 10+ datanodes:
 - 2x 2TB write optimized NVMe in RAID1
 - 2x 25GbE network ports
 
-#### Datanodes (10+x)
+#### Datanodes (10+)
+
 - 2x 16-core CPUs (32 cores total)
 - 128GB RAM
 - 31GB JVM heap
@@ -99,7 +100,7 @@ Consolidated architecture with 3 metadata nodes and 10+ datanodes:
 
 ### Large Enterprise Deployment (20PB+)
 
-Dedicated service architecture
+Dedicated service architecture.
 
 #### OM Nodes (3x)
 
