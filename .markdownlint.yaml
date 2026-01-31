@@ -74,6 +74,7 @@ proper-names:
   - Datanodes
   - S3 Gateway
   - HDDS
+  - HDDs
   # Acronyms:
   - FSO
   - OBS
