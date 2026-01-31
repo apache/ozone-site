@@ -97,7 +97,6 @@ Consolidated architecture with 3 metadata nodes and 10+ Datanodes.
 - 2x 480GB write optimized NVMe in RAID1 (metadata)
 - 2x 25GbE network ports
 
-
 ### Large Enterprise Deployment (20PB+)
 
 Dedicated service architecture.
@@ -118,7 +117,7 @@ Dedicated service architecture.
 - 48GB JVM heap
 - 2x 480GB SSD mixed workload drives in RAID1 for OS
 - 2x 4TB write optimized NVMe in RAID1
-- 2x 100GbE network ports 
+- 2x 100GbE network ports
 
 #### Datanodes (80+)
 
@@ -149,4 +148,3 @@ Dedicated service architecture.
 #### Load balancer for S3 Gateways
 
 Consider co-locating S3 Gateways with applications that use them or use dedicated hardware or software L7 load balancer for balancing traffic between S3 Gateways.  
-
