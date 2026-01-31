@@ -26,6 +26,19 @@ First, obtain Ozone's sample Docker Compose configuration and save it as `docker
 curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/docker-compose.yaml
 ```
 
+Edit the `docker-compose.yaml`:
+
+Append the last 2 SCM safemode configurations to the `x-common-config:` section to enable starting with a single datanode.
+
+```bash
+x-common-config:
+   &common-config
+   ...
+   no_proxy: "om,recon,scm,s3g,localhost,127.0.0.1"
+   OZONE-SITE.XML_hdds.scm.safemode.min.datanode: "1"
+   OZONE-SITE.XML_hdds.scm.safemode.healthy.pipeline.pct: "0" 
+```
+
 Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md) for details.
 
 ### Step 2 — Create `docker-compose-flink.yml` for Flink
