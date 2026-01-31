@@ -99,6 +99,7 @@ words:
 - FCQ
 - QoS
 # Other systems' words
+- savepoints
 - KDC
 - classpath
 - DS
