@@ -4,7 +4,7 @@ sidebar_label: Flink
 
 # Apache Flink
 
-[Apache Flink](https://flink.apache.org/) is a powerful, open-source distributed processing framework designed for stateful computations over both bounded and unbounded data streams at any scale. It enables high-throughput, low-latency, and fault-tolerant processing while offering elastic scaling capabilities to handle millions of events per second across thousands of cores. 
+[Apache Flink](https://flink.apache.org/) is a powerful, open-source distributed processing framework designed for stateful computations over both bounded and unbounded data streams at any scale. It enables high-throughput, low-latency, and fault-tolerant processing while offering elastic scaling capabilities to handle millions of events per second across thousands of cores.
 
 Apache Flink can use Apache Ozone for reading and writing data, and for storing essential operational components like application state checkpoints and savepoints.
 
@@ -12,10 +12,10 @@ Apache Flink can use Apache Ozone for reading and writing data, and for storing 
 
 This tutorial shows how to get started with connecting Apache Flink to Apache Ozone using the S3 Gateway, with Docker Compose.
 
-### Quickstart environment 
+### Quickstart environment
 
 - Unsecure Ozone and Flink clusters.
-- Ozone S3G enables path style access. To enable virtual-host style addressing see [here](../../01-client-interfaces/03-s3/01-s3-api.md#url-schema).
+- Ozone S3G enables path style access. To enable virtual-host style addressing see [here](../01-client-interfaces/03-s3/01-s3-api.md#url-schema).
 - Flink accesses Ozone via S3 Gateway.
 
 ### Step 1 — Download Ozone's `docker-compose.yaml`
@@ -28,7 +28,7 @@ curl -O https://raw.githubusercontent.com/apache/ozone-docker/refs/heads/latest/
 
 Edit the `docker-compose.yaml`:
 
-Append the last 2 SCM safemode configurations to the `x-common-config:` section to enable starting with a single datanode.
+Append the last 2 SCM safemode configurations to the `x-common-config:` section to enable starting with a single Datanode.
 
 ```bash
 x-common-config:
