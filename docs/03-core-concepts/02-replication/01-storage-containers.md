@@ -1,3 +1,7 @@
+---
+sidebar_label: Storage Containers
+---
+
 <!---
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -14,6 +18,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+
 # Storage Containers
 
 Storage Containers, or Containers (not to be confused with Docker containers) are the fundamental replication unit of Ozone, they are managed by the Storage Container Manager (SCM) service.
@@ -31,8 +36,8 @@ When a container is created it starts in an OPEN state. When it's full (~5GB dat
 
 The fundamental differences between OPEN and CLOSED containers:
 
-| OPEN | CLOSED |
-|-----------------------------------|-----------------------------------------|
-| mutable | immutable |
-| replicated with RAFT (Ratis) | Replicated with async container copy |
-| Raft leader is used to READ / WRITE | All the nodes can be used to READ |
+| OPEN                                | CLOSED                               |
+| ----------------------------------- | ------------------------------------ |
+| mutable                             | immutable                            |
+| replicated with RAFT (Ratis)        | Replicated with async container copy |
+| Raft leader is used to READ / WRITE | All the nodes can be used to READ    |
