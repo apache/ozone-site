@@ -125,6 +125,12 @@ const config = {
           editUrl:
             'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
         },
+        blog: {
+          showReadingTime: true,
+          // TODO update this link when the new website's branch is merged.
+          editUrl:
+            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/',
+        },
         theme: {
           customCss: [
             require.resolve('./src/css/custom.css'),
@@ -214,8 +220,8 @@ const config = {
             label: 'FAQ',
           },
           {
-            to: 'community/blogs',
-            label: 'Blogs',
+            to: '/blog',
+            label: 'Blog',
           },
           {
             label: 'Community',
