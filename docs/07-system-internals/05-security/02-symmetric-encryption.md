@@ -33,27 +33,18 @@ Symmetric key algorithms require both the signer (OM) and the verifier (Datanode
 
 **SecretKey Flow:**
 
-```text
-                        Fetch Current Key
-            ┌─────────────────────────────────────┐
-            │                                     │
-            ▼                                     │
-┌───────────────────┐                    ┌────────┴────────┐
-│    SCM Leader     │ ── Rotate Daily ──►│       OM        │
-│                   │                    │     (HMAC)      │
-│  SecretKey File   │                    └────────┬────────┘
-└─────────┬─────────┘                             │
-          │                                       │ Sign Block Token
-          │ Distribute Keys                       │
-          │ via Heartbeat                         ▼
-          │                              ┌─────────────────┐
-          │                              │     Client      │
-          ▼                              └────────┬────────┘
-┌───────────────────┐                             │
-│    Datanodes      │◄────────────────────────────┘
-│                   │        Read/Write with Token
-│  Verify Token     │
-└───────────────────┘
+```mermaid
+flowchart TB
+    SCM["SCM Leader<br/>SecretKey File"]
+    OM["OM<br/>(HMAC)"]
+    Client["Client"]
+    DN["Datanodes<br/>Verify Token"]
+
+    OM -->|Fetch Current Key| SCM
+    SCM -->|Rotate Daily| OM
+    OM -->|Sign Block Token| Client
+    SCM -->|Distribute Keys<br/>via Heartbeat| DN
+    Client -->|Read/Write with Token| DN
 ```
 
 ## SecretKey Lifecycle
