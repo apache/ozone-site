@@ -46,9 +46,9 @@ Open containers are available for writes into the cluster.
 
 Closing containers are in the process of being closed. They will transition to closing when they have enough data to be considered full, or there is an issue with the write pipeline, such as a Datanode going down.
 
-#### Quasi Closed
+#### Quasi-Closed
 
-A container moves to Quasi closed when a Datanode attempts to close the replica, but it was not able to close it cleanly due to the Ratis Pipeline being unavailable. This could happen if a Datanode goes down unexpectedly, for example. Replication Manager will attempt to close the container by identifying the replica with the highest Block Commit Sequence ID (BCSID) and close it. As replicas with older BCSID are stale, new copies will be made from the closed replica before removing the stale replicas.
+A container moves to quasi-closed when a Datanode attempts to close the replica, but it was not able to close it cleanly due to the Ratis Pipeline being unavailable. This could happen if a Datanode goes down unexpectedly, for example. Replication Manager will attempt to close the container by identifying the replica with the highest Block Commit Sequence ID (BCSID) and close it. As replicas with older BCSID are stale, new copies will be made from the closed replica before removing the stale replicas.
 
 #### Closed
 
@@ -121,9 +121,9 @@ A container is marked as empty if it has been closed and then all data blocks st
 
 When a container is open, it is expected that all the replicas are also in the same open state. If an issue occurs, which causes a replica to move from the open state, the Replication Manager will mark the container as Open Unhealthy and trigger the close process. Normally such a container will have transitioned to Closing or Closed by the next Replication Manager check stage.
 
-#### Quasi Closed Stuck
+#### Quasi-Closed Stuck
 
-This is relevant only for Ratis containers. When a container is in the Quasi Closed state, the Replication Manager needs to wait for the majority of replicas (2 out of 3) to reach the Quasi Closed state before it can transition the container to closed. While this is not the case, the container will be marked as Quasi Closed Stuck.
+This is relevant only for Ratis containers. When a container is in the quasi-closed state, the Replication Manager needs to wait for the majority of replicas (2 out of 3) to reach the quasi-closed state before it can transition the container to closed. While this is not the case, the container will be marked as quasi-closed Stuck.
 
 #### Unhealthy Container Samples
 
