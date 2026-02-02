@@ -24,8 +24,8 @@
 
 /* Server configuration input */
 .serverConfig {
-  background: var(--ifm-color-primary-lightest);
-  border: 1px solid var(--ifm-color-primary-light);
+  background: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary-dark);
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 30px;
@@ -36,15 +36,19 @@
 }
 
 [data-theme='dark'] .serverConfig {
-  background: rgba(150, 210, 110, 0.1);
-  border-color: var(--ifm-color-primary-dark);
+  background: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-darker);
 }
 
 .serverLabel {
   font-weight: 600;
-  color: var(--ifm-font-color-base);
+  color: #ffffff;
   font-size: 14px;
   margin: 0;
+}
+
+[data-theme='dark'] .serverLabel {
+  color: #ffffff;
 }
 
 .serverInput {
@@ -80,30 +84,37 @@
 
 .applyButton {
   padding: 8px 20px;
-  background: var(--ifm-color-primary);
-  color: #ffffff;
-  border: none;
+  background: #ffffff;
+  color: var(--ifm-color-primary-darker);
+  border: 2px solid #ffffff;
   border-radius: 4px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .applyButton:hover {
-  background: var(--ifm-color-primary-dark);
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 .applyButton:active {
-  background: var(--ifm-color-primary-darker);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 [data-theme='dark'] .applyButton {
-  color: #1a1a1a;
+  background: #ffffff;
+  color: var(--ifm-color-primary-darker);
+  border-color: #ffffff;
 }
 
 [data-theme='dark'] .applyButton:hover {
-  background: var(--ifm-color-primary-light);
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 .serverInput:focus,
@@ -120,8 +131,14 @@
 
 .serverHint {
   font-size: 13px;
-  color: var(--ifm-font-color-base);
+  color: #ffffff;
   font-style: italic;
+  opacity: 0.9;
+}
+
+[data-theme='dark'] .serverHint {
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 /* Remove white bars and extra spacing */
@@ -129,6 +146,7 @@
   margin: 0;
   padding: 0;
   background: transparent;
+  display: none !important;
 }
 
 .swaggerWrapper :global(.swagger-ui .scheme-container) {
@@ -142,6 +160,7 @@
   margin: 0 0 20px 0;
   padding: 0;
   background: transparent;
+  display: none !important;
 }
 
 .swaggerWrapper :global(.swagger-ui .wrapper) {
@@ -162,6 +181,46 @@
 .swaggerWrapper :global(.swagger-ui h5) {
   font-family: var(--ifm-heading-font-family);
   letter-spacing: -0.02em;
+}
+
+/* Make API section headings more readable - match doc heading style */
+.swaggerWrapper :global(.swagger-ui .opblock-tag) {
+  font-family: var(--ifm-heading-font-family) !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  margin: 2rem 0 1rem 0 !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Style the tag section description text */
+.swaggerWrapper :global(.swagger-ui .opblock-tag-section) {
+  margin-bottom: 2rem;
+}
+
+/* Style the tag description - "APIs to fetch..." text */
+.swaggerWrapper :global(.swagger-ui .opblock-tag small) {
+  font-family: var(--ifm-font-family-base) !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: var(--ifm-color-emphasis-700) !important;
+  letter-spacing: normal !important;
+}
+
+/* Make endpoint paths more readable */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-path) {
+  font-family: var(--ifm-font-family-monospace) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* Make endpoint descriptions more readable */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-description) {
+  font-family: var(--ifm-font-family-base) !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.6 !important;
+  color: var(--ifm-color-emphasis-800) !important;
 }
 
 /* Make main title white */
@@ -219,6 +278,7 @@
   padding: 0;
   margin: 15px 0 20px 0;
   box-shadow: none;
+  display: none !important;
 }
 
 .swaggerWrapper :global(.swagger-ui .scheme-container .servers-title) {
