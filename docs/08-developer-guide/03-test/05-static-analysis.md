@@ -23,7 +23,7 @@ Apache Ozone uses SonarCloud, a cloud-based version of SonarQube, for continuous
 
 ### Accessing SonarCloud
 
-The Ozone project's SonarCloud dashboard is publicly available at: https://sonarcloud.io/project/overview?id=apache_ozone
+The Ozone project's SonarCloud dashboard is publicly available at: https://sonarcloud.io/project/overview?id=hadoop-ozone
 
 ### When Analysis Runs
 
