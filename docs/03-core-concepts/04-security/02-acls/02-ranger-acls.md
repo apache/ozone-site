@@ -18,30 +18,30 @@ The table below shows the mapping between Ozone operations and the required Rang
 
 ### Volume related operation
 
-| `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
-|--------------------------|---------------------|---------------------|------------------|
-| `Create volume` | `CREATE` | | |
-| `List volume` | `LIST` | | |
-| `Get volume info` | `READ` | | |
-| `Delete volume` | `DELETE` | | |
-| `Set Quota` | `WRITE` | | |
-| `Set Owner` | `WRITE_ACL` | | |
-| `Create Tenant (and volume)` | `CREATE` | | |
-| `Delete Tenant` | `WRITE_ACL` | | |
+| `Operation` | `Volume permission` |
+|--------------------------|---------------------|
+| `Create volume` | `CREATE` |
+| `List volume` | `LIST` |
+| `Get volume info` | `READ` |
+| `Delete volume` | `DELETE` |
+| `Set Quota` | `WRITE` |
+| `Set Owner` | `WRITE_ACL` |
+| `Create Tenant (and volume)` | `CREATE` |
+| `Delete Tenant` | `WRITE_ACL` |
 
 ### Bucket related operation
 
-| `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
-|--------------------------|---------------------|---------------------|------------------|
-| `Create bucket` | `READ` | `CREATE` | |
-| `List bucket` | `LIST, READ` | | |
-| `Get bucket info` | `READ` | `READ` | |
-| `Delete bucket` | `READ` | `DELETE` | |
-| `Update bucket property (quota, replication, ...)` | `READ` | `WRITE` | |
-| `List Snapshot` | `READ` | `LIST` | |
-| `List Trash` | `READ` | `LIST` | |
-| `Trash Recover` | `READ` | `WRITE` | |
-| `Set Owner` | `READ` | `WRITE_ACL` | |
+| `Operation` | `Volume permission` | `Bucket permission` |
+|--------------------------|---------------------|---------------------|
+| `Create bucket` | `READ` | `CREATE` |
+| `List bucket` | `LIST, READ` | |
+| `Get bucket info` | `READ` | `READ` |
+| `Delete bucket` | `READ` | `DELETE` |
+| `Update bucket property (quota, replication, ...)` | `READ` | `WRITE` |
+| `List Snapshot` | `READ` | `LIST` |
+| `List Trash` | `READ` | `LIST` |
+| `Trash Recover` | `READ` | `WRITE` |
+| `Set Owner` | `READ` | `WRITE_ACL` |
 
 ### FSO / OBS related operation for key and files
 
