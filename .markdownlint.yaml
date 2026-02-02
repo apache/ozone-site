@@ -74,7 +74,6 @@ proper-names:
   - Datanodes
   - S3 Gateway
   - HDDS
-  - HDDs
   # Acronyms:
   - FSO
   - OBS
@@ -114,6 +113,7 @@ proper-names:
   - Hadoop
   - UUID
   - IP address
+  - HDDs
   # Enforce capitalization for these words only when they are used in sentences (preceded by a space).
   # Other uses in repo names or links like [apache/ozone](https://github.com/apache/ozone) are ok.
   - " Ratis"
