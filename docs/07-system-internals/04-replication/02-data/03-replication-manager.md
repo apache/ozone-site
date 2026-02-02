@@ -48,7 +48,7 @@ Closing containers are in the process of being closed. They will transition to c
 
 #### Quasi Closed
 
-A container moves to quasi closed when a Datanode attempts to close the replica, but it was not able to close it cleanly due to the Ratis Pipeline being unavailable. This could happen if a Datanode goes down unexpectedly, for example. Replication Manager will attempt to close the container by identifying the replica with the highest Block Commit Sequence ID (BCSID) and close it. As replicas with older BCSID are stale, new copies will be made from the closed replica before removing the stale replicas.
+A container moves to Quasi closed when a Datanode attempts to close the replica, but it was not able to close it cleanly due to the Ratis Pipeline being unavailable. This could happen if a Datanode goes down unexpectedly, for example. Replication Manager will attempt to close the container by identifying the replica with the highest Block Commit Sequence ID (BCSID) and close it. As replicas with older BCSID are stale, new copies will be made from the closed replica before removing the stale replicas.
 
 #### Closed
 
