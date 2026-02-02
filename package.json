@@ -12,7 +12,9 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve --port 3001",
     "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "lint": "markdownlint . && yamllint --format=colored \"$(git rev-parse --show-toplevel)\"",
+    "lint:fix": " markdownlint --fix . && yamllint --format=colored \"$(git rev-parse --show-toplevel)\""
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
