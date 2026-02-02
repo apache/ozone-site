@@ -15,8 +15,6 @@ sidebar_label: Storage Containers
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
 -->
 
 # Storage Containers
@@ -38,6 +36,6 @@ The fundamental differences between OPEN and CLOSED containers:
 
 | OPEN                                | CLOSED                               |
 | ----------------------------------- | ------------------------------------ |
-| mutable                             | immutable                            |
-| replicated with RAFT (Ratis)        | Replicated with async container copy |
+| Mutable                             | Immutable                            |
+| Replicated with RAFT (Ratis)        | Replicated with async container copy |
 | Raft leader is used to READ / WRITE | All the nodes can be used to READ    |
