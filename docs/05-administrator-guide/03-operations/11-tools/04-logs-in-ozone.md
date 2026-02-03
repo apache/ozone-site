@@ -8,9 +8,9 @@ Each Ozone service (Ozone Manager, Storage Container Manager, Datanode, S3 Gatew
 
 By default, log files are stored in the `$OZONE_LOG_DIR` directory, which is usually set to the `logs` directory under the Ozone installation. The log file names are specific to each service, for example:
 
-*   `ozone-om-....log` for Ozone Manager
-*   `ozone-scm-....log` for Storage Container Manager
-*   `ozone-datanode-....log` for Datanode
+- `ozone-om-....log` for Ozone Manager
+- `ozone-scm-....log` for Storage Container Manager
+- `ozone-datanode-....log` for Datanode
 
 The logging behavior for each service is controlled by its `log4j.properties` file, located in the service's `$OZONE_CONF_DIR` directory, usually `etc/hadoop`. You can modify this file to change the log level, appenders, and other logging parameters.
 
@@ -18,10 +18,10 @@ The logging behavior for each service is controlled by its `log4j.properties` fi
 
 Audit logs record security-sensitive operations, providing a trail of actions performed on the cluster. The following services produce audit logs:
 
-*   Ozone Manager
-*   Storage Container Manager
-*   Datanode
-*   S3 Gateway
+- Ozone Manager
+- Storage Container Manager
+- Datanode
+- S3 Gateway
 
 Audit log configurations are set in `*-audit-log4j2.properties` files. You can change the corresponding files to update the audit log policies for each component.
 
@@ -29,7 +29,7 @@ Audit log configurations are set in `*-audit-log4j2.properties` files. You can c
 
 Here is an example of an audit log entry from the Ozone Manager:
 
-```
+```text
 INFO  | OMAudit | ? | user=hdfs | ip=127.0.0.1 | op=CREATE_VOLUME | params={volume=vol1, admin=hdfs, owner=hdfs} | result=SUCCESS
 ```
 
@@ -39,7 +39,7 @@ This entry shows that the user `hdfs` successfully created a volume named `vol1`
 
 The default log appender is a rolling appender. The following configurations can be added for the deletion of out-of-date AuditLogs.
 
-```
+```text
 appender.rolling.strategy.type=DefaultRolloverStrategy
 appender.rolling.strategy.max=3000
 appender.rolling.strategy.delete.type=Delete
@@ -61,13 +61,13 @@ You can increase the log verbosity for debugging purposes for both services and 
 
 To enable debug logging for a service, you need to modify its `log4j.properties` file. Change the log level for the desired logger from `INFO` to `DEBUG`. For example, to enable debug logging for the Ozone Manager, you would edit its `log4j.properties` and change the following line:
 
-```
+```text
 rootLogger.level = info
 ```
 
 to:
 
-```
+```text
 rootLogger.level = debug
 ```
 
