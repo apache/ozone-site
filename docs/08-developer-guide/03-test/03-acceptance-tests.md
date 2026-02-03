@@ -5,11 +5,13 @@ Acceptance tests validate the complete Ozone system from an end-user perspective
 ## Scope and Purpose
 
 Acceptance tests serve as the final validation layer in Ozone's testing strategy:
+
 - **Unit Tests**: Test individual classes in isolation
 - **Integration** Tests: Test component interactions using in-memory clusters
 - **Acceptance Tests**: Test the entire system as deployed in containers
 
 Acceptance tests are ideal for:
+
 - End-to-end workflows
 - API compliance (especially S3)
 - Security configurations
@@ -133,6 +135,7 @@ Ozone cluster with multiple OMs and SCMs for HA testing.
 ### S3
 
 Running S3 specific tests requires the following setup:
+
 1. Create a bucket
 2. Configure your local aws cli
 3. Set bucket/endpointurl during the robot test execution
