@@ -24,7 +24,6 @@ Ozone uses [Robot Framework](https://robotframework.org/) for acceptance testing
 
 You can run acceptance tests in any environment after [installing robot framework](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst)
 
-
 ### Key Features
 
 - Human-readable test syntax
@@ -34,6 +33,7 @@ You can run acceptance tests in any environment after [installing robot framewor
 - Ability to create custom keywords
 
 ## Directory Structure
+
 Acceptance tests are located in the `hadoop-ozone/dist/src/main/smoketest/` directory.
 
 ```text
@@ -137,7 +137,7 @@ Ozone cluster with multiple OMs and SCMs for HA testing.
 Running S3 specific tests requires the following setup:
 
 1. Create a bucket
-2. Configure your local aws cli
+2. Configure your local `aws cli`
 3. Set bucket/endpointurl during the robot test execution
 
 ```bash
@@ -153,7 +153,6 @@ After running tests, Robot Framework generates detailed HTML reports:
 - `output.xml`: XML output for processing with other tools
 
 These reports are typically found in the `robot-results/` directory.
-
 
 ## Best Practices
 
