@@ -20,7 +20,7 @@ Acceptance tests are ideal for:
 
 Ozone uses [Robot Framework](https://robotframework.org/) for acceptance testing. Robot Framework is a generic test automation framework that uses a keyword-driven approach to testing.
 
-You can run accectance tests in any environment after [installing robot framework](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst)
+You can run acceptance tests in any environment after [installing robot framework](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst)
 
 
 ### Key Features
@@ -154,7 +154,7 @@ These reports are typically found in the `robot-results/` directory.
 
 ## Best Practices
 
-1. Use existing keywords: Leverage existing keywords from commonlib.robot and other libraries
+1. Use existing keywords: Leverage existing keywords from `commonlib.robot` and other libraries
 2. Create reusable keywords: Define new keywords for complex operations
 3. Clear test descriptions: Each test case should have a clear purpose
 4. Independent tests: Tests should not depend on each other
