@@ -84,7 +84,7 @@
                 />
   </url><url>
     <loc>/feature/diskbalancer.html</loc>
-    <lastmod>2025-12-31T07:54:20+05:30</lastmod>
+    <lastmod>2026-02-04T10:16:37+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -730,7 +730,7 @@
                 />
   </url><url>
     <loc>/design/index.html</loc>
-    <lastmod>2026-01-15T09:25:11+08:00</lastmod>
+    <lastmod>2026-02-03T05:23:07-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -746,7 +746,7 @@
     <lastmod>2026-01-15T09:25:11+08:00</lastmod>
   </url><url>
     <loc>/design/ozone-sts.html</loc>
-    <lastmod>2026-01-04T23:22:18-08:00</lastmod>
+    <lastmod>2026-02-03T05:23:07-08:00</lastmod>
   </url><url>
     <loc>/design/distributed-tracing-opentelemetry.html</loc>
     <lastmod>2025-10-16T09:06:36+05:30</lastmod>
