@@ -75,11 +75,7 @@ Delete Volume
     Should not contain  ${OUTPUT}       ${volume}
 ```
 
-## Running Tests Locally
-
-You can run acceptance tests in several ways:
-
-### Method 1: Using Docker Compose
+## Running Tests Locally using Docker compose
 
 ```bash
 # Go to the compose directory
@@ -92,28 +88,6 @@ cd hadoop-ozone/dist/src/main/compose/
 docker-compose up -d
 # wait....
 ./test-single.sh scm basic/basic.robot
-```
-
-### Method 2: Against a Running Cluster
-
-```bash
-# Set environment variables to point to your cluster
-export OZONE_OM_SERVICE_ID=om-service-test1
-export OZONE_OM_INTERNAL_SERVICE_ID=om-internal-service-test1
-export OZONE_OM_ADDRESS=ozonemanager.example.com:9862
-export OZONE_ADMINISTRATORS=admin
-
-# Run the Robot Framework tests directly
-cd hadoop-ozone/dist/src/main/smoketest
-robot basic/basic.robot
-```
-
-### Method 3: Using Maven
-
-```bash
-# Run acceptance tests with Maven
-cd hadoop-ozone
-mvn verify -Pacceptance
 ```
 
 ## Specialized Test Environments
