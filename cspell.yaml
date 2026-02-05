@@ -75,6 +75,7 @@ words:
 - ratis
 - OM
 - SCM
+- Recon
 - datanode
 - datanodes
 - DN
@@ -98,6 +99,7 @@ words:
 - FCQ
 - QoS
 # Other systems' words
+- savepoints
 - KDC
 - classpath
 - DS
@@ -130,6 +132,7 @@ words:
 - memtable
 - hsync
 - SASL
+- GSS
 - jira
 - jiras
 - LLAP
@@ -211,6 +214,20 @@ words:
 - utilisation
 - utilised
 - hotspots
+- hotspot
+# Author names
+- jojochuang
+- Gargi
+- jais
+- lai
+- activetimebyseconds
+- charindex
+- thecount
+- debugability
+- auditparser
+- checknative
+- subpages
+- analyse
 # Infrastructure and hardware terms
 - Chrony
 - SAS

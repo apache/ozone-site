@@ -15,7 +15,7 @@ Ozone achieves better scalability by separating namespace management from block 
 
 The block diagram below illustrates Ozone's main components and their interactions.
 
-![Architecture diagram](ozoneBlockDiagram.png)
+![Architecture diagram](OzoneArchitectureDiagram.png)
 
 - **Clients** interact with Ozone to read and write data.
 - The **Ozone Manager (OM)** acts as the namespace manager. It handles client requests for creating, deleting, or looking up keys.
