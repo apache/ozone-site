@@ -8,7 +8,8 @@ sidebar_label: Owners
 
 Every volume in Ozone has an **owner** property that identifies the user who owns the volume. The volume owner is a fundamental concept in Ozone's access control and resource management system. It plays a crucial role in determining permissions, storage accounting, and multi-tenant isolation.
 
-While volumes also have an `admin` field in their metadata structure, this field is stored but not functionally used by Ozone Manager for authorization or access control purposes.
+While volumes also have an `admin` field in their metadata structure, **with Native ACLs** (`OzoneNativeAuthorizer`), this field is stored but not functionally used by Ozone Manager for authorization or access control purposes. Authorization checks rely on ACLs and the volume owner instead.
+The behavior of the `admin` field may differ when using `RangerOzoneAuthorizer`.
 
 ## 2. Setting the Volume Owner
 
@@ -18,18 +19,50 @@ When creating a volume, the owner can be explicitly specified using the `--user`
 
 ```bash
 ozone sh volume create /myvolume --user alice
+ozone sh volume info /myvolume
+{
+  "metadata" : { },
+  "name" : "myvolume",
+  "admin" : "om",
+  "owner" : "alice",
+  ...
+}
 ```
 
-If the owner is not specified during creation, Ozone automatically sets the owner to the current user creating the volume:
+If the `--user` option is not provided during volume creation, Ozone automatically sets the owner to the **authenticated user identity** as determined by `UserGroupInformation.getCurrentUser()`. The behavior differs based on the cluster security configuration:
+
+- **Secure/Kerberos mode**: The owner is set to the Kerberos principal (or its short name) of the authenticated user. For example, if authenticated as Kerberos principal `om@REALM`, the volume owner will be `om`.
+
+- **Non-secure mode**: The owner is typically set to the Linux user running the CLI command. For example, if you run the command as Linux user `root`, the volume owner will be `root`.
 
 ```bash
-# Owner defaults to current user
+# Owner defaults to authenticated user
 ozone sh volume create /myvolume
+
+# secure mode kerberos authenticated user
+ozone sh volume info /myvolume
+{
+  "metadata" : { },
+  "name" : "myvolume",
+  "admin" : "om",
+  "owner" : "om",
+  ...
+}
+
+# unsecure mode linux user root
+ozone sh volume info /myvolume
+{
+  "metadata" : { },
+  "name" : "myvolume",
+  "admin" : "root",
+  "owner" : "root",
+  ...
+}
 ```
 
 **Default Behavior:**
 
-- If `--user` is not provided, the owner defaults to the current user creating the volume.
+- If `--user` is not provided, the owner defaults to the authenticated user creating the volume.
 - The `ozone sh volume create` command does not allow setting the admin user. The admin can only be set using the Ozone o3 native Java API.
 
 **Example Output:**
@@ -52,7 +85,7 @@ $ ozone sh volume info /myvolume
   } ]
 }
 
-# Volume created without specifying owner (defaults to current user)
+# Volume created without specifying owner (defaults to authenticated user)
 $ ozone sh volume create /myvol1
 $ ozone sh volume info /myvol1
 {
@@ -114,6 +147,12 @@ ozone sh volume update /myvolume --user bob
 
 Changing the volume owner via `ozone sh volume update --user <new_user>` updates the ownership metadata but **does not automatically modify ACLs**. The previous owner's ACL entries remain unchanged. If you need to revoke the old owner's access entirely, you must manage ACLs separately using ACL update commands.
 
+:::note Volume-Level Operations and Permissions
+Volume-level operations with respect to permissions can differ between Native ACL and Ranger ACL implementations. The permission requirements described here are specific to Native ACLs.
+:::
+
+For detailed information on how permissions and operations work for both **Native ACL** and **Ranger ACL**, refer to the [ACLs documentation](../../security/acls).
+
 ## 3. Volume Owner Privileges
 
 The volume owner receives special privileges that provide comprehensive access to the volume and all resources within it. These privileges are enforced by Ozone's native authorizer (`OzoneNativeAuthorizer`) and bypass standard ACL checks.
@@ -135,21 +174,3 @@ Volume owners **can delete their own volumes** because volumes are created with 
 :::note
 Volume creation is still an **administrative operation** that requires administrator privileges. Only administrators can create volumes.
 :::
-
-### Maximum User Volume Count
-
-Ozone enforces a configurable limit on the number of volumes a user can own. This limit is controlled by the configuration property:
-
-**Maximum number of volumes a user can own:**
-
-- **Default:** 1024 volumes per user
-- **Configuration property:** `ozone.om.user.max.volume`
-- **Error:** If exceeded, the operation fails with **USER_TOO_MANY_VOLUMES** error and message: `"Too many volumes for user: {owner}"`
-
-```xml
-<property>
-  <name>ozone.om.user.max.volume</name>
-  <value>1024</value>
-  <description>Maximum number of volumes a user can own</description>
-</property>
-```
