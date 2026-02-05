@@ -29,9 +29,8 @@ The Ozone project's SonarCloud dashboard is publicly available at: https://sonar
 
 SonarCloud analysis is triggered automatically on:
 
-- Pull Request submissions
 - Merges to the main branch
-- Release branch creation
+- Release tag creation
 
 The analysis is integrated into the GitHub Actions CI workflow in .github/workflows/ci.yml.
 
@@ -59,14 +58,6 @@ SonarQube categorizes issues by severity:
 - **Info**: Non-critical issues that represent best practice violations
 
 ## Addressing SonarQube Issues
-
-### Viewing PR-Specific Issues
-
-For Pull Requests, SonarCloud posts a comment with analysis results directly in the PR conversation. This includes:
-
-- New issues introduced by the PR
-- Code coverage changes
-- Overall status of the quality gate
 
 ### Fixing Common Issues
 
@@ -135,15 +126,15 @@ Source code analyzer that finds common programming flaws.
 
 ```shell
 # Run PMD
-cd hadoop-ozone
-mvn pmd:check
+cd hadoop-ozone/dev-support/checks
+./pmd.sh
 ```
 
-Rules are defined in `hadoop-ozone/dev-support/pmd/pmd-ruleset.xml`
+Rules are defined in `dev-support/pmd/pmd-ruleset.xml`
 
 ### 3. Checkstyle
 
-Enforces coding standards and conventions.
+Enforces Apache license header in all files, coding standards and conventions.
 
 ```shell
 # Run Checkstyle
@@ -151,7 +142,7 @@ cd hadoop-ozone/dev-support/checks
 ./checkstyle.sh
 ```
 
-Ozone's checkstyle rules ensure consistent code formatting and structure.
+Exclusions are defined in `dev-support/rat/rat-exclusions.txt`
 
 ## Best Practices
 
