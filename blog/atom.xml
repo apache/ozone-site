@@ -2,10 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ozone-site-v2.staged.apache.org/blog</id>
     <title>Apache Ozone Blog</title>
-    <updated>2026-01-29T00:00:00.000Z</updated>
+    <updated>2026-01-30T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ozone-site-v2.staged.apache.org/blog"/>
     <subtitle>Apache Ozone Blog</subtitle>
+    <entry>
+        <title type="html"><![CDATA[Apache Ozone Best Practices at Didi: Scaling to Tens of Billions of Files]]></title>
+        <id>https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi</id>
+        <link href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi"/>
+        <updated>2026-01-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Guest post by the Didi Engineering Team. For the full story with detailed slides, see Apache Ozone Best Practices at Didi (PDF).]]></summary>
+        <content type="html"><![CDATA[<p>Guest post by the Didi Engineering Team. For the full story with detailed slides, see <a href="https://ozone.apache.org/assets/ApacheOzoneBestPracticesAtDidi.pdf" target="_blank" rel="noopener noreferrer">Apache Ozone Best Practices at Didi (PDF)</a>.</p>
+<p>As Didi's volume of unstructured data surged into the hundreds of petabytes, comprising tens of billions of files, their traditional storage architecture faced severe scalability bottlenecks. This post summarizes how they migrated from HDFS to Apache Ozone, the optimizations they implemented for high-performance reads, and their journey in contributing these improvements back to the community.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="the-challenge-hdfs-at-scale">The Challenge: HDFS at Scale<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#the-challenge-hdfs-at-scale" class="hash-link" aria-label="Direct link to The Challenge: HDFS at Scale" title="Direct link to The Challenge: HDFS at Scale">​</a></h2>
+<p>Like many data-driven enterprises, Didi relied heavily on HDFS. However, as their data scale grew, they hit the classic "NameNode Limit."</p>
+<ul>
+<li><strong>Metadata Pressure:</strong> Storing hundreds of millions of files put immense pressure on the HDFS NameNode memory.</li>
+<li><strong>Block Reporting Storms:</strong> With massive file counts, block reporting became a significant overhead.</li>
+<li><strong>Scalability Ceiling:</strong> They needed a solution that could handle tens of billions of files without partitioning their clusters into unmanageable silos.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="why-ozone">Why Ozone?<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#why-ozone" class="hash-link" aria-label="Direct link to Why Ozone?" title="Direct link to Why Ozone?">​</a></h2>
+<p>They chose Apache Ozone as their next-generation storage engine because it addresses these limitations architecturally:</p>
+<ul>
+<li><strong>Decoupled Metadata:</strong> By separating the Ozone Manager (OM) for namespace and Storage Container Manager (SCM) for block management, Ozone scales significantly better than HDFS.</li>
+<li><strong>RocksDB-based Metadata:</strong> Unlike HDFS, which relies entirely on heap memory, Ozone stores metadata in RocksDB, removing the memory bottleneck.</li>
+<li><strong>Container Logic:</strong> Managing data in "containers" rather than individual blocks reduces the reporting overhead on the SCM.</li>
+</ul>
+<p>Today, Ozone has been running in production at Didi for over two years, managing hundreds of PB of storage.</p>
+<p><img decoding="async" loading="lazy" alt="Figure 1: Ozone Cluster Scale at Didi" src="https://ozone-site-v2.staged.apache.org/assets/images/ozone-cluster-scale-at-didi-bff8e63e93ed0f503b50d7350756bef4.png" width="1856" height="842" class="img_zmyy"></p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="architecture--key-optimizations">Architecture &amp; Key Optimizations<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#architecture--key-optimizations" class="hash-link" aria-label="Direct link to Architecture &amp; Key Optimizations" title="Direct link to Architecture &amp; Key Optimizations">​</a></h2>
+<p>Migrating was just the first step. To meet Didi's strict latency requirements (especially for "first-frame" read access), they engineered several critical optimizations.</p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="1-multi-cluster-routing-with-viewfs">1. Multi-Cluster Routing with ViewFs<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#1-multi-cluster-routing-with-viewfs" class="hash-link" aria-label="Direct link to 1. Multi-Cluster Routing with ViewFs" title="Direct link to 1. Multi-Cluster Routing with ViewFs">​</a></h3>
+<p>To manage the sheer volume of data, they utilized a client-side routing mechanism inspired by HDFS ViewFs. By mapping paths to specific clusters (e.g., <code>vol/bucket/prefix1</code> → cluster1), they effectively balanced the load and kept the file count in each cluster under 5 billion, alleviating RPC pressure on individual Ozone Managers.</p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="2-boosting-read-performance-s3g-follower-reads">2. Boosting Read Performance: S3G Follower Reads<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#2-boosting-read-performance-s3g-follower-reads" class="hash-link" aria-label="Direct link to 2. Boosting Read Performance: S3G Follower Reads" title="Direct link to 2. Boosting Read Performance: S3G Follower Reads">​</a></h3>
+<p>They observed that the Leader OM often became a bottleneck for S3 Gateway (S3G) requests. To solve this, they implemented a Follower Read strategy.</p>
+<p>They introduced a "probe task" in the client (e.g. every 3 seconds) that evaluates:</p>
+<ul>
+<li><strong>Latency:</strong> Selects the OM node with the lowest response time.</li>
+<li><strong>Freshness:</strong> Checks the lastAppliedIndex to ensure the Follower isn't serving stale data.</li>
+</ul>
+<p><strong>Result:</strong> The P90 latency for S3G metadata requests (GetMetaLatency) dropped from a weekly average of ~90ms to ~17ms; in best cases, from tens of milliseconds to under 3ms.</p>
+<p><img decoding="async" loading="lazy" alt="Figure 6-2. S3G Download Latency Monitoring After FollowerRead Goes Online" src="https://ozone-site-v2.staged.apache.org/assets/images/s3g-download-latency-follower-read-goes-online-102b1f38e6b783c7401950efbbef20b0.png" width="2310" height="1772" class="img_zmyy"></p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="3-heterogeneous-caching-hdd--nvme">3. Heterogeneous Caching (HDD + NVMe)<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#3-heterogeneous-caching-hdd--nvme" class="hash-link" aria-label="Direct link to 3. Heterogeneous Caching (HDD + NVMe)" title="Direct link to 3. Heterogeneous Caching (HDD + NVMe)">​</a></h3>
+<p>Didi's clusters use cost-effective hard disk drives, but random reads on small files (tens of MBs) suffered from disk latency. They designed a heterogeneous caching layer:</p>
+<ul>
+<li><strong>Strategy:</strong> They cache the first Chunk (1MB) of each block on high-speed NVMe SSDs; for EC (e.g. RS-6-3-1024k) they cache the first stripe (9MB: 6 data + 3 parity) to cover first-frame needs.</li>
+<li><strong>Impact:</strong> The 6MB of actual data in that stripe is sufficient for most first-frame requests, dramatically improving read speeds without the cost of all-flash storage.</li>
+<li><strong>Implementation:</strong> A custom LRU cache on the Datanode manages this hot data, ensuring efficient space utilization. This caching optimization brought at least 100ms latency improvement in first-frame reads.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="4-concurrency--lock-optimization">4. Concurrency &amp; Lock Optimization<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#4-concurrency--lock-optimization" class="hash-link" aria-label="Direct link to 4. Concurrency &amp; Lock Optimization" title="Direct link to 4. Concurrency &amp; Lock Optimization">​</a></h3>
+<p>During high-concurrency testing, they identified thread contention issues. Specifically, a spin lock in <code>ChunkUtils#processFileExclusive</code> was causing CPU spikes.</p>
+<p>They contributed a fix (see <a href="https://issues.apache.org/jira/browse/HDDS-11281" target="_blank" rel="noopener noreferrer">HDDS-11281</a>) that replaced the global lock with a <code>Striped&lt;ReadWriteLock&gt;</code>. This granular locking mechanism reduced lock contention and improved system throughput, yielding a performance gain of at least 50ms per operation in contended scenarios.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="cost-efficiency-erasure-coding-ec">Cost Efficiency: Erasure Coding (EC)<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#cost-efficiency-erasure-coding-ec" class="hash-link" aria-label="Direct link to Cost Efficiency: Erasure Coding (EC)" title="Direct link to Cost Efficiency: Erasure Coding (EC)">​</a></h2>
+<p>With data growing at &gt;1PB per day, the 3-replica cost model was unsustainable. They transitioned to Erasure Coding (EC) using the RS-6-3-1024k policy.</p>
+<ul>
+<li><strong>Storage Savings:</strong> Reduced replication factor from 3x to ~1.5x, saving 50% on hardware.</li>
+<li><strong>Challenges Solved:</strong> They encountered and fixed issues with deletion backlogs (<a href="https://issues.apache.org/jira/browse/HDDS-11498" target="_blank" rel="noopener noreferrer">HDDS-11498</a>), insufficient EC pipelines (<a href="https://issues.apache.org/jira/browse/HDDS-11209" target="_blank" rel="noopener noreferrer">HDDS-11209</a>), and Safe Mode logic for EC containers (<a href="https://issues.apache.org/jira/browse/HDDS-11243" target="_blank" rel="noopener noreferrer">HDDS-11243</a>), ensuring EC is as robust as replication in production.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="community-contributions">Community Contributions<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#community-contributions" class="hash-link" aria-label="Direct link to Community Contributions" title="Direct link to Community Contributions">​</a></h2>
+<p>Didi's journey with Ozone has been deeply collaborative. We are proud to highlight that Didi's contributors have brought several key fixes and improvements back to the Apache Ozone community:</p>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11483" target="_blank" rel="noopener noreferrer">HDDS-11483</a>: Increased S3G buffer size (e.g. to 4MB) to reduce network I/O and improve first-frame latency.</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11209" target="_blank" rel="noopener noreferrer">HDDS-11209</a>: Avoid insufficient EC pipelines in the container pipeline cache (OM must not cache EC pipelines with incomplete Datanodes).</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-9342" target="_blank" rel="noopener noreferrer">HDDS-9342</a>: Fixed OM HA crash and restart failure caused by timing inconsistency between applyTransactionMap and double-buffer.</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-10985" target="_blank" rel="noopener noreferrer">HDDS-10985</a>: EC Reconstruction failed because the size of currentChunks was not equal to checksumBlockDataChunks.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="summary--future-work">Summary &amp; Future Work<a href="https://ozone-site-v2.staged.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#summary--future-work" class="hash-link" aria-label="Direct link to Summary &amp; Future Work" title="Direct link to Summary &amp; Future Work">​</a></h2>
+<p>Apache Ozone has successfully enabled Didi to scale its storage infrastructure to hundreds of petabytes while maintaining high performance and lowering costs.</p>
+<p>Looking ahead, Didi is exploring:</p>
+<ul>
+<li><strong>IO_URING:</strong> To further enhance asynchronous I/O efficiency.</li>
+<li><strong>SPDK:</strong> To accelerate access to RocksDB on NVMe drives for OM and SCM.</li>
+</ul>
+<p>Didi thanks the Apache Ozone community for their support and vibrant collaboration. The transition to Ozone has been a game-changer for Didi's big data infrastructure.</p>]]></content>
+        <author>
+            <name>Kaun-Hung (Rich) Huang</name>
+            <uri>https://github.com/rich7420</uri>
+        </author>
+        <author>
+            <name>Wei-Chiu Chuang</name>
+            <uri>https://github.com/jojochuang</uri>
+        </author>
+        <author>
+            <name>The Apache Ozone Community</name>
+            <uri>https://ozone.apache.org</uri>
+        </author>
+        <category label="user-stories" term="user-stories"/>
+        <category label="performance" term="performance"/>
+        <category label="erasure-coding" term="erasure-coding"/>
+        <category label="scale" term="scale"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[No More Hotspots: Introducing the Automatic Disk Balancer in Apache Ozone]]></title>
         <id>https://ozone-site-v2.staged.apache.org/blog/2026/01/29/disk-balancer-preview</id>
