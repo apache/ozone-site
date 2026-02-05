@@ -16,7 +16,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.27c88cdc.css">
-<script src="/assets/js/runtime~main.e6d72192.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.512e1237.js" defer="defer"></script>
 <script src="/assets/js/main.2954cde0.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -103,7 +103,7 @@ The EC policy encapsulates how to encode/decode a file.</p>
 </ol>
 <p>To pass the EC Replication Config in command line or configuration files, we need to use the following format:
 <em>codec</em>-<em>num data blocks</em>-<em>num parity blocks</em>-<em>EC chunk size</em></p>
-<p>Currently, there are three built-in EC Replication Configs supported: <code>RS-3-2-1024k</code>, <code>RS-6-3-1024k</code>, <code>XOR-2-1-1024k</code>.
+<p>Currently, there are three built-in EC Replication Configs supported: <code>RS-3-2-1024k</code>, <code>RS-6-3-1024k</code>, <code>RS-10-4-1024k</code>.
 The most recommended option is <code>RS-6-3-1024k</code>. When a key/file created without specifying the Replication Config,
 it inherits the EC Replication Config of its bucket if it&#x27;s available.</p>
 <p>Changing the bucket level EC Replication Config only affect new files created within the bucket.
