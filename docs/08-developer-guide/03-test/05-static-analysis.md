@@ -147,7 +147,7 @@ cd hadoop-ozone/dev-support/checks
 Enforces Apache license header in all files
 
 ```shell
-# Run Checkstyle
+# Run rat
 cd hadoop-ozone/dev-support/checks
 ./rat.sh
 ```
