@@ -75,7 +75,7 @@ Delete Volume
     Should not contain  ${OUTPUT}       ${volume}
 ```
 
-## Running Tests Locally using Docker compose
+## Running Tests Locally using Docker Compose
 
 ```bash
 # Go to the compose directory
