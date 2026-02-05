@@ -167,6 +167,8 @@ words:
 - OCI
 - untar
 - Untar
+- LRU
+- SPDK
 # Misc words
 - acking
 - dashboarding
@@ -201,6 +203,7 @@ words:
 # Apache Ozone community member names
 - Sumit
 # Company names for "Who Uses Ozone" page
+- Didi
 - Shopee
 - Qihoo360
 - Meituan
