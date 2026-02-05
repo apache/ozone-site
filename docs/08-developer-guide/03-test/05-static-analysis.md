@@ -134,12 +134,22 @@ Rules are defined in `dev-support/pmd/pmd-ruleset.xml`
 
 ### 3. Checkstyle
 
-Enforces Apache license header in all files, coding standards and conventions.
+Enforces coding standards and conventions.
 
 ```shell
 # Run Checkstyle
 cd hadoop-ozone/dev-support/checks
 ./checkstyle.sh
+```
+
+### 4. RAT
+
+Enforces Apache license header in all files
+
+```shell
+# Run Checkstyle
+cd hadoop-ozone/dev-support/checks
+./rat.sh
 ```
 
 Exclusions are defined in `dev-support/rat/rat-exclusions.txt`
@@ -156,6 +166,7 @@ Exclusions are defined in `dev-support/rat/rat-exclusions.txt`
 # Run all static analysis checks
 cd hadoop-ozone/dev-support/checks
 ./findbugs.sh
+./pmd.sh
 ./checkstyle.sh
 ./rat.sh
 ```
