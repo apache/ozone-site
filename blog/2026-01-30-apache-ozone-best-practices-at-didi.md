@@ -50,7 +50,7 @@ They introduced a "probe task" in the client (e.g. every 3 seconds) that evaluat
 
 **Result:** The P90 latency for S3G metadata requests (GetMetaLatency) dropped from a weekly average of ~90ms to ~17ms; in best cases, from tens of milliseconds to under 3ms.
 
-![Figure 2: Significant drop in S3G latency after enabling Follower Reads](/img/blog/s3g-latency-follower-reads.png)
+![Figure 6-2. S3G Download Latency Monitoring After FollowerRead Goes Online](/img/blog/s3g-download-latency-follower-read-goes-online.png)
 
 ### 3. Heterogeneous Caching (HDD + NVMe)
 
