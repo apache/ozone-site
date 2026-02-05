@@ -50,4 +50,3 @@ The table below shows the mapping between Ozone operations and the required Rang
 | `List key` | `READ` | `LIST, READ` | |
 | `Write key` | `READ` | `READ` | `CREATE, WRITE` |
 | `Read key` | `READ` | `READ` | `READ` |
-
