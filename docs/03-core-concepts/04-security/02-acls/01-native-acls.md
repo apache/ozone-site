@@ -224,5 +224,4 @@ The table below shows the mapping between Ozone operations and the required Nati
 | `Delete key` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `DELETE (*recursive check all child), <admin>` |
 | `Read key` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` |
 | `Read ACL` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `READ_ACL, <admin>, <owner>` |
-| `Write ACL` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `WRITE_ACL, <admin>, <owner>` | |
-
+| `Write ACL` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `WRITE_ACL, <admin>, <owner>` |
