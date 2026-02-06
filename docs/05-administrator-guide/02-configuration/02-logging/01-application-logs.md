@@ -22,6 +22,16 @@ In addition to the main service log, Datanode also generates container-specific 
 
 Container logs are configured via `dn-container-log4j2.properties` and are stored as `dn-container-${hostName}.log` in the `$OZONE_LOG_DIR` directory.
 
+### Example
+
+```text
+2026-02-01 16:08:59,261 | INFO  | ID=2 | Index=0 | BCSID=0 | State=OPEN | Volume=/hadoop-ozone/datanode/data/hdds | DataChecksum=0 |
+2026-02-03 12:49:36,139 | INFO  | ID=2 | Index=0 | BCSID=1172 | State=CLOSING | Volume=/hadoop-ozone/datanode/data/hdds | DataChecksum=0 |
+2026-02-03 12:49:37,443 | INFO  | ID=2 | Index=0 | BCSID=1172 | State=CLOSED | Volume=/hadoop-ozone/datanode/data/hdds | DataChecksum=4117a7a2 |
+2026-02-03 13:31:17,149 | INFO  | ID=2018 | Index=0 | BCSID=159 | State=CLOSING | Volume=/mnt/dummy_disk1/hadoop-ozone/datanode/data/hdds | DataChecksum=0 |
+2026-02-03 13:31:17,205 | WARN  | ID=2018 | Index=0 | BCSID=159 | State=QUASI_CLOSED | Volume=/mnt/dummy_disk1/hadoop-ozone/datanode/data/hdds | DataChecksum=2a21d155 | Ratis group removed. Group id: group-82AA09A3DA8C |
+```
+
 ## Debugging
 
 You can increase the log verbosity for debugging purposes for both services and CLI tools.
