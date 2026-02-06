@@ -100,6 +100,7 @@ words:
 - QoS
 # Other systems' words
 - savepoints
+- HDDs
 - KDC
 - classpath
 - DS
@@ -166,6 +167,7 @@ words:
 - Cloudian
 - ABFS
 - OCI
+- OOM
 - untar
 - Untar
 - LRU
