@@ -645,10 +645,6 @@ org.apache.hadoop.ozone.upgrade.LayoutVersionManager#isAllowed(org.apache.hadoop
 <p>Method level annotation used to &ldquo;disallow&rdquo; an API if current layout version does not include the associated layout feature. Currently it is added only to the OM module, but can easily be moved down to a common module based on need on the HDDS layer.</p>
 <h2 id="belongstolayoutversion-annotation">@BelongsToLayoutVersion Annotation</h2>
 <p>Annotation to mark an OM request class that it belongs to a specific Layout Version. Until that version is available post finalize, this request will not be supported. A newer version of an existing OM request can be created (by inheritance or a fully new class) and marked with a newer layout version. Until finalizing this layout version, the older request class is used. Post finalizing, the newer version of the request class is used.</p>
-<h2 id="layoutversioninstancefactory">LayoutVersionInstanceFactory<T></h2>
-<p>Generic factory which stores different instances of Type &lsquo;T&rsquo; sharded by a key &amp; version. A single key can be associated with different versions of &lsquo;T&rsquo;.</p>
-<h3 id="why-does-this-class-exist">Why does this class exist?</h3>
-<p>A typical use case during upgrade is to have multiple versions of a class / method / object and choose them based  on the current layout version at runtime. Before finalizing, an older version is typically needed, and after finalization, a newer version is needed. This class serves this purpose in a generic way. For example, we can create a Factory to create multiple versions of OMRequests sharded by Request Type &amp; Layout Version Supported.</p>
 <h2 id="upgrade-action-upgradeactionom--upgradeactionhdds">Upgrade Action (UpgradeActionOm &amp; UpgradeActionHdds)</h2>
 <p>Annotation to specify upgrade action run during specific upgrade phases. Each layout feature can optionally define an upgrade action for every supported phase. These are the supported phases of action callbacks.</p>
 <h4 id="validate_in_prefinalize">VALIDATE_IN_PREFINALIZE</h4>
@@ -725,7 +721,7 @@ functionality.</li>
 <footer class="footer">
   <div class="container">
     <span class="small text-muted">
-      Version: 2.2.0-SNAPSHOT, Last Modified: June 10, 2025 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/5787135483c8539012c1e96a85cbc57e617c39aa">5787135483</a>
+      Version: 2.2.0-SNAPSHOT, Last Modified: February 5, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/28e202b873ac04b8457007b0550f31c2409705d7">28e202b873</a>
     </span>
   </div>
 </footer>
