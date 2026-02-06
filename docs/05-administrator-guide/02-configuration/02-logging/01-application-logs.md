@@ -16,6 +16,12 @@ By default, log files are stored in the `$OZONE_LOG_DIR` directory, which is usu
 
 The logging behavior for each service is controlled by its `log4j.properties` file, located in the service’s `$OZONE_CONF_DIR` directory, usually `etc/hadoop`. You can modify this file to change the log level, logging outputs, and other logging parameters.
 
+## Datanode Container Logs
+
+In addition to the main service log, Datanode also generates container-specific logs that track container replica-level events. These logs record brief messages about container state changes (open, closing, closed, unhealthy), replication events, reconstruction, reconciliation, container moves, and other container lifecycle events.
+
+Container logs are configured via `dn-container-log4j2.properties` and are stored as `dn-container-${hostName}.log` in the `$OZONE_LOG_DIR` directory.
+
 ## Debugging
 
 You can increase the log verbosity for debugging purposes for both services and CLI tools.
