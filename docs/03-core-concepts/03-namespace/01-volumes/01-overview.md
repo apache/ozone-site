@@ -51,6 +51,24 @@ ozone sh volume create /myvolume
 
 For more details on volume operations, refer to the [Ozone CLI documentation](../../../04-user-guide/01-client-interfaces/01-o3.md#volume-operations).
 
+### Maximum User Volume Count
+
+Ozone enforces a configurable limit on the number of volumes a user can own. This limit is controlled by the configuration property:
+
+**Maximum number of volumes a user can own:**
+
+- **Default:** 1024 volumes per user
+- **Configuration property:** `ozone.om.user.max.volume`
+- **Error:** If exceeded, the operation fails with **USER_TOO_MANY_VOLUMES** error and message: `"Too many volumes for user: {owner}"`
+
+```xml
+<property>
+  <name>ozone.om.user.max.volume</name>
+  <value>1024</value>
+  <description>Maximum number of volumes a user can own</description>
+</property>
+```
+
 ### Quota Management
 
 Volumes can have quotas applied to them, limiting the total storage space or the number of namespaces (buckets) they can consume. This is crucial for multi-tenant environments to prevent any single user or project from monopolizing resources.
