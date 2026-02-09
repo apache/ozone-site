@@ -4,7 +4,7 @@
   <ShortName>Apache Ozone</ShortName>
   <Description>Search Apache Ozone</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" method="get" template="https://ozone.apache.org/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://ozone.apache.org/opensearch.xml" />
-  <moz:SearchForm>https://ozone.apache.org/</moz:SearchForm>
+  <Url type="text/html" method="get" template="https://ozone-site-v2.staged.apache.org/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://ozone-site-v2.staged.apache.org/opensearch.xml" />
+  <moz:SearchForm>https://ozone-site-v2.staged.apache.org/</moz:SearchForm>
 </OpenSearchDescription>
