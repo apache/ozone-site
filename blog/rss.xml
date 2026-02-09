@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Apache Ozone Blog</title>
+        <link>https://ozone.apache.org/blog</link>
+        <description>Apache Ozone Blog</description>
+        <lastBuildDate>Fri, 30 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Apache Ozone Best Practices at Didi: Scaling to Tens of Billions of Files]]></title>
+            <link>https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi</link>
+            <guid>https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi</guid>
+            <pubDate>Fri, 30 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Guest post by the Didi Engineering Team. For the full story with detailed slides, see Apache Ozone Best Practices at Didi (PDF).]]></description>
+            <content:encoded><![CDATA[<p>Guest post by the Didi Engineering Team. For the full story with detailed slides, see <a href="https://ozone.apache.org/assets/ApacheOzoneBestPracticesAtDidi.pdf" target="_blank" rel="noopener noreferrer">Apache Ozone Best Practices at Didi (PDF)</a>.</p>
+<p>As Didi's volume of unstructured data surged into the hundreds of petabytes, comprising tens of billions of files, their traditional storage architecture faced severe scalability bottlenecks. This post summarizes how they migrated from HDFS to Apache Ozone, the optimizations they implemented for high-performance reads, and their journey in contributing these improvements back to the community.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="the-challenge-hdfs-at-scale">The Challenge: HDFS at Scale<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#the-challenge-hdfs-at-scale" class="hash-link" aria-label="Direct link to The Challenge: HDFS at Scale" title="Direct link to The Challenge: HDFS at Scale">​</a></h2>
+<p>Like many data-driven enterprises, Didi relied heavily on HDFS. However, as their data scale grew, they hit the classic "NameNode Limit."</p>
+<ul>
+<li><strong>Metadata Pressure:</strong> Storing hundreds of millions of files put immense pressure on the HDFS NameNode memory.</li>
+<li><strong>Block Reporting Storms:</strong> With massive file counts, block reporting became a significant overhead.</li>
+<li><strong>Scalability Ceiling:</strong> They needed a solution that could handle tens of billions of files without partitioning their clusters into unmanageable silos.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="why-ozone">Why Ozone?<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#why-ozone" class="hash-link" aria-label="Direct link to Why Ozone?" title="Direct link to Why Ozone?">​</a></h2>
+<p>They chose Apache Ozone as their next-generation storage engine because it addresses these limitations architecturally:</p>
+<ul>
+<li><strong>Decoupled Metadata:</strong> By separating the Ozone Manager (OM) for namespace and Storage Container Manager (SCM) for block management, Ozone scales significantly better than HDFS.</li>
+<li><strong>RocksDB-based Metadata:</strong> Unlike HDFS, which relies entirely on heap memory, Ozone stores metadata in RocksDB, removing the memory bottleneck.</li>
+<li><strong>Container Logic:</strong> Managing data in "containers" rather than individual blocks reduces the reporting overhead on the SCM.</li>
+</ul>
+<p>Today, Ozone has been running in production at Didi for over two years, managing hundreds of PB of storage.</p>
+<p><img decoding="async" loading="lazy" alt="Figure 1: Ozone Cluster Scale at Didi" src="https://ozone.apache.org/assets/images/ozone-cluster-scale-at-didi-bff8e63e93ed0f503b50d7350756bef4.png" width="1856" height="842" class="img_zmyy"></p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="architecture--key-optimizations">Architecture &amp; Key Optimizations<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#architecture--key-optimizations" class="hash-link" aria-label="Direct link to Architecture &amp; Key Optimizations" title="Direct link to Architecture &amp; Key Optimizations">​</a></h2>
+<p>Migrating was just the first step. To meet Didi's strict latency requirements (especially for "first-frame" read access), they engineered several critical optimizations.</p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="1-multi-cluster-routing-with-viewfs">1. Multi-Cluster Routing with ViewFs<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#1-multi-cluster-routing-with-viewfs" class="hash-link" aria-label="Direct link to 1. Multi-Cluster Routing with ViewFs" title="Direct link to 1. Multi-Cluster Routing with ViewFs">​</a></h3>
+<p>To manage the sheer volume of data, they utilized a client-side routing mechanism inspired by HDFS ViewFs. By mapping paths to specific clusters (e.g., <code>vol/bucket/prefix1</code> → cluster1), they effectively balanced the load and kept the file count in each cluster under 5 billion, alleviating RPC pressure on individual Ozone Managers.</p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="2-boosting-read-performance-s3g-follower-reads">2. Boosting Read Performance: S3G Follower Reads<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#2-boosting-read-performance-s3g-follower-reads" class="hash-link" aria-label="Direct link to 2. Boosting Read Performance: S3G Follower Reads" title="Direct link to 2. Boosting Read Performance: S3G Follower Reads">​</a></h3>
+<p>They observed that the Leader OM often became a bottleneck for S3 Gateway (S3G) requests. To solve this, they implemented a Follower Read strategy.</p>
+<p>They introduced a "probe task" in the client (e.g. every 3 seconds) that evaluates:</p>
+<ul>
+<li><strong>Latency:</strong> Selects the OM node with the lowest response time.</li>
+<li><strong>Freshness:</strong> Checks the lastAppliedIndex to ensure the Follower isn't serving stale data.</li>
+</ul>
+<p><strong>Result:</strong> The P90 latency for S3G metadata requests (GetMetaLatency) dropped from a weekly average of ~90ms to ~17ms; in best cases, from tens of milliseconds to under 3ms.</p>
+<p><img decoding="async" loading="lazy" alt="Figure 6-2. S3G Download Latency Monitoring After FollowerRead Goes Online" src="https://ozone.apache.org/assets/images/s3g-download-latency-follower-read-goes-online-102b1f38e6b783c7401950efbbef20b0.png" width="2310" height="1772" class="img_zmyy"></p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="3-heterogeneous-caching-hdd--nvme">3. Heterogeneous Caching (HDD + NVMe)<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#3-heterogeneous-caching-hdd--nvme" class="hash-link" aria-label="Direct link to 3. Heterogeneous Caching (HDD + NVMe)" title="Direct link to 3. Heterogeneous Caching (HDD + NVMe)">​</a></h3>
+<p>Didi's clusters use cost-effective hard disk drives, but random reads on small files (tens of MBs) suffered from disk latency. They designed a heterogeneous caching layer:</p>
+<ul>
+<li><strong>Strategy:</strong> They cache the first Chunk (1MB) of each block on high-speed NVMe SSDs; for EC (e.g. RS-6-3-1024k) they cache the first stripe (9MB: 6 data + 3 parity) to cover first-frame needs.</li>
+<li><strong>Impact:</strong> The 6MB of actual data in that stripe is sufficient for most first-frame requests, dramatically improving read speeds without the cost of all-flash storage.</li>
+<li><strong>Implementation:</strong> A custom LRU cache on the Datanode manages this hot data, ensuring efficient space utilization. This caching optimization brought at least 100ms latency improvement in first-frame reads.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="4-concurrency--lock-optimization">4. Concurrency &amp; Lock Optimization<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#4-concurrency--lock-optimization" class="hash-link" aria-label="Direct link to 4. Concurrency &amp; Lock Optimization" title="Direct link to 4. Concurrency &amp; Lock Optimization">​</a></h3>
+<p>During high-concurrency testing, they identified thread contention issues. Specifically, a spin lock in <code>ChunkUtils#processFileExclusive</code> was causing CPU spikes.</p>
+<p>They contributed a fix (see <a href="https://issues.apache.org/jira/browse/HDDS-11281" target="_blank" rel="noopener noreferrer">HDDS-11281</a>) that replaced the global lock with a <code>Striped&lt;ReadWriteLock&gt;</code>. This granular locking mechanism reduced lock contention and improved system throughput, yielding a performance gain of at least 50ms per operation in contended scenarios.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="cost-efficiency-erasure-coding-ec">Cost Efficiency: Erasure Coding (EC)<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#cost-efficiency-erasure-coding-ec" class="hash-link" aria-label="Direct link to Cost Efficiency: Erasure Coding (EC)" title="Direct link to Cost Efficiency: Erasure Coding (EC)">​</a></h2>
+<p>With data growing at &gt;1PB per day, the 3-replica cost model was unsustainable. They transitioned to Erasure Coding (EC) using the RS-6-3-1024k policy.</p>
+<ul>
+<li><strong>Storage Savings:</strong> Reduced replication factor from 3x to ~1.5x, saving 50% on hardware.</li>
+<li><strong>Challenges Solved:</strong> They encountered and fixed issues with deletion backlogs (<a href="https://issues.apache.org/jira/browse/HDDS-11498" target="_blank" rel="noopener noreferrer">HDDS-11498</a>), insufficient EC pipelines (<a href="https://issues.apache.org/jira/browse/HDDS-11209" target="_blank" rel="noopener noreferrer">HDDS-11209</a>), and Safe Mode logic for EC containers (<a href="https://issues.apache.org/jira/browse/HDDS-11243" target="_blank" rel="noopener noreferrer">HDDS-11243</a>), ensuring EC is as robust as replication in production.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="community-contributions">Community Contributions<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#community-contributions" class="hash-link" aria-label="Direct link to Community Contributions" title="Direct link to Community Contributions">​</a></h2>
+<p>Didi's journey with Ozone has been deeply collaborative. We are proud to highlight that Didi's contributors have brought several key fixes and improvements back to the Apache Ozone community:</p>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11483" target="_blank" rel="noopener noreferrer">HDDS-11483</a>: Increased S3G buffer size (e.g. to 4MB) to reduce network I/O and improve first-frame latency.</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-11209" target="_blank" rel="noopener noreferrer">HDDS-11209</a>: Avoid insufficient EC pipelines in the container pipeline cache (OM must not cache EC pipelines with incomplete Datanodes).</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-9342" target="_blank" rel="noopener noreferrer">HDDS-9342</a>: Fixed OM HA crash and restart failure caused by timing inconsistency between applyTransactionMap and double-buffer.</li>
+<li><a href="https://issues.apache.org/jira/browse/HDDS-10985" target="_blank" rel="noopener noreferrer">HDDS-10985</a>: EC Reconstruction failed because the size of currentChunks was not equal to checksumBlockDataChunks.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="summary--future-work">Summary &amp; Future Work<a href="https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi#summary--future-work" class="hash-link" aria-label="Direct link to Summary &amp; Future Work" title="Direct link to Summary &amp; Future Work">​</a></h2>
+<p>Apache Ozone has successfully enabled Didi to scale its storage infrastructure to hundreds of petabytes while maintaining high performance and lowering costs.</p>
+<p>Looking ahead, Didi is exploring:</p>
+<ul>
+<li><strong>IO_URING:</strong> To further enhance asynchronous I/O efficiency.</li>
+<li><strong>SPDK:</strong> To accelerate access to RocksDB on NVMe drives for OM and SCM.</li>
+</ul>
+<p>Didi thanks the Apache Ozone community for their support and vibrant collaboration. The transition to Ozone has been a game-changer for Didi's big data infrastructure.</p>]]></content:encoded>
+            <category>user-stories</category>
+            <category>performance</category>
+            <category>erasure-coding</category>
+            <category>scale</category>
+        </item>
+        <item>
+            <title><![CDATA[No More Hotspots: Introducing the Automatic Disk Balancer in Apache Ozone]]></title>
+            <link>https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview</link>
+            <guid>https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview</guid>
+            <pubDate>Thu, 29 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ever replaced a drive on a Datanode only to watch it become an I/O hotspot?]]></description>
+            <content:encoded><![CDATA[<p>Ever replaced a drive on a Datanode only to watch it become an I/O hotspot?
+Or seen one disk hit 95% usage while others on the same machine sit idle?
+These imbalances create performance bottlenecks and increase failure risk.
+Apache Ozone's new intra-node Disk Balancer is designed to fix this—automatically.</p>
+<p>Cluster-wide balancing in Ozone already ensures replicas are evenly spread across Datanodes. But inside a single Datanode, disks can still drift out of balance over time — for example after adding new disks, replacing hardware, or performing large deletions. This leads to I/O hotspots and uneven wear.</p>
+<p>Disk Balancer closes that gap.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="why-disk-balancer">Why Disk Balancer?<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#why-disk-balancer" class="hash-link" aria-label="Direct link to Why Disk Balancer?" title="Direct link to Why Disk Balancer?">​</a></h2>
+<ul>
+<li>
+<p><strong>Disks fill unevenly</strong> when nodes gain or lose volumes.</p>
+</li>
+<li>
+<p><strong>Large deletes</strong> can empty some disks disproportionately.</p>
+</li>
+<li>
+<p><strong>Hot disks degrade performance</strong> and become failure risks.</p>
+</li>
+</ul>
+<p>Even if the cluster is balanced, the node itself may not be. Disk Balancer fixes this automatically.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="how-it-works">How it works<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#how-it-works" class="hash-link" aria-label="Direct link to How it works" title="Direct link to How it works">​</a></h2>
+<p>The design (<a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer">HDDS-5713</a>) introduces a simple metric: <strong>Volume Data Density</strong> — how much a disk's utilization deviates from the node's average. If the deviation exceeds a threshold, the node begins balancing.</p>
+<p>Balancing is local and safe:</p>
+<ul>
+<li>Only <strong>closed containers</strong> are moved.</li>
+<li>Moves happen entirely <strong>within the same Datanode.</strong></li>
+<li>A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.</li>
+<li>Bandwidth and concurrency are <strong>operator-tunable</strong> to avoid interfering with production I/O.</li>
+</ul>
+<p>This runs independently on each Datanode. To use it, first enable the feature by setting <code>hdds.datanode.disk.balancer.enabled = true</code> in <code>ozone-site.xml</code> on your Datanodes. Once enabled, clients use <code>ozone admin datanode diskbalancer</code> commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE Datanodes when running batch operations with <code>--in-service-datanodes</code>.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="how-diskbalancer-decides-what-to-move">How DiskBalancer Decides What to Move<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#how-diskbalancer-decides-what-to-move" class="hash-link" aria-label="Direct link to How DiskBalancer Decides What to Move" title="Direct link to How DiskBalancer Decides What to Move">​</a></h2>
+<p>DiskBalancer uses simple but robust policies to decide <strong>which disks to balance</strong> and <strong>which containers to move</strong> (see the design doc for details: <code>diskbalancer.md</code> in <a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer">HDDS-5713</a>).</p>
+<ul>
+<li><strong>Default Volume Choosing Policy</strong>: Picks the most over‑utilized volume as the source and the most under‑utilized volume as the destination, based on each disk’s <strong>Volume Data Density</strong> and the Datanode’s average utilization.</li>
+<li><strong>Default Container Choosing Policy</strong>: Scans containers on the source volume and moves only <strong>CLOSED</strong> containers that are not already being moved. To avoid repeatedly scanning the same list, it caches container metadata with automatic expiry.</li>
+</ul>
+<p>These defaults aim to make safe, incremental moves that converge the disks toward an even utilization state.</p>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="container-move-process">Container Move Process<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#container-move-process" class="hash-link" aria-label="Direct link to Container Move Process" title="Direct link to Container Move Process">​</a></h3>
+<p>When DiskBalancer moves a container from one disk to another on the <strong>same Datanode</strong>, it follows a careful <strong>"Copy-Validate-Replace"</strong> flow (summarized from the design doc for <a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer">HDDS-5713</a>):</p>
+<ol>
+<li>Create a temporary copy of the CLOSED container on the destination disk.</li>
+<li>Transition that copy into a <strong>RECOVERING</strong> state and import it as a new container on the destination.</li>
+<li>Once import and metadata updates succeed, delete the original CLOSED container from the source disk.</li>
+</ol>
+<p>This ensures that data is always consistent: the destination copy is fully validated before the original is removed, minimizing risk during balancing.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="using-disk-balancer">Using Disk Balancer<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#using-disk-balancer" class="hash-link" aria-label="Direct link to Using Disk Balancer" title="Direct link to Using Disk Balancer">​</a></h2>
+<p>First, enable the Disk Balancer feature on each Datanode by setting the following in <code>ozone-site.xml</code>:</p>
+<ul>
+<li><code>hdds.datanode.disk.balancer.enabled = true</code></li>
+</ul>
+<p>The Disk Balancer CLI supports two command patterns:</p>
+<ul>
+<li><code>ozone admin datanode diskbalancer &lt;command&gt; --in-service-datanodes</code> - Operate on all <strong>IN_SERVICE and HEALTHY</strong> Datanodes</li>
+<li><code>ozone admin datanode diskbalancer &lt;command&gt; &lt;dn-hostname/dn-ipaddress:port&gt;</code> - Operate on a specific Datanode</li>
+</ul>
+<p>Available commands:</p>
+<ul>
+<li><strong>start</strong> - Start the Disk Balancer on the target Datanode(s)</li>
+<li><strong>stop</strong> - Stop the Disk Balancer on the target Datanode(s)</li>
+<li><strong>status</strong> - Check the current Disk Balancer status</li>
+<li><strong>report</strong> - Get a volume density report showing imbalance across disks</li>
+<li><strong>update</strong> - Update Disk Balancer configuration settings</li>
+</ul>
+<p>Examples:</p>
+<div class="language-bash codeBlockContainer_mZR4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_rIoO"><pre tabindex="0" class="prism-code language-bash codeBlock_kDDR thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_SQL2"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Start Disk Balancer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer start --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer start ozone-datanode-1 ozone-datanode-5</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># user can also specifiy configuration parameters during start</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer start </span><span class="token parameter variable" style="color:#36acaa">-t</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-b</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-p</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-s</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer start </span><span class="token parameter variable" style="color:#36acaa">-t</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-b</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-p</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-s</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> ozone-datanode-1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Stop Disk Balancer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer stop --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer stop </span><span class="token number" style="color:#36acaa">192.168</span><span class="token plain">.1.100:9860</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Check status</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer status --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer status ozone-datanode-1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Get volume density report</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer report --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer report </span><span class="token number" style="color:#36acaa">192.168</span><span class="token plain">.1.100:9860</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Update configuration</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer update </span><span class="token parameter variable" style="color:#36acaa">-t</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-b</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-p</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-s</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> --in-service-datanodes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">or</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone admin datanode diskbalancer update </span><span class="token parameter variable" style="color:#36acaa">-t</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-b</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-p</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-s</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">value</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> ozone-datanode-1</span><br></span></code></pre><div class="buttonGroup_QU8l"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_PE_v" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_bUEh"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_DKrM"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_e_9H" id="configuration-parameters">Configuration Parameters<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#configuration-parameters" class="hash-link" aria-label="Direct link to Configuration Parameters" title="Direct link to Configuration Parameters">​</a></h3>
+<p>The following parameters can be specified during <strong>start</strong> or <strong>update configuration</strong> Disk Balancer:</p>
+<table><thead><tr><th>Parameter</th><th>Short Flag</th><th>Default Value</th><th>Description</th></tr></thead><tbody><tr><td><code>--threshold</code></td><td><code>-t</code></td><td><code>10.0</code></td><td>Percentage deviation from average utilization of the disks after which a Datanode will be rebalanced.</td></tr><tr><td><code>--bandwidth-in-mb</code></td><td><code>-b</code></td><td><code>10</code></td><td>Maximum bandwidth for DiskBalancer per second.</td></tr><tr><td><code>--parallel-thread</code></td><td><code>-p</code></td><td><code>5</code></td><td>Max parallel thread count for DiskBalancer.</td></tr><tr><td><code>--stop-after-disk-even</code></td><td><code>-s</code></td><td><code>true</code></td><td>Stop DiskBalancer automatically after disk utilization is even.</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="benefits-for-operators">Benefits for operators<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#benefits-for-operators" class="hash-link" aria-label="Direct link to Benefits for operators" title="Direct link to Benefits for operators">​</a></h2>
+<ul>
+<li><strong>Even I/O load</strong> across disks → more stable performance.</li>
+<li><strong>Smooth ops after hardware changes</strong> (new or replaced disks).</li>
+<li><strong>Hands-off balancing</strong> once enabled.</li>
+<li><strong>Clear metrics</strong> for observability and troubleshooting.</li>
+</ul>
+<p>It complements the existing Container Balancer: one works across nodes, the other within nodes.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="closing-thoughts">Closing Thoughts<a href="https://ozone.apache.org/blog/2026/01/29/disk-balancer-preview#closing-thoughts" class="hash-link" aria-label="Direct link to Closing Thoughts" title="Direct link to Closing Thoughts">​</a></h2>
+<p>Disk Balancer is small but impactful. It brings Ozone closer to being a fully self-healing, self-balancing object store — reducing hotspots, simplifying maintenance, and improving cluster longevity.</p>
+<p>Ozone 2.2 will ship with this feature available via simple CLI controls and safe defaults. If you run long-lived clusters, this is a feature to watch.</p>
+<p>For more information, check out <a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer">HDDS-5713</a>.</p>]]></content:encoded>
+            <category>Ozone</category>
+            <category>Disk Balancer</category>
+            <category>Ozone 2.2</category>
+            <category>Datanode</category>
+        </item>
+        <item>
+            <title><![CDATA[Accessing Ozone S3 via CyberDuck]]></title>
+            <link>https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck</link>
+            <guid>https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck</guid>
+            <pubDate>Wed, 02 Jul 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Here's a step‑by‑step guide to mounting and managing your Apache Ozone object store's S3 interface using CyberDuck.]]></description>
+            <content:encoded><![CDATA[<p>Here's a step‑by‑step guide to mounting and managing your Apache Ozone object store's S3 interface using CyberDuck.</p>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="prerequisites">Prerequisites<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites">​</a></h2>
+<ol>
+<li>
+<p><strong>Running Ozone S3 Gateway</strong>
+Make sure your Ozone cluster is up and the S3 Gateway (s3g) is running. By default it listens on port <strong>9878</strong> over HTTP (and 9879 for HTTPS) at the host where you started it.</p>
+</li>
+<li>
+<p><strong>Credentials</strong></p>
+<ul>
+<li>
+<p><strong>No security:</strong> You can use any values for AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY.</p>
+</li>
+<li>
+<p><strong>With Kerberos security enabled:</strong></p>
+<div class="language-bash codeBlockContainer_mZR4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_rIoO"><pre tabindex="0" class="prism-code language-bash codeBlock_kDDR thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_SQL2"><span class="token-line" style="color:#393A34"><span class="token plain">kinit </span><span class="token parameter variable" style="color:#36acaa">-kt</span><span class="token plain"> /etc/security/keytabs/</span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">user</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain">.keytab </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">user</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain">@YOUR.REALM</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone s3 getsecret</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># → awsAccessKey=&lt;user&gt;@YOUR.REALM</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">#   awsSecret=&lt;long‑hex‑string&gt;</span><br></span></code></pre><div class="buttonGroup_QU8l"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_PE_v" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_bUEh"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_DKrM"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<p>These exports give you the Access Key ID and Secret you'll plug into CyberDuck.</p>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="1-install-cyberduck">1. Install CyberDuck<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#1-install-cyberduck" class="hash-link" aria-label="Direct link to 1. Install CyberDuck" title="Direct link to 1. Install CyberDuck">​</a></h2>
+<ol>
+<li>Download CyberDuck from <a href="https://cyberduck.io/" target="_blank" rel="noopener noreferrer">https://cyberduck.io</a> and install it on your Mac or Windows machine.</li>
+<li>Launch CyberDuck.</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="2-create-a-new-s3-connection">2. Create a New S3 Connection<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#2-create-a-new-s3-connection" class="hash-link" aria-label="Direct link to 2. Create a New S3 Connection" title="Direct link to 2. Create a New S3 Connection">​</a></h2>
+<ol>
+<li>The bundled S3 profile in CyberDuck does not permit a custom network port, and does not allow HTTP. You may need to install additional profiles to allow those.<!-- -->
+<ol>
+<li>Select a profile from <a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-cyberduck-profiles-md" target="_blank" rel="noopener noreferrer">Ozone S3 CyberDuck profiles</a>.</li>
+<li>For example, download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-cyberduckprofile" target="_blank" rel="noopener noreferrer">Ozone S3 <code>HTTP.cyberduckprofile</code></a></strong> if your gateway is HTTP.</li>
+<li>Or download the <strong><a href="https://gist.github.com/jojochuang/9e15acee99b528ee879f7a280b8f79f7#file-ozone-s3-http-with-path-style-addressing-cyberduckprofile" target="_blank" rel="noopener noreferrer">Ozone S3 (HTTP) with path-style <code>addressing.cyberduckprofile</code></a></strong>.</li>
+<li>Installing the file by double-clicking a <code>.cyberduckprofile</code> file</li>
+<li>Check out the <a href="https://docs.cyberduck.io/protocols/s3" target="_blank" rel="noopener noreferrer">CyberDuck user documentation</a> for more details.</li>
+</ol>
+</li>
+<li>In CyberDuck, click <strong>Open Connection</strong> (or press ⌘ N).</li>
+<li>From the <strong>Protocol</strong> dropdown choose <strong>Ozone S3 (HTTP)</strong> if your gateway is configured for HTTP), or <strong>Apache Ozone S3 HTTP path style</strong> if the gateway is configured with Path-Style Addressing.</li>
+<li>Fill in the fields:<!-- -->
+<ul>
+<li><strong>Server:</strong> <code>&lt;ozone‑s3‑host&gt;</code> (e.g. <code>ozone.example.com</code>)</li>
+<li><strong>Port:</strong> <code>9878</code> (or <code>9879</code> for HTTPS)</li>
+<li><strong>Access Key ID:</strong> the <code>awsAccessKey</code> you obtained</li>
+<li><strong>Secret Access Key:</strong> the <code>awsSecret</code> you obtained</li>
+</ul>
+</li>
+<li>Click the little <strong>▶</strong> triangle next to <strong>More Options</strong> and ensure <strong>Use SSL</strong> is unchecked if you're connecting over plain HTTP.</li>
+<li><strong>Path‑Style Addressing</strong> (default) vs <strong>Virtual‑Host Style</strong>:<!-- -->
+<ul>
+<li>By default Ozone uses <strong>path‑style</strong> (<code>http://host:9878/bucket</code>).</li>
+<li>If you've set <code>ozone.s3g.domain.name</code> in your <code>ozone-site.xml</code>, you can switch to virtual‑host style and CyberDuck will use <code>bucket.host:9878</code> URLs.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="3-save-as-a-bookmark-optional">3. Save as a Bookmark (Optional)<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#3-save-as-a-bookmark-optional" class="hash-link" aria-label="Direct link to 3. Save as a Bookmark (Optional)" title="Direct link to 3. Save as a Bookmark (Optional)">​</a></h2>
+<ol>
+<li>Click the dropdown arrow next to the <strong>Connect</strong> button and choose <strong>Bookmark</strong> ▶ <strong>Add Bookmark</strong>.</li>
+<li>Give it a name like "Ozone S3" so you can reconnect quickly.</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="4-browsing-and-basic-operations">4. Browsing and Basic Operations<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#4-browsing-and-basic-operations" class="hash-link" aria-label="Direct link to 4. Browsing and Basic Operations" title="Direct link to 4. Browsing and Basic Operations">​</a></h2>
+<p>Once connected, your CyberDuck window will list all buckets in the default <code>/s3v</code> volume as top‑level entries.</p>
+<ul>
+<li><strong>List Buckets:</strong> All existing buckets appear as folders.</li>
+<li><strong>Create Bucket:</strong> Click the "+" (New Folder) icon, enter a bucket name, and press <strong>Return</strong>.</li>
+<li><strong>Upload Files:</strong> Drag‑and‑drop files from your desktop into a bucket folder.</li>
+<li><strong>Download Files:</strong> Right‑click an object and choose <strong>Download To…</strong></li>
+<li><strong>Delete Objects/Buckets:</strong> Select the file or bucket, press the <strong>Delete</strong> key, and confirm.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="5-working-with-other-volumes">5. Working with Other Volumes<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#5-working-with-other-volumes" class="hash-link" aria-label="Direct link to 5. Working with Other Volumes" title="Direct link to 5. Working with Other Volumes">​</a></h2>
+<p>Ozone's namespace includes volumes beyond <code>/s3v</code>. To expose a bucket from another volume:</p>
+<div class="language-shell codeBlockContainer_mZR4 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_rIoO"><pre tabindex="0" class="prism-code language-shell codeBlock_kDDR thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_SQL2"><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> volume create /vol1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> bucket create /vol1/bucket1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ozone </span><span class="token function" style="color:#d73a49">sh</span><span class="token plain"> bucket </span><span class="token function" style="color:#d73a49">link</span><span class="token plain"> /vol1/bucket1 /s3v/common-bucket</span><br></span></code></pre><div class="buttonGroup_QU8l"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_PE_v" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_bUEh"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_DKrM"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>After linking, you'll see <code>common-bucket</code> in CyberDuck and can manage it just like any other S3 bucket.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_e_9H" id="6-tips--troubleshooting">6. Tips &amp; Troubleshooting<a href="https://ozone.apache.org/blog/2025/07/02/access-ozone-via-cyberduck#6-tips--troubleshooting" class="hash-link" aria-label="Direct link to 6. Tips &amp; Troubleshooting" title="Direct link to 6. Tips &amp; Troubleshooting">​</a></h2>
+<ul>
+<li><strong>Permissions:</strong> If you get "Access Denied," double‑check that you've generated or revoked/re‑generated your S3 secret correctly.</li>
+<li><strong>SSL Errors:</strong> If you enable HTTPS on the gateway, make sure you either trust the certificate in CyberDuck or use a CA‑signed cert.</li>
+<li><strong>Firewall/Network:</strong> Ensure your machine can reach <code>&lt;ozone‑s3‑host&gt;:9878</code> (e.g. <code>telnet hostname 9878</code>).</li>
+<li><strong>Bookmarks Sync:</strong> CyberDuck can sync bookmarks via Dropbox or iCloud so you can share connections across devices.</li>
+</ul>
+<hr>
+<p>You're all set! Enjoy browsing and managing your Ozone object store through a familiar S3 GUI.</p>]]></content:encoded>
+            <category>Ozone</category>
+            <category>S3</category>
+            <category>CyberDuck</category>
+        </item>
+        <item>
+            <title><![CDATA[Apache Ozone 2.0.0 Release]]></title>
+            <link>https://ozone.apache.org/blog/2025/04/30/ozone-2.0.0-release</link>
+            <guid>https://ozone.apache.org/blog/2025/04/30/ozone-2.0.0-release</guid>
+            <pubDate>Wed, 30 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Apache Ozone 2.0.0 was released on April 30th, 2025. This release includes 1700 new features, improvements, and bug fixes on top of Ozone 1.4.]]></description>
+            <content:encoded><![CDATA[<p>Apache Ozone 2.0.0 was released on April 30th, 2025. This release includes 1700 new features, improvements, and bug fixes on top of Ozone 1.4.</p>
+<p>Notable features in this release include:</p>
+<ul>
+<li>Supporting HSync and lease recovery (HDDS-7593).</li>
+<li>SCM Decommissioning Support (HDDS-7852).</li>
+<li>Symmetric Keys for Delegation Tokens (HDDS-8829).</li>
+<li>Atomic Key Overwrite and Key Replacement (HDDS-10656).</li>
+</ul>
+<p>Other noteworthy changes include:</p>
+<ul>
+<li>ARM64 support (HDDS-6263).</li>
+<li>Java 11/17/21 Support and Testing (HDDS-8246).</li>
+<li>AWS SDK v2 client support (HDDS-12488).</li>
+</ul>
+<p>Observability improvements are:</p>
+<ul>
+<li>Ozone performance and operational dashboards (HDDS-9307).</li>
+<li>Recon UI Improvements (HDDS-11153).</li>
+<li>Support for interactive mode for Ozone CLI (HDDS-11825).</li>
+</ul>
+<p>Developer-focused changes include:</p>
+<ul>
+<li>JUnit 4 to 5 upgrade (HDDS-6729).</li>
+<li>Dropped Hadoop 2.7 ~ 2.9 support (HDDS-8113).</li>
+<li>Publish SBOM artifacts (HDDS-10986).</li>
+<li>Hadoop dependency updated to 3.4.1 (HDDS-11617).</li>
+</ul>
+<p>Incompatible changes are:</p>
+<ul>
+<li>Move S3 Gateway web admin to separate port (HDDS-7307).</li>
+<li>Deprecate file per chunk layout from Datanode code (HDDS-11753).</li>
+<li>Drop support for non-Ratis OM and SCM (HDDS-11754).</li>
+<li>Remove LegacyReplicationManager (HDDS-11759).</li>
+</ul>
+<p>Detailed release notes are available at <a href="https://ozone.apache.org/release/2.0.0/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/release/2.0.0/</a>.
+Downloads can be found at <a href="https://ozone.apache.org/downloads/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/downloads/</a>.
+Documentation for this release is available at <a href="https://ozone.apache.org/docs/2.0.0/" target="_blank" rel="noopener noreferrer">https://ozone.apache.org/docs/2.0.0/</a>.</p>]]></content:encoded>
+            <category>release</category>
+            <category>ozone-2.0.0</category>
+        </item>
+    </channel>
+</rss>
