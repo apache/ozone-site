@@ -9,6 +9,7 @@ sidebar_label: Iceberg
 Iceberg uses Ozone storage layer to build scalable data lakehouses, acting as the durable system of record for table data and metadata. Ozone’s native atomic rename capability supports Iceberg’s atomic commit requirements, providing strong consistency for data management without external locking services. Ozone's ability to handle high object counts and its strong consistency model (via Ratis) make it a suitable, reliable backend for Iceberg's transactional, snapshot-based structure.
 
 ## Key Integration Details
+
 - **Storage and Metadata Management:** Iceberg stores data files and metadata files (manifests, snapshots) directly on Ozone.
 - **Atomic Operations:** Ozone supports necessary atomic operations for Iceberg’s commit process, ensuring data consistency during concurrent writes.
 - **Performance:** The combination allows for petabyte-scale analytics and fast query planning, overcoming the scalability bottlenecks of traditional HDFS Namenodes.
@@ -21,14 +22,15 @@ This tutorial shows how to get started with Apache Iceberg to Apache Ozone using
 ### Quickstart environment
 
 - Unsecure Ozone and Iceberg clusters.
-- Ozone S3G enables virtual-host style addressing with a subdomain `s3.ozone`. 
+- Ozone S3G enables virtual-host style addressing with a subdomain `s3.ozone`.
   - The subdomain and the subdomain with the bucket name `warehouse.s3.ozone` are mapped to the S3 Gateway.
 - Iceberg accesses Ozone via S3 Gateway.
 
 ### Step 1 — Create `docker-compose.yaml` for Ozone services
 
 Create a `docker-compose.yaml` file with the following content to
-- Spin up a single datanode Ozone cluster 
+
+- Spin up a single Datanode Ozone cluster
 - Start the S3 Gateway with the required configurations for Iceberg
   - Wait for OM to be ready before starting
   - Create the bucket `warehouse` on startup
