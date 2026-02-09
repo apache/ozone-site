@@ -128,13 +128,13 @@ const config = {
           sidebarPath: undefined,
           // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
+            'https://github.com/apache/ozone-site/tree/master',
         },
         blog: {
           showReadingTime: true,
           // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/',
+            'https://github.com/apache/ozone-site/tree/master/',
         },
         theme: {
           customCss: [
