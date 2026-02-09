@@ -126,13 +126,11 @@ const config = {
       ({
         docs: {
           sidebarPath: undefined,
-          // TODO update this link when the new website's branch is merged.
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
         },
         blog: {
           showReadingTime: true,
-          // TODO update this link when the new website's branch is merged.
           editUrl:
             'https://github.com/apache/ozone-site/tree/master/',
         },
@@ -152,8 +150,7 @@ const config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
 
-            // TODO Base URL must be updated when the new website's branch is merged.
-            const validUrlRegex = new RegExp('^https://ozone\.apache\.org/([a-z0-9][a-z0-9\./-]*[a-z0-9/])?$');
+            const validUrlRegex = /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
             items.forEach((item, index) => {
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
