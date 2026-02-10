@@ -112,7 +112,7 @@ Each EC Replication Config defined by the following pieces of information:
 To pass the EC Replication Config in command line or configuration files, we need to use the following format:
 *codec*-*num data blocks*-*num parity blocks*-*EC chunk size*
 
-Currently, there are three built-in EC Replication Configs supported: `RS-3-2-1024k`, `RS-6-3-1024k`, `XOR-2-1-1024k`.
+Currently, there are three built-in EC Replication Configs supported: `RS-3-2-1024k`, `RS-6-3-1024k`, `RS-10-4-1024k`.
 The most recommended option is `RS-6-3-1024k`. When a key/file created without specifying the Replication Config,
 it inherits the EC Replication Config of its bucket if it's available.
 
