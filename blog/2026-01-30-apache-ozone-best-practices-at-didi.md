@@ -1,7 +1,7 @@
 ---
 title: "Apache Ozone Best Practices at Didi: Scaling to Tens of Billions of Files"
 date: 2026-01-30
-authors: ["rich7420", "jojochuang", "apache-ozone-community"]
+authors: ["rich7420", "apache-ozone-community", "slfan1989", "whbing", "jianghuazhu", "weimingdiit"]
 tags: [user-stories, performance, erasure-coding, scale]
 ---
 
