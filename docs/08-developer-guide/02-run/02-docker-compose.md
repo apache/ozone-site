@@ -169,5 +169,5 @@ cd hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/
 
 After setting up your development cluster:
 
-1. Explore the [Ozone CLI documentation](/docs/04-user-guide/02-clients/01-ozone.md)
+1. Explore the [Ozone CLI documentation](/docs/04-user-guide/01-client-interfaces/01-o3.md)
 2. Experiment with the various compose configurations for specific use cases
