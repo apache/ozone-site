@@ -219,7 +219,7 @@ function Integrations() {
     },
    {
       name: 'DistCp',
-      icon: () => <img src="/img/integrations/distcp.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
+      icon: () => <img src="/img/integrations/distcp.svg" className="integration-logo-img" data-logo="distcp" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
       link: '/docs/user-guide/integrations/hadoop-distcp'
     },
   ];
