@@ -212,6 +212,16 @@ function Integrations() {
       icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
       link: '/docs/user-guide/integrations/hue' 
     },
+    {
+      name: 'HBase',
+      icon: () => <img src="/img/integrations/hbase.svg" className="integration-logo-img" data-logo="hbase" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
+      link: '/docs/user-guide/integrations/hbase'
+    },
+   {
+      name: 'DistCp',
+      icon: () => <img src="/img/integrations/distcp.svg" className="integration-logo-img" data-logo="distcp" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
+      link: '/docs/user-guide/integrations/hadoop-distcp'
+    },
   ];
 
   return (
