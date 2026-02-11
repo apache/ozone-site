@@ -80,12 +80,24 @@
             <uri>https://github.com/rich7420</uri>
         </author>
         <author>
-            <name>Wei-Chiu Chuang</name>
-            <uri>https://github.com/jojochuang</uri>
-        </author>
-        <author>
             <name>The Apache Ozone Community</name>
             <uri>https://ozone.apache.org</uri>
+        </author>
+        <author>
+            <name>Shilun Fan</name>
+            <uri>https://github.com/slfan1989</uri>
+        </author>
+        <author>
+            <name>Hongbing Wang</name>
+            <uri>https://github.com/whbing</uri>
+        </author>
+        <author>
+            <name>JiangHua Zhu</name>
+            <uri>https://github.com/jianghuazhu</uri>
+        </author>
+        <author>
+            <name>Ming Wei</name>
+            <uri>https://github.com/weimingdiit</uri>
         </author>
         <category label="user-stories" term="user-stories"/>
         <category label="performance" term="performance"/>
@@ -192,6 +204,10 @@ Apache Ozone's new intra-node Disk Balancer is designed to fix this—automatica
         <author>
             <name>Gargi Jaiswal</name>
             <uri>https://github.com/Gargi-jais11</uri>
+        </author>
+        <author>
+            <name>Sammi Chen</name>
+            <uri>https://github.com/ChenSammi</uri>
         </author>
         <category label="Ozone" term="Ozone"/>
         <category label="Disk Balancer" term="Disk Balancer"/>
