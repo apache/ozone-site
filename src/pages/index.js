@@ -213,8 +213,8 @@ function Integrations() {
       link: '/docs/user-guide/integrations/hue' 
     },
     {
-      name: 'Hbase',
-      icon: () => <img src="/img/integrations/hbase.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
+      name: 'HBase',
+      icon: () => <img src="/img/integrations/hbase.svg" className="integration-logo-img" data-logo="hbase" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
       link: '/docs/user-guide/integrations/hbase'
     },
    {
