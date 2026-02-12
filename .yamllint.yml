@@ -20,6 +20,7 @@
 ignore:
 - pnpm-lock.yaml
 - node_modules
+- "**/recon-api.yaml"
 
 rules:
   anchors: enable
