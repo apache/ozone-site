@@ -1,6 +1,11 @@
 ---
+draft: true
 sidebar_label: Filesystem Optimization (FSO)
 ---
+
+**TODO:** Uncomment the link to this page in docs/03-core-concepts/03-namespace/02-buckets/04-layouts/02-file-system-optimized.md
+**TODO:** Uncomment the link to this page in docs/04-user-guide/01-client-interfaces/01-o3.md
+**TODO:** Uncomment the link to this page in docs/05-administrator-guide/02-configuration/03-security/05-encryption/02-transparent-data-encryption.md
 
 # File System Optimization (FSO) System Internals
 
