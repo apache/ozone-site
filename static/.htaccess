@@ -13,29 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The main CI workflow for the Apache Ozone website.
-
-name: ci
-
-on:
-  pull_request:
-    types:
-    - opened
-    - synchronize
-  push:
-
-concurrency:
-  group: ci-${{ github.event.pull_request.number || github.sha }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-
-jobs:
-  static:
-    uses: ./.github/workflows/static.yml
-  docusaurus:
-    needs: static
-    uses: ./.github/workflows/docusaurus.yml
-  publish:
-    needs: docusaurus
-    # Update this to master when the website is ready to be published.
-    if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
-    uses: ./.github/workflows/publish.yml
+# CSP permissions for ozone.apache.org - Adding 3rd party service Algolia. Approved by VP Data Privacy.
+SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ https://*.algolia.io/"

@@ -83,6 +83,20 @@ const config = {
         href: 'apple-touch-icon.png',
       },
     },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'google-site-verification',
+        content: 'fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: 'A2998EF969F36A0D',
+      },
+    },
   ],
 
   markdown: {
@@ -363,11 +377,10 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['bash'],
       },
-      // TODO HDDS-9566
       algolia: {
-        appId: "PLACEHOLDER",
-        apiKey: "PLACEHOLDER",
-        indexName: "PLACEHOLDER",
+        appId: "YQWKI4BIJ7",
+        apiKey: "47cd671112fb5e0363a4d9724beeb9d4",
+        indexName: "Apache Ozone website",
         searchParameters: {}
       }
     }),
