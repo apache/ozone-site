@@ -20,3 +20,27 @@ apache-ozone-community:
   title: Apache Ozone Project
   url: https://ozone.apache.org
   image_url: /img/ozone-logo.svg
+
+jojochuang:
+  name: Wei-Chiu Chuang
+  title: Apache Ozone PMC
+  url: https://github.com/jojochuang
+  image_url: https://github.com/jojochuang.png
+
+0lai0:
+  name: Yu-Chen Lai
+  title: Apache Ozone Contributor
+  url: https://github.com/0lai0
+  image_url: https://github.com/0lai0.png
+
+Gargi-jais11:
+  name: Gargi Jaiswal
+  title: Apache Ozone Contributor
+  url: https://github.com/Gargi-jais11
+  image_url: https://github.com/Gargi-jais11.png
+
+rich7420:
+  name: Kaun-Hung (Rich) Huang
+  title: Apache Ozone Contributor
+  url: https://github.com/rich7420
+  image_url: https://github.com/rich7420.png
