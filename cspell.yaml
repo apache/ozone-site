@@ -87,7 +87,6 @@ words:
 - mis-replicate
 - mis-replication
 - mis-replicated
-- unreplicated
 - BCSID
 - EC
 - reconfig
@@ -96,7 +95,6 @@ words:
 - quasi-closed
 - HCFS
 - libo3fs
-- omdb
 - AOS
 - FCQ
 - QoS
