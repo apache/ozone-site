@@ -167,6 +167,7 @@ host3     | om3     | FOLLOWER
 
 ## References
 
+[//]: # (- [OM HA Implementation Details]&#40;/docs/system-internals/components/ozone-manager/high-availability&#41; - Technical implementation details including double buffer and automatic snapshot installation)
+
 - [Ozone Manager High Availability](/docs/core-concepts/high-availability/om-ha) - Conceptual overview
-- [OM HA Implementation Details](/docs/system-internals/components/ozone-manager/high-availability) - Technical implementation details including double buffer and automatic snapshot installation
 - [SCM HA Configuration](./scm-ha) - Storage Container Manager High Availability configuration
