@@ -1,0 +1,17 @@
+---
+sidebar_label: Datanode
+---
+
+# Datanode Decommissioning and Maintenance
+
+import DocCardList from '@theme/DocCardList';
+
+## Datanode Decommission
+
+The Datanode Decommission is the process that removes the existing Datanode from the Ozone cluster while ensuring that the new data should not be written to the decommissioned Datanode. When you initiate the process of decommissioning a Datanode, Ozone automatically ensures that all the storage containers on that Datanode have an additional copy created on another Datanode before the decommission completes. So, Datanode will keep running after it has been decommissioned and may be used for reads, but not for writes until it is stopped manually.
+
+## Datanode Maintenance Mode
+
+The Datanode Maintenance mode is a feature in Apache Ozone that allows you to temporarily take a Datanode offline for maintenance operations (e.g., hardware upgrades, software updates) without triggering immediate data replication. Unlike decommissioning, which aims to permanently remove a Datanode and its data from the cluster, maintenance mode is designed for temporary outages.
+
+<DocCardList/>

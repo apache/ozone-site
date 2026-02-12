@@ -1,0 +1,1399 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>Overview</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../start.html">
+                
+
+                    
+                    <span>Getting Started</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/ozonemanager.html">Ozone Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/snapshot.html">Ozone Snapshot</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/reconfigurability.html">Reconfigurability</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/s3.html">S3 Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../interface.html">Client Interfaces</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recon API</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/interface/reconapi.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Recon API</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>The Recon API v1 is a set of HTTP endpoints that help you understand the current
+state of an Ozone cluster and to troubleshoot if needed.</p>
+<p>Endpoints that are marked as <em>admin only</em> can only be accessed by Kerberos users
+specified in the <strong>ozone.administrators</strong> or <strong>ozone.recon.administrators</strong>
+configurations of a secure cluster. See <a href="../security/secureozone.html">Securing Ozone</a> for more information.
+To restrict access to these endpoints, set the following configurations:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ozone.security.enabled</td>
+<td><em>true</em></td>
+</tr>
+<tr>
+<td>ozone.security.http.kerberos.enabled</td>
+<td><em>true</em></td>
+</tr>
+<tr>
+<td>ozone.acl.enabled</td>
+<td><em>true</em></td>
+</tr>
+</tbody>
+</table>
+<p>Checkout an interactive version of the API powered by Swagger <a href="../interface/swaggerreconapi.html">here</a></p>
+<h2 id="containers-admin-only">Containers (admin only)</h2>
+<h3 id="get-apiv1containers">GET /api/v1/containers</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the containers with ID greater than the given prevKey.
+Example: prevKey=1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the ContainerMetadata objects.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containers&#34;</span>: [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">834</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;ContainerID&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;NumberOfKeys&#34;</span>: <span style="color:#ae81ff">833</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersidkeys">GET /api/v1/containers/:id/keys</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the keys that are present after the given prevKey key prefix.
+Example: prevKey=/vol1/bucket1/key1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the KeyMetadata objects for the given ContainerID.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;totalCount&#34;</span>:<span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keys&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Volume&#34;</span>:<span style="color:#e6db74">&#34;vol-1-73141&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Bucket&#34;</span>:<span style="color:#e6db74">&#34;bucket-3-35816&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Key&#34;</span>:<span style="color:#e6db74">&#34;key-0-43637&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;DataSize&#34;</span>:<span style="color:#ae81ff">1000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Versions&#34;</span>:[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Blocks&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;0&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;containerID&#34;</span>:<span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;localID&#34;</span>:<span style="color:#ae81ff">105232659753992201</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;CreationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:17.722Z&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ModificationTime&#34;</span>:<span style="color:#e6db74">&#34;2020-11-18T18:09:30.405Z&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersmissing">GET /api/v1/containers/missing</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the MissingContainerMetadata objects for all the missing containers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>    	<span style="color:#f92672">&#34;containers&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;missingSince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+</span></span><span style="display:flex;"><span>    		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+</span></span><span style="display:flex;"><span>    			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731201301</span>
+</span></span><span style="display:flex;"><span>    		}, 
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>    	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="get-apiv1containersidreplicahistory">GET /api/v1/containers/:id/replicaHistory</h3>
+<p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the ContainerHistory objects for the given ContainerID.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605724047057</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605730421294</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span></code></pre></div><h3 id="get-apiv1containersunhealthy">GET /api/v1/containers/unhealthy</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>batchNum (optional)</p>
+<p>The batch number (like &ldquo;page number&rdquo;) of results to return.
+Passing 1, will return records 1 to limit. 2 will return
+limit + 1 to 2 * limit, etc.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the UnhealthyContainerMetadata objects for all the unhealthycontainers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;missingCount&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;underReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;overReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;misReplicatedCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;containers&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containerID&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containerState&#34;</span>: <span style="color:#e6db74">&#34;MISSING&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;unhealthySince&#34;</span>: <span style="color:#ae81ff">1605731029145</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;expectedReplicaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;actualReplicaCount&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicaDeltaCount&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;88646d32-a1aa-4e1a&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicas&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;datanodeHost&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;firstReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605722960125</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;lastReportTimestamp&#34;</span>: <span style="color:#ae81ff">1605731230509</span>
+</span></span><span style="display:flex;"><span>     		}, 
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     } 
+</span></span></code></pre></div><h3 id="get-apiv1containersunhealthystate">GET /api/v1/containers/unhealthy/:state</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>batchNum (optional)</p>
+<p>The batch number (like &ldquo;page number&rdquo;) of results to return.
+Passing 1, will return records 1 to limit. 2 will return
+limit + 1 to 2 * limit, etc.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the UnhealthyContainerMetadata objects for the containers in the given state.
+Possible unhealthy container states are <code>MISSING</code>, <code>MIS_REPLICATED</code>,<code>UNDER_REPLICATED</code>, <code>OVER_REPLICATED</code>.
+The response structure is same as <code>/containers/unhealthy</code>.</p>
+<h3 id="get-apiv1containersmismatch">GET /api/v1/containers/mismatch</h3>
+<p><strong>Returns</strong></p>
+<p>Returns the list of mis-matched containers between OM and SCM</p>
+<ul>
+<li>Containers are present in OM, but not in SCM.</li>
+<li>Containers are present in SCM, but not in OM.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;containerId&#34;</span> : <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;numberOfKeys&#34;</span> : <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;pipelines&#34;</span> : [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;1423ghjds832403232&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdh4443&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;pipelineId&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;32vds94943fsdhs443&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;existsAt&#34;</span> : <span style="color:#e6db74">&#34;OM&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><h3 id="get-apiv1containersmismatchdeleted">GET /api/v1/containers/mismatch/deleted</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Returns the set of deleted containers in SCM which are present in OM to find out
+list of keys mapped to such DELETED state containers after the given prevKey (ContainerId).
+Example: prevKey=5, skip containers till it seeks correctly to the previous containerId.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the set of deleted containers in SCM which are present in OM to find out
+list of keys mapped to such DELETED state containers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;numberOfKeys&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;pipelines&#34;</span>: []
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><h3 id="get-apiv1keysopen">GET /api/v1/keys/open</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Returns the set of keys/files which are open and present after the given prevKey id.
+Example: prevKey=/vol1/bucket1/key1, this will skip keys till it seeks correctly to the given prevKey.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns set of keys/files which are open.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">13824</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">4608</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;entities&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key2&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">512</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">1536</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">512</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/file1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">3072</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/fso-bucket/dir1/dir2/file2&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;keyState&#34;</span>: <span style="color:#e6db74">&#34;Open&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;inStateSince&#34;</span>: <span style="color:#ae81ff">1667564193026</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">6144</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;unreplicatedSize&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;THREE&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="get-apiv1keysdeletepending">GET /api/v1/keys/deletePending</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Returns the set of keys/files pending for deletion that are present after the given prevKey id.
+Example: prevKey=/vol1/bucket1/key1, this will skip keys till it seeks correctly to the given prevKey.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns set of keys/files pending for deletion.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;sampleVol/bucketOne/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="get-apiv1keysdeletependingdirs">GET /api/v1/keys/deletePending/dirs</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Returns the set of directories pending for deletion that are present after the given prevKey id.
+Example: prevKey=/vol1/bucket1/bucket1/dir1, this will skip directories till it seeks correctly to the given prevKey.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns set of directories pending for deletion.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;lastKey&#34;</span>: <span style="color:#e6db74">&#34;vol1/bucket1/bucket1/dir1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;replicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;unreplicatedTotal&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deletedkeyinfo&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;omKeyInfoList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;metadata&#34;</span>: {},
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;parentObjectID&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;sampleVol&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;bucketOne&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dataSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;keyLocationVersions&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicationConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#e6db74">&#34;ONE&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;requiredNodes&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;STANDALONE&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileChecksum&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;0/key_one&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;file&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;latestVersionLocations&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;replicatedSize&#34;</span>: <span style="color:#ae81ff">-1530804718628866300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;fileEncryptionInfo&#34;</span>: <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;objectInfo&#34;</span>: <span style="color:#e6db74">&#34;OMKeyInfo{volume=&#39;sampleVol&#39;, bucket=&#39;bucketOne&#39;, key=&#39;key_one&#39;, dataSize=&#39;-1530804718628866186&#39;, creationTime=&#39;0&#39;, objectID=&#39;0&#39;, parentID=&#39;0&#39;, replication=&#39;STANDALONE/ONE&#39;, fileChecksum=&#39;null}&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;updateIDset&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="blocks-metadata-admin-only">Blocks Metadata (admin only)</h2>
+<h3 id="get-apiv1blocksdeletepending">GET /api/v1/blocks/deletePending</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the list of blocks pending for deletion, that are present after the given block id (prevKey).
+Example: prevKey=4, this will skip deletedBlocks table key to skip records before prevKey.</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns list of blocks pending for deletion.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;OPEN&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;containerId&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;localIDList&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;localIDCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;txID&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="namespace-metadata-admin-only">Namespace Metadata (admin only)</h2>
+<h3 id="get-apiv1namespacesummary">GET /api/v1/namespace/summary</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>path</p>
+<p>The path request in string without any protocol prefix.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns a basic summary of the path, including entity type and aggregate count
+of objects under the path.</p>
+<p><code>status</code> is <code>OK</code> if path exists, <code>PATH_NOT_FOUND</code> otherwise.</p>
+<p>Example: /api/v1/namespace/summary?path=/</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">ROOT</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">1000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Example: /api/v1/namespace/summary?path=/volume1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">VOLUME</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Example: /api/v1/namespace/summary?path=/volume1/bucket1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">BUCKET</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Example: /api/v1/namespace/summary?path=/volume1/bucket1/dir</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Example: /api/v1/namespace/summary?path=/volume1/bucket1/dir/nestedDir</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#960050;background-color:#1e0010">DIRECTORY</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numVolume&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numBucket&#34;</span>: <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numDir&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;numKey&#34;</span>: <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>If any <code>num</code> field is <code>-1</code>, the path request is not applicable to such an entity type.</p>
+<h3 id="get-apiv1namespacedu">GET /api/v1/namespace/du</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>path</p>
+<p>The path request in string without any protocol prefix.</p>
+</li>
+<li>
+<p>files (optional)</p>
+<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes disk usage for keys
+under the path.</p>
+</li>
+<li>
+<p>replica (optional)</p>
+<p>A boolean with a default value of <code>false</code>. If set to <code>true</code>, computes disk usage with replicated
+size of keys.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns disk usage of all sub-paths under the path. Normalizes <code>path</code> fields, returns
+total size of keys directly under the path as <code>sizeDirectKey</code>, and returns
+<code>size</code>/<code>sizeWithReplica</code> in number of bytes.</p>
+<p><code>status</code> is <code>OK</code> if path exists, <code>PATH_NOT_FOUND</code> otherwise.</p>
+<p>Example: /api/v1/namespace/du?path=/vol1/bucket1&amp;files=true&amp;replica=true</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">100000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">300000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;subPathCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;subPaths&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-2&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/dir1-3&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">90000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/vol1/bucket1/key1-1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">10000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sizeWithReplica&#34;</span>: <span style="color:#ae81ff">30000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;isKey&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;sizeDirectKey&#34;</span>: <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>If <code>files</code> is set to <code>false</code>, sub-path <code>/vol1/bucket1/key1-1</code> is omitted.
+If <code>replica</code> is set to <code>false</code>, <code>sizeWithReplica</code> returns <code>-1</code>. If the path&rsquo;s entity type
+cannot have direct keys (Root, Volume), <code>sizeDirectKey</code> returns <code>-1</code>.</p>
+<h3 id="get-apiv1namespacequota">GET /api/v1/namespace/quota</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>path</p>
+<p>The path request in string without any protocol prefix.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the quota allowed and used under the path. Only volumes and buckets
+have quota. Other types are not applicable to the quota request.</p>
+<p><code>status</code> is <code>OK</code> if the request is valid, <code>PATH_NOT_FOUND</code> if path doesn&rsquo;t exist,
+<code>TYPE_NOT_APPLICABLE</code> if path exists, but the path&rsquo;s entity type is not applicable
+to the request.</p>
+<p>Example: /api/v1/namespace/quota?path=/vol</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;allowed&#34;</span>: <span style="color:#ae81ff">200000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">160000</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>If quota is not set, <code>allowed</code> returns <code>-1</code>. More on [Quota in Ozone]
+(<a href="https://ci-hadoop.apache.org/view/Hadoop%20Ozone/job/ozone-doc-master/lastSuccessfulBuild/artifact/hadoop-hdds/docs/public/feature/quota.html">https://ci-hadoop.apache.org/view/Hadoop%20Ozone/job/ozone-doc-master/lastSuccessfulBuild/artifact/hadoop-hdds/docs/public/feature/quota.html</a>)</p>
+<h3 id="get-apiv1namespacedist">GET /api/v1/namespace/dist</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>path</p>
+<p>The path request in string without any protocol prefix.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the file size distribution of all keys under the path.</p>
+<p><code>status</code> is <code>OK</code> if the request is valid, <code>PATH_NOT_FOUND</code> if path doesn&rsquo;t exist,
+<code>TYPE_NOT_APPLICABLE</code> if path exists, but the path is a key, which does not have
+a file size distribution.</p>
+<p>Example: /api/v1/namespace/dist?path=/</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#960050;background-color:#1e0010">OK</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;dist&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Recon keeps track of all keys with size from <code>1 KB</code> to <code>1 PB</code>. For keys smaller than <code>1 KB</code>,
+map to the first bin (index); for keys larger than <code>1 PB</code>, map to the last bin (index).</p>
+<p>Each index of <code>dist</code> is mapped to a file size range (e.g. <code>1 MB</code> - <code>2 MB</code>).</p>
+<h2 id="clusterstate">ClusterState</h2>
+<h3 id="get-apiv1clusterstate">GET /api/v1/clusterState</h3>
+<p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns a summary of the current state of the Ozone cluster.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;pipelines&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;healthyDatanodes&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;storageReport&#34;</span>: {
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">1081719668736</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">1309212672</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">597361258496</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volumes&#34;</span>: <span style="color:#ae81ff">6</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;buckets&#34;</span>: <span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;keys&#34;</span>: <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="volumes-admin-only">Volumes (admin only)</h2>
+<h3 id="get-apiv1volumes">GET /api/v1/volumes</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the volume after the given prevKey.
+Example: prevKey=vol1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the volumes in the cluster.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volumes&#34;</span>: [{
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176660</span> ,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590397315</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">2048</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;READ&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+</span></span><span style="display:flex;"><span>              ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="buckets-admin-only">Buckets (admin only)</h2>
+<h3 id="get-apiv1buckets">GET /api/v1/buckets</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>volume (optional)</p>
+<p>The volume in string without any protocol prefix.</p>
+</li>
+<li>
+<p>prevKey (optional)</p>
+<p>Only returns the bucket after the given prevKey. prevKey is ignored if volume is not specified.
+Example: prevKey=bucket1</p>
+</li>
+<li>
+<p>limit (optional)</p>
+<p>Only returns the limited number of results. The default limit is 1000.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns all the buckets in the cluster if volume is not specified or it is an empty string.
+If <code>volume</code> is specified, it returns only the buckets under <code>volume</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;buckets&#34;</span>: [{
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;volumeName&#34;</span>: <span style="color:#e6db74">&#34;vol1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketName&#34;</span>: <span style="color:#e6db74">&#34;buck1&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;versioning&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;storageType&#34;</span>: <span style="color:#e6db74">&#34;DISK&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;creationTime&#34;</span>: <span style="color:#ae81ff">1665588176616</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;modificationTime&#34;</span>: <span style="color:#ae81ff">1665590392293</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedBytes&#34;</span>: <span style="color:#ae81ff">943718400</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;usedNamespace&#34;</span>: <span style="color:#ae81ff">40000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInBytes&#34;</span>: <span style="color:#ae81ff">1073741824</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;quotaInNamespace&#34;</span>: <span style="color:#ae81ff">50000</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;bucketLayout&#34;</span>: <span style="color:#e6db74">&#34;OBJECT_STORE&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;acls&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;USER&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;testuser&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;scope&#34;</span>: <span style="color:#e6db74">&#34;ACCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;aclList&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;WRITE&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;READ&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;DELETE&#34;</span>
+</span></span><span style="display:flex;"><span>              ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="datanodes">Datanodes</h2>
+<h3 id="get-apiv1datanodes">GET /api/v1/datanodes</h3>
+<p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the datanodes in the cluster.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;datanodes&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;f8f8cb45-3ab2-4123&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;lastHeartbeat&#34;</span>: <span style="color:#ae81ff">1605738400544</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;storageReport&#34;</span>: {
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;capacity&#34;</span>: <span style="color:#ae81ff">270429917184</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;used&#34;</span>: <span style="color:#ae81ff">358805504</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;remaining&#34;</span>: <span style="color:#ae81ff">119648149504</span>
+</span></span><span style="display:flex;"><span>     		},
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-2&#34;</span>
+</span></span><span style="display:flex;"><span>     		}, {
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;pipelineID&#34;</span>: <span style="color:#e6db74">&#34;3bf4a9e9-69cc-4d20&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>     			<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>
+</span></span><span style="display:flex;"><span>     		}],
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">17</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderCount&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="pipelines">Pipelines</h2>
+<h3 id="get-apiv1pipelines">GET /api/v1/pipelines</h3>
+<p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns all the pipelines in the cluster.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;totalCount&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;pipelines&#34;</span>: [{
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;pipelineId&#34;</span>: <span style="color:#e6db74">&#34;b9415b20-b9bd-4225&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;OPEN&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderNode&#34;</span>: <span style="color:#e6db74">&#34;localhost-1&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;datanodes&#34;</span>: [<span style="color:#e6db74">&#34;localhost-1&#34;</span>, <span style="color:#e6db74">&#34;localhost-2&#34;</span>, <span style="color:#e6db74">&#34;localhost-3&#34;</span>],
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;lastLeaderElection&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;duration&#34;</span>: <span style="color:#ae81ff">23166128</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;leaderElections&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicationType&#34;</span>: <span style="color:#e6db74">&#34;RATIS&#34;</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;replicationFactor&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>     		<span style="color:#f92672">&#34;containers&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>     	},
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div><h2 id="tasks">Tasks</h2>
+<h3 id="get-apiv1taskstatus">GET /api/v1/task/status</h3>
+<p><strong>Parameters</strong></p>
+<p>No parameters.</p>
+<p><strong>Returns</strong></p>
+<p>Returns the status of all the Recon tasks.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     [
+</span></span><span style="display:flex;"><span>       {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;taskName&#34;</span>: <span style="color:#e6db74">&#34;OmDeltaRequest&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;lastUpdatedTimestamp&#34;</span>: <span style="color:#ae81ff">1605724099147</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;lastUpdatedSeqNumber&#34;</span>: <span style="color:#ae81ff">186</span>
+</span></span><span style="display:flex;"><span>       },
+</span></span><span style="display:flex;"><span>       <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>     ]
+</span></span></code></pre></div><h2 id="utilization">Utilization</h2>
+<h3 id="get-apiv1utilizationfilecount">GET /api/v1/utilization/fileCount</h3>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>
+<p>volume (optional)</p>
+<p>Filters the results based on the given volume name.</p>
+</li>
+<li>
+<p>bucket (optional)</p>
+<p>Filters the results based on the given bucket name.</p>
+</li>
+<li>
+<p>fileSize (optional)</p>
+<p>Filters the results based on the given fileSize.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Returns the file counts within different file ranges with <code>fileSize</code> in the
+response object being the upper cap for file size range.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     [{
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-0-11685&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-1-41795&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-2-93377&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     }, {
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#e6db74">&#34;vol-2-04168&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;bucket&#34;</span>: <span style="color:#e6db74">&#34;bucket-3-50336&#34;</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;fileSize&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>     	<span style="color:#f92672">&#34;count&#34;</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>     }]
+</span></span></code></pre></div><h2 id="metrics">Metrics</h2>
+<h3 id="get-apiv1metricsapi">GET /api/v1/metrics/:api</h3>
+<p><strong>Parameters</strong></p>
+<p>Refer to <a href="https://prometheus.io/docs/prometheus/latest/querying/api/">Prometheus HTTP API Reference</a>
+for complete documentation on querying.</p>
+<p><strong>Returns</strong></p>
+<p>This is a proxy endpoint for Prometheus and returns the same response as
+the prometheus endpoint.
+Example: /api/v1/metrics/query?query=ratis_leader_election_electionCount</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;resultType&#34;</span>: <span style="color:#e6db74">&#34;vector&#34;</span>,
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;result&#34;</span>: [
+</span></span><span style="display:flex;"><span>           {
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">&#34;metric&#34;</span>: {
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;__name__&#34;</span>: <span style="color:#e6db74">&#34;ratis_leader_election_electionCount&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;exported_instance&#34;</span>: <span style="color:#e6db74">&#34;33a5ac1d-8c65-4c74-a0b8-9314dfcccb42&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;group-03CA9397D54B&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;instance&#34;</span>: <span style="color:#e6db74">&#34;ozone_datanode_1:9882&#34;</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#f92672">&#34;job&#34;</span>: <span style="color:#e6db74">&#34;ozone&#34;</span>
+</span></span><span style="display:flex;"><span>             },
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">&#34;value&#34;</span>: [
+</span></span><span style="display:flex;"><span>               <span style="color:#ae81ff">1599159384.455</span>,
+</span></span><span style="display:flex;"><span>               <span style="color:#e6db74">&#34;5&#34;</span>
+</span></span><span style="display:flex;"><span>             ]
+</span></span><span style="display:flex;"><span>           }
+</span></span><span style="display:flex;"><span>         ]
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>     }
+</span></span></code></pre></div>
+
+          
+          <a class="btn  btn-success btn-lg" href="../interface/javaapi.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 1.4.1, Last Modified: November 15, 2023 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/066215dbc6f5b94eb4da95020f9207e5e6bb0f56">066215dbc6</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
