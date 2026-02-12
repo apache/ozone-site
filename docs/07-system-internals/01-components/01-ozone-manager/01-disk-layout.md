@@ -78,7 +78,7 @@ Located under `ozone.metadata.dirs`, the security sub-directory contains the ide
 
 ### **4\. Ratis Logs**
 
-The ratis/ directory is critical for HA clusters. It stores the transaction logs that must be replicated across the OM quorum.
+The `ratis/` directory is critical for HA clusters. It stores the transaction logs that must be replicated across the OM quorum.
 
 - **Logs**: Represent "inflight" transactions that haven't been fully compacted into the state machine.
 - **Snapshots**: These are Ratis snapshots (not bucket snapshots). They allow a new or lagging OM node to recover its state quickly without replaying the entire history of logs.
@@ -103,4 +103,4 @@ For simplicity, a single "All-in-One" location can be used by setting `ozone.met
 
 ### **Production Environments**
 
-It is strictly recommended to separate these directories. The om.db and ratis logs should reside on high-IOPS storage (SSDs/NVMe) to minimize latency for namespace operations, while security certificates can remain on standard persistent storage.
+It is strictly recommended to separate these directories. The `om.db` and Ratis logs should reside on high-IOPS storage (SSDs/NVMe) to minimize latency for namespace operations, while security certificates can remain on standard persistent storage.
