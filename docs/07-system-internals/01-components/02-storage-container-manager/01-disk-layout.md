@@ -17,6 +17,7 @@ The following configuration keys define where the Storage Container Manager stor
 - **`ozone.metadata.dirs`**: Serves as the default location for security-related metadata (keys and certificates) and is often used as a fallback if specific DB directories are not defined.
 
 Ozone uses a hierarchical fallback system for configurations. Example the SCM looks for its CA location in this order:
+
 - `hdds.scm.ca.location`: The most specific: if this is set, it wins.
 - `hdds.scm.metadata.dirs`: SCM-wide metadata path.
 - `ozone.metadata.dirs`: Global fallback for all services.
@@ -69,11 +70,11 @@ A typical SCM metadata directory structure looks like the following:
 
 SCM uses an embedded RocksDB to store all mapping and state information. This database consists of several column families (tables):
 
-* **Pipelines:** Maps pipeline IDs to the list of Datanodes forming the pipeline.  
-* **Containers:** Maps container IDs to their state (Open/Closed), replication type, and owner.  
-* **Deleted Blocks:** A queue of blocks that have been marked for deletion and need to be cleaned up from Datanodes.  
-* **Valid Certificates:** Stores certificates issued by the SCM Certificate Authority (CA).  
-* **Datanodes:** Tracks the registration and heartbeat status of all Datanodes in the cluster.
+- **Pipelines:** Maps pipeline IDs to the list of Datanodes forming the pipeline.  
+- **Containers:** Maps container IDs to their state (Open/Closed), replication type, and owner.  
+- **Deleted Blocks:** A queue of blocks that have been marked for deletion and need to be cleaned up from Datanodes.  
+- **Valid Certificates:** Stores certificates issued by the SCM Certificate Authority (CA).  
+- **Datanodes:** Tracks the registration and heartbeat status of all Datanodes in the cluster.
 
 ### **2. The VERSION File**
 
@@ -102,11 +103,11 @@ layoutVersion=0
 
 The `ozone-metadata/scm/ca` directory contains key and certs sub-directory, which are used to persist the certificate and the public/private key pairs of SCM. The SCM private key is used to sign the issued certificates and tokens. In the context of SCM HA, the SCM can be either Root CA that issues certificates for SCM instances (a.k.a Sub SCM) that issues certificates to Ozone Manager and Datanodes.
 
-The issuing of certificates will be handled by SCM Ratis leader and the persistence of certificates into RocksDB will be replicated to SCM follower instances consistently. 
+The issuing of certificates will be handled by SCM Ratis leader and the persistence of certificates into RocksDB will be replicated to SCM follower instances consistently.
 
-Among the SCM CA instances, there will be one designated as Primary SCM which acts as Root CA during SCM init. All the other SCM instances will be running bootstrap to get the Primary SCM issued SCM instance certificate. 
+Among the SCM CA instances, there will be one designated as Primary SCM which acts as Root CA during SCM init. All the other SCM instances will be running bootstrap to get the Primary SCM issued SCM instance certificate.
 
-The SCM metadata above below use the all-in-one `ozone.metadata.dirs` without metadata DB on different drives.  As a result of that, the Primary SCM will have its metadata saved under `<The path of ozone.metadata.dirs>/scm/ca`. 
+The SCM metadata above below use the all-in-one `ozone.metadata.dirs` without metadata DB on different drives.  As a result of that, the Primary SCM will have its metadata saved under `<The path of ozone.metadata.dirs>/scm/ca`.
 
 All the Sub SCM instances (including the one running on the primary SCM) security metadata are stored at `<The path of ozone.metadata.dir>/scm/sub-ca`, with keys and certs under it, respectively. Here is an example of Sub SCM security metadata layout.
 
@@ -114,8 +115,8 @@ All the Sub SCM instances (including the one running on the primary SCM) securit
 
 When SCM High Availability (HA) is enabled, SCM uses **Apache Ratis** to replicate its state across the SCM quorum.
 
-* The `ratis/` directory contains the Raft log segments.  
-* Every write request (e.g., container allocation) is first appended to this log and replicated to followers before being applied to the local `scm.db`.
+- The `ratis/` directory contains the Raft log segments.  
+- Every write request (e.g., container allocation) is first appended to this log and replicated to followers before being applied to the local `scm.db`.
 
 ### **5. `db.checkpoints`**
 
@@ -123,7 +124,7 @@ The db.checkpoints directory serves as a dedicated storage area for point-in-tim
 
 ### Recommended Storage Configuration Mapping
 
-The following properties in ozone-site.xml control the disk layout:
+The following properties in `ozone-site.xml` control the disk layout:
 
 | Path Description | Configuration Key | Storage Type Recommendation | Purpose |
 | :---- | :---- | :---- | :---- |
