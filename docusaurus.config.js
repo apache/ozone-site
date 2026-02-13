@@ -228,10 +228,10 @@ const config = {
             to: 'roadmap',
             label: 'Roadmap',
           },
-          {
-            to: 'faq',
-            label: 'FAQ',
-          },
+          // {
+          //   to: 'faq',
+          //   label: 'FAQ',
+          // },
           {
             to: '/blog',
             label: 'Blog',
