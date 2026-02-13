@@ -5,7 +5,7 @@ sidebar_label: Storage Container Manager
 # Storage Container Manager
 
 Storage Container Manager (SCM) is the leader node of the *block space management*.
-The main responsibility is to create and manage [containers](../02-replication/01-storage-containers.md) which is the main replication unit of Ozone.
+The main responsibility is to create and manage [containers](../replication/storage-containers) which is the main replication unit of Ozone.
 
 ![Storage Container Manager](StorageContainerManager.png)
 

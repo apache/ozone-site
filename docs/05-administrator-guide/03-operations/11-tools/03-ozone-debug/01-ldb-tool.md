@@ -467,4 +467,4 @@ ozone debug ldb --db=/data/metadata/om.db value-schema --cf=keyTable
 ozone debug ldb --db=/data/metadata/om.db checkpoint --output=/tmp/om-checkpoint
 ```
 
-[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/debug-om)
+[Next >>](./debug-om)

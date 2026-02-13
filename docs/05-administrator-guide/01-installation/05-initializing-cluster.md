@@ -77,7 +77,7 @@ Let us look at the settings inside the generated file (`ozone-site.xml`) and how
 ## Initialize the cluster
 
 :::info
-For simplicity, here we show the steps for non-HA cluster (1 OM, 1 SCM). To configure OM HA or to convert from non-HA to HA, see the [OM HA documentation](/docs/administrator-guide/configuration/high-availability/om-ha). To configure SCM HA or to convert from non-HA to HA, see the [SCM HA documentation](/docs/administrator-guide/configuration/high-availability/scm-ha).
+For simplicity, here we show the steps for non-HA cluster (1 OM, 1 SCM). To configure OM HA or to convert from non-HA to HA, see the [OM HA documentation](../configuration/high-availability/om-ha). To configure SCM HA or to convert from non-HA to HA, see the [SCM HA documentation](../configuration/high-availability/scm-ha).
 :::
 
 :::tip For Production Deployments

@@ -16,4 +16,4 @@ Commands:
   inspect  Check the metadata of all container replicas on this datanode.
 ```
 
-[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/debug-replicas)
+[Next >>](./debug-replicas)

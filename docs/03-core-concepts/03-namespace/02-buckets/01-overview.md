@@ -50,26 +50,26 @@ Buckets are created within a specified volume.
 ozone sh bucket create /myvolume/mybucket
 ```
 
-For more details on bucket operations, refer to the [Ozone CLI documentation](../../../04-user-guide/01-client-interfaces/01-o3.md#bucket-operations).
+For more details on bucket operations, refer to the [Ozone CLI documentation](../../../user-guide/client-interfaces/o3#bucket-operations).
 
 ### Bucket Layouts (Object Store vs. File System Optimized)
 
 Ozone supports different bucket layouts, primarily:
 
 - **Object Store (OBS):** The traditional object storage layout, where keys are stored with their full path names. This is suitable for S3-like access patterns.
-For more details, refer to the [Object Store documentation](./04-layouts/01-object-store.md).
+For more details, refer to the [Object Store documentation](./layouts/object-store).
 - **File System Optimized (FSO):** An optimized layout for Hadoop Compatible File System (HCFS) semantics, where intermediate directories are stored separately, improving performance for file system operations like listing and renaming.
-For more details, refer to the [Prefix FSO documentation](./04-layouts/02-file-system-optimized.md).
+For more details, refer to the [Prefix FSO documentation](./layouts/file-system-optimized).
 
 ### Erasure Coding
 
 Erasure Coding (EC) can be enabled at the bucket level to define data redundancy strategies. This allows for more efficient storage compared to replication, especially for large datasets.
-For more information, see the [Erasure Coding documentation](../../02-replication/04-erasure-coding.md).
+For more information, see the [Erasure Coding documentation](../../replication/erasure-coding).
 
 ### Snapshots
 
 Ozone's snapshot feature allows users to take point-in-time consistent images of a given bucket. These snapshots are immutable and can be used for backup, recovery, archival, and incremental replication purposes.
-For more details, refer to the [Ozone Snapshot documentation](./08-snapshots.md).
+For more details, refer to the [Ozone Snapshot documentation](./snapshots).
 
 ### GDPR Compliance
 
@@ -79,9 +79,9 @@ For more details, refer to the [GDPR documentation](https://ozone.apache.org/doc
 ### Bucket Linking
 
 Bucket linking allows exposing a bucket from one volume (or even another bucket) as if it were in a different location, particularly useful for S3 compatibility or cross-tenant access. This creates a symbolic link-like behavior.
-For more information, see the [Bucket Links documentation](./07-links.md).
+For more information, see the [Bucket Links documentation](./links).
 
 ### Access Control Lists (ACLs)
 
 ACLs define permissions for buckets, controlling who can list keys, read/write data, or delete the bucket.
-For more details, refer to the [Security ACLs documentation](../../04-security/02-acls/01-native-acls.md).
+For more details, refer to the [Security ACLs documentation](../../security/acls/native-acls).

@@ -28,7 +28,7 @@ containerCheckChain
 
 ## ReplicationManager Report
 
-Each time the check phase of the Replication Manager runs, it generates a report which can be accessed via the command *container report* command. This command is described in the administrator guide under [Replication Manager Report](../../../05-administrator-guide/03-operations/05-container-replication-report.md).
+Each time the check phase of the Replication Manager runs, it generates a report which can be accessed via the command *container report* command. This command is described in the administrator guide under [Replication Manager Report](../../../administrator-guide/operations/container-replication-report).
 
 ### Container State Descriptions
 

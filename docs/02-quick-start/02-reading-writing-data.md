@@ -8,7 +8,7 @@ preferences. This guide explains how to use the three primary interfaces within 
 3. **S3 API** - Amazon S3 compatible REST interface
 
 All examples assume you already have a running Ozone cluster using Docker Compose as described in
-the [Docker Installation Guide](./01-installation/01-docker.md).
+the [Docker Installation Guide](./installation/docker).
 
 Let's start 5 Datanodes because the Erasure Coding example below requires at least 5 replicas:
 

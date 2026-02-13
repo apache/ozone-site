@@ -29,7 +29,7 @@ First of all, we need an Ozone cluster with s3gateway, and its OM RPC port and s
 because CSIServer will access OM to create or delete a bucket, also, CSIServer will publish volume by creating a mount point to s3g
 through goofys.
 
-If you don't have an Ozone cluster on Kubernetes, you can reference [Kubernetes](../../02-quick-start/01-installation/02-kubernetes.md) to create one. Use the resources from `kubernetes/examples/ozone` where you can find all the required Kubernetes resources to run cluster together with the dedicated Ozone CSI daemon (check `kubernetes/examples/ozone/csi`)
+If you don't have an Ozone cluster on Kubernetes, you can reference [Kubernetes](../../quick-start/installation/kubernetes) to create one. Use the resources from `kubernetes/examples/ozone` where you can find all the required Kubernetes resources to run cluster together with the dedicated Ozone CSI daemon (check `kubernetes/examples/ozone/csi`)
 
 Now, create the CSI related resources by execute the follow command.
 

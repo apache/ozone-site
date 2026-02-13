@@ -196,7 +196,7 @@ Key snapshot-related configuration properties include:
 - Configuration for snapshot retention policies
 - Snapshot cleanup and background service settings
 
-For detailed snapshot configuration properties, see [Snapshot Configuration Properties](./02-configuration-properties.md).
+For detailed snapshot configuration properties, see [Snapshot Configuration Properties](./configuration-properties).
 
 ### Monitoring
 

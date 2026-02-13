@@ -91,7 +91,7 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
   - **Conditional Requests:** Support for conditional requests (e.g., `If-Match`, `If-None-Match`) is planned and tracked in [HDDS-13117](https://issues.apache.org/jira/browse/HDDS-13117).
   - **Lifecycle configuration, cross region replication, S3 event notifications** are being implemented and in the roadmap.
 - While Ozone S3 Gateway provides extensive support for common S3 operations, users should be aware of the above non-compliant behaviors and limitations when integrating with applications expecting full AWS S3 functionality.
-- While Ozone S3 Gateway does not support S3 Server-Side Encryption, it does support encrypted buckets using Apache Ranger KMS. For more information, see the [Transparent Data Encryption](../../../05-administrator-guide/02-configuration/03-security/05-encryption/02-transparent-data-encryption.md) documentation.
+- While Ozone S3 Gateway does not support S3 Server-Side Encryption, it does support encrypted buckets using Apache Ranger KMS. For more information, see the [Transparent Data Encryption](../../../administrator-guide/configuration/security/encryption/transparent-data-encryption) documentation.
 :::
 
 ## Security

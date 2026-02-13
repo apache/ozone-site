@@ -52,12 +52,12 @@ Recon can integrate with any Prometheus instance configured to collected metrics
 
 ## API Reference
 
-[Link to complete API Reference](../../05-administrator-guide/03-operations/09-observability/02-recon/02-recon-rest-api.md)
+[Link to complete API Reference](../../administrator-guide/operations/observability/recon/recon-rest-api)
 
 ## Persisted state
 
-- A local copy of [OM database](./02-ozone-manager.md#persisted-state)
-- A local copy of [SCM database](./03-storage-container-manager.md#persisted-state)
+- A local copy of [OM database](./ozone-manager#persisted-state)
+- A local copy of [SCM database](./storage-container-manager#persisted-state)
 
 The following data is persisted in Recon in the specified RocksDB directory:
 
