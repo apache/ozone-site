@@ -37,5 +37,5 @@ jobs:
   publish:
     needs: docusaurus
     # Update this to master when the website is ready to be published.
-    if: ${{ github.event_name == 'push' && github.ref_name == 'HDDS-9225-website-v2' }}
+    if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
     uses: ./.github/workflows/publish.yml

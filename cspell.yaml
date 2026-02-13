@@ -75,6 +75,7 @@ words:
 - ratis
 - OM
 - SCM
+- Recon
 - datanode
 - datanodes
 - DN
@@ -86,6 +87,7 @@ words:
 - mis-replicate
 - mis-replication
 - mis-replicated
+- unreplicated
 - BCSID
 - EC
 - reconfig
@@ -94,10 +96,13 @@ words:
 - quasi-closed
 - HCFS
 - libo3fs
+- omdb
 - AOS
 - FCQ
 - QoS
 # Other systems' words
+- savepoints
+- HDDs
 - KDC
 - classpath
 - DS
@@ -110,6 +115,7 @@ words:
 - matomo
 - qube
 - PKI
+- PMD
 - proto
 - protolock
 - protolocks
@@ -130,6 +136,7 @@ words:
 - memtable
 - hsync
 - SASL
+- GSS
 - jira
 - jiras
 - LLAP
@@ -162,8 +169,11 @@ words:
 - Cloudian
 - ABFS
 - OCI
+- OOM
 - untar
 - Untar
+- LRU
+- SPDK
 # Misc words
 - acking
 - dashboarding
@@ -173,6 +183,7 @@ words:
 - devs
 - CLI
 - lakehouse
+- lakehouses
 - Flink
 - rebalancing
 - JDK
@@ -195,9 +206,11 @@ words:
 - minimises
 - minimising
 - tarballed
+- Namenodes
 # Apache Ozone community member names
 - Sumit
 # Company names for "Who Uses Ozone" page
+- Didi
 - Shopee
 - Qihoo360
 - Meituan
@@ -211,6 +224,25 @@ words:
 - utilisation
 - utilised
 - hotspots
+- hotspot
+# Author names
+- jojochuang
+- Gargi
+- jais
+- lai
+- activetimebyseconds
+- charindex
+- thecount
+- debugability
+- auditparser
+- checknative
+- subpages
+- analyse
+- Sammi
+- slfan1989
+- whbing
+- jianghuazhu
+- weimingdiit
 # Infrastructure and hardware terms
 - Chrony
 - SAS
@@ -221,3 +253,4 @@ words:
 - NVMe
 - ntpd
 - hotswap
+- UDF

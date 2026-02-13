@@ -30,12 +30,10 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Apache Ozone',
   tagline: 'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
-  // TODO: HDDS-12129 Delete this before the site goes live to enable search engine indexing.
-  noIndex: true,
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3001.
-  url: 'https://ozone-site-v2.staged.apache.org',
+  url: 'https://ozone.apache.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -81,6 +79,20 @@ const config = {
       attributes: {
         rel: 'apple-touch-icon',
         href: 'apple-touch-icon.png',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'google-site-verification',
+        content: 'fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: 'A2998EF969F36A0D',
       },
     },
   ],
@@ -188,15 +200,13 @@ const config = {
       ({
         docs: {
           sidebarPath: undefined,
-          // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2',
+            'https://github.com/apache/ozone-site/tree/master',
         },
         blog: {
           showReadingTime: true,
-          // TODO update this link when the new website's branch is merged.
           editUrl:
-            'https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2/',
+            'https://github.com/apache/ozone-site/tree/master/',
         },
         theme: {
           customCss: [
@@ -214,8 +224,7 @@ const config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
 
-            // TODO Base URL must be updated when the new website's branch is merged.
-            const validUrlRegex = new RegExp('^https://ozone-site-v2\.staged\.apache\.org/([a-z0-9][a-z0-9\./-]*[a-z0-9/])?$');
+            const validUrlRegex = /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
             items.forEach((item, index) => {
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
@@ -430,11 +439,10 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['bash'],
       },
-      // TODO HDDS-9566
       algolia: {
-        appId: "PLACEHOLDER",
-        apiKey: "PLACEHOLDER",
-        indexName: "PLACEHOLDER",
+        appId: "YQWKI4BIJ7",
+        apiKey: "47cd671112fb5e0363a4d9724beeb9d4",
+        indexName: "Apache Ozone website",
         searchParameters: {}
       }
     }),
