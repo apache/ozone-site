@@ -29,7 +29,7 @@ find "$root"/docs "$root"/src/pages | pnpm cspell --no-progress --show-context s
 if [ "$rc" != 0 ]; then
   # TODO Update this link to master when the new website's branch is merged.
   printf '\n%s\n%s\n' 'Spell check failed. See CONTRIBUTING.md for help fixing false positive spelling errors:' \
-    'https://github.com/apache/ozone-site/blob/HDDS-9225-website-v2/CONTRIBUTING.md#spelling' 1>&2
+    'https://github.com/apache/ozone-site/blob/master/CONTRIBUTING.md#spelling' 1>&2
 fi
 
 exit $rc
