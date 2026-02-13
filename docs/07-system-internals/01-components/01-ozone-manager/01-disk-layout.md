@@ -1,7 +1,10 @@
 ---
+draft: true
 sidebar_label: Disk Layout
 ---
 # Ozone Manager Disk Layout
+
+**TODO:** Allow inclusion of the system internals folder by updating the excludes list in `docusaurus.config.js`.
 
 ## **Overview**
 

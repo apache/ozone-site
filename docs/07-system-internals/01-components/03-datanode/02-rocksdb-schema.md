@@ -4,6 +4,8 @@ sidebar_label: Datanode Container Schema v3
 
 # Datanode Container Schema v3
 
+**TODO:** Uncomment the link to this page in docs/05-administrator-guide/02-configuration/04-performance/04-RocksDB.md
+
 In Ozone, user data are separated into blocks and stored in HDDS Containers. Containers are the fundamental replication unit of Ozone/HDDS. Each Container has its metadata and data. Data are saved as files on disk. Metadata is saved in RocksDB.
 
 Earlier, there was one RocksDB for each Container on Datanode. With user data continuously growing, there will be hundreds of thousands of RocksDB instances on one Datanode. It's a big challenge to manage this amount of RocksDB instances in one JVM.

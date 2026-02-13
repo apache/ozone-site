@@ -135,6 +135,10 @@ const config = {
           sidebarPath: undefined,
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
+          exclude: [
+            '**/06-troubleshooting/**',
+            '**/07-system-internals/**',
+          ]
         },
         blog: {
           showReadingTime: true,
@@ -224,10 +228,10 @@ const config = {
             to: 'roadmap',
             label: 'Roadmap',
           },
-          {
-            to: 'faq',
-            label: 'FAQ',
-          },
+          // {
+          //   to: 'faq',
+          //   label: 'FAQ',
+          // },
           {
             to: '/blog',
             label: 'Blog',
