@@ -21,6 +21,10 @@ ignore:
 - pnpm-lock.yaml
 - node_modules
 - "**/recon-api.yaml"
+<<<<<<< HEAD
+=======
+- "**/static/docs"
+>>>>>>> af434a367 (Update yamllint)
 
 rules:
   anchors: enable
