@@ -4,8 +4,6 @@ sidebar_label: Disk Layout
 ---
 # Ozone Manager Disk Layout
 
-**TODO:** Allow inclusion of the system internals folder by updating the excludes list in `docusaurus.config.js`.
-
 ## **Overview**
 
 Apache Ozone separates metadata management across different services to ensure scalability. The Ozone Manager (OM) is responsible for managing the namespace metadata, which includes volumes, buckets, and keys. This document outlines the on-disk configurations, directory structures, and layout for the Ozone Manager based on technical specifications.
