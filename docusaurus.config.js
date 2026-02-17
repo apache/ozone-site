@@ -277,10 +277,11 @@ const config = {
               },
             ]
           },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
+          //   TODO: Enable if multiple languages are supported. See https://issues.apache.org/jira/browse/HDDS-9571
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
           {
             href: 'https://github.com/apache/ozone',
             position: 'right',
