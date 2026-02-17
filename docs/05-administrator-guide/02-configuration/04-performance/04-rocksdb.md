@@ -124,7 +124,9 @@ Key tuning parameters for the Datanode often involve:
 
 **Compaction strategies:** Optimizing how data is merged and organized on disk.
 
-[//]: # (For more details, refer to the [Datanode Container Schema v3 in DN Documentation]&#40;../../../system-internals/components/datanode/rocksdb-schema/&#41;.)
+<!--
+For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/Datanode/RocksDB-schema/).
+-->
 
 | Property | Default | Description |
 |----------|---------|-------------|

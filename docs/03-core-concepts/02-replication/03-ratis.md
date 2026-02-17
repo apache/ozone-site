@@ -18,5 +18,7 @@ High Availability (HA) mechanisms of both the Ozone Manager (OM-HA) and Storage 
 
 For more detailed information, please visit the [Apache Ratis website](https://ratis.apache.org/).
 
-[//]: # (For troubleshooting Ratis problems encountered in production, please refer to)
-[//]: # ([Troubleshooting Ratis]&#40;/06-troubleshooting/13-ratis.md&#41;.)
+<!--
+For troubleshooting Ratis problems encountered in production, please refer to
+[Troubleshooting Ratis](/06-troubleshooting/13-ratis.md).
+-->

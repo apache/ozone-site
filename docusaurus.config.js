@@ -135,6 +135,8 @@ const config = {
           sidebarPath: undefined,
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
+          // TODO: The following sections are currently hidden. Ensure that a section contains a few pages
+          //  of publishable quality before enabling visibility for that section.
           exclude: [
             '**/06-troubleshooting/**',
             '**/07-system-internals/**',
@@ -228,6 +230,8 @@ const config = {
             to: 'roadmap',
             label: 'Roadmap',
           },
+          // TODO: The FAQ section is currently hidden. Ensure that the FAQ page
+          //  is of publishable quality before enabling visibility for this section.
           // {
           //   to: 'faq',
           //   label: 'FAQ',

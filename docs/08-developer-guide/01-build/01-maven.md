@@ -121,7 +121,9 @@ This command will:
 - Create a distribution in `hadoop-ozone/dist/target/ozone-<version>`
 - Run unit and integration tests during the build
 
-- [//]: # (- Run [unit]&#40;/docs/developer-guide/test/unit-tests&#41; and [integration]&#40;/docs/developer-guide/test/integration-tests&#41; tests during the build)
+<!--
+- Run [unit](/docs/developer-guide/test/unit-tests) and [integration](/docs/developer-guide/test/integration-tests) tests during the build)
+-->
 
 :::note
 
