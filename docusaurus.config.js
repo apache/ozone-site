@@ -214,7 +214,23 @@ const config = {
         items: [
           {
             label: 'Docs',
-            to: 'docs',
+            position: 'left',
+            items: [
+              {
+                label: 'Latest Docs',
+                to: 'docs',
+              },
+              {
+                label: 'Docs 2.0.0 (Archived)',
+                href: '/docs/2.0.0/',
+		target: '_blank'
+              },
+              {
+                label: 'Docs 1.4.1 (Archived)',
+                href: '/docs/1.4.1/',
+		target: '_blank'
+              },
+            ],
           },
           {
             to: 'download',

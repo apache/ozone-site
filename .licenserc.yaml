@@ -34,6 +34,7 @@ header:
   - pnpm-lock.yaml
   # SVG files from third-party sources don't need license headers
   - "**/*.svg"
+  - static/docs/**
 
   # Do not comment on pull requests.
   comment: never
