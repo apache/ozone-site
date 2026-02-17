@@ -143,4 +143,4 @@ For simplicity, a single "All-in-One" location can be used by setting `ozone.met
 It is strictly recommended to separate these directories. The `scm.db` and Ratis logs should reside on high-IOPS storage (SSDs/NVMe) to minimize latency for namespace operations, while security certificates can remain on standard persistent storage.
 
 - **Storage Type:** It is highly recommended to host the `scm.db` and `ratis/` directories on **NVMe or SAS SSDs** to minimize latency for block and container allocations.  
-- **Redundancy:** Use **RAID 1** (mirroring) for metadata disks to protect against local disk failure, even if SCM HA is enabled at the software layer.
+- **Redundancy:** Use **RAID 1+0** (or **RAID 1**) (mirroring) for metadata disks to protect against local disk failure, even if SCM HA is enabled at the software layer. (Note: Typically **RAID 1+0** disks provide better performance compared to **RAID 1**)
