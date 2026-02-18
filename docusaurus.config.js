@@ -133,18 +133,27 @@ const config = {
     preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
       const {filePath, fileContent} = params;
 
+      // Strip HTML comments and fenced code blocks to avoid false positives.
+      // Replace non-newline characters with spaces to preserve line numbers.
+      const contentForValidation = fileContent
+        .replace(/<!--[\s\S]*?-->/g, (m) => m.replace(/[^\n]/g, ' '))
+        .replace(/```[\s\S]*?```/g, (m) => m.replace(/[^\n]/g, ' '));
+
       // Match markdown links but exclude images (which start with !)
       // Uses negative lookbehind (?<!!) to skip ![alt](url) image syntax
       const internalLinkPattern = /(?<!!)\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
+      // Match reference link definitions: [ref]: url
+      const refLinkDefPattern = /^\[([^\]]+)\]:\s+(\S+)/gm;
       // Match two-digit number prefixes at start or after slash
       const numberPrefixPattern = /(^|\/)\d{2}-/;
 
       let matches;
       const invalidLinks = [];
 
-      while ((matches = internalLinkPattern.exec(fileContent)) !== null) {
+      while ((matches = internalLinkPattern.exec(contentForValidation)) !== null) {
         const linkText = matches[1];
-        const linkPath = matches[2];
+        // Strip angle brackets (e.g., <./ozone-manager.md> -> ./ozone-manager.md)
+        const linkPath = matches[2].replace(/^<|>$/g, '');
 
         // Skip external links (http://, https://, mailto:, etc.)
         if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
@@ -174,6 +183,35 @@ const config = {
             text: linkText,
             path: linkPath,
             line: fileContent.substring(0, matches.index).split('\n').length
+          });
+        }
+      }
+
+      // Check reference link definitions: [ref]: url
+      while ((matches = refLinkDefPattern.exec(contentForValidation)) !== null) {
+        const linkText = matches[1];
+        const linkPath = matches[2].replace(/^<|>$/g, '');
+
+        if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
+          continue;
+        }
+
+        const pathWithoutFragment = linkPath.split('#')[0];
+
+        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        if (isAbsoluteNonDocsPath) {
+          continue;
+        }
+
+        const isAbsoluteDocsPath = linkPath.startsWith('/docs/');
+        const hasNumberPrefix = numberPrefixPattern.test(linkPath);
+        const hasDocExtension = /\.(mdx?|jsx?|tsx)$/.test(pathWithoutFragment);
+
+        if (isAbsoluteDocsPath || hasNumberPrefix || hasDocExtension) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: contentForValidation.substring(0, matches.index).split('\n').length
           });
         }
       }
