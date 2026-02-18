@@ -9,7 +9,7 @@ This document summarizes the contribution process.
 1. Review the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications). Contributing to the new website follows a similar process with a few differences:
     - You should fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo instead of the main [apache/ozone](https://github.com/apache/ozone) repo.
     - You should enable the `ci` workflow on your fork, which will run tests on your changes before submitting a pull request.
-    - Your local branch containing changes for the new website should be based off of the [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) branch.
+    - Your local branch containing changes for the website should be based off of the [master](https://github.com/apache/ozone-site/tree/master) branch.
 
 2. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
     - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
@@ -19,7 +19,7 @@ This document summarizes the contribution process.
     - If you need to update the dependencies in your Docker image at any time, run `docker compose up --build` to create an updated image.
 
 4. Follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository.
-    - The target branch for the PR should be [HDDS-9225-website-v2](https://github.com/apache/ozone-site/tree/HDDS-9225-website-v2) for changes targeting this new unreleased version of the website.
+    - The target branch for the PR should be [master](https://github.com/apache/ozone-site/tree/master) for changes targeting this new unreleased version of the website.
 
 ⬇️ Continue reading for more details, helpful tips, and advanced usage. ⬇️
 
@@ -38,15 +38,6 @@ This document summarizes the contribution process.
 ## Filing Jira Issues
 
 Please follow the same [Jira guidelines](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#jira-guideline) as the main Ozone project when filing improvements or issues for the website. Website Jira issues are also under the HDDS project, but can be tagged with `website` and `documentation` to distinguish them from changes to Ozone itself.
-
-## Migrating Content From the Current Website to the New Website
-
-If you are migrating a page from the old website to the new website, please follow these steps:
-
-1. Verify that the content of the original page is clear and accurate.
-2. If there are issues with the original page, raise a PR with your fixes to the [current Ozone website](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs) to fix the page first.
-3. Once the page is merged into the current website, migrate it to the new website and raise a PR.
-    - Pages being brought in from the current website may be enhanced with [additional markdown functionality](#page-format) supported by the new website.
 
 ## Modifying the Website
 
@@ -347,4 +338,4 @@ Build and run the website locally with the `pnpm` package manager.
 
 ### Contributing Your Modifications
 
-Fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo and follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository. The target branch for the PR should be `HDDS-9225-website-v2` for changes targeting this new unreleased version of the website.
+Fork the [apache/ozone-site](https://github.com/apache/ozone-site) repo and follow the same steps as the main [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications) to create a pull request against the [apache/ozone-site](https://github.com/apache/ozone-site) repository. The target branch for the PR should be `master`.
