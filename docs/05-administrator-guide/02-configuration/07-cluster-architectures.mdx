@@ -82,7 +82,7 @@ When running application jobs, such as Spark, in a multi-cluster environment, ad
 To run a Spark shell job that accesses a remote cluster (e.g., `ozone2`), you must specify the filesystem path in the `spark.yarn.access.hadoopFileSystems` property:
 
 ```bash
-spark-shell \
+spark-shell 
   --conf "spark.yarn.access.hadoopFileSystems=ofs://ozone2"
 ```
 
@@ -97,8 +97,8 @@ org.apache.hadoop.yarn.exceptions.YarnException: Failed to submit application_17
 To prevent this, you must tell YARN to exclude the remote filesystem from its token renewal process. A complete Spark shell command for accessing a remote, Kerberized cluster would include both properties:
 
 ```bash
-spark-shell \
-  --conf "spark.yarn.access.hadoopFileSystems=ofs://ozone2" \
+spark-shell 
+  --conf "spark.yarn.access.hadoopFileSystems=ofs://ozone2" 
   --conf "spark.yarn.kerberos.renewal.excludeHadoopFileSystems=ofs://ozone2"
 ```
 
