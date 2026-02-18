@@ -25,7 +25,7 @@ SCM requires two Kerberos principals, and the corresponding key tab files for bo
 | `hdds.scm.http.auth.kerberos.keytab`    | The keytab file used by SCM HTTP server to login as its service principal if SPNEGO is enabled for SCM HTTP server. |
 
 :::note
-For general configuration on enabling Kerberos based SPNEGO authentication for HTTP web-consoles, refer to [Configuring HTTP authentication using Kerberos SPNEGO](/docs/05-administrator-guide/02-configuration/03-security/03-https.md).
+For general configuration on enabling Kerberos based SPNEGO authentication for HTTP web-consoles, refer to [Configuring HTTP authentication using Kerberos SPNEGO](../../../administrator-guide/configuration/security/https).
 :::
 
 ## Ozone Manager
@@ -73,7 +73,7 @@ Recon provides monitoring and management capabilities and can be secured using K
 | `ozone.recon.http.auth.kerberos.principal` | The service principal for the Recon HTTP endpoint. e.g., `HTTP/_HOST@REALM`. |
 | `ozone.recon.http.auth.kerberos.keytab` | The keytab file for the Recon HTTP principal. e.g., `/path/to/HTTP.keytab`. |
 
-Access to Recon's admin-only APIs is controlled by `ozone.administrators` or `ozone.recon.administrators` lists. Refer to [Configuring Ozone Administrators](/docs/administrator-guide/configuration/security/administrators) for more details.
+Access to Recon's admin-only APIs is controlled by `ozone.administrators` or `ozone.recon.administrators` lists. Refer to [Configuring Ozone Administrators](../../configuration/security/administrators) for more details.
 
 ## Securing Datanodes
 

@@ -23,7 +23,7 @@ Keys are created, read, and managed using the Ozone CLI or various client APIs (
 ozone sh key put /myvolume/mybucket/mykey.txt /path/to/local/file.txt
 ```
 
-For more details on key operations, refer to the [Ozone CLI documentation](/docs/user-guide/client-interfaces/o3#key-operations).
+For more details on key operations, refer to the [Ozone CLI documentation](../../../user-guide/client-interfaces/o3#key-operations).
 
 ### Key Write and Read Process
 
@@ -43,16 +43,16 @@ For more details, refer to the Overwriting Key Only If Unchanged design document
 
 When keys are deleted from File System Optimized (FSO) buckets, they are moved to a trash directory, allowing for recovery. For Object Store (OBS) buckets, keys are permanently deleted.
 
-For more information on the trash feature, refer to the [Trash documentation](/docs/administrator-guide/operations/trash).
+For more information on the trash feature, refer to the [Trash documentation](../../../administrator-guide/operations/trash).
 
 ### Encryption
 
 If the parent bucket is encrypted, all keys written to that bucket will be transparently encrypted.
 
-For more details, refer to the [Transparent Data Encryption documentation](/docs/administrator-guide/configuration/security/encryption/transparent-data-encryption).
+For more details, refer to the [Transparent Data Encryption documentation](../../../administrator-guide/configuration/security/encryption/transparent-data-encryption).
 
 ### Access Control Lists (ACLs)
 
 ACLs can also be applied to individual keys, providing fine-grained control over read and write permissions.
 
-For more details, refer to the [Native ACLs documentation](/docs/core-concepts/security/acls/native-acls).
+For more details, refer to the [Native ACLs documentation](../../security/acls/native-acls).

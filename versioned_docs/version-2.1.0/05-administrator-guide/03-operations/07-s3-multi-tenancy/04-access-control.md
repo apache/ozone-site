@@ -4,7 +4,7 @@ sidebar_label: Access Control
 
 # Access Control with Ranger
 
-Ozone multi-tenancy relies on [Apache Ranger](/docs/administrator-guide/configuration/security/ranger) to enforce access control to resources.
+Ozone multi-tenancy relies on [Apache Ranger](../../../administrator-guide/configuration/security/ranger) to enforce access control to resources.
 
 ## Ranger Policies
 
@@ -40,7 +40,7 @@ We leverage Ranger roles mainly for the advantage of easier user management in a
 
 :::warning
 
-**DO NOT** manually edit any Ranger roles created by Ozone. Any changes to them will be overwritten by the Ozone Manager's Ranger sync thread. Changes in tenant membership should be done using the [tenant CLI commands](./03-tenant-commands.md).
+**DO NOT** manually edit any Ranger roles created by Ozone. Any changes to them will be overwritten by the Ozone Manager's Ranger sync thread. Changes in tenant membership should be done using the [tenant CLI commands](./tenant-commands).
 
 :::
 

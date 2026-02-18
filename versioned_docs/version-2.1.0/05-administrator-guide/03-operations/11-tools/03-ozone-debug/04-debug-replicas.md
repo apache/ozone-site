@@ -98,4 +98,4 @@ failed checks.
                             errors.
 ```
 
-[Next >>](/docs/administrator-guide/operations/tools/ozone-debug/ratis-log-parser)
+[Next >>](./ratis-log-parser)
