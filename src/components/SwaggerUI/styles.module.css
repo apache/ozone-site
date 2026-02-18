@@ -29,7 +29,7 @@
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 30px;
-  display: flex;
+  display: none; /* Hidden until CORS is configured on Recon server */
   align-items: center;
   gap: 15px;
   flex-wrap: wrap;
