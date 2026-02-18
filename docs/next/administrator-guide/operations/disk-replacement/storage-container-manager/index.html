@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.27c88cdc.css">
-<script src="/assets/js/runtime~main.d9335d27.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1d3c8623.js" defer="defer"></script>
 <script src="/assets/js/main.6bbc9bc0.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -79,7 +79,7 @@ The procedure depends entirely on whether your SCM is a single, standalone insta
 <p><strong>Attempt Data Recovery:</strong> If possible, make a best-effort attempt to copy the contents of the <code>ozone.scm.db.dirs</code> directory from the failing disk to a safe, temporary location.</p>
 </li>
 <li>
-<p><strong>If Recovery Fails, Restore from Backup:</strong> If the SCM database is unrecoverable, you must restore it from your most recent backup. Without a backup, you risk permanent data loss or a lengthy, complex, and potentially incomplete state reconstruction from Datanode reports. If Recon is deployed, its local SCM copy (from Datanode reports) may be usable as a recovery source—see <a href="/docs/core-concepts/architecture/recon">Recon</a>.</p>
+<p><strong>If Recovery Fails, Restore from Backup:</strong> If the SCM database is unrecoverable, you must restore it from your most recent backup. Without a backup, you risk permanent data loss or a lengthy, complex, and potentially incomplete state reconstruction from Datanode reports. If Recon is deployed, its local SCM copy (from Datanode reports) may be usable as a recovery source—see <a href="/docs/next/core-concepts/architecture/recon">Recon</a>.</p>
 </li>
 <li>
 <p><strong>Replace and Configure Disk:</strong> Physically replace the hardware and ensure the new, empty disk is mounted at the correct path defined in <code>ozone.scm.db.dirs</code>.</p>

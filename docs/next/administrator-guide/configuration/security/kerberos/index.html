@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.27c88cdc.css">
-<script src="/assets/js/runtime~main.d9335d27.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1d3c8623.js" defer="defer"></script>
 <script src="/assets/js/main.6bbc9bc0.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -42,7 +42,7 @@
 <h2 class="anchor anchorWithStickyNavbar_e_9H" id="recon-server">Recon Server<a href="#recon-server" class="hash-link" aria-label="Direct link to Recon Server" title="Direct link to Recon Server">​</a></h2>
 <p>Recon provides monitoring and management capabilities and can be secured using Kerberos authentication for its web UI and REST endpoints.</p>
 <table><thead><tr><th>Property</th><th>Description</th></tr></thead><tbody><tr><td><code>ozone.recon.http.auth.type</code></td><td>Sets Recon&#x27;s HTTP authentication type. Set to <code>kerberos</code> for SPNEGO.</td></tr><tr><td><code>ozone.recon.http.auth.kerberos.principal</code></td><td>The service principal for the Recon HTTP endpoint. e.g., <code>HTTP/_HOST@REALM</code>.</td></tr><tr><td><code>ozone.recon.http.auth.kerberos.keytab</code></td><td>The keytab file for the Recon HTTP principal. e.g., <code>/path/to/HTTP.keytab</code>.</td></tr></tbody></table>
-<p>Access to Recon&#x27;s admin-only APIs is controlled by <code>ozone.administrators</code> or <code>ozone.recon.administrators</code> lists. Refer to <a href="/docs/administrator-guide/configuration/security/administrators">Configuring Ozone Administrators</a> for more details.</p>
+<p>Access to Recon&#x27;s admin-only APIs is controlled by <code>ozone.administrators</code> or <code>ozone.recon.administrators</code> lists. Refer to <a href="/docs/next/administrator-guide/configuration/security/administrators">Configuring Ozone Administrators</a> for more details.</p>
 <h2 class="anchor anchorWithStickyNavbar_e_9H" id="securing-datanodes">Securing Datanodes<a href="#securing-datanodes" class="hash-link" aria-label="Direct link to Securing Datanodes" title="Direct link to Securing Datanodes">​</a></h2>
 <p>Datanodes under Hadoop is traditionally secured by creating a Keytab file on the Datanodes. With Ozone, we have moved away to using Datanode certificates. That is, Kerberos on Datanodes is not needed in case of a secure Ozone cluster.</p>
 <p>However, we support the legacy Kerberos based Authentication to make it easy for the current set of users. The HDFS configuration keys are the following that is setup in <code>hdfs-site.xml</code>.</p>
