@@ -20,7 +20,7 @@ Before you begin, ensure you have installed:
 
 ### Step 1: Build from Source
 
-First, build Ozone from source following our [Build with Maven](/docs/08-developer-guide/01-build/01-maven.md) guide.
+First, build Ozone from source following our [Build with Maven](../../developer-guide/build/maven) guide.
 
 ### Step 2: Locate Docker Compose Files
 
@@ -169,5 +169,5 @@ cd hadoop-ozone/dist/target/ozone-*-SNAPSHOT/compose/
 
 After setting up your development cluster:
 
-1. Explore the [Ozone CLI documentation](/docs/04-user-guide/01-client-interfaces/01-o3.md)
+1. Explore the [Ozone CLI documentation](../../user-guide/client-interfaces/o3)
 2. Experiment with the various compose configurations for specific use cases

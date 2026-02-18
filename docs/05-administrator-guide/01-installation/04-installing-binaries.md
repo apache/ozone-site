@@ -14,7 +14,7 @@ To obtain the Ozone binaries, you have two primary options:
     For official releases, navigate to the [Downloads page](/download) to get the released binary tarball. Follow the instructions to verify the integrity of the tarball.
 
 2. **Build from Source**:
-    Alternatively, you can build Ozone from its source code. Follow the detailed instructions in the [Developer Guide: Building Ozone With Maven](../../08-developer-guide/01-build/01-maven.md).
+    Alternatively, you can build Ozone from its source code. Follow the detailed instructions in the [Developer Guide: Building Ozone With Maven](../../developer-guide/build/maven).
 
 ### Untar the Tarball (for released binaries)
 

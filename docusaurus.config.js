@@ -124,6 +124,111 @@ const config = {
 
       return result;
     },
+    /*
+    Validate internal markdown links to ensure they don't contain number prefixes or file extensions.
+    These can break when the ordering or format of the target page is updated.
+    Docusaurus can resolve links without these.
+    See https://docusaurus.io/docs/api/docusaurus-config#markdown for reference.
+    */
+    preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
+      const {filePath, fileContent} = params;
+
+      // Strip HTML comments and fenced code blocks to avoid false positives.
+      // Replace non-newline characters with spaces to preserve line numbers.
+      const contentForValidation = fileContent
+        .replace(/<!--[\s\S]*?-->/g, (m) => m.replace(/[^\n]/g, ' '))
+        .replace(/```[\s\S]*?```/g, (m) => m.replace(/[^\n]/g, ' '));
+
+      // Match markdown links but exclude images (which start with !)
+      // Uses negative lookbehind (?<!!) to skip ![alt](url) image syntax
+      const internalLinkPattern = /(?<!!)\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
+      // Match reference link definitions: [ref]: url
+      const refLinkDefPattern = /^\[([^\]]+)\]:\s+(\S+)/gm;
+      // Match two-digit number prefixes at start or after slash
+      const numberPrefixPattern = /(^|\/)\d{2}-/;
+
+      let matches;
+      const invalidLinks = [];
+
+      while ((matches = internalLinkPattern.exec(contentForValidation)) !== null) {
+        const linkText = matches[1];
+        // Strip angle brackets (e.g., <./ozone-manager.md> -> ./ozone-manager.md)
+        const linkPath = matches[2].replace(/^<|>$/g, '');
+
+        // Skip external links (http://, https://, mailto:, etc.)
+        if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
+          continue;
+        }
+
+        const pathWithoutFragment = linkPath.split('#')[0];
+
+        // Skip absolute paths to pages/static (e.g., /download, /foo.pdf) since they are not versioned
+        // Only check absolute paths to /docs/ which breaks versioning
+        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        if (isAbsoluteNonDocsPath) {
+          continue;
+        }
+
+        // Check for absolute paths to docs (breaks versioning)
+        const isAbsoluteDocsPath = linkPath.startsWith('/docs/');
+
+        // Check for number prefixes
+        const hasNumberPrefix = numberPrefixPattern.test(linkPath);
+
+        // Check for extensions that Docusaurus converts to routes (should be omitted in links)
+        const hasDocExtension = /\.(mdx?|jsx?|tsx)$/.test(pathWithoutFragment);
+
+        if (isAbsoluteDocsPath || hasNumberPrefix || hasDocExtension) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: fileContent.substring(0, matches.index).split('\n').length
+          });
+        }
+      }
+
+      // Check reference link definitions: [ref]: url
+      while ((matches = refLinkDefPattern.exec(contentForValidation)) !== null) {
+        const linkText = matches[1];
+        const linkPath = matches[2].replace(/^<|>$/g, '');
+
+        if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
+          continue;
+        }
+
+        const pathWithoutFragment = linkPath.split('#')[0];
+
+        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        if (isAbsoluteNonDocsPath) {
+          continue;
+        }
+
+        const isAbsoluteDocsPath = linkPath.startsWith('/docs/');
+        const hasNumberPrefix = numberPrefixPattern.test(linkPath);
+        const hasDocExtension = /\.(mdx?|jsx?|tsx)$/.test(pathWithoutFragment);
+
+        if (isAbsoluteDocsPath || hasNumberPrefix || hasDocExtension) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: contentForValidation.substring(0, matches.index).split('\n').length
+          });
+        }
+      }
+
+      if (invalidLinks.length > 0) {
+        const errorMsg = invalidLinks.map(link =>
+          `  Line ${link.line}: [${link.text}](${link.path})`
+        ).join('\n');
+
+        console.error('Invalid internal links found in', filePath + ':\n' + errorMsg);
+        console.error('\nInternal links should not include absolute paths to docs, number prefixes, or route file extensions (.md, .mdx, .js, .jsx, .tsx).');
+        console.error('Example: use \'./ozone-manager#persisted-state\' instead of \'./02-ozone-manager.md#persisted-state\'');
+        process.exit(1);
+      }
+
+      return fileContent;
+    },
   },
 
   presets: [

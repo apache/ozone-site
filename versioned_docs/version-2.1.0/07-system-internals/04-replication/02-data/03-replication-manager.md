@@ -1,4 +1,4 @@
-﻿# SCM Replication Manager
+# SCM Replication Manager
 
 The Replication Manager (RM) is a critical thread which runs inside the leader SCM daemon in an Ozone cluster. Its role is to periodically check the health of each container in the cluster, and take action for any containers which are not optimally replicated. Often that action involves arranging for new replicas of the container to be created, but it can also involve closing the replicas, deleting empty replicas, and so on.
 
@@ -28,7 +28,7 @@ containerCheckChain
 
 ## ReplicationManager Report
 
-Each time the check phase of the Replication Manager runs, it generates a report which can be accessed via the command *container report* command. This command is described in the administrator guide under [Replication Manager Report](../../../05-administrator-guide/03-operations/05-container-replication-report.md).
+Each time the check phase of the Replication Manager runs, it generates a report which can be accessed via the command *container report* command. This command is described in the administrator guide under [Replication Manager Report](../../../administrator-guide/operations/container-replication-report).
 
 ### Container State Descriptions
 

@@ -15,7 +15,7 @@ This tutorial shows how to get started with connecting Apache Flink to Apache Oz
 ### Quickstart environment
 
 - Unsecure Ozone and Flink clusters.
-- Ozone S3G enables path style access. To enable virtual-host style addressing see [here](../01-client-interfaces/03-s3/01-s3-api.md#url-schema).
+- Ozone S3G enables path style access. To enable virtual-host style addressing see [here](../client-interfaces/s3/s3-api#url-schema).
 - Flink accesses Ozone via S3 Gateway.
 
 ### Step 1 — Download Ozone's `docker-compose.yaml`
@@ -39,7 +39,7 @@ x-common-config:
    OZONE-SITE.XML_hdds.scm.safemode.healthy.pipeline.pct: "0" 
 ```
 
-Refer to the [Docker quick start page](../../02-quick-start/01-installation/01-docker.md) for details.
+Refer to the [Docker quick start page](../../quick-start/installation/docker) for details.
 
 ### Step 2 — Create `docker-compose-flink.yml` for Flink
 

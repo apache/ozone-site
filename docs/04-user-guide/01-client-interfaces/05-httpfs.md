@@ -20,7 +20,7 @@ The **WebHDFS** client FileSystem implementation can be used to access HttpFS us
 
 ## Getting started
 
-To try it out, follow the [instructions](../../02-quick-start/01-installation/01-docker.md) to start the Ozone cluster with Docker Compose.
+To try it out, follow the [instructions](../../quick-start/installation/docker) to start the Ozone cluster with Docker Compose.
 
 ```bash
 docker compose up -d --scale datanode=3
