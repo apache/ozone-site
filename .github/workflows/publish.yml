@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Commits the website build to the asf-site-v2 branch, where ASF automation configured by the .asf.yaml file on that
+# Commits the website build to the asf-site branch, where ASF automation configured by the .asf.yaml file on that
 # branch will publish it to the specified domain.
 # The website build is read from an artifact and is not built in this workflow.
 
@@ -40,7 +40,7 @@ jobs:
       with:
         path: publish
         # Update this to asf-site when the website is ready to be published.
-        ref: asf-site-v2
+        ref: asf-site
     - name: Commit changes
       working-directory: publish
       run: |
