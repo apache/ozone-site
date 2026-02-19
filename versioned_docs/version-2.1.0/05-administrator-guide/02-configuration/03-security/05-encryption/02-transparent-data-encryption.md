@@ -150,7 +150,10 @@ at the same time, use `--layout=FILE_SYSTEM_OPTIMIZED` instead.
 
 However, in buckets with `FILE_SYSTEM_OPTIMIZED` layout, some irregular S3 key
 names may be rejected or normalized, which can be undesired.
+
+<!--
 See [Prefix based File System Optimization](../../../../system-internals/features/filesystem-optimization) for more information.
+-->
 
 When accessing an S3G-enabled encrypted bucket:
 
