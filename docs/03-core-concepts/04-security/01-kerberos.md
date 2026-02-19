@@ -28,8 +28,8 @@ Clients (e.g., `ozone sh`, Spark jobs) authenticate with Ozone services (e.g., O
 
 ### Service-to-Service Authentication
 
-Ozone's internal services (e.g., Ozone Manager to SCM, SCM to Datanodes, Datanodes to other Datanodes for replication) also authenticate with each other using Kerberos. Each service runs as a distinct Kerberos principal, and they use service tickets to establish trusted communication channels. For details on configuring Kerberos for Ozone services, refer to the [Configuring Kerberos page](/docs/administrator-guide/configuration/security/kerberos).
+Ozone's internal services (e.g., Ozone Manager to SCM, SCM to Datanodes, Datanodes to other Datanodes for replication) also authenticate with each other using Kerberos. Each service runs as a distinct Kerberos principal, and they use service tickets to establish trusted communication channels. For details on configuring Kerberos for Ozone services, refer to the [Configuring Kerberos page](../../../administrator-guide/configuration/security/kerberos).
 
 ### Kerberos over HTTP using SPNEGO
 
-For web-based interfaces and REST APIs (e.g., Recon UI, S3 Gateway), Kerberos authentication is often performed using SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism). SPNEGO allows web clients (like browsers) to use their existing Kerberos credentials to authenticate with web servers without requiring explicit username/password input. For configuration details, see [Configuring HTTP authentication using Kerberos SPNEGO](/docs/administrator-guide/configuration/security/https).
+For web-based interfaces and REST APIs (e.g., Recon UI, S3 Gateway), Kerberos authentication is often performed using SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism). SPNEGO allows web clients (like browsers) to use their existing Kerberos credentials to authenticate with web servers without requiring explicit username/password input. For configuration details, see [Configuring HTTP authentication using Kerberos SPNEGO](../../../administrator-guide/configuration/security/https).
