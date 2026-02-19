@@ -245,7 +245,13 @@ const config = {
           exclude: [
             '**/06-troubleshooting/**',
             '**/07-system-internals/**',
-          ]
+          ],
+          versions: {
+            current: {
+              label: 'Next',
+              banner: 'unreleased',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -324,24 +330,9 @@ const config = {
         },
         items: [
           {
-            label: 'Docs',
-            position: 'left',
-            items: [
-              {
-                label: 'Latest Docs',
-                to: 'docs',
-              },
-              {
-                label: 'Docs 2.0.0 (Archived)',
-                href: '/docs/2.0.0/',
-		target: '_blank'
-              },
-              {
-                label: 'Docs 1.4.1 (Archived)',
-                href: '/docs/1.4.1/',
-		target: '_blank'
-              },
-            ],
+            label: 'Docs', // 'User documentation' link
+            to: 'docs/next',    // Links to the 'Next' version
+            position: 'left', // Keep it on the left
           },
           {
             to: 'download',
@@ -395,6 +386,26 @@ const config = {
           //   type: 'localeDropdown',
           //   position: 'right',
           // },
+          {
+            type: 'docsVersionDropdown', // User doc version select on the right
+            position: 'right',
+            dropdownItemsAfter: [
+              {
+                type: 'html',
+                value: '<hr class="dropdown-separator">',
+              },
+              {
+                label: 'Docs 2.0.0 (Archived)',
+                href: '/docs/2.0.0/',
+                target: '_blank',
+              },
+              {
+                label: 'Docs 1.4.1 (Archived)',
+                href: '/docs/1.4.1/',
+                target: '_blank',
+              },
+            ],
+          },
           {
             href: 'https://github.com/apache/ozone',
             position: 'right',
