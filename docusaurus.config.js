@@ -135,6 +135,12 @@ const config = {
           sidebarPath: undefined,
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
+          versions: {
+            current: {
+              label: 'Next',
+              banner: 'unreleased',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -213,24 +219,9 @@ const config = {
         },
         items: [
           {
-            label: 'Docs',
-            position: 'left',
-            items: [
-              {
-                label: 'Latest Docs',
-                to: 'docs',
-              },
-              {
-                label: 'Docs 2.0.0 (Archived)',
-                href: '/docs/2.0.0/',
-		target: '_blank'
-              },
-              {
-                label: 'Docs 1.4.1 (Archived)',
-                href: '/docs/1.4.1/',
-		target: '_blank'
-              },
-            ],
+            label: 'Docs', // New 'Docs' link
+            to: 'docs/next',    // Links to the 'Next' version
+            position: 'left', // Keep it on the left
           },
           {
             to: 'download',
@@ -276,6 +267,26 @@ const config = {
                 label: 'Events and Media',
               },
             ]
+          },
+          {
+            type: 'docsVersionDropdown', // Moved to right
+            position: 'right',
+            dropdownItemsAfter: [
+              {
+                type: 'html',
+                value: '<hr class="dropdown-separator">',
+              },
+              {
+                label: 'Docs 2.0.0 (Archived)',
+                href: '/docs/2.0.0/',
+                target: '_blank',
+              },
+              {
+                label: 'Docs 1.4.1 (Archived)',
+                href: '/docs/1.4.1/',
+                target: '_blank',
+              },
+            ],
           },
           {
             type: 'localeDropdown',
