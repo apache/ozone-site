@@ -3,7 +3,7 @@ title: Kerberos Authentication
 sidebar_label: Kerberos
 ---
 
-# Kerberos Authentication in Apache Ozone
+## Kerberos Authentication in Apache Ozone
 
 This document explains the fundamentals of Kerberos authentication and its application within Apache Ozone to secure communication between clients and services, as well as between Ozone services internally.
 
@@ -12,12 +12,11 @@ This document explains the fundamentals of Kerberos authentication and its appli
 Kerberos is a network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner. It uses strong cryptography so that a client can prove its identity to a server (and vice-versa) across an insecure network connection.
 
 Key components of Kerberos include:
-*   **Clients:** Users or services requesting access.
-*   **Servers:** Services providing resources.
-*   **Key Distribution Center (KDC):** A trusted third party responsible for issuing tickets and managing user credentials. The KDC typically consists of an Authentication Server (AS) and a Ticket-Granting Server (TGS).
-*   **Principals:** Unique identities (users or services) within the Kerberos realm.
 
-
+- **Clients:** Users or services requesting access.
+- **Servers:** Services providing resources.
+- **Key Distribution Center (KDC):** A trusted third party responsible for issuing tickets and managing user credentials. The KDC typically consists of an Authentication Server (AS) and a Ticket-Granting Server (TGS).
+- **Principals:** Unique identities (users or services) within the Kerberos realm.
 
 ## How Ozone uses Kerberos
 
