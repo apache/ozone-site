@@ -52,11 +52,7 @@ Recon can integrate with any Prometheus instance configured to collected metrics
 
 ## API Reference
 
-<<<<<<< HEAD
 [Link to complete API Reference](../../administrator-guide/operations/observability/recon/recon-rest-api)
-=======
-[Link to complete API Reference](../../05-administrator-guide/03-operations/09-observability/02-recon/02-recon-rest-api.mdx)
->>>>>>> a378f8564 (HDDS-10684.Fix configurable server URL, remove unused code, update broken link)
 
 ## Persisted state
 
