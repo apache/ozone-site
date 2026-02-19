@@ -137,6 +137,7 @@ words:
 - hsync
 - SASL
 - GSS
+- GSSAPI
 - jira
 - jiras
 - LLAP
@@ -153,6 +154,7 @@ words:
 - libhdfs
 - awscli
 - TGT
+- TGS
 - Kerberized
 - assignadmin
 - revokeadmin
