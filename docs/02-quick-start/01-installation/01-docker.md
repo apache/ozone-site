@@ -83,7 +83,7 @@ x-common-config:
   OZONE-SITE.XML_ozone.recon.http-address: 0.0.0.0:9090
 ```
 
-Refer to the [Configuring Ozone For Production](/docs/quick-start/installation/docker) page for more configuration guidelines.
+Refer to the [Configuring Ozone For Production](../../quick-start/installation/docker) page for more configuration guidelines.
 
 ## Next Steps
 
@@ -93,4 +93,4 @@ Now that your Ozone cluster is up and running, you can enter any container and e
 docker compose exec om bash
 ```
 
-Next, learn how to [read and write data](/docs/quick-start/reading-writing-data) into Ozone.
+Next, learn how to [read and write data](../../quick-start/reading-writing-data) into Ozone.

@@ -58,8 +58,8 @@ Recon can integrate with any Prometheus instance configured to collected metrics
 
 ## Persisted state
 
-- A local copy of [OM database](./02-ozone-manager.md#persisted-state)
-- A local copy of [SCM database](./03-storage-container-manager.md#persisted-state)
+- A local copy of [OM database](./ozone-manager#persisted-state)
+- A local copy of [SCM database](./storage-container-manager#persisted-state)
 
 The following data is persisted in Recon in the specified RocksDB directory:
 

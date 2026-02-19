@@ -14,23 +14,23 @@
 
 # Apache Ozone Website v2
 
-Welcome to the development branch of the new and improved Apache Ozone website. The new site is being built with [Docusaurus](https://docusaurus.io/). See the [Docusaurus docs](https://docusaurus.io/docs) for details on working with this framework. The `progress.sh` script can be used to get an approximation of how many pages are remaining before the website is ready.
+Welcome to the new and improved Apache Ozone website. The new site is being built with [Docusaurus](https://docusaurus.io/). See the [Docusaurus docs](https://docusaurus.io/docs) for details on working with this framework. The `progress.sh` script can be used to get an approximation of how many pages are still under development.
 
-You can preview the current state of the new website at https://ozone-site-v2.staged.apache.org.
+You can access the new website at https://ozone.apache.org/.
 
 ## Context
 
-- [HDDS-9225](https://issues.apache.org/jira/browse/HDDS-9225) is the parent Jira tracking current tasks required to get the new website ready for deployment.
+- [HDDS-9225](https://issues.apache.org/jira/browse/HDDS-9225) is the parent Jira tracking current tasks.
 
-- Attached to this Jira is a [document](https://issues.apache.org/jira/secure/attachment/13062569/Improving%20the%20Apache%20Ozone%20Website.pdf) outlining the long term plan required to get the new website ready for deployment.
+- Attached to this Jira is a [document](https://issues.apache.org/jira/secure/attachment/13062569/Improving%20the%20Apache%20Ozone%20Website.pdf) outlining the long term plan.
 
 - This [Apache mail thread](https://lists.apache.org/thread/fooxgc81cbglpl8kcfxr5mfgm9qrf5v1) is the original dev mailing thread discussing the new Ozone website.
 
 ## Branches
 
-- Development of the new website is currently happening on the `HDDS-9225-website-v2` branch. All changes specific to the new website should be merged into this branch.
+- Development of the website is currently happening on the `master` branch. All changes specific to the website should be merged into this branch.
 
-- The `master` branch is still tracking content for the currently active Ozone website. `master` and `HDDS-9225-website-v2` will remain separate until the new website is ready to be deployed.
+- The `master` branch is tracking content for the currently active Ozone website.
 
 - The `asf-site` branch is still holding build artifacts being used to deploy content from the `master` branch.
 

@@ -127,7 +127,7 @@ This command will:
 
 :::note
 
-This command does not run acceptance tests. Refer to the [acceptance tests](/docs/developer-guide/test/acceptance-tests) page for test execution instructions.
+This command does not run acceptance tests. Refer to the [acceptance tests](../../developer-guide/test/acceptance-tests) page for test execution instructions.
 
 :::
 
@@ -161,4 +161,4 @@ hadoop-ozone/dist/target/ozone-<version>/bin/ozone version
 
 ## Next Steps
 
-Run the build by deploying the binary on either [bare metal](../../05-administrator-guide/01-installation/04-installing-binaries.md) or a [Docker cluster](../../08-developer-guide/02-run/02-docker-compose.md).
+Run the build by deploying the binary on either [bare metal](../../administrator-guide/installation/installing-binaries) or a [Docker cluster](../../developer-guide/run/docker-compose).

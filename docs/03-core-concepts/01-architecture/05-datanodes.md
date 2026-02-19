@@ -83,7 +83,7 @@ the property `hdds.datanode.volume.choosing.policy`. There are two main policies
 
 Over time, operations like adding or replacing disks can cause uneven disk usage. Ozone provides a **Disk Balancer** feature to automatically balance disk usage across Datanode volumes. The Disk Balancer can be enabled via the `hdds.datanode.disk.balancer.enabled` configuration property and is managed through CLI commands.
 
-For more information on using the Disk Balancer, refer to the [Disk Balancer documentation](../../05-administrator-guide/03-operations/05-data-balancing/02-disk-balancer.md).
+For more information on using the Disk Balancer, refer to the [Disk Balancer documentation](../../administrator-guide/operations/data-balancing/disk-balancer).
 
 ## Notable Configurations
 
