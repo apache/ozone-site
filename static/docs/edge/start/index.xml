@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting Started on Ozone</title>
+    <link>/start/index.html</link>
+    <description>Recent content in Getting Started on Ozone</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="/start/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Production Deployment</title>
+      <link>/start/productiondeployment.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/productiondeployment.html</guid>
+      <description>&lt;!--&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;This document provides guidance on the requirements and best practices for a production deployment of Apache Ozone.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simple Single Ozone</title>
+      <link>/start/startfromdockerhub.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/startfromdockerhub.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working docker setup&lt;/li&gt;&#xA;&lt;li&gt;AWS CLI (optional)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;local-multi-container-cluster&#34;&gt;Local multi-container cluster&lt;/h1&gt;&#xA;&lt;h2 id=&#34;obtain-the-docker-compose-configuration&#34;&gt;Obtain the Docker Compose Configuration&lt;/h2&gt;&#xA;&lt;p&gt;First, obtain Ozone&amp;rsquo;s sample Docker Compose configuration:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ozone On Premise Installation</title>
+      <link>/start/onprem.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/onprem.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;If you are feeling adventurous, you can setup ozone in a real cluster.&#xA;Setting up a real cluster requires us to understand the components of Ozone.&#xA;Ozone is designed to work concurrently with HDFS. However, Ozone is also&#xA;capable of running independently. The components of ozone are the same in both approaches.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Minikube &amp; Ozone</title>
+      <link>/start/minikube.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/minikube.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working minikube setup&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;&lt;code&gt;kubernetes/examples&lt;/code&gt; folder of the ozone distribution contains kubernetes deployment resource files for multiple use cases. By default the kubernetes resource files are configured to use &lt;code&gt;apache/ozone&lt;/code&gt; image from the dockerhub.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ozone on Kubernetes</title>
+      <link>/start/kubernetes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/kubernetes.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;Working kubernetes cluster (LoadBalancer, PersistentVolume are not required)&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The Kubernetes examples and scripts in this project have been tested with Kubernetes 1.34.2 (k3s v1.34.2+k3s1).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pseudo-cluster</title>
+      <link>/start/runningviadocker.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/runningviadocker.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/install/&#34;&gt;Docker Engine&lt;/a&gt; latest stable version&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/compose/install/&#34;&gt;Docker Compose&lt;/a&gt; at least v2.30&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Download the Ozone binary tarball and untar it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>From Source</title>
+      <link>/start/fromsource.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/start/fromsource.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;x86 or ARM64&lt;/li&gt;&#xA;&lt;li&gt;Linux or MacOS&lt;/li&gt;&#xA;&lt;li&gt;JDK 1.8 or higher&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://maven.apache.org/download.cgi&#34;&gt;Maven 3.6 or later&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Internet connection for first build (to fetch all Maven and Ozone dependencies)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;You will also need to install the following dependencies to build native code (optional):&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
