@@ -245,6 +245,10 @@ const config = {
             label: 'FAQ',
           },
           {
+            to: '/release',
+            label: 'Release Notes',
+          },
+          {
             to: '/blog',
             label: 'Blog',
           },
