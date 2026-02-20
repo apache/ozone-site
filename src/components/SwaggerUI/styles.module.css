@@ -1,0 +1,533 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+.swaggerWrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Server configuration input */
+.serverConfig {
+  background: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary-dark);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: none; /* Hidden until CORS is configured on Recon server */
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+[data-theme='dark'] .serverConfig {
+  background: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-darker);
+}
+
+.serverLabel {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 14px;
+  margin: 0;
+}
+
+[data-theme='dark'] .serverLabel {
+  color: #ffffff;
+}
+
+.serverInput {
+  flex: 1;
+  min-width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .serverInput {
+  border-color: #444;
+}
+
+.versionInput {
+  width: 100px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .versionInput {
+  border-color: #444;
+}
+
+.applyButton {
+  padding: 8px 20px;
+  background: #ffffff;
+  color: var(--ifm-color-primary-darker);
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.applyButton:hover {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.applyButton:active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .applyButton {
+  background: #ffffff;
+  color: var(--ifm-color-primary-darker);
+  border-color: #ffffff;
+}
+
+[data-theme='dark'] .applyButton:hover {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.serverInput:focus,
+.versionInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(53, 117, 0, 0.1);
+}
+
+[data-theme='dark'] .serverInput:focus,
+[data-theme='dark'] .versionInput:focus {
+  box-shadow: 0 0 0 2px rgba(150, 210, 110, 0.2);
+}
+
+.serverHint {
+  font-size: 13px;
+  color: #ffffff;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+[data-theme='dark'] .serverHint {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* Remove white bars and extra spacing */
+.swaggerWrapper :global(.swagger-ui .information-container) {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  display: none !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container) {
+  margin: 0;
+  padding: 20px 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .info) {
+  margin: 0 0 20px 0;
+  padding: 0;
+  background: transparent;
+  display: none !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  padding: 0;
+}
+
+/* Match Swagger UI with Docusaurus theme */
+.swaggerWrapper :global(.swagger-ui) {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Match heading fonts */
+.swaggerWrapper :global(.swagger-ui .info .title),
+.swaggerWrapper :global(.swagger-ui h1),
+.swaggerWrapper :global(.swagger-ui h2),
+.swaggerWrapper :global(.swagger-ui h3),
+.swaggerWrapper :global(.swagger-ui h4),
+.swaggerWrapper :global(.swagger-ui h5) {
+  font-family: var(--ifm-heading-font-family);
+  letter-spacing: -0.02em;
+}
+
+/* Make API section headings more readable - match doc heading style */
+.swaggerWrapper :global(.swagger-ui .opblock-tag) {
+  font-family: var(--ifm-heading-font-family) !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  margin: 2rem 0 1rem 0 !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Style the tag section description text */
+.swaggerWrapper :global(.swagger-ui .opblock-tag-section) {
+  margin-bottom: 2rem;
+}
+
+/* Style the tag description - "APIs to fetch..." text */
+.swaggerWrapper :global(.swagger-ui .opblock-tag small) {
+  font-family: var(--ifm-font-family-base) !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: var(--ifm-color-emphasis-700) !important;
+  letter-spacing: normal !important;
+}
+
+/* Make endpoint paths more readable */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-path) {
+  font-family: var(--ifm-font-family-monospace) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* Make endpoint descriptions more readable */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-description) {
+  font-family: var(--ifm-font-family-base) !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.6 !important;
+  color: var(--ifm-color-emphasis-800) !important;
+}
+
+/* Make main title white */
+.swaggerWrapper :global(.swagger-ui .info .title) {
+  color: #ffffff !important;
+  background: var(--ifm-color-primary);
+  padding: 15px 20px;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info .title) {
+  color: #1a1a1a !important;
+  background: var(--ifm-color-primary);
+}
+
+/* Fix OAS version text visibility */
+.swaggerWrapper :global(.swagger-ui .info .main .version),
+.swaggerWrapper :global(.swagger-ui .info hgroup.main a),
+.swaggerWrapper :global(.swagger-ui .info hgroup.main span) {
+  color: var(--ifm-font-color-base) !important;
+  background: transparent !important;
+}
+
+.swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info .main .version),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info hgroup.main a),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info hgroup.main span) {
+  color: var(--ifm-font-color-base) !important;
+  background: transparent !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+}
+
+/* Style the spec file URL to match Apache License (green) */
+.swaggerWrapper :global(.swagger-ui .information-container .info .url) {
+  color: var(--ifm-color-primary) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .information-container .info .url) {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Style server URL section to match license */
+.swaggerWrapper :global(.swagger-ui .scheme-container) {
+  background: transparent;
+  padding: 0;
+  margin: 15px 0 20px 0;
+  box-shadow: none;
+  display: none !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers-title) {
+  display: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers > label) {
+  color: var(--ifm-color-primary) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.swaggerWrapper :global(.swagger-ui .scheme-container .servers select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .scheme-container .servers select) {
+  border-color: #444;
+}
+
+/* Match code/monospace fonts */
+.swaggerWrapper :global(.swagger-ui code),
+.swaggerWrapper :global(.swagger-ui pre) {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 14px;
+}
+
+/* Match link colors with Docusaurus theme */
+.swaggerWrapper :global(.swagger-ui a) {
+  color: var(--ifm-link-color) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui a:hover) {
+  color: var(--ifm-link-hover-color) !important;
+}
+
+/* Fix link text visibility in response links column */
+.swaggerWrapper :global(.swagger-ui .response-col_links),
+.swaggerWrapper :global(.swagger-ui .response-col_links a),
+.swaggerWrapper :global(.swagger-ui .response-col_links span),
+.swaggerWrapper :global(.swagger-ui .response-col_links .response-undocumented) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_links a) {
+  color: var(--ifm-link-color) !important;
+  text-decoration: underline;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links a),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links span),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links .response-undocumented) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links a) {
+  color: var(--ifm-link-color) !important;
+  text-decoration: underline;
+}
+
+/* Match background colors */
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  background: var(--ifm-background-color);
+}
+
+/* Improve body text readability */
+.swaggerWrapper :global(.swagger-ui p),
+.swaggerWrapper :global(.swagger-ui li),
+.swaggerWrapper :global(.swagger-ui td),
+.swaggerWrapper :global(.swagger-ui th) {
+  font-family: var(--ifm-font-family-base);
+  line-height: 1.6;
+}
+
+/* Improve visibility of ALL grey/muted text */
+.swaggerWrapper :global(.swagger-ui .opblock-description-wrapper p),
+.swaggerWrapper :global(.swagger-ui .opblock-external-docs-wrapper p),
+.swaggerWrapper :global(.swagger-ui .opblock-title_normal p),
+.swaggerWrapper :global(.swagger-ui .parameter__name),
+.swaggerWrapper :global(.swagger-ui .parameter__type),
+.swaggerWrapper :global(.swagger-ui .parameter__in),
+.swaggerWrapper :global(.swagger-ui .prop-type),
+.swaggerWrapper :global(.swagger-ui .prop-format),
+.swaggerWrapper :global(.swagger-ui .response-col_description),
+.swaggerWrapper :global(.swagger-ui .response-col_status),
+.swaggerWrapper :global(.swagger-ui .model),
+.swaggerWrapper :global(.swagger-ui .model-title),
+.swaggerWrapper :global(.swagger-ui table thead tr th),
+.swaggerWrapper :global(.swagger-ui table tbody tr td),
+.swaggerWrapper :global(.swagger-ui .tab li),
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown p),
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Dark mode text visibility */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-description-wrapper p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-external-docs-wrapper p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-title_normal p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__name),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__type),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__in),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-type),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-format),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_status),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model-title),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui table thead tr th),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui table tbody tr td),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .tab li),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .renderedMarkdown p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .renderedMarkdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Improve description text visibility */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-description),
+.swaggerWrapper :global(.swagger-ui .opblock-description),
+.swaggerWrapper :global(.swagger-ui .markdown p),
+.swaggerWrapper :global(.swagger-ui .markdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-summary-description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .markdown p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .markdown code) {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* Fix alignment issues when API is expanded */
+.swaggerWrapper :global(.swagger-ui .opblock-body) {
+  padding: 20px;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-section) {
+  padding: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-section-header) {
+  padding: 15px 20px;
+  margin: 0;
+}
+
+/* Fix table alignment */
+.swaggerWrapper :global(.swagger-ui table) {
+  width: 100%;
+  margin: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .table-container) {
+  padding: 0;
+  margin: 0;
+}
+
+/* Fix parameter table alignment - ALL columns */
+.swaggerWrapper :global(.swagger-ui .parameters-col_name),
+.swaggerWrapper :global(.swagger-ui .parameters-col_description),
+.swaggerWrapper :global(.swagger-ui table.parameters tbody tr td) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+.swaggerWrapper :global(.swagger-ui table.parameters thead tr th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+/* Make Parameters and Responses headers black in both modes */
+.swaggerWrapper :global(.swagger-ui .opblock-section-header h4),
+.swaggerWrapper :global(.swagger-ui .opblock-section-header label) {
+  color: #000000 !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-section-header h4),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-section-header label) {
+  color: #000000 !important;
+}
+
+/* Fix response section alignment - ALL columns */
+.swaggerWrapper :global(.swagger-ui .responses-wrapper) {
+  padding: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .responses-inner) {
+  padding: 20px;
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_status),
+.swaggerWrapper :global(.swagger-ui .response-col_description),
+.swaggerWrapper :global(.swagger-ui .response-col_links),
+.swaggerWrapper :global(.swagger-ui .responses-table tbody tr td) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .responses-header th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+}
+
+/* Fix ALL table cells alignment */
+.swaggerWrapper :global(.swagger-ui table tbody tr td),
+.swaggerWrapper :global(.swagger-ui table thead tr th) {
+  text-align: left !important;
+  padding: 12px 20px !important;
+  vertical-align: top;
+}
+
+/* Fix code block alignment */
+.swaggerWrapper :global(.swagger-ui .highlight-code) {
+  margin: 0;
+  text-align: left;
+}
+
+.swaggerWrapper :global(.swagger-ui .microlight) {
+  text-align: left;
+}
+
+/* Fix input field text visibility in Try it out */
+.swaggerWrapper :global(.swagger-ui input[type="text"]),
+.swaggerWrapper :global(.swagger-ui input[type="number"]),
+.swaggerWrapper :global(.swagger-ui input[type="email"]),
+.swaggerWrapper :global(.swagger-ui input[type="password"]),
+.swaggerWrapper :global(.swagger-ui input[type="search"]),
+.swaggerWrapper :global(.swagger-ui input[type="url"]),
+.swaggerWrapper :global(.swagger-ui textarea),
+.swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border: 1px solid #ccc !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="text"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="number"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="email"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="password"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="search"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type="url"]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui textarea),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui select) {
+  color: var(--ifm-font-color-base) !important;
+  background: var(--ifm-background-color) !important;
+  border-color: #444 !important;
+}
