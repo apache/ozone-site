@@ -122,7 +122,11 @@ Key tuning parameters for the Datanode often involve:
 |----------|---------|-------------|
 | `hdds.datanode.metadata.rocksdb.cache.size` | `1GB` | Configures the block cache size for RocksDB instances on Datanodes. |
 
-**Compaction strategies:** Optimizing how data is merged and organized on disk. For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/datanode/rocksdb-schema/).
+**Compaction strategies:** Optimizing how data is merged and organized on disk.
+
+<!--
+For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/Datanode/RocksDB-chema/).
+-->
 
 | Property | Default | Description |
 |----------|---------|-------------|

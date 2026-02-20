@@ -2,11 +2,12 @@
 
 These release names are based on US national parks, and for every minor release, we also move to the next letter for the release code name.
 
+<!--
 ## Backlog
-
 | Release | Tag | Feature | Exit criteria |
 | :--- | :--- | :--- | :--- |
 | TODO | TODO | HDFS to Ozone upgrade<br/>Load Balancer Deployments for S3 Gateway<br/>Using NFS gateway from HDFS for Ozone<br/>Truncate support<br/>Rolling upgrades | Run Ozone tests with multiple SCM<br/>This will allow HDFS clusters to upgrade to Ozone without data copies.<br/>Native CSI support (ozone specific daemon)<br/>Security is on by default, TDE, and Security testing with different applications.<br/>Test and Document different load balancers that can with S3 Gateway.<br/>Test with NFS client |
+-->
 
 ## Upcoming Releases
 

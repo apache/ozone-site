@@ -4,6 +4,9 @@ sidebar_label: High Availability
 
 # Ozone Manager High Availability
 
+**TODO:** Uncomment link to this page in docs/03-core-concepts/05-high-availability/02-OM-ha.md
+**TODO:** Uncomment link to this page in docs/05-administrator-guide/02-configuration/06-high-availability/02-OM-ha.md
+
 Ozone has two metadata-manager nodes (*Ozone Manager* for key space management and *Storage Container Manager* for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
 
 To avoid any single point of failure the metadata-manager nodes also should have a HA setup.
