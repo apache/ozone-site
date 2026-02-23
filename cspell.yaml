@@ -152,6 +152,7 @@ words:
 - fsspec
 - libhdfs
 - awscli
+- pyarrow
 - TGT
 - Kerberized
 - assignadmin

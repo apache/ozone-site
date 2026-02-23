@@ -48,7 +48,7 @@ An example `ReconScmTask` is `ContainerHealthTask` that runs in configurable int
 ## Recon and Prometheus
 
 Recon can integrate with any Prometheus instance configured to collected metrics and can display useful information in Recon UI in Datanodes and Pipelines pages. Recon also exposes a proxy endpoint
-([/metrics](https://ozone.apache.org/docs/edge/interface/reconapi.html#metrics)) to query Prometheus. This integration can be enabled by setting this configuration `ozone.recon.prometheus.http.endpoint` to the Prometheus endpoint like `ozone.recon.prometheus.http.endpoint=http://prometheus:9090`.
+([/metrics](pathname:///docs/2.0.0/interface/reconapi.html#metrics)) to query Prometheus. This integration can be enabled by setting this configuration `ozone.recon.prometheus.http.endpoint` to the Prometheus endpoint like `ozone.recon.prometheus.http.endpoint=http://prometheus:9090`.
 
 <!--
 ## API Reference

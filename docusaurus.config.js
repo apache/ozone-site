@@ -155,6 +155,15 @@ const config = {
         // Strip angle brackets (e.g., <./ozone-manager.md> -> ./ozone-manager.md)
         const linkPath = matches[2].replace(/^<|>$/g, '');
 
+        // Reject external links back to ozone.apache.org (use relative links instead)
+        if (/^https?:\/\/ozone\.apache\.org/.test(linkPath)) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: fileContent.substring(0, matches.index).split('\n').length
+          });
+        }
+
         // Skip external links (http://, https://, mailto:, etc.)
         if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
           continue;
@@ -192,6 +201,15 @@ const config = {
         const linkText = matches[1];
         const linkPath = matches[2].replace(/^<|>$/g, '');
 
+        // Reject external links back to ozone.apache.org (use relative links instead)
+        if (/^https?:\/\/ozone\.apache\.org/.test(linkPath)) {
+          invalidLinks.push({
+            text: linkText,
+            path: linkPath,
+            line: contentForValidation.substring(0, matches.index).split('\n').length
+          });
+        }
+
         if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(linkPath)) {
           continue;
         }
@@ -221,8 +239,11 @@ const config = {
           `  Line ${link.line}: [${link.text}](${link.path})`
         ).join('\n');
 
-        console.error('Invalid internal links found in', filePath + ':\n' + errorMsg);
-        console.error('\nInternal links should not include absolute paths to docs, number prefixes, or route file extensions (.md, .mdx, .js, .jsx, .tsx).');
+        console.error('Invalid links found in', filePath + ':\n' + errorMsg);
+        console.error('\nLinks must not:');
+        console.error('  - point to ozone.apache.org (use relative links instead)');
+        console.error('  - use absolute paths to docs (breaks versioning)');
+        console.error('  - include number prefixes or route file extensions (.md, .mdx, .js, .jsx, .tsx)');
         console.error('Example: use \'./ozone-manager#persisted-state\' instead of \'./02-ozone-manager.md#persisted-state\'');
         process.exit(1);
       }
@@ -237,7 +258,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: undefined,
+          sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
           // TODO: The following sections are currently hidden. Ensure that a section contains a few pages
@@ -245,7 +266,21 @@ const config = {
           exclude: [
             '**/06-troubleshooting/**',
             '**/07-system-internals/**',
-          ]
+          ],
+          sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
+            const items = await defaultSidebarItemsGenerator(args);
+            const hiddenIds = new Set([
+              'user-guide/client-interfaces/boto3-tutorial',
+              'user-guide/client-interfaces/pyarrow-tutorial',
+              'user-guide/client-interfaces/python-requests-ozone-httpfs',
+            ]);
+            function filterItems(list) {
+              return list
+                .filter(item => !(item.type === 'doc' && hiddenIds.has(item.id)))
+                .map(item => item.type === 'category' ? {...item, items: filterItems(item.items)} : item);
+            }
+            return filterItems(items);
+          },
         },
         blog: {
           showReadingTime: true,

@@ -17,6 +17,10 @@
       "description": "Makes pages for incomplete features only visible in development mode.",
       "type": "boolean"
     },
+    "unlisted": {
+      "description": "Makes pages accessible via direct URL but hidden from sidebar and search engines.",
+      "type": "boolean"
+    },
     "title": {
         "type": "string"
     },
