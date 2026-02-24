@@ -63,6 +63,8 @@ ignorePaths:
 - CLAUDE.md
 # Exclude events page  from spelling check due to author names.
 - src/pages/community/events-and-media.md
+# Exclude appendix file since the configs are generated directly from ozone-default.xml in the apache/ozone repo
+- docs/*-administrator-guide/*-configuration/*-appendix.md
 
 # List of words to be always considered correct.
 # Case insensitive.
