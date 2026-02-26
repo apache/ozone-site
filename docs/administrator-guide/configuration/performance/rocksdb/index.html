@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.27c88cdc.css">
-<script src="/assets/js/runtime~main.bde2df98.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1a63aa51.js" defer="defer"></script>
 <script src="/assets/js/main.2a0272af.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -101,7 +101,7 @@
 <p><strong>Compaction strategies:</strong> Optimizing how data is merged and organized on disk.</p>
 <table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file</code></td><td><code>true</code></td><td>Enables or disables auto-compaction for small SST files.</td></tr><tr><td><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold</code></td><td><code>1MB</code></td><td>Threshold for small SST file size for auto-compaction.</td></tr><tr><td><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold</code></td><td><code>512</code></td><td>Threshold for the number of small SST files for auto-compaction.</td></tr><tr><td><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.interval.minutes</code></td><td><code>120</code></td><td>Auto compact small SST files interval in minutes.</td></tr><tr><td><code>hdds.datanode.rocksdb.auto-compaction-small-sst-file.threads</code></td><td><code>1</code></td><td>Auto compact small SST files threads.</td></tr></tbody></table>
 <p><strong>Write-ahead log (WAL) settings:</strong> Balancing durability and write performance.</p>
-<table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.rocksdb.log.max-file-size</code></td><td><code>32MB</code></td><td>The max size of each user log file of RocksDB. O means no size limit.</td></tr><tr><td><code>hdds.datanode.rocksdb.log.max-file-num</code></td><td><code>64</code></td><td>The max user log file number to keep for each RocksDB.</td></tr></tbody></table>
+<table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.rocksdb.log.max-file-size</code></td><td><code>32MB</code></td><td>The max size of each user log file of RocksDB. <code>0</code> means no size limit.</td></tr><tr><td><code>hdds.datanode.rocksdb.log.max-file-num</code></td><td><code>64</code></td><td>The max user log file number to keep for each RocksDB.</td></tr></tbody></table>
 <p><strong>Logging:</strong></p>
 <table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.rocksdb.log.level</code></td><td><code>INFO</code></td><td>The user log level of RocksDB(DEBUG/INFO/WARN/ERROR/FATAL)).</td></tr></tbody></table>
 <p><strong>Other Settings:</strong></p>
