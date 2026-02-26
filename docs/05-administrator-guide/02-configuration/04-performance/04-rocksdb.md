@@ -138,10 +138,10 @@ For more details, refer to the [Datanode Container Schema v3 in DN Documentation
 
 **Write-ahead log (WAL) settings:** Balancing durability and write performance.
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.rocksdb.log.max-file-size` | `32MB` | The max size of each user log file of RocksDB. O means no size limit. |
-| `hdds.datanode.rocksdb.log.max-file-num` | `64` | The max user log file number to keep for each RocksDB. |
+| Property | Default | Description                                                           |
+|----------|---------|-----------------------------------------------------------------------|
+| `hdds.datanode.rocksdb.log.max-file-size` | `32MB` | The max size of each user log file of RocksDB. 0 means no size limit. |
+| `hdds.datanode.rocksdb.log.max-file-num` | `64` | The max user log file number to keep for each RocksDB.                |
 
 **Logging:**
 
