@@ -157,7 +157,7 @@ ozone sh bucket link /vol1/bucket1 /s3v/common-bucket
 This example expose the `/vol1/bucket1` Ozone bucket as an S3 compatible `common-bucket` via the S3 interface.
 
 :::note
-The implementation details of the bucket-linking feature can be found in the [design doc](https://ozone.apache.org/docs/edge/design/volume-management.html).
+The implementation details of the bucket-linking feature can be found in the [design doc](pathname:///docs/2.0.0/design/volume-management.html).
 :::
 
 ## Clients
@@ -185,6 +185,6 @@ Ozone's S3 Gateway enables integration with a wide range of cloud-native and ana
 - [JuiceFS](https://juicefs.com/docs/community/s3_gateway/)
 - [Starburst](https://docs.starburst.io/latest/connector/starburst-ozone.html) (Starburst also supports Ozone `ofs://`)
 - [Teradata NOS](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/Teradata-VantageTM-Native-Object-Store-Getting-Started-Guide-17.20)
-- [CyberDuck](https://cyberduck.io/) See the [tutorial page](https://ozone.apache.org/docs/edge/interface/cyberduckozones3.html)
+- [CyberDuck](https://cyberduck.io/) See the [tutorial page](pathname:///blog/2025/07/02/access-ozone-via-cyberduck)
 
 This list is not exhaustive—any application that supports the S3 protocol can potentially connect to Ozone, making it easy to adopt Ozone in modern data pipelines and cloud-native workflows.

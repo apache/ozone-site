@@ -58,4 +58,4 @@ export AWS_SECRET_ACCESS_KEY=your-secret-key
 aws s3api --endpoint http://localhost:9878 list-objects --bucket common-bucket
 ```
 
-For implementation details, refer to the [Volume Management design document](https://ozone.apache.org/docs/edge/design/volume-management.html).
+For implementation details, refer to the [Volume Management design document](pathname:///docs/2.0.0/design/volume-management.html).

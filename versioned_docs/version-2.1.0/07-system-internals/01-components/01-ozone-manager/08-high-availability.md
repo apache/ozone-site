@@ -61,7 +61,7 @@ accommodate the existing data and incoming snapshots, preventing disk space issu
 
 ## References
 
-- Design doc [HDDS-505 Ozone Manager HA](https://ozone.apache.org/docs/edge/design/omha.html)
+- Design doc [HDDS-505 Ozone Manager HA](pathname:///docs/2.0.0/design/omha.html)
 - <!-- TODO: Link to OM HA snapshot installation troubleshooting documentation when created --> For troubleshooting OM HA snapshot installation issues, see the troubleshooting documentation.
 - Ozone distribution contains an example OM HA configuration, under the `compose/ozone-om-ha` directory which can be tested with the help of [Docker Compose](../../../developer-guide/run/docker-compose).
 - [Apache Ratis State Machine API documentation](https://github.com/apache/ratis/blob/ratis-3.1.3/ratis-server-api/src/main/java/org/apache/ratis/statemachine/StateMachine.java)

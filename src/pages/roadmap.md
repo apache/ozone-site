@@ -19,7 +19,7 @@ These release names are based on US national parks, and for every minor release,
 
 ## Past Releases
 
-Ozone releases can be downloaded from https://ozone.apache.org/downloads/
+Ozone releases can be downloaded from [https://ozone.apache.org/downloads/](../download)
 
 | Release | Tag | Features | Exit criteria |
 | :--- | :--- | :--- | :--- |
