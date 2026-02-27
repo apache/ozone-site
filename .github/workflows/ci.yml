@@ -23,6 +23,8 @@ on:
     - opened
     - synchronize
   push:
+    branches-ignore:
+    - automated-config-doc-update
 
 concurrency:
   group: ci-${{ github.event.pull_request.number || github.sha }}
