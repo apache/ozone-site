@@ -1,0 +1,28 @@
+---
+title: Users and Groups
+sidebar_label: Users and Groups
+---
+
+# Users and Groups in Apache Ozone
+
+Consistent user identification and group mapping are crucial for security and access control in an Apache Ozone cluster. This document outlines how Ozone handles users and groups in different security environments.
+
+## Users
+
+A fundamental requirement for security in Ozone is that every host in the cluster has a consistent mechanism to identify a user. In enterprise environments, this is typically achieved by using a central identity management system like Active Directory, FreeIPA, or other LDAP-based mechanisms to manage user accounts across all machines.
+
+How Ozone determines the user identity depends on the security model in use:
+
+*   **Kerberized Environment (Secure):** In a secure cluster using Kerberos, a user's identity is derived from their Kerberos principal, providing strong, authenticated identity.
+    *   The mapping from a Kerberos principal to a local Ozone username is controlled by the `hadoop.security.auth_to_local` property in `core-site.xml`.
+    *   The default rule ("DEFAULT") typically uses the first component of the principal name as the username. For example, `user/host@REALM` would map to the username `user`.
+    *   For advanced mapping rules, refer to the [Hadoop documentation on Secure Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html).
+*   **Unsecure Environment (Simple):** In a non-Kerberized environment, the user identity is simply what the client application presents. This "trust-based" model lacks strong authentication and is not recommended for production environments.
+
+## Groups
+
+In Ozone, group memberships are primarily used for authorization, especially for administrator privilege checks.
+
+*   **Group Mapping:** By default, Ozone relies on the underlying Hadoop group mapping mechanism, which can be configured to use various sources (e.g., local system groups, LDAP). For detailed information on configuring group mapping, refer to the [Hadoop documentation on Group Mapping](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/GroupsMapping.html).
+*   **Administrator Privileges:** A list of users and/or groups can be designated as Ozone administrators, granting them permissions to perform elevated cluster operations. For details on how to configure these administrators, refer to the page [Configuring Ozone Administrators](../../../administrator-guide/configuration/security/administrators).
+*   **Ranger Authorization:** If Apache Ranger is integrated for authorization, group resolution and management are delegated to Ranger. User and group information within Ranger is then used to enforce access control policies. For more details, refer to the page [Ranger authorization policies](./acls/ranger-acls).
