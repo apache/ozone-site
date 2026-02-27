@@ -123,9 +123,10 @@ Docusaurus provides many options for laying out documentation pages and their me
 
 - Let Docusaurus automatically generate the page's title from its top level markdown heading instead of using `title` in the front matter. This is different from the sidebar label or URL slug.
 
-- Use relative file paths for all links between pages.
-  - This keeps page links pointing to the current version of the documentation.
-  - See [Markdown Links](https://docusaurus.io/docs/markdown-features/links) in Docusaurus for more information.
+- Use [URL paths](https://docusaurus.io/docs/markdown-features/links) to link between pages. To use this format:
+  - Do not include number prefixes in links. Use `./ozone-manager` instead of `./02-ozone-manager`.
+  - Do not include file extensions. Use `./ozone-manager` instead of `./ozone-manager.md`.
+  - Do not use absolute paths to docs (e.g., `/docs/...`). Use relative paths to keep page links pointing within the current version of the documentation.
 
 - Use short, succinct labels in the sidebar.
   - For example, the pages on bucket layouts may be organized as:

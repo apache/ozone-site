@@ -4,13 +4,16 @@ sidebar_label: High Availability
 
 # Ozone Manager High Availability
 
+**TODO:** Uncomment link to this page in docs/03-core-concepts/05-high-availability/02-OM-ha.md
+**TODO:** Uncomment link to this page in docs/05-administrator-guide/02-configuration/06-high-availability/02-OM-ha.md
+
 Ozone has two metadata-manager nodes (*Ozone Manager* for key space management and *Storage Container Manager* for block space management) and multiple storage nodes (Datanode). Data is replicated between Datanodes with the help of RAFT consensus algorithm.
 
 To avoid any single point of failure the metadata-manager nodes also should have a HA setup.
 
 Both Ozone Manager and Storage Container Manager supports HA. In this mode the internal state is replicated via RAFT (with Apache Ratis)
 
-This document explains the HA setup of Ozone Manager (OM) HA, please check the [SCM HA documentation](/docs/core-concepts/high-availability/scm-ha) for SCM HA. While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.
+This document explains the HA setup of Ozone Manager (OM) HA, please check the [SCM HA documentation](../../../core-concepts/high-availability/scm-ha) for SCM HA. While they can be setup for HA independently, a reliable, full HA setup requires enabling HA for both services.
 
 ## Ozone Manager HA
 
@@ -63,5 +66,5 @@ accommodate the existing data and incoming snapshots, preventing disk space issu
 
 - Design doc [HDDS-505 Ozone Manager HA](https://ozone.apache.org/docs/edge/design/omha.html)
 - <!-- TODO: Link to OM HA snapshot installation troubleshooting documentation when created --> For troubleshooting OM HA snapshot installation issues, see the troubleshooting documentation.
-- Ozone distribution contains an example OM HA configuration, under the `compose/ozone-om-ha` directory which can be tested with the help of [Docker Compose](/docs/developer-guide/run/docker-compose).
+- Ozone distribution contains an example OM HA configuration, under the `compose/ozone-om-ha` directory which can be tested with the help of [Docker Compose](../../../developer-guide/run/docker-compose).
 - [Apache Ratis State Machine API documentation](https://github.com/apache/ratis/blob/ratis-3.1.3/ratis-server-api/src/main/java/org/apache/ratis/statemachine/StateMachine.java)

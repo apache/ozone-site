@@ -54,7 +54,7 @@ This procedure is a critical disaster recovery event that requires full cluster 
 
 2. **Attempt Data Recovery:** If possible, make a best-effort attempt to copy the contents of the `ozone.scm.db.dirs` directory from the failing disk to a safe, temporary location.
 
-3. **If Recovery Fails, Restore from Backup:** If the SCM database is unrecoverable, you must restore it from your most recent backup. Without a backup, you risk permanent data loss or a lengthy, complex, and potentially incomplete state reconstruction from Datanode reports. If Recon is deployed, its local SCM copy (from Datanode reports) may be usable as a recovery source—see [Recon](/docs/core-concepts/architecture/recon).
+3. **If Recovery Fails, Restore from Backup:** If the SCM database is unrecoverable, you must restore it from your most recent backup. Without a backup, you risk permanent data loss or a lengthy, complex, and potentially incomplete state reconstruction from Datanode reports. If Recon is deployed, its local SCM copy (from Datanode reports) may be usable as a recovery source—see [Recon](../../../core-concepts/architecture/recon).
 
 4. **Replace and Configure Disk:** Physically replace the hardware and ensure the new, empty disk is mounted at the correct path defined in `ozone.scm.db.dirs`.
 

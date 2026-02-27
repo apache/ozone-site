@@ -122,7 +122,11 @@ Key tuning parameters for the Datanode often involve:
 |----------|---------|-------------|
 | `hdds.datanode.metadata.rocksdb.cache.size` | `1GB` | Configures the block cache size for RocksDB instances on Datanodes. |
 
-**Compaction strategies:** Optimizing how data is merged and organized on disk. For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/datanode/rocksdb-schema/).
+**Compaction strategies:** Optimizing how data is merged and organized on disk.
+
+<!--
+For more details, refer to the [Datanode Container Schema v3 in DN Documentation](../../../system-internals/components/Datanode/RocksDB-chema/).
+-->
 
 | Property | Default | Description |
 |----------|---------|-------------|
@@ -134,10 +138,10 @@ Key tuning parameters for the Datanode often involve:
 
 **Write-ahead log (WAL) settings:** Balancing durability and write performance.
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `hdds.datanode.rocksdb.log.max-file-size` | `32MB` | The max size of each user log file of RocksDB. O means no size limit. |
-| `hdds.datanode.rocksdb.log.max-file-num` | `64` | The max user log file number to keep for each RocksDB. |
+| Property                                  | Default | Description                                                             |
+|-------------------------------------------|---------|-------------------------------------------------------------------------|
+| `hdds.datanode.rocksdb.log.max-file-size` | `32MB`  | The max size of each user log file of RocksDB. `0` means no size limit. |
+| `hdds.datanode.rocksdb.log.max-file-num`  | `64`    | The max user log file number to keep for each RocksDB.                  |
 
 **Logging:**
 

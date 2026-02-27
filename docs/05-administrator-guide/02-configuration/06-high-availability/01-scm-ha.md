@@ -65,7 +65,7 @@ Note: both commands perform one-time initialization.  SCM still needs to be star
 
 ## SCM Leader Transfer
 
-For information on manually transferring SCM leadership, refer to the [Storage Container Manager Leader Transfer](/docs/administrator-guide/operations/leader-transfer/storage-container-manager) documentation.
+For information on manually transferring SCM leadership, refer to the [Storage Container Manager Leader Transfer](../../../administrator-guide/operations/leader-transfer/storage-container-manager) documentation.
 
 ## Auto-bootstrap
 

@@ -54,6 +54,7 @@ no-bare-urls: false
 hr-style:
   style: ---
 
+# Rule MD044
 # Enforce consistent capitalization.
 # Use markdownlint instead of cspell to enforce capitalization since markdownlint is aware of code blocks within
 # markdown, for which these rules do not apply.

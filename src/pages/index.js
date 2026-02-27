@@ -160,7 +160,7 @@ function Integrations() {
     { 
       name: 'Spark', 
       icon: () => <img src="/img/integrations/spark.svg" className="integration-logo-img" data-logo="spark" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/spark' 
+      // link: '/docs/user-guide/integrations/spark'
     },
     { 
       name: 'Iceberg', 
@@ -170,7 +170,7 @@ function Integrations() {
     { 
       name: 'Trino', 
       icon: () => <img src="/img/integrations/trino.svg" className="integration-logo-img" data-logo="trino" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/trino' 
+      // link: '/docs/user-guide/integrations/trino'
     },
     { 
       name: 'Impala', 
@@ -185,7 +185,7 @@ function Integrations() {
     { 
       name: 'Knox', 
       icon: () => <img src="/img/integrations/knox.svg" className="integration-logo-img" data-logo="knox" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/administrator-guide/configuration/security/knox' 
+      // link: '/docs/administrator-guide/configuration/security/knox'
     },
     { 
       name: 'Kerberos', 
@@ -205,12 +205,12 @@ function Integrations() {
     { 
       name: 'Oozie', 
       icon: () => <img src="/img/integrations/oozie.svg" className="integration-logo-img" data-logo="oozie" style={{ height: '28px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/oozie' 
+      // link: '/docs/user-guide/integrations/oozie'
     },
     { 
       name: 'Hue', 
-      icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />, 
-      link: '/docs/user-guide/integrations/hue' 
+      icon: () => <img src="/img/integrations/hue.svg" className="integration-logo-img" data-logo="hue" style={{ height: '42px', width: 'auto', maxWidth: '100%', objectFit: 'contain' }} />,
+      // link: '/docs/user-guide/integrations/hue'
     },
     {
       name: 'HBase',

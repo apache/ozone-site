@@ -41,7 +41,7 @@ Another way to understand Ozone is by looking at its functional layers.
 
 - The **Metadata Management Layer** is composed of the Ozone Manager and Storage Container Manager.
 - The **Data Storage Layer** consists of the Datanodes, which are managed by SCM. Data is stored in logical blocks, which are grouped into containers for replication.
-- The **Replication Layer** is powered by [Ratis](../02-replication/03-ratis.md), a Java-based implementation of the Raft consensus protocol. Ratis ensures that metadata is reliably replicated across OM and SCM instances and maintains data consistency during write operations on the Datanodes.
+- The **Replication Layer** is powered by [Ratis](../replication/ratis), a Java-based implementation of the Raft consensus protocol. Ratis ensures that metadata is reliably replicated across OM and SCM instances and maintains data consistency during write operations on the Datanodes.
 - The **Protocol Bus** allows Ozone to be extended with different protocols. Currently, it supports an S3-compatible protocol. This bus allows new object store or file system protocols to be implemented on top of Ozone's native protocol.
 
 This layered architecture, combined with a clear separation of metadata and data management, allows Ozone to scale to handle billions of objects while maintaining high performance and fault tolerance.
