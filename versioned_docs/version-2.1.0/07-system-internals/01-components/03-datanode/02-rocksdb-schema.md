@@ -49,5 +49,5 @@ Existing containers each has one RocksDB for them will be still accessible after
 
 ## References
 
-- Design doc: [HDDS-3630 Merge Container RocksDB in DN](https://ozone.apache.org/docs/edge/design/dn-merge-rocksdb.html)
+- Design doc: [HDDS-3630 Merge Container RocksDB in DN](pathname:///docs/2.0.0/design/dn-merge-rocksdb.html)
 - Jira: [HDDS-3630](https://issues.apache.org/jira/browse/HDDS-3630)

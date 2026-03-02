@@ -14,7 +14,7 @@ This guide covers setting up Apache Ozone on physical or virtual machines. Choos
 4. **Recon** (Optional) - Management and monitoring interface
 5. **S3 Gateway (S3G)** (Optional) - Provides S3-compatible API access to Ozone
 
-Learn more: [Ozone Architecture Overview](https://ozone.apache.org/docs/edge/concept/overview.html)
+Learn more: [Ozone Architecture Overview](../../core-concepts/architecture/overview)
 
 ## Prerequisites
 
@@ -155,11 +155,11 @@ Edit `/opt/ozone/etc/hadoop/ozone-site.xml`:
 
 **Configuration Resources:**
 
-- [Configuration Properties Reference](https://ozone.apache.org/docs/edge/start/onprem.html#ozone-settings-summary)
-- [Network Ports Reference](https://ozone.apache.org/docs/edge/concept/ports.html)
-- [S3 Gateway Setup Guide](https://ozone.apache.org/docs/edge/interface/s3.html)
-- [Security Configuration](https://ozone.apache.org/docs/edge/security/secureozone.html)
-- [High Availability Setup](https://ozone.apache.org/docs/edge/feature/om-ha.html)
+- [Configuration Properties Reference](../../administrator-guide/installation/initializing-cluster#ozone-settings-summary)
+- [Network Ports Reference](../../administrator-guide/configuration/basic/network/default-ports)
+- [S3 Gateway Setup Guide](../../user-guide/client-interfaces/s3/s3-api)
+- [Security Configuration](../../administrator-guide/configuration/)
+- [High Availability Setup](pathname:///docs/2.0.0/feature/om-ha.html)
 
 Copy `ozone-site.xml` to all nodes.
 
