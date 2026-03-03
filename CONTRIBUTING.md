@@ -55,6 +55,8 @@ pnpm run lint:fix
 - `pnpm run lint` runs checks only from markdownlint and yamllint (no files are modified).
 - `pnpm run lint:fix` applies auto-fixes from markdownlint.
 
+**Prerequisites**: The lint scripts require `yamllint`, which is not a Node.js package and must be installed separately. Install it via pip (`pip install yamllint`) or your system package manager (e.g. `brew install yamllint` on macOS).
+
 ### Directory Layout
 
 - [docusaurus.config.js](https://docusaurus.io/docs/configuration)
