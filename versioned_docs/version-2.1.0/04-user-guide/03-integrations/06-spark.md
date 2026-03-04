@@ -4,7 +4,7 @@ sidebar_label: Spark
 
 # Using Apache Spark with Ozone
 
-Apache Spark is a widely used unified analytics engine for large-scale data processing. Ozone can serve as a scalable storage layer for Spark applications, allowing you to read and write data directly from/to Ozone clusters using familiar Spark APIs.
+[Apache Spark](https://spark.apache.org/) is a widely used unified analytics engine for large-scale data processing. Ozone can serve as a scalable storage layer for Spark applications, allowing you to read and write data directly from/to Ozone clusters using familiar Spark APIs.
 
 :::note
 This guide covers Apache Spark 3.x. Examples were tested with Spark 3.5.x and Apache Ozone 2.1.0.
@@ -12,7 +12,10 @@ This guide covers Apache Spark 3.x. Examples were tested with Spark 3.5.x and Ap
 
 ## Overview
 
-Spark interacts with Ozone primarily through the OzoneFileSystem (ofs) connector, which allows access using the `ofs://` URI scheme. You can also use the older `o3fs://` scheme, though `ofs://` is generally recommended.
+Spark interacts with Ozone primarily through the OzoneFileSystem connector, which allows access using the `ofs://` URI scheme.
+Spark can also access Ozone through the S3 Gateway using the `s3a://` protocol, which is useful for porting existing cloud-native Spark applications to Ozone without changing application code.
+
+The older `o3fs://` scheme is supported for legacy compatibility but is not recommended for new deployments.
 
 Key benefits include:
 
@@ -39,7 +42,6 @@ While Spark often picks up settings from `core-site.xml` on the classpath, expli
 
 ```properties
 spark.hadoop.fs.ofs.impl=org.apache.hadoop.fs.ozone.RootedOzoneFileSystem
-spark.hadoop.fs.o3fs.impl=org.apache.hadoop.fs.ozone.OzoneFileSystem
 ```
 
 ### 3. Security (Kerberos)
@@ -195,3 +197,8 @@ Where core-site.xml contains at minimum:
 ```
 
 Replace `YOUR_KUBERNETES_API_SERVER`, `YOUR_REPO`, and `YOUR_NAMESPACE` with your environment values.
+
+## Using the S3A Protocol
+
+Spark can also access Ozone through the S3 Gateway using the `s3a://` protocol. This is useful for porting existing cloud-native Spark applications to Ozone without changing application code.
+For configuration details, refer to the [S3A documentation](../01-client-interfaces/04-s3a.md).
