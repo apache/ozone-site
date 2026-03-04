@@ -34,7 +34,7 @@ Key benefits include:
 
 ### 1. Core Site (`core-site.xml`)
 
-For `core-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../01-client-interfaces/02-ofs.md#configuration).
+For `core-site.xml` configuration, refer to the [Ozone File System (ofs) Configuration section](../client-interfaces/ofs#configuration).
 
 ### 2. Spark Configuration (`spark-defaults.conf` or `--conf`)
 
@@ -200,4 +200,4 @@ Replace `YOUR_KUBERNETES_API_SERVER`, `YOUR_REPO`, and `YOUR_NAMESPACE` with you
 
 Spark can also access Ozone through the S3 Gateway using the `s3a://` protocol. This is useful for porting existing cloud-native Spark applications to Ozone without changing application code.
 
-For configuration details, refer to the [S3A documentation](../01-client-interfaces/04-s3a.md).
+For configuration details, refer to the [S3A documentation](../client-interfaces/s3a).
