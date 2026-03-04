@@ -12,13 +12,13 @@ This guide covers Apache Spark 3.x. Examples were tested with Spark 3.5.x and Ap
 
 ## Overview
 
-Spark interacts with Ozone primarily through the OzoneFileSystem (ofs) connector, which allows access using the `ofs://` URI scheme. You can also use the older `o3fs://` scheme, though `ofs://` is generally recommended, especially in CDP environments.
+Spark interacts with Ozone primarily through the OzoneFileSystem (ofs) connector, which allows access using the `ofs://` URI scheme. You can also use the older `o3fs://` scheme, though `ofs://` is generally recommended.
 
 Key benefits include:
 
 - Storing large datasets generated or consumed by Spark jobs directly in Ozone.
 - Leveraging Ozone's scalability and object storage features for Spark workloads.
-- Using standard Spark DataFrame and RDD APIs to interact with Ozone data.
+- Using standard Spark DataFrame and `RDD` APIs to interact with Ozone data.
 
 ## Prerequisites
 
@@ -103,9 +103,9 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("Ozone Spark Read Example").getOrCreate()
 
 # Read a CSV file from Ozone
-df = spark.read.format("csv") \
-    .option("header", "true") \
-    .option("inferSchema", "true") \
+df = spark.read.format("csv")
+    .option("header", "true")
+    .option("inferSchema", "true")
     .load("ofs://ozone1/volume1/bucket1/input/data.csv")
 
 df.show()
@@ -134,9 +134,12 @@ spark.stop()
 
 ## Spark on Kubernetes
 
-The recommended approach for running Spark on Kubernetes with Ozone is to bake the ozone-filesystem-hadoop3-client-*.jar, the hadoop-common-3.4.x.jar (if using Ozone 2.1.0+), and core-site.xml directly into a custom Spark image.
+The recommended approach for running Spark on Kubernetes with Ozone is to bake the `ozone-filesystem-hadoop3-client-*.jar` JAR, the `hadoop-common-3.4.x.jar` JAR (if using Ozone 2.1.0+), and core-site.xml directly into a custom Spark image.
 
-1. **Build a Custom Spark Image:** Place the Ozone client JAR and Hadoop compatibility JAR in /opt/spark/jars/, which is on the default Spark classpath, and core-site.xml in /opt/spark/conf/:
+### Build a Custom Spark Image
+
+Place the Ozone client JAR and Hadoop compatibility JAR in /opt/spark/jars/, which is on the default Spark classpath, and core-site.xml in /opt/spark/conf/:
+
 ```dockerfile
 FROM apache/spark:3.5.8-scala2.12-java11-python3-ubuntu
 
@@ -155,7 +158,9 @@ COPY ozone_write.py /opt/spark/work-dir/ozone_write.py
 
 USER spark
 ```
+
 Where core-site.xml contains at minimum:
+
 ```xml
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -174,16 +179,19 @@ Where core-site.xml contains at minimum:
   </property>
 </configuration>
 ```
-2. **Submit `Spark-submit`:**
-    ```bash
-   ./bin/spark-submit \
-     --master k8s://https://<kubernetes-api-server>:6443 \
-     --deploy-mode cluster \
-     --name spark-ozone-example \
-     --conf spark.executor.instances=2 \
-     --conf spark.kubernetes.container.image=<your-repo>/spark-ozone:latest \
-     --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
-     --conf spark.kubernetes.namespace=<your-namespace> \
-     local:///opt/spark/work-dir/ozone_example.py
-    ```
-Replace <kubernetes-api-server>, <your-repo>, and <your-namespace> with your environment values.
+
+### Submit `Spark-submit`
+
+```bash
+./bin/spark-submit \
+  --master k8s://https://YOUR_KUBERNETES_API_SERVER:6443 \
+  --deploy-mode cluster \
+  --name spark-ozone-example \
+  --conf spark.executor.instances=2 \
+  --conf spark.kubernetes.container.image=YOUR_REPO/spark-ozone:latest \
+  --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+  --conf spark.kubernetes.namespace=YOUR_NAMESPACE \
+  local:///opt/spark/work-dir/ozone_example.py
+```
+
+Replace `YOUR_KUBERNETES_API_SERVER`, `YOUR_REPO`, and `YOUR_NAMESPACE` with your environment values.
