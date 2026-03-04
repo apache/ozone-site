@@ -26,7 +26,7 @@ Key benefits include:
 ## Prerequisites
 
 1. **Ozone Cluster:** A running Ozone cluster.
-2. **Ozone Client JARs:** The `ozone-filesystem-hadoop3.jar` must be available on the Spark driver and executor classpath.
+2. **Ozone Client JARs:** The `ozone-filesystem-hadoop3-client-*.jar` must be available on the Spark driver and executor classpath.
 3. **Hadoop 3.4.x runtime (Ozone 2.1.0+):** Ozone 2.1.0 removed bundled copies of several Hadoop classes (`LeaseRecoverable`, `SafeMode`, `SafeModeAction`) and now requires them from the runtime classpath ([HDDS-13574](https://issues.apache.org/jira/browse/HDDS-13574)). Since Spark 3.5.x ships with Hadoop 3.3.4, you must add `hadoop-common-3.4.x.jar` to the Spark classpath alongside the existing Hadoop JARs.
 4. **Configuration:** Spark needs access to Ozone configuration (`core-site.xml` and potentially `ozone-site.xml`) to connect to the Ozone cluster.
 
@@ -46,7 +46,9 @@ spark.hadoop.fs.ofs.impl=org.apache.hadoop.fs.ozone.RootedOzoneFileSystem
 
 ### 3. Security (Kerberos)
 
-If your Ozone and Spark clusters are Kerberos-enabled, Spark needs permission to obtain delegation tokens for Ozone. Configure the following property in `spark-defaults.conf`or via`--conf`, specifying your Ozone filesystem URI:
+If your Ozone and Spark clusters are Kerberos-enabled, Spark needs permission to obtain delegation tokens for Ozone.
+
+Configure the following property in `spark-defaults.conf` or via `--conf`, specifying your Ozone filesystem URI:
 
 ```properties
 # For YARN deployments in spark3+
@@ -59,7 +61,7 @@ Replace `ozone1` with your OM Service ID. Ensure the user running the Spark job 
 
 You can read and write data using `ofs://` URIs like any other Hadoop-compatible filesystem.
 
-**URI Format:** `ofs://<om-service-id>/<volume>/<bucket>/path/to/key>`
+**URI Format:** `ofs://<om-service-id>/<volume>/<bucket>/path/to/key`
 
 ### Reading Data (Scala)
 
@@ -172,17 +174,13 @@ Where core-site.xml contains at minimum:
     <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
   </property>
   <property>
-    <name>fs.o3fs.impl</name>
-    <value>org.apache.hadoop.fs.ozone.OzoneFileSystem</value>
-  </property>
-  <property>
     <name>ozone.om.address</name>
     <value>om-host.example.com:9862</value>
   </property>
 </configuration>
 ```
 
-### Submit `Spark-submit`
+### Submit a Spark Job
 
 ```bash
 ./bin/spark-submit \
@@ -193,7 +191,7 @@ Where core-site.xml contains at minimum:
   --conf spark.kubernetes.container.image=YOUR_REPO/spark-ozone:latest \
   --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
   --conf spark.kubernetes.namespace=YOUR_NAMESPACE \
-  local:///opt/spark/work-dir/ozone_example.py
+  local:///opt/spark/work-dir/ozone_write.py
 ```
 
 Replace `YOUR_KUBERNETES_API_SERVER`, `YOUR_REPO`, and `YOUR_NAMESPACE` with your environment values.
@@ -201,4 +199,5 @@ Replace `YOUR_KUBERNETES_API_SERVER`, `YOUR_REPO`, and `YOUR_NAMESPACE` with you
 ## Using the S3A Protocol
 
 Spark can also access Ozone through the S3 Gateway using the `s3a://` protocol. This is useful for porting existing cloud-native Spark applications to Ozone without changing application code.
+
 For configuration details, refer to the [S3A documentation](../01-client-interfaces/04-s3a.md).
