@@ -269,7 +269,7 @@ const config = {
             const items = await defaultCreateSitemapItems(rest);
 
             const validUrlRegex = /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
-            items.forEach((item, index) => {
+            items.forEach((item) => {
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
                   console.error('All URLs should use kebab case and lowercase letters.');

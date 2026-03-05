@@ -81,7 +81,6 @@ export default defineConfig([
   {
     ignores: [
       "static/**",
-      "*.config*",
       "node_modules/**",
       "build/**",
       "dist/**",
