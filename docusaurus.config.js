@@ -344,7 +344,7 @@ const config = {
             ],
           },
           {
-            to: 'download',
+            to: 'downloads',
             label: 'Download',
           },
           {

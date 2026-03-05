@@ -276,7 +276,7 @@ export default function Home() {
                     Get Started
                   </button>
                 </Link>
-                <Link to="/download">
+                <Link to="/downloads">
                   <button className="button button--secondary button--lg">
                     Download
                   </button>
