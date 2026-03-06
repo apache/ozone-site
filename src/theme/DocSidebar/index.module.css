@@ -48,6 +48,6 @@ aside .customSidebarInner {
 
 aside .customSidebarVersion p {
     margin-bottom: 0;
-    font-size: var(--fbc-font-size: 13px;);
+    font-size: var(--fbc-font-size, 13px);
     padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
 }

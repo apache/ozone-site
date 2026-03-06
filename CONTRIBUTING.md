@@ -12,7 +12,7 @@ This document summarizes the contribution process.
     - Your local branch containing changes for the website should be based off of the [master](https://github.com/apache/ozone-site/tree/master) branch.
 
 2. Use your favorite editor to write markdown content under the [docs/](docs/) and [src/pages/](src/pages/) directories.
-    - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
+    - A good option is [Visual Studio Code](https://code.visualstudio.com/) with [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) and [cspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) plugins, which will automatically detect the website's configuration files and give feedback as you type.
 
 3. Preview your changes locally by running `docker compose up` and opening `localhost:3001` in your browser.
     - Make sure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your system.
@@ -52,8 +52,8 @@ pnpm run lint
 pnpm run lint:fix
 ```
 
-- `pnpm run lint` runs checks only from markdownlint and yamllint (no files are modified).
-- `pnpm run lint:fix` applies auto-fixes from markdownlint.
+- `pnpm run lint` runs checks only from eslint, markdownlint and yamllint (no files are modified).
+- `pnpm run lint:fix` applies auto-fixes from eslint and markdownlint.
 
 **Prerequisites**: The lint scripts require `yamllint`, which is not a Node.js package and must be installed separately. Install it via pip (`pip install yamllint`) or your system package manager (e.g. `brew install yamllint` on macOS).
 

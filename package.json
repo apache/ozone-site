@@ -13,8 +13,8 @@
     "serve": "docusaurus serve --port 3001",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "markdownlint \"$(git rev-parse --show-toplevel)\" && yamllint --format=colored \"$(git rev-parse --show-toplevel)\"",
-    "lint:fix": "markdownlint --fix \"$(git rev-parse --show-toplevel)\" && yamllint --format=colored \"$(git rev-parse --show-toplevel)\""
+    "lint": "eslint . && markdownlint \"$(git rev-parse --show-toplevel)\" && yamllint --format=colored \"$(git rev-parse --show-toplevel)\"",
+    "lint:fix": "eslint --fix . && markdownlint --fix \"$(git rev-parse --show-toplevel)\" && yamllint --format=colored \"$(git rev-parse --show-toplevel)\""
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
@@ -34,9 +34,17 @@
     "@cspell/dict-java": "^5.0.11",
     "@cspell/dict-markdown": "^2.0.9",
     "@cspell/dict-shell": "^1.1.0",
+    "@docusaurus/eslint-plugin": "^3.9.2",
     "@docusaurus/module-type-aliases": "3.7.0",
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^10.0.1",
     "ajv-cli": "^5.0.0",
     "cspell": "^8.17.5",
+    "eslint": "^10.0.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.4.0",
     "markdownlint-cli": "^0.39.0"
   },
   "browserslist": {
