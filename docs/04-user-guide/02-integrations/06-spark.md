@@ -7,7 +7,7 @@ sidebar_label: Spark
 [Apache Spark](https://spark.apache.org/) is a widely used unified analytics engine for large-scale data processing. Ozone can serve as a scalable storage layer for Spark applications, allowing you to read and write data directly from/to Ozone clusters using familiar Spark APIs.
 
 :::note
-This guide covers Apache Spark 3.x. Examples were tested with Spark 3.5.x and Apache Ozone 2.1.0.
+This guide covers Apache Spark 3.x. Examples were tested with Spark 3.5.x and Apache Ozone 2.2.0.
 :::
 
 ## Overview
@@ -26,7 +26,7 @@ Key benefits include:
 ## Prerequisites
 
 1. **Ozone Cluster:** A running Ozone cluster.
-2. **Ozone Client JARs:** The `ozone-filesystem-hadoop3-client-*.jar` must be available on the Spark driver and executor classpath.
+2. **Ozone Client JARs:** The `ozone-filesystem-hadoop3-*.jar` must be available on the Spark driver and executor classpath.
 3. **Hadoop 3.4.x runtime (Ozone 2.1.0+):** Ozone 2.1.0 removed bundled copies of several Hadoop classes (`LeaseRecoverable`, `SafeMode`, `SafeModeAction`) and now requires them from the runtime classpath ([HDDS-13574](https://issues.apache.org/jira/browse/HDDS-13574)). Since Spark 3.5.x ships with Hadoop 3.3.4, you must add `hadoop-common-3.4.x.jar` to the Spark classpath alongside the existing Hadoop JARs.
 4. **Configuration:** Spark needs access to Ozone configuration (`core-site.xml` and potentially `ozone-site.xml`) to connect to the Ozone cluster.
 
@@ -77,8 +77,6 @@ val df = spark.read.format("csv")
   .load("ofs://ozone1/volume1/bucket1/input/data.csv")
 
 df.show()
-
-spark.stop()
 ```
 
 ### Writing Data (Scala)
@@ -95,8 +93,6 @@ val df = spark.createDataFrame(data).toDF("name", "id")
 // Write DataFrame to Ozone as Parquet files
 df.write.mode("overwrite")
   .parquet("ofs://ozone1/volume1/bucket1/output/users.parquet")
-
-spark.stop()
 ```
 
 ### Reading Data (Python)
@@ -113,8 +109,6 @@ df = spark.read.format("csv") \
     .load("ofs://ozone1/volume1/bucket1/input/data.csv")
 
 df.show()
-
-spark.stop()
 ```
 
 ### Writing Data (Python)
@@ -132,13 +126,11 @@ df = spark.createDataFrame(data, columns)
 # Write DataFrame to Ozone as Parquet files
 df.write.mode("overwrite") \
     .parquet("ofs://ozone1/volume1/bucket1/output/users.parquet")
-
-spark.stop()
 ```
 
 ## Spark on Kubernetes
 
-The recommended approach for running Spark on Kubernetes with Ozone is to bake the `ozone-filesystem-hadoop3-client-*.jar` JAR, the `hadoop-common-3.4.x.jar` JAR (if using Ozone 2.1.0+), and core-site.xml directly into a custom Spark image.
+The recommended approach for running Spark on Kubernetes with Ozone is to bake the `ozone-filesystem-hadoop3-*.jar` JAR, the `hadoop-common-3.4.x.jar` JAR (if using Ozone 2.1.0+), and core-site.xml directly into a custom Spark image.
 
 ### Build a Custom Spark Image
 
@@ -149,7 +141,7 @@ FROM apache/spark:3.5.8-scala2.12-java11-python3-ubuntu
 
 USER root
 
-ADD https://repo1.maven.org/maven2/org/apache/ozone/ozone-filesystem-hadoop3-client/2.1.0/ozone-filesystem-hadoop3-client-2.1.0.jar \
+ADD https://repo1.maven.org/maven2/org/apache/ozone/ozone-filesystem-hadoop3/2.2.0/ozone-filesystem-hadoop3-2.2.0.jar \
     /opt/spark/jars/
 
 # Ozone 2.1.0+ requires Hadoop 3.4.x classes (HDDS-13574).

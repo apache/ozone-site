@@ -77,8 +77,6 @@ val df = spark.read.format("csv")
   .load("ofs://ozone1/volume1/bucket1/input/data.csv")
 
 df.show()
-
-spark.stop()
 ```
 
 ### Writing Data (Scala)
@@ -95,8 +93,6 @@ val df = spark.createDataFrame(data).toDF("name", "id")
 // Write DataFrame to Ozone as Parquet files
 df.write.mode("overwrite")
   .parquet("ofs://ozone1/volume1/bucket1/output/users.parquet")
-
-spark.stop()
 ```
 
 ### Reading Data (Python)
@@ -113,8 +109,6 @@ df = spark.read.format("csv") \
     .load("ofs://ozone1/volume1/bucket1/input/data.csv")
 
 df.show()
-
-spark.stop()
 ```
 
 ### Writing Data (Python)
@@ -132,8 +126,6 @@ df = spark.createDataFrame(data, columns)
 # Write DataFrame to Ozone as Parquet files
 df.write.mode("overwrite") \
     .parquet("ofs://ozone1/volume1/bucket1/output/users.parquet")
-
-spark.stop()
 ```
 
 ## Spark on Kubernetes
