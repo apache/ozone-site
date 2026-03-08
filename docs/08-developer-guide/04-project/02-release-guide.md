@@ -567,6 +567,23 @@ This step requires the release's [Docker image](#publish-a-docker-image-for-the-
 
 3. Create a row for the next release in the `Upcoming Releases` section, and add planned features that you are aware of.
 
+### Update Apache Release Metadata
+
+1. Mark the version as released in Apache Jira HDDS project: https://issues.apache.org/jira/plugins/servlet/project-config/HDDS/administer-versions?status=unreleased
+2. A PMC member should add the release in Apache project metadata: https://reporter.apache.org/addrelease.html?ozone
+
+### Deprecate or Remove Old Releases
+
+When a release is superseded or no longer supported, clean up old release references.
+
+1. Remove unneeded artifacts from the Apache distribution SVN:
+
+    ```bash
+    svn rm -m "Ozone: delete old version <old_version>" https://dist.apache.org/repos/dist/release/ozone/<old_version>
+    ```
+
+2. Update the website download page to point to supported versions.
+
 ### Write an Announcement Mail to the Ozone Mailing Lists
 
 Include the following links:
@@ -590,7 +607,7 @@ If there is a security vulnerability or critical bug uncovered in a major or min
       - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
-3. Remove the previous release that this patch release supersedes from the Apache distribution site:
+3. Remove the previous release that this patch release supersedes from the Apache distribution site. e.g.:
 
     ```bash
     svn rm -m 'Ozone: delete old version 1.2.0' https://dist.apache.org/repos/dist/release/ozone/1.2.0
