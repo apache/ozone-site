@@ -23,6 +23,7 @@ ignore:
 - "**/static/docs"
 - build
 - static/recon-api.yaml
+- "**/recon-api.yaml"
 
 rules:
   anchors: enable
