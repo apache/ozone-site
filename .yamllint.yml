@@ -22,6 +22,8 @@ ignore:
 - node_modules
 - "**/static/docs"
 - build
+- static/recon-api.yaml
+- "**/recon-api.yaml"
 
 rules:
   anchors: enable
