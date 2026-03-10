@@ -145,7 +145,7 @@ These metrics are exposed by the Storage Container Manager (SCM) and provide ins
 | `ecPartialReconstructionNoneOverloadedTotal` | `replication_manager_metrics_ec_partial_reconstruction_none_overloaded_total` | Number of times partial EC reconstruction was used due to insufficient nodes available and with no overloaded nodes. |
 | `ecPartialReplicationForOutOfServiceReplicasTotal` | `replication_manager_metrics_ec_partial_replication_for_out_of_service_replicas_total` | Number of times EC decommissioning or entering maintenance mode replicas were not all replicated due to insufficient nodes available. |
 | `ecPartialReplicationForMisReplicationTotal` | `replication_manager_metrics_ec_partial_replication_for_mis_replication_total` | Number of times partial replication occurred to fix a mis-replicated EC container due to insufficient nodes available. |
-| `ecReconstructionCmdsDeferredTotal`    | `replication_manager_metrics_ec_reconstruction_cmds_deferred_total` | Number of Reconstruct EC Container commands that could not be sent due to the pending commands on the target datanode. |
+| `ecReconstructionCmdsDeferredTotal`    | `replication_manager_metrics_ec_reconstruction_cmds_deferred_total` | Number of Reconstruct EC Container commands that could not be sent due to the pending commands on the target Datanode. |
 
 #### From `SafeModeMetrics`
 
@@ -206,4 +206,3 @@ These metrics are exposed by the Ozone client.
 | ------------------------------- | --------------------------------------------------------- | ---------------------------------------- |
 | `ecReconstructionTotal`         | `xceiver_client_metrics_ec_reconstruction_total` | Total number of EC reconstruction tasks. |
 | `ecReconstructionFailsTotal`    | `xceiver_client_metrics_ec_reconstruction_fails_total` | Total number of failed EC reconstruction tasks. |
-
