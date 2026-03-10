@@ -118,3 +118,92 @@ it inherits the EC Replication Config of its bucket if it's available.
 
 Changing the bucket level EC Replication Config only affect new files created within the bucket.
 Once a file has been created, its EC Replication Config cannot be changed currently.
+
+## EC Metrics
+
+The following sections describe the various metrics related to Erasure Coding that are exposed by different Ozone services. These metrics are useful for monitoring the health and performance of the EC implementation and for troubleshooting any issues.
+
+### SCM Metrics
+
+These metrics are exposed by the Storage Container Manager (SCM) and provide insights into the management of EC containers and pipelines.
+
+#### From `ReplicationManagerMetrics`
+
+| JMX Metric Name                        | Prometheus Metric Name                                  | Description                                                                                                             |
+| -------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `InflightEcReplication`                | `replication_manager_metrics_inflight_ec_replication` | Tracked inflight EC container replication requests.                                                                     |
+| `InflightEcDeletion`                   | `replication_manager_metrics_inflight_ec_deletion`  | Tracked inflight EC container deletion requests.                                                                        |
+| `ecReplicationCmdsSentTotal`           | `replication_manager_metrics_ec_replication_cmds_sent_total` | Number of EC Replication commands sent.                                                                                 |
+| `ecDeletionCmdsSentTotal`              | `replication_manager_metrics_ec_deletion_cmds_sent_total` | Number of EC Replica Deletion commands sent.                                                                            |
+| `ecReconstructionCmdsSentTotal`        | `replication_manager_metrics_ec_reconstruction_cmds_sent_total` | Number of EC Reconstruction commands sent.                                                                              |
+| `ecReplicasCreatedTotal`               | `replication_manager_metrics_ec_replicas_created_total` | Number of EC replicas successfully created by Replication Manager.                                                      |
+| `ecReplicasDeletedTotal`               | `replication_manager_metrics_ec_replicas_deleted_total` | Number of EC replicas successfully deleted by Replication Manager.                                                      |
+| `ecReplicaCreateTimeoutTotal`          | `replication_manager_metrics_ec_replica_create_timeout_total` | Number of EC replicas scheduled to be created which timed out.                                                          |
+| `ecReplicaDeleteTimeoutTotal`          | `replication_manager_metrics_ec_replica_delete_timeout_total` | Number of EC replicas scheduled for delete which timed out.                                                             |
+| `ecPartialReconstructionSkippedTotal`  | `replication_manager_metrics_ec_partial_reconstruction_skipped_total` | Number of times partial EC reconstruction was needed due to overloaded nodes, but skipped as there was still sufficient redundancy. |
+| `ecPartialReconstructionCriticalTotal` | `replication_manager_metrics_ec_partial_reconstruction_critical_total` | Number of times partial EC reconstruction was used due to insufficient nodes available and reconstruction was critical. |
+| `ecPartialReconstructionNoneOverloadedTotal` | `replication_manager_metrics_ec_partial_reconstruction_none_overloaded_total` | Number of times partial EC reconstruction was used due to insufficient nodes available and with no overloaded nodes. |
+| `ecPartialReplicationForOutOfServiceReplicasTotal` | `replication_manager_metrics_ec_partial_replication_for_out_of_service_replicas_total` | Number of times EC decommissioning or entering maintenance mode replicas were not all replicated due to insufficient nodes available. |
+| `ecPartialReplicationForMisReplicationTotal` | `replication_manager_metrics_ec_partial_replication_for_mis_replication_total` | Number of times partial replication occurred to fix a mis-replicated EC container due to insufficient nodes available. |
+| `ecReconstructionCmdsDeferredTotal`    | `replication_manager_metrics_ec_reconstruction_cmds_deferred_total` | Number of Reconstruct EC Container commands that could not be sent due to the pending commands on the target datanode. |
+
+#### From `SafeModeMetrics`
+
+| JMX Metric Name                                | Prometheus Metric Name                                                  | Description                                                                                           |
+| ---------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `numContainerWithECDataReplicaReportedThreshold` | `safe_mode_metrics_num_container_with_ec_data_replica_reported_threshold` | The threshold for the number of containers with at least one EC replica reported for SCM to exit safe mode. |
+| `currentContainersWithECDataReplicaReportedCount` | `safe_mode_metrics_current_containers_with_ec_data_replica_reported_count` | The current count of containers with at least one EC replica reported to SCM.                         |
+
+#### From `SCMPipelineMetrics`
+
+These metrics are generated dynamically for each pipeline.
+
+| JMX Metric Name                                     | Prometheus Metric Name                                  | Description                                           |
+| --------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------- |
+| `NumBlocksAllocated-EC-rs-3-2-1024k-&lt;pipeline-id&gt;` | `pipeline_metrics_num_blocks_allocated_ec_rs_3_2_1024k` | Number of blocks allocated in a specific EC pipeline. |
+
+### Datanode Metrics
+
+These metrics are exposed by the Datanodes and relate to the execution of EC-related commands.
+
+#### From `ECReconstructionMetrics`
+
+| JMX Metric Name                         | Prometheus Metric Name                                           | Description                                        |
+| --------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
+| `blockGroupReconstructionTotal`         | `ec_reconstruction_metrics_block_group_reconstruction_total` | Total number of block groups reconstructed.        |
+| `blockGroupReconstructionFailsTotal`    | `ec_reconstruction_metrics_block_group_reconstruction_fails_total` | Total number of failed block group reconstructions.|
+| `reconstructionTotal`                   | `ec_reconstruction_metrics_reconstruction_total`        | Total number of reconstruction tasks.              |
+| `reconstructionFailsTotal`              | `ec_reconstruction_metrics_reconstruction_fails_total`  | Total number of failed reconstruction tasks.       |
+
+#### From `DatanodeQueueMetrics`
+
+These metrics track the size of command queues on the Datanode.
+
+| JMX Metric Name                                            | Prometheus Metric Name                                                              | Description                                                                     |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `StateContextCommandQueuereconstructECContainersCommandSize` | `datanode_queue_metrics_state_context_command_queuereconstruct_ec_containers_command_size` | Queue size of `reconstructECContainersCommand` from the StateContextCommandQueue. |
+| `CommandDispatcherCommandQueuereconstructECContainersCommandSize` | `datanode_queue_metrics_command_dispatcher_command_queuereconstruct_ec_containers_command_size` | Queue size of `reconstructECContainersCommand` from the CommandDispatcherQueue. |
+
+#### From `CommandHandlerMetrics`
+
+These metrics are tagged with `Command=reconstructECContainersCommand`.
+
+| JMX Metric Name (with tag)              | Prometheus Metric Name (with label)                                                 | Description                                                  |
+| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `TotalRunTimeMs`                        | `command_handler_metrics_total_run_time_ms{command="reconstructECContainersCommand"}` | The total runtime of the command handler in milliseconds.    |
+| `AvgRunTimeMs`                          | `command_handler_metrics_avg_run_time_ms{command="reconstructECContainersCommand"}` | Average run time of the command handler in milliseconds.     |
+| `QueueWaitingTaskCount`                 | `command_handler_metrics_queue_waiting_task_count{command="reconstructECContainersCommand"}` | The number of queued tasks waiting for execution.            |
+| `InvocationCount`                       | `command_handler_metrics_invocation_count{command="reconstructECContainersCommand"}` | The number of times the command handler has been invoked.    |
+| `CommandReceivedCount`                  | `command_handler_metrics_command_received_count{command="reconstructECContainersCommand"}` | The number of received SCM commands for each command type.   |
+
+### Client Metrics
+
+These metrics are exposed by the Ozone client.
+
+#### From `XceiverClientMetrics`
+
+| JMX Metric Name                 | Prometheus Metric Name                                    | Description                              |
+| ------------------------------- | --------------------------------------------------------- | ---------------------------------------- |
+| `ecReconstructionTotal`         | `xceiver_client_metrics_ec_reconstruction_total` | Total number of EC reconstruction tasks. |
+| `ecReconstructionFailsTotal`    | `xceiver_client_metrics_ec_reconstruction_fails_total` | Total number of failed EC reconstruction tasks. |
+
