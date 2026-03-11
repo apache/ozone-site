@@ -202,7 +202,7 @@ For detailed snapshot configuration properties, see [Snapshot Configuration Prop
 
 Monitor OM heap usage with many snapshots or large diffs. Enable Ozone Native ACLs or Ranger for access control.
 
-**Monitoring Snapshots:** Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages.
+**Monitoring Snapshots:** Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages. A [Grafana dashboard for Snapshot operations](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20OM%20Snapshot.json) is also available.
 
 ## Authorization
 
