@@ -1,0 +1,1018 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Apache Ozone Documentation">
+
+    <title>Documentation for Apache Ozone</title>
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/ozonedoc.css" rel="stylesheet">
+
+    
+    
+    <link href="../swagger-resources/swagger-ui.css" rel="stylesheet">
+
+    
+    <script>
+      var _paq = window._paq = window._paq || [];
+      
+
+       
+      _paq.push(['disableCookies']);
+      
+
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.apache.org/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '34']);
+        var d=document, g=d.createElement('script'),
+s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    
+
+  </head>
+
+
+<body>
+
+  
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-left ozone-logo">
+        <img src="../ozone-logo-small.png"/>
+      </a>
+      <a class="navbar-brand hidden-xs" href="../index.html">
+        Apache Ozone/HDDS Documentation
+      </a>
+      <a class="navbar-brand visible-xs-inline" href="#">Apache Ozone</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/apache/ozone">Source</a></li>
+        <li><a href="https://ozone.apache.org">Apache Ozone</a></li>
+        <li><a href="https://apache.org">ASF</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      
+<div class="col-sm-2 col-md-2 sidebar" id="sidebar">
+  <ul class="nav nav-sidebar">
+    
+    
+        
+            <li class="">
+                
+                   <a href="../index.html">
+                
+
+                    
+                    <span>An Introduction to Apache Ozone</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../start/index.html">
+                    
+                    <span>Getting Started</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../start/productiondeployment.html">Production Deployment</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../concept/index.html">
+                    
+                    <span>Architecture</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../concept/overview.html">Overview</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozonemanager.html">
+                                 
+                                 <span>Ozone Manager</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/volumesbucketskeys.html">Volumes, Buckets, and Keys</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/storagecontainermanager.html">Storage Container Manager</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/containers.html">Containers</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/datanodes.html">Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../concept/ozones3gateway.html">
+                                 
+                                 <span>Ozone S3 Gateway</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../concept/s3-gateway-load-balancing.html">S3 Gateway Load Balancing</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/recon.html">Recon</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/networkports.html">Network Ports</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/comparison.html">Comparison with Other Storage Technologies</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../concept/rocksdb.html">RocksDB in Apache Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../feature/index.html">
+                    
+                    <span>Features</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../feature/decommission.html">Decommissioning</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/diskbalancer.html">DiskBalancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/snapshotdefragmentation.html">Improve Ozone Snapshot Scale with Snapshot Defragmentation</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/om-ha.html">OM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/erasurecoding.html">Ozone Erasure Coding</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/snapshot.html">
+                                 
+                                 <span>Ozone Snapshot</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/snapshot-configuration-properties.html">Snapshot Configuration Properties</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/scm-ha.html">SCM High Availability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/streaming-write-pipeline.html">Streaming Write Pipeline</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/dn-merge-rocksdb.html">Merge Container RocksDB in DN</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/prefixfso.html">Prefix based File System Optimization</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/topology.html">Topology awareness</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/quota.html">Quota in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/recon.html">Recon Server</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/observability.html">Observability</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/nonrolling-upgrade.html">Non-Rolling Upgrades and Downgrades</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../feature/s3-multi-tenancy.html">
+                                 
+                                 <span>S3 Multi-Tenancy</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-setup.html">Setup</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-tenant-commands.html">Tenant commands</a>
+                                  </li>
+                               
+                                  <li class="">
+                                     <a href="../feature/s3-multi-tenancy-access-control.html">Access Control</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="active">
+                           
+                           <a href="../feature/reconfigurability.html">Dynamic Property Reload</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/containerbalancer.html">Container Balancer</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/maintenance.html">Maintenance Mode</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/multi-raft-support.html">Multi-Raft Support in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../feature/trash.html">Trash</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../integration/index.html">
+                    
+                    <span>Application Integrations</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../integration/distcp.html">Hadoop DistCp</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/hive.html">Hive</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../integration/impala.html">Impala</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../interface/index.html">
+                    
+                    <span>Client Interfaces</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../interface/ofs.html">Ofs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/o3fs.html">O3fs (Hadoop compatible)</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                               <a href="../interface/s3.html">
+                                 
+                                 <span>S3 Protocol</span>
+                               </a>
+                               <ul class="nav">
+                               
+                                  <li class="">
+                                     <a href="../interface/cyberduckozones3.html">Accessing Ozone S3 via CyberDuck</a>
+                                  </li>
+                               
+                               </ul>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/cli.html">Command Line Interface</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/reconapi.html">Recon API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/javaapi.html">Java API</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/python.html">Accessing Apache Ozone from Python</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/csi.html">CSI Protocol</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/httpfs.html">HttpFS Gateway</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../interface/native-cpp.html">Native C/C&#43;&#43; Client Access to Ozone</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                <a href="../security/index.html">
+                    
+                    <span>Security</span>
+                </a>
+                <ul class="nav">
+                    
+                        <li class="">
+                           
+                           <a href="../security/secureozone.html">Securing Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingtde.html">Transparent Data Encryption</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/gdpr.html">GDPR in Ozone</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingdatanodes.html">Securing Datanodes</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securingozonehttp.html">Securing HTTP</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securings3.html">Securing S3</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securityacls.html">Ozone ACLs</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/protect-in-transit-traffic.html">Protect In-Transit Traffic</a>
+                           
+                        </li>
+                    
+                        <li class="">
+                           
+                           <a href="../security/securitywithranger.html">Apache Ranger</a>
+                           
+                        </li>
+                    
+                </ul>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../tools/index.html">
+                
+
+                    
+                    <span>Tools</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../recipe/index.html">
+                
+
+                    
+                    <span>Recipes</span>
+                </a>
+            </li>
+        
+    
+        
+            <li class="">
+                
+                   <a href="../troubleshooting/index.html">
+                
+
+                    
+                    <span>Troubleshooting</span>
+                </a>
+            </li>
+        
+    
+    <li><a href="../design.html"><span><b>Design docs</b></span></a></li>
+    <li class="visible-xs"><a href="#">References</a>
+    <ul class="nav">
+        <li><a href="https://github.com/apache/ozone"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Source</a></li>
+        <li><a href="https://ozone.apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Apache Ozone</a></li>
+        <li><a href="https://apache.org"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> ASF</a></li>
+    </ul></li>
+  </ul>
+
+</div>
+
+      <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main-content">
+
+
+
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="../feature/index.html">Features</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Dynamic Property Reload</li>
+                </ol>
+              </nav>
+
+          
+
+<div class="pull-right">
+    
+    
+    
+    
+    
+    <a href="../zh/feature/reconfigurability.html"><span class="label label-success">中文</span></a>
+    
+    
+</div>
+
+
+          <div class="col-md-9">
+            <h1>Dynamic Property Reload</h1>
+
+            <!---
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<p>Ozone supports dynamic reloading of certain configuration properties without restarting services. This enables operators to tune cluster behavior, adjust limits, and update settings in production without service disruption.</p>
+<h2 id="overview">Overview</h2>
+<p>When a property is marked as reconfigurable, you can:</p>
+<ol>
+<li>Modify the property value in the configuration file (<code>ozone-site.xml</code>)</li>
+<li>Invoke the reconfig command to apply the changes to the running service</li>
+</ol>
+<p>The reconfiguration is performed asynchronously, and you can check the status to verify completion.</p>
+<h2 id="command-reference">Command Reference</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ozone admin reconfig --service<span style="color:#f92672">=[</span>OM|SCM|DATANODE<span style="color:#f92672">]</span> --address<span style="color:#f92672">=</span>&lt;ip:port|hostname:port&gt; &lt;operation&gt;
+</span></span></code></pre></div><h3 id="options">Options</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Option</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--service</code></td>
+          <td>The service type: <code>OM</code>, <code>SCM</code>, or <code>DATANODE</code></td>
+      </tr>
+      <tr>
+          <td><code>--address</code></td>
+          <td>RPC address of the target server (e.g., <code>hadoop1:9862</code> or <code>192.168.1.10:9862</code>). Required unless <code>--in-service-datanodes</code> is specified.</td>
+      </tr>
+      <tr>
+          <td><code>--in-service-datanodes</code></td>
+          <td>(DataNode only) Apply to all IN_SERVICE datanodes</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="operations">Operations</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>start</code></td>
+          <td>Execute reconfiguration asynchronously</td>
+      </tr>
+      <tr>
+          <td><code>status</code></td>
+          <td>Check the status of a reconfiguration task</td>
+      </tr>
+      <tr>
+          <td><code>properties</code></td>
+          <td>List all reconfigurable properties for the service</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="reconfigurable-properties-reference">Reconfigurable Properties Reference</h2>
+<h3 id="ozone-manager-om">Ozone Manager (OM)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ozone.administrators</code></td>
+          <td>-</td>
+          <td>Comma-separated list of Ozone administrators</td>
+      </tr>
+      <tr>
+          <td><code>ozone.readonly.administrators</code></td>
+          <td>-</td>
+          <td>Comma-separated list of read-only administrators</td>
+      </tr>
+      <tr>
+          <td><code>ozone.om.server.list.max.size</code></td>
+          <td><code>1000</code></td>
+          <td>Maximum server-side response size for list operations</td>
+      </tr>
+      <tr>
+          <td><code>ozone.om.volume.listall.allowed</code></td>
+          <td><code>true</code></td>
+          <td>Allow all users to list all volumes</td>
+      </tr>
+      <tr>
+          <td><code>ozone.om.follower.read.local.lease.enabled</code></td>
+          <td><code>false</code></td>
+          <td>Enable local lease for follower read optimization</td>
+      </tr>
+      <tr>
+          <td><code>ozone.om.follower.read.local.lease.lag.limit</code></td>
+          <td><code>10000</code></td>
+          <td>Maximum log lag for follower reads</td>
+      </tr>
+      <tr>
+          <td><code>ozone.om.follower.read.local.lease.time.ms</code></td>
+          <td><code>5000</code></td>
+          <td>Lease time in milliseconds for follower reads</td>
+      </tr>
+      <tr>
+          <td><code>ozone.key.deleting.limit.per.task</code></td>
+          <td><code>50000</code></td>
+          <td>Maximum keys to delete per task</td>
+      </tr>
+      <tr>
+          <td><code>ozone.directory.deleting.service.interval</code></td>
+          <td><code>60s</code></td>
+          <td>Directory deletion service run interval</td>
+      </tr>
+      <tr>
+          <td><code>ozone.thread.number.dir.deletion</code></td>
+          <td><code>10</code></td>
+          <td>Number of threads for directory deletion</td>
+      </tr>
+      <tr>
+          <td><code>ozone.snapshot.filtering.service.interval</code></td>
+          <td><code>60s</code></td>
+          <td>Snapshot SST filtering service run interval</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="storage-container-manager-scm">Storage Container Manager (SCM)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ozone.administrators</code></td>
+          <td>-</td>
+          <td>Comma-separated list of Ozone administrators</td>
+      </tr>
+      <tr>
+          <td><code>ozone.readonly.administrators</code></td>
+          <td>-</td>
+          <td>Comma-separated list of read-only administrators</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.block.deletion.per-interval.max</code></td>
+          <td><code>500000</code></td>
+          <td>Maximum blocks SCM processes per deletion interval</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.thread.interval</code></td>
+          <td><code>300s</code></td>
+          <td>Interval for the replication monitor thread</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.under.replicated.interval</code></td>
+          <td><code>30s</code></td>
+          <td>Frequency to check the under-replicated queue</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.over.replicated.interval</code></td>
+          <td><code>30s</code></td>
+          <td>Frequency to check the over-replicated queue</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.event.timeout</code></td>
+          <td><code>12m</code></td>
+          <td>Timeout for replication/deletion commands</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.event.timeout.datanode.offset</code></td>
+          <td><code>6m</code></td>
+          <td>Offset subtracted from event timeout for datanode deadline</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.maintenance.replica.minimum</code></td>
+          <td><code>2</code></td>
+          <td>Minimum replicas required for node maintenance</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.maintenance.remaining.redundancy</code></td>
+          <td><code>1</code></td>
+          <td>Remaining redundancy required for maintenance (EC)</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.datanode.replication.limit</code></td>
+          <td><code>20</code></td>
+          <td>Max replication commands queued per datanode</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.datanode.reconstruction.weight</code></td>
+          <td><code>3</code></td>
+          <td>Weight multiplier for reconstruction commands</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.datanode.delete.container.limit</code></td>
+          <td><code>40</code></td>
+          <td>Max delete container commands queued per datanode</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.inflight.limit.factor</code></td>
+          <td><code>0.75</code></td>
+          <td>Factor to scale cluster-wide replication limit</td>
+      </tr>
+      <tr>
+          <td><code>hdds.scm.replication.container.sample.limit</code></td>
+          <td><code>100</code></td>
+          <td>Number of containers sampled per state for debugging</td>
+      </tr>
+      <tr>
+          <td><code>ozone.scm.ec.pipeline.minimum</code></td>
+          <td><code>5</code></td>
+          <td>Minimum EC pipelines to keep open</td>
+      </tr>
+      <tr>
+          <td><code>ozone.scm.ec.pipeline.per.volume.factor</code></td>
+          <td><code>1</code></td>
+          <td>Factor for calculating EC pipelines based on volumes</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="datanode">DataNode</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>hdds.datanode.block.deleting.limit.per.interval</code></td>
+          <td><code>20000</code></td>
+          <td>Maximum blocks deleted per interval on a datanode</td>
+      </tr>
+      <tr>
+          <td><code>hdds.datanode.block.delete.threads.max</code></td>
+          <td><code>5</code></td>
+          <td>Maximum threads for block deletion</td>
+      </tr>
+      <tr>
+          <td><code>ozone.block.deleting.service.workers</code></td>
+          <td><code>10</code></td>
+          <td>Number of block deletion service workers</td>
+      </tr>
+      <tr>
+          <td><code>ozone.block.deleting.service.interval</code></td>
+          <td><code>60s</code></td>
+          <td>Block deletion service run interval</td>
+      </tr>
+      <tr>
+          <td><code>ozone.block.deleting.service.timeout</code></td>
+          <td><code>300s</code></td>
+          <td>Block deletion service timeout</td>
+      </tr>
+      <tr>
+          <td><code>hdds.datanode.replication.streams.limit</code></td>
+          <td><code>10</code></td>
+          <td>Maximum replication streams per datanode</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="list-reconfigurable-properties">List Reconfigurable Properties</h3>
+<p>To view all properties that can be dynamically reconfigured:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>OM --address<span style="color:#f92672">=</span>hadoop1:9862 properties
+</span></span><span style="display:flex;"><span>OM: Node <span style="color:#f92672">[</span>hadoop1:9862<span style="color:#f92672">]</span> Reconfigurable properties:
+</span></span><span style="display:flex;"><span>ozone.administrators
+</span></span><span style="display:flex;"><span>ozone.om.server.list.max.size
+</span></span><span style="display:flex;"><span>ozone.om.volume.listall.allowed
+</span></span><span style="display:flex;"><span>ozone.om.follower.read.local.lease.enabled
+</span></span><span style="display:flex;"><span>ozone.om.follower.read.local.lease.lag.limit
+</span></span><span style="display:flex;"><span>ozone.om.follower.read.local.lease.time.ms
+</span></span></code></pre></div><h3 id="om-reconfiguration-example">OM Reconfiguration Example</h3>
+<p>Modify <code>ozone.administrators</code> in <code>ozone-site.xml</code>, then execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>OM --address<span style="color:#f92672">=</span>hadoop1:9862 start
+</span></span><span style="display:flex;"><span>OM: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop1:9862<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>OM --address<span style="color:#f92672">=</span>hadoop1:9862 status
+</span></span><span style="display:flex;"><span>OM: Reconfiguring status <span style="color:#66d9ef">for</span> node <span style="color:#f92672">[</span>hadoop1:9862<span style="color:#f92672">]</span>: started at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST <span style="color:#ae81ff">2022</span> and finished at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST 2022.
+</span></span><span style="display:flex;"><span>SUCCESS: Changed property ozone.administrators
+</span></span><span style="display:flex;"><span>From: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>To: <span style="color:#e6db74">&#34;hadoop,bigdata&#34;</span>
+</span></span></code></pre></div><h3 id="scm-reconfiguration-example">SCM Reconfiguration Example</h3>
+<p>Modify <code>ozone.administrators</code> in <code>ozone-site.xml</code>, then execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>SCM --address<span style="color:#f92672">=</span>hadoop1:9860 start
+</span></span><span style="display:flex;"><span>SCM: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop1:9860<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>SCM --address<span style="color:#f92672">=</span>hadoop1:9860 status
+</span></span><span style="display:flex;"><span>SCM: Reconfiguring status <span style="color:#66d9ef">for</span> node <span style="color:#f92672">[</span>hadoop1:9860<span style="color:#f92672">]</span>: started at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST <span style="color:#ae81ff">2022</span> and finished at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST 2022.
+</span></span><span style="display:flex;"><span>SUCCESS: Changed property ozone.administrators
+</span></span><span style="display:flex;"><span>From: <span style="color:#e6db74">&#34;hadoop&#34;</span>
+</span></span><span style="display:flex;"><span>To: <span style="color:#e6db74">&#34;hadoop,bigdata&#34;</span>
+</span></span></code></pre></div><h3 id="datanode-reconfiguration-example">DataNode Reconfiguration Example</h3>
+<p>Modify <code>hdds.datanode.block.deleting.limit.per.interval</code> in <code>ozone-site.xml</code>, then execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>DATANODE --address<span style="color:#f92672">=</span>hadoop1:19864 start
+</span></span><span style="display:flex;"><span>Datanode: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop1:19864<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>DATANODE --address<span style="color:#f92672">=</span>hadoop1:19864 status
+</span></span><span style="display:flex;"><span>Datanode: Reconfiguring status <span style="color:#66d9ef">for</span> node <span style="color:#f92672">[</span>hadoop1:19864<span style="color:#f92672">]</span>: started at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST <span style="color:#ae81ff">2022</span> and finished at Wed Dec <span style="color:#ae81ff">28</span> 19:04:44 CST 2022.
+</span></span><span style="display:flex;"><span>SUCCESS: Changed property hdds.datanode.block.deleting.limit.per.interval
+</span></span><span style="display:flex;"><span>From: <span style="color:#e6db74">&#34;20000&#34;</span>
+</span></span><span style="display:flex;"><span>To: <span style="color:#e6db74">&#34;30000&#34;</span>
+</span></span></code></pre></div><h3 id="batch-operations-datanode-only">Batch Operations (DataNode Only)</h3>
+<p>To perform reconfiguration on all IN_SERVICE datanodes simultaneously:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>DATANODE --in-service-datanodes start
+</span></span><span style="display:flex;"><span>Datanode: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop1:19864<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>Datanode: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop2:19864<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>Datanode: Started reconfiguration task on node <span style="color:#f92672">[</span>hadoop3:19864<span style="color:#f92672">]</span>.
+</span></span><span style="display:flex;"><span>Reconfig successfully <span style="color:#ae81ff">3</span> nodes, failure <span style="color:#ae81ff">0</span> nodes.
+</span></span></code></pre></div><p>To list properties across all datanodes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ozone admin reconfig --service<span style="color:#f92672">=</span>DATANODE --in-service-datanodes properties
+</span></span><span style="display:flex;"><span>DN: Node <span style="color:#f92672">[</span>hadoop1:19864<span style="color:#f92672">]</span> Reconfigurable properties:
+</span></span><span style="display:flex;"><span>hdds.datanode.block.deleting.limit.per.interval
+</span></span><span style="display:flex;"><span>Datanode: Node <span style="color:#f92672">[</span>hadoop2:19864<span style="color:#f92672">]</span> Reconfigurable properties:
+</span></span><span style="display:flex;"><span>hdds.datanode.block.deleting.limit.per.interval
+</span></span><span style="display:flex;"><span>Datanode: Node <span style="color:#f92672">[</span>hadoop3:19864<span style="color:#f92672">]</span> Reconfigurable properties:
+</span></span><span style="display:flex;"><span>hdds.datanode.block.deleting.limit.per.interval
+</span></span><span style="display:flex;"><span>Reconfig successfully <span style="color:#ae81ff">3</span> nodes, failure <span style="color:#ae81ff">0</span> nodes.
+</span></span></code></pre></div><h2 id="best-practices">Best Practices</h2>
+<ol>
+<li>
+<p><strong>Test in non-production first</strong>: Always validate configuration changes in a test environment before applying to production.</p>
+</li>
+<li>
+<p><strong>Change one property at a time</strong>: When making multiple changes, apply them incrementally to isolate the impact of each change.</p>
+</li>
+<li>
+<p><strong>Monitor after changes</strong>: Watch cluster metrics and logs after reconfiguration to ensure the changes have the desired effect.</p>
+</li>
+<li>
+<p><strong>Document changes</strong>: Keep a record of configuration changes for troubleshooting and audit purposes.</p>
+</li>
+<li>
+<p><strong>Use batch operations carefully</strong>: When using <code>--in-service-datanodes</code>, ensure all nodes should receive the same configuration.</p>
+</li>
+</ol>
+
+
+          
+          <a class="btn  btn-success btn-lg" href="../feature/s3-multi-tenancy-setup.html">Next >></a>
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="push"></div>
+  </div>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <span class="small text-muted">
+      Version: 2.2.0-SNAPSHOT, Last Modified: January 9, 2026 <a class="hide-child link primary-color" href="https://github.com/apache/ozone/commit/7cd8e4812a841579ba16bbc66b5f19377d989dad">7cd8e4812a</a>
+    </span>
+  </div>
+</footer>
+
+
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/ozonedoc.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
