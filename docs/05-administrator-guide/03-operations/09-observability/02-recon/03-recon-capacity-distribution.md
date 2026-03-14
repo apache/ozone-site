@@ -3,20 +3,23 @@ sidebar_label: Cluster Capacity User Guide
 ---
 # Cluster Capacity User Guide
 
-This page is the central place for understanding storage distribution across the Ozone cluster. 
-It moves from a high-level physical view to logical service usage, and down to individual node diagnostics. 
+This page is the central place for understanding storage distribution across the Ozone cluster.
+It moves from a high-level physical view to logical service usage, and down to individual node diagnostics.
 Use this guide to understand exactly where your storage capacity is going.
 
 ## Dashboard Layout Overview
+
 The Cluster Capacity page is organized logically from top to bottom, increasing in granularity:
 
 1. Header & Controls: Global settings and refresh rates.
 2. Cluster Summary: The total physical disk view.
 3. Service Summary: The logical state of Ozone data (Open, Committed, Pending Deletion).
-4. Pending Deletion & Datanode Insights: Deep dives into data deletion lifecycles and individual node performance.
+4. Pending Deletion & Datanode Insights: Deep dives into data deletion life cycles and individual node performance.
 
 ---
+
 ## Cluster (Physical Capacity)
+
 ![Cluster Widget](./ozone_capacity.png)
 The **Cluster** widget provides a high-level summary of the total physical storage managed by Ozone Datanodes. It helps you distinguish between space used by Ozone and space taken by other processes on the underlying hardware.
 
@@ -42,7 +45,9 @@ The **Cluster** widget provides a high-level summary of the total physical stora
 > Monitor **Other Used Space**. If this value is consistently high, it may indicate that non-Ozone processes are competing for disk space, which could lead to capacity issues for your Ozone data.
 
 ---
+
 ## Service (Logical Capacity)
+
 ![Service Widget](./service_capacity.png)
 The **Service** widget transitions from the physical view to the logical view. It breaks down the **Ozone Used Space** based on the state of the data keys within the Ozone architecture.
 
@@ -87,6 +92,7 @@ This widget provides transparency into the multi-stage process of data deletion 
 ---
 
 ## Datanode Insights
+
 ![DataNodeInsight](./data_node_insights.png)
 The **Datanodes** section moves from the cluster level to individual node performance. This is crucial for identifying imbalances, failing disks, or nodes that are filling up faster than others.
 
