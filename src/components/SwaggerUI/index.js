@@ -17,10 +17,10 @@
  * under the License.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import { useState, useRef, useEffect } from 'react';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 export default function SwaggerUIComponent({ spec, defaultServer }) {
