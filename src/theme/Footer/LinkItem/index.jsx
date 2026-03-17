@@ -17,9 +17,9 @@
  * under the License.
  */
 
+import isInternalUrl from '@docusaurus/isInternalUrl';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import isInternalUrl from '@docusaurus/isInternalUrl';
 import IconExternalLink from '@theme/Icon/ExternalLink';
 
 const iconMapping = {

@@ -17,10 +17,10 @@
  * under the License.
  */
 
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Layout from "@theme/Layout";
-import Logo from "@site/static/img/ozone-logo.svg";
 import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Logo from "@site/static/img/ozone-logo.svg";
+import Layout from "@theme/Layout";
 
 // Import Bootstrap icons
 import {
