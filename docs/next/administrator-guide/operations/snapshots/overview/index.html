@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.be86cbba.css">
-<script src="/assets/js/runtime~main.84bf9f61.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.bf7c5c8a.js" defer="defer"></script>
 <script src="/assets/js/main.a51eb616.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -106,7 +106,7 @@ Manage diff jobs: <code>ozone sh snapshot listDiff /vol1/bucket1</code>, <code>o
 <p>For detailed snapshot configuration properties, see <a href="/docs/next/administrator-guide/operations/snapshots/configuration-properties">Snapshot Configuration Properties</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_e_9H" id="monitoring">Monitoring<a href="#monitoring" class="hash-link" aria-label="Direct link to Monitoring" title="Direct link to Monitoring">​</a></h3>
 <p>Monitor OM heap usage with many snapshots or large diffs. Enable Ozone Native ACLs or Ranger for access control.</p>
-<p><strong>Monitoring Snapshots:</strong> Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages.</p>
+<p><strong>Monitoring Snapshots:</strong> Use OM metrics (Prometheus, RPC) for snapshot counts, diff operations, etc. Check OM logs for snapshot-related messages. A <a href="https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20OM%20Snapshot.json" target="_blank" rel="noopener noreferrer">Grafana dashboard for Snapshot operations</a> is also available.</p>
 <h2 class="anchor anchorWithStickyNavbar_e_9H" id="authorization">Authorization<a href="#authorization" class="hash-link" aria-label="Direct link to Authorization" title="Direct link to Authorization">​</a></h2>
 <p>Snapshot operations require specific privileges:</p>
 <ul>
