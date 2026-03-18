@@ -20,8 +20,9 @@ The Cluster Capacity page is organized logically from top to bottom, increasing 
 
 ## Cluster (Physical Capacity)
 
-![Cluster Widget](./ozone_capacity.png)
 The **Cluster** widget provides a high-level summary of the total physical storage managed by Ozone Datanodes. It helps you distinguish between space used by Ozone and space taken by other processes on the underlying hardware.
+
+![Cluster Widget](./ozone_capacity.png)
 
 ### Metric Definitions
 
@@ -48,8 +49,9 @@ The **Cluster** widget provides a high-level summary of the total physical stora
 
 ## Service (Logical Capacity)
 
-![Service Widget](./service_capacity.png)
 The **Service** widget transitions from the physical view to the logical view. It breaks down the **Ozone Used Space** based on the state of the data keys within the Ozone architecture.
+
+![Service Widget](./service_capacity.png)
 
 ### Ozone Used Space Breakdown
 
@@ -63,7 +65,7 @@ The **Service** widget transitions from the physical view to the logical view. I
   Finalized and immutable data that is successfully stored and accessible by users.
 
 - **Pending Deletion (3.8 GB)**  
-  Data from keys that have been logically deleted by a user but have not yet been physically scrubbed from the Datanodes. This space will eventually be reclaimed.
+  Data from keys that have been logically deleted by a user but have not yet been physically scrubbed from the Datanodes. This is the combined total size of data pending deletion across OM, SCM, and Datanodes. This space will eventually be reclaimed.
 
 > 💡 **Administrator Tip:**  
 > A high and persistent **Pending Deletion** value might indicate that the automated deletion process is lagging. This guide explains how to investigate that lifecycle in the next section.
@@ -72,8 +74,9 @@ The **Service** widget transitions from the physical view to the logical view. I
 
 ## Pending Deletion Lifecycle
 
-![Pending Deletion_Widget](./pending_deletion.png)
 This widget provides transparency into the multi-stage process of data deletion in Ozone. It tracks how deleted blocks move from the Ozone Manager through the Storage Container Manager to final removal on Datanodes.
+
+![Pending Deletion_Widget](./pending_deletion.png)
 
 ### Tracking the Stages
 
@@ -93,8 +96,9 @@ This widget provides transparency into the multi-stage process of data deletion 
 
 ## Datanode Insights
 
-![DataNodeInsight](./data_node_insights.png)
 The **Datanodes** section moves from the cluster level to individual node performance. This is crucial for identifying imbalances, failing disks, or nodes that are filling up faster than others.
+
+![DataNodeInsight](./data_node_insights.png)
 
 ### Using the Datanode Inspector
 
