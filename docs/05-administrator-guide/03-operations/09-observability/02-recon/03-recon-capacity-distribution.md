@@ -11,10 +11,9 @@ Use this guide to understand exactly where your storage capacity is going.
 
 The Cluster Capacity page is organized logically from top to bottom, increasing in granularity:
 
-1. Header & Controls: Global settings and refresh rates.
-2. Cluster Summary: The total physical disk view.
-3. Service Summary: The logical state of Ozone data (Open, Committed, Pending Deletion).
-4. Pending Deletion & Datanode Insights: Deep dives into data deletion life cycles and individual node performance.
+1. Cluster Summary: The total physical disk view.
+2. Service Summary: The logical state of Ozone data (Open, Committed, Pending Deletion).
+3. Pending Deletion & Datanode Insights: Deep dives into data deletion life cycles and individual node performance.
 
 ---
 
@@ -26,15 +25,18 @@ The **Cluster** widget provides a high-level summary of the total physical stora
 
 ### Metric Definitions
 
+> Note: All metric values presented here are obtained from a representative sample cluster and are for reference purposes only.
+
 - **Total Capacity (2.2 TB)**  
   The combined capacity of all configured storage directories across all live Datanodes in the cluster.
+  It shows how much usable space is available after subtracting the reserved space from the file system capacity.
 
 - **Ozone Used Space (437.3 GB)**  
   Physical space currently occupied by replicated Ozone blocks.
   > Note: This accounts for the replication factor (e.g., a 100 GB key with 3x replication uses 300 GB of physical space).
 
 - **Other Used Space (482.5 GB)**  
-  Space on the disks that is occupied by non-Ozone files. This includes OS files, system logs, temp directories, or other Hadoop services running on the same hardware.
+  This is the space occupied by other Ozone related files but not actual data stored by Ozone. This may include things like logs, configuration files, Rocks DB files etc.
 
 - **Container Pre-allocated (0 B)**  
   Space reserved for open containers that have been allocated to clients but have not yet been written to. This ensures space is available when needed.
@@ -106,7 +108,7 @@ The **Datanodes** section moves from the cluster level to individual node perfor
   Download a snapshot report of all Datanode storage distribution in CSV format.
 
 - **Node Selector**  
-  Use the searchable dropdown to pick a specific Datanode. It displays both the hostname and the unique UUID for precise identification (e.g., `ccycloud-1...`).
+  Use the searchable dropdown to pick a specific Datanode. It displays both the hostname and the unique UUID for precise identification (e.g., `ozone-datanode-1.ozone_defa`).
 
 Once a node is selected, the specific storage charts appear.
 
