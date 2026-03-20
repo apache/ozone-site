@@ -39,19 +39,16 @@ The **Cluster** widget provides a high-level summary of the total physical stora
   This is the space occupied by other Ozone related files but not actual data stored by Ozone. This may include things like logs, configuration files, Rocks DB files etc.
 
 - **Container Pre-allocated (0 B)**  
-  Space reserved for open containers that have been allocated to clients but have not yet been written to. This ensures space is available when needed.
+  Space reserved for open containers that have been allocated to clients but not yet written to, ensuring capacity is available when needed. This reserved space decreases as data is written to the containers, and any remaining unused portion is released when the containers are closed.
 
 - **Remaining Space (1.3 TB)**  
   The actual amount of unused physical disk space available for new Ozone data or other files.
-
-> 💡 **Administrator Tip:**  
-> Monitor **Other Used Space**. If this value is consistently high, it may indicate that non-Ozone processes are competing for disk space, which could lead to capacity issues for your Ozone data.
 
 ---
 
 ## Service (Logical Capacity)
 
-The **Service** widget transitions from the physical view to the logical view. It breaks down the **Ozone Used Space** based on the state of the data keys within the Ozone architecture.
+The **Service** widget transitions from the physical view to the logical view. It breaks down the **Ozone Used Space** based on the state of the keys within the Ozone architecture.
 
 ![Service Widget](./service_capacity.png)
 
@@ -76,7 +73,7 @@ The **Service** widget transitions from the physical view to the logical view. I
 
 ## Pending Deletion Lifecycle
 
-This widget provides transparency into the multi-stage process of data deletion in Ozone. It tracks how deleted blocks move from the Ozone Manager through the Storage Container Manager to final removal on Datanodes.
+This widget provides transparency into the multi-stage process of data deletion in Ozone. It tracks how deletion requests flow from the Ozone Manager through the Storage Container Manager to final removal of block on Datanodes.
 
 ![Pending Deletion_Widget](./pending_deletion.png)
 
