@@ -20,6 +20,7 @@
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Logo from "@site/static/img/ozone-logo.svg";
+import Heading from "@theme/Heading";
 import Layout from "@theme/Layout";
 
 // Import Bootstrap icons
