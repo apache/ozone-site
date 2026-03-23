@@ -17,7 +17,8 @@
  * under the License.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 export default function AskQuestionForm() {
@@ -41,7 +42,9 @@ export default function AskQuestionForm() {
 
   return (
     <div className={styles.formContainer}>
-      <h2 className={styles.formTitle}>Ask a Question</h2>
+      <Heading as="h2" className={styles.formTitle}>
+        Ask a Question
+      </Heading>
       <p className={styles.formDescription}>Have a question about Apache Ozone? Fill out this form and we'll redirect you to GitHub Discussions with your question pre-filled.</p>
       
       <form onSubmit={handleSubmit} className={styles.form}>

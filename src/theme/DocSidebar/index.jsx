@@ -17,7 +17,6 @@
  * under the License.
  */
 
-import React from 'react';
 import DocSidebar from '@theme-original/DocSidebar';
 import DocsVersionDropdownNavbarItem from '@theme-original/NavbarItem/DocsVersionDropdownNavbarItem';
 import styles from './index.module.css';
