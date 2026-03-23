@@ -18,6 +18,7 @@
  */
 
 import { useState } from 'react';
+import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 export default function AskQuestionForm() {
