@@ -17,102 +17,106 @@
  * under the License.
  */
 
-import pluginDocusaurus from "@docusaurus/eslint-plugin";
-import css from "@eslint/css";
-import js from "@eslint/js";
-import { defineConfig } from "eslint/config";
-import pluginImport from "eslint-plugin-import-x";
-import pluginReact from "eslint-plugin-react";
-import pluginUnusedImports from "eslint-plugin-unused-imports";
-import globals from "globals";
+import pluginDocusaurus from '@docusaurus/eslint-plugin';
+import css from '@eslint/css';
+import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import pluginImport from 'eslint-plugin-import-x';
+import pluginPrettier from 'eslint-plugin-prettier/recommended';
+import pluginReact from 'eslint-plugin-react';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
+import globals from 'globals';
 
 export default defineConfig([
   // General
   {
     ignores: [
-      "static/**",
-      "node_modules/**",
-      "build/**",
-      ".docusaurus/**",
-      ".github/**",
-    ],
+      'static/**',
+      'node_modules/**',
+      'build/**',
+      '.docusaurus/**',
+      '.github/**'
+    ]
   },
+
+  // Prettier integration
+  pluginPrettier,
 
   // JS
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
+    files: ['**/*.{js,mjs,cjs,jsx}'],
     ...js.configs.recommended,
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
     plugins: {
-      "unused-imports": pluginUnusedImports,
-      import: pluginImport,
+      'unused-imports': pluginUnusedImports,
+      import: pluginImport
     },
     rules: {
-      "unused-imports/no-unused-imports": "error",
+      'unused-imports/no-unused-imports': 'error',
       // unused vars (but ignore underscore-prefixed)
-      "unused-imports/no-unused-vars": [
-        "error",
+      'unused-imports/no-unused-vars': [
+        'error',
         {
-          vars: "all",
-          varsIgnorePattern: "^_",
-          args: "after-used",
-          argsIgnorePattern: "^_",
-        },
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_'
+        }
       ],
-      "import/no-duplicates": "error",
-      "import/order": [
-        "error",
+      'import/no-duplicates': 'error',
+      'import/order': [
+        'error',
         {
           groups: [
-            "builtin", // Node built-ins (path, fs, etc.)
-            "external", // npm packages (react, @docusaurus/*, etc.)
-            "internal", // paths configured as internal (e.g. @site/*)
-            ["parent", "sibling", "index"], // relative imports
+            'builtin', // Node built-ins (path, fs, etc.)
+            'external', // npm packages (react, @docusaurus/*, etc.)
+            'internal', // paths configured as internal (e.g. @site/*)
+            ['parent', 'sibling', 'index'] // relative imports
           ],
-          alphabetize: { order: "asc", caseInsensitive: true },
-        },
+          alphabetize: { order: 'asc', caseInsensitive: true }
+        }
       ],
-      "no-unused-vars": "off",
-    },
+      'no-unused-vars': 'off'
+    }
   },
 
   // React
   {
-    files: ["**/*.{js,jsx}"],
+    files: ['**/*.{js,jsx}'],
     ...pluginReact.configs.flat.recommended,
     settings: {
-      react: { version: "detect" },
+      react: { version: 'detect' }
     },
     rules: {
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/jsx-uses-vars": "error",
-    },
+      'react/prop-types': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-vars': 'error'
+    }
   },
 
   // CSS
   {
-    files: ["**/*.css"],
+    files: ['**/*.css'],
     plugins: { css },
-    language: "css/css",
-    extends: ["css/recommended"],
+    language: 'css/css',
+    extends: ['css/recommended'],
     rules: {
-      "css/no-invalid-properties": "off",
-      "css/no-important": "off",
-      "css/use-baseline": "off",
-    },
+      'css/no-invalid-properties': 'off',
+      'css/no-important': 'off',
+      'css/use-baseline': 'off'
+    }
   },
 
   // Docusaurus
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: { "@docusaurus": pluginDocusaurus },
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    plugins: { '@docusaurus': pluginDocusaurus },
     rules: {
       ...pluginDocusaurus.configs.recommended.rules,
-      "@docusaurus/no-html-links": "error",
-      "@docusaurus/prefer-docusaurus-heading": "error",
+      '@docusaurus/no-html-links': 'error',
+      '@docusaurus/prefer-docusaurus-heading': 'error'
       // for i18n
       // "@docusaurus/no-untranslated-text": ["warn", { ignoredStrings: [] }]
-    },
-  },
+    }
+  }
 ]);
