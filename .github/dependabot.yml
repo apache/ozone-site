@@ -16,11 +16,11 @@
 version: 2
 
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      # 'daily' only runs on weekdays
-      interval: "cron"
-      cronjob: "15 11 * * *"
-    cooldown:
-      default-days: 4
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    # 'daily' only runs on weekdays
+    interval: "cron"
+    cronjob: "15 11 * * *"
+  cooldown:
+    default-days: 4
