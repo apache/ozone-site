@@ -23,6 +23,9 @@ on:
     - edited
     - synchronize
 
+permissions:
+  contents: read
+
 jobs:
   title:
     runs-on: ubuntu-latest
