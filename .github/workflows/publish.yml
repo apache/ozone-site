@@ -40,7 +40,6 @@ jobs:
       with:
         path: publish
         persist-credentials: true
-        # Update this to asf-site when the website is ready to be published.
         ref: asf-site
     - name: Commit changes
       working-directory: publish
