@@ -78,7 +78,7 @@ jobs:
     - name: Output spelling check tips
       if: ${{ failure() }}
       run: |
-        cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
+        cat $resource_dir/spelling_tips.md >> $GITHUB_STEP_SUMMARY
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -124,4 +124,4 @@ jobs:
     - name: Output sidebar check tips
       if: ${{ failure() }}
       run: |
-        cat ${{ env.resource_dir }}/sidebar_tips.md >> $GITHUB_STEP_SUMMARY
+        cat $resource_dir/sidebar_tips.md >> $GITHUB_STEP_SUMMARY

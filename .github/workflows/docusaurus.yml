@@ -52,7 +52,7 @@ jobs:
     - name: Save docker image to tar
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        docker save ozone-site --output="${{ env.image_tar }}"
+        docker save ozone-site --output="$image_tar"
     - name: Save docker image tar to cache
       if: steps.cache.outputs.cache-hit != 'true'
       uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
@@ -75,7 +75,7 @@ jobs:
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
     - name: Load docker image
       run: |
-        docker load --input="${{ env.image_tar }}"
+        docker load --input="$image_tar"
     - name: Build website
       run: |
         docker compose run site pnpm build
@@ -108,7 +108,7 @@ jobs:
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
     - name: Load docker image
       run: |
-        docker load --input="${{ env.image_tar }}"
+        docker load --input="$image_tar"
     - name: Curl website homepage
       timeout-minutes: 5
       working-directory: ${{ env.script_dir }}
