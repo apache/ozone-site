@@ -29,17 +29,19 @@ concurrency:
 jobs:
   publish-website:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Download website build artifact
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
       with:
         name: build
         path: build
     - name: Checkout publish branch
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         path: publish
-        # Update this to asf-site when the website is ready to be published.
+        persist-credentials: true
         ref: asf-site
     - name: Commit changes
       working-directory: publish

@@ -30,6 +30,9 @@ concurrency:
   group: ci-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+permissions:
+  contents: read
+
 jobs:
   static:
     uses: ./.github/workflows/static.yml
@@ -38,6 +41,7 @@ jobs:
     uses: ./.github/workflows/docusaurus.yml
   publish:
     needs: docusaurus
-    # Update this to master when the website is ready to be published.
     if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
     uses: ./.github/workflows/publish.yml
+    permissions:
+      contents: write

@@ -23,4 +23,4 @@ updates:
     interval: cron
     cronjob: 15 11 * * *
   cooldown:
-    default-days: 4
+    default-days: 7

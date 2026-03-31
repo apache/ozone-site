@@ -37,14 +37,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - name: Check Apache license headers
-      uses: apache/skywalking-eyes@v0.8.0
+      uses: apache/skywalking-eyes@61275cc80d0798a405cb070f7d3a8aaf7cf2c2c1 # v0.8.0
   file-names:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - name: Run file name check
       working-directory: ${{ env.script_dir }}
       run: |
@@ -53,13 +57,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - name: Enable corepack
       run: |
         npm i -g --force corepack # see https://github.com/actions/setup-node/issues/1222
         corepack enable
     - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
       with:
         node-version: ${{ env.node_version }}
         cache: pnpm
@@ -72,18 +78,20 @@ jobs:
     - name: Output spelling check tips
       if: ${{ failure() }}
       run: |
-        cat ${{ env.resource_dir }}/spelling_tips.md >> $GITHUB_STEP_SUMMARY
+        cat $resource_dir/spelling_tips.md >> $GITHUB_STEP_SUMMARY
   lint:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - name: Enable corepack
       run: |
         npm i -g --force corepack # see https://github.com/actions/setup-node/issues/1222
         corepack enable
     - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
       with:
         node-version: ${{ env.node_version }}
         cache: pnpm
@@ -95,13 +103,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
     - name: Enable corepack
       run: |
         npm i -g --force corepack # see https://github.com/actions/setup-node/issues/1222
         corepack enable
     - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
       with:
         node-version: ${{ env.node_version }}
         cache: pnpm
@@ -114,4 +124,4 @@ jobs:
     - name: Output sidebar check tips
       if: ${{ failure() }}
       run: |
-        cat ${{ env.resource_dir }}/sidebar_tips.md >> $GITHUB_STEP_SUMMARY
+        cat $resource_dir/sidebar_tips.md >> $GITHUB_STEP_SUMMARY
