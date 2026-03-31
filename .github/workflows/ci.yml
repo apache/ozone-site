@@ -41,7 +41,6 @@ jobs:
     uses: ./.github/workflows/docusaurus.yml
   publish:
     needs: docusaurus
-    # Update this to master when the website is ready to be published.
     if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
     uses: ./.github/workflows/publish.yml
     permissions:
