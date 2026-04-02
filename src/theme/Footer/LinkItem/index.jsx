@@ -25,33 +25,44 @@ import IconExternalLink from '@theme/Icon/ExternalLink';
 const iconMapping = {
   'GitHub Discussions': '/img/social/github.svg',
   'Jira Issues': '/img/social/jira.svg',
-  'Slack': '/img/social/slack.svg',
+  Slack: '/img/social/slack.svg',
   'Mailing List': '/img/social/mail.svg',
-  'YouTube': '/img/social/youtube.svg',
-  'Twitter': '/img/social/twitter-x.svg'
+  YouTube: '/img/social/youtube.svg',
+  Twitter: '/img/social/twitter-x.svg'
 };
-export default function FooterLinkItem({item}) {
-  const {to, href, label, prependBaseUrlToHref, ...props} = item;
+export default function FooterLinkItem({ item }) {
+  const { to, href, label, prependBaseUrlToHref, ...props } = item;
   const toUrl = useBaseUrl(to);
-  const normalizedHref = useBaseUrl(href, {forcePrependBaseUrl: true});
-  const iconPath = iconMapping[label];  // Get icon path from mapping
+  const normalizedHref = useBaseUrl(href, { forcePrependBaseUrl: true });
+  const iconPath = iconMapping[label]; // Get icon path from mapping
 
   return (
-      <Link
-          className="footer__link-item"
-          {...(href
-              ? {
-                href: prependBaseUrlToHref ? normalizedHref : href,
-              }
-              : {
-                to: toUrl,
-              })}
-          {...props}>
+    <Link
+      className="footer__link-item"
+      {...(href
+        ? {
+            href: prependBaseUrlToHref ? normalizedHref : href
+          }
+        : {
+            to: toUrl
+          })}
+      {...props}
+    >
+      {iconPath && (
+        <img
+          src={iconPath}
+          alt={`${label} Icon`}
+          style={{
+            width: '1em',
+            height: '1em',
+            marginRight: '0.5em',
+            verticalAlign: 'middle'
+          }}
+        />
+      )}
 
-        {iconPath && <img src={iconPath} alt={`${label} Icon`} style={{width: '1em', height: '1em', marginRight: '0.5em', verticalAlign: 'middle'}} />}
-
-        {label}
-        {href && !isInternalUrl(href) && <IconExternalLink />}
-      </Link>
+      {label}
+      {href && !isInternalUrl(href) && <IconExternalLink />}
+    </Link>
   );
 }
