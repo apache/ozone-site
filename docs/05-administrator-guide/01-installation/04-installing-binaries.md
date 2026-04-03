@@ -11,7 +11,7 @@ First, identify the hosts where Ozone will be installed. The installation steps 
 To obtain the Ozone binaries, you have two primary options:
 
 1. **Official Apache Ozone Releases**:
-    For official releases, navigate to the [Downloads page](/download) to get the released binary tarball. Follow the instructions to verify the integrity of the tarball.
+    For official releases, navigate to the [Downloads page](/downloads) to get the released binary tarball. Follow the instructions to verify the integrity of the tarball.
 
 2. **Build from Source**:
     Alternatively, you can build Ozone from its source code. Follow the detailed instructions in the [Developer Guide: Building Ozone With Maven](../../developer-guide/build/maven).
