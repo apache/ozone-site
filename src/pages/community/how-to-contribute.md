@@ -8,7 +8,7 @@ Thank you for your interest in contributing to Apache Ozone! This guide will hel
 - [CONTRIBUTING.md](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md) - Detailed contribution guidelines
 - [Newbie Jira Issues](https://issues.apache.org/jira/issues/?jql=labels%20%3D%20newbie%20AND%20project%20%3D%20%22Apache%20Ozone%22%20AND%20status%20%3D%20open%20ORDER%20BY%20created) - Good first issues for new contributors
 - [GitHub Discussions](https://github.com/apache/ozone/discussions) - Engage with the community
-- [Ozone Website](https://ozone.apache.org/) - Project documentation
+- [Ozone Website](../) - Project documentation
 - [Slack Channel](http://s.apache.org/slack-invite) - Join #ozone on ASF Slack
 
 ## Ways to Contribute
@@ -62,7 +62,7 @@ Code reviews are a crucial part of the Apache Ozone development process. Reviewi
 
 ### Documentation
 
-- **Website Improvements**: Contribute to the [Ozone website](https://ozone.apache.org/)
+- **Website Improvements**: Contribute to the [Ozone website](../)
 - **Developer Docs**: Enhance the [markdown documentation](https://github.com/apache/ozone/tree/master/hadoop-hdds/docs/content) in the source tree
 
 ### Testing

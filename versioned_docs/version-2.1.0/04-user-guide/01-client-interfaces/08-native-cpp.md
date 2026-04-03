@@ -116,6 +116,6 @@ ozone sh bucket create /my-volume/my-bucket
 
 ## References
 
-- [Ozone FileSystem Java Interface](https://ozone.apache.org/docs/edge/interface/ofs.html)
+- [Ozone FileSystem Java Interface](./ofs)
 - [Hadoop libhdfs Docs](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/LibHdfs.html)
 - [JNI and Native Libraries in Hadoop](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/NativeLibraries.html)

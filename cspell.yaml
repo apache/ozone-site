@@ -155,6 +155,7 @@ words:
 - fsspec
 - libhdfs
 - awscli
+- pyarrow
 - TGT
 - TGS
 - Kerberized
