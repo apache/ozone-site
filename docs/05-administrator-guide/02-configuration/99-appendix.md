@@ -135,7 +135,6 @@ This page provides a comprehensive overview of the configuration keys available 
 | `hdds.security.client.scm.secretkey.om.protocol.acl` | * | `SECURITY` | Comma separated list of users and groups allowed to access client scm secret key protocol for om. |
 | `hdds.security.client.scm.secretkey.scm.protocol.acl` | * | `SECURITY` | Comma separated list of users and groups allowed to access client scm secret key protocol for om. |
 | `hdds.security.provider` | BC | `OZONE`, `HDDS`, `X509`, `SECURITY`, `CRYPTO_COMPLIANCE` | The main security provider used for various cryptographic algorithms. |
-| `hdds.tracing.enabled` | false | `OZONE`, `HDDS` | If enabled, tracing information is sent to tracing server. |
 | `hdds.x509.ca.rotation.ack.timeout` | PT15M | `OZONE`, `HDDS`, `SECURITY` | Max time that SCM leader will wait for the rotation preparation acks before it believes the rotation is failed. Default is 15 minutes. |
 | `hdds.x509.ca.rotation.check.interval` | P1D | `OZONE`, `HDDS`, `SECURITY` | Check interval of whether internal root certificate is going to expire and needs to start rotation or not. Default is 1 day. The property value should be less than the value of property `hdds.x509.renew.grace.duration`. |
 | `hdds.x509.ca.rotation.enabled` | false | `OZONE`, `HDDS`, `SECURITY` | Whether auto root CA and sub CA certificate rotation is enabled or not. Default is disabled. |
