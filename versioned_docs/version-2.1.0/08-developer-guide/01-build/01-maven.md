@@ -33,7 +33,7 @@ Choose one of the following methods to get the source code:
     ```
   </TabItem>
   <TabItem value="Tarball" label="Tarball">
-    Use this option if you only want a released version of Ozone. Source code for Ozone releases can be obtained from the [download page](/download).
+    Use this option if you only want a released version of Ozone. Source code for Ozone releases can be obtained from the [download page](/downloads).
     ```bash
     tar xzf ozone-<version>-src.tar.gz
     cd ozone-<version>-src
