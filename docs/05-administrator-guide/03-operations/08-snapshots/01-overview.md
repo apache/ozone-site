@@ -15,36 +15,6 @@ Ozone Snapshots provide point-in-time, read-only copies of buckets. This relies 
 
 The SnapshotDiff feature compares two snapshots (or a snapshot and the live bucket) to identify changes like added, deleted, modified, or renamed keys, caching results for speed.
 
-## Snapshot Sizing
-
-Ozone tracks two primary metrics for snapshot storage: **Referenced Size** and **Exclusive Size**.
-
-*   **Referenced Size (Total View)**: This represents the sum of all files and directories visible in the snapshot. If your bucket contains 100GB of data at the time of the snapshot, its Referenced Size is 100GB. *In other words, it is the space it would take when replicating the whole snapshotted path to a destination cluster.*
-*   **Exclusive Size (Unique Data)**: This is the amount of data held *only* by that specific snapshot and no other entity in the system. *In other words, it is the space (not accounting for replication factor) that would be freed on the cluster when the snapshot is deleted.*
-
-### How Exclusive Size Grows
-
-When a snapshot is first created, its exclusive size is 0 bytes because its data still exists in the active bucket. A snapshot's exclusive size grows when:
-
-1.  A file is deleted or overwritten in the active bucket (AOS).
-2.  The file is not present in any newer snapshots in the same path chain.
-
-**Example Scenario:**
-
--   **Time T1**: Bucket has `File-A` (1GB).
--   **Time T2**: Take `Snapshot-1`.
-    *   Referenced: 1GB, Exclusive: 0GB (because `File-A` still exists in the active bucket).
--   **Time T3**: Delete `File-A` from the active bucket.
-    *   Referenced: 1GB, Exclusive: 1GB (because `Snapshot-1` is now the only thing in the system keeping `File-A` alive).
-
-### Importance of Exclusive Size
-
-The Exclusive Size is the most critical metric for storage management because it tells you exactly how much disk space will be reclaimed if you delete that snapshot. 
-
-When the `SnapshotDeletingService` runs, it identifies this exclusive data and marks it for deletion in the Datanodes. If a snapshot has an exclusive size of 50GB, deleting it will eventually free up 50GB of disk space.
-
-Ozone calculates these sizes in the background using the `SnapshotSstFilteringService` and `SnapshotDeletingService`, which compare deleted data across snapshots to determine what blocks are truly exclusive.
-
 ## System Architecture Deep Dive
 
 Ozone snapshots version bucket metadata within the OM. A dedicated snapshot metadata table in RocksDB records the key directory tree at snapshot creation. This is an instant operation as it involves metadata pointers (via RocksDB checkpoints) rather than data copying. Each snapshot has a unique ID and name.
