@@ -70,7 +70,7 @@ There is no limit to the number of gateway instances. These services are statele
 Typically, only **one** Recon server is run per cluster. It is a centralized service for monitoring and is not designed for an HA configuration.
 
 ### Pipelines
-There is no configured limit on the number of pipelines. The SCM automatically creates and destroys pipelines based on the number of healthy DataNodes and data replication requirements.
+There is no configured limit on the total number of pipelines in a cluster. The SCM automatically creates and destroys pipelines based on the number of healthy DataNodes and data replication requirements.
 
 ## Resource Limits
 
@@ -110,24 +110,6 @@ There is no configured limit on the number of S3 tenants. The practical limit is
 *   **CORS (Cross-Origin Resource Sharing) and Lifecycle Policies:** Limits on these features are not explicitly defined.
 
 ## Component Hardware and Resources
-
-### JVM Heap Size
-The heap size for each Java-based service is controlled by JVM flags (`-Xms`, `-Xmx`) and is practically limited by the host machine's physical RAM. The following are general recommendations.
-*   **Ozone Manager (OM):** The OM heap is the most critical parameter for cluster scale.
-    *   *Minimum:* 8 GB for a test cluster.
-    *   *Recommendation:* Size according to the number of objects. Production clusters may need **128 GB, 256 GB, or more**.
-*   **Storage Container Manager (SCM):**
-    *   *Minimum:* 8 GB.
-    *   *Recommendation:* Typically smaller than the OM heap. May require **32-64 GB** for very large clusters.
-*   **Recon Server:**
-    *   *Minimum:* 8-16 GB.
-    *   *Recommendation:* May require **32-64 GB** on large clusters to handle processing metadata from OM and SCM.
-*   **Datanode:**
-    *   *Minimum:* 4 GB.
-    *   *Recommendation:* **8-16 GB** is usually sufficient. Allocating excess memory is often wasteful.
-*   **S3 Gateway & HTTPFS Gateway:**
-    *   *Minimum:* 4 GB.
-    *   *Recommendation:* **8-16 GB** is sufficient for most workloads.
 
 ### DataNode Storage
 *   **Total Manageable Space:** A DataNode has no internal limit on the total storage it can manage. The limit is determined by the host's OS and hardware (number of disks multiplied by their capacity).
