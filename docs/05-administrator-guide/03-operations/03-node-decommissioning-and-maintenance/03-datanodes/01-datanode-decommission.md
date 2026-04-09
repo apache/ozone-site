@@ -6,12 +6,19 @@ sidebar_label: Datanode Decommission
 
 The Datanode decommission is the process that removes the existing Datanode from the Ozone cluster while ensuring that the new data should not be written to the decommissioned Datanode. When you initiate the process of decommissioning a Datanode, Ozone automatically ensures that all the storage containers on that Datanode have an additional copy created on another Datanode before the decommission completes. So, Datanode will keep running after it has been decommissioned and may be used for reads, but not for writes until it is stopped manually.
 
-When we initiate the process of decommissioning, first we check the current state of the node, ideally it should be `IN_SERVICE`, then we change it's state to `DECOMMISSIONING` and start the process of decommissioning, it goes through a workflow where the following happens:
+When we initiate the process of decommissioning, first we check the current state of the node, ideally it should be `IN_SERVICE`, then we change its state to `DECOMMISSIONING` and start the decommission workflow.
 
-1. First an event is fired to close any pipelines on the node, which will also close any containers.
-2. Next the containers on the node are obtained and checked to see if new replicas are needed. If so, the new replicas are scheduled.
-3. After scheduling replication, the node remains pending until replication has completed.
-4. At this stage the node will complete the decommission process and the state of the node will be changed to `DECOMMISSIONED`.
+### Transition Criteria (DECOMMISSIONING to DECOMMISSIONED)
+
+The transition from `DECOMMISSIONING` to `DECOMMISSIONED` is the final step in permanently removing a Datanode from the cluster. To ensure data safety, the SCM (Storage Container Manager) verifies the following three criteria before the node is fully decommissioned:
+
+1. **Active Pipelines Closed**: The Datanode must no longer be part of any active Ratis or Erasure Coding (EC) pipelines. Closing these pipelines ensures that no new data is written to the node and that all ongoing write operations are finalized.
+2. **State Acknowledged by the Datanode**: The Datanode must confirm that it has received the decommissioning command and persisted this state to its local disk. This acknowledgment ensures that if the node is restarted, it will remember its status and not attempt to rejoin the cluster as a normal, active node.
+3. **Full Data Redundancy Reached (Perfect Health)**: Because decommissioning is permanent, the cluster must ensure that all data stored on the node has been fully replicated to other healthy nodes.
+    * **Ratis (3-way)**: Every container that was on the node must now have 3 healthy copies on other nodes in the cluster.
+    * **Erasure Coding (EC)**: Every container must have its full set of shards available on other nodes.
+
+The node will remain in the `DECOMMISSIONING` state until every single container it stores has reached its full target replication level elsewhere. Once this "Perfect Health" state is achieved, the node transitions to `DECOMMISSIONED` and can be safely removed.
 
 To check the current state of the Datanodes we can execute the following command,
 
