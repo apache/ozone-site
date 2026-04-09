@@ -25,9 +25,13 @@ import styles from './styles.module.css';
 
 export default function SwaggerUIComponent({ spec, defaultServer }) {
   const specUrl = useBaseUrl(spec);
-  const [serverUrl, setServerUrl] = useState(defaultServer || 'http://localhost:9888');
+  const [serverUrl, setServerUrl] = useState(
+    defaultServer || 'http://localhost:9888'
+  );
   const [apiVersion, setApiVersion] = useState('v1');
-  const [appliedServerUrl, setAppliedServerUrl] = useState(defaultServer || 'http://localhost:9888');
+  const [appliedServerUrl, setAppliedServerUrl] = useState(
+    defaultServer || 'http://localhost:9888'
+  );
   const [appliedApiVersion, setAppliedApiVersion] = useState('v1');
   const swaggerSystemRef = useRef(null);
 
@@ -37,11 +41,15 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
       const spec = swaggerSystemRef.current.getState().getIn(['spec', 'json']);
       if (spec) {
         // Construct full URL: {serverUrl}/api/{version}/
-        const baseUrl = appliedServerUrl.endsWith('/') ? appliedServerUrl.slice(0, -1) : appliedServerUrl;
+        const baseUrl = appliedServerUrl.endsWith('/')
+          ? appliedServerUrl.slice(0, -1)
+          : appliedServerUrl;
         const fullServerUrl = `${baseUrl}/api/${appliedApiVersion}/`;
         swaggerSystemRef.current.specActions.updateJsonSpec({
           ...spec.toJS(),
-          servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
+          servers: [
+            { url: fullServerUrl, description: 'Configured Recon Server' }
+          ]
         });
       }
     }
@@ -85,10 +93,11 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
           Apply
         </button>
         <span className={styles.serverHint}>
-          (Default for Docker quick start. Change server/version and click Apply.)
+          (Default for Docker quick start. Change server/version and click
+          Apply.)
         </span>
       </div>
-      <SwaggerUI 
+      <SwaggerUI
         url={specUrl}
         docExpansion="list"
         defaultModelsExpandDepth={1}
@@ -99,11 +108,15 @@ export default function SwaggerUIComponent({ spec, defaultServer }) {
           // Set initial server URL with API version
           const spec = system.getState().getIn(['spec', 'json']);
           if (spec) {
-            const baseUrl = appliedServerUrl.endsWith('/') ? appliedServerUrl.slice(0, -1) : appliedServerUrl;
+            const baseUrl = appliedServerUrl.endsWith('/')
+              ? appliedServerUrl.slice(0, -1)
+              : appliedServerUrl;
             const fullServerUrl = `${baseUrl}/api/${appliedApiVersion}/`;
             system.specActions.updateJsonSpec({
               ...spec.toJS(),
-              servers: [{ url: fullServerUrl, description: 'Configured Recon Server' }]
+              servers: [
+                { url: fullServerUrl, description: 'Configured Recon Server' }
+              ]
             });
           }
         }}
