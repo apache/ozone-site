@@ -278,4 +278,4 @@ The Exclusive Size is the most critical metric for storage management because it
 
 When the `SnapshotDeletingService` runs, it identifies this exclusive data and marks it for deletion in the Datanodes. If a snapshot has an exclusive size of 50GB, deleting it will eventually free up 50GB of disk space.
 
-Ozone calculates these sizes in the background using the `SnapshotSstFilteringService` and `SnapshotDeletingService`, which compare deleted data across snapshots to determine what blocks are truly exclusive.
+Ozone calculates these sizes in the background using the `KeyDeletingService` and `SnapshotDeletingService`, which compare deleted data across snapshots to determine what blocks are truly exclusive.
