@@ -75,7 +75,7 @@ Most checks live in [`hadoop-ozone/dev-support/checks`](https://github.com/apach
 | ~10 minutes | `findbugs.sh`, `kubernetes.sh` | SpotBugs, small Kubernetes-related checks |
 | An hour or more | `unit.sh`, `integration.sh`, `acceptance.sh` | Unit tests, mini-cluster tests, Docker Compose acceptance tests |
 
-More on test styles: [Unit tests](./unit-tests), [Integration tests](./integration-tests), [Acceptance tests](./acceptance-tests).
+More on test styles: [Acceptance tests](./acceptance-tests) on this site. For unit and integration testing (and running checks locally), see [Running Ozone smoke tests and unit tests](https://cwiki.apache.org/confluence/display/OZONE/Running+Ozone+Smoke+Tests+and+Unit+Tests) on the wiki until the dedicated **Unit tests** and **Integration tests** pages here are published.
 
 `integration.sh` and `acceptance.sh` can take extra arguments to run a subset; open the scripts to see options. Output usually lands under `target/` (for example `target/docs`).
 
