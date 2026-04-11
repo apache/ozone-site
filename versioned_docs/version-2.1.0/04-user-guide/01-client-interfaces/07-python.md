@@ -76,7 +76,7 @@ Configure fs.defaultFS in the core-site.xml to point to the Ozone cluster. For e
 
 :::
 
-Try it yourself! Check out [PyArrow Tutorial](https://ozone.apache.org/docs/edge/recipe/pyarrowtutorial.html) for a quick start using Ozone's Docker image.
+Try it yourself! Check out PyArrow Tutorial for a quick start using Ozone's Docker image.
 
 ## Method 2: Access Ozone via Boto3 and S3 Gateway
 
@@ -119,7 +119,7 @@ print("Downloaded 'file.txt' as 'downloaded.txt'")
 Replace endpoint URL, credentials, and bucket names with your setup.
 :::
 
-Try it yourself! Check out [Boto3 Tutorial](https://ozone.apache.org/docs/edge/recipe/boto3tutorial.html) for a quick start using Ozone's Docker image.
+Try it yourself! Check out Boto3 Tutorial for a quick start using Ozone's Docker image.
 
 ## Method 3: Access Ozone via HttpFS REST API
 
@@ -192,7 +192,7 @@ else:
   print(resp_read.text)
 ```
 
-Try it yourself! Check out [Access Ozone using HttpFS REST API Tutorial](https://ozone.apache.org/docs/edge/recipe/pythonrequestsozonehttpfs.html) for a quick start using Ozone's Docker image.
+Try it yourself! Check out Access Ozone using HttpFS REST API Tutorial for a quick start using Ozone's Docker image.
 
 ### Code Example (webhdfs)
 
@@ -229,7 +229,7 @@ Replace host, port, and path as per your setup.
 
 ## References and Further Resources
 
-- [Apache Ozone Documentation](https://ozone.apache.org/docs/)
+- [Apache Ozone Documentation](pathname:///docs/)
 - [PyArrow Documentation](https://arrow.apache.org/docs/python/)
 - [Boto3 Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 - [fsspec WebHDFS Python API](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.webhdfs.WebHDFS)
