@@ -38,7 +38,7 @@ Used for buckets with **LEGACY** or **OBJECT_STORE** layout. Keys are stored und
 | ---------- | ---------- | ---------- | ----------- |
 | `keyTable` | `/{volume}/{bucket}/{key}` | `OmKeyInfo` | Committed keys (includes block locations) |
 | `openKeyTable` | `/{volume}/{bucket}/{key}/{clientId}` | `OmKeyInfo` | In-progress writes (uncommitted) |
-| `deletedTable` | `/{volume}/{bucket}/{key}` | `RepeatedOmKeyInfo` | Keys pending deletion / GC |
+| `deletedTable` | `/{volume}/{bucket}/{key}/{objectID}` | `RepeatedOmKeyInfo` | Keys pending deletion / GC |
 
 ### 3. File system optimized (FSO) layout
 
