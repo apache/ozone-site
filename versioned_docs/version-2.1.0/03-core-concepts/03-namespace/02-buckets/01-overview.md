@@ -74,7 +74,7 @@ For more details, refer to the [Ozone Snapshot documentation](./snapshots).
 ### GDPR Compliance
 
 Ozone provides features to support GDPR compliance, particularly the "right to be forgotten." When a GDPR-compliant bucket is created, encryption keys for deleted data are immediately removed, making the data unreadable even if the underlying blocks haven't been physically purged yet.
-For more details, refer to the [GDPR documentation](https://ozone.apache.org/docs/edge/security/gdpr.html).
+For more details, refer to the [GDPR documentation](pathname:///docs/2.0.0/security/gdpr.html).
 
 ### Bucket Linking
 

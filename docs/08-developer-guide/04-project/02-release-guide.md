@@ -588,9 +588,9 @@ When a release is superseded or no longer supported, clean up old release refere
 
 Include the following links:
 
-- Release notes: https://ozone.apache.org/release/1.2.0/. Replace the version in the URL with the version being released.
-- Download link: https://ozone.apache.org/downloads/
-- Link to versioned documentation: https://ozone.apache.org/docs/
+- Release notes: `https://ozone.apache.org/release/1.2.0/`. Replace the version in the URL with the version being released.
+- Download link: `https://ozone.apache.org/downloads/`
+- Link to versioned documentation: `https://ozone.apache.org/docs/`
 
 ## Patch Release
 

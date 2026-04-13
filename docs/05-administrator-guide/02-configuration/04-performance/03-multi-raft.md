@@ -118,4 +118,4 @@ documentation](https://github.com/apache/ratis/blob/ratis-3.2.1/ratis-docs/src/s
 
 ## References
 
-- Design doc: [HDDS-1564 Ozone multi-raft support](https://ozone.apache.org/docs/edge/design/multiraft.html)
+- Design doc: [HDDS-1564 Ozone multi-raft support](pathname:///docs/2.0.0/design/multiraft.html)
