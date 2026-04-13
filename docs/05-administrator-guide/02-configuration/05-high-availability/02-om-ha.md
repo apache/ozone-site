@@ -168,6 +168,7 @@ host3     | om3     | FOLLOWER
 ## References
 
 - [Ozone Manager High Availability](../../../core-concepts/high-availability/om-ha) - Conceptual overview
+- [Listener OM](./listener-om) - Read-only OM nodes for scaling reads
 - [SCM HA Configuration](./scm-ha) - Storage Container Manager High Availability configuration
 
 <!--
