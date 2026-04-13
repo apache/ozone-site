@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>概述 on Ozone</title>
+    <link>/zh/index.html</link>
+    <description>Recent content in 概述 on Ozone</description>
+    <generator>Hugo</generator>
+    <language>zh</language>
+    <atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安全化 Ozone</title>
+      <link>/zh/security/secureozone.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/secureozone.html</guid>
+      <description>简要介绍 Ozone 中的安全概念以及安全化 OM 和 SCM 的步骤。</description>
+    </item>
+    <item>
+      <title>概览</title>
+      <link>/zh/concept/overview.html</link>
+      <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/overview.html</guid>
+      <description>介绍 Ozone 的整体和各个组件。</description>
+    </item>
+    <item>
+      <title>Java API</title>
+      <link>/zh/interface/javaapi.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/javaapi.html</guid>
+      <description>Ozone 有一套基于原生 RPC 的 API，其它协议都由这个最底层的 API 扩展而来，它也是所有 Ozone 支持的协议中性能最好、功能最全的。</description>
+    </item>
+    <item>
+      <title>Ofs (兼容 Hadoop 的文件系统)</title>
+      <link>/zh/interface/ofs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/ofs.html</guid>
+      <description>Hadoop Compatible file system allows any application that expects an HDFS like interface to work against Ozone with zero changes. Frameworks like Apache Spark, YARN and Hive work against Ozone without needing any change. &lt;strong&gt;Global level view.&lt;/strong&gt;</description>
+    </item>
+    <item>
+      <title>Decommissioning</title>
+      <link>/zh/feature/decommission.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/decommission.html</guid>
+      <description>Decommissioning of SCM, OM and Datanode.</description>
+    </item>
+    <item>
+      <title>磁盘均衡器</title>
+      <link>/zh/feature/diskbalancer.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/diskbalancer.html</guid>
+      <description>数据节点的磁盘平衡器.</description>
+    </item>
+    <item>
+      <title>高可用 OM</title>
+      <link>/zh/feature/om-ha.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/om-ha.html</guid>
+      <description>Ozone Manager 用于避免单点故障的高可用设置</description>
+    </item>
+    <item>
+      <title>高可用 SCM</title>
+      <link>/zh/feature/scm-ha.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/scm-ha.html</guid>
+      <description>Storage Container Manager 的 HA 设置可以避免任何单点故障。</description>
+    </item>
+    <item>
+      <title>纠删码</title>
+      <link>/zh/feature/erasurecoding.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/erasurecoding.html</guid>
+      <description>Ozone 的纠删码机制</description>
+    </item>
+    <item>
+      <title>透明数据加密</title>
+      <link>/zh/security/securingtde.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securingtde.html</guid>
+      <description>透明数据加密（Transparent Data Encryption，TDE）以密文形式在磁盘上保存数据，但可以在用户访问的时候自动进行解密。</description>
+    </item>
+    <item>
+      <title>Ozone Manager</title>
+      <link>/zh/concept/ozonemanager.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/ozonemanager.html</guid>
+      <description>Ozone Manager 是 Ozone 主要的命名空间服务，它管理了卷、桶和键的生命周期。</description>
+    </item>
+    <item>
+      <title>Ozone 文件系统</title>
+      <link>/zh/interface/o3fs.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/o3fs.html</guid>
+      <description>Hadoop 文件系统兼容使得任何使用类 HDFS 接口的应用无需任何修改就可以在 Ozone 上工作，比如基于 Apache Spark、YARN 和 Hive 等框架的应用。</description>
+    </item>
+    <item>
+      <title>基于前缀的文件系统优化</title>
+      <link>/zh/feature/prefixfso.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/prefixfso.html</guid>
+      <description>支持原子的重命名和删除操作。</description>
+    </item>
+    <item>
+      <title>拓扑感知能力</title>
+      <link>/zh/feature/topology.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/topology.html</guid>
+      <description>机架感知配置可以提高读/写性能</description>
+    </item>
+    <item>
+      <title>在DataNode上合并Container的RocksDB</title>
+      <link>/zh/feature/dn-merge-rocksdb.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/dn-merge-rocksdb.html</guid>
+      <description>Ozone DataNode Container模式简介V3</description>
+    </item>
+    <item>
+      <title>Ozone 中的 GDPR</title>
+      <link>/zh/security/gdpr.html</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/gdpr.html</guid>
+      <description>Ozone 中的 GDPR</description>
+    </item>
+    <item>
+      <title>安全化 Datanode</title>
+      <link>/zh/security/securingdatanodes.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securingdatanodes.html</guid>
+      <description>解释安全化 datanode 的不同模式，包括 Kerberos、证书的手动颁发和自动颁发等。</description>
+    </item>
+    <item>
+      <title>Storage Container Manager</title>
+      <link>/zh/concept/storagecontainermanager.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/storagecontainermanager.html</guid>
+      <description>Storage Container Manager（SCM）是 Ozone 的核心元数据服务，它提供了 Ozone 的分布式数据块服务层。</description>
+    </item>
+    <item>
+      <title>CSI 协议</title>
+      <link>/zh/interface/csi.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/csi.html</guid>
+      <description>Ozone 支持 容器存储接口 (CSI) 协议。你可以通过 Ozone CSI 挂载 Ozone 桶的方式使用 Ozone。</description>
+    </item>
+    <item>
+      <title>S3 协议接口</title>
+      <link>/zh/interface/s3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/s3.html</guid>
+      <description>Ozone 支持 Amazon 的 Simple Storage Service (S3) 协议，事实上，你不需要对基于 S3 客户端和 S3 SDK 的应用做任何修改就可以在 Ozone 上使用。</description>
+    </item>
+    <item>
+      <title>Ozone 中的配额</title>
+      <link>/zh/feature/quota.html</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/quota.html</guid>
+      <description>Ozone中的配额</description>
+    </item>
+    <item>
+      <title>安全化 HTTP</title>
+      <link>/zh/security/securingozonehttp.html</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securingozonehttp.html</guid>
+      <description>安全化 Ozone 服务的 HTTP 网络控制台</description>
+    </item>
+    <item>
+      <title>数据节点</title>
+      <link>/zh/concept/datanodes.html</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/datanodes.html</guid>
+      <description>Ozone 支持 Amazon S3 协议，你可以原封不动地在 Ozone 上使用基于 S3 客户端和 S3 SDK 的应用。</description>
+    </item>
+    <item>
+      <title>Recon API</title>
+      <link>/zh/interface/reconapi.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/reconapi.html</guid>
+      <description>Recon 服务器支持 HTTP 端点，以帮助故障排除和监听 Ozone 集群。</description>
+    </item>
+    <item>
+      <title>命令行接口</title>
+      <link>/zh/interface/cli.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/interface/cli.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;Ozone shell 是从命令行与 Ozone 交互的主要接口。在后台，它调用 &lt;a href=&#34;../zh/interface/javaapi.html&#34;&gt;Java API&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安全化 S3</title>
+      <link>/zh/security/securings3.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securings3.html</guid>
+      <description>Ozone 支持 S3 协议，并使用 AWS Signature Version 4 protocol which allows a seamless S3 experience.</description>
+    </item>
+    <item>
+      <title>Containers</title>
+      <link>/zh/concept/containers.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/containers.html</guid>
+      <description>容器（Ozone的基本复制单元）的相关描述。</description>
+    </item>
+    <item>
+      <title>Ozone 访问控制列表</title>
+      <link>/zh/security/securityacls.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securityacls.html</guid>
+      <description>Ozone 原生的授权模块提供了不需要集成 Ranger 的访问控制列表（ACL）支持。</description>
+    </item>
+    <item>
+      <title>生产环境部署</title>
+      <link>/zh/start/productiondeployment.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/productiondeployment.html</guid>
+      <description>&lt;!--&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;本文档旨在为 Apache Ozone 的生产环境部署提供需求和最佳实践的指导。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Apache Ranger</title>
+      <link>/zh/security/securitywithranger.html</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/security/securitywithranger.html</guid>
+      <description>Apache Ranger 是一个用于管理和监控 Hadoop 平台复杂数据权限的框架。</description>
+    </item>
+    <item>
+      <title>Recon 服务器</title>
+      <link>/zh/feature/recon.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/recon.html</guid>
+      <description>Recon 是 Ozone 中用于分析服务的网页用户界面（Web UI）</description>
+    </item>
+    <item>
+      <title>Recon</title>
+      <link>/zh/concept/recon.html</link>
+      <pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/zh/concept/recon.html</guid>
+      <description>Recon 作为 Ozone 的管理和监视控制台。</description>
+    </item>
+    <item>
+      <title>动态加载配置</title>
+      <link>/zh/feature/reconfigurability.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/reconfigurability.html</guid>
+      <description>动态加载配置</description>
+    </item>
+    <item>
+      <title>可观察性</title>
+      <link>/zh/feature/observability.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/feature/observability.html</guid>
+      <description>Ozone 的不同工具来提高可观察性</description>
+    </item>
+    <item>
+      <title>简易 Ozone</title>
+      <link>/zh/start/startfromdockerhub.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/startfromdockerhub.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;docker&lt;/li&gt;&#xA;&lt;li&gt;AWS CLI（可选）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;所有-ozone-服务在单个容器&#34;&gt;所有 Ozone 服务在单个容器&lt;/h1&gt;&#xA;&lt;p&gt;启动一个 all-in-one 的 ozone 容器最简单的方法就是使用 Docker Hub 最新的 docker 镜像：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>物理集群上 Ozone 的安装</title>
+      <link>/zh/start/onprem.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/onprem.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;p&gt;如果你想要有点挑战性，你可以在物理集群上安装 ozone。搭建一个 Ozone 集群需要了解它的各个组件，Ozone 既能和现有的 HDFS 集群并存运行，也可以独立运行。在这两种模式下，需要运行的 Ozone 组件是相同的。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在 Minikube 中运行 Ozone</title>
+      <link>/zh/start/minikube.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/minikube.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;minikube&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;ozone 发行包中的 &lt;code&gt;kubernetes/examples&lt;/code&gt; 文件夹下包含了多种用途的 kubernetes 部署资源文件，这些资源文件默认使用 Docker Hub 上的 &lt;code&gt;apache/ozone&lt;/code&gt; 镜像。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在 Kubernetes 集群上部署 Ozone</title>
+      <link>/zh/start/kubernetes.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/kubernetes.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;可用的 kubernetes 集群（LoadBalancer 和 PersistentVolume 非必需）&lt;/li&gt;&#xA;&lt;li&gt;kubectl&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;由于 &lt;em&gt;apache/ozone&lt;/em&gt; 镜像可以从 Docker Hub 获取到，K8s 上的部署过程和 Minikube 上的部署过程十分相似，唯一的区别是我们为 K8s 部署准备了专门的配置&#xA;文件（比如，我们可以在每个 K8s 节点上部署一个 Datanode）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>伪集群部署 Ozone</title>
+      <link>/zh/start/runningviadocker.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/runningviadocker.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&#xA;&lt;div class=&#34;panel panel-default&#34;&gt;&#xA;    &lt;div class=&#34;panel-heading&#34;&gt;Requirements&lt;/div&gt;&#xA;    &lt;div class=&#34;panel-body&#34;&gt;&#xA;        &lt;ul&gt;&#xA;&lt;li&gt;docker 和 docker-compose&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;下载 Ozone 二进制压缩包并解压。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>从源码构建 Ozone</title>
+      <link>/zh/start/fromsource.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/start/fromsource.html</guid>
+      <description>&lt;!---&#xA;  Licensed to the Apache Software Foundation (ASF) under one or more&#xA;  contributor license agreements.  See the NOTICE file distributed with&#xA;  this work for additional information regarding copyright ownership.&#xA;  The ASF licenses this file to You under the Apache License, Version 2.0&#xA;  (the &#34;License&#34;); you may not use this file except in compliance with&#xA;  the License.  You may obtain a copy of the License at&#xA;&#xA;      http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;  Unless required by applicable law or agreed to in writing, software&#xA;  distributed under the License is distributed on an &#34;AS IS&#34; BASIS,&#xA;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;  See the License for the specific language governing permissions and&#xA;  limitations under the License.&#xA;--&gt;&#xA;&lt;div class=&#34;alert alert-warning&#34;&gt;&#xA;&lt;p&gt;注意：本页面翻译的信息可能滞后，最新的信息请参看英文版的相关页面。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Container Replica Debugger Tool</title>
+      <link>/zh/tools/debug/containerlogparser.html</link>
+      <pubDate>Mon, 09 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/debug/containerlogparser.html</guid>
+      <description>该工具处理来自 Ozone 数据节点的容器日志文件，以跟踪状态转换。它提供 CLI 命令，用于根据不同的属性查询容器。</description>
+    </item>
+    <item>
+      <title>Ozone Debug</title>
+      <link>/zh/tools/debug/ldb.html</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/debug/ldb.html</guid>
+      <description>Ozone Debug 命令可用于所有与调试相关的任务。</description>
+    </item>
+    <item>
+      <title>Ozone Admin</title>
+      <link>/zh/tools/admin.html</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/admin.html</guid>
+      <description>Ozone Admin 命令可以用于所有与管理有关的任务。</description>
+    </item>
+    <item>
+      <title>最小化配置Ozone服务管理</title>
+      <link>/zh/design/configless.html</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      <guid>/zh/design/configless.html</guid>
+      <description>仅分发最小配置，并在启动前下载所有剩余配置</description>
+    </item>
+    <item>
+      <title>配置生成</title>
+      <link>/zh/tools/genconf.html</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/genconf.html</guid>
+      <description>用于生成默认配置的工具</description>
+    </item>
+    <item>
+      <title>审计解析器</title>
+      <link>/zh/tools/debug/auditparser.html</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/debug/auditparser.html</guid>
+      <description>审计解析器工具用来查看 Ozone 的审计日志。</description>
+    </item>
+    <item>
+      <title>使用 Boto3 客户端访问 Ozone 对象存储</title>
+      <link>/zh/recipe/botoclient.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/recipe/botoclient.html</guid>
+      <description>如何使用 Boto3 客户端访问 Ozone 对象存储？</description>
+    </item>
+    <item>
+      <title>使用 Prometheus 监控</title>
+      <link>/zh/recipe/prometheus.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/recipe/prometheus.html</guid>
+      <description>使用 Prometheus 监控 Ozone 的简要说明</description>
+    </item>
+    <item>
+      <title>Kubernetes 上运行 Spark 和 OzoneFS</title>
+      <link>/zh/recipe/sparkozonefsk8s.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/recipe/sparkozonefsk8s.html</guid>
+      <description>如何在 K8s 上通过 Apache Spark 使用 Ozone ?</description>
+    </item>
+    <item>
+      <title>测试工具</title>
+      <link>/zh/tools/testtools.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/tools/testtools.html</guid>
+      <description>Ozone 提供了负载生成、网络分片测试、验收测试等多种测试工具。</description>
+    </item>
+  </channel>
+</rss>
