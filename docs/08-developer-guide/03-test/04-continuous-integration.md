@@ -60,12 +60,6 @@ When you push new commits to an open pull request, **newer runs can cancel older
 
 Running scripts locally catches problems before you push. You need a working dev environment first—see [Build with Maven](../../developer-guide/build/maven) and [Building from source](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#building-from-source) in `CONTRIBUTING.md`.
 
-From the **root of your clone** (the folder that contains `hadoop-ozone/`):
-
-```bash
-./hadoop-ozone/dev-support/checks/build.sh
-```
-
 Most checks live in [`hadoop-ozone/dev-support/checks`](https://github.com/apache/ozone/tree/master/hadoop-ozone/dev-support/checks). The [Check your contribution](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#check-your-contribution) section groups them by rough duration:
 
 | Rough time | Scripts | What they do |
@@ -73,9 +67,15 @@ Most checks live in [`hadoop-ozone/dev-support/checks`](https://github.com/apach
 | Build step | `build.sh` | Compile Ozone |
 | Minutes | `author.sh`, `bats.sh`, `rat.sh`, `docs.sh`, `dependency.sh`, `checkstyle.sh`, `pmd.sh` | Style, license headers, docs, dependency list |
 | ~10 minutes | `findbugs.sh`, `kubernetes.sh` | SpotBugs, small Kubernetes-related checks |
-| An hour or more | `unit.sh`, `integration.sh`, `acceptance.sh` | Unit tests, mini-cluster tests, Docker Compose acceptance tests |
+| An hour or more | `integration.sh`, `acceptance.sh` | JUnit tests (via integration), mini-cluster style tests, Docker Compose acceptance tests |
 
-More on test styles: [Acceptance tests](./acceptance-tests) on this site. For unit and integration testing (and running checks locally), see [Running Ozone smoke tests and unit tests](https://cwiki.apache.org/confluence/display/OZONE/Running+Ozone+Smoke+Tests+and+Unit+Tests) on the wiki until the dedicated **Unit tests** and **Integration tests** pages here are published.
+The command below is **only an example** of running one script from the **root of your clone** (the folder that contains `hadoop-ozone/`):
+
+```bash
+./hadoop-ozone/dev-support/checks/build.sh
+```
+
+More on test styles: [Acceptance tests](./acceptance-tests) on this site.
 
 `integration.sh` and `acceptance.sh` can take extra arguments to run a subset; open the scripts to see options. Output usually lands under `target/` (for example `target/docs`).
 
@@ -93,16 +93,18 @@ So a focused change might show fewer checks than a large refactor. **That is exp
 The list below matches [`.github/ci.md`](https://github.com/apache/ozone/blob/master/.github/ci.md). Treat it as a map when reading logs, not something to memorize.
 
 - **build-info** — Decides which other jobs run (selective CI).
-- **compile** — Builds with Java 8 and 11 via [`build.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/build.sh); later jobs typically use the Java 8 build.
+- **build** — Performs a full build; its output is reused by later jobs.
+- **compile** — Re-builds with various Java versions. It consumes the **source tarball** (release artifact) produced by **build**, not a fresh checkout of the git repository.
 - **basic** — Checks like author tags, BATS, Checkstyle, Hugo for docs, SpotBugs, PMD, RAT—depending on what was selected.
-- **unit** — [`unit.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/unit.sh) and [`native.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/native.sh) for RocksDB-native tests.
-- **dependency** — Compares JARs to [`jar-report.txt`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/license/jar-report.txt).
+- **dependency** — Detects whether dependencies were added or removed, as a reminder to update `LICENSE.txt` (how this is implemented—for example comparisons against `jar-report.txt`—is an internal detail).
 - **acceptance** — [`acceptance.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/acceptance.sh) (Robot Framework + Docker Compose; variants like secure / unsecure / misc).
 - **kubernetes** — [`kubernetes.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/kubernetes.sh).
-- **integration** — [`integration.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/integration.sh) (mini-cluster style tests, often sharded in CI).
+- **integration** — [`integration.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/integration.sh) runs **all** JUnit tests, regardless of which submodule they live in ([HDDS-9242](https://issues.apache.org/jira/browse/HDDS-9242); often sharded in CI). Older CI had a separate **unit** job; it was removed in favor of this.
 - **coverage** — [`coverage.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/coverage.sh) merges coverage when earlier jobs produced it.
 
-Some jobs use a **matrix** (for example multiple Java versions) with **fail-fast**: if one matrix leg fails, the others in that matrix stop. Unrelated jobs can still run until they finish or fail.
+The RocksDB native library is built and used as part of the normal workflow across jobs ([HDDS-12734](https://issues.apache.org/jira/browse/HDDS-12734)); you do not need a separate “native-only” check to exercise it.
+
+Matrix jobs (for example multiple Java versions) are configured **without fail-fast** ([HDDS-6464](https://issues.apache.org/jira/browse/HDDS-6464)) so that other matrix legs keep running and failed legs can be **re-run individually** in the GitHub UI.
 
 ## Other workflows
 
@@ -123,11 +125,7 @@ A red check does not mean you did something wrong—it means the run found somet
 1. Open the failed **`build-branch`** run → click the red job → read the **log** from the bottom upward for the first error.
 2. If the job uploaded **Artifacts**, download them from the run summary (they expire after a short time).
 3. Try the same **check script** locally if you have the environment set up ([Run checks on your machine](#run-checks-on-your-machine)).
-4. To re-run without new code, use **Re-run all jobs** or **Re-run failed jobs** on the run page, or:
-
-```bash
-git commit --allow-empty -m 'trigger new CI check'
-```
+4. For **transient** failures or **flaky** tests only, re-trigger what failed: **committers** can use GitHub’s **Re-run failed jobs** on the workflow run. **Other contributors** should wait for a committer to do that, or ask on the PR if it does not happen within a reasonable time (which varies with time of day, weekends, holidays, and so on). Avoid empty commits or re-running the entire workflow when only a subset failed. Some artifacts expire quickly (for example within a day); re-run failed jobs before those artifacts disappear.
 
 Failures on the **main** repo’s default branch sometimes leave extra artifacts on [ozone build results](https://elek.github.io/ozone-build-results/) (community mirror).
 
@@ -137,24 +135,14 @@ Failures on the **main** repo’s default branch sometimes leave extra artifacts
 - **Email** [dev@ozone.apache.org](mailto:dev@ozone.apache.org) for broader questions.
 - **[GitHub Discussions](https://github.com/apache/ozone/discussions)** and the [#ozone](http://s.apache.org/slack-invite) Slack channel (ASF Slack) are listed in [`CONTRIBUTING.md`](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#who-to-contact).
 
-### Local and wiki testing notes
-
-- Wiki: [Running Ozone smoke tests and unit tests](https://cwiki.apache.org/confluence/display/OZONE/Running+Ozone+Smoke+Tests+and+Unit+Tests).
-
 ## Advanced: flaky tests and debugging on a fork
 
 These patterns are for **repeat failures** or **environment-only** bugs. They usually live on a **personal fork**, not in `apache/ozone`.
 
-- Wiki: [GitHub Actions tips and tricks](https://cwiki.apache.org/confluence/display/OZONE/Github+Actions+tips+and+tricks) — running one test many times, extra logging, optional [tmate](https://github.com/tmate-io/tmate)-style access (unsafe on public repos; never with secrets exposed).
+- Running a single test or suite in a loop, enabling extra logging, or attaching an interactive debugger session (for example via [tmate](https://github.com/tmate-io/tmate)) can help isolate flakiness—use care on **public** forks and **never** expose secrets.
 - Prefer current runner images (for example `ubuntu-latest`) when copying older examples.
-
-## Deprecated workflows
-
-Old workflows can still appear on the [Actions](https://github.com/apache/ozone/actions) tab. An outdated workflow also named **build-branch** is tied to [`chaos.yml`](https://github.com/apache/ozone/actions/workflows/chaos.yml), not the current `post-commit.yml` pipeline—compare URLs. Full list: [`.github/ci.md` — Old/Deprecated Workflows](https://github.com/apache/ozone/blob/master/.github/ci.md#olddeprecated-workflows).
 
 ## See also
 
 - [`.github/ci.md`](https://github.com/apache/ozone/blob/master/.github/ci.md) in `apache/ozone`
 - [Contributing guide — Check your contribution](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#check-your-contribution)
-- Wiki: [Ozone CI with GitHub Actions](https://cwiki.apache.org/confluence/display/OZONE/Ozone+CI+with+Github+Actions) (older context; prefer the repo for current names)
-- Wiki: [GitHub Actions tips and tricks](https://cwiki.apache.org/confluence/display/OZONE/Github+Actions+tips+and+tricks)
