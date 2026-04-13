@@ -50,7 +50,7 @@ Two names show up in docs; both mean “the main CI pipeline”:
 | What | Meaning |
 | --- | --- |
 | **`build-branch`** | The **name** of the workflow in the Actions tab. It comes from the `name:` field in [`post-commit.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/post-commit.yml). |
-| **`ci.yml`** | Where most **jobs** (compile, tests, and so on) are defined. `post-commit.yml` calls this file as a [reusable workflow](https://docs.github.com/en/actions/using-workflows/reusing-workflows). |
+| **`ci.yml`** | Where most **jobs** (build, compile, tests, and so on) are defined. `post-commit.yml` calls this file as a [reusable workflow](https://docs.github.com/en/actions/using-workflows/reusing-workflows). |
 
 So: **`post-commit.yml`** = front door; **`ci.yml`** = where the heavy lifting is described.
 
@@ -76,6 +76,17 @@ The command below is **only an example** of running one script from the **root o
 ```
 
 More on test styles: [Acceptance tests](./acceptance-tests) on this site.
+
+### Reproducing failures locally (by check type)
+
+What you need depends on which job failed:
+
+1. **basic** — Safe to run locally without a full prior build; scripts are quick (author tags, BATS, RAT, docs, Checkstyle, PMD, SpotBugs, and similar—whatever `basic` selected for that run).
+2. **dependency / license** — Quick, but expects a **build** already (the dependency check compares against built outputs / the dependency list).
+3. **Checks that reproduce compiler or packaging issues** — Run the same **`build.sh`** (or narrower Maven command) after a normal dev build; align with the log.
+4. **integration** (JUnit) — After a build, narrow work to one test with Maven, for example `-Dtest='YourTestClass'`, or run the same class or method from your IDE. [`integration.sh`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dev-support/checks/integration.sh) wraps the full suite; open it for flags and defaults.
+5. **acceptance** — Needs a **build** (often a dist build). Prefer re-running only the failing shell driver the log names (for example a line like `ERROR: Test execution of ozone/test-legacy-bucket.sh is FAILED` points at `test-legacy-bucket.sh`) instead of the whole suite.
+6. **kubernetes** — The `kubernetes.sh` check is aimed at **Linux** environments; macOS or Windows may not match CI.
 
 `integration.sh` and `acceptance.sh` can take extra arguments to run a subset; open the scripts to see options. Output usually lands under `target/` (for example `target/docs`).
 
@@ -123,11 +134,11 @@ A red check does not mean you did something wrong—it means the run found somet
 :::
 
 1. Open the failed **`build-branch`** run → click the red job → read the **log** from the bottom upward for the first error.
-2. If the job uploaded **Artifacts**, download them from the run summary (they expire after a short time).
+2. If the job uploaded **Artifacts**, download them from the run summary while they are still available.
 3. Try the same **check script** locally if you have the environment set up ([Run checks on your machine](#run-checks-on-your-machine)).
-4. For **transient** failures or **flaky** tests only, re-trigger what failed: **committers** can use GitHub’s **Re-run failed jobs** on the workflow run. **Other contributors** should wait for a committer to do that, or ask on the PR if it does not happen within a reasonable time (which varies with time of day, weekends, holidays, and so on). Avoid empty commits or re-running the entire workflow when only a subset failed. Some artifacts expire quickly (for example within a day); re-run failed jobs before those artifacts disappear.
+4. For **transient** failures or **flaky** tests only: **committers** can use GitHub’s **Re-run failed jobs** on the workflow run. **Other contributors** should wait for a committer to do that, or ask on the PR if it does not happen within a reasonable time (which varies with time of day, weekends, holidays, and so on). Avoid empty commits or re-running the entire workflow when only a subset failed.
 
-Failures on the **main** repo’s default branch sometimes leave extra artifacts on [ozone build results](https://elek.github.io/ozone-build-results/) (community mirror).
+A maintained mirror of build results from `apache/ozone` default-branch runs is [adoroszlai/ozone-build-results](https://github.com/adoroszlai/ozone-build-results/) (the older `elek.github.io` archive is no longer updated).
 
 ### Get help
 
@@ -137,10 +148,12 @@ Failures on the **main** repo’s default branch sometimes leave extra artifacts
 
 ## Advanced: flaky tests and debugging on a fork
 
-These patterns are for **repeat failures** or **environment-only** bugs. They usually live on a **personal fork**, not in `apache/ozone`.
+For **repeat failures** or **environment-only** bugs, use the dedicated workflows on **your fork** (enable Actions, then run them manually from the **Actions** tab via **workflow_dispatch**):
 
-- Running a single test or suite in a loop, enabling extra logging, or attaching an interactive debugger session (for example via [tmate](https://github.com/tmate-io/tmate)) can help isolate flakiness—use care on **public** forks and **never** expose secrets.
-- Prefer current runner images (for example `ubuntu-latest`) when copying older examples.
+- **`flaky-test-check`** — defined in [`intermittent-test-check.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/intermittent-test-check.yml); runs a chosen JUnit class or method many times across parallel splits.
+- **`repeat-acceptance-test`** — defined in [`repeat-acceptance.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/repeat-acceptance.yml); repeats acceptance tests concurrently (suite or filter).
+
+Those replace ad-hoc loops from older wiki-style tips. You can still use an IDE, extra logging, or interactive debugging (for example [tmate](https://github.com/tmate-io/tmate)) on a fork if you accept the risk on **public** repos and **never** expose secrets.
 
 ## See also
 
