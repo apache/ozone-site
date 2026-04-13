@@ -22,14 +22,15 @@
 
 import Ajv from 'ajv';
 
-const {themes} = require('prism-react-renderer');
+const { themes } = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
-  tagline: 'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
+  tagline:
+    'Scalable, reliable, distributed storage system optimized for data analytics and object store workloads.',
   // Set the production URL of the website. Must be updated when the final site is deployed.
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3001.
@@ -50,7 +51,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en']
   },
 
   /*
@@ -64,37 +65,37 @@ const config = {
         rel: 'icon',
         href: 'favicon.ico',
         sizes: '32x32'
-      },
+      }
     },
     {
       tagName: 'link',
       attributes: {
         rel: 'icon',
         href: 'favicon.svg',
-        type: "image/svg+xml"
-      },
+        type: 'image/svg+xml'
+      }
     },
     {
       tagName: 'link',
       attributes: {
         rel: 'apple-touch-icon',
-        href: 'apple-touch-icon.png',
-      },
+        href: 'apple-touch-icon.png'
+      }
     },
     {
       tagName: 'meta',
       attributes: {
         name: 'google-site-verification',
-        content: 'fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE',
-      },
+        content: 'fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE'
+      }
     },
     {
       tagName: 'meta',
       attributes: {
         name: 'algolia-site-verification',
-        content: 'A2998EF969F36A0D',
-      },
-    },
+        content: 'A2998EF969F36A0D'
+      }
+    }
   ],
 
   markdown: {
@@ -117,8 +118,15 @@ const config = {
       const isValid = validate(result.frontMatter);
 
       if (!isValid) {
-        console.error('Front matter validation error in', params.filePath + ':\n', validate.errors);
-        console.error('Front matter validation failed against JSON schema', schemaPath);
+        console.error(
+          'Front matter validation error in',
+          params.filePath + ':\n',
+          validate.errors
+        );
+        console.error(
+          'Front matter validation failed against JSON schema',
+          schemaPath
+        );
         process.exit(1);
       }
 
@@ -130,8 +138,10 @@ const config = {
     Docusaurus can resolve links without these.
     See https://docusaurus.io/docs/api/docusaurus-config#markdown for reference.
     */
-    preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
-      const {filePath, fileContent} = params;
+    preprocessor: (
+      /** @type {{filePath: string, fileContent: string}} */ params
+    ) => {
+      const { filePath, fileContent } = params;
 
       // Strip HTML comments and fenced code blocks to avoid false positives.
       // Replace non-newline characters with spaces to preserve line numbers.
@@ -141,7 +151,8 @@ const config = {
 
       // Match markdown links but exclude images (which start with !)
       // Uses negative lookbehind (?<!!) to skip ![alt](url) image syntax
-      const internalLinkPattern = /(?<!!)\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
+      const internalLinkPattern =
+        /(?<!!)\[([^\]]+)\]\(([^()\s]+(?:\([^)]*\)[^()\s]*)*)\)/g;
       // Match reference link definitions: [ref]: url
       const refLinkDefPattern = /^\[([^\]]+)\]:\s+(\S+)/gm;
       // Match two-digit number prefixes at start or after slash
@@ -150,7 +161,9 @@ const config = {
       let matches;
       const invalidLinks = [];
 
-      while ((matches = internalLinkPattern.exec(contentForValidation)) !== null) {
+      while (
+        (matches = internalLinkPattern.exec(contentForValidation)) !== null
+      ) {
         const linkText = matches[1];
         // Strip angle brackets (e.g., <./ozone-manager.md> -> ./ozone-manager.md)
         const linkPath = matches[2].replace(/^<|>$/g, '');
@@ -164,7 +177,8 @@ const config = {
 
         // Skip absolute paths to pages/static (e.g., /download, /foo.pdf) since they are not versioned
         // Only check absolute paths to /docs/ which breaks versioning
-        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        const isAbsoluteNonDocsPath =
+          linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
         if (isAbsoluteNonDocsPath) {
           continue;
         }
@@ -188,7 +202,9 @@ const config = {
       }
 
       // Check reference link definitions: [ref]: url
-      while ((matches = refLinkDefPattern.exec(contentForValidation)) !== null) {
+      while (
+        (matches = refLinkDefPattern.exec(contentForValidation)) !== null
+      ) {
         const linkText = matches[1];
         const linkPath = matches[2].replace(/^<|>$/g, '');
 
@@ -198,7 +214,8 @@ const config = {
 
         const pathWithoutFragment = linkPath.split('#')[0];
 
-        const isAbsoluteNonDocsPath = linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
+        const isAbsoluteNonDocsPath =
+          linkPath.startsWith('/') && !linkPath.startsWith('/docs/');
         if (isAbsoluteNonDocsPath) {
           continue;
         }
@@ -211,24 +228,32 @@ const config = {
           invalidLinks.push({
             text: linkText,
             path: linkPath,
-            line: contentForValidation.substring(0, matches.index).split('\n').length
+            line: contentForValidation.substring(0, matches.index).split('\n')
+              .length
           });
         }
       }
 
       if (invalidLinks.length > 0) {
-        const errorMsg = invalidLinks.map(link =>
-          `  Line ${link.line}: [${link.text}](${link.path})`
-        ).join('\n');
+        const errorMsg = invalidLinks
+          .map((link) => `  Line ${link.line}: [${link.text}](${link.path})`)
+          .join('\n');
 
-        console.error('Invalid internal links found in', filePath + ':\n' + errorMsg);
-        console.error('\nInternal links should not include absolute paths to docs, number prefixes, or route file extensions (.md, .mdx, .js, .jsx, .tsx).');
-        console.error('Example: use \'./ozone-manager#persisted-state\' instead of \'./02-ozone-manager.md#persisted-state\'');
+        console.error(
+          'Invalid internal links found in',
+          filePath + ':\n' + errorMsg
+        );
+        console.error(
+          '\nInternal links should not include absolute paths to docs, number prefixes, or route file extensions (.md, .mdx, .js, .jsx, .tsx).'
+        );
+        console.error(
+          "Example: use './ozone-manager#persisted-state' instead of './02-ozone-manager.md#persisted-state'"
+        );
         process.exit(1);
       }
 
       return fileContent;
-    },
+    }
   },
 
   presets: [
@@ -238,26 +263,21 @@ const config = {
       ({
         docs: {
           sidebarPath: undefined,
-          editUrl:
-            'https://github.com/apache/ozone-site/tree/master',
+          editUrl: 'https://github.com/apache/ozone-site/tree/master',
           // TODO: The following sections are currently hidden. Ensure that a section contains a few pages
           //  of publishable quality before enabling visibility for that section.
-          exclude: [
-            '**/06-troubleshooting/**',
-            '**/07-system-internals/**',
-          ]
+          exclude: ['**/06-troubleshooting/**', '**/07-system-internals/**']
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            'https://github.com/apache/ozone-site/tree/master/',
+          editUrl: 'https://github.com/apache/ozone-site/tree/master/'
         },
         theme: {
           customCss: [
             require.resolve('./src/css/custom.css'),
             require.resolve('./src/css/header.css'),
-            require.resolve('./src/css/footer.css'),
-          ],
+            require.resolve('./src/css/footer.css')
+          ]
         },
         sitemap: {
           /*
@@ -265,22 +285,30 @@ const config = {
           See https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap#ex-config for reference.
           */
           createSitemapItems: async (params) => {
-            const {defaultCreateSitemapItems, ...rest} = params;
+            const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
 
-            const validUrlRegex = /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
+            const validUrlRegex =
+              /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
             items.forEach((item) => {
               if (!validUrlRegex.test(item.url)) {
-                  console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
-                  console.error('All URLs should use kebab case and lowercase letters.');
-                  process.exit(1);
+                console.error(
+                  'Generated URL',
+                  item.url,
+                  'does not match the allowed RegEx:',
+                  validUrlRegex
+                );
+                console.error(
+                  'All URLs should use kebab case and lowercase letters.'
+                );
+                process.exit(1);
               }
             });
             return items;
-          },
-        },
-      }),
-    ],
+          }
+        }
+      })
+    ]
   ],
 
   plugins: [
@@ -291,10 +319,10 @@ const config = {
           {
             tagName: 'link',
             rel: 'manifest',
-            href: 'pwa/manifest.json',
-          },
-        ],
-      },
+            href: 'pwa/manifest.json'
+          }
+        ]
+      }
     ]
   ],
 
@@ -304,7 +332,7 @@ const config = {
     ({
       colorMode: {
         defaultMode: 'light',
-        respectPrefersColorScheme: true, // Automatically use dark mode when the user's system prefers it
+        respectPrefersColorScheme: true // Automatically use dark mode when the user's system prefers it
       },
       // Optional: Add an announcement bar to the top of the website.
       // announcementBar: {
@@ -320,7 +348,7 @@ const config = {
         title: 'Apache Ozone',
         logo: {
           alt: 'Ozone Logo',
-          src: 'img/ozone-logo.svg',
+          src: 'img/ozone-logo.svg'
         },
         items: [
           {
@@ -329,27 +357,27 @@ const config = {
             items: [
               {
                 label: 'Latest Docs',
-                to: 'docs',
+                to: 'docs'
               },
               {
                 label: 'Docs 2.0.0 (Archived)',
                 href: '/docs/2.0.0/',
-		target: '_blank'
+                target: '_blank'
               },
               {
                 label: 'Docs 1.4.1 (Archived)',
                 href: '/docs/1.4.1/',
-		target: '_blank'
-              },
-            ],
+                target: '_blank'
+              }
+            ]
           },
           {
             to: 'download',
-            label: 'Download',
+            label: 'Download'
           },
           {
             to: 'roadmap',
-            label: 'Roadmap',
+            label: 'Roadmap'
           },
           // TODO: The FAQ section is currently hidden. Ensure that the FAQ page
           //  is of publishable quality before enabling visibility for this section.
@@ -359,35 +387,35 @@ const config = {
           // },
           {
             to: '/blog',
-            label: 'Blog',
+            label: 'Blog'
           },
           {
             label: 'Community',
             items: [
               {
                 to: 'community/communication-channels',
-                label: 'Communication Channels',
+                label: 'Communication Channels'
               },
               {
                 to: 'community/who-uses-ozone',
-                label: 'Who Uses Ozone?',
+                label: 'Who Uses Ozone?'
               },
               {
                 to: 'community/report-an-issue',
-                label: 'Report An Issue',
+                label: 'Report An Issue'
               },
               {
                 to: 'community/ask-a-question',
-                label: 'Ask a Question',
+                label: 'Ask a Question'
               },
               {
                 to: 'community/how-to-contribute',
-                label: 'How to Contribute',
+                label: 'How to Contribute'
               },
               {
                 to: 'community/events-and-media',
-                label: 'Events and Media',
-              },
+                label: 'Events and Media'
+              }
             ]
           },
           //   TODO: Enable if multiple languages are supported. See https://issues.apache.org/jira/browse/HDDS-9571
@@ -399,9 +427,9 @@ const config = {
             href: 'https://github.com/apache/ozone',
             position: 'right',
             className: 'header-github-link',
-            'aria-label': 'GitHub Repo',
-          },
-        ],
+            'aria-label': 'GitHub Repo'
+          }
+        ]
       },
       footer: {
         links: [
@@ -435,7 +463,7 @@ const config = {
               {
                 label: 'Thanks',
                 href: 'https://www.apache.org/foundation/thanks.html'
-              },
+              }
             ]
           },
           {
@@ -464,30 +492,30 @@ const config = {
               {
                 label: 'Twitter',
                 href: 'https://twitter.com/ApacheOzone'
-              },
-            ],
+              }
+            ]
           },
           {
             title: 'Repositories',
             items: [
               {
                 label: 'Ozone',
-                to: 'https://github.com/apache/ozone',
+                to: 'https://github.com/apache/ozone'
               },
               {
                 label: 'Website',
-                to: 'https://github.com/apache/ozone-site',
+                to: 'https://github.com/apache/ozone-site'
               },
               {
                 label: 'Docker Image',
-                to: 'https://github.com/apache/ozone-docker',
+                to: 'https://github.com/apache/ozone-docker'
               },
               {
                 label: 'Docker Runner Image',
-                to: 'https://github.com/apache/ozone-docker-runner',
-              },
-            ],
-          },
+                to: 'https://github.com/apache/ozone-docker-runner'
+              }
+            ]
+          }
         ],
         copyright: `
         <div>
@@ -495,21 +523,21 @@ const config = {
           <div>
             <p>The Apache Software Foundation, Apache Ozone, Ozone, Apache, the Apache Feather, and the Apache Ozone project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p>
           </div>
-        </div>`,
+        </div>`
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['bash'],
+        additionalLanguages: ['bash']
       },
       algolia: {
-        appId: "YQWKI4BIJ7",
-        apiKey: "47cd671112fb5e0363a4d9724beeb9d4",
-        indexName: "Apache Ozone website",
+        appId: 'YQWKI4BIJ7',
+        apiKey: '47cd671112fb5e0363a4d9724beeb9d4',
+        indexName: 'Apache Ozone website',
         searchParameters: {}
       }
     }),
-    scripts: ['/script/matomo.js'],
+  scripts: ['/script/matomo.js']
 };
 
 module.exports = config;

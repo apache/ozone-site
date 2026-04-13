@@ -17,11 +17,11 @@
  * under the License.
  */
 
-import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Logo from "@site/static/img/ozone-logo.svg";
-import Heading from "@theme/Heading";
-import Layout from "@theme/Layout";
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Logo from '@site/static/img/ozone-logo.svg';
+import Heading from '@theme/Heading';
+import Layout from '@theme/Layout';
 
 // Import Bootstrap icons
 import {
@@ -35,51 +35,51 @@ import {
   Water,
   Bucket,
   Folder2
-} from "react-bootstrap-icons";
+} from 'react-bootstrap-icons';
 
 const features = [
   {
-    title: "Scalable",
+    title: 'Scalable',
     description:
-      "Handle petabytes of data with ease. Apache Ozone scales to billions of objects and supports both small and large files efficiently.",
+      'Handle petabytes of data with ease. Apache Ozone scales to billions of objects and supports both small and large files efficiently.',
     icon: GraphUpArrow,
-    iconSize: 30,
+    iconSize: 30
   },
   {
-    title: "Resilient",
+    title: 'Resilient',
     description:
-      "Built-in replication, erasure coding, and robust consistency model ensure your data remains safe and available.",
+      'Built-in replication, erasure coding, and robust consistency model ensure your data remains safe and available.',
     icon: Diagram3Fill,
-    iconSize: 30,
+    iconSize: 30
   },
   {
-    title: "Secure",
+    title: 'Secure',
     description:
-      "Security features including Kerberos authentication, TDE encryption, ACL-based and Ranger based authorization for enterprise environments.",
+      'Security features including Kerberos authentication, TDE encryption, ACL-based and Ranger based authorization for enterprise environments.',
     icon: LockFill,
-    iconSize: 30,
+    iconSize: 30
   },
   {
-    title: "Performant",
+    title: 'Performant',
     description:
-      "Optimized for both high throughput and low latency operations, with support for tiered storage.",
+      'Optimized for both high throughput and low latency operations, with support for tiered storage.',
     icon: Speedometer,
-    iconSize: 30,
+    iconSize: 30
   },
   {
-    title: "Multi-Protocol",
+    title: 'Multi-Protocol',
     description:
-      "Native S3 protocol support plus seamless integration with the Hadoop ecosystem through multiple filesystem interfaces.",
+      'Native S3 protocol support plus seamless integration with the Hadoop ecosystem through multiple filesystem interfaces.',
     icon: Stack,
-    iconSize: 30,
+    iconSize: 30
   },
   {
-    title: "Efficient",
+    title: 'Efficient',
     description:
-      "Dense storage nodes and extensive scalability allow consolidation of multiple clusters, reducing operational costs.",
+      'Dense storage nodes and extensive scalability allow consolidation of multiple clusters, reducing operational costs.',
     icon: HddRackFill,
-    iconSize: 30,
-  },
+    iconSize: 30
+  }
 ];
 
 function Feature({ title, description, icon: Icon, iconSize }) {
@@ -88,7 +88,7 @@ function Feature({ title, description, icon: Icon, iconSize }) {
       <div className="text--center padding--lg">
         <div
           className="margin-bottom--md"
-          style={{ color: "var(--ifm-color-primary)" }}
+          style={{ color: 'var(--ifm-color-primary)' }}
         >
           <Icon size={iconSize} />
         </div>
@@ -102,26 +102,26 @@ function Feature({ title, description, icon: Icon, iconSize }) {
 function UseCases() {
   const useCases = [
     {
-      title: "Data Lakes",
+      title: 'Data Lakes',
       description:
-        "Build cost-effective, scalable data lakes for analytics workloads with tiered storage support.",
+        'Build cost-effective, scalable data lakes for analytics workloads with tiered storage support.',
       icon: Water,
-      iconSize: 30,
+      iconSize: 30
     },
     {
-      title: "Object Storage",
+      title: 'Object Storage',
       description:
-        "S3-compatible storage for applications, backups, and unstructured data at any scale.",
+        'S3-compatible storage for applications, backups, and unstructured data at any scale.',
       icon: Bucket,
-      iconSize: 30,
+      iconSize: 30
     },
     {
-      title: "Big Data Storage",
+      title: 'Big Data Storage',
       description:
-        "Reliable storage foundation for Hadoop, Spark, and other data processing frameworks.",
+        'Reliable storage foundation for Hadoop, Spark, and other data processing frameworks.',
       icon: Folder2,
-      iconSize: 30,
-    },
+      iconSize: 30
+    }
   ];
 
   return (
@@ -129,9 +129,9 @@ function UseCases() {
       <div className="container">
         <div className="row">
           <div className="col">
-             <Heading as="h2" className="text--center margin-bottom--lg">
+            <Heading as="h2" className="text--center margin-bottom--lg">
               Use Cases
-             </Heading>
+            </Heading>
           </div>
         </div>
         <div className="row">
@@ -140,7 +140,7 @@ function UseCases() {
               <div className="text--center padding--lg">
                 <div
                   className="margin-bottom--md"
-                  style={{ color: "var(--ifm-color-primary)" }}
+                  style={{ color: 'var(--ifm-color-primary)' }}
                 >
                   <useCase.icon size={useCase.iconSize} />
                 </div>
@@ -168,238 +168,238 @@ function UseCases() {
 function Integrations() {
   const integrations = [
     {
-      name: "Hive",
+      name: 'Hive',
       icon: () => (
         <img
           src="/img/integrations/hive.svg"
           className="integration-logo-img"
           data-logo="hive"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/user-guide/integrations/hive",
+      link: '/docs/user-guide/integrations/hive'
     },
     {
-      name: "Spark",
+      name: 'Spark',
       icon: () => (
         <img
           src="/img/integrations/spark.svg"
           className="integration-logo-img"
           data-logo="spark"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
-      ),
+      )
       // link: '/docs/user-guide/integrations/spark'
     },
     {
-      name: "Iceberg",
+      name: 'Iceberg',
       icon: () => (
         <img
           src="/img/integrations/iceberg.svg"
           className="integration-logo-img"
           data-logo="iceberg"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/user-guide/integrations/iceberg",
+      link: '/docs/user-guide/integrations/iceberg'
     },
     {
-      name: "Trino",
+      name: 'Trino',
       icon: () => (
         <img
           src="/img/integrations/trino.svg"
           className="integration-logo-img"
           data-logo="trino"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
-      ),
+      )
       // link: '/docs/user-guide/integrations/trino'
     },
     {
-      name: "Impala",
+      name: 'Impala',
       icon: () => (
         <img
           src="/img/integrations/impala.svg"
           className="integration-logo-img"
           data-logo="impala"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/user-guide/integrations/impala",
+      link: '/docs/user-guide/integrations/impala'
     },
     {
-      name: "Ranger",
+      name: 'Ranger',
       icon: () => (
         <img
           src="/img/integrations/ranger.svg"
           className="integration-logo-img"
           data-logo="ranger"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/administrator-guide/configuration/security/ranger",
+      link: '/docs/administrator-guide/configuration/security/ranger'
     },
     {
-      name: "Knox",
+      name: 'Knox',
       icon: () => (
         <img
           src="/img/integrations/knox.svg"
           className="integration-logo-img"
           data-logo="knox"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
-      ),
+      )
       // link: '/docs/administrator-guide/configuration/security/knox'
     },
     {
-      name: "Kerberos",
+      name: 'Kerberos',
       icon: (props) => (
         <ShieldLock
           {...props}
           size={28}
-          style={{ color: "#212529" }}
+          style={{ color: '#212529' }}
           data-logo="kerberos-icon"
         />
       ),
-      link: "/docs/administrator-guide/configuration/security/kerberos",
+      link: '/docs/administrator-guide/configuration/security/kerberos'
     },
     {
-      name: "Prometheus",
+      name: 'Prometheus',
       icon: () => (
         <img
           src="/img/integrations/prometheus.svg"
           className="integration-logo-img"
           data-logo="prometheus"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/administrator-guide/operations/observability/prometheus",
+      link: '/docs/administrator-guide/operations/observability/prometheus'
     },
     {
-      name: "Grafana",
+      name: 'Grafana',
       icon: () => (
         <img
           src="/img/integrations/grafana.svg"
           className="integration-logo-img"
           data-logo="grafana"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/administrator-guide/operations/observability/grafana",
+      link: '/docs/administrator-guide/operations/observability/grafana'
     },
     {
-      name: "Oozie",
+      name: 'Oozie',
       icon: () => (
         <img
           src="/img/integrations/oozie.svg"
           className="integration-logo-img"
           data-logo="oozie"
           style={{
-            height: "28px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '28px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
-      ),
+      )
       // link: '/docs/user-guide/integrations/oozie'
     },
     {
-      name: "Hue",
+      name: 'Hue',
       icon: () => (
         <img
           src="/img/integrations/hue.svg"
           className="integration-logo-img"
           data-logo="hue"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
-      ),
+      )
       // link: '/docs/user-guide/integrations/hue'
     },
     {
-      name: "HBase",
+      name: 'HBase',
       icon: () => (
         <img
           src="/img/integrations/hbase.svg"
           className="integration-logo-img"
           data-logo="hbase"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/user-guide/integrations/hbase",
+      link: '/docs/user-guide/integrations/hbase'
     },
     {
-      name: "DistCp",
+      name: 'DistCp',
       icon: () => (
         <img
           src="/img/integrations/distcp.svg"
           className="integration-logo-img"
           data-logo="distcp"
           style={{
-            height: "42px",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
+            height: '42px',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain'
           }}
         />
       ),
-      link: "/docs/user-guide/integrations/hadoop-distcp",
-    },
+      link: '/docs/user-guide/integrations/hadoop-distcp'
+    }
   ];
 
   return (
@@ -418,16 +418,16 @@ function Integrations() {
               <Link
                 to={integration.link}
                 className="text--center padding--md integration-item"
-                style={{ display: "block", textDecoration: "none" }}
+                style={{ display: 'block', textDecoration: 'none' }}
               >
                 <div
                   className="margin-bottom--sm"
                   style={{
-                    color: "var(--ifm-color-primary)",
-                    height: "50px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    color: 'var(--ifm-color-primary)',
+                    height: '50px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                   }}
                 >
                   <integration.icon size={28} />
@@ -449,7 +449,7 @@ export default function Home() {
     <Layout title="Home" description={`${siteConfig.tagline}`}>
       <div className="hero hero-banner">
         <div className="container">
-          <div className="row" style={{ alignItems: "center" }}>
+          <div className="row" style={{ alignItems: 'center' }}>
             <div className="col col--6">
               <Heading as="h1" className="hero__title">
                 {siteConfig.title}
@@ -472,12 +472,12 @@ export default function Home() {
               {/* Logo with increased size and positioned more to the right */}
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  paddingRight: "2rem",
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  paddingRight: '2rem'
                 }}
               >
-                <Logo style={{ maxHeight: "240px", width: "auto" }} />
+                <Logo style={{ maxHeight: '240px', width: 'auto' }} />
               </div>
             </div>
           </div>
