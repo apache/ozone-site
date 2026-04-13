@@ -244,7 +244,6 @@ const config = {
           //  of publishable quality before enabling visibility for that section.
           exclude: [
             '**/06-troubleshooting/**',
-            '**/07-system-internals/**',
           ]
         },
         blog: {
