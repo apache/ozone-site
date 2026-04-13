@@ -138,7 +138,7 @@ A red check does not mean you did something wrong—it means the run found somet
 3. Try the same **check script** locally if you have the environment set up ([Run checks on your machine](#run-checks-on-your-machine)).
 4. For **transient** failures or **flaky** tests only: **committers** can use GitHub’s **Re-run failed jobs** on the workflow run. **Other contributors** should wait for a committer to do that, or ask on the PR if it does not happen within a reasonable time (which varies with time of day, weekends, holidays, and so on). Avoid empty commits or re-running the entire workflow when only a subset failed.
 
-A maintained mirror of build results from `apache/ozone` default-branch runs is [adoroszlai/ozone-build-results](https://github.com/adoroszlai/ozone-build-results/) (the older `elek.github.io` archive is no longer updated).
+A maintained mirror of build results from `apache/ozone` default-branch runs is [adoroszlai/ozone-build-results](https://github.com/adoroszlai/ozone-build-results/).
 
 ### Get help
 
@@ -153,7 +153,7 @@ For **repeat failures** or **environment-only** bugs, use the dedicated workflow
 - **`flaky-test-check`** — defined in [`intermittent-test-check.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/intermittent-test-check.yml); runs a chosen JUnit class or method many times across parallel splits.
 - **`repeat-acceptance-test`** — defined in [`repeat-acceptance.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/repeat-acceptance.yml); repeats acceptance tests concurrently (suite or filter).
 
-Those replace ad-hoc loops from older wiki-style tips. You can still use an IDE, extra logging, or interactive debugging (for example [tmate](https://github.com/tmate-io/tmate)) on a fork if you accept the risk on **public** repos and **never** expose secrets.
+You can still use an IDE, extra logging, or interactive debugging (for example [tmate](https://github.com/tmate-io/tmate)) on a fork if you accept the risk on **public** repos and **never** expose secrets.
 
 ## See also
 
