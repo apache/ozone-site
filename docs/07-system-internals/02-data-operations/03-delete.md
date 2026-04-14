@@ -6,8 +6,6 @@ sidebar_label: Delete
 
 A common question is: after a user deletes something, when is space actually reclaimed? Ozone spreads work across the client, Ozone Manager (OM), Storage Container Manager (SCM), and Datanodes. This page is a single map of that pipeline: **metadata moves first**, then **blocks are deleted asynchronously**, and **bytes on disk** disappear only after Datanodes finish their background cleanup.
 
-AuthN, authZ (Kerberos, Ranger, native ACLs), and encryption behave like other OM requests; they gate the flows below but are not repeated in every step.
-
 ## Client: CLI, FileSystem, and trash
 
 Deletion depends on **which API** you use and on **bucket layout**. Trash is implemented on the **client** (renames into `.Trash`), not as a separate table inside OM.
@@ -134,6 +132,6 @@ This design favors **eventual completion** under failures, **no orphan replicas*
 
 ## See also
 
-- [RocksDB tables in OM](../01-components/01-ozone-manager/02-rocksdb-schema) — where `fileTable`, `deletedTable`, and related column families are documented.
-- [RocksDB on SCM](../01-components/02-storage-container-manager/02-rocksdb-schema) and [on Datanodes](../01-components/03-datanode/02-rocksdb-schema).
-- [Administrator trash guide](../../05-administrator-guide/03-operations/12-trash) — operations-focused trash behavior.
+- [RocksDB in Ozone](../../administrator-guide/configuration/performance/rocksdb) — OM, SCM, and Datanode RocksDB usage, including tables such as `fileTable` and `deletedTable`.
+- [Datanode container schema (RocksDB)](../components/datanode/rocksdb-schema) — per-container metadata layout on the Datanode.
+- [Trash](../../administrator-guide/operations/trash) — operations-focused trash behavior.
