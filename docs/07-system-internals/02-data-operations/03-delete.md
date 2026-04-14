@@ -49,6 +49,8 @@ Deletion depends on **which API** you use and on **bucket layout**. Trash is imp
 
 **Takeaway:** OM has **no trash table**. It only sees **renames** or **final deletes**.
 
+![Ozone client-side deletion and trash decision tree: skipTrash vs default rm, trash enabled/disabled, FSO rename to .Trash vs OBS direct deleteKey, and trash emptier](./client_delete.png)
+
 ## Ozone Manager: tables and background services
 
 Deletion in OM is **multi-phase** and **asynchronous** so large trees and huge key counts do not block a single RPC.
@@ -90,6 +92,8 @@ Deleting a directory does **not** instantly move every descendant. The service:
 | 3 | File metadata | `deletedTable` | removed | `KeyDeletingService` → `OMKeyPurgeRequest` |
 | 4 | Directory metadata | `deletedDirectoryTable` | removed | `DirectoryDeletingService` → `PurgePathRequest` |
 
+![OM internal deletion workflow: synchronous delete, DirectoryDeletingService, KeyDeletingService, OMKeyPurgeRequest, and handoff to SCM](./om_delete.png)
+
 ## OBS and LEGACY buckets
 
 OBS / legacy layouts use a **flat key namespace** (paths with slashes are still **one key**). There is **no** directory tree in **`directoryTable`**, so there is **no** **`DirectoryDeletingService`** expansion step.
@@ -129,6 +133,8 @@ This design favors **eventual completion** under failures, **no orphan replicas*
 | `BlockDeletingTask` | Per-container work unit; uses the container **handler** (e.g. key-value) |
 
 **Net effect:** SCM and OM do not wait for slow disks before moving their own state forward; Datanodes **guarantee** eventual removal or keep retrying until the cluster agrees every replica is gone.
+
+![SCM block reclamation: DeletedBlocksTXTable, SCMBlockDeletingService, DeleteBlocksCommand to Datanodes, ACKs, and transaction cleanup](./scm_delete.png)
 
 ## See also
 
