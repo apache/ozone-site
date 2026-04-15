@@ -19,11 +19,11 @@ The Datanode transitions through the following operational states during mainten
 A Datanode will remain in the `ENTERING_MAINTENANCE` state until the SCM (Storage Container Manager) verifies the following safety conditions:
 
 * **Pipeline Closure**: All open Ratis and EC pipelines on the Datanode must be successfully closed. This ensures no active write operations are interrupted.
-* **Datanode Acknowledgment**: The Datanode must confirm it has received the maintenance command and persisted the "Entering Maintenance" state to its local disk. This prevents state confusion if the Datanode is rebooted.
+* **Datanode Acknowledgment**: The Datanode must confirm it has received the maintenance command and persisted the "ENTERING_MAINTENANCE" state to its local disk. This prevents state confusion if the Datanode is rebooted.
 * **Sufficient Replication (Data Safety)**: The SCM verifies that every container stored on the Datanode has enough healthy copies elsewhere in the cluster to remain safe while the node is offline.
     * **Ratis (3-way)**: By default, at least 2 replicas must remain online on other healthy Datanodes (configurable via `hdds.scm.replication.maintenance.replica.minimum`).
     * **Erasure Coding (EC)**: By default, the cluster must maintain at least `Data Shards + 1` available shards elsewhere (configurable via `hdds.scm.replication.maintenance.remaining.redundancy`). For example, in an RS(6,3) policy, at least 7 shards must be online.
-    * **Health Check**: Every container on the node must be in a stable state (e.g., `CLOSED` or `QUASI_CLOSED`). If a container is under-replicated or "unclosed," the SCM will block the transition and trigger background replication to create new copies on other nodes until the safety threshold is met.
+    * **Health Check**: Every container on the node must be in a stable state (e.g., `CLOSED` or `QUASI_CLOSED`). If a container is under-replicated or in a non-stable state, the SCM will block the transition and trigger background replication to create new copies on other nodes until the safety threshold is met.
 
 ## Command Line Usage
 
@@ -38,10 +38,10 @@ ozone admin datanode list
 To start maintenance mode for one or more Datanodes:
 
 ```shell
-ozone admin datanode maintenance [-hV] [-id=<scmServiceId>] [--scm=<scm>] [--end=<hours>] [--force] [<hosts>...]
+ozone admin datanode maintenance [-hV] [-id=<scmServiceId>] [--scm=<scm>] [--end=<hours>] [--force] <hosts>...
 ```
 
-- `<hosts>`: A space-separated list of hostnames or IP addresses of the Datanodes to put into maintenance mode.
+- `<hosts>`: **Required.** A space-separated list of hostnames or IP addresses of the Datanodes to put into maintenance mode.
 - `--end=<hours>`: Optional. Automatically end maintenance after the given hours. By default, maintenance must be ended manually.
 - `--force`: Optional. Forcefully try to put the Datanode(s) into maintenance mode.
 
