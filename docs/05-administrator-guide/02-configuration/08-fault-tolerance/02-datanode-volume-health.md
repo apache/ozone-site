@@ -8,9 +8,9 @@ Ozone separates container scrubbing (checksum validation of container metadata a
 
 For container checksum scanning, see [Container scanner](./container-scanner).
 
-## Volume health checker
+## Volume scanner
 
-The Datanode runs a periodic volume health process that exercises the physical volumes used for data, metadata, or local databases:
+The Datanode volume scanner runs periodically and exercises the physical volumes used for data, metadata, or local databases:
 
 - It runs on a configurable interval (see `hdds.datanode.periodic.disk.check.interval.minutes` below).
 - It performs small read/write probes to see whether each volume responds reliably.
@@ -39,7 +39,7 @@ For how data, metadata, and DB directories are laid out on the node (`hdds.datan
 | `hdds.datanode.failed.data.volumes.tolerated` | `-1` | Data volumes that may fail before the Datanode stops (`-1` = no fixed cap, but at least one good volume must remain). |
 | `hdds.datanode.failed.metadata.volumes.tolerated` | `-1` | Same for metadata volumes. |
 | `hdds.datanode.failed.db.volumes.tolerated` | `-1` | Same for RocksDB / local DB volumes. |
-| `hdds.datanode.periodic.disk.check.interval.minutes` | `60` | How often the volume health checker runs. |
+| `hdds.datanode.periodic.disk.check.interval.minutes` | `60` | How often the volume scanner runs. |
 | `hdds.datanode.disk.check.io.test.count` | `3` | Number of recent I/O tests used to judge disk health. Set to `0` to disable disk I/O checks. |
 | `hdds.datanode.disk.check.io.failures.tolerated` | `1` | How many of the last `io.test.count` checks may fail before the volume is marked failed. |
 | `hdds.datanode.disk.check.io.file.size` | `100` (bytes) | Size of the temporary file used for read/write probes during a check. |
