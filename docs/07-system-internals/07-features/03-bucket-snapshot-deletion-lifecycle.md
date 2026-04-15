@@ -49,3 +49,5 @@ The snapshot deletion process is divided into four main phases:
 | **`OMSnapshotDeleteRequest`** | The Labeler | Marks the snapshot for death by updating its status. |
 | **`SnapshotDeletingService`** | The Reclaimer | Moves the data references to the next snapshot or AOS. |
 | **`OMSnapshotPurgeRequest`** | The Surgeon & Janitor | Re-links the snapshot chain and deletes the physical records. |
+
+![Apache Ozone Snapshot Deletion Lifecycle](snapshot_delete.png)
