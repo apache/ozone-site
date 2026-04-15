@@ -72,5 +72,5 @@ To update the default layout when creating buckets, configure these properties i
 | `ozone.s3g.default.bucket.layout` | `OBJECT_STORE` | Defines the default layout for buckets created through the S3 API |
 
 <!--
-For detailed technical information about the internal metadata structure and implementation, see the [File System Optimization System Internals](../../../../07-system-internals/07-features/01-filesystem-optimization.md) documentation.
+For detailed technical information about the internal metadata structure and implementation, see the [File System Optimization System Internals](../../../../system-internals/features/filesystem-optimization) documentation.
 -->
