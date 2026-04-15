@@ -12,7 +12,7 @@ The exact column families and key encodings can evolve between Ozone releases; t
 
 | Property | Value |
 | -------- | ----- |
-| Database directory | Configured by [`ozone.om.db.dirs`](../../../05-administrator-guide/02-configuration/99-appendix) (falls back to `ozone.metadata.dirs` if unset) |
+| Database directory | Configured by [`ozone.om.db.dirs`](../../../administrator-guide/configuration/appendix) (falls back to `ozone.metadata.dirs` if unset) |
 | On-disk name | `om.db` |
 | Engine | RocksDB with multiple column families |
 
@@ -42,7 +42,7 @@ Used for buckets with **LEGACY** or **OBJECT_STORE** layout. Keys are stored und
 
 ### 3. File system optimized (FSO) layout
 
-Used for buckets with **FILE_SYSTEM_OPTIMIZED** layout. Keys use volume ID, bucket ID, and parent object ID so directory operations (for example `ls`, rename) can avoid scanning full string paths. See also [Filesystem optimization](../../07-features/01-filesystem-optimization).
+Used for buckets with **FILE_SYSTEM_OPTIMIZED** layout. Keys use volume ID, bucket ID, and parent object ID so directory operations (for example `ls`, rename) can avoid scanning full string paths. See also [File System Optimized buckets](../../../core-concepts/namespace/buckets/layouts/file-system-optimized).
 
 | Table name | Key format | Value type | Description |
 | ---------- | ---------- | ---------- | ----------- |
