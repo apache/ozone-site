@@ -26,7 +26,7 @@ Three paths balance coverage and cost:
 | --- | --- | --- |
 | **Background metadata scanner** | Validates **container metadata** and internal metadata structures. | One thread **across all volumes** on the Datanode; relatively light. |
 | **Background data scanner** | Performs checksum validation on every byte of data on the volume | **One thread per volume**, with a read bandwidth limit to avoid interfering with workloads. |
-| **On-demand scanner** | Runs when a container is **opened** or when corruption is **suspected** during normal I/O. | Uses its own throttle (`hdds.container.scrub.on.demand.volume.bytes.per.second` in the [appendix](../appendix)). |
+| **On-demand data scanner** | Runs metadata and data scans when corruption is **suspected** during normal I/O. | Uses its own throttle (`hdds.container.scrub.on.demand.volume.bytes.per.second`. |
 
 Developer-only toggles `hdds.container.scrub.dev.metadata.scan.enabled` and `hdds.container.scrub.dev.data.scan.enabled` can turn off background metadata/data scanning for testing; do not use that in production clusters.
 
