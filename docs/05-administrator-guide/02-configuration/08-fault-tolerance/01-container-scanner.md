@@ -87,7 +87,11 @@ For Datanode volume and directory layout, see `hdds.datanode.dir`, `hdds.datanod
 
 ## Tuning tips
 
-- **Large disks** — If a full data pass cannot finish within your `data.scan.interval` at the default throttle, **raise** `hdds.container.scrub.volume.bytes.per.second` cautiously.
+::: note
+The background container data scanner can potentially take weeks to scan all container data on a volume. This rate is expected in order to reserve disk bandwidth for foreground workloads.
+:::
+
+- **Large disks** — If a full data pass cannot finish within your desired `data.scan.interval` at the default throttle, **raise** `hdds.container.scrub.volume.bytes.per.second` cautiously to avoid taking too much disk IO from foreground workloads.
 - **Latency-sensitive workloads** — If background scanning competes with foreground I/O, **lower** the per-volume byte limit.
 - **Fail-fast nodes** — Tighten **`failed.*.volumes.tolerated`** (non-negative values) if you prefer the process to exit once a few volumes are bad, instead of running degraded.
 
