@@ -70,7 +70,7 @@ For Datanode volume and directory layout, see `hdds.datanode.dir`, `hdds.datanod
 | --- | --- | --- |
 | `hdds.container.scrub.enabled` | `true` | Master switch for container scanners. |
 | `hdds.container.scrub.metadata.scan.interval` | `3h` | Time between **metadata** scan passes. |
-| `hdds.container.scrub.data.scan.interval` | `7d` | Minimum time between **full data** scan **iterations** (if a pass finishes sooner, the scanner waits). |
+| `hdds.container.scrub.data.scan.interval` | `7d` | Minimum time between starting full container data scans of the same volume. If a scan takes longer than this, the next scan will begin as soon as the current one finishes. |
 | `hdds.container.scrub.volume.bytes.per.second` | `5242880` (~**5&nbsp;MiB/s**) | Per-volume **bandwidth cap** for **background** data scanning. |
 | `hdds.container.scrub.min.gap` | `15m` | Minimum time before the **same** container is scanned again. |
 
