@@ -25,7 +25,7 @@ The snapshot deletion process is divided into four main phases:
     *   It processes the deleted snapshot's internal tracking tables: `deletedTable`, `deletedDirTable`, and `renamedTable`.
     *   **Data Moving:** It moves entries from these tables to either:
         1.  The **next active snapshot** in the chain (if one exists).
-        2.  The **Active Object Store (AOS)** (the main bucket) if no subsequent snapshot exists.
+        2.  The **Active Object Store (AOS)** if no subsequent snapshot exists.
 *   **Settling:** Once all keys and directories for the snapshot have been successfully moved (i.e., the snapshot's deleted tables are empty), the service collects the snapshot's DB key into a "purge list".
 
 ## 3. Finalization Phase: `OMSnapshotPurgeRequest`
