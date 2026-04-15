@@ -16,7 +16,7 @@ Storage can corrupt data **without** an immediate I/O error. The container scann
 
 - **Early detection** — Bad replicas are flagged before a client depends on them.
 - **Replication health** — SCM can keep the intended replica count by treating unhealthy copies as needing repair.
-- **Automated recovery** — The Datanode reports container state to SCM; SCM’s replication machinery can schedule work using healthy copies (see also the [replication manager report](../../operations/container-replication-report)).
+- **Automated recovery** — The Datanode reports container state to SCM; SCM’s replication manager can schedule work using healthy copies (see also the [replication manager report](../../operations/container-replication-report)).
 
 ## Scanner types
 
