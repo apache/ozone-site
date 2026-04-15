@@ -4,7 +4,7 @@ sidebar_label: Container Scanner
 
 # Ozone container scanner
 
-The **container scanner** is a Datanode background service that helps protect against **silent data corruption** (“bit rot”) by verifying [storage containers](../../../core-concepts/replication/storage-containers) before clients read them. This page summarizes how it works, how failures propagate to [Storage Container Manager (SCM)](../../../core-concepts/architecture/storage-container-manager), and which settings operators tune.
+The **container scanner** is a Datanode background service that helps protect against **silent data corruption** (“bit rot”) by verifying [storage containers](../../../core-concepts/replication/storage-containers) even when clients are not reading them. This page summarizes how it works, how failures propagate to [Storage Container Manager (SCM)](../../../core-concepts/architecture/storage-container-manager), and which settings operators tune.
 
 For authoritative defaults and descriptions, use the [configuration appendix](../appendix) (search for `hdds.container.scrub` and `hdds.datanode`). Main scanner implementations in [`apache/ozone`](https://github.com/apache/ozone) are linked under [Scanner types](#scanner-types) below.
 
