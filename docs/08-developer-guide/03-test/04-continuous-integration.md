@@ -23,7 +23,7 @@ Follow these steps once; after that, pushing to your branch is the usual loop.
 3. **Jira** — Create or choose an issue in [HDDS](https://issues.apache.org/jira/projects/HDDS/) (the Ozone Jira project; the name is historical). Need an account? Use the ASF [Jira self-service](https://selfserve.apache.org/jira-account.html?project=ozone) form.
 4. **Branch** — Work on a branch, often named after the issue (for example `HDDS-1234`).
 5. **Push** — When you push, GitHub should show a **`build-branch`** workflow run under the **Actions** tab on your fork. Wait for it to finish and fix any failures you can reproduce.
-6. **Open the PR** — Use the [pull request template](https://github.com/apache/ozone/blob/master/.github/pull_request_template.md). When the change is ready for review, set the Jira to **Patch Available** so committers know to look.
+6. **Open the PR** — Use the [pull request template](https://github.com/apache/ozone/blob/master/.github/pull_request_template.md) to describe your work and raise the PR. Once submitted, change the Jira status to **Patch Available**.
 
 The full narrative (reviews, merging, Jira etiquette) is in the [Ozone contributing guide](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#contribute-your-modifications).
 
