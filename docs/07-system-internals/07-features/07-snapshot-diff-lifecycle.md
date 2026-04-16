@@ -72,4 +72,65 @@ Based on `SnapshotDiffManager.java`, here is the step-by-step lifecycle:
 *   **REJECTED**: Too many concurrent jobs; the client should retry later.
 *   **CANCELLED**: The job was manually stopped via a cancel request.
 
-![System diagram: asynchronous snapshot diff lifecycle in Ozone Manager](snapshot_diff.png)
+## Lifecycle flow
+
+```mermaid
+flowchart TB
+    subgraph s1["1. Initiation & job queuing (getSnapshotDiffReport)"]
+        A["User requests diff: fromSnapshot → toSnapshot"] --> B["Derive snapDiffJobKey (snapshot UUID pair)"]
+        B --> C{"Job already exists?"}
+        C -->|Yes| D["Return current job status"]
+        C -->|No| E["Create SnapshotDiffJob (QUEUED)<br/>persist to snapDiffJobTable"]
+        E --> F["Submit to snapDiffExecutor"]
+        F --> G["Status → IN_PROGRESS"]
+    end
+
+    subgraph s2["2. Preparation (generateSnapshotDiffReport)"]
+        G --> H["Increment numSnapshotDiffJobs"]
+        H --> I["Acquire rcFromSnapshot, rcToSnapshot"]
+        I --> J["Create temp column families:<br/>fromSnapshot / toSnapshot / objectIDs"]
+    end
+
+    subgraph s3["3. Delta discovery (getDeltaFilesAndDiffKeysToObjectIdToKeyMap)"]
+        J --> K{"Native diff available<br/>and not forced full?"}
+        K -->|Yes| L["RocksDBCheckpointDiffer:<br/>identify delta SST files"]
+        K -->|No| M["Fallback: full scan of key tables"]
+        L --> N["Stream keys from delta SSTs"]
+        M --> N
+        N --> O["Populate Object ID → key maps<br/>and objectIDs union (dir flags)"]
+    end
+
+    subgraph s4["4. Path resolution (FSO)"]
+        O --> P{"FSO layout bucket?"}
+        P -->|Yes| Q["FSODirectoryPathResolver:<br/>ParentID + name → full path"]
+        P -->|No| R["No FSO path rewrite"]
+        Q --> S["generateDiffReport"]
+        R --> S
+    end
+
+    subgraph s5["5. Report generation"]
+        S --> T["Iterate union of Object IDs from delta"]
+        T --> U["Classify: CREATE / DELETE / RENAME / MODIFY"]
+        U --> V["Serialize DiffReportEntry rows<br/>→ snapDiffReportTable"]
+    end
+
+    subgraph s6["6. Finalization"]
+        V --> W["Job status → DONE<br/>record totalDiffEntries"]
+        W --> X["Drop temp CFs<br/>decrement snapshot ref counts"]
+    end
+
+    subgraph s7["7. Consumption (createPageResponse)"]
+        X --> Y["Client polls OM for report"]
+        Y --> Z["Paged responses + continuation token"]
+    end
+
+    subgraph s8["8. Garbage collection (DiffCleanupService)"]
+        AA["Background: retention elapsed"] --> AB["Delete job + report pages<br/>from RocksDB tables"]
+    end
+
+    Z -.->|Later| AA
+
+    G -.->|Error| FAIL["FAILED (with reason)"]
+    F -.->|Concurrency limit| REJ["REJECTED — retry later"]
+    G -.->|Cancel request| CANC["CANCELLED"]
+```
