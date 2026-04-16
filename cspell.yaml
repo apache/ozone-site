@@ -133,6 +133,8 @@ words:
 - spnego
 - keytab
 - Keytab
+- keyspace
+- Merkle
 - RocksDB
 - LDB
 - memtable
