@@ -11,8 +11,20 @@ While in maintenance mode, a Datanode does not accept new writes but may still s
 The Datanode transitions through the following operational states during maintenance:
 
 1. **IN_SERVICE**: The Datanode is fully operational and participating in data writes and reads.
-2. **ENTERING_MAINTENANCE**: The Datanode is transitioning into maintenance mode. New writes will be avoided.
+2. **ENTERING_MAINTENANCE**: The Datanode is transitioning into maintenance mode. New writes will be avoided. The SCM monitors the Datanode until it meets all safety criteria before allowing it to fully enter maintenance.
 3. **IN_MAINTENANCE**: The Datanode is in maintenance mode. Data will not be written to it. If the Datanode remains in this state beyond the configured maintenance window, its data will start to be replicated to other Datanodes to ensure data durability.
+
+### Transition Criteria (ENTERING_MAINTENANCE to IN_MAINTENANCE)
+
+A Datanode will remain in the `ENTERING_MAINTENANCE` state until the SCM (Storage Container Manager) verifies the following safety conditions:
+
+* **Pipeline Closure**: All open Ratis and EC pipelines on the Datanode must be successfully closed. This ensures no active write operations are interrupted.
+* **Datanode Acknowledgment**: The Datanode must confirm it has received the maintenance command and persisted the "ENTERING_MAINTENANCE" state to its local disk. This prevents state confusion if the Datanode is rebooted.
+* **Container Health**: All containers on the DataNode must be in a stable state (either CLOSED or QUASI_CLOSED). Nodes will not enter maintenance if they
+      contain OPEN or CLOSING containers
+* **Sufficient Replication (Data Safety)**: The SCM verifies that every container stored on the Datanode has enough healthy copies elsewhere in the cluster to remain safe while the node is offline.
+    * **Ratis (3-way)**: By default, at least 2 replicas must remain online on other healthy Datanodes (configurable via `hdds.scm.replication.maintenance.replica.minimum`).
+    * **Erasure Coding (EC)**: By default, the cluster must maintain at least `Data Shards + 1` available shards elsewhere (configurable via `hdds.scm.replication.maintenance.remaining.redundancy`). For example, in an RS(6,3) policy, at least 7 shards must be online.
 
 ## Command Line Usage
 
@@ -27,10 +39,10 @@ ozone admin datanode list
 To start maintenance mode for one or more Datanodes:
 
 ```shell
-ozone admin datanode maintenance [-hV] [-id=<scmServiceId>] [--scm=<scm>] [--end=<hours>] [--force] [<hosts>...]
+ozone admin datanode maintenance [-hV] [-id=<scmServiceId>] [--scm=<scm>] [--end=<hours>] [--force] <hosts>...
 ```
 
-- `<hosts>`: A space-separated list of hostnames or IP addresses of the Datanodes to put into maintenance mode.
+- `<hosts>`: **Required.** A space-separated list of hostnames or IP addresses of the Datanodes to put into maintenance mode.
 - `--end=<hours>`: Optional. Automatically end maintenance after the given hours. By default, maintenance must be ended manually.
 - `--force`: Optional. Forcefully try to put the Datanode(s) into maintenance mode.
 
