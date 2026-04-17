@@ -20,10 +20,11 @@ A Datanode will remain in the `ENTERING_MAINTENANCE` state until the SCM (Storag
 
 * **Pipeline Closure**: All open Ratis and EC pipelines on the Datanode must be successfully closed. This ensures no active write operations are interrupted.
 * **Datanode Acknowledgment**: The Datanode must confirm it has received the maintenance command and persisted the "ENTERING_MAINTENANCE" state to its local disk. This prevents state confusion if the Datanode is rebooted.
+* **Container Health**: All containers on the DataNode must be in a stable state (either CLOSED or QUASI_CLOSED). Nodes will not enter maintenance if they
+      contain OPEN or CLOSING containers
 * **Sufficient Replication (Data Safety)**: The SCM verifies that every container stored on the Datanode has enough healthy copies elsewhere in the cluster to remain safe while the node is offline.
     * **Ratis (3-way)**: By default, at least 2 replicas must remain online on other healthy Datanodes (configurable via `hdds.scm.replication.maintenance.replica.minimum`).
     * **Erasure Coding (EC)**: By default, the cluster must maintain at least `Data Shards + 1` available shards elsewhere (configurable via `hdds.scm.replication.maintenance.remaining.redundancy`). For example, in an RS(6,3) policy, at least 7 shards must be online.
-    * **Health Check**: Every container on the node must be in a stable state (e.g., `CLOSED` or `QUASI_CLOSED`). If a container is under-replicated or in a non-stable state, the SCM will block the transition and trigger background replication to create new copies on other nodes until the safety threshold is met.
 
 ## Command Line Usage
 
