@@ -233,7 +233,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/user-guide/integrations/trino'
+      link: "/docs/user-guide/integrations/trino",
     },
     {
       name: "Impala",
