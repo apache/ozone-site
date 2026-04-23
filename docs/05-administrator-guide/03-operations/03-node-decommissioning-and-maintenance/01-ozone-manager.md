@@ -20,3 +20,5 @@ The *force* option will skip checking whether OM configurations in `ozone-site.x
 `ozone.om.decommissioned.nodes` property.
 
 **Note** - It is recommended to bootstrap another OM node before decommissioning one to maintain HA.
+
+To compare **configuration-based** vs **DNS-based** strategies when moving OM to new hosts (pros, cons, and DNS pitfalls), see [OM migration approaches](./om-migration).
