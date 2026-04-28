@@ -103,3 +103,20 @@ These metrics are available on each Datanode. For a decommissioning node, they s
 - `queueTime` (`measured_replicator_queue_time`): The total time tasks spend in the replication queue. A high value might indicate the Datanode is overloaded.
 
 By monitoring these metrics, administrators can get a clear picture of the decommissioning progress and identify potential bottlenecks.
+
+## Removing Decommissioned DataNodes from the List
+
+After successfully decommissioning a DataNode, it will still appear in the output of `ozone admin datanode list` with a status of `DECOMMISSIONED`.
+
+### Expected Behavior
+It is expected behavior for `DEAD` and `DECOMMISSIONED` nodes to remain in the Storage Container Manager (SCM) node list while the SCM process is running. SCM keeps these records in memory to provide visibility into the cluster's history and to assist in troubleshooting. Since the metadata for even thousands of DataNodes is relatively small, there is no significant performance impact.
+
+### How to Clear the List
+DataNode information is stored **in-memory only** within SCM. To fully remove decommissioned or dead nodes from the `ozone admin datanode list`, you must **restart the SCM**.
+
+Upon restart, SCM enters Safemode and rebuilds its cluster membership list from scratch based only on the DataNodes that register themselves. Nodes that are offline or decommissioned will not register and will therefore be removed from the list.
+
+:::note
+There is currently no CLI command to manually "forget" a node without a restart.
+:::
+

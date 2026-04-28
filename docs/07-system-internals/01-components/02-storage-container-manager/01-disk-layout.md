@@ -1,5 +1,4 @@
 ---
-draft: true
 sidebar_label: Disk Layout
 ---
 
