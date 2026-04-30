@@ -61,7 +61,7 @@ When **`deleteKey`** is processed:
 
 - **File (FSO):** Row leaves **`fileTable`** (or **`keyTable`** in non-FSO layouts) and is recorded in **`deletedTable`**.
 - **Directory (FSO):** Row moves from **`directoryTable`** to **`deletedDirectoryTable`**.
-- **Quota:** Bucket **used bytes** and **namespace** usage are updated for the **logical** delete at this stage.
+- **Quota:** Bucket **used bytes** and **namespace** usage are updated for the **logical** delete at this stage; retained usage stays in quota totals until **`OMKeyPurgeRequest`** clears it ([quota internals](./quota)).
 
 ### Directory expansion (`DirectoryDeletingService`) — FSO
 
