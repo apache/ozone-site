@@ -49,6 +49,10 @@ Ozone shines when users look for commodity hardware, open systems and embrace th
 
 These cloud storage offerings are only available from their respective public cloud vendors. In contrast, Ozone runs on-prem or in your private cloud, giving you full control.
 
+## Further reading (third-party benchmarks)
+
+For a **benchmark-driven** look at Ozone—**erasure-coded** data with **Teragen** and **Terasort** compared in the same style as classic HDFS workloads—see Cloudera’s write-up on Medium: [Cloudera Object Store EC performance evaluation (Teragen and Terasort)](https://medium.com/@ritesh_76398/cloudera-object-store-ec-performance-evaluation-by-benchmarking-with-teragen-and-terasort-c541af020237). It is an independent article, not Apache project documentation; use it alongside your own testing.
+
 ## Summary
 
 In summary, Ozone is the best fit in the following scenarios:
