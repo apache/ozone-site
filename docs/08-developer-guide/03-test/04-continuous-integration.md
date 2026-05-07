@@ -152,6 +152,7 @@ For repeat failures or environment-only bugs, use the dedicated workflows on you
 
 - `flaky-test-check` — defined in [`intermittent-test-check.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/intermittent-test-check.yml); runs a chosen JUnit class or method many times across parallel splits.
 - `repeat-acceptance-test` — defined in [`repeat-acceptance.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/repeat-acceptance.yml); repeats acceptance tests concurrently (suite or filter).
+- `ci-with-ratis` — defined in [`ci-with-ratis.yml`](https://github.com/apache/ozone/blob/master/.github/workflows/ci-with-ratis.yml); runs full CI while building against a selected Apache Ratis branch. Because Ozone is tightly integrated with Ratis, some failures trace to the Ratis layer; this workflow is meant to validate Ozone quickly after Ratis-side fixes.
 
 You can still use an IDE, extra logging, or interactive debugging (for example [tmate](https://github.com/tmate-io/tmate)) on a fork if you accept the risk on public repos and never expose secrets.
 
