@@ -36,7 +36,7 @@ Prohibitions:
 
 This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.
 
-To relax the compliance check, configure the property `ozone.om.namespace.s3.strict` to `false` in the `ozone-site.xml` of Ozone Manager.
+To allow underscore (`_`) in volume and bucket names while still enforcing the other S3 naming rules, configure the property `ozone.om.namespace.s3.strict` to `false` in the `ozone-site.xml` of Ozone Manager. (This does not relax the rules for other non-S3 characters.)
 
 :::
 
