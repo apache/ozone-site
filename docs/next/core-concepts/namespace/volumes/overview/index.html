@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.33291081.css">
-<script src="/assets/js/runtime~main.392a5460.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.e4ea776c.js" defer="defer"></script>
 <script src="/assets/js/main.2b41a324.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -40,7 +40,7 @@
 <li>Cannot be formatted as an IP address (e.g., 192.168.5.4)</li>
 <li>Cannot have consecutive periods (e.g., my..bucket) or have dashes adjacent to periods (e.g., my-.bucket)</li>
 <li>Cannot end with a dash</li>
-</ul><p>This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.</p><p>To relax the compliance check, configure the property <code>ozone.om.namespace.s3.strict</code> to <code>false</code> in the <code>ozone-site.xml</code> of Ozone Manager.</p></div></div>
+</ul><p>This can cause trouble when migrating HDFS workloads to Ozone, since HDFS path names are POSIX-compliant.</p><p>To allow underscore (<code>_</code>) in volume and bucket names while still enforcing the other S3 naming rules, configure the property <code>ozone.om.namespace.s3.strict</code> to <code>false</code> in the <code>ozone-site.xml</code> of Ozone Manager. (This does not relax the rules for other non-S3 characters.)</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_sold" id="details">Details<a href="#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_sold" id="creation-and-management">Creation and Management<a href="#creation-and-management" class="hash-link" aria-label="Direct link to Creation and Management" title="Direct link to Creation and Management">​</a></h3>
 <p>Volumes are typically created and managed using the Ozone command-line interface (CLI). For example:</p>
