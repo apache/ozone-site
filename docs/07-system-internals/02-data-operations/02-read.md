@@ -13,13 +13,13 @@ This guide provides a comprehensive trace of a read request in Apache Ozone, inc
 
 ### 1.1 Initiating the Request
 
-The application calls `OzoneBucket.readKey(key)`. The client sends a `lookupKey` RPC to the Ozone Manager (OM).
+The application calls `OzoneBucket.readKey(key)`. The client sends a `getKeyInfo` RPC to the Ozone Manager (OM).
 
 ### 1.2 OM: Authorization Check
 
-Before processing the lookup, the OM must authorize the user.
+Before returning key metadata, the OM must authorize the user.
 
-1. **Entry Point:** `OmMetadataReader.checkAcls()` is called within the `lookupKey` flow.
+1. **Entry Point:** `OmMetadataReader.checkAcls()` is called within the `getKeyInfo` flow.
 2. **Authorizer Selection:** Based on configuration (`ozone.acl.authorizer.class`), OM uses either:
    - **Native Authorizer:** Uses Ozone's internal ACLs stored in RocksDB.
    - **Apache Ranger Authorizer:** Delegates the decision to the Ranger Ozone Plugin (`RangerOzoneAuthorizer`).
@@ -34,7 +34,7 @@ Once authorized:
 
 1. **Key Lookup:** OM finds the `OmKeyInfo` in the `keyTable`.
 2. **Encryption Check:** If TDE is enabled, the `OmKeyInfo` contains the `EDEK` (Encrypted Data Encryption Key) and the EZ Key Name.
-3. **Block Allocation:** OM retrieves the `OmKeyLocationInfo` (Block IDs and Pipelines).
+3. **Block Retrieval:** OM retrieves the `OmKeyLocationInfo` (Block IDs and Pipelines). Container locations are resolved using OM's container location cache; pipeline and placement metadata may be refreshed from SCM when needed. For locality-aware reads, OM can sort Datanodes within each pipeline by network distance using the network topology cached in OM (synchronized from SCM).
 4. **Block Token Generation:** OM generates a signed Block Token for each block using secret keys managed by the SCM.
 
 OM returns `OmKeyInfo` (Metadata + `EDEK` + Block Tokens) to the client.
@@ -61,7 +61,7 @@ The client wraps the data stream in a `CryptoInputStream` initialized with the r
 
 ### 3.1 Fetching Encrypted Chunks
 
-The client's `ChunkInputStream` sends a `ReadChunk` request to a Datanode.
+If `ozone.client.stream.readblock.enable` is `true` (default is `false`), the client may issue an optional `ReadBlock` request instead. Otherwise, the client issues `ReadChunk`.
 
 - **Security:** The request includes the Block Token.
 - **Datanode Validation:** The Datanode verifies the token's signature using the Secret Keys it fetched from the SCM. This is the final "at-the-edge" authorization check.
@@ -92,7 +92,7 @@ The client's `ChunkInputStream` sends a `ReadChunk` request to a Datanode.
 ```text
  1 Application -> [OzoneClient]
  2                   |
- 3         (1) lookupKey(Volume, Bucket, Key)
+ 3         (1) getKeyInfo(Volume, Bucket, Key)
  4                   |
  5         [Ozone Manager] -> (2) [Ranger/Native Authorizer] (Access READ?)
  6                   |                 |-- Yes: Continue
@@ -104,7 +104,7 @@ The client's `ChunkInputStream` sends a `ReadChunk` request to a Datanode.
 12         <-- Returns OmKeyInfo --
 13                   |
 14         (5) [Client] -> KMS: decrypt(`EDEK`) -> returns `DEK`
-15         (6) [Client] -> Datanode: readChunk(BlockToken)
+15         (6) [Client] -> Datanode: ReadChunk (BlockToken), or ReadBlock (BlockToken) if ozone.client.stream.readblock.enable=true
 16                   |
 17         [Datanode] -> (7) Verify Block Token Signature
 18                   |                 |-- Valid: Stream bytes
