@@ -92,6 +92,35 @@ If strict linearizability is required, use `LINEARIZABLE_LEADER_ONLY` for leader
 
 `LOCAL_LEASE` removes the ReadIndex round trip when the follower is within configured lag bounds. This gives the lowest follower-read latency, but it is a bounded-staleness mode rather than a linearizable mode.
 
+## Network partitions and ReadIndex timeout
+
+Linearizable follower reads depend on the follower being able to complete the Ratis ReadIndex protocol. If a follower is partitioned away from the majority, it cannot confirm a current read index with the leader. The read waits until the Ratis read timeout expires, then fails and the client can retry or fail over to another OM.
+
+In Ozone, OM HA Ratis server properties can be configured by prefixing the Ratis property with `ozone.om.ha.`. For example, Ratis `raft.server.read.timeout` becomes `ozone.om.ha.raft.server.read.timeout`.
+
+The main Ratis timeout setting for follower-read behavior is:
+
+| Property | Ratis default | Description |
+|----------|---------------|-------------|
+| `ozone.om.ha.raft.server.read.timeout` | `10s` | Timeout for linearizable read-only requests, including the wait for the follower to complete the read against a current Raft state. |
+
+## Ratis leader lease
+
+Ratis leader lease can reduce the cost of linearizable leader reads. When the leader has a valid lease based on recent majority heartbeats, it can serve a linearizable leader read without sending a fresh heartbeat round for that read.
+
+This optimization applies to leader reads, such as `LINEARIZABLE_LEADER_ONLY` and the leader side of `LINEARIZABLE_ALLOW_FOLLOWER`. It does not make a partitioned follower able to serve a linearizable follower read.
+
+The trade-off is failover timing. The lease is derived from the minimum election timeout and `raft.server.read.leader.lease.timeout.ratio`. A new leader should not be elected until the old leader's lease can no longer be valid, so enabling or lengthening the lease can increase the time before a partitioned leader is replaced.
+
+Leader lease also assumes bounded clock drift across OM hosts. If clocks can drift beyond the lease assumptions, the linearizability guarantee can be weakened because different OMs may disagree about whether the old leader's lease is still valid.
+
+Leader lease can be configured with:
+
+| Property | Ratis default | Description |
+|----------|---------------|-------------|
+| `ozone.om.ha.raft.server.read.leader.lease.enabled` | `false` in Ozone | Enables Ratis leader lease for linearizable leader reads. |
+| `ozone.om.ha.raft.server.read.leader.lease.timeout.ratio` | `0.9` | Controls the maximum timeout ratio used by the Ratis leader lease. |
+
 ## Local lease reads
 
 `LOCAL_LEASE` trades strict linearizability for lower latency by allowing a follower to serve local data without running ReadIndex, but only while the follower is close enough to the leader.
