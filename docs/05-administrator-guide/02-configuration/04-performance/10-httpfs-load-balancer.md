@@ -28,7 +28,7 @@ Running HttpFS behind a load balancer with Kerberos is a valid pattern (similar 
 
    `/var/lib/hadoop-ozone/keytabs/httpfs.keytab`
 
-3. When exporting the keytab, avoid creating a new random key version unexpectedly (for example on MIT Kerberos use `kadmin`’s `ktadd` with **`-norandkey`** when adding an existing key to the keytab so the KDC key version stays consistent with what clients and other hosts expect, per your runbook).
+3. When exporting the keytab, avoid creating a new random key version unexpectedly (for example on MIT Kerberos use `kadmin`’s `ktadd` with **`-norandkey`** when adding an existing key to the keytab so the KDC key version stays consistent with what clients and other hosts expect, per your operational procedures).
 
 ## Configuration (`httpfs-site.xml`)
 
