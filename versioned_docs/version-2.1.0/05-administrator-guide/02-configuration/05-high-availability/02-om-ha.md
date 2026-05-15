@@ -168,6 +168,7 @@ host3     | om3     | FOLLOWER
 ## References
 
 - [Ozone Manager High Availability](../../../core-concepts/high-availability/om-ha) - Conceptual overview
+- [OM Follower Read](./om-follower-read) - Client and OM settings for serving eligible OM reads from followers
 - [SCM HA Configuration](./scm-ha) - Storage Container Manager High Availability configuration
 
 <!--
