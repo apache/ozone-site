@@ -8,9 +8,20 @@ OM follower read lets Ozone clients send eligible read-only OM requests to non-l
 
 Follower read is disabled by default. When it is enabled on the client, the Hadoop RPC transport wraps the normal OM failover proxy with a follower-read proxy. The proxy adds a read consistency hint to eligible read requests, tries OM nodes in the configured service, and falls back to the leader path if follower reads cannot be served.
 
+Client follower read is currently implemented only for the Hadoop RPC OM transport. If a client is configured to use the gRPC OM transport, `ozone.client.follower.read.enabled` does not enable follower-read routing for that client.
+
 ## Enable follower reads
 
-Set the client-side flag in the client configuration used by Ozone clients, S3 Gateway, or other services that issue OM reads:
+Use the Hadoop RPC transport for the client-to-OM channel. This is the default transport, but it can be set explicitly in the client configuration used by Ozone clients, S3 Gateway, or other services that issue OM reads:
+
+```xml
+<property>
+  <name>ozone.om.transport.class</name>
+  <value>org.apache.hadoop.ozone.om.protocolPB.Hadoop3OmTransportFactory</value>
+</property>
+```
+
+Then set the client-side follower-read flag:
 
 ```xml
 <property>
@@ -18,6 +29,8 @@ Set the client-side flag in the client configuration used by Ozone clients, S3 G
   <value>true</value>
 </property>
 ```
+
+Do not set `ozone.om.transport.class` to `org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory` for clients that should use OM follower read.
 
 The default follower-read consistency is `LINEARIZABLE_ALLOW_FOLLOWER`, which preserves linearizable read semantics when the OM Ratis server supports linearizable reads.
 
