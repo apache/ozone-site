@@ -12,7 +12,7 @@ The failover and retry mechanisms operate transparently to client applications. 
 
 ## Client to Ozone Manager Failover
 
-By default, clients submit requests to the leader Ozone Manager (OM). If the `leader` is `unknown`, clients start by sending requests to the first OM in the configuration and retries other OMs until a leader is found. When [OM follower read](./om-follower-read) is enabled, eligible read-only OM requests can be sent to followers and fall back to the leader path when needed.
+Clients always submit requests to the leader Ozone Manager (OM). If the `leader` is `unknown`, clients start by sending requests to the first OM in the configuration and retries other OMs until a leader is found.
 
 ### 1. Hadoop RPC Transport (`HadoopRpcOMFailoverProxyProvider`)
 
