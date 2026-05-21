@@ -26,11 +26,12 @@ Ozone provides two types of reserved space to protect the system:
 
 This is a safety margin managed by the Datanode to prevent the disk from ever reaching 100% capacity. It is the most important setting for capacity planning.
 
-- **Purpose**: Protects the Datanode from OS-level disk-full errors.
+- **Purpose**: Protects the Datanode from OS-level disk-full errors and gives SCM headroom for placement decisions.
 - **Configuration**:
-  - `hdds.datanode.volume.min.free.space`: A fixed value (e.g., `20GB`).
-  - `hdds.datanode.volume.min.free.space.percent`: A percentage of the volume capacity (e.g., `0.02` for 2%).
-- **Logic**: Ozone uses the **maximum** of the fixed value and the percentage.
+  - `hdds.datanode.volume.min.free.space`: A fixed byte value (e.g., `20GB`) used together with the percent settings below. For each tier, the effective value is the **maximum** of this bytes setting and `capacity × ratio`.
+  - **Soft limit** (`hdds.datanode.volume.min.free.space.percent`, default `0.02` or 2%): Reported to SCM in heartbeats as `freeSpaceToSpare`. SCM uses this for placement—new containers and re-replication targets avoid volumes below this headroom.
+  - **Hard limit** (`hdds.datanode.volume.min.free.space.hard.limit.percent`, default `0.015` or 1.5%): Enforced locally on the Datanode. Writes are rejected when available space would drop below `max(capacity × hard limit percent, min.free.space bytes)`. Set the hard limit to be **less than or equal to** the soft limit so SCM plans with more headroom than the Datanode enforces for writes.
+- **Soft band**: The gap between soft and hard limits (for example, on a 2 TB disk: 2% ≈ 40 GB reported to SCM vs 1.5% ≈ 30 GB hard limit → ~10 GB) is where the Datanode may close containers while writes can still succeed.
 
 ### 2. DU Reserved Space
 
@@ -52,11 +53,13 @@ When Ozone replicates a container (e.g., during decommissioning), it requires sp
 
 | Property | Default | Description |
 | :--- | :--- | :--- |
-| `hdds.datanode.volume.min.free.space` | `20GB` | Fixed minimum free space per volume. |
-| `hdds.datanode.volume.min.free.space.percent` | `0.02` (2%) | Percentage-based minimum free space. |
+| `hdds.datanode.volume.min.free.space` | `-1` (often set to `20GB`) | Fixed minimum free space (bytes) combined with the percent settings; effective value is `max(bytes, capacity × ratio)` per tier. |
+| `hdds.datanode.volume.min.free.space.percent` | `0.02` (2%) | Soft limit: minimum free-space fraction reported to SCM as `freeSpaceToSpare` for placement decisions. |
+| `hdds.datanode.volume.min.free.space.hard.limit.percent` | `0.015` (1.5%) | Hard limit: minimum free-space fraction enforced locally for write rejection. Should be ≤ `min.free.space.percent`. |
 | `hdds.datanode.dir.du.reserved` | (unset) | Fixed bytes reserved for non-Ozone use. |
 | `ozone.scm.container.size` | `5GB` | The target size for containers. |
-| `hdds.datanode.storage.utilization.critical.threshold` | `0.95` (95%) | Threshold at which SCM logs a "Critical" space warning. |
+| `hdds.datanode.storage.utilization.warning.threshold` | `0.75` (75%) | Datanode-wide utilization above which SCM logs a warning while processing the node report. |
+| `hdds.datanode.storage.utilization.critical.threshold` | `0.95` (95%) | Datanode-wide utilization above which SCM marks the Datanode out of space. |
 
 ## Inspecting Storage Usage
 
@@ -79,13 +82,15 @@ ozone admin datanode usageinfo
 
 This command shows the capacity, SCM used, and remaining space for each Datanode.
 
-### 3. Detailed Volume Info
+### 3. Per-Datanode Usage Summary
 
-To see the status of individual disks on a specific Datanode:
+To see the aggregated capacity, usage, and remaining space for a specific Datanode:
 
 ```bash
-ozone admin datanode usageinfo --uuid <datanode-uuid>
+ozone admin datanode usageinfo --node-id <datanode-uuid>
 ```
+
+For per-volume breakdown on a node, use the **Datanodes** view in the Recon Web UI (see above).
 
 ## Concrete Examples
 
