@@ -85,8 +85,16 @@ Requires read privileges on the bucket.
 
 Shows changes between two snapshots or a snapshot and the live bucket.
 
+Submit a snapshot diff job:
+
 ```bash
 ozone sh snapshot diff /vol1/bucket1 <snap1> <snap2_or_live_bucket>
+```
+
+Get the snapshot diff report:
+
+```bash
+ozone sh snapshot diff /vol1/bucket1 <snap1> <snap2_or_live_bucket> --get-report
 ```
 
 Output prefixes: `+` (add), `-` (delete), `M` (modify), `R` (rename). Use `-p`, `-t` for pagination.
