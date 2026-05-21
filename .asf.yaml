@@ -18,19 +18,19 @@ meta:
   nextgen: true
 
 github:
-  description: "Website for Apache Ozone"
+  description: Website for Apache Ozone
   homepage: https://ozone.apache.org/
   labels:
-    - ozone
+  - ozone
   enabled_merge_buttons:
-    squash:  true
+    squash: true
     squash_commit_message: PR_TITLE
-    merge:   false
-    rebase:  false
+    merge: false
+    rebase: false
   autolink_jira:
-    - HDDS
+  - HDDS
 notifications:
-  commits:      commits@ozone.apache.org
-  issues:       issues@ozone.apache.org
+  commits: commits@ozone.apache.org
+  issues: issues@ozone.apache.org
   pullrequests: issues@ozone.apache.org
   jira_options: link label
