@@ -30,14 +30,13 @@ github:
   autolink_jira:
   - HDDS
   rulesets:
-  - name: "Default Branch Protection"
+  - name: Default Branch Protection
     type: branch
     branches:
       includes:
-      - "~DEFAULT_BRANCH"
-      - "release/*"
-      - "rel/*"
-      excludes: []
+      - ~DEFAULT_BRANCH
+      - asf-site
+      excludes: [ ]
     bypass_teams:
     - root
     restrict_deletion: true
