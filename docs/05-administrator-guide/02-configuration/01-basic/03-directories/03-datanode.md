@@ -1,8 +1,16 @@
 ---
-draft: true
-sidebar_label: Datanodes
+sidebar_label: Datanode
 ---
 
-# Directory Configurations for Datanodes
+# Directory Configurations for Datanode
 
-**TODO:** File a subtask under [HDDS-9859](https://issues.apache.org/jira/browse/HDDS-9859) and complete this page or section.
+This section describes directory-related configuration properties used by Datanodes.
+
+| Property Name                            | Description                                                                                                                                                                                                 | Tags                                           | Default/Example Value                          | Sample Value                    |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------- |
+| `hdds.datanode.dir`                      | Local filesystem directories where HDDS stores data (container block files). Use comma-separated paths; tag each with a storage type (`[DISK]`, `[SSD]`, `[ARCHIVE]`, or `[RAM_DISK]`) for storage policies. | OZONE, CONTAINER, STORAGE, MANAGEMENT          | Empty                                          | `/data/hdds/disk1`              |
+| `hdds.datanode.data.dir.permissions`     | Permissions for Datanode **data** directories (octal or symbolic).                                                                                                                                          |                                                | `700`                                          | `700`                           |
+| `hdds.datanode.container.db.dir`         | Base location for per-disk RocksDB instances that hold container metadata. If unset, RocksDB is placed on the same disk as the matching HDDS data. Prefer fast storage (for example SSD).                     | OZONE, CONTAINER, STORAGE, MANAGEMENT          | Empty                                          | `/data/hdds/rocksdb`            |
+| `hdds.container.ratis.datanode.storage.dir` | Directory for Datanode Ratis metadata (for example closed-container replication logs). If unset, falls back to default metadata dirs and a warning is logged. Use fast, durable storage.                  | OZONE, CONTAINER, STORAGE, MANAGEMENT, RATIS   | Empty (uses default metadata dirs)           | `/var/data/ozone/dn/ratis`      |
+| `ozone.scm.datanode.id.dir`              | Filesystem path where the Datanode stores its persistent **Datanode ID** file. If unset, the ID is created under the metadata directory.                                                                    | OZONE, MANAGEMENT                              | Empty                                          | `/var/lib/ozone/datanode-id`    |
+| `ozone.metadata.dirs`                    | Fallback metadata root for Datanodes (and SCM, OM, Recon) when component-specific directories are not set. Fine for test/PoC; production should set explicit paths such as `hdds.container.ratis.datanode.storage.dir`. | OZONE, OM, SCM, CONTAINER, STORAGE, REQUIRED   | Empty                                          | `/data/ozone/metadata`          |
