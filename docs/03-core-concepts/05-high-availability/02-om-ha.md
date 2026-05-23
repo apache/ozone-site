@@ -24,6 +24,6 @@ Client connects to the Leader Ozone Manager which processes the request and sche
 
 - **Configuration**: For detailed configuration instructions on setting up OM HA, see the [OM HA Configuration](../../administrator-guide/configuration/high-availability/om-ha) documentation.
 - **Read scaling**: To add read-only, non-voting OM replicas (Listener OMs), see [Listener OM](../../administrator-guide/configuration/high-availability/listener-om).
-- **Migrating OM to new hardware**: For configuration-based vs DNS-based cutover trade-offs, see [OM migration approaches](../../administrator-guide/operations/node-decommissioning-and-maintenance/om-migration).
+- **Migrating OM hosts**: For configuration-based and DNS-based host replacement procedures, see [OM migration approaches](../../administrator-guide/operations/node-decommissioning-and-maintenance/om-migration).
 
 - **Implementation Details**: For in-depth technical details about the OM HA implementation, including the double buffer approach and automatic snapshot installation, see the [OM HA Implementation Details](../../system-internals/components/ozone-manager/high-availability) documentation.
