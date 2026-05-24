@@ -1,0 +1,58 @@
+{
+  "title": {
+    "message": "Apache Ozone",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Ozone 标志",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Download": {
+    "message": "下载",
+    "description": "Navbar item with label Download"
+  },
+  "item.label.Roadmap": {
+    "message": "路线图",
+    "description": "Navbar item with label Roadmap"
+  },
+  "item.label.FAQ": {
+    "message": "常见问题",
+    "description": "Navbar item with label FAQ"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Community": {
+    "message": "社区",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.Communication Channels": {
+    "message": "沟通渠道",
+    "description": "Navbar item with label Communication Channels"
+  },
+  "item.label.Who Uses Ozone?": {
+    "message": "谁在使用 Ozone？",
+    "description": "Navbar item with label Who Uses Ozone?"
+  },
+  "item.label.Report An Issue": {
+    "message": "报告问题",
+    "description": "Navbar item with label Report An Issue"
+  },
+  "item.label.Ask a Question": {
+    "message": "提出问题",
+    "description": "Navbar item with label Ask a Question"
+  },
+  "item.label.How to Contribute": {
+    "message": "如何贡献",
+    "description": "Navbar item with label How to Contribute"
+  },
+  "item.label.Events and Media": {
+    "message": "活动与媒体",
+    "description": "Navbar item with label Events and Media"
+  }
+}

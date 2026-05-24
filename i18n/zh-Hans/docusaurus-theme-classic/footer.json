@@ -1,0 +1,86 @@
+{
+  "link.title.Apache Software Foundation": {
+    "message": "Apache Software Foundation",
+    "description": "The title of the footer links column with title=Apache Software Foundation in the footer"
+  },
+  "link.title.Community": {
+    "message": "社区",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.Repositories": {
+    "message": "代码仓库",
+    "description": "The title of the footer links column with title=Repositories in the footer"
+  },
+  "link.item.label.Foundation": {
+    "message": "基金会",
+    "description": "The label of footer link with label=Foundation linking to https://www.apache.org/"
+  },
+  "link.item.label.License": {
+    "message": "许可证",
+    "description": "The label of footer link with label=License linking to https://www.apache.org/licenses/"
+  },
+  "link.item.label.Events": {
+    "message": "活动",
+    "description": "The label of footer link with label=Events linking to https://www.apache.org/events/current-event"
+  },
+  "link.item.label.Sponsorship": {
+    "message": "赞助",
+    "description": "The label of footer link with label=Sponsorship linking to https://www.apache.org/foundation/sponsorship.html"
+  },
+  "link.item.label.Privacy": {
+    "message": "隐私",
+    "description": "The label of footer link with label=Privacy linking to https://privacy.apache.org/policies/privacy-policy-public.html"
+  },
+  "link.item.label.Security": {
+    "message": "安全",
+    "description": "The label of footer link with label=Security linking to https://www.apache.org/security/"
+  },
+  "link.item.label.Thanks": {
+    "message": "致谢",
+    "description": "The label of footer link with label=Thanks linking to https://www.apache.org/foundation/thanks.html"
+  },
+  "link.item.label.GitHub Discussions": {
+    "message": "GitHub 讨论",
+    "description": "The label of footer link with label=GitHub Discussions linking to https://github.com/apache/ozone/discussions"
+  },
+  "link.item.label.Jira Issues": {
+    "message": "Jira 问题",
+    "description": "The label of footer link with label=Jira Issues linking to https://issues.apache.org/jira/projects/HDDS/issues"
+  },
+  "link.item.label.Slack": {
+    "message": "Slack",
+    "description": "The label of footer link with label=Slack linking to https://infra.apache.org/slack.html"
+  },
+  "link.item.label.Mailing List": {
+    "message": "邮件列表",
+    "description": "The label of footer link with label=Mailing List linking to mailto:dev@ozone.apache.org"
+  },
+  "link.item.label.YouTube": {
+    "message": "YouTube",
+    "description": "The label of footer link with label=YouTube linking to https://www.youtube.com/@ApacheOzone"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/ApacheOzone"
+  },
+  "link.item.label.Ozone": {
+    "message": "Ozone",
+    "description": "The label of footer link with label=Ozone linking to https://github.com/apache/ozone"
+  },
+  "link.item.label.Website": {
+    "message": "网站",
+    "description": "The label of footer link with label=Website linking to https://github.com/apache/ozone-site"
+  },
+  "link.item.label.Docker Image": {
+    "message": "Docker 镜像",
+    "description": "The label of footer link with label=Docker Image linking to https://github.com/apache/ozone-docker"
+  },
+  "link.item.label.Docker Runner Image": {
+    "message": "Docker Runner 镜像",
+    "description": "The label of footer link with label=Docker Runner Image linking to https://github.com/apache/ozone-docker-runner"
+  },
+  "copyright": {
+    "message": "\n        <div>\n          Copyright © 2026 <a href=\"https://www.apache.org/\" class=copyright-link>The Apache Software Foundation</a>. Licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" class=copyright-link>Apache License, Version 2.0</a>. <br>\n          <div>\n            <p>The Apache Software Foundation, Apache Ozone, Ozone, Apache, the Apache Feather, and the Apache Ozone project logo are either registered trademarks or trademarks of the Apache Software Foundation.</p>\n          </div>\n        </div>",
+    "description": "The footer copyright"
+  }
+}
