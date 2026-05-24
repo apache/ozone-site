@@ -1,0 +1,242 @@
+{
+  "version.label": {
+    "message": "下一版",
+    "description": "The label for version current"
+  },
+  "sidebar.defaultSidebar.category.Quick Start": {
+    "message": "快速开始",
+    "description": "The label for category Quick Start in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Installation": {
+    "message": "安装",
+    "description": "The label for category Installation in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Core Concepts": {
+    "message": "核心概念",
+    "description": "The label for category Core Concepts in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Architecture": {
+    "message": "架构",
+    "description": "The label for category Architecture in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Replication": {
+    "message": "复制",
+    "description": "The label for category Replication in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Namespace": {
+    "message": "命名空间",
+    "description": "The label for category Namespace in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Volumes": {
+    "message": "卷",
+    "description": "The label for category Volumes in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Buckets": {
+    "message": "桶",
+    "description": "The label for category Buckets in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Layouts": {
+    "message": "布局",
+    "description": "The label for category Layouts in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Keys": {
+    "message": "键",
+    "description": "The label for category Keys in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Security": {
+    "message": "安全",
+    "description": "The label for category Security in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.ACLs": {
+    "message": "ACL",
+    "description": "The label for category ACLs in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.High Availability": {
+    "message": "高可用",
+    "description": "The label for category High Availability in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.User Guide": {
+    "message": "用户指南",
+    "description": "The label for category User Guide in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Client Interfaces": {
+    "message": "客户端接口",
+    "description": "The label for category Client Interfaces in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.S3 API": {
+    "message": "S3 API",
+    "description": "The label for category S3 API in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Clients": {
+    "message": "客户端",
+    "description": "The label for category Clients in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Integrations": {
+    "message": "集成",
+    "description": "The label for category Integrations in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Administrator Guide": {
+    "message": "管理员指南",
+    "description": "The label for category Administrator Guide in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Configuration": {
+    "message": "配置",
+    "description": "The label for category Configuration in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Basic": {
+    "message": "基础",
+    "description": "The label for category Basic in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Network": {
+    "message": "网络",
+    "description": "The label for category Network in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Directories": {
+    "message": "目录",
+    "description": "The label for category Directories in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Logging": {
+    "message": "日志",
+    "description": "The label for category Logging in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Encryption": {
+    "message": "加密",
+    "description": "The label for category Encryption in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Network Encryption": {
+    "message": "网络加密",
+    "description": "The label for category Network Encryption in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Performance": {
+    "message": "性能",
+    "description": "The label for category Performance in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Operations": {
+    "message": "运维",
+    "description": "The label for category Operations in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Decommissioning and Maintenance": {
+    "message": "退役与维护",
+    "description": "The label for category Decommissioning and Maintenance in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Datanode": {
+    "message": "Datanode",
+    "description": "The label for category Datanode in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Disk Replacement": {
+    "message": "磁盘更换",
+    "description": "The label for category Disk Replacement in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Data Balancing": {
+    "message": "数据均衡",
+    "description": "The label for category Data Balancing in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.S3 Multi-Tenancy": {
+    "message": "S3 多租户",
+    "description": "The label for category S3 Multi-Tenancy in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Snapshots": {
+    "message": "快照",
+    "description": "The label for category Snapshots in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Observability": {
+    "message": "可观测性",
+    "description": "The label for category Observability in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Recon": {
+    "message": "Recon",
+    "description": "The label for category Recon in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Leader Transfer": {
+    "message": "Leader 转移",
+    "description": "The label for category Leader Transfer in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Tools": {
+    "message": "工具",
+    "description": "The label for category Tools in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Ozone Debug": {
+    "message": "Ozone 调试",
+    "description": "The label for category Ozone Debug in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Troubleshooting": {
+    "message": "故障排查",
+    "description": "The label for category Troubleshooting in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.System Internals": {
+    "message": "系统内部原理",
+    "description": "The label for category System Internals in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Components": {
+    "message": "组件",
+    "description": "The label for category Components in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Ozone Manager": {
+    "message": "Ozone Manager",
+    "description": "The label for category Ozone Manager in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Storage Container Manager": {
+    "message": "Storage Container Manager",
+    "description": "The label for category Storage Container Manager in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.S3 Gateway": {
+    "message": "S3 Gateway",
+    "description": "The label for category S3 Gateway in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Client": {
+    "message": "客户端",
+    "description": "The label for category Client in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.HttpFS Gateway": {
+    "message": "HttpFS Gateway",
+    "description": "The label for category HttpFS Gateway in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Data Operations": {
+    "message": "数据操作",
+    "description": "The label for category Data Operations in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Data Integrity": {
+    "message": "数据完整性",
+    "description": "The label for category Data Integrity in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Data": {
+    "message": "数据",
+    "description": "The label for category Data in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Write Pipelines": {
+    "message": "写入管道",
+    "description": "The label for category Write Pipelines in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Containers": {
+    "message": "容器",
+    "description": "The label for category Containers in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Network Protocols": {
+    "message": "网络协议",
+    "description": "The label for category Network Protocols in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Features": {
+    "message": "特性",
+    "description": "The label for category Features in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Developer Guide": {
+    "message": "开发者指南",
+    "description": "The label for category Developer Guide in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Build": {
+    "message": "构建",
+    "description": "The label for category Build in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Run": {
+    "message": "运行",
+    "description": "The label for category Run in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Test": {
+    "message": "测试",
+    "description": "The label for category Test in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Project": {
+    "message": "项目",
+    "description": "The label for category Project in sidebar defaultSidebar"
+  }
+}
