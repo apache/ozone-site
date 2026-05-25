@@ -49,10 +49,6 @@ These environment variables apply only to certain Ozone services or roles.
 | `OZONE_VAPOR_OPTS` | (empty)                            | Specifies Java properties for the `ozone vapor` command.                                                          |
 | `OZONE_DAEMON_JSVC_EXTRA_OPTS`| (none)                  | Extra arguments passed to `jsvc` when launching secure (privileged) daemons.                                     |
 
-:::note HttpFS Gateway Configuration
-The HttpFS Gateway supports a dedicated `OZONE_HTTPFS_OPTS` variable, just like the other daemons. Any JVM properties set in `OZONE_HTTPFS_OPTS` are folded into `OZONE_OPTS` when the gateway starts, so you no longer need to add them to the global `OZONE_OPTS` variable.
-:::
-
 ## Configuration Methods
 
 There are several ways to set these environment variables, depending on your needs.
