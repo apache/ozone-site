@@ -610,12 +610,11 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.recon.om.snapshot.task.initial.delay` | 1m | `OZONE`, `RECON`, `OM` | Initial delay in MINUTES by Recon to request OM DB Snapshot. |
 | `ozone.recon.om.snapshot.task.interval.delay` | 5s | `OZONE`, `RECON`, `OM` | Interval in SECONDS by Recon to request OM DB Snapshot. |
 | `ozone.recon.om.socket.timeout` | 5s | `OZONE`, `RECON`, `OM` | Socket timeout in milliseconds for HTTP call made by Recon to request OM snapshot. |
-| `ozone.recon.scm.connection.request.timeout` | 5s | `OZONE`, `RECON`, `SCM` | Connection request timeout in milliseconds for HTTP call made by Recon to request SCM DB snapshot. |
-| `ozone.recon.scm.connection.timeout` | 5s | `OZONE`, `RECON`, `SCM` | Connection timeout for HTTP call in milliseconds made by Recon to request SCM snapshot. |
-| `ozone.recon.scm.container.threshold` | 100 | `OZONE`, `RECON`, `SCM` | Threshold value for the difference in number of containers in SCM and RECON. |
+| `ozone.recon.scm.container.sync.task.initial.delay` | 1m | `OZONE`, `MANAGEMENT`, `RECON`, `SCM` | Initial delay before Recon starts the incremental SCM container sync task. This gives Recon startup enough time to initialize the SCM DB before the first incremental sync runs. |
+| `ozone.recon.scm.container.sync.task.interval.delay` | 6h | `OZONE`, `MANAGEMENT`, `RECON`, `SCM` | Interval between incremental SCM container sync runs in Recon. Each cycle evaluates drift between SCM and Recon and either runs the targeted multi-pass sync or takes no action. |
+| `ozone.recon.scm.container.threshold` | 1000000 | `OZONE`, `RECON`, `SCM` | Container-count drift threshold used during initial SCM DB setup to decide whether Recon should refresh from an SCM snapshot before serving requests. |
+| `ozone.recon.scm.deleted.container.check.batch.size` | 1000000 | `OZONE`, `RECON`, `SCM`, `PERFORMANCE` | Maximum number of SCM DELETED containers fetched per page during targeted Recon container sync. DELETED sync reads SCM's DELETED list and reconciles Recon forward to DELETED; the configured value is capped by the Hadoop IPC message-size limit. |
 | `ozone.recon.scm.snapshot.enabled` | true | `OZONE`, `RECON`, `SCM` | If enabled, SCM DB Snapshot is taken by Recon. |
-| `ozone.recon.scm.snapshot.task.initial.delay` | 1m | `OZONE`, `MANAGEMENT`, `RECON` | Initial delay in MINUTES by Recon to request SCM DB Snapshot. |
-| `ozone.recon.scm.snapshot.task.interval.delay` | 24h | `OZONE`, `MANAGEMENT`, `RECON` | Interval in MINUTES by Recon to request SCM DB Snapshot. |
 | `ozone.recon.scmclient.failover.max.retry` | 3 | `OZONE`, `RECON`, `SCM` | Max retry count for SCM Client when failover happens. |
 | `ozone.recon.scmclient.max.retry.timeout` | 6s | `OZONE`, `RECON`, `SCM` | Max retry timeout for SCM Client when Recon connects to SCM. This config is used to dynamically compute the max retry count for SCM Client when failover happens. Check the SCMClientConfig class getRetryCount method. |
 | `ozone.recon.scmclient.rpc.timeout` | 1m | `OZONE`, `RECON`, `SCM` | RpcClient timeout on waiting for the response from SCM when Recon connects to SCM. |
