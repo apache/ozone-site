@@ -2,85 +2,276 @@
 sidebar_label: SCM migration
 ---
 
-# SCM migration
+# Storage Container Manager migration approach
 
-This guide describes how to move an Ozone cluster from one Storage Container Manager (SCM) HA membership (for example logical nodes `scm1`, `scm2`, `scm3`) to another (`scm4`, `scm5`, `scm6`) while avoiding a full rolling restart of every DataNode for configuration changes.
+This page describes how to move Storage Container Manager (SCM) roles to new hosts in an HA deployment while avoiding a full rolling restart of every Datanode for SCM endpoint changes.
 
-For background on SCM HA configuration and bootstrap, see [SCM High Availability](../../../../administrator-guide/configuration/high-availability/scm-ha). For decommissioning SCM instances, see [Storage Container Manager decommission](./decommission) (SCM decommission). For the `ozone admin reconfig` command, see [Dynamic Property Reload](../../../../administrator-guide/operations/dynamic-property-reload).
+SCM migration is different from Ozone Manager (OM) migration. SCM is not client-facing in the same way OM is, so there is no DNS-based client transition strategy. The main operational concern is making Ozone services, especially Datanodes, learn the new SCM peer list before the old SCMs are removed.
 
-## Why this matters
+The procedure uses the same SCM Ratis membership operations as normal SCM HA administration: bootstrap the new SCMs, make sure an SCM being removed is not leader, decommission the old SCMs, and clean up obsolete configuration. The difference is that Datanodes can dynamically reload the SCM node list instead of being restarted twice.
 
-Historically, operators had to change `ozone.scm.nodes.<scmServiceId>` twice and roll DataNodes twice: first to include both old and new SCM node IDs, then again after the old SCMs were gone. Rolling the entire DataNode fleet can take a long time on large clusters.
+For background on SCM HA configuration and bootstrap, see [SCM High Availability](../../../../administrator-guide/configuration/high-availability/scm-ha). For removing individual SCMs, see [Storage Container Manager decommission](./decommission). For the `ozone admin reconfig` command, see [Dynamic Property Reload](../../../../administrator-guide/operations/dynamic-property-reload).
 
-DataNodes can now apply changes to the SCM node list dynamically: the running process computes the SCM node IDs that were added and removed, opens connections to new endpoints, then closes connections to removed ones. Together with deploying full `ozone-site.xml` definitions for each SCM logical node ID, this avoids those restarts for SCM endpoint migration ([HDDS-13890](https://issues.apache.org/jira/browse/HDDS-13890)).
+## Comparing the strategies
 
-## Principles
+| Concern | Dynamic Datanode reconfiguration | Legacy rolling restart |
+| ------- | -------------------------------- | ---------------------- |
+| Datanode changes | Datanodes reload SCM address keys and `ozone.scm.nodes.<scmServiceId>` while running. | Datanodes must be restarted after adding new SCMs and restarted again after removing old SCMs. |
+| SCM peer identity | Each SCM has a unique node ID and configured address. The migration temporarily expands the SCM list, then shrinks it after decommission. | Same peer identity model, but Datanodes only pick up changes on restart. |
+| Client DNS changes | Not needed. SCM is not migrated through client-facing DNS remapping. | Not needed. |
+| Migration order | Bootstrap new SCMs, reload Datanodes to connect to old and new SCMs, move leadership if needed, decommission old SCMs, reload Datanodes to keep only retained SCMs. | Add new SCMs and roll Datanodes, decommission old SCMs, then roll Datanodes again with the final SCM list. |
+| Operational speed | Faster on large clusters because Datanodes avoid two rolling restarts. | Slower when the Datanode fleet is large or restart windows are limited. |
+| Failure mode | A failed address or node-list reload can leave one Datanode on the previous effective SCM list until the issue is corrected and reconfiguration is retried. | A failed restart can leave one Datanode on the previous on-disk configuration until it is restarted successfully. |
 
-**Use two phases instead of cutting over in one step.** Add and validate the new SCMs while old ones remain, then migrate leadership if needed, decommission the old SCMs, and finally shrink `ozone.scm.nodes` to only the surviving members. Separating expansion and shrinking reduces risk and makes rollback simpler if something fails before the old nodes are torn down.
+Use dynamic Datanode reconfiguration for SCM host replacement when the cluster version supports `ozone.scm.nodes.<scmServiceId>` reconfiguration on Datanodes. Use the legacy rolling restart flow only when dynamic reconfiguration is not available or your operational process requires restarts.
 
-**Configure addresses before IDs.** Each DataNode resolves SCM RPC targets from `ozone.scm.nodes.<scmServiceId>` together with address properties keyed by node ID (`ozone.scm.address.<scmServiceId>.<scmNodeId>` and the DataNode RPC port for SCM, documented under [Configuration](../../../../administrator-guide/configuration/high-availability/scm-ha#configuration)). Every SCM node ID you list in `ozone.scm.nodes` must already have matching address settings in configuration that DataNodes will load; otherwise reconfiguration fails or skips additions.
+## Migration order
 
-## Phase 1: Add new SCMs and expand membership
+Do the migration in two configuration waves. First, expand the SCM configuration so old and new SCMs are both known. After the new SCMs are healthy and the old SCMs are decommissioned, shrink the configuration to only the retained SCMs.
 
-1. **Deploy new SCM hosts** according to [Bootstrap](../../../../administrator-guide/configuration/high-availability/scm-ha#bootstrap). Use `ozone scm --bootstrap` on each additional node (respecting [`ozone.scm.primordial.node.id`](../../../../administrator-guide/configuration/high-availability/scm-ha#auto-bootstrap) and security notes in [SCM HA Security](../../../../administrator-guide/configuration/high-availability/scm-ha#scm-ha-security)). Start the SCM service on each new instance.
-2. **Update configuration everywhere** (OM, SCM, DataNodes, clients) so that for your `scmServiceId` you include:
-   - `ozone.scm.nodes.<scmServiceId>` with **both** existing and new logical node IDs (for example `scm1,scm2,scm3,scm4,scm5,scm6`).
-   - For **each** of those node IDs, the usual `ozone.scm.address.<scmServiceId>.<scmNodeId>` (and DataNode RPC port settings in `ozone.scm.datanode.address.*` or defaults, as in your environment).
-3. **Reload SCM address keys on DataNodes.** Keys whose names match `ozone.scm.address.<scmServiceId>.*` are dynamically reconfigurable; apply those first so running DataNodes can resolve endpoints for newly added SCM node IDs ([Dynamic Property Reload](../../../../administrator-guide/operations/dynamic-property-reload)). Ensure any auxiliary keys your deployment uses for SCM DataNode RPC addresses are consistent with what you deployed in `ozone-site.xml`.
+The examples below use an SCM service ID of `prod` and migrate three SCMs from `scm1`, `scm2`, and `scm3` to `scm4`, `scm5`, and `scm6`.
 
-4. **Expand `ozone.scm.nodes` on DataNodes without restart:** after the address properties are visible to each DataNode process, reload `ozone.scm.nodes.<scmServiceId>` through the DataNode reconfiguration path (see below).
+| SCM node | Hostname | Initial state |
+| -------- | -------- | ------------- |
+| `scm1` | `scm1.example.com` | Existing SCM to be replaced |
+| `scm2` | `scm2.example.com` | Existing SCM to be replaced |
+| `scm3` | `scm3.example.com` | Existing SCM to be replaced |
+| `scm4` | `scm4.example.com` | New SCM host |
+| `scm5` | `scm5.example.com` | New SCM host |
+| `scm6` | `scm6.example.com` | New SCM host |
 
-5. **Validate**  
-   Wait until new SCM replicas have joined the Ratis group, the SCM role you expect exists (for example [`ozone admin scm roles`](../../../../administrator-guide/configuration/high-availability/scm-ha#verify-scm-ha-setup)), and SCM has exited safemode. Confirm DataNodes reach a healthy heartbeat relationship with SCMs—for example inspect DataNode logs and SCM UI or metrics—and that replicated metadata looks normal before you rely on only the new set.
+## Leadership transfer and rollback
 
-Plan two configuration waves (`ozone admin reconfig` after expanding `ozone.scm.nodes`, then again after decommission narrows membership), mirroring validated migration flows rather than flipping unrelated keys in one edit.
+Before decommissioning an SCM, verify that it is not the current leader:
 
-### Applying DataNode SCM list changes dynamically
+```shell
+ozone admin scm roles --service-id=prod
+```
 
-Deploy the updated `ozone-site.xml` on each DataNode host, then trigger reload from that file:
+If the SCM being removed is leader, transfer leadership to an SCM that should remain available. The `-n` option expects the target SCM's SCM ID, which is the Raft peer ID reported by `ozone admin scm roles`:
+
+```shell
+ozone admin scm transfer --service-id=prod -n <target-scm-peer-id>
+```
+
+Ozone also supports transferring leadership to a randomly chosen follower:
+
+```shell
+ozone admin scm transfer --service-id=prod -r
+```
+
+Rollback depends on how far the migration has progressed:
+
+- Before an old SCM is decommissioned, keep or restore the expanded configuration, transfer leadership back to an old SCM if needed, and stop or decommission the newly bootstrapped replacement.
+- After an old SCM is decommissioned, do not try to bring it back with the same membership identity. Bootstrap a replacement SCM with a new node ID, then add that replacement through the same expansion flow.
+- If a Datanode reconfiguration partially succeeds, fix the missing address or node-list configuration and rerun Datanode reconfiguration. The callback returns the effective SCM node list that the Datanode actually connected to, so a later retry can add or remove the remaining endpoints.
+
+## Configuration-based SCM migration
+
+Configuration-based SCM migration gives each new SCM its own unique address in `ozone-site.xml`. Existing SCMs, new SCMs, OMs, Recon, and Datanodes learn about new SCM peers through configuration rollout.
+
+### Step 1: Publish the expanded SCM configuration
+
+#### SCM node configuration
+
+Add all new SCMs to the SCM HA configuration used by the existing SCMs and the new SCMs:
+
+```xml
+<property>
+  <name>ozone.scm.nodes.prod</name>
+  <value>scm1,scm2,scm3,scm4,scm5,scm6</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm4</name>
+  <value>scm4.example.com</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm5</name>
+  <value>scm5.example.com</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm6</name>
+  <value>scm6.example.com</value>
+</property>
+```
+
+Include any SCM Datanode RPC address or port overrides used by your deployment, such as `ozone.scm.datanode.address.prod.scm4` or `ozone.scm.datanode.port.prod.scm4`. If those keys are not set, Datanodes derive the Datanode RPC endpoint from the normal SCM address and default SCM Datanode RPC port.
+
+#### Ozone service configuration
+
+Roll the same expanded SCM list to Ozone services that use SCM peer configuration, such as OMs, Recon, and Datanodes:
+
+```xml
+<property>
+  <name>ozone.scm.nodes.prod</name>
+  <value>scm1,scm2,scm3,scm4,scm5,scm6</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm4</name>
+  <value>scm4.example.com</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm5</name>
+  <value>scm5.example.com</value>
+</property>
+<property>
+  <name>ozone.scm.address.prod.scm6</name>
+  <value>scm6.example.com</value>
+</property>
+```
+
+Datanodes must know the address keys before `ozone.scm.nodes.prod` is reloaded. If your deployment tooling can stage changes, roll SCM address keys first, then roll the expanded node list in a second Datanode reconfiguration wave. If both changes are present in the same file before the node-list reload, verify the Datanode reconfiguration status and retry if address resolution was not ready.
+
+#### Validation
+
+Confirm that every new SCM node ID has matching address settings in the configuration files distributed to SCMs and Datanodes. On representative Datanodes, confirm that the keys are reconfigurable:
+
+```shell
+ozone admin reconfig --service=DATANODE --address=<dn-host>:<dn-rpc-port> properties
+```
+
+The output should include `ozone.scm.nodes.prod` and the `ozone.scm.address.prod.*` address keys.
+
+### Step 2: Bootstrap the new SCMs
+
+#### SCM node action
+
+Apply the expanded configuration to each new SCM host. Make sure `ozone.scm.primordial.node.id` still points to an existing SCM that can issue SCM certificates in a secure cluster. Then bootstrap and start each new SCM:
+
+```shell
+# On scm4.example.com
+ozone scm --bootstrap
+ozone --daemon start scm
+
+# On scm5.example.com
+ozone scm --bootstrap
+ozone --daemon start scm
+
+# On scm6.example.com
+ozone scm --bootstrap
+ozone --daemon start scm
+```
+
+#### Datanode action
+
+After address keys for the new SCMs are visible on each Datanode, reload the expanded SCM node list without restarting the Datanode:
 
 ```shell
 ozone admin reconfig --service=DATANODE --address=<dn-host>:<dn-rpc-port> start
 ozone admin reconfig --service=DATANODE --address=<dn-host>:<dn-rpc-port> status
 ```
 
-To push the same on-disk configuration to every `IN_SERVICE` DataNode at once:
+To apply the same on-disk configuration to all `IN_SERVICE` Datanodes:
 
 ```shell
 ozone admin reconfig --service=DATANODE --in-service-datanodes start
 ozone admin reconfig --service=DATANODE --in-service-datanodes status
 ```
 
-Use `ozone admin reconfig --service=DATANODE --address=... properties` (or the batch form) to confirm that `ozone.scm.nodes.<scmServiceId>` and the `ozone.scm.address.<scmServiceId>.*` keys are listed as reconfigurable on your version.
+The Datanode must be in the `RUNNING` state for this reconfiguration to succeed. During SCM node-list reload, the Datanode compares the previous and new node ID sets, resolves SCM Datanode RPC addresses, adds new SCM connections, removes dropped SCM connections, and resizes internal endpoint-processing pools to match the active SCM and Recon endpoints.
 
-## Phase 2: Move leadership off nodes you will remove
+#### Validation
 
-If any SCM you plan to decommission is the current Raft leader, transfer leadership to a node that will stay (usually one of the new SCMs). See [Leader SCM](./decommission#leader-scm) and [SCM Leader Transfer](../../../../administrator-guide/configuration/high-availability/scm-ha#scm-leader-transfer).
+Validate SCM roles:
 
-If you must change which node is **primordial** (metadata and certificate implications), follow [Primordial SCM](./decommission#primordial-scm) and the security discussion in [Primordial SCM under SCM HA Security](../../../../administrator-guide/configuration/high-availability/scm-ha#primordial-scm) before decommissioning.
+```shell
+ozone admin scm roles --service-id=prod
+```
 
-## Phase 3: Decommission old SCMs
+The expected state at this point is that old and new SCMs are all in the HA ring:
 
-Decommission each old SCM using the cluster administration command and cluster state described in [SCM decommission](./decommission#scm-decommission), including manual handling of private keys noted there.
+```text
+scm1 : FOLLOWER
+scm2 : LEADER
+scm3 : FOLLOWER
+scm4 : FOLLOWER
+scm5 : FOLLOWER
+scm6 : FOLLOWER
+```
 
-## Phase 4: Remove old node IDs from DataNode configuration
+Wait until Datanodes have registered with the new SCMs and all SCMs report healthy Datanode heartbeats. Check SCM UI, SCM metrics, or Datanode logs for failed endpoint registration, unresolved SCM addresses, or repeated heartbeat errors before decommissioning old SCMs.
 
-1. Update `ozone.scm.nodes.<scmServiceId>` to list **only** the surviving logical node IDs (for example `scm4,scm5,scm6`). Remove properties for decommissioned SCM node IDs from `ozone-site.xml` when they are no longer needed elsewhere.
-2. Deploy the file and run DataNode reconfiguration again (`ozone admin reconfig` as in phase 1). The DataNode removes RPC connections to retired endpoints after a successful removal.
+### Step 3: Decommission the old SCMs
 
-## Behavior and limitations (DataNode)
+#### SCM node action
 
-Reconfiguration runs only when the DataNode state machine is in the `RUNNING` state. The service compares the previous and new SCM node ID sets, resolves addresses for **add** and **remove** sets, **adds** new SCM connections first, then **removes** dropped ones, and resizes internal thread pools to match the number of SCM (and Recon) endpoints.
+Decommission the old SCMs in a controlled sequence. Before each command, confirm that the target SCM is not leader; if needed, transfer leadership to a retained SCM. The `-nodeid` value is the SCM ID reported by `ozone admin scm roles`, not the logical configuration name such as `scm1`.
 
-If an SCM hostname cannot be resolved for an **add**, that endpoint is skipped with a warning until DNS or configuration is fixed; you can retry after correcting the environment. If some adds or removes fail (for example I/O error), the effective node ID list returned by the reconfiguration callback reflects what actually connected or disconnected so a later retry can succeed without duplicating work.
+```shell
+ozone admin scm decommission --service-id=prod -nodeid=<scm1-scm-id>
+ozone admin scm decommission --service-id=prod -nodeid=<scm2-scm-id>
+ozone admin scm decommission --service-id=prod -nodeid=<scm3-scm-id>
+```
 
-Setting `ozone.scm.nodes.<scmServiceId>` to an empty value is rejected. Future releases may add stricter checks (for example around leader SCM); follow release notes when upgrading.
+If you decommission the primordial SCM, update `ozone.scm.primordial.node.id` to a retained SCM before decommissioning and follow the security notes in [SCM HA Security](../../../../administrator-guide/configuration/high-availability/scm-ha#scm-ha-security).
 
-## Legacy behavior (without dynamic reconfiguration)
+#### Datanode configuration
 
-Without dynamic reload, the same logical migration still requires:
+Do not remove `scm1`, `scm2`, or `scm3` from Datanode configuration before decommissioning finishes. During decommission, Datanodes can safely carry both old and new SCM addresses as long as the retained SCMs are reachable.
 
-1. Set `ozone.scm.nodes` to the union of old and new IDs, then restart every DataNode (or roll once through the fleet).
-2. After old SCMs are removed from the cluster, set `ozone.scm.nodes` to the final list and restart every DataNode again.
+#### Validation
 
-Using `ozone admin reconfig` for `ozone.scm.nodes.<scmServiceId>` and related address keys removes the need for those restarts when updating SCM membership.
+The decommissioned SCMs should stop and disappear from `ozone admin scm roles` output:
+
+```text
+scm4 : LEADER
+scm5 : FOLLOWER
+scm6 : FOLLOWER
+```
+
+Confirm that retained SCMs no longer list the removed SCM peers and that Datanode heartbeat health remains normal.
+
+### Step 4: Clean up the old SCM configuration
+
+#### SCM node configuration
+
+After the old SCMs have been decommissioned, remove obsolete entries from the retained SCM configuration:
+
+- `ozone.scm.address.prod.scm1`
+- `ozone.scm.address.prod.scm2`
+- `ozone.scm.address.prod.scm3`
+- any old `ozone.scm.datanode.address.*` or `ozone.scm.datanode.port.*` entries
+- the old node IDs from `ozone.scm.nodes.prod`
+
+The retained SCM configuration should contain only the new SCMs:
+
+```xml
+<property>
+  <name>ozone.scm.nodes.prod</name>
+  <value>scm4,scm5,scm6</value>
+</property>
+```
+
+When convenient, restart retained SCMs so the cleaned configuration is reflected consistently in each SCM process.
+
+#### Datanode action
+
+Roll the cleanup configuration to Datanodes and run Datanode reconfiguration again:
+
+```shell
+ozone admin reconfig --service=DATANODE --in-service-datanodes start
+ozone admin reconfig --service=DATANODE --in-service-datanodes status
+```
+
+After a successful reload, Datanodes close RPC connections to the retired SCM endpoints. The effective `ozone.scm.nodes.prod` value on each Datanode should contain only `scm4`, `scm5`, and `scm6`.
+
+#### Validation
+
+Confirm that Datanodes continue sending heartbeats to retained SCMs and no expected traffic still targets `scm1.example.com`, `scm2.example.com`, or `scm3.example.com`. Do not shut down or repurpose the old machines until retained SCM health and Datanode heartbeat health are stable.
+
+## Behavior and limitations
+
+SCM node-list reconfiguration on Datanodes is intentionally scoped to Datanode endpoint connections. It does not replace SCM bootstrap, SCM Ratis membership changes, SCM decommission, or SCM leadership transfer.
+
+The Datanode rejects an empty `ozone.scm.nodes.<scmServiceId>` value. If a new SCM address cannot be resolved during an add operation, that endpoint is skipped with a warning and the effective node list remains limited to SCMs the Datanode actually connected to. If some add or remove operations fail because of an I/O error, retry after correcting the environment.
+
+The Datanode adds new SCM endpoints before removing old ones, then resizes endpoint-processing pools to match the number of active SCM and Recon connections. This keeps the process connected to at least the previous SCM set when an addition fails before old endpoints are removed.
+
+## Legacy behavior without dynamic reconfiguration
+
+Without dynamic reload, the same logical migration requires two Datanode restart waves:
+
+1. Set `ozone.scm.nodes.<scmServiceId>` to the union of old and new SCM node IDs, then restart every Datanode.
+2. After old SCMs are decommissioned, set `ozone.scm.nodes.<scmServiceId>` to the final retained SCM list and restart every Datanode again.
+
+Dynamic Datanode reconfiguration removes the need for those two restart waves when updating SCM membership endpoints.
