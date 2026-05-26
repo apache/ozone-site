@@ -120,7 +120,14 @@ Roll the same expanded SCM list to Ozone services that use SCM peer configuratio
 </property>
 ```
 
-Datanodes must know the address keys before `ozone.scm.nodes.prod` is reloaded. If your deployment tooling can stage changes, roll SCM address keys first, then roll the expanded node list in a second Datanode reconfiguration wave. If both changes are present in the same file before the node-list reload, verify the Datanode reconfiguration status and retry if address resolution was not ready.
+OMs and Recon do not support dynamic reconfiguration of SCM node-list changes. After rolling the expanded SCM configuration to OM and Recon hosts, restart those services so they pick up the new SCM peers before the old SCMs are decommissioned. This keeps OM-to-SCM and Recon-to-SCM communication valid if a retained or newly added SCM becomes the active SCM endpoint used by the service.
+
+Datanodes must know the address keys before `ozone.scm.nodes.prod` is reloaded. Apply Datanode reconfiguration in two waves:
+
+1. Roll the new `ozone.scm.address.prod.<scm-node-id>` keys and reconfigure the Datanodes.
+2. Roll the expanded `ozone.scm.nodes.prod` value and reconfigure the Datanodes again.
+
+If both changes are present before the first Datanode reconfiguration, the node-list reload can fail while resolving the new SCM node IDs. Verify the Datanode reconfiguration status and retry the reconfiguration after the address keys are loaded. The retry can still reach the same final state.
 
 #### Validation
 
@@ -243,6 +250,8 @@ The retained SCM configuration should contain only the new SCMs:
 ```
 
 When convenient, restart retained SCMs so the cleaned configuration is reflected consistently in each SCM process.
+
+Roll the cleanup configuration to OMs and Recon and restart them as well. Unlike Datanodes, these services cannot remove retired SCM peers through `ozone admin reconfig`.
 
 #### Datanode action
 
