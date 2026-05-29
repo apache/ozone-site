@@ -6,8 +6,8 @@ sidebar_label: OM migration approaches
 
 This page describes two approaches for moving Ozone Manager (OM) roles to new hosts in an HA deployment:
 
-- Configuration-based migration, where every new OM has its own unique host address and clients update `ozone-site.xml` before and after the migration.
-- DNS-based migration, where clients keep stable OM hostnames and operators remap DNS from each old OM host to a new OM host.
+- [Configuration-based migration](#configuration-based-migration), where every new OM has its own unique host address and clients update `ozone-site.xml` before and after the migration.
+- [DNS-based migration](#dns-based-migration), where clients keep stable OM hostnames and operators remap DNS from each old OM host to a new OM host.
 
 Both approaches use the same Ratis membership operations: bootstrap the new OMs, make sure the OM being removed is not leader, decommission the old OMs, and clean up obsolete configuration. The main difference is where the cutover happens: in client configuration or in DNS.
 
