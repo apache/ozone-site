@@ -23,7 +23,7 @@ For background on SCM HA configuration and bootstrap, see [SCM High Availability
 | Operational speed | Faster on large clusters because Datanodes avoid two rolling restarts. | Slower when the Datanode fleet is large or restart windows are limited. |
 | Failure mode | A failed address or node-list reload can leave one Datanode on the previous effective SCM list until the issue is corrected and reconfiguration is retried. | A failed restart can leave one Datanode on the previous on-disk configuration until it is restarted successfully. |
 
-Use dynamic Datanode reconfiguration for SCM host replacement when the cluster version supports `ozone.scm.nodes.<scmServiceId>` reconfiguration on Datanodes. Use the legacy rolling restart flow only when dynamic reconfiguration is not available or your operational process requires restarts.
+Dynamic Datanode reconfiguration for SCM node-list changes is available in Ozone 2.2.0 and later. Use it for SCM host replacement when the cluster version supports `ozone.scm.nodes.<scmServiceId>` reconfiguration on Datanodes. Use the legacy rolling restart flow only when dynamic reconfiguration is not available or your operational process requires restarts.
 
 ![SCM migration strategy using dynamic Datanode reconfiguration](scm-migration-dynamic-reconfiguration.png)
 
