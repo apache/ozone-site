@@ -195,9 +195,9 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 2.0.0, then the master branch's current version would be `2.0.0-SNAPSHOT`. Here you would increase it to `2.1.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/8065) for an example.
 
 ```bash title="Update project version"
-mvn versions:set -DnewVersion=2.1.0-SNAPSHOT
-mvn versions:set-property -Dproperty=ozone.version -DnewVersion=2.1.0-SNAPSHOT
-mvn versions:set-property -Dproperty=ozone.release -DnewVersion="Joshua Tree”
+mvn versions:set -DgenerateBackupPoms=false -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.version -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.release -DnewVersion="Joshua Tree"
 ```
 
 :::note
@@ -241,11 +241,13 @@ Assume all following commands are executed from within this repo with your relea
 Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
 
 ```bash title="Update and Commit the Version Changes"
-mvn versions:set -DnewVersion=$VERSION
-mvn versions:set-property -Dproperty=ozone.version -DnewVersion=$VERSION
+mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.version -DnewVersion=$VERSION
 
 git commit -am "Update Ozone version to $VERSION"
 ```
+
+If you use an IDE or different commands for the version update, verify that no `pom.xml.versionsBackup` files were left behind before continuing.
 
 ### Tag the Commit for the Release Candidate
 
@@ -313,6 +315,15 @@ If the command fails, you may need to do the following additional steps:
   git reset --hard
   git clean -dfx
   ```
+
+- Verify the repo is pristine before starting the release build.
+
+  ```bash
+  git status --short
+  find . -name 'pom.xml.versionsBackup'
+  ```
+
+  Both commands should produce no output.
 
 ### Build the Project
 
@@ -401,7 +412,13 @@ Now each .tar.gz file should have an associated .mds file, .asc file, and .sha51
 
 Before uploading the artifacts, run some basic tests on them, similar to what other devs will run before voting in favor of the release.
 
-1. Extract the contents of the source tarball and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
+1. Extract the contents of the source tarball, verify that it does not contain any `pom.xml.versionsBackup` files, and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
+
+    ```bash
+    find ozone-$VERSION-src -name 'pom.xml.versionsBackup'
+    ```
+
+    The command should produce no output.
 2. Check the size of the output binary tarball for significant size increase from the last release.
     - A significant increase in size could indicate a dependency issue that needs to be fixed.
     - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
