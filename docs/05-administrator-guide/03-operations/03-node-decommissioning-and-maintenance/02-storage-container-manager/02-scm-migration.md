@@ -25,6 +25,8 @@ For background on SCM HA configuration and bootstrap, see [SCM High Availability
 
 Use dynamic Datanode reconfiguration for SCM host replacement when the cluster version supports `ozone.scm.nodes.<scmServiceId>` reconfiguration on Datanodes. Use the legacy rolling restart flow only when dynamic reconfiguration is not available or your operational process requires restarts.
 
+![SCM migration strategy using dynamic Datanode reconfiguration](scm-migration-dynamic-reconfiguration.png)
+
 ## Migration order
 
 Do the migration in two configuration waves. First, expand the SCM configuration so old and new SCMs are both known. After the new SCMs are healthy and the old SCMs are decommissioned, shrink the configuration to only the retained SCMs.
@@ -175,6 +177,8 @@ ozone admin reconfig --service=DATANODE --in-service-datanodes start
 ozone admin reconfig --service=DATANODE --in-service-datanodes status
 ```
 
+The batch form discovers targets from SCM when the command starts. It targets Datanodes in the `IN_SERVICE` operational state, skips Datanodes reported as `DEAD`, and skips Datanodes without a `CLIENT_RPC` port. Datanodes that are unavailable, not `IN_SERVICE`, or become available after discovery can be missed by that batch run. Review the per-node output and status, rerun the batch command if needed, or reconfigure missed Datanodes explicitly with `--address=<dn-host>:<dn-rpc-port>`. Do not rely only on the aggregate success and failure count printed by the batch command.
+
 The Datanode must be in the `RUNNING` state for this reconfiguration to succeed. During SCM node-list reload, the Datanode compares the previous and new node ID sets, resolves SCM Datanode RPC addresses, adds new SCM connections, removes dropped SCM connections, and resizes internal endpoint-processing pools to match the active SCM and Recon endpoints.
 
 #### Validation
@@ -264,6 +268,8 @@ ozone admin reconfig --service=DATANODE --in-service-datanodes status
 
 After a successful reload, Datanodes close RPC connections to the retired SCM endpoints. The effective `ozone.scm.nodes.prod` value on each Datanode should contain only `scm4`, `scm5`, and `scm6`.
 
+The same batch-discovery caveat applies during cleanup. Reconfigure any Datanode missed by the batch command after it returns to `IN_SERVICE` and `RUNNING`.
+
 #### Validation
 
 Confirm that Datanodes continue sending heartbeats to retained SCMs and no expected traffic still targets `scm1.example.com`, `scm2.example.com`, or `scm3.example.com`. Do not shut down or repurpose the old machines until retained SCM health and Datanode heartbeat health are stable.
@@ -279,6 +285,8 @@ The Datanode adds new SCM endpoints before removing old ones, then resizes endpo
 ## Legacy behavior without dynamic reconfiguration
 
 Without dynamic reload, the same logical migration requires two Datanode restart waves:
+
+![SCM migration strategy using legacy rolling restart](scm-migration-legacy-rolling-restart.png)
 
 1. Set `ozone.scm.nodes.<scmServiceId>` to the union of old and new SCM node IDs, then restart every Datanode.
 2. After old SCMs are decommissioned, set `ozone.scm.nodes.<scmServiceId>` to the final retained SCM list and restart every Datanode again.
