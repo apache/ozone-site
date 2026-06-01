@@ -728,7 +728,6 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.scm.ha.ratis.server.failure.timeout.duration` | 120s | `SCM`, `OZONE`, `HA`, `RATIS` | The timeout duration for ratis server failure detection, once the threshold has reached, the ratis state machine will be informed about the failure in the ratis ring. |
 | `ozone.scm.ha.ratis.server.leaderelection.pre-vote` | true | `SCM`, `OZONE`, `HA`, `RATIS` | Enable/disable SCM HA leader election pre-vote phase. |
 | `ozone.scm.ha.ratis.server.retry.cache.timeout` | 60s | `SCM`, `OZONE`, `HA`, `RATIS` | Retry Cache entry timeout for SCM's Ratis server. |
-| `ozone.scm.ha.ratis.server.snapshot.creation.gap` | 1024 | `SCM`, `OZONE` | Raft snapshot gap index after which snapshot can be taken. |
 | `ozone.scm.ha.ratis.snapshot.dir` |  | `SCM`, `OZONE`, `HA`, `RATIS` | The ratis snapshot dir location. |
 | `ozone.scm.ha.ratis.snapshot.threshold` | 1000 | `SCM`, `OZONE`, `HA`, `RATIS` | The threshold to trigger a Ratis taking snapshot operation for SCM. |
 | `ozone.scm.ha.ratis.storage.dir` |  | `OZONE`, `SCM`, `HA`, `RATIS` | Storage directory used by SCM to write Ratis logs. |
