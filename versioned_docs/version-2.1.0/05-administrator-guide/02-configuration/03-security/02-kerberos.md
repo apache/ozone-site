@@ -63,6 +63,10 @@ The HttpFS gateway offers an HDFS-compatible REST API (`webhdfs`). It requires K
 | `httpfs.hadoop.authentication.kerberos.principal` | The Kerberos principal used by HttpFS to connect to the HDFS NameNode (Ozone Manager). e.g., `${user.name}/${httpfs.hostname}@${kerberos.realm}`. |
 | `httpfs.hadoop.authentication.kerberos.keytab` | The Kerberos keytab file for the principal used to connect to the HDFS NameNode (Ozone Manager). e.g., `${user.home}/httpfs.keytab`. |
 
+:::note
+For HttpFS placed behind a **load balancer** with Kerberos (SPNEGO), the HTTP principal must match the **load balancer hostname** that clients use, not only the backend HttpFS host. See [HttpFS behind a load balancer (Kerberos)](../performance/httpfs-load-balancer).
+:::
+
 ## Recon Server
 
 Recon provides monitoring and management capabilities and can be secured using Kerberos authentication for its web UI and REST endpoints.
