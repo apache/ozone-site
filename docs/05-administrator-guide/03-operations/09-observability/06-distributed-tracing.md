@@ -95,3 +95,8 @@ export OTEL_SPAN_SAMPLING_ARG="createVolume:1.0,getBucket:0.5"
 ```
 
 > **Note:** In this example, 100% of `createVolume` spans and 50% of `getBucket` spans will be collected.
+
+## References
+
+- Design doc: [HDDS-13679 Distributed tracing improvement](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/distributed-tracing-OpenTelemetry.md)
+- Jira: [HDDS-13679](https://issues.apache.org/jira/browse/HDDS-13679)
