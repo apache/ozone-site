@@ -31,7 +31,7 @@ When resolving configurations for endpoints and sampling strategies, Ozone evalu
 
 The endpoint specifies the destination where the Jaeger collector is listening.
 
-### Via `ozone-site.xml`
+#### Via `ozone-site.xml`
 
 ```xml
 <property>
@@ -40,7 +40,7 @@ The endpoint specifies the destination where the Jaeger collector is listening.
 </property>
 ```
 
-### Via Environment Variable
+#### Via Environment Variable
 
 You can also set this environment variable for each Ozone component (OM, SCM, DataNode) and the Ozone client:
 
