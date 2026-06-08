@@ -260,3 +260,7 @@ docker compose exec -it s3g ozone fs -ls -R ofs://om/s3v/warehouse
 ```
 
 Spark UI is available at `http://localhost:8080`. You can monitor the Spark jobs here.
+
+## Iceberg table path rewrite
+If you have an existing Iceberg table created with OFS (`ofs://`) paths and need to access it through S3-compatible catalogs or engines, use the `ozone iceberg rewrite-path` command to rewrite metadata path references without copying data files.
+See [Iceberg Table Path Rewrite](../../administrator-guide/operations/tools/iceberg-table-path-rewrite) for the full step-by-step workflow.
