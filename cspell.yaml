@@ -73,6 +73,7 @@ words:
 - ASF
 - PMC
 # Ozone specific words
+- checksumming
 - HDDS
 - ratis
 - OM
