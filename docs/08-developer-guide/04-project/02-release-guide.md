@@ -532,7 +532,7 @@ The website is rendered from the `master` branch of the [apache/ozone-site](http
 
 1. Updates the [Downloads page](https://ozone.apache.org/download/) (`src/pages/download.md`) to include the artifacts of the new release version.
 2. Adds release notes for the new version under `src/pages/release-notes/` with your haiku image. Please write the release notes in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. In particular, make sure it is human readable and not a simple commit log diff.
-3. Creates a versioned copy of the documentation for the release. See [this pull request](https://github.com/apache/ozone-site/pull/330) for an example.
+3. Creates a versioned copy of the documentation for the release. See [this pull request](https://github.com/apache/ozone-site/pull/330) for an example, and check out the instructions from the [Docusaurus website](https://docusaurus.io/docs/versioning#tagging-a-new-version).
 
 Test the website locally by running `pnpm build` from the repository root to verify that it builds, then `pnpm serve` (or `pnpm start`) to browse the site and click through the new release's links. The build only validates internal links, so the links to the release artifacts must be checked manually.
 
