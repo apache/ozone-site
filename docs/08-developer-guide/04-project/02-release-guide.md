@@ -613,7 +613,7 @@ If there is a security vulnerability or critical bug uncovered in a major or min
 
 2. Run all steps from the sections [Update the Versions](#update-the-ozone-version-on-the-release-branch) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
     - Do not update the protolock files unless protocol buffers were changed as part of the fix.
-    - When updating the website, replace the superseded release's row on the [Downloads page](https://ozone.apache.org/download/) with this patch version, since we do not want users downloading the original release anymore.
+    - When updating the website, replace the superseded release's row on the [Downloads page](https://ozone.apache.org/download/) with this patch version, since users should no longer download the original release.
       - For example, if 1.2.1 is released, the 1.2.0 row on the Downloads page should be replaced with 1.2.1.
       - Add release notes for the patch release under `src/pages/release-notes/` as described above in [Update the Ozone Website](#update-the-ozone-website). The release notes page for the original major/minor release can remain alongside the page for the patch release.
       - Remove the Downloads section from the superseded release's notes page, and point readers to the patch release's notes page instead. The superseded artifacts will be removed from the distribution site, so the old download links would no longer work.
