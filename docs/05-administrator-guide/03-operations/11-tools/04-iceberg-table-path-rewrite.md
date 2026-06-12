@@ -16,7 +16,7 @@ It serves as Ozone's native implementation of Iceberg's RewriteTablePath action.
 
 ## Requirements
 
-- Apache Iceberg 1.8.0 or higher (Ozone implementation aligned with Iceberg 1.10.1)
+- Apache Iceberg 1.10.1 or higher
 - Ozone build with JDK 11+ (`ozone iceberg` is not available on Java 8 builds)
 
 ## Purpose of the tool
@@ -350,7 +350,7 @@ This is a known limitation tracked in
 The Ozone implementation will be updated once the Iceberg fix lands.
 
 **Workaround:** Avoid rewriting tables with existing position delete files until
-the fix is available, because the position delete file reads may fail with certain catalogs.
+the fix is available, because the position delete file reads may fail with certain catalogs(except Hadoop-based catalogs).
 
 ### Dual-catalog risk
 
