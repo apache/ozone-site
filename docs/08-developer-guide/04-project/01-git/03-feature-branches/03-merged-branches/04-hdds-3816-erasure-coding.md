@@ -78,7 +78,7 @@ Compatibility Changes: Currently forward compatibility broken due to the introdu
 
 We are tracking down the above issues before the merge.
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 No new dependencies are added.
 

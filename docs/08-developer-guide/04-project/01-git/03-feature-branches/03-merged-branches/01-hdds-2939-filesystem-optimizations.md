@@ -94,7 +94,7 @@ For using this feature, "ozone.OM.metadata.layout" config needs to be set to be 
 
 The new metadata layout is supported only in a fresh cluster and the layout detail is stored in per-bucket. Presently, both old and new metadata layout buckets can't co-exists in the same cluster. User can't start OM in new layout(prefix) if there are existing old layout buckets(simple) and vice-versa. Work is in progress to support the existing old buckets to be available in new layout, this will be supported in the next development phase.
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 No new dependencies are added.
 
@@ -102,7 +102,7 @@ No new dependencies are added.
 
 Done testing to evaluate the performance of delete, rename operations in feature branch vs master code base. Following charts capturing the directory delete and rename operations execution time shows that, feature branch has a very significant performance gain compared to the master.
 
-Ran freon '*dtsg' dfs tree generator benchmark test* in a single node cluster. V0 represents master code(simple) and V1 represents feature branch(prefix). Please refer to the [Jira document](https://issues.apache.org/jira/secure/attachment/13023395/Performance+Comparison+Between++Master+and+HDDS-2939+branch-Report-001.pdf) for more details.
+Ran `freon dtsg` dfs tree generator benchmark test in a single node cluster. V0 represents master code(simple) and V1 represents feature branch(prefix). Please refer to the [Jira document](https://issues.apache.org/jira/secure/attachment/13023395/Performance+Comparison+Between++Master+and+HDDS-2939+branch-Report-001.pdf) for more details.
 
 ## 12. security considerations
 

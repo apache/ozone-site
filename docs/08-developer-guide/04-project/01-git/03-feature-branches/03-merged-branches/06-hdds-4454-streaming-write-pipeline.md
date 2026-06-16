@@ -1,3 +1,4 @@
+<!-- cspell:ignore bursty -->
 # HDDS-4454: Streaming Write Pipeline
 
 Git branch:

@@ -45,7 +45,7 @@ No significant change
 
 There is no incompatible change introduced with this feature.
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 No new dependency is added.
 

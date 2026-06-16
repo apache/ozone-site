@@ -26,11 +26,11 @@ This holds true except in the event the initial persistent connection cannot be 
 
 ### 5. Docker-compose / acceptance tests
 
-Added enabling Ozone Manager gRPC server service to each Docker-config for the development clusters: Ozone, ozonesecure, Ozone-ha and ozonesecure-ha.
+Added enabling Ozone Manager gRPC server service to each Docker-config for the development clusters: `ozone`, `ozonesecure`, `ozone-ha` and `ozonesecure-ha`.
 
 To test the S3 Gateway performance persistent connection gRPC feature with Docker-compose / acceptance tests.   Add the following configuration key settings to the Docker-compose.yaml : OM container - [OZONE-SITE.XML_ozone.OM](http://OZONE-SITE.XML_ozone.om).S3.gRPC.server_enabled: "true" & s3g container - [OZONE-SITE.XML_ozone.](http://OZONE-SITE.XML_ozone.om)OM.transport.class : "[org.apache.Hadoop.ozone.OM](http://org.apache.hadoop.ozone.om).protocolPB.GrpcOmTransportFactory".
 
-Then run acceptance tests, test.sh, for development cluster configured including Ozone, ozonesecure, Ozone-ha and ozonesecure-ha.
+Then run acceptance tests, test.sh, for development cluster configured including `ozone`, `ozonesecure`, `ozone-ha` and `ozonesecure-ha`.
 
 Also, with development cluster configured for s3g gRPC can load test the S3 Gateway using the endpoint, localhost:9878.  Load testers used include freon and warp.
 
@@ -52,7 +52,7 @@ Code coverage is nearly unchanged from master to feature branch, from 76.5% to 7
 
 **Current HDDS-4440-S3-performance feature branch build time:** .
 
-Building on a local machine with ubuntu linux six-core i5 Coffee Lake and 64Gb Ram (\$ mvn clean install -DskipTests):
+Building on a local machine with ubuntu linux six-core i5 Coffee Lake and 64Gb Ram (`mvn clean install -DskipTests`):
 
 |                                                          |               |
 |----------------------------------------------------------|---------------|
@@ -79,14 +79,14 @@ For the S3-performance gRPC feature, network transport related jars are added to
 |                                               |
 |-----------------------------------------------|
 | Added to License.txt                          |
-| \+   io.Netty:netty-tcnative-boringssl-static |
-| \+   io.Netty:netty-tcnative                  |
+| `io.netty:netty-tcnative-boringssl-static` |
+| `io.netty:netty-tcnative` |
 
 ### 11. performance
 
 We compare the performance of the S3 Gateway using the gRPC persistent connection with TLS to the existing Hadoop RPC, hRPC connections with encryption on the wire for metadata requests.  We find that in load testing the S3 performance feature branch with gRPC and encryption on the wire outperforms the existing hRPC connection ***both*** encrypted and in plaintext.  This is particularly evident in the comparison of gRPC with TLS to encrypted wire Hadoop RPC where the increase is greater than 2X.
 
-| # | s3g Transport Type | Description | Load Test Performance for Metadata throughput, Objects / sec (objs/sec) |
+| # | s3g Transport Type | Description | Load Test Performance for Metadata throughput, Objects / sec (objects/sec) |
 |---|---|---|---|
 | 1 | gRPC TLS (feature branch) | s3g ↔︎ Ozone Manager connection over gRPC with encryption on the wire, TLS. Persistent connection. | 9026.12 |
 | 2 | hRPC plaintext (current) | s3g ↔︎ Ozone Manager connection over Hadoop RPC plaintext. Persistent connection (HDDS-5881). | 6508.85 |

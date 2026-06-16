@@ -15,7 +15,7 @@ The new API is for developers to build upon. Not intended for end-users or admin
 
 The design and architecture spans across multiple design docs
 
-[Design doc: Supporting Hflush and lease recovery](https://docs.google.com/document/d/1KcB9qjIe6vEg7iRu4rFsHE5kTj6A1JCaJ-Q2PKWLpGw/edit?usp=sharing)
+[Design doc: Supporting `Hflush` and lease recovery](https://docs.google.com/document/d/1KcB9qjIe6vEg7iRu4rFsHE5kTj6A1JCaJ-Q2PKWLpGw/edit?usp=sharing)
 
 [Ozone File Lease Recovery Protocol Detail Design](https://docs.google.com/document/d/1wS0dVL3huManP8OrKl-sBjxE5vFVyeW4XEFdHHIctO4/edit?usp=sharing)
 
@@ -23,7 +23,7 @@ The design and architecture spans across multiple design docs
 
 ## 4. S3 compatibility
 
-S3 behaviour was not changed.
+S3 behavior was not changed.
 
 The new APIs (hsync, recoverLease, ...) are Hadoop file system APIs and are not supported by S3.
 
@@ -53,7 +53,7 @@ ozone.client.stream.putblock.piggybacking
 ozone.incremental.chunk.list
 ```
 
-Additionally, new Datanode layout version "HBASE_SUPPORT" was added. A Datanode wire protocol version COMBINED_PUTBLOCK_WRITECHUNK_RPC was added too.
+Additionally, new Datanode layout version "HBASE_SUPPORT" was added. A Datanode wire protocol version `COMBINED_PUTBLOCK_WRITECHUNK_RPC` was added too.
 
 ## 10. third party dependencies/license changes
 

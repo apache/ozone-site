@@ -12,11 +12,11 @@ Use a feature branch for changes that:
 - Make iterative changes to core code paths.
 - Require broader community testing.
 - Cannot be easily gated with a feature flag.
-  - The covers changaes that migrate existing code paths instead of adding completely new ones.
+  - The covers changes that migrate existing code paths instead of adding completely new ones.
 - Would have issues if a release was cut in the middle of their development.
   - A release branch can be cut from `master` at any time and feature development should not block this.
   - If a feature has upgrade compatibility concerns that will not be addressed right away, it should be developed on a feature branch.
-  - Note that protobuf messages and wire protocols become locked into compatability guarantees once they are released.
+  - Note that protobuf messages and wire protocols become locked into compatibility guarantees once they are released.
     - If a feature is making changes in this area and it wants to keep the structure flexible while it is being finalized, it should be done on a feature branch.
 
 

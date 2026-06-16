@@ -25,7 +25,7 @@ N/A, S3 compatibility remains the same. DiskBalancer only affects the Data Volum
 
 ## 5. Docker-compose / Acceptance tests
 
-New robot test [testdiskbalancer.robot](https://github.com/apache/ozone/blob/HDDS-5713/hadoop-ozone/dist/src/main/smoketest/diskbalancer/testdiskbalancer.robot) is being added.
+New robot test [`testdiskbalancer.robot`](https://github.com/apache/ozone/blob/HDDS-5713/hadoop-ozone/dist/src/main/smoketest/diskbalancer/testdiskbalancer.robot) is being added.
 
 New acceptance test are added, mainly tests the CLI for DiskBalancer. It does not test fault injection.
 
@@ -55,7 +55,7 @@ To enable the feature, the following configs need to be added to DN Ozone-site.x
 
 | Property | Default | Tags | Description |
 |---|---|---|---|
-| `hdds.datanode.disk.balancer.enabled` | `false` | OZONE, Datanode, DISKBALANCER | If this property is set to true, then the Disk Balancer  service is enabled on Datanodes, and users can use this service. By default, this is disabled.  |
+| `hdds.datanode.disk.balancer.enabled` | `false` | `OZONE, Datanode, DISKBALANCER` | If this property is set to true, then the Disk Balancer  service is enabled on Datanodes, and users can use this service. By default, this is disabled.  |
 
 ## 10. Third-party dependencies/License changes
 
@@ -67,7 +67,7 @@ The major work flow of DiskBalancer on Datanode, is first select a pair of data 
 
 Except the move container part,  we did the microbenchmark performance testing for volume pair choosing(VolumeChoosingPolicy), and container choosing(ContainerChoosingPolicy) . VolumeChoosingPolicy, it chooses a pair of volumes which will act as source volume(most used) and destination volume(least used). ContainerChoosingPolicy, it decides which container to move from an over-utilized disk to least-utilized to help balance storage across volumes.
 
-Performance test for ContainerChoosingPolicy is done by [HDDS-13055. Optimise ContainerChoosingPolicy Performance](https://issues.apache.org/jira/browse/HDDS-13055) . The test shows it takes approx 0.02ms to pick one container.
+Performance test for ContainerChoosingPolicy is done by [HDDS-13055. Optimize ContainerChoosingPolicy Performance](https://issues.apache.org/jira/browse/HDDS-13055) . The test shows it takes approx 0.02ms to pick one container.
 
 Performance test for VolumeChoosingPolicy is done by [HDDS-13291. Add Performance test for VolumeChoosingPolicy](https://issues.apache.org/jira/browse/HDDS-13291) . It shows it takes approx 0.12ms to pick one pair of volume.
 

@@ -2,21 +2,21 @@
 
 ## 1. stable builds/intermittent test failures
 
-- The HDDS-3698-nonrolling-upgrade branch has no intermittent test failures.
-- Most intermittent failures specific to the HDDS-3698-nonrolling-upgrade branch were tracked and resolved in [HDDS-4833](https://issues.apache.org/jira/browse/HDDS-4833).
+- The `HDDS-3698-nonrolling-upgrade` branch has no intermittent test failures.
+- Most intermittent failures specific to the `HDDS-3698-nonrolling-upgrade` branch were tracked and resolved in [HDDS-4833](https://issues.apache.org/jira/browse/HDDS-4833).
 - Other intermittent failures have been resolved in [HDDS-5109](https://issues.apache.org/jira/browse/HDDS-5109) and [HDDS-5336](https://issues.apache.org/jira/browse/HDDS-5336).
 
 ## 2. documentation
 
-- *Hadoop-HDDs/docs/feature/design/how-to-do-a-nonrolling-upgrade.md* contains instructions for users to upgrade a cluster using the framework.
+- `hadoop-hdds/docs/feature/design/how-to-do-a-nonrolling-upgrade.md` contains instructions for users to upgrade a cluster using the framework.
 
 - Documentation will be refined in coming weeks, before it is needed in the 1.2.0 release.
 
 ## 3. design, attached the docs
 
-- *Hadoop-HDDs/docs/content/design/upgrade-dev-primer.md* contains instructions for developers who need to add a feature using the upgrade framework.
-- *Hadoop-HDDs/docs/content/design/nonrolling-upgrade.md* contains links to the main design document and presentation.
-- *Hadoop-HDDs/docs/content/design/omprepare.md* contains links and summary for OM preparation design document.
+- `Hadoop-hdds/docs/content/design/upgrade-dev-primer.md` contains instructions for developers who need to add a feature using the upgrade framework.
+- `hadoop-hdds/docs/content/design/nonrolling-upgrade.md` contains links to the main design document and presentation.
+- `hadoop-hdds/docs/content/design/omprepare.md` contains links and summary for OM preparation design document.
 
 ## 4. S3 compatibility
 
@@ -82,8 +82,8 @@ There are no incompatible changes and no feature flags. The upgrade framework wi
 
 - The following dependencies have been added:
 
-  - aspectjrt-1.8.9.jar
-  - aspectjweaver-1.8.9.jar
+  - `aspectjrt-1.8.9.jar`
+  - `aspectjweaver-1.8.9.jar`
   - reflections-0.9.12.jar
 
 - All new libraries have compatible licenses. (License file update: HDDS-5137)
@@ -98,7 +98,7 @@ There are no incompatible changes and no feature flags. The upgrade framework wi
 
 `ozone freon rk --num-of-keys=100 --num-of-buckets=10 --num-of-volumes=1 --replication-type=RATIS --factor=THREE`
 
-HDDS-3698-nonrolling-upgrade:
+`HDDS-3698-nonrolling-upgrade`:
 
 ```text
 

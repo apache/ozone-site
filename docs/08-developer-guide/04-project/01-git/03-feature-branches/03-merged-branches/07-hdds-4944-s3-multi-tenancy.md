@@ -78,7 +78,7 @@ The design docs can be found under the Attachments section in the umbrella Jira:
 
 ## 4. S3 compatibility
 
-S3 multi-tenancy feature does not break any existing S3 API compatiblity. And all S3 secret key pairs generated with the existing `ozone s3 getsecret`  command can still be used the same way (still confined to default s3v volume) after the OM upgrade.
+S3 multi-tenancy feature does not break any existing S3 API compatibility. And all S3 secret key pairs generated with the existing `ozone s3 getsecret`  command can still be used the same way (still confined to default s3v volume) after the OM upgrade.
 
 ## 5. Docker-compose / acceptance tests
 
@@ -106,7 +106,7 @@ There should not be any incompatible changes introduced with this feature.
 
 A global enable/disable switch for the S3 multi-tenancy feature is to be added in [HDDS-6612](https://issues.apache.org/jira/browse/HDDS-6612) .
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 [HDDS-5836](https://issues.apache.org/jira/browse/HDDS-5836) Ranger Java client would include new dependency `org.apache.ranger.ranger-intg`
 

@@ -41,7 +41,7 @@ Build time in CI of the latest commit on the [feature branch (54f151946cc349087b
 
 A new OM version number was introduced to prevent new client sending atomic key overwrite request to old OM which does not support this feature.
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 N/A, no new dependencies were introduced.
 

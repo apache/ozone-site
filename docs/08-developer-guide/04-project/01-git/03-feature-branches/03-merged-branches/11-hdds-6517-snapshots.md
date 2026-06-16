@@ -46,13 +46,13 @@ There should not be any incompatible changes introduced with this feature.
 
 Snapshot feature will be a layout upgrade in new releases and can be used after upgrade finalization. This will be tracked through Jira [HDDS-7772](https://issues.apache.org/jira/browse/HDDS-7772)
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 NA
 
 ## 11. performance
 
-The feature won't affect performance if the Snapshot feature is not in use. When snapshots are used, the performance can get impacted proportionate to the number of snapshots that are actively read from and the number of concurrent snapdiff operations,
+The feature won't affect performance if the Snapshot feature is not in use. When snapshots are used, the performance can get impacted proportionate to the number of snapshots that are actively read from and the number of concurrent `snapdiff` operations,
 
 ## 12. security considerations
 

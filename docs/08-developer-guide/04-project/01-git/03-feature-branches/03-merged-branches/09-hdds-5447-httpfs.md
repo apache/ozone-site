@@ -50,7 +50,7 @@ no significant change
 
 there should not be any incompatible changes introduced with this feature.
 
-## 10. third party dependencies/licence changes
+## 10. third party dependencies/license changes
 
 these dependencies were added:
 
