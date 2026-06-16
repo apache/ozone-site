@@ -270,6 +270,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `hdds.scm.safemode.log.interval` | 1m | `HDDS`, `SCM`, `OPERATION` | Interval at which SCM logs safemode status while SCM is in safemode. Default is 1 minute. |
 | `hdds.scm.safemode.min.datanode` | 3 | `HDDS`, `SCM`, `OPERATION` | Minimum DataNodes which should be registered to get SCM out of safe mode. |
 | `hdds.scm.safemode.pipeline.creation` | true | `HDDS`, `SCM`, `OPERATION` | Boolean value to enable background pipeline creation in SCM safe mode. |
+| `hdds.scm.safemode.rule.refresh.interval` | 5s | `HDDS`, `SCM`, `OPERATION` | Refresh interval in SCM Safemode. |
 | `hdds.scm.safemode.threshold.pct` | 0.99 | `HDDS`, `SCM`, `OPERATION` | % of containers which should have at least one reported replica before SCM comes out of safe mode. |
 | `hdds.scm.unknown-container.action` | WARN | `SCM`, `MANAGEMENT` | The action taken by SCM to process unknown containers that reported by Datanodes. The default action is just logging container not found warning, another available action is DELETE action. These unknown containers will be deleted under this action way. |
 | `hdds.scm.wait.time.after.safemode.exit` | 5m | `HDDS`, `SCM`, `OPERATION` | After exiting safemode, wait for configured interval of time to start replication monitor and cleanup activities of unhealthy pipelines. |
