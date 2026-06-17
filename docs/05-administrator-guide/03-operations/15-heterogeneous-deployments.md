@@ -107,7 +107,7 @@ Existing Rack 1 (1.2PB)          New Rack 2 (10PB)
   - Bypasses power or port limits on older rack switches.
 - **Cons:**
   - **Causes severe data imbalance:** SCM's write-path allocation will send equal traffic to the 1.2PB rack and the 10PB rack, causing the 1.2PB rack to exhaust its space immediately.
-  - **SPOF risk:** A single network switch failure on the new 10PB rack will temporarily offline a much larger percentage of the cluster's total data compared to an older rack failure.
+  - **Single point of failure risk:** A single network switch failure on the new 10PB rack will temporarily offline a much larger percentage of the cluster's total data compared to an older rack failure.
 - **Recommendation:** **Use only when physically required.** If you must add dense racks, actively configure and run the [Container Balancer](./data-balancing/container-balancer) to migrate data post-write from the old racks to the new racks, and plan to [decommission](./node-decommissioning-and-maintenance/datanodes/datanode-decommission) the older racks over time.
 
 ## Recommendations and best practices
