@@ -553,9 +553,9 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.om.snapshot.diff.disable.native.libs` | false | `OZONE`, `OM` | Flag to perform snapshot diff without using native libs(can be slow). |
 | `ozone.om.snapshot.diff.job.default.wait.time` | 1m | `OZONE`, `OM` | Default wait time returned to client to wait before retrying snap diff request. Uses millisecond by default when no time unit is specified. |
 | `ozone.om.snapshot.diff.job.report.persistent.time` | 7d | `OZONE`, `OM` | Maximum time a successful snapshot diff job and its report will be persisted. Uses millisecond by default when no time unit is specified. |
-| `ozone.om.snapshot.diff.max.allowed.keys.changed.per.job` | 10000000 | `OZONE`, `OM` | Max numbers of keys changed allowed for a snapshot diff job. |
+| `ozone.om.snapshot.diff.max.allowed.keys.changed.per.job` | 1000000000 | `OZONE`, `OM` | Max numbers of keys changed allowed for a snapshot diff job. |
 | `ozone.om.snapshot.diff.max.jobs.purge.per.task` | 100 | `OZONE`, `OM` | Maximum number of snapshot diff jobs to be purged per snapDiff clean up run. |
-| `ozone.om.snapshot.diff.max.page.size` | 1000 | `OZONE`, `OM` | Maximum number of entries to be returned in a single page of snap diff report. |
+| `ozone.om.snapshot.diff.max.page.size` | 5000 | `OZONE`, `OM` | Maximum number of entries to be returned in a single page of snap diff report. |
 | `ozone.om.snapshot.diff.thread.pool.size` | 10 | `OZONE`, `OM` | Maximum numbers of concurrent snapshot diff jobs are allowed. |
 | `ozone.om.snapshot.directory.metrics.update.interval` | 5m | `OZONE`, `OM` | Time interval used to update the space consumption stats of the Ozone Manager snapshot directories. Background thread periodically calculates and updates these stats. Unit could be defined with postfix (ns,ms,s,m,h,d) |
 | `ozone.om.snapshot.force.full.diff` | false | `OZONE`, `OM` | Flag to always perform full snapshot diff (can be slow) without using the optimised compaction DAG. |
