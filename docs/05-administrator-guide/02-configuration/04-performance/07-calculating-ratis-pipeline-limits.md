@@ -2,6 +2,8 @@
 sidebar_label: Calculating Ratis Pipeline Limits
 ---
 
+import RatisPipelineCalculator from '@site/src/components/RatisPipelineCalculator';
+
 # Calculating Ratis Pipeline Limits
 
 ReplicationFactor.THREE is controlled by three configuration properties that limit the
@@ -50,6 +52,8 @@ And the configuration is:
 4.  Compare with the global limit: `min(24, 30) = 24`
 
 SCM will attempt to create and maintain approximately **24** open, FACTOR_THREE Ratis pipelines.
+
+<RatisPipelineCalculator />
 
 ## Sizing Trade-offs
 
