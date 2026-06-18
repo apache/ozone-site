@@ -143,7 +143,7 @@ The `KeyDeletingService` runs background tasks against both the active DB and th
 
 ### 3. Snapshot Reclamation (Snapshot Deletion)
 When a snapshot is deleted, its keys must be reconciled with the rest of the chain:
-* The Snapshot Deleting Service (SDS) executes an `OMSnapshotMoveDeletedKeysRequest`.
+* The Snapshot Deleting Service (`SDS`) executes an `OMSnapshotMoveDeletedKeysRequest`.
 * It scans the deleted snapshot's local `deletedTable`.
 * Any keys that are still referenced by the next snapshot in the chain are **moved** from the deleted snapshot's `deletedTable` to the next snapshot's `deletedTable`.
 * If there is no next snapshot, the keys are moved back to the active DB's `deletedTable`.
