@@ -51,10 +51,57 @@ And the configuration is:
 
 SCM will attempt to create and maintain approximately **24** open, FACTOR_THREE Ratis pipelines.
 
-**Production Recommendation:**
+## Sizing Trade-offs
 
-For most production deployments, using the dynamic per-disk limit (`ozone.scm.datanode.pipeline.limit=0`) is
-recommended, as it allows the cluster to scale pipeline capacity naturally with its resources. You can use the
-global limit (`ozone.scm.ratis.pipeline.limit`) as a safety cap if needed. A good starting value for
-`ozone.scm.pipeline.per.metadata.disk` is **2**. Monitor the section **Pipeline Statistics** in SCM web UI, or run
-the command `ozone admin pipeline list` to see if the actual number of pipelines aligns with your configured targets.
+Pipeline limits balance write throughput against Datanode resource usage. Each open Ratis pipeline is one Ratis
+replication group, so the number of pipelines directly affects how much concurrent write capacity the cluster
+exposes.
+
+**Benefits of more pipelines**
+
+- **Higher write parallelism**: Each pipeline is an independent Ratis group, so more pipelines allow more
+  concurrent write streams across the cluster.
+- **Lower write latency under contention**: With more pipelines, different clients are less likely to share the
+  same Ratis group, reducing queueing on a single Raft leader.
+
+**Costs of too many pipelines**
+
+- **Datanode resource pressure**: Each pipeline consumes CPU, memory, and metadata-disk I/O on the Datanodes
+  that participate in it. Very high pipeline counts can overload individual nodes.
+- **Follower lag and tail latency**: When a Datanode hosts many Raft groups, followers can fall behind on log
+  replication (index lag). This delays WATCH responses and increases write tail latency for pipelines on that
+  node.
+
+### Ozone vs HDFS write pipelines
+
+Ozone and HDFS take different approaches to grouping Datanodes for replicated writes:
+
+| | Ozone (Ratis pipelines) | HDFS (stateless pipelines) |
+| --- | --- | --- |
+| **Pipeline model** | SCM creates and tracks a bounded set of explicit Ratis pipelines | Any three Datanodes can form an ad hoc "pipeline" for three block replicas |
+| **Control & visibility** | Centralized limits and monitoring via SCM (`ozone admin pipeline list`, SCM UI) | No equivalent cluster-wide pipeline registry |
+| **Load spreading** | Bounded by configured pipeline limits; may cap peak write throughput | Blocks can spread across any DNs, spreading load more evenly |
+| **Operational trade-off** | More predictable capacity planning; may sacrifice some peak throughput | Higher potential throughput; harder to observe and cap concurrent write groups |
+
+![Ozone Ratis pipelines vs HDFS stateless block placement](ratis-vs-hdfs-pipelines.png)
+
+## Production Recommendation
+
+For most production deployments, start with the dynamic per-disk limit (`ozone.scm.datanode.pipeline.limit=0`).
+This lets pipeline capacity scale naturally with metadata disk resources. A good starting value for
+`ozone.scm.pipeline.per.metadata.disk` is **2**.
+
+Increase pipeline limits only when you observe write contention—for example, many clients sharing the same
+pipelines or sustained write queueing—and Datanode resources (CPU, memory, metadata-disk I/O) have headroom.
+Use `ozone.scm.ratis.pipeline.limit` as a safety cap rather than the primary tuning knob.
+
+Monitor the **Pipeline Statistics** section in the SCM web UI, or run `ozone admin pipeline list`, to confirm
+the actual number of open pipelines aligns with your configured targets. Watch for follower index lag or
+elevated resource usage on Datanodes as signals that pipeline counts may be too high.
+
+## Related Topics
+
+Limits on this page apply to **open Ratis pipelines** (ReplicationFactor.THREE). The number of OPEN containers
+and containers per pipeline are separate concerns and are not covered here. For background on Multi-Raft and
+Datanode metadata directories, see [Multi-Raft](./multi-raft). For EC pipeline sizing, see
+[Calculating EC Pipeline Limits](./calculating-ec-pipeline-limits).
