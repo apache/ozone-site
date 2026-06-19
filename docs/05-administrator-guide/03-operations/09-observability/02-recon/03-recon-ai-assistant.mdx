@@ -14,9 +14,9 @@ default**, experimental feature of the Recon service.
 
 ## 1. Overview
 
-Recon continuously derives a large amount of cluster metadata — container health and replica state,
+Recon continuously derives a large amount of cluster metadata - container health and replica state,
 namespace and usage rollups, open and pending-delete keys, datanode and pipeline status, background
-task and sync state — and exposes it across many REST endpoints and UI screens. In practice most of
+task and sync state - and exposes it across many REST endpoints and UI screens. In practice most of
 that information is never seen or correlated, because you have to know which endpoint or screen holds
 the answer.
 
@@ -25,10 +25,10 @@ those reads, and writes back a readable summary.
 
 **What it is not:**
 
-- It is **not** a computing or analytics engine — it reports what Recon's endpoints return and does
+- It is **not** a computing or analytics engine - it reports what Recon's endpoints return and does
   not perform ad-hoc aggregations, joins, or math across the cluster.
-- It is **read-only** — it never mutates the cluster.
-- Its results are **bounded** (at most 1000 records per read — see [Limits](#11-limits--boundary-conditions)).
+- It is **read-only** - it never mutates the cluster.
+- Its results are **bounded** (at most 1000 records per read - see [Limits](#11-limits--boundary-conditions)).
 - Its answers reflect Recon's **last metadata sync**, not the live cluster state.
 
 > **Important:** The assistant calls an **external LLM provider**, so cluster metadata leaves your
@@ -39,10 +39,10 @@ those reads, and writes back a readable summary.
 
 At a high level a question flows through three steps:
 
-1. **Tool selection** — the assistant asks the LLM which Recon view(s) can answer the question.
-2. **In-process execution** — Recon runs those reads inside the Recon JVM (no HTTP loopback), with
+1. **Tool selection** - the assistant asks the LLM which Recon view(s) can answer the question.
+2. **In-process execution** - Recon runs those reads inside the Recon JVM (no HTTP loopback), with
    hard safety limits applied.
-3. **Summarization** — the raw results are sent back to the LLM, which writes the final answer.
+3. **Summarization** - the raw results are sent back to the LLM, which writes the final answer.
 
 The assistant is **provider-agnostic**: OpenAI, Google Gemini, and Anthropic are all reachable behind
 one interface (see [Supported providers & models](#3-supported-providers--models)).
@@ -68,7 +68,7 @@ a provider with no key is simply unavailable.
 
 The **default selection** is provider `gemini`, model `gemini-2.5-flash`.
 
-> **Tip — reasoning vs. fast models:** "Reasoning" models (for example `gemini-2.5-pro`) spend output
+> **Tip - reasoning vs. fast models:** "Reasoning" models (for example `gemini-2.5-pro`) spend output
 > tokens on internal thinking and are slower and more token-hungry; "fast" models (for example
 > `gemini-2.5-flash`) return snappier answers. For an interactive assistant, prefer a fast model as
 > the default and reserve reasoning models for harder questions.
@@ -91,7 +91,7 @@ Before enabling the assistant:
 - Recon is deployed and running.
 - You have an account and API key for at least one supported provider.
 - The **Recon server** can make **outbound HTTPS** calls to the provider endpoint(s) listed in
-  [Supported providers](#3-supported-providers--models). Only the Recon server needs egress — end
+  [Supported providers](#3-supported-providers--models). Only the Recon server needs egress - end
   users' browsers do not.
 
 > **Note:** In firewalled or proxied environments, allowlist the provider hostnames on HTTPS (443),
@@ -112,16 +112,16 @@ cluster before enabling it.
 
 - The user's **question text**.
 - The **system prompts** (the catalog of Recon tools and the semantic guide describing them).
-- The **raw JSON results** of the Recon reads used to answer — this is cluster **metadata** such as
+- The **raw JSON results** of the Recon reads used to answer - this is cluster **metadata** such as
   volume / bucket / key names, paths, container and pipeline IDs, sizes, counts, and health states.
 - A second round-trip containing those results for **summarization**.
 
 **Not transmitted:**
 
-- Ozone object **data** (file contents) — only metadata is ever read.
+- Ozone object **data** (file contents) - only metadata is ever read.
 - Any credential beyond the provider's own API authentication.
 
-> **Warning:** Object **names and paths are themselves potentially sensitive** — real volume, bucket,
+> **Warning:** Object **names and paths are themselves potentially sensitive** - real volume, bucket,
 > and key names can reveal business or data structure. The 1000-record cap bounds the *volume* of
 > data sent, not its sensitivity.
 
@@ -135,7 +135,7 @@ cluster before enabling it.
 
 ## 6. Managing API keys (secure vs. insecure storage)
 
-API keys are resolved **server-side only** — they are never accepted per request, and every chat user
+API keys are resolved **server-side only** - they are never accepted per request, and every chat user
 shares the single admin-configured key. (This is why you should gate who can reach the endpoint.)
 
 **Resolution order** (handled by Recon's `CredentialHelper`):
@@ -155,7 +155,7 @@ shares the single admin-configured key. (This is why you should gate who can rea
 > **Warning:** Plaintext keys are readable by anyone who can read `ozone-site.xml`. Use this only for
 > local development or testing, never in production.
 
-### Secure: Hadoop Credential Provider (JCEKS) — recommended
+### Secure: Hadoop Credential Provider (JCEKS) - recommended
 
 The credential **alias must equal the config key name** (for example
 `ozone.recon.chatbot.gemini.api.key`).
@@ -180,8 +180,8 @@ The credential **alias must equal the config key name** (for example
    ```
 
 3. Protect the keystore. Restrict file permissions (for example `chmod 600`, owned by the Recon
-   service user) and supply the keystore password out-of-band — for example via
-   `HADOOP_CREDSTORE_PASSWORD` or a password file — rather than relying on the default.
+   service user) and supply the keystore password out-of-band - for example via
+   `HADOOP_CREDSTORE_PASSWORD` or a password file - rather than relying on the default.
 
 4. Restart Recon and verify with `GET /api/v1/chatbot/health` (`llmClientAvailable` should be `true`).
 
@@ -206,7 +206,7 @@ feature still works through any other configured provider.
    ```
 
 2. Choose a provider and model (defaults are `gemini` / `gemini-2.5-flash`).
-3. Supply an API key — see [Managing API keys](#6-managing-api-keys-secure-vs-insecure-storage).
+3. Supply an API key - see [Managing API keys](#6-managing-api-keys-secure-vs-insecure-storage).
 4. Restart Recon and verify:
    - `GET /api/v1/chatbot/health`
    - `GET /api/v1/chatbot/models`
@@ -276,19 +276,19 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 |---|---|---|
 | `anthropic.beta.header` | `context-1m-2025-08-07` | Anthropic beta header (enables the 1M-token context window). Set empty to disable. |
 
-## 9. Using the assistant — what you can ask
+## 9. Using the assistant - what you can ask
 
 Ask by **intent**; the assistant maps your question to the right Recon view. It can answer questions
 about:
 
-- **Cluster & capacity** — overall health, storage used/available.
-- **Datanodes** — inventory, health, dead/stale nodes.
-- **Pipelines** — inventory, leaders, members, state.
-- **Containers** — inventory and health: unhealthy, missing, deleted, OM/SCM mismatch, quasi-closed.
-- **Keys** — committed key listings, open/uncommitted keys, pending-delete keys, multipart uploads.
-- **Volumes & buckets** — inventory, ownership, layout, quotas.
-- **Namespace** — disk usage, object counts, quota usage, file-size distribution for a path.
-- **Tasks** — Recon background task and sync status.
+- **Cluster & capacity** - overall health, storage used/available.
+- **Datanodes** - inventory, health, dead/stale nodes.
+- **Pipelines** - inventory, leaders, members, state.
+- **Containers** - inventory and health: unhealthy, missing, deleted, OM/SCM mismatch, quasi-closed.
+- **Keys** - committed key listings, open/uncommitted keys, pending-delete keys, multipart uploads.
+- **Volumes & buckets** - inventory, ownership, layout, quotas.
+- **Namespace** - disk usage, object counts, quota usage, file-size distribution for a path.
+- **Tasks** - Recon background task and sync status.
 
 **Example questions:** "How much storage is used?", "Are any containers under-replicated?", "Show
 open keys in `/vol1/bucket1`", "List buckets in volume `sales`", "What is the disk usage of
@@ -301,7 +301,7 @@ cluster data.
 per-container replica timelines, raw block-to-key mapping, any mutation, and arbitrary computation.
 
 > **Tip:** Name the volume and bucket, and say "open" when you mean uncommitted keys. FSO/OBS is a
-> bucket *layout*, not a key *state* — "FSO keys" means committed keys in an FSO bucket, while "open
+> bucket *layout*, not a key *state* - "FSO keys" means committed keys in an FSO bucket, while "open
 > FSO keys" means uncommitted keys.
 
 ## 10. Tool (endpoint) reference
@@ -343,7 +343,7 @@ These are the Recon views the assistant can call. This list mirrors the in-code 
 
 ## 11. Limits & boundary conditions
 
-The assistant is a bounded, read-only summarizer — not a query engine. Keep these in mind when
+The assistant is a bounded, read-only summarizer - not a query engine. Keep these in mind when
 interpreting answers:
 
 - **At most 1000 records per read, no pagination.** Answers are a **sample / first page**, not the
@@ -395,7 +395,7 @@ is enabled **and** at least one provider has a usable API key:
 
 ### `GET /api/v1/chatbot/models`
 
-Returns the model lists for the configured (key-present) providers — exactly what the UI dropdown
+Returns the model lists for the configured (key-present) providers - exactly what the UI dropdown
 should offer. The list is empty when no provider is configured:
 
 ```json
@@ -418,15 +418,15 @@ The `userId` is masked in logs so identities are not leaked.
 
 Defenses are layered so that even a fully prompt-injected model cannot make Recon do anything unsafe:
 
-- **Prompt-level** — the model is told the user message is untrusted and to ignore embedded
+- **Prompt-level** - the model is told the user message is untrusted and to ignore embedded
   instructions.
-- **Allowlist** — only the registered Recon tools can ever execute.
-- **Safe-scope** — key listings require a bucket-scoped prefix (default).
-- **Record cap** — every read is capped at 1000 records.
-- **Credential isolation** — API keys are resolved server-side (see
+- **Allowlist** - only the registered Recon tools can ever execute.
+- **Safe-scope** - key listings require a bucket-scoped prefix (default).
+- **Record cap** - every read is capped at 1000 records.
+- **Credential isolation** - API keys are resolved server-side (see
   [Managing API keys](#6-managing-api-keys-secure-vs-insecure-storage)); never per request.
-- **Resource bounds** — a bounded thread pool, queue, and per-request timeout.
-- **Read-only** — by construction, the assistant only reads Recon metadata.
+- **Resource bounds** - a bounded thread pool, queue, and per-request timeout.
+- **Read-only** - by construction, the assistant only reads Recon metadata.
 
 See also [Data sent to third-party LLM providers](#5-data-sent-to-third-party-llm-providers) for the
 data-egress considerations.
@@ -440,11 +440,11 @@ The assistant is built to grow with Recon:
 
 To expose a **new** Recon endpoint to the assistant:
 
-1. Add it to the in-code catalog — a tool spec (name, description, parameters), an allowlist entry,
+1. Add it to the in-code catalog - a tool spec (name, description, parameters), an allowlist entry,
    and a router case that calls the Recon bean.
 2. Document its semantics in `recon-tool-semantics.md` so the model knows when to choose it.
 
-An automated consistency test keeps the catalog, allowlist, and router in sync — adding a tool in
+An automated consistency test keeps the catalog, allowlist, and router in sync - adding a tool in
 only one place fails the build.
 
 > **Note:** Do not hand-edit the tuned prompt wording. The shipped prompts are tuned for Recon;
@@ -461,17 +461,17 @@ The editable prompt resources live in `hadoop-ozone/recon/src/main/resources/cha
 | `recon-summarization-prompt.txt` | Rules for formatting the final answer. |
 | `recon-fallback-prompt-template.txt` | Reply used when no tool fits / off-topic questions. |
 
-The shipped versions are tuned for Recon — change them deliberately.
+The shipped versions are tuned for Recon - change them deliberately.
 
 ## 16. Troubleshooting & operations
 
 | Symptom | Likely cause / fix |
 |---|---|
 | Empty answer from a reasoning model (e.g. `gemini-2.5-pro`) | The model spent its token budget "thinking". Prefer a fast model (flash), or raise token limits. |
-| Answered by an unexpected model/provider | Routing fallback — the requested provider/model was not configured. See [routing](#provider--model-routing-fallback-behavior). |
+| Answered by an unexpected model/provider | Routing fallback - the requested provider/model was not configured. See [routing](#provider--model-routing-fallback-behavior). |
 | "No API key configured" | Check the provider, the key, and `hadoop.security.credential.provider.path`. |
 | HTTP 504 (timeout) / HTTP 503 (overloaded) | Tune `thread.pool.size`, `max.queue.size`, `request.timeout.ms`. |
-| Stale answers | Recon sync lag — answers reflect the last sync. Check `api_v1_task_status`. |
+| Stale answers | Recon sync lag - answers reflect the last sync. Check `api_v1_task_status`. |
 | Egress / connection failures | Firewall, proxy, or `*.base.url`. See [Prerequisites & egress](#4-prerequisites--network-egress). |
 
 Logs record request lifecycle and token counts but **not** the query text or any secrets.
