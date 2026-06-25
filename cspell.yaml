@@ -91,6 +91,7 @@ words:
 - mis-replicated
 - unreplicated
 - untampered
+- checkpointed
 - BCSID
 - EC
 - reconfig
