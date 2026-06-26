@@ -202,6 +202,23 @@ function Integrations() {
       // link: '/docs/user-guide/integrations/spark'
     },
     {
+      name: "Flink",
+      icon: () => (
+        <img
+          src="/img/integrations/flink.svg"
+          className="integration-logo-img"
+          data-logo="flink"
+          style={{
+            height: "28px",
+            width: "auto",
+            maxWidth: "100%",
+            objectFit: "contain",
+          }}
+        />
+      ),
+      link: "/docs/user-guide/integrations/flink",
+    },
+    {
       name: "Iceberg",
       icon: () => (
         <img
