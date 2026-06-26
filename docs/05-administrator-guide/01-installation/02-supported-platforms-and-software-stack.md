@@ -13,7 +13,7 @@ For kernel tuning, filesystem choices, heap sizing, and network layout, see [Pro
 | Deployment model | Production | Dev / test / eval |
 | ---------------- | ---------- | ----------------- |
 | Bare metal Linux | Supported (recommended) | — |
-| Linux VM | Supported (with caveats; see [Production Deployment](../configuration/performance/placeholder)) | — |
+| Linux VM | Supported | — |
 | Kubernetes (Helm) | **Supported** | Also used in [Quick Start Kubernetes](../../quick-start/installation/kubernetes) |
 | Docker Compose | Not for production | Supported ([Quick Start Docker](../../quick-start/installation/docker), CI, local eval) |
 | macOS (Apple Silicon / Intel) | **Not supported** | Dev/build only — see [Development-only platforms](#development-only-platforms) |
@@ -56,7 +56,7 @@ Ozone is a Java application. Set `JAVA_HOME` on every host before starting servi
 | Ozone line | Supported JDK (runtime) | Recommended | Notes |
 | ---------- | ----------------------- | ----------- | ----- |
 | **2.x (current)** | 11, 17, 21 | **17 or 21** | Tested at release in [Ozone 2.0.0](https://ozone.apache.org/blog/2025-04-30-ozone-2.0.0-release); official Docker images use the `jdk21` flavor |
-| **2.x** | 8 | Build / legacy only | Not recommended for production runtime; some tools require 11+ (for example, `ozone iceberg` per [Iceberg Table Path Rewrite](../operations/tools/iceberg-table-path-rewrite)) |
+| **2.x** | 8 | Build / legacy only | Not recommended for production runtime; some tools require 11+ (for example, `ozone iceberg`) |
 | **1.x** | 8, 11 | 11 | Official Docker images use the `jdk11` flavor |
 
 :::tip Production recommendation
