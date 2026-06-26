@@ -18,9 +18,11 @@ Learn more: [Ozone Architecture Overview](https://ozone.apache.org/docs/edge/con
 
 ## Prerequisites
 
+This quick-start assumes a minimal eval cluster. For the full production platform matrix (OS versions, JDK, architecture, and deployment models), see [Supported Platforms](../../administrator-guide/installation/supported-platforms-and-software-stack).
+
 **All Nodes:**
 
-- Linux OS (RHEL/CentOS 7+, Ubuntu 20.04+)
+- Linux OS (Ubuntu 20.04+ recommended; RHEL/CentOS 7+ acceptable for eval only)
 - Java 11 or Java 17 (OpenJDK)
 - Minimum 4 GB RAM
 - SSH access

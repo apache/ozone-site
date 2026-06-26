@@ -6,6 +6,10 @@ sidebar_label: Docker
 
 Apache Ozone can be quickly deployed using Docker Compose, making it ideal for development, testing, and evaluation purposes. This guide walks you through setting up a multi-node Ozone cluster using pre-built Docker images.
 
+:::note Production deployments
+Docker Compose is for **dev/eval only**. For production, see [Supported Platforms](../../administrator-guide/installation/supported-platforms-and-software-stack) and deploy on bare metal, Linux VMs, or [Kubernetes](../../administrator-guide/installation/supported-platforms-and-software-stack#kubernetes).
+:::
+
 ![Quickstart](quickstart.gif)
 
 ## Prerequisites
