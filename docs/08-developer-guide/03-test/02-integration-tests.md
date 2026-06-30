@@ -156,6 +156,7 @@ A few practical notes:
 
 - If you haven't built recently, add **`-am`** (`also-make`) so Maven builds the upstream modules first: `mvn -am -pl :ozone-integration-test test -Dtest=TestMiniOzoneCluster`.
 - Skip work you don't need to shorten the rebuild: **`-DskipRecon`** (skip the Recon JS frontend) and **`-DskipShade`** (skip the fat-jar) are the two big wins. See [Maven build options](../../developer-guide/build/maven#common-maven-build-options) for the full list.
+- When adding new coverage, prefer unit tests whenever possible to keep overall test runtime manageable; integration tests are much heavier, since they start a mini cluster of multiple networked services that must initialize and connect, which takes significant time.
 
 ## Test Reports
 
