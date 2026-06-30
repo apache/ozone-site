@@ -69,7 +69,7 @@ jobs:
       with:
         persist-credentials: false
     - name: Restore docker image tar from cache
-      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
@@ -102,7 +102,7 @@ jobs:
         name: build
         path: build
     - name: Restore docker image tar from cache
-      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
