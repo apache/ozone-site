@@ -177,8 +177,8 @@ aws s3 ls --endpoint http://localhost:9878 s3://buckettest
 
 #### Supported AWS CLI Versions
 
-- AWS CLI v1 (1.36.0 and above) and AWS CLI v2 (2.23.0 and above) are supported by Apache Ozone 2.1 and above.
-- [AWS has announced AWS CLI v1 enters maintenance mode on July 15, 2026](https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/); users are encouraged to upgrade to AWS CLI v2. Support for AWS CLI v1 may be dropped at some point in the future.
+- AWS CLI v1 (1.37.0 and above) and AWS CLI v2 (2.23.0 and above) are supported. These are the versions in which AWS enabled [default data integrity protections](https://github.com/aws/aws-cli/issues/9214) that automatically calculate a `CRC32` checksum for S3 uploads; Ozone added handling for that flow in 2.1 and later.
+- [AWS has announced AWS CLI v1 enters maintenance mode on July 15, 2026](https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/); users are encouraged to upgrade to AWS CLI v2. Ozone may drop support for AWS CLI v1 at some point in the future.
 
 ## Compatible third-party applications
 
