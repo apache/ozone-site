@@ -175,6 +175,11 @@ Or
 aws s3 ls --endpoint http://localhost:9878 s3://buckettest
 ```
 
+#### Supported AWS CLI Versions
+
+- AWS CLI v1 (1.36.0 and above) and AWS CLI v2 (2.23.0 and above) are supported by Apache Ozone 2.1 and above.
+- [AWS has announced AWS CLI v1 enters maintenance mode on July 15, 2026](https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/); users are encouraged to upgrade to AWS CLI v2. Support for AWS CLI v1 may be dropped at some point in the future.
+
 ## Compatible third-party applications
 
 Ozone's S3 Gateway enables integration with a wide range of cloud-native and analytics applications. Here are some examples of tools and platforms known to work with Ozone (in alphabetical order):
