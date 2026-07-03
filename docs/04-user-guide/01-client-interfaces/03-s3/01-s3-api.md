@@ -175,6 +175,11 @@ Or
 aws s3 ls --endpoint http://localhost:9878 s3://buckettest
 ```
 
+#### Supported AWS CLI Versions
+
+- AWS CLI v1 (1.37.0 and above) and AWS CLI v2 (2.23.0 and above) are supported. These are the versions in which AWS enabled [default data integrity protections](https://github.com/aws/aws-cli/issues/9214) that automatically calculate a `CRC32` checksum for S3 uploads; Ozone added handling for that flow in 2.1 and later.
+- [AWS has announced AWS CLI v1 enters maintenance mode on July 15, 2026](https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/); users are encouraged to upgrade to AWS CLI v2. Ozone may drop support for AWS CLI v1 at some point in the future.
+
 ## Compatible third-party applications
 
 Ozone's S3 Gateway enables integration with a wide range of cloud-native and analytics applications. Here are some examples of tools and platforms known to work with Ozone (in alphabetical order):
