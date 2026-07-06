@@ -130,8 +130,8 @@ Additional properties control disk health check behavior:
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `hdds.datanode.disk.check.io.test.count` | `3` | Number of IO tests required to determine failure. Set to `0` to disable IO checks. |
-| `hdds.datanode.disk.check.io.failures.tolerated` | `1` | IO test failures allowed before marking volume as failed |
+| `hdds.datanode.disk.check.io.test.count` | `3` | Number of I/O tests required to determine failure. Set to `0` to disable I/O checks. |
+| `hdds.datanode.disk.check.io.failures.tolerated` | `1` | I/O test failures allowed before marking volume as failed |
 | `hdds.datanode.disk.check.io.file.size` | `100B` | Size of temporary file used for I/O health checks |
 | `hdds.datanode.disk.check.min.gap` | `10m` | Minimum time gap between successive checks of the same volume |
 | `hdds.datanode.disk.check.timeout` | `10m` | Maximum time allowed for a disk check to complete |
