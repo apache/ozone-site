@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.3be09b38.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c8b220dd.js" defer="defer"></script>
 <script src="/assets/js/main.498bfd35.js" defer="defer"></script>
 </head>
 <body>
@@ -90,7 +90,7 @@
 <p>This configures disk checks to run every 30 minutes instead of the default 60 minutes.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="disk-check-configuration">Disk Check Configuration<a href="#disk-check-configuration" class="hash-link" aria-label="Direct link to Disk Check Configuration" title="Direct link to Disk Check Configuration" translate="no">​</a></h3>
 <p>Additional properties control disk health check behavior:</p>
-<table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.disk.check.io.test.count</code></td><td><code>3</code></td><td>Number of IO tests required to determine failure. Set to <code>0</code> to disable IO checks.</td></tr><tr><td><code>hdds.datanode.disk.check.io.failures.tolerated</code></td><td><code>1</code></td><td>IO test failures allowed before marking volume as failed</td></tr><tr><td><code>hdds.datanode.disk.check.io.file.size</code></td><td><code>100B</code></td><td>Size of temporary file used for I/O health checks</td></tr><tr><td><code>hdds.datanode.disk.check.min.gap</code></td><td><code>10m</code></td><td>Minimum time gap between successive checks of the same volume</td></tr><tr><td><code>hdds.datanode.disk.check.timeout</code></td><td><code>10m</code></td><td>Maximum time allowed for a disk check to complete</td></tr></tbody></table>
+<table><thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>hdds.datanode.disk.check.io.test.count</code></td><td><code>3</code></td><td>Number of I/O tests required to determine failure. Set to <code>0</code> to disable I/O checks.</td></tr><tr><td><code>hdds.datanode.disk.check.io.failures.tolerated</code></td><td><code>1</code></td><td>I/O test failures allowed before marking volume as failed</td></tr><tr><td><code>hdds.datanode.disk.check.io.file.size</code></td><td><code>100B</code></td><td>Size of temporary file used for I/O health checks</td></tr><tr><td><code>hdds.datanode.disk.check.min.gap</code></td><td><code>10m</code></td><td>Minimum time gap between successive checks of the same volume</td></tr><tr><td><code>hdds.datanode.disk.check.timeout</code></td><td><code>10m</code></td><td>Maximum time allowed for a disk check to complete</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="failed-volume-handling">Failed Volume Handling<a href="#failed-volume-handling" class="hash-link" aria-label="Direct link to Failed Volume Handling" title="Direct link to Failed Volume Handling" translate="no">​</a></h2>
 <p>When a volume fails, it is:</p>
 <ol>
