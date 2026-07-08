@@ -137,6 +137,7 @@ words:
 - spnego
 - keytab
 - Keytab
+- JCEKS
 - keyspace
 - Merkle
 - RocksDB
@@ -149,6 +150,7 @@ words:
 - jira
 - jiras
 - LLAP
+- LLM
 - mvn
 - NIFI
 - gpg
@@ -188,6 +190,7 @@ words:
 - acking
 - ACK
 - dashboarding
+- rollups
 - UI
 - UIs
 - UX
@@ -255,6 +258,7 @@ words:
 - jianghuazhu
 - weimingdiit
 # Infrastructure and hardware terms
+- firewalled
 - Chrony
 - SAS
 - JBOD
