@@ -31,25 +31,25 @@ those reads, and writes back a readable summary.
 - Its results are **bounded** (at most 1000 records per read - see [Limits](#11-limits--boundary-conditions)).
 - Its answers reflect Recon's **last metadata sync**, not the live cluster state.
 
-> **Important:** The assistant calls an **external LLM provider**, so cluster metadata leaves your
-> network when it is used. Read [Data sent to third-party LLM providers](#5-data-sent-to-third-party-llm-providers)
+> **Important:** The assistant calls an **external `LLM` provider**, so cluster metadata leaves your
+> network when it is used. Read [Data sent to third-party providers](#5-data-sent-to-third-party-llm-providers)
 > before enabling it. The feature is marked unstable and may change between releases.
 
 ## 2. Architecture at a glance
 
 At a high level a question flows through three steps:
 
-1. **Tool selection** - the assistant asks the LLM which Recon view(s) can answer the question.
+1. **Tool selection** - the assistant asks the `LLM` which Recon view(s) can answer the question.
 2. **In-process execution** - Recon runs those reads inside the Recon JVM (no HTTP loopback), with
    hard safety limits applied.
-3. **Summarization** - the raw results are sent back to the LLM, which writes the final answer.
+3. **Summarization** - the raw results are sent back to the `LLM`, which writes the final answer.
 
 The assistant is **provider-agnostic**: OpenAI, Google Gemini, and Anthropic are all reachable behind
 one interface (see [Supported providers & models](#3-supported-providers--models)).
 
 ## 3. Supported providers & models
 
-The assistant supports **three** LLM providers. You configure one (or more) by supplying an API key;
+The assistant supports **three** `LLM` providers. You configure one (or more) by supplying an API key;
 a provider with no key is simply unavailable.
 
 | Provider | Reached via | Notes |
@@ -99,11 +99,11 @@ Before enabling the assistant:
 > or point the relevant `*.base.url` at an in-VPC, OpenAI-compatible gateway (see
 > [Configuration](#8-configuration-reference)).
 
-Each concurrent query holds one Recon worker thread for its full duration (up to two LLM calls plus
+Each concurrent query holds one Recon worker thread for its full duration (up to two `LLM` calls plus
 up to five Recon reads), so size the thread pool to your expected concurrency (see
 [Configuration](#8-configuration-reference)).
 
-## 5. Data sent to third-party LLM providers
+## 5. Data sent to third-party `LLM` providers
 
 Because the assistant calls an external provider, you should understand exactly what leaves your
 cluster before enabling it.
@@ -140,7 +140,7 @@ shares the single admin-configured key. (This is why you should gate who can rea
 
 **Resolution order** (handled by Recon's `CredentialHelper`):
 
-1. The Hadoop Credential Provider (JCEKS), if `hadoop.security.credential.provider.path` is set.
+1. The Hadoop Credential Provider (`JCEKS`), if `hadoop.security.credential.provider.path` is set.
 2. A plaintext value in `ozone-site.xml` (backward-compatible fallback).
 
 ### Insecure: plaintext in `ozone-site.xml` (dev/test only)
@@ -155,7 +155,7 @@ shares the single admin-configured key. (This is why you should gate who can rea
 > **Warning:** Plaintext keys are readable by anyone who can read `ozone-site.xml`. Use this only for
 > local development or testing, never in production.
 
-### Secure: Hadoop Credential Provider (JCEKS) - recommended
+### Secure: Hadoop Credential Provider (`JCEKS`) - recommended
 
 The credential **alias must equal the config key name** (for example
 `ozone.recon.chatbot.gemini.api.key`).
@@ -192,7 +192,7 @@ feature still works through any other configured provider.
 | Environment | Recommended storage |
 |---|---|
 | Local dev / testing | `ozone-site.xml` (plaintext) |
-| Production | Hadoop Credential Provider (JCEKS) |
+| Production | Hadoop Credential Provider (`JCEKS`) |
 
 ## 7. Getting started
 
@@ -235,9 +235,9 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 
 | Key | Default | Description |
 |---|---|---|
-| `openai.api.key` | _(none)_ | OpenAI API key. Prefer JCEKS storage. |
-| `gemini.api.key` | _(none)_ | Gemini API key. Prefer JCEKS storage. |
-| `anthropic.api.key` | _(none)_ | Anthropic API key. Prefer JCEKS storage. |
+| `openai.api.key` | _(none)_ | OpenAI API key. Prefer `JCEKS` storage. |
+| `gemini.api.key` | _(none)_ | Gemini API key. Prefer `JCEKS` storage. |
+| `anthropic.api.key` | _(none)_ | Anthropic API key. Prefer `JCEKS` storage. |
 
 ### Base URL overrides
 
@@ -428,7 +428,7 @@ Defenses are layered so that even a fully prompt-injected model cannot make Reco
 - **Resource bounds** - a bounded thread pool, queue, and per-request timeout.
 - **Read-only** - by construction, the assistant only reads Recon metadata.
 
-See also [Data sent to third-party LLM providers](#5-data-sent-to-third-party-llm-providers) for the
+See also [Data sent to third-party providers](#5-data-sent-to-third-party-llm-providers) for the
 data-egress considerations.
 
 ## 14. Extending the assistant for new Recon features

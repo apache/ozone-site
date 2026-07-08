@@ -137,7 +137,6 @@ words:
 - spnego
 - keytab
 - Keytab
-- JCEKS
 - keyspace
 - Merkle
 - RocksDB
@@ -150,7 +149,6 @@ words:
 - jira
 - jiras
 - LLAP
-- LLM
 - mvn
 - NIFI
 - gpg
