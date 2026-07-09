@@ -5,6 +5,8 @@ authors: ["peterxcli"]
 tags: [Ozone, S3, concurrency, conditional-requests]
 ---
 
+<!-- cspell:ignore peterxcli RDBMS LSN CAS amaliujia Turbopuffer MVCC -->
+
 :::note
 Apache Ozone will support conditional `PutObject`, `GetObject`, `HeadObject`, `CopyObject`, and `CompleteMultipartUpload` in the upcoming [2.2 release](https://github.com/apache/ozone/releases/tag/ozone-2.2.0-RC0) (RC0 is currently under a [vote](https://lists.apache.org/thread/gz567ljydh4ht63h6c9pjfclrbrrr9z7)), and will add conditional `DeleteObject` and `DeleteObjects` support in 2.3.
 :::

@@ -5,6 +5,8 @@ authors: ["peterxcli"]
 tags: [Ozone, S3, compatibility]
 ---
 
+<!-- cspell:ignore peterxcli Xiangpeng ish laggy Zstd overclaim amz -->
+
 Recently I created [https://ozone.s3.peterxcli.dev/](https://ozone.s3.peterxcli.dev/), an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR really helps the compatibility story. It is fully open source at [https://github.com/peterxcli/ozone-s3-compatibility](https://github.com/peterxcli/ozone-s3-compatibility).
 
 <!-- truncate -->
