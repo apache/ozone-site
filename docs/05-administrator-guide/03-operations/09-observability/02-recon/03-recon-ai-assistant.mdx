@@ -26,7 +26,7 @@ those reads, and writes back a readable summary.
 **What it is not:**
 
 - It is **not** a query engine that runs server-side aggregations across all cluster data - it
-  reports what individual Recon endpoints return. The LLM may reason over the data it receives (for
+  reports what individual Recon endpoints return. The `LLM` may reason over the data it receives (for
   example, count or compare items in a result set), but it does not issue cross-endpoint joins or
   scan unbounded datasets server-side.
 - It is **read-only** - it never mutates the cluster.
