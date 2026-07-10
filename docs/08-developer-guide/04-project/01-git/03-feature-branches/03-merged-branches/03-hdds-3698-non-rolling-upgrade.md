@@ -25,7 +25,7 @@
 ## 5. Docker-compose / acceptance tests
 
 - Upgrades can be done in Docker-compose to/from any Ozone version which has a Docker image, or to the current code.
-- See *Hadoop-ozone/dist/src/main/compose/upgrade/README.md* for more information.
+- See `Hadoop-ozone/dist/src/main/compose/upgrade/README.md` for more information.
 
 ## 6. support of containers / Kubernetes
 
@@ -224,4 +224,4 @@ Total Execution time: 00:00:23,677
 
 ## 12. security considerations
 
-The branch introduced the RPC methods in the ScmAdminProtocol.proto to initialize (and finalize) the upgrade process. They are available only to the admins (HDDS-5138).
+The branch introduced the RPC methods in the `ScmAdminProtocol.proto` to initialize (and finalize) the upgrade process. They are available only to the admins (HDDS-5138).

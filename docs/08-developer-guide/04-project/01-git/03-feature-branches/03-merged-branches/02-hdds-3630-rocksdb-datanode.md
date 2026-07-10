@@ -2,7 +2,7 @@
 
 Git branch:  https://github.com/apache/ozone/tree/HDDS-3630
 
-Currently there will be one RocksDB for each Container on Datanode, which leads to hundreds of thousands of RocksDB instances on one Datanode. It's very challenging to manage this amount of RocksDB instances in one JVM. Please refer to the "problem statement" section of the design document\[1\] for challenge details. Unlike the current approach, Datanode RocksDB merge feature will use only one RocksDB for each data volume. With far fewer RocksDB instances to manage, the write path performance and DN stability are improved, Refer to the Micro Benchmark Data section of the design document.
+Currently there will be one RocksDB for each Container on Datanode, which leads to hundreds of thousands of RocksDB instances on one Datanode. It's very challenging to manage this amount of RocksDB instances in one JVM. Please refer to the "problem statement" section of the design document[1] for challenge details. Unlike the current approach, Datanode RocksDB merge feature will use only one RocksDB for each data volume. With far fewer RocksDB instances to manage, the write path performance and DN stability are improved, Refer to the Micro Benchmark Data section of the design document.
 
 To enable the feature, the following configs need to be added to Ozone Manager's `ozone-site.xml`.
 

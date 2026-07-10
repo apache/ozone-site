@@ -32,14 +32,14 @@ No addition yet.
 
 ## 7. coverage/code quality
 
-**[Master](https://sonarcloud.io/summary/overall?id=hadoop-ozone&branch=master) and [HDDS-7733-Symmetric-Tokens](https://sonarcloud.io/summary/new_code?id=hadoop-ozone&branch=HDDS-7733-Symmetric-Tokens)**
+[Master](https://sonarcloud.io/summary/overall?id=hadoop-ozone&branch=master) and [HDDS-7733-Symmetric-Tokens](https://sonarcloud.io/summary/new_code?id=hadoop-ozone&branch=HDDS-7733-Symmetric-Tokens)
 
 ## 8. build time
 
 No significant change
 
-- current master: **[1h 43m 9s](https://github.com/apache/ozone/actions/runs/4996624349)**
-- last merged commit on branch: **[1h 40m 17s](https://github.com/apache/ozone/actions/runs/4963516058)**
+- current master: [1h 43m 9s](https://github.com/apache/ozone/actions/runs/4996624349)
+- last merged commit on branch: [1h 40m 17s](https://github.com/apache/ozone/actions/runs/4963516058)
 
 ## 9. possible incompatible changes/used feature flag
 

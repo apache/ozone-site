@@ -30,12 +30,11 @@ SCM-HA has  20 more issues but 2.3 better code coverage.
 
 ## 7. build time
 
-**Recent master builder:
+Recent master builder:
 
-Recent SCM-HA build: \**
+Recent SCM-HA build:
 
 SCM-HA branch didn't introduce any significant slowness (2-3 minutes plus to the existing integrations test and acceptance tests which are already close to 1h runtime).
-**\**
 There is no significant difference between local build time. In a linux with the below configuration,
 
 ```text
@@ -84,11 +83,11 @@ INFO Finished at: 2021-03-10T17:06:42+08:00
 
 ## 8. possible incompatible changes/used feature flag
 
-For using the SCM HA feature, "ozone.SCM.ratis.enable" config needs to be set to be true in Ozone-site.xml.
+For using the SCM HA feature, "ozone.SCM.ratis.enable" config needs to be set to be true in `ozone-site.xml`.
 
 ## 9. third party dependencies/licence changes
 
-Checking the content of the two branches (find -type f \| sort \> ...  + diff) the only jar differences are due to a latest version bump:
+Checking the content of the two branches (`find -type f | sort > ...`  + diff) the only jar differences are due to a latest version bump:
 
 ```text
  ./share/ozone/lib/jackson-annotations-2.12.1.jar

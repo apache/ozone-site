@@ -2,8 +2,8 @@
 
 Distributed systems basic expectation is to provide the data durability.
 To provide the higher data durability, many popular storage systems use replication
-approach which is expensive. The Apache Ozone supports \`RATIS/THREE\` replication scheme.
-The Ozone default replication scheme \`RATIS/THREE\` has 200% overhead in storage
+approach which is expensive. The Apache Ozone supports `RATIS/THREE` replication scheme.
+The Ozone default replication scheme `RATIS/THREE` has 200% overhead in storage
 space and other resources (e.g., network bandwidth).
 However, for warm and cold datasets with relatively low I/O activities, additional
 block replicas rarely accessed during normal operations, but still consume the same
@@ -13,12 +13,12 @@ Therefore, a natural improvement is to use Erasure Coding (EC) in place of repli
 which provides the same level of fault-tolerance with much less storage space.
 In typical EC setups, the storage overhead is no more than 50%. The replication factor of an EC file is meaningless.
 Instead of replication factor, we introduced ReplicationConfig interface to specify the required type of replication,
-either \`RATIS/THREE\` or \`EC\`.
+either `RATIS/THREE` or `EC`.
 
 Integrating EC with Ozone can improve storage efficiency while still providing similar
 data durability as traditional replication-based Ozone deployments.
-As an example, a 3x replicated file with 6 blocks will consume 6\*3 = \`18\` blocks of disk space.
-But with EC (6 data, 3 parity) deployment, it will only consume \`9\` blocks of disk space.
+As an example, a 3x replicated file with 6 blocks will consume 6*3 = `18` blocks of disk space.
+But with EC (6 data, 3 parity) deployment, it will only consume `9` blocks of disk space.
 
 ## Git Branch
 
@@ -32,14 +32,14 @@ all the CI checks are clean prior to every commit merge .The plan is to run repe
 
 Described feature in Apache Ozone page via [HDDS-6172](https://issues.apache.org/jira/browse/HDDS-6172) .
 
-- *[Hadoop-HDDs/docs/content/feature/ErasureCoding.md](https://github.com/apache/ozone/blob/HDDS-3816-ec/hadoop-hdds/docs/content/feature/ErasureCoding.md)* has the feature details and related configurations.
+- [Hadoop-HDDs/docs/content/feature/ErasureCoding.md](https://github.com/apache/ozone/blob/HDDS-3816-ec/hadoop-hdds/docs/content/feature/ErasureCoding.md) has the feature details and related configurations.
 
 ## 3. design, attached the docs
 
 Following design docs are linked from the documentation present in [HDDS-6172](https://issues.apache.org/jira/browse/HDDS-6172)  Jira
 
 - [Design Document](https://issues.apache.org/jira/secure/attachment/13021096/Ozone%20EC%20v3.pdf)
-- *[Hadoop-HDDs/docs/content/feature/Hadoop-HDDs/docs/content/feature/ErasureCoding.md](https://github.com/apache/ozone/blob/HDDS-3816-ec/hadoop-hdds/docs/content/feature/ErasureCoding.md)* has the feature details and related configurations.
+- [Hadoop-HDDs/docs/content/feature/Hadoop-HDDs/docs/content/feature/ErasureCoding.md](https://github.com/apache/ozone/blob/HDDS-3816-ec/hadoop-hdds/docs/content/feature/ErasureCoding.md) has the feature details and related configurations.
 
 ## 4. S3 compatibility
 
@@ -55,8 +55,8 @@ NA. Deployment model for OzoneManager remains as earlier.
 
 ## 7. coverage/code quality
 
-**[Sonar master branch](https://sonarcloud.io/dashboard?branch=master&id=hadoop-ozone)
-[Sonar HDDS-3816-EC branch](https://sonarcloud.io/dashboard?branch=HDDS-3816-ec&id=hadoop-ozone).**
+[Sonar master branch](https://sonarcloud.io/dashboard?branch=master&id=hadoop-ozone)
+[Sonar HDDS-3816-EC branch](https://sonarcloud.io/dashboard?branch=HDDS-3816-ec&id=hadoop-ozone)
 
 The branch has better coverage than master (68% vs 72%)
 
@@ -64,9 +64,9 @@ The branch has better coverage than master (68% vs 72%)
 
 There is no significant difference between local build time.
 
-[**Recent master build**](https://github.com/apache/ozone/actions/runs/1807694482)
+[Recent master build](https://github.com/apache/ozone/actions/runs/1807694482)
 
-[**Recent HDDS-3816-EC branch build**](https://github.com/apache/ozone/actions/runs/1826490688)
+[Recent HDDS-3816-EC branch build](https://github.com/apache/ozone/actions/runs/1826490688)
 
 ## 9. possible incompatible changes/used feature flag
 

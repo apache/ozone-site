@@ -9,6 +9,7 @@ Feature branches are used for larger or longer-running work that would be hard t
 ## When to use a feature branch
 
 Use a feature branch for changes that:
+
 - Make iterative changes to core code paths.
 - Require broader community testing.
 - Cannot be easily gated with a feature flag.
@@ -18,7 +19,6 @@ Use a feature branch for changes that:
   - If a feature has upgrade compatibility concerns that will not be addressed right away, it should be developed on a feature branch.
   - Note that protobuf messages and wire protocols become locked into compatibility guarantees once they are released.
     - If a feature is making changes in this area and it wants to keep the structure flexible while it is being finalized, it should be done on a feature branch.
-
 
 ## Merge Process
 

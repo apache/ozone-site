@@ -14,7 +14,7 @@ Documented in Apache Ozone Design docs as HDDS-4440 Proposed persistent OM conne
 
 ### 3. design, attached the docs
 
-Design found in Jira HDDS-4440 and supporting related Jiras HDDS-5881, HDDS-5630.  ASF feature branch slack channel is, \#ozone-s3g-gRPC.
+Design found in Jira HDDS-4440 and supporting related Jiras HDDS-5881, HDDS-5630.  ASF feature branch slack channel is, #ozone-s3g-gRPC.
 
 ### 4. S3 compatibility
 
@@ -28,9 +28,9 @@ This holds true except in the event the initial persistent connection cannot be 
 
 Added enabling Ozone Manager gRPC server service to each Docker-config for the development clusters: `ozone`, `ozonesecure`, `ozone-ha` and `ozonesecure-ha`.
 
-To test the S3 Gateway performance persistent connection gRPC feature with Docker-compose / acceptance tests.   Add the following configuration key settings to the Docker-compose.yaml : OM container - [OZONE-SITE.XML_ozone.OM](http://OZONE-SITE.XML_ozone.om).S3.gRPC.server_enabled: "true" & s3g container - [OZONE-SITE.XML_ozone.](http://OZONE-SITE.XML_ozone.om)OM.transport.class : "[org.apache.Hadoop.ozone.OM](http://org.apache.hadoop.ozone.om).protocolPB.GrpcOmTransportFactory".
+To test the S3 Gateway performance persistent connection gRPC feature with Docker-compose / acceptance tests.   Add the following configuration key settings to the `docker-compose.yaml` : OM container - `OZONE-SITE.XML_ozone.om.s3.grpc.server_enabled: "true"` & s3g container - `OZONE-SITE.XML_ozone.om.transport.class: "org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory"`.
 
-Then run acceptance tests, test.sh, for development cluster configured including `ozone`, `ozonesecure`, `ozone-ha` and `ozonesecure-ha`.
+Then run acceptance tests, `test.sh`, for development cluster configured including `ozone`, `ozonesecure`, `ozone-ha` and `ozonesecure-ha`.
 
 Also, with development cluster configured for s3g gRPC can load test the S3 Gateway using the endpoint, localhost:9878.  Load testers used include freon and warp.
 
@@ -59,18 +59,16 @@ Building on a local machine with ubuntu linux six-core i5 Coffee Lake and 64Gb R
 | **Master branch build time:**                            | 06:22 min     |
 | **Feature branch HDDS-4440-S3-performance build time:** | **06:16 min** |
 
-**\**
-
 ### 9. possible incompatible changes
 
 The S3g gRPC Persistent Connections feature is enabled through two s3g gRPC specific configuration keys.  One configuration key is to enable the gRPC server service on the Ozone Manager, OM, and the other is to enable the gRPC client on the S3 Gateway, s3g.  By default the S3 Gateway gRPC client is off and communication between the s3g and OM is though the existing Hadoop RPC.
 
 To enable this feature set,
 
-1. [ozone.OM](http://OZONE-SITE.XML_ozone.om).S3.gRPC.server_enabled set to true in *ozone-site.xml*. (enable service on OM)
-2. [ozone.](http://OZONE-SITE.XML_ozone.om)OM.transport.class set to [org.apache.Hadoop.ozone.OM](http://org.apache.hadoop.ozone.om).protocolPB.GrpcOmTransportFactory in *ozone-site.xml*. (enable gRPC on s3g client)
+1. `ozone.om.s3.grpc.server_enabled` set to true in `ozone-site.xml`. (enable service on OM)
+2. `ozone.om.transport.class` set to `org.apache.hadoop.ozone.om.protocolPB.GrpcOmTransportFactory` in `ozone-site.xml`. (enable gRPC on s3g client)
 
-With these two configuration keys disabled, the S3 Gateway \ Ozone Manager channel operates in legacy mode with the existing Hadoop RPC.  This can used in the upgrade period to turn off the feature when the feature is unstable and operate in legacy mode (Hadoop RPC communication).
+With these two configuration keys disabled, the S3 Gateway / Ozone Manager channel operates in legacy mode with the existing Hadoop RPC.  This can used in the upgrade period to turn off the feature when the feature is unstable and operate in legacy mode (Hadoop RPC communication).
 
 ### 10. third party dependencies/license changes
 
@@ -78,7 +76,7 @@ For the S3-performance gRPC feature, network transport related jars are added to
 
 |                                               |
 |-----------------------------------------------|
-| Added to License.txt                          |
+| Added to `LICENSE.txt`                        |
 | `io.netty:netty-tcnative-boringssl-static` |
 | `io.netty:netty-tcnative` |
 
@@ -95,14 +93,14 @@ We compare the performance of the S3 Gateway using the gRPC persistent connectio
 Load test used: minio Warp S3 benchmarking tool.  
 
 ```bash
-./warp stat --host=\ --duration=1m –bucket bucket1 --concurrent=64 --noclear --obj.size=1KiB --access-key=$AWS_ACCESS_KEY --secret-key=$AWS_SECRET_ACCESS_KEY
+./warp stat --host= --duration=1m –bucket bucket1 --concurrent=64 --noclear --obj.size=1KiB --access-key=$AWS_ACCESS_KEY --secret-key=$AWS_SECRET_ACCESS_KEY
 ```
 
 Test cluster consists of native Ozone deployment, bare-metal.  OM-SCM on one node, S3 Gateway on separate node.
 
 ### 12. security considerations
 
-This feature branch supports gRPC encryption channel communication between the S3 Gateway and Ozone Manager through TLS.  Encryption on the wire for the gRPC channel is configured by the Ozone-site.xml key,
+This feature branch supports gRPC encryption channel communication between the S3 Gateway and Ozone Manager through TLS.  Encryption on the wire for the gRPC channel is configured by the `ozone-site.xml` key,
 
 1. `hdds.grpc.tls.enabled` set to `true`
 

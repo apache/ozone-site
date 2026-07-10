@@ -49,9 +49,9 @@ No addition. No change in existing support.
 
 There should not be any incompatible changes introduced with this feature.
 
-A global enable/disable switch for the DiskBalancer feature is to be added in [HDDS-13497. \[DiskBalancer\] Add new property "HDDs.Datanode.disk.balancer.enabled"](https://issues.apache.org/jira/browse/HDDS-13497)
+A global enable/disable switch for the DiskBalancer feature is to be added in [HDDS-13497. [DiskBalancer] Add new property "HDDs.Datanode.disk.balancer.enabled"](https://issues.apache.org/jira/browse/HDDS-13497)
 
-To enable the feature, the following configs need to be added to DN Ozone-site.xml, and set the value to "true"
+To enable the feature, the following configs need to be added to DN `ozone-site.xml`, and set the value to "true"
 
 | Property | Default | Tags | Description |
 |---|---|---|---|

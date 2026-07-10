@@ -10,12 +10,12 @@ no additional flaky tests have been introduced by the feature branch.
 
 ## 2. documentation
 
-the documentation for HttpFS was added by [HDDS-5966](https://issues.apache.org/jira/browse/HDDS-5966) , it can be found at *[Hadoop-HDDs/docs/content/interface/HttpFS.md](https://github.com/apache/ozone/blob/HDDS-5447-httpfs/hadoop-hdds/docs/content/interface/HttpFS.md)*
+the documentation for HttpFS was added by [HDDS-5966](https://issues.apache.org/jira/browse/HDDS-5966) , it can be found at [Hadoop-HDDs/docs/content/interface/HttpFS.md](https://github.com/apache/ozone/blob/HDDS-5447-httpfs/hadoop-hdds/docs/content/interface/HttpFS.md)
 
 ## 3. design, attached the docs
 
 - [design document](https://issues.apache.org/jira/secure/attachment/13031822/HTTPFS%20interface%20for%20Ozone.pdf) (can be found under the epic Jira)
-- attached docs can be found at *[Hadoop-HDDs/docs/content/interface/HttpFS.md](https://github.com/apache/ozone/blob/HDDS-5447-httpfs/hadoop-hdds/docs/content/interface/HttpFS.md)*
+- attached docs can be found at [Hadoop-HDDs/docs/content/interface/HttpFS.md](https://github.com/apache/ozone/blob/HDDS-5447-httpfs/hadoop-hdds/docs/content/interface/HttpFS.md)
 
 ## 4. S3 compatibility
 
@@ -43,8 +43,8 @@ no addition yet.
 
 no significant change
 
-- current master: **[1h 41m 17s](https://github.com/apache/ozone/actions/runs/4103741189)**
-- last merged commit on branch: [**1h 33m 58s**](https://github.com/apache/ozone/actions/runs/4005079797) (will update with a green build-branch from the HDDS-5447-HttpFS branch)
+- current master: [1h 41m 17s](https://github.com/apache/ozone/actions/runs/4103741189)
+- last merged commit on branch: [1h 33m 58s](https://github.com/apache/ozone/actions/runs/4005079797) (will update with a green build-branch from the HDDS-5447-HttpFS branch)
 
 ## 9. possible incompatible changes/used feature flag
 

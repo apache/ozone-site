@@ -10,9 +10,9 @@ Implementing this in a separate feature [HDDS-2939](https://github.com/apache/oz
 
 ## How to enable prefix based optimization feature
 
-Following are the set of configurations to be configured in 'ozone-default.xml' to enable this feature. By default, the feature will be turned OFF.
+Following are the set of configurations to be configured in `ozone-default.xml` to enable this feature. By default, the feature will be turned OFF.
 
-An example of Ozone-site.xml
+An example of `ozone-site.xml`
 
 ```xml
 <configuration>
@@ -40,7 +40,7 @@ There are no intermittent failures specific to the HDDS-2939 branch as of now. D
 
 Described feature in Apache Ozone page via HDDS-5067.
 
-- *[Hadoop-HDDs/docs/content/feature/PrefixFSO.md](https://github.com/apache/ozone/blob/HDDS-2939/hadoop-hdds/docs/content/feature/PrefixFSO.md)* has the feature details and related configurations.
+- [Hadoop-HDDs/docs/content/feature/PrefixFSO.md](https://github.com/apache/ozone/blob/HDDS-2939/hadoop-hdds/docs/content/feature/PrefixFSO.md) has the feature details and related configurations.
 
 ## 3. design, attached the docs
 
@@ -48,11 +48,11 @@ Following design docs are linked from the documentation present in HDDS-2939 Jir
 
 - [Design Document](https://issues.apache.org/jira/secure/attachment/12991926/Ozone%20FS%20Namespace%20Proposal%20v1.0.docx)
 - [Internal design - metadata format](https://issues.apache.org/jira/secure/attachment/13023399/OzoneFS%20Optimizations_DesignOverview_%20HDDS-2939.pdf)
-- *[Hadoop-HDDs/docs/content/feature/PrefixFSO.md](https://github.com/apache/ozone/blob/HDDS-2939/hadoop-hdds/docs/content/feature/PrefixFSO.md)* has the feature details and related configurations.
+- [Hadoop-HDDs/docs/content/feature/PrefixFSO.md](https://github.com/apache/ozone/blob/HDDS-2939/hadoop-hdds/docs/content/feature/PrefixFSO.md) has the feature details and related configurations.
 
 ## 4. S3 compatibility
 
-There are no incompatibilities with respect to S3. This feature can be enabled only together with *ozone.OM.enable.filesystem.paths.* When file system-style path handling is enabled, 100 % S3 compatibility could not be guaranteed. FS compatible S3 key names supposed to be working well, but non-fs compatible, extra key names (like 'a/../b1 or real file with the name \`key1/\` might be normalized or rejected by the implementation of *ozone.OM.enable.filesystem.paths*)
+There are no incompatibilities with respect to S3. This feature can be enabled only together with `ozone.OM.enable.filesystem.paths`. When file system-style path handling is enabled, 100 % S3 compatibility could not be guaranteed. FS compatible S3 key names supposed to be working well, but non-fs compatible, extra key names (like `a/../b1` or real file with the name `key1/` might be normalized or rejected by the implementation of `ozone.OM.enable.filesystem.paths`)
 
 Note: Added S3 acceptance test with feature is turned on - PREFIX layout.
 
@@ -68,8 +68,8 @@ Example files are committed with HDDS-5018
 
 ## 7. coverage/code quality
 
-**[Sonar master branch](https://sonarcloud.io/dashboard?branch=master&id=hadoop-ozone)
-[Sonar HDDS-2939 branch](https://sonarcloud.io/dashboard?branch=HDDS-2939&id=hadoop-ozone).**
+[Sonar master branch](https://sonarcloud.io/dashboard?branch=master&id=hadoop-ozone)
+[Sonar HDDS-2939 branch](https://sonarcloud.io/dashboard?branch=HDDS-2939&id=hadoop-ozone)
 
 The branch has better coverage than master (73.5% vs 742.2%) but two new Sonar bugs are introduced (169 vs 171)
 
@@ -77,11 +77,11 @@ The branch has better coverage than master (73.5% vs 742.2%) but two new Sonar b
 
 There is no significant difference between local build time.
 
-[**Recent master build**](https://github.com/apache/ozone/pull/2132/checks)
+[Recent master build](https://github.com/apache/ozone/pull/2132/checks)
 
 ---
 
-[**Recent HDDS-2939 branch build**](https://github.com/apache/ozone/pull/2151/checks)
+[Recent HDDS-2939 branch build](https://github.com/apache/ozone/pull/2151/checks)
 
 ---
 
@@ -90,7 +90,7 @@ There is no significant difference between local build time.
 
 ## 9. possible incompatible changes/used feature flag
 
-For using this feature, "ozone.OM.metadata.layout" config needs to be set to be true in *ozone-site.xml*
+For using this feature, "ozone.OM.metadata.layout" config needs to be set to be true in `ozone-site.xml`
 
 The new metadata layout is supported only in a fresh cluster and the layout detail is stored in per-bucket. Presently, both old and new metadata layout buckets can't co-exists in the same cluster. User can't start OM in new layout(prefix) if there are existing old layout buckets(simple) and vice-versa. Work is in progress to support the existing old buckets to be available in new layout, this will be supported in the next development phase.
 

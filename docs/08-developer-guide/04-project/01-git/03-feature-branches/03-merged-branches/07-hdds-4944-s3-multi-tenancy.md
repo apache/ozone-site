@@ -9,7 +9,7 @@ Compare: https://github.com/apache/ozone/compare/master...HDDS-4944
 For a quick intro to the S3 multi-tenancy feature, here is an excerpt from the documentation:
 
 > Before Ozone multi-tenancy, all S3 access to Ozone (via S3 Gateway) are
-> confined to a single designated S3 volume (that is volume \`s3v\`, by default).
+> confined to a single designated S3 volume (that is volume `s3v`, by default).
 >
 > Ozone multi-tenancy allows multiple S3-accessible volumes to be created.
 > Each volume can be managed separately by their own tenant admins via CLI for user operations, and via Apache Ranger for access control.
@@ -56,7 +56,7 @@ To enable multi-tenancy with Ranger Java client ( [HDDS-5836](https://issues.apa
 </property>
 ```
 
-\`ozone.OM.kerberos.principal\` and \`ozone.OM.kerberos.keytab.file\` should have been [configured](https://ozone.apache.org/docs/1.2.1/security/secureozone.html#:~:text=ozone.om.kerberos.principal) already.
+`ozone.OM.kerberos.principal` and `ozone.OM.kerberos.keytab.file` should have been [configured](https://ozone.apache.org/docs/1.2.1/security/secureozone.html#:~:text=ozone.om.kerberos.principal) already.
 
 NOTE: Ranger Java client patch is merged. BUT the authorizer implementation switch hasn't happened. Partially due to Ranger 2.3.0 hasn't been released yet. Therefore, as of now it can only use the Ranger Basic HTTP authentication approach. Further patch will be done to complete the switch.
 
@@ -70,7 +70,7 @@ But there is one flaky upgrade/SCM acceptance test worth mentioning here that co
 
 Documentation has been added since [HDDS-6275](https://issues.apache.org/jira/browse/HDDS-6275) and is under constant revision.
 
-The doc (S3-Multi-Tenancy.md, S3-Tenant-Commands.md and so on) can be found under
+The doc (`S3-Multi-Tenancy.md`, `S3-Tenant-Commands.md` and so on) can be found under
 
 ## 3. design, attached the docs
 
