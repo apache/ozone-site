@@ -58,7 +58,7 @@ Note: Added S3 acceptance test with feature is turned on - PREFIX layout.
 
 ## 5. Docker-compose / acceptance tests
 
-The \`compose/ozone\` cluster is modified with testing \`ozonefs/ozonefs.robot\` with or without turning on the new feature. (both ofs and o3fs and linked and unlinked bucket are tested...)
+The `compose/ozone` cluster is modified with testing `ozonefs/ozonefs.robot` with or without turning on the new feature. (both ofs and o3fs and linked and unlinked bucket are tested...)
 
 ## 6. support of containers / Kubernetes
 

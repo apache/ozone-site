@@ -36,9 +36,9 @@ No addition so far. This should not be a merge blocker.
 
 No significant build time difference has been observed.
 
-master branch succeeded yesterday in 13m 30s:
+master branch succeeded yesterday in 13m 30s: https://github.com/apache/ozone/actions/runs/3877624995/jobs/6612858610
 
-Feature branch succeeded in 15m 31s:
+Feature branch succeeded in 15m 31s: https://github.com/apache/ozone/actions/runs/3876977121/jobs/6611455939
 
 ## 9. possible incompatible changes/used feature flag
 
