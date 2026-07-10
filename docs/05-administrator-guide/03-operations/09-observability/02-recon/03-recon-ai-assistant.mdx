@@ -25,15 +25,17 @@ those reads, and writes back a readable summary.
 
 **What it is not:**
 
-- It is **not** a computing or analytics engine - it reports what Recon's endpoints return and does
-  not perform ad-hoc aggregations, joins, or math across the cluster.
+- It is **not** a query engine that runs server-side aggregations across all cluster data - it
+  reports what individual Recon endpoints return. The LLM may reason over the data it receives (for
+  example, count or compare items in a result set), but it does not issue cross-endpoint joins or
+  scan unbounded datasets server-side.
 - It is **read-only** - it never mutates the cluster.
 - Its results are **bounded** (at most 1000 records per read - see [Limits](#11-limits--boundary-conditions)).
 - Its answers reflect Recon's **last metadata sync**, not the live cluster state.
 
 > **Important:** The assistant calls an **external LLM provider**, so cluster metadata leaves your
 > network when it is used. Read [Data sent to third-party LLM providers](#5-data-sent-to-third-party-llm-providers)
-> before enabling it. The feature is marked unstable and may change between releases.
+> before enabling it. The feature is marked **Beta** and may change between releases.
 
 ## 2. Architecture at a glance
 
@@ -44,10 +46,28 @@ At a high level a question flows through three steps:
    hard safety limits applied.
 3. **Summarization** - the raw results are sent back to the LLM, which writes the final answer.
 
-The assistant is **provider-agnostic**: OpenAI, Google Gemini, and Anthropic are all reachable behind
-one interface (see [Supported providers & models](#3-supported-providers--models)).
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI as Recon UI
+    participant Recon as Recon Server
+    participant LLM as LLM Provider
 
-## 3. Supported providers & models
+    User->>UI: Type question
+    UI->>Recon: POST /api/v1/chatbot/chat
+    Recon->>LLM: Tool-selection call<br/>(question + tool catalog)
+    LLM-->>Recon: Tool call(s) to execute
+    Recon->>Recon: Execute Recon reads in-JVM<br/>(safety limits applied)
+    Recon->>LLM: Summarization call<br/>(question + raw results)
+    LLM-->>Recon: Plain-English answer
+    Recon-->>UI: { "response": "..." }
+    UI-->>User: Display answer
+```
+
+The assistant is **provider-agnostic**: OpenAI, Google Gemini, and Anthropic are all reachable behind
+one interface (see [Supported providers & models](#supported-providers)).
+
+## 3. Supported providers & models {#supported-providers}
 
 The assistant supports **three** LLM providers. You configure one (or more) by supplying an API key;
 a provider with no key is simply unavailable.
@@ -90,18 +110,22 @@ Before enabling the assistant:
 
 - Recon is deployed and running.
 - You have an account and API key for at least one supported provider.
-- The **Recon server** can make **outbound HTTPS** calls to the provider endpoint(s) listed in
-  [Supported providers](#3-supported-providers--models). Only the Recon server needs egress - end
-  users' browsers do not.
+- The **Recon server** can make **outbound HTTPS** calls to the configured provider endpoint(s)
+  (public cloud API or an in-VPC gateway — see [Supported providers](#supported-providers)). Only
+  the Recon server needs egress; end users' browsers do not.
 
 > **Note:** In firewalled or proxied environments, allowlist the provider hostnames on HTTPS (443),
-> or route through your outbound proxy. In air-gapped environments, either leave the feature disabled
-> or point the relevant `*.base.url` at an in-VPC, OpenAI-compatible gateway (see
-> [Configuration](#8-configuration-reference)).
+> or route through your outbound proxy. In air-gapped or strict-egress environments, either leave
+> the feature disabled, or set the relevant `*.base.url` config key to an internal endpoint that
+> speaks the OpenAI-compatible chat-completions API — for example a self-hosted vLLM, Ollama, or a
+> private LiteLLM gateway running inside your network. When using such a gateway, set the matching
+> `*.api.key` to any non-empty placeholder value if the gateway does not require authentication. See
+> [Base URL overrides](#configuration-reference) in the Configuration reference for the exact key
+> names.
 
 Each concurrent query holds one Recon worker thread for its full duration (up to two LLM calls plus
 up to five Recon reads), so size the thread pool to your expected concurrency (see
-[Configuration](#8-configuration-reference)).
+[Configuration reference](#configuration-reference)).
 
 ## 5. Data sent to third-party LLM providers
 
@@ -133,7 +157,7 @@ cluster before enabling it.
 - Review each provider's **data-retention and training** policy.
 - **Restrict access** to the Recon chat endpoint, since all users share the server-configured key.
 
-## 6. Managing API keys (secure vs. insecure storage)
+## 6. Managing API keys (secure vs. insecure storage) {#managing-api-keys}
 
 API keys are resolved **server-side only** - they are never accepted per request, and every chat user
 shares the single admin-configured key. (This is why you should gate who can reach the endpoint.)
@@ -206,7 +230,7 @@ feature still works through any other configured provider.
    ```
 
 2. Choose a provider and model (defaults are `gemini` / `gemini-2.5-flash`).
-3. Supply an API key - see [Managing API keys](#6-managing-api-keys-secure-vs-insecure-storage).
+3. Supply an API key - see [Managing API keys](#managing-api-keys).
 4. Restart Recon and verify:
    - `GET /api/v1/chatbot/health`
    - `GET /api/v1/chatbot/models`
@@ -214,7 +238,7 @@ feature still works through any other configured provider.
 
 When the feature is disabled, none of its components are wired in and it cannot affect Recon.
 
-## 8. Configuration reference
+## 8. Configuration reference {#configuration-reference}
 
 All keys are under the prefix `ozone.recon.chatbot.`.
 
@@ -277,6 +301,11 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 | `anthropic.beta.header` | `context-1m-2025-08-07` | Anthropic beta header (enables the 1M-token context window). Set empty to disable. |
 
 ## 9. Using the assistant - what you can ask
+
+:::note
+A walkthrough video will be added here once the feature reaches GA. Until then, the example
+questions and tool reference table below describe what you can do.
+:::
 
 Ask by **intent**; the assistant maps your question to the right Recon view. It can answer questions
 about:
@@ -359,6 +388,9 @@ interpreting answers:
   about task/sync status (`api_v1_task_status`) to gauge freshness.
 - **Bounded concurrency and time.** Requests beyond pool + queue capacity get HTTP 503; requests
   exceeding `request.timeout.ms` get HTTP 504.
+- **No conversation memory.** Each query is independent - the assistant does not retain context from
+  previous questions in the same session. If a follow-up question relies on a prior answer, repeat
+  the relevant detail in the new query.
 - **Honest answers.** Truncation, empty results, and sampling are called out in the response text.
 
 ## 12. REST API endpoints
@@ -424,7 +456,7 @@ Defenses are layered so that even a fully prompt-injected model cannot make Reco
 - **Safe-scope** - key listings require a bucket-scoped prefix (default).
 - **Record cap** - every read is capped at 1000 records.
 - **Credential isolation** - API keys are resolved server-side (see
-  [Managing API keys](#6-managing-api-keys-secure-vs-insecure-storage)); never per request.
+  [Managing API keys](#managing-api-keys)); never per request.
 - **Resource bounds** - a bounded thread pool, queue, and per-request timeout.
 - **Read-only** - by construction, the assistant only reads Recon metadata.
 
