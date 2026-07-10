@@ -20,23 +20,32 @@ Use a feature branch for changes that:
   - Note that protobuf messages and wire protocols become locked into compatibility guarantees once they are released.
     - If a feature is making changes in this area and it wants to keep the structure flexible while it is being finalized, it should be done on a feature branch.
 
+## Keeping the feature branch up to date
+
+While development continues on `master`, periodically bring those changes into your feature branch (roughly every two weeks) so it does not drift too far and the eventual merge stays manageable. You can use either `git merge` or `git rebase` for this. Any merge commits created with this process will be removed before the branch is incorporated into `master` (see below), so both approaches lead to the same clean result.
+
 ## Merge Process
 
-Complete the following steps when a feature branch is ready to be merged into `master`:
+Merging a feature branch directly to master would carry the back-and-forth merge commits accumulated during development into `master`, where the layered merge commits become difficult to follow. Instead, the community votes on a frozen merge candidate branch that has been rebased onto `master`, similar to how a release candidate is voted on. Complete the following steps when a feature branch is ready to be merged into `master`:
 
-1. Complete the [branch merge checklist](./merge-checklist) for your feature branch and raise it as a pull request to the [ozone-site](https://github.com/apache/ozone-site) repo's `master` branch.
+1. Create a merge candidate (`mc`) branch from your feature branch and rebase it onto `master`, for example `HDDS-3816-ec-mc0`. This accomplishes a few things:
+    - The rebase of the candidate branch will create new copies of the commits while leaving the original feature branch intact. It is non-destructive.
+    - The rebase erases any incremental merge commits in the candidate branch so `master` ends up with a clean history when the final candidate branch is merged.
+    - Voting happens on a frozen candidate. If development continues in the background on the feature branch it is clearly separated from what is being voted on.
 
-    - Feature branch merge checklists will be committed [to the website](./merged-branches) once the branch merge is approved.
+2. Complete the [branch merge checklist](./merge-checklist) for the merge candidate and raise it as a pull request to the [ozone-site](https://github.com/apache/ozone-site) repo's `master` branch.
+    - Feature branch merge checklists will be committed once the branch merge is approved.
 
-2. Start a mail thread on the `dev@ozone.apache.org` mailing list for committers and PMC members to vote on the branch merge. Include a link to the branch merge checklist PR.
+3. Start a mail thread on the `dev@ozone.apache.org` mailing list for committers and PMC members to vote on the merge candidate branch. Include a link to the branch merge checklist PR. The subject of the mail thread should contain the merge candidate number, and a new thread should be started for each merge candidate.
 
-3. If the vote passes, changes from the feature branch will be incorporated into `master`, and development can continue on the `master` branch.
+4. If more changes are needed (for example, addressing review feedback), continue development on the original feature branch. Cut a new candidate (`mc1`, and so on) and re-vote as needed.
 
-**Do not use GitHub "Squash and merge" or rebase** to land the feature branch onto `master`. Use a **regular `git merge`** so history, Jira links, and PR discussions stay aligned with the original commit IDs.
+5. If the vote passes, merge the candidate branch into `master` with a regular `git merge`, then development can continue on the `master` branch.
+    - The merge will need to be done locally by a committer and then pushed directly to the master branch, since Github is configured to only allow "Squash and merge" to incorporate changes from pull requests.
+    - The merge commit creates a single clear point in history where the whole feature was added, which helps with later tasks such as flaky test triage.
 
 ## See also
 
 - [Release branches](../release-branches) — release branch lifecycle and tags
 - [Release Manager Guide](../../release-guide) — RC tags and publishing
 - [Ozone `CONTRIBUTING.md`](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md) — everyday PR workflow to `master`
-
