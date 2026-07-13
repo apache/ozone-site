@@ -333,6 +333,20 @@ per-container replica timelines, raw block-to-key mapping, any mutation, and arb
 > bucket *layout*, not a key *state* - "FSO keys" means committed keys in an FSO bucket, while "open
 > FSO keys" means uncommitted keys.
 
+### Example: Filtering by Storage Mode
+
+You can ask the assistant to filter results based on the storage mode (OBS or FSO). For example, you can request only the open keys of type OBS:
+
+![Open OBS Keys](/img/recon-ai-filter-obs.png)
+
+Or request only the open keys of type FSO:
+
+![Open FSO Keys](/img/recon-ai-filter-fso.png)
+
+You can also ask the assistant to list all open keys and categorize them by their storage mode:
+
+![Open Keys Categorized by Storage Mode](/img/recon-ai-filter-both.png)
+
 ## 10. Tool (endpoint) reference
 
 These are the Recon views the assistant can call. This list mirrors the in-code catalog (see
