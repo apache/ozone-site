@@ -126,7 +126,7 @@ When Datanodes enter maintenance mode, EC container replicas on those Datanodes 
 Similar to decommissioning, but with different redundancy requirements:
 
 - Maintenance mode allows for reduced redundancy (`maintenanceRemainingRedundancy` config)
-- Replication ensures minimum redundancy is maintained during maintenance using the configured replication mode (push by default)
+- Replication ensures minimum redundancy is maintained during maintenance
 
 ### Scenario 3: Mis-Replication
 
@@ -137,5 +137,5 @@ When EC container replicas are placed on Datanodes that violate placement polici
 
 1. **Placement Validation**: `ECMisReplicationHandler` validates replica placement against policies
 2. **Violation Detection**: Identifies replicas that violate placement constraints
-3. **Replication to Correct Placement**: Creates replication commands to move replicas to compliant locations using the configured replication mode (push by default)
+3. **Replication to Correct Placement**: Creates replication commands to move replicas to compliant locations
 4. **Old Replica Deletion**: After successful replication, old replicas are deleted
