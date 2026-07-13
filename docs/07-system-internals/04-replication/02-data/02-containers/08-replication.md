@@ -10,19 +10,13 @@ Container replication is a critical mechanism in Apache Ozone that ensures data 
 
 ## Replication Mode
 
-Apache Ozone supports **Push Replication** by **default**, where the source Datanode actively pushes the container to the target Datanode. The replication mode is controlled by the configuration property `hdds.scm.replication.push` (default: `true`). When set to `false`, the system uses pull replication where the target Datanode pulls from source Datanodes.
+Apache Ozone uses **Push Replication**, where the source Datanode (client) actively pushes or uploads the container to the target Datanode (server).
 
-**Push Replication :** `PushReplicator` class handles push replication by:
+**Push Replication:** `PushReplicator` class handles push replication by:
 
 - Using `OnDemandContainerReplicationSource` to prepare the container
 - Using `GrpcContainerUploader` to upload the container via gRPC stream
 - Streaming the container data directly to the target Datanode
-
-:::note
-
-Both regular container replication and EC container replication respect the same `hdds.scm.replication.push` configuration setting. EC container replication scenarios (decommissioning, under-replication, maintenance mode, mis-replication) will use push mode when the configuration is `true` (default) or pull mode when set to `false`.
-
-:::
 
 ---
 
@@ -48,7 +42,7 @@ The source Datanode streams the tarball to the destination via gRPC:
 - Establishes gRPC stream connection
 - Streams data in chunks via `SendContainerRequest` messages
 - Destination writes chunks to temporary file in the temp dir of the volume chosen: `<volume-root>/tmp/container-copy/`.
-  That way, Datanode parallelizes container download, and does not block on the system root drive.
+  That way, Datanode parallelizes container upload, and does not block on the system root drive.
 
 Before receiving, the destination selects a volume, **reserves space (2x container size)** to accommodate both the tarball and the extracted files, and creates the temporary directory.
 
@@ -88,7 +82,7 @@ After successful import, all temporary files are cleaned up:
 
 ## Advantages of Push Replication
 
-Push replication offers several advantages:
+Push replication (where the client uploads the container to the server) offers several advantages:
 
 - **Better Load Distribution**: Source Datanode controls transfer rate and timing, managing its own load while simplifying target operations
 - **Improved Network Efficiency**: Direct streaming with gRPC flow control adapts to network conditions, reducing latency
@@ -99,7 +93,7 @@ Push replication offers several advantages:
 
 ## EC Container Replication Scenarios
 
-Erasure Coded (EC) containers have specific replication requirements and scenarios where replication is necessary.
+Erasure Coded (EC) containers usually have their durability restored using reconstruction since each replica is unique. However, there are specific scenarios where replication is necessary.
 
 ### Scenario 1: Decommissioning
 
@@ -112,7 +106,7 @@ When a Datanode enters the decommissioning state, all EC container replicas stor
 2. **Index Identification**: The handler identifies which EC indexes are only present on decommissioning Datanodes (`decommissioningOnlyIndexes()`)
 3. **One-to-One Replication**: For each decommissioning index, a replication command is created to copy that specific index to a new Datanode
 4. **Target Selection**: New target Datanodes are selected based on placement policies
-5. **Replication Execution**: Each index is replicated independently using the configured replication mode (push by default, configurable to pull via `hdds.scm.replication.push`)
+5. **Replication Execution**: Each index is replicated independently by pushing the replica from the source to the target Datanode
 
 **Example:**
 
@@ -122,19 +116,7 @@ For an EC container with replication config `RS-6-3-1024k`:
 - If index 2 is only on a decommissioning Datanode, only index 2 needs to be replicated
 - The replication command includes `replicaIndex=2` to specify which index to copy
 
-### Scenario 2: Under-Replication
-
-**When it occurs:**
-When an EC container has fewer replicas than required for a specific index, that index needs to be replicated.
-
-**How it works:**
-
-1. **Replica Count Analysis**: `ECContainerReplicaCount` analyzes the current replica distribution
-2. **Missing Index Detection**: Identifies indexes that have fewer replicas than required
-3. **Source Selection**: Selects healthy source replicas for the missing indexes
-4. **Replication Commands**: Creates replication commands to restore redundancy using the configured replication mode (push by default)
-
-### Scenario 3: Maintenance Mode
+### Scenario 2: Maintenance Mode
 
 **When it occurs:**
 When Datanodes enter maintenance mode, EC container replicas on those Datanodes may need additional copies to maintain redundancy during maintenance.
@@ -146,7 +128,7 @@ Similar to decommissioning, but with different redundancy requirements:
 - Maintenance mode allows for reduced redundancy (`maintenanceRemainingRedundancy` config)
 - Replication ensures minimum redundancy is maintained during maintenance using the configured replication mode (push by default)
 
-### Scenario 4: Mis-Replication
+### Scenario 3: Mis-Replication
 
 **When it occurs:**
 When EC container replicas are placed on Datanodes that violate placement policies (e.g., too many replicas in the same rack).
