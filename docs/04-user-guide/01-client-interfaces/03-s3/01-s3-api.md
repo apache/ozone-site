@@ -107,8 +107,16 @@ awsSecret=c261b6ecabf7d37d5f9ded654b1c724adac9bd9f13e247a235e567e8296d2999
 ```
 
 :::note
-Starting in Ozone 1.4.0, the secret will be **shown only once** when generated with `getsecret`. If the secret is lost, the user would have to `revokesecret` first before regenerating a new secret with `getsecret`.
+Starting in Ozone 1.4.0, the secret will be **shown only once** when generated with `getsecret`. If the secret is lost, use `revokesecret` and then `getsecret` to generate a new auto-generated secret, or use `setsecret` to assign a new known value while you still have Kerberos access.
 :::
+
+To change an existing secret to a specific value, use `ozone s3 setsecret`:
+
+```bash
+ozone s3 setsecret --secret 'my-new-secret-key'
+awsAccessKey=testuser/scm@EXAMPLE.COM
+awsSecret=my-new-secret-key
+```
 
 Now, you can use the key and the secret to access the S3 endpoint:
 
@@ -126,7 +134,7 @@ Enter 'y' to confirm S3 secret revocation for 'testuser/scm@EXAMPLE.COM': y
 S3 secret revoked.
 ```
 
-Ozone Manager administrators can run `ozone s3 getsecret` and `ozone s3 revokesecret` command with `-u` parameter to specify another users.
+Ozone Manager administrators can run `ozone s3 getsecret`, `ozone s3 setsecret`, and `ozone s3 revokesecret` with the `-u` parameter to specify another user.
 
 ```bash
 # Obtained Kerberos TGT for testuser/scm@EXAMPLE.COM with kinit,
@@ -134,6 +142,10 @@ Ozone Manager administrators can run `ozone s3 getsecret` and `ozone s3 revokese
 ozone s3 getsecret -u om/om@EXAMPLE.COM
 awsAccessKey=om/om@EXAMPLE.COM
 awsSecret=1e9379d0424cce6669b1a501ff14834e46dee004ee868b41a313b49eabcfb68f
+
+ozone s3 setsecret -u om/om@EXAMPLE.COM --secret 'admin-chosen-secret'
+awsAccessKey=om/om@EXAMPLE.COM
+awsSecret=admin-chosen-secret
 
 ozone s3 revokesecret -u om/om@EXAMPLE.COM -y
 S3 secret revoked.
