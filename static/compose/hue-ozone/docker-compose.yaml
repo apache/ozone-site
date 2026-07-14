@@ -1,3 +1,20 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
 # Hue + Ozone verification stack
 #
 # Starts a non-secure Ozone cluster with HttpFS (port 14000) and Cloudera Hue (port 8888).
@@ -11,47 +28,49 @@
 #   curl -i -X PUT "http://localhost:14000/webhdfs/v1/huevol?op=MKDIRS&user.name=hdfs"
 #   curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=hdfs"
 
-x-image: &image
+x-image:
+  &image
   image: ${OZONE_IMAGE:-apache/ozone}:${OZONE_IMAGE_VERSION:-2.1.1}${OZONE_IMAGE_FLAVOR:-}
 
-x-common-config: &common-config
-  OZONE-SITE.XML_hdds.datanode.dir: "/data/hdds"
-  OZONE-SITE.XML_ozone.metadata.dirs: "/data/metadata"
-  OZONE-SITE.XML_ozone.om.address: "om"
-  OZONE-SITE.XML_ozone.om.http-address: "om:9874"
-  OZONE-SITE.XML_ozone.recon.address: "recon:9891"
-  OZONE-SITE.XML_ozone.recon.db.dir: "/data/metadata/recon"
+x-common-config:
+  &common-config
+  OZONE-SITE.XML_hdds.datanode.dir: /data/hdds
+  OZONE-SITE.XML_ozone.metadata.dirs: /data/metadata
+  OZONE-SITE.XML_ozone.om.address: om
+  OZONE-SITE.XML_ozone.om.http-address: om:9874
+  OZONE-SITE.XML_ozone.recon.address: recon:9891
+  OZONE-SITE.XML_ozone.recon.db.dir: /data/metadata/recon
   OZONE-SITE.XML_ozone.replication: "1"
-  OZONE-SITE.XML_ozone.scm.block.client.address: "scm"
-  OZONE-SITE.XML_ozone.scm.client.address: "scm"
-  OZONE-SITE.XML_ozone.scm.datanode.id.dir: "/data/metadata"
-  OZONE-SITE.XML_ozone.scm.names: "scm"
-  no_proxy: "om,recon,scm,s3g,httpfs,hue,localhost,127.0.0.1"
+  OZONE-SITE.XML_ozone.scm.block.client.address: scm
+  OZONE-SITE.XML_ozone.scm.client.address: scm
+  OZONE-SITE.XML_ozone.scm.datanode.id.dir: /data/metadata
+  OZONE-SITE.XML_ozone.scm.names: scm
+  no_proxy: om,recon,scm,s3g,httpfs,hue,localhost,127.0.0.1
 
 services:
   datanode:
     <<: *image
-    command: ["ozone", "datanode"]
+    command: [ ozone, datanode ]
     environment:
       <<: *common-config
 
   om:
     <<: *image
     ports:
-      - "9874:9874"
-    command: ["ozone", "om"]
+    - 9874:9874
+    command: [ ozone, om ]
     environment:
       <<: *common-config
       ENSURE_OM_INITIALIZED: /data/metadata/om/current/VERSION
       WAITFOR: scm:9876
     depends_on:
-      - scm
+    - scm
 
   scm:
     <<: *image
     ports:
-      - "9876:9876"
-    command: ["ozone", "scm"]
+    - 9876:9876
+    command: [ ozone, scm ]
     environment:
       <<: *common-config
       ENSURE_SCM_INITIALIZED: /data/metadata/scm/current/VERSION
@@ -59,27 +78,27 @@ services:
   recon:
     <<: *image
     ports:
-      - "9888:9888"
-    command: ["ozone", "recon"]
+    - 9888:9888
+    command: [ ozone, recon ]
     environment:
       <<: *common-config
 
   s3g:
     <<: *image
     ports:
-      - "9878:9878"
-    command: ["ozone", "s3g"]
+    - 9878:9878
+    command: [ ozone, s3g ]
     environment:
       <<: *common-config
 
   httpfs:
     <<: *image
     ports:
-      - "14000:14000"
-    command: ["ozone", "httpfs"]
+    - 14000:14000
+    command: [ ozone, httpfs ]
     environment:
       <<: *common-config
-      CORE-SITE.XML_fs.defaultFS: "ofs://om"
+      CORE-SITE.XML_fs.defaultFS: ofs://om
       CORE-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
       CORE-SITE.XML_httpfs.proxyuser.hue.groups: "*"
 
@@ -88,10 +107,10 @@ services:
     platform: linux/amd64
     hostname: hue
     ports:
-      - "8888:8888"
+    - 8888:8888
     environment:
       POLARS_SKIP_CPU_CHECK: "1"
     volumes:
-      - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on:
-      - httpfs
+    - httpfs
