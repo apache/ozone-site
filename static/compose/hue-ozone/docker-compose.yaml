@@ -1,0 +1,97 @@
+# Hue + Ozone verification stack
+#
+# Starts a non-secure Ozone cluster with HttpFS (port 14000) and Cloudera Hue (port 8888).
+# HttpFS is configured with proxy-user settings for the Hue service user.
+#
+# Usage:
+#   docker compose up -d --scale datanode=3
+#   open http://localhost:8888  (default login: admin / admin)
+#
+# Verify HttpFS before Hue:
+#   curl -i -X PUT "http://localhost:14000/webhdfs/v1/huevol?op=MKDIRS&user.name=hdfs"
+#   curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=hdfs"
+
+x-image: &image
+  image: ${OZONE_IMAGE:-apache/ozone}:${OZONE_IMAGE_VERSION:-2.1.1}${OZONE_IMAGE_FLAVOR:-}
+
+x-common-config: &common-config
+  OZONE-SITE.XML_hdds.datanode.dir: "/data/hdds"
+  OZONE-SITE.XML_ozone.metadata.dirs: "/data/metadata"
+  OZONE-SITE.XML_ozone.om.address: "om"
+  OZONE-SITE.XML_ozone.om.http-address: "om:9874"
+  OZONE-SITE.XML_ozone.recon.address: "recon:9891"
+  OZONE-SITE.XML_ozone.recon.db.dir: "/data/metadata/recon"
+  OZONE-SITE.XML_ozone.replication: "1"
+  OZONE-SITE.XML_ozone.scm.block.client.address: "scm"
+  OZONE-SITE.XML_ozone.scm.client.address: "scm"
+  OZONE-SITE.XML_ozone.scm.datanode.id.dir: "/data/metadata"
+  OZONE-SITE.XML_ozone.scm.names: "scm"
+  no_proxy: "om,recon,scm,s3g,httpfs,hue,localhost,127.0.0.1"
+
+services:
+  datanode:
+    <<: *image
+    command: ["ozone", "datanode"]
+    environment:
+      <<: *common-config
+
+  om:
+    <<: *image
+    ports:
+      - "9874:9874"
+    command: ["ozone", "om"]
+    environment:
+      <<: *common-config
+      ENSURE_OM_INITIALIZED: /data/metadata/om/current/VERSION
+      WAITFOR: scm:9876
+    depends_on:
+      - scm
+
+  scm:
+    <<: *image
+    ports:
+      - "9876:9876"
+    command: ["ozone", "scm"]
+    environment:
+      <<: *common-config
+      ENSURE_SCM_INITIALIZED: /data/metadata/scm/current/VERSION
+
+  recon:
+    <<: *image
+    ports:
+      - "9888:9888"
+    command: ["ozone", "recon"]
+    environment:
+      <<: *common-config
+
+  s3g:
+    <<: *image
+    ports:
+      - "9878:9878"
+    command: ["ozone", "s3g"]
+    environment:
+      <<: *common-config
+
+  httpfs:
+    <<: *image
+    ports:
+      - "14000:14000"
+    command: ["ozone", "httpfs"]
+    environment:
+      <<: *common-config
+      CORE-SITE.XML_fs.defaultFS: "ofs://om"
+      CORE-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
+      CORE-SITE.XML_httpfs.proxyuser.hue.groups: "*"
+
+  hue:
+    image: gethue/hue:latest
+    platform: linux/amd64
+    hostname: hue
+    ports:
+      - "8888:8888"
+    environment:
+      POLARS_SKIP_CPU_CHECK: "1"
+    volumes:
+      - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on:
+      - httpfs

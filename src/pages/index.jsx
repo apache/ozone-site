@@ -381,7 +381,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/user-guide/integrations/hue'
+      link: '/docs/user-guide/integrations/hue'
     },
     {
       name: "HBase",

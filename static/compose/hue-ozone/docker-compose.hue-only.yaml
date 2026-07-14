@@ -1,0 +1,28 @@
+# Connect Hue to an existing Ozone Docker network (HttpFS already running).
+#
+# Usage (example with knox-ozone_default network):
+#   docker network ls | grep ozone
+#   OZONE_NETWORK=knox-ozone_default docker compose -f docker-compose.hue-only.yaml up -d
+#
+# Ensure HttpFS has proxy-user settings for the Hue service user (hue):
+#   CORE-SITE.XML_httpfs.proxyuser.hue.hosts=*
+#   CORE-SITE.XML_httpfs.proxyuser.hue.groups=*
+
+services:
+  hue:
+    image: gethue/hue:latest
+    platform: linux/amd64
+    hostname: hue
+    ports:
+      - "8888:8888"
+    environment:
+      POLARS_SKIP_CPU_CHECK: "1"
+    volumes:
+      - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    networks:
+      - ozone
+
+networks:
+  ozone:
+    external: true
+    name: ${OZONE_NETWORK:-knox-ozone_default}
