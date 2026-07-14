@@ -301,7 +301,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/administrator-guide/configuration/security/knox'
+      link: "/docs/administrator-guide/configuration/security/knox",
     },
     {
       name: "Kerberos",
