@@ -41,6 +41,8 @@ x-common-config:
   OZONE-SITE.XML_ozone.recon.address: recon:9891
   OZONE-SITE.XML_ozone.recon.db.dir: /data/metadata/recon
   OZONE-SITE.XML_ozone.replication: "1"
+  OZONE-SITE.XML_ozone.scm.block.size: 1MB
+  OZONE-SITE.XML_ozone.scm.container.size: 1GB
   OZONE-SITE.XML_ozone.scm.block.client.address: scm
   OZONE-SITE.XML_ozone.scm.client.address: scm
   OZONE-SITE.XML_ozone.scm.datanode.id.dir: /data/metadata
@@ -61,6 +63,10 @@ services:
     command: [ ozone, om ]
     environment:
       <<: *common-config
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.hosts: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.groups: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hue.hosts: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hue.groups: "*"
       ENSURE_OM_INITIALIZED: /data/metadata/om/current/VERSION
       WAITFOR: scm:9876
     depends_on:
@@ -99,6 +105,8 @@ services:
     environment:
       <<: *common-config
       CORE-SITE.XML_fs.defaultFS: ofs://om
+      CORE-SITE.XML_httpfs.proxyuser.hadoop.hosts: "*"
+      CORE-SITE.XML_httpfs.proxyuser.hadoop.groups: "*"
       CORE-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
       CORE-SITE.XML_httpfs.proxyuser.hue.groups: "*"
 

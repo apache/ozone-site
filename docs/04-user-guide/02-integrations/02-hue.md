@@ -43,9 +43,14 @@ Replace `hue` with the OS user that runs the Hue process:
 </property>
 ```
 
+Hue also issues proxied Ozone RPC calls through HttpFS. Configure matching `hadoop.proxyuser.hue.hosts` and `hadoop.proxyuser.hue.groups` in OM `core-site.xml` (not only in HttpFS `httpfs-site.xml`).
+
 Restrict `hosts` and `groups` in production instead of using `*`. Restart HttpFS after changing `httpfs-site.xml`.
 
-On Docker Compose, you can set the same properties through HttpFS environment variables (for example `CORE-SITE.XML_httpfs.proxyuser.hue.hosts=*`).
+On Docker Compose, you can set the same properties through HttpFS environment variables (for example `CORE-SITE.XML_httpfs.proxyuser.hue.hosts=*`). HttpFS runs as the `hadoop` OS user; WebHDFS requests that pass `user.name` (including the curl checks below) require both:
+
+- `httpfs.proxyuser.hadoop.hosts` and `httpfs.proxyuser.hadoop.groups` in HttpFS `httpfs-site.xml` (or `CORE-SITE.XML_httpfs.proxyuser.hadoop.*` on the HttpFS container)
+- `hadoop.proxyuser.hadoop.hosts` and `hadoop.proxyuser.hadoop.groups` in OM `core-site.xml` (or `CORE-SITE.XML_hadoop.proxyuser.hadoop.*` on the OM container) so OM accepts proxied RPC calls from HttpFS
 
 ### Verify HttpFS with curl
 
@@ -162,3 +167,8 @@ Hue supports browsing Ozone through HttpFS, but some operations are limited. See
 - Check Ozone ACLs and Ranger policies for the impersonated user.
 - Prefer **FSO** buckets for directory create, rename, and delete operations.
 - Check HttpFS and OM logs for the specific WebHDFS operation that failed.
+- On Docker Compose dev clusters, the default SCM block size (256 MB) can prevent small file uploads because datanodes cannot satisfy the reserved space. Lower `ozone.scm.block.size` and `ozone.scm.container.size` in `ozone-site.xml` for local testing, as described in the [Docker Compose guide](../../developer-guide/run/docker-compose#step-3-configure-your-deployment-optional).
+
+### Volume or bucket already exists (curl verification)
+
+Re-running the HttpFS `MKDIRS` curl examples against the same volume or bucket name returns HTTP 500 with `Volume already exists` or a similar error. Use new names, or treat the response as confirmation that the path is already present.
