@@ -1,0 +1,148 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+# Hue + Ozone verification stack
+#
+# Starts a non-secure Ozone cluster with HttpFS (port 14000), Postgres (Hue DB),
+# and Cloudera Hue (port 8888). HttpFS is configured with proxy-user settings
+# for the Hue service user.
+#
+# Usage:
+#   docker compose up -d --scale datanode=3
+#   ./init-demo-data.sh
+#   open http://localhost:8888  (default login: admin / admin)
+#
+# init-demo-data.sh creates huevol/huebucket owned by admin so the default
+# Hue login can list them at ofs://om. WebHDFS MKDIRS alone creates volumes
+# owned by the request user, which other Hue users cannot see at the root.
+#
+# Verify HttpFS before Hue:
+#   curl -i "http://localhost:14000/webhdfs/v1/?op=LISTSTATUS&user.name=admin"
+#   curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=admin"
+
+x-image:
+  &image
+  image: ${OZONE_IMAGE:-apache/ozone}:${OZONE_IMAGE_VERSION:-2.1.1}${OZONE_IMAGE_FLAVOR:-}
+
+x-common-config:
+  &common-config
+  OZONE-SITE.XML_hdds.datanode.dir: /data/hdds
+  OZONE-SITE.XML_ozone.metadata.dirs: /data/metadata
+  OZONE-SITE.XML_ozone.om.address: om
+  OZONE-SITE.XML_ozone.om.http-address: om:9874
+  OZONE-SITE.XML_ozone.recon.address: recon:9891
+  OZONE-SITE.XML_ozone.recon.db.dir: /data/metadata/recon
+  OZONE-SITE.XML_ozone.replication: "1"
+  OZONE-SITE.XML_ozone.scm.block.size: 1MB
+  OZONE-SITE.XML_ozone.scm.container.size: 1GB
+  OZONE-SITE.XML_ozone.scm.block.client.address: scm
+  OZONE-SITE.XML_ozone.scm.client.address: scm
+  OZONE-SITE.XML_ozone.scm.datanode.id.dir: /data/metadata
+  OZONE-SITE.XML_ozone.scm.names: scm
+  no_proxy: om,recon,scm,s3g,httpfs,hue,postgres,localhost,127.0.0.1
+
+services:
+  datanode:
+    <<: *image
+    command: [ ozone, datanode ]
+    environment:
+      <<: *common-config
+
+  om:
+    <<: *image
+    ports:
+    - 9874:9874
+    command: [ ozone, om ]
+    environment:
+      <<: *common-config
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.hosts: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.groups: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hue.hosts: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hue.groups: "*"
+      ENSURE_OM_INITIALIZED: /data/metadata/om/current/VERSION
+      WAITFOR: scm:9876
+    depends_on:
+    - scm
+
+  scm:
+    <<: *image
+    ports:
+    - 9876:9876
+    command: [ ozone, scm ]
+    environment:
+      <<: *common-config
+      ENSURE_SCM_INITIALIZED: /data/metadata/scm/current/VERSION
+
+  recon:
+    <<: *image
+    ports:
+    - 9888:9888
+    command: [ ozone, recon ]
+    environment:
+      <<: *common-config
+
+  s3g:
+    <<: *image
+    ports:
+    - 9878:9878
+    command: [ ozone, s3g ]
+    environment:
+      <<: *common-config
+
+  httpfs:
+    <<: *image
+    ports:
+    - 14000:14000
+    command: [ ozone, httpfs ]
+    environment:
+      <<: *common-config
+      CORE-SITE.XML_fs.defaultFS: ofs://om
+      HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.hosts: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.groups: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hue.groups: "*"
+
+  postgres:
+    image: postgres:15-alpine
+    hostname: postgres
+    environment:
+      POSTGRES_USER: hue
+      POSTGRES_PASSWORD: hue
+      POSTGRES_DB: hue
+    healthcheck:
+      test: [ CMD-SHELL, pg_isready -U hue -d hue ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  hue:
+    # 4.11.0 lacks Ozone File Browser; latest segfaults on Apple Silicon QEMU.
+    # This tag has ofs_access/Ozone support without the Polars crash.
+    image: gethue/hue:20250101-140101
+    platform: linux/amd64
+    hostname: hue
+    ports:
+    - 8888:8888
+    environment:
+      POLARS_SKIP_CPU_CHECK: "1"
+    volumes:
+    - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on:
+      postgres:
+        condition: service_healthy
+      httpfs:
+        condition: service_started
