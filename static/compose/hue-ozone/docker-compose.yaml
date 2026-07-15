@@ -17,8 +17,9 @@
 
 # Hue + Ozone verification stack
 #
-# Starts a non-secure Ozone cluster with HttpFS (port 14000) and Cloudera Hue (port 8888).
-# HttpFS is configured with proxy-user settings for the Hue service user.
+# Starts a non-secure Ozone cluster with HttpFS (port 14000), Postgres (Hue DB),
+# and Cloudera Hue (port 8888). HttpFS is configured with proxy-user settings
+# for the Hue service user.
 #
 # Usage:
 #   docker compose up -d --scale datanode=3
@@ -47,7 +48,7 @@ x-common-config:
   OZONE-SITE.XML_ozone.scm.client.address: scm
   OZONE-SITE.XML_ozone.scm.datanode.id.dir: /data/metadata
   OZONE-SITE.XML_ozone.scm.names: scm
-  no_proxy: om,recon,scm,s3g,httpfs,hue,localhost,127.0.0.1
+  no_proxy: om,recon,scm,s3g,httpfs,hue,postgres,localhost,127.0.0.1
 
 services:
   datanode:
@@ -110,6 +111,19 @@ services:
       CORE-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
       CORE-SITE.XML_httpfs.proxyuser.hue.groups: "*"
 
+  postgres:
+    image: postgres:15-alpine
+    hostname: postgres
+    environment:
+      POSTGRES_USER: hue
+      POSTGRES_PASSWORD: hue
+      POSTGRES_DB: hue
+    healthcheck:
+      test: [ CMD-SHELL, pg_isready -U hue -d hue ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   hue:
     image: gethue/hue:latest
     platform: linux/amd64
@@ -121,4 +135,7 @@ services:
     volumes:
     - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on:
-    - httpfs
+      postgres:
+        condition: service_healthy
+      httpfs:
+        condition: service_started

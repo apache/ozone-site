@@ -22,6 +22,15 @@ Cloudera Hue (File Browser) --WebHDFS REST--> Ozone HttpFS gateway --Ozone RPC--
 
 To try the steps locally, start an Ozone cluster with Docker Compose as described in the [Docker quick start](../../quick-start/installation/docker) or [developer Docker Compose guide](../../developer-guide/run/docker-compose). The default stack includes an `httpfs` service on `localhost:14000`.
 
+For an all-in-one **Hue + Ozone** verification stack (HttpFS, Hue, and a Postgres database for Hue users), use the compose files under [`static/compose/hue-ozone/`](https://github.com/apache/ozone-site/tree/master/static/compose/hue-ozone) in this repository:
+
+```bash
+cd static/compose/hue-ozone
+docker compose up -d --scale datanode=3
+```
+
+Hue listens on `http://localhost:8888` (default login: `admin` / `admin`). The stack includes a **Postgres** service so Hue persists users and avoids embedded-DB issues during local testing.
+
 ## Configure HttpFS
 
 Ensure the HttpFS gateway is running and reachable at `http(s)://<httpfs-host>:<port>/webhdfs/v1`.
@@ -80,11 +89,22 @@ Non-secure cluster example:
 # Ozone does not support the /append WebHDFS API; disable chunked uploads.
 enable_chunked_file_uploader=false
 
+# Local compose only: Postgres backing store for Hue users (see static/compose/hue-ozone).
+[[database]]
+engine=postgresql_psycopg2
+host=postgres
+port=5432
+user=hue
+password=hue
+name=hue
+
 [[ozone]]
 [[[default]]]
 fs_defaultfs=ofs://om
 webhdfs_url=http://httpfs:14000/webhdfs/v1
 ```
+
+- **`[[database]]`**: Optional for production CDP deployments; required in the bundled `hue-ozone` compose stack so Hue persists users in Postgres instead of an embedded database.
 
 - **`fs_defaultfs`**: Use `ofs://<service-id>` for HA (`ozone.service.id`) or `ofs://<om-host>` for a single OM. Docker Compose uses `ofs://om`.
 - **`webhdfs_url`**: HttpFS WebHDFS base URL, for example `http://localhost:14000/webhdfs/v1` from the host or `http://httpfs:14000/webhdfs/v1` on the Docker network.
@@ -168,6 +188,11 @@ Hue supports browsing Ozone through HttpFS, but some operations are limited. See
 - Prefer **FSO** buckets for directory create, rename, and delete operations.
 - Check HttpFS and OM logs for the specific WebHDFS operation that failed.
 - On Docker Compose dev clusters, the default SCM block size (256 MB) can prevent small file uploads because datanodes cannot satisfy the reserved space. Lower `ozone.scm.block.size` and `ozone.scm.container.size` in `ozone-site.xml` for local testing, as described in the [Docker Compose guide](../../developer-guide/run/docker-compose#step-3-configure-your-deployment-optional).
+
+### Hue login or user errors (local Docker)
+
+- Ensure the `postgres` service is healthy before Hue starts (`docker compose ps`).
+- Confirm `hue.ini` includes the `[[database]]` block with `engine=postgresql_psycopg2` and host `postgres`, matching the compose environment variables.
 
 ### Volume or bucket already exists (curl verification)
 

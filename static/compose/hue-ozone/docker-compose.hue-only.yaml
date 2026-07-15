@@ -26,6 +26,19 @@
 #   CORE-SITE.XML_httpfs.proxyuser.hue.groups=*
 
 services:
+  postgres:
+    image: postgres:15-alpine
+    hostname: postgres
+    environment:
+      POSTGRES_USER: hue
+      POSTGRES_PASSWORD: hue
+      POSTGRES_DB: hue
+    healthcheck:
+      test: [ CMD-SHELL, pg_isready -U hue -d hue ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   hue:
     image: gethue/hue:latest
     platform: linux/amd64
@@ -36,6 +49,9 @@ services:
       POLARS_SKIP_CPU_CHECK: "1"
     volumes:
     - ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
     - ozone
 
