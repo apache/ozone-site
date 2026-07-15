@@ -58,10 +58,17 @@ Hue also issues proxied Ozone RPC calls through HttpFS. Configure matching `hado
 
 Restrict `hosts` and `groups` in production instead of using `*`. Restart HttpFS after changing `httpfs-site.xml`.
 
-On Docker Compose, you can set the same properties through HttpFS environment variables (for example `CORE-SITE.XML_httpfs.proxyuser.hue.hosts=*`). HttpFS runs as the `hadoop` OS user; WebHDFS requests that pass `user.name` (including the curl checks below) require both:
+On Docker Compose, set proxy-user properties on the **HttpFS** container with the `HTTPFS-SITE.XML_` prefix (they belong in `httpfs-site.xml`, not `core-site.xml`):
 
-- `httpfs.proxyuser.hadoop.hosts` and `httpfs.proxyuser.hadoop.groups` in HttpFS `httpfs-site.xml` (or `CORE-SITE.XML_httpfs.proxyuser.hadoop.*` on the HttpFS container)
-- `hadoop.proxyuser.hadoop.hosts` and `hadoop.proxyuser.hadoop.groups` in OM `core-site.xml` (or `CORE-SITE.XML_hadoop.proxyuser.hadoop.*` on the OM container) so OM accepts proxied RPC calls from HttpFS
+```bash
+HTTPFS-SITE.XML_httpfs.proxyuser.hue.hosts=*
+HTTPFS-SITE.XML_httpfs.proxyuser.hue.groups=*
+```
+
+HttpFS runs as the `hadoop` OS user. WebHDFS curl checks that pass `user.name=hadoop` (or another proxy user) also require:
+
+- `HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.hosts` and `HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.groups` on the HttpFS container
+- `CORE-SITE.XML_hadoop.proxyuser.hadoop.hosts` and `CORE-SITE.XML_hadoop.proxyuser.hadoop.groups` on the OM container so OM accepts proxied RPC calls from HttpFS
 
 ### Verify HttpFS with curl
 
@@ -204,7 +211,8 @@ The bundled `static/compose/hue-ozone/hue.ini` already disables HDFS and YARN fo
 
 ### Permission denied / impersonation errors
 
-- Verify `httpfs.proxyuser.<hue_user>.hosts` and `httpfs.proxyuser.<hue_user>.groups` in `httpfs-site.xml`.
+- Verify `httpfs.proxyuser.<hue_user>.hosts` and `httpfs.proxyuser.<hue_user>.groups` in **`httpfs-site.xml`** (on Docker Compose, use `HTTPFS-SITE.XML_httpfs.proxyuser.<hue_user>.*` on the HttpFS container — not `CORE-SITE.XML_`).
+- If Hue reports `User: hue is not allowed to impersonate admin`, HttpFS is missing or not reading the Hue proxy-user settings; recreate the HttpFS container after fixing `httpfs-site.xml`.
 - Ensure the **end user** (not only the Hue service user) has Ozone ACLs on the target path.
 - Confirm the user's Hue group has `filebrowser.ofs_access`.
 

@@ -106,10 +106,10 @@ services:
     environment:
       <<: *common-config
       CORE-SITE.XML_fs.defaultFS: ofs://om
-      CORE-SITE.XML_httpfs.proxyuser.hadoop.hosts: "*"
-      CORE-SITE.XML_httpfs.proxyuser.hadoop.groups: "*"
-      CORE-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
-      CORE-SITE.XML_httpfs.proxyuser.hue.groups: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.hosts: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hadoop.groups: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hue.hosts: "*"
+      HTTPFS-SITE.XML_httpfs.proxyuser.hue.groups: "*"
 
   postgres:
     image: postgres:15-alpine
