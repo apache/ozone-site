@@ -31,6 +31,8 @@ docker compose up -d --scale datanode=3
 
 Hue listens on `http://localhost:8888` (default login: `admin` / `admin`). The stack includes a **Postgres** service so Hue persists users and avoids embedded-DB issues during local testing.
 
+In the Hue sidebar, open **Ozone** (not **Files**). **Files** is the HDFS browser and is disabled in this stack because there is no NameNode.
+
 ## Configure HttpFS
 
 Ensure the HttpFS gateway is running and reachable at `http(s)://<httpfs-host>:<port>/webhdfs/v1`.
@@ -102,6 +104,17 @@ name=hue
 [[[default]]]
 fs_defaultfs=ofs://om
 webhdfs_url=http://httpfs:14000/webhdfs/v1
+nice_name=Ozone
+
+[hadoop]
+# Disable HDFS/YARN defaults; this stack uses Ozone only.
+[[hdfs_clusters]]
+[[[default]]]
+is_enabled=false
+
+[[yarn_clusters]]
+[[[default]]]
+is_enabled=false
 ```
 
 - **`[[database]]`**: Optional for production CDP deployments; required in the bundled `hue-ozone` compose stack so Hue persists users in Postgres instead of an embedded database.
@@ -162,6 +175,19 @@ Hue supports browsing Ozone through HttpFS, but some operations are limited. See
 - **OBS**: Object Store buckets use a flat key namespace. Hue File Browser is intended for filesystem semantics over HttpFS; use FSO buckets for directory-oriented browsing.
 
 ## Troubleshooting
+
+### HDFS "Files" shows `/user/admin` or port 50070 errors
+
+Hue ships with a default **HDFS** File Browser that points at `localhost:50070`. In an Ozone-only deployment there is no NameNode, so **Files** fails with connection refused. Use the **Ozone** entry in the left sidebar instead, or disable HDFS in `hue.ini`:
+
+```ini
+[hadoop]
+[[hdfs_clusters]]
+[[[default]]]
+is_enabled=false
+```
+
+The bundled `static/compose/hue-ozone/hue.ini` already disables HDFS and YARN for this reason.
 
 ### Cannot connect / "Could not connect to WebHDFS"
 

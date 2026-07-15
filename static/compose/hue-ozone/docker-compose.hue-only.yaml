@@ -40,8 +40,8 @@ services:
       retries: 5
 
   hue:
-    # Pin 4.11.0: gethue/hue:latest adds Polars and segfaults under amd64 QEMU on Apple Silicon.
-    image: gethue/hue:4.11.0
+    # 4.11.0 lacks Ozone File Browser; latest segfaults on Apple Silicon QEMU.
+    image: gethue/hue:20250101-140101
     platform: linux/amd64
     hostname: hue
     ports:
