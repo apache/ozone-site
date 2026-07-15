@@ -23,11 +23,16 @@
 #
 # Usage:
 #   docker compose up -d --scale datanode=3
+#   ./init-demo-data.sh
 #   open http://localhost:8888  (default login: admin / admin)
 #
+# init-demo-data.sh creates huevol/huebucket owned by admin so the default
+# Hue login can list them at ofs://om. WebHDFS MKDIRS alone creates volumes
+# owned by the request user, which other Hue users cannot see at the root.
+#
 # Verify HttpFS before Hue:
-#   curl -i -X PUT "http://localhost:14000/webhdfs/v1/huevol?op=MKDIRS&user.name=hdfs"
-#   curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=hdfs"
+#   curl -i "http://localhost:14000/webhdfs/v1/?op=LISTSTATUS&user.name=admin"
+#   curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=admin"
 
 x-image:
   &image

@@ -27,9 +27,12 @@ For an all-in-one **Hue + Ozone** verification stack (HttpFS, Hue, and a Postgre
 ```bash
 cd static/compose/hue-ozone
 docker compose up -d --scale datanode=3
+./init-demo-data.sh
 ```
 
 Hue listens on `http://localhost:8888` (default login: `admin` / `admin`). The stack includes a **Postgres** service so Hue persists users and avoids embedded-DB issues during local testing.
+
+Run `./init-demo-data.sh` after the cluster starts. It creates `huevol` / `huevol/huebucket` owned by `admin` so the default Hue login can see them at `ofs://om`. WebHDFS `MKDIRS` alone creates volumes owned by the WebHDFS user (`hue`, `hdfs`, etc.); other Hue users see an empty Ozone root until they have **LIST** access on those volumes.
 
 In the Hue sidebar, open **Ozone** (not **Files**). **Files** is the HDFS browser and is disabled in this stack because there is no NameNode.
 
@@ -75,15 +78,20 @@ HttpFS runs as the `hadoop` OS user. WebHDFS curl checks that pass `user.name=ha
 Before configuring Hue, confirm WebHDFS works against your HttpFS gateway:
 
 ```bash
-# Create a volume
-curl -i -X PUT "http://localhost:14000/webhdfs/v1/huevol?op=MKDIRS&user.name=hdfs"
-
-# Create a bucket
-curl -i -X PUT "http://localhost:14000/webhdfs/v1/huevol/huebucket?op=MKDIRS&user.name=hdfs"
-
-# List the bucket
-curl -i "http://localhost:14000/webhdfs/v1/huevol/huebucket?op=LISTSTATUS&user.name=hdfs"
+# After ./init-demo-data.sh in static/compose/hue-ozone (creates admin-owned paths)
+curl -i "http://localhost:14000/webhdfs/v1/?op=LISTSTATUS&user.name=admin"
+curl -i "http://localhost:14000/webhdfs/v1/huevol?op=LISTSTATUS&user.name=admin"
+curl -i "http://localhost:14000/webhdfs/v1/huevol/huebucket?op=LISTSTATUS&user.name=admin"
 ```
+
+To create paths manually with the Ozone shell (recommended so you control volume owner and bucket layout):
+
+```bash
+docker compose exec om ozone sh volume create /huevol -u admin
+docker compose exec om ozone sh bucket create /huevol/huebucket --layout fso
+```
+
+WebHDFS `MKDIRS` can also create volumes and buckets, but the volume owner is the `user.name` in the request. Hue impersonates the logged-in user, so a volume created as `user.name=hue` is not listed at `ofs://om` for the `admin` Hue account unless `admin` has **LIST** ACLs on that volume.
 
 Additional examples are in [HttpFS Gateway](../client-interfaces/httpfs#getting-started).
 
@@ -208,6 +216,12 @@ The bundled `static/compose/hue-ozone/hue.ini` already disables HDFS and YARN fo
 - Verify HttpFS Kerberos principal and keytab configuration.
 - Set `security_enabled=true` in the `[[[default]]]` Ozone block when HttpFS uses SPNEGO.
 - For TLS, set `ssl_cert_ca_verify` and provide CA certificates as required.
+
+### Ozone File Browser is empty at `ofs://om`
+
+- Hue lists volumes visible to the **logged-in Hue user** (HttpFS `doas`). Volumes created with `user.name=hue` or `user.name=hdfs` are owned by that user and do not appear at the root for `admin` unless `admin` has **LIST** ACLs on the volume.
+- In `static/compose/hue-ozone`, run `./init-demo-data.sh` after `docker compose up` to recreate `huevol` / `huebucket` owned by `admin`.
+- Grant the Hue user **LIST** (or **ALL**) on the volume with `ozone sh volume setacl`, or create the volume with `ozone sh volume create /vol -u <hue-user>`.
 
 ### Permission denied / impersonation errors
 
