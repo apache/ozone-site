@@ -331,6 +331,11 @@ const config = {
                 to: 'docs',
               },
               {
+                label: 'Docs 2.1.0 (Archived)',
+                href: '/docs/2.1.0/',
+		target: '_blank'
+              },
+              {
                 label: 'Docs 2.0.0 (Archived)',
                 href: '/docs/2.0.0/',
 		target: '_blank'
