@@ -42,7 +42,7 @@ The source Datanode streams the tarball to the destination via gRPC:
 - Establishes gRPC stream connection
 - Streams data in chunks via `SendContainerRequest` messages
 - Destination writes chunks to temporary file in the temp dir of the volume chosen: `<volume-root>/tmp/container-copy/`.
-  That way, Datanode parallelizes container upload, and does not block on the system root drive.
+  That way, Datanode parallelizes container transfer, and does not block on the system root drive.
 
 Before receiving, the destination selects a volume, **reserves space (2x container size)** to accommodate both the tarball and the extracted files, and creates the temporary directory.
 
@@ -74,7 +74,7 @@ Import progress is tracked to prevent concurrent imports. If import fails or con
 
 After successful import, all temporary files are cleaned up:
 
-1. **Delete Tarball**: The downloaded tarball file is deleted from the temporary directory
+1. **Delete Tarball**: The uploaded tarball file is deleted from the temporary directory
 2. **Release Reserved Space**: The reserved space on the volume is released
 3. **Cleanup on Failure**: If any step fails, temporary files are deleted and reserved space is released
 
