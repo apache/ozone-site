@@ -11,7 +11,7 @@ tags: [Ozone, S3, concurrency, conditional-requests]
 Apache Ozone will support conditional `PutObject`, `GetObject`, `HeadObject`, `CopyObject`, and `CompleteMultipartUpload` in the upcoming [2.2 release](https://github.com/apache/ozone/releases/tag/ozone-2.2.0-RC0) (RC0 is currently under a [vote](https://lists.apache.org/thread/gz567ljydh4ht63h6c9pjfclrbrrr9z7)), and will add conditional `DeleteObject` and `DeleteObjects` support in 2.3.
 :::
 
-More database systems are moving their underlying storage to S3 in shared-everything architectures to reduce cost, dependencies, and operational complexity. In the Hadoop 🐘 era, we typically used ZooKeeper and HDFS as the control plane and data plane. Modern systems are moving the control plane to self-managed consensus groups or RDBMS-backed catalogs, while moving the data plane onto AWS S3 or S3-compatible storage.
+An increasing number of database systems are moving storage to S3 in shared-everything architectures to reduce cost, dependencies, and operational complexity. In the Hadoop 🐘 era, we typically used ZooKeeper and HDFS as the control plane and data plane. Modern systems are moving the control plane to self-managed consensus groups or RDBMS-backed catalogs, while moving the data plane onto AWS S3 or S3-compatible storage.
 
 Shared-everything systems usually have two pain points: communication overhead and coordination. To reduce write latency, systems often use inline data writes, background flush, and LSN-based union reads. To reduce read latency, they add multi-layer caches, such as self-managed or OS-managed in-memory caches and on-disk caches. Coordination is harder: multiple clients may read the same metadata, make decisions locally, and then try to update the same object. Without a storage-level compare-and-set primitive, applications often need an external lock service, catalog database, or consensus system just to avoid lost updates.
 
@@ -35,7 +35,7 @@ You can use conditional requests to add preconditions to your S3 operations. To 
 Source: [Amazon S3 conditional requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html)
 :::
 
-Conditional requests allow atomic CAS operations on target objects: clients can coordinate through S3 objects instead of asking external arbiters. Using S3 conditional requests is like moving part of the coordination logic into storage.
+Conditional requests allow atomic CAS operations on target objects: clients can coordinate through S3 objects instead of relying on external arbiters. Using S3 conditional requests is like moving part of the coordination logic into storage.
 
 AWS also noted that conditional requests [let customers remove workaround code and simplify their systems](https://www.allthingsdistributed.com/2025/03/in-s3-simplicity-is-table-stakes.html#:~:text=When%20we%20moved%20S3%20to,similar%20reaction). The same storage-level feature also [powers S3 Tables](https://www.allthingsdistributed.com/2025/03/in-s3-simplicity-is-table-stakes.html#:~:text=they%20involve%20a%20complex,storage%2Dlevel%20features), which manages tabular data on S3.
 
@@ -64,11 +64,11 @@ Common conditional request patterns include:
   - Use `If-Match: *` to delete only if the object exists.
   - Use case: preventing a client from deleting an object that another writer has already replaced.
 
-For more advanced usage, let’s look at how modern systems use these APIs.
+To see this in practice, let’s look at how modern systems use these APIs.
 
 ## Application use cases
 
-So who exactly can use this?
+Who is this for?
 
 ### Dynamic AI model reloading
 
@@ -126,7 +126,7 @@ Leader election by itself is not enough. A paused old leader can come back and s
 
 The leader should periodically update the lock file it acquired to signal liveness. Other nodes can poll the lock and check whether the lock was released or expired by looking at `Last-Modified`, which S3 exposes as standard object metadata.
 
-### WAL write/get with OSWALD
+### WAL Writes and Reads with OSWALD
 
 OSWALD, the Object Storage Write-Ahead Log Device, shows how to build a WAL directly on object storage primitives. The design has three object types: a manifest object, snapshots, and log chunks. The manifest tracks the latest checkpoint and garbage collection progress; chunks hold the log content.
 
@@ -136,11 +136,11 @@ Appending to the WAL can be done with conditional object creation. A writer crea
 
 *Figure 7. OSWALD uses manifest, snapshot, and chunk objects to build a WAL on object storage. Source: [OSWALD](https://github.com/nvartolomei/oswald).*
 
-Now let’s look at how Ozone keeps S3 conditional requests—the CAS primitive—fast.
+Now let’s look at how Ozone implements S3 conditional requests efficiently.
 
 ## Technical details
 
-To keep the performance overhead minimal, thanks to [Ivan](https://github.com/ivandika3)’s suggestion, we coalesce the “conditional flag” with the normal client-to-server RPC message, so no additional RPC round trip is introduced. This characteristic is a great match for the optimistic path of conditional requests.
+To keep performance overhead minimal—thanks to [Ivan](https://github.com/ivandika3)’s suggestion—we coalesce the “conditional flag” with the normal client-to-server RPC message, so no additional RPC round trip is introduced. This fits well with the optimistic concurrency path.
 
 Before diving into that coalescing optimization, let’s look at Ozone’s atomic rewrite work, which is the foundation reused by S3 conditional requests.
 
@@ -320,7 +320,7 @@ sequenceDiagram
 
 #### CompleteMultipartUpload
 
-`CompleteMultipartUpload` compares the caller’s expected ETag or create-if-absent condition with the current database record on the server side.
+`CompleteMultipartUpload` compares the caller’s expected ETag or create-if-absent condition with the committed key state.
 
 Related patch: [apache/ozone#10164](https://github.com/apache/ozone/pull/10164). Thanks [@YutaLin](https://github.com/YutaLin).
 
@@ -351,7 +351,7 @@ sequenceDiagram
 
 #### DeleteObject
 
-`DeleteObject` compares the caller’s expected ETag with the current database record on the server side before writing the delete tombstone.
+`DeleteObject` compares the caller’s expected ETag with the committed key state before writing the delete tombstone.
 
 Related patch: [apache/ozone#10511](https://github.com/apache/ozone/pull/10511)
 
@@ -398,7 +398,7 @@ In this setup, conditional create was effectively the same as normal create: the
 
 Object storage has quietly crossed a line. It is no longer just where systems park their bytes.  It has become the place where they coordinate. Metadata catalogs, write-ahead logs, leader election, job queues, model caches: all of these need a single point of truth about “who wrote last,” and increasingly they want to ask that question of the storage layer itself.
 
-By bringing native S3 conditional requests to Apache Ozone, and doing it without a single extra RPC on the happy path. We turn Ozone into a first-class substrate for optimistic concurrency control. Applications can compare-and-swap directly against the objects they already store, and retire the external lock services, catalog databases, and consensus clusters they once needed just to avoid a lost update.
+By bringing native S3 conditional requests to Apache Ozone without adding an extra RPC on the happy path, we turn Ozone into a first-class substrate for optimistic concurrency control. Applications can compare-and-swap directly against the objects they already store, and retire the external lock services, catalog databases, and consensus clusters they once needed just to avoid a lost update.
 
 The result is a simpler architecture: fewer moving parts, one less thing to operate, and coordination that lives exactly where the data does.
 
