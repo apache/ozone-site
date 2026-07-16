@@ -13,8 +13,8 @@ These release names are based on US national parks, and for every minor release,
 
 | Release | Tag | Features | Exit criteria |
 | :--- | :--- | :--- | :--- |
-| 3.0.0 | | [HDDS-11415](https://issues.apache.org/jira/browse/HDDS-11415) Leader Execution at Leader | |
-| 2.3.0 | Kenai Fjords | [HDDS-8342](https://issues.apache.org/jira/browse/HDDS-8342) S3 Lifecycle Configurations - Object Expiration<br/>[HDDS-13323](https://issues.apache.org/jira/browse/HDDS-13323) STS - temporary, limited-privilege credentials service | |
+| 3.0.0 | | [HDDS-11415](https://issues.apache.org/jira/browse/HDDS-11415) Leader Execution at Leader<br/>[HDDS-14496](https://issues.apache.org/jira/browse/HDDS-14496) Zero Downtime Upgrade<br/>[HDDS-15763](https://issues.apache.org/jira/browse/HDDS-15763) Ozone IPv6 Support | |
+| 2.3.0 | Kenai Fjords | [HDDS-8342](https://issues.apache.org/jira/browse/HDDS-8342) S3 Lifecycle Configurations - Object Expiration<br/>[HDDS-13323](https://issues.apache.org/jira/browse/HDDS-13323) STS - temporary, limited-privilege credentials service<br/>[HDDS-10685](https://issues.apache.org/jira/browse/HDDS-10685) Short circuit read support in Ozone<br/>[HDDS-15672](https://issues.apache.org/jira/browse/HDDS-15672) Support Java 25<br/>[HDDS-14967](https://issues.apache.org/jira/browse/HDDS-14967) S3 Vector Support<br/>[HDDS-14893](https://issues.apache.org/jira/browse/HDDS-14893) Support single-node local S3 development | |
 | 2.0.1 | ? | Critical bugs fixed found after 2.0.0 | |
 
 ## Past Releases
