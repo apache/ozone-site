@@ -36,7 +36,6 @@ x-common-config:
   OZONE-SITE.XML_hdds.scm.safemode.healthy.pipeline.pct: "0"
   no_proxy: om,recon,scm,s3g,httpfs,knox-ldap,knox-gateway,localhost,127.0.0.1
 
-version: "3"
 services:
   datanode:
     <<: *image
@@ -90,12 +89,12 @@ services:
     environment:
       <<: *common-config
       CORE-SITE.XML_fs.defaultFS: ofs://om
-      CORE-SITE.XML_httpfs.proxyuser.knoxuser.hosts: "*"
-      CORE-SITE.XML_httpfs.proxyuser.knoxuser.groups: "*"
+    volumes:
+    - ./conf/httpfs-site.xml:/opt/hadoop/etc/hadoop/httpfs-site.xml:ro
     command: [ ozone, httpfs ]
 
   knox-ldap:
-    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-latest}
+    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-2.1.0}
     entrypoint: [ /bin/bash, -c ]
     command:
     - |
@@ -105,7 +104,7 @@ services:
     - 33389:33389
 
   knox-gateway:
-    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-latest}
+    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-2.1.0}
     depends_on:
     - knox-ldap
     - om

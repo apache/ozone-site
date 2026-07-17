@@ -4,7 +4,7 @@ sidebar_label: Apache Knox
 
 # Configuring Apache Knox
 
-[Apache Knox](https://knox.apache.org/) is a reverse proxy gateway for Hadoop ecosystem REST APIs and web UIs. Knox 2.0.0 and later can proxy Ozone services, giving users a single HTTPS entry point while hiding internal cluster hostnames and ports.
+[Apache Knox](https://knox.apache.org/) is a reverse proxy gateway for Hadoop ecosystem REST APIs and web UIs. Knox 2.0.0 and later can proxy Ozone web UIs (OM, SCM, and Recon). Knox **2.1.0 or later** is required to proxy HttpFS. Knox gives users a single HTTPS entry point while hiding internal cluster hostnames and ports.
 
 Ozone integration was added in [KNOX-2833](https://issues.apache.org/jira/browse/KNOX-2833) (OM, SCM, and Recon UIs) and extended in [KNOX-2914](https://issues.apache.org/jira/browse/KNOX-2914) (HttpFS). Knox does **not** proxy the S3 Gateway today; use a load balancer or direct S3G access instead.
 
@@ -19,7 +19,8 @@ Ozone integration was added in [KNOX-2833](https://issues.apache.org/jira/browse
 
 ## Prerequisites
 
-- Apache Knox **2.0.0 or later** installed and running.
+- Apache Knox **2.0.0 or later** installed and running to proxy Ozone web UIs.
+- Apache Knox **2.1.0 or later** if you proxy HttpFS through Knox.
 - Ozone HTTP endpoints reachable from the Knox host (`ozone.om.http-address`, `ozone.scm.http-address`, `ozone.recon.http-address`, and HttpFS on port 14000 by default).
 - For production: configure TLS on Knox and Kerberos SPNEGO on Ozone HTTP services. See [HTTPS / SPNEGO](./https) and [Kerberos](./kerberos).
 
@@ -130,7 +131,7 @@ For Kerberized Ozone clusters:
 
 ### HttpFS proxy user
 
-When Knox proxies HttpFS, configure a proxy user on the HttpFS service so Knox can impersonate end users. Add the following to `httpfs-site.xml` (or the equivalent `CORE-SITE.XML_` environment variables in Docker):
+When Knox proxies HttpFS, configure a proxy user on the HttpFS service so Knox can impersonate end users. Add the following to `httpfs-site.xml`:
 
 ```xml
 <property>
@@ -187,10 +188,10 @@ Access HttpFS through Knox using the `/httpfs/` path prefix:
 
 ```bash
 curl -ik -u guest:guest-password \
-  "https://localhost:8443/gateway/ozone/httpfs/v1/?op=LISTSTATUS&user.name=hadoop"
+  "https://<knox-host>:8443/gateway/ozone/httpfs/v1/?op=LISTSTATUS&user.name=hadoop"
 ```
 
-The `user.name` parameter specifies the Ozone user to impersonate. Knox authenticates the caller; HttpFS performs the operation as the proxied user.
+Knox authenticates the caller and rewrites `user.name` to the authenticated Knox user (for example, `guest` in the demo topology). HttpFS performs the operation as that proxied user.
 
 ## Docker quickstart
 
@@ -203,6 +204,8 @@ mkdir knox-ozone && cd knox-ozone
 curl -O https://raw.githubusercontent.com/apache/ozone-site/master/static/compose/knox-ozone/docker-compose.yaml
 curl -O https://raw.githubusercontent.com/apache/ozone-site/master/static/compose/knox-ozone/Dockerfile
 mkdir -p conf/topologies
+curl -o conf/httpfs-site.xml \
+  https://raw.githubusercontent.com/apache/ozone-site/master/static/compose/knox-ozone/conf/httpfs-site.xml
 curl -o conf/topologies/ozone.xml \
   https://raw.githubusercontent.com/apache/ozone-site/master/static/compose/knox-ozone/conf/topologies/ozone.xml
 curl -o conf/topologies/knoxsso.xml \
@@ -215,7 +218,7 @@ curl -o conf/topologies/knoxsso.xml \
 docker compose up -d --scale datanode=1
 ```
 
-This starts Ozone (SCM, OM, Recon, S3G, HttpFS, one Datanode), Knox demo LDAP, and the Knox gateway with the `ozone` and `knoxsso` topologies mounted. The `knoxsso` topology is required for browser login — it must point LDAP at the `knox-ldap` service hostname, not `localhost`.
+This starts Ozone (SCM, OM, Recon, S3G, HttpFS, one Datanode), Knox demo LDAP, and the Knox gateway with the `ozone` and `knoxsso` topologies mounted. The compose stack mounts `conf/httpfs-site.xml` on the HttpFS service for Knox proxy-user settings. The `knoxsso` topology is required for browser login — it must point LDAP at the `knox-ldap` service hostname, not `localhost`.
 
 ### Verify access
 

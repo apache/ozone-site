@@ -15,7 +15,7 @@
 
 # Optional image that bakes the Ozone topology into the official Knox gateway
 # image. The default docker-compose.yaml mounts the topology instead.
-FROM apache/knox:latest
+FROM apache/knox:2.1.0
 
 COPY conf/topologies/ozone.xml /home/knox/knox/conf/topologies/ozone.xml
 COPY conf/topologies/knoxsso.xml /home/knox/knox/conf/topologies/knoxsso.xml
