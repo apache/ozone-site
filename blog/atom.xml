@@ -2,10 +2,363 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ozone.apache.org/blog</id>
     <title>Apache Ozone Blog</title>
-    <updated>2026-01-30T00:00:00.000Z</updated>
+    <updated>2026-07-08T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ozone.apache.org/blog"/>
     <subtitle>Apache Ozone Blog</subtitle>
+    <entry>
+        <title type="html"><![CDATA[Fast Optimistic Concurrency Control with Apache Ozone S3 Conditional Requests]]></title>
+        <id>https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request</id>
+        <link href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request"/>
+        <updated>2026-07-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Apache Ozone will support conditional PutObject, GetObject, HeadObject, CopyObject, and CompleteMultipartUpload in the upcoming 2.2 release (RC0 is currently under a vote), and will add conditional DeleteObject and DeleteObjects support in 2.3.]]></summary>
+        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_KWNG alert alert--secondary"><div class="admonitionHeading_KbNW"><span class="admonitionIcon_mAjL"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_oTFZ"><p>Apache Ozone will support conditional <code>PutObject</code>, <code>GetObject</code>, <code>HeadObject</code>, <code>CopyObject</code>, and <code>CompleteMultipartUpload</code> in the upcoming <a href="https://github.com/apache/ozone/releases/tag/ozone-2.2.0-RC0" target="_blank" rel="noopener noreferrer" class="">2.2 release</a> (RC0 is currently under a <a href="https://lists.apache.org/thread/gz567ljydh4ht63h6c9pjfclrbrrr9z7" target="_blank" rel="noopener noreferrer" class="">vote</a>), and will add conditional <code>DeleteObject</code> and <code>DeleteObjects</code> support in 2.3.</p></div></div>
+<p>An increasing number of database systems are moving storage to S3 in shared-everything architectures to reduce cost, dependencies, and operational complexity. In the Hadoop 🐘 era, we typically used ZooKeeper and HDFS as the control plane and data plane. Modern systems are moving the control plane to self-managed consensus groups or RDBMS-backed catalogs, while moving the data plane onto AWS S3 or S3-compatible storage.</p>
+<p>Shared-everything systems usually have two pain points: communication overhead and coordination. To reduce write latency, systems often use inline data writes, background flush, and LSN-based union reads. To reduce read latency, they add multi-layer caches, such as self-managed or OS-managed in-memory caches and on-disk caches. Coordination is harder: multiple clients may read the same metadata, make decisions locally, and then try to update the same object. Without a storage-level compare-and-set primitive, applications often need an external lock service, catalog database, or consensus system just to avoid lost updates.</p>
+<p>Because Apache Ozone exposes S3, HCFS, HttpFS, and Java APIs as part of its multi-protocol story, conditional requests have become increasingly important. This work is now nearly complete.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="tldr">TL;DR<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#tldr" class="hash-link" aria-label="Direct link to TL;DR" title="Direct link to TL;DR" translate="no">​</a></h2>
+<p>Apache Ozone is adding S3 conditional request support for operations such as <code>PutObject</code>, <code>GetObject</code>, <code>HeadObject</code>, <code>CopyObject</code>, <code>DeleteObject</code>, and <code>CompleteMultipartUpload</code>. This allows applications to perform an operation only when the object state matches expected conditions, such as “create this object only if it does not already exist” or “overwrite this object only if the current ETag still matches.”</p>
+<p>Under the hood, Ozone reuses its atomic rewrite path. For conditional writes, the S3 Gateway passes the caller’s expected ETag to Ozone Manager (OM). OM validates it near the metadata write path, stores the matched generation in the open key, and revalidates it during commit. This keeps the ETag check close to the place where the object state changes, so Ozone can provide a distributed CAS-style primitive without adding an extra gateway-side metadata read on the successful path.</p>
+<p>This unlocks safer optimistic concurrency control for data systems built on top of object storage, including metadata catalogs, WAL-like workflows, leader-election patterns, queues, model-serving caches, and object-store-backed databases.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="what-is-an-s3-conditional-request">What is an S3 conditional request?<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#what-is-an-s3-conditional-request" class="hash-link" aria-label="Direct link to What is an S3 conditional request?" title="Direct link to What is an S3 conditional request?" translate="no">​</a></h2>
+<div class="theme-admonition theme-admonition-note admonition_KWNG alert alert--secondary"><div class="admonitionHeading_KbNW"><span class="admonitionIcon_mAjL"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_oTFZ"><p>You can use conditional requests to add preconditions to your S3 operations. To use conditional requests, you add an additional header to your Amazon S3 API operation. This header specifies a condition that, if not met, will result in the S3 operation failing.</p><p>Source: <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html" target="_blank" rel="noopener noreferrer" class="">Amazon S3 conditional requests</a></p></div></div>
+<p>Conditional requests allow atomic CAS operations on target objects: clients can coordinate through S3 objects instead of relying on external arbiters. Using S3 conditional requests is like moving part of the coordination logic into storage.</p>
+<p>AWS also noted that conditional requests <a href="https://www.allthingsdistributed.com/2025/03/in-s3-simplicity-is-table-stakes.html#:~:text=When%20we%20moved%20S3%20to,similar%20reaction" target="_blank" rel="noopener noreferrer" class="">let customers remove workaround code and simplify their systems</a>. The same storage-level feature also <a href="https://www.allthingsdistributed.com/2025/03/in-s3-simplicity-is-table-stakes.html#:~:text=they%20involve%20a%20complex,storage%2Dlevel%20features" target="_blank" rel="noopener noreferrer" class="">powers S3 Tables</a>, which manages tabular data on S3.</p>
+<p>Common conditional request patterns include:</p>
+<ul>
+<li class=""><strong>Conditional <code>PUT</code></strong>
+<ul>
+<li class="">Use <code>If-None-Match: *</code> to create an object only if it does not already exist.</li>
+<li class="">Use <code>If-Match: &lt;etag&gt;</code> to overwrite an object only if the current ETag is still the one the client observed.</li>
+<li class="">Use case: metadata commits, manifest updates, distributed lock files, and create-only log chunks.</li>
+</ul>
+</li>
+<li class=""><strong>Conditional <code>GET</code></strong>
+<ul>
+<li class="">Use <code>If-None-Match: &lt;etag&gt;</code> or date-based conditions to download the object only when it has changed.</li>
+<li class="">Use case: cache validation, dynamic model reloading, config refresh, and avoiding repeated downloads of large objects.</li>
+</ul>
+</li>
+<li class=""><strong>Conditional <code>HEAD</code></strong>
+<ul>
+<li class="">Same idea as conditional <code>GET</code>, but metadata-only.</li>
+<li class="">Use case: checking whether an object is still current without fetching the body.</li>
+</ul>
+</li>
+<li class=""><strong>Conditional <code>POST</code> / <code>CompleteMultipartUpload</code></strong>
+<ul>
+<li class="">Multipart upload writes data in parts, but the destination object becomes visible only when <code>CompleteMultipartUpload</code> succeeds.</li>
+<li class="">Conditional completion lets the client say: “complete this large object only if the destination still does not exist” or “only if the destination still matches this ETag.”</li>
+<li class="">Use case: large object writes where the final commit still needs create-only or compare-and-swap semantics.</li>
+</ul>
+</li>
+<li class=""><strong>Conditional <code>COPY</code></strong>
+<ul>
+<li class="">Source-side conditions make sure the source object is the version the client expects.</li>
+<li class="">Destination-side conditions make sure the copy does not overwrite unexpected data.</li>
+<li class="">Use case: snapshot promotion, clone/copy workflows, and metadata copy where both source and destination need validation.</li>
+</ul>
+</li>
+<li class=""><strong>Conditional <code>DELETE</code></strong>
+<ul>
+<li class="">Use <code>If-Match: &lt;etag&gt;</code> to delete only if the object is still unchanged.</li>
+<li class="">Use <code>If-Match: *</code> to delete only if the object exists.</li>
+<li class="">Use case: preventing a client from deleting an object that another writer has already replaced.</li>
+</ul>
+</li>
+</ul>
+<p>To see this in practice, let’s look at how modern systems use these APIs.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="application-use-cases">Application use cases<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#application-use-cases" class="hash-link" aria-label="Direct link to Application use cases" title="Direct link to Application use cases" translate="no">​</a></h2>
+<p>Who is this for?</p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="dynamic-ai-model-reloading">Dynamic AI model reloading<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#dynamic-ai-model-reloading" class="hash-link" aria-label="Direct link to Dynamic AI model reloading" title="Direct link to Dynamic AI model reloading" translate="no">​</a></h3>
+<p>Advanced inference servers often cache massive model weights on local NVMe drives. To keep these models updated without constantly re-downloading them every few minutes, they can use S3 conditional requests. For example, the inference server can send a <code>GET</code> request with <code>If-None-Match</code> and the ETag of the model it already has.</p>
+<p>If the ETag still matches, Ozone can return <code>304 Not Modified</code>, so the server keeps using the local cached model and skips the download. If the ETag does not match, the model has been updated, so the server downloads the newest model and stores the new ETag for the next check. Thanks to <a href="https://github.com/amaliujia" target="_blank" rel="noopener noreferrer" class="">@amaliujia</a> for the example.</p>
+<p><img decoding="async" loading="lazy" alt="Dynamic model reloading with S3 ETag validation" src="https://ozone.apache.org/assets/images/model-reload-0ac1f0d6cfaf6d71da45a08317ea8560.png" width="1821" height="2048" class="img_xxiv"></p>
+<p><em>Figure 1. An inference server uses <code>If-None-Match</code> to avoid re-downloading unchanged model weights.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="turbopuffer">Turbopuffer<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#turbopuffer" class="hash-link" aria-label="Direct link to Turbopuffer" title="Direct link to Turbopuffer" translate="no">​</a></h3>
+<p>Turbopuffer’s object-storage queue is a great example of using a small metadata object to coordinate larger data work. In the simple version, a pusher reads <code>queue.json</code>, appends a job, and writes it back with CAS. A worker does the same thing to claim the next job. The CAS write only succeeds if <code>queue.json</code> has not changed since the client read it; otherwise the client reads the new queue and retries.</p>
+<p>This design is simple, but many clients can contend on one queue object. Turbopuffer improves it by batching updates with group commit, then moving the object-storage interaction behind a stateless broker. Clients talk to the broker, the broker performs one group-commit loop, and it only acknowledges work after the updated queue is durably committed.</p>
+<p><img decoding="async" loading="lazy" alt="Object-storage queue coordinated through compare-and-swap updates" src="https://ozone.apache.org/assets/images/object-queue-67ca82cff7a9087a818c7b36ab7b46e9.png" width="1476" height="894" class="img_xxiv"></p>
+<p><em>Figure 2. Turbopuffer’s object-storage queue batches contended CAS updates behind a broker. Source: <a href="https://turbopuffer.com/blog/object-storage-queue" target="_blank" rel="noopener noreferrer" class="">Turbopuffer object storage queue</a>.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="slatedb">SlateDB<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#slatedb" class="hash-link" aria-label="Direct link to SlateDB" title="Direct link to SlateDB" translate="no">​</a></h3>
+<p>SlateDB is an embedded LSM-tree storage engine built for object storage. It stores durable state as object-store files: WAL SSTs, compacted SSTs, and manifest files. Like other LSM engines, it relies on immutable files for most data movement, but it still needs a safe coordination point to decide which writer owns the next part of the log.</p>
+<p>Conditional object creation is useful here because SlateDB can use object names as fencing points. Instead of overwriting a shared file, the writer creates the next manifest or WAL object with <code>If-None-Match: *</code>. The write succeeds only if that object does not already exist.</p>
+<p><img decoding="async" loading="lazy" alt="SlateDB writer claiming the next object with create-if-absent semantics" src="https://ozone.apache.org/assets/images/slatedb-writer-70589494e44a1e196368304cb372d58c.png" width="950" height="2048" class="img_xxiv"></p>
+<p><em>Figure 3. A SlateDB writer uses conditional object creation as a fencing point for object-store state.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="iceberg-file-catalog">Iceberg file catalog<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#iceberg-file-catalog" class="hash-link" aria-label="Direct link to Iceberg file catalog" title="Direct link to Iceberg file catalog" translate="no">​</a></h3>
+<p>Iceberg is another natural fit for this style of coordination. Iceberg table state is maintained in metadata files, and each commit creates a new metadata file. The commit succeeds by atomically swapping the table metadata pointer from the old metadata file to the new one. If another writer commits first, the swap fails, and the writer retries against the new table state.</p>
+<p>For an Iceberg-style file catalog on object storage, conditional requests can provide the missing compare-and-swap primitive. The catalog can store a small pointer object, such as <code>current.json</code>, that points to the latest table metadata file. A writer first writes the new metadata file using a unique name, then updates the current metadata pointer only if its ETag still matches the ETag that the writer read.</p>
+<p><img decoding="async" loading="lazy" alt="Iceberg catalog pointer update protected by ETag comparison" src="https://ozone.apache.org/assets/images/iceberg-catalog-17f88ef0821231fac4b8e15657d61d1e.png" width="2048" height="1990" class="img_xxiv"></p>
+<p><em>Figure 4. An Iceberg-style file catalog updates a small metadata pointer only if its ETag still matches.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="leader-election">Leader election<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#leader-election" class="hash-link" aria-label="Direct link to Leader election" title="Direct link to Leader election" translate="no">​</a></h3>
+<p>Leader election can also be built on top of conditional writes. The basic idea is to have all nodes compete to create the next lock file, such as <code>lock-0000000002.json</code>, using <code>If-None-Match: *</code>. Only one node can create the file successfully. That node becomes the leader for that epoch; the others receive a precondition failure and keep watching.</p>
+<p><img decoding="async" loading="lazy" alt="Leader election through conditional lock-file creation" src="https://ozone.apache.org/assets/images/leader-election-8f6f0c15a77234e9ddb96853874210f7.png" width="2048" height="1182" class="img_xxiv"></p>
+<p><em>Figure 5. Nodes compete to create the next epoch lock file; only one writer succeeds.</em></p>
+<p>Leader election by itself is not enough. A paused old leader can come back and still believe it owns the lock. This is the “zombie leader” problem. The fix is to use the leader epoch as a fencing token. Every request made by the leader includes the epoch, and downstream systems reject requests with an older epoch than the highest one they have already seen.</p>
+<p><img decoding="async" loading="lazy" alt="Fencing zombie leaders with monotonically increasing epochs" src="https://ozone.apache.org/assets/images/leader-fencing-a2a8b262b38d38579c6a24ea096e5ba9.png" width="1586" height="2048" class="img_xxiv"></p>
+<p><em>Figure 6. Epoch fencing prevents an old paused leader from writing after a newer leader takes over.</em></p>
+<p>The leader should periodically update the lock file it acquired to signal liveness. Other nodes can poll the lock and check whether the lock was released or expired by looking at <code>Last-Modified</code>, which S3 exposes as standard object metadata.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="wal-writes-and-reads-with-oswald">WAL Writes and Reads with OSWALD<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#wal-writes-and-reads-with-oswald" class="hash-link" aria-label="Direct link to WAL Writes and Reads with OSWALD" title="Direct link to WAL Writes and Reads with OSWALD" translate="no">​</a></h3>
+<p>OSWALD, the Object Storage Write-Ahead Log Device, shows how to build a WAL directly on object storage primitives. The design has three object types: a manifest object, snapshots, and log chunks. The manifest tracks the latest checkpoint and garbage collection progress; chunks hold the log content.</p>
+<p>Appending to the WAL can be done with conditional object creation. A writer creates the next chunk with <code>PUT If-None-Match</code>. If another writer already created that chunk for the same LSN, the write fails and the writer catches up by tailing the log. After creating a chunk, the writer also checks the manifest with <code>GET If-None-Match</code> to make sure garbage collection has not moved past its LSN before acknowledging the write.</p>
+<p><img decoding="async" loading="lazy" alt="OSWALD write-ahead log built on manifest, snapshot, and chunk objects" src="https://ozone.apache.org/assets/images/oswald-wal-b8d85d5a05ec555aa8fd7de2840643db.png" width="1126" height="746" class="img_xxiv"></p>
+<p><em>Figure 7. OSWALD uses manifest, snapshot, and chunk objects to build a WAL on object storage. Source: <a href="https://github.com/nvartolomei/oswald" target="_blank" rel="noopener noreferrer" class="">OSWALD</a>.</em></p>
+<p>Now let’s look at how Ozone implements S3 conditional requests efficiently.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="technical-details">Technical details<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#technical-details" class="hash-link" aria-label="Direct link to Technical details" title="Direct link to Technical details" translate="no">​</a></h2>
+<p>To keep performance overhead minimal—thanks to <a href="https://github.com/ivandika3" target="_blank" rel="noopener noreferrer" class="">Ivan</a>’s suggestion—we coalesce the “conditional flag” with the normal client-to-server RPC message, so no additional RPC round trip is introduced. This fits well with the optimistic concurrency path.</p>
+<p>Before diving into that coalescing optimization, let’s look at Ozone’s atomic rewrite work, which is the foundation reused by S3 conditional requests.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="atomic-rewrite">Atomic rewrite<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#atomic-rewrite" class="hash-link" aria-label="Direct link to Atomic rewrite" title="Direct link to Atomic rewrite" translate="no">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Atomic rewrite create and write phases" src="https://ozone.apache.org/assets/images/atomic-rewrite-create-fb40d4223489aa2c0bcd073e95409e18.png" width="2048" height="1730" class="img_xxiv"></p>
+<p><em>Figure 8. Atomic rewrite create and write phases.</em></p>
+<p>The client indicates the expected epoch of the target object in the key-creation request. After Ozone Manager receives the <code>createKey</code> request, it first compares the expected epoch with the live key in the key table. If they match, OM stores the expected epoch along with the open key record in the open key table.</p>
+<p>At this stage, two clients can both successfully create an open key, so they can both start streaming file data to the datanode pipeline. Once a client believes the file data write is finished, it starts committing the key.</p>
+<div class="theme-admonition theme-admonition-note admonition_KWNG alert alert--secondary"><div class="admonitionHeading_KbNW"><span class="admonitionIcon_mAjL"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_oTFZ"><p>The client ID in <code>/vol1/bucket1/key1/{client_id}</code> is generated by Ozone Manager. It is a unique, non-human-readable ID that binds to a single key-creation lifecycle. It is not a persistent client ID. “Session ID” would probably be a better name, but the diagram uses a meaningful ID for clarity.</p></div></div>
+<p>During the commit phase, Ozone Manager compares the expected epoch stored in the client’s open key record with the live key epoch in the key table in the same transaction. If they match, OM overwrites the live key with the open key. If they do not match, OM cleans up the open key table and returns an atomic rewrite failure for the concurrent conflict.</p>
+<p><img decoding="async" loading="lazy" alt="Atomic rewrite commit phase" src="https://ozone.apache.org/assets/images/atomic-rewrite-commit-7af41ff448a4514057fa54b03b203c1b.png" width="2048" height="847" class="img_xxiv"></p>
+<p><em>Figure 9. Atomic rewrite commit phase.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="coalescing-the-conditional-flag">Coalescing the conditional flag<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#coalescing-the-conditional-flag" class="hash-link" aria-label="Direct link to Coalescing the conditional flag" title="Direct link to Coalescing the conditional flag" translate="no">​</a></h3>
+<p>In normal workloads, and especially under optimistic concurrency control, the successful path is expected to be common. Therefore, we validate the key’s ETag metadata at the same time as the key-creation request. Instead of introducing an additional request to fetch the latest key epoch and then plumbing that epoch into the atomic rewrite path, we extend atomic rewrite so it can recognize the expected ETag sent from S3 Gateway, validate it, translate it to an expected epoch, and store that epoch in the open key table. This lets the atomic rewrite commit path stay untouched.</p>
+<blockquote>
+<p>For more information, see the discussion in <a href="https://github.com/apache/ozone/pull/9334#discussion_r2558578333" target="_blank" rel="noopener noreferrer" class="">apache/ozone#9334</a>.</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Coalescing S3 conditional headers into Ozone atomic rewrite metadata" src="https://ozone.apache.org/assets/images/conditional-flag-ed74491945e045237a2e8336a89ac625.png" width="2048" height="689" class="img_xxiv"></p>
+<p><em>Figure 10. Coalescing the conditional flag into the normal Ozone write path.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="implementation-by-api">Implementation by API<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#implementation-by-api" class="hash-link" aria-label="Direct link to Implementation by API" title="Direct link to Implementation by API" translate="no">​</a></h3>
+<p>The discussion, design, and patches are available in Apache Jira and GitHub:</p>
+<ul>
+<li class="">Epic ticket: <a href="https://issues.apache.org/jira/browse/HDDS-13117" target="_blank" rel="noopener noreferrer" class="">HDDS-13117</a></li>
+<li class="">Design: <a href="https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/s3-conditional-requests.md" target="_blank" rel="noopener noreferrer" class=""><code>s3-conditional-requests.md</code></a></li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="putobject">PutObject<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#putobject" class="hash-link" aria-label="Direct link to PutObject" title="Direct link to PutObject" translate="no">​</a></h4>
+<p>Ozone Manager enforces conditional writes using a two-phase validation process, returning specific HTTP error codes depending on when a state mismatch is detected.</p>
+<p>During the initial <code>createKey</code> request, if OM determines that the expected ETag already mismatches the current state of the key, it immediately rejects the request with <code>412 Precondition Failed</code>.</p>
+<p>If the initial check passes but a concurrent modification occurs during the upload, OM detects the discrepancy during the <code>commitKey</code> phase. By comparing the expected epoch stored in the open session against the live key record in the key table, OM identifies the concurrent update and returns <code>409 Conflict</code>.</p>
+<p>Related patches:</p>
+<ul>
+<li class=""><a href="https://github.com/apache/ozone/pull/10182" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10182</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10023" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10023</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/9815" target="_blank" rel="noopener noreferrer" class="">apache/ozone#9815</a></li>
+</ul>
+<h5 class="anchor anchorTargetStickyNavbar_Dk4v" id="if-none-match"><code>If-None-Match</code><a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#if-none-match" class="hash-link" aria-label="Direct link to if-none-match" title="Direct link to if-none-match" translate="no">​</a></h5>
+<p>We extend the existing atomic rewrite path to support the “generation must match <code>0</code>” condition, which matches GCS semantics. <code>If-None-Match: *</code> then reuses this create-if-absent path.</p>
+<!-- -->
+<p><em>Figure 11. <code>PUT If-None-Match</code> maps create-if-absent semantics to Ozone’s generation-match path.</em></p>
+<h5 class="anchor anchorTargetStickyNavbar_Dk4v" id="if-match"><code>If-Match</code><a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#if-match" class="hash-link" aria-label="Direct link to if-match" title="Direct link to if-match" translate="no">​</a></h5>
+<p>S3 Gateway carries the expected ETag along with the <code>createKey</code> request. OM compares it with the live key, translates it to the expected epoch recognized by atomic rewrite, and then reuses the existing commit path.</p>
+<!-- -->
+<p><em>Figure 12. <code>PUT If-Match</code> validates the ETag once, stores the matched epoch, and rechecks that epoch at commit time.</em></p>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="getobject--headobject">GetObject / HeadObject<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#getobject--headobject" class="hash-link" aria-label="Direct link to GetObject / HeadObject" title="Direct link to GetObject / HeadObject" translate="no">​</a></h4>
+<p>For <code>GetObject</code> and <code>HeadObject</code>, S3 Gateway fetches key metadata from OM and evaluates the conditional headers against that metadata.</p>
+<p>Related patch: <a href="https://github.com/apache/ozone/pull/10031" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10031</a></p>
+<!-- -->
+<p><em>Figure 13. <code>GET</code> and <code>HEAD</code> evaluate conditional headers after retrieving object metadata from OM.</em></p>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="copyobject">CopyObject<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#copyobject" class="hash-link" aria-label="Direct link to CopyObject" title="Direct link to CopyObject" translate="no">​</a></h4>
+<p><code>CopyObject</code> is effectively <code>GetObject</code> plus <code>PutObject</code>, because it must enforce conditional logic on both the source and destination. During the source phase, the gateway resolves the source object metadata and evaluates preconditions against that snapshot before streaming the data. In the destination phase, the gateway performs a conditional write to the destination, reusing the atomic write APIs introduced for <code>PutObject</code>.</p>
+<p>Related patch: <a href="https://github.com/apache/ozone/pull/10207" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10207</a>. Thanks <a href="https://github.com/YutaLin" target="_blank" rel="noopener noreferrer" class="">@YutaLin</a>.</p>
+<!-- -->
+<p><em>Figure 14. <code>CopyObject</code> checks source preconditions first, then reuses conditional destination writes.</em></p>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="completemultipartupload">CompleteMultipartUpload<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#completemultipartupload" class="hash-link" aria-label="Direct link to CompleteMultipartUpload" title="Direct link to CompleteMultipartUpload" translate="no">​</a></h4>
+<p><code>CompleteMultipartUpload</code> compares the caller’s expected ETag or create-if-absent condition with the committed key state.</p>
+<p>Related patch: <a href="https://github.com/apache/ozone/pull/10164" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10164</a>. Thanks <a href="https://github.com/YutaLin" target="_blank" rel="noopener noreferrer" class="">@YutaLin</a>.</p>
+<!-- -->
+<p><em>Figure 15. Conditional <code>CompleteMultipartUpload</code> validates the destination state before publishing the completed object.</em></p>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="deleteobject">DeleteObject<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#deleteobject" class="hash-link" aria-label="Direct link to DeleteObject" title="Direct link to DeleteObject" translate="no">​</a></h4>
+<p><code>DeleteObject</code> compares the caller’s expected ETag with the committed key state before writing the delete tombstone.</p>
+<p>Related patch: <a href="https://github.com/apache/ozone/pull/10511" target="_blank" rel="noopener noreferrer" class="">apache/ozone#10511</a></p>
+<!-- -->
+<p><em>Figure 16. Conditional <code>DeleteObject</code> deletes only when the current object still matches the expected ETag.</em></p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="benchmark">Benchmark<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#benchmark" class="hash-link" aria-label="Direct link to Benchmark" title="Direct link to Benchmark" translate="no">​</a></h2>
+<p>The main performance question for conditional writes is whether adding the precondition makes the common successful path slower than a normal write. In Ozone, the expected ETag or create-if-absent flag is carried with the normal S3 Gateway to OM request, then validated in OM’s metadata update path. This design avoids a separate gateway-side metadata read before every conditional write.</p>
+<p>To sanity-check that assumption, we ran a small local benchmark against a Docker Compose Ozone cluster through S3 Gateway. The benchmark used 4 KiB objects, 15 warmup iterations, and 100 measured iterations per operation. It compared four operations:</p>
+<ul>
+<li class="">normal <code>PUT</code> creating a new key,</li>
+<li class=""><code>PUT If-None-Match: *</code> creating a new key,</li>
+<li class="">normal <code>PUT</code> overwriting an existing key,</li>
+<li class=""><code>PUT If-Match: &lt;etag&gt;</code> overwriting an existing key.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Benchmark comparing normal and conditional PUT latency" src="https://ozone.apache.org/assets/images/benchmark-latency-b34ad2bd093809922d914cee8851b567.png" width="1904" height="1120" class="img_xxiv"></p>
+<p><em>Figure 17. Local benchmark latency for normal <code>PUT</code>, <code>PUT If-None-Match</code>, normal overwrite, and <code>PUT If-Match</code>.</em></p>
+<p>In this setup, conditional create was effectively the same as normal create: the mean latency differed by about 0.12 ms, and the p95 was slightly lower. Conditional overwrite was also close to normal overwrite: the mean latency was about 0.35 ms higher, while p95 remained slightly lower and p99 was nearly identical.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="conclusion">Conclusion<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<p>Object storage has quietly crossed a line. It is no longer just where systems park their bytes.  It has become the place where they coordinate. Metadata catalogs, write-ahead logs, leader election, job queues, model caches: all of these need a single point of truth about “who wrote last,” and increasingly they want to ask that question of the storage layer itself.</p>
+<p>By bringing native S3 conditional requests to Apache Ozone without adding an extra RPC on the happy path, we turn Ozone into a first-class substrate for optimistic concurrency control. Applications can compare-and-swap directly against the objects they already store, and retire the external lock services, catalog databases, and consensus clusters they once needed just to avoid a lost update.</p>
+<p>The result is a simpler architecture: fewer moving parts, one less thing to operate, and coordination that lives exactly where the data does.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="references">References<a href="https://ozone.apache.org/blog/2026/07/08/ozone-s3-conditional-request#references" class="hash-link" aria-label="Direct link to References" title="Direct link to References" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html" target="_blank" rel="noopener noreferrer" class="">Amazon S3 conditional requests</a></li>
+<li class=""><a href="https://www.allthingsdistributed.com/2025/03/in-s3-simplicity-is-table-stakes.html" target="_blank" rel="noopener noreferrer" class="">In S3, simplicity is table stakes</a></li>
+<li class=""><a href="https://www.bitsxpages.com/p/protocols-for-transactional-usage" target="_blank" rel="noopener noreferrer" class="">Protocols for transactional usage</a></li>
+<li class=""><a href="https://www.morling.dev/blog/leader-election-with-s3-conditional-writes/" target="_blank" rel="noopener noreferrer" class="">Leader election with S3 conditional writes</a></li>
+<li class=""><a href="https://nvartolomei.com/oswald/#writer-writer-conflicts" target="_blank" rel="noopener noreferrer" class="">OSWALD writer-writer conflicts</a></li>
+<li class=""><a href="https://github.com/nvartolomei/oswald/tree/main/p/Oswald" target="_blank" rel="noopener noreferrer" class="">OSWALD repository</a></li>
+<li class=""><a href="https://www.shayon.dev/post/2025/277/an-mvcc-like-columnar-table-on-s3-with-constant-time-deletes/#the-delete-problem-with-immutable-formats" target="_blank" rel="noopener noreferrer" class="">An MVCC-like columnar table on S3 with constant-time deletes</a></li>
+<li class=""><a href="https://turbopuffer.com/blog/object-storage-queue" target="_blank" rel="noopener noreferrer" class="">Turbopuffer object storage queue</a></li>
+<li class=""><a href="https://github.com/seaweedfs/seaweedfs/wiki/S3-Conditional-Operations" target="_blank" rel="noopener noreferrer" class="">SeaweedFS S3 conditional operations</a></li>
+<li class=""><a href="https://news.ycombinator.com/item?id=45493158" target="_blank" rel="noopener noreferrer" class="">Hacker News discussion on S3 conditional writes</a></li>
+<li class=""><a href="https://www.opendata.dev/blog/buffer-ha-pipelines-without-kafka" target="_blank" rel="noopener noreferrer" class="">Buffer HA pipelines without Kafka</a></li>
+</ul>]]></content>
+        <author>
+            <name>Peter Lee</name>
+            <uri>https://github.com/peterxcli</uri>
+        </author>
+        <category label="Ozone" term="Ozone"/>
+        <category label="S3" term="S3"/>
+        <category label="concurrency" term="concurrency"/>
+        <category label="conditional-requests" term="conditional-requests"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Making Apache Ozone’s S3 Compatibility Visible]]></title>
+        <id>https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility</id>
+        <link href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility"/>
+        <updated>2026-06-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Recently I created https//github.com/peterxcli/ozone-s3-compatibility.]]></summary>
+        <content type="html"><![CDATA[<p>Recently I created <a href="https://ozone.s3.peterxcli.dev/" target="_blank" rel="noopener noreferrer" class="">https://ozone.s3.peterxcli.dev/</a>, an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR helps the compatibility story. It is fully open source at <a href="https://github.com/peterxcli/ozone-s3-compatibility" target="_blank" rel="noopener noreferrer" class="">https://github.com/peterxcli/ozone-s3-compatibility</a>.</p>
+<p>TL;DR:</p>
+<ul>
+<li class="">Overall, <strong>7% (50/711)</strong> compatibility improvement at the time of writing.</li>
+<li class="">Parquet + search-index optimization made the Pages data <strong>11.8x smaller</strong>, yearly git growth <strong>12x slower</strong>, and search data <strong>14x smaller</strong>.</li>
+<li class="">It runs Apache Ozone against <a href="https://github.com/ceph/s3-tests" target="_blank" rel="noopener noreferrer" class=""><code>ceph/s3-tests</code></a> and <a href="https://github.com/minio/mint" target="_blank" rel="noopener noreferrer" class=""><code>minio/mint</code></a>, then publishes a GitHub Pages report.</li>
+<li class="">It turns compatibility from “a few epic tickets and some memory in people’s heads” into a searchable, linkable, daily signal.</li>
+<li class="">For users, it answers “does Ozone support this S3 behavior today?” For developers, it answers “which exact test is failing, why, and did my PR move it?”</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="why-did-i-create-it">Why did I create it?<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#why-did-i-create-it" class="hash-link" aria-label="Direct link to Why did I create it?" title="Direct link to Why did I create it?" translate="no">​</a></h2>
+<p>Before this dashboard was introduced, Apache Ozone had already invested considerable effort in tracking the compatibility gap through several epic issues: <a href="https://issues.apache.org/jira/browse/HDDS-1186" target="_blank" rel="noopener noreferrer" class="">Ozone S3 gateway Phase 4</a>, <a href="https://issues.apache.org/jira/browse/HDDS-12716" target="_blank" rel="noopener noreferrer" class="">Ozone S3 gateway (phase III)</a>, and <a href="https://issues.apache.org/jira/browse/HDDS-8423" target="_blank" rel="noopener noreferrer" class="">S3 API compatibility improvements and fixes</a>.</p>
+<p>But if you click through those links, you will quickly get lost. They are useful, but they are not a fresh report of what Apache Ozone’s S3 compatibility looks like today.</p>
+<p>Users don’t know whether Ozone supports a specific S3 behavior. Developers don’t know whether a feature gap, implementation gap, or corner case is already handled correctly. And when a compatibility issue is fixed or newly introduced, there was no fresh source of truth to show that change.</p>
+<p>Also, when we develop S3 features, we often look at AWS S3 docs or source code from other open source S3-compatible systems, then infer how the implementation should behave and what test cases we should add. That works sometimes, but it is still mostly guessing. There was no easy harness to continuously test Ozone’s behavior against existing compatibility suites and make the result easy to inspect.</p>
+<p>So that’s why I wanted to create this dashboard.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="how-to-use-the-dashboard">How to Use the Dashboard<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#how-to-use-the-dashboard" class="hash-link" aria-label="Direct link to How to Use the Dashboard" title="Direct link to How to Use the Dashboard" translate="no">​</a></h2>
+<p>I usually think of the dashboard as having a few different modes.</p>
+<p>First, start from the latest run summary. The top cards show the current <code>s3-tests</code> and <code>mint</code> compatibility rate, eligible case count, pass/fail/error count, skipped count, and the delta compared with the previous run. This makes it easy to know whether today’s result is better, worse, or basically unchanged. One small detail here: the compatibility rate is <code>passed / (passed + failed + errored)</code>.</p>
+<p><img decoding="async" loading="lazy" alt="overview" src="https://ozone.apache.org/assets/images/overview-2841642bf0435f07ae6d4e466e54d6e5.png" width="2048" height="1042" class="img_xxiv"></p>
+<p>Second, use the search box as the main debugging entry point. You can search by suite, test name, run id, run date, source path, feature name, status, or failure text. For example, if you are working on object tagging, you can search for <code>tagging</code>; if you are looking at a specific failure from <code>s3-tests</code>, you can paste part of the error message. Search results show the matched fields, suite, run date, status, feature tags, and a short failure preview.
+<img decoding="async" loading="lazy" alt="test-case-search" src="https://ozone.apache.org/assets/images/test-case-search-791885f7df8da5b98a1b9064a8c81103.png" width="2048" height="452" class="img_xxiv"></p>
+<p>Third, click a search result. The modal shows the full failure detail, related metadata, a permalink, and the test code. For <code>s3-tests</code>, the dashboard can fetch the upstream source file and extract the Python test function, so you don’t need to jump between the report, GitHub, and your local checkout just to understand what the test is asking for.</p>
+<p><img decoding="async" loading="lazy" alt="test-case-search-detail" src="https://ozone.apache.org/assets/images/test-case-search-detail-140f81054ca1abb56ed40a6be643f063.png" width="2048" height="1837" class="img_xxiv"></p>
+<p>Fourth, open the current report detail. The page does not load all case details upfront. Instead, it loads summary first, then fetches the full run detail when you open the latest run or an archived run. Inside the run detail, you can inspect suites, feature summaries, individual failed cases, and log files.
+<img decoding="async" loading="lazy" alt="run-overview" src="https://ozone.apache.org/assets/images/run-overview-0cb1d79f842662ba6435bc94051bccf6.png" width="2048" height="601" class="img_xxiv">
+<img decoding="async" loading="lazy" alt="run-expanded" src="https://ozone.apache.org/assets/images/run-expanded-6f6a2b9c9d950e0876f799e56b77102c.png" width="1972" height="1758" class="img_xxiv">
+<img decoding="async" loading="lazy" alt="run-detail" src="https://ozone.apache.org/assets/images/run-detail-2682d9d4b20a9590cdb83148139d958d.png" width="1874" height="1898" class="img_xxiv"></p>
+<p>Fifth, use the trend panel. The top-line trend is useful to see whether the overall compatibility is moving. The per-feature trend is even more useful because a single global number can hide what changed. For example, a PR might only improve object tagging, bucket listing, copy object behavior, or some conditional-write corner case. Those changes are much easier to reason about feature by feature.</p>
+<p><img decoding="async" loading="lazy" alt="trend-panel" src="https://ozone.apache.org/assets/images/trend-panel-9a633875f1dec07986774f5449f9d4e1.png" width="2048" height="858" class="img_xxiv"></p>
+<p>Sixth, use archived runs when you need history. Old runs are still there, but their details are loaded only when opened. This is helpful when you want to compare a failure today with an older run, or when a PR says “this test used to fail before the fix.”
+<img decoding="async" loading="lazy" alt="archived-runs" src="https://ozone.apache.org/assets/images/archived-runs-068db04255eb4fe26370319592bc0617.png" width="1797" height="2048" class="img_xxiv"></p>
+<p>Finally, the Parquet file inspector is there for people who want to inspect the published dataset itself. This is mostly for debugging the dashboard and data model, but it is surprisingly useful when you want to understand what files were generated, how many rows they contain, and whether the published data looks sane. I also want to thank Xiangpeng for building the <a href="https://github.com/XiangpengHao/parquet-viewer" target="_blank" rel="noopener noreferrer" class="">Parquet Viewer</a>, which let us inspect the parquet file content directly on the site.
+<img decoding="async" loading="lazy" alt="parquet-file-inspector" src="https://ozone.apache.org/assets/images/parquet-file-inspector-f36b9581830a6a5ab7a50ca3d0dc48b4.png" width="2048" height="1238" class="img_xxiv">
+<img decoding="async" loading="lazy" alt="parquet-file-viewer" src="https://ozone.apache.org/assets/images/parquet-file-viewer-6e6085cfed201efd7d64d6c63274fc7f.png" width="2048" height="1436" class="img_xxiv"></p>
+<p>For PR authors, there is also a PR comparison workflow. It can run an Ozone PR head, compare it with the latest published main run, write a step summary, and optionally comment back on the Ozone PR. That is the part I like the most: compatibility is not just a dashboard to look at, but something you can wire into development review.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="how-is-this-built">How is this built?<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#how-is-this-built" class="hash-link" aria-label="Direct link to How is this built?" title="Direct link to How is this built?" translate="no">​</a></h2>
+<p>For the very first version, I literally just prompted Codex with <code>gpt5.4 xhigh</code>:</p>
+<div class="theme-admonition theme-admonition-info admonition_KWNG alert alert--info"><div class="admonitionHeading_KbNW"><span class="admonitionIcon_mAjL"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Prompt</div><div class="admonitionContent_oTFZ"><p>I want to create a repo that runs <a href="https://github.com/ceph/s3-tests" target="_blank" rel="noopener noreferrer" class="">https://github.com/ceph/s3-tests</a> and <a href="https://github.com/minio/mint" target="_blank" rel="noopener noreferrer" class="">https://github.com/minio/mint</a> on GitHub Action and generate the compatibility report page on GitHub Pages nightly. Make the page pretty. My desired steps that run in the GitHub Action are: clone the Ozone repo, pull latest master change, compile, start running cluster, run Mint and s3-tests to get result, compile result to be the page. We can show the compatibility rate of each feature for each test (<code>s3-tests</code>, <code>mint</code>) daily change as a chart at the page top, followed by the report page, then also include the old result expansion button to allow users to check a specific date’s running result. BTW I have the local clone of Ozone at <code>~/Documents/oss/apache/ozone</code>, you can look into it directly without searching the codebase on the website.</p></div></div>
+<p>It got most of it right on the first try. I still made some follow-ups on the result, like “attach <code>s3-tests</code> and <code>mint</code> as submodule” and “use <code>act</code> to test the GitHub Action works locally within Docker”, but those were relatively minor compared with the first scaffold.</p>
+<p>The nightly workflow now does roughly this:</p>
+<ol>
+<li class="">Build the Vue/Vite report frontend.</li>
+<li class="">Clone Ozone and the upstream compatibility suites.</li>
+<li class="">Build an Ozone distribution.</li>
+<li class="">Start a packaged Ozone compose cluster.</li>
+<li class="">Run <code>s3-tests</code> and Mint against the S3 Gateway.</li>
+<li class="">Normalize the raw output into a run result.</li>
+<li class="">Build the static Pages output, including the historical data.</li>
+<li class="">Publish to <code>gh-pages</code> for scheduled runs.</li>
+</ol>
+<p>The frontend is Vue 3 + Vite. The automation layer is just scripts and GitHub Actions. The data processing is mostly Python. For the newer version, the published report data is JSON.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="optimization">Optimization<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#optimization" class="hash-link" aria-label="Direct link to Optimization" title="Direct link to Optimization" translate="no">​</a></h3>
+<p>After a few runs, I started to notice that the dashboard was becoming sluggish. After some inspection, I found a few reasons.</p>
+<ol>
+<li class="">
+<p>First, we originally used one JSON file to represent one run result. Each latest run was about 0.236 MiB. This sounds small, but the problem is that we did not lazy-load these files initially. Every time the page refreshed, even if some files might already be cached by the browser, the TypeScript data structure still ended up holding too much content from too many files. That was memory-intensive.</p>
+</li>
+<li class="">
+<p>Second, the JSON data had a ton of room to compress. The data shape is very repetitive: <code>run_id</code>, <code>suite_key</code>, <code>status</code>, feature names, source paths, class names, test names, and similar object keys appear again and again. JSON stores all of that as repeated text and nested objects. Even if HTTP compression helps over the network, the browser still has to parse it into JavaScript objects, and Git still stores changed blobs. This kind of data is much closer to a table than a document, so a columnar format makes more sense.</p>
+</li>
+<li class="">
+<p>Finally, the search index data was not normalized correctly. The index repeated run metadata and case metadata too much, and it grew quickly. For Git history, this is especially bad because every new run changes a large generated file again.</p>
+</li>
+</ol>
+<p>So then I basically applied three optimizations: lazy loading, Parquet compression, and search/index normalization.</p>
+<ol>
+<li class=""><strong>Lazy loading.</strong> The page now loads the light catalog/index first. Full run details are fetched only when you open the latest run or expand an archived run. Search index loading is also delayed until you actually search, and the browser can keep the FlexSearch index in IndexedDB. Logs are fetched only when you open a log modal. Source snippets are fetched only when you open a case. This makes the first page load much cheaper.</li>
+<li class=""><strong>Compress data as Parquet.</strong> Instead of treating every run as one large JSON document, the report data is split into Parquet tables: catalog runs, suites, features, per-run metadata, per-run cases, search rows, log files, and log lines. The Parquet writer uses Zstd compression and dictionary encoding, which is a much better fit for repeated values like suite names, statuses, feature tags, and source paths. The frontend then queries these Parquet files in the browser through DuckDB-Wasm.</li>
+<li class=""><strong>Index file optimization.</strong> The search rows now contain normalized fields and a short <code>detail_preview</code>, while the full case detail can be hydrated from the per-run case Parquet file when needed. For JSON fallback, the index and search data are partitioned into smaller shards. For the normal Parquet path, the global search index is a compressed Parquet file. The search index also has a stable <code>index_id</code>, so the browser can reuse the IndexedDB cache when the data has not changed.</li>
+</ol>
+<p>The results were dramatic:</p>
+<ol>
+<li class="">Parquet data now:<!-- -->
+<ol>
+<li class="">search rows: 7.64 MiB, 33,876 rows, growing about 0.142-0.147 MiB/run</li>
+<li class="">run case/detail data excluding search: 4.92 MiB across 52 runs, growing about 0.093 MiB/run</li>
+<li class="">catalog/index data: 0.03 MiB now, growing less than 1 KiB/run</li>
+<li class="">total Pages data: 12.59 MiB across 52 runs</li>
+<li class="">latest run data: 246,696 bytes = 0.235 MiB</li>
+</ol>
+</li>
+<li class="">Projection at the current rate:<!-- -->
+<ol>
+<li class="">about +0.236 MiB/run</li>
+<li class="">about +7.1 MiB/month</li>
+<li class="">about +86 MiB/year</li>
+</ol>
+</li>
+<li class="">Compared with the JSON baseline:<!-- -->
+<ol>
+<li class="">current data size: 149.11 MiB -&gt; 12.59 MiB, about 11.8x smaller</li>
+<li class="">yearly growth: ~1.0 GiB/year -&gt; ~86 MiB/year, about 12x slower</li>
+<li class="">search data: 107.09 MiB -&gt; 7.64 MiB, about 14x smaller</li>
+</ol>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="impact">Impact<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#impact" class="hash-link" aria-label="Direct link to Impact" title="Direct link to Impact" translate="no">​</a></h2>
+<p>Ozone has already improved since the dashboard was released.
+<img decoding="async" loading="lazy" alt="s3-tests-compatibility-rate" src="https://ozone.apache.org/assets/images/s3-tests-compatibility-rate-5794804afa99270ffadbf607601bf1f0.png" width="1096" height="510" class="img_xxiv"></p>
+<p>I don’t want to take credit for every improvement below, but I do think the dashboard changed the workflow. It gives us concrete failing cases, links that can be pasted into PRs, and an easy way to check whether the gap is still there after a patch.</p>
+<p>There are already quite a few PRs and designs which aim to fix compatibility gaps discovered or made easier to discuss by the dashboard:</p>
+<ul>
+<li class="">Object tagging and bucket tagging:<!-- -->
+<ul>
+<li class=""><a href="https://github.com/apache/ozone/pull/10265" target="_blank" rel="noopener noreferrer" class="">HDDS-15258. Include x-amz-tagging-count header in HEAD object tagging responses</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10277" target="_blank" rel="noopener noreferrer" class="">HDDS-15283. GetObjectTagging should return TagSet in sorted order of key</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10299" target="_blank" rel="noopener noreferrer" class="">HDDS-15259. PutObject should treat null tag value for x-amz-tagging header as empty tag value</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10498" target="_blank" rel="noopener noreferrer" class="">HDDS-15510. Implement OM read/write paths for bucket tagging with audit and metrics</a></li>
+<li class=""><a href="https://docs.google.com/document/d/1jq1JOatCrUpD7k3PutfkGrZ7nFC1C69BkMoMWcRWaw4/edit?tab=t.0#heading=h.rs6cprl5cddi" target="_blank" rel="noopener noreferrer" class="">Proposal: S3 Bucket Tagging in Apache Ozone</a></li>
+</ul>
+</li>
+<li class="">Bucket listing and directory bucket behavior:<!-- -->
+<ul>
+<li class=""><a href="https://github.com/apache/ozone/pull/10297" target="_blank" rel="noopener noreferrer" class="">HDDS-15302. Throw S3 InvalidArgument for RequestParameters getInt if parsing error</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10298" target="_blank" rel="noopener noreferrer" class="">HDDS-15303. Enable prefix filter for OBS</a></li>
+<li class=""><a href="https://github.com/apache/ozone/pull/10408" target="_blank" rel="noopener noreferrer" class="">HDDS-15450. Implement ListDirectoryBuckets S3 API for Directory Buckets support</a></li>
+</ul>
+</li>
+<li class="">Other compatibility-related correctness work:<!-- -->
+<ul>
+<li class=""><a href="https://github.com/apache/ozone/pull/10472" target="_blank" rel="noopener noreferrer" class="">HDDS-15515. Support object Content-Type end-to-end in S3 Gateway</a></li>
+</ul>
+</li>
+</ul>
+<p>The most useful effect is not just that the percentage moved. It is that the compatibility gap became much more concrete. A failed test can now become a dashboard link, then a JIRA, then a PR, then a nightly result showing whether it passed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="insight">Insight<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#insight" class="hash-link" aria-label="Direct link to Insight" title="Direct link to Insight" translate="no">​</a></h2>
+<ol>
+<li class="">The main reason this was adopted by other community members is that I shared it as soon as it was useful enough for others to try: <a href="https://lists.apache.org/thread/2td4jt8r26pwph5lwq3ncbnv97n27d5w" target="_blank" rel="noopener noreferrer" class="">[DISCUSS] Nightly Ozone S3 compatibility report</a>. It was not perfect yet, and I think posting early was important.</li>
+<li class="">This played a role in my promotion to PMC because it made a long-standing problem visible and gave the community a practical tool to keep improving it.</li>
+<li class="">Not every failed test case means Ozone is wrong. Sometimes the compatibility suite itself has a questionable expectation. For example, I opened <a href="https://github.com/ceph/s3-tests/pull/735" target="_blank" rel="noopener noreferrer" class="">ceph/s3-tests#735</a> to align conditional write tests with <code>If-None-Match: *</code> semantics. At the time of writing, it is still open. This is a good reminder that compatibility work is not only “fix Ozone until all tests pass”; sometimes it is also “debug the tests and upstream better expectations.”</li>
+<li class="">A dashboard is also a social tool. If the result is not searchable, linkable, and easy to quote in a PR, it will not be used much. The permalink part sounds small, but it matters a lot when people discuss failures asynchronously.</li>
+<li class="">A single compatibility percentage is useful, but it is not enough. The real value is in the drill-down: which feature changed, which test changed, what error message changed, and what source code was the test running. Without that, the percentage is just a vanity number.</li>
+<li class="">LLMs are very good at scaffolding this kind of glue project. But the part that made it trustworthy was not the first generated code. It was the boring follow-up: run it locally with <code>act</code>, add tests, normalize data, make it faster, and keep it running every day.</li>
+<li class="">I should have treated the data model as important from the beginning. The UI can grow quickly, but if the data layout is wrong, the page becomes slow and the Git history becomes huge. Moving to Parquet later worked, but I probably should have designed the report as a dataset earlier.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="conclusion">Conclusion<a href="https://ozone.apache.org/blog/2026/06/27/ozone-s3-compatibility#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<p>This dashboard started as a pretty simple idea: run <code>s3-tests</code> and Mint against Apache Ozone every night, then publish a nice report page. But after using it for a while, I think the more important part is that it turns S3 compatibility into a feedback loop.</p>
+<p>Before, compatibility was scattered across JIRA epics, docs, people’s memory, and occasional manual testing. Now there is a daily report that users can search, developers can debug, and PR authors can use as evidence. It is still not perfect, and some failures still need human judgment, but at least we have a place to look.</p>
+<p>If you are using Ozone S3 Gateway, or if you are working on Ozone S3 compatibility, please try the dashboard and the repo. Search for the feature you care about, click into the failures, and open issues or PRs when something looks wrong. The more boring and continuous this compatibility work becomes, the better Ozone will get.</p>]]></content>
+        <author>
+            <name>Peter Lee</name>
+            <uri>https://github.com/peterxcli</uri>
+        </author>
+        <category label="Ozone" term="Ozone"/>
+        <category label="S3" term="S3"/>
+        <category label="compatibility" term="compatibility"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Apache Ozone Best Practices at Didi: Scaling to Tens of Billions of Files]]></title>
         <id>https://ozone.apache.org/blog/2026/01/30/apache-ozone-best-practices-at-didi</id>
