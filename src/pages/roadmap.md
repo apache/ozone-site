@@ -13,8 +13,8 @@ These release names are based on US national parks, and for every minor release,
 
 | Release | Tag | Features | Exit criteria |
 | :--- | :--- | :--- | :--- |
-| 3.0.0 | | [HDDS-11415](https://issues.apache.org/jira/browse/HDDS-11415) Leader Execution at Leader | |
-| 2.2.0 | Katmai | [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713) Disk balancer<br/>[HDDS-8342](https://issues.apache.org/jira/browse/HDDS-8342) S3 Lifecycle Configurations - Object Expiration<br/>[HDDS-13323](https://issues.apache.org/jira/browse/HDDS-13323) STS - temporary, limited-privilege credentials service | |
+| 3.0.0 | | [HDDS-11415](https://issues.apache.org/jira/browse/HDDS-11415) Leader Execution at Leader<br/>[HDDS-14496](https://issues.apache.org/jira/browse/HDDS-14496) Zero Downtime Upgrade<br/>[HDDS-15763](https://issues.apache.org/jira/browse/HDDS-15763) Ozone IPv6 Support | |
+| 2.3.0 | Kenai Fjords | [HDDS-8342](https://issues.apache.org/jira/browse/HDDS-8342) S3 Lifecycle Configurations - Object Expiration<br/>[HDDS-13323](https://issues.apache.org/jira/browse/HDDS-13323) STS - temporary, limited-privilege credentials service<br/>[HDDS-10685](https://issues.apache.org/jira/browse/HDDS-10685) Short circuit read support in Ozone<br/>[HDDS-15672](https://issues.apache.org/jira/browse/HDDS-15672) Support Java 25<br/>[HDDS-14967](https://issues.apache.org/jira/browse/HDDS-14967) S3 Vector Support<br/>[HDDS-14893](https://issues.apache.org/jira/browse/HDDS-14893) Support single-node local S3 development | |
 | 2.0.1 | ? | Critical bugs fixed found after 2.0.0 | |
 
 ## Past Releases
@@ -23,6 +23,7 @@ Ozone releases can be downloaded from https://ozone.apache.org/downloads/
 
 | Release | Tag | Features | Exit criteria |
 | :--- | :--- | :--- | :--- |
+| 2.2.0 | Katmai<br/>RELEASED | [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713) Add a disk balancer for datanode<br/>[HDDS-14424](https://issues.apache.org/jira/browse/HDDS-14424) OM HA: Support Follower Read (Phase 1)<br/>[HDDS-10338](https://issues.apache.org/jira/browse/HDDS-10338) Implement a Client Datanode API to stream a block<br/>| |
 | 2.1.0 | Joshua Tree<br/>RELEASED | [HDDS-10239](https://issues.apache.org/jira/browse/HDDS-10239) Storage Container Reconciliation<br/>[HDDS-12940](https://issues.apache.org/jira/browse/HDDS-12940) Ozone Snapshot Phase 3: Scale up Snapshot Operations<br/>[HDDS-8387](https://issues.apache.org/jira/browse/HDDS-8387) Container and volume scanners phase II<br/>[HDDS-12564](https://issues.apache.org/jira/browse/HDDS-12564) Handling disk issues in Datanodes - Phase II<br/> | |
 | 2.0.0 | Indiana Dunes<br/>RELEASED | [HDDS-7593](https://issues.apache.org/jira/browse/HDDS-7593) Supporting HSync and lease recovery<br/>[HDDS-7852](https://issues.apache.org/jira/browse/HDDS-7852) SCM Decommissioning Support<br/>[HDDS-8829](https://issues.apache.org/jira/browse/HDDS-8829) Symmetric Keys for Delegation Tokens<br/>[HDDS-10656](https://issues.apache.org/jira/browse/HDDS-10656) Atomic Key Overwrite and Key Replacement<br/>**Other noteworthy changes:**<br/>[HDDS-6263](https://issues.apache.org/jira/browse/HDDS-6263) ARM64 support<br/>[HDDS-8246](https://issues.apache.org/jira/browse/HDDS-8246) Java 11/17/21 Support and Testing<br/>[HDDS-11577](https://issues.apache.org/jira/browse/HDDS-11577) AWS SDK v2 client support | |
 | 1.4.1 | Hot Springs<br/>RELEASED | Stability improvements. For a detailed list, please refer to [Changes between Ozone-1.4.0 and Ozone-1.4.1 on GitHub)](https://github.com/apache/ozone/compare/ozone-1.4.0...ozone-1.4.1) | |
