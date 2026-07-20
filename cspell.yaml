@@ -270,6 +270,9 @@ words:
 - minimising
 - tarballed
 - Namenodes
+- WIP
+- smoketest
+- microbenchmark
 - Jacoco
 - txn
 - Xfer
