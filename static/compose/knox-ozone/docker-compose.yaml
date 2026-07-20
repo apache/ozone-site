@@ -1,0 +1,118 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to you under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+x-image:
+  &image
+  image: ${OZONE_IMAGE:-apache/ozone}:${OZONE_IMAGE_VERSION:-2.1.1}${OZONE_IMAGE_FLAVOR:-}
+
+x-common-config:
+  &common-config
+  OZONE-SITE.XML_hdds.datanode.dir: /data/hdds
+  OZONE-SITE.XML_ozone.metadata.dirs: /data/metadata
+  OZONE-SITE.XML_ozone.om.address: om
+  OZONE-SITE.XML_ozone.om.http-address: om:9874
+  OZONE-SITE.XML_ozone.recon.address: recon:9891
+  OZONE-SITE.XML_ozone.recon.db.dir: /data/metadata/recon
+  OZONE-SITE.XML_ozone.recon.http-address: recon:9888
+  OZONE-SITE.XML_ozone.replication: "1"
+  OZONE-SITE.XML_ozone.scm.block.client.address: scm
+  OZONE-SITE.XML_ozone.scm.client.address: scm
+  OZONE-SITE.XML_ozone.scm.datanode.id.dir: /data/metadata
+  OZONE-SITE.XML_ozone.scm.http-address: scm:9876
+  OZONE-SITE.XML_ozone.scm.names: scm
+  OZONE-SITE.XML_hdds.scm.safemode.min.datanode: "1"
+  OZONE-SITE.XML_hdds.scm.safemode.healthy.pipeline.pct: "0"
+  no_proxy: om,recon,scm,s3g,httpfs,knox-ldap,knox-gateway,localhost,127.0.0.1
+
+services:
+  datanode:
+    <<: *image
+    ports:
+    - 9864
+    command: [ ozone, datanode ]
+    environment:
+      <<: *common-config
+
+  om:
+    <<: *image
+    ports:
+    - 9874:9874
+    environment:
+      <<: *common-config
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.hosts: "*"
+      CORE-SITE.XML_hadoop.proxyuser.hadoop.groups: "*"
+      ENSURE_OM_INITIALIZED: /data/metadata/om/current/VERSION
+      WAITFOR: scm:9876
+    command: [ ozone, om ]
+
+  scm:
+    <<: *image
+    ports:
+    - 9876:9876
+    environment:
+      <<: *common-config
+      ENSURE_SCM_INITIALIZED: /data/metadata/scm/current/VERSION
+    command: [ ozone, scm ]
+
+  recon:
+    <<: *image
+    ports:
+    - 9888:9888
+    environment:
+      <<: *common-config
+    command: [ ozone, recon ]
+
+  s3g:
+    <<: *image
+    ports:
+    - 9878:9878
+    environment:
+      <<: *common-config
+    command: [ ozone, s3g ]
+
+  httpfs:
+    <<: *image
+    ports:
+    - 14000:14000
+    environment:
+      <<: *common-config
+      CORE-SITE.XML_fs.defaultFS: ofs://om
+    volumes:
+    - ./conf/httpfs-site.xml:/opt/hadoop/etc/hadoop/httpfs-site.xml:ro
+    command: [ ozone, httpfs ]
+
+  knox-ldap:
+    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-2.1.0}
+    entrypoint: [ /bin/bash, -c ]
+    command:
+    - |
+      /home/knox/knox/bin/ldap.sh start
+      tail -f /home/knox/knox/logs/ldap.out
+    ports:
+    - 33389:33389
+
+  knox-gateway:
+    image: ${KNOX_IMAGE:-apache/knox}:${KNOX_IMAGE_VERSION:-2.1.0}
+    depends_on:
+    - knox-ldap
+    - om
+    - scm
+    - recon
+    - httpfs
+    ports:
+    - 8443:8443
+    volumes:
+    - ./conf/topologies/ozone.xml:/home/knox/knox/conf/topologies/ozone.xml:ro
+    - ./conf/topologies/knoxsso.xml:/home/knox/knox/conf/topologies/knoxsso.xml:ro

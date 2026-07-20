@@ -37,14 +37,15 @@ Balancing is local and safe:
 - A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.
 - Bandwidth and concurrency are **operator-tunable** to avoid interfering with production I/O.
 
-This runs independently on each Datanode. To use it, first enable the feature by setting `hdds.datanode.disk.balancer.enabled = true` in `ozone-site.xml` on your Datanodes. Once enabled, clients use `ozone admin datanode diskbalancer` commands to talk directly to Datanodes, with SCM only used to discover IN_SERVICE Datanodes when running batch operations with `--in-service-datanodes`.
+This runs independently on each Datanode. The feature can be disabled by setting `hdds.datanode.disk.balancer.enabled = false` in `ozone-site.xml` on your Datanodes. Once disabled, clients can no longer use `ozone admin datanode diskbalancer` commands to balance disks on a datanode.
 
 ## How DiskBalancer Decides What to Move
 
-DiskBalancer uses simple but robust policies to decide **which disks to balance** and **which containers to move** (see the design doc for details: `diskbalancer.md` in [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)).
+DiskBalancer uses simple but robust policy to decide **which disks to balance** and **which containers to move** (see the design doc for details: `diskbalancer.md` in [HDDS-5713](https://issues.apache.org/jira/browse/HDDS-5713)).
 
-- **Default Volume Choosing Policy**: Picks the most over‑utilized volume as the source and the most under‑utilized volume as the destination, based on each disk’s **Volume Data Density** and the Datanode’s average utilization.
-- **Default Container Choosing Policy**: Scans containers on the source volume and moves only **CLOSED** containers that are not already being moved. To avoid repeatedly scanning the same list, it caches container metadata with automatic expiry.
+- **Default Container Choosing Policy**: This is the default policy that consolidates both volume selection and container selection into a single operation. It identifies the most over-utilized volume
+as the source and the most under-utilized volume with sufficient space as the destination, then iterates through containers on the source to pick the first one that is movable (per `hdds.datanode.disk.balancer.container.states`,
+default **CLOSED** and **QUASI_CLOSED**) and is not already being moved. It caches the list of containers for each volume which auto expires after one hour.
 
 These defaults aim to make safe, incremental moves that converge the disks toward an even utilization state.
 
@@ -56,13 +57,22 @@ When DiskBalancer moves a container from one disk to another on the **same Datan
 2. Transition that copy into a **RECOVERING** state and import it as a new container on the destination.
 3. Once import and metadata updates succeed, delete the original CLOSED container from the source disk.
 
+```
+D1     ----> C1-CLOSED  --- (5) ---> C1-DELETED
+        |
+        |
+       (1)
+        |
+D2      ----> Temp C1-CLOSED  --- (2) ---> Temp C1-RECOVERING --- (3) ---> C1-RECOVERING --- (4) ---> C1-CLOSED
+```
+
 This ensures that data is always consistent: the destination copy is fully validated before the original is removed, minimizing risk during balancing.
 
 ## Using Disk Balancer
 
-First, enable the Disk Balancer feature on each Datanode by setting the following in `ozone-site.xml`:
+The Disk Balancer has a feature flag which is **by default true** on each Datanode and can be disabled by setting the following property in `ozone-site.xml` :
 
-- `hdds.datanode.disk.balancer.enabled = true`
+- `hdds.datanode.disk.balancer.enabled = false`
 
 The Disk Balancer CLI supports two command patterns:
 
@@ -121,6 +131,7 @@ The following parameters can be specified during **start** or **update configura
 | `--bandwidth-in-mb` | `-b` | `10`          | Maximum bandwidth for DiskBalancer per second. |
 | `--parallel-thread` | `-p` | `5`           | Max parallel thread count for DiskBalancer. |
 | `--stop-after-disk-even` | `-s` | `true`        | Stop DiskBalancer automatically after disk utilization is even. |
+| `--container-states` | `-c` | `CLOSED,QUASI_CLOSED` | Comma-separated list of container states that are eligible for moving during balancing. |
 
 ## Benefits for operators
 

@@ -35,12 +35,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with:
         persist-credentials: false
     - name: Check Docker image cache
       id: cache
-      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
@@ -55,7 +55,7 @@ jobs:
         docker save ozone-site --output="$image_tar"
     - name: Save docker image tar to cache
       if: steps.cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
@@ -65,11 +65,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with:
         persist-credentials: false
     - name: Restore docker image tar from cache
-      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}
@@ -93,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get Docker files
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with:
         persist-credentials: false
     - name: Download website build artifact
@@ -102,7 +102,7 @@ jobs:
         name: build
         path: build
     - name: Restore docker image tar from cache
-      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ env.image_tar }}
         key: image2-${{ hashFiles('Dockerfile', 'compose.yml', 'pnpm-lock.yaml') }}

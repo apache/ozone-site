@@ -91,6 +91,7 @@ words:
 - mis-replicated
 - unreplicated
 - untampered
+- checkpointed
 - BCSID
 - EC
 - reconfig
@@ -103,6 +104,37 @@ words:
 - AOS
 - FCQ
 - QoS
+- QUASI_CLOSED
+- SCMHA
+- OMHA
+- RDB
+- ZDU
+- MPU
+- mpu
+- ICR
+- FCR
+- NPE
+- JAXB
+- configless
+- unsuppress
+- blocktransaction
+- listall
+- minfreespace
+- outofservice
+- ozonesecure
+- ozonescripts
+- diskbalancer
+- getacl
+- setacl
+- threadsafe
+- threadpools
+- smoketest
+- randomkeys
+- ockg
+- Dirstream
+- xcompat
+- Linearizable
+- thirdparty
 # Other systems' words
 - savepoints
 - HDDs
@@ -183,10 +215,30 @@ words:
 - Untar
 - LRU
 - SPDK
+# Maven / library names
+- assertj
+- antrun
+- awssdk
+- cdi
+- dnsjava
+- guice
+- javac
+- javassist
+- jline
+- jnr
+- langchain
+- libnss
+- slf4j
+- snakeyaml
+- zstd
+- zizmor
+- Ints
+- jre
 # Misc words
 - acking
 - ACK
 - dashboarding
+- rollups
 - UI
 - UIs
 - UX
@@ -195,6 +247,7 @@ words:
 - lakehouse
 - lakehouses
 - Flink
+- filepicker
 - rebalancing
 - JDK
 - CMDB
@@ -220,6 +273,12 @@ words:
 - WIP
 - smoketest
 - microbenchmark
+- Jacoco
+- txn
+- Xfer
+- amz
+- gh
+- GPT
 # Apache Ozone community member names
 - Sumit
 # Company names for "Who Uses Ozone" page
@@ -238,6 +297,9 @@ words:
 - utilised
 - hotspots
 - hotspot
+- Modularise
+- Optimise
+- behaviour
 # Author names
 - jojochuang
 - Gargi
@@ -257,6 +319,7 @@ words:
 - jianghuazhu
 - weimingdiit
 # Infrastructure and hardware terms
+- firewalled
 - Chrony
 - SAS
 - JBOD

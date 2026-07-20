@@ -4,8 +4,23 @@ sidebar_label: Grafana
 
 # Dashboarding With Grafana
 
-Once Prometheus is up and running, Grana can be configured to monitor and
+Once Prometheus is up and running, Grafana can be configured to monitor and
 visualize Ozone metrics.
+
+## Grafana Installation & Startup
+
+Follow the installation steps from [official docs](https://grafana.com/grafana/download?edition=oss).
+Download and install the open-source edition of Grafana on the cluster host.
+ **Apache Ozone supports** Grafana version 13 and above (docker compose uses `grafana/grafana:13.0.1-security-01`).
+
+**Start Server:** Start the server on the same host, and check the status. It should be active (running).
+```bash
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+```
+Access the Grafana web UI, The default port used is 3000.
+Visit `http://<hostname>:3000`.
+
 
 ## Add Prometheus as a data source
 
