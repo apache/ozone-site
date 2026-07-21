@@ -240,10 +240,8 @@ const config = {
           sidebarPath: undefined,
           editUrl:
             'https://github.com/apache/ozone-site/tree/master',
-          // TODO: The following sections are currently hidden. Ensure that a section contains a few pages
-          //  of publishable quality before enabling visibility for that section.
+          // TODO: Ensure remaining sections contain publishable pages before enabling.
           exclude: [
-            '**/06-troubleshooting/**',
           ]
         },
         blog: {
