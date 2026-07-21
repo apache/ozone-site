@@ -130,7 +130,3 @@ Now you can access any of the services. By default the services are not publishe
 kubectl port-forward s3g-0 9878:9878
 kubectl port-forward scm-0 9876:9876
 ```
-
-:::note Client connectivity
-If metadata operations work but client-to-Datanode data traffic fails, or Datanode pods restart often, set `hdds.datanode.use.datanode.hostname=true` on clients and Datanodes. See [Troubleshooting client connectivity](../../troubleshooting/client-connectivity).
-:::
