@@ -8,6 +8,8 @@ This guide covers common ways to grow capacity: **new Datanodes**, **extra disks
 
 Adding capacity does **not** immediately redistribute existing data. New writes use the expanded cluster; to spread load or disk usage, use the balancers linked below.
 
+Before choosing how to expand—adding disks to existing nodes, new nodes in existing racks, or new racks—review [Heterogeneous deployments](./heterogeneous-deployments) for hardware and rack-density guidance.
+
 ## Add a new Datanode
 
 1. Prepare the host (OS, Java, network, users/permissions) and install Ozone binaries—same as any new node. See the [bare-metal installation guide](../../quick-start/installation/bare-metal) and [Installing Ozone binaries](../installation/installing-binaries).
