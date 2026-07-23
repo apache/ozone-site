@@ -72,4 +72,4 @@ To ensure data security and integrity, Ozone will follow the same rules as Hadoo
 The path component: '/etc/hadoop' in '/etc/hadoop/ozone_dn_socket' has permissions 0777 uid 0 and gid 0. It is not protected because it is world-writable. This might help: 'chmod o-w /etc/hadoop'. For more information: https://wiki.apache.org/hadoop/SocketPathSecurity
 :::
 
-To understand the design of this feature, see the [Short-Circuit Local Read design document](../../../system-internals/design-docs/short-circuit-local-reads).
+To understand the design of this feature, see the [Short-Circuit Local Read design document](../../../system-internals/features/short-circuit-local-reads).
