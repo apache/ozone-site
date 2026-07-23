@@ -11,11 +11,11 @@ The plan is to run repeated CI checks on the merge commit to master.
 
 ## 2. Documentation
 
-[User Documentation](https://github.com/apache/ozone/blob/HDDS-8342/hadoop-hdds/docs/content/feature/Lifecycle.md) or S3 Lifecycle Configuration - Object Expiration has been added.
+[User Documentation](https://ozone.apache.org/docs/next/administrator-guide/operations/object-lifecycle) for S3 Lifecycle Configuration - Object Expiration has been added.
 
 ## 3. Design, attached the docs
 
-Design document can be found here : [S3 Lifecycle Configuration - Object Expiration Design Doc](https://github.com/apache/ozone/blob/HDDS-8342/hadoop-hdds/docs/content/design/s3-object-lifecycle-management.md).
+Design document can be found here : [S3 Lifecycle Configuration - Object Expiration Design Doc](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/s3-object-lifecycle-management.md).
 
 ## 4. S3 compatibility
 
@@ -23,7 +23,7 @@ N/A, only the object expiration action of S3 Lifecycle configuration is supporte
 
 ## 5. Docker-compose / Acceptance tests
 
-New robot test [`om-lifecycle.robot`](https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/dist/src/main/smoketest/lifecycle/om-lifecycle.robot) and [`bucketlifecycle.robot`](https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/dist/src/main/smoketest/s3/bucketlifecycle.robot) are being added.
+New robot test [`om-lifecycle.robot`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/smoketest/lifecycle/om-lifecycle.robot) and [`bucketlifecycle.robot`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/smoketest/s3/bucketlifecycle.robot) are being added.
 
 Comprehensive tests with fault injection were added. The major one is [TestKeyLifecycleService](https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/ozone-manager/src/test/java/org/apache/hadoop/ozone/om/service/TestKeyLifecycleService.java).
 
