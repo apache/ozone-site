@@ -67,7 +67,7 @@ Administrators can inspect the actual and "SCM-usable" space using the Ozone CLI
 
 ### 1. Recon Web UI
 
-The [Recon cluster capacity guide](../../operations/observability/recon/recon-capacity-distribution) describes how to monitor cluster-wide storage:
+The [Recon cluster capacity guide](../../operations/observability/recon/recon-web-ui/capacity) describes how to monitor cluster-wide storage:
 
 - **Dashboards**: View aggregated capacity, used space, and remaining space for the entire cluster.
 - **Datanodes Page**: Sort Datanodes by utilization to quickly identify nodes that are approaching their "Full" threshold.

@@ -1,0 +1,56 @@
+---
+sidebar_label: Recon Web UI
+---
+
+# Recon Web UI
+
+import DocCardList from '@theme/DocCardList';
+
+## Introduction
+
+Apache Ozone Recon is a read-only monitoring and observability service for Apache Ozone clusters, designed for cluster administrators. Recon aggregates metadata from Ozone Manager (OM), Storage Container Manager (SCM), and Datanodes, and exposes this information through a web-based user interface.
+
+Recon does not modify cluster state. It is designed to provide visibility, diagnostics, and insight into the health and usage of an Ozone cluster.
+
+## Accessing the Recon UI
+
+The Recon UI is available via the Recon HTTP endpoint, typically:
+
+`http://<recon-host>:9888/`
+
+The left navigation panel provides access to all available views:
+
+- Overview
+- Volumes
+- Buckets
+- Datanodes
+- Pipelines
+- Containers
+- Insights
+- OM DB Insights
+- Namespace Usage
+- Heatmap
+
+The **Cluster Capacity** page is reached from the **View More** link on the Overview page rather than from the left navigation.
+
+## Common conventions
+
+Most Recon UI pages share the same controls and behaviors. They are described once here; each page notes only where it differs.
+
+- **Auto Reload panel** — an **Auto Refresh** toggle that re-queries Recon every 60 seconds (and remembers your choice for the session) plus a manual **reload** button showing the last refreshed time. Auto Refresh only re-queries Recon; it does **not** force Recon to re-sync from OM. Some pages (for example Insights, Heatmap, and OM DB Insights) have no Auto Reload panel.
+- **Data freshness** — namespace data (volumes, buckets, keys, and their summaries) comes from Recon's own copy of the Ozone Manager (OM) database, updated by a periodic sync; datanode, container, pipeline, and capacity figures come from datanode reports and heartbeats. Values are only as current as the last sync or report. The Overview page shows the last **DB Synced at** time and can trigger an on-demand OM sync.
+- **Columns selector** — table pages let you choose which columns are visible; a key identifier column is always pinned.
+- **Limit selector** — on large listings, controls how many rows are fetched from the server (options such as 1000/5000/10000/20000; default 1000). **Search, sorting, and filters apply to the loaded rows only**, not to rows beyond the limit — raise the limit if you expect more.
+- **Error states** — on a fetch error, a page reports a data-fetch error and its table stays empty; until the first successful load, counts may appear as zero or `N/A`.
+
+## Pages
+
+<DocCardList/>
+
+## Limitations
+
+Recon is read-only and cannot be used to modify cluster state.
+
+Recon data freshness depends on metadata synchronization from OM and SCM.
+
+Operational actions must be performed using standard Ozone administrative tools.
