@@ -77,6 +77,8 @@ in a table with **Volume**, **Bucket**, **Key**, **Size**, **Date Created**,
 
 ### Export tab
 
+![Recon Containers export tab](./ozone_recon_containers_export.png)
+
 - A **Container State** selector and an **Export CSV** button to start an export
   job for one state.
 - **Active Exports** table (shown when jobs are running/queued): Job ID, State,
@@ -103,9 +105,35 @@ in a table with **Volume**, **Bucket**, **Key**, **Size**, **Date Created**,
 - **Auto Reload** panel — an **Auto Refresh** toggle (refreshes the active tab
   and highlights every 60 seconds) and a manual **reload** button.
 - **Export actions** — start an export for a chosen state, watch progress,
-  download the resulting CSV (limited number of downloads), and delete finished
-  jobs. Only one active/completed export per state is allowed at a time; the
-  button is disabled and explains why if one already exists.
+  download the resulting archive (limited number of downloads), and delete
+  finished jobs. Only one active/completed export per state is allowed at a
+  time; the button is disabled and explains why if one already exists.
+
+### Exporting a list of containers
+
+To export every container in a given unhealthy state:
+
+1. Open the **Export** tab.
+2. Pick the state to export from the **Container State** selector (for example
+   *Missing* or *Under-Replicated*).
+3. Click **Export CSV**. The job appears under **Active Exports** as **QUEUED**
+   (with its queue position), then **RUNNING** with a live progress bar showing
+   processed / total records.
+4. When it finishes, the job moves to **Completed Exports** as **COMPLETED**.
+   Use **Download** in the **Action** column to save the archive (for example
+   `export_missing_webui_<jobid>.tar`); the button shows how many downloads
+   remain.
+5. Use **Delete** to remove a finished job. A **FAILED** job shows its error
+   message instead of a download button.
+
+Only one active or completed export per state is allowed at a time, and each
+completed export allows a limited number of downloads. The following video shows
+the full flow:
+
+<video controls width="100%" style={{maxWidth: '800px'}}>
+  <source src="/img/recon-containers-export-demo.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 ## 6. How to Interpret the Information
 
