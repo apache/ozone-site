@@ -1,0 +1,81 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Triggers Algolia DocSearch crawler reindex on demand or when master had commits in the last 24 hours.
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   ALGOLIA_CRAWLER_USER_ID — Crawler dashboard → Settings → Crawler User Id
+#   ALGOLIA_CRAWLER_API_KEY — Crawler dashboard → Settings → Crawler API Key
+#   ALGOLIA_CRAWLER_ID      — Your crawler → Configuration → Settings → Crawler ID
+
+name: algolia-reindex
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Skip the 24-hour master commit check and always reindex
+        type: boolean
+        default: false
+  schedule:
+    - cron: '0 12 * * *'
+
+concurrency:
+  group: algolia-reindex
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  script_dir: .github/scripts
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      with:
+        ref: master
+        fetch-depth: 0
+        persist-credentials: false
+    - name: Check whether reindex is needed
+      id: gate
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
+          echo "should_reindex=true" >> "$GITHUB_OUTPUT"
+          echo "Forced reindex via workflow_dispatch."
+          exit 0
+        fi
+        git fetch origin master
+        count="$(git rev-list --count origin/master --since='24 hours ago')"
+        echo "Commits on master in the last 24 hours: ${count}"
+        if [ "$count" -gt 0 ]; then
+          echo "should_reindex=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "should_reindex=false" >> "$GITHUB_OUTPUT"
+          echo "Skipping reindex: no master commits in the last 24 hours."
+        fi
+    - name: Trigger Algolia crawler reindex
+      if: steps.gate.outputs.should_reindex == 'true'
+      working-directory: ${{ env.script_dir }}
+      env:
+        ALGOLIA_CRAWLER_ID: ${{ secrets.ALGOLIA_CRAWLER_ID }}
+        ALGOLIA_CRAWLER_USER_ID: ${{ secrets.ALGOLIA_CRAWLER_USER_ID }}
+        ALGOLIA_CRAWLER_API_KEY: ${{ secrets.ALGOLIA_CRAWLER_API_KEY }}
+      run: |
+        chmod +x ./algolia_reindex.sh
+        ./algolia_reindex.sh
