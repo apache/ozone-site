@@ -49,13 +49,13 @@ A summary bar of cluster-wide container counts:
 - **Mis-Replicated** — replicas placed in a way that violates placement rules.
 - **Mismatched Replicas** — replicas that disagree (for example, differing data
   checksums).
-- **Quasi Closed** — containers stuck in the quasi-closed state.
+- **Quasi-Closed** — containers stuck in the quasi-closed state.
 
 ### Tabs
 
 Each of the first six tabs shows a table of containers in that state: **Missing**,
 **Under-Replicated**, **Over-Replicated**, **Mis-Replicated**, **Mismatched
-Replicas**, and **Quasi Closed**. The seventh tab is **Export**.
+Replicas**, and **Quasi-Closed**. The seventh tab is **Export**.
 
 ### Container table columns
 
@@ -67,7 +67,7 @@ Replicas**, and **Quasi Closed**. The seventh tab is **Export**.
   hosts (and data checksums when available).
 - **Pipeline ID** — the pipeline the container belongs to.
 - **Unhealthy Since** — when the container entered this unhealthy state. On the
-  Quasi Closed tab this column is labeled **State Enter Time**.
+  Quasi-Closed tab this column is labeled **State Enter Time**.
 
 ### Expanded row — keys in a container
 
@@ -148,7 +148,7 @@ the full flow:
   (for example rack rules), even if the count is correct.
 - **Mismatched Replicas:** replicas exist but disagree — check the per-datanode
   checksums in the Datanodes popover.
-- **Quasi Closed:** containers that could not be cleanly closed; the State Enter
+- **Quasi-Closed:** containers that could not be cleanly closed; the State Enter
   Time shows how long they have been stuck.
 - **Actual/Expected `2 / 3`:** actual is less than expected → under-replicated;
   greater → over-replicated.

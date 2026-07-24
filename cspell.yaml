@@ -98,6 +98,7 @@ words:
 - reconfigurable
 - quasi-close
 - quasi-closed
+- heartbeating
 - HCFS
 - libo3fs
 - omdb
