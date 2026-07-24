@@ -43,14 +43,4 @@ Most Recon UI pages share the same controls and behaviors. They are described on
 - **Limit selector** — on large listings, controls how many rows are fetched from the server (options such as 1000/5000/10000/20000; default 1000). **Search, sorting, and filters apply to the loaded rows only**, not to rows beyond the limit — raise the limit if you expect more.
 - **Error states** — on a fetch error, a page reports a data-fetch error and its table stays empty; until the first successful load, counts may appear as zero or `N/A`.
 
-## Pages
-
 <DocCardList/>
-
-## Limitations
-
-Recon is read-only and cannot be used to modify cluster state.
-
-Recon data freshness depends on metadata synchronization from OM and SCM.
-
-Operational actions must be performed using standard Ozone administrative tools.
