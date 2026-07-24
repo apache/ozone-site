@@ -8,7 +8,7 @@ This document proposes a standard process for creating, reviewing, publishing, a
 
 ## Problem statement
 
-Some of the biggers features requires well defined plans before the implementation. Until now it was managed by uploading PDF design docs to selected JIRA. There are multiple problems with the current practice.
+Some of the bigger features requires well defined plans before the implementation. Until now it was managed by uploading PDF design docs to selected JIRA. There are multiple problems with the current practice.
 
 1. There is no easy way to find existing up-to-date and outdated design docs.
 2. Design docs usually have better description of the problem that the user docs
@@ -134,7 +134,7 @@ Defined in the markdown header. Proposed statuses:
 
 6. Alternatives
 
-> What are the other alternatives you considered and why do yoy prefer the proposed solution The goal of this section is to help people understand why this is the best solution now, and also to prevent churn in the future when old alternatives are reconsidered.
+> What are the other alternatives you considered and why do you prefer the proposed solution The goal of this section is to help people understand why this is the best solution now, and also to prevent churn in the future when old alternatives are reconsidered.
 
 Note: In some cases 4/5 can be combined. For example if you have multiple proposals, the first version may include multiple solutions. At the end ot the discussion we can move the alternatives to 5. and explain why the community is decided to use the selected option.
 
@@ -168,6 +168,6 @@ __Spark__ process:
 
 *Kubernetes*:
 
-* Deditaced git repository
+* Dedicated git repository
 * KEPs are committed to the repo
 * Well defined approval process managed by SIGs (KEPs are assigned to SIGs)
