@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.872206ba.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.14bd7752.js" defer="defer"></script>
 <script src="/assets/js/main.278ed4ac.js" defer="defer"></script>
 </head>
 <body>
@@ -32,13 +32,13 @@ Feature branch:  <a href="https://github.com/apache/ozone/tree/HDDS-8342" target
 <p>There are no intermittent failures specific to the HDDS-8342 branch as of now. During the development , it was ensured all the CI checks were clean prior to every commit merge .</p>
 <p>The plan is to run repeated CI checks on the merge commit to master.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="2-documentation">2. Documentation<a href="#2-documentation" class="hash-link" aria-label="Direct link to 2. Documentation" title="Direct link to 2. Documentation" translate="no">​</a></h2>
-<p><a href="https://github.com/apache/ozone/blob/HDDS-8342/hadoop-hdds/docs/content/feature/Lifecycle.md" target="_blank" rel="noopener noreferrer" class="">User Documentation</a> or S3 Lifecycle Configuration - Object Expiration has been added.</p>
+<p><a href="https://ozone.apache.org/docs/next/administrator-guide/operations/object-lifecycle" target="_blank" rel="noopener noreferrer" class="">User Documentation</a> for S3 Lifecycle Configuration - Object Expiration has been added.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="3-design-attached-the-docs">3. Design, attached the docs<a href="#3-design-attached-the-docs" class="hash-link" aria-label="Direct link to 3. Design, attached the docs" title="Direct link to 3. Design, attached the docs" translate="no">​</a></h2>
-<p>Design document can be found here : <a href="https://github.com/apache/ozone/blob/HDDS-8342/hadoop-hdds/docs/content/design/s3-object-lifecycle-management.md" target="_blank" rel="noopener noreferrer" class="">S3 Lifecycle Configuration - Object Expiration Design Doc</a>.</p>
+<p>Design document can be found here : <a href="https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/s3-object-lifecycle-management.md" target="_blank" rel="noopener noreferrer" class="">S3 Lifecycle Configuration - Object Expiration Design Doc</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="4-s3-compatibility">4. S3 compatibility<a href="#4-s3-compatibility" class="hash-link" aria-label="Direct link to 4. S3 compatibility" title="Direct link to 4. S3 compatibility" translate="no">​</a></h2>
 <p>N/A, only the object expiration action of S3 Lifecycle configuration is supported.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="5-docker-compose--acceptance-tests">5. Docker-compose / Acceptance tests<a href="#5-docker-compose--acceptance-tests" class="hash-link" aria-label="Direct link to 5. Docker-compose / Acceptance tests" title="Direct link to 5. Docker-compose / Acceptance tests" translate="no">​</a></h2>
-<p>New robot test <a href="https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/dist/src/main/smoketest/lifecycle/om-lifecycle.robot" target="_blank" rel="noopener noreferrer" class=""><code>om-lifecycle.robot</code></a> and <a href="https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/dist/src/main/smoketest/s3/bucketlifecycle.robot" target="_blank" rel="noopener noreferrer" class=""><code>bucketlifecycle.robot</code></a> are being added.</p>
+<p>New robot test <a href="https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/smoketest/lifecycle/om-lifecycle.robot" target="_blank" rel="noopener noreferrer" class=""><code>om-lifecycle.robot</code></a> and <a href="https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/smoketest/s3/bucketlifecycle.robot" target="_blank" rel="noopener noreferrer" class=""><code>bucketlifecycle.robot</code></a> are being added.</p>
 <p>Comprehensive tests with fault injection were added. The major one is <a href="https://github.com/apache/ozone/blob/HDDS-8342/hadoop-ozone/ozone-manager/src/test/java/org/apache/hadoop/ozone/om/service/TestKeyLifecycleService.java" target="_blank" rel="noopener noreferrer" class="">TestKeyLifecycleService</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="6-support-of-containers--kubernetes">6. Support of containers / Kubernetes<a href="#6-support-of-containers--kubernetes" class="hash-link" aria-label="Direct link to 6. Support of containers / Kubernetes" title="Direct link to 6. Support of containers / Kubernetes" translate="no">​</a></h2>
 <p>No addition. No change in existing support.</p>
