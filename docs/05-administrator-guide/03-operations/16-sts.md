@@ -20,7 +20,7 @@ The initial implementation:
 
 1. A user with permanent S3 credentials calls **AssumeRole** on the STS endpoint.
 2. Ozone validates the request signature and asks Ranger whether the caller may assume the target role.
-3. If an optional inline session policy (`Policy` parameter) is supplied, Ozone converts it to Ranger permissions and actions via the `IamSessionPolicyResolver` Java class.
+3. If an optional inline session policy (`Policy` parameter) is supplied, Ozone converts it to Ranger permissions and actions.
 4. On success, Ozone returns temporary credentials:
    - **AccessKeyId** — begins with `ASIA`
    - **SecretAccessKey**
@@ -76,7 +76,10 @@ STS is disabled by default. Enable it in `ozone-site.xml`:
   <description>Enable the Ozone S3 Gateway STS endpoint.</description>
 </property>
 ```
-Restart Ozone after changing this property to have it take effect.
+
+Restart all Ozone Managers and all S3 Gateways after changing this property to have it take effect. Datanodes, SCM, and Recon do not need to be restarted.
+
+**WARNING**: Do *NOT* enable STS without also enabling the corresponding flag on the Ranger side (see "Ranger feature flag" section below).  If the Ozone feature flag is enabled but not the Ranger feature flag, it is possible for the created STS token to have more access than requested.  For example, a token requested for the `s3:PutObject` action would have access to `s3:PutObject`, `s3:PutObjectTagging` and `s3:DeleteObjectTagging` actions, which is a security issue.  Having both the Ozone and Ranger feature flags set to true prevents these scenarios from happening provided the Ranger policies are also set up correctly.
 
 ### Additional Configurable Properties
 
@@ -111,10 +114,6 @@ To enforce **S3 action-level** restrictions in Ranger policies (required for fin
 </property>
 ```
 
-Property in `ranger-admin-site.xml`:
-
-`ranger.servicedef.ozone.enableActionMatcherInPoliciesCondition`
-
 <div style={{overflowX: 'auto'}}>
 
 | Default | When `false`                                                                                                                                                                                                                | When `true` |
@@ -134,11 +133,7 @@ Restart Ranger Admin after changing this property so the updated Ozone service d
 
 ## IAM Session Policy to Ranger Permission/Action Mapping
 
-When a caller passes a `Policy` parameter to AssumeRole, Ozone parses the AWS IAM session policy JSON and maps each supported S3 action to Ranger permissions and actions at **volume**, **bucket**, and **key** levels. Ranger then authorizes based on the intersection:
-
-```
-authorized permissions = role permissions ∩ session policy permissions
-```
+When a caller passes a `Policy` parameter to AssumeRole, Ozone parses the AWS IAM session policy JSON and maps each supported S3 action to Ranger permissions and actions at **volume**, **bucket**, and **key** levels. Ranger then authorizes based on the intersection of the role permissions and actions and session policy permissions and actions.
 
 ### Supported session policy subset
 
@@ -152,7 +147,7 @@ authorized permissions = role permissions ∩ session policy permissions
 
 ### S3 action → Ranger permissions and actions
 
-The table below is derived from the `IamSessionPolicyResolver` Java class. For each S3 action, it shows which Ranger permissions and actions are required at each resource level when that action appears in a session policy.
+The table below shows for each S3 action, which Ranger permissions and actions are required at each resource level when that action appears in a session policy.
 
 Each applicable resource level must also include a matching `action-matches` condition for that S3 action (for example `PutObject` at volume, bucket, and key for object-scoped actions). If `action-matches` is omitted at a level, the ACL permission applies to **every** S3 action that requires that ACL at that level. For example, key-level `READ` without `action-matches` authorizes both `GetObject` and `GetObjectTagging`. It is **imperative** (for security reasons) to specify the action at every applicable level.
 
