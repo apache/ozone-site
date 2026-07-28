@@ -117,18 +117,17 @@ When you use snapshots in Apache Ozone, deleting data (keys or directories) does
 This is because snapshots can retain data even after it has been "deleted" from the active bucket.
 Ozone now tracks and calculates bucket quotas more clearly to give you an accurate view of your usage.
 
-**How Your Quota is Calculated and Reported**
+### How Your Quota is Calculated and Reported
 
 Your bucket's total reported quota usage is now a sum of both actively used resources and those pending deletion:
 
-*   **Total Reported Used Space:** `usedBytes` (active data) + `pendingDeleteSnapshotBytes` (data pending deletion due to snapshots)
-*   **Total Reported Used Namespace:** `usedNamespace` (active items) + `pendingDeleteSnapshotNamespace` (items pending deletion due to snapshots)
+- **Total Reported Used Space:** `usedBytes` (active data) + `pendingDeleteSnapshotBytes` (data pending deletion due to snapshots)
+- **Total Reported Used Namespace:** `usedNamespace` (active items) + `pendingDeleteSnapshotNamespace` (items pending deletion due to snapshots)
 
 Quota checks and reporting use these comprehensive totals.
 
-**What This Means for You:**
+### What This Means for You
 
-*   **Accurate Quota View:** Your reported bucket quota is more accurate. It includes active data and data held by snapshots, even if deleted from the active view. This prevents a misleading impression of available quota.
-*   **Understanding Space Reclamation:** You'll see that quota is reclaimed only when data is fully purged. This happens after it's no longer held by any snapshot and background cleanup is complete.
-*   **Better Capacity Planning:** This clearer view of quota usage helps in more effective monitoring and capacity planning for your storage.
-
+- **Accurate Quota View:** Your reported bucket quota is more accurate. It includes active data and data held by snapshots, even if deleted from the active view. This prevents a misleading impression of available quota.
+- **Understanding Space Reclamation:** You'll see that quota is reclaimed only when data is fully purged. This happens after it's no longer held by any snapshot and background cleanup is complete.
+- **Better Capacity Planning:** This clearer view of quota usage helps in more effective monitoring and capacity planning for your storage.

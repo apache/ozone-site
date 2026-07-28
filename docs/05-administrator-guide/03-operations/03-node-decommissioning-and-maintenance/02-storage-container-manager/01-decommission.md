@@ -6,9 +6,9 @@ sidebar_label: Decommission
 
 Storage Container Manager (SCM) decommissioning is the process in which you can gracefully remove one of the SCM from the SCM HA Ring.
 
-For migrating an entire SCM HA membership to new SCM hosts without restarting every DataNode, see [SCM migration](./scm-migration).
+For migrating an entire SCM HA membership to new SCM hosts without restarting every Datanode, see [SCM migration](./scm-migration).
 
-## SCM decommission {#scm-decommission}
+## SCM decommission {#SCM-decommission}
 
 To decommission an SCM and remove the node from the SCM HA ring, the following steps need to be executed.
 
