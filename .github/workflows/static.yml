@@ -69,7 +69,7 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      run: pnpm install --frozen-lockfile
     - name: Run spelling check
       working-directory: ${{ env.script_dir }}
       run: |
@@ -94,7 +94,7 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      run: pnpm install --frozen-lockfile
     - name: Run lint
       run: pnpm run lint
   check-sidebar:
@@ -113,7 +113,7 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      run: pnpm install --frozen-lockfile
     - name: Run docs sidebar check
       working-directory: ${{ env.script_dir }}
       run: |
