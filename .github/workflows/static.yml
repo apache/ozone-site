@@ -71,7 +71,7 @@ jobs:
         cache: pnpm
     - name: Install pnpm dependencies
       # --dev skips the site's build dependencies; cspell only needs devDependencies.
-      run: pnpm install --dev
+      run: pnpm install --dev --frozen-lockfile
     - name: Run spelling check
       working-directory: ${{ env.script_dir }}
       run: |
@@ -118,7 +118,7 @@ jobs:
         cache: pnpm
     - name: Install pnpm dependencies
       # --dev skips the site's build dependencies; the sidebar check is a shell script.
-      run: pnpm install --dev
+      run: pnpm install --dev --frozen-lockfile
     - name: Run docs sidebar check
       working-directory: ${{ env.script_dir }}
       run: |
