@@ -215,6 +215,7 @@ words:
 - Untar
 - LRU
 - SPDK
+- YCSB
 # Maven / library names
 - assertj
 - antrun
