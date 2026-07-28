@@ -19,7 +19,7 @@ Design document can be found here : [S3 Lifecycle Configuration - Object Expirat
 
 ## 4. S3 compatibility
 
-N/A, only the object expiration action of S3 Lifecycle configuration is supported. 
+N/A, only the object expiration action of S3 Lifecycle configuration is supported.
 
 ## 5. Docker-compose / Acceptance tests
 
@@ -45,7 +45,7 @@ No addition. No change in existing support.
 
 A global enable/disable switch for this feature is added in HDDS-12780. [Implement the Lifecycle Service](https://issues.apache.org/jira/browse/HDDS-12780).
 
-To enable the feature, the following configs need to be added to OM ozone-site.xml, and set the value to "true"
+To enable the feature, the following configs need to be added to OM Ozone-site.xml, and set the value to "true"
 
 ```xml
 <property>
@@ -56,9 +56,9 @@ To enable the feature, the following configs need to be added to OM ozone-site.x
 </property>
 ```
 
-A new table with "lifecycleConfigurationTable" is introduced in OM to persist bucket's lifecycle configurations, as a configuration can have up to 1000 rules per AWS S3 document, so including the lifecycle configuration in bucketInfo instead of a new table is considered but not chosen finally.  New table "lifecycleScanStateTable" is introduced to save the checkpoint of each bucket's scan, so the scan can be resumed when there is leader transfer or OM restart. 
+A new table with "lifecycleConfigurationTable" is introduced in OM to persist bucket's lifecycle configurations, as a configuration can have up to 1000 rules per AWS S3 document, so including the lifecycle configuration in bucketInfo instead of a new table is considered but not chosen finally.  New table "lifecycleScanStateTable" is introduced to save the checkpoint of each bucket's scan, so the scan can be resumed when there is leader transfer or OM restart.
 
-A OM feature with name S3_LIFECYCLE_SUPPORT is introduced in OM, to reject Lifecycle configuration operations(put/get/delete) call if the feature is not finalized yet. 
+A OM feature with name S3_LIFECYCLE_SUPPORT is introduced in OM, to reject Lifecycle configuration operations(put/get/delete) call if the feature is not finalized yet.
 
 ## 10. Third-party dependencies/License changes
 
@@ -66,11 +66,11 @@ There are no third party dependencies introduced by this feature.
 
 ## 11. Performance
 
-The major performance consideration based on real production environment experience is it's not recommended to delete expired keys too quickly, other wise the RocksDB access latency can increase due to too many tombstone not compacted. Property "ozone.lifecycle.service.delete.batch-size" with default value 1000 is introduced to control the batch deletion size,  so deletion will not happen too fast. 
+The major performance consideration based on real production environment experience is it's not recommended to delete expired keys too quickly, other wise the RocksDB access latency can increase due to too many tombstone not compacted. Property "ozone.lifecycle.service.delete.batch-size" with default value 1000 is introduced to control the batch deletion size,  so deletion will not happen too fast.
 
 ## 12. Security considerations
 
-The API to set/delete bucket's Lifecycle configuration requires the caller is the owner of bucket for native ACL, and bucket write permission for Ranger. 
+The API to set/delete bucket's Lifecycle configuration requires the caller is the owner of bucket for native ACL, and bucket write permission for Ranger.
 
 The CLI to pause/resume/get Lifecycle service status, is only accessible to the OM admins.
 
