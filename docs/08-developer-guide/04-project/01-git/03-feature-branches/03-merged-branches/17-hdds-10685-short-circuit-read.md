@@ -81,25 +81,42 @@ A benchmark was run against feature branch HDDS-10685, testing short-circuit per
 
 ### Cluster configuration
 
-![Short-circuit read benchmark cluster configuration](/img/developer-guide/short-circuit-read-benchmark/cluster-config.png)
+- Hosts: 9 nodes, node8 has no region server and datanode
+- Ozone: 8 datanodes (16GB heap, 1 data volume), 3 OMs (8GB heap), 3 SCMs (8GB heap)
+- Hbase: 2 masters (1GB heap), 8 region servers (31GB heap)
+- `ozone.client.bytes.per.checksum` = 1MB
 
 ### Ozone FS
 
 Use `ozone fs -get ofs://ozone1733996033/vol-scr/buck/scr/file33 ./file33` to download a 10 GB file. Node9 and node7 have the datanode role; node8 does not.
 
-![Ozone FS short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/ozone-fs-get.png)
+|  | Short-circuit disabled(A) | short-circuit-enabled(B) | B/A |
+| :---: | :---: | :---: | :---: |
+| node9 | 4m4.123s | 3m21.165s | 82.4% |
+| node7 | 4m57.135s | 3m58.782s | 80.5% |
+| node8 | 4m21.895s | 4m46.193s |  |
 
-### `YCSB`
+### YCSB
 
 The tests are performed by running 3 consecutive iterations after changing the `ozone.client.read.short-circuit` configuration and restarting all related services. HBase `l1CacheHitRatio` is around 90% during the test.
 
 **Workload C**
 
-![Workload C short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/workload-c.png)
+|  | Short-Circuit disabled |  |  | Short-Circuit enabled |  |  |  |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+|  | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
+| **Num Ops(360s)** | 140266 | 128684 | 136483 | 152988 | 162343 | 150459 | 87.0% |
+| **Throughput** | 387.6 | 353.7 | 378.9 | 423.7 | 449.5 | 416.5 | 86.9% |
+| **Avg Latency(ms)** | 163.9 | 179.1 | 168.4 | 150.5 | 142.0 | 153.3 | 114.7% |
+| **95 Latency(ms)** | 833 | 1061.9 | 850.9 | 908.8 | 936.9 | 870.9 | 101.1% |
+| **99 Latency(ms)** | 2316.3 | 3149.8 | 4345.9 | 2510.8 | 2709.5 | 3151.9 | 117.2% |
 
 **Workload A**
 
-![Workload A short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/workload-a.png)
+|  | Short-Circuit disabled |  |  | Short-Circuit enabled |  |  |  |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+|  | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
+| **Throughput** | 611.2 | 592.5 | 586.7 | 859.7 | 723.0 | 706.6 | 78.2% |
 
 Metrics (`ContainerLocalOps`, local op latencies, local bytes stats) are added in Datanode to observe the runtime state/latency.
 
