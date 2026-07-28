@@ -5,11 +5,10 @@
 | 2.2.0   | 2026 Jul 15  | [Source](https://www.apache.org/dyn/closer.cgi/ozone/2.2.0/ozone-2.2.0-src.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.2.0/ozone-2.2.0-src.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.2.0/ozone-2.2.0-src.tar.gz.asc) | [Binary](https://www.apache.org/dyn/closer.cgi/ozone/2.2.0/ozone-2.2.0.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.2.0/ozone-2.2.0.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.2.0/ozone-2.2.0.tar.gz.asc) | [Release Notes](/release-notes/2.2.0) |
 | 2.1.1   | 2026 Jun 21  | [Source](https://www.apache.org/dyn/closer.cgi/ozone/2.1.1/ozone-2.1.1-src.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.1.1/ozone-2.1.1-src.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.1.1/ozone-2.1.1-src.tar.gz.asc) | [Binary](https://www.apache.org/dyn/closer.cgi/ozone/2.1.1/ozone-2.1.1.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.1.1/ozone-2.1.1.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.1.1/ozone-2.1.1.tar.gz.asc) | [Release Notes](/release-notes/2.1.1) |
 | 2.0.0   | 2025 Apr 30  | [Source](https://www.apache.org/dyn/closer.cgi/ozone/2.0.0/ozone-2.0.0-src.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.0.0/ozone-2.0.0-src.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.0.0/ozone-2.0.0-src.tar.gz.asc) | [Binary](https://www.apache.org/dyn/closer.cgi/ozone/2.0.0/ozone-2.0.0.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/2.0.0/ozone-2.0.0.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/2.0.0/ozone-2.0.0.tar.gz.asc) | [Release Notes](/release-notes/2.0.0) |
-| 1.4.1   | 2024 Nov 24  | [Source](https://www.apache.org/dyn/closer.cgi/ozone/1.4.1/ozone-1.4.1-src.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/1.4.1/ozone-1.4.1-src.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/1.4.1/ozone-1.4.1-src.tar.gz.asc) | [Binary](https://www.apache.org/dyn/closer.cgi/ozone/1.4.1/ozone-1.4.1.tar.gz)<br/>[Checksum](https://downloads.apache.org/ozone/1.4.1/ozone-1.4.1.tar.gz.sha512)<br/>[Signature](https://downloads.apache.org/ozone/1.4.1/ozone-1.4.1.tar.gz.asc) | [Release Notes](/release-notes/1.4.1) |
 
 ## Archives
 
-Older releases are available from the [Apache Ozone archive](https://archive.apache.org/dist/ozone/).
+Older releases are available from the [Apache Ozone archive](https://archive.apache.org/dist/ozone/) for reference, but are no longer recommended.
 
 ## Verify
 

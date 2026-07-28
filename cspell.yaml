@@ -98,6 +98,7 @@ words:
 - reconfigurable
 - quasi-close
 - quasi-closed
+- heartbeating
 - HCFS
 - libo3fs
 - omdb
@@ -270,6 +271,9 @@ words:
 - minimising
 - tarballed
 - Namenodes
+- WIP
+- smoketest
+- microbenchmark
 - Jacoco
 - txn
 - Xfer
