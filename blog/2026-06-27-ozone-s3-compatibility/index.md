@@ -7,7 +7,7 @@ tags: [Ozone, S3, compatibility]
 
 <!-- cspell:ignore peterxcli Xiangpeng Zstd amz -->
 
-Recently I created [https://ozone.s3.peterxcli.dev/](https://ozone.s3.peterxcli.dev/), an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR helps the compatibility story. It is fully open source at [https://github.com/peterxcli/ozone-s3-compatibility](https://github.com/peterxcli/ozone-s3-compatibility).
+Recently I created https://ozone.s3.peterxcli.dev/, an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR helps the compatibility story. It is fully open source at https://github.com/peterxcli/ozone-s3-compatibility.
 
 <!-- truncate -->
 
@@ -69,7 +69,7 @@ For PR authors, there is also a PR comparison workflow. It can run an Ozone PR h
 For the very first version, I literally just prompted Codex with `gpt5.4 xhigh`:
 
 :::info Prompt
-I want to create a repo that runs [https://github.com/ceph/s3-tests](https://github.com/ceph/s3-tests) and [https://github.com/minio/mint](https://github.com/minio/mint) on GitHub Action and generate the compatibility report page on GitHub Pages nightly. Make the page pretty. My desired steps that run in the GitHub Action are: clone the Ozone repo, pull latest master change, compile, start running cluster, run Mint and `s3-tests` to get result, compile result to be the page. We can show the compatibility rate of each feature for each test (`s3-tests`, `mint`) daily change as a chart at the page top, followed by the report page, then also include the old result expansion button to allow users to check a specific date’s running result. BTW I have the local clone of Ozone at `~/Documents/oss/apache/ozone`, you can look into it directly without searching the codebase on the website.
+I want to create a repo that runs https://github.com/ceph/s3-tests and https://github.com/minio/mint on GitHub Action and generate the compatibility report page on GitHub Pages nightly. Make the page pretty. My desired steps that run in the GitHub Action are: clone the Ozone repo, pull latest master change, compile, start running cluster, run Mint and `s3-tests` to get result, compile result to be the page. We can show the compatibility rate of each feature for each test (`s3-tests`, `mint`) daily change as a chart at the page top, followed by the report page, then also include the old result expansion button to allow users to check a specific date’s running result. BTW I have the local clone of Ozone at `~/Documents/oss/apache/ozone`, you can look into it directly without searching the codebase on the website.
 :::
 
 It got most of it right on the first try. I still made some follow-ups on the result, like “attach `s3-tests` and `mint` as submodule” and “use `act` to test the GitHub Action works locally within Docker”, but those were relatively minor compared with the first scaffold.
