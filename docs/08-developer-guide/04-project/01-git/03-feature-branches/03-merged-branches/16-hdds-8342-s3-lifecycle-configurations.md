@@ -45,7 +45,7 @@ No addition. No change in existing support.
 
 A global enable/disable switch for this feature is added in HDDS-12780. [Implement the Lifecycle Service](https://issues.apache.org/jira/browse/HDDS-12780).
 
-To enable the feature, the following configs need to be added to OM Ozone-site.xml, and set the value to "true"
+To enable the feature, the following configs need to be added to OM `ozone-site.xml`, and set the value to `true`
 
 ```xml
 <property>
