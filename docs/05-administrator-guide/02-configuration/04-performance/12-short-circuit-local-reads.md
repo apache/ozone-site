@@ -69,7 +69,7 @@ To enable short-circuit read, here is an example configuration.
 To ensure data security and integrity, Ozone will follow the same rules as Hadoop to check permission on the `ozone.domain.socket.path` path as documented in [Socket Path Security](https://wiki.apache.org/hadoop/SocketPathSecurity). It will fail the `ozone.domain.socket.path` verification and disable the feature if the filesystem permissions of the specified path are inadequate. The verification failure message carries detail instruction about how to fix the problem. Following is an example:
 
 :::note
-The path component: '/etc/Hadoop' in '/etc/Hadoop/ozone_dn_socket' has permissions 0777 uid 0 and gid 0. It is not protected because it is world-writable. This might help: 'chmod o-w /etc/Hadoop'. For more information: https://wiki.apache.org/hadoop/SocketPathSecurity
+The path component: `/etc/hadoop` in `/etc/hadoop/ozone_dn_socket` has permissions 0777 uid 0 and gid 0. It is not protected because it is world-writable. This might help: `chmod o-w /etc/hadoop`. For more information: https://wiki.apache.org/hadoop/SocketPathSecurity
 :::
 
 To understand the design of this feature, see the [Short-Circuit Local Read design document](../../../system-internals/features/short-circuit-local-reads).
