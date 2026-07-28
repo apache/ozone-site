@@ -16,26 +16,13 @@ The initial implementation:
 - Support the **AssumeRole** API.
 - Requires **Apache Ranger** for authorization. 
 
-## How Ozone STS Works
-
-1. A user with permanent S3 credentials calls **AssumeRole** on the STS endpoint.
-2. Ozone validates the request signature and asks Ranger whether the caller may assume the target role.
-3. If an optional inline session policy (`Policy` parameter) is supplied, Ozone converts it to Ranger permissions and actions.
-4. On success, Ozone returns temporary credentials:
-   - **AccessKeyId** — begins with `ASIA`
-   - **SecretAccessKey**
-   - **SessionToken** — opaque, server-side stateless token 
-5. Subsequent S3 API calls use the temporary credentials and must include the session token in the `x-amz-security-token` header.  If an optional inline session policy was supplied in the initial AssumeRole call, the permissions and actions for the inline policy will be intersected with the role's permissions for authorization.  Otherwise, the role's permissions only will be used for authorization.
-
-Temporary credential lifetime is **15 minutes to 12 hours** (900–43,200 seconds). If `DurationSeconds` is omitted, the token's expiration defaults to 3600 seconds (1 hour) per the AWS specification.
-
 ## Prerequisites
 
 Before using STS, you need:
 
 1. **Secure Ozone cluster** with Kerberos and Ranger enabled.
 2. **Ranger Ozone plugin** installed on OM/S3G with `RangerOzoneAuthorizer` configured (see [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger)).
-3. **Permanent S3 credentials** for the calling user:
+3. **Permanent S3 credentials** for the calling user (i.e. service principal):
 
 ```shell
 kinit my-service-user
@@ -44,10 +31,13 @@ ozone s3 getsecret
 # awsSecret=...
 ```
 
-4. **Ranger roles and policies**:
-   - Create a Ranger **role** for each role that can be assumed.
-   - Grant the calling user **assume_role** permission on that role.
-   - Grant the role the resource permissions and actions it needs (volume/bucket/key) via resource policies.
+4. **Ozone volume(s), bucket(s) and key(s) created** as needed for the resources the STS tokens would need to access
+
+5. **Ranger user, roles and policies**:
+    - Create a Ranger **user** corresponding to the service principal in Ozone
+    - Create a Ranger **role** for each role that can be assumed.
+    - Grant the calling user **assume_role** permission on that role.
+    - Grant the role the resource permissions and actions it needs (volume/bucket/key) via resource policies.
 
 The role name in `RoleArn` must match the Ranger role name:
 
@@ -59,7 +49,22 @@ arn:aws:iam::123456789012:role/my-data-reader-role
 
 The account ID (`123456789012`) is accepted for AWS compatibility but is not used for authorization.
 
-Set environment variable `RANGER_URL` to your Ranger Admin base URL (for example `http://localhost:6080`) and environment variable `RANGER_SERVICE` to your Ozone Ranger service name (for example `dev_ozone`). The curl examples below authenticate to Ranger Admin with `-u admin:rangerR0cks!` (replace with your Ranger Admin username and password).
+When configuring Ranger policies via `curl` (such as in the `Ranger Policy Setup` section below), set environment variable `RANGER_URL` to your Ranger Admin base URL (for example `http://localhost:6080`) and environment variable `RANGER_SERVICE` to your Ozone Ranger service name (for example `dev_ozone`). The curl examples below authenticate to Ranger Admin with `-u admin:rangerR0cks!` (replace with your Ranger Admin username and password).
+
+---
+
+## How Ozone STS Works
+
+1. A user with permanent S3 credentials calls **AssumeRole** on the STS endpoint.
+2. Ozone validates the request signature and asks Ranger whether the caller may assume the target role.
+3. If an optional inline session policy (`Policy` parameter) is supplied, Ozone converts it to Ranger permissions and actions.
+4. On success, Ozone returns temporary credentials:
+   - **AccessKeyId** — begins with `ASIA`
+   - **SecretAccessKey**
+   - **SessionToken** — opaque, server-side stateless token
+5. Subsequent S3 API calls use the temporary credentials and must include the session token in the `x-amz-security-token` header.  If an optional inline session policy was supplied in the initial AssumeRole call, the permissions and actions for the inline policy will be intersected with the role's permissions for authorization.  Otherwise, the role's permissions only will be used for authorization.
+
+Temporary credential lifetime is **15 minutes to 12 hours** (900–43,200 seconds). If `DurationSeconds` is omitted, the token's expiration defaults to 3600 seconds (1 hour) per the AWS specification.
 
 ---
 
@@ -93,7 +98,7 @@ Restart all Ozone Managers and all S3 Gateways after changing this property to h
 | `ozone.om.sts.token.cleanup.service.interval` | `3h`           | Interval for cleaning revoked token entries older than 12 hours |
 | `ozone.om.sts.token.cleanup.service.timeout` | `15m`          | Timeout for a cleanup run                                       |
 
-After enabling, the STS endpoint is available at:
+After enabling, the STS endpoint is available at one or more of the following URLs, depending on the `ozone.http.policy` value (`HTTP_ONLY`, `HTTPS_ONLY`, or `HTTP_AND_HTTPS`) and whether TLS is configured.  By default, the value is `HTTP_ONLY`:
 
 ```
 http://<s3g-host>:9880/sts
