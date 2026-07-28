@@ -101,11 +101,11 @@ It's not a hard requirement to migrate all the design doc. But process is always
 
 This the proposed template to document any proposal. It's recommended but not required the use exactly the some structure. Some proposal may require different structure, but we need the following information.
 
-1. Summary
+### 1. Summary
 
 > Give a one sentence summary, like the Jira title. It will be displayed on the documentation page. Should be enough to understand
 
-1. Status
+### 2. Status
 
 Defined in the markdown header. Proposed statuses:
 
@@ -116,31 +116,31 @@ Defined in the markdown header. Proposed statuses:
 
 Note: the *accepted* design docs won't be visible as part of the documentation or only under a dedicated section to clearly communicate that it's not ready, yet.
 
-1. Problem statement (Motivation / Abstract)
+### 3. Problem statement (Motivation / Abstract)
 
 > What is the problem and how would you solve it? Think about an abstract of a paper: one paragraph overview. Why will the world better with this change?
 
-1. Non-goals
+### 4. Non-goals
 
 > Very important to define what is outside of the scope of this proposal
 
-1. Technical Description (Architecture and implementation details)
+### 5. Technical Description (Architecture and implementation details)
 
 > Explain the problem in more details. How can it be reproduced? What is the current solution? What is the limitation of the current solution?
 > How the new proposed solution would solve the problem? Architectural design.
 > Implementation details. What should be changed in the code. Is it a huge change? Do we need to change wire protocol? Backward compatibility?
 
-1. Alternatives
+### 6. Alternatives
 
 > What are the other alternatives you considered and why do you prefer the proposed solution The goal of this section is to help people understand why this is the best solution now, and also to prevent churn in the future when old alternatives are reconsidered.
 
 Note: In some cases 4/5 can be combined. For example if you have multiple proposals, the first version may include multiple solutions. At the end ot the discussion we can move the alternatives to 5. and explain why the community is decided to use the selected option.
 
-1. Plan
+### 7. Plan
 
 > Planning to implement the feature. Estimated size of the work? Do we need feature branch? Any migration plan, dependency? If it's not a big new feature it can be one sentence or optional.
 
-1. References
+### 8. References
 
 ## Workflows form other projects
 
