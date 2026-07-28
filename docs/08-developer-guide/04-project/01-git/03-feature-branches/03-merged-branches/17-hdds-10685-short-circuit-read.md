@@ -77,29 +77,29 @@ The major workflow of Short-Circuit Read is: The client detects a local Datanode
 
 End-to-end read performance is therefore dominated by local disk I/O, similar to a direct file read, rather than by gRPC data transfer.
 
-A benchmark was run against feature branch HDDS-10685, testing short-circuit performance with the `ozone fs` command and YCSB on a ycloud cluster. Short-circuit read was toggled with `ozone.client.read.short-circuit` and `ozone.domain.socket.path`.
+A benchmark was run against feature branch HDDS-10685, testing short-circuit performance with the `ozone fs` command and `YCSB` on Cloudera's internal test bed. Short-circuit read was toggled with `ozone.client.read.short-circuit` and `ozone.domain.socket.path`.
 
 ### Cluster configuration
 
-![Short-circuit read benchmark cluster configuration](short-circuit-read-benchmark/cluster-config.png)
+![Short-circuit read benchmark cluster configuration](/img/developer-guide/short-circuit-read-benchmark/cluster-config.png)
 
 ### Ozone FS
 
 Use `ozone fs -get ofs://ozone1733996033/vol-scr/buck/scr/file33 ./file33` to download a 10 GB file. Node9 and node7 have the datanode role; node8 does not.
 
-![Ozone FS short-circuit read benchmark](short-circuit-read-benchmark/ozone-fs-get.png)
+![Ozone FS short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/ozone-fs-get.png)
 
-### YCSB
+### `YCSB`
 
 The tests are performed by running 3 consecutive iterations after changing the `ozone.client.read.short-circuit` configuration and restarting all related services. HBase `l1CacheHitRatio` is around 90% during the test.
 
 **Workload C**
 
-![YCSB Workload C short-circuit read benchmark](short-circuit-read-benchmark/workload-c.png)
+![Workload C short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/workload-c.png)
 
 **Workload A**
 
-![YCSB Workload A short-circuit read benchmark](short-circuit-read-benchmark/workload-a.png)
+![Workload A short-circuit read benchmark](/img/developer-guide/short-circuit-read-benchmark/workload-a.png)
 
 Metrics (`ContainerLocalOps`, local op latencies, local bytes stats) are added in Datanode to observe the runtime state/latency.
 
