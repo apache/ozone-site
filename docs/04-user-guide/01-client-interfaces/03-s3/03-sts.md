@@ -1,5 +1,5 @@
 ---
-sidebar_label: Ozone S3 STS
+sidebar_label: STS
 ---
 
 # Ozone S3 Security Token Service (STS)
@@ -34,7 +34,7 @@ Temporary credential lifetime is **15 minutes to 12 hours** (900–43,200 second
 Before using STS, you need:
 
 1. **Secure Ozone cluster** with Kerberos and Ranger enabled.
-2. **Ranger Ozone plugin** installed on OM/S3G with `RangerOzoneAuthorizer` configured (see [Configuring Apache Ranger](../configuration/security/ranger)).
+2. **Ranger Ozone plugin** installed on OM/S3G with `RangerOzoneAuthorizer` configured (see [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger)).
 3. **Permanent S3 credentials** for the calling user:
 
 ```shell
@@ -175,11 +175,9 @@ Each applicable resource level must also include a matching `action-matches` con
 
 † For `s3:ListBucket`, key-level **READ** is granted on the listed prefix (or `*` if no `s3:prefix` condition is present).
 
-#### Simplifying bucket and key policies with `All`
+#### Simplifying resource policies with `All`
 
-You can often simplify **bucket** and **key** policies by granting **`All`** instead of individual access types such as `write` or `delete`. The `action-matches` condition restricts which S3 action the permission applies to, so `All` with Action: `PutObject` does not broadly authorize unrelated operations at that resource level.
-
-At the **volume** level, prefer **specific** access types such as `read` and `list` rather than `All`. Volume-level permissions apply even when a request has no mapped S3 action (similar to bucket-level and key-level permissions), so granting `All` on a volume could unintentionally allow destructive operations such as volume deletion.
+You can simplify resource policies by granting **`All`** instead of individual access types such as `write` or `delete`. The `action-matches` condition restricts which S3 action the permission applies to, so `All` with Action: `PutObject` does not broadly authorize unrelated operations at that resource level.
 
 #### Example: IAM permission policy mapped to Ranger policies
 
@@ -200,11 +198,11 @@ The corresponding Ranger role needs matching policies at each level:
 
 | Level | Resource | Permission         | Action-matches Policy Condition |
 | --- | --- |--------------------|---------------------------------|
-| Volume | `s3v` | `READ`             | `GetObject`                     |
+| Volume | `s3v` | `READ` (or `All`‡)            | `GetObject`                     |
 | Bucket | `reports` | `READ` (or `All`‡) | `GetObject`                     |
 | Key | `*` (under `reports`) | `READ` (or `All`‡) | `GetObject`                     |
 
-‡ When using `All` at bucket or key level, the `action-matches: GetObject` condition is what prevents unrelated S3 actions from being authorized at that level.
+‡ When using `All`, the `action-matches: GetObject` condition is what prevents unrelated S3 actions from being authorized at that level.
 
 Example Ranger policy item for the key level (specific read permission):
 
@@ -335,7 +333,7 @@ Let's use the following IAM permission policy and make equivalent Ranger policie
 }
 ```
 
-**Volume** (prefer specific access types — not `All`):
+**Volume** (`READ` or `All` both work when paired with `action-matches`):
 
 ```shell
 curl --silent --show-error --location -u admin:rangerR0cks! \
@@ -466,10 +464,10 @@ export AWS_DEFAULT_REGION=<region such as us-east-1>
 
 ### Step 2: Create the reports bucket in Ozone and upload sample object
 
-`my-service-user` does not have permission to read the `s3v` volume or create buckets. Switch to a Kerberos identity that does (for example the default `hdfs` user), create the `reports` bucket referenced in the Ranger policies above, upload a sample object for `GetObject` tests in later steps, then switch back to `my-service-user`.
+`my-service-user` does not have permission to read the `s3v` volume or create buckets. Switch to a Kerberos identity with permission to read the s3v volume and create `report` bucket (you may need to create this user and assign it the proper permissions in Ranger policies), create the `reports` bucket referenced in the Ranger policies above, upload a sample object for `GetObject` tests in later steps, then switch back to `my-service-user`.
 
 ```shell
-kinit hdfs
+kinit <userWithPermissionToReadS3VVolumeAndCreateReportsBucket>
 ozone sh bucket create /s3v/reports
 printf 'sample data for GetObject test\n' > /tmp/file.parquet
 ozone sh key put /s3v/reports/data/file.parquet /tmp/file.parquet
@@ -582,5 +580,5 @@ ozone s3 revokesecret -u my-service-user -y
 ## Further Reading
 
 - [AWS STS Design for Ozone S3](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/ozone-sts.md) — architecture, session token format, and design rationale
-- [Configuring Apache Ranger](../configuration/security/ranger) — base Ranger/Ozone integration
-- [Securing S3](../../../user-guide/client-interfaces/s3/securing-s3) — Kerberos, S3 secrets, and S3 Gateway security
+- [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger) — base Ranger/Ozone integration
+- [Securing S3](./securing-s3) — Kerberos, S3 secrets, and S3 Gateway security
