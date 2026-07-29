@@ -43,11 +43,11 @@ No addition. No change in existing support.
 
 ## 9. Possible incompatible changes/used feature flag
 
-Short-circuit read is gated by the non-rolling upgrade framework as HDDSLayoutFeature.SHORT_CIRCUIT_READS (layout version 11). 
+Short-circuit read is gated by DatanodeVersion.SHORT_CIRCUIT_READS (version 4), which prevents a new version of Ozone client from communicating with a cluster that does not support short-circuit reads.
 
-It remains inactive until the cluster upgrade is finalized. A global enable/disable switch is provided via ozone.client.read.short-circuit (default: false).
+A global enable/disable switch is provided via ozone.client.read.short-circuit (default: false).
 
-To enable the feature (after finalization), add the following to the client and Datanode ozone-site.xml to enable the feature:
+To enable this feature, add the following to both the client and Datanode ozone-site.xml:
 
 ```xml
 <property>
@@ -61,7 +61,7 @@ And the following to the client and Datanode ozone-site.xml, to specify the path
 ```xml
 <property>
     <name>ozone.domain.socket.path</name>
-    <value></value>
+    <value>$your-domain-socket-path</value>
     <tag>CLIENT, DATANODE</tag>
     <description>UNIX domain socket path for co-located client–Datanode short-circuit communication.</description>
 </property>
@@ -126,5 +126,5 @@ Short-Circuit Read does not introduce any new CLI or admin command.
 
 Short-circuit communication uses a UNIX domain socket (`ozone.domain.socket.path`) between the client and Datanode. 
 
-It follows the same [Hadoop Socket Path Security](https://cwiki.apache.org/confluence/spaces/HADOOP2/pages/120730260/SocketPathSecurity) rules as HDFS short-circuit reads.
+It follows the same rules as HDFS short-circuit reads. Refer to the "Security" section of [Design](https://github.com/apache/ozone/blob/HDDS-10685/hadoop-hdds/docs/content/design/short-circuit-read.md) for details.
 
