@@ -5,7 +5,7 @@ Feature branch:  https://github.com/apache/ozone/tree/HDDS-10685
 
 ## 1. Builds/intermittent test failures
 
-There are no intermittent failures specific to the HDDS-10685 branch as of now. During the development, it was ensured all the CI checks were clean prior to every commit merge. 
+There are no intermittent failures specific to the HDDS-10685 branch as of now. During the development, it was ensured all the CI checks were clean prior to every commit merge.
 
 The plan is to run repeated CI checks on the merge commit to master.
 
@@ -19,7 +19,7 @@ Design document can be found here : [Short Circuit Read Support](https://github.
 
 ## 4. S3 compatibility
 
-N/A, S3 compatibility remains the same. Short Circuit Read only affects the client and DataNode read path. 
+N/A, S3 compatibility remains the same. Short Circuit Read only affects the client and Datanode read path.
 
 ## 5. Docker-compose / Acceptance tests
 
@@ -45,9 +45,9 @@ No addition. No change in existing support.
 
 Short-circuit read is gated by DatanodeVersion.SHORT_CIRCUIT_READS (version 4), which prevents a new version of Ozone client from communicating with a cluster that does not support short-circuit reads.
 
-A global enable/disable switch is provided via ozone.client.read.short-circuit (default: false).
+A global enable/disable switch is provided via Ozone.client.read.short-circuit (default: false).
 
-To enable this feature, add the following to both the client and Datanode ozone-site.xml:
+To enable this feature, add the following to both the client and Datanode Ozone-site.xml:
 
 ```xml
 <property>
@@ -57,7 +57,9 @@ To enable this feature, add the following to both the client and Datanode ozone-
     <description>Disable or enable the short-circuit local read feature. By default it is disabled.</description>
 </property>
 ```
-And the following to the client and Datanode ozone-site.xml, to specify the path of the UNIX domain socket:
+
+And the following to the client and Datanode Ozone-site.xml, to specify the path of the UNIX domain socket:
+
 ```xml
 <property>
     <name>ozone.domain.socket.path</name>
@@ -81,20 +83,20 @@ A benchmark was run against feature branch HDDS-10685, testing short-circuit per
 
 ### Cluster configuration
 
-- Hosts: 9 nodes, node8 has no region server and datanode
-- Ozone: 8 datanodes (16GB heap, 1 data volume), 3 OMs (8GB heap), 3 SCMs (8GB heap)
+- Hosts: 9 nodes, node8 has no region server and Datanode
+- Ozone: 8 Datanodes (16GB heap, 1 data volume), 3 OMs (8GB heap), 3 SCMs (8GB heap)
 - Hbase: 2 masters (1GB heap), 8 region servers (31GB heap)
 - `ozone.client.bytes.per.checksum` = 1MB
 
 ### Ozone FS
 
-Use `ozone fs -get ofs://ozone1733996033/vol-scr/buck/scr/file33 ./file33` to download a 10 GB file. Node9 and node7 have the datanode role; node8 does not.
+Use `ozone fs -get ofs://ozone1733996033/vol-scr/buck/scr/file33 ./file33` to download a 10 GB file. Node9 and node7 have the Datanode role; node8 does not.
 
-|  | Short-circuit disabled(A) | short-circuit-enabled(B) | B/A |
+| | Short-circuit disabled(A) | short-circuit-enabled(B) | B/A |
 | :---: | :---: | :---: | :---: |
 | node9 | 4m4.123s | 3m21.165s | 82.4% |
 | node7 | 4m57.135s | 3m58.782s | 80.5% |
-| node8 | 4m21.895s | 4m46.193s |  |
+| node8 | 4m21.895s | 4m46.193s | |
 
 ### YCSB
 
@@ -102,9 +104,9 @@ The tests are performed by running 3 consecutive iterations after changing the `
 
 **Workload C**
 
-|  | Short-Circuit disabled |  |  | Short-Circuit enabled |  |  |  |
+| | Short-Circuit disabled | | | Short-Circuit enabled | | | |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-|  | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
+| | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
 | **Num Ops(360s)** | 140266 | 128684 | 136483 | 152988 | 162343 | 150459 | 87.0% |
 | **Throughput** | 387.6 | 353.7 | 378.9 | 423.7 | 449.5 | 416.5 | 86.9% |
 | **Avg Latency(ms)** | 163.9 | 179.1 | 168.4 | 150.5 | 142.0 | 153.3 | 114.7% |
@@ -113,9 +115,9 @@ The tests are performed by running 3 consecutive iterations after changing the `
 
 **Workload A**
 
-|  | Short-Circuit disabled |  |  | Short-Circuit enabled |  |  |  |
+| | Short-Circuit disabled | | | Short-Circuit enabled | | | |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-|  | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
+| | run1(A) | run2(B) | run3(C) | run1(D) | run2(E) | run3(F) | (A+B+C)/(D+E+F) |
 | **Throughput** | 611.2 | 592.5 | 586.7 | 859.7 | 723.0 | 706.6 | 78.2% |
 
 Metrics (`ContainerLocalOps`, local op latencies, local bytes stats) are added in Datanode to observe the runtime state/latency.
@@ -124,7 +126,6 @@ Metrics (`ContainerLocalOps`, local op latencies, local bytes stats) are added i
 
 Short-Circuit Read does not introduce any new CLI or admin command.
 
-Short-circuit communication uses a UNIX domain socket (`ozone.domain.socket.path`) between the client and Datanode. 
+Short-circuit communication uses a UNIX domain socket (`ozone.domain.socket.path`) between the client and Datanode.
 
 It follows the same rules as HDFS short-circuit reads. Refer to the "Security" section of [Design](https://github.com/apache/ozone/blob/HDDS-10685/hadoop-hdds/docs/content/design/short-circuit-read.md) for details.
-
