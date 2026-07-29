@@ -301,7 +301,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/administrator-guide/configuration/security/knox'
+      link: "/docs/administrator-guide/configuration/security/knox",
     },
     {
       name: "Kerberos",
@@ -381,7 +381,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/user-guide/integrations/hue'
+      link: '/docs/user-guide/integrations/hue'
     },
     {
       name: "HBase",

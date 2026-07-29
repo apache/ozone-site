@@ -110,7 +110,6 @@ proper-names:
   - Docker Compose
   - Docker
   - pnpm
-  - S3
   - Hadoop
   - UUID
   - IP address
@@ -118,6 +117,7 @@ proper-names:
   # Enforce capitalization for these words only when they are used in sentences (preceded by a space).
   # Other uses in repo names or links like [apache/ozone](https://github.com/apache/ozone) are ok.
   - " Ratis"
+  - " S3"
   - " Ozone"
   - " Apache"
   - " ASF"

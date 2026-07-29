@@ -69,14 +69,16 @@ one interface (see [Supported providers & models](#supported-providers)).
 
 ## 3. Supported providers & models {#supported-providers}
 
-The assistant supports **three** `LLM` providers. You configure one (or more) by supplying an API key;
-a provider with no key is simply unavailable.
+The assistant supports **three direct** `LLM` providers plus a **`gateway`** provider for
+OpenAI-compatible gateways. You configure one (or more) by supplying an API key; a provider with no
+key is simply unavailable.
 
 | Provider | Reached via | Notes |
 |---|---|---|
 | **OpenAI** | Native OpenAI API (`https://api.openai.com`) | Standard chat-completions API. |
 | **Google Gemini** | Google's **OpenAI-compatible** endpoint (`https://generativelanguage.googleapis.com/v1beta/openai/`) | Used instead of the native Gemini client for reliable timeout handling. |
 | **Anthropic (Claude)** | Native Anthropic API | Sends a beta header for the 1M-token context window (`anthropic.beta.header`). |
+| **Gateway** | Your **OpenAI-compatible** gateway (for example LiteLLM), set via `gateway.base.url` | One endpoint for many models (OpenAI, Claude, Gemini). See [Using an OpenAI-compatible gateway](#gateway-provider). |
 
 **Default model lists** (configurable without a code change; surfaced by `GET /chatbot/models`):
 
@@ -85,6 +87,7 @@ a provider with no key is simply unavailable.
 | OpenAI | `ozone.recon.chatbot.openai.models` | `gpt-4.1, gpt-4.1-mini, gpt-4.1-nano` |
 | Gemini | `ozone.recon.chatbot.gemini.models` | `gemini-2.5-pro, gemini-2.5-flash, gemini-3-flash-preview, gemini-3.1-pro-preview` |
 | Anthropic | `ozone.recon.chatbot.anthropic.models` | `claude-opus-4-6, claude-sonnet-4-6` |
+| Gateway | `ozone.recon.chatbot.gateway.models` | _(none - you must list the aliases your gateway exposes)_ |
 
 The **default selection** is provider `gemini`, model `gemini-2.5-flash`.
 
@@ -103,6 +106,56 @@ actually configured. This explains why an answer can come from a different model
 - A requested **model** is used only if it appears in a configured model list. Otherwise the
   **default model** is used.
 - If the resolved model is not valid for the resolved provider, **both reset to the defaults**.
+
+### Using an OpenAI-compatible gateway {#gateway-provider}
+
+If you route all `LLM` traffic through a single **OpenAI-compatible gateway** (for example LiteLLM),
+use the dedicated `gateway` provider instead of the direct `openai`/`gemini`/`anthropic` providers.
+This is the cleanest option when OpenAI, Claude, and Gemini models are all served behind one endpoint
+and one API key.
+
+| Key | Required | Description |
+|---|---|---|
+| `ozone.recon.chatbot.provider` | yes | Set to `gateway`. |
+| `ozone.recon.chatbot.gateway.base.url` | yes | Your gateway's OpenAI-compatible base URL (no default). |
+| `ozone.recon.chatbot.gateway.api.key` | yes | Gateway API key (prefer `JCEKS` - see [Managing API keys](#managing-api-keys)). |
+| `ozone.recon.chatbot.gateway.models` | yes | Comma-separated model aliases your gateway exposes. |
+| `ozone.recon.chatbot.default.model` | no | Default model (should be one of the aliases above). |
+
+Example (`ozone-site.xml`):
+
+```xml
+<property>
+  <name>ozone.recon.chatbot.enabled</name>
+  <value>true</value>
+</property>
+<property>
+  <name>ozone.recon.chatbot.provider</name>
+  <value>gateway</value>
+</property>
+<property>
+  <name>ozone.recon.chatbot.gateway.base.url</name>
+  <value>https://your-gateway/v1</value>
+</property>
+<property>
+  <name>ozone.recon.chatbot.gateway.models</name>
+  <value>gpt-4o,claude-sonnet,gemini-2.5-pro</value>
+</property>
+<property>
+  <name>ozone.recon.chatbot.default.model</name>
+  <value>claude-sonnet</value>
+</property>
+```
+
+Key points:
+
+- **Model aliases must match exactly** what your gateway exposes. There is no auto-discovery; you
+  maintain the list in `gateway.models`.
+- The UI groups models by name prefix (`gpt*` → OpenAI, `claude*` → Anthropic, `gemini*` → Gemini)
+  for display, but every request is routed through the single `gateway` provider.
+- There is **no** `anthropic.base.url` override. To reach Claude models through an OpenAI-compatible
+  endpoint, use the `gateway` provider.
+- Recon fails fast if `gateway.base.url` is missing while the gateway provider is in use.
 
 ## 4. Prerequisites & network egress
 
@@ -191,8 +244,9 @@ The credential **alias must equal the config key name** (for example
      -provider localjceks://file/etc/security/recon-keys.jceks
    ```
 
-   Repeat for `ozone.recon.chatbot.openai.api.key` and
-   `ozone.recon.chatbot.anthropic.api.key` as needed. The command prompts for the secret value.
+   Repeat for the aliases you use - for example `ozone.recon.chatbot.openai.api.key`,
+   `ozone.recon.chatbot.anthropic.api.key`, or `ozone.recon.chatbot.gateway.api.key` (when using the
+   [gateway provider](#gateway-provider)). The command prompts for the secret value.
 
 2. Point Recon at the keystore in `ozone-site.xml`:
 
@@ -204,14 +258,42 @@ The credential **alias must equal the config key name** (for example
    ```
 
 3. Protect the keystore. Restrict file permissions (for example `chmod 600`, owned by the Recon
-   service user) and supply the keystore password out-of-band - for example via
-   `HADOOP_CREDSTORE_PASSWORD` or a password file - rather than relying on the default.
+   service user) and supply the keystore password out-of-band, rather than relying on the default.
+   There are two ways to provide the keystore password:
+
+   - **Environment variable** - set `HADOOP_CREDSTORE_PASSWORD` in the Recon process environment.
+   - **Password file** - set `hadoop.security.credstore.java-keystore-provider.password-file` in
+     `ozone-site.xml`. Its value is a **filename** (resolved on the classpath/config dir), not the
+     password itself; store the password in that file and restrict its permissions.
 
 4. Restart Recon and verify with `GET /api/v1/chatbot/health` (`llmClientAvailable` should be `true`).
 
+> **Important - remove plaintext keys when using `JCEKS`.** Recon resolves secrets `JCEKS`-first and
+> **falls back to plaintext** in `ozone-site.xml`. If a plaintext key is left in place, Recon may
+> silently use it even when you believe the keystore is in effect. For a true secure setup, delete
+> the plaintext `*.api.key` entries so the keystore is the only source.
+
+**Verify the key really comes from `JCEKS`:**
+
+- `GET /api/v1/chatbot/health` returns `llmClientAvailable: true`.
+- `ozone getconf -confKey ozone.recon.chatbot.gateway.api.key` (or the relevant provider key) returns
+  **empty** - confirming there is no plaintext key and the value is sourced from the keystore.
+
+**Failure behavior to expect:**
+
+- **Wrong or missing keystore password** - every alias in that keystore becomes unreadable, so all
+  `JCEKS`-sourced providers go unavailable at once (`llmClientAvailable: false`).
+- **Missing / unreadable key** - `health` reports `llmClientAvailable: false`. If the chatbot is still
+  `enabled` and the affected provider is the only one configured (common with `gateway`), a `/chat`
+  request fails at query time with **HTTP 500** (not 503). Use `health` as the reliable indicator.
+
 **Rotation / removal:** update or delete the alias with `hadoop credential create` / `hadoop
-credential delete`, then restart Recon. If a key is missing, that provider is simply unavailable; the
-feature still works through any other configured provider.
+credential delete`, then **restart Recon** (new alias values take effect only after a restart). If a
+key is missing, that provider is simply unavailable; the feature still works through any other
+configured provider.
+
+> **Note:** `JCEKS` does **not** require a secure/Kerberized cluster - it works on unsecure clusters
+> too.
 
 | Environment | Recommended storage |
 |---|---|
@@ -252,7 +334,7 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 
 | Key | Default | Description |
 |---|---|---|
-| `provider` | `gemini` | Default provider: `openai`, `gemini`, or `anthropic`. |
+| `provider` | `gemini` | Default provider: `openai`, `gemini`, `anthropic`, or `gateway`. |
 | `default.model` | `gemini-2.5-flash` | Default model when none is requested or the requested one is unavailable. |
 
 ### API keys (see Section 6)
@@ -262,6 +344,7 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 | `openai.api.key` | _(none)_ | OpenAI API key. Prefer `JCEKS` storage. |
 | `gemini.api.key` | _(none)_ | Gemini API key. Prefer `JCEKS` storage. |
 | `anthropic.api.key` | _(none)_ | Anthropic API key. Prefer `JCEKS` storage. |
+| `gateway.api.key` | _(none)_ | Gateway API key (used when `provider=gateway`). Prefer `JCEKS` storage. |
 
 ### Base URL overrides
 
@@ -269,6 +352,7 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 |---|---|---|
 | `openai.base.url` | `https://api.openai.com` | Override to target an OpenAI-compatible gateway. |
 | `gemini.base.url` | `https://generativelanguage.googleapis.com/v1beta/openai/` | Gemini's OpenAI-compatible endpoint. |
+| `gateway.base.url` | _(none)_ | Required when `provider=gateway`. Your OpenAI-compatible gateway URL. Recon fails fast if unset while the gateway provider is in use. |
 
 ### Execution policy
 
@@ -293,6 +377,7 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 | `openai.models` | `gpt-4.1, gpt-4.1-mini, gpt-4.1-nano` |
 | `gemini.models` | `gemini-2.5-pro, gemini-2.5-flash, gemini-3-flash-preview, gemini-3.1-pro-preview` |
 | `anthropic.models` | `claude-opus-4-6, claude-sonnet-4-6` |
+| `gateway.models` | _(none - list the aliases your gateway exposes, e.g. `gpt-4o, claude-sonnet, gemini-2.5-pro`)_ |
 
 ### Anthropic header
 
@@ -456,7 +541,7 @@ should offer. The list is empty when no provider is configured:
 | 400 | Empty/blank query. |
 | 503 | Feature disabled, or the request queue is full (overloaded). |
 | 504 | Request exceeded `request.timeout.ms`. |
-| 500 | Internal error (details are logged, not returned). |
+| 500 | Internal error (details are logged, not returned). Also returned when the resolved provider has no usable key at query time - for example a `JCEKS` key that cannot be read - and no other provider is configured. Check `GET /api/v1/chatbot/health`. |
 
 The `userId` is masked in logs so identities are not leaked.
 
@@ -516,6 +601,8 @@ The shipped versions are tuned for Recon - change them deliberately.
 | Empty answer from a reasoning model (e.g. `gemini-2.5-pro`) | The model spent its token budget "thinking". Prefer a fast model (flash), or raise token limits. |
 | Answered by an unexpected model/provider | Routing fallback - the requested provider/model was not configured. See [routing](#provider--model-routing-fallback-behavior). |
 | "No API key configured" | Check the provider, the key, and `hadoop.security.credential.provider.path`. |
+| `llmClientAvailable: false` after enabling `JCEKS` | Wrong/missing keystore password (`HADOOP_CREDSTORE_PASSWORD` or the password file), or the alias name does not match the config key. A bad password makes **all** aliases in that keystore unreadable. |
+| Chat works but you expected `JCEKS` to be in use | A plaintext `*.api.key` is still present and is used as fallback. Remove it; confirm `ozone getconf` returns empty for the key. |
 | HTTP 504 (timeout) / HTTP 503 (overloaded) | Tune `thread.pool.size`, `max.queue.size`, `request.timeout.ms`. |
 | Stale answers | Recon sync lag - answers reflect the last sync. Check `api_v1_task_status`. |
 | Egress / connection failures | Firewall, proxy, or `*.base.url`. See [Prerequisites & egress](#4-prerequisites--network-egress). |
