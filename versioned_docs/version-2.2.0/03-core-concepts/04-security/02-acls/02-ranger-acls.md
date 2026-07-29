@@ -19,7 +19,7 @@ The table below shows the mapping between Ozone operations and the required Rang
 ### Volume related operation
 
 | `Operation` | `Volume permission` |
-|--------------------------|---------------------|
+| -------------------------- | --------------------- |
 | `Create volume` | `CREATE` |
 | `List volume` | `LIST` |
 | `Get volume info` | `READ` |
@@ -32,7 +32,7 @@ The table below shows the mapping between Ozone operations and the required Rang
 ### Bucket related operation
 
 | `Operation` | `Volume permission` | `Bucket permission` |
-|--------------------------|---------------------|---------------------|
+| -------------------------- | --------------------- | --------------------- |
 | `Create bucket` | `READ` | `CREATE` |
 | `List bucket` | `LIST, READ` | |
 | `Get bucket info` | `READ` | `READ` |
@@ -46,7 +46,7 @@ The table below shows the mapping between Ozone operations and the required Rang
 ### FSO / OBS related operation for key and files
 
 | `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
-|--------------------------|---------------------|---------------------|------------------|
+| -------------------------- | --------------------- | --------------------- | ------------------ |
 | `List key` | `READ` | `LIST, READ` | |
 | `Write key` | `READ` | `READ` | `CREATE, WRITE` |
 | `Read key` | `READ` | `READ` | `READ` |

@@ -39,11 +39,11 @@ If the SCM provides a suggested leader in the exception, the client fails over t
 The failover configuration properties are:
 
 | Property | Default | Description |
-|----------|-------|-------------|
+| ---------- | ------- | ------------- |
 | `hdds.scmclient.rpc.timeout` | 15min | RPC timeout for SCM. If `ipc.client.ping` is set to true and this RPC-timeout is greater than the value of `ipc.ping.interval`, the effective value of the RPC-timeout is rounded up to multiple of `ipc.ping.interval`. |
 | `hdds.scmclient.max.retry.timeout` | 10min | Maximum retry timeout for SCM Client. |
-| `hdds.scmclient.failover.max.retry` | 15    | Maximum retry count for SCM Client when failover happens. If `maxRetryTimeout / retryInterval` is larger than this value, the calculated value is used instead. |
-| `hdds.scmclient.failover.retry.interval` | 2s    | Time to wait between retry attempts to other SCM IP. |
+| `hdds.scmclient.failover.max.retry` | 15 | Maximum retry count for SCM Client when failover happens. If `maxRetryTimeout / retryInterval` is larger than this value, the calculated value is used instead. |
+| `hdds.scmclient.failover.retry.interval` | 2s | Time to wait between retry attempts to other SCM IP. |
 
 ## Client to Datanode Failover and Retry
 
@@ -62,7 +62,7 @@ Clients retry Datanodes in the pipeline in order upon failure, in other words cl
 - Maximum retries: **5 × number of Datanodes**
 
 | Property | Default | Description |
-|----------|---------|-------------|
+| ---------- | --------- | ------------- |
 | `ozone.client.read.max.retries` | 3 | Maximum number of retries by Ozone Client on encountering connectivity exception when reading a key. |
 | `ozone.client.read.retry.interval` | 1 second | Time duration in seconds a client will wait before retrying a read key request on encountering a connectivity exception from Datanodes. |
 | `ozone.client.max.retries` | 5 | Maximum number of retries by Ozone Client on encountering exception while writing a key. |

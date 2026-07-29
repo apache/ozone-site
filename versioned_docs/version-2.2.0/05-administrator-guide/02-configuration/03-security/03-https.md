@@ -22,7 +22,7 @@ If you have an SPNEGO enabled Ozone cluster and want to disable it for all Ozone
 However, they can be configured to require Kerberos authentication using HTTP SPNEGO protocol (supported by browsers like Firefox and Chrome). To achieve that, the following keys must be configured first.
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `hadoop.security.authentication` | `kerberos` |
 | `ozone.security.http.kerberos.enabled` | `true` |
 | `ozone.http.filter.initializers` | `org.apache.hadoop.security.AuthenticationFilterInitializer` |
@@ -32,7 +32,7 @@ After that, individual component needs to configure properly to completely enabl
 ## Enable SPNEGO authentication for OM HTTP
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `ozone.om.http.auth.type` | `kerberos` |
 | `ozone.om.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
 | `ozone.om.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
@@ -40,7 +40,7 @@ After that, individual component needs to configure properly to completely enabl
 ## Enable SPNEGO authentication for S3G HTTP
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `ozone.s3g.http.auth.type` | `kerberos` |
 | `ozone.s3g.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
 | `ozone.s3g.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
@@ -48,7 +48,7 @@ After that, individual component needs to configure properly to completely enabl
 ## Enable SPNEGO authentication for Recon HTTP
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `ozone.recon.http.auth.type` | `kerberos` |
 | `ozone.recon.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
 | `ozone.recon.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
@@ -56,7 +56,7 @@ After that, individual component needs to configure properly to completely enabl
 ## Enable SPNEGO authentication for SCM HTTP
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `ozone.scm.http.auth.type` | `kerberos` |
 | `ozone.scm.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
 | `ozone.scm.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
@@ -64,7 +64,7 @@ After that, individual component needs to configure properly to completely enabl
 ## Enable SPNEGO authentication for Datanode HTTP
 
 | Property | Value |
-|----------|-------|
+| ---------- | ------- |
 | `ozone.datanode.http.auth.type` | `kerberos` |
 | `ozone.datanode.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
 | `ozone.datanode.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |

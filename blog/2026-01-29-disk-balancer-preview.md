@@ -126,11 +126,11 @@ ozone admin datanode diskbalancer update -t <value> -b <value> -p <value> -s <va
 The following parameters can be specified during **start** or **update configuration** Disk Balancer:
 
 | Parameter | Short Flag | Default Value | Description |
-| --------- | ---------- |---------------| ----------- |
-| `--threshold` | `-t` | `10.0`        | Percentage deviation from average utilization of the disks after which a Datanode will be rebalanced. |
-| `--bandwidth-in-mb` | `-b` | `10`          | Maximum bandwidth for DiskBalancer per second. |
-| `--parallel-thread` | `-p` | `5`           | Max parallel thread count for DiskBalancer. |
-| `--stop-after-disk-even` | `-s` | `true`        | Stop DiskBalancer automatically after disk utilization is even. |
+| --------- | ---------- | --------------- | ----------- |
+| `--threshold` | `-t` | `10.0` | Percentage deviation from average utilization of the disks after which a Datanode will be rebalanced. |
+| `--bandwidth-in-mb` | `-b` | `10` | Maximum bandwidth for DiskBalancer per second. |
+| `--parallel-thread` | `-p` | `5` | Max parallel thread count for DiskBalancer. |
+| `--stop-after-disk-even` | `-s` | `true` | Stop DiskBalancer automatically after disk utilization is even. |
 | `--container-states` | `-c` | `CLOSED,QUASI_CLOSED` | Comma-separated list of container states that are eligible for moving during balancing. |
 
 ## Benefits for operators

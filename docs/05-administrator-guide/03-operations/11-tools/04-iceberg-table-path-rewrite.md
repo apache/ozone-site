@@ -77,7 +77,7 @@ ozone iceberg rewrite-path \
 **Required options:**
 
 | Option | Description |
-|--------|-------------|
+| -------- | ------------- |
 | `-l`, `--table-location` | Absolute path to the latest `*.metadata.json` file |
 | `-s`, `--source-prefix` | Prefix to replace |
 | `-t`, `--target-prefix` | Target prefix |
@@ -85,7 +85,7 @@ ozone iceberg rewrite-path \
 **Additional options:**
 
 | Option | Description |
-|--------|-------------|
+| -------- | ------------- |
 | `--staging` | Custom staging directory (default: `copy-table-staging-<uuid>/` under metadata directory of the table) |
 | `--start-version` | Start metadata version for incremental rewrite (will not be included for rewrite) |
 | `--end-version` | End metadata version or defaults to current (will be included for rewrite) |
@@ -326,14 +326,14 @@ If the old catalog is a Hadoop catalog, avoid using it entirely after rewrite.
 Read this before rewriting production tables.
 :::
 
-| File | What happens                                                                                                                                 |
-|------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| File | What happens |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Metadata files, manifest lists, manifest files | Rewritten to the staging directory with all internal path references updated. Must be copied to their target location as part of the rewrite |
-| Data files | Path references in respective manifests are updated, the files themselves are not moved (access is provided through the bucket link)         |
-| Position delete files | Rewritten to the staging directory with all internal path references updated and must be copied to their target location as part of the rewrite                                       |
-| Equality delete files | Path references in respective manifests are updated                                                                                          |
-| Partition statistics files | **Not supported** — the rewrite operation fails if these files are present                                                                   |
-| Deletion vectors | **Not supported**                                                                                                                            |
+| Data files | Path references in respective manifests are updated, the files themselves are not moved (access is provided through the bucket link) |
+| Position delete files | Rewritten to the staging directory with all internal path references updated and must be copied to their target location as part of the rewrite |
+| Equality delete files | Path references in respective manifests are updated |
+| Partition statistics files | **Not supported** — the rewrite operation fails if these files are present |
+| Deletion vectors | **Not supported** |
 
 ### Position delete file read failure (known issue)
 

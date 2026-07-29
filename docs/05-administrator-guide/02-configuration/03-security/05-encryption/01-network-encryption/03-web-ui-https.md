@@ -90,7 +90,7 @@ Ozone uses standard Hadoop SSL configuration. The main entry point is the server
 From [`ozone-default.xml`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/resources/ozone-default.xml):
 
 | Property | Default | Description |
-|----------|---------|--------------|
+| ---------- | --------- | -------------- |
 | `ozone.https.server.keystore.resource` | `ssl-server.xml` | Resource file from which server keystore information is read |
 | `ssl.server.keystore.location` | *(empty)* | Filesystem path to the server keystore file |
 | `ssl.server.keystore.password` | *(empty)* | Password for the server keystore |
@@ -159,7 +159,7 @@ By default, the server does **not** require a client certificate.
 From [`ozone-default.xml`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/resources/ozone-default.xml):
 
 | Property | Default | Description |
-|----------|---------|--------------|
+| ---------- | --------- | -------------- |
 | `ozone.https.client.need-auth` | `false` | Whether SSL client certificate authentication is required (mTLS). |
 | `ozone.https.client.keystore.resource` | `ssl-client.xml` | Resource file describing the client keystore/truststore. |
 

@@ -129,7 +129,7 @@ This configures disk checks to run every 30 minutes instead of the default 60 mi
 Additional properties control disk health check behavior:
 
 | Property | Default | Description |
-|----------|---------|-------------|
+| ---------- | --------- | ------------- |
 | `hdds.datanode.disk.check.io.test.count` | `3` | Number of I/O tests required to determine failure. Set to `0` to disable I/O checks. |
 | `hdds.datanode.disk.check.io.failures.tolerated` | `1` | I/O test failures allowed before marking volume as failed |
 | `hdds.datanode.disk.check.io.file.size` | `100B` | Size of temporary file used for I/O health checks |
