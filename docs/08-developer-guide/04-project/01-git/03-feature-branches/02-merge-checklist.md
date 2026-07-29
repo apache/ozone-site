@@ -1,6 +1,6 @@
 # Feature Branch Merge Checklist
 
-This section collects generic questions which can be checked for each feature branch. Some of them are obvious for some branches (for example: the decommissioning feature didn't change the s3 interface) but it's good to go through them for each of the merges. Answering these questions will also help the community to test the branch. If you have any new idea about what should be checked, submit a pull request to the [ozone-site](https://github.com/apache/ozone-site) repo to update this page.
+This section collects generic questions which can be checked for each feature branch. Some of them are obvious for some branches (for example: the decommissioning feature didn't change the S3 interface) but it's good to go through them for each of the merges. Answering these questions will also help the community to test the branch. If you have any new idea about what should be checked, submit a pull request to the [ozone-site](https://github.com/apache/ozone-site) repo to update this page.
 
 ## Summary
 

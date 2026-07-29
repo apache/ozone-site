@@ -13,8 +13,8 @@
     "serve": "docusaurus serve --port 3001",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "lint": "eslint . ; markdownlint . ; yamllint --format=colored .",
-    "lint:fix": "eslint --fix . ; markdownlint --fix . ; yamllint --format=colored ."
+    "lint": "rc=0; eslint . || rc=1; markdownlint . || rc=1; yamllint --format=colored . || rc=1; exit $rc",
+    "lint:fix": "rc=0; eslint --fix . || rc=1; markdownlint --fix . || rc=1; yamllint --format=colored . || rc=1; exit $rc"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
