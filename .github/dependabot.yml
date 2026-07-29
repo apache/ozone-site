@@ -24,3 +24,8 @@ updates:
     cronjob: 15 11 * * *
   cooldown:
     default-days: 7
+  groups:
+    # Bump actions/cache, actions/cache/save, actions/cache/restore at the same time
+    actions-cache:
+      patterns:
+      - actions/cache*

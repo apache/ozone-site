@@ -14,4 +14,5 @@
 # limitations under the License.
 
 # CSP permissions for ozone.apache.org - Adding 3rd party service Algolia. Approved by VP Data Privacy.
-SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ https://*.algolia.io/"
+# GitHub avatars used on the blog contributor cards (HDDS-15884).
+SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ https://*.algolia.io/ https://github.com/ https://*.githubusercontent.com/"
