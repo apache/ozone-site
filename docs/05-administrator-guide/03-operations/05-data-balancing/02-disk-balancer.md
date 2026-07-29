@@ -45,12 +45,14 @@ In secure clusters with Kerberos enabled, the Datanode must have its Kerberos pr
   </description>
 </property>
 ```
+
 :::note
 
  Without this configuration, DiskBalancer commands will fail with authentication errors in secure clusters. The client uses this principal to verify the
  Datanode's identity when establishing RPC connections.
 
 :::
+
 ### Authorization Configuration
 
 Each Datanode performs authorization checks using `OzoneAdmins` based on the `ozone.administrators` configuration:
@@ -101,7 +103,7 @@ The DiskBalancer is managed through the `ozone admin datanode diskbalancer` comm
 
 :::note
 
- DiskBalancer is enabled by default on datanodes. Use `hdds.datanode.disk.balancer.enabled=false` in `ozone-site.xml` to disable the service on datanodes and prevent CLI commands from running.
+ DiskBalancer is enabled by default on Datanodes. Use `hdds.datanode.disk.balancer.enabled=false` in `ozone-site.xml` to disable the service on Datanodes and prevent CLI commands from running.
 
 :::
 
@@ -233,7 +235,7 @@ The DiskBalancer's behavior can be controlled using the following configuration 
 
 | Property | Default                                                                                                          | Purpose                                                                                                                                                               |
 |----------|------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `hdds.datanode.disk.balancer.enabled` | `true`                                                                                                           | If false, the DiskBalancer service on the Datanode is disabled. By default, DiskBalancer is enabled on datanodes.                                                  |
+| `hdds.datanode.disk.balancer.enabled` | `true`                                                                                                           | If false, the DiskBalancer service on the Datanode is disabled. By default, DiskBalancer is enabled on Datanodes.                                                  |
 | `hdds.datanode.disk.balancer.volume.density.threshold.percent` | `10.0`                                                                                                           | A percentage (0-100). A Datanode is considered balanced if for each volume, its utilization differs from the average Datanode utilization by no more than this threshold. |
 | `hdds.datanode.disk.balancer.max.disk.throughputInMBPerSec` | `10`                                                                                                             | The maximum bandwidth (in MB/s) that the balancer can use for moving data, to avoid impacting client I/O.                                                             |
 | `hdds.datanode.disk.balancer.parallel.thread` | `5`                                                                                                              | The number of worker threads to use for moving containers in parallel.                                                                                                |

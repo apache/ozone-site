@@ -28,13 +28,13 @@ These steps apply to **[`apache/ozone`](https://github.com/apache/ozone)** (the 
 
 :::tip First time running Ozone?
 
-If you mainly need *any* local cluster to try the shell or APIs, [Docker Compose](./docker-compose) is often faster to bring up. IntelliJ is most useful when you are **debugging or changing Java code** and want breakpoints in SCM, OM, or datanodes.
+If you mainly need *any* local cluster to try the shell or APIs, [Docker Compose](./docker-compose) is often faster to bring up. IntelliJ is most useful when you are **debugging or changing Java code** and want breakpoints in SCM, OM, or Datanodes.
 
 :::
 
 ## Start services in order
 
-Ozone components expect a **storage** (SCM) layer before the **manager** (OM), and datanodes expect **Recon** in this dev layout. Use the built-in configurations **in this order** (names match the **Run** dropdown):
+Ozone components expect a **storage** (SCM) layer before the **manager** (OM), and Datanodes expect **Recon** in this dev layout. Use the built-in configurations **in this order** (names match the **Run** dropdown):
 
 | Step | Run configuration | What it does |
 | --- | --- | --- |
@@ -42,12 +42,12 @@ Ozone components expect a **storage** (SCM) layer before the **manager** (OM), a
 | 2 | **StorageContainerManager** | Starts SCM. |
 | 3 | **OzoneManagerInit** | Initializes OM (requires SCM to be up). |
 | 4 | **OzoneManager** | Starts OM. |
-| 5 | **Recon** | Starts Recon (needed before datanodes in this setup). |
-| 6 | **Datanode1**, **Datanode2**, **Datanode3** | Starts three datanode processes. |
+| 5 | **Recon** | Starts Recon (needed before Datanodes in this setup). |
+| 6 | **Datanode1**, **Datanode2**, **Datanode3** | Starts three Datanode processes. |
 
 Wait until each step looks healthy in the **Run** tool window before starting the next (SCM and OM can take a moment on first boot).
 
-**Quick glossary:** **SCM** is the Storage Container Manager (block and datanode coordination); **OM** is the Ozone Manager (namespace). **Recon** is the monitoring and UI service the bundled dev configs expect before datanodes. For a fuller picture, read the [architecture overview](../../core-concepts/architecture/overview) and the pages on [Ozone Manager](../../core-concepts/architecture/ozone-manager), [Storage Container Manager](../../core-concepts/architecture/storage-container-manager), and [Recon](../../core-concepts/architecture/recon).
+**Quick glossary:** **SCM** is the Storage Container Manager (block and Datanode coordination); **OM** is the Ozone Manager (namespace). **Recon** is the monitoring and UI service the bundled dev configs expect before Datanodes. For a fuller picture, read the [architecture overview](../../core-concepts/architecture/overview) and the pages on [Ozone Manager](../../core-concepts/architecture/ozone-manager), [Storage Container Manager](../../core-concepts/architecture/storage-container-manager), and [Recon](../../core-concepts/architecture/recon).
 
 The upstream contributing guide uses the same sequence; see [Using IDE — Run Ozone from IntelliJ](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#run-ozone-from-intellij) in [`CONTRIBUTING.md`](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md).
 

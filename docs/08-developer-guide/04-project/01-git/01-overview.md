@@ -25,4 +25,3 @@ For routine contribution steps (fork, branch, PR, Jira), see [Ozone `CONTRIBUTIN
 - [Ozone `CONTRIBUTING.md`](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md) — everyday PR workflow to `master`
 - [`.github/ci.md`](https://github.com/apache/ozone/blob/master/.github/ci.md) — what CI runs on branches and PRs
 - [Release Manager Guide](../release-guide) — step-by-step release process
-
