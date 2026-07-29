@@ -18,7 +18,7 @@ Ozone's lifecycle management is designed with AWS S3 Lifecycle as a reference. T
 ### API Compatibility
 
 | S3 API | Supported | Description |
-| -------- | ----------- | ------------- |
+|--------|-----------|-------------|
 | `PutBucketLifecycleConfiguration` | Yes | Set via S3 Gateway `PUT /{bucket}?lifecycle` |
 | `GetBucketLifecycleConfiguration` | Yes | Get via S3 Gateway `GET /{bucket}?lifecycle` |
 | `DeleteBucketLifecycle` | Yes | Delete via S3 Gateway `DELETE /{bucket}?lifecycle` |
@@ -26,7 +26,7 @@ Ozone's lifecycle management is designed with AWS S3 Lifecycle as a reference. T
 ### Lifecycle Actions
 
 | S3 Lifecycle Action | Supported | Description |
-| --------------------- | ----------- | ------------- |
+|---------------------|-----------|-------------|
 | Expiration | Yes | Supports both `Days` and `Date` modes |
 | Transition | No | Ozone does not currently support tiered storage class transitions similar to S3 |
 | NoncurrentVersionExpiration | No | Ozone's bucket versioning mechanism differs from S3 |
@@ -39,7 +39,7 @@ Ozone's lifecycle management is designed with AWS S3 Lifecycle as a reference. T
 ### Filter Conditions
 
 | S3 Filter Element | Supported | Description |
-| -------------------- | ----------- | ------------- |
+|--------------------|-----------|-------------|
 | Prefix | Yes | Supports both top-level Prefix and Prefix within Filter |
 | Tag | Yes | Supports filtering by a single tag |
 | And (Prefix + Tags) | Yes | Supports combining Prefix with multiple Tag conditions |
@@ -63,7 +63,7 @@ A Lifecycle Configuration is bound to a bucket. Each bucket can have at most one
 Each rule contains the following elements:
 
 | Element | Description |
-| --------- | ------------- |
+|---------|-------------|
 | ID | Unique identifier for the rule, up to 255 characters. Auto-generated if not specified. |
 | Status | `Enabled` or `Disabled`. Only enabled rules are executed. |
 | Filter / Prefix | Specifies the scope of the rule. Can filter by object name prefix. |
@@ -119,7 +119,7 @@ For FILE_SYSTEM_OPTIMIZED (FSO) buckets, the Prefix must be a normalized and val
 The following table shows examples of valid and invalid prefixes:
 
 | Prefix | Valid for FSO Bucket | Reason |
-| ---- | ---------------------- | -- |
+|----|----------------------|--|
 | `logs/` | Valid | Normalized directory prefix |
 | `data/2024/` | Valid | Multi-level directory prefix |
 | `archive` | Invalid | Without tailing slash |
@@ -250,7 +250,7 @@ For FSO buckets, the lifecycle service performs recursive evaluation based on th
 Prefix semantic differences:
 
 | Prefix | OBS/LEGACY Behavior | FSO Behavior |
-| -------- | --------------------- | -------------- |
+|--------|---------------------|--------------|
 | `""` (empty) | Matches all objects | Matches all objects and directories |
 | `key` | Matches all keys starting with `key` | Matches files and directories starting with `key` |
 | `dir/` | Matches all keys starting with `dir/` | Matches files and subdirectories under `dir`, excluding `dir` itself |
@@ -287,7 +287,7 @@ The lifecycle service is disabled by default and must be explicitly enabled in `
 The following table lists all related configuration properties:
 
 | Property | Default | Description |
-| ---------- | --------- | ------------- |
+|----------|---------|-------------|
 | `ozone.lifecycle.service.enabled` | `false` | Whether to enable the lifecycle management service. |
 | `ozone.lifecycle.service.interval` | `24h` | The scan interval of the lifecycle management service. |
 | `ozone.lifecycle.service.timeout` | `2h` | The timeout threshold for lifecycle evaluation tasks. This setting does not interrupt a running task. It only prints a WARN-level log after a task completes if the actual execution time of a single bucket's evaluation exceeds this value. |

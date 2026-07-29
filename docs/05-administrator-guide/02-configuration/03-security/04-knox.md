@@ -11,7 +11,7 @@ Ozone integration was added in [KNOX-2833](https://issues.apache.org/jira/browse
 ## Supported Ozone services
 
 | Knox service role | Ozone component | Default HTTP port | Knox path prefix |
-| --- | --- | --- | --- |
+|---|---|---|---|
 | `OZONE` | Ozone Manager UI | 9874 | `/ozone/` |
 | `OZONE-SCM` | Storage Container Manager UI | 9876 | `/ozone-scm/` |
 | `OZONE-RECON` | Recon UI | 9888 | `/ozone-recon/` |
@@ -151,7 +151,7 @@ Replace `knoxuser` with the Unix or service account Knox uses to connect to Http
 Ensure each proxied service publishes the HTTP address Knox will use:
 
 | Property | Example |
-| --- | --- |
+|---|---|
 | `ozone.om.http-address` | `om1.example.com:9874` |
 | `ozone.scm.http-address` | `scm1.example.com:9876` |
 | `ozone.recon.http-address` | `recon.example.com:9888` |

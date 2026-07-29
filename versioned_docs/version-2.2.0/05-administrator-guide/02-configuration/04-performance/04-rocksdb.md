@@ -92,7 +92,7 @@ Ozone provides a set of general RocksDB configurations that apply to all service
 **Logging:**
 
 | Property | Default | Description |
-| ---------- | --------- | ------------- |
+|----------|---------|-------------|
 | `hadoop.hdds.db.rocksdb.logging.enabled` | `false` | Enables or disables RocksDB's own logging. |
 | `hadoop.hdds.db.rocksdb.logging.level` | `INFO` | The logging level for RocksDB (INFO, DEBUG, WARN, ERROR, FATAL). |
 | `hadoop.hdds.db.rocksdb.max.log.file.size` | `100MB` | The maximum size of a single RocksDB log file. |
@@ -102,12 +102,12 @@ Ozone provides a set of general RocksDB configurations that apply to all service
 
 These settings, defined in `ozone-default.xml`, apply specifically to the Ozone Manager.
 
-| Property | Default | Description |
-| ---------- | ------------------------------------------------------------------------------------------- | ------------- |
-| `ozone.om.db.max.open.files` | `-1` (unlimited) | The total number of files that a RocksDB can open in the OM. |
-| `ozone.om.compaction.service.enabled` | `false` | Enable or disable a background job that periodically compacts RocksDB tables flagged for compaction. |
-| `ozone.om.compaction.service.run.interval` | `6h` | The interval for the OM's compaction service. |
-| `ozone.om.compaction.service.timeout` | `10m` | Timeout for the OM's compaction service. |
+| Property | Default                                                                                   | Description |
+|----------|-------------------------------------------------------------------------------------------|-------------|
+| `ozone.om.db.max.open.files` | `-1` (unlimited)                                                                          | The total number of files that a RocksDB can open in the OM. |
+| `ozone.om.compaction.service.enabled` | `false`                                                                                   | Enable or disable a background job that periodically compacts RocksDB tables flagged for compaction. |
+| `ozone.om.compaction.service.run.interval` | `6h`                                                                                      | The interval for the OM's compaction service. |
+| `ozone.om.compaction.service.timeout` | `10m`                                                                                     | Timeout for the OM's compaction service. |
 | `ozone.om.compaction.service.columnfamilies` | `keyTable`<br />`fileTable`<br />`directoryTable`<br />`deletedTable`<br />`deletedDirectoryTable`<br />`multipartInfoTable` | A comma-separated list of column families to be compacted by the service. |
 
 ### Datanode-Specific Settings
@@ -129,7 +129,7 @@ For more details, refer to the [Datanode Container Schema v3 in DN Documentation
 -->
 
 | Property | Default | Description |
-| ---------- | --------- | ------------- |
+|----------|---------|-------------|
 | `hdds.datanode.rocksdb.auto-compaction-small-sst-file` | `true` | Enables or disables auto-compaction for small SST files. |
 | `hdds.datanode.rocksdb.auto-compaction-small-sst-file-size-threshold` | `1MB` | Threshold for small SST file size for auto-compaction. |
 | `hdds.datanode.rocksdb.auto-compaction-small-sst-file-num-threshold` | `512` | Threshold for the number of small SST files for auto-compaction. |
@@ -152,7 +152,7 @@ For more details, refer to the [Datanode Container Schema v3 in DN Documentation
 **Other Settings:**
 
 | Property | Default | Description |
-| ---------- | -------- | ------------ |
+|----------|--------|------------|
 | `hdds.datanode.db.config.path` | empty (not configured) | Path to an INI configuration file for advanced RocksDB tuning on Datanodes. |
 | `hdds.datanode.container.schema.v3.enabled` | `true` | Enable container schema v3 (one RocksDB per disk). |
 | `hdds.datanode.container.schema.v3.key.separator` | &#124; | The separator between Container ID and container meta key name in schema v3. |

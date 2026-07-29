@@ -76,7 +76,7 @@ the property `hdds.datanode.volume.choosing.policy`. There are two main policies
 For capacity planning, reserved space, and when volumes are treated as full, see [Storage Capacity Planning](../../administrator-guide/configuration/performance/storage-capacity-planning).
 
 | Property Name | Default Value | Description |
-| --------------- | --------------- | ------------- |
+|---------------|---------------|-------------|
 | `hdds.datanode.volume.choosing.policy` | `CapacityVolumeChoosingPolicy` | The policy used to select a volume for new containers. |
 | `hdds.datanode.volume.min.free.space` | `20GB` | Minimum free space required on a volume to be eligible for new containers. |
 | `hdds.datanode.volume.min.free.space.percent` | `0.02` | Minimum free space percentage required on a volume to be eligible for new containers. |
@@ -90,7 +90,7 @@ For more information on using the Disk Balancer, refer to the [Disk Balancer doc
 ## Notable Configurations
 
 | Key | Default | Description |
-| ----- | --------- | ------------- |
+|-----|---------|-------------|
 | `dfs.container.ratis.datanode.storage.dir` | none | This directory is used for storing Ratis metadata like logs. |
 | `ozone.scm.datanode.id.dir` | none | The path that Datanodes will use to store the Datanode ID. |
 | `hdds.datanode.dir` | none | Determines where HDDS data will be stored on the local filesystem. |

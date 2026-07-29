@@ -9,7 +9,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 ### General Snapshot Management
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.om.fs.snapshot.max.limit` | 10000 | Max snapshots per bucket. Safety limit. |
 | `ozone.om.ratis.snapshot.dir` | ratis-snapshot under OM DB dir | The directory where OM Ratis snapshots are stored. |
 | `ozone.om.ratis.snapshot.max.total.sst.size` | 100000000 | The maximum total size of SST files to be included in a Ratis snapshot. |
@@ -19,7 +19,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 ### SnapshotDiff Service
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.om.snapshot.diff.db.dir` | OM metadata dir | Directory for SnapshotDiff job data. Use a spacious location for large diffs. |
 | `ozone.om.snapshot.force.full.diff` | false | Force a full diff for all snapshot diff jobs. |
 | `ozone.om.snapshot.diff.disable.native.libs` | false | Disable native libraries for snapshot diff. |
@@ -31,7 +31,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 ### Snapshot Compaction and Cleanup
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.snapshot.key.deleting.limit.per.task` | 20000 | The maximum number of keys scanned by the snapshot deleting service in a single run. |
 | `ozone.om.snapshot.compact.non.snapshot.diff.tables` | false | When enabled, allows compaction of tables not tracked by snapshot diffs after snapshots are evicted from the cache. |
 | `ozone.om.snapshot.compaction.dag.max.time.allowed` | 30 days | Window for efficient SnapshotDiff. Older diffs may be slower. |
@@ -52,7 +52,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 ### Performance and Resource Management
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.om.snapshot.rocksdb.metrics.enabled` | false | Enable detailed RocksDB metrics for snapshots. Use for debugging/monitoring. |
 | `ozone.om.snapshot.cache.max.size` | 10 | Maximum size of the snapshot cache soft limit. |
 | `ozone.om.snapshot.db.max.open.files` | 100 | Maximum number of open files for the snapshot database. |
@@ -60,7 +60,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 ### Snapshot Provider (Internal)
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.om.snapshot.provider.socket.timeout` | 5000s | Socket timeout for the snapshot provider. |
 | `ozone.om.snapshot.provider.connection.timeout` | 5000s | Connection timeout for the snapshot provider. |
 | `ozone.om.snapshot.provider.request.timeout` | 5m | Request timeout for the snapshot provider. |
@@ -70,7 +70,7 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 These settings, defined in `ozone-default.xml`, apply specifically to Recon.
 
 | Property | Default Value | Description |
-| ---------- | --------------- | ------------- |
+|----------|---------------|-------------|
 | `ozone.recon.om.snapshot.task.initial.delay` | 1m | Initial delay for the OM snapshot task in Recon. |
 | `ozone.recon.om.snapshot.task.interval.delay` | 5s | Interval for the OM snapshot task in Recon. |
 | `ozone.recon.om.snapshot.task.flush.param` | false | Flush parameter for the OM snapshot task in Recon. |

@@ -45,9 +45,9 @@ No addition. No change in existing support.
 
 Short-circuit read is gated by DatanodeVersion.SHORT_CIRCUIT_READS (version 4), which prevents a new version of Ozone client from communicating with a cluster that does not support short-circuit reads.
 
-A global enable/disable switch is provided via `ozone.client.read.short-circuit` (default: false).
+A global enable/disable switch is provided via Ozone.client.read.short-circuit (default: false).
 
-To enable this feature, add the following to both the client and Datanode `ozone-site.xml`:
+To enable this feature, add the following to both the client and Datanode Ozone-site.xml:
 
 ```xml
 <property>
@@ -58,7 +58,7 @@ To enable this feature, add the following to both the client and Datanode `ozone
 </property>
 ```
 
-And the following to the client and Datanode `ozone-site.xml`, to specify the path of the UNIX domain socket:
+And the following to the client and Datanode Ozone-site.xml, to specify the path of the UNIX domain socket:
 
 ```xml
 <property>
@@ -102,7 +102,7 @@ Use `ozone fs -get ofs://ozone1733996033/vol-scr/buck/scr/file33 ./file33` to do
 
 The tests are performed by running 3 consecutive iterations after changing the `ozone.client.read.short-circuit` configuration and restarting all related services. HBase `l1CacheHitRatio` is around 90% during the test.
 
-#### Workload C
+**Workload C**
 
 | | Short-Circuit disabled | | | Short-Circuit enabled | | | |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
@@ -113,7 +113,7 @@ The tests are performed by running 3 consecutive iterations after changing the `
 | **95 Latency(ms)** | 833 | 1061.9 | 850.9 | 908.8 | 936.9 | 870.9 | 101.1% |
 | **99 Latency(ms)** | 2316.3 | 3149.8 | 4345.9 | 2510.8 | 2709.5 | 3151.9 | 117.2% |
 
-#### Workload A
+**Workload A**
 
 | | Short-Circuit disabled | | | Short-Circuit enabled | | | |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |

@@ -55,7 +55,7 @@ S3 Gateway requires one service principal and here the configuration values need
 The HttpFS gateway offers an HDFS-compatible REST API (`webhdfs`). It requires Kerberos for its client-facing HTTP endpoint and for its internal connection to the Ozone Manager (which acts as an HDFS NameNode proxy).
 
 | Property | Description |
-| --- | --- |
+|---|---|
 | `hadoop.http.authentication.type` | Defines the authentication mechanism used by HttpFS for its HTTP clients. Valid values are `simple` or `kerberos`. Set to `kerberos` for SPNEGO. |
 | `hadoop.http.authentication.kerberos.principal` | The HTTP Kerberos principal used by HttpFS for its client-facing HTTP endpoint. This MUST start with `HTTP/` (e.g., `HTTP/${httpfs.hostname}@${kerberos.realm}`). |
 | `hadoop.http.authentication.kerberos.keytab` | The Kerberos keytab file for the client-facing HTTP principal. e.g., `${user.home}/httpfs.keytab`. |
@@ -72,7 +72,7 @@ For HttpFS placed behind a **load balancer** with Kerberos (SPNEGO), the HTTP pr
 Recon provides monitoring and management capabilities and can be secured using Kerberos authentication for its web UI and REST endpoints.
 
 | Property | Description |
-| --- | --- |
+|---|---|
 | `ozone.recon.http.auth.type` | Sets Recon's HTTP authentication type. Set to `kerberos` for SPNEGO. |
 | `ozone.recon.http.auth.kerberos.principal` | The service principal for the Recon HTTP endpoint. e.g., `HTTP/_HOST@REALM`. |
 | `ozone.recon.http.auth.kerberos.keytab` | The keytab file for the Recon HTTP principal. e.g., `/path/to/HTTP.keytab`. |

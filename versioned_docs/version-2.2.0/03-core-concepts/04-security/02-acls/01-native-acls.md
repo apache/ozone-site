@@ -187,7 +187,7 @@ The table below shows the mapping between Ozone operations and the required Nati
 ### Volume related operation
 
 | `Operation` | `Volume permission` |
-| -------------------------- | --------------------- |
+|--------------------------|---------------------|
 | `Create volume` | `<admin>` |
 | `List volume` | `<admin>, <configuration: listall>` |
 | `Get volume info` | `READ, <admin>, <owner>` |
@@ -202,7 +202,7 @@ The table below shows the mapping between Ozone operations and the required Nati
 ### Bucket related operation
 
 | `Operation` | `Volume permission` | `Bucket permission` |
-| -------------------------- | --------------------- | --------------------- |
+|--------------------------|---------------------|---------------------|
 | `Create bucket` | `WRITE, <admin>, <owner>` | |
 | `List bucket` | `LIST, <admin>, <owner>` | |
 | `Get bucket info` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` |
@@ -218,7 +218,7 @@ The table below shows the mapping between Ozone operations and the required Nati
 ### FSO / OBS related operation for key and files
 
 | `Operation` | `Volume permission` | `Bucket permission` | `Key permission` |
-| -------------------------- | --------------------- | --------------------- | ------------------ |
+|--------------------------|---------------------|---------------------|------------------|
 | `List key` | `READ, <admin>, <owner>` | `LIST, READ, <admin>, <owner>` | |
 | `Write key` | `READ, <admin>, <owner>` | `WRITE, <admin>, <owner>` | `CREATE, WRITE, <admin>` |
 | `Delete key` | `READ, <admin>, <owner>` | `READ, <admin>, <owner>` | `DELETE (*recursive check all child), <admin>` |

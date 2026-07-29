@@ -11,7 +11,7 @@ Since Ozone Manager is not horizontally scalable by design, minimizing operation
 ## Performance Advantages Over Asymmetric Encryption
 
 | Aspect | Asymmetric (RSA-2048) | Symmetric (HMAC-SHA256) |
-| -------- | ---------------------- | ------------------------ |
+|--------|----------------------|------------------------|
 | Signing Speed | Milliseconds | Microseconds |
 | CPU Overhead | High | Low |
 | Latency Impact | >80% of OM read/write latency | Negligible |
@@ -26,7 +26,7 @@ Symmetric key algorithms require both the signer (OM) and the verifier (Datanode
 **Component Responsibilities:**
 
 | Component | Role |
-| ----------- | ------ |
+|-----------|------|
 | **SCM** | Source of truth. Generates, rotates, stores, and distributes SecretKeys. |
 | **OM** | Fetches current SecretKey from SCM, caches it, and signs block tokens using HMAC. |
 | **Datanodes** | Receive SecretKeys via heartbeat/register, verify tokens using cached keys. |
@@ -128,7 +128,7 @@ If all stored keys have expired, SCM behaves as if starting fresh.
 The following table illustrates SCM key restoration behavior with a 7-day key expiry period. In this example, `kN` represents a key generated on day N. Assume SCM was running until Day 6 and stored keys k1-k7 (where k6 was `currentKey` and k7 was `nextKey`), then went down. The table shows what happens when SCM restarts on different days:
 
 | Stored Keys | Restart Day | Key Restoration Result |
-| ------------- | ------------- | ------------------------ |
+|-------------|-------------|------------------------|
 | k1-k7 | Day 6 | `currentKey` = k6, `nextKey` = k7, `allKeys` = [k1, k2, k3, k4, k5, k6, k7] |
 | k1-k7 | Day 7 | `currentKey` = k7, `nextKey` = generateNewKey(), `allKeys` = [k1, k2, k3, k4, k5, k6, k7, nextKey] |
 | k1-k7 | Day 8 | `currentKey` = k7, `nextKey` = generateNewKey(), `allKeys` = [k2, k3, k4, k5, k6, k7, nextKey] |

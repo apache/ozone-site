@@ -85,7 +85,7 @@ For the S3-performance gRPC feature, network transport related jars are added to
 We compare the performance of the S3 Gateway using the gRPC persistent connection with TLS to the existing Hadoop RPC, hRPC connections with encryption on the wire for metadata requests.  We find that in load testing the S3 performance feature branch with gRPC and encryption on the wire outperforms the existing hRPC connection ***both*** encrypted and in plaintext.  This is particularly evident in the comparison of gRPC with TLS to encrypted wire Hadoop RPC where the increase is greater than 2X.
 
 | # | s3g Transport Type | Description | Load Test Performance for Metadata throughput, Objects / sec (objects/sec) |
-| --- | --- | --- | --- |
+|---|---|---|---|
 | 1 | gRPC TLS (feature branch) | s3g ↔︎ Ozone Manager connection over gRPC with encryption on the wire, TLS. Persistent connection. | 9026.12 |
 | 2 | hRPC plaintext (current) | s3g ↔︎ Ozone Manager connection over Hadoop RPC plaintext. Persistent connection (HDDS-5881). | 6508.85 |
 | 3 | hRPC encrypted wire (current) | s3g ↔︎ Ozone Manager connection over Hadoop RPC with encryption on the wire (privacy configuration). Persistent connection (HDDS-5881). | 3989.35 |
