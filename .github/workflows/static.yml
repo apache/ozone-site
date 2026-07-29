@@ -15,8 +15,9 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Static analysis of website files.
-# These jobs only require pnpm's dev dependencies and do not building or running the website.
+# Static analysis of website files. These jobs do not build or run the website.
+# Most install only pnpm's dev dependencies (--dev); the lint job needs a full
+# install because eslint's import resolver relies on an optional native binding.
 
 name: static
 
@@ -69,7 +70,8 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      # --dev skips the site's build dependencies; cspell only needs devDependencies.
+      run: pnpm install --dev --frozen-lockfile
     - name: Run spelling check
       working-directory: ${{ env.script_dir }}
       run: |
@@ -94,7 +96,9 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      # Full install (not --dev): eslint-plugin-import-x loads unrs-resolver's
+      # native binding, which ships as an optionalDependency that --dev prunes.
+      run: pnpm install --frozen-lockfile
     - name: Run lint
       run: pnpm run lint
   check-sidebar:
@@ -113,7 +117,8 @@ jobs:
         node-version: ${{ env.node_version }}
         cache: pnpm
     - name: Install pnpm dependencies
-      run: pnpm install --dev
+      # --dev skips the site's build dependencies; the sidebar check is a shell script.
+      run: pnpm install --dev --frozen-lockfile
     - name: Run docs sidebar check
       working-directory: ${{ env.script_dir }}
       run: |

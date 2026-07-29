@@ -24,7 +24,7 @@ These steps assume you have cloned **[`apache/ozone`](https://github.com/apache/
 
 :::
 
-:::tip Running SCM, OM, and datanodes from the IDE?
+:::tip Running SCM, OM, and Datanodes from the IDE?
 
 That workflow uses shared **Run** configurations in the `.run` folder. It is described in [`CONTRIBUTING.md` — *Run Ozone from IntelliJ*](https://github.com/apache/ozone/blob/master/CONTRIBUTING.md#run-ozone-from-intellij) (and will be covered on this site under *Run → IntelliJ* when that page is published).
 

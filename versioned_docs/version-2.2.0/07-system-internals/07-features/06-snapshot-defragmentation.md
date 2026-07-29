@@ -49,19 +49,19 @@ because the snapshot diff path relies on stable SST metadata.
 
 The implementation is centered on these classes:
 
-* `SnapshotDefragService`: background and on-demand service that rewrites
+- `SnapshotDefragService`: background and on-demand service that rewrites
   snapshot checkpoint directories.
-* `OmSnapshotLocalData` and `OmSnapshotLocalDataYaml`: local per-OM metadata
+- `OmSnapshotLocalData` and `OmSnapshotLocalDataYaml`: local per-OM metadata
   persisted in YAML sidecar files.
-* `OmSnapshotLocalDataManager`: loads YAML files, maintains the in-memory
+- `OmSnapshotLocalDataManager`: loads YAML files, maintains the in-memory
   dependency graph for `(snapshotId, version)` nodes, resolves previous
   snapshot versions, and removes orphaned version metadata.
-* `CompositeDeltaDiffComputer`, `RDBDifferComputer`, and `FullDiffComputer`:
+- `CompositeDeltaDiffComputer`, `RDBDifferComputer`, and `FullDiffComputer`:
   compute the SST files that may contain differences between two snapshots.
-* `SstFileSetReader` and `TableMergeIterator`: read candidate keys from delta
+- `SstFileSetReader` and `TableMergeIterator`: read candidate keys from delta
   SST files as a sorted stream and compare the current and previous snapshot
   tables without issuing an independent point lookup for every candidate key.
-* `OmSnapshotManager`: opens the current snapshot version and deletes old
+- `OmSnapshotManager`: opens the current snapshot version and deletes old
   checkpoint directories after a version switch.
 
 The defrag service is local to each OM. The rewritten checkpoint directories
@@ -181,11 +181,11 @@ dependencies. Each node is a `(snapshotId, version)` pair and points to the
 `(previousSnapshotId, previousSnapshotVersion)` it depends on. The graph is
 rebuilt from YAML at OM startup. It is used to:
 
-* reject deletion of a version that is still referenced by another snapshot
+- reject deletion of a version that is still referenced by another snapshot
   version;
-* resolve a snapshot's previous-version dependency when the path chain changes
+- resolve a snapshot's previous-version dependency when the path chain changes
   after purge;
-* identify orphaned versions and YAML files that can be removed after purge.
+- identify orphaned versions and YAML files that can be removed after purge.
 
 ## Service Configuration
 
@@ -229,8 +229,8 @@ chain, not merely the global creation order.
 
 The service decides that a snapshot needs defrag when either:
 
-* the local `needsDefrag` flag is true; or
-* the snapshot's current version depends on an older version of its resolved
+- the local `needsDefrag` flag is true; or
+- the snapshot's current version depends on an older version of its resolved
   previous snapshot than the previous snapshot's current version.
 
 The second condition is what propagates defrag after a previous snapshot is
@@ -240,24 +240,24 @@ The main workflow is:
 
 1. Acquire the bootstrap read lock and load `SnapshotInfo` plus local YAML.
 2. Create a temporary checkpoint in `tmp_defrag`.
-   * If this is the first snapshot in the path chain, checkpoint the current
+   - If this is the first snapshot in the path chain, checkpoint the current
      snapshot.
-   * Otherwise, checkpoint the current version of the path previous snapshot.
+   - Otherwise, checkpoint the current version of the path previous snapshot.
 3. Drop non-incremental column families from the temporary checkpoint. They are
    reloaded from the current snapshot later.
 4. For the first snapshot in the path chain, do a full defrag of `keyTable`,
    `directoryTable`, and `fileTable`:
-   * delete ranges outside the bucket prefix;
-   * compact each tracked table with forced bottommost-level compaction so the
+   - delete ranges outside the bucket prefix;
+   - compact each tracked table with forced bottommost-level compaction so the
      range tombstones are removed from the rewritten checkpoint.
 5. For later snapshots, do incremental defrag of the same tracked tables:
-   * compute delta SST files between the path previous snapshot and the current
+   - compute delta SST files between the path previous snapshot and the current
      snapshot;
-   * group deltas by column family;
-   * read candidate keys from the delta SST files, merge them with the previous
+   - group deltas by column family;
+   - read candidate keys from the delta SST files, merge them with the previous
      and current snapshot tables, and write only changed keys or tombstones into
      a temporary SST file;
-   * ingest the resulting SST file into the temporary checkpoint.
+   - ingest the resulting SST file into the temporary checkpoint.
 6. Acquire a write `SNAPSHOT_DB_CONTENT_LOCK` for the current snapshot. This is
    the lock that prevents concurrent snapshot content changes while the service
    reloads non-incremental tables and switches versions. Snapshot reads and
@@ -363,12 +363,12 @@ diff report.
 The internal SST-candidate path changes based on the current local version of
 the to-snapshot:
 
-* Before defrag, the to-snapshot is version `0`, which is the original OM DB
+- Before defrag, the to-snapshot is version `0`, which is the original OM DB
   checkpoint. `RDBDifferComputer` can ask `RocksDBCheckpointDiffer` to walk the
   active DB compaction DAG and use the YAML `dbTxSequenceNumber` plus version
   `0` SST metadata to identify changed SSTs. If the DAG cannot provide a
   complete answer, `CompositeDeltaDiffComputer` falls back to `FullDiffComputer`.
-* After defrag, the to-snapshot's current version is greater than `0`, and that
+- After defrag, the to-snapshot's current version is greater than `0`, and that
   version is a rewritten snapshot DB rather than an active DB checkpoint
   produced by normal RocksDB compactions. The differ resolves the from-snapshot
   dependency through `OmSnapshotLocalDataManager`, passes the YAML
@@ -424,16 +424,16 @@ files, rebuilds the in-memory version dependency graph, and queues every
 loaded snapshot ID for an orphan check. Later commits can queue additional
 snapshot IDs:
 
-* when a snapshot gains or removes local versions;
-* when a snapshot's resolved `previousSnapshotId` changes after purge updates
+- when a snapshot gains or removes local versions;
+- when a snapshot's resolved `previousSnapshotId` changes after purge updates
   the path chain;
-* when purge records `transactionInfo` in a snapshot's YAML.
+- when purge records `transactionInfo` in a snapshot's YAML.
 
 Each cleanup pass checks the queued snapshot IDs. A version entry can be
 removed from YAML when no other local version node depends on it and either:
 
-* the version is not `0` and is not the snapshot's current version; or
-* the snapshot itself has been purged.
+- the version is not `0` and is not the snapshot's current version; or
+- the snapshot itself has been purged.
 
 Version `0` is kept for active snapshots even when it has no dependents,
 because a newly created or unresolved snapshot can still depend on the original
