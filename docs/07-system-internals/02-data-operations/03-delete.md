@@ -127,31 +127,38 @@ sequenceDiagram
 ```
 
 ### 1. Deleted Key Partitioning (Snapshot Creation)
+
 To prevent double-counting and key duplication across databases, deleted keys are cleanly partitioned during snapshot creation:
+
 1. **DB Checkpoint**: When a snapshot is taken, the active DB is checkpointed to create a frozen, read-only snapshot DB. At this point, the snapshot DB's `deletedTable` and `deletedDirTable` contain all keys that were deleted in the active namespace prior to the snapshot's creation.
 2. **Active DB Purge**: Immediately following checkpoint creation, the active DB transaction deletes all keys matching the bucket's prefix from the **active DB's** `deletedTable` and `deletedDirTable`.
-3. **Partition Effect**: 
-   * Keys deleted **before** snapshot creation reside **only in the snapshot DB's deleted tables**.
-   * Keys deleted **after** snapshot creation reside **only in the active DB's deleted tables**.
-   * Consequently, a specific deleted key (identified by its path and unique `objectId`) resides in at most one deleted table at any time.
+3. **Partition Effect**:
+   - Keys deleted **before** snapshot creation reside **only in the snapshot DB's deleted tables**.
+   - Keys deleted **after** snapshot creation reside **only in the active DB's deleted tables**.
+   - Consequently, a specific deleted key (identified by its path and unique `objectId`) resides in at most one deleted table at any time.
 
 ### 2. Reclaimable Key Filtering
+
 The `KeyDeletingService` runs background tasks against both the active DB and the snapshot DBs. To determine if a deleted key's block space can be safely reclaimed, it uses a `ReclaimableKeyFilter`:
-* When scanning a `deletedTable` entry in snapshot `S_n`, the filter checks if the key exists in the `keyTable` or `fileTable` of the previous snapshot `S_{n-1}` in the bucket's snapshot chain.
-* If the key is present in `S_{n-1}`, it means the key is still referenced by an older snapshot. The key is **not reclaimable** and remains in the `deletedTable`.
-* If the key is not referenced by any older snapshot, the filter marks it reclaimable. The block delete commands are registered with SCM, and an `OMKeyPurgeRequest` removes the metadata entry.
+
+- When scanning a `deletedTable` entry in snapshot `S_n`, the filter checks if the key exists in the `keyTable` or `fileTable` of the previous snapshot `S_{n-1}` in the bucket's snapshot chain.
+- If the key is present in `S_{n-1}`, it means the key is still referenced by an older snapshot. The key is **not reclaimable** and remains in the `deletedTable`.
+- If the key is not referenced by any older snapshot, the filter marks it reclaimable. The block delete commands are registered with SCM, and an `OMKeyPurgeRequest` removes the metadata entry.
 
 ### 3. Snapshot Reclamation (Snapshot Deletion)
+
 When a snapshot is deleted, its keys must be reconciled with the rest of the chain:
-* The Snapshot Deleting Service (`SDS`) executes an `OMSnapshotMoveDeletedKeysRequest`.
-* It scans the deleted snapshot's local `deletedTable`.
-* Any keys that are still referenced by the next snapshot in the chain are **moved** from the deleted snapshot's `deletedTable` to the next snapshot's `deletedTable`.
-* If there is no next snapshot, the keys are moved back to the active DB's `deletedTable`.
-* This ensures that as snapshots are deleted, block deletion intent is safely passed forward until the blocks are no longer protected by any snapshot.
+
+- The Snapshot Deleting Service (`SDS`) executes an `OMSnapshotMoveDeletedKeysRequest`.
+- It scans the deleted snapshot's local `deletedTable`.
+- Any keys that are still referenced by the next snapshot in the chain are **moved** from the deleted snapshot's `deletedTable` to the next snapshot's `deletedTable`.
+- If there is no next snapshot, the keys are moved back to the active DB's `deletedTable`.
+- This ensures that as snapshots are deleted, block deletion intent is safely passed forward until the blocks are no longer protected by any snapshot.
 
 ### 4. Quota Accounting for Snapshots
-* When a key is logically deleted, if snapshots exist, its size is subtracted from `usedBytes` and added to `snapshotUsedBytes` (the pending deletion bucket).
-* When a key is permanently reclaimed (via `KeyDeletingService` or snapshot delete), `purgeSnapshotUsedBytes` is called to decrement the `snapshotUsedBytes` metric.
+
+- When a key is logically deleted, if snapshots exist, its size is subtracted from `usedBytes` and added to `snapshotUsedBytes` (the pending deletion bucket).
+- When a key is permanently reclaimed (via `KeyDeletingService` or snapshot delete), `purgeSnapshotUsedBytes` is called to decrement the `snapshotUsedBytes` metric.
 
 ---
 

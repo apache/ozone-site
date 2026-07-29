@@ -37,7 +37,7 @@ Balancing is local and safe:
 - A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.
 - Bandwidth and concurrency are **operator-tunable** to avoid interfering with production I/O.
 
-This runs independently on each Datanode. The feature can be disabled by setting `hdds.datanode.disk.balancer.enabled = false` in `ozone-site.xml` on your Datanodes. Once disabled, clients can no longer use `ozone admin datanode diskbalancer` commands to balance disks on a datanode.
+This runs independently on each Datanode. The feature can be disabled by setting `hdds.datanode.disk.balancer.enabled = false` in `ozone-site.xml` on your Datanodes. Once disabled, clients can no longer use `ozone admin datanode diskbalancer` commands to balance disks on a Datanode.
 
 ## How DiskBalancer Decides What to Move
 
@@ -57,7 +57,7 @@ When DiskBalancer moves a container from one disk to another on the **same Datan
 2. Transition that copy into a **RECOVERING** state and import it as a new container on the destination.
 3. Once import and metadata updates succeed, delete the original CLOSED container from the source disk.
 
-```
+```text
 D1     ----> C1-CLOSED  --- (5) ---> C1-DELETED
         |
         |

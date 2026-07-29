@@ -7,7 +7,7 @@ tags: [Ozone, S3, compatibility]
 
 <!-- cspell:ignore peterxcli Xiangpeng Zstd amz -->
 
-Recently I created [https://ozone.s3.peterxcli.dev/](https://ozone.s3.peterxcli.dev/), an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR helps the compatibility story. It is fully open source at [https://github.com/peterxcli/ozone-s3-compatibility](https://github.com/peterxcli/ozone-s3-compatibility).
+Recently I created https://ozone.s3.peterxcli.dev/, an automated update dashboard for Apache Ozone S3 compatibility. It runs Ozone against real S3 compatibility suites, publishes the result every day, and lets you search test cases, inspect failures, read source snippets, open logs, and check whether your PR helps the compatibility story. It is fully open source at https://github.com/peterxcli/ozone-s3-compatibility.
 
 <!-- truncate -->
 
@@ -21,7 +21,7 @@ TL;DR:
 
 ## Why did I create it?
 
-Before this dashboard was introduced, Apache Ozone had already invested considerable effort in tracking the compatibility gap through several epic issues: [Ozone S3 gateway Phase 4](https://issues.apache.org/jira/browse/HDDS-1186), [Ozone S3 gateway (phase III)](https://issues.apache.org/jira/browse/HDDS-12716), and [S3 API compatibility improvements and fixes](https://issues.apache.org/jira/browse/HDDS-8423).
+Before this dashboard was introduced, Apache Ozone had already invested considerable effort in tracking the compatibility gap through several epic issues: [Ozone S3 Gateway Phase 4](https://issues.apache.org/jira/browse/HDDS-1186), [Ozone S3 Gateway (phase III)](https://issues.apache.org/jira/browse/HDDS-12716), and [S3 API compatibility improvements and fixes](https://issues.apache.org/jira/browse/HDDS-8423).
 
 But if you click through those links, you will quickly get lost. They are useful, but they are not a fresh report of what Apache Ozone’s S3 compatibility looks like today.
 
@@ -69,7 +69,7 @@ For PR authors, there is also a PR comparison workflow. It can run an Ozone PR h
 For the very first version, I literally just prompted Codex with `gpt5.4 xhigh`:
 
 :::info Prompt
-I want to create a repo that runs [https://github.com/ceph/s3-tests](https://github.com/ceph/s3-tests) and [https://github.com/minio/mint](https://github.com/minio/mint) on GitHub Action and generate the compatibility report page on GitHub Pages nightly. Make the page pretty. My desired steps that run in the GitHub Action are: clone the Ozone repo, pull latest master change, compile, start running cluster, run Mint and s3-tests to get result, compile result to be the page. We can show the compatibility rate of each feature for each test (`s3-tests`, `mint`) daily change as a chart at the page top, followed by the report page, then also include the old result expansion button to allow users to check a specific date’s running result. BTW I have the local clone of Ozone at `~/Documents/oss/apache/ozone`, you can look into it directly without searching the codebase on the website.
+I want to create a repo that runs https://github.com/ceph/s3-tests and https://github.com/minio/mint on GitHub Action and generate the compatibility report page on GitHub Pages nightly. Make the page pretty. My desired steps that run in the GitHub Action are: clone the Ozone repo, pull latest master change, compile, start running cluster, run Mint and `s3-tests` to get result, compile result to be the page. We can show the compatibility rate of each feature for each test (`s3-tests`, `mint`) daily change as a chart at the page top, followed by the report page, then also include the old result expansion button to allow users to check a specific date’s running result. BTW I have the local clone of Ozone at `~/Documents/oss/apache/ozone`, you can look into it directly without searching the codebase on the website.
 :::
 
 It got most of it right on the first try. I still made some follow-ups on the result, like “attach `s3-tests` and `mint` as submodule” and “use `act` to test the GitHub Action works locally within Docker”, but those were relatively minor compared with the first scaffold.
@@ -115,7 +115,7 @@ The results were dramatic:
    1. about \+0.236 MiB/run
    2. about \+7.1 MiB/month
    3. about \+86 MiB/year
-2. Compared with the JSON baseline:
+3. Compared with the JSON baseline:
    1. current data size: 149.11 MiB \-\> 12.59 MiB, about 11.8x smaller
    2. yearly growth: \~1.0 GiB/year \-\> \~86 MiB/year, about 12x slower
    3. search data: 107.09 MiB \-\> 7.64 MiB, about 14x smaller
@@ -142,7 +142,7 @@ There are already quite a few PRs and designs which aim to fix compatibility gap
 - Other compatibility-related correctness work:
   - [HDDS-15515. Support object Content-Type end-to-end in S3 Gateway](https://github.com/apache/ozone/pull/10472)
 
-The most useful effect is not just that the percentage moved. It is that the compatibility gap became much more concrete. A failed test can now become a dashboard link, then a JIRA, then a PR, then a nightly result showing whether it passed.
+The most useful effect is not just that the percentage moved. It is that the compatibility gap became much more concrete. A failed test can now become a dashboard link, then a Jira, then a PR, then a nightly result showing whether it passed.
 
 ## Insight
 
@@ -158,6 +158,6 @@ The most useful effect is not just that the percentage moved. It is that the com
 
 This dashboard started as a pretty simple idea: run `s3-tests` and Mint against Apache Ozone every night, then publish a nice report page. But after using it for a while, I think the more important part is that it turns S3 compatibility into a feedback loop.
 
-Before, compatibility was scattered across JIRA epics, docs, people’s memory, and occasional manual testing. Now there is a daily report that users can search, developers can debug, and PR authors can use as evidence. It is still not perfect, and some failures still need human judgment, but at least we have a place to look.
+Before, compatibility was scattered across Jira epics, docs, people’s memory, and occasional manual testing. Now there is a daily report that users can search, developers can debug, and PR authors can use as evidence. It is still not perfect, and some failures still need human judgment, but at least we have a place to look.
 
 If you are using Ozone S3 Gateway, or if you are working on Ozone S3 compatibility, please try the dashboard and the repo. Search for the feature you care about, click into the failures, and open issues or PRs when something looks wrong. The more boring and continuous this compatibility work becomes, the better Ozone will get.

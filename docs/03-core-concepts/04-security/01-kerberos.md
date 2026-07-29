@@ -1,5 +1,4 @@
 ---
-title: Kerberos Authentication
 sidebar_label: Kerberos
 ---
 

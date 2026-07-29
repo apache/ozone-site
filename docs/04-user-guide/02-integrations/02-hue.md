@@ -235,7 +235,7 @@ The bundled `static/compose/hue-ozone/hue.ini` already disables HDFS and YARN fo
 - Check Ozone ACLs and Ranger policies for the impersonated user.
 - Prefer **FSO** buckets for directory create, rename, and delete operations.
 - Check HttpFS and OM logs for the specific WebHDFS operation that failed.
-- On Docker Compose dev clusters, the default SCM block size (256 MB) can prevent small file uploads because datanodes cannot satisfy the reserved space. Lower `ozone.scm.block.size` and `ozone.scm.container.size` in `ozone-site.xml` for local testing, as described in the [Docker Compose guide](../../developer-guide/run/docker-compose#step-3-configure-your-deployment-optional).
+- On Docker Compose dev clusters, the default SCM block size (256 MB) can prevent small file uploads because Datanodes cannot satisfy the reserved space. Lower `ozone.scm.block.size` and `ozone.scm.container.size` in `ozone-site.xml` for local testing, as described in the [Docker Compose guide](../../developer-guide/run/docker-compose#step-3-configure-your-deployment-optional).
 
 ### Hue login or user errors (local Docker)
 
