@@ -82,7 +82,7 @@ For example: `ozone.scm.client.port.scmservice.scm1`.
 - Hadoop RPC, a binary protocol operating over TCP, may be authenticated and encrypted using the Java SASL mechanism.
 - Authentication of the Web UI and HttpFS is achievable through Kerberos/SPNEGO, with encryption facilitated by HTTPS.
 - S3 client connections to the S3 Gateway undergo authentication utilizing S3 secrets and encryption via TLS.
-- A series of Ozone service ports are established by gRPC and Ratis, the latter employing gRPC. gRPC, a protocol based on HTTP/2, is capable of being encrypted with TLS.
+- A series of Ozone service ports are established by gRPC and Ratis, the latter employing gRPC. gRPC, a protocol based on HTTP/2, is capable of being encrypted with TLS. For how TLS and mTLS apply across gRPC/Ratis and HTTPS ports, see [Configuring gRPC With TLS](../../security/encryption/network-encryption/grpc).
 - Ratis streaming ports, initiated by Netty, can be secured through TLS encryption.
 
 :::

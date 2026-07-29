@@ -18,8 +18,11 @@ These environment variables apply to all Ozone processes.
 | `OZONE_HOME`       | Auto-detected from script location | The path to the Ozone installation directory.                                                                     |
 | `OZONE_CONF_DIR`   | `$OZONE_HOME/etc/hadoop`           | The directory containing Ozone configuration files.                                                               |
 | `OZONE_LOG_DIR`    | `$OZONE_HOME/logs`                 | The directory where Ozone log files are stored.                                                                   |
+| `OZONE_SECURE_LOG_DIR`| `$OZONE_LOG_DIR`                | The directory where logs for secure (privileged) daemons are stored.                                              |
 | `OZONE_PID_DIR`    | `/tmp`                             | The directory where daemon PID files are stored.                                                                  |
+| `OZONE_WORKER_NAMES`| (none)                            | A space-separated list of worker host names, used as an alternative to the `OZONE_WORKERS` file. Only one of the two may be set. |
 | `OZONE_OPTS`       | `-Djava.net.preferIPv4Stack=true`  | Universal Java options applied to all Ozone processes.                                                            |
+| `OZONE_LOGLEVEL`   | `INFO`                             | The default log level applied to Ozone processes.                                                                |
 | `OZONE_HEAPSIZE_MAX`| (JVM default)                      | The maximum JVM heap size (`-Xmx`). If not set, the JVM auto-scales.                                              |
 | `OZONE_HEAPSIZE_MIN`| (JVM default)                      | The minimum JVM heap size (`-Xms`). If not set, the JVM auto-scales.                                              |
 
@@ -36,10 +39,15 @@ These environment variables apply only to certain Ozone services or roles.
 | `OZONE_DATANODE_OPTS`| (empty)                            | Specifies Java properties for Datanodes.                                                                          |
 | `OZONE_S3G_OPTS`   | (empty)                            | Specifies Java properties for the S3 Gateway.                                                                     |
 | `OZONE_RECON_OPTS` | (empty)                            | Specifies Java properties for the Recon server.                                                                   |
-
-:::note HttpFS Gateway Configuration
-The HttpFS Gateway does not use an `OZONE_HTTPFS_OPTS` variable. Its specific JVM properties must be added to the global `OZONE_OPTS` variable.
-:::
+| `OZONE_HTTPFS_OPTS`| (empty)                            | Specifies Java properties for the HttpFS Gateway.                                                                 |
+| `OZONE_CSI_OPTS`   | (empty)                            | Specifies Java properties for the CSI server.                                                                     |
+| `OZONE_SH_OPTS`    | (empty)                            | Specifies Java properties for the `ozone sh` command.                                                             |
+| `OZONE_FS_OPTS`    | (empty)                            | Specifies Java properties for the `ozone fs` command.                                                             |
+| `OZONE_ADMIN_OPTS` | (empty)                            | Specifies Java properties for the `ozone admin` command.                                                          |
+| `OZONE_DEBUG_OPTS` | (empty)                            | Specifies Java properties for the `ozone debug` command.                                                          |
+| `OZONE_FREON_OPTS` | (empty)                            | Specifies Java properties for the `ozone freon` command.                                                          |
+| `OZONE_VAPOR_OPTS` | (empty)                            | Specifies Java properties for the `ozone vapor` command.                                                          |
+| `OZONE_DAEMON_JSVC_EXTRA_OPTS`| (none)                  | Extra arguments passed to `jsvc` when launching secure (privileged) daemons.                                     |
 
 ## Configuration Methods
 

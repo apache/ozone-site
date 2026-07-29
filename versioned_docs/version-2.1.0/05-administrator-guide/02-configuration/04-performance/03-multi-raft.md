@@ -53,6 +53,8 @@ Ratis handles concurrent logs per node.
     This property is effective only when the previous property is set to 0.
     The value of this property must be greater than 0.
 
+See [Calculating Ratis Pipeline Limits](./calculating-ratis-pipeline-limits) for how SCM applies cluster-wide and Datanode-level limits (including `ozone.scm.ratis.pipeline.limit`).
+
 ## How to Use
 
 1. Configure Datanode metadata directories:

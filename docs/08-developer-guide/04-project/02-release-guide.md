@@ -195,9 +195,9 @@ Protolock files are used to check backwards compatibility of protocol buffers be
 Update the Ozone SNAPSHOT version and national park tag on master with a pull request. The snapshot version should be set to one minor version after the current release. For example, if you are releasing 2.0.0, then the master branch's current version would be `2.0.0-SNAPSHOT`. Here you would increase it to `2.1.0-SNAPSHOT`. As part of this change, you will pick the [United States National Park](https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States) to use for the next release of Ozone and set it in the project's top level pom at `<ozone.release>`. See [this pull request](https://github.com/apache/ozone/pull/8065) for an example.
 
 ```bash title="Update project version"
-mvn versions:set -DnewVersion=2.1.0-SNAPSHOT
-mvn versions:set-property -Dproperty=ozone.version -DnewVersion=2.1.0-SNAPSHOT
-mvn versions:set-property -Dproperty=ozone.release -DnewVersion="Joshua Tree”
+mvn versions:set -DgenerateBackupPoms=false -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.version -DnewVersion=2.1.0-SNAPSHOT
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.release -DnewVersion="Joshua Tree"
 ```
 
 :::note
@@ -241,11 +241,13 @@ Assume all following commands are executed from within this repo with your relea
 Use the commands below or your IDE to replace `$VERSION-SNAPSHOT` with `$VERSION`.
 
 ```bash title="Update and Commit the Version Changes"
-mvn versions:set -DnewVersion=$VERSION
-mvn versions:set-property -Dproperty=ozone.version -DnewVersion=$VERSION
+mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+mvn versions:set-property -DgenerateBackupPoms=false -Dproperty=ozone.version -DnewVersion=$VERSION
 
 git commit -am "Update Ozone version to $VERSION"
 ```
+
+If you use an IDE or different commands for the version update, verify that no `pom.xml.versionsBackup` files were left behind before continuing.
 
 ### Tag the Commit for the Release Candidate
 
@@ -313,6 +315,15 @@ If the command fails, you may need to do the following additional steps:
   git reset --hard
   git clean -dfx
   ```
+
+- Verify the repo is pristine before starting the release build.
+
+  ```bash
+  git status --short
+  find . -name 'pom.xml.versionsBackup'
+  ```
+
+  Both commands should produce no output.
 
 ### Build the Project
 
@@ -401,7 +412,13 @@ Now each .tar.gz file should have an associated .mds file, .asc file, and .sha51
 
 Before uploading the artifacts, run some basic tests on them, similar to what other devs will run before voting in favor of the release.
 
-1. Extract the contents of the source tarball and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
+1. Extract the contents of the source tarball, verify that it does not contain any `pom.xml.versionsBackup` files, and build it with an empty Maven cache by renaming your `~/.m2` directory before doing the build.
+
+    ```bash
+    find ozone-$VERSION-src -name 'pom.xml.versionsBackup'
+    ```
+
+    The command should produce no output.
 2. Check the size of the output binary tarball for significant size increase from the last release.
     - A significant increase in size could indicate a dependency issue that needs to be fixed.
     - The Apache svn repo has a size limit for release artifacts. If uploading svn fails because the tarball is too big, we need to contact INFRA to increase our repo size. [See here for details.](https://issues.apache.org/jira/browse/INFRA-23892)
@@ -505,15 +522,19 @@ To publish the artifacts to [Maven Central](https://central.sonatype.com), login
 
 ### Write a Haiku
 
-Check the tag from the [Ozone Roadmap](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Roadmap) page (it's a national park).
+Check the release's national park tag, set in the `<ozone.release>` property of the project's top level pom (also shown by `bin/ozone version`).
 Find a photo which is under the CC license.
 Write a haiku to the photo with Future font.
 
 ### Update the Ozone Website
 
-1. Create release notes and add them to the Ozone website with your haiku image. An example pull request showing how to do this is [here](https://github.com/apache/ozone-site/pull/17). Note that the target branch is `master`. Please write the release notes in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. In particular, make sure it is human readable and not a simple commit log diffs.
-2. Extract the docs folder from the release tarball, and add its contents to the website. An example pull request for this is [here](https://github.com/apache/ozone-site/pull/18). Note that the target branch is `asf-site` , and that the `docs/current` symlink has been updated to point to the latest release's directory.
-3. Test the website locally by running `hugo serve` from the repository root with the master branch checked out. Check that links for the new release are working. Links to the documentation will not work until the PR to the `asf-site` branch is merged.
+The website is rendered from the `master` branch of the [apache/ozone-site](https://github.com/apache/ozone-site) repository. Open a pull request against the `master` branch that:
+
+1. Updates the [Downloads page](https://ozone.apache.org/download/) (`src/pages/download.md`) to include the artifacts of the new release version.
+2. Adds release notes for the new version under `src/pages/release-notes/` with your haiku image. Please write the release notes in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. In particular, make sure it is human readable and not a simple commit log diff.
+3. Creates a versioned copy of the documentation for the release. See [this pull request](https://github.com/apache/ozone-site/pull/330) for an example, and check out the instructions from the [Docusaurus website](https://docusaurus.io/docs/versioning#tagging-a-new-version).
+
+Test the website locally by running `pnpm build` from the repository root to verify that it builds, then `pnpm serve` (or `pnpm start`) to browse the site and click through the new release's links. The build only validates internal links, so the links to the release artifacts must be checked manually.
 
 ### Add the Final Git Tag and Push It
 
@@ -559,14 +580,6 @@ Update the upgrade and client cross compatibility acceptance tests to check agai
 This step requires the release's [Docker image](#publish-a-docker-image-for-the-release) to be published.
 :::
 
-### Update the Ozone Roadmap
-
-1. Update the [Ozone Roadmap](https://cwiki.apache.org/confluence/display/OZONE/Ozone+Roadmap) so that the release notes for the just completed release are correct.
-
-2. Move its row to the `Past Releases` section.
-
-3. Create a row for the next release in the `Upcoming Releases` section, and add planned features that you are aware of.
-
 ### Update Apache Release Metadata
 
 1. Mark the version as released in Apache Jira HDDS project: https://issues.apache.org/jira/plugins/servlet/project-config/HDDS/administer-versions?status=unreleased
@@ -588,8 +601,8 @@ When a release is superseded or no longer supported, clean up old release refere
 
 Include the following links:
 
-- Release notes: https://ozone.apache.org/release/1.2.0/. Replace the version in the URL with the version being released.
-- Download link: https://ozone.apache.org/downloads/
+- Release notes: https://ozone.apache.org/release-notes/2.1.0/. Replace the version in the URL with the version being released.
+- Download link: https://ozone.apache.org/download/
 - Link to versioned documentation: https://ozone.apache.org/docs/
 
 ## Patch Release
@@ -600,11 +613,10 @@ If there is a security vulnerability or critical bug uncovered in a major or min
 
 2. Run all steps from the sections [Update the Versions](#update-the-ozone-version-on-the-release-branch) through [Publish a Docker Image for the Release](#publish-a-docker-image-for-the-release), with the following modifications:
     - Do not update the protolock files unless protocol buffers were changed as part of the fix.
-    - When updating the website, all instances of the original major/minor release should be replaced with this patch version, since we do not want users downloading the original release anymore.
-      - For example, any website text referring to 1.2.0 should be changed to refer to 1.2.1.
-      - Continuing the 1.2.0 to 1.2.1 example, the release/1.2.0 page should redirect to release/1.2.1.
-      - An example pull request to do this is [here](https://github.com/apache/ozone-site/pull/23).
-      - The docs can be added to the website normally as described above in [Update the Ozone Website](#update-the-ozone-website). The docs link for the original major/minor release can remain alongside the docs link for the patch release.
+    - When updating the website, replace the superseded release's row on the [Downloads page](https://ozone.apache.org/download/) with this patch version, since users should no longer download the original release.
+      - For example, if 1.2.1 is released, replace the 1.2.0 row on the Downloads page with 1.2.1.
+      - Add release notes for the patch release under `src/pages/release-notes/` as described above in [Update the Ozone Website](#update-the-ozone-website). The release notes page for the original major/minor release can remain alongside the page for the patch release.
+      - Remove the Downloads section from the superseded release's notes page, and point readers to the patch release's notes page instead. The superseded artifacts will be removed from the distribution site, so the old download links would no longer work.
     - In the event of a critical security vulnerability or seriously harmful bug with a small set of changes in the patch, PMC members may vote to forgo the usual 72 hour minimum time for a release vote and publish once there are enough binding +1s.
 
 3. Remove the previous release that this patch release supersedes from the Apache distribution site. e.g.:

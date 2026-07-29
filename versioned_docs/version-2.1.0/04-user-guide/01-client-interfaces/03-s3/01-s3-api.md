@@ -44,7 +44,6 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
 | ✅ [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) | Creates a new bucket. | **Non-compliant behavior:** The default bucket ACL may include extra group permissions instead of being strictly private. Bucket names must adhere to S3 naming conventions. |
 | ✅ [HeadBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html) | Checks for the existence of a bucket. | Returns a 200 status if the bucket exists. |
 | ✅ [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html) | Deletes a bucket. | Bucket must be empty before deletion. |
-| ✅ [GetBucketLocation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html) | Retrieves the location (region) of a bucket. | Typically returns a default region (e.g., `us-east-1`), which may differ from AWS if region-specific responses are expected. |
 
 ### Object Operations
 
@@ -175,6 +174,11 @@ Or
 ```bash
 aws s3 ls --endpoint http://localhost:9878 s3://buckettest
 ```
+
+#### Supported AWS CLI Versions
+
+- AWS CLI v1 (1.37.0 and above) and AWS CLI v2 (2.23.0 and above) are supported. These are the versions in which AWS enabled [default data integrity protections](https://github.com/aws/aws-cli/issues/9214) that automatically calculate a `CRC32` checksum for S3 uploads; Ozone added handling for that flow in 2.1 and later.
+- [AWS has announced AWS CLI v1 enters maintenance mode on July 15, 2026](https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/); users are encouraged to upgrade to AWS CLI v2. Ozone may drop support for AWS CLI v1 at some point in the future.
 
 ## Compatible third-party applications
 

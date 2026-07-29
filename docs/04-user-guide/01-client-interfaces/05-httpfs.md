@@ -18,6 +18,14 @@ HttpFS can be used to access data in Ozone using HTTP utilities (such as curl an
 
 The **WebHDFS** client FileSystem implementation can be used to access HttpFS using the Ozone filesystem command line tool (`ozone fs`) as well as from Java applications using the Hadoop FileSystem Java API.
 
+:::note
+If HttpFS is fronted by a **load balancer** and you use Kerberos (SPNEGO), clients obtain tickets for the load balancer’s hostname. Configure the HttpFS HTTP principal and keytab accordingly; see [HttpFS behind a load balancer (Kerberos)](../../administrator-guide/configuration/performance/httpfs-load-balancer).
+:::
+
+:::note
+If HttpFS is fronted by **Apache Knox**, configure a proxy user for Knox and access HttpFS through the Knox gateway URL. See [Configuring Apache Knox](../../administrator-guide/configuration/security/knox).
+:::
+
 ## Getting started
 
 To try it out, follow the [instructions](../../quick-start/installation/docker) to start the Ozone cluster with Docker Compose.

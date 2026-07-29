@@ -73,6 +73,8 @@ the property `hdds.datanode.volume.choosing.policy`. There are two main policies
 
 ### Volume-Related Configuration Properties
 
+For capacity planning, reserved space, and when volumes are treated as full, see [Storage Capacity Planning](../../administrator-guide/configuration/performance/storage-capacity-planning).
+
 | Property Name | Default Value | Description |
 |---------------|---------------|-------------|
 | `hdds.datanode.volume.choosing.policy` | `CapacityVolumeChoosingPolicy` | The policy used to select a volume for new containers. |

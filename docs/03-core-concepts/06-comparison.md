@@ -26,7 +26,7 @@ Ozone shines when users are in need of an Apache licensed, strongly consistent s
 
 | Tech | Type | Consistency | Scale | Big Data Integration | Performance Focus | Notes |
 | ---- | ---- | ----------- | ----- | -------------------- | ----------------- | ----- |
-| **Isilon (Dell PowerScale)** | File (Scale-Out NAS) | Strong | PBs, billions of files | Indirect | High throughput, good mixed IO | Enterprise NAS, POSIX compliant, good for mixed workloads, backup, analytics |
+| **Isilon (Dell PowerScale)** | File (Scale-Out NAS) | Strong | PBs, billions of files | Indirect | High throughput, good mixed I/O | Enterprise NAS, POSIX compliant, good for mixed workloads, backup, analytics |
 | **VAST** | File / Object | Strong | PBs | Yes, AI workloads | Ultra-low latency, all-flash NVMe | All-flash, NFS/S3, great for AI/ML and large unstructured datasets |
 | **WEKA** | Parallel File | Strong | PBs | HPC, AI | Ultra-low latency, high IOPS | High-performance file, GPU clusters, NFS/SMB/S3 |
 | **Spectrum Scale (GPFS)** | File (POSIX) | Strong | PBs | HPC, AI | High throughput, scale-out metadata | IBM, used in HPC/AI, policy tiering, good POSIX compliance |
@@ -48,6 +48,10 @@ Ozone shines when users look for commodity hardware, open systems and embrace th
 | **IBM Cloud Object Storage** | Object | Strong | Exabyte+ | Via S3 API & native services | S3-compatible, geo-dispersed erasure coding for durability |
 
 These cloud storage offerings are only available from their respective public cloud vendors. In contrast, Ozone runs on-prem or in your private cloud, giving you full control.
+
+## Further reading (third-party benchmarks)
+
+For a **benchmark-driven** look at Ozone—**erasure-coded** data with **Teragen** and **Terasort** compared in the same style as classic HDFS workloads—see Cloudera’s write-up on Medium: [Cloudera Object Store EC performance evaluation (Teragen and Terasort)](https://medium.com/@ritesh_76398/cloudera-object-store-ec-performance-evaluation-by-benchmarking-with-teragen-and-terasort-c541af020237). It is an independent article, not Apache project documentation; use it alongside your own testing.
 
 ## Summary
 
