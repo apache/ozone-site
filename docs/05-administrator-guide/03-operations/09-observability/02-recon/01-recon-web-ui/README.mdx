@@ -29,7 +29,6 @@ The left navigation panel provides access to all available views:
 - Insights
 - OM DB Insights
 - Namespace Usage
-- Heatmap
 
 The **Cluster Capacity** page is reached from the **View More** link on the Overview page rather than from the left navigation.
 
@@ -42,5 +41,12 @@ Most Recon UI pages share the same controls and behaviors. They are described on
 - **Columns selector** — table pages let you choose which columns are visible; a key identifier column is always pinned.
 - **Limit selector** — on large listings, controls how many rows are fetched from the server (options such as 1000/5000/10000/20000; default 1000). **Search, sorting, and filters apply to the loaded rows only**, not to rows beyond the limit — raise the limit if you expect more.
 - **Error states** — on a fetch error, a page reports a data-fetch error and its table stays empty; until the first successful load, counts may appear as zero or `N/A`.
+
+## AI Assistant
+
+Recon includes an optional AI Assistant that lets you query cluster metadata in
+plain English from within the UI. It is disabled by default and requires
+operator configuration. See the [Recon AI Assistant](../recon-ai-assistant) page
+for setup, configuration, security, and usage guidance.
 
 <DocCardList/>
