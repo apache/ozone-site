@@ -352,6 +352,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.client.datastream.buffer.flush.size` | 16MB | `CLIENT` | The boundary at which putBlock is executed |
 | `ozone.client.datastream.min.packet.size` | 1MB | `CLIENT` | The maximum size of the ByteBuffer (used via ratis streaming) |
 | `ozone.client.datastream.pipeline.mode` | true | `CLIENT` | Streaming write support both pipeline mode(datanode1-&gt;datanode2-&gt;datanode3) and star mode(datanode1-&gt;datanode2, datanode1-&gt;datanode3). By default we use pipeline mode. |
+| `ozone.client.datastream.putblock.on.close.enabled` | false | `CLIENT` | When enabled, use StreamInitWithPutBlock so datanodes commit PutBlock when the Ratis data stream closes instead of via a separate WriteAsync PutBlock. |
 | `ozone.client.datastream.sync.size` | 0B | `CLIENT` | The minimum size of written data before forcing the datanodes in the pipeline to flush the pending data to underlying storage. If set to zero or negative, the client will not force the datanodes to flush. |
 | `ozone.client.datastream.window.size` | 64MB | `CLIENT` | Maximum size of BufferList(used for retry) size per BlockDataStreamOutput instance |
 | `ozone.client.ec.grpc.retries.enabled` | true | `CLIENT` | To enable Grpc client retries for EC. |
