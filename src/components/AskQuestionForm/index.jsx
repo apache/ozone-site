@@ -17,8 +17,8 @@
  * under the License.
  */
 
-import { useState } from 'react';
 import Heading from '@theme/Heading';
+import { useState } from 'react';
 import styles from './styles.module.css';
 
 export default function AskQuestionForm() {

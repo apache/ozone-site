@@ -202,6 +202,23 @@ function Integrations() {
       // link: '/docs/user-guide/integrations/spark'
     },
     {
+      name: "Flink",
+      icon: () => (
+        <img
+          src="/img/integrations/flink.svg"
+          className="integration-logo-img"
+          data-logo="flink"
+          style={{
+            height: "28px",
+            width: "auto",
+            maxWidth: "100%",
+            objectFit: "contain",
+          }}
+        />
+      ),
+      link: "/docs/user-guide/integrations/flink",
+    },
+    {
       name: "Iceberg",
       icon: () => (
         <img
@@ -284,7 +301,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/administrator-guide/configuration/security/knox'
+      link: "/docs/administrator-guide/configuration/security/knox",
     },
     {
       name: "Kerberos",
@@ -364,7 +381,7 @@ function Integrations() {
           }}
         />
       ),
-      // link: '/docs/user-guide/integrations/hue'
+      link: '/docs/user-guide/integrations/hue'
     },
     {
       name: "HBase",
