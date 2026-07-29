@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.a6d3a5c3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.9a062bd8.js" defer="defer"></script>
 <script src="/assets/js/main.377cd33d.js" defer="defer"></script>
 </head>
 <body>
@@ -53,7 +53,7 @@ Apache Ozone&#x27;s new intra-node Disk Balancer is designed to fix this—autom
 <li class="">A scheduler periodically checks for imbalance and dispatches copy-and-import tasks.</li>
 <li class="">Bandwidth and concurrency are <strong>operator-tunable</strong> to avoid interfering with production I/O.</li>
 </ul>
-<p>This runs independently on each Datanode. The feature can be disabled by setting <code>hdds.datanode.disk.balancer.enabled = false</code> in <code>ozone-site.xml</code> on your Datanodes. Once disabled, clients can no longer use <code>ozone admin datanode diskbalancer</code> commands to balance disks on a datanode.</p>
+<p>This runs independently on each Datanode. The feature can be disabled by setting <code>hdds.datanode.disk.balancer.enabled = false</code> in <code>ozone-site.xml</code> on your Datanodes. Once disabled, clients can no longer use <code>ozone admin datanode diskbalancer</code> commands to balance disks on a Datanode.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="how-diskbalancer-decides-what-to-move">How DiskBalancer Decides What to Move<a href="#how-diskbalancer-decides-what-to-move" class="hash-link" aria-label="Direct link to How DiskBalancer Decides What to Move" title="Direct link to How DiskBalancer Decides What to Move" translate="no">​</a></h2>
 <p>DiskBalancer uses simple but robust policy to decide <strong>which disks to balance</strong> and <strong>which containers to move</strong> (see the design doc for details: <code>diskbalancer.md</code> in <a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer" class="">HDDS-5713</a>).</p>
 <ul>

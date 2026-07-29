@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.a6d3a5c3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.9a062bd8.js" defer="defer"></script>
 <script src="/assets/js/main.377cd33d.js" defer="defer"></script>
 </head>
 <body>
@@ -34,12 +34,12 @@
 <li class=""><strong>ENTERING_MAINTENANCE</strong>: The Datanode is transitioning into maintenance mode. New writes will be avoided. The SCM monitors the Datanode until it meets all safety criteria before allowing it to fully enter maintenance.</li>
 <li class=""><strong>IN_MAINTENANCE</strong>: The Datanode is in maintenance mode. Data will not be written to it. If the Datanode remains in this state beyond the configured maintenance window, its data will start to be replicated to other Datanodes to ensure data durability.</li>
 </ol>
-<h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="transition-criteria-entering_maintenance-to-in_maintenance">Transition Criteria (<code>ENTERING_MAINTENANCE</code> to <code>IN_MAINTENANCE</code>)<a href="#transition-criteria-entering_maintenance-to-in_maintenance" class="hash-link" aria-label="Direct link to transition-criteria-entering_maintenance-to-in_maintenance" title="Direct link to transition-criteria-entering_maintenance-to-in_maintenance" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="transition-criteria-entering_maintenance-to-in_maintenance">Transition Criteria (<code>ENTERING_MAINTENANCE</code> to <code>IN_MAINTENANCE</code>)<a href="#transition-criteria-entering_maintenance-to-in_maintenance" class="hash-link" aria-label="Direct link to transition-criteria-entering_maintenance-to-in_maintenance" title="Direct link to transition-criteria-entering_maintenance-to-in_maintenance" translate="no">​</a></h2>
 <p>A Datanode will remain in the <code>ENTERING_MAINTENANCE</code> state until the SCM (Storage Container Manager) verifies the following safety conditions:</p>
 <ul>
 <li class=""><strong>Pipeline Closure</strong>: All open Ratis and EC pipelines on the Datanode must be successfully closed. This ensures no active write operations are interrupted.</li>
 <li class=""><strong>Datanode Acknowledgment</strong>: The Datanode must confirm it has received the maintenance command and persisted the <code>ENTERING_MAINTENANCE</code> state to its local disk. This prevents state confusion if the Datanode is rebooted.</li>
-<li class=""><strong>Container Health</strong>: All containers on the DataNode must be in a stable state (either <code>CLOSED</code> or <code>QUASI_CLOSED</code>). Nodes will not enter maintenance if they
+<li class=""><strong>Container Health</strong>: All containers on the Datanode must be in a stable state (either <code>CLOSED</code> or <code>QUASI_CLOSED</code>). Nodes will not enter maintenance if they
 contain <code>OPEN</code> or <code>CLOSING</code> containers</li>
 <li class=""><strong>Sufficient Replication (Data Safety)</strong>: The SCM verifies that every container stored on the Datanode has enough healthy copies elsewhere in the cluster to remain safe while the node is offline.<!-- -->
 <ul>

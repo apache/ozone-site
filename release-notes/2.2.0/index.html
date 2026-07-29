@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.a6d3a5c3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.9a062bd8.js" defer="defer"></script>
 <script src="/assets/js/main.377cd33d.js" defer="defer"></script>
 </head>
 <body>
@@ -32,7 +32,7 @@
 <p><a href="https://issues.apache.org/jira/browse/HDDS-13003" target="_blank" rel="noopener noreferrer" class="">HDDS-13003</a> | <em>Major</em> | <strong>Snapshot Defragmentation to reduce storage footprint</strong></p>
 <p>Snapshot defragmentation reduces snapshot storage footprint and improves snapshot local-data, locking, and diff handling.</p>
 <hr>
-<p><a href="https://issues.apache.org/jira/browse/HDDS-12716" target="_blank" rel="noopener noreferrer" class="">HDDS-12716</a> | <em>Major</em> | <strong>Ozone S3 gateway Phase 4</strong></p>
+<p><a href="https://issues.apache.org/jira/browse/HDDS-12716" target="_blank" rel="noopener noreferrer" class="">HDDS-12716</a> | <em>Major</em> | <strong>Ozone S3 Gateway Phase 4</strong></p>
 <p>S3 Gateway Phase 4 delivers broad S3 API compatibility, request handling, metrics, and correctness improvements.</p>
 <hr>
 <p><a href="https://issues.apache.org/jira/browse/HDDS-13177" target="_blank" rel="noopener noreferrer" class="">HDDS-13177</a> | <em>Major</em> | <strong>Storage Capacity Distribution</strong></p>
@@ -44,14 +44,14 @@
 <p><a href="https://issues.apache.org/jira/browse/HDDS-5404" target="_blank" rel="noopener noreferrer" class="">HDDS-5404</a> | <em>Major</em> | <strong>upgrade protobuf to proto3</strong></p>
 <p>Ozone moves toward protobuf 3 and removes older protobuf compilation paths.</p>
 <hr>
-<p><a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer" class="">HDDS-5713</a> | <em>Major</em> | <strong>Add a disk balancer for datanode</strong></p>
-<p>Disk Balancer adds and refines DataNode disk balancing, validation, metrics, and command output.</p>
+<p><a href="https://issues.apache.org/jira/browse/HDDS-5713" target="_blank" rel="noopener noreferrer" class="">HDDS-5713</a> | <em>Major</em> | <strong>Add a disk balancer for Datanode</strong></p>
+<p>Disk Balancer adds and refines Datanode disk balancing, validation, metrics, and command output.</p>
 <hr>
 <p><a href="https://issues.apache.org/jira/browse/HDDS-14424" target="_blank" rel="noopener noreferrer" class="">HDDS-14424</a> | <em>Major</em> | <strong>OM HA: Support Follower Read (Phase 1)</strong></p>
 <p>OM HA follower reads add foundations for scaling read paths through follower-side reads.</p>
 <hr>
 <p><a href="https://issues.apache.org/jira/browse/HDDS-10338" target="_blank" rel="noopener noreferrer" class="">HDDS-10338</a> | <em>Major</em> | <strong>Implement a Client Datanode API to stream a block</strong></p>
-<p>Client-to-DataNode stream block APIs lay groundwork for more efficient streaming reads.</p>
+<p>Client-to-Datanode stream block APIs lay groundwork for more efficient streaming reads.</p>
 <hr>
 <p><a href="https://issues.apache.org/jira/browse/HDDS-14937" target="_blank" rel="noopener noreferrer" class="">HDDS-14937</a> | <em>Major</em> | <strong>Ozone native implementation of Iceberg RewriteTablePath</strong></p>
 <p>Iceberg RewriteTablePath support adds Ozone-native path migration actions and CLI integration.</p>
@@ -68,7 +68,7 @@
 <p><a href="https://issues.apache.org/jira/browse/HDDS-12090" target="_blank" rel="noopener noreferrer" class="">HDDS-12090</a> | <em>Major</em> | <strong>Fix Snapshot Bootstrapping race condition to prevent snapshot corruption</strong></p>
 <p>Snapshot bootstrapping fixes strengthen lock ordering and race protection to prevent corruption.</p>
 <hr>
-<p><a href="https://issues.apache.org/jira/browse/HDDS-11825" target="_blank" rel="noopener noreferrer" class="">HDDS-11825</a> | <em>Major</em> | <strong>Support interactive mode for ozone CLI</strong></p>
+<p><a href="https://issues.apache.org/jira/browse/HDDS-11825" target="_blank" rel="noopener noreferrer" class="">HDDS-11825</a> | <em>Major</em> | <strong>Support interactive mode for Ozone CLI</strong></p>
 <p>The Ozone interactive CLI submodule adds an interactive shell experience and related command improvements.</p>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="changelog">Changelog<a href="#changelog" class="hash-link" aria-label="Direct link to Changelog" title="Direct link to Changelog" translate="no">​</a></h2>
@@ -81,7 +81,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Add example for uploading file via HttpFS. (<a href="https://issues.apache.org/jira/browse/HDDS-13167" target="_blank" rel="noopener noreferrer" class="">HDDS-13167</a>)</li>
 <li class="">Add transactionInfo field in SnapshotLocalData and update the value on SnapshotPurgeRequest. (<a href="https://issues.apache.org/jira/browse/HDDS-13833" target="_blank" rel="noopener noreferrer" class="">HDDS-13833</a>)</li>
 <li class="">Introduce Snapshot Content Lock to lock table contents. (<a href="https://issues.apache.org/jira/browse/HDDS-13847" target="_blank" rel="noopener noreferrer" class="">HDDS-13847</a>)</li>
-<li class="">Add doc for ozone sh snapshot listDiff command. (<a href="https://issues.apache.org/jira/browse/HDDS-13755" target="_blank" rel="noopener noreferrer" class="">HDDS-13755</a>)</li>
+<li class="">Add doc for <code>ozone sh snapshot listDiff</code> command. (<a href="https://issues.apache.org/jira/browse/HDDS-13755" target="_blank" rel="noopener noreferrer" class="">HDDS-13755</a>)</li>
 <li class="">Add permission check in getFileStatus. (<a href="https://issues.apache.org/jira/browse/HDDS-13858" target="_blank" rel="noopener noreferrer" class="">HDDS-13858</a>)</li>
 <li class="">Add CLI that allows manually triggering snapshot defrag. (<a href="https://issues.apache.org/jira/browse/HDDS-13640" target="_blank" rel="noopener noreferrer" class="">HDDS-13640</a>)</li>
 <li class="">Add unit test coverage for OMNodeDetails. (<a href="https://issues.apache.org/jira/browse/HDDS-13868" target="_blank" rel="noopener noreferrer" class="">HDDS-13868</a>)</li>
@@ -118,18 +118,18 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Add BCSID on the container info console output. (<a href="https://issues.apache.org/jira/browse/HDDS-14547" target="_blank" rel="noopener noreferrer" class="">HDDS-14547</a>)</li>
 <li class="">Include fsCapacity and fsAvailable in storage distribution endpoint. (<a href="https://issues.apache.org/jira/browse/HDDS-14533" target="_blank" rel="noopener noreferrer" class="">HDDS-14533</a>)</li>
 <li class="">Add automatic labeling for PRs to the ZDU feature branch. (<a href="https://issues.apache.org/jira/browse/HDDS-14565" target="_blank" rel="noopener noreferrer" class="">HDDS-14565</a>)</li>
-<li class="">Create submodule hdds-cli-common. (<a href="https://issues.apache.org/jira/browse/HDDS-14607" target="_blank" rel="noopener noreferrer" class="">HDDS-14607</a>)</li>
+<li class="">Create submodule <code>hdds-cli-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14607" target="_blank" rel="noopener noreferrer" class="">HDDS-14607</a>)</li>
 <li class="">Add metrics for ReadBlock. (<a href="https://issues.apache.org/jira/browse/HDDS-14219" target="_blank" rel="noopener noreferrer" class="">HDDS-14219</a>)</li>
 <li class="">Include all storage report fields in downloaded CSV report for Capacity Distribution. (<a href="https://issues.apache.org/jira/browse/HDDS-14517" target="_blank" rel="noopener noreferrer" class="">HDDS-14517</a>)</li>
 <li class="">Add snapshot defrag metrics. (<a href="https://issues.apache.org/jira/browse/HDDS-13453" target="_blank" rel="noopener noreferrer" class="">HDDS-13453</a>)</li>
 <li class="">Add a generic type to ScmCodec. (<a href="https://issues.apache.org/jira/browse/HDDS-14655" target="_blank" rel="noopener noreferrer" class="">HDDS-14655</a>)</li>
 <li class="">Create context for BucketOperationHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-14685" target="_blank" rel="noopener noreferrer" class="">HDDS-14685</a>)</li>
-<li class="">Publish user-facing configs to the doc site: ozone-default.xml and ozone-default-generated.xml. (<a href="https://issues.apache.org/jira/browse/HDDS-11072" target="_blank" rel="noopener noreferrer" class="">HDDS-11072</a>)</li>
+<li class="">Publish user-facing configs to the doc site: <code>ozone-default.xml</code> and <code>ozone-default-generated.xml</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-11072" target="_blank" rel="noopener noreferrer" class="">HDDS-11072</a>)</li>
 <li class="">Include an option for excluding containers in the Container Balancer CLI. (<a href="https://issues.apache.org/jira/browse/HDDS-14619" target="_blank" rel="noopener noreferrer" class="">HDDS-14619</a>)</li>
-<li class="">Provide an option in ‘scm safemode status’ to show status of all SCM nodes. (<a href="https://issues.apache.org/jira/browse/HDDS-14108" target="_blank" rel="noopener noreferrer" class="">HDDS-14108</a>)</li>
+<li class="">Provide an option in <code>scm safemode status</code> to show status of all SCM nodes. (<a href="https://issues.apache.org/jira/browse/HDDS-14108" target="_blank" rel="noopener noreferrer" class="">HDDS-14108</a>)</li>
 <li class="">Allow client to choose the read consistency level. (<a href="https://issues.apache.org/jira/browse/HDDS-14509" target="_blank" rel="noopener noreferrer" class="">HDDS-14509</a>)</li>
 <li class="">Implement ScmEnumCodec without reflection. (<a href="https://issues.apache.org/jira/browse/HDDS-14673" target="_blank" rel="noopener noreferrer" class="">HDDS-14673</a>)</li>
-<li class="">Display retry messages in cli when scm&#x27;s are unavailable. (<a href="https://issues.apache.org/jira/browse/HDDS-14725" target="_blank" rel="noopener noreferrer" class="">HDDS-14725</a>)</li>
+<li class="">Display retry messages in CLI when SCM&#x27;s are unavailable. (<a href="https://issues.apache.org/jira/browse/HDDS-14725" target="_blank" rel="noopener noreferrer" class="">HDDS-14725</a>)</li>
 <li class="">Allow Datanode to dynamically reconfigure SCM node addresses. (<a href="https://issues.apache.org/jira/browse/HDDS-14764" target="_blank" rel="noopener noreferrer" class="">HDDS-14764</a>)</li>
 <li class="">Support including only specified containers in Container Balancer. (<a href="https://issues.apache.org/jira/browse/HDDS-14618" target="_blank" rel="noopener noreferrer" class="">HDDS-14618</a>)</li>
 <li class="">Implement ScmGeneratedMessageCodec without reflection. (<a href="https://issues.apache.org/jira/browse/HDDS-14748" target="_blank" rel="noopener noreferrer" class="">HDDS-14748</a>)</li>
@@ -158,7 +158,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Implement RewriteTablePath action. (<a href="https://issues.apache.org/jira/browse/HDDS-14938" target="_blank" rel="noopener noreferrer" class="">HDDS-14938</a>)</li>
 <li class="">Add metrics to track Snapshot backup SST file stats. (<a href="https://issues.apache.org/jira/browse/HDDS-14996" target="_blank" rel="noopener noreferrer" class="">HDDS-14996</a>)</li>
 <li class="">Add default javadoc<!-- -->:aggregate<!-- --> goal parameters to the root pom.xml. (<a href="https://issues.apache.org/jira/browse/HDDS-13145" target="_blank" rel="noopener noreferrer" class="">HDDS-13145</a>)</li>
-<li class="">Introduce PendingContainerTracker in SCM to prevent container over-allocation per DataNode. (<a href="https://issues.apache.org/jira/browse/HDDS-15024" target="_blank" rel="noopener noreferrer" class="">HDDS-15024</a>)</li>
+<li class="">Introduce PendingContainerTracker in SCM to prevent container over-allocation per Datanode. (<a href="https://issues.apache.org/jira/browse/HDDS-15024" target="_blank" rel="noopener noreferrer" class="">HDDS-15024</a>)</li>
 <li class="">Implement version file rewrite logic for path migration across metadata history. (<a href="https://issues.apache.org/jira/browse/HDDS-14939" target="_blank" rel="noopener noreferrer" class="">HDDS-14939</a>)</li>
 <li class="">Add support for S3 conditional requests. (<a href="https://issues.apache.org/jira/browse/HDDS-13117" target="_blank" rel="noopener noreferrer" class="">HDDS-13117</a>)</li>
 <li class="">Add an OM config to toggle Ozone snapshot rename feature. (<a href="https://issues.apache.org/jira/browse/HDDS-15100" target="_blank" rel="noopener noreferrer" class="">HDDS-15100</a>)</li>
@@ -168,7 +168,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Conditional CompleteMultipartUpload. (<a href="https://issues.apache.org/jira/browse/HDDS-15067" target="_blank" rel="noopener noreferrer" class="">HDDS-15067</a>)</li>
 <li class="">Implement manifest selection logic for rewrite based on snapshot delta. (<a href="https://issues.apache.org/jira/browse/HDDS-14942" target="_blank" rel="noopener noreferrer" class="">HDDS-14942</a>)</li>
 <li class="">Atomic Create-If-Absent Should Use 0 for Generation Match. (<a href="https://issues.apache.org/jira/browse/HDDS-15184" target="_blank" rel="noopener noreferrer" class="">HDDS-15184</a>)</li>
-<li class="">Add a switch to toggle the RocksDb open test for volume health. (<a href="https://issues.apache.org/jira/browse/HDDS-15127" target="_blank" rel="noopener noreferrer" class="">HDDS-15127</a>)</li>
+<li class="">Add a switch to toggle the RocksDB open test for volume health. (<a href="https://issues.apache.org/jira/browse/HDDS-15127" target="_blank" rel="noopener noreferrer" class="">HDDS-15127</a>)</li>
 <li class="">Enable UselessStringValueOf, UseStringBufferForStringAppends in PMD. (<a href="https://issues.apache.org/jira/browse/HDDS-14923" target="_blank" rel="noopener noreferrer" class="">HDDS-14923</a>)</li>
 <li class="">Implement Scalable CSV Export for Unhealthy Containers in Recon UI. (<a href="https://issues.apache.org/jira/browse/HDDS-14913" target="_blank" rel="noopener noreferrer" class="">HDDS-14913</a>)</li>
 <li class="">Conditional Copy (CopyObject) (<a href="https://issues.apache.org/jira/browse/HDDS-13921" target="_blank" rel="noopener noreferrer" class="">HDDS-13921</a>)</li>
@@ -176,13 +176,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Add robot test case covering the basics. (<a href="https://issues.apache.org/jira/browse/HDDS-15181" target="_blank" rel="noopener noreferrer" class="">HDDS-15181</a>)</li>
 <li class="">Add Quasi-Closed Container Tracking in Recon. (<a href="https://issues.apache.org/jira/browse/HDDS-14927" target="_blank" rel="noopener noreferrer" class="">HDDS-14927</a>)</li>
 <li class="">Allow running acceptance test with local-only image. (<a href="https://issues.apache.org/jira/browse/HDDS-15229" target="_blank" rel="noopener noreferrer" class="">HDDS-15229</a>)</li>
-<li class="">Enable ozone.snapshot.deep.cleaning.enabled by default. (<a href="https://issues.apache.org/jira/browse/HDDS-15187" target="_blank" rel="noopener noreferrer" class="">HDDS-15187</a>)</li>
+<li class="">Enable <code>ozone.snapshot.deep.cleaning.enabled</code> by default. (<a href="https://issues.apache.org/jira/browse/HDDS-15187" target="_blank" rel="noopener noreferrer" class="">HDDS-15187</a>)</li>
 <li class="">Add tests for Ozone Iceberg statistics file copy plan. (<a href="https://issues.apache.org/jira/browse/HDDS-15174" target="_blank" rel="noopener noreferrer" class="">HDDS-15174</a>)</li>
 <li class="">Implement manifest rewrite logic for data and delete files. (<a href="https://issues.apache.org/jira/browse/HDDS-14944" target="_blank" rel="noopener noreferrer" class="">HDDS-14944</a>)</li>
 <li class="">Add ScmInvoker subclasses for the remaining SCMHandler(s) (<a href="https://issues.apache.org/jira/browse/HDDS-15191" target="_blank" rel="noopener noreferrer" class="">HDDS-15191</a>)</li>
 <li class="">&quot;Move the &quot;&quot;atomic key creation&quot;&quot; logic from output stream to S3 endpoints&quot;. (<a href="https://issues.apache.org/jira/browse/HDDS-15193" target="_blank" rel="noopener noreferrer" class="">HDDS-15193</a>)</li>
 <li class="">Add tests for ScmInvoker subclasses. (<a href="https://issues.apache.org/jira/browse/HDDS-15322" target="_blank" rel="noopener noreferrer" class="">HDDS-15322</a>)</li>
-<li class="">Create submodule ozone-cli-interactive. (<a href="https://issues.apache.org/jira/browse/HDDS-15185" target="_blank" rel="noopener noreferrer" class="">HDDS-15185</a>)</li>
+<li class="">Create submodule <code>ozone-cli-interactive</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15185" target="_blank" rel="noopener noreferrer" class="">HDDS-15185</a>)</li>
 <li class="">Support StringCodec without fallback. (<a href="https://issues.apache.org/jira/browse/HDDS-15355" target="_blank" rel="noopener noreferrer" class="">HDDS-15355</a>)</li>
 <li class="">Add Recon AI Assistant backend foundation. (<a href="https://issues.apache.org/jira/browse/HDDS-14816" target="_blank" rel="noopener noreferrer" class="">HDDS-14816</a>)</li>
 <li class="">Implement position delete file rewrite for path migration. (<a href="https://issues.apache.org/jira/browse/HDDS-14945" target="_blank" rel="noopener noreferrer" class="">HDDS-14945</a>)</li>
@@ -193,13 +193,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <ul>
 <li class="">Bump jnr-posix to 3.1.21. (<a href="https://issues.apache.org/jira/browse/HDDS-13837" target="_blank" rel="noopener noreferrer" class="">HDDS-13837</a>)</li>
 <li class="">Bump zstd-jni to 1.5.7-6. (<a href="https://issues.apache.org/jira/browse/HDDS-13838" target="_blank" rel="noopener noreferrer" class="">HDDS-13838</a>)</li>
-<li class="">Bump exec-maven-plugin to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-13836" target="_blank" rel="noopener noreferrer" class="">HDDS-13836</a>)</li>
+<li class="">Bump <code>exec-maven-plugin</code> to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-13836" target="_blank" rel="noopener noreferrer" class="">HDDS-13836</a>)</li>
 <li class="">Bump Bouncy Castle to 1.82. (<a href="https://issues.apache.org/jira/browse/HDDS-13717" target="_blank" rel="noopener noreferrer" class="">HDDS-13717</a>)</li>
 <li class="">Bump awssdk to 2.36.2. (<a href="https://issues.apache.org/jira/browse/HDDS-13839" target="_blank" rel="noopener noreferrer" class="">HDDS-13839</a>)</li>
 <li class="">Snapshot Cache lock on a specific snapshotId. (<a href="https://issues.apache.org/jira/browse/HDDS-13004" target="_blank" rel="noopener noreferrer" class="">HDDS-13004</a>)</li>
 <li class="">Use EnumCounters instead <code>Map&lt;Type, Integer&gt;</code> for command counts. (<a href="https://issues.apache.org/jira/browse/HDDS-12749" target="_blank" rel="noopener noreferrer" class="">HDDS-12749</a>)</li>
 <li class="">Refine getRole logic in getServiceList. (<a href="https://issues.apache.org/jira/browse/HDDS-13831" target="_blank" rel="noopener noreferrer" class="">HDDS-13831</a>)</li>
-<li class="">OmSnapshotLocalDataManager should handle needsDefrag flag in the yaml file. (<a href="https://issues.apache.org/jira/browse/HDDS-13859" target="_blank" rel="noopener noreferrer" class="">HDDS-13859</a>)</li>
+<li class="">OmSnapshotLocalDataManager should handle needsDefrag flag in the YAML file. (<a href="https://issues.apache.org/jira/browse/HDDS-13859" target="_blank" rel="noopener noreferrer" class="">HDDS-13859</a>)</li>
 <li class="">Bump awssdk to 2.37.3. (<a href="https://issues.apache.org/jira/browse/HDDS-13871" target="_blank" rel="noopener noreferrer" class="">HDDS-13871</a>)</li>
 <li class="">Bump junit to 5.14.1. (<a href="https://issues.apache.org/jira/browse/HDDS-13872" target="_blank" rel="noopener noreferrer" class="">HDDS-13872</a>)</li>
 <li class="">Reduce duplication between ContainerSafeModeRule tests. (<a href="https://issues.apache.org/jira/browse/HDDS-13485" target="_blank" rel="noopener noreferrer" class="">HDDS-13485</a>)</li>
@@ -214,14 +214,14 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Bump awssdk to 2.38.2. (<a href="https://issues.apache.org/jira/browse/HDDS-13900" target="_blank" rel="noopener noreferrer" class="">HDDS-13900</a>)</li>
 <li class="">Use GitHub&#x27;s stale action to auto close inactive pull requests. (<a href="https://issues.apache.org/jira/browse/HDDS-11370" target="_blank" rel="noopener noreferrer" class="">HDDS-11370</a>)</li>
 <li class="">Replace OMKeyInfo with light-weight ReconBasicOmKeyInfo under OmTableHandlers. (<a href="https://issues.apache.org/jira/browse/HDDS-13442" target="_blank" rel="noopener noreferrer" class="">HDDS-13442</a>)</li>
-<li class="">[Docs] Include configurations and metrics related to DataNode decommission. (<a href="https://issues.apache.org/jira/browse/HDDS-13641" target="_blank" rel="noopener noreferrer" class="">HDDS-13641</a>)</li>
+<li class="">[Docs] Include configurations and metrics related to Datanode decommission. (<a href="https://issues.apache.org/jira/browse/HDDS-13641" target="_blank" rel="noopener noreferrer" class="">HDDS-13641</a>)</li>
 <li class="">Have single constructor in ContainerReplicaPendingOps and ContainerReplicaOp. (<a href="https://issues.apache.org/jira/browse/HDDS-13509" target="_blank" rel="noopener noreferrer" class="">HDDS-13509</a>)</li>
 <li class="">Prune ACLs from OmKeyInfo before building purge directory requests in DirectoryDeletingService. (<a href="https://issues.apache.org/jira/browse/HDDS-13907" target="_blank" rel="noopener noreferrer" class="">HDDS-13907</a>)</li>
 <li class="">Refactor Recon test helper class CommonUtils. (<a href="https://issues.apache.org/jira/browse/HDDS-13917" target="_blank" rel="noopener noreferrer" class="">HDDS-13917</a>)</li>
 <li class="">Bump Ratis to 3.2.1. (<a href="https://issues.apache.org/jira/browse/HDDS-13918" target="_blank" rel="noopener noreferrer" class="">HDDS-13918</a>)</li>
 <li class="">Prevent snapshot defrag from happening before upgrade finalization. (<a href="https://issues.apache.org/jira/browse/HDDS-13452" target="_blank" rel="noopener noreferrer" class="">HDDS-13452</a>)</li>
 <li class="">Bump awssdk to 2.38.7. (<a href="https://issues.apache.org/jira/browse/HDDS-13934" target="_blank" rel="noopener noreferrer" class="">HDDS-13934</a>)</li>
-<li class="">Bump common-custom-user-data-maven-extension to 2.1.0. (<a href="https://issues.apache.org/jira/browse/HDDS-13935" target="_blank" rel="noopener noreferrer" class="">HDDS-13935</a>)</li>
+<li class="">Bump <code>common-custom-user-data-maven-extension</code> to 2.1.0. (<a href="https://issues.apache.org/jira/browse/HDDS-13935" target="_blank" rel="noopener noreferrer" class="">HDDS-13935</a>)</li>
 <li class="">Make WithMetadata immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-10388" target="_blank" rel="noopener noreferrer" class="">HDDS-10388</a>)</li>
 <li class="">Extract builderFromProtobuf methods. (<a href="https://issues.apache.org/jira/browse/HDDS-13938" target="_blank" rel="noopener noreferrer" class="">HDDS-13938</a>)</li>
 <li class="">Standardize option for OM address for <code>ozone admin om</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-13406" target="_blank" rel="noopener noreferrer" class="">HDDS-13406</a>)</li>
@@ -235,7 +235,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Move dbTxSequenceNumber from SnapshotInfo to LocalDataYaml file. (<a href="https://issues.apache.org/jira/browse/HDDS-13949" target="_blank" rel="noopener noreferrer" class="">HDDS-13949</a>)</li>
 <li class="">Decouple DirectoryDeletingService delete batching from Ratis request size. (<a href="https://issues.apache.org/jira/browse/HDDS-13844" target="_blank" rel="noopener noreferrer" class="">HDDS-13844</a>)</li>
 <li class="">Make WithObjectID immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-13937" target="_blank" rel="noopener noreferrer" class="">HDDS-13937</a>)</li>
-<li class="">Snapshot diff can use rocksdb iterator instead of using multiple gets. (<a href="https://issues.apache.org/jira/browse/HDDS-13930" target="_blank" rel="noopener noreferrer" class="">HDDS-13930</a>)</li>
+<li class="">Snapshot diff can use RocksDB iterator instead of using multiple gets. (<a href="https://issues.apache.org/jira/browse/HDDS-13930" target="_blank" rel="noopener noreferrer" class="">HDDS-13930</a>)</li>
 <li class="">Bump awssdk to 2.39.2. (<a href="https://issues.apache.org/jira/browse/HDDS-13979" target="_blank" rel="noopener noreferrer" class="">HDDS-13979</a>)</li>
 <li class="">Recon - OM Db delta updates handler resource cleanup. (<a href="https://issues.apache.org/jira/browse/HDDS-13927" target="_blank" rel="noopener noreferrer" class="">HDDS-13927</a>)</li>
 <li class="">Refactor and move SnapshotDefragService to snapshot package. (<a href="https://issues.apache.org/jira/browse/HDDS-13993" target="_blank" rel="noopener noreferrer" class="">HDDS-13993</a>)</li>
@@ -251,7 +251,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Move ResourceLockTracker outside of OzoneManagerLock class and also reuse it for HierarchicalResourceLockManager interface. (<a href="https://issues.apache.org/jira/browse/HDDS-13984" target="_blank" rel="noopener noreferrer" class="">HDDS-13984</a>)</li>
 <li class="">Use the same gRPC steam for reading the same block. (<a href="https://issues.apache.org/jira/browse/HDDS-13974" target="_blank" rel="noopener noreferrer" class="">HDDS-13974</a>)</li>
 <li class="">Close OmMetadataManagerImpl.createCheckpointMetadataManager properly. (<a href="https://issues.apache.org/jira/browse/HDDS-13809" target="_blank" rel="noopener noreferrer" class="">HDDS-13809</a>)</li>
-<li class="">hdds.datanode.dir.du.reserved is not reflected in any of the datanode info console output. (<a href="https://issues.apache.org/jira/browse/HDDS-13862" target="_blank" rel="noopener noreferrer" class="">HDDS-13862</a>)</li>
+<li class=""><code>hdds.datanode.dir.du.reserved</code> is not reflected in any of the Datanode info console output. (<a href="https://issues.apache.org/jira/browse/HDDS-13862" target="_blank" rel="noopener noreferrer" class="">HDDS-13862</a>)</li>
 <li class="">Code reliability and data integrity improvements in Recon. (<a href="https://issues.apache.org/jira/browse/HDDS-13956" target="_blank" rel="noopener noreferrer" class="">HDDS-13956</a>)</li>
 <li class="">Release stream resources in StreamBlockInputStream properly. (<a href="https://issues.apache.org/jira/browse/HDDS-14013" target="_blank" rel="noopener noreferrer" class="">HDDS-14013</a>)</li>
 <li class="">OM bootstrap lock should acquire a lock on SnapshotLocalDataManager before copying the local data files. (<a href="https://issues.apache.org/jira/browse/HDDS-13967" target="_blank" rel="noopener noreferrer" class="">HDDS-13967</a>)</li>
@@ -259,7 +259,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Extract utility for resizing thread pool. (<a href="https://issues.apache.org/jira/browse/HDDS-14023" target="_blank" rel="noopener noreferrer" class="">HDDS-14023</a>)</li>
 <li class="">Bump awssdk to 2.39.5. (<a href="https://issues.apache.org/jira/browse/HDDS-14028" target="_blank" rel="noopener noreferrer" class="">HDDS-14028</a>)</li>
 <li class="">Copy Hadoop RPC code to Ozone. (<a href="https://issues.apache.org/jira/browse/HDDS-13752" target="_blank" rel="noopener noreferrer" class="">HDDS-13752</a>)</li>
-<li class="">Move ozone.om.volume.listall.allowed into OmConfig. (<a href="https://issues.apache.org/jira/browse/HDDS-12301" target="_blank" rel="noopener noreferrer" class="">HDDS-12301</a>)</li>
+<li class="">Move <code>ozone.om.volume.listall.allowed</code> into OmConfig. (<a href="https://issues.apache.org/jira/browse/HDDS-12301" target="_blank" rel="noopener noreferrer" class="">HDDS-12301</a>)</li>
 <li class="">Use forked Hadoop RPC. (<a href="https://issues.apache.org/jira/browse/HDDS-13753" target="_blank" rel="noopener noreferrer" class="">HDDS-13753</a>)</li>
 <li class="">Make SCM replication manager report sample size dynamically configurable. (<a href="https://issues.apache.org/jira/browse/HDDS-13998" target="_blank" rel="noopener noreferrer" class="">HDDS-13998</a>)</li>
 <li class="">Refactor dir event handlers in NSSummaryTaskDbEventHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-14014" target="_blank" rel="noopener noreferrer" class="">HDDS-14014</a>)</li>
@@ -268,30 +268,30 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">ReconStorageContainerManagerFacade is not getting initialized properly after upgrade. (<a href="https://issues.apache.org/jira/browse/HDDS-14046" target="_blank" rel="noopener noreferrer" class="">HDDS-14046</a>)</li>
 <li class="">SCM start DN protocol server during startup. (<a href="https://issues.apache.org/jira/browse/HDDS-13980" target="_blank" rel="noopener noreferrer" class="">HDDS-13980</a>)</li>
 <li class="">[Recon] Create API Endpoint to Return Consolidated Storage Report. (<a href="https://issues.apache.org/jira/browse/HDDS-13465" target="_blank" rel="noopener noreferrer" class="">HDDS-13465</a>)</li>
-<li class="">Relocate protobuf in ozone-filesystem shaded jars. (<a href="https://issues.apache.org/jira/browse/HDDS-14056" target="_blank" rel="noopener noreferrer" class="">HDDS-14056</a>)</li>
+<li class="">Relocate protobuf in <code>ozone-filesystem</code> shaded jars. (<a href="https://issues.apache.org/jira/browse/HDDS-14056" target="_blank" rel="noopener noreferrer" class="">HDDS-14056</a>)</li>
 <li class="">Optionally allow skipping ReadIndex for Leader. (<a href="https://issues.apache.org/jira/browse/HDDS-13953" target="_blank" rel="noopener noreferrer" class="">HDDS-13953</a>)</li>
 <li class="">DN quickly reregister to SCM. (<a href="https://issues.apache.org/jira/browse/HDDS-13981" target="_blank" rel="noopener noreferrer" class="">HDDS-13981</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in ozone-manager. (<a href="https://issues.apache.org/jira/browse/HDDS-14060" target="_blank" rel="noopener noreferrer" class="">HDDS-14060</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>ozone-manager</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14060" target="_blank" rel="noopener noreferrer" class="">HDDS-14060</a>)</li>
 <li class="">Upgrade protobuf to v3. (<a href="https://issues.apache.org/jira/browse/HDDS-5407" target="_blank" rel="noopener noreferrer" class="">HDDS-5407</a>)</li>
 <li class="">Require existing build for acceptance/kubernetes check. (<a href="https://issues.apache.org/jira/browse/HDDS-14000" target="_blank" rel="noopener noreferrer" class="">HDDS-14000</a>)</li>
 <li class="">Update k3s version. (<a href="https://issues.apache.org/jira/browse/HDDS-14051" target="_blank" rel="noopener noreferrer" class="">HDDS-14051</a>)</li>
 <li class="">Optimise NodesOutOfSpace metric logic. (<a href="https://issues.apache.org/jira/browse/HDDS-14048" target="_blank" rel="noopener noreferrer" class="">HDDS-14048</a>)</li>
 <li class="">Bump Bouncy Castle to 1.83. (<a href="https://issues.apache.org/jira/browse/HDDS-14029" target="_blank" rel="noopener noreferrer" class="">HDDS-14029</a>)</li>
 <li class="">Replace Preconditions.checkNotNull in tests. (<a href="https://issues.apache.org/jira/browse/HDDS-14058" target="_blank" rel="noopener noreferrer" class="">HDDS-14058</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in hdds-container-service. (<a href="https://issues.apache.org/jira/browse/HDDS-14059" target="_blank" rel="noopener noreferrer" class="">HDDS-14059</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>hdds-container-service</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14059" target="_blank" rel="noopener noreferrer" class="">HDDS-14059</a>)</li>
 <li class="">Disk Usage improvements. (<a href="https://issues.apache.org/jira/browse/HDDS-12360" target="_blank" rel="noopener noreferrer" class="">HDDS-12360</a>)</li>
 <li class="">Use codec buffers in defragmentation instead of byte array to avoid GC memory issues because of Defragmentation. (<a href="https://issues.apache.org/jira/browse/HDDS-14027" target="_blank" rel="noopener noreferrer" class="">HDDS-14027</a>)</li>
 <li class="">Bump opentelemetry to 1.57.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14096" target="_blank" rel="noopener noreferrer" class="">HDDS-14096</a>)</li>
 <li class="">Clean up TestKeyManagerImpl integration test. (<a href="https://issues.apache.org/jira/browse/HDDS-13966" target="_blank" rel="noopener noreferrer" class="">HDDS-13966</a>)</li>
 <li class="">Bump sqlite-jdbc to 3.51.1.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14095" target="_blank" rel="noopener noreferrer" class="">HDDS-14095</a>)</li>
 <li class="">Bump Hugo to 0.152.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14085" target="_blank" rel="noopener noreferrer" class="">HDDS-14085</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in hdds-server-scm. (<a href="https://issues.apache.org/jira/browse/HDDS-14088" target="_blank" rel="noopener noreferrer" class="">HDDS-14088</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in hdds-server-framework. (<a href="https://issues.apache.org/jira/browse/HDDS-14086" target="_blank" rel="noopener noreferrer" class="">HDDS-14086</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in hdds-client and -common. (<a href="https://issues.apache.org/jira/browse/HDDS-14087" target="_blank" rel="noopener noreferrer" class="">HDDS-14087</a>)</li>
-<li class="">Replace Preconditions.checkNotNull in ozone-client and -common. (<a href="https://issues.apache.org/jira/browse/HDDS-14089" target="_blank" rel="noopener noreferrer" class="">HDDS-14089</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>hdds-server-scm</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14088" target="_blank" rel="noopener noreferrer" class="">HDDS-14088</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>hdds-server-framework</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14086" target="_blank" rel="noopener noreferrer" class="">HDDS-14086</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>hdds-client</code> and <code>-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14087" target="_blank" rel="noopener noreferrer" class="">HDDS-14087</a>)</li>
+<li class="">Replace Preconditions.checkNotNull in <code>ozone-client</code> and <code>-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14089" target="_blank" rel="noopener noreferrer" class="">HDDS-14089</a>)</li>
 <li class="">Bump awssdk to 2.40.3. (<a href="https://issues.apache.org/jira/browse/HDDS-14097" target="_blank" rel="noopener noreferrer" class="">HDDS-14097</a>)</li>
 <li class="">Replace remaining Preconditions.checkNotNull usage. (<a href="https://issues.apache.org/jira/browse/HDDS-14090" target="_blank" rel="noopener noreferrer" class="">HDDS-14090</a>)</li>
-<li class="">Parallelize recon tasks to speed up OM rocksdb reading tasks. (<a href="https://issues.apache.org/jira/browse/HDDS-12607" target="_blank" rel="noopener noreferrer" class="">HDDS-12607</a>)</li>
+<li class="">Parallelize Recon tasks to speed up OM RocksDB reading tasks. (<a href="https://issues.apache.org/jira/browse/HDDS-12607" target="_blank" rel="noopener noreferrer" class="">HDDS-12607</a>)</li>
 <li class="">Make OmPrefixInfo immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-10522" target="_blank" rel="noopener noreferrer" class="">HDDS-10522</a>)</li>
 <li class="">ContainerStateMap uses HashSet to store container replica lists. (<a href="https://issues.apache.org/jira/browse/HDDS-7544" target="_blank" rel="noopener noreferrer" class="">HDDS-7544</a>)</li>
 <li class="">MiniOzoneCluster not shutdown properly in some tests. (<a href="https://issues.apache.org/jira/browse/HDDS-14098" target="_blank" rel="noopener noreferrer" class="">HDDS-14098</a>)</li>
@@ -309,7 +309,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Make WithParentObjectId immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-14124" target="_blank" rel="noopener noreferrer" class="">HDDS-14124</a>)</li>
 <li class="">Replace ByteArrayCodec with CodecBufferCodec in FSORepairTool. (<a href="https://issues.apache.org/jira/browse/HDDS-14156" target="_blank" rel="noopener noreferrer" class="">HDDS-14156</a>)</li>
 <li class="">Use workflow inputs in run command via environment variable. (<a href="https://issues.apache.org/jira/browse/HDDS-14171" target="_blank" rel="noopener noreferrer" class="">HDDS-14171</a>)</li>
-<li class="">[Docs] Multiple S3 gateway using proxy. (<a href="https://issues.apache.org/jira/browse/HDDS-14077" target="_blank" rel="noopener noreferrer" class="">HDDS-14077</a>)</li>
+<li class="">[Docs] Multiple S3 Gateway using proxy. (<a href="https://issues.apache.org/jira/browse/HDDS-14077" target="_blank" rel="noopener noreferrer" class="">HDDS-14077</a>)</li>
 <li class="">Use MapBuilder for tags in OmKeyInfo. (<a href="https://issues.apache.org/jira/browse/HDDS-14151" target="_blank" rel="noopener noreferrer" class="">HDDS-14151</a>)</li>
 <li class="">Make OmDirectoryInfo immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-14125" target="_blank" rel="noopener noreferrer" class="">HDDS-14125</a>)</li>
 <li class="">Reuse cluster for S3 V1/V2 integration tests. (<a href="https://issues.apache.org/jira/browse/HDDS-14191" target="_blank" rel="noopener noreferrer" class="">HDDS-14191</a>)</li>
@@ -329,7 +329,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Revert HDDS-13415 to separate out Refactoring and implementation of Delete Range with batch. (<a href="https://issues.apache.org/jira/browse/HDDS-14240" target="_blank" rel="noopener noreferrer" class="">HDDS-14240</a>)</li>
 <li class="">Simplify ManagedDirectSlice to use ByteBuffers. (<a href="https://issues.apache.org/jira/browse/HDDS-14237" target="_blank" rel="noopener noreferrer" class="">HDDS-14237</a>)</li>
 <li class="">Make streaming write SYNC configurable. (<a href="https://issues.apache.org/jira/browse/HDDS-14194" target="_blank" rel="noopener noreferrer" class="">HDDS-14194</a>)</li>
-<li class="">Bump exec-maven-plugin to 3.6.3. (<a href="https://issues.apache.org/jira/browse/HDDS-14254" target="_blank" rel="noopener noreferrer" class="">HDDS-14254</a>)</li>
+<li class="">Bump <code>exec-maven-plugin</code> to 3.6.3. (<a href="https://issues.apache.org/jira/browse/HDDS-14254" target="_blank" rel="noopener noreferrer" class="">HDDS-14254</a>)</li>
 <li class="">Move HddsUtils.getSCMAddressForDatanodes to HddsServerUtil. (<a href="https://issues.apache.org/jira/browse/HDDS-14022" target="_blank" rel="noopener noreferrer" class="">HDDS-14022</a>)</li>
 <li class="">Reduce duplication in S3 object tagging tests. (<a href="https://issues.apache.org/jira/browse/HDDS-14233" target="_blank" rel="noopener noreferrer" class="">HDDS-14233</a>)</li>
 <li class="">Bump awssdk to 2.40.16. (<a href="https://issues.apache.org/jira/browse/HDDS-14253" target="_blank" rel="noopener noreferrer" class="">HDDS-14253</a>)</li>
@@ -353,7 +353,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">[Website v2] [Docs] [Administrator Guide] Dynamic property reload. (<a href="https://issues.apache.org/jira/browse/HDDS-14293" target="_blank" rel="noopener noreferrer" class="">HDDS-14293</a>)</li>
 <li class="">Completely get rid of byte array operations from RDBBatchOperation. (<a href="https://issues.apache.org/jira/browse/HDDS-14166" target="_blank" rel="noopener noreferrer" class="">HDDS-14166</a>)</li>
 <li class="">Bump junit to 5.14.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14406" target="_blank" rel="noopener noreferrer" class="">HDDS-14406</a>)</li>
-<li class="">Bump license-maven-plugin to 2.7.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14408" target="_blank" rel="noopener noreferrer" class="">HDDS-14408</a>)</li>
+<li class="">Bump <code>license-maven-plugin</code> to 2.7.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14408" target="_blank" rel="noopener noreferrer" class="">HDDS-14408</a>)</li>
 <li class="">Bump opentelemetry to 1.58.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14407" target="_blank" rel="noopener noreferrer" class="">HDDS-14407</a>)</li>
 <li class="">Bump cdi-api to 2.0.SP1. (<a href="https://issues.apache.org/jira/browse/HDDS-14410" target="_blank" rel="noopener noreferrer" class="">HDDS-14410</a>)</li>
 <li class="">Bump awssdk to 2.41.5. (<a href="https://issues.apache.org/jira/browse/HDDS-14409" target="_blank" rel="noopener noreferrer" class="">HDDS-14409</a>)</li>
@@ -373,14 +373,14 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Design Cluster Utilization Page UI. (<a href="https://issues.apache.org/jira/browse/HDDS-13183" target="_blank" rel="noopener noreferrer" class="">HDDS-13183</a>)</li>
 <li class="">Clean up leftover references to Hadoop shaded protobuf. (<a href="https://issues.apache.org/jira/browse/HDDS-14484" target="_blank" rel="noopener noreferrer" class="">HDDS-14484</a>)</li>
 <li class="">design/configless.md translated to Chinese. (<a href="https://issues.apache.org/jira/browse/HDDS-5572" target="_blank" rel="noopener noreferrer" class="">HDDS-5572</a>)</li>
-<li class="">Bump properties-maven-plugin to 1.3.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14507" target="_blank" rel="noopener noreferrer" class="">HDDS-14507</a>)</li>
+<li class="">Bump <code>properties-maven-plugin</code> to 1.3.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14507" target="_blank" rel="noopener noreferrer" class="">HDDS-14507</a>)</li>
 <li class="">Bump awssdk to 2.41.14. (<a href="https://issues.apache.org/jira/browse/HDDS-14508" target="_blank" rel="noopener noreferrer" class="">HDDS-14508</a>)</li>
 <li class="">Improve the data structures in OMFailoverProxyProviderBase. (<a href="https://issues.apache.org/jira/browse/HDDS-14470" target="_blank" rel="noopener noreferrer" class="">HDDS-14470</a>)</li>
 <li class="">Skip sending block deletion command to SCM for empty files. (<a href="https://issues.apache.org/jira/browse/HDDS-14418" target="_blank" rel="noopener noreferrer" class="">HDDS-14418</a>)</li>
 <li class="">Update containerIds set in HddsVolume during container move. (<a href="https://issues.apache.org/jira/browse/HDDS-14450" target="_blank" rel="noopener noreferrer" class="">HDDS-14450</a>)</li>
 <li class="">Bump assertj to 3.27.7. (<a href="https://issues.apache.org/jira/browse/HDDS-14515" target="_blank" rel="noopener noreferrer" class="">HDDS-14515</a>)</li>
 <li class="">Make Datanode disk space related commands and metrics clear. (<a href="https://issues.apache.org/jira/browse/HDDS-14446" target="_blank" rel="noopener noreferrer" class="">HDDS-14446</a>)</li>
-<li class="">Move BackgroundService to hdds-server-framework. (<a href="https://issues.apache.org/jira/browse/HDDS-14025" target="_blank" rel="noopener noreferrer" class="">HDDS-14025</a>)</li>
+<li class="">Move BackgroundService to <code>hdds-server-framework</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14025" target="_blank" rel="noopener noreferrer" class="">HDDS-14025</a>)</li>
 <li class="">Improve disk balancer audit log. (<a href="https://issues.apache.org/jira/browse/HDDS-14491" target="_blank" rel="noopener noreferrer" class="">HDDS-14491</a>)</li>
 <li class="">Bump Netty to 4.1.130, gRPC to 1.77.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14522" target="_blank" rel="noopener noreferrer" class="">HDDS-14522</a>)</li>
 <li class="">Bump jackson to 2.21.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14513" target="_blank" rel="noopener noreferrer" class="">HDDS-14513</a>)</li>
@@ -388,18 +388,18 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">HadoopRpcOMFollowerProxyProvider should explicitly use OzoneManagerProtocolPB. (<a href="https://issues.apache.org/jira/browse/HDDS-14490" target="_blank" rel="noopener noreferrer" class="">HDDS-14490</a>)</li>
 <li class="">Bump awssdk to 2.41.19. (<a href="https://issues.apache.org/jira/browse/HDDS-14542" target="_blank" rel="noopener noreferrer" class="">HDDS-14542</a>)</li>
 <li class="">Capture all container replication status in SCM container info. (<a href="https://issues.apache.org/jira/browse/HDDS-14119" target="_blank" rel="noopener noreferrer" class="">HDDS-14119</a>)</li>
-<li class="">Replace javac.version with maven.compiler.release. (<a href="https://issues.apache.org/jira/browse/HDDS-13670" target="_blank" rel="noopener noreferrer" class="">HDDS-13670</a>)</li>
+<li class="">Replace <code>javac.version</code> with <code>maven.compiler.release</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-13670" target="_blank" rel="noopener noreferrer" class="">HDDS-13670</a>)</li>
 <li class="">SCM safemode exit quickly for follower when ideal. (<a href="https://issues.apache.org/jira/browse/HDDS-14070" target="_blank" rel="noopener noreferrer" class="">HDDS-14070</a>)</li>
 <li class="">Bump commons-pool2 to 2.13.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14585" target="_blank" rel="noopener noreferrer" class="">HDDS-14585</a>)</li>
-<li class="">Bump maven-dependency-plugin to 3.9.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14588" target="_blank" rel="noopener noreferrer" class="">HDDS-14588</a>)</li>
+<li class="">Bump <code>maven-dependency-plugin</code> to 3.9.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14588" target="_blank" rel="noopener noreferrer" class="">HDDS-14588</a>)</li>
 <li class="">Bump commons-net to 3.12.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14587" target="_blank" rel="noopener noreferrer" class="">HDDS-14587</a>)</li>
-<li class="">Bump maven-jar-plugin to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14589" target="_blank" rel="noopener noreferrer" class="">HDDS-14589</a>)</li>
-<li class="">Bump maven-antrun-plugin to 3.2.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14586" target="_blank" rel="noopener noreferrer" class="">HDDS-14586</a>)</li>
+<li class="">Bump <code>maven-jar-plugin</code> to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14589" target="_blank" rel="noopener noreferrer" class="">HDDS-14589</a>)</li>
+<li class="">Bump <code>maven-antrun-plugin</code> to 3.2.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14586" target="_blank" rel="noopener noreferrer" class="">HDDS-14586</a>)</li>
 <li class="">Test if proto 3 SCM request can be parsed by proto 2. (<a href="https://issues.apache.org/jira/browse/HDDS-14562" target="_blank" rel="noopener noreferrer" class="">HDDS-14562</a>)</li>
 <li class="">Refactor ObjectEndpoint get/delete to use ObjectOperationHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-14534" target="_blank" rel="noopener noreferrer" class="">HDDS-14534</a>)</li>
 <li class="">Run some client tests with Java 8. (<a href="https://issues.apache.org/jira/browse/HDDS-14581" target="_blank" rel="noopener noreferrer" class="">HDDS-14581</a>)</li>
 <li class="">ReInit DeletedBlocksTransactionSummary after SCM leader transfer. (<a href="https://issues.apache.org/jira/browse/HDDS-14572" target="_blank" rel="noopener noreferrer" class="">HDDS-14572</a>)</li>
-<li class="">Bump ozone-runner to 20260206-2-jdk21. (<a href="https://issues.apache.org/jira/browse/HDDS-14575" target="_blank" rel="noopener noreferrer" class="">HDDS-14575</a>)</li>
+<li class="">Bump <code>ozone-runner</code> to 20260206-2-jdk21. (<a href="https://issues.apache.org/jira/browse/HDDS-14575" target="_blank" rel="noopener noreferrer" class="">HDDS-14575</a>)</li>
 <li class="">Cluster Capacity refresh button should refresh all the data. (<a href="https://issues.apache.org/jira/browse/HDDS-14532" target="_blank" rel="noopener noreferrer" class="">HDDS-14532</a>)</li>
 <li class="">Update Snapshot configuration default values. (<a href="https://issues.apache.org/jira/browse/HDDS-14403" target="_blank" rel="noopener noreferrer" class="">HDDS-14403</a>)</li>
 <li class="">Use MappedByteBuffer in ChunkManagerDummyImpl. (<a href="https://issues.apache.org/jira/browse/HDDS-9940" target="_blank" rel="noopener noreferrer" class="">HDDS-9940</a>)</li>
@@ -411,26 +411,26 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Bump commons-collections4 to 4.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14638" target="_blank" rel="noopener noreferrer" class="">HDDS-14638</a>)</li>
 <li class="">SCMRatisRequest/ResponseProto should use the shaded protobuf from Ratis. (<a href="https://issues.apache.org/jira/browse/HDDS-14561" target="_blank" rel="noopener noreferrer" class="">HDDS-14561</a>)</li>
 <li class="">SCM Pending Deletion should reflect the actual replicated space consumed in the cluster. (<a href="https://issues.apache.org/jira/browse/HDDS-14625" target="_blank" rel="noopener noreferrer" class="">HDDS-14625</a>)</li>
-<li class="">Ozone Recon - Show fs reserved space as well in datanodes page table under Storage Capacity. (<a href="https://issues.apache.org/jira/browse/HDDS-14558" target="_blank" rel="noopener noreferrer" class="">HDDS-14558</a>)</li>
-<li class="">Bump maven-enforcer-plugin to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14640" target="_blank" rel="noopener noreferrer" class="">HDDS-14640</a>)</li>
-<li class="">Bump maven-core to 3.9.12. (<a href="https://issues.apache.org/jira/browse/HDDS-14641" target="_blank" rel="noopener noreferrer" class="">HDDS-14641</a>)</li>
+<li class="">Ozone Recon - Show fs reserved space as well in Datanodes page table under Storage Capacity. (<a href="https://issues.apache.org/jira/browse/HDDS-14558" target="_blank" rel="noopener noreferrer" class="">HDDS-14558</a>)</li>
+<li class="">Bump <code>maven-enforcer-plugin</code> to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14640" target="_blank" rel="noopener noreferrer" class="">HDDS-14640</a>)</li>
+<li class="">Bump <code>maven-core</code> to 3.9.12. (<a href="https://issues.apache.org/jira/browse/HDDS-14641" target="_blank" rel="noopener noreferrer" class="">HDDS-14641</a>)</li>
 <li class="">Extract MultipartKeyHandler for MPU object operations. (<a href="https://issues.apache.org/jira/browse/HDDS-14590" target="_blank" rel="noopener noreferrer" class="">HDDS-14590</a>)</li>
 <li class="">Bump commons-io to 2.21.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14639" target="_blank" rel="noopener noreferrer" class="">HDDS-14639</a>)</li>
-<li class="">Bump maven-assembly-plugin to 3.8.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14637" target="_blank" rel="noopener noreferrer" class="">HDDS-14637</a>)</li>
+<li class="">Bump <code>maven-assembly-plugin</code> to 3.8.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14637" target="_blank" rel="noopener noreferrer" class="">HDDS-14637</a>)</li>
 <li class="">Unify isValidKeyPath implementation. (<a href="https://issues.apache.org/jira/browse/HDDS-13444" target="_blank" rel="noopener noreferrer" class="">HDDS-13444</a>)</li>
 <li class="">Convert OzoneFileSystemTests to abstract class. (<a href="https://issues.apache.org/jira/browse/HDDS-14608" target="_blank" rel="noopener noreferrer" class="">HDDS-14608</a>)</li>
 <li class="">Move test-utils code back to src/main. (<a href="https://issues.apache.org/jira/browse/HDDS-14644" target="_blank" rel="noopener noreferrer" class="">HDDS-14644</a>)</li>
 <li class="">Refactor OneReplicaPipelineSafeModeRule to not use PipelineReportFromDatanode. (<a href="https://issues.apache.org/jira/browse/HDDS-12938" target="_blank" rel="noopener noreferrer" class="">HDDS-12938</a>)</li>
 <li class="">Grafana Dashboard for ReadBlock operations. (<a href="https://issues.apache.org/jira/browse/HDDS-14453" target="_blank" rel="noopener noreferrer" class="">HDDS-14453</a>)</li>
 <li class="">Bump commons-lang3 to 3.20.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14689" target="_blank" rel="noopener noreferrer" class="">HDDS-14689</a>)</li>
-<li class="">Bump maven-dependency-plugin to 3.10.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14691" target="_blank" rel="noopener noreferrer" class="">HDDS-14691</a>)</li>
-<li class="">Bump maven-gpg-plugin to 3.2.8. (<a href="https://issues.apache.org/jira/browse/HDDS-14692" target="_blank" rel="noopener noreferrer" class="">HDDS-14692</a>)</li>
+<li class="">Bump <code>maven-dependency-plugin</code> to 3.10.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14691" target="_blank" rel="noopener noreferrer" class="">HDDS-14691</a>)</li>
+<li class="">Bump <code>maven-gpg-plugin</code> to 3.2.8. (<a href="https://issues.apache.org/jira/browse/HDDS-14692" target="_blank" rel="noopener noreferrer" class="">HDDS-14692</a>)</li>
 <li class="">Bump commons-configuration2 to 2.13.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14688" target="_blank" rel="noopener noreferrer" class="">HDDS-14688</a>)</li>
 <li class="">Design Documentation. (<a href="https://issues.apache.org/jira/browse/HDDS-13197" target="_blank" rel="noopener noreferrer" class="">HDDS-13197</a>)</li>
 <li class="">Abstract testCreateDoesNotAddParentDirKeys and testListStatusIteratorOnRoot tests. (<a href="https://issues.apache.org/jira/browse/HDDS-14698" target="_blank" rel="noopener noreferrer" class="">HDDS-14698</a>)</li>
 <li class="">Require successful basic checks for javadoc check. (<a href="https://issues.apache.org/jira/browse/HDDS-14596" target="_blank" rel="noopener noreferrer" class="">HDDS-14596</a>)</li>
 <li class="">Bump k3s to v1.35.1+k3s1. (<a href="https://issues.apache.org/jira/browse/HDDS-14628" target="_blank" rel="noopener noreferrer" class="">HDDS-14628</a>)</li>
-<li class="">Standardize docker compose command used in README.md. (<a href="https://issues.apache.org/jira/browse/HDDS-14722" target="_blank" rel="noopener noreferrer" class="">HDDS-14722</a>)</li>
+<li class="">Standardize Docker Compose command used in README.md. (<a href="https://issues.apache.org/jira/browse/HDDS-14722" target="_blank" rel="noopener noreferrer" class="">HDDS-14722</a>)</li>
 <li class="">Bump axios to 1.13.5. (<a href="https://issues.apache.org/jira/browse/HDDS-14726" target="_blank" rel="noopener noreferrer" class="">HDDS-14726</a>)</li>
 <li class="">Bump restrict-imports-enforcer-rule to 3.0.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14680" target="_blank" rel="noopener noreferrer" class="">HDDS-14680</a>)</li>
 <li class="">Move dependency on slf4j-reload4j to runnable modules. (<a href="https://issues.apache.org/jira/browse/HDDS-14606" target="_blank" rel="noopener noreferrer" class="">HDDS-14606</a>)</li>
@@ -441,7 +441,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Explain Ozone Capacity calculation in Cluster Capacity page tooltip. (<a href="https://issues.apache.org/jira/browse/HDDS-14552" target="_blank" rel="noopener noreferrer" class="">HDDS-14552</a>)</li>
 <li class="">Bump zstd-jni to 1.5.7-7. (<a href="https://issues.apache.org/jira/browse/HDDS-14743" target="_blank" rel="noopener noreferrer" class="">HDDS-14743</a>)</li>
 <li class="">Bump sqlite-jdbc to 3.51.2.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14744" target="_blank" rel="noopener noreferrer" class="">HDDS-14744</a>)</li>
-<li class="">Bump maven-install-plugin to 3.1.4. (<a href="https://issues.apache.org/jira/browse/HDDS-14745" target="_blank" rel="noopener noreferrer" class="">HDDS-14745</a>)</li>
+<li class="">Bump <code>maven-install-plugin</code> to 3.1.4. (<a href="https://issues.apache.org/jira/browse/HDDS-14745" target="_blank" rel="noopener noreferrer" class="">HDDS-14745</a>)</li>
 <li class="">Check config doc against PR. (<a href="https://issues.apache.org/jira/browse/HDDS-14747" target="_blank" rel="noopener noreferrer" class="">HDDS-14747</a>)</li>
 <li class="">Run update-ozone-site-config-doc after generate-config-doc. (<a href="https://issues.apache.org/jira/browse/HDDS-14749" target="_blank" rel="noopener noreferrer" class="">HDDS-14749</a>)</li>
 <li class="">Refactor HealthyPipelineSafeModeRule to to not use PipelineReportFromDatanode. (<a href="https://issues.apache.org/jira/browse/HDDS-13590" target="_blank" rel="noopener noreferrer" class="">HDDS-13590</a>)</li>
@@ -451,25 +451,25 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Close ReconfigurationHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-14766" target="_blank" rel="noopener noreferrer" class="">HDDS-14766</a>)</li>
 <li class="">Combine CompactionService and CompactDBService. (<a href="https://issues.apache.org/jira/browse/HDDS-14411" target="_blank" rel="noopener noreferrer" class="">HDDS-14411</a>)</li>
 <li class="">Bump jackson to 2.21.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14780" target="_blank" rel="noopener noreferrer" class="">HDDS-14780</a>)</li>
-<li class="">Bump maven-compiler-plugin to 3.15.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14781" target="_blank" rel="noopener noreferrer" class="">HDDS-14781</a>)</li>
-<li class="">Bump maven-pmd-plugin to 3.28.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14783" target="_blank" rel="noopener noreferrer" class="">HDDS-14783</a>)</li>
+<li class="">Bump <code>maven-compiler-plugin</code> to 3.15.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14781" target="_blank" rel="noopener noreferrer" class="">HDDS-14781</a>)</li>
+<li class="">Bump <code>maven-pmd-plugin</code> to 3.28.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14783" target="_blank" rel="noopener noreferrer" class="">HDDS-14783</a>)</li>
 <li class="">Bump awssdk to 2.42.8. (<a href="https://issues.apache.org/jira/browse/HDDS-14782" target="_blank" rel="noopener noreferrer" class="">HDDS-14782</a>)</li>
-<li class="">Move server code out of ozone-common. (<a href="https://issues.apache.org/jira/browse/HDDS-14708" target="_blank" rel="noopener noreferrer" class="">HDDS-14708</a>)</li>
+<li class="">Move server code out of <code>ozone-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14708" target="_blank" rel="noopener noreferrer" class="">HDDS-14708</a>)</li>
 <li class="">Update protobuf definitions to include a lightweight MultipartPartInfo message. (<a href="https://issues.apache.org/jira/browse/HDDS-14659" target="_blank" rel="noopener noreferrer" class="">HDDS-14659</a>)</li>
 <li class="">Bump Hadoop to 3.4.3. (<a href="https://issues.apache.org/jira/browse/HDDS-14791" target="_blank" rel="noopener noreferrer" class="">HDDS-14791</a>)</li>
 <li class="">Split server-side load testers from freon. (<a href="https://issues.apache.org/jira/browse/HDDS-14771" target="_blank" rel="noopener noreferrer" class="">HDDS-14771</a>)</li>
 <li class="">Use ubuntu-slim for some jobs. (<a href="https://issues.apache.org/jira/browse/HDDS-14786" target="_blank" rel="noopener noreferrer" class="">HDDS-14786</a>)</li>
-<li class="">Optimization of gc pressure on om due to handling of mpu large files. (<a href="https://issues.apache.org/jira/browse/HDDS-10611" target="_blank" rel="noopener noreferrer" class="">HDDS-10611</a>)</li>
+<li class="">Optimization of gc pressure on OM due to handling of mpu large files. (<a href="https://issues.apache.org/jira/browse/HDDS-10611" target="_blank" rel="noopener noreferrer" class="">HDDS-10611</a>)</li>
 <li class="">[DiskBalancer] Improve DiskBalancer CLI Output Readability and Usability. (<a href="https://issues.apache.org/jira/browse/HDDS-14195" target="_blank" rel="noopener noreferrer" class="">HDDS-14195</a>)</li>
 <li class="">Upgrade pnpm version to latest v10. (<a href="https://issues.apache.org/jira/browse/HDDS-14602" target="_blank" rel="noopener noreferrer" class="">HDDS-14602</a>)</li>
 <li class="">Bump commons-text to 1.15.0, commons-validator to 1.10.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14792" target="_blank" rel="noopener noreferrer" class="">HDDS-14792</a>)</li>
 <li class="">Abstract listStatus tests to base class. (<a href="https://issues.apache.org/jira/browse/HDDS-14828" target="_blank" rel="noopener noreferrer" class="">HDDS-14828</a>)</li>
 <li class="">Bump GitHub action versions. (<a href="https://issues.apache.org/jira/browse/HDDS-14833" target="_blank" rel="noopener noreferrer" class="">HDDS-14833</a>)</li>
-<li class="">Bump maven-shade-plugin to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14835" target="_blank" rel="noopener noreferrer" class="">HDDS-14835</a>)</li>
+<li class="">Bump <code>maven-shade-plugin</code> to 3.6.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14835" target="_blank" rel="noopener noreferrer" class="">HDDS-14835</a>)</li>
 <li class="">[Pipeline Tab] Improvements on Pipelines Tab. (<a href="https://issues.apache.org/jira/browse/HDDS-14823" target="_blank" rel="noopener noreferrer" class="">HDDS-14823</a>)</li>
 <li class="">Bump commons-compress to 1.28.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14839" target="_blank" rel="noopener noreferrer" class="">HDDS-14839</a>)</li>
 <li class="">Bump awssdk to 2.42.13. (<a href="https://issues.apache.org/jira/browse/HDDS-14836" target="_blank" rel="noopener noreferrer" class="">HDDS-14836</a>)</li>
-<li class="">Bump maven-core to 3.9.14. (<a href="https://issues.apache.org/jira/browse/HDDS-14838" target="_blank" rel="noopener noreferrer" class="">HDDS-14838</a>)</li>
+<li class="">Bump <code>maven-core</code> to 3.9.14. (<a href="https://issues.apache.org/jira/browse/HDDS-14838" target="_blank" rel="noopener noreferrer" class="">HDDS-14838</a>)</li>
 <li class="">Bump opentelemetry to 1.60.1. (<a href="https://issues.apache.org/jira/browse/HDDS-14837" target="_blank" rel="noopener noreferrer" class="">HDDS-14837</a>)</li>
 <li class="">Consolidate DiskBalancerVolumeChoosingPolicy and ContainerChoosingPolicy. (<a href="https://issues.apache.org/jira/browse/HDDS-14701" target="_blank" rel="noopener noreferrer" class="">HDDS-14701</a>)</li>
 <li class="">Avoid using guava Ints/Longs to convert byte arrays. (<a href="https://issues.apache.org/jira/browse/HDDS-14788" target="_blank" rel="noopener noreferrer" class="">HDDS-14788</a>)</li>
@@ -477,7 +477,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Use XMLUtils.newSecure...Factory. (<a href="https://issues.apache.org/jira/browse/HDDS-14857" target="_blank" rel="noopener noreferrer" class="">HDDS-14857</a>)</li>
 <li class="">Bump junit to 5.14.3. (<a href="https://issues.apache.org/jira/browse/HDDS-14880" target="_blank" rel="noopener noreferrer" class="">HDDS-14880</a>)</li>
 <li class="">Bump sqlite-jdbc to 3.51.3.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14879" target="_blank" rel="noopener noreferrer" class="">HDDS-14879</a>)</li>
-<li class="">Bump maven-clean-plugin to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14878" target="_blank" rel="noopener noreferrer" class="">HDDS-14878</a>)</li>
+<li class="">Bump <code>maven-clean-plugin</code> to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14878" target="_blank" rel="noopener noreferrer" class="">HDDS-14878</a>)</li>
 <li class="">Exclude transitive dependency on commons-daemon. (<a href="https://issues.apache.org/jira/browse/HDDS-14882" target="_blank" rel="noopener noreferrer" class="">HDDS-14882</a>)</li>
 <li class="">Update reconOmTasks with newly created tasks after reprocess. (<a href="https://issues.apache.org/jira/browse/HDDS-14844" target="_blank" rel="noopener noreferrer" class="">HDDS-14844</a>)</li>
 <li class="">Recon - Introduce ContainerHealthTaskV2 with SCM-based health monitoring and batch processing. (<a href="https://issues.apache.org/jira/browse/HDDS-13891" target="_blank" rel="noopener noreferrer" class="">HDDS-13891</a>)</li>
@@ -487,32 +487,32 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">RandomAccessFileChannel to implement Closeable. (<a href="https://issues.apache.org/jira/browse/HDDS-14370" target="_blank" rel="noopener noreferrer" class="">HDDS-14370</a>)</li>
 <li class="">Unify OzoneManagerProtocolPB failover proxy provider. (<a href="https://issues.apache.org/jira/browse/HDDS-14682" target="_blank" rel="noopener noreferrer" class="">HDDS-14682</a>)</li>
 <li class="">Bump jersey to 2.48. (<a href="https://issues.apache.org/jira/browse/HDDS-14909" target="_blank" rel="noopener noreferrer" class="">HDDS-14909</a>)</li>
-<li class="">Bump maven-javadoc-plugin to 3.12.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14911" target="_blank" rel="noopener noreferrer" class="">HDDS-14911</a>)</li>
+<li class="">Bump <code>maven-javadoc-plugin</code> to 3.12.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14911" target="_blank" rel="noopener noreferrer" class="">HDDS-14911</a>)</li>
 <li class="">Bump jackson to 2.21.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14910" target="_blank" rel="noopener noreferrer" class="">HDDS-14910</a>)</li>
-<li class="">Bump maven-source-plugin to 3.4.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14912" target="_blank" rel="noopener noreferrer" class="">HDDS-14912</a>)</li>
+<li class="">Bump <code>maven-source-plugin</code> to 3.4.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14912" target="_blank" rel="noopener noreferrer" class="">HDDS-14912</a>)</li>
 <li class="">[Buckets Tab] Improvements on Buckets Tab. (<a href="https://issues.apache.org/jira/browse/HDDS-14840" target="_blank" rel="noopener noreferrer" class="">HDDS-14840</a>)</li>
 <li class="">Rename committed bytes to finalized key bytes and align committed space terminology. (<a href="https://issues.apache.org/jira/browse/HDDS-14611" target="_blank" rel="noopener noreferrer" class="">HDDS-14611</a>)</li>
 <li class="">Bump jline to 3.30.9. (<a href="https://issues.apache.org/jira/browse/HDDS-14928" target="_blank" rel="noopener noreferrer" class="">HDDS-14928</a>)</li>
 <li class="">Bump awssdk to 2.42.18. (<a href="https://issues.apache.org/jira/browse/HDDS-14929" target="_blank" rel="noopener noreferrer" class="">HDDS-14929</a>)</li>
 <li class="">Enhance DiskBalancer Report to show individual volume&#x27;s density. (<a href="https://issues.apache.org/jira/browse/HDDS-14866" target="_blank" rel="noopener noreferrer" class="">HDDS-14866</a>)</li>
 <li class="">Bump commons-codec to 1.21.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14931" target="_blank" rel="noopener noreferrer" class="">HDDS-14931</a>)</li>
-<li class="">Bump maven-resources-plugin to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14930" target="_blank" rel="noopener noreferrer" class="">HDDS-14930</a>)</li>
+<li class="">Bump <code>maven-resources-plugin</code> to 3.5.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14930" target="_blank" rel="noopener noreferrer" class="">HDDS-14930</a>)</li>
 <li class="">[Insights Page] Improvements on File Size Distribution Tab. (<a href="https://issues.apache.org/jira/browse/HDDS-14727" target="_blank" rel="noopener noreferrer" class="">HDDS-14727</a>)</li>
 <li class="">Pin axios to 1.13.6. (<a href="https://issues.apache.org/jira/browse/HDDS-14948" target="_blank" rel="noopener noreferrer" class="">HDDS-14948</a>)</li>
 <li class="">Speed up testRetryMessageShownWhenScmUnavailable. (<a href="https://issues.apache.org/jira/browse/HDDS-14941" target="_blank" rel="noopener noreferrer" class="">HDDS-14941</a>)</li>
-<li class="">Improve ozone_add_default_gc_opts. (<a href="https://issues.apache.org/jira/browse/HDDS-14890" target="_blank" rel="noopener noreferrer" class="">HDDS-14890</a>)</li>
+<li class="">Improve <code>ozone_add_default_gc_opts</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14890" target="_blank" rel="noopener noreferrer" class="">HDDS-14890</a>)</li>
 <li class="">Bump log4j2 to 2.25.4. (<a href="https://issues.apache.org/jira/browse/HDDS-14971" target="_blank" rel="noopener noreferrer" class="">HDDS-14971</a>)</li>
 <li class="">Bump awssdk to 2.42.23. (<a href="https://issues.apache.org/jira/browse/HDDS-14972" target="_blank" rel="noopener noreferrer" class="">HDDS-14972</a>)</li>
 <li class="">Bump jackson2 to 2.21.2. (<a href="https://issues.apache.org/jira/browse/HDDS-14970" target="_blank" rel="noopener noreferrer" class="">HDDS-14970</a>)</li>
-<li class="">Move awssdk version definition to ozone-integration-test-s3. (<a href="https://issues.apache.org/jira/browse/HDDS-14975" target="_blank" rel="noopener noreferrer" class="">HDDS-14975</a>)</li>
+<li class="">Move awssdk version definition to <code>ozone-integration-test-s3</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14975" target="_blank" rel="noopener noreferrer" class="">HDDS-14975</a>)</li>
 <li class="">Bump Zookeeper to 3.8.6. (<a href="https://issues.apache.org/jira/browse/HDDS-14978" target="_blank" rel="noopener noreferrer" class="">HDDS-14978</a>)</li>
-<li class="">Retry attempt to pull docker images. (<a href="https://issues.apache.org/jira/browse/HDDS-14963" target="_blank" rel="noopener noreferrer" class="">HDDS-14963</a>)</li>
+<li class="">Retry attempt to pull Docker images. (<a href="https://issues.apache.org/jira/browse/HDDS-14963" target="_blank" rel="noopener noreferrer" class="">HDDS-14963</a>)</li>
 <li class="">Update ScmInvokerCodeGenerator to generate getProxy() (<a href="https://issues.apache.org/jira/browse/HDDS-14973" target="_blank" rel="noopener noreferrer" class="">HDDS-14973</a>)</li>
 <li class="">[Snapshot] Integration test for SnapshotDeletingService during OM failover. (<a href="https://issues.apache.org/jira/browse/HDDS-8703" target="_blank" rel="noopener noreferrer" class="">HDDS-8703</a>)</li>
 <li class="">dynamic enable of server tracing. (<a href="https://issues.apache.org/jira/browse/HDDS-13804" target="_blank" rel="noopener noreferrer" class="">HDDS-13804</a>)</li>
 <li class="">Inline EndpointBase#createS3Bucket/deleteS3Bucket. (<a href="https://issues.apache.org/jira/browse/HDDS-15003" target="_blank" rel="noopener noreferrer" class="">HDDS-15003</a>)</li>
 <li class="">Bump jnr-posix to 3.1.22. (<a href="https://issues.apache.org/jira/browse/HDDS-15021" target="_blank" rel="noopener noreferrer" class="">HDDS-15021</a>)</li>
-<li class="">Use line.separator in option descriptions. (<a href="https://issues.apache.org/jira/browse/HDDS-14998" target="_blank" rel="noopener noreferrer" class="">HDDS-14998</a>)</li>
+<li class="">Use <code>line.separator</code> in option descriptions. (<a href="https://issues.apache.org/jira/browse/HDDS-14998" target="_blank" rel="noopener noreferrer" class="">HDDS-14998</a>)</li>
 <li class="">Bump awssdk to 2.42.28. (<a href="https://issues.apache.org/jira/browse/HDDS-15020" target="_blank" rel="noopener noreferrer" class="">HDDS-15020</a>)</li>
 <li class="">Bump commons-configuration2 to 2.14.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15019" target="_blank" rel="noopener noreferrer" class="">HDDS-15019</a>)</li>
 <li class="">Improve BigInteger instantiation. (<a href="https://issues.apache.org/jira/browse/HDDS-14955" target="_blank" rel="noopener noreferrer" class="">HDDS-14955</a>)</li>
@@ -526,7 +526,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Bump actions/cache to 5.0.5. (<a href="https://issues.apache.org/jira/browse/HDDS-15062" target="_blank" rel="noopener noreferrer" class="">HDDS-15062</a>)</li>
 <li class="">Make snap diff job status tracking more reliable. (<a href="https://issues.apache.org/jira/browse/HDDS-14829" target="_blank" rel="noopener noreferrer" class="">HDDS-14829</a>)</li>
 <li class="">Improve BucketAclHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-15078" target="_blank" rel="noopener noreferrer" class="">HDDS-15078</a>)</li>
-<li class="">Use line.separator in cli-admin. (<a href="https://issues.apache.org/jira/browse/HDDS-14999" target="_blank" rel="noopener noreferrer" class="">HDDS-14999</a>)</li>
+<li class="">Use <code>line.separator</code> in <code>cli-admin</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14999" target="_blank" rel="noopener noreferrer" class="">HDDS-14999</a>)</li>
 <li class="">OM Web UI dashboard for Ozone Snapshot (list snapshot) (<a href="https://issues.apache.org/jira/browse/HDDS-14987" target="_blank" rel="noopener noreferrer" class="">HDDS-14987</a>)</li>
 <li class="">Avoid ArchiveOutputStream.createArchiveEntry due to libnss issue. (<a href="https://issues.apache.org/jira/browse/HDDS-15102" target="_blank" rel="noopener noreferrer" class="">HDDS-15102</a>)</li>
 <li class="">Bump awssdk to 2.42.36. (<a href="https://issues.apache.org/jira/browse/HDDS-15117" target="_blank" rel="noopener noreferrer" class="">HDDS-15117</a>)</li>
@@ -535,7 +535,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Refactor code related to container tracker. (<a href="https://issues.apache.org/jira/browse/HDDS-15104" target="_blank" rel="noopener noreferrer" class="">HDDS-15104</a>)</li>
 <li class="">Bump actions/upload-artifact to 7.0.1. (<a href="https://issues.apache.org/jira/browse/HDDS-15107" target="_blank" rel="noopener noreferrer" class="">HDDS-15107</a>)</li>
 <li class="">Revise snapshot defrag design doc and add implementation details. (<a href="https://issues.apache.org/jira/browse/HDDS-15105" target="_blank" rel="noopener noreferrer" class="">HDDS-15105</a>)</li>
-<li class="">Bump maven-core to 3.9.15. (<a href="https://issues.apache.org/jira/browse/HDDS-15118" target="_blank" rel="noopener noreferrer" class="">HDDS-15118</a>)</li>
+<li class="">Bump <code>maven-core</code> to 3.9.15. (<a href="https://issues.apache.org/jira/browse/HDDS-15118" target="_blank" rel="noopener noreferrer" class="">HDDS-15118</a>)</li>
 <li class="">Bump sqlite-jdbc to 3.53.0.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15119" target="_blank" rel="noopener noreferrer" class="">HDDS-15119</a>)</li>
 <li class="">Use CRC tables to speed up galoisFieldMultiply in CrcUtil. (<a href="https://issues.apache.org/jira/browse/HDDS-10489" target="_blank" rel="noopener noreferrer" class="">HDDS-10489</a>)</li>
 <li class="">Reducing DatanodeDetails in the ContainerLocationCache. (<a href="https://issues.apache.org/jira/browse/HDDS-10767" target="_blank" rel="noopener noreferrer" class="">HDDS-10767</a>)</li>
@@ -543,7 +543,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Bump commons-io to 2.22.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15163" target="_blank" rel="noopener noreferrer" class="">HDDS-15163</a>)</li>
 <li class="">Bump commons-codec to 1.22.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15161" target="_blank" rel="noopener noreferrer" class="">HDDS-15161</a>)</li>
 <li class="">Update ScmInvokerCodeGenerator for generating the latest invokeLocal. (<a href="https://issues.apache.org/jira/browse/HDDS-15053" target="_blank" rel="noopener noreferrer" class="">HDDS-15053</a>)</li>
-<li class="">Bump common-custom-user-data-maven-extension to 2.2.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15159" target="_blank" rel="noopener noreferrer" class="">HDDS-15159</a>)</li>
+<li class="">Bump <code>common-custom-user-data-maven-extension</code> to 2.2.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15159" target="_blank" rel="noopener noreferrer" class="">HDDS-15159</a>)</li>
 <li class="">Bump javassist to 3.31.0-GA. (<a href="https://issues.apache.org/jira/browse/HDDS-15160" target="_blank" rel="noopener noreferrer" class="">HDDS-15160</a>)</li>
 <li class="">Extract rename test cases to OzoneFileSystemTests. (<a href="https://issues.apache.org/jira/browse/HDDS-15109" target="_blank" rel="noopener noreferrer" class="">HDDS-15109</a>)</li>
 <li class="">Cut WritableRPCEngine. (<a href="https://issues.apache.org/jira/browse/HDDS-15205" target="_blank" rel="noopener noreferrer" class="">HDDS-15205</a>)</li>
@@ -551,7 +551,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Bump jackson to 2.21.3. (<a href="https://issues.apache.org/jira/browse/HDDS-15214" target="_blank" rel="noopener noreferrer" class="">HDDS-15214</a>)</li>
 <li class="">Bump zstd-jni to 1.5.7-8. (<a href="https://issues.apache.org/jira/browse/HDDS-15218" target="_blank" rel="noopener noreferrer" class="">HDDS-15218</a>)</li>
 <li class="">Bump junit to 5.14.4. (<a href="https://issues.apache.org/jira/browse/HDDS-15217" target="_blank" rel="noopener noreferrer" class="">HDDS-15217</a>)</li>
-<li class="">Clarify ozone.om.namespace.s3.strict in ozone-default.xml. (<a href="https://issues.apache.org/jira/browse/HDDS-15203" target="_blank" rel="noopener noreferrer" class="">HDDS-15203</a>)</li>
+<li class="">Clarify <code>ozone.om.namespace.s3.strict</code> in <code>ozone-default.xml</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15203" target="_blank" rel="noopener noreferrer" class="">HDDS-15203</a>)</li>
 <li class="">Bump awssdk to 2.44.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15219" target="_blank" rel="noopener noreferrer" class="">HDDS-15219</a>)</li>
 <li class="">[Ozone Local] Add User facing Config Contract. (<a href="https://issues.apache.org/jira/browse/HDDS-15082" target="_blank" rel="noopener noreferrer" class="">HDDS-15082</a>)</li>
 <li class="">Bump Netty to 4.1.133. (<a href="https://issues.apache.org/jira/browse/HDDS-15224" target="_blank" rel="noopener noreferrer" class="">HDDS-15224</a>)</li>
@@ -559,7 +559,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Enhance DN Disk space management with soft and hard minfreespace limits. (<a href="https://issues.apache.org/jira/browse/HDDS-14925" target="_blank" rel="noopener noreferrer" class="">HDDS-14925</a>)</li>
 <li class="">Consider forked RPC for code coverage. (<a href="https://issues.apache.org/jira/browse/HDDS-15252" target="_blank" rel="noopener noreferrer" class="">HDDS-15252</a>)</li>
 <li class="">Wait for healthy KDC before starting Ozone. (<a href="https://issues.apache.org/jira/browse/HDDS-15231" target="_blank" rel="noopener noreferrer" class="">HDDS-15231</a>)</li>
-<li class="">Pass OZONE_OPTS to more containers. (<a href="https://issues.apache.org/jira/browse/HDDS-15254" target="_blank" rel="noopener noreferrer" class="">HDDS-15254</a>)</li>
+<li class="">Pass <code>OZONE_OPTS</code> to more containers. (<a href="https://issues.apache.org/jira/browse/HDDS-15254" target="_blank" rel="noopener noreferrer" class="">HDDS-15254</a>)</li>
 <li class="">DiskBalancer should validate persisted config before applying. (<a href="https://issues.apache.org/jira/browse/HDDS-15278" target="_blank" rel="noopener noreferrer" class="">HDDS-15278</a>)</li>
 <li class="">Use enum for the ID type in SequenceIdGenerator. (<a href="https://issues.apache.org/jira/browse/HDDS-15145" target="_blank" rel="noopener noreferrer" class="">HDDS-15145</a>)</li>
 <li class="">Bump opentelemetry to 1.62.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15295" target="_blank" rel="noopener noreferrer" class="">HDDS-15295</a>)</li>
@@ -579,7 +579,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Set up ruleset for default and release branches. (<a href="https://issues.apache.org/jira/browse/HDDS-15340" target="_blank" rel="noopener noreferrer" class="">HDDS-15340</a>)</li>
 <li class="">Reduce duplication in OMAllocateBlockRequest OBS/FSO classes. (<a href="https://issues.apache.org/jira/browse/HDDS-15320" target="_blank" rel="noopener noreferrer" class="">HDDS-15320</a>)</li>
 <li class="">Bump zizmor-action to 0.5.6. (<a href="https://issues.apache.org/jira/browse/HDDS-15339" target="_blank" rel="noopener noreferrer" class="">HDDS-15339</a>)</li>
-<li class="">Bump maven-enforcer-plugin to 3.6.3. (<a href="https://issues.apache.org/jira/browse/HDDS-15360" target="_blank" rel="noopener noreferrer" class="">HDDS-15360</a>)</li>
+<li class="">Bump <code>maven-enforcer-plugin</code> to 3.6.3. (<a href="https://issues.apache.org/jira/browse/HDDS-15360" target="_blank" rel="noopener noreferrer" class="">HDDS-15360</a>)</li>
 <li class="">Bump sqlite-jdbc to 3.53.1.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15364" target="_blank" rel="noopener noreferrer" class="">HDDS-15364</a>)</li>
 <li class="">Bump asm to 9.10. (<a href="https://issues.apache.org/jira/browse/HDDS-15365" target="_blank" rel="noopener noreferrer" class="">HDDS-15365</a>)</li>
 <li class="">Bump awssdk to 2.44.7. (<a href="https://issues.apache.org/jira/browse/HDDS-15366" target="_blank" rel="noopener noreferrer" class="">HDDS-15366</a>)</li>
@@ -587,18 +587,18 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Use SequenceIdType in StateManagerImpl. (<a href="https://issues.apache.org/jira/browse/HDDS-15288" target="_blank" rel="noopener noreferrer" class="">HDDS-15288</a>)</li>
 <li class="">Recon - Mismatch Between Cluster State Container Count and Container Summary Totals. (<a href="https://issues.apache.org/jira/browse/HDDS-14758" target="_blank" rel="noopener noreferrer" class="">HDDS-14758</a>)</li>
 <li class="">Bump actions/stale to 10.3.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15383" target="_blank" rel="noopener noreferrer" class="">HDDS-15383</a>)</li>
-<li class="">SCM and Datanode web UI to display datanode Uuid. (<a href="https://issues.apache.org/jira/browse/HDDS-15351" target="_blank" rel="noopener noreferrer" class="">HDDS-15351</a>)</li>
-<li class="">Grafana dashboard for datanode decommission &amp; maintenance mode. (<a href="https://issues.apache.org/jira/browse/HDDS-15352" target="_blank" rel="noopener noreferrer" class="">HDDS-15352</a>)</li>
+<li class="">SCM and Datanode web UI to display Datanode UUID. (<a href="https://issues.apache.org/jira/browse/HDDS-15351" target="_blank" rel="noopener noreferrer" class="">HDDS-15351</a>)</li>
+<li class="">Grafana dashboard for Datanode decommission &amp; maintenance mode. (<a href="https://issues.apache.org/jira/browse/HDDS-15352" target="_blank" rel="noopener noreferrer" class="">HDDS-15352</a>)</li>
 <li class="">Manage Netty native memory consumption. (<a href="https://issues.apache.org/jira/browse/HDDS-11234" target="_blank" rel="noopener noreferrer" class="">HDDS-11234</a>)</li>
 <li class="">Cache some Java 8 dependencies. (<a href="https://issues.apache.org/jira/browse/HDDS-15414" target="_blank" rel="noopener noreferrer" class="">HDDS-15414</a>)</li>
 <li class="">[Ozone Dashboard] Create Ozone OM Overview&#x27; dashboard. (<a href="https://issues.apache.org/jira/browse/HDDS-15336" target="_blank" rel="noopener noreferrer" class="">HDDS-15336</a>)</li>
 <li class="">Speed up TestBlockDeletingService. (<a href="https://issues.apache.org/jira/browse/HDDS-14645" target="_blank" rel="noopener noreferrer" class="">HDDS-14645</a>)</li>
-<li class="">Move virtual-host test out of smoketest/s3. (<a href="https://issues.apache.org/jira/browse/HDDS-15347" target="_blank" rel="noopener noreferrer" class="">HDDS-15347</a>)</li>
+<li class="">Move virtual-host test out of <code>smoketest/s3</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15347" target="_blank" rel="noopener noreferrer" class="">HDDS-15347</a>)</li>
 <li class="">Bump zstd-jni to 1.5.7-9. (<a href="https://issues.apache.org/jira/browse/HDDS-15433" target="_blank" rel="noopener noreferrer" class="">HDDS-15433</a>)</li>
-<li class="">Bump maven-dependency-plugin to 3.11.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15434" target="_blank" rel="noopener noreferrer" class="">HDDS-15434</a>)</li>
-<li class="">Bump maven-site-plugin to 3.22.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15435" target="_blank" rel="noopener noreferrer" class="">HDDS-15435</a>)</li>
+<li class="">Bump <code>maven-dependency-plugin</code> to 3.11.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15434" target="_blank" rel="noopener noreferrer" class="">HDDS-15434</a>)</li>
+<li class="">Bump <code>maven-site-plugin</code> to 3.22.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15435" target="_blank" rel="noopener noreferrer" class="">HDDS-15435</a>)</li>
 <li class="">Bump axios to 1.16.0. (<a href="https://issues.apache.org/jira/browse/HDDS-15437" target="_blank" rel="noopener noreferrer" class="">HDDS-15437</a>)</li>
-<li class="">Close idle connection for Datanode GRPC server. (<a href="https://issues.apache.org/jira/browse/HDDS-15382" target="_blank" rel="noopener noreferrer" class="">HDDS-15382</a>)</li>
+<li class="">Close idle connection for Datanode gRPC server. (<a href="https://issues.apache.org/jira/browse/HDDS-15382" target="_blank" rel="noopener noreferrer" class="">HDDS-15382</a>)</li>
 <li class="">Speed up TestReconTaskControllerImpl. (<a href="https://issues.apache.org/jira/browse/HDDS-15269" target="_blank" rel="noopener noreferrer" class="">HDDS-15269</a>)</li>
 <li class="">Bump awssdk to 2.44.12. (<a href="https://issues.apache.org/jira/browse/HDDS-15436" target="_blank" rel="noopener noreferrer" class="">HDDS-15436</a>)</li>
 <li class="">Improve space accounting in SCM with In-Flight container allocation tracking. (<a href="https://issues.apache.org/jira/browse/HDDS-14921" target="_blank" rel="noopener noreferrer" class="">HDDS-14921</a>)</li>
@@ -620,7 +620,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="removed">Removed<a href="#removed" class="hash-link" aria-label="Direct link to Removed" title="Direct link to Removed" translate="no">​</a></h3>
 <ul>
 <li class="">Remove extra OzoneConfiguration#of from OzoneFileSystem#initialize. (<a href="https://issues.apache.org/jira/browse/HDDS-13851" target="_blank" rel="noopener noreferrer" class="">HDDS-13851</a>)</li>
-<li class="">Remove orphan versions from SnapshotLocalData Yaml file. (<a href="https://issues.apache.org/jira/browse/HDDS-13785" target="_blank" rel="noopener noreferrer" class="">HDDS-13785</a>)</li>
+<li class="">Remove orphan versions from SnapshotLocalData YAML file. (<a href="https://issues.apache.org/jira/browse/HDDS-13785" target="_blank" rel="noopener noreferrer" class="">HDDS-13785</a>)</li>
 <li class="">Remove all MiniDFSCluster comments in tests. (<a href="https://issues.apache.org/jira/browse/HDDS-13903" target="_blank" rel="noopener noreferrer" class="">HDDS-13903</a>)</li>
 <li class="">Remove unused POM profile: clover. (<a href="https://issues.apache.org/jira/browse/HDDS-13910" target="_blank" rel="noopener noreferrer" class="">HDDS-13910</a>)</li>
 <li class="">Remove leftover references to custom pending label. (<a href="https://issues.apache.org/jira/browse/HDDS-13923" target="_blank" rel="noopener noreferrer" class="">HDDS-13923</a>)</li>
@@ -629,31 +629,31 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Remove HttpFS site. (<a href="https://issues.apache.org/jira/browse/HDDS-13970" target="_blank" rel="noopener noreferrer" class="">HDDS-13970</a>)</li>
 <li class="">Remove unused removal listener code from OmSnapshotManager Constructor. (<a href="https://issues.apache.org/jira/browse/HDDS-14032" target="_blank" rel="noopener noreferrer" class="">HDDS-14032</a>)</li>
 <li class="">Remove leftover TODO from OMKeyDeleteRequestWithFSO. (<a href="https://issues.apache.org/jira/browse/HDDS-14033" target="_blank" rel="noopener noreferrer" class="">HDDS-14033</a>)</li>
-<li class="">Remove hadoop-thirdparty protobuf compilation. (<a href="https://issues.apache.org/jira/browse/HDDS-13761" target="_blank" rel="noopener noreferrer" class="">HDDS-13761</a>)</li>
+<li class="">Remove <code>hadoop-thirdparty</code> protobuf compilation. (<a href="https://issues.apache.org/jira/browse/HDDS-13761" target="_blank" rel="noopener noreferrer" class="">HDDS-13761</a>)</li>
 <li class="">Remove jakarta.validation-api. (<a href="https://issues.apache.org/jira/browse/HDDS-14112" target="_blank" rel="noopener noreferrer" class="">HDDS-14112</a>)</li>
 <li class="">Remove dnsjava.version. (<a href="https://issues.apache.org/jira/browse/HDDS-13818" target="_blank" rel="noopener noreferrer" class="">HDDS-13818</a>)</li>
 <li class="">Remove OM Proxy duplication in HadoopRpcOMFailoverProxyProvider. (<a href="https://issues.apache.org/jira/browse/HDDS-14336" target="_blank" rel="noopener noreferrer" class="">HDDS-14336</a>)</li>
 <li class="">Remove dependency on jetty-util-ajax. (<a href="https://issues.apache.org/jira/browse/HDDS-14445" target="_blank" rel="noopener noreferrer" class="">HDDS-14445</a>)</li>
 <li class="">Remove legacy dockerfile references. (<a href="https://issues.apache.org/jira/browse/HDDS-14537" target="_blank" rel="noopener noreferrer" class="">HDDS-14537</a>)</li>
 <li class="">Remove unused LayoutVersionInstanceFactory from the upgrade framework. (<a href="https://issues.apache.org/jira/browse/HDDS-14568" target="_blank" rel="noopener noreferrer" class="">HDDS-14568</a>)</li>
-<li class="">Remove dependency on commons-pool2 in hdds-common. (<a href="https://issues.apache.org/jira/browse/HDDS-14583" target="_blank" rel="noopener noreferrer" class="">HDDS-14583</a>)</li>
+<li class="">Remove dependency on commons-pool2 in <code>hdds-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14583" target="_blank" rel="noopener noreferrer" class="">HDDS-14583</a>)</li>
 <li class="">Remove duplicate setter invocations in ContainerInfo.getProtobuf() method. (<a href="https://issues.apache.org/jira/browse/HDDS-14573" target="_blank" rel="noopener noreferrer" class="">HDDS-14573</a>)</li>
-<li class="">Remove dependency on commons-validator in hdds-common. (<a href="https://issues.apache.org/jira/browse/HDDS-14584" target="_blank" rel="noopener noreferrer" class="">HDDS-14584</a>)</li>
+<li class="">Remove dependency on commons-validator in <code>hdds-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14584" target="_blank" rel="noopener noreferrer" class="">HDDS-14584</a>)</li>
 <li class="">Remove usage of Netty internal StringUtil. (<a href="https://issues.apache.org/jira/browse/HDDS-14605" target="_blank" rel="noopener noreferrer" class="">HDDS-14605</a>)</li>
-<li class="">Remove dependency on netty in hdds-hadoop-dependency-client. (<a href="https://issues.apache.org/jira/browse/HDDS-14603" target="_blank" rel="noopener noreferrer" class="">HDDS-14603</a>)</li>
+<li class="">Remove dependency on Netty in <code>hdds-hadoop-dependency-client</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14603" target="_blank" rel="noopener noreferrer" class="">HDDS-14603</a>)</li>
 <li class="">Remove support for upgrade actions that run outside of finalization. (<a href="https://issues.apache.org/jira/browse/HDDS-14569" target="_blank" rel="noopener noreferrer" class="">HDDS-14569</a>)</li>
 <li class="">Remove ProtoUtils. (<a href="https://issues.apache.org/jira/browse/HDDS-14623" target="_blank" rel="noopener noreferrer" class="">HDDS-14623</a>)</li>
 <li class="">Remove duplicate FileSystem field from test classes. (<a href="https://issues.apache.org/jira/browse/HDDS-14683" target="_blank" rel="noopener noreferrer" class="">HDDS-14683</a>)</li>
 <li class="">Remove unused OmUtils.getOmAddressForClients. (<a href="https://issues.apache.org/jira/browse/HDDS-14664" target="_blank" rel="noopener noreferrer" class="">HDDS-14664</a>)</li>
-<li class="">Remove dependency on snakeyaml from hdds-common. (<a href="https://issues.apache.org/jira/browse/HDDS-14609" target="_blank" rel="noopener noreferrer" class="">HDDS-14609</a>)</li>
+<li class="">Remove dependency on snakeyaml from <code>hdds-common</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14609" target="_blank" rel="noopener noreferrer" class="">HDDS-14609</a>)</li>
 <li class="">Remove synchronized methods from XceiverClientGrpc. (<a href="https://issues.apache.org/jira/browse/HDDS-14571" target="_blank" rel="noopener noreferrer" class="">HDDS-14571</a>)</li>
-<li class="">Remove unused maven-war-plugin from root POM. (<a href="https://issues.apache.org/jira/browse/HDDS-14690" target="_blank" rel="noopener noreferrer" class="">HDDS-14690</a>)</li>
+<li class="">Remove unused <code>maven-war-plugin</code> from root POM. (<a href="https://issues.apache.org/jira/browse/HDDS-14690" target="_blank" rel="noopener noreferrer" class="">HDDS-14690</a>)</li>
 <li class="">Delete EC replica when container state is DELETED in SCM. (<a href="https://issues.apache.org/jira/browse/HDDS-14772" target="_blank" rel="noopener noreferrer" class="">HDDS-14772</a>)</li>
 <li class="">Remove Redundant intermediate SnapshotDiff tables and optimize snapshot diff. (<a href="https://issues.apache.org/jira/browse/HDDS-14038" target="_blank" rel="noopener noreferrer" class="">HDDS-14038</a>)</li>
 <li class="">Remove PR comment commands. (<a href="https://issues.apache.org/jira/browse/HDDS-14785" target="_blank" rel="noopener noreferrer" class="">HDDS-14785</a>)</li>
 <li class="">Remove the type parameter from ScmCodec.deserialize(..) (<a href="https://issues.apache.org/jira/browse/HDDS-14875" target="_blank" rel="noopener noreferrer" class="">HDDS-14875</a>)</li>
 <li class="">Remove unused component versions. (<a href="https://issues.apache.org/jira/browse/HDDS-14917" target="_blank" rel="noopener noreferrer" class="">HDDS-14917</a>)</li>
-<li class="">Remove duplicate keys from ozone-default.xml. (<a href="https://issues.apache.org/jira/browse/HDDS-15108" target="_blank" rel="noopener noreferrer" class="">HDDS-15108</a>)</li>
+<li class="">Remove duplicate keys from <code>ozone-default.xml</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15108" target="_blank" rel="noopener noreferrer" class="">HDDS-15108</a>)</li>
 <li class="">Remove unused ChecksumByteBuffer implementations from PureJava CRC helpers. (<a href="https://issues.apache.org/jira/browse/HDDS-15111" target="_blank" rel="noopener noreferrer" class="">HDDS-15111</a>)</li>
 <li class="">Remove duplicate jackson2 version property. (<a href="https://issues.apache.org/jira/browse/HDDS-15216" target="_blank" rel="noopener noreferrer" class="">HDDS-15216</a>)</li>
 <li class="">Remove unused GenericRefreshProtocol, RefreshCallQueueProtocol. (<a href="https://issues.apache.org/jira/browse/HDDS-15243" target="_blank" rel="noopener noreferrer" class="">HDDS-15243</a>)</li>
@@ -662,8 +662,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Remove unused RPC code. (<a href="https://issues.apache.org/jira/browse/HDDS-15154" target="_blank" rel="noopener noreferrer" class="">HDDS-15154</a>)</li>
 <li class="">Delete EC replica when container state is DELETING in SCM. (<a href="https://issues.apache.org/jira/browse/HDDS-15005" target="_blank" rel="noopener noreferrer" class="">HDDS-15005</a>)</li>
 <li class="">Remove the non-ignorePipeline codec from OmKeyInfo. (<a href="https://issues.apache.org/jira/browse/HDDS-15349" target="_blank" rel="noopener noreferrer" class="">HDDS-15349</a>)</li>
-<li class="">Remove unused dependency properties-maven-plugin. (<a href="https://issues.apache.org/jira/browse/HDDS-15363" target="_blank" rel="noopener noreferrer" class="">HDDS-15363</a>)</li>
-<li class="">Remove static horizontal divider from ozone interactive shell. (<a href="https://issues.apache.org/jira/browse/HDDS-15368" target="_blank" rel="noopener noreferrer" class="">HDDS-15368</a>)</li>
+<li class="">Remove unused dependency <code>properties-maven-plugin</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15363" target="_blank" rel="noopener noreferrer" class="">HDDS-15363</a>)</li>
+<li class="">Remove static horizontal divider from Ozone interactive shell. (<a href="https://issues.apache.org/jira/browse/HDDS-15368" target="_blank" rel="noopener noreferrer" class="">HDDS-15368</a>)</li>
 <li class="">Remove DatanodeDetails#getUuid and DatanodeID#getUuid methods. (<a href="https://issues.apache.org/jira/browse/HDDS-13199" target="_blank" rel="noopener noreferrer" class="">HDDS-13199</a>)</li>
 <li class="">Remove SCMHAInvocationHandler and the related code. (<a href="https://issues.apache.org/jira/browse/HDDS-15192" target="_blank" rel="noopener noreferrer" class="">HDDS-15192</a>)</li>
 </ul>
@@ -675,11 +675,11 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Change SstFileInfo to track fileName as the name of the file without sst extension. (<a href="https://issues.apache.org/jira/browse/HDDS-13856" target="_blank" rel="noopener noreferrer" class="">HDDS-13856</a>)</li>
 <li class="">RocksDatabase#open leaks column family handles when failing to read cfOptions from file. (<a href="https://issues.apache.org/jira/browse/HDDS-13860" target="_blank" rel="noopener noreferrer" class="">HDDS-13860</a>)</li>
 <li class="">Add regression testing for OM epoch and txId calculation. (<a href="https://issues.apache.org/jira/browse/HDDS-13822" target="_blank" rel="noopener noreferrer" class="">HDDS-13822</a>)</li>
-<li class="">Snapshot Paths to be re read from om checkpoint db inside lock again. (<a href="https://issues.apache.org/jira/browse/HDDS-13772" target="_blank" rel="noopener noreferrer" class="">HDDS-13772</a>)</li>
+<li class="">Snapshot Paths to be re read from OM checkpoint db inside lock again. (<a href="https://issues.apache.org/jira/browse/HDDS-13772" target="_blank" rel="noopener noreferrer" class="">HDDS-13772</a>)</li>
 <li class="">Initial s3v volume cache entry will not be evicted until OM restart. (<a href="https://issues.apache.org/jira/browse/HDDS-13823" target="_blank" rel="noopener noreferrer" class="">HDDS-13823</a>)</li>
 <li class="">OM should acquire snapshot cache lock before taking checkpoint. (<a href="https://issues.apache.org/jira/browse/HDDS-13768" target="_blank" rel="noopener noreferrer" class="">HDDS-13768</a>)</li>
 <li class="">Intermittent failure in testOverWriteKeyWithAndWithOutVersioning. (<a href="https://issues.apache.org/jira/browse/HDDS-13861" target="_blank" rel="noopener noreferrer" class="">HDDS-13861</a>)</li>
-<li class="">Block ozone repair if service is running and skip check in dry run mode. (<a href="https://issues.apache.org/jira/browse/HDDS-13873" target="_blank" rel="noopener noreferrer" class="">HDDS-13873</a>)</li>
+<li class="">Block <code>ozone repair</code> if service is running and skip check in dry run mode. (<a href="https://issues.apache.org/jira/browse/HDDS-13873" target="_blank" rel="noopener noreferrer" class="">HDDS-13873</a>)</li>
 <li class="">Intermittent timeout in testSnapshotAndKeyDeletionBackgroundServices. (<a href="https://issues.apache.org/jira/browse/HDDS-13889" target="_blank" rel="noopener noreferrer" class="">HDDS-13889</a>)</li>
 <li class="">Intermittent failure in testBucketUsedNamespace. (<a href="https://issues.apache.org/jira/browse/HDDS-13879" target="_blank" rel="noopener noreferrer" class="">HDDS-13879</a>)</li>
 <li class="">Intermittent failure in TestKeyDeletingService$Normal.testSnapshotDeepClean. (<a href="https://issues.apache.org/jira/browse/HDDS-13880" target="_blank" rel="noopener noreferrer" class="">HDDS-13880</a>)</li>
@@ -695,7 +695,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Shaded Jar build failure in case insensitive filesystem. (<a href="https://issues.apache.org/jira/browse/HDDS-10178" target="_blank" rel="noopener noreferrer" class="">HDDS-10178</a>)</li>
 <li class="">Potential channel leak in StreamingClient.stream() method. (<a href="https://issues.apache.org/jira/browse/HDDS-13939" target="_blank" rel="noopener noreferrer" class="">HDDS-13939</a>)</li>
 <li class="">Wrong fields used to determine deleted block size in OM. (<a href="https://issues.apache.org/jira/browse/HDDS-13946" target="_blank" rel="noopener noreferrer" class="">HDDS-13946</a>)</li>
-<li class="">Snapshot needsDefrag should be set on upgrade when creating missing yaml files. (<a href="https://issues.apache.org/jira/browse/HDDS-13957" target="_blank" rel="noopener noreferrer" class="">HDDS-13957</a>)</li>
+<li class="">Snapshot needsDefrag should be set on upgrade when creating missing YAML files. (<a href="https://issues.apache.org/jira/browse/HDDS-13957" target="_blank" rel="noopener noreferrer" class="">HDDS-13957</a>)</li>
 <li class="">Clarify error message for invalid volume or bucket name. (<a href="https://issues.apache.org/jira/browse/HDDS-9855" target="_blank" rel="noopener noreferrer" class="">HDDS-9855</a>)</li>
 <li class="">Improve error message for malformed input in DirstreamClientHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-13943" target="_blank" rel="noopener noreferrer" class="">HDDS-13943</a>)</li>
 <li class="">Ozone UI: Configuration page does not show description. (<a href="https://issues.apache.org/jira/browse/HDDS-499" target="_blank" rel="noopener noreferrer" class="">HDDS-499</a>)</li>
@@ -716,7 +716,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Ozone command always print warn message before execution. (<a href="https://issues.apache.org/jira/browse/HDDS-4267" target="_blank" rel="noopener noreferrer" class="">HDDS-4267</a>)</li>
 <li class="">Duplicated instanceof checks in OzoneOutputStream. (<a href="https://issues.apache.org/jira/browse/HDDS-10791" target="_blank" rel="noopener noreferrer" class="">HDDS-10791</a>)</li>
 <li class="">StreamRead: Fix bugs for arbitrary block length. (<a href="https://issues.apache.org/jira/browse/HDDS-14055" target="_blank" rel="noopener noreferrer" class="">HDDS-14055</a>)</li>
-<li class="">populate-cache fails at ozone-filesystem-hadoop2. (<a href="https://issues.apache.org/jira/browse/HDDS-14065" target="_blank" rel="noopener noreferrer" class="">HDDS-14065</a>)</li>
+<li class="">populate-cache fails at <code>ozone-filesystem-hadoop2</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14065" target="_blank" rel="noopener noreferrer" class="">HDDS-14065</a>)</li>
 <li class="">Intermittent timeout in TestReconScmSnapshot#testExplicitRemovalOfNode. (<a href="https://issues.apache.org/jira/browse/HDDS-11645" target="_blank" rel="noopener noreferrer" class="">HDDS-11645</a>)</li>
 <li class="">Clean up handles when dropping column family. (<a href="https://issues.apache.org/jira/browse/HDDS-14024" target="_blank" rel="noopener noreferrer" class="">HDDS-14024</a>)</li>
 <li class="">StreamRead: Positioned-read should not do pre-read. (<a href="https://issues.apache.org/jira/browse/HDDS-14035" target="_blank" rel="noopener noreferrer" class="">HDDS-14035</a>)</li>
@@ -738,7 +738,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Close OutputStream properly in TestFailureHandlingByClient. (<a href="https://issues.apache.org/jira/browse/HDDS-14100" target="_blank" rel="noopener noreferrer" class="">HDDS-14100</a>)</li>
 <li class="">SnapshotLocalDataProvider should return an <code>Optional&lt;SnapshotLocalData&gt;</code> for previous snapshotLocalData to avoid inadvertent NPE. (<a href="https://issues.apache.org/jira/browse/HDDS-14153" target="_blank" rel="noopener noreferrer" class="">HDDS-14153</a>)</li>
 <li class="">Change SCM ha and pipeline code to throw more specific exceptions. (<a href="https://issues.apache.org/jira/browse/HDDS-14157" target="_blank" rel="noopener noreferrer" class="">HDDS-14157</a>)</li>
-<li class="">Parameter &#x27;format&#x27; is unknown for plugin &#x27;maven-checkstyle-plugin:3.6.0<!-- -->:check<!-- -->. (<a href="https://issues.apache.org/jira/browse/HDDS-14158" target="_blank" rel="noopener noreferrer" class="">HDDS-14158</a>)</li>
+<li class="">Parameter &#x27;format&#x27; is unknown for plugin <code>maven-checkstyle-plugin:3.6.0:check</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14158" target="_blank" rel="noopener noreferrer" class="">HDDS-14158</a>)</li>
 <li class="">StreamRead: Make preReadSize, responseDataSize and read timeout configurable. (<a href="https://issues.apache.org/jira/browse/HDDS-14036" target="_blank" rel="noopener noreferrer" class="">HDDS-14036</a>)</li>
 <li class="">Selective checks: handle change in check.yml. (<a href="https://issues.apache.org/jira/browse/HDDS-14173" target="_blank" rel="noopener noreferrer" class="">HDDS-14173</a>)</li>
 <li class="">RandomAccessFileChannel.close() should not throws RuntimeException. (<a href="https://issues.apache.org/jira/browse/HDDS-14174" target="_blank" rel="noopener noreferrer" class="">HDDS-14174</a>)</li>
@@ -748,16 +748,16 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">ContainerInfo.fromProtobuf creates two instances. (<a href="https://issues.apache.org/jira/browse/HDDS-14196" target="_blank" rel="noopener noreferrer" class="">HDDS-14196</a>)</li>
 <li class="">Fix ManagedDirectSlice usage as wrapper for ByteBuffer class. (<a href="https://issues.apache.org/jira/browse/HDDS-14185" target="_blank" rel="noopener noreferrer" class="">HDDS-14185</a>)</li>
 <li class="">Fix Native Jni Lib to read SST files using CodecBuffer. (<a href="https://issues.apache.org/jira/browse/HDDS-14162" target="_blank" rel="noopener noreferrer" class="">HDDS-14162</a>)</li>
-<li class="">Fix missing putObjectAcl latency metrics in S3 gateway. (<a href="https://issues.apache.org/jira/browse/HDDS-14251" target="_blank" rel="noopener noreferrer" class="">HDDS-14251</a>)</li>
-<li class="">Handle empty datanode.id file gracefully. (<a href="https://issues.apache.org/jira/browse/HDDS-13955" target="_blank" rel="noopener noreferrer" class="">HDDS-13955</a>)</li>
+<li class="">Fix missing putObjectAcl latency metrics in S3 Gateway. (<a href="https://issues.apache.org/jira/browse/HDDS-14251" target="_blank" rel="noopener noreferrer" class="">HDDS-14251</a>)</li>
+<li class="">Handle empty <code>datanode.id</code> file gracefully. (<a href="https://issues.apache.org/jira/browse/HDDS-13955" target="_blank" rel="noopener noreferrer" class="">HDDS-13955</a>)</li>
 <li class="">Container CLOSED with sequence ID lower than a replica. (<a href="https://issues.apache.org/jira/browse/HDDS-13846" target="_blank" rel="noopener noreferrer" class="">HDDS-13846</a>)</li>
 <li class="">Reconciler should not cast BlockExtendedInputStream to BlockInputStream. (<a href="https://issues.apache.org/jira/browse/HDDS-14217" target="_blank" rel="noopener noreferrer" class="">HDDS-14217</a>)</li>
-<li class="">Add ozone debug CLI to get keys that use certain containers. (<a href="https://issues.apache.org/jira/browse/HDDS-11747" target="_blank" rel="noopener noreferrer" class="">HDDS-11747</a>)</li>
+<li class="">Add <code>ozone debug</code> CLI to get keys that use certain containers. (<a href="https://issues.apache.org/jira/browse/HDDS-11747" target="_blank" rel="noopener noreferrer" class="">HDDS-11747</a>)</li>
 <li class="">Fix warnings in ContainerReportQueue. (<a href="https://issues.apache.org/jira/browse/HDDS-7523" target="_blank" rel="noopener noreferrer" class="">HDDS-7523</a>)</li>
 <li class="">Fix file descriptor leak in OMDBCheckpointServletInodeBasedXfer. (<a href="https://issues.apache.org/jira/browse/HDDS-14376" target="_blank" rel="noopener noreferrer" class="">HDDS-14376</a>)</li>
 <li class="">S3G stuck on failover to a new leader OM. (<a href="https://issues.apache.org/jira/browse/HDDS-14212" target="_blank" rel="noopener noreferrer" class="">HDDS-14212</a>)</li>
 <li class="">ContainerManagerImpl.getOpenContainerCountPerPipeline could have division by zero. (<a href="https://issues.apache.org/jira/browse/HDDS-14371" target="_blank" rel="noopener noreferrer" class="">HDDS-14371</a>)</li>
-<li class="">RatisPipelineProvider does not honor OZONE_DATANODE_PIPELINE_LIMIT_DEFAULT. (<a href="https://issues.apache.org/jira/browse/HDDS-14369" target="_blank" rel="noopener noreferrer" class="">HDDS-14369</a>)</li>
+<li class="">RatisPipelineProvider does not honor <code>OZONE_DATANODE_PIPELINE_LIMIT_DEFAULT</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14369" target="_blank" rel="noopener noreferrer" class="">HDDS-14369</a>)</li>
 <li class="">[doc] Add proxy user configuration documentation to HttpFS. (<a href="https://issues.apache.org/jira/browse/HDDS-14352" target="_blank" rel="noopener noreferrer" class="">HDDS-14352</a>)</li>
 <li class="">Ozone OM fails to start with minimal configs on non-HA mode. (<a href="https://issues.apache.org/jira/browse/HDDS-14249" target="_blank" rel="noopener noreferrer" class="">HDDS-14249</a>)</li>
 <li class="">Require ConfigGroup prefix to be present in Config keys. (<a href="https://issues.apache.org/jira/browse/HDDS-14105" target="_blank" rel="noopener noreferrer" class="">HDDS-14105</a>)</li>
@@ -766,13 +766,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Fix HadoopRpcOMFailoverProxyProvider generic warnings. (<a href="https://issues.apache.org/jira/browse/HDDS-14455" target="_blank" rel="noopener noreferrer" class="">HDDS-14455</a>)</li>
 <li class="">GrpcOmTransport.shutdown() could wait up to number_of_channels * 5s. (<a href="https://issues.apache.org/jira/browse/HDDS-14430" target="_blank" rel="noopener noreferrer" class="">HDDS-14430</a>)</li>
 <li class="">Disk Space Not Fully Reclaimed After Key Deletion. (<a href="https://issues.apache.org/jira/browse/HDDS-14416" target="_blank" rel="noopener noreferrer" class="">HDDS-14416</a>)</li>
-<li class="">Incorrect label on Containers page: “No of Keys” should be “No of Blocks”. (<a href="https://issues.apache.org/jira/browse/HDDS-14492" target="_blank" rel="noopener noreferrer" class="">HDDS-14492</a>)</li>
+<li class="">Incorrect label on Containers page: <code>No of Keys</code> should be <code>No of Blocks</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14492" target="_blank" rel="noopener noreferrer" class="">HDDS-14492</a>)</li>
 <li class="">&quot;[Recon UI] Display &quot;&quot;0 B&quot;&quot; instead of &quot;&quot;N/A&quot;&quot; for zero byte values in Summary Cards&quot;. (<a href="https://issues.apache.org/jira/browse/HDDS-14422" target="_blank" rel="noopener noreferrer" class="">HDDS-14422</a>)</li>
 <li class="">Support OBS keys and additional flags in ContainerToKeyMapping tool. (<a href="https://issues.apache.org/jira/browse/HDDS-14118" target="_blank" rel="noopener noreferrer" class="">HDDS-14118</a>)</li>
 <li class="">Intermittent assertion failure in TestOzoneManagerHAWithStoppedNodes#testOMHAMetrics. (<a href="https://issues.apache.org/jira/browse/HDDS-11353" target="_blank" rel="noopener noreferrer" class="">HDDS-11353</a>)</li>
 <li class="">OMResponse.leaderOMNodeId should not use RaftClientMessage.serverId. (<a href="https://issues.apache.org/jira/browse/HDDS-14426" target="_blank" rel="noopener noreferrer" class="">HDDS-14426</a>)</li>
 <li class="">Incorrect net.topology.node.switch.mapping.impl default value. (<a href="https://issues.apache.org/jira/browse/HDDS-14385" target="_blank" rel="noopener noreferrer" class="">HDDS-14385</a>)</li>
-<li class="">Incorrect Default Value for “Stop after disk even” Command Option in DiskBalancer Doc. (<a href="https://issues.apache.org/jira/browse/HDDS-14554" target="_blank" rel="noopener noreferrer" class="">HDDS-14554</a>)</li>
+<li class="">Incorrect Default Value for <code>Stop after disk even</code> Command Option in DiskBalancer Doc. (<a href="https://issues.apache.org/jira/browse/HDDS-14554" target="_blank" rel="noopener noreferrer" class="">HDDS-14554</a>)</li>
 <li class="">Container state and sequence id doesn&#x27;t match with empty replica can cause abnormal behaviour. (<a href="https://issues.apache.org/jira/browse/HDDS-14551" target="_blank" rel="noopener noreferrer" class="">HDDS-14551</a>)</li>
 <li class="">Use proto 3 in SCMRatisProtocol.proto. (<a href="https://issues.apache.org/jira/browse/HDDS-10481" target="_blank" rel="noopener noreferrer" class="">HDDS-10481</a>)</li>
 <li class="">SnapshotDeletingService incorrectly checks Ratis Buffer Limit. (<a href="https://issues.apache.org/jira/browse/HDDS-14432" target="_blank" rel="noopener noreferrer" class="">HDDS-14432</a>)</li>
@@ -781,7 +781,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Intermittent failure in TestContainerEndpoint. (<a href="https://issues.apache.org/jira/browse/HDDS-14178" target="_blank" rel="noopener noreferrer" class="">HDDS-14178</a>)</li>
 <li class="">Comment mismatch with code in DatanodeClientProtocol.proto. (<a href="https://issues.apache.org/jira/browse/HDDS-5438" target="_blank" rel="noopener noreferrer" class="">HDDS-5438</a>)</li>
 <li class="">SCMSnapshotProvider should not auto-create Ratis directory. (<a href="https://issues.apache.org/jira/browse/HDDS-13572" target="_blank" rel="noopener noreferrer" class="">HDDS-13572</a>)</li>
-<li class="">Create new submodules for ozone debug/repair. (<a href="https://issues.apache.org/jira/browse/HDDS-14595" target="_blank" rel="noopener noreferrer" class="">HDDS-14595</a>)</li>
+<li class="">Create new submodules for <code>ozone debug/repair</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14595" target="_blank" rel="noopener noreferrer" class="">HDDS-14595</a>)</li>
 <li class="">multiPartInfoTable not getting cleaned up when entry not exist in openKeyTable. (<a href="https://issues.apache.org/jira/browse/HDDS-14601" target="_blank" rel="noopener noreferrer" class="">HDDS-14601</a>)</li>
 <li class="">Improve error message when renaming keys across different volumes or buckets. (<a href="https://issues.apache.org/jira/browse/HDDS-14616" target="_blank" rel="noopener noreferrer" class="">HDDS-14616</a>)</li>
 <li class="">&quot;[FSO] Non-recursive dir deletion fails with &quot;&quot;Directory is not empty&quot;&quot; despite all children deleted when double buffer is not flushed&quot;. (<a href="https://issues.apache.org/jira/browse/HDDS-14600" target="_blank" rel="noopener noreferrer" class="">HDDS-14600</a>)</li>
@@ -789,7 +789,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Sync fork should not trigger GitHub action. (<a href="https://issues.apache.org/jira/browse/HDDS-12999" target="_blank" rel="noopener noreferrer" class="">HDDS-12999</a>)</li>
 <li class="">TestDefault...ChoosingPolicy failing due to cluster ID mismatch. (<a href="https://issues.apache.org/jira/browse/HDDS-14632" target="_blank" rel="noopener noreferrer" class="">HDDS-14632</a>)</li>
 <li class="">ozonescripts/test.sh fails with image already exists. (<a href="https://issues.apache.org/jira/browse/HDDS-14633" target="_blank" rel="noopener noreferrer" class="">HDDS-14633</a>)</li>
-<li class="">kubernetes check fails after restarting datanodes. (<a href="https://issues.apache.org/jira/browse/HDDS-14635" target="_blank" rel="noopener noreferrer" class="">HDDS-14635</a>)</li>
+<li class="">kubernetes check fails after restarting Datanodes. (<a href="https://issues.apache.org/jira/browse/HDDS-14635" target="_blank" rel="noopener noreferrer" class="">HDDS-14635</a>)</li>
 <li class="">Error stopping S3 Gateway admin webserver. (<a href="https://issues.apache.org/jira/browse/HDDS-13069" target="_blank" rel="noopener noreferrer" class="">HDDS-13069</a>)</li>
 <li class="">setErrorMsg() throws NPE when ex.getMessage() is null, hiding the underlying cause. (<a href="https://issues.apache.org/jira/browse/HDDS-14649" target="_blank" rel="noopener noreferrer" class="">HDDS-14649</a>)</li>
 <li class="">Populate Missing Fields in /clusterState DatanodeStorageReport. (<a href="https://issues.apache.org/jira/browse/HDDS-14621" target="_blank" rel="noopener noreferrer" class="">HDDS-14621</a>)</li>
@@ -801,28 +801,28 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Change label-pr workflow to avoid pull_request_target. (<a href="https://issues.apache.org/jira/browse/HDDS-13777" target="_blank" rel="noopener noreferrer" class="">HDDS-13777</a>)</li>
 <li class="">Fix orphan snapshot versions handling when snapshot chain tableKey mapping is stale. (<a href="https://issues.apache.org/jira/browse/HDDS-14699" target="_blank" rel="noopener noreferrer" class="">HDDS-14699</a>)</li>
 <li class="">Support open keys and MPU in ContainerToKeyMapping tool. (<a href="https://issues.apache.org/jira/browse/HDDS-14518" target="_blank" rel="noopener noreferrer" class="">HDDS-14518</a>)</li>
-<li class="">update-ozone-site-config-doc fails to cd ozone-site repo. (<a href="https://issues.apache.org/jira/browse/HDDS-14696" target="_blank" rel="noopener noreferrer" class="">HDDS-14696</a>)</li>
+<li class="">update-ozone-site-config-doc fails to cd <code>ozone-site</code> repo. (<a href="https://issues.apache.org/jira/browse/HDDS-14696" target="_blank" rel="noopener noreferrer" class="">HDDS-14696</a>)</li>
 <li class="">Intermittent Socket closed in JacocoServer. (<a href="https://issues.apache.org/jira/browse/HDDS-14710" target="_blank" rel="noopener noreferrer" class="">HDDS-14710</a>)</li>
 <li class="">Open HA checkpoint RocksDB as read-only to prevent unnecessary compaction during txn-info verification. (<a href="https://issues.apache.org/jira/browse/HDDS-14719" target="_blank" rel="noopener noreferrer" class="">HDDS-14719</a>)</li>
 <li class="">Handle NoSuchFileException during the bootstrap tarball transfer. (<a href="https://issues.apache.org/jira/browse/HDDS-14652" target="_blank" rel="noopener noreferrer" class="">HDDS-14652</a>)</li>
 <li class="">The user who starts Recon process will have administrator privilege. (<a href="https://issues.apache.org/jira/browse/HDDS-14380" target="_blank" rel="noopener noreferrer" class="">HDDS-14380</a>)</li>
-<li class="">Fix the <code>{...}</code> issue in xml_to_md.py and rename appendix.md. (<a href="https://issues.apache.org/jira/browse/HDDS-14736" target="_blank" rel="noopener noreferrer" class="">HDDS-14736</a>)</li>
+<li class="">Fix the <code>{...}</code> issue in <code>xml_to_md.py</code> and rename appendix.md. (<a href="https://issues.apache.org/jira/browse/HDDS-14736" target="_blank" rel="noopener noreferrer" class="">HDDS-14736</a>)</li>
 <li class="">Intermittent failure in TestOzoneManagerHAFollowerReadWithAllRunning#testLinearizableReadConsistency. (<a href="https://issues.apache.org/jira/browse/HDDS-14741" target="_blank" rel="noopener noreferrer" class="">HDDS-14741</a>)</li>
 <li class="">Implement Ratis follower read exception handling. (<a href="https://issues.apache.org/jira/browse/HDDS-14425" target="_blank" rel="noopener noreferrer" class="">HDDS-14425</a>)</li>
-<li class="">Container Balancer does not validate include/exclude datanode names. (<a href="https://issues.apache.org/jira/browse/HDDS-14662" target="_blank" rel="noopener noreferrer" class="">HDDS-14662</a>)</li>
+<li class="">Container Balancer does not validate include/exclude Datanode names. (<a href="https://issues.apache.org/jira/browse/HDDS-14662" target="_blank" rel="noopener noreferrer" class="">HDDS-14662</a>)</li>
 <li class="">NoSuchFileException when orphan check runs after purged snapshot YAML is deleted. (<a href="https://issues.apache.org/jira/browse/HDDS-14654" target="_blank" rel="noopener noreferrer" class="">HDDS-14654</a>)</li>
 <li class="">Expose pending delete bytes/namespace in OzoneBucket. (<a href="https://issues.apache.org/jira/browse/HDDS-14467" target="_blank" rel="noopener noreferrer" class="">HDDS-14467</a>)</li>
 <li class="">Make OM bootstrap implementation configurable. (<a href="https://issues.apache.org/jira/browse/HDDS-14721" target="_blank" rel="noopener noreferrer" class="">HDDS-14721</a>)</li>
-<li class="">Enforce 700 permissions on Ozone Metadata and Data(hdds) directories. (<a href="https://issues.apache.org/jira/browse/HDDS-14574" target="_blank" rel="noopener noreferrer" class="">HDDS-14574</a>)</li>
+<li class="">Enforce 700 permissions on Ozone Metadata and Data(<code>hdds</code>) directories. (<a href="https://issues.apache.org/jira/browse/HDDS-14574" target="_blank" rel="noopener noreferrer" class="">HDDS-14574</a>)</li>
 <li class="">Fix infinite CPU spin loop in ECBlockInputStream. (<a href="https://issues.apache.org/jira/browse/HDDS-14724" target="_blank" rel="noopener noreferrer" class="">HDDS-14724</a>)</li>
 <li class="">Reconciliation will incorrectly skip blocks with only metadata present. (<a href="https://issues.apache.org/jira/browse/HDDS-14763" target="_blank" rel="noopener noreferrer" class="">HDDS-14763</a>)</li>
 <li class="">Inconsistent Ozone admin check. (<a href="https://issues.apache.org/jira/browse/HDDS-14207" target="_blank" rel="noopener noreferrer" class="">HDDS-14207</a>)</li>
 <li class="">Intermittent BindException in TestDatanodeUpgradeToSchemaV3. (<a href="https://issues.apache.org/jira/browse/HDDS-14787" target="_blank" rel="noopener noreferrer" class="">HDDS-14787</a>)</li>
-<li class="">Invalid maven-compiler-plugin argument: artifactId. (<a href="https://issues.apache.org/jira/browse/HDDS-14789" target="_blank" rel="noopener noreferrer" class="">HDDS-14789</a>)</li>
-<li class="">test-hadoop.sh fails locally due to bad substitution. (<a href="https://issues.apache.org/jira/browse/HDDS-14820" target="_blank" rel="noopener noreferrer" class="">HDDS-14820</a>)</li>
+<li class="">Invalid <code>maven-compiler-plugin</code> argument: artifactId. (<a href="https://issues.apache.org/jira/browse/HDDS-14789" target="_blank" rel="noopener noreferrer" class="">HDDS-14789</a>)</li>
+<li class=""><code>test-hadoop.sh</code> fails locally due to bad substitution. (<a href="https://issues.apache.org/jira/browse/HDDS-14820" target="_blank" rel="noopener noreferrer" class="">HDDS-14820</a>)</li>
 <li class="">Make Datanode dispatcher error message more informative. (<a href="https://issues.apache.org/jira/browse/HDDS-14832" target="_blank" rel="noopener noreferrer" class="">HDDS-14832</a>)</li>
 <li class="">OzoneManagerSyncMetrics incrNumDeltaRequestsFailed increments the wrong value. (<a href="https://issues.apache.org/jira/browse/HDDS-14848" target="_blank" rel="noopener noreferrer" class="">HDDS-14848</a>)</li>
-<li class="">Escape log4j variables in docker-compose templates. (<a href="https://issues.apache.org/jira/browse/HDDS-14805" target="_blank" rel="noopener noreferrer" class="">HDDS-14805</a>)</li>
+<li class="">Escape log4j variables in <code>docker-compose</code> templates. (<a href="https://issues.apache.org/jira/browse/HDDS-14805" target="_blank" rel="noopener noreferrer" class="">HDDS-14805</a>)</li>
 <li class="">Key removal in LowerCaseKeyStringMap does not transform the string to lowercase. (<a href="https://issues.apache.org/jira/browse/HDDS-14849" target="_blank" rel="noopener noreferrer" class="">HDDS-14849</a>)</li>
 <li class="">Fix lock leak on SnapshotCache cleanup and handle eviction race appropriately. (<a href="https://issues.apache.org/jira/browse/HDDS-14768" target="_blank" rel="noopener noreferrer" class="">HDDS-14768</a>)</li>
 <li class="">ThrottledAsyncChecker does not schedule checks in a threadsafe manner. (<a href="https://issues.apache.org/jira/browse/HDDS-14860" target="_blank" rel="noopener noreferrer" class="">HDDS-14860</a>)</li>
@@ -833,7 +833,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">File Size Distribution Bucket Size Range Calculation is not correct. (<a href="https://issues.apache.org/jira/browse/HDDS-14827" target="_blank" rel="noopener noreferrer" class="">HDDS-14827</a>)</li>
 <li class="">Datanode should gracefully handle CONTAINER_ALREADY_EXISTS. (<a href="https://issues.apache.org/jira/browse/HDDS-14831" target="_blank" rel="noopener noreferrer" class="">HDDS-14831</a>)</li>
 <li class="">ContainerBalancerStatus shows 0GB due to incorrect field mapping. (<a href="https://issues.apache.org/jira/browse/HDDS-14883" target="_blank" rel="noopener noreferrer" class="">HDDS-14883</a>)</li>
-<li class="">OM request fails with ClassNotFoundException: java.lang.constant.Constable. (<a href="https://issues.apache.org/jira/browse/HDDS-14858" target="_blank" rel="noopener noreferrer" class="">HDDS-14858</a>)</li>
+<li class="">OM request fails with ClassNotFoundException: <code>java.lang.constant.Constable</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14858" target="_blank" rel="noopener noreferrer" class="">HDDS-14858</a>)</li>
 <li class="">Set -XX<!-- -->:NewRatio<!-- -->=3 explicitly when using ConcurrentMarkSweep GC. (<a href="https://issues.apache.org/jira/browse/HDDS-14106" target="_blank" rel="noopener noreferrer" class="">HDDS-14106</a>)</li>
 <li class="">SCM listContainer API has performance issues at scale (200K+ containers) (<a href="https://issues.apache.org/jira/browse/HDDS-14730" target="_blank" rel="noopener noreferrer" class="">HDDS-14730</a>)</li>
 <li class="">BASH_SOURCE0: unbound variable. (<a href="https://issues.apache.org/jira/browse/HDDS-14887" target="_blank" rel="noopener noreferrer" class="">HDDS-14887</a>)</li>
@@ -847,7 +847,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Intermittent failure in TestKeyDeletingService.testPurgeKeysRequestBatching. (<a href="https://issues.apache.org/jira/browse/HDDS-13661" target="_blank" rel="noopener noreferrer" class="">HDDS-13661</a>)</li>
 <li class="">Intermittent NPE in XceiverClientGrpc. (<a href="https://issues.apache.org/jira/browse/HDDS-14793" target="_blank" rel="noopener noreferrer" class="">HDDS-14793</a>)</li>
 <li class="">Intermittent failure in Recon Namespace Summary acceptance test. (<a href="https://issues.apache.org/jira/browse/HDDS-10916" target="_blank" rel="noopener noreferrer" class="">HDDS-10916</a>)</li>
-<li class="">xml_to_md.py does not handle generated XML files. (<a href="https://issues.apache.org/jira/browse/HDDS-14976" target="_blank" rel="noopener noreferrer" class="">HDDS-14976</a>)</li>
+<li class=""><code>xml_to_md.py</code> does not handle generated XML files. (<a href="https://issues.apache.org/jira/browse/HDDS-14976" target="_blank" rel="noopener noreferrer" class="">HDDS-14976</a>)</li>
 <li class="">Add metrics to track Snapshot RocksDB space and SST File stats. (<a href="https://issues.apache.org/jira/browse/HDDS-14041" target="_blank" rel="noopener noreferrer" class="">HDDS-14041</a>)</li>
 <li class="">Migrate failed volume checks to one sliding window. (<a href="https://issues.apache.org/jira/browse/HDDS-13108" target="_blank" rel="noopener noreferrer" class="">HDDS-13108</a>)</li>
 <li class="">Differentiate PreconditionFailed and ConditionalRequestConflict in S3 Conditional PUT. (<a href="https://issues.apache.org/jira/browse/HDDS-14968" target="_blank" rel="noopener noreferrer" class="">HDDS-14968</a>)</li>
@@ -858,16 +858,16 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Fix some typos. (<a href="https://issues.apache.org/jira/browse/HDDS-15041" target="_blank" rel="noopener noreferrer" class="">HDDS-15041</a>)</li>
 <li class="">Check leader status before serving bootstrap request. (<a href="https://issues.apache.org/jira/browse/HDDS-14775" target="_blank" rel="noopener noreferrer" class="">HDDS-14775</a>)</li>
 <li class="">Change SCMStateMachine to use ScmInvoker. (<a href="https://issues.apache.org/jira/browse/HDDS-14974" target="_blank" rel="noopener noreferrer" class="">HDDS-14974</a>)</li>
-<li class="">Show failed volumes in ozone admin datanode list output and SCM metrics. (<a href="https://issues.apache.org/jira/browse/HDDS-14990" target="_blank" rel="noopener noreferrer" class="">HDDS-14990</a>)</li>
+<li class="">Show failed volumes in <code>ozone admin datanode list</code> output and SCM metrics. (<a href="https://issues.apache.org/jira/browse/HDDS-14990" target="_blank" rel="noopener noreferrer" class="">HDDS-14990</a>)</li>
 <li class="">[Recon] globalStorage.totalOzoneUsedSpace inconsistent with sum of dataNodeUsage due to non-atomic snapshot. (<a href="https://issues.apache.org/jira/browse/HDDS-15060" target="_blank" rel="noopener noreferrer" class="">HDDS-15060</a>)</li>
 <li class="">Improve S3 audit log stack traces. (<a href="https://issues.apache.org/jira/browse/HDDS-15000" target="_blank" rel="noopener noreferrer" class="">HDDS-15000</a>)</li>
 <li class="">Some ExecutorService#awaitTermination are inverted. (<a href="https://issues.apache.org/jira/browse/HDDS-15040" target="_blank" rel="noopener noreferrer" class="">HDDS-15040</a>)</li>
-<li class="">DataNode: tolerate per-volume health-check latch timeouts before marking volumes failed. (<a href="https://issues.apache.org/jira/browse/HDDS-14871" target="_blank" rel="noopener noreferrer" class="">HDDS-14871</a>)</li>
+<li class="">Datanode: tolerate per-volume health-check latch timeouts before marking volumes failed. (<a href="https://issues.apache.org/jira/browse/HDDS-14871" target="_blank" rel="noopener noreferrer" class="">HDDS-14871</a>)</li>
 <li class="">HDDS-14040 may break majority commit contract. (<a href="https://issues.apache.org/jira/browse/HDDS-15052" target="_blank" rel="noopener noreferrer" class="">HDDS-15052</a>)</li>
-<li class="">OM termination due to race condition between om start and install snapshot. (<a href="https://issues.apache.org/jira/browse/HDDS-15103" target="_blank" rel="noopener noreferrer" class="">HDDS-15103</a>)</li>
+<li class="">OM termination due to race condition between OM start and install snapshot. (<a href="https://issues.apache.org/jira/browse/HDDS-15103" target="_blank" rel="noopener noreferrer" class="">HDDS-15103</a>)</li>
 <li class="">Allow QUASI_CLOSED containers in DiskBalancer with improved debug logging for containers. (<a href="https://issues.apache.org/jira/browse/HDDS-14926" target="_blank" rel="noopener noreferrer" class="">HDDS-14926</a>)</li>
 <li class="">CrcUtil/CrcComposer should not throw IOException for non-IO. (<a href="https://issues.apache.org/jira/browse/HDDS-15115" target="_blank" rel="noopener noreferrer" class="">HDDS-15115</a>)</li>
-<li class="">Missing OZONE_WEBSITE_BUILD in update-ozone-site-config-doc. (<a href="https://issues.apache.org/jira/browse/HDDS-15136" target="_blank" rel="noopener noreferrer" class="">HDDS-15136</a>)</li>
+<li class="">Missing <code>OZONE_WEBSITE_BUILD</code> in update-ozone-site-config-doc. (<a href="https://issues.apache.org/jira/browse/HDDS-15136" target="_blank" rel="noopener noreferrer" class="">HDDS-15136</a>)</li>
 <li class="">Handle negative space usage values gracefully in CachingSpaceUsageSource. (<a href="https://issues.apache.org/jira/browse/HDDS-15112" target="_blank" rel="noopener noreferrer" class="">HDDS-15112</a>)</li>
 <li class="">[Docs] Fix broken in-repo doc links. (<a href="https://issues.apache.org/jira/browse/HDDS-15124" target="_blank" rel="noopener noreferrer" class="">HDDS-15124</a>)</li>
 <li class="">Incorrect pending deletion size for EC blocks in DN. (<a href="https://issues.apache.org/jira/browse/HDDS-15076" target="_blank" rel="noopener noreferrer" class="">HDDS-15076</a>)</li>
@@ -890,14 +890,14 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Intermittent failure in testSnapshotNameConsistency. (<a href="https://issues.apache.org/jira/browse/HDDS-15222" target="_blank" rel="noopener noreferrer" class="">HDDS-15222</a>)</li>
 <li class="">TestAddRemoveOzoneManager may fail at SetConfigurationRequest. (<a href="https://issues.apache.org/jira/browse/HDDS-14017" target="_blank" rel="noopener noreferrer" class="">HDDS-14017</a>)</li>
 <li class="">Intermittent timeout in TestReconAndAdminContainerCLI.testMissingContainer. (<a href="https://issues.apache.org/jira/browse/HDDS-15223" target="_blank" rel="noopener noreferrer" class="">HDDS-15223</a>)</li>
-<li class="">Limit the max network connections created by Datanode GRPC server. (<a href="https://issues.apache.org/jira/browse/HDDS-15149" target="_blank" rel="noopener noreferrer" class="">HDDS-15149</a>)</li>
+<li class="">Limit the max network connections created by Datanode gRPC server. (<a href="https://issues.apache.org/jira/browse/HDDS-15149" target="_blank" rel="noopener noreferrer" class="">HDDS-15149</a>)</li>
 <li class="">[Recon] Fix eslint configs and command for Recon. (<a href="https://issues.apache.org/jira/browse/HDDS-11199" target="_blank" rel="noopener noreferrer" class="">HDDS-11199</a>)</li>
-<li class="">SCM Web UI search box should filter the entire datanodes set, not just the displayed rows. (<a href="https://issues.apache.org/jira/browse/HDDS-15007" target="_blank" rel="noopener noreferrer" class="">HDDS-15007</a>)</li>
+<li class="">SCM Web UI search box should filter the entire Datanodes set, not just the displayed rows. (<a href="https://issues.apache.org/jira/browse/HDDS-15007" target="_blank" rel="noopener noreferrer" class="">HDDS-15007</a>)</li>
 <li class="">FSORepairTool throws ClassNotFoundException: org.apache.ozone.compaction.log.CompactionLogEntry. (<a href="https://issues.apache.org/jira/browse/HDDS-15173" target="_blank" rel="noopener noreferrer" class="">HDDS-15173</a>)</li>
 <li class="">Deletion Metrics Page for Ozone Manager Web UI. (<a href="https://issues.apache.org/jira/browse/HDDS-15095" target="_blank" rel="noopener noreferrer" class="">HDDS-15095</a>)</li>
 <li class="">&quot;[DiskBalancer] Add CLOSING state to the &quot;&quot;not movable&quot;&quot; check&quot;. (<a href="https://issues.apache.org/jira/browse/HDDS-15257" target="_blank" rel="noopener noreferrer" class="">HDDS-15257</a>)</li>
-<li class="">Unhealthy container never showed up in the container report in 30 minutes after corrupting chunks on all datanodes that hold replicas of that container. (<a href="https://issues.apache.org/jira/browse/HDDS-15261" target="_blank" rel="noopener noreferrer" class="">HDDS-15261</a>)</li>
-<li class="">[Recon] Fix incorrect datanode insight values when a DN goes down. (<a href="https://issues.apache.org/jira/browse/HDDS-15262" target="_blank" rel="noopener noreferrer" class="">HDDS-15262</a>)</li>
+<li class="">Unhealthy container never showed up in the container report in 30 minutes after corrupting chunks on all Datanodes that hold replicas of that container. (<a href="https://issues.apache.org/jira/browse/HDDS-15261" target="_blank" rel="noopener noreferrer" class="">HDDS-15261</a>)</li>
+<li class="">[Recon] Fix incorrect Datanode insight values when a DN goes down. (<a href="https://issues.apache.org/jira/browse/HDDS-15262" target="_blank" rel="noopener noreferrer" class="">HDDS-15262</a>)</li>
 <li class="">Read-Write Lock race leave stale references to container creating orphan replicas. (<a href="https://issues.apache.org/jira/browse/HDDS-15066" target="_blank" rel="noopener noreferrer" class="">HDDS-15066</a>)</li>
 <li class="">Fix Trace Hierarchy for Freon s3bg Command. (<a href="https://issues.apache.org/jira/browse/HDDS-14903" target="_blank" rel="noopener noreferrer" class="">HDDS-14903</a>)</li>
 <li class="">Quota repair CLI ignores --buckets because the OM client never sends the bucket list. (<a href="https://issues.apache.org/jira/browse/HDDS-15199" target="_blank" rel="noopener noreferrer" class="">HDDS-15199</a>)</li>
@@ -920,7 +920,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Handle zero-capacity volumes in DiskBalancer policy. (<a href="https://issues.apache.org/jira/browse/HDDS-15300" target="_blank" rel="noopener noreferrer" class="">HDDS-15300</a>)</li>
 <li class="">Malformed PutBlock request can mark container UNHEALTHY. (<a href="https://issues.apache.org/jira/browse/HDDS-15301" target="_blank" rel="noopener noreferrer" class="">HDDS-15301</a>)</li>
 <li class="">Enable prefix filter for OBS. (<a href="https://issues.apache.org/jira/browse/HDDS-15303" target="_blank" rel="noopener noreferrer" class="">HDDS-15303</a>)</li>
-<li class="">Escape more elements in xml_to_md.py. (<a href="https://issues.apache.org/jira/browse/HDDS-15260" target="_blank" rel="noopener noreferrer" class="">HDDS-15260</a>)</li>
+<li class="">Escape more elements in <code>xml_to_md.py</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-15260" target="_blank" rel="noopener noreferrer" class="">HDDS-15260</a>)</li>
 <li class="">ozone admin container list --all returns duplicate containers due to sort/pagination key mismatch in SCM. (<a href="https://issues.apache.org/jira/browse/HDDS-15305" target="_blank" rel="noopener noreferrer" class="">HDDS-15305</a>)</li>
 <li class="">[DiskBalancer] Fix DiskBalancer DN container Log Format. (<a href="https://issues.apache.org/jira/browse/HDDS-15311" target="_blank" rel="noopener noreferrer" class="">HDDS-15311</a>)</li>
 <li class="">[DiskBalancer] Fix Threshold range in negative. (<a href="https://issues.apache.org/jira/browse/HDDS-15310" target="_blank" rel="noopener noreferrer" class="">HDDS-15310</a>)</li>
@@ -931,8 +931,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Increase snapshot diff cleanup interval. (<a href="https://issues.apache.org/jira/browse/HDDS-15166" target="_blank" rel="noopener noreferrer" class="">HDDS-15166</a>)</li>
 <li class="">DiskBalancer should update delta sizes atomically. (<a href="https://issues.apache.org/jira/browse/HDDS-15346" target="_blank" rel="noopener noreferrer" class="">HDDS-15346</a>)</li>
 <li class="">Container scanner should not mark container as UNHEALTHY when FD exhausted. (<a href="https://issues.apache.org/jira/browse/HDDS-15150" target="_blank" rel="noopener noreferrer" class="">HDDS-15150</a>)</li>
-<li class="">Fix datanode shutdown on ozone.scm.nodes reconfig. (<a href="https://issues.apache.org/jira/browse/HDDS-15369" target="_blank" rel="noopener noreferrer" class="">HDDS-15369</a>)</li>
-<li class="">Fix nested tab completion in ozone interactive. (<a href="https://issues.apache.org/jira/browse/HDDS-15354" target="_blank" rel="noopener noreferrer" class="">HDDS-15354</a>)</li>
+<li class="">Fix Datanode shutdown on <code>ozone.scm.nodes</code> reconfig. (<a href="https://issues.apache.org/jira/browse/HDDS-15369" target="_blank" rel="noopener noreferrer" class="">HDDS-15369</a>)</li>
+<li class="">Fix nested tab completion in Ozone interactive. (<a href="https://issues.apache.org/jira/browse/HDDS-15354" target="_blank" rel="noopener noreferrer" class="">HDDS-15354</a>)</li>
 <li class="">DiskBalancer should use monotonic time for delayed replica deletion. (<a href="https://issues.apache.org/jira/browse/HDDS-15371" target="_blank" rel="noopener noreferrer" class="">HDDS-15371</a>)</li>
 <li class="">Shell completion knows too few commands. (<a href="https://issues.apache.org/jira/browse/HDDS-15367" target="_blank" rel="noopener noreferrer" class="">HDDS-15367</a>)</li>
 <li class="">Documentation and Scripting Inconsistencies for Ozone Environment Variables. (<a href="https://issues.apache.org/jira/browse/HDDS-14443" target="_blank" rel="noopener noreferrer" class="">HDDS-14443</a>)</li>
@@ -941,12 +941,12 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">EC write can fail with ArrayIndexOutOfBoundsException due to CoderUtil emptyChunk resize race. (<a href="https://issues.apache.org/jira/browse/HDDS-15341" target="_blank" rel="noopener noreferrer" class="">HDDS-15341</a>)</li>
 <li class="">BackgroundService pool size unchanged by reconfiguration. (<a href="https://issues.apache.org/jira/browse/HDDS-15405" target="_blank" rel="noopener noreferrer" class="">HDDS-15405</a>)</li>
 <li class="">[DiskBalancer] Handle zero-capacity volumes in status report. (<a href="https://issues.apache.org/jira/browse/HDDS-15362" target="_blank" rel="noopener noreferrer" class="">HDDS-15362</a>)</li>
-<li class="">Divide by zero bug crashed SCM when decommissioning a datanode. (<a href="https://issues.apache.org/jira/browse/HDDS-15350" target="_blank" rel="noopener noreferrer" class="">HDDS-15350</a>)</li>
+<li class="">Divide by zero bug crashed SCM when decommissioning a Datanode. (<a href="https://issues.apache.org/jira/browse/HDDS-15350" target="_blank" rel="noopener noreferrer" class="">HDDS-15350</a>)</li>
 <li class="">OmMultipartPartKeyCodec should not use UTF8.decode(..) (<a href="https://issues.apache.org/jira/browse/HDDS-15348" target="_blank" rel="noopener noreferrer" class="">HDDS-15348</a>)</li>
 <li class="">Change sequenceIdTable to use SequenceIdType. (<a href="https://issues.apache.org/jira/browse/HDDS-15370" target="_blank" rel="noopener noreferrer" class="">HDDS-15370</a>)</li>
 <li class="">Fix updateAndRestart deadlock with BackgroundService.PeriodicalTask. (<a href="https://issues.apache.org/jira/browse/HDDS-15429" target="_blank" rel="noopener noreferrer" class="">HDDS-15429</a>)</li>
 <li class="">Reduce Ratis snapshot creation gap to eliminate SCM flush delay and remove redundant Ozone configuration. (<a href="https://issues.apache.org/jira/browse/HDDS-15065" target="_blank" rel="noopener noreferrer" class="">HDDS-15065</a>)</li>
-<li class="">Expose Disk Balancer CLI in top-level datanode help and improve usability. (<a href="https://issues.apache.org/jira/browse/HDDS-15306" target="_blank" rel="noopener noreferrer" class="">HDDS-15306</a>)</li>
+<li class="">Expose Disk Balancer CLI in top-level Datanode help and improve usability. (<a href="https://issues.apache.org/jira/browse/HDDS-15306" target="_blank" rel="noopener noreferrer" class="">HDDS-15306</a>)</li>
 <li class="">[Documentation] Fix pip install syntax error in TestTools.md. (<a href="https://issues.apache.org/jira/browse/HDDS-15451" target="_blank" rel="noopener noreferrer" class="">HDDS-15451</a>)</li>
 <li class="">[Recon] Cluster Capacity in Recon UI shows -1 when SCM goes down. (<a href="https://issues.apache.org/jira/browse/HDDS-15272" target="_blank" rel="noopener noreferrer" class="">HDDS-15272</a>)</li>
 <li class="">Intermittent failure in testWriteStateMachineDataIdempotencyWithClosedContainer. (<a href="https://issues.apache.org/jira/browse/HDDS-13482" target="_blank" rel="noopener noreferrer" class="">HDDS-13482</a>)</li>
@@ -962,7 +962,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Avoid leaked event-processing thread and async work outliving tests in TestReconTaskControllerImpl. (<a href="https://issues.apache.org/jira/browse/HDDS-15449" target="_blank" rel="noopener noreferrer" class="">HDDS-15449</a>)</li>
 <li class="">optimize Container Safemode refresh. (<a href="https://issues.apache.org/jira/browse/HDDS-15498" target="_blank" rel="noopener noreferrer" class="">HDDS-15498</a>)</li>
 <li class="">[Recon] Auto Refresh in Cluster Capacity does not load all the APIs. (<a href="https://issues.apache.org/jira/browse/HDDS-15453" target="_blank" rel="noopener noreferrer" class="">HDDS-15453</a>)</li>
-<li class="">[DiskBalancer] Align batch CLI success messages with HEALTHY IN_SERVICE datanode selection. (<a href="https://issues.apache.org/jira/browse/HDDS-15490" target="_blank" rel="noopener noreferrer" class="">HDDS-15490</a>)</li>
+<li class="">[DiskBalancer] Align batch CLI success messages with HEALTHY IN_SERVICE Datanode selection. (<a href="https://issues.apache.org/jira/browse/HDDS-15490" target="_blank" rel="noopener noreferrer" class="">HDDS-15490</a>)</li>
 <li class="">containerMap is not threadsafe. (<a href="https://issues.apache.org/jira/browse/HDDS-15475" target="_blank" rel="noopener noreferrer" class="">HDDS-15475</a>)</li>
 <li class="">MiniOzoneCluster setup stuck when any VPN is enabled. (<a href="https://issues.apache.org/jira/browse/HDDS-15513" target="_blank" rel="noopener noreferrer" class="">HDDS-15513</a>)</li>
 </ul>
@@ -978,29 +978,29 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Make OmKeyInfo ACL list immutable. (<a href="https://issues.apache.org/jira/browse/HDDS-14122" target="_blank" rel="noopener noreferrer" class="">HDDS-14122</a>)</li>
 <li class="">Ozone Shell getacl capable of printing ACL string the way it is fed to setacl. (<a href="https://issues.apache.org/jira/browse/HDDS-5306" target="_blank" rel="noopener noreferrer" class="">HDDS-5306</a>)</li>
 <li class="">[STS] Create Design Doc. (<a href="https://issues.apache.org/jira/browse/HDDS-13857" target="_blank" rel="noopener noreferrer" class="">HDDS-13857</a>)</li>
-<li class="">Fix JMX query failures when hdds.datanode.http.auth.type is set to Kerberos. (<a href="https://issues.apache.org/jira/browse/HDDS-14334" target="_blank" rel="noopener noreferrer" class="">HDDS-14334</a>)</li>
+<li class="">Fix JMX query failures when <code>hdds.datanode.http.auth.type</code> is set to Kerberos. (<a href="https://issues.apache.org/jira/browse/HDDS-14334" target="_blank" rel="noopener noreferrer" class="">HDDS-14334</a>)</li>
 <li class="">Prometheus servlet token parsing throws StringIndexOutOfBoundsException. (<a href="https://issues.apache.org/jira/browse/HDDS-14149" target="_blank" rel="noopener noreferrer" class="">HDDS-14149</a>)</li>
 <li class="">Move ACL check in OMTenantCreateRequest and OMTenantDeleteRequest to pre execute. (<a href="https://issues.apache.org/jira/browse/HDDS-13864" target="_blank" rel="noopener noreferrer" class="">HDDS-13864</a>)</li>
 <li class="">Bump Ranger to 2.7.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14381" target="_blank" rel="noopener noreferrer" class="">HDDS-14381</a>)</li>
 <li class="">Fix TestBucketPut by correcting test logic and updating test cases. (<a href="https://issues.apache.org/jira/browse/HDDS-13932" target="_blank" rel="noopener noreferrer" class="">HDDS-13932</a>)</li>
-<li class="">&quot;Missing default value for &quot;&quot;hdds.datanode.kerberos.principal&quot;&quot;&quot;. (<a href="https://issues.apache.org/jira/browse/HDDS-14064" target="_blank" rel="noopener noreferrer" class="">HDDS-14064</a>)</li>
-<li class="">gh pr edit fails due to lack of permission in OZONE_WEBSITE_BUILD token. (<a href="https://issues.apache.org/jira/browse/HDDS-14746" target="_blank" rel="noopener noreferrer" class="">HDDS-14746</a>)</li>
+<li class="">&quot;Missing default value for <code>hdds.datanode.kerberos.principal</code>. (<a href="https://issues.apache.org/jira/browse/HDDS-14064" target="_blank" rel="noopener noreferrer" class="">HDDS-14064</a>)</li>
+<li class="">gh pr edit fails due to lack of permission in <code>OZONE_WEBSITE_BUILD</code> token. (<a href="https://issues.apache.org/jira/browse/HDDS-14746" target="_blank" rel="noopener noreferrer" class="">HDDS-14746</a>)</li>
 <li class="">Bump Ranger to 2.8.0. (<a href="https://issues.apache.org/jira/browse/HDDS-14813" target="_blank" rel="noopener noreferrer" class="">HDDS-14813</a>)</li>
 <li class="">Fix outdated download links in README.md and SECURITY.md. (<a href="https://issues.apache.org/jira/browse/HDDS-14904" target="_blank" rel="noopener noreferrer" class="">HDDS-14904</a>)</li>
 <li class="">Enable StringToString, UseArraysAsList and UseIndexOfChar in PMD. (<a href="https://issues.apache.org/jira/browse/HDDS-14918" target="_blank" rel="noopener noreferrer" class="">HDDS-14918</a>)</li>
 <li class="">Support cluster-wide blacklist on OM. (<a href="https://issues.apache.org/jira/browse/HDDS-14843" target="_blank" rel="noopener noreferrer" class="">HDDS-14843</a>)</li>
-<li class="">Add ozone debug commands for Kerberos. (<a href="https://issues.apache.org/jira/browse/HDDS-3128" target="_blank" rel="noopener noreferrer" class="">HDDS-3128</a>)</li>
-<li class="">Add ssl.server.include.cipher.list and ssl.enabled.protocols to HttpServer2 setup. (<a href="https://issues.apache.org/jira/browse/HDDS-10819" target="_blank" rel="noopener noreferrer" class="">HDDS-10819</a>)</li>
+<li class="">Add <code>ozone debug</code> commands for Kerberos. (<a href="https://issues.apache.org/jira/browse/HDDS-3128" target="_blank" rel="noopener noreferrer" class="">HDDS-3128</a>)</li>
+<li class="">Add <code>ssl.server.include.cipher.list</code> and <code>ssl.enabled.protocols</code> to HttpServer2 setup. (<a href="https://issues.apache.org/jira/browse/HDDS-10819" target="_blank" rel="noopener noreferrer" class="">HDDS-10819</a>)</li>
 <li class="">Add protocol and cipher config to gRPC TLS config. (<a href="https://issues.apache.org/jira/browse/HDDS-15094" target="_blank" rel="noopener noreferrer" class="">HDDS-15094</a>)</li>
 <li class="">[STS] Artifacts for Ranger to Consider S3 Action when Authorizing. (<a href="https://issues.apache.org/jira/browse/HDDS-15064" target="_blank" rel="noopener noreferrer" class="">HDDS-15064</a>)</li>
-<li class="">Exercise ozone debug kerberos commands. (<a href="https://issues.apache.org/jira/browse/HDDS-15044" target="_blank" rel="noopener noreferrer" class="">HDDS-15044</a>)</li>
+<li class="">Exercise <code>ozone debug</code> kerberos commands. (<a href="https://issues.apache.org/jira/browse/HDDS-15044" target="_blank" rel="noopener noreferrer" class="">HDDS-15044</a>)</li>
 <li class="">[STS] Fix Latent S3 API Issue having No Acl Check for ListMultipartUploads. (<a href="https://issues.apache.org/jira/browse/HDDS-14894" target="_blank" rel="noopener noreferrer" class="">HDDS-14894</a>)</li>
 <li class="">[STS] Fix Latent S3 API Issue having No Acl Check for ListParts. (<a href="https://issues.apache.org/jira/browse/HDDS-14898" target="_blank" rel="noopener noreferrer" class="">HDDS-14898</a>)</li>
 <li class="">Ozone SCM fails to start when gRPC cipher policy list includes unsupported cipher. (<a href="https://issues.apache.org/jira/browse/HDDS-15176" target="_blank" rel="noopener noreferrer" class="">HDDS-15176</a>)</li>
 <li class="">SSL protocol config is not applied to Jetty when set to default value. (<a href="https://issues.apache.org/jira/browse/HDDS-15152" target="_blank" rel="noopener noreferrer" class="">HDDS-15152</a>)</li>
 <li class="">Support configurable SASL mechanism. (<a href="https://issues.apache.org/jira/browse/HDDS-15168" target="_blank" rel="noopener noreferrer" class="">HDDS-15168</a>)</li>
 <li class="">Add ScmInvoker subclasses for CertificateStore and RootCARotationHandler. (<a href="https://issues.apache.org/jira/browse/HDDS-15190" target="_blank" rel="noopener noreferrer" class="">HDDS-15190</a>)</li>
-<li class="">Grafana process down on docker compose cluster. (<a href="https://issues.apache.org/jira/browse/HDDS-15285" target="_blank" rel="noopener noreferrer" class="">HDDS-15285</a>)</li>
+<li class="">Grafana process down on Docker Compose cluster. (<a href="https://issues.apache.org/jira/browse/HDDS-15285" target="_blank" rel="noopener noreferrer" class="">HDDS-15285</a>)</li>
 <li class="">Move ACL check in Volume requests to preExecute. (<a href="https://issues.apache.org/jira/browse/HDDS-15462" target="_blank" rel="noopener noreferrer" class="">HDDS-15462</a>)</li>
 </ul>
 <p>For more details, check out <a href="https://issues.apache.org/jira/projects/HDDS/versions/12356258" target="_blank" rel="noopener noreferrer" class="">Apache Ozone 2.2.0 Jira list</a>.</p>
@@ -1015,7 +1015,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><a href="https://ozone.apache.org/docs/2.2.0" target="_blank" rel="noopener noreferrer" class="">Ozone 2.2.0 Documentation</a></li>
 </ul>
 <p><strong>Release Date:</strong> 2026 Jul 15</p>
-<p><em>Generated-by: Codex + GPT-5.5, with input data from Apache JIRA metadata and local git history.</em></p>
+<p><em>Generated-by: Codex + GPT-5.5, with input data from Apache Jira metadata and local git history.</em></p>
 <!-- -->
 <p><em>Image credit: <a href="https://www.nps.gov/im/vmi-katm.htm" target="_blank" rel="noopener noreferrer" class="">Brown bear on Brooks River, Katmai National Park and Preserve</a>, NPS Photo / R. Taylor / Text added to original</em></p>
 </article></div><div class="col col--2"><div class="tableOfContents_tAnR thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#release-notes" class="table-of-contents__link toc-highlight">Release Notes</a></li><li><a href="#changelog" class="table-of-contents__link toc-highlight">Changelog</a><ul><li><a href="#added" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#removed" class="table-of-contents__link toc-highlight">Removed</a></li><li><a href="#fixed" class="table-of-contents__link toc-highlight">Fixed</a></li><li><a href="#security" class="table-of-contents__link toc-highlight">Security</a></li></ul></li><li><a href="#downloads" class="table-of-contents__link toc-highlight">Downloads</a></li><li><a href="#documentation" class="table-of-contents__link toc-highlight">Documentation</a></li></ul></div></div></div></main></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Apache Software Foundation</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.apache.org/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Foundation<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/licenses/" target="_blank" rel="noopener noreferrer" class="footer__link-item">License<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/events/current-event" target="_blank" rel="noopener noreferrer" class="footer__link-item">Events<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/sponsorship.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Sponsorship<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://privacy.apache.org/policies/privacy-policy-public.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/security/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Security<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.apache.org/foundation/thanks.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Thanks<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/apache/ozone/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/github.svg" alt="GitHub Discussions Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://issues.apache.org/jira/projects/HDDS/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/jira.svg" alt="Jira Issues Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">Jira Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://infra.apache.org/slack.html" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/slack.svg" alt="Slack Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">Slack<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="mailto:dev@ozone.apache.org" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/mail.svg" alt="Mailing List Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">Mailing List<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.youtube.com/@ApacheOzone" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/youtube.svg" alt="YouTube Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">YouTube<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://twitter.com/ApacheOzone" target="_blank" rel="noopener noreferrer" class="footer__link-item"><img src="/img/social/twitter-x.svg" alt="Twitter Icon" style="width:1em;height:1em;margin-right:0.5em;vertical-align:middle">Twitter<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_bgzT"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Repositories</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/apache/ozone" target="_blank" rel="noopener noreferrer" class="footer__link-item">Ozone</a></li><li class="footer__item"><a href="https://github.com/apache/ozone-site" target="_blank" rel="noopener noreferrer" class="footer__link-item">Website</a></li><li class="footer__item"><a href="https://github.com/apache/ozone-docker" target="_blank" rel="noopener noreferrer" class="footer__link-item">Docker Image</a></li><li class="footer__item"><a href="https://github.com/apache/ozone-docker-runner" target="_blank" rel="noopener noreferrer" class="footer__link-item">Docker Runner Image</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">
