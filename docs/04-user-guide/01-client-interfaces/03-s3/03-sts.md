@@ -14,7 +14,7 @@ The initial implementation:
 
 - Exposes a dedicated STS endpoint on the S3 Gateway (separate from the S3 object API port).
 - Support the **AssumeRole** API.
-- Requires **Apache Ranger** for authorization. 
+- Requires **Apache Ranger** for authorization.
 
 ## Prerequisites
 
@@ -24,12 +24,12 @@ Before using STS, you need:
 2. **Ranger Ozone plugin** installed on OM/S3G with `RangerOzoneAuthorizer` configured (see [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger)).
 3. **Permanent S3 credentials** for the calling user (i.e. service principal):
 
-```shell
-kinit my-service-user
-ozone s3 getsecret
-# awsAccessKey=...
-# awsSecret=...
-```
+   ```shell
+   kinit my-service-user
+   ozone s3 getsecret
+   # awsAccessKey=...
+   # awsSecret=...
+   ```
 
 4. **Ozone volume(s), bucket(s) and key(s) created** as needed for the resources the STS tokens would need to access
 
@@ -41,7 +41,7 @@ ozone s3 getsecret
 
 The role name in `RoleArn` must match the Ranger role name:
 
-```
+```text
 arn:aws:iam::123456789012:role/my-data-reader-role
                               ^^^^^^^^^^^^^^^^^^^^
                               Ranger role name
@@ -100,7 +100,7 @@ Restart all Ozone Managers and all S3 Gateways after changing this property to h
 
 After enabling, the STS endpoint is available at one or more of the following URLs, depending on the `ozone.http.policy` value (`HTTP_ONLY`, `HTTPS_ONLY`, or `HTTP_AND_HTTPS`) and whether TLS is configured.  By default, the value is `HTTP_ONLY`:
 
-```
+```text
 http://<s3g-host>:9880/sts
 https://<s3g-host>:9881/sts
 ```
@@ -232,7 +232,6 @@ Equivalent simplified key-level policy using `all`:
 ```
 
 **WARNING**: Without `action-matches` on the volume, bucket and key policies, the same key-level `read` grant would also authorize `GetObjectTagging` and any other read-scoped S3 action at that path.
-
 
 #### `s3:prefix` condition (ListBucket only)
 
@@ -453,6 +452,7 @@ curl --silent --show-error --location -u admin:rangerR0cks! \
   }' \
   "${RANGER_URL}/service/public/v2/api/policy"
 ```
+
 ---
 
 ## Sample Ozone STS Usage
