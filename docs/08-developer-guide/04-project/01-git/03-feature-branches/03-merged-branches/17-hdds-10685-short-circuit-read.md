@@ -15,7 +15,7 @@ The plan is to run repeated CI checks on the merge commit to master.
 
 ## 3. Design, attached the docs
 
-Design document can be found here : [Short Circuit Read Support](https://github.com/apache/ozone/blob/HDDS-10685/hadoop-hdds/docs/content/design/short-circuit-read.md).
+Design document can be found here : [Short Circuit Read Support](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/short-circuit-read.md).
 
 ## 4. S3 compatibility
 
@@ -23,7 +23,7 @@ N/A, S3 compatibility remains the same. Short Circuit Read only affects the clie
 
 ## 5. Docker-compose / Acceptance tests
 
-New robot test [short-circuit.robot](https://github.com/apache/ozone/blob/HDDS-10685/hadoop-ozone/dist/src/main/smoketest/short-circuit/short-circuit.robot) is being added.
+New robot test [short-circuit.robot](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/smoketest/short-circuit/short-circuit.robot) is being added.
 
 New acceptance tests are added, mainly tests the Short Circuit Read metrics. It does not test fault injection.
 
@@ -128,4 +128,4 @@ Short-Circuit Read does not introduce any new CLI or admin command.
 
 Short-circuit communication uses a UNIX domain socket (`ozone.domain.socket.path`) between the client and Datanode.
 
-It follows the same rules as HDFS short-circuit reads. Refer to the "Security" section of [Design](https://github.com/apache/ozone/blob/HDDS-10685/hadoop-hdds/docs/content/design/short-circuit-read.md) for details.
+It follows the same rules as HDFS short-circuit reads. Refer to the "Security" section of [Design](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/short-circuit-read.md) for details.
