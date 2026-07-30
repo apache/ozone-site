@@ -33,7 +33,7 @@ ozone s3 getsecret
 
 4. **Ozone volume(s), bucket(s) and key(s) created** as needed for the resources the STS tokens would need to access
 
-5. **Ranger user, roles and policies**:
+5. **Ranger user, roles and policies** (Ranger Admin configures):
     - Create a Ranger **user** corresponding to the service principal in Ozone
     - Create a Ranger **role** for each role that can be assumed.
     - Grant the calling user **assume_role** permission on that role.
@@ -180,9 +180,11 @@ Each applicable resource level must also include a matching `action-matches` con
 
 † For `s3:ListBucket`, key-level **READ** is granted on the listed prefix (or `*` if no `s3:prefix` condition is present).
 
-#### Simplifying resource policies with `All`
+#### Simplifying bucket and key policies with `All`
 
-You can simplify resource policies by granting **`All`** instead of individual access types such as `write` or `delete`. The `action-matches` condition restricts which S3 action the permission applies to, so `All` with Action: `PutObject` does not broadly authorize unrelated operations at that resource level.
+You can often simplify **bucket** and **key** policies by granting **`All`** instead of individual access types such as `write` or `delete`. The `action-matches` condition restricts which S3 action the permission applies to, so `All` with Action: `PutObject` does not broadly authorize unrelated operations at that resource level.
+
+At the **volume** level, prefer **specific** access types such as `read` and `list` rather than `All`.
 
 #### Example: IAM permission policy mapped to Ranger policies
 
@@ -203,11 +205,11 @@ The corresponding Ranger role needs matching policies at each level:
 
 | Level | Resource | Permission         | Action-matches Policy Condition |
 | --- | --- |--------------------|---------------------------------|
-| Volume | `s3v` | `READ` (or `All`‡)            | `GetObject`                     |
+| Volume | `s3v` | `READ`             | `GetObject`                     |
 | Bucket | `reports` | `READ` (or `All`‡) | `GetObject`                     |
 | Key | `*` (under `reports`) | `READ` (or `All`‡) | `GetObject`                     |
 
-‡ When using `All`, the `action-matches: GetObject` condition is what prevents unrelated S3 actions from being authorized at that level.
+‡ When using `All` at bucket or key level, the `action-matches: GetObject` condition is what prevents unrelated S3 actions from being authorized at that level.
 
 Example Ranger policy item for the key level (specific read permission):
 
@@ -338,7 +340,7 @@ Let's use the following IAM permission policy and make equivalent Ranger policie
 }
 ```
 
-**Volume** (`READ` or `All` both work when paired with `action-matches`):
+**Volume** (prefer specific access types — not `All`):
 
 ```shell
 curl --silent --show-error --location -u admin:rangerR0cks! \
