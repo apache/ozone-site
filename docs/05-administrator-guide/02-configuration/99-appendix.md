@@ -810,6 +810,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.snapshot.key.deleting.limit.per.task` | 20000 | `OM`, `PERFORMANCE`, `DELETION` | The maximum number of deleted keys to be scanned by Snapshot Deleting Service per snapshot run. |
 | `ozone.ssl.enabled.protocols` |  | `OZONE`, `SECURITY`, `CRYPTO_COMPLIANCE` | The supported SSL protocols used to restrict connections towards the WebUI of different components, and the S3 GateWay. |
 | `ozone.sst.filtering.service.timeout` | 300000ms | `OZONE`, `PERFORMANCE`, `OM`, `DELETION` | A timeout value of sst filtering service. |
+| `ozone.tracing.client.application-aware` | true | `OZONE`, `HDDS` | Only effective when ozone.tracing.enabled=false. When true, Ozone will continue an application-supplied trace (via GlobalOpenTelemetry or a wire-propagated context) as child spans, but will NOT start a new root trace on its own. |
 | `ozone.tracing.enabled` | false | `OZONE`, `HDDS` | If true, tracing is initialized and spans may be exported (subject to sampling). |
 | `ozone.tracing.endpoint` |  | `OZONE`, `HDDS` | OTLP gRPC receiver endpoint URL. |
 | `ozone.tracing.sampler` | -1 | `OZONE`, `HDDS` | Root trace sampling ratio (0.0 to 1.0). |
