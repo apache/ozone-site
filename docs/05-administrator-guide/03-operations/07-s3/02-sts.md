@@ -84,7 +84,11 @@ STS is disabled by default. Enable it in `ozone-site.xml`:
 
 Restart all Ozone Managers and all S3 Gateways after changing this property to have it take effect. Datanodes, SCM, and Recon do not need to be restarted.
 
-**WARNING**: Do *NOT* enable STS without also enabling the corresponding flag on the Ranger side (see "Ranger feature flag" section below).  If the Ozone feature flag is enabled but not the Ranger feature flag, it is possible for the created STS token to have more access than requested.  For example, a token requested for the `s3:PutObject` action would have access to `s3:PutObject`, `s3:PutObjectTagging` and `s3:DeleteObjectTagging` actions, which is a security issue.  Having both the Ozone and Ranger feature flags set to true prevents these scenarios from happening provided the Ranger policies are also set up correctly.
+:::warning
+
+**Do NOT** enable STS without also enabling the corresponding flag on the Ranger side (see "Ranger feature flag" section below). If the Ozone feature flag is enabled but not the Ranger feature flag, it is possible for the created STS token to have more access than requested. For example, a token requested for the `s3:PutObject` action would have access to `s3:PutObject`, `s3:PutObjectTagging` and `s3:DeleteObjectTagging` actions, which is a security issue. Having both the Ozone and Ranger feature flags set to true prevents these scenarios from happening provided the Ranger policies are also set up correctly.
+
+:::
 
 ### Additional Configurable Properties
 
@@ -184,7 +188,7 @@ Each applicable resource level must also include a matching `action-matches` con
 
 You can often simplify **bucket** and **key** policies by granting **`All`** instead of individual access types such as `write` or `delete`. The `action-matches` condition restricts which S3 action the permission applies to, so `All` with Action: `PutObject` does not broadly authorize unrelated operations at that resource level.
 
-At the **volume** level, prefer **specific** access types such as `read` and `list` rather than `All`.
+At the **volume** level, prefer **specific** access types such as `read` and `list` rather than `All`.  Volume-level permissions apply even when a request has no mapped S3 action (similar to bucket-level and key-level permissions), so granting `All` on a volume could unintentionally allow destructive operations such as volume deletion when the role is used outside the S3 context.
 
 #### Example: IAM permission policy mapped to Ranger policies
 
@@ -231,7 +235,11 @@ Equivalent simplified key-level policy using `all`:
 }
 ```
 
-**WARNING**: Without `action-matches` on the volume, bucket and key policies, the same key-level `read` grant would also authorize `GetObjectTagging` and any other read-scoped S3 action at that path.
+:::warning
+
+Without `action-matches` on the volume, bucket and key policies, the same key-level `read` grant would also authorize `GetObjectTagging` and any other read-scoped S3 action at that path.
+
+:::
 
 #### `s3:prefix` condition (ListBucket only)
 
@@ -579,7 +587,7 @@ ozone s3 revokesecret -u my-service-user -y
 
 ## Considerations
 
-- **Multi-tenancy**: In S3 multi-tenant deployments, the volume in resource policies may differ from `s3v`.
+- **Multi-tenancy**: In [S3 multi-tenant](./multi-tenancy/overview) deployments, the volume in resource policies may differ from `s3v`.
 - **Ranger policy refresh**: Allow time for policy cache refresh (up to 30 seconds) after creating/modifying resource policies before calling AssumeRole.
 
 ---
@@ -588,4 +596,4 @@ ozone s3 revokesecret -u my-service-user -y
 
 - [AWS STS Design for Ozone S3](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/ozone-sts.md) — architecture, session token format, and design rationale
 - [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger) — base Ranger/Ozone integration
-- [Securing S3](./securing-s3) — Kerberos, S3 secrets, and S3 Gateway security
+- [Securing S3](../../../user-guide/client-interfaces/s3/securing-s3) — Kerberos, S3 secrets, and S3 Gateway security
