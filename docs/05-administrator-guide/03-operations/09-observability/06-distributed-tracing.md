@@ -127,18 +127,18 @@ export OTEL_SPAN_SAMPLING_ARG="createVolume:1.0,getBucket:0.5"
 When tracing is enabled, specific services emit spans using the designated identifiers below.
 Trace context is propagated across service boundaries via gRPC and W3C context propagation.
 
-| Service / Component | Service Name |
-| ------------------- | ------------ |
-| Ozone Manager | `OzoneManager` |
+| Service / Component       | Service Name |
+|---------------------------| ------------ |
+| Ozone Manager             | `OzoneManager` |
 | Storage Container Manager | `StorageContainerManager` |
-| DataNode | `HddsDatanodeService.{datanodeId}` |
-| S3 Gateway | `S3gateway` |
-| Ozone Client | `client` |
+| Datanode                  | `HddsDatanodeService.{datanodeId}` |
+| S3 Gateway                | `S3gateway` |
+| Ozone Client              | `client` |
 | CLIs (Shell / FS / Freon) | `shell`, `FsShell`, `freon` |
 
 ## Dynamic Reconfiguration
 
-You can update the following tracing properties at runtime on the OM, SCM, and DataNodes
+You can update the following tracing properties at runtime on the OM, SCM, and Datanodes
 without restarting the processes:
 
 - `ozone.tracing.enabled`
@@ -157,9 +157,9 @@ For more details on dynamic property reload, see [Dynamic Property Reload](../dy
 2. Enable tracing and set the collector endpoint to your Jaeger OTLP receiver. See [Enabling Tracing](#enabling-tracing) and [Collector Endpoint Configuration](#collector-endpoint-configuration).
 3. Generate sample traces:
 
-```shell
-ozone freon rk --numOfVolumes=1 --numOfBuckets=1 --numOfKeys=2
-```
+   ```shell
+   ozone freon rk --numOfVolumes=1 --numOfBuckets=1 --numOfKeys=2
+   ```
 
 4. Open the Jaeger UI, select a service such as `OzoneManager` or `freon`, and click **Find Traces**.
 
