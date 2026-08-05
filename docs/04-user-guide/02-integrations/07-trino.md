@@ -4,7 +4,7 @@ sidebar_label: Trino
 
 # Trino with Ozone
 
-[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)**. The recommended path uses native Ozone **`ofs://`** URIs; an alternative uses Ozone's **S3 Gateway** with **`s3a://`** / **`s3://`** URIs. For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./hive).
+[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)**. The recommended path uses native Ozone **`ofs://`** URIs; an alternative uses Ozone's **S3 Gateway** with **`s3a://`** URIs (HMS creates paths through Hadoop S3A). For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./hive).
 
 This page walks through a **Docker lab** verified with **Ozone 2.2.0** and **`trinodb/trino:483`**. The **`ofs://`** flow (including **`INSERT` / `SELECT`**) was verified end-to-end; the **S3 Gateway** flow was verified for creating schemas/tables and reads, but not writes (see [Alternative: Ozone S3 Gateway](#alternative-ozone-s3-gateway-s3a)).
 
@@ -12,8 +12,8 @@ This page walks through a **Docker lab** verified with **Ozone 2.2.0** and **`tr
 
 - Docker Compose with enough memory for Ozone (three Datanodes), Hive Metastore, and Trino.
 - **`ozone-filesystem-hadoop3-*.jar`** at the **same version as your cluster** ([HDDS-14056](https://issues.apache.org/jira/browse/HDDS-14056): use this JAR only; the old **`ozone-filesystem-hadoop3-client`** artifact was removed in Ozone 2.2+).
-- HMS on `thrift://<host>:9083`, with the same Ozone JAR and Hadoop XML as Trino.
-- **`core-site.xml`** and **`ozone-site.xml`** inside the Trino container, referenced from the catalog.
+- HMS on `thrift://<host>:9083`. For the **`ofs://`** path, HMS needs the Ozone JAR and **`ofs`** Hadoop XML. If you also use the S3 Gateway path, HMS additionally needs S3A JARs and `fs.s3a.*` settings (see [Alternative: Ozone S3 Gateway](#alternative-ozone-s3-gateway-s3a)).
+- **`core-site.xml`** and **`ozone-site.xml`** inside the Trino container for the **`ozone`** catalog, referenced from `hive.config.resources`.
 
 :::warning Trino 483 and Hadoop 3.4 interfaces
 Ozone **2.2.0** targets Hadoop **3.4** APIs. Trino **483** ships Hadoop **3.3.x**, which can cause `NoClassDefFoundError: org/apache/hadoop/fs/LeaseRecoverable` on the first `ofs://` write. This is a **Trino classpath gap**, not an Ozone build step—see [Build the Hadoop 3.4 interface stub](#build-the-hadoop-34-interface-stub-trino-483-lab) below. Prefer a Trino release that bundles Hadoop **3.4+** when one is available for your deployment.
@@ -136,7 +136,7 @@ Author **`core-site.xml`** and **`ozone-site.xml`** on the host. Use the compose
 ```
 
 :::warning Keep S3A settings out of Trino's `core-site.xml`
-Use the **`ofs`-only** `core-site.xml` above inside the Trino container for the **`ozone`** catalog. Do **not** add `fs.s3a.*` properties there—Trino's Hive plugin does not ship `hadoop-aws`, and mixed XML causes `ClassNotFoundException: org.apache.hadoop.fs.s3a.S3AFileSystem` on `ofs://` writes. HMS can use a **separate** `core-site.xml` that adds S3A settings when you also run the S3 Gateway path (see below).
+Use the **`ofs`-only** `core-site.xml` above inside the Trino container for the **`ozone`** catalog. Do **not** add `fs.s3a.*` properties there—Trino's Hive plugin does not ship `hadoop-aws`, and mixed XML causes `ClassNotFoundException: org.apache.hadoop.fs.s3a.S3AFileSystem` when Trino touches `s3a://` paths. HMS can use a **separate** `core-site.xml` (for example under `hive-conf/`) that adds S3A settings when you also run the S3 Gateway path (see below).
 :::
 
 ## 4. Start Hive Metastore and Trino
@@ -153,7 +153,31 @@ docker run -d --name hive-metastore \
   apache/hive:4.0.1
 ```
 
-Include `hive-site.xml` in `hive-conf` with a warehouse path on Ozone, for example `ofs://om/s3v/trino-lab/warehouse`.
+Include **`core-site.xml`**, **`ozone-site.xml`**, and **`hive-site.xml`** in `hive-conf`. Example **`hive-site.xml`** (embedded Derby is fine for the lab):
+
+```xml
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:derby:;databaseName=/tmp/metastore_db;create=true</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>org.apache.derby.jdbc.EmbeddedDriver</value>
+  </property>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>ofs://om/s3v/trino-lab/warehouse</value>
+  </property>
+  <property>
+    <name>hive.metastore.schema.verification</name>
+    <value>false</value>
+  </property>
+</configuration>
+```
+
+For HMS, you can merge **`ofs`** and **`fs.s3a.*`** properties into one `core-site.xml` under `hive-conf/` when running both paths. Keep Trino's copy **`ofs`-only** (see step 3).
 
 Start Trino on the same network and mount the Hadoop XML directory:
 
@@ -167,18 +191,18 @@ docker run -d --name trino \
   trinodb/trino
 ```
 
-Copy the Ozone JAR, the Hadoop 3.4 interface stub (Trino 483), and the catalog into Trino, then restart:
+Copy the Ozone JAR, the Hadoop 3.4 interface stub (Trino 483), and the catalog property file into Trino, then restart:
 
 ```bash
 docker cp /tmp/ozone-filesystem-hadoop3-2.2.0.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
 docker cp /tmp/hadoop34-interfaces.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
-docker cp ozone.properties trino:/etc/trino/catalog/ozone.properties
+docker cp /path/to/ozone.properties trino:/etc/trino/catalog/ozone.properties
 docker restart trino
 ```
 
-**`ozone.properties`** (the file name becomes the catalog name):
+Create **`ozone.properties`** on the host (path in the `docker cp` command above):
 
 ```properties
 connector.name=hive
@@ -199,7 +223,7 @@ Use **`docker cp`** for catalog files and JARs. Bind-mount a directory for confi
 
 ## 5. Verify
 
-Use the **`ozone`** catalog ( **`ofs://`** ) for the steps below. Do **not** run these writes on **`ozone_s3a`**—S3 Gateway inserts fail in this lab (see [Troubleshooting](#troubleshooting)).
+Use the **`ozone`** catalog and **`ofs://`** for the steps below. Do **not** run these writes on **`ozone_s3a`**—S3 Gateway inserts fail in this lab (see [Troubleshooting](#troubleshooting)).
 
 ```sql
 SHOW CATALOGS;
@@ -223,7 +247,9 @@ The optional **`ozone_s3a`** catalog uses the same Hive Metastore. Use **differe
 
 ## Alternative: Ozone S3 Gateway (`s3a://`)
 
-Use this when you prefer the Hadoop **S3A** bucket layout (`s3a://bucket/path`) or Ozone's **S3 Gateway** (`s3g`) instead of the Ozone filesystem JAR on Trino. See also [s3a and Ozone](../client-interfaces/s3a).
+Use this when you prefer the Hadoop **S3A** bucket layout (`s3a://bucket/path`) or Ozone's **S3 Gateway** (`s3g`) instead of the Ozone filesystem JAR on **Trino**. Trino reads and writes through its native **`s3.*`** client; **HMS** still uses Hadoop S3A to create and validate `s3a://` paths. See also [s3a and Ozone](../client-interfaces/s3a).
+
+The Ozone bucket created in step 2 (`s3v/trino-lab`) is exposed to S3 clients as bucket **`trino-lab`**—that is why **`ofs://`** paths include the volume (`s3v/trino-lab/...`) while **`s3a://`** paths use the bucket name alone (`s3a://trino-lab/...`).
 
 :::note Trino 483 uses native S3, not Hadoop S3A JARs
 Trino **483** removed legacy `hive.s3.*` settings. Configure **`fs.s3.enabled=true`** and **`s3.*`** catalog properties instead. Do **not** add `hadoop-aws` to Trino's classpath—HMS still needs the Hadoop S3A client to validate `s3a://` paths when creating schemas and tables.
@@ -280,7 +306,14 @@ Mount **`hadoop-aws-3.3.5.jar`** (match Trino's Hadoop **3.3.x** line) plus its 
 
 ### Trino catalog for S3
 
-Create a separate catalog file (example **`ozone_s3a.properties`**):
+Create **`ozone_s3a.properties`** on the host, copy it into Trino, and restart (same pattern as **`ozone.properties`** in step 4):
+
+```bash
+docker cp /path/to/ozone_s3a.properties trino:/etc/trino/catalog/ozone_s3a.properties
+docker restart trino
+```
+
+Example catalog file:
 
 ```properties
 connector.name=hive
@@ -310,7 +343,7 @@ CREATE TABLE ozone_s3a.lab.demo (
   name varchar
 ) WITH (format = 'TEXTFILE');
 
--- Read path: point an external table at objects already in the bucket
+-- Optional read check: upload objects under s3-read/ first (for example with aws s3 cp against s3g:9878)
 CREATE TABLE ozone_s3a.readlab.demo (
   id varchar,
   name varchar
@@ -331,7 +364,7 @@ Docker lab verification with **`fs.s3.enabled=true`** and Ozone S3G:
 | `SELECT` from external data in the bucket | OK |
 | `INSERT` into managed tables | Failed (`HIVE_WRITER_CLOSE_ERROR` after long commit timeout) |
 
-Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S3 **`INSERT`** path when upgrading Trino or Ozone, or in a production-sized cluster with more memory.
+Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S3 **`INSERT`** path when upgrading Trino or Ozone.
 
 ## Troubleshooting
 
