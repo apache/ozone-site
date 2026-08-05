@@ -4,7 +4,7 @@ sidebar_label: Trino
 
 # Trino with Ozone
 
-[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)**. The recommended path uses native Ozone **`ofs://`** URIs; an alternative uses Ozone's **S3 Gateway** with **`s3a://`** / **`s3://`** URIs. For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./01-hive).
+[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)**. The recommended path uses native Ozone **`ofs://`** URIs; an alternative uses Ozone's **S3 Gateway** with **`s3a://`** / **`s3://`** URIs. For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./hive).
 
 This page walks through a **Docker lab** verified with **Ozone 2.2.0** and **`trinodb/trino:483`**. The **`ofs://`** flow (including **`INSERT` / `SELECT`**) was verified end-to-end; the **S3 Gateway** flow was verified for creating schemas/tables and reads, but not writes (see [Alternative: Ozone S3 Gateway](#alternative-ozone-s3-gateway-s3a)).
 
@@ -213,7 +213,7 @@ SELECT * FROM ozone.lab.demo ORDER BY id;
 
 ## Alternative: Ozone S3 Gateway (`s3a://`)
 
-Use this when you prefer the Hadoop **S3A** bucket layout (`s3a://bucket/path`) or Ozone's **S3 Gateway** (`s3g`) instead of the Ozone filesystem JAR on Trino. See also [s3a and Ozone](../01-client-interfaces/04-s3a).
+Use this when you prefer the Hadoop **S3A** bucket layout (`s3a://bucket/path`) or Ozone's **S3 Gateway** (`s3g`) instead of the Ozone filesystem JAR on Trino. See also [s3a and Ozone](../client-interfaces/s3a).
 
 :::note Trino 483 uses native S3, not Hadoop S3A JARs
 Trino **483** removed legacy `hive.s3.*` settings. Configure **`fs.s3.enabled=true`** and **`s3.*`** catalog properties instead. Do **not** add `hadoop-aws` to Trino's classpath—HMS still needs the Hadoop S3A client to validate `s3a://` paths when creating schemas and tables.
