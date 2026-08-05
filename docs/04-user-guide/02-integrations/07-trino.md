@@ -205,20 +205,20 @@ Use the **`ozone`** catalog ( **`ofs://`** ) for the steps below. Do **not** run
 SHOW CATALOGS;
 SHOW SCHEMAS FROM ozone;
 
-CREATE SCHEMA ozone.lab WITH (location = 'ofs://om/s3v/trino-lab/lab');
+CREATE SCHEMA ozone.ofslab WITH (location = 'ofs://om/s3v/trino-lab/ofslab');
 
-CREATE TABLE ozone.lab.demo (
+CREATE TABLE ozone.ofslab.demo (
   id bigint,
   name varchar
 ) WITH (format = 'PARQUET');
 
-INSERT INTO ozone.lab.demo VALUES (1, 'alice'), (2, 'bob');
+INSERT INTO ozone.ofslab.demo VALUES (1, 'alice'), (2, 'bob');
 
-SELECT * FROM ozone.lab.demo ORDER BY id;
+SELECT * FROM ozone.ofslab.demo ORDER BY id;
 ```
 
 :::note One HMS, two catalogs
-If you add the optional **`ozone_s3a`** catalog later, it shares the same Hive Metastore. Schema and table names must not collide, and each schema's `location` must match the catalog you query (`ofs://…` for **`ozone`**, `s3a://…` for **`ozone_s3a`**). If you already created `lab` with an `s3a://` location while testing S3, create a new schema (for example `ofslab`) on the **`ozone`** catalog instead of reusing `lab`.
+The optional **`ozone_s3a`** catalog uses the same Hive Metastore. Use **different schema names** for each path (`ofslab` above vs `lab` in the S3 section) so locations do not collide. Query each table through the catalog that matches its location: **`ofs://…`** → **`ozone`**, **`s3a://…`** → **`ozone_s3a`**. Using **`ozone.lab.demo`** after creating `lab` via S3 fails with `ClassNotFoundException: S3AFileSystem` because that table's location is `s3a://…`.
 :::
 
 ## Alternative: Ozone S3 Gateway (`s3a://`)
@@ -338,7 +338,7 @@ Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S
 | Symptom | Likely cause |
 | ------- | ------------ |
 | `NoClassDefFoundError: LeaseRecoverable` | Trino Hadoop **3.3** vs Ozone **3.4** interfaces; build and copy `hadoop34-interfaces.jar` (step 1) or upgrade Trino. |
-| `ClassNotFoundException: S3AFileSystem` on **`ozone`** writes | `fs.s3a.*` in Trino's `core-site.xml`, or querying a table whose HMS location is `s3a://…` through the **`ozone`** catalog. Use ofs-only XML in Trino and `ofs://` schema/table locations. |
+| `ClassNotFoundException: S3AFileSystem` on **`ozone`** reads/writes | Table or schema location is `s3a://…` but you queried the **`ozone`** catalog, or `fs.s3a.*` is in Trino's `core-site.xml`. Use **`ozone_s3a`** for `s3a://` tables, **`ozone`** + `ofs://` locations for native Ozone, and ofs-only XML in Trino. |
 | `UnsupportedFileSystemException: ofs` | Missing or wrong `hive.config.resources`, or HMS missing Ozone JAR/XML. |
 | INSERT fails moving staged files | Staging path not set to a **`RATIS/ONE`** bucket. |
 | Writes hang | SCM safe mode; not enough healthy Datanodes or disk for pipelines. |
