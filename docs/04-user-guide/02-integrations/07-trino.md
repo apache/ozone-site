@@ -4,9 +4,9 @@ sidebar_label: Trino
 
 # Trino with Ozone
 
-[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)** that understands `ofs://` paths. For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./01-hive).
+[Trino](https://trino.io/) reads and writes Ozone data through the **Hive connector** and a **Hive Metastore (HMS)**. The recommended path uses native Ozone **`ofs://`** URIs; an alternative uses Ozone's **S3 Gateway** with **`s3a://`** / **`s3://`** URIs. For background on Hive warehouse paths and the Ozone filesystem JAR, see [Hive](./01-hive).
 
-This page walks through a **Docker lab** verified with **Ozone 2.2.0**, **`ozone-filesystem-hadoop3-2.2.0.jar`**, and **`trinodb/trino:483`**.
+This page walks through a **Docker lab** verified with **Ozone 2.2.0** and **`trinodb/trino:483`**. The **`ofs://`** flow (including **`INSERT` / `SELECT`**) was verified end-to-end; the **S3 Gateway** flow was verified for creating schemas/tables and reads, but not writes (see [Alternative: Ozone S3 Gateway](#alternative-ozone-s3-gateway-s3a)).
 
 ## What you need
 
@@ -211,6 +211,114 @@ INSERT INTO ozone.lab.demo VALUES (1, 'alice'), (2, 'bob');
 SELECT * FROM ozone.lab.demo ORDER BY id;
 ```
 
+## Alternative: Ozone S3 Gateway (`s3a://`)
+
+Use this when you prefer the Hadoop **S3A** bucket layout (`s3a://bucket/path`) or Ozone's **S3 Gateway** (`s3g`) instead of the Ozone filesystem JAR on Trino. See also [s3a and Ozone](../01-client-interfaces/04-s3a).
+
+:::note Trino 483 uses native S3, not Hadoop S3A JARs
+Trino **483** removed legacy `hive.s3.*` settings. Configure **`fs.s3.enabled=true`** and **`s3.*`** catalog properties instead. Do **not** add `hadoop-aws` to Trino's classpath—HMS still needs the Hadoop S3A client to validate `s3a://` paths when creating schemas and tables.
+:::
+
+### Extra setup
+
+#### Start S3 Gateway
+
+Ensure the **S3 Gateway** service is running (included in [Apache Ozone Docker](https://github.com/apache/ozone-docker); service name **`s3g`**, port **9878**).
+
+#### HMS `core-site.xml` S3A settings
+
+Add S3A client settings to **`core-site.xml`** (insecure lab example; adjust hostnames and keys for production):
+
+```xml
+  <property>
+    <name>fs.s3a.impl</name>
+    <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+  </property>
+  <property>
+    <name>fs.s3a.endpoint</name>
+    <value>http://s3g:9878</value>
+  </property>
+  <property>
+    <name>fs.s3a.endpoint.region</name>
+    <value>us-east-1</value>
+  </property>
+  <property>
+    <name>fs.s3a.path.style.access</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>fs.s3a.bucket.probe</name>
+    <value>0</value>
+  </property>
+  <property>
+    <name>fs.s3a.change.detection.mode</name>
+    <value>none</value>
+  </property>
+  <property>
+    <name>fs.s3a.access.key</name>
+    <value>test</value>
+  </property>
+  <property>
+    <name>fs.s3a.secret.key</name>
+    <value>test</value>
+  </property>
+```
+
+#### HMS S3A JARs
+
+Mount **`hadoop-aws-3.3.5.jar`** (match Trino's Hadoop **3.3.x** line) plus its AWS SDK v1 dependencies on **HMS** classpath—for example `aws-java-sdk-core`, `aws-java-sdk-s3`, `aws-java-sdk-dynamodb`, `joda-time`, and Jackson JARs at the same SDK version.
+
+### Trino catalog for S3
+
+Create a separate catalog file (example **`ozone_s3a.properties`**):
+
+```properties
+connector.name=hive
+hive.metastore.uri=thrift://hive-metastore:9083
+fs.s3.enabled=true
+s3.endpoint=http://s3g:9878
+s3.region=us-east-1
+s3.path-style-access=true
+s3.aws-access-key=test
+s3.aws-secret-key=test
+hive.non-managed-table-writes-enabled=true
+```
+
+Use **`s3a://`** (not `s3://`) in **`CREATE SCHEMA ... WITH (location = ...)`** so HMS can create the path through its S3A client.
+
+### Verify (S3 Gateway)
+
+```sql
+CREATE SCHEMA ozone_s3a.lab WITH (location = 's3a://trino-lab/s3-lab');
+
+CREATE TABLE ozone_s3a.lab.demo (
+  id bigint,
+  name varchar
+) WITH (format = 'TEXTFILE');
+
+-- Read path: point an external table at objects already in the bucket
+CREATE TABLE ozone_s3a.readlab.demo (
+  id varchar,
+  name varchar
+)
+WITH (
+  format = 'CSV',
+  external_location = 's3a://trino-lab/s3-read'
+);
+
+SELECT * FROM ozone_s3a.readlab.demo;
+```
+
+Docker lab verification with **`fs.s3.enabled=true`** and Ozone S3G:
+
+| Step | Result |
+| ---- | ------ |
+| `CREATE SCHEMA` / `CREATE TABLE` with `s3a://` | OK |
+| `SELECT` from external data in the bucket | OK |
+| `INSERT` into managed tables | Failed (`HIVE_WRITER_CLOSE_ERROR` after long commit timeout) |
+
+Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S3 **`INSERT`** path when upgrading Trino or Ozone, or in a production-sized cluster with more memory.
+
 ## Troubleshooting
 
 | Symptom | Likely cause |
@@ -220,6 +328,8 @@ SELECT * FROM ozone.lab.demo ORDER BY id;
 | INSERT fails moving staged files | Staging path not set to a **`RATIS/ONE`** bucket. |
 | Writes hang | SCM safe mode; not enough healthy Datanodes or disk for pipelines. |
 | Metastore connection errors | Trino not on the same Docker network as HMS, or wrong hostname in `hive.metastore.uri`. |
+| S3 `CREATE SCHEMA` fails on HMS | HMS missing S3A JARs or `fs.s3a.*` settings in `core-site.xml`; use `s3a://` locations. |
+| S3 `INSERT` hangs or fails on commit | Known issue in the Docker lab with Trino **483** native S3; prefer **`ofs://`** for writes. |
 
 ## Ranger (optional)
 
