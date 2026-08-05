@@ -76,7 +76,7 @@ docker compose -p ozone-trino exec scm ozone admin safemode exit
 ```
 
 :::note Docker lab sizing
-Three Datanodes avoid replication and pipeline issues on a small compose stack. If Docker disk space is tight, set smaller SCM container defaults in compose (for example `ozone.scm.container.size: "1GB"`).
+Three Datanodes are **required** for the verified **`INSERT`** path: Trino staging blocks still use **`RATIS/THREE`** in this lab, and a single Datanode cannot satisfy that pipeline. If Docker disk space is tight, set smaller SCM container defaults in compose (for example `ozone.scm.container.size: "1GB"`) rather than scaling Datanodes below three.
 :::
 
 ## 3. Prepare Hadoop XML
@@ -141,19 +141,13 @@ Use the **`ofs`-only** `core-site.xml` above inside the Trino container for the 
 
 ## 4. Start Hive Metastore and Trino
 
-Start HMS on the **same Docker network** as Ozone (example network: `ozone-trino_default`). Mount the Ozone JAR plus the XML files:
+Prepare a host directory for lab files (example **`/tmp/trino-lab/`**) with:
 
-```bash
-docker run -d --name hive-metastore \
-  --network ozone-trino_default \
-  -p 9083:9083 \
-  -e SERVICE_NAME=metastore \
-  -v /path/to/hive-conf:/opt/hive/conf:ro \
-  -v /tmp/ozone-filesystem-hadoop3-2.2.0.jar:/opt/hive/lib/ozone-filesystem-hadoop3.jar:ro \
-  apache/hive:4.0.1
-```
+- **`hive-conf/`** — `core-site.xml`, `ozone-site.xml`, `hive-site.xml` for HMS
+- **`hadoop-conf/`** — **`ofs`-only** `core-site.xml` and `ozone-site.xml` for Trino (step 3)
+- **`ozone.properties`** — Trino catalog file (contents below)
 
-Include **`core-site.xml`**, **`ozone-site.xml`**, and **`hive-site.xml`** in `hive-conf`. Example **`hive-site.xml`** (embedded Derby is fine for the lab):
+Example **`hive-site.xml`** (embedded Derby is fine for the lab):
 
 ```xml
 <?xml version="1.0"?>
@@ -179,30 +173,45 @@ Include **`core-site.xml`**, **`ozone-site.xml`**, and **`hive-site.xml`** in `h
 
 For HMS, you can merge **`ofs`** and **`fs.s3a.*`** properties into one `core-site.xml` under `hive-conf/` when running both paths. Keep Trino's copy **`ofs`-only** (see step 3).
 
-Start Trino on the same network and mount the Hadoop XML directory:
+Start HMS on the **same Docker network** as Ozone (example network: `ozone-trino_default`), copy configuration and the Ozone JAR in, then restart:
+
+```bash
+docker run -d --name hive-metastore \
+  --network ozone-trino_default \
+  -p 9083:9083 \
+  -e SERVICE_NAME=metastore \
+  apache/hive:4.0.1
+
+docker cp /tmp/trino-lab/hive-conf/core-site.xml hive-metastore:/opt/hive/conf/
+docker cp /tmp/trino-lab/hive-conf/ozone-site.xml hive-metastore:/opt/hive/conf/
+docker cp /tmp/trino-lab/hive-conf/hive-site.xml hive-metastore:/opt/hive/conf/
+docker cp /tmp/ozone-filesystem-hadoop3-2.2.0.jar \
+  hive-metastore:/opt/hive/lib/ozone-filesystem-hadoop3.jar
+docker restart hive-metastore
+```
+
+Start Trino on the same network, copy Hadoop XML, JARs, and the catalog file in, then restart:
 
 ```bash
 docker run -d --name trino \
   --network ozone-trino_default \
   -p 8080:8080 \
-  --memory=1536m \
-  -e JAVA_TOOL_OPTIONS="-Xmx768m -XX:+UseSerialGC" \
-  -v /path/to/hadoop-conf:/tmp/hadoop/conf:ro \
+  --memory=2g \
+  -e JAVA_TOOL_OPTIONS="-Xmx1024m -XX:+UseSerialGC" \
   trinodb/trino
-```
 
-Copy the Ozone JAR, the Hadoop 3.4 interface stub (Trino 483), and the catalog property file into Trino, then restart:
-
-```bash
+docker exec trino mkdir -p /tmp/hadoop/conf
+docker cp /tmp/trino-lab/hadoop-conf/core-site.xml trino:/tmp/hadoop/conf/
+docker cp /tmp/trino-lab/hadoop-conf/ozone-site.xml trino:/tmp/hadoop/conf/
 docker cp /tmp/ozone-filesystem-hadoop3-2.2.0.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
 docker cp /tmp/hadoop34-interfaces.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
-docker cp /path/to/ozone.properties trino:/etc/trino/catalog/ozone.properties
+docker cp /tmp/trino-lab/ozone.properties trino:/etc/trino/catalog/ozone.properties
 docker restart trino
 ```
 
-Create **`ozone.properties`** on the host (path in the `docker cp` command above):
+**`ozone.properties`** (the file name becomes the catalog name):
 
 ```properties
 connector.name=hive
@@ -215,15 +224,15 @@ hive.dfs.replication=1
 hive.temporary-staging-directory-path=ofs://om/s3v/trino-lab/.staging
 ```
 
-Set **`hive.temporary-staging-directory-path`** to your **`RATIS/ONE`** bucket. Trino otherwise stages under an auto-created `tmp` volume with default **`RATIS/THREE`**, which breaks moves into a one-replica lab bucket.
+Set **`hive.temporary-staging-directory-path`** to your **`RATIS/ONE`** bucket. Trino otherwise stages under an auto-created `tmp` volume with default **`RATIS/THREE`**, which fails when the compose stack has fewer than three healthy Datanodes.
 
 :::tip Docker Desktop on macOS
-Use **`docker cp`** for catalog files and JARs. Bind-mount a directory for config, not a single file under `/tmp` (mounts can appear empty in the container).
+Bind mounts into these containers often appear **empty** (including `-v .../hive-conf:/opt/hive/conf`). Use the **`docker cp`** workflow above for HMS and Trino configuration and JARs. Run SQL from the Trino Web UI at `http://localhost:8080` or with a host-installed Trino CLI—avoid `docker exec trino trino ...` on memory-constrained hosts, because it starts a second JVM inside the container.
 :::
 
 ## 5. Verify
 
-Use the **`ozone`** catalog and **`ofs://`** for the steps below. Do **not** run these writes on **`ozone_s3a`**—S3 Gateway inserts fail in this lab (see [Troubleshooting](#troubleshooting)).
+Use the **`ozone`** catalog and **`ofs://`** for the steps below. Do **not** run these writes on **`ozone_s3a`**—S3 Gateway inserts fail in this lab (see [Troubleshooting](#troubleshooting)). Open the Trino Web UI at `http://localhost:8080` and run the SQL there (or use a host-installed Trino CLI).
 
 ```sql
 SHOW CATALOGS;
@@ -302,7 +311,14 @@ Add S3A client settings to **`core-site.xml`** (insecure lab example; adjust hos
 
 #### HMS S3A JARs
 
-Mount **`hadoop-aws-3.3.5.jar`** (match Trino's Hadoop **3.3.x** line) plus its AWS SDK v1 dependencies on **HMS** classpath—for example `aws-java-sdk-core`, `aws-java-sdk-s3`, `aws-java-sdk-dynamodb`, `joda-time`, and Jackson JARs at the same SDK version.
+Copy **`hadoop-aws-3.3.5.jar`** (match Trino's Hadoop **3.3.x** line) plus its AWS SDK v1 dependencies into HMS with **`docker cp`**, then restart HMS—for example `aws-java-sdk-core`, `aws-java-sdk-s3`, `aws-java-sdk-dynamodb`, `joda-time`, and Jackson JARs at the same SDK version:
+
+```bash
+docker cp /path/to/hadoop-aws-3.3.5.jar hive-metastore:/opt/hive/lib/hadoop-aws.jar
+docker cp /path/to/aws-java-sdk-core.jar hive-metastore:/opt/hive/lib/
+# ... other S3A dependency JARs ...
+docker restart hive-metastore
+```
 
 ### Trino catalog for S3
 
@@ -372,8 +388,8 @@ Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S
 | ------- | ------------ |
 | `NoClassDefFoundError: LeaseRecoverable` | Trino Hadoop **3.3** vs Ozone **3.4** interfaces; build and copy `hadoop34-interfaces.jar` (step 1) or upgrade Trino. |
 | `ClassNotFoundException: S3AFileSystem` on **`ozone`** reads/writes | Table or schema location is `s3a://…` but you queried the **`ozone`** catalog, or `fs.s3a.*` is in Trino's `core-site.xml`. Use **`ozone_s3a`** for `s3a://` tables, **`ozone`** + `ofs://` locations for native Ozone, and ofs-only XML in Trino. |
-| `UnsupportedFileSystemException: ofs` | Missing or wrong `hive.config.resources`, or HMS missing Ozone JAR/XML. |
-| INSERT fails moving staged files | Staging path not set to a **`RATIS/ONE`** bucket. |
+| `UnsupportedFileSystemException: ofs` | HMS missing Ozone JAR/XML (often empty bind mounts on Docker Desktop—use **`docker cp`** and restart HMS), or Trino `hive.config.resources` paths wrong. |
+| INSERT fails moving staged files / `RATIS/THREE` pipeline error | Staging path not set to the lab bucket, or fewer than **three** healthy Datanodes for default **`RATIS/THREE`** staging blocks. |
 | Writes hang | SCM safe mode; not enough healthy Datanodes or disk for pipelines. |
 | Metastore connection errors | Trino not on the same Docker network as HMS, or wrong hostname in `hive.metastore.uri`. |
 | S3 `CREATE SCHEMA` fails on HMS | HMS missing S3A JARs or `fs.s3a.*` settings in `core-site.xml`; use `s3a://` locations. |
