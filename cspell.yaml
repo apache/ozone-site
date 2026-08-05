@@ -294,6 +294,8 @@ words:
 - Teradata
 # Regional terms
 - APAC
+# Linux distributions
+- rockylinux
 # British English spellings
 - utilisation
 - utilised

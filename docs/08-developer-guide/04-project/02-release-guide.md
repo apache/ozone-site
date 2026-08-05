@@ -19,44 +19,13 @@ The following packages are required during the release process:
 - [Protolock](https://github.com/nilslice/protolock) to manage protocol buffer compatibility.
 
 :::note
-As of Ozone 2.0.0, we have optional native libraries for fault inject tool and Ozone Snapshot features. It is recommended to build on a Linux so users can use these features.
+Release managers must build the official release artifacts on Linux. As of Ozone 2.0.0, Ozone includes optional native libraries for the fault injection tool and Ozone Snapshot features. Building on Linux ensures these features are available in the released artifacts.
 :::
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-<TabItem value="mac" label="Mac">
-Install pre-requisites using Homebrew.
-
-  ```bash
-  brew install svn git pinentry-mac cmake gcc coreutils gpatch
-
-  sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
-  sudo ln -s /usr/local/bin/gsha512sum /usr/local/bin/sha512sum
-
-  # use GNU patch as patch
-  PATH="$HOMEBREW_PREFIX/opt/gpatch/libexec/gnubin:$PATH"
-  ```
-
-Make sure to use [GNU tar](https://www.gnu.org/software/tar/).  On Mac, built-in tar includes additional metadata in the archive, which appears as extra files when extracted on other platforms.  GNU tar can be installed e.g. via Homebrew:
-
-```bash title="Install GNU tar on Mac"
-brew install gnu-tar
-# to use it as "tar", not "gtar", add the "gnubin" directory to your PATH
-export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
-```
-
-You may encounter problems regarding sqlite3 compatibility issues when installing Subversion on Mac. Use the following workaround to resolve it:
-
-```bash title="Install Subversion on Mac"
-# fix svn sqlite3 incompatibility
-brew update
-brew remove sqlite svn
-brew reinstall sqlite svn --build-from-source
-```
-
-</TabItem>
 <TabItem value="rockylinux" label="Rocky Linux">
 
 ```bash title="Install pre-requisites"
@@ -268,38 +237,19 @@ If the command fails, you may need to do the following additional steps:
   git config --global user.signingKey $CODESIGNINGKEY
   ```
 
-- And then perform the following platform-dependent steps.
+- Configure GPG agent on Linux.
 
-<Tabs>
-<TabItem value="mac" label="Mac">
-- Tell GPG to use this program to prompt for passphrase:
+  - Add this to `~/.gnupg/gpg.conf`:
 
-  ```bash
-  echo "pinentry-program $(which pinentry-mac)" > ~/.gnupg/gpg-agent.conf
-  ```
+    ```bash
+    use-agent
+    ```
 
-- Reload `gpg-agent`:
+  - Add this to `~/.gnupg/gpg-agent.conf`:
 
-  ```bash
-  gpgconf --kill gpg-agent
-  ```
-
-</TabItem>
-<TabItem value="linux" label="Linux">
-- add this to `~/.gnupg/gpg.conf`:
-
-  ```bash
-  use-agent
-  ```
-
-- add this to `~/.gnupg/gpg-agent.conf`
-
-  ```bash
-  allow-loopback-pinentry
-  ```
-
-</TabItem>
-</Tabs>
+    ```bash
+    allow-loopback-pinentry
+    ```
 
 ### Perform Sanity Checks
 
