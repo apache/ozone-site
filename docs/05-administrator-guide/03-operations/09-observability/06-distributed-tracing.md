@@ -8,7 +8,7 @@ Distributed tracing can help to understand performance bottleneck with visualizi
 Ozone makes use of [OpenTelemetry](https://opentelemetry.io/) API for tracing and uses OTLP with gRPC format for sending traces.
 [jaeger](https://jaegertracing.io) tracing library as collector can collect traces from Ozone over default port 4317 (as default).
 
-## Enabling Tracing {#enabling-tracing}
+## Enabling Tracing
 
 Tracing is turned off by default. To enable it across Ozone services, configure the following property in `ozone-site.xml`:
 
@@ -53,7 +53,7 @@ When resolving configurations for endpoints and sampling strategies, Ozone evalu
 2. Environment Variables
 3. Default Internal Values
 
-## Collector Endpoint Configuration {#collector-endpoint-configuration}
+## Collector Endpoint Configuration
 
 The endpoint specifies the destination where the Jaeger collector is listening.
 
@@ -133,8 +133,10 @@ Trace context is propagated across service boundaries via gRPC and W3C context p
 | Storage Container Manager | `StorageContainerManager` |
 | Datanode                  | `HddsDatanodeService.{datanodeId}` |
 | S3 Gateway                | `S3gateway` |
-| Ozone Client              | `client` |
+| Ozone Client              | `client` (when Ozone initializes tracing in the JVM) |
 | CLIs (Shell / FS / Freon) | `shell`, `FsShell`, `freon` |
+
+> **Note:** If an application registers OpenTelemetry first, client spans are exported under that application's service name, not `client`.
 
 ## Dynamic Reconfiguration
 
