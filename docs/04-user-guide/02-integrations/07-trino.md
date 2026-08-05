@@ -16,7 +16,7 @@ This page walks through a **Docker lab** verified with **Ozone 2.2.0**, **`ozone
 - **`core-site.xml`** and **`ozone-site.xml`** inside the Trino container, referenced from the catalog.
 
 :::warning Trino 483 and Hadoop 3.4 interfaces
-Ozone **2.2.0** targets Hadoop **3.4** APIs. Trino **483** ships Hadoop **3.3.x**, which can cause `NoClassDefFoundError: org/apache/hadoop/fs/LeaseRecoverable` on the first `ofs://` write. For a lab, add a small supplemental JAR with the missing interface classes (`LeaseRecoverable`, `SafeMode`, `SafeModeAction`) to `plugin/hive/hdfs/` next to the Ozone JAR. Prefer a Trino release that bundles Hadoop **3.4+** when one is available for your deployment.
+Ozone **2.2.0** targets Hadoop **3.4** APIs. Trino **483** ships Hadoop **3.3.x**, which can cause `NoClassDefFoundError: org/apache/hadoop/fs/LeaseRecoverable` on the first `ofs://` write. This is a **Trino classpath gap**, not an Ozone build step—see [Build the Hadoop 3.4 interface stub](#build-the-hadoop-34-interface-stub-trino-483-lab) below. Prefer a Trino release that bundles Hadoop **3.4+** when one is available for your deployment.
 :::
 
 ## 1. Download the Ozone filesystem JAR
@@ -28,6 +28,28 @@ curl -L -o /tmp/ozone-filesystem-hadoop3-${OZONE_VERSION}.jar \
 ```
 
 You can also copy the JAR from a running Ozone container under `/opt/hadoop/share/ozone/lib/`.
+
+### Build the Hadoop 3.4 interface stub (Trino 483 lab)
+
+Ozone 2.1+ expects Hadoop **3.4** interface types on the client classpath ([HDDS-13574](https://issues.apache.org/jira/browse/HDDS-13574)). Trino **483** does not ship them. For a lab, build a **small stub JAR** from Apache **`hadoop-common` 3.4** on Maven Central—do **not** rebuild Ozone, and avoid dropping the full `hadoop-common` JAR onto Trino (Trino already embeds Hadoop 3.3 and duplicate JARs can cause other conflicts).
+
+```bash
+HADOOP34=/tmp/hadoop-common-3.4.0.jar
+curl -L -o "$HADOOP34" \
+  "https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/3.4.0/hadoop-common-3.4.0.jar"
+
+mkdir -p /tmp/hadoop34-stub && cd /tmp/hadoop34-stub
+jar xf "$HADOOP34" \
+  org/apache/hadoop/fs/LeaseRecoverable.class \
+  org/apache/hadoop/fs/SafeMode.class \
+  org/apache/hadoop/fs/SafeModeAction.class
+jar cf /tmp/hadoop34-interfaces.jar \
+  org/apache/hadoop/fs/LeaseRecoverable.class \
+  org/apache/hadoop/fs/SafeMode.class \
+  org/apache/hadoop/fs/SafeModeAction.class
+```
+
+Copy **both** JARs into Trino’s Hive HDFS plugin directory (see step 4). Skip this stub if your Trino release already bundles Hadoop **3.4+**.
 
 ## 2. Start Ozone and create a bucket
 
@@ -141,10 +163,12 @@ docker run -d --name trino \
   trinodb/trino
 ```
 
-Copy the Ozone JAR (and the Hadoop 3.4 interface supplemental JAR, if needed) into Trino’s Hive plugin, then add the catalog:
+Copy the Ozone JAR, the Hadoop 3.4 interface stub (Trino 483), and the catalog into Trino, then restart:
 
 ```bash
 docker cp /tmp/ozone-filesystem-hadoop3-2.2.0.jar \
+  trino:/usr/lib/trino/plugin/hive/hdfs/
+docker cp /tmp/hadoop34-interfaces.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
 docker cp ozone.properties trino:/etc/trino/catalog/ozone.properties
 docker restart trino
@@ -191,7 +215,7 @@ SELECT * FROM ozone.lab.demo ORDER BY id;
 
 | Symptom | Likely cause |
 | ------- | ------------ |
-| `NoClassDefFoundError: LeaseRecoverable` | Trino Hadoop **3.3** vs Ozone **3.4** interfaces; add supplemental JAR or upgrade Trino. |
+| `NoClassDefFoundError: LeaseRecoverable` | Trino Hadoop **3.3** vs Ozone **3.4** interfaces; build and copy `hadoop34-interfaces.jar` (step 1) or upgrade Trino. |
 | `UnsupportedFileSystemException: ofs` | Missing or wrong `hive.config.resources`, or HMS missing Ozone JAR/XML. |
 | INSERT fails moving staged files | Staging path not set to a **`RATIS/ONE`** bucket. |
 | Writes hang | SCM safe mode; not enough healthy Datanodes or disk for pipelines. |
