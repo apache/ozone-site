@@ -135,6 +135,10 @@ Author **`core-site.xml`** and **`ozone-site.xml`** on the host. Use the compose
 </configuration>
 ```
 
+:::warning Keep S3A settings out of Trino's `core-site.xml`
+Use the **`ofs`-only** `core-site.xml` above inside the Trino container for the **`ozone`** catalog. Do **not** add `fs.s3a.*` properties there—Trino's Hive plugin does not ship `hadoop-aws`, and mixed XML causes `ClassNotFoundException: org.apache.hadoop.fs.s3a.S3AFileSystem` on `ofs://` writes. HMS can use a **separate** `core-site.xml` that adds S3A settings when you also run the S3 Gateway path (see below).
+:::
+
 ## 4. Start Hive Metastore and Trino
 
 Start HMS on the **same Docker network** as Ozone (example network: `ozone-trino_default`). Mount the Ozone JAR plus the XML files:
@@ -195,6 +199,8 @@ Use **`docker cp`** for catalog files and JARs. Bind-mount a directory for confi
 
 ## 5. Verify
 
+Use the **`ozone`** catalog ( **`ofs://`** ) for the steps below. Do **not** run these writes on **`ozone_s3a`**—S3 Gateway inserts fail in this lab (see [Troubleshooting](#troubleshooting)).
+
 ```sql
 SHOW CATALOGS;
 SHOW SCHEMAS FROM ozone;
@@ -210,6 +216,10 @@ INSERT INTO ozone.lab.demo VALUES (1, 'alice'), (2, 'bob');
 
 SELECT * FROM ozone.lab.demo ORDER BY id;
 ```
+
+:::note One HMS, two catalogs
+If you add the optional **`ozone_s3a`** catalog later, it shares the same Hive Metastore. Schema and table names must not collide, and each schema's `location` must match the catalog you query (`ofs://…` for **`ozone`**, `s3a://…` for **`ozone_s3a`**). If you already created `lab` with an `s3a://` location while testing S3, create a new schema (for example `ofslab`) on the **`ozone`** catalog instead of reusing `lab`.
+:::
 
 ## Alternative: Ozone S3 Gateway (`s3a://`)
 
@@ -288,6 +298,10 @@ Use **`s3a://`** (not `s3://`) in **`CREATE SCHEMA ... WITH (location = ...)`** 
 
 ### Verify (S3 Gateway)
 
+:::warning No writes in the Docker lab
+Do **not** run `INSERT` (or `CREATE TABLE AS`) on **`ozone_s3a`** in this lab. Trino commits through the native S3 client; Ozone S3 Gateway returns HTTP **500** on multi-part puts, which surfaces as **`HIVE_WRITER_CLOSE_ERROR`** after several minutes. Use the **`ozone`** catalog and **`ofs://`** for verified writes.
+:::
+
 ```sql
 CREATE SCHEMA ozone_s3a.lab WITH (location = 's3a://trino-lab/s3-lab');
 
@@ -324,12 +338,13 @@ Use **`ofs://`** (above) when you need verified writes from Trino. Re-test the S
 | Symptom | Likely cause |
 | ------- | ------------ |
 | `NoClassDefFoundError: LeaseRecoverable` | Trino Hadoop **3.3** vs Ozone **3.4** interfaces; build and copy `hadoop34-interfaces.jar` (step 1) or upgrade Trino. |
+| `ClassNotFoundException: S3AFileSystem` on **`ozone`** writes | `fs.s3a.*` in Trino's `core-site.xml`, or querying a table whose HMS location is `s3a://…` through the **`ozone`** catalog. Use ofs-only XML in Trino and `ofs://` schema/table locations. |
 | `UnsupportedFileSystemException: ofs` | Missing or wrong `hive.config.resources`, or HMS missing Ozone JAR/XML. |
 | INSERT fails moving staged files | Staging path not set to a **`RATIS/ONE`** bucket. |
 | Writes hang | SCM safe mode; not enough healthy Datanodes or disk for pipelines. |
 | Metastore connection errors | Trino not on the same Docker network as HMS, or wrong hostname in `hive.metastore.uri`. |
 | S3 `CREATE SCHEMA` fails on HMS | HMS missing S3A JARs or `fs.s3a.*` settings in `core-site.xml`; use `s3a://` locations. |
-| S3 `INSERT` hangs or fails on commit | Known issue in the Docker lab with Trino **483** native S3; prefer **`ofs://`** for writes. |
+| S3 `INSERT` → `HIVE_WRITER_CLOSE_ERROR` (HTTP 500 from S3G) | Expected in the Docker lab with Trino **483** native S3 on **`ozone_s3a`**; use **`ozone`** + **`ofs://`** for writes. |
 
 ## Ranger (optional)
 
