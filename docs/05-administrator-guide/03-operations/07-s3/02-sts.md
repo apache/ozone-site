@@ -4,6 +4,8 @@ sidebar_label: STS
 
 # Ozone S3 Security Token Service (STS)
 
+import Details from '@theme/Details';
+
 This guide explains how to enable, configure, and use Ozone STS to issue short-lived S3 credentials through the AWS-compatible (at least for the supported features) **AssumeRole** API. Ozone STS is designed for scenarios such as data-lake workloads that need temporary, scoped access to Ozone buckets and keys without distributing long-lived credentials.
 
 ## Background
@@ -156,9 +158,11 @@ When a caller passes a `Policy` parameter to AssumeRole, Ozone parses the AWS IA
 
 ### S3 action → Ranger permissions and actions
 
-The table below shows for each S3 action, which Ranger permissions and actions are required at each resource level when that action appears in a session policy.
+Expand the mapping table below to see, for each S3 action, which Ranger permissions and actions are required at each resource level when that action appears in a session policy.
 
 Each applicable resource level must also include a matching `action-matches` condition for that S3 action (for example `PutObject` at volume, bucket, and key for object-scoped actions). If `action-matches` is omitted at a level, the ACL permission applies to **every** S3 action that requires that ACL at that level. For example, key-level `READ` without `action-matches` authorizes both `GetObject` and `GetObjectTagging`. It is **imperative** (for security reasons) to specify the action at every applicable level.
+
+<Details summary="Read full S3 action → Ranger mapping table">
 
 <div style={{overflowX: 'auto'}}>
 
@@ -183,6 +187,8 @@ Each applicable resource level must also include a matching `action-matches` con
 </div>
 
 † For `s3:ListBucket`, key-level **READ** is granted on the listed prefix (or `*` if no `s3:prefix` condition is present).
+
+</Details>
 
 #### Simplifying bucket and key policies with `All`
 
