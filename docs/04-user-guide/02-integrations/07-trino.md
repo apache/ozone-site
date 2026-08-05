@@ -6,7 +6,7 @@ sidebar_label: Trino
 
 [Trino](https://trino.io/) can query tables whose data lives in Apache Ozone when you use the **Hive connector** and a **Hive Metastore (HMS)** that already understands Ozone paths (`ofs://`, `o3fs://`, or `s3a://`, depending on how tables were created). [Apache Ranger](https://ranger.apache.org/) can enforce access control for Trino through Trino’s Ranger integration.
 
-This page describes a **Docker-based lab-style setup**: build the standard Ozone **Hadoop 3 filesystem** JAR (`ozonefs-hadoop3` / `ozone-filesystem-hadoop3-*.jar`), join Trino to the same Docker network as Ozone, Ranger, Hadoop, and Hive, then configure a Hive catalog and Ranger access control.
+This page describes a **Docker-based lab-style setup**: obtain the standard Ozone **Hadoop 3 filesystem** JAR (`ozone-filesystem-hadoop3-*.jar`), join Trino to the same Docker network as Ozone and Hive, configure a Hive catalog, and optionally Ranger access control.
 
 :::note
 This is an **advanced** integration. Names (`ranger-hive`, `rangernw`), compose file names, and paths come from typical Ranger `dev-support/ranger-docker` layouts and **will differ** if you change compose projects or image tags. Treat hostnames and file names as examples and align them with your environment.
@@ -16,61 +16,68 @@ For how Hive uses Ozone (warehouse paths, `ofs://` URIs, and the filesystem JAR)
 
 ## Prerequisites
 
-- Docker and Docker Compose, with enough memory for Ranger, Hive, Ozone, and Trino.
-- Source tree for **Apache Ozone** and a JDK / Maven build able to run `mvn package` for the **`ozonefs-hadoop3`** module (or a release download of `ozone-filesystem-hadoop3`).
+- Docker and Docker Compose, with enough memory for Ozone, Hive, Trino, and (optionally) Ranger.
+- The **`ozone-filesystem-hadoop3-*.jar`** artifact at the **same Ozone version as your cluster** (see [Ozone JAR and Trino](#ozone-jar-and-trino)).
 - A running **Hive Metastore** that Trino can reach on `thrift://<host>:9083`.
-- **Hadoop `core-site.xml`** (and related config) that defines the Ozone filesystem implementation and service addresses, mounted or copied into the Trino container where `hive.config.resources` points.
-- If you use Ranger: Trino **Ranger plugin** configuration files (`ranger-trino-security.xml`, `ranger-trino-audit.xml`, `ranger-policymgr-ssl.xml`, and policies synced from Ranger Admin). See the [Trino Ranger access control](https://trino.io/docs/current/security/ranger-access-control.html) documentation.
+- **Hadoop XML configuration** inside the Trino container that defines the Ozone filesystem (`fs.ofs.impl`, OM/SCM addresses) and is referenced by `hive.config.resources`.
+- If you use Ranger: Trino **Ranger plugin** configuration files and policies synced from Ranger Admin. See [Trino Ranger access control](https://trino.io/docs/current/security/ranger-access-control.html).
 
 ## Ozone JAR and Trino
 
-Trino bundles its own Hadoop libraries. For the Hive connector to read and write `ofs://` / `o3fs://` paths, the **`ozone-filesystem-hadoop3-*.jar`** from the **`ozonefs-hadoop3`** Maven module must be on the Hive plugin classpath (see below).
+Trino bundles its own Hadoop libraries (currently Hadoop **3.3.x** in recent `trinodb/trino` images). For the Hive connector to read and write `ofs://` / `o3fs://` paths, the **`ozone-filesystem-hadoop3-*.jar`** from the **`ozonefs-hadoop3`** Maven module must be on the Hive HDFS plugin classpath (see below).
 
-The older **`ozonefs-hadoop3-client`** artifact and the **`proto.shaded.prefix`** Maven option are **no longer used** in current Ozone; build or download the standard **`ozonefs-hadoop3`** output only.
+Since [HDDS-14056](https://issues.apache.org/jira/browse/HDDS-14056) (Ozone 2.2+), use **`ozone-filesystem-hadoop3` only**. The separate **`ozone-filesystem-hadoop3-client`** artifact was removed; protobuf is relocated inside the main JAR to `org.apache.ozone.shaded.com.google.protobuf`. Do **not** look for or build the old client JAR.
 
-:::warning
-Pair **Ozone and Trino releases** that agree on a compatible Hadoop 3.x line. If Trino fails to load the Ozone filesystem or you see class or protobuf conflicts, align versions or ask on the Ozone dev list.
+If you hit protobuf class-cast errors at runtime with a specific Trino release, see [Trino discussion #18026](https://github.com/trinodb/trino/discussions/18026).
+
+:::warning Hadoop line compatibility (Ozone 2.x + Trino 483)
+Ozone **2.x** filesystem classes implement Hadoop **3.4** interfaces such as `org.apache.hadoop.fs.LeaseRecoverable`. Trino **483** still ships Hadoop **3.3.x**, which causes `NoClassDefFoundError: org/apache/hadoop/fs/LeaseRecoverable` on the first `ofs://` write unless you align versions. Options for a lab:
+
+- Use a Trino release that bundles Hadoop **3.4+** when available, or
+- Add a small supplemental JAR with the missing Hadoop 3.4 interface classes (`LeaseRecoverable`, `SafeMode`, `SafeModeAction`) to `plugin/hive/hdfs/` alongside the Ozone JAR (lab use only).
+
+This was verified with `ozone-filesystem-hadoop3-2.2.0.jar` from Maven Central and `trinodb/trino:483`.
 :::
 
-## 1. Build the Ozone filesystem JAR
+## 1. Obtain the Ozone filesystem JAR
 
-From your Ozone source checkout, build the Hadoop 3 filesystem module (and its dependencies):
+### Download from Maven Central (recommended for labs)
+
+Match the JAR version to your cluster (example: Ozone **2.2.0**):
+
+```bash
+OZONE_VERSION=2.2.0
+curl -L -o /tmp/ozone-filesystem-hadoop3-${OZONE_VERSION}.jar \
+  "https://repo1.maven.org/maven2/org/apache/ozone/ozone-filesystem-hadoop3/${OZONE_VERSION}/ozone-filesystem-hadoop3-${OZONE_VERSION}.jar"
+```
+
+You can also copy the JAR from a running Ozone container:
+
+```bash
+docker cp <ozone-om-container>:/opt/hadoop/share/ozone/lib/ozone-filesystem-hadoop3-*.jar /tmp/
+```
+
+### Build from source
+
+From your Ozone source checkout:
 
 ```bash
 mvn clean package -DskipTests -pl hadoop-ozone/ozonefs-hadoop3 -am
-```
-
-When the build succeeds, copy the artifact from the module output directory:
-
-```bash
 cd hadoop-ozone/ozonefs-hadoop3/target/
 cp ozone-filesystem-hadoop3-*.jar /tmp/
 ```
 
-The version in the file name (`*-SNAPSHOT.jar` or a release version) **depends on your Ozone branch**. You can also use the same artifact from Maven Central (coordinates `org.apache.ozone:ozone-filesystem-hadoop3`) at the version that matches your cluster instead of building from source.
+## 2. Bring up Ozone, Hive, and (optionally) Ranger in Docker
 
-:::note Historical note
-An older lab used [Ozone at commit fc89ba6a](https://github.com/apache/ozone/tree/fc89ba6aef9bd01562f76ef19888a56950bc6939); layout and Maven modules have changed since then. Prefer a **maintained release tag** that matches your cluster.
-:::
-
-## 2. Bring up Ozone, Ranger, Hive, and Hadoop in Docker
-
-### Option A: Ranger project compose stacks (recommended for a single lab network)
+### Option A: Ranger project compose stacks
 
 The Apache Ranger repo ships Docker Compose files under `dev-support/ranger-docker`.
 
-1. Clone Ranger: [https://github.com/apache/ranger](https://github.com/apache/ranger).
-2. Open `dev-support/ranger-docker` and follow the **README** there (prerequisites, passwords, profiles).
-3. Build and start the stack that includes Ranger, Hadoop, Hive, and Ozone. The README and file names on `master` **change over time**; your commands may look like the following pattern (verify against the current README):
+1. Clone Ranger: [Apache Ranger](https://github.com/apache/ranger).
+2. Open `dev-support/ranger-docker` and follow the **README** there.
+3. Build and start the stack (verify file names against the current README):
 
 ```bash
-docker compose \
-  -f docker-compose.ranger.yml \
-  -f docker-compose.ranger-hadoop.yml \
-  -f docker-compose.ranger-hive.yml \
-  -f docker-compose.ranger-ozone.yml \
-  build
-
 docker compose \
   -f docker-compose.ranger.yml \
   -f docker-compose.ranger-hadoop.yml \
@@ -79,120 +86,242 @@ docker compose \
   up -d
 ```
 
-### Option B: Assemble containers yourself
+Use `docker network inspect` to find the compose network name (often `rangernw`) and HMS hostname (often `ranger-hive`).
 
-Alternatively, run compatible images (for example [Apache Ranger](https://hub.docker.com/r/apache/ranger), [Apache Ozone](https://hub.docker.com/r/apache/ozone), and Hive/Hadoop images you trust) and attach them to **one user-defined Docker network** so Trino can resolve HMS and Ozone by container name.
+### Option B: Minimal lab without Ranger (Ozone + Hive Metastore)
+
+Verified against [Apache Ozone Docker](https://github.com/apache/ozone-docker) with `trinodb/trino:483` and `ozone-filesystem-hadoop3-2.2.0.jar`.
+
+1. Start Ozone with **three Datanodes** (recommended for writes; default replication needs healthy Ratis pipelines):
+
+   ```bash
+   git clone https://github.com/apache/ozone-docker.git
+   cd ozone-docker
+   docker compose -p ozone-trino up -d --scale datanode=3
+   ```
+
+   On a nearly full Docker disk, add smaller container defaults to compose (for example `ozone.scm.container.size: "1GB"` and `hdds.datanode.volume.min.free.space: "256MB"`) so SCM can allocate pipelines.
+
+2. Find the Docker network (example: `ozone-trino_default`):
+
+   ```bash
+   docker network ls | grep ozone-trino
+   ```
+
+3. Create an FSO bucket with **`RATIS/ONE`** replication (default `THREE` needs three Datanodes):
+
+   ```bash
+   docker compose -p ozone-trino exec om \
+     ozone sh bucket create s3v/trino-lab -l fso -t RATIS -r ONE
+   ```
+
+4. Prepare Hadoop/Ozone XML on the host (see [Hadoop and Ozone configuration](#hadoop-and-ozone-configuration-inside-trino)). HMS needs the **same** `core-site.xml`, `ozone-site.xml`, and Ozone JAR.
+
+5. Start Hive Metastore on the **same network**:
+
+   ```bash
+   docker run -d --name hive-metastore \
+     --network ozone-trino_default \
+     -p 9083:9083 \
+     -e SERVICE_NAME=metastore \
+     -v /path/to/hive-conf:/opt/hive/conf:ro \
+     -v /tmp/ozone-filesystem-hadoop3-2.2.0.jar:/opt/hive/lib/ozone-filesystem-hadoop3.jar:ro \
+     apache/hive:4.0.1
+   ```
+
+The `hive-conf` directory must include `hive-site.xml` (warehouse dir on Ozone), `core-site.xml`, and `ozone-site.xml`.
 
 :::warning Network and hostnames
-Trino’s catalog must use the **same Docker network** as HMS and the hosts named in `core-site.xml`. If Trino cannot resolve `ranger-hive` (or your HMS hostname), `thrift://` connections will fail. Replace example names with `docker network inspect` output from your stack.
+Trino’s catalog must use the **same Docker network** as HMS and the hostnames in `ozone-site.xml` / `core-site.xml` (for example `om`, `scm`). If Trino cannot resolve the HMS hostname, `thrift://` connections fail.
 :::
 
 ## 3. Run Trino and install the Ozone JAR
 
-Start a Trino container on the Ranger/Ozone network. The example uses image [trinodb/trino](https://hub.docker.com/r/trinodb/trino) and assumes the network is named `rangernw` (adjust to your setup):
+Start Trino on the Ozone/Hive network and bind-mount a host directory for Hadoop XML:
 
 ```bash
-docker run -d -p 8080:8080 --name trino --network rangernw trinodb/trino
+docker run -d -p 8080:8080 --name trino \
+  --network ozone-trino_default \
+  --memory=1536m \
+  -e JAVA_TOOL_OPTIONS="-Xmx768m -XX:+UseSerialGC" \
+  -v /path/to/hadoop-conf:/tmp/hadoop/conf:ro \
+  trinodb/trino
 ```
 
-Copy the Ozone filesystem JAR into the Hive HDFS plugin directory inside the container (paths match common Trino image layouts):
+With three Ozone Datanodes plus Hive Metastore, Trino may need a modest heap limit to avoid OOM on a typical Docker Desktop memory budget.
+
+Copy the Ozone filesystem JAR (and, if needed for Ozone 2.x + Trino 483, the Hadoop 3.4 interface supplemental JAR) into the Hive HDFS plugin directory:
 
 ```bash
-docker cp /tmp/ozone-filesystem-hadoop3-*.jar \
+docker cp /tmp/ozone-filesystem-hadoop3-2.2.0.jar \
   trino:/usr/lib/trino/plugin/hive/hdfs/
+# Lab only, if you see LeaseRecoverable errors:
+# docker cp /tmp/hadoop34-interfaces.jar trino:/usr/lib/trino/plugin/hive/hdfs/
+docker restart trino
 ```
 
-If your Trino image uses a different install root, locate `plugin/hive/hdfs` under that root.
+:::tip Docker Desktop on macOS
 
-The **`ozone-filesystem-hadoop3`** module normally produces a **self-contained (shaded) JAR** meant to be dropped in as a **single** file. If you see `NoClassDefFoundError` for Ozone or gRPC classes, you may have the wrong artifact or a partial copy—use the primary `ozone-filesystem-hadoop3-*.jar` from this module’s `target/` directory, or the matching artifact from Maven Central.
+- Use **`docker cp`** for catalog properties and JARs, or bind-mount a **directory** for `/etc/trino/catalog`—not individual property files (Docker may create a directory instead of a file).
+- Bind mounts under `/tmp` can appear empty inside the container; mount from a normal workspace path.
 
-**Restart Trino** after adding the JAR so the plugin class loader picks it up.
+:::
 
 ### Hadoop and Ozone configuration inside Trino
 
-`hive.config.resources` must point to **real files** inside the container (comma-separated list if you need more than one). Those files must define the Ozone filesystem (for example `fs.ofs.impl`) and OM/SCM addresses the same way your Hive/Hadoop stack does—usually by reusing `core-site.xml` (and sometimes additional config such as `ozone-site.xml` or keys merged into `core-site.xml`) from the Ranger/Hadoop/Ozone compose setup.
+`hive.config.resources` must list **separate** `core-site.xml` and `ozone-site.xml` files (comma-separated). Plain **`apache/ozone` Docker images** expose Ozone settings through environment variables; their packaged `core-site.xml` is often empty—author both files yourself.
 
-The doc does **not** copy those files for you. Typical approaches:
+**`core-site.xml`** (adjust hostnames to match compose service names):
 
-- **`docker cp`** from a Hadoop or edge container that already has the right XMLs, into a path such as `/tmp/hadoop/conf/`, or  
-- **`docker run -v`** to bind-mount a host directory of config into the Trino container.
+```xml
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>fs.ofs.impl</name>
+    <value>org.apache.hadoop.fs.ozone.RootedOzoneFileSystem</value>
+  </property>
+  <property>
+    <name>fs.AbstractFileSystem.ofs.impl</name>
+    <value>org.apache.hadoop.fs.ozone.RootedOzFs</value>
+  </property>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>ofs://om/</value>
+  </property>
+</configuration>
+```
 
-Until this matches your live Ozone cluster, Trino will fail when it tries to open `ofs://` paths even if the Hive catalog and Metastore connection work.
+**`ozone-site.xml`** (single OM on the `om` service):
 
-## 4. Hive catalog properties (`hive.properties`)
+```xml
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>ozone.om.address</name>
+    <value>om</value>
+  </property>
+  <property>
+    <name>ozone.om.service.ids</name>
+    <value>om</value>
+  </property>
+  <property>
+    <name>ozone.om.nodes.om</name>
+    <value>om</value>
+  </property>
+  <property>
+    <name>ozone.om.address.om.om</name>
+    <value>om</value>
+  </property>
+  <property>
+    <name>ozone.scm.names</name>
+    <value>scm</value>
+  </property>
+  <property>
+    <name>ozone.scm.client.address</name>
+    <value>scm</value>
+  </property>
+</configuration>
+```
 
-Create a catalog file for the Hive connector. The HMS URI and config paths **must match your deployment**.
+Mount these under `/tmp/hadoop/conf/` (or another path referenced from the catalog).
 
-Example `hive.properties`:
+## 4. Hive catalog properties (`ozone.properties`)
+
+The **file name** (without `.properties`) becomes the catalog name—for example `ozone.properties` → `SHOW CATALOGS` lists `ozone`.
+
+Example for the minimal lab:
 
 ```properties
 connector.name=hive
-hive.metastore.uri=thrift://ranger-hive:9083
+hive.metastore.uri=thrift://hive-metastore:9083
 fs.hadoop.enabled=true
-hive.config.resources=/tmp/hadoop/conf/core-site.xml
+hive.config.resources=/tmp/hadoop/conf/core-site.xml,/tmp/hadoop/conf/ozone-site.xml
 hive.non-managed-table-writes-enabled=true
-hive.hdfs.impersonation.enabled=true
+hive.hdfs.impersonation.enabled=false
+hive.dfs.replication=1
+hive.temporary-staging-directory-path=ofs://om/s3v/trino-lab/.staging
 ```
 
-Copy it into the container:
+Point **`hive.temporary-staging-directory-path`** at a bucket that uses **`RATIS/ONE`**. Trino otherwise stages under an auto-created `tmp` volume with default **`RATIS/THREE`**, which can fail when moving files into a one-replica lab bucket.
+
+Copy the catalog file and restart:
 
 ```bash
-docker cp hive.properties trino:/etc/trino/catalog/
+docker cp ozone.properties trino:/etc/trino/catalog/ozone.properties
+docker restart trino
 ```
 
-:::warning Possible configuration gaps
-- **`hive.config.resources`**: Must list real files inside the container (often you mount a host directory of Hadoop config at `/tmp/hadoop/conf` or another path you choose).
-- **`hive.hdfs.impersonation.enabled=true`**: Requires a secure setup where Trino can impersonate end users; in minimal Docker demos this can fail if Hadoop/Ozone security is not aligned with Trino. Disable or adjust only if you understand the security trade-offs.
-- **Managed vs external tables**: Behavior depends on HMS metadata and Ozone paths; see [Hive](./hive).
+:::warning Lab vs production settings
+
+- **`hive.hdfs.impersonation.enabled=false`** is for non-Kerberos labs only.
+- **`hive.config.resources`** must point to files that exist inside the container before the catalog starts.
+
 :::
 
-## 5. Ranger access control (`access-control.properties`)
+## 5. Ranger access control (optional)
 
-Ranger authorization for Trino depends on your **Trino version** and distribution: you need the Ranger access-control integration Trino expects (plugin JARs and native libraries, if any), **not** only the properties and XML files below. Follow [Trino Ranger access control](https://trino.io/docs/current/security/ranger-access-control.html) end to end, including how to install Ranger’s Trino artifacts into the container image if required.
-
-If you enable Ranger for Trino, add an `access-control.properties` (location depends on Trino version; often `/etc/trino/`):
-
-```properties
-access-control.name=ranger
-ranger.service.name=dev_trino
-ranger.plugin.config.resource=/etc/trino/ranger-trino-security.xml,/etc/trino/ranger-trino-audit.xml,/etc/trino/ranger-policymgr-ssl.xml
-ranger.hadoop.config.resource=
-```
-
-Copy it in:
-
-```bash
-docker cp access-control.properties trino:/etc/trino/
-```
-
-You must also install the XML files referenced above (and any TLS trust stores or policy cache settings Ranger expects). Follow [Trino Ranger access control](https://trino.io/docs/current/security/ranger-access-control.html) and your Ranger Admin deployment.
-
-:::warning Empty `ranger.hadoop.config.resource`
-The draft setup left **`ranger.hadoop.config.resource` blank**. That may be intentional for a minimal demo or it may be **incomplete** for your Ranger or Hadoop layout. Confirm with Trino and Ranger documentation whether Hadoop config must be passed to the Ranger plugin in your environment.
-:::
+Ranger requires the full Trino Ranger plugin install, not only property files. See [Trino Ranger access control](https://trino.io/docs/current/security/ranger-access-control.html).
 
 ## 6. Restart Trino and verify
 
-Restart the Trino container after configuration changes.
+After JAR, catalog, or XML changes, restart Trino. Then confirm connectivity and Ozone-backed DDL:
 
-1. Open the Trino web UI (port `8080` in the example) or use `trino-cli`.
-2. `SHOW CATALOGS` should list `hive` (or whatever you named the properties file without `.properties`).
-3. Run a simple query against a table you know is stored on Ozone (path visible in HMS).
+```sql
+SHOW CATALOGS;
+-- expect: ozone
+
+SHOW SCHEMAS FROM ozone;
+-- expect: default, information_schema, ...
+
+CREATE SCHEMA ozone.lab WITH (location = 'ofs://om/s3v/trino-lab/lab');
+
+CREATE TABLE ozone.lab.demo (
+  id bigint,
+  name varchar
+) WITH (format = 'PARQUET');
+
+INSERT INTO ozone.lab.demo VALUES (1, 'alice'), (2, 'bob');
+
+SELECT * FROM ozone.lab.demo ORDER BY id;
+```
+
+The following were **verified locally** with `ozone-filesystem-hadoop3-2.2.0.jar`, Ozone Docker **2.2.0** (three Datanodes), and Trino **483**:
+
+| Step | Result |
+| ---- | ------ |
+| `SHOW CATALOGS` / `SHOW SCHEMAS FROM ozone` | OK |
+| `CREATE SCHEMA ... WITH (location = 'ofs://...')` | OK |
+| `CREATE TABLE ... WITH (format = 'PARQUET')` | OK |
+| `INSERT` / `SELECT` with data | OK (with staging path and cluster notes below) |
+
+:::note Docker lab caveats
+
+- Scale compose with **`--scale datanode=3`**; default three-way replication needs three healthy Datanodes.
+- If writes hang, check SCM safe mode: `docker exec <scm> ozone admin safemode status` and `ozone admin safemode exit` if pipelines are slow to form.
+- On a nearly full Docker disk, lower **`ozone.scm.container.size`** (for example `1GB`) so SCM can allocate containers.
+- Set **`hive.temporary-staging-directory-path`** to a **`RATIS/ONE`** bucket path (see catalog example above).
+
+:::
 
 If initialization fails, check Trino logs for:
 
-- Class loading or **protobuf** errors (often an Ozone / Hadoop / Trino **version mismatch** or a wrong JAR on the plugin classpath).
-- **Metastore** connection errors (wrong host, port, or network).
-- **Filesystem** errors (missing `core-site.xml` properties for `ofs` / `o3fs`).
+- **`NoClassDefFoundError: LeaseRecoverable`**: See [Hadoop line compatibility](#ozone-jar-and-trino).
+- **`UnsupportedFileSystemException: No FileSystem for scheme "ofs"`**: Missing XML, wrong `hive.config.resources` paths, or HMS missing the Ozone JAR/config.
+- **Protobuf / class loading errors**: Ozone–Trino version skew; confirm you use **`ozone-filesystem-hadoop3`** only ([HDDS-14056](https://issues.apache.org/jira/browse/HDDS-14056)).
+- **Metastore errors**: Wrong HMS host, port, or network.
 
-## Summary of risks and open checks
+### Alternative: S3 Gateway (`s3a://`)
+
+If `ofs://` remains blocked by version skew, some deployments use Ozone’s **S3 Gateway** with Trino S3 settings. See [S3A](../01-client-interfaces/04-s3a) and [Trino discussion #18026](https://github.com/trinodb/trino/discussions/18026).
+
+## Summary
 
 | Area | What to verify |
 | ---- | -------------- |
-| Ozone JAR vs Trino | Use **`ozone-filesystem-hadoop3-*.jar`** from **`ozonefs-hadoop3`**; Ozone version and Hadoop line must match Trino and your cluster. |
-| Versions | Pinned Git commits and `*-SNAPSHOT` JARs are for **development**, not production baselines. |
-| Docker compose | File names and services come from the Ranger repo; they **drift** on `master`. |
-| Ranger | All `ranger-*.xml` files, service definitions, and `ranger.hadoop.config.resource` must match Ranger Admin and your Hadoop/Ozone config. |
-| Impersonation | `hive.hdfs.impersonation.enabled` requires a coherent security story across Trino, Hadoop, and Ozone. |
+| Ozone JAR | **`ozone-filesystem-hadoop3-*.jar`** only ([HDDS-14056](https://issues.apache.org/jira/browse/HDDS-14056)); match cluster version. |
+| Install path | Drop into Trino **`plugin/hive/hdfs/`**; same JAR on HMS classpath. |
+| Hadoop XML | **`fs.ofs.impl`**, **`fs.AbstractFileSystem.ofs.impl`**, OM/SCM in separate **`core-site.xml`** + **`ozone-site.xml`**. |
+| Trino + Ozone 2.x | Watch for Hadoop **3.3 vs 3.4** (`LeaseRecoverable`) on Trino 483. |
+| Docker lab | Same network; **`--scale datanode=3`**; **`RATIS/ONE`** buckets; staging path; exit SCM safe mode before writes. |
 
 For work tracked around this integration on the Ozone side, see [HDDS-12321](https://issues.apache.org/jira/browse/HDDS-12321).
