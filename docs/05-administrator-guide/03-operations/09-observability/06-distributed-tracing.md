@@ -19,6 +19,32 @@ Tracing is turned off by default. To enable it across Ozone services, configure 
 </property>
 ```
 
+## Application-Aware Client Tracing
+
+Application-aware tracing lets Ozone participate in an existing application trace without starting its own
+root traces when cluster-wide tracing is disabled. It applies only when `ozone.tracing.enabled=false` and parent context is passed.
+
+This is controlled by:
+
+```xml
+<property>
+   <name>ozone.tracing.client.application-aware</name>
+   <value>true</value>
+</property>
+```
+
+**Default Value:** `true`
+
+**Behavior:**
+
+- When `true`, the Ozone client can create child spans if an application trace is already active
+  (via the application's Global OpenTelemetry instance or a W3C-propagated context).
+  Ozone will not start a new root trace on its own.
+- When `false` (with `ozone.tracing.enabled=false`), client tracing is fully off.
+- When `ozone.tracing.enabled=true`, Ozone uses its own OpenTelemetry SDK and exports
+  spans normally; application-aware mode does not change that behavior.
+- Set `ozone.tracing.endpoint` on the Ozone side to the same OTLP collector endpoint used by your application.
+
 ## Configuration Priorities
 
 When resolving configurations for endpoints and sampling strategies, Ozone evaluates sources in the following order of priority:
@@ -95,6 +121,51 @@ export OTEL_SPAN_SAMPLING_ARG="createVolume:1.0,getBucket:0.5"
 ```
 
 > **Note:** In this example, 100% of `createVolume` spans and 50% of `getBucket` spans will be collected.
+
+## Instrumented Components
+
+When tracing is enabled, specific services emit spans using the designated identifiers below.
+Trace context is propagated across service boundaries via gRPC and W3C context propagation.
+
+| Service / Component       | Service Name |
+|---------------------------| ------------ |
+| Ozone Manager             | `OzoneManager` |
+| Storage Container Manager | `StorageContainerManager` |
+| Datanode                  | `HddsDatanodeService.{datanodeId}` |
+| S3 Gateway                | `S3gateway` |
+| Ozone Client              | `client` (when Ozone initializes tracing in the JVM) |
+| CLIs (Shell / FS / Freon) | `shell`, `FsShell`, `freon` |
+
+> **Note:** If an application registers OpenTelemetry first, client spans are exported under that application's service name, not `client`.
+
+## Dynamic Reconfiguration
+
+You can update the following tracing properties at runtime on the OM, SCM, and Datanodes
+without restarting the processes:
+
+- `ozone.tracing.enabled`
+- `ozone.tracing.endpoint`
+- `ozone.tracing.sampler`
+- `ozone.tracing.span.sampling`
+- `ozone.tracing.client.application-aware`
+
+> **Note:** S3 Gateway and the Ozone client do not support dynamic reconfiguration.
+
+For more details on dynamic property reload, see [Dynamic Property Reload](../dynamic-property-reload).
+
+## Quick Start
+
+1. Start your Ozone cluster and a Jaeger collector.
+2. Enable tracing and set the collector endpoint to your Jaeger OTLP receiver. See [Enabling Tracing](#enabling-tracing) and [Collector Endpoint Configuration](#collector-endpoint-configuration).
+3. Generate sample traces:
+
+   ```shell
+   ozone freon rk --numOfVolumes=1 --numOfBuckets=1 --numOfKeys=2
+   ```
+
+4. Open the Jaeger UI, select a service such as `OzoneManager` or `freon`, and click **Find Traces**.
+
+![Jaeger trace view showing freon command](jaeger-trace.png)
 
 ## References
 
