@@ -45,6 +45,11 @@ This is controlled by:
   spans normally; application-aware mode does not change that behavior.
 - Set `ozone.tracing.endpoint` on the Ozone side to the same OTLP collector endpoint used by your application.
 
+> **Note:** For application-aware tracing, the application must register its OpenTelemetry SDK with
+`GlobalOpenTelemetry` so Ozone can adopt it. If no global tracer is registered, Ozone 
+> initializes its own SDK and uses the `ozone` tracer instead.
+
+
 ## Configuration Priorities
 
 When resolving configurations for endpoints and sampling strategies, Ozone evaluates sources in the following order of priority:
@@ -104,23 +109,36 @@ export OTEL_TRACES_SAMPLER_ARG=0.01
 ### 2. Span-Level Sampling
 
 This allows you to set sampling for specific, high-interest operations. It accepts a comma-separated list of `spanName:rate` pairings.
+The table below shows common span naming patterns with examples. Use the exact span name (case-sensitive) in your config. Client and server spans often use different names for the same operation.
+
+| Pattern | Typical layer | Examples |
+| ------- | ------------- | -------- |
+| `{Interface}.{method}` | Client → OM/SCM | `OzoneManagerClientProtocol.openKey`, `OzoneManagerClientProtocol.commitKey`, `ScmBlockLocationProtocol.allocateBlock` |
+| `{RequestType}` | OM/SCM server | `CreateKey`, `CommitKey`, `InfoVolume`, `AllocateScmBlock` |
+| `XceiverClient{Transport}.{CmdType}` | Client → Datanode | `XceiverClientRatis.WriteChunk`, `XceiverClientRatis.PutBlock`, `XceiverClientGrpc.WriteChunk` |
+| `{CmdType}` | Datanode server | `WriteChunk`, `PutBlock`, `ReadChunk` |
+| `{EndpointClass}.{method}` | S3 Gateway | `ObjectEndpoint.put`, `ObjectEndpoint.get` |
+| `ofs {operation}` | Ozone FileSystem | `ofs create`, `ofs open`, `ofs delete` |
+| `{command} {args...}` | Shell / CLI | `ozone sh key put vol1/buck1/key1 /path/to/file` |
+
+Run one operation in Jaeger first, then copy the span names you see into `ozone.tracing.span.sampling`.
 
 #### Via `ozone-site.xml`
 
 ```xml
 <property>
    <name>ozone.tracing.span.sampling</name>
-   <value>createVolume:1.0,getBucket:0.5</value>
+   <value>OzoneManagerClientProtocol.openKey:1.0,CreateKey:1.0,XceiverClientRatis.WriteChunk:0.1,WriteChunk:0.1</value>
 </property>
 ```
 
 #### Via Environment Variable
 
 ```env
-export OTEL_SPAN_SAMPLING_ARG="createVolume:1.0,getBucket:0.5"
+export OTEL_SPAN_SAMPLING_ARG="OzoneManagerClientProtocol.openKey:1.0,CreateKey:1.0,XceiverClientRatis.WriteChunk:0.1,WriteChunk:0.1"
 ```
 
-> **Note:** In this example, 100% of `createVolume` spans and 50% of `getBucket` spans will be collected.
+> **Note:** In this example, OM and client key-open spans are always collected; Datanode write spans are sampled at 10%.
 
 ## Instrumented Components
 
@@ -135,6 +153,11 @@ Trace context is propagated across service boundaries via gRPC and W3C context p
 | S3 Gateway                | `S3gateway` |
 | Ozone Client              | `client` (when Ozone initializes tracing in the JVM) |
 | CLIs (Shell / FS / Freon) | `shell`, `FsShell`, `freon` |
+
+Ozone uses the OpenTelemetry tracer name **`ozone`** by default for all components. The `service.name`
+values in the table above are set at component initialization. OpenTelemetry defines `OTEL_SERVICE_NAME`
+for configuring `service.name`, but Ozone does not support overriding service names through this
+environment variable.
 
 > **Note:** If an application registers OpenTelemetry first, client spans are exported under that application's service name, not `client`.
 
