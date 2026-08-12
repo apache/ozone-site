@@ -45,10 +45,9 @@ This is controlled by:
   spans normally; application-aware mode does not change that behavior.
 - Set `ozone.tracing.endpoint` on the Ozone side to the same OTLP collector endpoint used by your application.
 
-> **Note:** For application-aware tracing, the application must register its OpenTelemetry SDK with
-`GlobalOpenTelemetry` so Ozone can adopt it. If no global tracer is registered, Ozone 
-> initializes its own SDK and uses the `ozone` tracer instead.
-
+> **Note:** For application-aware tracing in-process, the application must register its OpenTelemetry SDK with
+`GlobalOpenTelemetry` before creating the Ozone client so Ozone can adopt it. If no
+global tracer is registered, Ozone initializes its own SDK and uses the `ozone` tracer instead.
 
 ## Configuration Priorities
 
@@ -128,17 +127,17 @@ Run one operation in Jaeger first, then copy the span names you see into `ozone.
 ```xml
 <property>
    <name>ozone.tracing.span.sampling</name>
-   <value>OzoneManagerClientProtocol.openKey:1.0,CreateKey:1.0,XceiverClientRatis.WriteChunk:0.1,WriteChunk:0.1</value>
+   <value>createVolume:1.0,getBucket:0.5</value>
 </property>
 ```
 
 #### Via Environment Variable
 
 ```env
-export OTEL_SPAN_SAMPLING_ARG="OzoneManagerClientProtocol.openKey:1.0,CreateKey:1.0,XceiverClientRatis.WriteChunk:0.1,WriteChunk:0.1"
+export OTEL_SPAN_SAMPLING_ARG="createVolume:1.0,getBucket:0.5"
 ```
 
-> **Note:** In this example, OM and client key-open spans are always collected; Datanode write spans are sampled at 10%.
+> **Note:** In this example, 100% of `createVolume` spans and 50% of `getBucket` spans will be collected.
 
 ## Instrumented Components
 
