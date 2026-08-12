@@ -120,8 +120,6 @@ The table below shows common span naming patterns with examples. Use the exact s
 | `ofs {operation}` | Ozone FileSystem | `ofs create`, `ofs open`, `ofs delete` |
 | `{command} {args...}` | Shell / CLI | `ozone sh key put vol1/buck1/key1 /path/to/file` |
 
-Run one operation in Jaeger first, then copy the span names you see into `ozone.tracing.span.sampling`.
-
 #### Via `ozone-site.xml`
 
 ```xml
