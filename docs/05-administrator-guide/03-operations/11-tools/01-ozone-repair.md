@@ -1,6 +1,6 @@
 # Ozone Repair
 
-Ozone Repair (`ozone repair`) is an advanced tool to repair Ozone. The nodes being repaired must be stopped before the tool is run.
+Ozone Repair (`ozone repair`) is an advanced tool to repair Ozone. Most subcommands require the node being repaired to be stopped before the tool is run. The `ozone repair om download` subcommand is an exception: it reads from a **running** OM over HTTP(S) while you restore metadata onto a stopped node.
 
 :::note
 All repair commands support a `--dry-run` option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.
@@ -69,6 +69,7 @@ Operational tool to repair OM.
 - quota
 - compact
 - skip-ratis-transaction
+- download
 
 ### FSO-tree
 
@@ -227,6 +228,29 @@ from one of the good OMs to the crashing OM instead.
                                removed
   -s, --segment-path=<segmentFile>
                              Path of the input segment file
+```
+
+#### download
+
+Download and construct `om.db` from a running OM using the same v2 inode-based checkpoint transfer that follower bootstrap uses (including bucket snapshot data in the transfer). Unlike most repair subcommands, the **source** OM cluster must be **running** and reachable over HTTP(S). Stop the **target** OM before replacing its local `om.db` with the downloaded output.
+
+Requires Ozone 2.2+ with HDDS-16171. See [OM metadata backup](../backup-and-recovery/om-metadata-backup#restore-metadata-from-a-live-om-ozone-repair-om-download) for a full restore walkthrough.
+
+```bash
+Usage: ozone repair om download [-hV] [--overwrite] [--verbose]
+                                [--node-id=<nodeId>]
+                                [--om-service-id=<omServiceId>]
+                                --output-dir=<outputDir>
+Downloads and constructs om.db from an OM node using the same checkpoint
+transfer flow as follower bootstrap.
+      --node-id=<nodeId>
+                      Node ID of the OM to download om.db from. Required when
+                        OM HA is configured.
+      --om-service-id, --service-id=<omServiceId>
+                      Ozone Manager Service ID
+      --output-dir=<outputDir>
+                      Path where the constructed om.db directory will be written
+      --overwrite     Overwrite output directory if it already exists.
 ```
 
 ## ozone repair SCM

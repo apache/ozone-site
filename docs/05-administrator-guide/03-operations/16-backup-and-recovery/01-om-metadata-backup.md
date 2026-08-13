@@ -122,9 +122,65 @@ The v1 `/dbCheckpoint` endpoint (selected when `ozone.om.db.checkpoint.use.inode
 
 Use `ozone om --bootstrap` (downloads a fresh checkpoint from the live leader, including snapshots). See [Replacing Ozone Manager disks](../disk-replacement/ozone-manager).
 
-### Cold restore from an offline tarball without a live leader
+### Restore metadata from a live OM (`ozone repair om download`)
 
-Use when **no OM leader is available** to serve bootstrap—for example, total metadata loss on a standalone OM, or every HA OM lost its metadata volume. This installs a previously saved **v2** checkpoint tarball manually, following the same hardlink reconstruction and directory layout that `ozone om --bootstrap` applies after download.
+When at least one OM is reachable (for example, HA peers are healthy but one host lost its disk), use the repair CLI added in [HDDS-16171](https://issues.apache.org/jira/browse/HDDS-16171). It downloads and constructs `om.db` using the same v2 inode-based checkpoint transfer and hardlink reconstruction that OM followers use during bootstrap—no manual `curl` or shell hardlink steps.
+
+**Requirements**
+
+- Ozone **2.2+** build that includes `ozone repair om download` (HDDS-16171).
+- A reachable OM HTTP(S) endpoint and `ozone-site.xml` on the host where you run the command.
+- Caller identity in `ozone.administrators` when `ozone.security.enabled=true` (run `kinit` first in secure clusters).
+- The **target** OM whose disk you are restoring must be **stopped** before you replace its local `om.db`. The **source** OM cluster must remain up to serve the checkpoint.
+
+**Download**
+
+Non-HA (single OM):
+
+```shell
+kinit -k -t /path/to/admin.keytab admin@REALM   # secure clusters only
+
+ozone repair om download \
+  --output-dir /restore/om.db \
+  --overwrite
+```
+
+OM HA (specify the service ID and the node to pull from—typically the current leader):
+
+```shell
+ozone repair om download \
+  --service-id <om-service-id> \
+  --node-id <om-node-id> \
+  --output-dir /restore/om.db \
+  --overwrite
+```
+
+The command always uses `/v2/dbCheckpoint` with snapshot data included. It fails if `--output-dir` already exists unless you pass `--overwrite`.
+
+**Install on the failed node**
+
+1. Stop the Ozone Manager on the node being restored (and block client writes if this is a standalone deployment).
+2. Back up any partial data under `ozone.om.db.dirs` if the disk is still readable.
+3. Replace the local database directory:
+
+```shell
+OM_DB_DIRS=/var/lib/ozone/om/metadata   # your ozone.om.db.dirs
+
+rm -rf "$OM_DB_DIRS/om.db"
+mv /restore/om.db "$OM_DB_DIRS/om.db"
+```
+
+Preserve the existing `om/` VERSION subtree under `OM_DB_DIRS` when it survives disk failure. Do not delete OM cluster identity files unless you are intentionally rebuilding the OM from scratch.
+
+4. Start the Ozone Manager and verify with `ozone sh volume list`.
+
+For HA nodes with an empty metadata disk, prefer `ozone om --bootstrap` when the Ratis ring is intact. Use `ozone repair om download` when you need a constructed `om.db` on disk for manual replacement or offline inspection.
+
+See also [Ozone Repair](../tools/ozone-repair#download).
+
+### Restore from an offline tarball (no live OM)
+
+Use only when **no OM is available** to serve a checkpoint—for example, total metadata loss on a standalone deployment, or every HA OM lost its metadata volume. Offline tarballs cannot be consumed by `ozone repair om download`; install the saved checkpoint manually.
 
 **Requirements**
 
@@ -172,13 +228,10 @@ rm -f "$STAGING/hardLinkFile" "$STAGING/OZONE_RATIS_SNAPSHOT_COMPLETE"
 
 5. **Validate layout.** Expect top-level items such as `om.db` and, when bucket snapshots were backed up, `db.snapshots`. Confirm `om.db/CURRENT` exists.
 
-6. **Install into OM metadata storage.** Let `OM_DB_DIRS` be the path configured in `ozone.om.db.dirs` (or `ozone.metadata.dirs`). Back up any recoverable existing metadata, then install checkpoint items:
+6. **Install into OM metadata storage.** Let `OM_DB_DIRS` be the path configured in `ozone.om.db.dirs` (or `ozone.metadata.dirs`):
 
 ```shell
 OM_DB_DIRS=/var/lib/ozone/om/metadata   # your ozone.om.db.dirs
-
-# Optional: preserve the om/ VERSION subtree if the disk is partially readable
-# before replacing RocksDB directories.
 
 mkdir -p "$OM_DB_DIRS"
 for name in om.db db.snapshots; do
@@ -191,20 +244,14 @@ done
 find "$STAGING" -mindepth 1 -maxdepth 1 -exec mv -t "$OM_DB_DIRS" {} +
 ```
 
-Preserve the existing `om/` VERSION subdirectory under `OM_DB_DIRS` when it survives disk failure. Do not delete OM cluster identity files unless you are intentionally rebuilding the OM from scratch.
+7. **Standalone OM:** Start SCM (if required), then start the Ozone Manager. Verify with `ozone sh volume list`.
 
-7. **Standalone OM:** Start SCM (if required), then start the Ozone Manager. Verify with `ozone sh volume list` and spot-check buckets and keys.
-
-8. **HA OM (all peers lost metadata):** The tarball replaces RocksDB metadata only; Ratis state lives under `ozone.om.ratis.storage.dir` on each node. After installing the checkpoint on a designated seed OM:
-
-   - Clear `ozone.om.ratis.storage.dir` on **every** OM node (empty directory or fresh disk).
-   - Start the seed OM and confirm it serves reads.
-   - Bootstrap remaining OMs from the seed with `ozone om --bootstrap` once the seed is healthy. If the Ratis ring cannot reform, engage the [Ozone community](https://ozone.apache.org/community/) before forcing further metadata changes.
+8. **HA OM (all peers lost metadata):** Clear `ozone.om.ratis.storage.dir` on **every** OM node, install the checkpoint on a seed OM, start it, then bootstrap remaining peers with `ozone om --bootstrap` once the seed is healthy.
 
 **Limitations**
 
 - v1 (`/dbCheckpoint`) backups omit bucket snapshot data; use them only for AOS-only recovery on legacy clusters.
-- There is no single supported CLI for cold install. Validate the procedure on a non-production clone before relying on it for production DR.
+- Validate the offline tarball procedure on a non-production clone before relying on it for production DR.
 
 Store tarball backups off-cluster (object store, NFS, or backup appliance) according to your retention policy.
 
@@ -227,6 +274,7 @@ Store tarball backups off-cluster (object store, NFS, or backup appliance) accor
 
 ## See also
 
+- [Ozone Repair](../tools/ozone-repair#download)
 - [OM bootstrapping with snapshots (design)](../../../system-internals/features/om-bootstrapping-with-snapshots)
 - [OM HA configuration](../../configuration/high-availability/om-ha)
 - [Replacing Ozone Manager disks](../disk-replacement/ozone-manager)
