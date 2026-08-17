@@ -3,13 +3,13 @@ sidebar_label: Object Lifecycle Management
 ---
 # Object Lifecycle Management
 
-This guide explains how to configure and use Object Lifecycle Management to automatically remove expired objects from buckets based on configurable lifecycle rules.
+This guide explains how to configure and use Object Lifecycle Management to automatically remove expired objects and stale incomplete multipart uploads from buckets based on configurable lifecycle rules.
 
 ## Background
 
 In object storage scenarios, large amounts of data become obsolete over time and no longer need to be accessed or retained. Manually cleaning up expired data is both time-consuming and error-prone. Object lifecycle management provides an automated approach that allows administrators to configure policies at the bucket level so the system can automatically handle the cleanup of expired objects.
 
-Ozone's object lifecycle management is designed after [AWS S3 Lifecycle Configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) and provides compatible API interfaces through the S3 Gateway. The current version implements the Expiration action, which automatically deletes or moves objects to trash based on the object's last modification time.
+Ozone's object lifecycle management is designed after [AWS S3 Lifecycle Configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) and provides compatible API interfaces through the S3 Gateway. The current version implements the **Expiration** action, which automatically deletes or moves objects to trash based on the object's last modification time, and the **AbortIncompleteMultipartUpload** action, which aborts stale incomplete multipart uploads based on `DaysAfterInitiation`.
 
 ## Compatibility with AWS S3 Lifecycle
 
@@ -34,7 +34,7 @@ Ozone's lifecycle management is designed with AWS S3 Lifecycle as a reference. T
 | AbortIncompleteMultipartUpload [1] | Yes | Automatic cleanup of incomplete multipart uploads based on `DaysAfterInitiation` |
 | ExpiredObjectDeleteMarker | No | Ozone does not use S3-style delete markers |
 
-[1] Ozone has two independent services that can clean up stale incomplete multipart uploads: `KeyLifecycleService` (via `AbortIncompleteMultipartUpload` rules) and `MultipartUploadCleanupService` (controlled by `ozone.om.open.mpu.expire.threshold`, default `30d`). Because `MultipartUploadCleanupService` runs unconditionally, any lifecycle rule whose `DaysAfterInitiation` is greater than or equal to the cleanup threshold would be silently preempted — the upload would already be gone before the rule fires. Ozone therefore **rejects** `PutBucketLifecycleConfiguration` requests where `DaysAfterInitiation >= ozone.om.open.mpu.expire.threshold`. See [Interaction with MultipartUploadCleanupService](#interaction-with-multipartuploadcleanupservice).
+[1] Ozone also runs a cluster-wide `MultipartUploadCleanupService` that can preempt lifecycle MPU rules. See [Interaction with MultipartUploadCleanupService](#interaction-with-multipartuploadcleanupservice).
 
 ### Filter Conditions
 
@@ -62,12 +62,15 @@ A Lifecycle Configuration is bound to a bucket. Each bucket can have at most one
 
 Each rule contains the following elements:
 
-| Element | Description |
-|---------|-------------|
-| ID | Unique identifier for the rule, up to 255 characters. Auto-generated if not specified. |
-| Status | `Enabled` or `Disabled`. Only enabled rules are executed. |
-| Filter / Prefix | Specifies the scope of the rule. Can filter by object name prefix. |
-| Expiration | Expiration action. Specifies when objects expire via `Days` or `Date`. |
+| Element | Description                                                                                                                   |
+|---------|-------------------------------------------------------------------------------------------------------------------------------|
+| ID | Unique identifier for the rule, up to 255 characters. Auto-generated if not specified.                                        |
+| Status | `Enabled` or `Disabled`. Only enabled rules are executed.                                                                     |
+| Filter / Prefix | Specifies the scope of the rule. Can filter by object name prefix, tag, or both.                                              |
+| Expiration | Expiration action. Specifies when objects expire via `Days` or `Date`.                                                        |
+| AbortIncompleteMultipartUpload | Aborts stale incomplete multipart uploads. Specifies when incomplete multipart uploads are aborted via `DaysAfterInitiation`. |
+
+Each rule must include at least one action (`Expiration` and/or `AbortIncompleteMultipartUpload`).
 
 ### Expiration Action
 
@@ -94,7 +97,7 @@ Configuration element:
 
 | Element | Description |
 |---------|-------------|
-| `DaysAfterInitiation` | Number of days after the multipart upload was initiated before it is aborted. Must be a positive integer greater than zero. |
+| `DaysAfterInitiation` | Number of whole days after the multipart upload was initiated before it is aborted. Must be a positive integer greater than zero. Ozone compares this value against `ozone.om.open.mpu.expire.threshold` in milliseconds (for example, `36h`). |
 
 Example rule:
 
@@ -122,11 +125,13 @@ Ozone runs two independent services that can clean up stale incomplete multipart
 - **`KeyLifecycleService`** — processes `AbortIncompleteMultipartUpload` lifecycle rules per bucket, allowing fine-grained control with prefix and tag filters.
 - **`MultipartUploadCleanupService`** — runs cluster-wide and unconditionally aborts any incomplete multipart upload older than `ozone.om.open.mpu.expire.threshold` (default: `30d`).
 
-Because `MultipartUploadCleanupService` runs regardless of lifecycle rules, a lifecycle rule with `DaysAfterInitiation` greater than or equal to the cleanup threshold would have **no effect**: the upload would already be deleted before the rule fires.
+Because `MultipartUploadCleanupService` runs regardless of lifecycle rules, an enabled lifecycle rule with `DaysAfterInitiation` greater than or equal to the cleanup threshold would have **no effect**: the upload would already be deleted before the rule fires.
 
-To prevent this silent no-op, Ozone rejects lifecycle configurations at creation time with an error if any `AbortIncompleteMultipartUpload` rule has:
+To prevent this silent no-op, Ozone rejects lifecycle configurations at creation time with an error if any **enabled** `AbortIncompleteMultipartUpload` rule has:
 
 `DaysAfterInitiation >= ozone.om.open.mpu.expire.threshold`
+
+Disabled rules are not checked; enabling a stored rule later requires submitting an updated lifecycle configuration that passes validation.
 
 To use `AbortIncompleteMultipartUpload` lifecycle rules with a longer threshold, increase `ozone.om.open.mpu.expire.threshold` to a value greater than the largest `DaysAfterInitiation` you intend to configure.
 
@@ -339,7 +344,7 @@ The following table lists all related configuration properties:
 | `ozone.lifecycle.service.delete.batch-size` | `1000` | The maximum number of objects included in a single batch delete request. Each batch of keys is packaged into a single Ratis delete request submitted to the OM. Excessively large batches increase the size of individual Ratis log entries and consume more memory. It is not recommended to exceed 1000. |
 | `ozone.lifecycle.service.move.to.trash.enabled` | `true` | When enabled, expired objects are moved to trash; when disabled, they are deleted directly. Not applicable to OBS buckets. |
 | `ozone.lifecycle.service.delete.cached.directory.max-count` | `1000000` | The maximum number of directories cached in memory during recursive evaluation of FSO buckets. The current evaluation will be aborted if this limit is exceeded. |
-| `ozone.om.open.mpu.expire.threshold` | `30d` | Age threshold for the `MultipartUploadCleanupService`. Incomplete multipart uploads older than this value are unconditionally aborted by that service. `AbortIncompleteMultipartUpload` lifecycle rules must have `DaysAfterInitiation` strictly less than this value; otherwise the lifecycle configuration is rejected at creation time. |
+| `ozone.om.open.mpu.expire.threshold` | `30d` | Age threshold for the `MultipartUploadCleanupService`. Incomplete multipart uploads older than this value are unconditionally aborted by that service. Enabled `AbortIncompleteMultipartUpload` lifecycle rules must have `DaysAfterInitiation` strictly less than this value; otherwise the lifecycle configuration is rejected at creation time. |
 
 ## Administrative Operations
 
@@ -378,7 +383,7 @@ ozone admin om lifecycle resume [-id=<omServiceId>] [-host=<omHost>]
 - In OM HA mode, only the leader OM executes lifecycle evaluation tasks.
 - For FSO buckets, a directory is only marked as expired and deleted if all its child files and subdirectories have expired.
 - For FSO buckets using Prefix, if the Prefix does not end with `/`, it will match both the directory with the exact name and sibling directories starting with the same prefix (e.g., `dir` matches both `dir` and `dir1`).
-- `AbortIncompleteMultipartUpload` rules must have `DaysAfterInitiation` strictly less than `ozone.om.open.mpu.expire.threshold` (default `30d`). Ozone rejects lifecycle configurations that violate this constraint at creation time to prevent rules from being silently preempted by `MultipartUploadCleanupService`.
+- Enabled `AbortIncompleteMultipartUpload` rules must have `DaysAfterInitiation` strictly less than `ozone.om.open.mpu.expire.threshold` (default `30d`). Ozone rejects lifecycle configurations that violate this constraint at creation time to prevent rules from being silently preempted by `MultipartUploadCleanupService`.
 
 ### Impact of OM Leader Transfer on the Lifecycle Service
 
