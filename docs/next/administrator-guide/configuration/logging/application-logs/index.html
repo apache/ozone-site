@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.0d2a60ee.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7f8029b3.js" defer="defer"></script>
 <script src="/assets/js/main.2fc8abd9.js" defer="defer"></script>
 </head>
 <body>
@@ -48,6 +48,21 @@
 <p>to</p>
 <div class="language-properties codeBlockContainer_u_cv theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_v1q3"><pre tabindex="0" class="prism-code language-properties codeBlock_hAju thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wyJo"><div class="token-line" style="color:#393A34"><span class="token plain">rootLogger.level = debug</span><br></div></code></pre></div></div>
 <p>After saving the file and restarting the service, the service will start logging more detailed debug information.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Dk4v" id="enabling-jersey-debug-logs-in-s3-gateway">Enabling Jersey Debug Logs in S3 Gateway<a href="#enabling-jersey-debug-logs-in-s3-gateway" class="hash-link" aria-label="Direct link to Enabling Jersey Debug Logs in S3 Gateway" title="Direct link to Enabling Jersey Debug Logs in S3 Gateway" translate="no">​</a></h4>
+<p>Jersey uses <code>java.util.logging</code> (JUL). S3 Gateway forwards JUL records to SLF4J,
+but JUL checks the log level before forwarding a record. Therefore, both JUL
+and log4j must allow debug records.</p>
+<p>Create a JUL configuration file, for example
+<code>$OZONE_CONF_DIR/s3g-jul-logging.properties</code>, with the following content:</p>
+<div class="language-properties codeBlockContainer_u_cv theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_v1q3"><pre tabindex="0" class="prism-code language-properties codeBlock_hAju thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wyJo"><div class="token-line" style="color:#393A34"><span class="token plain">org.glassfish.jersey.level = FINE</span><br></div></code></pre></div></div>
+<p><code>FINE</code> is the JUL level that maps to SLF4J <code>DEBUG</code>. This setting enables it only
+for Jersey loggers.</p>
+<p>Add the following line to <code>$OZONE_CONF_DIR/log4j.properties</code>:</p>
+<div class="language-properties codeBlockContainer_u_cv theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_v1q3"><pre tabindex="0" class="prism-code language-properties codeBlock_hAju thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wyJo"><div class="token-line" style="color:#393A34"><span class="token plain">log4j.logger.org.glassfish.jersey=DEBUG</span><br></div></code></pre></div></div>
+<p>Configure S3 Gateway to use the JUL properties file by adding the following to
+<code>$OZONE_CONF_DIR/ozone-env.sh</code>:</p>
+<div class="language-bash codeBlockContainer_u_cv theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_v1q3"><pre tabindex="0" class="prism-code language-bash codeBlock_hAju thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_wyJo"><div class="token-line" style="color:#393A34"><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">OZONE_S3G_OPTS</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;</span><span class="token string variable" style="color:#36acaa">${OZONE_S3G_OPTS}</span><span class="token string" style="color:#e3116c"> -Djava.util.logging.config.file=</span><span class="token string variable" style="color:#36acaa">${OZONE_CONF_DIR}</span><span class="token string" style="color:#e3116c">/s3g-jul-logging.properties&quot;</span><br></div></code></pre></div></div>
+<p>Restart S3 Gateway for the changes to take effect.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="changing-service-log-levels-at-runtime">Changing Service Log Levels at Runtime<a href="#changing-service-log-levels-at-runtime" class="hash-link" aria-label="Direct link to Changing Service Log Levels at Runtime" title="Direct link to Changing Service Log Levels at Runtime" translate="no">​</a></h3>
 <p>Use <code>ozone daemonlog</code> to inspect or change the log level of a running Ozone
 daemon without restarting it. The command talks to the daemon&#x27;s HTTP endpoint
