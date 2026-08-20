@@ -52,6 +52,37 @@ rootLogger.level = debug
 
 After saving the file and restarting the service, the service will start logging more detailed debug information.
 
+#### Enabling Jersey Debug Logs in S3 Gateway
+
+Jersey uses `java.util.logging` (JUL). S3 Gateway forwards JUL records to SLF4J,
+but JUL checks the log level before forwarding a record. Therefore, both JUL
+and log4j must allow debug records.
+
+Create a JUL configuration file, for example
+`$OZONE_CONF_DIR/s3g-jul-logging.properties`, with the following content:
+
+```properties
+org.glassfish.jersey.level = FINE
+```
+
+`FINE` is the JUL level that maps to SLF4J `DEBUG`. This setting enables it only
+for Jersey loggers.
+
+Add the following line to `$OZONE_CONF_DIR/log4j.properties`:
+
+```properties
+log4j.logger.org.glassfish.jersey=DEBUG
+```
+
+Configure S3 Gateway to use the JUL properties file by adding the following to
+`$OZONE_CONF_DIR/ozone-env.sh`:
+
+```bash
+export OZONE_S3G_OPTS="${OZONE_S3G_OPTS} -Djava.util.logging.config.file=${OZONE_CONF_DIR}/s3g-jul-logging.properties"
+```
+
+Restart S3 Gateway for the changes to take effect.
+
 ### Changing Service Log Levels at Runtime
 
 Use `ozone daemonlog` to inspect or change the log level of a running Ozone
