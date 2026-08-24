@@ -4,277 +4,136 @@ sidebar_label: OM metadata backup
 
 # OM metadata backup (including bucket snapshots)
 
-This procedure describes how to take a **consistent tarball backup of Ozone Manager (OM) metadata**, including **bucket snapshot** RocksDB state. It uses the same checkpoint mechanism that OM HA bootstrap and Ratis snapshot installation rely on internally ([OM bootstrapping with snapshots](../../../system-internals/features/om-bootstrapping-with-snapshots)).
+Back up **Ozone Manager (OM) namespace metadata**, including **bucket snapshot** RocksDB state. This is not a substitute for Datanode block or SCM metadata backups.
 
-## What is backed up
+The transfer uses the same v2 checkpoint mechanism as OM HA follower bootstrap ([design doc](../../../system-internals/features/om-bootstrapping-with-snapshots)).
 
-When `includeSnapshotData=true`, the leader OM streams a tar archive containing:
+## What is included
 
-- The Active Object Store (AOS) RocksDB checkpoint (`om.db`).
-- All bucket snapshot RocksDB directories registered in the snapshot metadata table.
-- Snapshot compaction backup and compaction log directories required to interpret snapshot SST files.
-- Snapshot-local property files used by snapshot defragmentation.
-- A `hardLinkFile` mapping so hard-linked SST files can be reconstructed on restore.
-- An `OZONE_RATIS_SNAPSHOT_COMPLETE` sentinel on the **final** batch when the transfer finishes.
+- `om.db` — volumes, buckets, keys, and related AOS metadata
+- `db.snapshots` — bucket snapshot RocksDB state (when snapshots exist on the leader)
+- Compaction backup and log directories needed to read snapshot SST files
 
-This is **OM namespace metadata only** (volumes, buckets, keys, snapshot definitions, and related RocksDB state). It does **not** replace Datanode block backups or SCM metadata backups.
+Requires Ozone **2.2+** with inode-based checkpoint transfer (default: `ozone.om.db.checkpoint.use.inode.based.transfer=true`).
 
-## Prerequisites
+## Backup and restore (recommended)
 
-1. An OM HA cluster with a reachable **leader** OM HTTP(S) endpoint (default port `9874`).
-2. A caller identity in `ozone.administrators` when `ozone.security.enabled=true` (Kerberos SPNEGO or equivalent HTTP auth).
-3. Sufficient disk space on the backup host for the tarball(s). The leader sets response header `X-Ozone-Om-Checkpoint-Estimated-Sst-Bytes` with an uncompressed SST size estimate; plan for at least **2×** that value to allow for tar overhead and unpack headroom (same guidance as [OM HA](../../../system-internals/components/ozone-manager/high-availability)).
-4. Ozone **2.2+** with inode-based checkpoint transfer enabled (default):
+Use `ozone repair om download` ([HDDS-16171](https://issues.apache.org/jira/browse/HDDS-16171)) when a live OM is reachable. It handles multi-batch transfer, hard link reconstruction, and writes a **ready-to-install** copy of everything under `--output-dir` (including `db.snapshots` when snapshots exist on the leader). No separate snapshot steps.
 
-```xml
-<property>
-  <name>ozone.om.db.checkpoint.use.inode.based.transfer</name>
-  <value>true</value>
-</property>
-```
-
-## Important: include snapshot data explicitly
-
-A checkpoint request **without** `includeSnapshotData=true` returns **AOS metadata only** and omits bucket snapshots. This was the limitation of older backup procedures.
-
-Always pass:
-
-| Query parameter         | Required value | Purpose                                                       |
-| ----------------------- | -------------- | ------------------------------------------------------------- |
-| `includeSnapshotData`   | `true`         | Include bucket snapshot RocksDB directories and related files |
-| `flushBeforeCheckpoint` | `true`         | Flush memtables before taking the AOS checkpoint              |
-
-## Single-batch backup (small to medium metadata)
-
-Use when total snapshot SST size fits in one batch (typically when snapshot SST footprint is below `ozone.om.ratis.snapshot.max.total.sst.size`, default **10 GB**).
-
-Replace `<om-leader-host>`, `<port>`, and auth flags for your environment.
-
-**Secure cluster (Kerberos):**
+**Requirements:** `ozone-site.xml` on the host; `kinit` in secure clusters (`ozone.administrators`); stop the **target** OM before installing downloaded metadata.
 
 ```shell
-kinit -k -t /path/to/admin.keytab admin@REALM
-curl -f --negotiate -u : \
-  -X POST \
-  "https://<om-leader-host>:<port>/v2/dbCheckpoint?includeSnapshotData=true&flushBeforeCheckpoint=true" \
-  -F "toExcludeSST[]=" \
-  -o "om-metadata-$(date +%Y%m%d-%H%M%S).tar"
-```
+# Download
+ozone repair om download --output-dir /backup/om-metadata --overwrite
 
-**Non-secure cluster:**
-
-```shell
-curl -f \
-  -X POST \
-  "http://<om-leader-host>:<port>/v2/dbCheckpoint?includeSnapshotData=true&flushBeforeCheckpoint=true" \
-  -F "toExcludeSST[]=" \
-  -o "om-metadata-$(date +%Y%m%d-%H%M%S).tar"
-```
-
-### Verify the archive
-
-The tarball uses inode-based file names during transfer. On the **final** batch, expect:
-
-- `hardLinkFile` — tab-separated mapping of relative paths to inode identifiers
-- `OZONE_RATIS_SNAPSHOT_COMPLETE` — completion sentinel
-
-If your backup stopped after one batch but lacks the completion sentinel, the snapshot set is **incomplete** (see multi-batch section below).
-
-## Multi-batch backup (large snapshot footprint)
-
-When snapshot SST data exceeds `ozone.om.ratis.snapshot.max.total.sst.size`, the leader splits the transfer across multiple POST responses. Each batch excludes inode IDs already received via the `toExcludeSST[]` multipart form field.
-
-Use the helper script in this directory (same logic as OM bootstrap's `OmRatisSnapshotProvider` / `HAUtils.getExistingFiles`):
-
-```shell
-chmod +x om-metadata-backup.sh
-
-# Secure cluster (run kinit first)
-./om-metadata-backup.sh --kerberos \
-  --base-url "https://<om-leader-host>:<port>" \
-  --archive "om-metadata-$(date +%Y%m%d-%H%M%S).tar.gz"
-
-# Non-secure cluster
-./om-metadata-backup.sh \
-  --base-url "http://<om-leader-host>:<port>" \
-  --staging-dir "/backup/om-metadata-staging"
-```
-
-The script:
-
-1. POSTs to `/v2/dbCheckpoint` with `includeSnapshotData=true` and `flushBeforeCheckpoint=true`.
-2. Saves each response tarball, extracts it into a staging directory, and collects file basenames (inode IDs) already on disk.
-3. Repeats with `toExcludeSST[]=<inodeId>` for each collected file until `OZONE_RATIS_SNAPSHOT_COMPLETE` appears in the staging directory.
-
-Optional flags: `--staging-dir`, `--archive` (gzip tarball of the final staging tree), and `--max-batches` as a safety limit. Run `./om-metadata-backup.sh --help` for the full list.
-
-Verify the staging directory contains `hardLinkFile` and `OZONE_RATIS_SNAPSHOT_COMPLETE` before treating the backup as complete.
-
-## Legacy v1 endpoint
-
-The v1 `/dbCheckpoint` endpoint (selected when `ozone.om.db.checkpoint.use.inode.based.transfer=false`) transfers **AOS (`om.db`) metadata only**. It does **not** include bucket snapshot RocksDB state in the checkpoint, even when `includeSnapshotData=true` is passed.
-
-**New deployments should run Ozone 2.2+** with inode-based transfer enabled (the default) and use `/v2/dbCheckpoint` for backups that include bucket snapshots. Reserve v1 only for legacy clusters that have not yet migrated to inode-based transfer.
-
-## Restore scenarios
-
-### Add or replace an OM node in an existing HA cluster
-
-Use `ozone om --bootstrap` (downloads a fresh checkpoint from the live leader, including snapshots). See [Replacing Ozone Manager disks](../disk-replacement/ozone-manager).
-
-### Restore metadata from a live OM (`ozone repair om download`)
-
-When at least one OM is reachable (for example, HA peers are healthy but one host lost its disk), use the repair CLI added in [HDDS-16171](https://issues.apache.org/jira/browse/HDDS-16171). It downloads and constructs `om.db` using the same v2 inode-based checkpoint transfer and hardlink reconstruction that OM followers use during bootstrap—no manual `curl` or shell hardlink steps.
-
-**Requirements**
-
-- Ozone **2.2+** build that includes `ozone repair om download` (HDDS-16171).
-- A reachable OM HTTP(S) endpoint and `ozone-site.xml` on the host where you run the command.
-- Caller identity in `ozone.administrators` when `ozone.security.enabled=true` (run `kinit` first in secure clusters).
-- The **target** OM whose disk you are restoring must be **stopped** before you replace its local `om.db`. The **source** OM cluster must remain up to serve the checkpoint.
-
-**Download**
-
-Non-HA (single OM):
-
-```shell
-kinit -k -t /path/to/admin.keytab admin@REALM   # secure clusters only
-
-ozone repair om download \
-  --output-dir /restore/om.db \
-  --overwrite
-```
-
-OM HA (specify the service ID and the node to pull from—typically the current leader):
-
-```shell
+# OM HA — add --service-id; --node-id targets a specific OM (leader recommended)
 ozone repair om download \
   --service-id <om-service-id> \
   --node-id <om-node-id> \
-  --output-dir /restore/om.db \
+  --output-dir /backup/om-metadata \
   --overwrite
+
+# Archive off-cluster (top-level om-metadata/ directory in the tarball)
+tar -czf om-metadata-$(date +%Y%m%d).tar.gz -C /backup om-metadata
 ```
 
-The command always uses `/v2/dbCheckpoint` with snapshot data included. It fails if `--output-dir` already exists unless you pass `--overwrite`.
-
-**Install on the failed node**
-
-1. Stop the Ozone Manager on the node being restored (and block client writes if this is a standalone deployment).
-2. Back up any partial data under `ozone.om.db.dirs` if the disk is still readable.
-3. Replace the local database directory:
+**Restore** — stop the target OM first. If a live OM is still up, re-run `ozone repair om download`. Otherwise extract a CLI backup archive and install:
 
 ```shell
-OM_DB_DIRS=/var/lib/ozone/om/metadata   # your ozone.om.db.dirs
+mkdir -p /restore
+tar -xzf om-metadata-YYYYMMDD.tar.gz -C /restore    # yields /restore/om-metadata/
 
-rm -rf "$OM_DB_DIRS/om.db"
-mv /restore/om.db "$OM_DB_DIRS/om.db"
+OM_DB_DIRS=/var/lib/ozone/om/metadata                # ozone.om.db.dirs
+rm -rf "$OM_DB_DIRS/om.db" "$OM_DB_DIRS/db.snapshots"
+rsync -a /restore/om-metadata/ "$OM_DB_DIRS/"
+
+# Start OM; verify with: ozone sh volume list
 ```
 
-Preserve the existing `om/` VERSION subtree under `OM_DB_DIRS` when it survives disk failure. Do not delete OM cluster identity files unless you are intentionally rebuilding the OM from scratch.
+For HA with an intact Ratis ring, prefer `ozone om --bootstrap` over manual install. See [Replacing Ozone Manager disks](../disk-replacement/ozone-manager) and [Ozone Repair](../tools/ozone-repair#download).
 
-4. Start the Ozone Manager and verify with `ozone sh volume list`.
+## Alternative: HTTP checkpoint download
 
-For HA nodes with an empty metadata disk, prefer `ozone om --bootstrap` when the Ratis ring is intact. Use `ozone repair om download` when you need a constructed `om.db` on disk for manual replacement or offline inspection.
+Use `curl` or `om-metadata-backup.sh` only when the backup host has no Ozone CLI. This runs the same `/v2/dbCheckpoint` transfer, but the saved tarball stays in inode-based form and needs hard link reconstruction before install.
 
-See also [Ozone Repair](../tools/ozone-repair#download).
+Target the **leader** OM. Plan for at least **2×** the `X-Ozone-Om-Checkpoint-Estimated-Sst-Bytes` response header value (see [OM HA](../../../system-internals/components/ozone-manager/high-availability)).
 
-### Restore from an offline tarball (no live OM)
+Always pass `includeSnapshotData=true&flushBeforeCheckpoint=true`.
 
-Use only when **no OM is available** to serve a checkpoint—for example, total metadata loss on a standalone deployment, or every HA OM lost its metadata volume. Offline tarballs cannot be consumed by `ozone repair om download`; install the saved checkpoint manually.
-
-**Requirements**
-
-- Backup taken from `/v2/dbCheckpoint` with `includeSnapshotData=true` on Ozone **2.2+**.
-- Extracted staging tree contains `hardLinkFile` and `OZONE_RATIS_SNAPSHOT_COMPLETE`.
-- Plan for **cluster downtime** while OM metadata is offline.
-
-**Procedure**
-
-1. **Stop writers.** Stop all Ozone Manager processes, clients, and services that write to the cluster.
-
-2. **Verify the backup.** For multi-batch backups, confirm the staging directory contains `hardLinkFile` and `OZONE_RATIS_SNAPSHOT_COMPLETE`. Do not proceed with an incomplete transfer.
-
-3. **Extract the archive** into a clean staging directory:
+**Single batch** (snapshot SST below `ozone.om.ratis.snapshot.max.total.sst.size`, default 10 GB):
 
 ```shell
-mkdir -p /restore/om-checkpoint-staging
-tar -xf om-metadata-YYYYMMDD.tar -C /restore/om-checkpoint-staging
-# If you used om-metadata-backup.sh --archive:
-tar -xzf om-metadata-YYYYMMDD.tar.gz -C /restore/om-checkpoint-staging
+# Non-secure
+curl -f -X POST \
+  "http://<om-leader>:<port>/v2/dbCheckpoint?includeSnapshotData=true&flushBeforeCheckpoint=true" \
+  -F "toExcludeSST[]=" \
+  -o "om-metadata-$(date +%Y%m%d).tar"
+
+# Secure (run kinit first)
+curl -f --negotiate -u : -X POST \
+  "https://<om-leader>:<port>/v2/dbCheckpoint?includeSnapshotData=true&flushBeforeCheckpoint=true" \
+  -F "toExcludeSST[]=" \
+  -o "om-metadata-$(date +%Y%m%d).tar"
 ```
 
-4. **Reconstruct hard links.** v2 checkpoints store many files under inode IDs; `hardLinkFile` maps logical paths (for example `om.db/000012.sst`) to those IDs:
+**Multiple batches** — `om-metadata-backup.sh` loops until `OZONE_RATIS_SNAPSHOT_COMPLETE`:
 
 ```shell
-STAGING=/restore/om-checkpoint-staging
+chmod +x om-metadata-backup.sh
+./om-metadata-backup.sh --base-url "http://<om-leader>:<port>" \
+  --archive "om-metadata-$(date +%Y%m%d).tar.gz"
+# Add --kerberos for secure clusters (run kinit first)
+```
+
+HTTP archives contain a **flat** inode-based tree (not the `om-metadata/` wrapper used by the CLI). Stop the target OM, then reconstruct hard links and install:
+
+```shell
+mkdir -p /restore/om-staging
+OM_DB_DIRS=/var/lib/ozone/om/metadata
+
+tar -xf om-metadata-YYYYMMDD.tar -C /restore/om-staging     # .tar from curl
+# tar -xzf om-metadata-YYYYMMDD.tar.gz -C /restore/om-staging   # .tar.gz from om-metadata-backup.sh --archive
 
 while IFS=$'\t' read -r dest src; do
-  [[ -z "$dest" ]] && continue
-  install -d "$(dirname "$STAGING/$dest")"
-  ln "$STAGING/$src" "$STAGING/$dest"
-done < "$STAGING/hardLinkFile"
+  [[ -z "$dest" || -z "$src" ]] && continue
+  install -d "$(dirname "/restore/om-staging/$dest")"
+  ln "/restore/om-staging/$src" "/restore/om-staging/$dest"
+done < /restore/om-staging/hardLinkFile
 
 while IFS=$'\t' read -r dest src; do
   [[ -z "$src" ]] && continue
-  if [[ -d "$STAGING/$src" ]]; then
-    rm -rf "$STAGING/$src"
+  if [[ -d "/restore/om-staging/$src" ]]; then
+    rm -rf "/restore/om-staging/$src"
   else
-    rm -f "$STAGING/$src"
+    rm -f "/restore/om-staging/$src"
   fi
-done < "$STAGING/hardLinkFile"
+done < /restore/om-staging/hardLinkFile
 
-rm -f "$STAGING/hardLinkFile" "$STAGING/OZONE_RATIS_SNAPSHOT_COMPLETE"
+rm -f /restore/om-staging/hardLinkFile /restore/om-staging/OZONE_RATIS_SNAPSHOT_COMPLETE
+
+rm -rf "$OM_DB_DIRS/om.db" "$OM_DB_DIRS/db.snapshots"
+rsync -a /restore/om-staging/ "$OM_DB_DIRS/"
 ```
 
-5. **Validate layout.** Expect top-level items such as `om.db` and, when bucket snapshots were backed up, `db.snapshots`. Confirm `om.db/CURRENT` exists.
-
-6. **Install into OM metadata storage.** Let `OM_DB_DIRS` be the path configured in `ozone.om.db.dirs` (or `ozone.metadata.dirs`):
-
-```shell
-OM_DB_DIRS=/var/lib/ozone/om/metadata   # your ozone.om.db.dirs
-
-mkdir -p "$OM_DB_DIRS"
-for name in om.db db.snapshots; do
-  if [[ -e "$STAGING/$name" ]]; then
-    rm -rf "$OM_DB_DIRS/$name"
-    mv "$STAGING/$name" "$OM_DB_DIRS/"
-  fi
-done
-# Move any remaining top-level checkpoint items (compaction backup dirs, etc.)
-find "$STAGING" -mindepth 1 -maxdepth 1 -exec mv -t "$OM_DB_DIRS" {} +
-```
-
-7. **Standalone OM:** Start SCM (if required), then start the Ozone Manager. Verify with `ozone sh volume list`.
-
-8. **HA OM (all peers lost metadata):** Clear `ozone.om.ratis.storage.dir` on **every** OM node, install the checkpoint on a seed OM, start it, then bootstrap remaining peers with `ozone om --bootstrap` once the seed is healthy.
-
-**Limitations**
-
-- v1 (`/dbCheckpoint`) backups omit bucket snapshot data; use them only for AOS-only recovery on legacy clusters.
-- Validate the offline tarball procedure on a non-production clone before relying on it for production DR.
-
-Store tarball backups off-cluster (object store, NFS, or backup appliance) according to your retention policy.
+The legacy v1 `/dbCheckpoint` endpoint omits bucket snapshot data even with `includeSnapshotData=true`. Use v2 only.
 
 ## Operational notes
 
-- Run backups against the **leader** OM. Followers redirect or reject checkpoint creation.
-- Checkpoint creation takes a short-lived snapshot cache lock when snapshot data is included. Schedule backups during low snapshot activity when possible.
-- Recon's OM sync uses `includeSnapshotData=false` by design; do **not** use Recon as a full-metadata backup source.
-- Bucket **Ozone Snapshots** (user-visible point-in-time bucket images) are included in this backup. **Ratis snapshots** (OM HA replication checkpoints) are a related but separate concept; see [OM high availability](../../../system-internals/components/ozone-manager/high-availability).
+- Run checkpoints against the **leader** OM.
+- Schedule during low snapshot activity; including snapshot data takes a short-lived cache lock.
+- Do **not** use Recon as a backup source (`includeSnapshotData=false` by design).
+- User-visible **Ozone Snapshots** are included. **Ratis snapshots** (OM HA replication) are a separate concept — see [OM high availability](../../../system-internals/components/ozone-manager/high-availability).
 
 ## Related configuration
 
 | Property | Default | Relevance |
 | ---------- | --------- | --------- |
-| `ozone.om.db.checkpoint.use.inode.based.transfer` | `true` | Use `/v2/dbCheckpoint` |
-| `ozone.om.ratis.snapshot.max.total.sst.size` | `10GB` | Batch size threshold for snapshot SST transfer |
-| `ozone.om.bootstrap.min.space` | `5GB` | Follower disk pre-check fallback (bootstrap) |
-| `ozone.om.bootstrap.checkpoint.estimated.space.headroom.ratio` | `2.0` | Follower disk pre-check vs leader SST estimate |
-| `ozone.administrators` | (none) | HTTP checkpoint access in secure mode |
+| `ozone.om.db.checkpoint.use.inode.based.transfer` | `true` | Required for snapshot-inclusive backup |
+| `ozone.om.ratis.snapshot.max.total.sst.size` | `10GB` | HTTP multi-batch threshold |
+| `ozone.administrators` | (none) | HTTP/CLI access in secure mode |
 
 ## See also
 
-- [Ozone Repair](../tools/ozone-repair#download)
 - [OM bootstrapping with snapshots (design)](../../../system-internals/features/om-bootstrapping-with-snapshots)
 - [OM HA configuration](../../configuration/high-availability/om-ha)
 - [Replacing Ozone Manager disks](../disk-replacement/ozone-manager)

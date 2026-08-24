@@ -232,25 +232,17 @@ from one of the good OMs to the crashing OM instead.
 
 #### download
 
-Download and construct `om.db` from a running OM using the same v2 inode-based checkpoint transfer that follower bootstrap uses (including bucket snapshot data in the transfer). Unlike most repair subcommands, the **source** OM cluster must be **running** and reachable over HTTP(S). Stop the **target** OM before replacing its local `om.db` with the downloaded output.
-
-Requires Ozone 2.2+ with HDDS-16171. See [OM metadata backup](../backup-and-recovery/om-metadata-backup#restore-metadata-from-a-live-om-ozone-repair-om-download) for a full restore walkthrough.
+Download OM metadata from a running OM (same v2 checkpoint flow as follower bootstrap). The source cluster must be **running**; stop the target OM before installing the output. Requires Ozone 2.2+ (HDDS-16171). See [OM metadata backup](../backup-and-recovery/om-metadata-backup#backup-and-restore-from-a-live-om).
 
 ```bash
-Usage: ozone repair om download [-hV] [--overwrite] [--verbose]
+Usage: ozone repair om download [-hV] [--dry-run] [--overwrite] [--verbose]
                                 [--node-id=<nodeId>]
                                 [--om-service-id=<omServiceId>]
                                 --output-dir=<outputDir>
-Downloads and constructs om.db from an OM node using the same checkpoint
-transfer flow as follower bootstrap.
-      --node-id=<nodeId>
-                      Node ID of the OM to download om.db from. Required when
-                        OM HA is configured.
-      --om-service-id, --service-id=<omServiceId>
-                      Ozone Manager Service ID
-      --output-dir=<outputDir>
-                      Path where the constructed om.db directory will be written
-      --overwrite     Overwrite output directory if it already exists.
+      --node-id=<nodeId>              OM node to download from (recommended: leader)
+      --om-service-id, --service-id   Ozone Manager Service ID
+      --output-dir=<outputDir>        Output directory (om.db and db.snapshots)
+      --overwrite                     Overwrite output directory if it exists
 ```
 
 ## ozone repair SCM
