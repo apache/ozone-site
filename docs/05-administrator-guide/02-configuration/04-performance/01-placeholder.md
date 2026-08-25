@@ -21,9 +21,8 @@ A typical production Ozone cluster includes the following services:
 
 ### System Requirements
 
-- **Hardware**: Bare metal machines are recommended for optimal performance. Virtual machines or containers are not recommended for production deployments.
-- **Operating System**: Linux (recommended distributions: Red Hat 8/Rocky 8+, Ubuntu, SUSE; supported architectures: x86/ARM).
-- **Java Development Kit (JDK)**: Version 8 or higher.
+- **Platform and software stack**: See [Supported Platforms](../../installation/supported-platforms-and-software-stack) for supported operating systems, CPU architectures, JDK versions, and deployment models (bare metal, VM, Kubernetes, Docker Compose).
+- **Hardware**: Bare metal machines are recommended for optimal performance. Virtual machines are acceptable when sized and tuned appropriately; use Kubernetes for containerized production deployments. Docker Compose is for dev/eval only.
 - **Time Synchronization**: A time synchronization service such as Chrony or ntpd must be enabled to prevent time drift.
 
 ### Memory Requirements

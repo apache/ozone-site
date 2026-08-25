@@ -49,6 +49,10 @@ Apache Ozone uses [Maven](https://maven.apache.org/) as its build system. The bu
 
 If you are running on an ARM-based Apple silicon Mac, please perform the additional steps in this section.
 
+:::note Platform support
+macOS is supported for **building from source and local development only**, not for production Ozone runtime. See [Supported Platforms](../../administrator-guide/installation/supported-platforms-and-software-stack#development-only-platforms) for the full platform matrix.
+:::
+
 #### Compile and Patch Protobuf version 2.5.0 for ARM-based Mac
 
 Note: These steps are required for Hadoop 2 support in Ozone 2.1.x and earlier. This won't be needed in Ozone 2.2.0 and later since protobuf 2.5.0's removal in HDDS-5407.
