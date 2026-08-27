@@ -45,6 +45,7 @@ jobs:
       with:
         persist-credentials: false
     - name: Check actions
+      # yamllint disable-line rule:line-length
       uses: apache/infrastructure-actions/allowlist-check@61dcea11f19e2bbe1263f14d72235e8da17d3ad0 # allowlist-check/v1.0.0
       with:
         scan-glob: .github/workflows/*.y*ml
