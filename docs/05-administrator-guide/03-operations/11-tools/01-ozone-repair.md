@@ -232,7 +232,7 @@ from one of the good OMs to the crashing OM instead.
 
 #### download
 
-Download OM metadata from a running OM (same v2 checkpoint flow as follower bootstrap). The source cluster must be **running**; stop the target OM before installing the output. Requires Ozone 2.2+ (HDDS-16171). See [OM metadata backup](../backup-and-recovery/om-metadata-backup#backup-and-restore-from-a-live-om).
+Download OM metadata from a running OM (same v2 checkpoint flow as follower bootstrap). The source cluster must be **running**; stop the target OM before installing the output. Requires Ozone 2.2+ (HDDS-16171). See [OM metadata backup](../backup-and-recovery/om-metadata-backup).
 
 ```bash
 Usage: ozone repair om download [-hV] [--dry-run] [--overwrite] [--verbose]

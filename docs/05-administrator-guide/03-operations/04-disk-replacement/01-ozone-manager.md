@@ -49,7 +49,7 @@ This is a high-risk, manual disaster recovery process that will require cluster 
 
 2. **Attempt Data Recovery:** If the failed disk is still partially readable, make a best-effort attempt to copy the contents of the `ozone.om.db.dirs` directory to a safe, temporary location.
 
-3. **If Recovery Fails, Restore from Backup:** If the OM database files are unrecoverable, restore from your most recent backup. When another OM is reachable, use [backup and restore from a live OM](../backup-and-recovery/om-metadata-backup#backup-and-restore-from-a-live-om) (`ozone repair om download`). Otherwise extract and install a saved tarball (same page).
+3. **If Recovery Fails, Restore from Backup:** If the OM database files are unrecoverable, restore from your most recent backup using [OM metadata backup](../backup-and-recovery/om-metadata-backup#restore) (`ozone repair om download`, or a saved tarball from the same command).
 
 4. **Replace and Configure Disk:** Physically replace the hardware and ensure the new, empty disk is mounted at the correct path defined in `ozone.om.db.dirs`.
 
