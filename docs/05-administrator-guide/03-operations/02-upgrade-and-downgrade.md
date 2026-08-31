@@ -64,8 +64,6 @@ Upgrade finalization status:
 - Add `-v` / `--verbose` to also show the apparent versions of OM, SCM, and the
   Datanodes.
 - Add `--json` to format the output as JSON.
-- In OM HA, pass `--service-id=<om-service-id>`; in a non-HA deployment, pass
-  `--service-host=<om-host>`.
 
 `ozone admin datanode list` lists all Datanodes and their health state (`HEALTHY`, `STALE`, or `DEAD`) as seen by SCM. Pre-finalized Datanodes are not placed in a separate read-only state: during a rolling upgrade, every reachable Datanode stays `HEALTHY` and fully participates in reads and writes, while SCM ensures a consistent write version is used across mixed-version Datanodes. To track how far Datanode finalization has progressed, use `ozone admin upgrade status` (the `Datanodes finalized: N/M` line, or `-v` for per-Datanode apparent versions) rather than the Datanode health state. `STALE` or `DEAD` Datanodes will be told to finalize by SCM once they are reachable again.
 
@@ -185,8 +183,6 @@ ozone admin upgrade finalize
   been started.
 - Add `--wait` to have the command poll and block until the entire cluster is
   finalized (interruptible with Ctrl-C).
-- In OM HA, pass `--service-id=<om-service-id>`; in a non-HA deployment, pass
-  `--service-host=<om-host>`.
 
 Monitor progress with [`ozone admin upgrade status`](#querying-upgrade-status).
 The command is idempotent, so finalization continues after OM restarts or leader
@@ -201,9 +197,5 @@ start.
 `ozone admin upgrade finalize` and `ozone admin upgrade status` require an OM that
 supports ZDU. If they are run against a cluster whose OM predates ZDU support, they
 will report that the OM does not support zero downtime upgrade and direct you to
-the older commands, which are retained for this case:
-
-```bash
-ozone admin scm finalizeupgrade
-ozone admin om finalizeupgrade
-```
+the older, now-deprecated commands that are retained for this case
+(`ozone admin scm finalizeupgrade` followed by `ozone admin om finalizeupgrade`).
