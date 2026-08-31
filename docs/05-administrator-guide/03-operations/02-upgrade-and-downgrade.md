@@ -182,7 +182,7 @@ ozone admin upgrade finalize
   finalization is asynchronous, the command returns as soon as the process has
   been started.
 - Add `--wait` to have the command poll and block until the entire cluster is
-  finalized (interruptible with Ctrl-C).
+  finalized (interrupt with Ctrl-C).
 
 Monitor progress with [`ozone admin upgrade status`](#querying-upgrade-status).
 The command is idempotent, so finalization continues after OM restarts or leader
