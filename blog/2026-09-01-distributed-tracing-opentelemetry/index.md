@@ -64,16 +64,15 @@ We tried this with HBase on Ozone. Running `create 'trace_test', 'cf'` produced 
 
 You can follow it from `CreateTableProcedure` on the HBase master, through the WAL sync and into Ozone's file creation and block writes.
 
-Open the WAL sync step and you see where storage time actually went — without jumping between HBase and Ozone logs trying to match things up.
+Open the step you want to see where storage time actually went — without jumping between HBase and Ozone logs trying to match things up.
 
 ![HBase WAL sync trace showing Ozone client and Datanode spans](hbase_flamegraph.png)
 
 **To get this working:**
 
-1. [Configure HBase to store data on Ozone](https://ozone.apache.org/docs/user-guide/integrations/hbase).
-2. Enable tracing on Ozone's services (OM, SCM, and Datanodes) with `ozone.tracing.enabled=true`.
-3. Keep `ozone.tracing.client.application-aware=true` (the default).
-4. Instrument HBase with OpenTelemetry and point it at the same Jaeger collector as Ozone.
+1. [Configure HBase to store data on Ozone](https://ozone.apache.org/docs/user-guide/integrations/hbase). 
+2. Keep `ozone.tracing.client.application-aware=true` (the default). 
+3. Bump up the OpenTelemetry version in Hbase and point it at the same Jaeger collector as Ozone.
 
 That's it — one trace, one view, from HBase down to the Datanodes.
 
