@@ -42,7 +42,6 @@ Next, tell Ozone where to send traces. You can set `ozone.tracing.endpoint` in `
 
 With that in place, generate some traffic — Freon is a simple option — and open Jaeger. If you see spans for services like `OzoneManager` or `freon`, tracing is working.
 
-
 ## Keeping the Noise Down
 
 On a busy cluster, tracing every request can add overhead and flood your collector. Ozone gives you two levels of control.
