@@ -74,6 +74,7 @@ words:
 - PMC
 - TBD
 # Ozone specific words
+- checksumming
 - HDDS
 - ratis
 - OM
