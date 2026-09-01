@@ -70,8 +70,8 @@ Open the step you want to see where storage time actually went — without jumpi
 
 **To get this working:**
 
-1. [Configure HBase to store data on Ozone](https://ozone.apache.org/docs/user-guide/integrations/hbase). 
-2. Keep `ozone.tracing.client.application-aware=true` (the default). 
+1. [Configure HBase to store data on Ozone](https://ozone.apache.org/docs/user-guide/integrations/hbase).
+2. Keep `ozone.tracing.client.application-aware=true` (the default).
 3. Bump up the OpenTelemetry version in Hbase and point it at the same Jaeger collector as Ozone.
 
 That's it — one trace, one view, from HBase down to the Datanodes.
