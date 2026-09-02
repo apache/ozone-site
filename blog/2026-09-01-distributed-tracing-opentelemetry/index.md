@@ -58,7 +58,7 @@ Most tracing examples start inside Ozone — Freon, the shell, the S3 Gateway. I
 
 Application-aware client tracing handles that. When it's on, Ozone doesn't start its own trace. It adds its work as steps inside whatever trace the application already has running.
 
-We tried this with HBase on Ozone. Running `create 'trace_test', 'cf'` produced one trace for the whole operation — about 120ms, across HBase, Ozone Manager, SCM, and Datanodes.
+Here's an example with HBase on Ozone. Running `create 'trace_test', 'cf'` produced one trace for the whole operation — about 120ms, across HBase, Ozone Manager, SCM, and Datanodes.
 
 ![HBase CreateTableProcedure trace spanning HBase, OM, and SCM](hbase_trace.png)
 
@@ -71,8 +71,25 @@ Open the step you want to see where storage time actually went — without jumpi
 **To get this working:**
 
 1. [Configure HBase to store data on Ozone](https://ozone.apache.org/docs/user-guide/integrations/hbase).
-2. Keep `ozone.tracing.client.application-aware=true` (the default).
-3. Bump up the OpenTelemetry version in Hbase and point it at the same Jaeger collector as Ozone.
+
+2. Bump up OpenTelemetry version in HBase so it can emit spans and share trace context with Ozone.
+
+3. Enable tracing on HBase following these configurations:
+
+   ```yaml
+   HBASE_OTEL_TRACING_ENABLED: "true"
+   OTEL_TRACES_EXPORTER: otlp
+   OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+   OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+   OTEL_METRICS_EXPORTER: none
+   OTEL_LOGS_EXPORTER: none
+   OTEL_TRACES_SAMPLER: always_on
+   HBASE_MASTER_OPTS: "-Dotel.resource.attributes=service.name=hbase-master"
+   HBASE_REGIONSERVER_OPTS: "-Dotel.resource.attributes=service.name=hbase-regionserver"
+   HBASE_SHELL_OPTS: "-Dotel.resource.attributes=service.name=hbase-shell"
+   ```
+
+4. On Ozone, keep `ozone.tracing.client.application-aware=true` (the default).
 
 That's it — one trace, one view, from HBase down to the Datanodes.
 
