@@ -121,3 +121,7 @@ Upon restart, SCM enters Safemode and rebuilds its cluster membership list from 
 :::note
 There is currently no CLI command to manually "forget" a node without a restart.
 :::
+
+## See also
+
+- [Troubleshooting Decommissioning and Maintenance](../../../../troubleshooting/decommission-maintenance) for a decommission that is slow or stuck
