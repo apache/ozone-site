@@ -50,6 +50,18 @@ On a busy cluster, tracing every request can add overhead and flood your collect
 
 **Span-level sampling** lets you go deeper on specific operations. You can always capture spans you care about, like `CommitKey` or `WriteChunk`, even when global sampling is low. That way you get broad coverage when you want it, and full detail exactly where you need it.
 
+## Tuning Without a Restart
+
+On Ozone Manager, SCM, and Datanodes, you can change tracing configs at runtime — no restart needed:
+
+- `ozone.tracing.enabled`
+- `ozone.tracing.endpoint`
+- `ozone.tracing.sampler`
+- `ozone.tracing.span.sampling`
+- `ozone.tracing.client.application-aware`
+
+That means you can flip tracing on during an incident, bump sampling to catch slow requests, then turn it back off.
+
 ## Application-Aware Client Tracing
 
 Most tracing examples start inside Ozone — Freon, the shell, the S3 Gateway. In real deployments, something else is usually on top.
