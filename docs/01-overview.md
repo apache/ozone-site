@@ -96,7 +96,7 @@ Aspects related to storage administration include:
 
 - **Unified Storage:** Can potentially serve as a common storage layer for different types of workloads.
 - **Management Tools:** Includes the Recon web UI for monitoring and CLI tools for administration.
-- **Maintenance:** Supports features like rolling upgrades, node decommissioning, and data balancing.
+- **Maintenance:** Supports features like [rolling upgrades](./administrator-guide/operations/upgrade-and-downgrade), node decommissioning, and data balancing.
 
 ### Hybrid Cloud Scenarios
 
