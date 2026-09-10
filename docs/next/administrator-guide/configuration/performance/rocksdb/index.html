@@ -18,8 +18,8 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.871ef58c.js" defer="defer"></script>
-<script src="/assets/js/main.2a0386be.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d78c9b3b.js" defer="defer"></script>
+<script src="/assets/js/main.fd989fac.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -42,7 +42,7 @@
 <li class=""><strong>Access Control:</strong> <code>prefixTable</code> (for storing prefix-based access control information).</li>
 </ul>
 </li>
-<li class=""><strong>Security:</strong> <code>userTable</code>, <code>dTokenTable</code> (delegation tokens), and <code>s3SecretTable</code>.</li>
+<li class=""><strong>Security:</strong> <code>userTable</code>, <code>dTokenTable</code> (delegation tokens), <code>s3SecretTable</code>, and <code>s3RevokedStsTokenTable</code> (revoked STS session tokens).</li>
 <li class=""><strong>S3 Multi-Tenancy:</strong> <code>tenantStateTable</code> (for storing tenant state information), <code>tenantAccessIdTable</code> (for storing access ID information), and <code>principalToAccessIdsTable</code> (for mapping user principals to access IDs).</li>
 <li class=""><strong>State Management:</strong>
 <ul>
