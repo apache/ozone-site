@@ -72,15 +72,16 @@ Snapshot metadata and bookkeeping for snapshot-related garbage collection.
 
 ### 6. Multi-tenant and security
 
-Tenants, access mappings, S3 secrets, and delegation tokens.
+Tenants, access mappings, S3 secrets, delegation tokens, and revoked STS session tokens.
 
-| Table name | Key format | Value type | Description |
-| ---------- | ---------- | ---------- | ----------- |
-| `tenantStateTable` | `tenantId` | `OmDBTenantState` | Tenant configuration and state |
-| `tenantAccessIdTable` | `accessId` | `OmDBAccessIdInfo` | Access ID to secret and tenant |
-| `principalToAccessIdsTable` | `userPrincipal` | `OmDBUserPrincipalInfo` | Kerberos principal to access IDs |
-| `s3SecretTable` | `accessKeyId` | `S3SecretValue` | S3 secrets |
-| `dTokenTable` | `OzoneTokenID` | `Long` | Delegation tokens and renewal times |
+| Table name | Key format | Value type | Description                                                  |
+| ---------- | ---------- | ---------- |--------------------------------------------------------------|
+| `tenantStateTable` | `tenantId` | `OmDBTenantState` | Tenant configuration and state                               |
+| `tenantAccessIdTable` | `accessId` | `OmDBAccessIdInfo` | Access ID to secret and tenant                               |
+| `principalToAccessIdsTable` | `userPrincipal` | `OmDBUserPrincipalInfo` | Kerberos principal to access IDs                             |
+| `s3SecretTable` | `accessKeyId` | `S3SecretValue` | S3 secrets                                                   |
+| `s3RevokedStsTokenTable` | `originalAccessKeyId` | `Long` | OriginalAccessKeyId (revocation cutoff time in milliseconds) |
+| `dTokenTable` | `OzoneTokenID` | `Long` | Delegation tokens and renewal times                          |
 
 ### 7. Administrative and system
 

@@ -25,7 +25,7 @@ RocksDB is utilized in the following Ozone components to store critical metadata
   - **Object Store Layout:** `volumeTable`, `bucketTable`, `keyTable` (for object store layout), `openKeyTable` (for tracking open keys during multipart uploads), and `multipartInfoTable` (for storing multipart upload information).
   - **File System Layout:** `directoryTable` and `fileTable` (for file system layout), `openFileTable` (for tracking open files), and `deletedDirectoryTable` (for tracking deleted directories).
   - **Access Control:** `prefixTable` (for storing prefix-based access control information).
-- **Security:** `userTable`, `dTokenTable` (delegation tokens), and `s3SecretTable`.
+- **Security:** `userTable`, `dTokenTable` (delegation tokens), `s3SecretTable`, and `s3RevokedStsTokenTable` (revoked STS session tokens).
 - **S3 Multi-Tenancy:** `tenantStateTable` (for storing tenant state information), `tenantAccessIdTable` (for storing access ID information), and `principalToAccessIdsTable` (for mapping user principals to access IDs).
 - **State Management:**
   - `transactionInfoTable` for tracking transactions.
