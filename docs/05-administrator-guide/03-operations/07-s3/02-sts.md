@@ -107,8 +107,8 @@ Restart all Ozone Managers and all S3 Gateways after changing this property to h
 After enabling, the STS endpoint is available at one or more of the following URLs, depending on the `ozone.http.policy` value (`HTTP_ONLY`, `HTTPS_ONLY`, or `HTTP_AND_HTTPS`) and whether TLS is configured.  By default, the value is `HTTP_ONLY`:
 
 ```text
-http://<s3g-host>:9880/sts
-https://<s3g-host>:9881/sts
+http://<s3g-host>:9880
+https://<s3g-host>:9881
 ```
 
 The S3 object API remains on the existing S3G port (typically `9878`).
@@ -504,7 +504,7 @@ CREDS=$(AWS_ACCESS_KEY_ID=$PERM_AWS_ACCESS_KEY_ID \
   AWS_SECRET_ACCESS_KEY=$PERM_AWS_SECRET_ACCESS_KEY \
   AWS_SESSION_TOKEN= \
   aws sts assume-role \
-  --endpoint-url http://<s3g-host>:9880/sts \
+  --endpoint-url http://<s3g-host>:9880 \
   --role-arn arn:aws:iam::123456789012:role/my-data-read-write-role \
   --role-session-name catalog-session \
   --duration-seconds 3600 \
@@ -546,7 +546,7 @@ CREDS=$(AWS_ACCESS_KEY_ID=$PERM_AWS_ACCESS_KEY_ID \
   AWS_SECRET_ACCESS_KEY=$PERM_AWS_SECRET_ACCESS_KEY \
   AWS_SESSION_TOKEN= \
   aws sts assume-role \
-  --endpoint-url http://<s3g-host>:9880/sts \
+  --endpoint-url http://<s3g-host>:9880 \
   --role-arn arn:aws:iam::123456789012:role/my-data-read-write-role \
   --role-session-name scoped-read \
   --policy "$SESSION_POLICY" \
