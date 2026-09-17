@@ -575,18 +575,20 @@ aws s3api put-object \
 # → AccessDenied
 ```
 
-### Revoke a session token
+### Revoking session tokens
 
-Only the token creator or an S3/tenant admin may revoke:
+Ozone STS provides the ability to revoke STS tokens via command-line interface, such that all tokens created by the user before the time the command was issued will be revoked.
+STS tokens created after the command is run will still work fine.
+Only the user identity corresponding to originalAccessKeyId or an S3/tenant admin may revoke:
 
 ```shell
-ozone s3 revokeststoken -t "$(echo "$CREDS" | jq -r .Credentials.SessionToken)" -y
+ozone s3 revokeststoken -o "$PERM_AWS_ACCESS_KEY_ID" -y
 ```
 
-Revoking a user's permanent secret also invalidates all outstanding STS tokens for that user:
+Revoking a user's permanent secret also invalidates all outstanding STS tokens for that user (irrespective of cutoff) and no new tokens can be created by that user:
 
 ```shell
-ozone s3 revokesecret -u my-service-user -y
+ozone s3 revokesecret -u "$PERM_AWS_ACCESS_KEY_ID" -y
 ```
 
 ---
