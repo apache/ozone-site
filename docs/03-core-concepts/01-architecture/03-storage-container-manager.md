@@ -78,7 +78,7 @@ There are two ways to exit safe mode:
    - **`OneReplicaPipelineSafeModeRule`**: Checks if a certain percentage of pipelines have at least one replica reported. This is configured by `hdds.scm.safemode.atleast.one.node.reported.pipeline.pct` (default: `0.90`).
    - **`ECContainerSafeModeRule`**: Checks if a certain percentage of erasure coded block groups are healthy. This is also configured by `hdds.scm.safemode.threshold.pct` (default: `0.99`).
 
-2. **Manual Exit:** You can force SCM to exit safe mode using the `ozone admin safemode --force-exit` command.
+2. **Manual Exit:** You can force SCM to exit safe mode using the `ozone admin safemode exit` command.
 
 ### Safe Mode Pre-Check
 

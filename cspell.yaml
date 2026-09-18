@@ -87,6 +87,7 @@ words:
 - OBS
 - HttpFS
 - safemode
+- Precheck
 - mis-replicate
 - mis-replication
 - mis-replicated
