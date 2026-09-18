@@ -599,7 +599,7 @@ ozone s3 revokesecret -u "$PERM_AWS_ACCESS_KEY_ID" -y
 
 Ozone allows buckets to be linked. There can be a source bucket S, that is linked to bucket A, which is linked to bucket B, and so on.
 If you need to use a linked bucket when assuming the role, ensure the Ranger policies for the role have the proper permissions for each link in the chain as well as the source bucket.
-As an example, suppose we want to assume role on bucket B.  The role needs read access to bucket B, read access to bucket A, and the requisite access for bucket S (such as read on keys for GetObject, create and write on keys for PutObject, etc.). 
+As an example, suppose we want to assume role on bucket B.  The role needs read access to bucket B, read access to bucket A, and the requisite access for bucket S (such as read on keys for GetObject, create and write on keys for PutObject, etc.).
 The role also must have at least read access to the volume(s) where these buckets live as well.
 
 For this example, we'll use `reports` bucket as the source bucket, `reports-link-1` as bucket A and `reports-link-2` as bucket B.
