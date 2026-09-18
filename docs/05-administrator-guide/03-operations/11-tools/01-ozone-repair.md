@@ -1,6 +1,6 @@
 # Ozone Repair
 
-Ozone Repair (`ozone repair`) is an advanced tool to repair Ozone. The nodes being repaired must be stopped before the tool is run.
+Ozone Repair (`ozone repair`) is an advanced tool to repair Ozone. Most subcommands require the node being repaired to be stopped before the tool is run. The `ozone repair om download` subcommand is an exception: it reads from a **running** OM over HTTP(S) while you restore metadata onto a stopped node.
 
 :::note
 All repair commands support a `--dry-run` option which allows a user to see what repair the command will be performing without actually making any changes to the cluster.
@@ -69,6 +69,7 @@ Operational tool to repair OM.
 - quota
 - compact
 - skip-ratis-transaction
+- download
 
 ### FSO-tree
 
@@ -227,6 +228,21 @@ from one of the good OMs to the crashing OM instead.
                                removed
   -s, --segment-path=<segmentFile>
                              Path of the input segment file
+```
+
+#### download
+
+Download OM metadata from a running OM (same v2 checkpoint flow as follower bootstrap). The source cluster must be **running**; stop the target OM before installing the output. Requires Ozone 2.2+ (HDDS-16171). See [OM metadata backup](../backup-and-recovery/om-metadata-backup).
+
+```bash
+Usage: ozone repair om download [-hV] [--dry-run] [--overwrite] [--verbose]
+                                [--node-id=<nodeId>]
+                                [--om-service-id=<omServiceId>]
+                                --output-dir=<outputDir>
+      --node-id=<nodeId>              OM node to download from (recommended: leader)
+      --om-service-id, --service-id   Ozone Manager Service ID
+      --output-dir=<outputDir>        Output directory (om.db and db.snapshots)
+      --overwrite                     Overwrite output directory if it exists
 ```
 
 ## ozone repair SCM

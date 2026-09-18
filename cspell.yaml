@@ -72,6 +72,7 @@ words:
 # Apache Software Foundation words
 - ASF
 - PMC
+- TBD
 # Ozone specific words
 - HDDS
 - ratis
@@ -86,6 +87,7 @@ words:
 - OBS
 - HttpFS
 - safemode
+- Precheck
 - mis-replicate
 - mis-replication
 - mis-replicated
@@ -322,6 +324,9 @@ words:
 - whbing
 - jianghuazhu
 - weimingdiit
+- sravani
+- revuri
+- sumitagrawl
 # Infrastructure and hardware terms
 - firewalled
 - Chrony

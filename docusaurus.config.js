@@ -26,6 +26,10 @@ const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 
+// Set the /<baseUrl>/ pathname under which your site is served
+// For GitHub pages deployment, it is often '/<projectName>/'
+const baseUrl = '/';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
@@ -34,9 +38,7 @@ const config = {
   // This must match the URL the website is hosted at for social media previews to work.
   // If you are testing the social media image (themeConfig.image) locally, set this to http://localhost:3001.
   url: 'https://ozone.apache.org',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl,
 
   // Fail the build if there are any broken links.
   onBrokenLinks: 'throw',
@@ -62,7 +64,7 @@ const config = {
       tagName: 'link',
       attributes: {
         rel: 'icon',
-        href: 'favicon.ico',
+        href: `${baseUrl}favicon.ico`,
         sizes: '32x32'
       },
     },
@@ -70,7 +72,7 @@ const config = {
       tagName: 'link',
       attributes: {
         rel: 'icon',
-        href: 'favicon.svg',
+        href: `${baseUrl}favicon.svg`,
         type: "image/svg+xml"
       },
     },
@@ -78,7 +80,7 @@ const config = {
       tagName: 'link',
       attributes: {
         rel: 'apple-touch-icon',
-        href: 'apple-touch-icon.png',
+        href: `${baseUrl}apple-touch-icon.png`,
       },
     },
     {

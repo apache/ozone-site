@@ -5,6 +5,7 @@ Apache Ozone offers several ways to connect with the community. Whether you have
 ## Quick Links
 
 - [Mailing Lists](#mailing-lists): Primary communication for development discussions and decisions
+- [Reporting Security Vulnerabilities](#reporting-security-vulnerabilities): Report undisclosed security vulnerabilities privately
 - [GitHub Discussions](#github-discussions): Q&A and community discussions
 - [Slack](#slack): Real-time chat with community members
 - [Jira](#jira): Issue tracking and project management
@@ -38,6 +39,16 @@ For user questions and discussions:
 - For code snippets, use proper formatting (indent with 4 spaces)
 - Respond inline to long emails with multiple points
 - Follow the [Apache Code of Conduct](https://www.apache.org/foundation/policies/conduct.html)
+
+## Reporting Security Vulnerabilities
+
+The Apache Ozone project maintains a security mailing list for anyone to report security vulnerabilities in the project.
+
+- **Report vulnerabilities**: [security@ozone.apache.org](mailto:security@ozone.apache.org)
+- **Reporting guidelines**: [ASF Project Security for Committers](https://www.apache.org/security/committers.html)
+- **Published security advisories**: [security.apache.org/projects/ozone](https://security.apache.org/projects/ozone/)
+
+Note: Known vulnerabilities in thirdparty dependencies should not be reported using this channel.
 
 ## GitHub Discussions
 
@@ -116,6 +127,7 @@ The Ozone community holds regular video calls to discuss project progress, make 
 ## Choosing the Right Channel
 
 - **Mailing Lists**: For official discussions, design proposals, community decisions
+- **Reporting Security Vulnerabilities**: For privately reporting undisclosed security vulnerabilities in Ozone. Do not use Jira or GitHub for this.
 - **GitHub Discussions**: For Q&A, ideas, and general conversations about Ozone
 - **Slack**: For quick questions and real-time chat
 - **Jira**: For tracking specific bugs, improvements, and feature requests
