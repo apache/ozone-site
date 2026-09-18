@@ -471,6 +471,8 @@ curl --silent --show-error --location -u admin:rangerR0cks! \
 
 ## Sample Ozone STS Usage
 
+Complete [Ranger Policy Setup](#ranger-policy-setup) if you have not already.
+
 ### Step 1: Obtain permanent credentials
 
 ```shell
@@ -485,13 +487,13 @@ export AWS_DEFAULT_REGION=<region such as us-east-1>
 
 ### Step 2: Create the reports bucket in Ozone and upload sample object
 
-`my-service-user` does not have permission to read the `s3v` volume or create buckets. Switch to a Kerberos identity with permission to read the s3v volume and create `report` bucket (you may need to create this user and assign it the proper permissions in Ranger policies), create the `reports` bucket referenced in the Ranger policies above, upload a sample object for `GetObject` tests in later steps, then switch back to `my-service-user`.
+`my-service-user` does not have permission to read the `s3v` volume or create buckets. Switch to a Kerberos identity with permission to read the s3v volume and create `reports` bucket (you may need to create this user and assign it the proper permissions in Ranger policies), create the `reports` bucket referenced in the Ranger policies above, upload a sample object for `GetObject` tests in later steps, then switch back to `my-service-user`.
 
 ```shell
 kinit <userWithPermissionToReadS3VVolumeAndCreateReportsBucket>
 ozone sh bucket create /s3v/reports
-printf 'sample data for GetObject test\n' > /tmp/file.parquet
-ozone sh key put /s3v/reports/data/file.parquet /tmp/file.parquet
+printf 'sample data for GetObject test\n' > /tmp/file.txt
+ozone sh key put /s3v/reports/data/file.txt /tmp/file.txt
 kinit my-service-user
 ```
 
@@ -524,13 +526,13 @@ Remember to replace `<s3g-host>` with the correct value for your server (for exa
 # Read allowed
 aws s3api get-object \
   --endpoint-url "$AWS_ENDPOINT_URL_S3" \
-  --bucket reports --key data/file.parquet /tmp/file.parquet
+  --bucket reports --key data/file.txt /tmp/file.txt
 
 # Write allowed as well
-printf 'new data for PutObject test\n' > /tmp/new.parquet
+printf 'new data for PutObject test\n' > /tmp/new.txt
 aws s3api put-object \
   --endpoint-url "$AWS_ENDPOINT_URL_S3" \
-  --bucket reports --key data/new.parquet --body /tmp/new.parquet
+  --bucket reports --key data/new.txt --body /tmp/new.txt
 ```
 
 ### Step 5: Assume a role with an inline session policy
@@ -566,12 +568,12 @@ Remember to replace `<s3g-host>` with the correct value for your server (for exa
 # Read allowed
 aws s3api get-object \
   --endpoint-url "$AWS_ENDPOINT_URL_S3" \
-  --bucket reports --key data/file.parquet /tmp/file.parquet
+  --bucket reports --key data/file.txt /tmp/file.txt
 
 # Write denied since session policy only allowed GetObject
 aws s3api put-object \
   --endpoint-url "$AWS_ENDPOINT_URL_S3" \
-  --bucket reports --key data/new.parquet --body /tmp/new.parquet
+  --bucket reports --key data/new.txt --body /tmp/new.txt
 # → AccessDenied
 ```
 
@@ -589,6 +591,212 @@ Revoking a user's permanent secret also invalidates all outstanding STS tokens f
 
 ```shell
 ozone s3 revokesecret -u "$PERM_AWS_ACCESS_KEY_ID" -y
+```
+
+---
+
+## Sample Ozone STS Usage - Linked Buckets
+
+Ozone allows buckets to be linked. There can be a source bucket S, that is linked to bucket A, which is linked to bucket B, and so on.
+If you need to use a linked bucket when assuming the role, ensure the Ranger policies for the role have the proper permissions for each link in the chain as well as the source bucket.
+As an example, suppose we want to assume role on bucket B.  The role needs read access to bucket B, read access to bucket A, and the requisite access for bucket S (such as read on keys for GetObject, create and write on keys for PutObject, etc.). 
+The role also must have at least read access to the volume(s) where these buckets live as well.
+
+For this example, we'll use `reports` bucket as the source bucket, `reports-link-1` as bucket A and `reports-link-2` as bucket B.
+
+### Step 1: Configure Ranger policies
+
+Complete [Ranger Policy Setup](#ranger-policy-setup) if you have not already. That section covers the Ranger user, role, assume_role policy, and volume/bucket/key policies for the source `reports` bucket.
+
+Because S3 clients access `reports-link-2`, Ranger must also authorize each link in the resolution chain. Add a **bucket** policy for each link bucket (`reports-link-1` and `reports-link-2`) with at least `read` access and matching `action-matches` conditions for the S3 actions the role will perform:
+
+**Bucket `reports-link-1`** (link to source bucket `reports`):
+
+```shell
+curl --silent --show-error --location -u admin:rangerR0cks! \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "accept: application/json" \
+  --data '{
+    "isEnabled": true,
+    "service": "'"${RANGER_SERVICE}"'",
+    "name": "read/write reports-link-1 bucket access",
+    "policyType": 0,
+    "policyPriority": 0,
+    "isAuditEnabled": true,
+    "resources": {
+      "volume": {
+        "values": ["s3v"],
+        "isExcludes": false,
+        "isRecursive": false
+      },
+      "bucket": {
+        "values": ["reports-link-1"],
+        "isExcludes": false,
+        "isRecursive": false
+      }
+    },
+    "policyItems": [{
+      "accesses": [{ "type": "read", "isAllowed": true }],
+      "roles": ["my-data-read-write-role"],
+      "conditions": [{ "type": "action-matches", "values": ["GetObject", "PutObject"] }],
+      "delegateAdmin": false
+    }],
+    "serviceType": "ozone",
+    "isDenyAllElse": false
+  }' \
+  "${RANGER_URL}/service/public/v2/api/policy"
+```
+
+**Bucket `reports-link-2`** (link to `reports-link-1`; this is the bucket name used in S3 API calls):
+
+```shell
+curl --silent --show-error --location -u admin:rangerR0cks! \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "accept: application/json" \
+  --data '{
+    "isEnabled": true,
+    "service": "'"${RANGER_SERVICE}"'",
+    "name": "read/write reports-link-2 bucket access",
+    "policyType": 0,
+    "policyPriority": 0,
+    "isAuditEnabled": true,
+    "resources": {
+      "volume": {
+        "values": ["s3v"],
+        "isExcludes": false,
+        "isRecursive": false
+      },
+      "bucket": {
+        "values": ["reports-link-2"],
+        "isExcludes": false,
+        "isRecursive": false
+      }
+    },
+    "policyItems": [{
+      "accesses": [{ "type": "read", "isAllowed": true }],
+      "roles": ["my-data-read-write-role"],
+      "conditions": [{ "type": "action-matches", "values": ["GetObject", "PutObject"] }],
+      "delegateAdmin": false
+    }],
+    "serviceType": "ozone",
+    "isDenyAllElse": false
+  }' \
+  "${RANGER_URL}/service/public/v2/api/policy"
+```
+
+Key-level `read`, `create`, and `write` permissions remain on the source bucket `reports` only; link buckets do not store keys.
+
+Allow time for Ranger policy cache refresh (up to 30 seconds) before calling AssumeRole.
+
+### Step 2: Obtain permanent credentials
+
+```shell
+kinit my-service-user
+ozone s3 getsecret
+export PERM_AWS_ACCESS_KEY_ID=<awsAccessKey from output>
+export PERM_AWS_SECRET_ACCESS_KEY=<awsSecret from output>
+export AWS_ACCESS_KEY_ID=$PERM_AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$PERM_AWS_SECRET_ACCESS_KEY
+export AWS_DEFAULT_REGION=<region such as us-east-1>
+```
+
+### Step 3: Create the source bucket, bucket links, and sample object
+
+`my-service-user` does not have permission to read the `s3v` volume or create buckets. Switch to a Kerberos identity with permission to read the `s3v` volume and create buckets (you may need to create this user and assign it the proper permissions in Ranger policies), then:
+
+1. Create the source bucket `reports` and upload a sample object.
+2. Create bucket links so `reports-link-1` points to `reports`, and `reports-link-2` points to `reports-link-1`.
+
+```shell
+kinit <userWithPermissionToReadS3VVolumeAndCreateReportsBucket>
+ozone sh bucket create /s3v/reports
+printf 'sample data for GetObject test\n' > /tmp/file.txt
+ozone sh key put /s3v/reports/data/file.txt /tmp/file.txt
+ozone sh bucket link /s3v/reports /s3v/reports-link-1
+ozone sh bucket link /s3v/reports-link-1 /s3v/reports-link-2
+kinit my-service-user
+```
+
+For background on bucket links, see [Bucket Links](../../../core-concepts/namespace/buckets/links).
+
+### Step 4: Assume a role (full role permissions)
+
+AssumeRole must be invoked with the caller's permanent credentials (`PERM_AWS_*` from Step 2):
+
+```shell
+CREDS=$(AWS_ACCESS_KEY_ID=$PERM_AWS_ACCESS_KEY_ID \
+  AWS_SECRET_ACCESS_KEY=$PERM_AWS_SECRET_ACCESS_KEY \
+  AWS_SESSION_TOKEN= \
+  aws sts assume-role \
+  --endpoint-url http://<s3g-host>:9880 \
+  --role-arn arn:aws:iam::123456789012:role/my-data-read-write-role \
+  --role-session-name linked-bucket-session \
+  --duration-seconds 3600 \
+  --output json)
+
+export AWS_ACCESS_KEY_ID=$(echo "$CREDS" | jq -r .Credentials.AccessKeyId)
+export AWS_SECRET_ACCESS_KEY=$(echo "$CREDS" | jq -r .Credentials.SecretAccessKey)
+export AWS_SESSION_TOKEN=$(echo "$CREDS" | jq -r .Credentials.SessionToken)
+export AWS_ENDPOINT_URL_S3=http://<s3g-host>:9878
+```
+
+Remember to replace `<s3g-host>` with the correct value for your server (for example localhost).
+
+### Step 5: Use temporary credentials against the linked bucket
+
+Access data through bucket `reports-link-2`. Ozone resolves the link chain to the source bucket `reports` transparently:
+
+```shell
+# Read allowed (data stored in /s3v/reports/data/file.txt)
+aws s3api get-object \
+  --endpoint-url "$AWS_ENDPOINT_URL_S3" \
+  --bucket reports-link-2 --key data/file.txt /tmp/file.txt
+
+# Write allowed as well (object created in source bucket reports)
+printf 'new data for PutObject test\n' > /tmp/new.txt
+aws s3api put-object \
+  --endpoint-url "$AWS_ENDPOINT_URL_S3" \
+  --bucket reports-link-2 --key data/new.txt --body /tmp/new.txt
+```
+
+If Ranger policies omit read access on any link bucket in the chain, or omit the requisite key permissions on the source bucket `reports`, these calls return `AccessDenied` even though the S3 client targets `reports-link-2`.
+
+### Step 6: Assume a role with an inline session policy (optional)
+
+To scope temporary credentials to the linked bucket only, pass an inline session policy whose `Resource` references `reports-link-2`. AssumeRole must be invoked with the caller's **permanent** credentials:
+
+```shell
+SESSION_POLICY='{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":"s3:GetObject","Resource":"arn:aws:s3:::reports-link-2/*"}]}'
+
+CREDS=$(AWS_ACCESS_KEY_ID=$PERM_AWS_ACCESS_KEY_ID \
+  AWS_SECRET_ACCESS_KEY=$PERM_AWS_SECRET_ACCESS_KEY \
+  AWS_SESSION_TOKEN= \
+  aws sts assume-role \
+  --endpoint-url http://<s3g-host>:9880 \
+  --role-arn arn:aws:iam::123456789012:role/my-data-read-write-role \
+  --role-session-name linked-bucket-scoped-read \
+  --policy "$SESSION_POLICY" \
+  --output json)
+
+export AWS_ACCESS_KEY_ID=$(echo "$CREDS" | jq -r .Credentials.AccessKeyId)
+export AWS_SECRET_ACCESS_KEY=$(echo "$CREDS" | jq -r .Credentials.SecretAccessKey)
+export AWS_SESSION_TOKEN=$(echo "$CREDS" | jq -r .Credentials.SessionToken)
+export AWS_ENDPOINT_URL_S3=http://<s3g-host>:9878
+```
+
+```shell
+# Read allowed via reports-link-2
+aws s3api get-object \
+  --endpoint-url "$AWS_ENDPOINT_URL_S3" \
+  --bucket reports-link-2 --key data/file.txt /tmp/file.txt
+
+# Write denied since session policy only allowed GetObject
+aws s3api put-object \
+  --endpoint-url "$AWS_ENDPOINT_URL_S3" \
+  --bucket reports-link-2 --key data/new.txt --body /tmp/new.txt
+# → AccessDenied
 ```
 
 ---
