@@ -65,5 +65,6 @@ The first command checks metadata (OM). The second checks data read (Datanode). 
 
 ## See also
 
+- [Troubleshooting connectivity issues](./connectivity) — OM, SCM, Recon, and Datanode connection failures
 - [HDDS-5916](https://issues.apache.org/jira/browse/HDDS-5916) — Kubernetes pipeline issues after pod IP changes
 - [HDDS-13124](https://issues.apache.org/jira/browse/HDDS-13124) — read path and hostname configuration
