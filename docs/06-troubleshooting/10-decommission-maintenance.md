@@ -5,30 +5,27 @@ sidebar_label: Decommissioning and Maintenance
 # Troubleshooting Decommissioning and Maintenance
 
 A Datanode moves from `DECOMMISSIONING` to `DECOMMISSIONED` only after every container it holds is sufficiently replicated on other nodes.
-On a dense Datanode this takes hours, and on a large or busy cluster it can take days: the whole node has to be copied over the network while the cluster keeps serving normal traffic.
+On a dense Datanode this takes hours, and on a large or busy cluster it can take days.
 Slow is normal; stuck is not.
-This page shows how to tell the two apart, what usually blocks the workflow, and which settings make it faster.
+This page shows how to tell the two apart and what to do in each case.
 
-The same workflow (close pipelines, replicate containers, change state) is used when a Datanode enters maintenance, so the checks below apply to a node stuck in `ENTERING_MAINTENANCE` as well.
+SCM re-checks every decommissioning node each `ozone.scm.datanode.admin.monitor.interval` (default `30s`), and completes it once:
 
-## How the workflow progresses
+1. All pipelines on the node, Ratis and EC, have closed.
+2. The node is alive and has reported its new operational state in a heartbeat.
+3. Every container on the node is `CLOSED` or `QUASI_CLOSED` and has enough healthy replicas on other nodes. Containers in `DELETING` or `DELETED` state are ignored.
 
-SCM's Datanode admin monitor re-checks every decommissioning node each `ozone.scm.datanode.admin.monitor.interval` (default `30s`).
-A node completes only once all of the following hold:
-
-1. All Ratis pipelines on the node have closed.
-2. The Datanode has reported the new operational state in a heartbeat, so it must be alive.
-3. Every container on the node is `CLOSED` or `QUASI_CLOSED`, its healthy replicas on `IN_SERVICE` nodes are in that same state, and there are enough of them. Containers in `DELETING` or `DELETED` state are ignored.
-
-The copying itself is done by the SCM Replication Manager, which sends replicate-container commands to Datanodes.
-Those commands are throttled per Datanode and cluster-wide.
-SCM copies each container from whichever of its healthy replicas has the fewest replication commands queued.
-The decommissioning node is allowed more queued commands than an in-service node, so it stays eligible as a source for longer.
-Either way, the throttles set the pace of the whole decommission.
+:::note Maintenance
+A node entering maintenance goes through the same checks with a lower replica threshold: a Ratis container needs `hdds.scm.replication.maintenance.replica.minimum` (default `2`) replicas on other nodes, and an EC container needs its data replicas plus `hdds.scm.replication.maintenance.remaining.redundancy` (default `1`).
+The status command below only lists `DECOMMISSIONING` nodes, so for a node stuck in `ENTERING_MAINTENANCE` use the [SCM log](#scm-log) and [metrics](#metrics) instead.
+See [Datanode Maintenance Mode](../administrator-guide/operations/node-decommissioning-and-maintenance/datanodes/datanode-maintenance) for details.
+:::
 
 ## Check the progress
 
 ### Decommission status command
+
+Run the status command a few times, some minutes apart:
 
 ```shell
 ozone admin datanode status decommission [--node-id=<uuid> | --ip=<ipAddress>] [--json]
@@ -45,91 +42,90 @@ No. of Unclosed Containers: 3
 {UnderReplicated=[#1001, #1002, ...], UnClosed=[#1200, #1201, #1202]}
 ```
 
-Run the command a few times, some minutes apart:
-
-- `No. of UnderReplicated Containers` keeps decreasing: the decommission is progressing and just needs time. See [Making it faster](#making-it-faster).
-- `No. of Unclosed Pipelines` stays above zero: see [Pipelines that do not close](#pipelines-that-do-not-close).
-- `No. of Unclosed Containers` stays above zero while the under-replicated count reaches zero: see [Containers that do not close](#containers-that-do-not-close).
-- `No. of UnderReplicated Containers` stays flat across several monitor intervals: replication is not happening. See [Replication is not making progress](#replication-is-not-making-progress).
+| What you see | Next step |
+| --- | --- |
+| `No. of UnderReplicated Containers` keeps decreasing | The decommission is progressing. If it is too slow, see [Make it faster](#make-it-faster). |
+| `No. of Unclosed Pipelines` stays above zero | See [Pipelines do not close](#pipelines-do-not-close). |
+| `No. of Unclosed Containers` stays above zero | See [Containers do not close](#containers-do-not-close). |
+| `No. of UnderReplicated Containers` stays flat for several monitor intervals | See [Replication is stalled](#replication-is-stalled). |
 
 ### SCM log
 
-On every monitor run SCM logs one summary line per tracked node:
+On every monitor run SCM logs one line per node.
+Compare consecutive lines to see whether `underReplicated` moves:
 
 ```text
 <datanode> has 12405 sufficientlyReplicated, 17 deleting, 1834 underReplicated and 3 unclosed containers
 ```
 
-Compare consecutive lines to see whether `underReplicated` moves.
-While pipelines are still open the line is `Waiting for pipelines to close for <datanode>. There are N pipelines` instead.
-Each blocking container is also logged as `Under Replicated Container <id> <replicas>; <replica details>` or `Unclosed Container <id> <replicas>; <replica details>`, with the state and location of its replicas.
-The number of such lines per node and per category is capped by `ozone.scm.datanode.admin.monitor.logging.limit` (default `1000`) unless DEBUG logging is enabled.
+While pipelines are still open, the line is `Waiting for pipelines to close for <datanode>. There are N pipelines` instead.
+Each blocking container is logged as `Under Replicated Container <id> ...` or `Unclosed Container <id> ...`, with the state and location of its replicas, up to `ozone.scm.datanode.admin.monitor.logging.limit` (default `1000`) lines per node and category.
 
 ### Metrics
 
-The SCM `NodeDecommissionMetrics` source (JMX bean `Hadoop:service=StorageContainerManager,name=NodeDecommissionMetrics`) exposes the same counters the status command prints, so they can be graphed in Grafana:
+Import the [Ozone Datanode Decommission and Maintenance dashboard](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/common/grafana/dashboards/Ozone%20-%20Datanode%20Decommission%20and%20Maintenance.json) into [Grafana](../administrator-guide/operations/observability/grafana).
+It graphs the same counters as the status command, per node and in total, next to the SCM Replication Manager and Datanode replication metrics used on the rest of this page.
+In a healthy decommission, under-replicated containers trend down and sufficiently replicated containers trend up.
+Each metric is described in the [Datanode decommission guide](../administrator-guide/operations/node-decommissioning-and-maintenance/datanodes/datanode-decommission#metrics).
 
-- `ContainersUnderReplicatedTotal`, `ContainersUnClosedTotal`, `ContainersSufficientlyReplicatedTotal` and `PipelinesWaitingToCloseTotal` across all tracked nodes.
-- Per node, tagged with the `datanode` host name: `UnderReplicatedDN`, `UnclosedContainersDN`, `SufficientlyReplicatedDN` and `PipelinesWaitingToCloseDN`, plus `StartTimeDN`, the time the workflow started.
+## Pipelines do not close
 
-A healthy decommission shows `ContainersUnderReplicatedTotal` trending down and `ContainersSufficientlyReplicatedTotal` trending up.
-To see how hard the cluster is replicating, pair them with the SCM `ReplicationManagerMetrics` (`InflightReplication`, `ReplicationCmdsSentTotal`, `ReplicasCreatedTotal`, `ReplicateContainerCmdsDeferredTotal`) and the Datanode-side replication metrics described in the [Datanode decommission guide](../administrator-guide/operations/node-decommissioning-and-maintenance/datanodes/datanode-decommission#metrics).
+A small non-zero count during the first few minutes is expected: a closed pipeline is only removed from the node by the pipeline scrubber (`ozone.scm.pipeline.scrub.interval`, default `5m`) after it has stayed `CLOSED` for `ozone.scm.pipeline.destroy.timeout` (default `66s`).
+If the count stays above zero for longer:
 
-## Common causes
+1. Run `ozone admin pipeline list` and find the pipelines that still include the node.
+2. Check that the other Datanodes in those pipelines are healthy.
 
-### Pipelines that do not close
+## Containers do not close
 
-The workflow does not look at containers until every pipeline on the node is gone.
-SCM closes the node's pipelines and the containers in them right away, but a closed pipeline is only removed from the node by the pipeline scrubber (`ozone.scm.pipeline.scrub.interval`, default `5m`) once it has stayed `CLOSED` for `ozone.scm.pipeline.destroy.timeout` (default `66s`), so a small non-zero count during the first few minutes of the decommission is expected.
-If `No. of Unclosed Pipelines` stays above zero for longer than that, look at `ozone admin pipeline list` for the pipelines still `CLOSED` with the node in them, and check that their other Datanodes are healthy.
+A container blocks the workflow while it is `OPEN` or `CLOSING`, and should close within a few heartbeats after its pipeline closes.
+If it does not:
 
-### Containers that do not close
+1. Take the container IDs from the `UnClosed` list of the status command, or from the `Unclosed Container` lines in the SCM log.
+2. Run `ozone admin container info <containerID>` to see its state and replicas.
+3. Check the Datanode logs on the replica nodes for errors closing that container.
 
-A container blocks the decommission while it is `OPEN` or `CLOSING`.
-Once its pipeline is closed the container should close within a few heartbeats.
-If it does not, look up its state and replicas with `ozone admin container info <containerID>`, and check the Datanode logs on the replica nodes for errors closing that container.
-A `QUASI_CLOSED` container does not block the decommission by itself, as long as its healthy replicas on `IN_SERVICE` nodes are also `QUASI_CLOSED`; it then only needs enough replicas.
+A `QUASI_CLOSED` container does not block the workflow by itself, as long as its healthy replicas on `IN_SERVICE` nodes are also `QUASI_CLOSED`.
 
-### Replication is not making progress
+## Replication is stalled
 
-If the under-replicated count is flat, the Replication Manager cannot schedule copies, or the copies it schedules fail.
-Look at the SCM log for the container IDs listed under `UnderReplicated` and check which of these applies:
+Take a few IDs from the `UnderReplicated` list, search the SCM log for them, and match the message:
 
-- **No suitable target Datanodes.** SCM logs `Cannot replicate container <id> because no suitable targets were found`, and the placement policy reports `No enough datanodes to choose` or `Placement Policy: <policy> did not return any nodes`.
-  A target must be `IN_SERVICE`, healthy, must not already hold a replica, must have enough free space for the container, and must satisfy the rack placement policy.
-  This usually means too many nodes are decommissioning at the same time, the remaining nodes or racks are too few, or the remaining nodes are running out of space.
+- **`Cannot replicate container <id> because no suitable targets were found`**: no Datanode can take a new replica.
+  A target must be `IN_SERVICE`, healthy, have enough free space, not already hold a replica, and satisfy the rack placement policy.
   Add capacity, or recommission some nodes with `ozone admin datanode recommission` and decommission them in smaller batches.
-- **No source with capacity.** `ReplicateContainerCmdsDeferredTotal` climbs and SCM logs `No sources with capacity available for replication of container <id>`.
-  Every node that could serve as source already has as many queued replication commands as it is allowed.
-  This is the throttle described in [Making it faster](#making-it-faster).
-- **Commands time out.** `ReplicationCmdsSentTotal` grows much faster than `ReplicasCreatedTotal`, and the Datanodes report replication failures or timeouts in their `ReplicationSupervisorMetrics` (`numFailureReplications`, `numTimeoutReplications`).
-  Each command must finish within `hdds.scm.replication.event.timeout` (default `12m`), otherwise SCM retries it.
-  Very large containers over a slow or congested link can miss that deadline every time; raise the timeout or reduce the concurrency so that each copy gets more bandwidth.
-- **The decommissioning node is not heartbeating.** The node must confirm its new state, and its replicas are among the sources SCM copies from.
-  If the node dies during the workflow, SCM logs `Datanode <dn> is dead and the admin workflow cannot continue` and puts it back to `IN_SERVICE`, after which the containers are handled as ordinary under-replicated containers.
+- **`No sources with capacity available for replication of container <id>`**: every node that could serve as source is at its replication limit, and `ReplicateContainerCmdsDeferredTotal` climbs.
+  Raise the per-Datanode limits, see [Make it faster](#make-it-faster).
+- **`Datanode <dn> is dead and the admin workflow cannot continue`**: the decommissioning node died, and SCM put it back to `IN_SERVICE`.
+  Its containers are re-replicated as ordinary under-replicated containers; if the node comes back, decommission it again.
 
-## Making it faster
+If there is no such message but `ReplicationCmdsSentTotal` grows much faster than `ReplicasCreatedTotal`, the copies are failing or timing out.
+Check `numFailureReplications` and `numTimeoutReplications` in the Datanode `ReplicationSupervisorMetrics`.
+Each copy must finish within `hdds.scm.replication.event.timeout` (default `12m`), otherwise SCM retries it; for large containers on a slow link, raise the timeout or lower the replication limits so that each copy gets more bandwidth.
 
-Replication is throttled in three places.
-All of the values below can be raised, at the cost of more replication load on the cluster while the decommission runs; do it in steps and watch the Datanode replication metrics and client latency.
+## Make it faster
 
-| Property | Default | Where | Effect |
+Replication is throttled per Datanode and cluster-wide, and those throttles set the pace of the decommission.
+Raise the one that is limiting you, in steps, and watch client latency, since every step adds replication load to the cluster.
+
+| Symptom | Property to raise |
+| --- | --- |
+| `ReplicateContainerCmdsDeferredTotal` climbs | `hdds.scm.replication.datanode.replication.limit`, or `hdds.datanode.replication.outofservice.limit.factor` to raise it only for decommissioning nodes |
+| SCM logs `The maximum number of pending replicas (<n>) are scheduled`, and `PendingReplicationLimitReachedTotal` climbs | `hdds.scm.replication.inflight.limit.factor` |
+| `queueTime` of the `MeasuredReplicator` metrics is high on the decommissioning node | `hdds.datanode.replication.streams.limit`, or `hdds.datanode.replication.per.volume.streams.limit` if per-volume replication is enabled |
+
+| Property | Default | Set on | Effect |
 | --- | --- | --- | --- |
-| `hdds.scm.replication.datanode.replication.limit` | `20` | SCM | Maximum replication commands queued on one Datanode. Reconfigurable at runtime. |
-| `hdds.datanode.replication.outofservice.limit.factor` | `2.0` (clamped to `1`-`10`) | SCM **and** Datanodes | Multiplier applied to the limit above, and to the Datanode replication queue and thread pool, for nodes that are decommissioning or in maintenance. |
-| `hdds.scm.replication.inflight.limit.factor` | `0.75` | SCM | Scales the cluster-wide cap of *healthy nodes × replication limit*. `1` disables the extra scaling, `0` disables the cap. Reconfigurable at runtime. |
-| `hdds.datanode.replication.streams.limit` | `10` | Datanodes | Replication threads on a Datanode, scaled by the out-of-service factor on decommissioning nodes. Raise it if the `MeasuredReplicator` `queueTime` metric is high on the decommissioning node. |
+| `hdds.scm.replication.datanode.replication.limit` | `20` | SCM | Replication load that can be queued on one Datanode, counted as replication commands plus EC reconstruction commands × `hdds.scm.replication.datanode.reconstruction.weight` (default `3`). Reconfigurable. |
+| `hdds.datanode.replication.outofservice.limit.factor` | `2.0` (`1`-`10`) | SCM **and** Datanodes | Multiplies the limit above, and the Datanode replication queue and thread pools, on decommissioning and maintenance nodes. Needs a restart. |
+| `hdds.scm.replication.inflight.limit.factor` | `0.75` | SCM | Scales the cluster-wide cap of *healthy nodes × replication limit* replicas pending creation. `0` disables the cap. Reconfigurable. |
+| `hdds.datanode.replication.streams.limit` | `10` | Datanodes | Replication threads on a Datanode. Limits outgoing copies only while `hdds.datanode.replication.per.volume.enabled` is `false` (default). Reconfigurable. |
+| `hdds.datanode.replication.per.volume.streams.limit` | `2` | Datanodes | Outgoing copies per data volume when `hdds.datanode.replication.per.volume.enabled` is `true`. Reconfigurable. |
 
-With the defaults, a decommissioning node is allowed 20 × 2 = 40 queued replication commands, and the whole cluster is capped at *healthy nodes × 20 × 0.75* in-flight replications.
-If that cap is what limits you, several nodes decommissioning at once share it.
-
-`hdds.datanode.replication.outofservice.limit.factor` has to be set on SCM as well as on the Datanodes: SCM uses it to decide how many commands to send, the Datanode uses it to size its queue and thread pool.
-It is not reconfigurable, so a restart is needed for it to take effect.
-The two SCM `hdds.scm.replication.*` properties marked reconfigurable can be changed without a restart, see [Dynamic Property Reload](../administrator-guide/operations/dynamic-property-reload).
+With the defaults, a decommissioning node can have 20 × 2 = 40 replication commands queued (each EC reconstruction command counts as 3), and all decommissioning nodes share a cluster-wide cap of *healthy nodes × 20 × 0.75* replicas pending creation.
+Reconfigurable properties can be changed without a restart, see [Dynamic Property Reload](../administrator-guide/operations/dynamic-property-reload).
 
 :::note
-Raising the limits only helps if the replication itself is the bottleneck.
-If the under-replicated count is flat rather than slowly decreasing, go back to [Replication is not making progress](#replication-is-not-making-progress) first.
+Raising the limits only helps if replication is slowly progressing.
+If the under-replicated count is flat, go back to [Replication is stalled](#replication-is-stalled) first.
 :::
-
-A full description of every replication-related property and metric is in the [Datanode decommission guide](../administrator-guide/operations/node-decommissioning-and-maintenance/datanodes/datanode-decommission#tuning-and-monitoring-decommissioning).
