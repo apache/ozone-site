@@ -22,7 +22,7 @@ See the [page about Containers](../../../core-concepts/replication/storage-conta
 
 ## Configuring Topology Hierarchy
 
-Ozone determines Datanode network locations (e.g., racks) using Hadoop's rack awareness, configured via `net.topology.node.switch.mapping.impl` in `ozone-site.xml`. This key specifies a `org.apache.hadoop.net.CachedDNSToSwitchMapping` implementation. [1]
+Ozone determines Datanode network locations (e.g., racks) using Hadoop's rack awareness, configured via `net.topology.node.switch.mapping.impl` in `ozone-site.xml`. The value of this key is the class name of an implementation of `org.apache.hadoop.net.DNSToSwitchMapping`. [1]
 
 :::note
 Both Ozone Manager (OM) and Storage Container Manager (SCM) use network topology information. It is critical to maintain a consistent topology assignment across all OM and SCM instances in the cluster.
