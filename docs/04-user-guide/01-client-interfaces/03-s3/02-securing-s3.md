@@ -68,6 +68,69 @@ aws configure set region us-west-1
 Please refer to AWS S3 documentation on how to use S3 via command line or via
 S3 API.
 
+## Set Secret
+
+Use `ozone s3 setsecret` to change an existing S3 secret to a specific value.
+Unlike `getsecret`, which auto-generates a secret when one does not exist,
+`setsecret` only updates an existing secret and requires you to provide the new
+secret key.
+
+| Command | Purpose |
+| ------- | ------- |
+| `ozone s3 getsecret` | Create or retrieve the initial auto-generated secret |
+| `ozone s3 setsecret` | Update an existing secret to a user-chosen value |
+| `ozone s3 revokesecret` | Invalidate the current secret |
+
+### Using the command line
+
+For a regular user to set their own secret:
+
+```bash
+ozone s3 setsecret --secret '<SECRET_KEY>'
+```
+
+An Ozone administrator can set a secret for a specific user by using the `-u` flag:
+
+```bash
+ozone s3 setsecret -u <username> --secret '<SECRET_KEY>'
+```
+
+The command also accepts the alias `set-secret` and the short form `-s` for
+`--secret`:
+
+```bash
+ozone s3 set-secret -s '<SECRET_KEY>'
+```
+
+To print shell `export` statements for use with `eval`:
+
+```bash
+eval $(ozone s3 setsecret -e --secret '<SECRET_KEY>')
+```
+
+Example:
+
+```bash
+kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM
+ozone s3 setsecret --secret 'my-new-secret-key'
+awsAccessKey=testuser/scm@EXAMPLE.COM
+awsSecret=my-new-secret-key
+```
+
+The AWS access key ID stays the same; only the secret changes. Secret keys
+must be at least 8 characters long. If no secret exists yet, run
+`ozone s3 getsecret` first.
+
+:::caution
+After `setsecret`, clients still using the old secret can no longer
+authenticate. Update `aws configure`, environment variables, or other client
+configuration with the new secret.
+:::
+
+For S3 multi-tenancy access IDs, use
+[`ozone tenant user setsecret`](../../../administrator-guide/operations/s3-multi-tenancy/tenant-commands#set-tenant-user-secret-key)
+instead.
+
 ## Revoking Secrets via REST API
 
 To invalidate/revoke the secret, use `ozone s3 revokesecret` command.
