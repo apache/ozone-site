@@ -20,6 +20,10 @@ Ozone's topology-aware strategies apply differently depending on the operation:
 
 See the [page about Containers](../../../core-concepts/replication/storage-containers) for more information related to Open vs Closed containers.
 
+:::tip
+When scaling with mixed hardware batches or uneven rack storage densities, see [Heterogeneous deployments](../../operations/heterogeneous-deployments) for deployment strategies and limitations of rack-aware placement.
+:::
+
 ## Configuring Topology Hierarchy
 
 Ozone determines Datanode network locations (e.g., racks) using Hadoop's rack awareness, configured via `net.topology.node.switch.mapping.impl` in `ozone-site.xml`. This key specifies a `org.apache.hadoop.net.CachedDNSToSwitchMapping` implementation. [1]
