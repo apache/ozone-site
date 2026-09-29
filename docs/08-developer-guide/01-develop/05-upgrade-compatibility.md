@@ -111,7 +111,7 @@ if (!ozoneManager.getVersionManager().needsFinalization()) {
 New versions will continue be added in subsequent releases after `MY_NEW_FEATURE`. Say `MY_NEW_FEATURE_2` is added in the next release. When upgrading from software version `MY_NEW_FEATURE` to `MY_NEW_FEATURE_2`, `MY_NEW_FEATURE` must remain finalized and usable from the previous upgrade even if the component is not yet finalized for `MY_NEW_FEATURE_2`.
 :::
 
-## Surface-by-surface guide
+## Surface-by-Surface Guide
 
 Each surface below follows the same shape: **what is considered incompatible** and **the pattern to handle it**. Note that OM and SCM are finalized via Ratis, but Datanodes finalize asynchronously as they receive the finalize command from SCM.
 
@@ -152,7 +152,7 @@ Each surface below follows the same shape: **what is considered incompatible** a
   }
 ```
 
-### OM apply transaction / OM RocksDB state
+### OM Apply Transaction / OM RocksDB State
 
 **Incompatible:** any change to what an OM request writes to RocksDB inside `validateAndUpdateCache`. This includes:
 
@@ -165,7 +165,7 @@ Each surface below follows the same shape: **what is considered incompatible** a
 
 If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105, both replaying this transaction from Ratis, arrive at the same DB state?* If not, it needs a gate.
 
-### OM ↔ OM peer RPCs outside Ratis, including Ratis snapshot installation APIs
+### OM ↔ OM Peer RPCs Outside Ratis, Including Ratis Snapshot Installation APIs
 
 **Incompatible:** adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright.
 
@@ -173,55 +173,55 @@ If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105,
 
 This pattern also applies to SCM peer RPCs.
 
-### OM → SCM communication
+### OM → SCM Communication
 
 **Incompatible:** any change to [`ScmBlockLocationProtocol`](https://github.com/apache/ozone/blob/master/hadoop-hdds/framework/src/main/java/org/apache/hadoop/hdds/scm/protocol/ScmBlockLocationProtocol.java) or [`StorageContainerLocationProtocol`](https://github.com/apache/ozone/blob/master/hadoop-hdds/framework/src/main/java/org/apache/hadoop/hdds/scm/protocol/StorageContainerLocationProtocol.java) which does not leave SCM's server backwards compatible with older OM clients.
 
 **Pattern:** SCM is always upgraded before OM, so compatibility is maintained by requiring SCM's server to always remain backwards compatible with older OM clients. Finalization happens in the same order after upgrade is complete (SCM before OM). This ordering combined with backwards compatibility guarantees of the SCM server allows OM and SCM to communicate without passing versions between them. Note that OM should not start exercising a new feature against SCM until OM itself has finalized, which guarantees that SCM has also finalized.
 
-### SCM state machine / SCM RocksDB
+### SCM State Machine / SCM RocksDB
 
 **Incompatible:** renaming a state-manager method invoked over Ratis, changing an argument codec, or changing what a state manager persists to RocksDB. SCM's Ratis protocol is a generic reflective RPC — different from OM's typed `OMRequest` — so the method name and argument types are part of the wire format. A rename or codec swap is a real break, not just a source-level refactor.
 
 **Pattern:** gate the *behavior* the state manager performs on `scm.getVersionManager().isAllowed(HDDSVersion.X)`. Never rename or delete an existing Ratis-invoked method or change its argument encoding. Add a new method instead and gate the switch to it.
 
-### Datanode → SCM heartbeat / reports
+### Datanode → SCM Heartbeat / Reports
 
 **Incompatible:** changing the semantics of an existing report field, or making a new report field *required* by SCM for correct processing.
 
 **Pattern:** SCM's heartbeat protocol server must remain backwards compatible with older Datanode clients. It must allow report formats from old and new Datanodes without regressions when SCM is newer than the Datanodes. The canonical example is `ContainerReplicaProto.isEmpty` (in [`ScmServerDatanodeHeartbeatProtocol.proto`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-server/src/main/proto/ScmServerDatanodeHeartbeatProtocol.proto)): a newer Datanode sets it, an older Datanode omits it, and SCM defaults it to `false` — which is the safe assumption.
 
-### SCM → Datanode commands
+### SCM → Datanode Commands
 
 **Incompatible:** new required fields on `SCMCommandProto`, new command types, or changed semantics for an existing command. Purely additive optional fields are safe.
 
 **Pattern:** If possible, make SCM issue commands in a backwards compatible way, such that Datanodes with an older apparent version can safely no-op the new operations until they are upgraded and finalized. If this is not possible, check the Datanode's apparent version using `DatanodeInfo#getLastKnownApparentVersion` to determine whether the new command can be sent to the node or not. Note that SCM's view of the Datanode's apparent version may be stale, but apparent version can never decrease and using a lower version is always safe.
 
-### Datanode write path
+### Datanode Write Path
 
 **Incompatible:** any change to how a container replica is written that must be identical across all replicas. This includes a new chunk-checksum scheme, a new container-schema, or new write-RPC semantics.
 
 **Pattern:** SCM picks a common apparent version for writes that is supported by all Datanodes in the pipeline, and provides that to the client to forward to Datanodes. Use `ClientCommandsUtils#getWritePipelineVersion` to obtain this version that the Datanode should use to execute the write request. Gate new write behavior on the **client-provided write pipeline version**, never on the Datanode's own apparent version. Datanodes are upgraded and finalize asynchronously, so peers may be in different apparent versions and unable to process a new request type even if the current node can.
 
-### Datanode read path
+### Datanode Read Path
 
 **Incompatible:** Any change that prevents older data from being read. A container's schema is fixed for the container's lifetime once it is created, so Datanodes must be able to serve every schema that was ever written.
 
 **Pattern:** **old data must remain readable forever.** Never remove a read path for a prior schema. A new schema adds a new branch; it never replaces an existing one.
 
-### Datanode ↔ Datanode (replication, EC reconstruction, reconciliation)
+### Datanode ↔ Datanode (Replication, EC Reconstruction, Reconciliation)
 
 **Incompatible:** any change to how a container replica is copied or created that must be identical across all replicas. This includes `CopyContainerRequestProto`, `SendContainerRequest`, `ReconstructECContainersCommandProto`, and `ReconcileContainerCommandProto`.
 
 **Pattern:** When SCM initiates a replication command, it will attach the minimum supported version of all involved Datanodes to the command. Receiving Datanodes should execute the replication command using that apparent version, regardless of their actual apparent version. This ensures that peers which are upgraded or finalized asynchronously can still process the command. An example of SCM passing this version to Datanodes is [`ReplicateContainerCommandProto#apparentVersion`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-server/src/main/proto/ScmServerDatanodeHeartbeatProtocol.proto).
 
-### Datanode on-disk container schema
+### Datanode On-Disk Container Schema
 
 **Incompatible:** removing or repurposing an existing container schema (V1/V2/V3). Existing schemas must never disappear.
 
 **Pattern:** a new schema is selected at container-create time from the write pipeline version and fixed for that container's life. Migrating existing containers to a new schema is an optional background process run after the upgrade completes. It is never part of finalization.
 
-### Block tokens & delegation tokens
+### Block Tokens & Delegation Tokens
 
 **Incompatible:** adding a new `AccessModeProto` value to `BlockTokenSecretProto`, or changing token enforcement semantics, in [`hdds.proto`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-client/src/main/proto/hdds.proto). Purely additive token fields are safe if an older Datanode is not required to process them.
 
@@ -235,7 +235,7 @@ Recon is a client of both OM and SCM and receives Datanode heartbeats. It is upg
 
 Recon also has its own version framework — `ReconVersion` and `ReconVersionManager` — for Recon's own on-disk schema changes. Currently Recon finalizes on startup and does not support downgrade. `ReconVersion`s exist only to to run reformatting actions on upgrade.
 
-## Finalization actions
+## Finalization Actions
 
 You can attach an action to run when a version finalizes. The upgrade action is guaranteed to run at least once before the version is finalized and available for use. Register actions through the per-component providers:
 
@@ -250,7 +250,7 @@ An upgrade action must be:
 - **Idempotent.** It may run again after a restart or partial failure during finalization.
 - **Throw on failure.** A thrown exception is what tells the framework that finalization of this feature failed and that the component must crash and be restarted to make progress. An action that swallows its exception and returns will *not* be retried and the version will be finalized without the action completing.
 
-## Testing your change
+## Testing Your Change
 
 ### Unit Tests
 
@@ -268,7 +268,7 @@ Integration tests run a single version of the code as one process so they are no
 
 The rolling-upgrade acceptance test suite under [`hadoop-ozone/dist/src/main/compose/upgrade/upgrades`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/upgrades). Uses Docker images from past releases to test a full upgrade, downgrade, and finalization cycle. It is the only way to truly test mixed version compatibility in addition to finalization. See the [upgrade acceptance test README](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/README.md) for details on how to add new tests that hook into the upgrade flow.
 
-## See also
+## See Also
 
 - [ZDU design document](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/zdu-design.md) — the rationale, invariants, and full step-by-step upgrade walkthrough.
 - [Upgrade and Downgrade](../administrator-guide/operations/upgrade-and-downgrade) — the operator-facing guide to running an upgrade.
