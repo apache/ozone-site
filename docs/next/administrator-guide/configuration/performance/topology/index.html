@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.e5d0a62b.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.8b7e6097.js" defer="defer"></script>
 <script src="/assets/js/main.040d135a.js" defer="defer"></script>
 </head>
 <body>
@@ -41,7 +41,7 @@
 </ul>
 <p>See the <a class="" href="/docs/next/core-concepts/replication/storage-containers">page about Containers</a> for more information related to Open vs Closed containers.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="configuring-topology-hierarchy">Configuring Topology Hierarchy<a href="#configuring-topology-hierarchy" class="hash-link" aria-label="Direct link to Configuring Topology Hierarchy" title="Direct link to Configuring Topology Hierarchy" translate="no">​</a></h2>
-<p>Ozone determines Datanode network locations (e.g., racks) using Hadoop&#x27;s rack awareness, configured via <code>net.topology.node.switch.mapping.impl</code> in <code>ozone-site.xml</code>. This key specifies a <code>org.apache.hadoop.net.CachedDNSToSwitchMapping</code> implementation. [1]</p>
+<p>Ozone determines Datanode network locations (e.g., racks) using Hadoop&#x27;s rack awareness, configured via <code>net.topology.node.switch.mapping.impl</code> in <code>ozone-site.xml</code>. The value of this key is the class name of an implementation of <code>org.apache.hadoop.net.DNSToSwitchMapping</code>. [1]</p>
 <div class="theme-admonition theme-admonition-note admonition_KWNG alert alert--secondary"><div class="admonitionHeading_KbNW"><span class="admonitionIcon_mAjL"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_oTFZ"><p>Both Ozone Manager (OM) and Storage Container Manager (SCM) use network topology information. It is critical to maintain a consistent topology assignment across all OM and SCM instances in the cluster.</p></div></div>
 <p>Two primary methods exist:</p>
 <h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="1-static-list-tablemapping">1. Static List: <code>TableMapping</code><a href="#1-static-list-tablemapping" class="hash-link" aria-label="Direct link to 1-static-list-tablemapping" title="Direct link to 1-static-list-tablemapping" translate="no">​</a></h3>
