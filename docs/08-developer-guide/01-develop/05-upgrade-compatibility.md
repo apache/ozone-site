@@ -127,6 +127,8 @@ Each surface below follows the same shape: **what is considered incompatible** a
 
 **Pattern:** Intercept the request before the leader OM processes it using a `RequestFeatureValidator`. Check if the incompatible argument has been specified, and if so, fail the request. This is typically placed in the request's `OMClientRequest` subclass for write requests and in `OzoneManagerRequestHandler` for read requests.
 
+This is a real example of using `RequestFeatureValidator` to block a new incompatible field to an existing request until the corresponding version is finalized. Note that this uses the old `OMLayoutFeature` version enum instead of the current `OzoneManagerVersion` enum.
+
 ```java
   @RequestFeatureValidator(
       conditions = ValidationCondition.CLUSTER_NEEDS_FINALIZATION,
@@ -169,7 +171,7 @@ If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105,
 
 **Incompatible:** adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright.
 
-**Pattern:** Callers must not invoke a new inter-OM method until its version is finalized . The method invocation should only proceed if `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X) == true`. Receivers should not implement gating and process the call regardless of their finalization state. Because all components must be upgraded before finalization is invoked, the existence of a finalized OM making the call means that the receiver is in a new enough software version to be able to process the call, even if it is a slow follower which has not yet finalized.
+**Pattern:** Callers must not invoke a new inter-OM method until its version is finalized. The method invocation should only proceed if `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X) == true`. Receivers should not implement gating and process the call regardless of their finalization state. Because all components must be upgraded before finalization is invoked, the existence of a finalized OM making the call means that the receiver is in a new enough software version to be able to process the call, even if it is a slow follower which has not yet finalized.
 
 This pattern also applies to SCM peer RPCs.
 
@@ -233,7 +235,7 @@ Recon is a client of both OM and SCM and receives Datanode heartbeats. It is upg
 
 **Pattern:** Recon code that consumes an OM API must accept an older or pre-finalized OM. There is currently no version passing between Recon and OM, although this may be added later as needed.
 
-Recon also has its own version framework — `ReconVersion` and `ReconVersionManager` — for Recon's own on-disk schema changes. Currently Recon finalizes on startup and does not support downgrade. `ReconVersion`s exist only to to run reformatting actions on upgrade.
+Recon also has its own version framework — `ReconVersion` and `ReconVersionManager` — for Recon's own on-disk schema changes. Currently Recon finalizes on startup and does not support downgrade. `ReconVersion`s exist only to run reformatting actions on upgrade.
 
 ## Finalization Actions
 
@@ -271,4 +273,4 @@ The rolling-upgrade acceptance test suite under [`hadoop-ozone/dist/src/main/com
 ## See Also
 
 - [ZDU design document](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/zdu-design.md) — the rationale, invariants, and full step-by-step upgrade walkthrough.
-- [Upgrade and Downgrade](../administrator-guide/operations/upgrade-and-downgrade) — the operator-facing guide to running an upgrade.
+- [Upgrade and Downgrade](../../administrator-guide/operations/upgrade-and-downgrade) — the operator-facing guide to running an upgrade.
