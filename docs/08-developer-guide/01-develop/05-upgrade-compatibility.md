@@ -4,11 +4,7 @@ sidebar_label: Upgrade Compatibility
 
 # Developing for Compatibility with Zero Downtime Upgrade
 
-Zero Downtime Upgrade (ZDU) lets the internal components of an Ozone cluster (OM, SCM, Datanode, S3 Gateway, and Recon) run in mixed versions during an upgrade with no interruption to service. To make this safe, the framework enforces one invariant that every developer commit must uphold:
-
-> While a rolling upgrade is in progress, components of the same type may be running different software but must behave as if they are the same version. Two OMs, two SCMs, or two Datanodes at different software versions must persist identical on-disk state and expose identical wire behavior until the cluster finalizes.
-
-Without this guarantee, a rolling upgrade can silently introduce behavior like diverging OM state machines, corrupting a container replica, or leaving a Datanode unable to re-register. This page is a practical guide to what counts as an incompatible change inside the cluster, and how to handle it in each area of the code.
+Zero Downtime Upgrade (ZDU) lets the internal components of an Ozone cluster (OM, SCM, Datanode, S3 Gateway, and Recon) run in mixed versions during an upgrade with no interruption to service. Additionally, Ozone provides a window where a cluster can be downgraded after the upgrade. Both of these features require every release to uphold certain compatibility guarantees, otherwise an upgrade can silently introduce behavior like diverging OM state machines, corrupting a container replica, or leaving a Datanode unable to re-register. This page is a practical guide to what counts as an incompatible change inside the cluster, and how to safely onboard such changes to each area of the code.
 
 The rationale behind the framework lives in the [ZDU design document](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/zdu-design.md). Read it if you want the full model. This page is only focused on day-to-day development.
 
@@ -24,25 +20,26 @@ This page covers compatibility **between internal Ozone components** during an u
 
 - **Software version**: The highest component version contained in the running code. This is fixed by the bits that are installed.
 
-- **Pre-finalized**: The state a component is in when its apparent version on disk is *less than* its software version. All old features work; new features are blocked; downgrade is allowed.
+- **Pre-finalized**: The state a component is in when its apparent version on disk is *less than* its software version. All old features work; new features are blocked; downgrade is allowed. Components enter this state when they are first started after an upgrade, and remain here until they are either downgraded or finalized by the admin.
 
-- **Finalized**: The state a component reaches when its apparent version *equals* its software version. All features are allowed; downgrade is no longer possible.
+- **Finalized**: The state a component reaches when its apparent version *equals* its software version. All features are allowed; downgrade is no longer possible. Components enter this state after they have been upgraded to a pre-finalized state and then given an explicit finalize command by the admin.
 
-In summary, any behavior incompatible with an old version's disk layout or API must be mapped to a version and disabled until its corresponding version is finalized.
+Any behavior incompatible with an old version's disk layout or API must be mapped to a version and disabled until its corresponding version is finalized.
 
-### Invariants
+### Invariants Provided to the Developer
 
-To maintain consistency during zero downtime upgrade, the following invariants must be maintained:
+To maintain consistency during zero downtime upgrade, the following invariants can be relied on by developers:
 
-1. **Components of the same type always operate at the same apparent version**
-   - This means they expose the same API surface and persist data in the same format.
-2. **For internal client/server relationships, the server is always upgraded before and finalizes before its client.**
+1. **For internal client/server relationships, the server is always upgraded before its client.**
    - The only exception is Recon, which is a client of OM but is upgraded ahead of it.
-3. **All internal components are running the newest software before finalization begins.**
+   - This is maintained by the admin following the documented component upgrade order.
+2. **All internal components are running the newest software before finalization begins.**
+   - Ozone's upgrade framework provides best-effort enforcement of this invariant, but due to corner cases it ultimately falls on the admin to correctly execute.
+3. **For internal client/server relationships, the server is always finalized before its client.**
+   - Again, Recon is the only exception, since it finalizes before OM.
+   - This is completely enforced by the upgrade framework within Ozone.
 
-Only invariant 1 is the focus of this document which needs to be maintained by Ozone feature developers. Invariant 2 is maintained by the admin following the documented component upgrade order. Invariant 3 is loosely enforced by the upgrade framework built in to Ozone, but also falls on the admin to correctly execute.
-
-### Upgrade Order
+#### Upgrade Order
 
 Components are upgraded in the following order to meet the client/server version invariant:
 
@@ -50,11 +47,11 @@ Components are upgraded in the following order to meet the client/server version
 - Recon
 - Datanodes
 - OM
-- S3 and HttpFS Gateways
+- S3 and HttpFS Gateways (can be upgraded simultaneously)
 
 Feature developers do not need to account for upgrade orders that deviate from this when handling compatibility for a feature. An out of order upgrade is considered user error.
 
-### Finalization Order
+#### Finalization Order
 
 Components finalize in the same order they are upgraded. Finalization is triggered by a single admin command and the cluster ensures the correct finalization order internally.
 
@@ -62,11 +59,16 @@ Components finalize in the same order they are upgraded. Finalization is trigger
 - Datanodes: Finalized asynchronously by SCM after it finalizes itself.
 - OM: Finalized via Ratis only once HDDS (SCM and all live Datanodes) have finalized
 
-Stateless gateway components do not need to finalize since they have no disk state to manage on downgrade and do not communicate with each other. Their compatibility is handled solely by the guarantee that the server they call remains backwards compatible with their client version. Recon currently finalizes immediately on upgrade. Downgrade support for Recon may be added in the future.
+Stateless gateway components do not need to finalize since they have no disk state to manage on downgrade and do not communicate with each other. Their compatibility with the rest of the cluster is handled solely by the guarantee that the server they call remains backwards compatible with older client versions. Recon currently finalizes immediately on upgrade, although downgrade support for Recon may be added in the future.
 
 ## Quick Start
 
-Adding a feature means adding an entry to the affected components' version enums. That is where a contributor adding a change makes their first edit:
+Within this framework, most incompatible changes can be handled by upholding two rules during feature development:
+
+1. **Components with the same apparent version expose the same API surface and persist data in the same format.**
+2. **For internal client/server relationships, the server remains backwards compatible with older clients.**
+
+When a change to API surface or disk layout must be introduced, a new component version must be added to gate the feature. To do this, first add an entry to the affected components' version enums:
 
 - [`OzoneManagerVersion.java`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/java/org/apache/hadoop/ozone/OzoneManagerVersion.java) — used within the OM ring and reported to external clients.
 - [`HDDSVersion.java`](https://github.com/apache/ozone/blob/master/hadoop-hdds/common/src/main/java/org/apache/hadoop/hdds/HDDSVersion.java) — shared by SCM and Datanodes so SCM can orchestrate Datanode finalization and shared with clients.
@@ -121,9 +123,9 @@ Each surface below follows the same shape: **what is considered incompatible** a
 
 ### New Fields or Behavior in Existing OM Requests (Read or Write)
 
-**Incompatible:** Any new option that can be passed in by a client that changes the result of an existing read or write request. For example, adding a new replication type that blocks can be allocated with.
+**Incompatible:** Any new option that can be passed in by a client that changes the result of an existing read or write request. For example, adding a new replication type that blocks can be allocated with in `allocateBlock` request.
 
-**Pattern:** Intercept the request before the leader OM processes it using a `RequestFeatureValidator`. This is typically it is placed in the `OMClientRequest` subclass for write requests and in `OzoneManagerRequestHandler` for read requests.
+**Pattern:** Intercept the request before the leader OM processes it using a `RequestFeatureValidator`. Check if the incompatible argument has been specified, and if so, fail the request. This is typically placed in the request's `OMClientRequest` subclass for write requests and in `OzoneManagerRequestHandler` for read requests.
 
 ```java
   @RequestFeatureValidator(
@@ -163,7 +165,7 @@ Each surface below follows the same shape: **what is considered incompatible** a
 
 If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105, both replaying this transaction from Ratis, arrive at the same DB state?* If not, it needs a gate.
 
-### OM ↔ OM peer RPCs outside Ratis
+### OM ↔ OM peer RPCs outside Ratis, including Ratis snapshot installation APIs
 
 **Incompatible:** adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright.
 
@@ -171,17 +173,11 @@ If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105,
 
 This pattern also applies to SCM peer RPCs.
 
-### Ratis state-machine snapshots (OM & SCM)
-
-**Incompatible:** anything that makes a follower's installed snapshot unreadable by a peer that has not finalized. Snapshot compatibility *is* RocksDB-schema compatibility.
-
-**Pattern:** if your change adds a new column family, it must not be populated until finalization. Otherwise a follower that installs a snapshot from a new leader ends up holding data an older peer cannot read after a downgrade. Gating the *write* into the new column family on the apparent version is what keeps snapshots portable.
-
 ### OM → SCM communication
 
 **Incompatible:** any change to [`ScmBlockLocationProtocol`](https://github.com/apache/ozone/blob/master/hadoop-hdds/framework/src/main/java/org/apache/hadoop/hdds/scm/protocol/ScmBlockLocationProtocol.java) or [`StorageContainerLocationProtocol`](https://github.com/apache/ozone/blob/master/hadoop-hdds/framework/src/main/java/org/apache/hadoop/hdds/scm/protocol/StorageContainerLocationProtocol.java) which does not leave SCM's server backwards compatible with older OM clients.
 
-**Pattern:** SCM is always upgraded before OM, so compatibility is maintained by requiring SCM's server to always remain backwards compatible with older OM clients. Finalization happens in the same order after upgrade is complete. This ordering combined with backwards compatibility guarantees of the SCM server allows OM and SCM to communicate without passing versions between them. Note that OM must still gate any new OM behavior on its own `versionManager.isAllowed(...)`. OM should not start exercising a new feature against SCM until OM itself has finalized, which guarantees that SCM has also finalized.
+**Pattern:** SCM is always upgraded before OM, so compatibility is maintained by requiring SCM's server to always remain backwards compatible with older OM clients. Finalization happens in the same order after upgrade is complete (SCM before OM). This ordering combined with backwards compatibility guarantees of the SCM server allows OM and SCM to communicate without passing versions between them. Note that OM should not start exercising a new feature against SCM until OM itself has finalized, which guarantees that SCM has also finalized.
 
 ### SCM state machine / SCM RocksDB
 
@@ -205,7 +201,7 @@ This pattern also applies to SCM peer RPCs.
 
 **Incompatible:** any change to how a container replica is written that must be identical across all replicas. This includes a new chunk-checksum scheme, a new container-schema, or new write-RPC semantics.
 
-**Pattern:** Gate new write behavior on the **client-provided write pipeline version**, never on the Datanode's own apparent version. Datanodes are upgraded and finalize asynchronously, so peers may be in different apparent versions and unable to process a new request type even if the current node can. To solve this issue, SCM picks a common apparent version for writes that is supported by all Datanodes in the pipeline, and provides that to the client to forward to Datanodes. Use `ClientCommandsUtils#getWritePipelineVersion` to obtain the version that the Datanode should use to execute the write request.
+**Pattern:** SCM picks a common apparent version for writes that is supported by all Datanodes in the pipeline, and provides that to the client to forward to Datanodes. Use `ClientCommandsUtils#getWritePipelineVersion` to obtain this version that the Datanode should use to execute the write request. Gate new write behavior on the **client-provided write pipeline version**, never on the Datanode's own apparent version. Datanodes are upgraded and finalize asynchronously, so peers may be in different apparent versions and unable to process a new request type even if the current node can.
 
 ### Datanode read path
 
@@ -215,17 +211,21 @@ This pattern also applies to SCM peer RPCs.
 
 ### Datanode ↔ Datanode (replication, EC reconstruction, reconciliation)
 
-TODO
-
 **Incompatible:** any change to how a container replica is copied or created that must be identical across all replicas. This includes `CopyContainerRequestProto`, `SendContainerRequest`, `ReconstructECContainersCommandProto`, and `ReconcileContainerCommandProto`.
 
-**Pattern:** When SCM initiates a replication command, it will attach the minimum supported version of all Datanodes to the command. Receiving Datanodes should execute the replication command using that apparent version, regardless of their actual apparent version. This ensures that peers which are upgraded or finalized asynchronously can still process the command. An example of SCM passing this version to Datanodes is [`ReplicateContainerCommandProto#apparentVersion`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-server/src/main/proto/ScmServerDatanodeHeartbeatProtocol.proto).
+**Pattern:** When SCM initiates a replication command, it will attach the minimum supported version of all involved Datanodes to the command. Receiving Datanodes should execute the replication command using that apparent version, regardless of their actual apparent version. This ensures that peers which are upgraded or finalized asynchronously can still process the command. An example of SCM passing this version to Datanodes is [`ReplicateContainerCommandProto#apparentVersion`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-server/src/main/proto/ScmServerDatanodeHeartbeatProtocol.proto).
 
 ### Datanode on-disk container schema
 
 **Incompatible:** removing or repurposing an existing container schema (V1/V2/V3). Existing schemas must never disappear.
 
 **Pattern:** a new schema is selected at container-create time from the write pipeline version and fixed for that container's life. Migrating existing containers to a new schema is an optional background process run after the upgrade completes. It is never part of finalization.
+
+### Block tokens & delegation tokens
+
+**Incompatible:** adding a new `AccessModeProto` value to `BlockTokenSecretProto`, or changing token enforcement semantics, in [`hdds.proto`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-client/src/main/proto/hdds.proto). Purely additive token fields are safe if an older Datanode is not required to process them.
+
+**Pattern:** a token change whose enforcement depends on new bits being present at the Datanode should be gated on an OM version. OM then refuses to issue tokens using the new mode until OM itself is finalized. Because OM cannot finalize until every active Datanode has finalized, finalizing OM guarantees every active Datanode can already honor the new mode.
 
 ### Recon
 
@@ -234,12 +234,6 @@ Recon is a client of both OM and SCM and receives Datanode heartbeats. It is upg
 **Pattern:** Recon code that consumes an OM API must accept an older or pre-finalized OM. There is currently no version passing between Recon and OM, although this may be added later as needed.
 
 Recon also has its own version framework — `ReconVersion` and `ReconVersionManager` — for Recon's own on-disk schema changes. Currently Recon finalizes on startup and does not support downgrade. `ReconVersion`s exist only to to run reformatting actions on upgrade.
-
-### 14. Block tokens & delegation tokens
-
-**Incompatible:** adding a new `AccessModeProto` value to `BlockTokenSecretProto`, or changing token enforcement semantics, in [`hdds.proto`](https://github.com/apache/ozone/blob/master/hadoop-hdds/interface-client/src/main/proto/hdds.proto). Purely additive token fields are safe if an older Datanode is not required to process them.
-
-**Pattern:** a token change whose enforcement depends on new bits being present at the Datanode should be gated on an OM version. OM then refuses to issue tokens using the new mode until OM itself is finalized. Because OM cannot finalize until every active Datanode has finalized, finalizing OM guarantees every active Datanode can already honor the new mode.
 
 ## Finalization actions
 
