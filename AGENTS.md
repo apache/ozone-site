@@ -106,7 +106,8 @@ Notes:
 - Run `pnpm build`. Broken links, anchors, and duplicate routes fail
   the build (`onBrokenLinks` / `onBrokenAnchors` in
   `docusaurus.config.js`).
-- If you added files, run `.github/scripts/spelling.sh`.
+- If you added or changed Markdown or MDX content, or added or renamed
+  files under `docs/` or `src/pages/`, run `.github/scripts/spelling.sh`.
 - Root files such as this `AGENTS.md` are not website routes. Do not
   treat "no new URL" as a test failure.
 
