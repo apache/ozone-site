@@ -395,7 +395,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.client.stream.buffer.max.size` | 32MB | `CLIENT` | Size which determines at what buffer position write call be blocked till acknowledgement of the first partial flush happens by all servers. |
 | `ozone.client.stream.buffer.size` | 4MB | `CLIENT` | The size of chunks the client will send to the server |
 | `ozone.client.stream.putblock.piggybacking` | false | `CLIENT` | Allow PutBlock to be piggybacked in WriteChunk requests if the chunk is small. Can be enabled only when `ozone.client.hbase.enhancements.allowed` = true |
-| `ozone.client.stream.read.pre-read-size` | 33554432 | `CLIENT` | Extra bytes to prefetch during streaming reads. |
+| `ozone.client.stream.read.pre-read-size` | 33554432 | `CLIENT` | Size of the pre-read window for streaming reads: the number of bytes requested from the datanode ahead of the current read position. The window is refilled in bulk once the bytes requested ahead drop below half of this value. Set to 0 to disable pre-read. |
 | `ozone.client.stream.read.response-data-size` | 1048576 | `CLIENT` | Chunk size of streaming read responses from datanodes. |
 | `ozone.client.stream.read.timeout` | 10s | `CLIENT` | Timeout for receiving streaming read responses. |
 | `ozone.client.stream.readblock.enable` | false | `CLIENT` | Allow ReadBlock to stream all the readChunk in one request. |
