@@ -115,6 +115,16 @@ New versions will continue be added in subsequent releases after `MY_NEW_FEATURE
 
 Each surface below follows the same shape: **what is considered incompatible** and **the pattern to handle it**. Note that OM and SCM are finalized via Ratis, but Datanodes finalize asynchronously as they receive the finalize command from SCM.
 
+### General Protobuf Compatibility
+
+Most of Ozone's disk and network serialization formats are protobuf. Basic protobuf compatibility is statically enforced by Ozone's CI using [protolock](https://github.com/nilslice/protolock). However, it is possible to break compatibility at the proto layer while still passing protolock. This usually happens when the component writing the protobuf is newer than the component reading it. A new writer/old reader scenario may occur when a proto is written to disk in a new version before finalization and read by an old version after downgrade. It may also occur in internal client/server relationships when the server is upgraded and returns a response to an older client. The following changes may still need additional version gating for upgrades despite being compatible with protolock:
+
+- **Potentially Incompatible: New Fields**: Old readers will silently ignore a field they do not know about. Old writers will leave the new field empty and new readers will fall back to the default value.
+  - **Pattern**: If no versioning is used, the field's default value has to be the safe interpretation. The writer must behave acceptably when the field is ignored, and the reader must behave acceptably when the field is missing. Otherwise, a corresponding component version must be added and the field cannot be used until that version is finalized.
+
+- **Incompatible: New Enum Values**: Even though protobuf can carry an unrecognized enum value over the wire, Ozone code switches on these values to decide what to do, so an old reader has no correct branch to take.
+  - **Pattern**: New enum values require version gating and must not be written until their corresponding version is finalized.
+
 ### New OM Requests (Read or Write)
 
 **Incompatible:** Any new read or write request added to the OM. New write requests will not be able to be applied by all nodes when the cluster is in a mixed version. New read requests may appear and disappear to the client as a mixed version OM Ratis group changes leaders.
