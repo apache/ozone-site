@@ -22,7 +22,7 @@ This page covers compatibility **between internal Ozone components** during an u
 
 - **Pre-finalized**: The state a component is in when its apparent version on disk is *less than* its software version. All old features work; new features are blocked; downgrade is allowed. Components enter this state when they are first started after an upgrade, and remain here until they are either downgraded or finalized by the admin.
 
-- **Finalized**: The state a component reaches when its apparent version *equals* its software version. All features are allowed; downgrade is no longer possible. Components enter this state after they have been upgraded to a pre-finalized state and then given an explicit finalize command by the admin.
+- **Finalized**: The state a component reaches when its apparent version *equals* its software version. All features are allowed; downgrade is no longer possible. Components enter this state after they have been upgraded to a pre-finalized state and then given an explicit finalize command by the admin. This transition happens while the cluster is running and the cluster is expected to remain operational during finalization.
 
 Any behavior incompatible with an old version's disk layout or API must be mapped to a version and disabled until its corresponding version is finalized.
 
@@ -119,11 +119,24 @@ Each surface below follows the same shape: **what is considered incompatible** a
 
 Most of Ozone's disk and network serialization formats are protobuf. Basic protobuf compatibility is statically enforced by Ozone's CI using [protolock](https://github.com/nilslice/protolock). However, it is possible to break compatibility at the proto layer while still passing protolock. This usually happens when the component writing the protobuf is newer than the component reading it. A new writer/old reader scenario may occur when a proto is written to disk in a new version before finalization and read by an old version after downgrade. It may also occur in internal client/server relationships when the server is upgraded and returns a response to an older client. The following changes may still need additional version gating for upgrades despite being compatible with protolock:
 
-- **Potentially Incompatible: New Fields**: Old readers will silently ignore a field they do not know about. Old writers will leave the new field empty and new readers will fall back to the default value.
-  - **Pattern**: If no versioning is used, the field's default value has to be the safe interpretation. The writer must behave acceptably when the field is ignored, and the reader must behave acceptably when the field is missing. Otherwise, a corresponding component version must be added and the field cannot be used until that version is finalized.
+**Potentially Incompatible - New Fields**: Old readers will silently ignore a field they do not know about. Old writers will leave the new field empty and new readers will fall back to the default value.
 
-- **Incompatible: New Enum Values**: Even though protobuf can carry an unrecognized enum value over the wire, Ozone code switches on these values to decide what to do, so an old reader has no correct branch to take.
-  - **Pattern**: New enum values require version gating and must not be written until their corresponding version is finalized.
+**Pattern**: If no versioning is used, the field's default value has to be the safe interpretation. The writer must behave acceptably when the field is ignored, and the reader must behave acceptably when the field is missing. Otherwise, a corresponding component version must be added and the field cannot be used until that version is finalized.
+
+**Incompatible - New Enum Values**: Even though protobuf can carry an unrecognized enum value over the wire, Ozone code switches on these values to decide what to do, so an old reader has no correct branch to take.
+
+**Pattern**: New enum values require version gating and must not be written until their corresponding version is finalized.
+
+### Configuration Changes
+
+**Incompatible:** Any change to an existing configuration's default value, or a new configuration with a default value that impacts:
+
+- Communication between components with and without the configuration
+- Downgrade after the configuration is used
+
+During the rolling upgrade, older clients without the configuration must still be able to communicate with newer servers that have the configuration. Additionally, before finalization, all disk state must remain readable by the old version regardless of any supplied configuration values.
+
+**Pattern:** A configuration that may interfere with downgrade should not be acted on until after its corresponding component version is finalized. If the configuration is only relevant at startup, it will be re-read the next time the component is restarted after finalization completes. Configuration changes that impact network communication between components cannot happen automatically during ZDU. Applying them during a rolling restart outside of the upgrade would produce the same problem, so such changes must be made with partial downtime on a case-by-case basis.
 
 ### New OM Requests (Read or Write)
 
