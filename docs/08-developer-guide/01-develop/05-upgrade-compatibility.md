@@ -269,11 +269,17 @@ You can attach an action to run when a version finalizes. The upgrade action is 
 - [`DatanodeUpgradeActionProvider`](https://github.com/apache/ozone/blob/master/hadoop-hdds/container-service/src/main/java/org/apache/hadoop/hdds/upgrade/DatanodeUpgradeActionProvider.java)
 - [`ReconUpgradeActionProvider`](https://github.com/apache/ozone/blob/master/hadoop-ozone/recon/src/main/java/org/apache/hadoop/ozone/recon/upgrade/ReconUpgradeActionProvider.java)
 
-An upgrade action must be:
+An upgrade action must:
 
-- **Constant time.** Finalization is synchronous within a component. An action whose cost grows with cluster or dataset size stalls the whole finalize path. Never do invasive on-disk reformatting here.
-- **Idempotent.** It may run again after a restart or partial failure during finalization.
+- **Run in constant time.** Finalization is synchronous within a component. An action whose cost grows with cluster or dataset size stalls the whole finalize path. Never do invasive on-disk reformatting here.
+- **Be idempotent.** It may run again after a restart or partial failure during finalization.
+- **Execute safely on a live cluster.** Finalization is run on while the cluster is actively serving reads and writes. Finalization actions must not interfere with ongoing traffic through their component.
 - **Throw on failure.** A thrown exception is what tells the framework that finalization of this feature failed and that the component must crash and be restarted to make progress. An action that swallows its exception and returns will *not* be retried and the version will be finalized without the action completing.
+
+Examples of upgrade finalization actions include:
+
+- Adding a symlink to make a directory reachable from a new path
+- Starting a background service that continues to run asynchronously
 
 ## Testing Your Change
 
