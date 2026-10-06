@@ -738,7 +738,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.scm.dead.node.interval` | 10m | `OZONE`, `MANAGEMENT` | The interval between heartbeats before a node is tagged as dead. |
 | `ozone.scm.default.service.id` |  | `OZONE`, `SCM`, `HA` | Service ID of the SCM. If this is not set fall back to `ozone.scm.service.ids` to find the service ID it belongs to. |
 | `ozone.scm.ec.pipeline.minimum` | 5 | `STORAGE` | The minimum number of pipelines to have open for each Erasure Coding configuration |
-| `ozone.scm.ec.pipeline.per.volume.factor` | 1 | `SCM` | TODO |
+| `ozone.scm.ec.pipeline.per.volume.factor` | 1 | `SCM` | Factor used to calculate the maximum number of open pipelines for each EC replication config, based on the number of healthy volumes in the cluster. The limit is max(factor * total healthy volumes / (data + parity), `ozone.scm.ec.pipeline.minimum`). Setting it to 0 disables the volume-based limit, so only `ozone.scm.ec.pipeline.minimum` applies. |
 | `ozone.scm.event.ContainerReport.thread.pool.size` | 10 | `OZONE`, `SCM` | Thread pool size configured to process container reports. |
 | `ozone.scm.expired.container.replica.op.scrub.interval` | 5m | `OZONE`, `SCM`, `CONTAINER` | SCM schedules a fixed interval job using the configured interval to scrub expired container replica operation. |
 | `ozone.scm.grpc.port` | 9895 | `OZONE`, `SCM`, `HA`, `RATIS` | The port number of the SCM's grpc server. |
