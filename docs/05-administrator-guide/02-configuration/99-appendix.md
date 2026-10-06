@@ -743,6 +743,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.scm.expired.container.replica.op.scrub.interval` | 5m | `OZONE`, `SCM`, `CONTAINER` | SCM schedules a fixed interval job using the configured interval to scrub expired container replica operation. |
 | `ozone.scm.grpc.port` | 9895 | `OZONE`, `SCM`, `HA`, `RATIS` | The port number of the SCM's grpc server. |
 | `ozone.scm.ha.dbtransactionbuffer.flush.interval` | 60s | `SCM`, `OZONE` | Wait duration for flush of buffered transaction. |
+| `ozone.scm.ha.dbtransactionbuffer.flush.pending.limit` | 10000 | `SCM`, `OZONE` | Maximum number of buffered DB operations the SCM HA transaction buffer holds before applyTransaction flushes them to RocksDB. This bounds memory use while a restarted follower applies a large backlog of committed Ratis log entries. |
 | `ozone.scm.ha.grpc.deadline.interval` | 30m | `SCM`, `OZONE`, `HA`, `RATIS` | Deadline for SCM DB checkpoint interval. |
 | `ozone.scm.ha.raft.server.log.appender.wait-time.min` | 0ms | `OZONE`, `SCM`, `RATIS`, `PERFORMANCE` | Minimum wait time between two appendEntries calls. |
 | `ozone.scm.ha.raft.server.rpc.first-election.timeout` |  | `SCM`, `OZONE`, `HA`, `RATIS` | ratis timeout for the first election of a leader. If not configured, fallback to `ozone.scm.ha.ratis.leader.election.timeout`. |
