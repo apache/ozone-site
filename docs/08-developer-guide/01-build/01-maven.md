@@ -14,9 +14,11 @@ This guide explains how to build Apache Ozone from source using Maven and prepar
 
 Before you begin, ensure you have the following installed on your build machine:
 
-- Java 1.8 or higher
-- Apache Maven 3.6.3 or higher
+- JDK 17 or higher
+- Apache Maven 3.9.6 or higher
 - Git (if building from source repository)
+
+These build requirements also apply when building only client modules. Client modules still target Java 8 bytecode.
 
 ## Obtain the Source Code
 
