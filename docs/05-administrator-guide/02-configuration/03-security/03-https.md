@@ -17,6 +17,8 @@ By default Ozone HTTP web-consoles (OM, SCM, S3G, Recon, Datanode) allow access 
 
 If you have an SPNEGO enabled Ozone cluster and want to disable it for all Ozone services, just make sure the two key mentioned are configured as above.
 
+Without SPNEGO a request carries no authenticated identity, so endpoints that are restricted to administrators cannot check the caller. This includes the DB checkpoint endpoints of OM (`/dbCheckpoint`, `/v2/dbCheckpoint`) and SCM (`/dbCheckpoint`), which serve a copy of the service's metadata DB. The OM DB contains the S3 secrets of all users. On a secure cluster, enable SPNEGO for OM and SCM as described below, or restrict network access to their HTTP ports.
+
 ## Kerberos based SPNEGO authentication
 
 However, they can be configured to require Kerberos authentication using HTTP SPNEGO protocol (supported by browsers like Firefox and Chrome). To achieve that, the following keys must be configured first.
