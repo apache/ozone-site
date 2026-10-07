@@ -59,9 +59,9 @@ After that, individual component needs to configure properly to completely enabl
 
 | Property | Value |
 |----------|-------|
-| `ozone.scm.http.auth.type` | `kerberos` |
-| `ozone.scm.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
-| `ozone.scm.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
+| `hdds.scm.http.auth.type` | `kerberos` |
+| `hdds.scm.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
+| `hdds.scm.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
 
 ## Enable SPNEGO authentication for Datanode HTTP
 
@@ -106,8 +106,8 @@ If you don’t want to specify the user.name in the query string parameter, chan
 
 | Property | Value |
 |----------|-------|
-| `ozone.scm.http.auth.type` | `simple` |
-| `ozone.scm.http.auth.simple.anonymous.allowed` | `false` |
+| `hdds.scm.http.auth.type` | `simple` |
+| `hdds.scm.http.auth.simple.anonymous.allowed` | `false` |
 
 If you don’t want to specify the user.name in the query string parameter, change `hdds.scm.http.auth.simple.anonymous.allowed` to true.
 
