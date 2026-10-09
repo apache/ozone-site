@@ -694,6 +694,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.s3g.metrics.percentiles.intervals.seconds` | 60 | `S3GATEWAY`, `PERFORMANCE` | Specifies the interval in seconds for the rollover of MutableQuantiles metrics. Setting this interval equal to the metrics sampling time ensures more detailed metrics. |
 | `ozone.s3g.secret.http.auth.type` | kerberos | `S3GATEWAY`, `SECURITY`, `KERBEROS` | simple or kerberos. If kerberos is set, Kerberos SPNEOGO will be used for http authentication. |
 | `ozone.s3g.secret.http.enabled` | false | `OZONE`, `S3GATEWAY` | The boolean which enables the Ozone S3Gateway Secret endpoint. |
+| `ozone.s3g.standard.storage-class.use-client-default` | false | `OZONE`, `S3GATEWAY` | When true, a request with x-amz-storage-class STANDARD uses ozone.replication and ozone.replication.type, if ozone.replication is set, instead of RATIS/THREE. The ozone local runtime sets it to true. |
 | `ozone.s3g.sts.http-address` | 0.0.0.0:9880 | `OZONE`, `S3GATEWAY` | The HTTP address for the S3 Gateway STS endpoint. |
 | `ozone.s3g.sts.http-bind-host` | 0.0.0.0 | `OZONE`, `S3GATEWAY` | The bind host for the S3 Gateway STS HTTP server. If this optional address is set, it overrides only the hostname portion of `ozone.s3g.sts.http-address`. If not set, the value of `ozone.s3g.http-bind-host` is used. |
 | `ozone.s3g.sts.http.enabled` | false | `OZONE`, `S3GATEWAY` | The boolean which enables the Ozone S3Gateway STS endpoint. |
