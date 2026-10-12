@@ -17,6 +17,8 @@ By default Ozone HTTP web-consoles (OM, SCM, S3G, Recon, Datanode) allow access 
 
 If you have an SPNEGO enabled Ozone cluster and want to disable it for all Ozone services, just make sure the two key mentioned are configured as above.
 
+Without SPNEGO a request carries no authenticated identity, so endpoints that are restricted to administrators cannot check the caller. This includes the DB checkpoint endpoints of OM (`/dbCheckpoint`, `/v2/dbCheckpoint`) and SCM (`/dbCheckpoint`), which serve a copy of the service's metadata DB. The OM DB contains the S3 secrets of all users. On a secure cluster, enable SPNEGO for OM and SCM as described below, or restrict network access to their HTTP ports.
+
 ## Kerberos based SPNEGO authentication
 
 However, they can be configured to require Kerberos authentication using HTTP SPNEGO protocol (supported by browsers like Firefox and Chrome). To achieve that, the following keys must be configured first.
@@ -57,9 +59,9 @@ After that, individual component needs to configure properly to completely enabl
 
 | Property | Value |
 |----------|-------|
-| `ozone.scm.http.auth.type` | `kerberos` |
-| `ozone.scm.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
-| `ozone.scm.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
+| `hdds.scm.http.auth.type` | `kerberos` |
+| `hdds.scm.http.auth.kerberos.principal` | `HTTP/_HOST@REALM` |
+| `hdds.scm.http.auth.kerberos.keytab` | `/path/to/HTTP.keytab` |
 
 ## Enable SPNEGO authentication for Datanode HTTP
 
@@ -104,8 +106,8 @@ If you don’t want to specify the user.name in the query string parameter, chan
 
 | Property | Value |
 |----------|-------|
-| `ozone.scm.http.auth.type` | `simple` |
-| `ozone.scm.http.auth.simple.anonymous.allowed` | `false` |
+| `hdds.scm.http.auth.type` | `simple` |
+| `hdds.scm.http.auth.simple.anonymous.allowed` | `false` |
 
 If you don’t want to specify the user.name in the query string parameter, change `hdds.scm.http.auth.simple.anonymous.allowed` to true.
 
