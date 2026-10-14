@@ -29,7 +29,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `hdds.block.token.expiry.time` | 1d | `OZONE`, `HDDS`, `SECURITY`, `TOKEN` | Default value for expiry time of block token. This setting supports multiple time unit suffixes as described in dfs.heartbeat.interval. If no suffix is specified, then milliseconds is assumed. |
 | `hdds.command.status.report.interval` | 30s | `OZONE`, `DATANODE`, `MANAGEMENT` | Time interval of the datanode to send status of commands executed since last report. Unit could be defined with postfix (ns,ms,s,m,h,d) |
 | `hdds.container.action.max.limit` | 20 | `DATANODE` | Maximum number of Container Actions sent by the datanode to SCM in a single heartbeat. |
-| `hdds.container.balancer.balancing.iteration.interval` | 70m | `BALANCER` | The interval period between each iteration of Container Balancer. |
+| `hdds.container.balancer.balancing.iteration.interval` | 3m | `BALANCER` | The interval to wait between Container Balancer iterations. Container Balancer runs iterations continuously and waits only briefly so SCM can receive refreshed datanode usage information before the next iteration starts.. |
 | `hdds.container.balancer.datanodes.involved.max.percentage.per.iteration` | 20 | `BALANCER` | Maximum percentage of healthy, in service datanodes that can be involved in balancing in one iteration. |
 | `hdds.container.balancer.exclude.containers` |  | `BALANCER` | List of container IDs to exclude from balancing. For example "1, 4, 5" or "1,4,5". |
 | `hdds.container.balancer.exclude.datanodes` |  | `BALANCER` | A list of Datanode hostnames or ip addresses separated by commas. The Datanodes specified in this list are excluded from balancing. This configuration is empty by default. |
