@@ -57,6 +57,14 @@ The Ozone S3 Gateway implements a substantial subset of the Amazon S3 REST API. 
 | ✅ [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) | Copies an object (intra- or inter-bucket). | Supports metadata directives (COPY/REPLACE). **Non-compliant behavior:** Self-copying for metadata updates may differ slightly from AWS S3. |
 | ✅ [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html) | Lists objects in a bucket with filtering and pagination. | Supports prefix, delimiter, and continuation tokens. |
 
+### Bucket Tagging Operations
+
+| **API Name** | **Feature** | **Note** |
+| ------------ | ----------- | -------- |
+| ✅ [PutBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html) | Sets the tag set for a bucket. | Fully supported; each request replaces all bucket tags and does not append to the existing tag set. |
+| ✅ [GetBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html) | Retrieves the tag set of a bucket. | Returns the tag set as defined by the S3 API. |
+| ✅ [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html) | Removes the tag set from a bucket. | Clears all tags associated with the bucket. |
+
 ### Object Tagging Operations
 
 | **API Name** | **Feature** | **Note** |
