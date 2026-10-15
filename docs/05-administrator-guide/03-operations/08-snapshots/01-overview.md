@@ -206,6 +206,12 @@ Key snapshot-related configuration properties include:
 
 For detailed snapshot configuration properties, see [Snapshot Configuration Properties](./configuration-properties).
 
+### Snapshot Defragmentation
+
+Snapshot defragmentation reduces the OM disk space used by snapshot metadata.
+See [Snapshot Defragmentation](./defragmentation) for prerequisites,
+configuration, manual triggering, and monitoring.
+
 ### Monitoring
 
 Monitor OM heap usage with many snapshots or large diffs. Enable Ozone Native ACLs or Ranger for access control.

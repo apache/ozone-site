@@ -49,6 +49,16 @@ These parameters, defined in `ozone-site.xml`, control how Ozone manages snapsho
 | `ozone.snapshot.deleting.service.interval` | 30s | Interval for the snapshot deleting service. |
 | `ozone.snapshot.deep.cleaning.enabled` | false | Enable deep cleaning of snapshots. |
 
+### Snapshot Defragmentation
+
+| Property | Default Value | Description |
+|----------|---------------|-------------|
+| `ozone.snapshot.defrag.service.interval` | -1 (disabled) | Interval between periodic defragmentation tasks. A positive duration enables the service. |
+| `ozone.snapshot.defrag.limit.per.task` | 1 | Maximum number of snapshots to defragment per task, including manual triggers. |
+| `ozone.snapshot.defrag.service.timeout` | 300s | Timeout for a background defragmentation task run. |
+
+See [Snapshot Defragmentation](./defragmentation) for setup and manual triggering.
+
 ### Performance and Resource Management
 
 | Property | Default Value | Description |
