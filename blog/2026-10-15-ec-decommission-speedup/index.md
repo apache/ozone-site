@@ -1,8 +1,8 @@
 ---
 title: "The Datanode That Wouldn't Leave: Speeding Up EC Decommission in Apache Ozone"
-authors: ["apache-ozone-community", "jojochuang"]
+authors: ["apache-ozone-community", "jojochuang", "smengcl"]
 date: 2026-10-15
-tags: [Ozone, EC, Decommission, SCM, Observability, HDDS-17053]
+tags: [Ozone, EC, Decommission, SCM, Observability]
 # cspell:ignore decom HOL
 ---
 
@@ -14,7 +14,7 @@ Recon and the admin CLI show the same stubborn picture: hundreds or thousands of
 
 So you ask the obvious question: *We added nodes. Why doesn't decommission get faster?*
 
-That question has a precise answer for EC—and a fix landing under epic [HDDS-15014](https://issues.apache.org/jira/browse/HDDS-15014).
+That question has a precise answer for EC—and **Apache Ozone 2.3.0** (upcoming) adds SCM behavior that addresses both bottlenecks.
 
 <!-- truncate -->
 
@@ -49,7 +49,7 @@ More Datanodes do not break either lock by themselves.
 
 ## The way out: reconstruct across the cluster
 
-Epic [HDDS-15014](https://issues.apache.org/jira/browse/HDDS-15014) changes **what** SCM schedules when the `decom` node is saturated, not by pretending one replication source can scale with fleet size.
+Starting in **2.3.0**, SCM can change **what** it schedules when the `decom` node is saturated, instead of treating fleet growth as extra read bandwidth off the node you are draining.
 
 **Shift work from replicate to reconstruct.** **EC reconstruction** rebuilds missing indexes from **several surviving fragments on other Datanodes**. SCM **offloads** the decommissioning node as a reconstruction source when enough healthy **IN_SERVICE** fragments exist elsewhere. That eases Trap 1: recovery no longer means reading every stripe from the node we are evicting.
 
@@ -57,7 +57,7 @@ Epic [HDDS-15014](https://issues.apache.org/jira/browse/HDDS-15014) changes **wh
 
 If reconstruction is not viable (insufficient sources, overloaded targets, placement failure, or a **global reconstruction cap**), SCM **falls back to 1:1 replication**. Safety stays; you only take the fast path when the cluster can support it.
 
-Implementation: [HDDS-15071](https://issues.apache.org/jira/browse/HDDS-15071) (configuration and global reconstruction limit), [HDDS-15072](https://issues.apache.org/jira/browse/HDDS-15072) (load-based switching and source offloading), [HDDS-15075](https://issues.apache.org/jira/browse/HDDS-15075) (metrics). Related discussion in the broader ecosystem: [HDFS-16874](https://issues.apache.org/jira/browse/HDFS-16874).
+The feature is **off by default** until you enable it on SCM. Even when enabled, SCM uses reconstruction only after the decom Datanode's combined replicate/reconstruct queue crosses the load factor. It ships with reconfigurable limits and metrics so operators can confirm reconstruction is actually running during decommission.
 
 ![EC decommission reconstruction solution](ec-decommission-reconstruction.svg)
 
@@ -75,7 +75,7 @@ All keys are on SCM Replication Manager configuration, **reconfigurable**, and c
 
 ## Metrics
 
-On SCM **`ReplicationManagerMetrics`**:
+On SCM (JMX / Prometheus metrics):
 
 **Gauges:** `InflightEcReconstruction`, `EcReconstructionGlobalLimit`
 
@@ -89,6 +89,4 @@ If `EcReconstructionDecommissionTriggeredTotal` stays flat while fallbacks climb
 
 ## Bottom line
 
-EC decommission was slow because **every stripe copy was tied to the leaving node as source**, and **those copies piled up in one queue**. The fix is to **move some recovery to reconstruction** (multi-source, off the `decom` node) when that node is the head of the line, with caps and safe fallback.
-
-**References:** [HDDS-15014](https://issues.apache.org/jira/browse/HDDS-15014). Ozone PRs [#11054](https://github.com/apache/ozone/pull/11054), [#11450](https://github.com/apache/ozone/pull/11450), [#11557](https://github.com/apache/ozone/pull/11557)
+EC decommission was slow because **every stripe copy was tied to the leaving node as source**, and **those copies piled up in one queue**. **Apache Ozone 2.3.0** lets SCM **move some recovery to reconstruction** (multi-source, off the `decom` node) when that node is the head of the line, with caps and safe fallback to 1:1 replicate when the cluster cannot support reconstruction.
