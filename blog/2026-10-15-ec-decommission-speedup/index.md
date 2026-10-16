@@ -3,7 +3,7 @@ title: "The Datanode That Wouldn't Leave: Speeding Up EC Decommission in Apache 
 authors: ["apache-ozone-community", "jojochuang", "smengcl"]
 date: 2026-10-15
 tags: [Ozone, EC, Decommission, SCM, Observability]
-# cspell:ignore decom HOL
+# cspell:ignore decom HOL smengcl
 ---
 
 You run `ozone admin datanode decommission`. The node flips to **DECOMMISSIONING**. You expect a few hours of background copying, then a clean shutdown.
