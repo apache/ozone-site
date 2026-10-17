@@ -108,12 +108,12 @@ Hadoop RPC SASL verifies either a Kerberos ticket or an OM delegation token at t
       - Generate the wrapped encryption key if the bucket is encrypted. See [1.3.2](#132-om--kms-key--encryption)
       - Authorize the request. See [1.3.3](#133-om-authorization-check)
       - Mint the client identifier
-   3) Submits the rewritten request to Ratis to replicate. See [1.4](#14-om-replicated-validation-and-write-into-the-openkeytable)
+   3) Submits the rewritten request to Ratis to replicate. See [1.4](#14-om-replicate-validation-and-write-into-the-openkeytable)
 
 For the logic in processing write requests, OM splits each write request into two parts:
 
 - The **non-deterministic part** (step 3.2 in the above): It runs exactly once on the leader OM that received the request, before the request is replicated.
-- The **deterministic part** is `validateAndUpdateCache` (see [1.4](#14-om-replicated-validation-and-write-into-the-openkeytable)): It runs on every OM as a replicated state machine step. This part must be deterministic, because every OM has to reach the same result independently.
+- The **deterministic part** is `validateAndUpdateCache` (see [1.4](#14-om-replicate-validation-and-write-into-the-openkeytable)): It runs on every OM as a replicated state machine step. This part must be deterministic, because every OM has to reach the same result independently.
 
 Anything that cannot be repeated identically has to happen in `preExecute`. See [Ozone Manager high availability](../components/ozone-manager/high-availability) for the replication machinery itself.
 
