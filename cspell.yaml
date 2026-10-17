@@ -171,6 +171,7 @@ words:
 - spnego
 - keytab
 - Keytab
+- NIC
 - keyspace
 - Merkle
 - RocksDB
