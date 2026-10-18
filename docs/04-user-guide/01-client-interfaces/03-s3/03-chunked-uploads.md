@@ -1,8 +1,7 @@
 # S3 Chunked Uploads
 
 S3 Gateway accepts `aws-chunked` request bodies for `PutObject` and multipart `UploadPart`, including datastream writes.
-Verifying chunk signatures authenticates the payload, while a checksum trailer lets the gateway compare the received payload with the client's checksum.
-Signature verification depends on request authentication and the signing key returned by OM; checksum verification is a separate check.
+Verifying chunk signatures authenticates the payload. A checksum trailer lets S3 Gateway compare the payload with the client's checksum.
 
 Chunks frame a single request body. They are separate from the parts of a multipart upload.
 
@@ -16,7 +15,7 @@ The following `x-amz-content-sha256` values specify the signatures and trailers 
 | `STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER` | HMAC-SHA256 | Checksum and HMAC-SHA256 signature |
 | `STREAMING-UNSIGNED-PAYLOAD-TRAILER` | None | Checksum |
 
-ECDSA payload markers are covered under [ECDSA and SigV4a](#ecdsa-and-sigv4a).
+For ECDSA markers, see [ECDSA and SigV4a](#ecdsa-and-sigv4a).
 `UNSIGNED-PAYLOAD` describes a raw body, not an `aws-chunked` body.
 
 For object and part uploads, set `x-amz-decoded-content-length` to the payload size without chunk framing.
@@ -28,8 +27,7 @@ The [FSO directory path](#fso-directories) has different verification behavior.
 For either HMAC payload mode above, authentication through an `Authorization` header with `AWS4-HMAC-SHA256` selects chunk-signature verification.
 S3 Gateway requests a derived SigV4 signing key from OM when it opens the object or part. If a key is returned, S3 Gateway enables signature verification before reading the payload.
 
-OM returns the signing key when OM security is enabled. A secure cluster normally verifies signatures; a non-secure cluster normally has no signing key and skips verification.
-The following table applies to the two HMAC payload modes on object and part uploads. Here, secure mode means `ozone.security.enabled=true` on S3 Gateway.
+OM returns the key only when OM security is enabled. In the table, secure mode means `ozone.security.enabled=true` on S3 Gateway.
 
 | Authentication | Signing key from OM | Chunk and signed-trailer signatures |
 |---|---|---|
@@ -38,7 +36,6 @@ The following table applies to the two HMAC payload modes on object and part upl
 | `Authorization` header, non-secure mode | Missing | Not verified |
 | Presigned URL | Not requested | Not verified |
 
-In a secure cluster, presigned requests are authenticated through their query parameters, even though their chunk and trailer signatures are not verified.
 For `STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER` and `STREAMING-UNSIGNED-PAYLOAD-TRAILER`, the payload checksum is verified regardless of whether signatures are verified.
 
 ## Verification and commit
@@ -48,9 +45,9 @@ For `STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER` and `STREAMING-UNSIGNED-PAYLOAD
 3. Before committing the upload, S3 Gateway completes the required checks on the final zero-byte chunk and any declared trailer. When signature verification is enabled, it verifies the trailer signature over the checksum header text before comparing the checksum with the payload bytes.
 4. A transfer or verification failure prevents the object or part from being committed. Data can already have been streamed to Datanodes, but the failed upload does not become a committed key or part.
 
-Completion is checked when HMAC verification is enabled or either supported trailer mode is used.
-When neither signature verification nor a supported checksum trailer is enabled, the gateway does not require a final zero-byte chunk or valid CRLF delimiters after chunk data.
-It rejects a payload shorter than `x-amz-decoded-content-length`, but stops reading at that length; excess data is not stored or reported as an error.
+Streams with HMAC verification enabled or a supported checksum trailer require a final zero-byte chunk and valid CRLF delimiters after chunk data.
+Other signed streams, including those with ECDSA markers, skip these checks.
+For these streams, S3 Gateway stops reading at `x-amz-decoded-content-length`: a shorter payload is rejected, and excess data is neither stored nor reported as an error.
 `Content-MD5`, when supplied, is still checked against the payload that is written.
 
 ## Checksum trailers
@@ -76,10 +73,10 @@ The trailer section must end with a blank line and the request body must end the
 | Failure | S3 error | HTTP status |
 |---|---|---|
 | Missing decoded length or required `x-amz-trailer` declaration, or a supplied `Content-Encoding` without `aws-chunked` | `InvalidArgument` | 400 |
-| Unsupported trailer name, malformed checksum, invalid chunk or trailer framing, or missing completion data when completion is checked | `InvalidRequest` | 400 |
+| Unsupported trailer name, malformed checksum, invalid chunk or trailer framing, or a missing required final chunk or trailer | `InvalidRequest` | 400 |
 | Checksum does not match the decoded payload | `BadDigest` | 400 |
 | Well-formed chunk or trailer signature fails an enabled HMAC check | `SignatureDoesNotMatch` | 403 |
-| Derived key missing when HMAC verification is required in secure mode | `InternalError` | 500 |
+| Derived key missing when HMAC verification is requested in secure mode | `InternalError` | 500 |
 | `AWS4-ECDSA-P256-SHA256` used as the request authentication algorithm | `AuthorizationHeaderMalformed` | 400 |
 
 ## Limitations
@@ -92,7 +89,7 @@ The payload marker is handled separately from the authentication algorithm.
 An ECDSA `STREAMING-...` marker on an otherwise accepted request selects signed chunk decoding without signature verification.
 The decoder still requires a 64-character hexadecimal signature on each chunk, as used by HMAC-SHA256.
 The `STREAMING-AWS4-ECDSA-P256-SHA256-PAYLOAD-TRAILER` marker does not enable trailer parsing or checksum verification; its trailer is ignored.
-Such a request can be stored if the chunk format and other upload checks pass, with no chunk-signature or trailer verification.
+The upload can succeed if the chunk format and other upload checks pass.
 
 ### FSO directories
 
