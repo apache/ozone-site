@@ -31,6 +31,42 @@ However, they can be configured to require Kerberos authentication using HTTP SP
 
 After that, individual component needs to configure properly to completely enable SPNEGO or SIMPLE authentication.
 
+## Resolving `_HOST` in the Kerberos principal
+
+`HTTP/_HOST@REALM` in `*.http.auth.kerberos.principal` is expanded at startup. The
+hostname must match your **keytab** and the **host in the browser URL**.
+
+Ozone takes `_HOST` from the **advertised** web address (`ozone.<service>.http-address`
+or `https-address`), **not** from `*-http-bind-host`. Bind host only chooses where
+the process listens (`0.0.0.0`, `::`, a NIC IP, and so on).
+
+For Datanode, the address keys are `hdds.datanode.http-address` and
+`hdds.datanode.https-address`.
+
+| Property (OM example) | Example | Used for `_HOST` |
+|-----------------------|---------|------------------|
+| `ozone.om.http-address` | `om1.example.com:9874` | Yes |
+| `ozone.om.http-bind-host` | `0.0.0.0` or `::` | No |
+
+Ozone checks enabled schemes, HTTP before HTTPS, and uses the first configured
+hostname that is not an IP literal for all listeners. With `HTTP_AND_HTTPS`, different
+HTTP and HTTPS hostnames still produce one principal: the HTTP name wins when both are
+non-literal hostnames. With `HTTPS_ONLY`, the HTTP address is ignored.
+
+If no enabled `*-address` supplies a hostname (the settings are unset or
+contain IP literals, including `0.0.0.0`, `[::]`, and concrete IP addresses),
+Ozone uses this machine's **canonical hostname**.
+
+**Recommended:** set `*-address` to the FQDN in the keytab; keep `*-bind-host` on
+`0.0.0.0` or `::` if needed; open the UI with that FQDN. For **IPv6 bind `::`**, still
+set a non-wildcard FQDN in `*-address`. S3 web admin (and Kerberos `/secret/*` when
+enabled) follows `ozone.s3g.webadmin.http-address` / `https-address` the same way.
+
+**SPNEGO fails:** check `klist -k -t <keytab>` against `*-address` and the browser URL
+(FQDN, short name, and IP are not interchangeable).
+
+See [HDDS-16347](https://issues.apache.org/jira/browse/HDDS-16347) for the code change.
+
 ## Enable SPNEGO authentication for OM HTTP
 
 | Property | Value |
