@@ -365,6 +365,8 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.client.ec.grpc.retries.enabled` | true | `CLIENT` | To enable Grpc client retries for EC. |
 | `ozone.client.ec.grpc.retries.max` | 3 | `CLIENT` | The maximum attempts GRPC client makes before failover. |
 | `ozone.client.ec.grpc.write.timeout` | 30s | `OZONE`, `CLIENT`, `MANAGEMENT` | Timeout for ozone ec grpc client during write. |
+| `ozone.client.ec.parallel.read.enabled` | false | `CLIENT` | When enabled, a read of an EC block that spans more than one cell reads the cells of different data indexes from their datanodes in parallel, instead of one cell at a time. Reads within a single cell, and reads that need reconstruction, are not affected. |
+| `ozone.client.ec.parallel.read.pool.limit` | 30 | `CLIENT` | Thread pool max size for reading the cells of an EC block in parallel, when `ozone.client.ec.parallel.read.enabled` is true. When the pool is saturated, the reading thread reads the remaining cells itself. |
 | `ozone.client.ec.reconstruct.stripe.read.pool.limit` | 30 | `CLIENT` | Thread pool max size for parallel read available ec chunks to reconstruct the whole stripe. |
 | `ozone.client.ec.reconstruct.stripe.write.pool.limit` | 30 | `CLIENT` | Thread pool max size for parallel write available ec chunks to reconstruct the whole stripe. |
 | `ozone.client.ec.stripe.queue.size` | 2 | `CLIENT` | The max number of EC stripes can be buffered in client before flushing into datanodes. |
