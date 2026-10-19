@@ -20,23 +20,29 @@ The following packages are required during the release process:
 
 :::note
 Release managers must build the official release artifacts on Linux. As of Ozone 2.0.0, Ozone includes optional native libraries for the fault injection tool and Ozone Snapshot features. Building on Linux ensures these features are available in the released artifacts.
+
+The native libraries link against the `glibc` and `libstdc++` of the build machine, so they only load on systems with the same or newer versions. Build the release on Rocky Linux 9, the base of the [apache/ozone](https://hub.docker.com/r/apache/ozone) Docker image, or in a `rockylinux:9` container. Native libraries built on a newer distribution, such as a recent Ubuntu or Debian, may not load on Rocky Linux 9. The native libraries are built only for the CPU architecture of the build machine.
 :::
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-<TabItem value="rockylinux" label="Rocky Linux">
+<TabItem value="rockylinux" label="Rocky Linux 9">
 
 ```bash title="Install pre-requisites"
-yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch which
+yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch which unzip
 ```
 
 </TabItem>
-<TabItem value="ubuntulinux" label="Ubuntu Linux">
+<TabItem value="container" label="rockylinux:9 container">
 
-```bash title="Install pre-requisites"
-apt update && apt install -y subversion git pinentry-tty openjdk-8-jdk cmake g++ patch gpg
+```bash title="Start a build container from the Ozone repository"
+docker run -it --rm -v "$PWD:/ozone" -v "$HOME/.m2:/root/.m2" -v "$HOME/.gnupg:/root/.gnupg" -w /ozone rockylinux:9 bash
+```
+
+```bash title="Install pre-requisites in the container"
+yum install -y svn git pinentry java-1.8.0-openjdk-devel cmake gcc-c++ patch which unzip
 ```
 
 </TabItem>
@@ -405,6 +411,19 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
     :::note
     The `test.sh` file committed to the master branch only checks upgrade compatibility against the last released Ozone version to save build time. Compatibility with all past versions should be checked by uncommenting all `run_test` lines in the `test.sh` file before running it. This test matrix may take a long time to run, so it might be better to run it on GitHub Actions instead of locally.
     :::
+8. Verify the native library in the extracted release tarball on Rocky Linux 9 or in a `rockylinux:9` container.
+    - Check that it loads. Run the command from a directory you can write to; the output should contain `rocks-tools:  true`.
+
+      ```bash
+      bin/ozone debug checknative
+      ```
+
+    - Check the newest glibc and libstdc++ versions it requires. They must not be newer than `GLIBC_2.34` and `GLIBCXX_3.4.29`, the versions in Rocky Linux 9.
+
+      ```bash
+      unzip -o -q share/ozone/lib/hdds-rocks-native-$VERSION.jar libozone_rocksdb_tools.so -d /tmp/ozone-native
+      for v in GLIBC GLIBCXX; do objdump -T /tmp/ozone-native/libozone_rocksdb_tools.so | grep -oE "${v}_[0-9.]+" | sort -uV | tail -n 1; done
+      ```
 
 ### Upload the Artifacts to Dev Staging
 
