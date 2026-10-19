@@ -18,7 +18,7 @@ Run **more than one** Listener OM if reads depend on them. If a single listener 
 
 ## Requirements and limitations
 
-- **Voting group size:** Raft needs an odd number of **voting** members. Use **one or three** voting OMs (for example three for production). A two-voting-member configuration is invalid.
+- **Voting group size:** Use an odd number of voting OMs, such as three or five, for high availability. Two voting OMs work, but both are required for quorum, so they tolerate no failure. Three voting OMs tolerate one failure and five tolerate two; an even count adds no failure tolerance compared with the preceding odd count. Listener OMs do not vote or increase failure tolerance. See [OM HA fault tolerance](../../../core-concepts/high-availability/om-ha#fault-tolerance).
 - **Listeners are not promotable:** A Listener OM cannot become leader or follower. Administrative leader transfer ([`ozone admin om transfer`](./om-ha#om-leader-transfer)) applies only to voting members.
 - **Read consistency:** Reads served from a Listener OM are **eventually consistent** relative to the leader: they can lag slightly behind the latest committed metadata. Plan for that if applications need to see writes immediately.
 

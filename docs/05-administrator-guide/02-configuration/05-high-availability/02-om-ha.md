@@ -32,6 +32,8 @@ For each of the defined `serviceId` a logical configuration name should be defin
 </property>
 ```
 
+For a five-voter group, list `om1,om2,om3,om4,om5` in `ozone.om.nodes.cluster1` and configure an address for each OM. These IDs must identify voting OMs; adding Listener OMs does not increase failure tolerance.
+
 The defined prefixes can be used to define the address of each of the OM services:
 
 ```xml
@@ -73,6 +75,8 @@ To convert a non-HA OM to be HA or to add new OM nodes to existing HA OM ring, n
 
 Before bootstrapping a new OM node, all the existing OM's on-disk configuration file (ozone-site.xml) must be updated with the configuration details of the new OM such as nodeId, address, port etc. Note that the existing OMs need not be restarted. They will reload the configuration from disk when they receive a bootstrap request from the bootstrapping node.
 
+Before a new OM can become leader, update every OM client configuration with the new node IDs in `ozone.om.nodes.<serviceId>` and the corresponding `ozone.om.address.<serviceId>.<nodeId>` entries. This includes Ozone clients, admin tools, S3 Gateway, Recon, and HttpFS. Ensure running clients load the updated configuration, restarting them where necessary. Updating the existing OMs' configuration files alone is insufficient: a client cannot follow a leader that is absent from its configured OM list (see [HDDS-17126](https://issues.apache.org/jira/browse/HDDS-17126)).
+
 To bootstrap an OM, the following command needs to be run:
 
 ```bash
@@ -90,6 +94,8 @@ Note that using the *force* option during bootstrap could crash the OM process i
 ## OM Leader Transfer
 
 The `ozone admin om transfer` command allows you to manually transfer the leadership of the Ozone Manager (OM) Raft group to a specific OM node or to a randomly chosen follower.
+
+Until [HDDS-17124](https://issues.apache.org/jira/browse/HDDS-17124) is fixed, manual OM and SCM leadership transfer commands have taken approximately 4–13 seconds in five-node tests because of Ratis client retry waits during leader discovery and priority reset. This is an observation, not an upper bound or a guarantee about automatic failover latency. Account for client RPC timeouts; if a command times out, check the current roles before deciding whether to retry.
 
 ### Usage
 

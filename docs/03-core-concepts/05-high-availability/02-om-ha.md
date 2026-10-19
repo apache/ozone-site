@@ -18,7 +18,21 @@ A single Ozone Manager uses [RocksDB](https://github.com/facebook/rocksdb/) to p
 
 ![HA OM](HA-OM.png)
 
-Client connects to the Leader Ozone Manager which processes the request and schedules the replication with RAFT. When the request is replicated to all the followers the leader can return with the response.
+Client connects to the Leader Ozone Manager which processes the request and schedules the replication with RAFT. When the request is persisted to the Raft logs of a majority of voting OMs, the leader can return with the response.
+
+## Fault tolerance
+
+OM and SCM HA groups can have more than three voting members. Raft requires a majority of voting members to elect a leader and commit requests:
+
+| Voting members | Majority required | Failures tolerated |
+| --- | --- | --- |
+| 2 | 2 | 0 |
+| 3 | 2 | 1 |
+| 4 | 3 | 1 |
+| 5 | 3 | 2 |
+| 6 | 4 | 2 |
+
+An even number of voting members works, but adds no failure tolerance compared with the preceding odd number. Three voting members tolerate one failure; five tolerate two, allowing one node to fail while another is down for maintenance. Deploy voting members on independent hosts. Listener OMs do not count toward the voting majority or increase failure tolerance.
 
 ## Learn More
 
