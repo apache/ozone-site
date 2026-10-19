@@ -38,13 +38,22 @@ Ozone takes `_HOST` from the **advertised** web address (`ozone.<service>.http-a
 or `https-address`), **not** from `*-http-bind-host`. Bind host only chooses where
 the process listens (`0.0.0.0`, `::`, a NIC IP, and so on).
 
+For Datanode, the address keys are `hdds.datanode.http-address` and
+`hdds.datanode.https-address`.
+
 | Property (OM example) | Example | Used for `_HOST` |
 |-----------------------|---------|------------------|
 | `ozone.om.http-address` | `om1.example.com:9874` | Yes |
 | `ozone.om.http-bind-host` | `0.0.0.0` or `::` | No |
 
-If `*-address` uses a wildcard host (`0.0.0.0` or `[::]`), Ozone uses this machine's
-**canonical hostname** (same idea as default Hadoop installs).
+Ozone checks enabled schemes, HTTP before HTTPS, and uses the first configured
+hostname that is not an IP literal for all listeners. With `HTTP_AND_HTTPS`, different
+HTTP and HTTPS hostnames still produce one principal: the HTTP name wins when both are
+non-literal hostnames. With `HTTPS_ONLY`, the HTTP address is ignored.
+
+If no enabled `*-address` supplies a hostname (the settings are unset or
+contain IP literals, including `0.0.0.0`, `[::]`, and concrete IP addresses),
+Ozone uses this machine's **canonical hostname**.
 
 **Recommended:** set `*-address` to the FQDN in the keytab; keep `*-bind-host` on
 `0.0.0.0` or `::` if needed; open the UI with that FQDN. For **IPv6 bind `::`**, still
