@@ -22,7 +22,7 @@ Client connects to the Leader Ozone Manager which processes the request and sche
 
 ## Fault tolerance
 
-OM and SCM HA groups can have more than three voting members. Raft requires a majority of voting members to elect a leader and commit requests:
+OM HA group can have more than three voting members. Raft requires a majority of voting members to elect a leader and commit requests:
 
 | Voting members | Majority required | Failures tolerated |
 | --- | --- | --- |
