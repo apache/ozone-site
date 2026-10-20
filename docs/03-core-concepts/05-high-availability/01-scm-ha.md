@@ -14,7 +14,7 @@ Please check the [OM HA documentation](om-ha) for HA setup of Ozone Manager (OM)
 
 ## Fault tolerance
 
-OM and SCM HA groups can have more than three voting members. Raft requires a majority of voting members to elect a leader and commit requests:
+SCM HA group can have more than three voting members. Raft requires a majority of voting members to elect a leader and commit requests:
 
 | Voting members | Majority required | Failures tolerated |
 | --- | --- | --- |
