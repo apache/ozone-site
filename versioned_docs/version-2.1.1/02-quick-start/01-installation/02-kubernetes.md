@@ -6,6 +6,8 @@ sidebar_label: Kubernetes
 
 Ozone is designed to work well under Kubernetes. This document provides a guide for deploying and experimenting with Ozone on K8s, using Helm Chart, MiniKube or a self-hosted Kubernetes cluster.
 
+For supported Kubernetes versions, container images, and production deployment guidance, see [Supported Platforms — Kubernetes](../../administrator-guide/installation/supported-platforms-and-software-stack#kubernetes).
+
 ## Helm Chart
 
 For a streamlined deployment of Apache Ozone on Kubernetes, consider using the [Apache Ozone Helm Chart](https://apache.github.io/ozone-helm-charts/). This Helm Chart simplifies the installation and management of an Ozone cluster by packaging best practices into a set of configurable Kubernetes resources.
