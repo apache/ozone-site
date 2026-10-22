@@ -763,7 +763,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.scm.ha.grpc.server.permit.keepalive.time` | 5m | `SCM`, `OZONE`, `HA`, `RATIS` | Minimum interval the Inter-SCM gRPC server permits between keepalive pings from a client. Clients pinging more frequently are disconnected. Should be no larger than `ozone.scm.ha.grpc.client.keepalive.time` so client pings are accepted. |
 | `ozone.scm.ha.raft.server.log.appender.wait-time.min` | 0ms | `OZONE`, `SCM`, `RATIS`, `PERFORMANCE` | Minimum wait time between two appendEntries calls. |
 | `ozone.scm.ha.raft.server.rpc.first-election.timeout` |  | `SCM`, `OZONE`, `HA`, `RATIS` | ratis timeout for the first election of a leader. If not configured, fallback to `ozone.scm.ha.ratis.leader.election.timeout`. |
-| `ozone.scm.ha.ratis.leader.election.timeout` | 5s | `SCM`, `OZONE`, `HA`, `RATIS` | The minimum timeout duration for SCM ratis leader election. Default is 1s. |
+| `ozone.scm.ha.ratis.leader.election.timeout` | 5s | `SCM`, `OZONE`, `HA`, `RATIS` | The minimum timeout duration for SCM ratis leader election. Default is 5s. It is used as raft.server.rpc.timeout.min of SCM's Ratis server, and raft.server.rpc.timeout.max is set to this value plus 200ms. |
 | `ozone.scm.ha.ratis.leader.ready.check.interval` | 2s | `SCM`, `OZONE`, `HA`, `RATIS` | The interval between ratis server performing a leader readiness check. |
 | `ozone.scm.ha.ratis.leader.ready.wait.timeout` | 60s | `SCM`, `OZONE`, `HA`, `RATIS` | The minimum timeout duration for waiting for leader readiness. |
 | `ozone.scm.ha.ratis.log.appender.queue.byte-limit` | 32MB | `SCM`, `OZONE`, `HA`, `RATIS` | Byte limit for Raft's Log Worker queue. |
