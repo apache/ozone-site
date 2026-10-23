@@ -171,6 +171,7 @@ words:
 - spnego
 - keytab
 - Keytab
+- NIC
 - keyspace
 - Merkle
 - RocksDB
@@ -239,6 +240,7 @@ words:
 - Ints
 - jre
 # Misc words
+- ATX
 - acking
 - ACK
 - dashboarding
