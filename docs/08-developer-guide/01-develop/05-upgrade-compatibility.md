@@ -111,6 +111,50 @@ if (!ozoneManager.getVersionManager().needsFinalization()) {
 New versions will continue be added in subsequent releases after `MY_NEW_FEATURE`. Say `MY_NEW_FEATURE_2` is added in the next release. When upgrading from software version `MY_NEW_FEATURE` to `MY_NEW_FEATURE_2`, `MY_NEW_FEATURE` must remain finalized and usable from the previous upgrade even if the component is not yet finalized for `MY_NEW_FEATURE_2`.
 :::
 
+## Committing Changes
+
+Ozone's component versions are a logical versioning framework decoupled from official Ozone releases. The system is expected to work correctly regardless of which commit a release is cut from. To maintain this property, changes requiring versioning must be checked in with the same commit that the version is introduced. Splitting this over multiple commits will create an incompatiblity if a release is cut between the commits:
+
+1. **Incompatible: Adding an incompatible change and then adding a version gate for it in a follow-up commit.** A release cut between these two commits will release the incompatible change without the version gate.
+
+2. **Incompatible: Adding a version in one commit and using it in a follow-up commit.** A release cut between these two commits will finalize the version as a no-op. The next release will then start using the feature automatically as if it was introduced in the previous version.
+
+3. **Incompatible: Extending the usage of an existing version in follow-up commits.** This breaks for the same reason as (2). A new version must be used for the new functionality.
+
+One large feature may introduce incompatible changes in multiple areas which take multiple commits to add, however it is easier to reason about these if they are grouped by one apparent version. There are two strategies developers can use for this:
+
+1. **Build these features on feature branches.** Feature branches are not release candidates, so they can contain incompatible changes between commits. A single version just needs to be added to gate all incompatible behavior before the branch is merged back to master.
+
+2. **Place the incompatible changes behind a disabled feature flag, and switch this flag to a version gate when the feature is ready to be released.** If multiple incompatible changes for a feature are being added to master, they can each be gated with the same pattern while under development:
+
+```java
+// featureFlagEnabled = false except when needed in test environments.
+if (featureFlagEnabled) {
+  // All capabilities of MY_NEW_FEATURE can be used, even if they are incompatible with older components.
+} else {
+  // Must continue to act as the older version without using incompatible changes from MY_NEW_FEATURE.
+}
+```
+
+Once all incompatible changes are added over multiple commits, replace all usages of the feature flag with a version gate in a single commit to release the feature. This makes it identical to the pattern shown above:
+
+```diff
+--- b/example.java
++++ a/example.java
+@@ -1,5 +1,4 @@
+-// featureFlagEnabled = false except when needed in test environments.
+-if (featureFlagEnabled) {
++if (ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.MY_NEW_FEATURE)) {
+   // All capabilities of MY_NEW_FEATURE can be used, even if they are incompatible with older components.
+ } else {
+   // Must continue to act as the older version without using incompatible changes from MY_NEW_FEATURE.
+ }
+```
+
+:::warning
+Developing large features on master must be done with care. The next section documents many surfaces that are susceptible to incompatible changes, and large features have the potential to accidentally break these if a release is cut from master while the feature is still being developed. Since protobuf structures and server side APIs cannot accept incompatible changes after a release, only features built on feature branches have the freedom to create initial drafts implementations of these and update them incompatibly as the design evolves.
+:::
+
 ## Surface-by-Surface Guide
 
 Each surface below follows the same shape: **what is considered incompatible** and **the pattern to handle it**. Note that OM and SCM are finalized via Ratis, but Datanodes finalize asynchronously as they receive the finalize command from SCM.
@@ -183,12 +227,14 @@ This is a real example of using `RequestFeatureValidator` to block a new incompa
 
 - A new column family
 - A change to the shape of a persisted value class
+- Addition or removal of exceptions that abort further processing of the request
+  - The version without the exception will persist the update to the state machine, while the version with the exception will abort without updating the state machine.
 - A difference in how a persisted value is calculated, even if the protobuf schema does not change.
   - For example, an update to quota calculation logic would require version gating.
 
 **Pattern:** gate the new persisted behavior in `validateAndUpdateCache` on `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X)` and keep the pre-feature code path for the negative branch. Two OMs can replay the same Ratis transaction while acting as different versions, so the gate keeps their state machines from diverging.
 
-If in doubt, ask: *would an OM acting as apparent v100 and an OM acting as v105, both replaying this transaction from Ratis, arrive at the same DB state?* If not, it needs a gate.
+If in doubt, ask: *would an OM acting as apparent version X and an OM acting as apparent version Y, both replaying this transaction from Ratis, arrive at the same DB state?* If not, it needs a gate.
 
 ### OM ↔ OM Peer RPCs Outside Ratis, Including Ratis Snapshot Installation APIs
 
@@ -280,6 +326,10 @@ Examples of upgrade finalization actions include:
 
 - Adding a symlink to make a directory reachable from a new path
 - Starting a background service that continues to run asynchronously
+
+:::warning
+If an upgrade action is committed with an issue that incorrectly modifies disk state, fixing the action in the latest version will not fix any existing issues it may have caused in past deployments. This is because the upgrade action will not be run again after its corresponding version is finalized. To handle this, add a new version and upgrade action which contains the fix.
+:::
 
 ## Testing Your Change
 
