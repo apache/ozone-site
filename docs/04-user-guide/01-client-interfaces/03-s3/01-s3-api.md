@@ -124,7 +124,7 @@ The S3 Gateway partially supports [conditional requests](https://docs.aws.amazon
 
 - **GetObject and HeadObject:** Support `If-Match`, `If-None-Match`, `If-Modified-Since`, and `If-Unmodified-Since`. A failed `If-Match` or `If-Unmodified-Since` returns `412 Precondition Failed`. A matching `If-None-Match` or a failed `If-Modified-Since` returns `304 Not Modified`.
 - **CopyObject:** Supports `x-amz-copy-source-if-match`, `x-amz-copy-source-if-none-match`, `x-amz-copy-source-if-modified-since`, and `x-amz-copy-source-if-unmodified-since` on the source object. A failed condition returns `412 Precondition Failed`.
-- **PutObject, CopyObject, and CompleteMultipartUpload:** Support `If-Match` with an ETag, to write only if the existing object matches, and `If-None-Match: *`, to write only if the object does not exist. `If-None-Match` with a specific ETag is not supported and returns `InvalidRequest`. `If-Match` and `If-None-Match` cannot be used together.
+- **PutObject, CopyObject, and CompleteMultipartUpload:** Support `If-Match` with an ETag, to write only if the existing object matches, and `If-None-Match: *`, to write only if the object does not exist. `If-None-Match` accepts a specific ETag, to write only if the existing object does not match it; this is a Ceph S3 extension, not an AWS S3 feature. A failed condition returns `412 Precondition Failed`. `If-Match` and `If-None-Match` cannot be used together.
 - **DeleteObject:** Supports `If-Match`.
 
 ### Operations Not Implemented
@@ -218,7 +218,7 @@ READY
 
 Returns `200 READY` only when the gateway can reach OM, and `503 NOT READY` during startup or while OM is unreachable. A background probe refreshes OM reachability off the request path, so the endpoint always responds immediately and cannot be blocked by a slow OM. The probe cadence and its timeout are tunable with `ozone.s3g.health-check.probe.interval` and `ozone.s3g.health-check.probe.timeout`.
 
-When S3 Gateway is horizontally scaled, point the load balancer's HTTP health check at the readiness endpoint so it only routes S3 traffic to gateways that can serve it; see the bundled `compose/common/s3-haproxy.cfg` for a worked HAProxy example. Both endpoints can be turned off with `ozone.s3g.health-check.enabled=false`, which removes them entirely. Note that the bundled Kubernetes manifests and HAProxy configs probe `/health/live` and `/health/ready` unconditionally, so if you disable the endpoints you must also remove those probes from your deployment; otherwise Kubernetes restarts the pods on failed liveness checks and HAProxy marks every backend down.
+When S3 Gateway is horizontally scaled, point the load balancer's HTTP health check at the readiness endpoint so it only routes S3 traffic to gateways that can serve it. Both endpoints can be turned off with `ozone.s3g.health-check.enabled=false`, which removes them entirely. If you disable the endpoints, also remove any probes on `/health/live` and `/health/ready` from your deployment, such as Kubernetes liveness and readiness probes; otherwise failed liveness checks restart the pods.
 
 ## Expose any volume
 
