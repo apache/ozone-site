@@ -26,7 +26,7 @@ During benchmark Ozone on Hbase, we found that current Ozone (branch HDDS-7593) 
 
 The benchmark compared three configurations on a pure read workload (workload C). The last third is Ozone, the second is HDFS without short circuit read, and the last is HDFS with short circuit read.
 
-<img src="short-circuit-read-hbase-benchmark.png" alt="HBase benchmark with workload C" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-hbase-benchmark.png" alt="HBase benchmark with workload C" width="420" />
 
 To have competitive read performance as HDFS, we consider supporting short circuit read in Ozone.
 
@@ -34,13 +34,13 @@ To have competitive read performance as HDFS, we consider supporting short circu
 
 Here is how an Ozone Client reads data from DN. Once the client gets the KeyInfo from OzoneManager, it will know the location of each block. The Client will send a getBlock request to Datanode, to retrieve the Block and ChunkInfo for one block. With the ChunkInfo, next the client will send a readChunk request to Datanode. All these requests are sent on a TCP connection between Client and Datanode. When Datanode receives the readChunk request, it will locate the BlockFile on disk, open it, and read from the specified offset, with specified length into its internal data buffer, then wrap the buffer and send the data through the network to the Client.
 
-<img src="short-circuit-read-current-flow.png" alt="Current Ozone read path over TCP/gRPC" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-current-flow.png" alt="Current Ozone read path over TCP/gRPC" width="420" />
 
 Currently this flow is the same regardless of whether the Client and Datanode are on the same server or not. Obviously, there is a lot of buffer copy, packing data, transfer data, unpacking data operation here. So if the Client and Datanode are on the same server, a straightforward idea is why just let the OzoneClient read from the Block file directly, save the cost of network data transfer, packing/unpacking data and possibly less buffer copy.
 
 Here is the target flow: instead of passing the data to Client, Datanode will pass a file descriptor of the Block file. Once the Client receives this file descriptor, it can use it to read the file directly.
 
-<img src="short-circuit-read-target-flow.png" alt="Target short circuit read path with file descriptor" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-target-flow.png" alt="Target short circuit read path with file descriptor" width="420" />
 
 To achieve the above flow, we need to leverage Unix Domain Socket.
 
@@ -52,7 +52,7 @@ The API for Unix domain sockets is similar to that of an Internet socket, for ex
 
 Comparing TCP/IP and Unix domain for local IPC between two sockets:
 
-<img src="short-circuit-read-unix-domain-socket.png" alt="Comparing TCP/IP and Unix domain socket for local IPC" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-unix-domain-socket.png" alt="Comparing TCP/IP and Unix domain socket for local IPC" width="420" />
 
 Unix domain sockets may use the file system as their address name space, eg. `/foo/bar` or `C:\foo\bar`. Processes reference Unix domain sockets as file system inodes, so two processes can communicate by opening the same socket. In addition to sending data, processes may send file descriptors across a Unix domain socket connection using the `sendmsg()` and `recvmsg()` system calls. This allows the sending process to grant the receiving process access to a file descriptor for which the receiving process otherwise does not have access. This is how it will be used in Ozone.
 
@@ -80,7 +80,7 @@ The **GetBlock** request and response will be exchanged over the current gRPC ch
 
 ### Flow
 
-<img src="short-circuit-read-getblock-flow.png" alt="Short circuit read flow with GetBlock and Unix domain socket" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-getblock-flow.png" alt="Short circuit read flow with GetBlock and Unix domain socket" width="420" />
 
 ## Configuration
 
@@ -156,7 +156,7 @@ Besides the Unix Domain Socket, HDFS further improves the read performance by al
 
 According to [HDFS-4953](https://issues.apache.org/jira/browse/HDFS-4953), there is a microbenchmark, which shows that the mmap cache can achieve the same performance as pure memory operation, 3x faster than normal short circuit read.
 
-<img src="short-circuit-read-mmap-cache-benchmark.png" alt="HDFS short circuit read and mmap cache microbenchmark" style="max-width: 420px; height: auto;" />
+<img src="short-circuit-read-mmap-cache-benchmark.png" alt="HDFS short circuit read and mmap cache microbenchmark" width="420" />
 
 - The top line is file in memory, so pure memory operation.
 - The second top line is the short circuit read, with cached mmap, so no page faulting overhead.

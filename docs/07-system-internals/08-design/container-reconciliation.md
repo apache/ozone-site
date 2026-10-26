@@ -181,7 +181,7 @@ The following APIs would be added to datanodes to support container reconciliati
     - Datanodes will call `getContainerHashes` for each container replica to identify repairs needed, and use existing chunk read/write APIs to do repairs necessary.
     - This would likely be a new command as part of the SCM heartbeat protocol, not actually a new API.
 - `getContainerHashes(containerID)`
-    - A datanode API that returns the merkle tree for a given container. The proto structure would be similar to that outlined in [Merkle Tree](#Container-Hash-Tree-/-Merkle-Tree).
+    - A datanode API that returns the merkle tree for a given container. The proto structure would be similar to that outlined in [Merkle Tree](#container-hash-tree--merkle-tree).
 
 ## Reconciliation Process
 
