@@ -45,7 +45,8 @@ is_markdown() {
 }
 
 # Check docs pages. These must use number prefixes.
-for file in $(find "$root"/docs/*); do
+# TODO: Remove the design docs exemption once the imported files are renamed.
+for file in $(find "$root"/docs/* -not -path "$root/docs/07-system-internals/08-design/*"); do
     if [ -d "$file" ]; then
         # Check docs directories.
         check_regex "$file" "$doc_dir_regex"

@@ -30,6 +30,9 @@ const darkCodeTheme = themes.dracula;
 // For GitHub pages deployment, it is often '/<projectName>/'
 const baseUrl = '/';
 
+// TODO: Imported design docs are drafts and exempt from the build-time content checks until they are cleaned up.
+const uncheckedDocsDir = '/docs/07-system-internals/08-design/';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Apache Ozone',
@@ -111,6 +114,16 @@ const config = {
       // Reuse the default parser.
       const result = await params.defaultParseFrontMatter(params);
 
+      if (params.filePath.includes(uncheckedDocsDir)) {
+        // Draft pages render in `pnpm start` but are left out of the production build.
+        result.frontMatter = {...result.frontMatter, draft: true};
+        // Parse the imported .md files as CommonMark since they are not valid MDX.
+        if (params.filePath.endsWith('.md')) {
+          result.frontMatter = {...result.frontMatter, mdx: {format: 'md'}};
+        }
+        return result;
+      }
+
       // Validate front matter against the schema.
       const schemaPath = './.github/resource/frontmatter.schema.json';
       const frontMatterSchema = require(schemaPath);
@@ -134,6 +147,10 @@ const config = {
     */
     preprocessor: (/** @type {{filePath: string, fileContent: string}} */ params) => {
       const {filePath, fileContent} = params;
+
+      if (filePath.includes(uncheckedDocsDir)) {
+        return fileContent;
+      }
 
       // Strip HTML comments and fenced code blocks to avoid false positives.
       // Replace non-newline characters with spaces to preserve line numbers.
@@ -269,6 +286,10 @@ const config = {
 
             const validUrlRegex = /^https:\/\/ozone\.apache\.org\/([a-z0-9][a-z0-9./-]*[a-z0-9/])?$/;
             items.forEach((item) => {
+              // TODO: Remove once the imported design docs are renamed.
+              if (item.url.includes('/system-internals/design/')) {
+                return;
+              }
               if (!validUrlRegex.test(item.url)) {
                   console.error('Generated URL', item.url, 'does not match the allowed RegEx:', validUrlRegex);
                   console.error('All URLs should use kebab case and lowercase letters.');

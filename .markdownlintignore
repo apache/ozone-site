@@ -20,3 +20,4 @@ node_modules
 CLAUDE.md
 static/docs/
 docs/*-administrator-guide/*-configuration/*-appendix.md
+docs/*-system-internals/*-design/

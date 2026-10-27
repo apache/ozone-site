@@ -24,7 +24,7 @@ printf '%s\n' 'Checking document content...'
 pnpm cspell lint --root="$root" --no-progress --show-context '**/*.md' '**/*.mdx' || rc="$?"
 
 printf '\n%s\n' 'Checking file names...'
-find "$root"/docs "$root"/src/pages | sed "s|^$root/||" | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
+find "$root"/docs "$root"/src/pages -not -path "$root/docs/07-system-internals/08-design/*" | sed "s|^$root/||" | pnpm cspell --no-progress --show-context stdin://'File Name' || rc="$?"
 
 if [ "$rc" != 0 ]; then
   printf '\n%s\n%s\n' 'Spell check failed. See CONTRIBUTING.md for help fixing false positive spelling errors:' \

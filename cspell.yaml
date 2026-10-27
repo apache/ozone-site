@@ -65,6 +65,8 @@ ignorePaths:
 - src/pages/community/events-and-media.md
 # Exclude appendix file since the configs are generated directly from ozone-default.xml in the apache/ozone repo
 - docs/*-administrator-guide/*-configuration/*-appendix.md
+# TODO: Imported design docs are exempt until they are cleaned up.
+- docs/*-system-internals/*-design/**
 
 # List of words to be always considered correct.
 # Case insensitive.
