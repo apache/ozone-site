@@ -403,7 +403,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.client.stream.buffer.size` | 4MB | `CLIENT` | The size of chunks the client will send to the server |
 | `ozone.client.stream.putblock.piggybacking` | false | `CLIENT` | Allow PutBlock to be piggybacked in WriteChunk requests if the chunk is small. Can be enabled only when `ozone.client.hbase.enhancements.allowed` = true |
 | `ozone.client.stream.read.pre-read-size` | 33554432 | `CLIENT` | Size of the pre-read window for streaming reads: the number of bytes requested from the datanode ahead of the current read position. The window is refilled in bulk once the bytes requested ahead drop below half of this value. Set to 0 to disable pre-read. |
-| `ozone.client.stream.read.response-data-size` | 1048576 | `CLIENT` | Chunk size of streaming read responses from datanodes. |
+| `ozone.client.stream.read.response-data-size` | 1048576 | `CLIENT` | Amount of block data the datanode sends in each streaming read response. A response must fit in the 32 MB gRPC message limit, and 1 MB of that is reserved for metadata such as checksums, so the datanode caps this value at 31 MB. |
 | `ozone.client.stream.read.timeout` | 10s | `CLIENT` | Timeout for receiving streaming read responses. |
 | `ozone.client.stream.readblock.enable` | false | `CLIENT` | Allow ReadBlock to stream all the readChunk in one request. |
 | `ozone.client.verify.checksum` | true | `CLIENT` | Ozone client to verify checksum of the checksum blocksize data. |
