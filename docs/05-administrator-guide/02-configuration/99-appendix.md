@@ -11,6 +11,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `fs.trash.classname` | org.apache.hadoop.fs.ozone.OzoneTrashPolicy | `OZONE`, `OZONEFS`, `CLIENT` | Trash Policy to be used. |
 | `hadoop.hdds.db.rocksdb.WAL_size_limit_MB` | 0MB | `OM`, `SCM`, `DATANODE` | The total size limit of WAL log files. Once the total log file size exceeds this limit, the earliest files will be deleted.Default 0 means no limit. |
 | `hadoop.hdds.db.rocksdb.WAL_ttl_seconds` | 1200 | `OM`, `SCM`, `DATANODE` | The lifetime of WAL log files. Default 1200 seconds. |
+| `hadoop.hdds.db.rocksdb.compaction.deletion.ratio` | 0 | `OM`, `SCM`, `DATANODE` | Request automatic compaction when the fraction of deletion tombstones in a newly created SST reaches this ratio. Valid values are between 0 and 1; 0 disables the collector. Applies to default DB profiles; explicit column family options and options files take precedence. Does not flush tombstones from memtables or override disabled automatic compaction. Requires restart. |
 | `hadoop.hdds.db.rocksdb.keep.log.file.num` | 10 | `OM`, `SCM`, `DATANODE` | Maximum number of RocksDB application log files. |
 | `hadoop.hdds.db.rocksdb.logging.enabled` | false | `OM`, `SCM`, `DATANODE` | Enable/Disable RocksDB logging for OM. |
 | `hadoop.hdds.db.rocksdb.logging.level` | INFO | `OM`, `SCM`, `DATANODE` | OM RocksDB logging level (INFO/DEBUG/WARN/ERROR/FATAL) |
