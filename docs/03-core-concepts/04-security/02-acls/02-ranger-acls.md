@@ -39,6 +39,10 @@ The table below shows the mapping between Ozone operations and the required Rang
 | `Delete bucket` | `READ` | `DELETE` |
 | `Update bucket property (quota, replication, ...)` | `READ` | `WRITE` |
 | `List Snapshot` | `READ` | `LIST` |
+| `Get snapshot info` | `READ` | `READ` |
+| `Snapshot diff (submit, get report)` | `READ` | `LIST, READ` |
+| `Cancel snapshot diff` | `READ` | `READ` |
+| `List snapshot diff jobs` | `READ` | `LIST` |
 | `List Trash` | `READ` | `LIST` |
 | `Trash Recover` | `READ` | `WRITE` |
 | `Set Owner` | `READ` | `WRITE_ACL` |
