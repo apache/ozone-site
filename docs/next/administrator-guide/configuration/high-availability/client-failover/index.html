@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.9bf9663b.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.10b2b074.js" defer="defer"></script>
 <script src="/assets/js/main.2f8f0d2c.js" defer="defer"></script>
 </head>
 <body>
@@ -38,8 +38,13 @@
 <li class="">is not the leader, or</li>
 <li class="">is the leader but not ready to accept requests.</li>
 </ul>
-<p>The failover mechanism retries up to <strong>500 times</strong> (<code>ozone.client.failover.max.attempts</code>), with <strong>2 seconds</strong> between each failover retry (<code>ozone.client.wait.between.retries.millis</code>).
+<p>The failover mechanism retries up to <strong>500 times</strong> (<code>ozone.client.failover.max.attempts</code>).
 If an OM is not aware of the current leader, the client tries the next OM in round-robin fashion. Otherwise, the client retries contacting the current leader.</p>
+<p>The wait between retries is based on <code>ozone.client.wait.between.retries.millis</code> (default <strong>2 seconds</strong>):</p>
+<ul>
+<li class="">When trying OMs in round-robin fashion, for example because an OM is not reachable, the client waits this long after it has tried every OM once. With a single OM, this means a 2 second wait before each retry after a connection failure.</li>
+<li class="">When retrying the same OM because the OM asked for it, for example because the leader is not ready yet, the wait grows linearly: 2 seconds, 4 seconds, 6 seconds, and so on.</li>
+</ul>
 <p>Additionally, it is crucial to ensure clients and OM have consistent node mapping configurations, otherwise failover may not reach the leader OM.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Dk4v" id="2-grpc-transport">2. gRPC Transport<a href="#2-grpc-transport" class="hash-link" aria-label="Direct link to 2. gRPC Transport" title="Direct link to 2. gRPC Transport" translate="no">​</a></h3>
 <p>When using gRPC transport (<code>GrpcOMFailoverProxyProvider</code>), the failover behavior is similar to Hadoop RPC transport, using the same retry policies and configuration parameters.</p>
