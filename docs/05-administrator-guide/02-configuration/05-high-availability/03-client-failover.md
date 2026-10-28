@@ -22,8 +22,13 @@ If client to OM is Hadoop RPC transport(`HadoopRpcOMFailoverProxyProvider`), fai
 - is not the leader, or
 - is the leader but not ready to accept requests.
 
-The failover mechanism retries up to **500 times** (`ozone.client.failover.max.attempts`), with **2 seconds** between each failover retry (`ozone.client.wait.between.retries.millis`).
+The failover mechanism retries up to **500 times** (`ozone.client.failover.max.attempts`).
 If an OM is not aware of the current leader, the client tries the next OM in round-robin fashion. Otherwise, the client retries contacting the current leader.
+
+The wait between retries is based on `ozone.client.wait.between.retries.millis` (default **2 seconds**):
+
+- When trying OMs in round-robin fashion, for example because an OM is not reachable, the client waits this long after it has tried every OM once. With a single OM, this means a 2 second wait before each retry after a connection failure.
+- When retrying the same OM because the OM asked for it, for example because the leader is not ready yet, the wait grows linearly: 2 seconds, 4 seconds, 6 seconds, and so on.
 
 Additionally, it is crucial to ensure clients and OM have consistent node mapping configurations, otherwise failover may not reach the leader OM.
 
