@@ -108,12 +108,12 @@ if (!ozoneManager.getVersionManager().needsFinalization()) {
 }
 ```
 
-New versions will continue be added in subsequent releases after `MY_NEW_FEATURE`. Say `MY_NEW_FEATURE_2` is added in the next release. When upgrading from software version `MY_NEW_FEATURE` to `MY_NEW_FEATURE_2`, `MY_NEW_FEATURE` must remain finalized and usable from the previous upgrade even if the component is not yet finalized for `MY_NEW_FEATURE_2`.
+New versions will continue be to added in subsequent releases after `MY_NEW_FEATURE`. Say `MY_NEW_FEATURE_2` is added in the next release. When upgrading from software version `MY_NEW_FEATURE` to `MY_NEW_FEATURE_2`, `MY_NEW_FEATURE` must remain finalized and usable from the previous upgrade even if the component is not yet finalized for `MY_NEW_FEATURE_2`.
 :::
 
 ## Committing Changes
 
-Ozone's component versions are a logical versioning framework decoupled from official Ozone releases. The system is expected to work correctly regardless of which commit a release is cut from. To maintain this property, changes requiring versioning must be checked in with the same commit that the version is introduced. Splitting this over multiple commits will create an incompatiblity if a release is cut between the commits:
+Ozone's component versions are a logical versioning framework decoupled from official Ozone releases. The system is expected to work correctly regardless of which commit a release is cut from. To maintain this property, changes requiring versioning must be checked in with the same commit that the version is introduced. Splitting this over multiple commits will create an incompatibility if a release is cut between the commits:
 
 1. **Incompatible: Adding an incompatible change and then adding a version gate for it in a follow-up commit.** A release cut between these two commits will release the incompatible change without the version gate.
 
@@ -121,11 +121,11 @@ Ozone's component versions are a logical versioning framework decoupled from off
 
 3. **Incompatible: Extending the usage of an existing version in follow-up commits.** This breaks for the same reason as (2). A new version must be used for the new functionality.
 
-One large feature may introduce incompatible changes in multiple areas which take multiple commits to add, however it is easier to reason about these if they are grouped by one apparent version. There are two strategies developers can use for this:
+One large feature may introduce incompatible changes in multiple areas which take multiple commits to add, however it is easier to reason about these if they are grouped by one component version. There are two strategies developers can use for this:
 
 1. **Build these features on feature branches.** Feature branches are not release candidates, so they can contain incompatible changes between commits. A single version just needs to be added to gate all incompatible behavior before the branch is merged back to master.
 
-2. **Place the incompatible changes behind a disabled feature flag, and switch this flag to a version gate when the feature is ready to be released.** If multiple incompatible changes for a feature are being added to master, they can each be gated with the same pattern while under development:
+2. **Place the incompatible changes behind a disabled feature flag, and switch this flag to a version gate when the feature is ready to be released.** If multiple incompatible changes for a feature are being added to master, they can each be gated with a feature flag while under development. If the feature flag must be exposed as a configuration key, ensure it has a prefix (like `dev.`) and a description that indicates it enables an unsupported feature and should only be used for development. While developing the feature, use this pattern:
 
 ```java
 // featureFlagEnabled = false except when needed in test environments.
@@ -152,7 +152,7 @@ Once all incompatible changes are added over multiple commits, replace all usage
 ```
 
 :::warning
-Developing large features on master must be done with care. The next section documents many surfaces that are susceptible to incompatible changes, and large features have the potential to accidentally break these if a release is cut from master while the feature is still being developed. Since protobuf structures and server side APIs cannot accept incompatible changes after a release, only features built on feature branches have the freedom to create initial drafts implementations of these and update them incompatibly as the design evolves.
+Developing large features on master must be done with care. The next section documents many surfaces that are susceptible to incompatible changes, and large features have the potential to accidentally break these if a release is cut from master while the feature is still being developed. Since protobuf structures and server side APIs cannot accept incompatible changes after a release, only features built on feature branches have the freedom to create initial draft implementations of these and update them incompatibly as the design evolves.
 :::
 
 ## Surface-by-Surface Guide
@@ -186,7 +186,7 @@ During the rolling upgrade, older clients without the configuration must still b
 
 **Incompatible:** Any new read or write request added to the OM. New write requests will not be able to be applied by all nodes when the cluster is in a mixed version. New read requests may appear and disappear to the client as a mixed version OM Ratis group changes leaders.
 
-**Pattern:** Block new write requests until their feature is finalized by putting `DisallowedUntilOmVersion(OzoneManagerVersion.X)` on the `preExecute` method of its `OMClientRequest` subclass. Block new read requests until their feature is finalized by putting `DisallowedUntilOmVersion(OzoneManagerVersion.X)` on helper method the read delegates to in `OzoneManagerRequestHandler`.
+**Pattern:** Block new write requests until their feature is finalized by putting `@DisallowedUntilOmVersion(OzoneManagerVersion.X)` on the `preExecute` method of its `OMClientRequest` subclass. Block new read requests until their feature is finalized by putting `@DisallowedUntilOmVersion(OzoneManagerVersion.X)` on the helper method that the read delegates to in `OzoneManagerRequestHandler`.
 
 ### New Fields or Behavior in Existing OM Requests (Read or Write)
 
@@ -232,11 +232,11 @@ This is a real example of using `RequestFeatureValidator` to block a new incompa
 - A difference in how a persisted value is calculated, even if the protobuf schema does not change.
   - For example, an update to quota calculation logic would require version gating.
 
-**Pattern:** gate the new persisted behavior in `validateAndUpdateCache` on `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X)` and keep the pre-feature code path for the negative branch. Two OMs can replay the same Ratis transaction while acting as different versions, so the gate keeps their state machines from diverging.
+**Pattern:** gate the new persisted behavior in `validateAndUpdateCache` on `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X)` and keep the pre-feature code path for the negative branch. Two OMs can replay the same Ratis transaction while acting as different versions, so the gate keeps their state machines from diverging. This also allows mixed version leader/follower setups to process the contents of Ratis snapshots.
 
 If in doubt, ask: *would an OM acting as apparent version X and an OM acting as apparent version Y, both replaying this transaction from Ratis, arrive at the same DB state?* If not, it needs a gate.
 
-### OM ↔ OM Peer RPCs Outside Ratis, Including Ratis Snapshot Installation APIs
+### OM/SCM ↔ OM/SCM Peer RPCs Outside Ratis, Including Ratis Snapshot Installation APIs
 
 **Incompatible:** adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright.
 
@@ -319,13 +319,17 @@ An upgrade action must:
 
 - **Run in constant time.** Finalization is synchronous within a component. An action whose cost grows with cluster or dataset size stalls the whole finalize path. Never do invasive on-disk reformatting here.
 - **Be idempotent.** It may run again after a restart or partial failure during finalization.
-- **Execute safely on a live cluster.** Finalization is run on while the cluster is actively serving reads and writes. Finalization actions must not interfere with ongoing traffic through their component.
+- **Execute safely on a live cluster.** Finalization is run while the cluster is actively serving reads and writes. Finalization actions must not interfere with ongoing traffic through their component.
 - **Throw on failure.** A thrown exception is what tells the framework that finalization of this feature failed and that the component must crash and be restarted to make progress. An action that swallows its exception and returns will *not* be retried and the version will be finalized without the action completing.
 
 Examples of upgrade finalization actions include:
 
 - Adding a symlink to make a directory reachable from a new path
 - Starting a background service that continues to run asynchronously
+
+:::warning
+Upgrade actions on OM and SCM execute during the `applyTransaction` phase of Ratis. This means it is possible for them to run on each node while it is a follower, even though it must have been committed by a leader. Upgrade actions should not depend on the node's leader status, otherwise they may fail to execute.
+:::
 
 :::warning
 If an upgrade action is committed with an issue that incorrectly modifies disk state, fixing the action in the latest version will not fix any existing issues it may have caused in past deployments. This is because the upgrade action will not be run again after its corresponding version is finalized. To handle this, add a new version and upgrade action which contains the fix.
@@ -347,7 +351,7 @@ Integration tests run a single version of the code as one process so they are no
 
 ### Acceptance Tests
 
-The rolling-upgrade acceptance test suite under [`hadoop-ozone/dist/src/main/compose/upgrade/upgrades`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/upgrades). Uses Docker images from past releases to test a full upgrade, downgrade, and finalization cycle. It is the only way to truly test mixed version compatibility in addition to finalization. See the [upgrade acceptance test README](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/README.md) for details on how to add new tests that hook into the upgrade flow.
+The rolling-upgrade acceptance test suite is under [`hadoop-ozone/dist/src/main/compose/upgrade/upgrades`](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/upgrades). Uses Docker images from past releases to test a full upgrade, downgrade, and finalization cycle. It is the only way to truly test mixed version compatibility in addition to finalization. See the [upgrade acceptance test README](https://github.com/apache/ozone/blob/master/hadoop-ozone/dist/src/main/compose/upgrade/README.md) for details on how to add new tests that hook into the upgrade flow.
 
 ## See Also
 
