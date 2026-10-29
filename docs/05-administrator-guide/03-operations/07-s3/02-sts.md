@@ -115,7 +115,7 @@ The S3 object API remains on the existing S3G port (typically `9878`).
 
 ### Ranger feature flag (action-matches Policy Condition)
 
-To enforce **S3 action-level** restrictions in Ranger policies (required for fine-grained STS behavior such as separating `GetObject` from `GetObjectTagging` at the same key path), enable the Ozone service-def option in Ranger Admin:
+To enforce **S3 action-level** restrictions in Ranger policies (for example, separating `GetObject` from `GetObjectTagging` at the same key path), enable the Ozone service-def option in Ranger Admin. This requires Apache Ranger 2.9.0 or later.
 
 ```xml
 <!-- ranger-admin-site.xml -->
@@ -127,15 +127,17 @@ To enforce **S3 action-level** restrictions in Ranger policies (required for fin
 
 <div style={{overflowX: 'auto'}}>
 
-| Default | When `false`                                                                                                                                                                                                                | When `true` |
-| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| `false` | Ranger evaluates only Ozone access types (`read`, `write`, `create`, etc.). S3 actions from session policies are not enforced at action granularity, neither is it possible to specify granular actions on the role itself. | Enables the **Action** (`action-matches`) policy condition. The S3 Gateway passes the IAM action (for example `PutObject`) to Ranger on each request. |
+| Default | When `false`                                                                                                                                                                                                                | When `true`                                                                                                                                                                     |
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `false` | Ranger evaluates only Ozone access types (`read`, `write`, `create`, etc.). S3 actions from session policies are not enforced at action granularity, neither is it possible to specify granular actions on the role itself. | Enables the **Action** (`action-matches`) policy condition. The S3 Gateway passes the IAM action (for example `PutObject`) to Ranger on each S3 request that has an IAM action. |
 
 </div>
 
 When this flag is enabled:
 
 - Ranger policies can use the **Action** condition with values such as `PutObject`, `GetObject`, `ListBucket`, or wildcards like `Get*`.
+- S3 Gateway sends the action for each S3 operation that maps to an action in the table below, including requests that use permanent credentials while the STS endpoint stays disabled.  Requests that do not come through S3 Gateway (for example ofs or `ozone sh`) also carry no S3 action. An `action-matches` condition that lists specific actions does not match those requests. A condition that allows any action (`*`) still matches.
+- `GetObjectAttributes` is allowed only when Ranger authorizes both the `GetObjectAttributes` and `GetObject` actions. Include `GetObject` in role policies and session policies that grant `GetObjectAttributes`. Ozone checks `GetObject` as a dependent action on the same request.
 - Inline session policies from AssumeRole carry S3 action constraints that Ranger enforces alongside ACL permissions.
 
 Restart Ranger Admin after changing this property so the updated Ozone service definition (including the `action-matches` condition) is loaded.
@@ -153,7 +155,7 @@ When a caller passes a `Policy` parameter to AssumeRole, Ozone parses the AWS IA
 | `Effect` | `Allow` only | `Deny` and other effects are rejected                                                                                                    |
 | `Action` | Supported S3 actions and wildcards (`s3:*`, `s3:Get*`, `s3:Put*`, `s3:List*`, `s3:Create*`, `s3:Delete*`) | Unknown actions are **silently ignored** similar to AWS behavior (AssumeRole still succeeds; credentials simply won't grant that action) |
 | `Resource` | `arn:aws:s3:::` prefix or `*` | Other ARN prefixes are rejected                                                                                                          |
-| `Condition` | `StringEquals` or `StringLike` with key `s3:prefix` | Only one condition operator per statement; only applies to `s3:ListBucket`                                                               |
+| `Condition` | `StringEquals` or `StringLike` with key `s3:prefix` | Only one condition operator per statement; only applies to `s3:ListBucket` and `s3:ListBucketVersions`                                    |
 | Policy size | ≤ 2048 characters | Matches AWS AssumeRole limit                                                                                                             |
 
 ### S3 action → Ranger permissions and actions
@@ -174,19 +176,25 @@ Each applicable resource level must also include a matching `action-matches` con
 | `s3:DeleteObject` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObject`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObject`</span> | Permission: `DELETE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObject`</span> |
 | `s3:DeleteObjectTagging` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObjectTagging`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObjectTagging`</span> | Permission: `WRITE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `DeleteObjectTagging`</span> |
 | `s3:GetBucketAcl` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetBucketAcl`</span> | Permission: `READ`, `READ_ACL`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetBucketAcl`</span> | — |
+| `s3:GetBucketTagging` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetBucketTagging`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetBucketTagging`</span> | — |
+| `s3:GetLifecycleConfiguration` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetLifecycleConfiguration`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetLifecycleConfiguration`</span> | — |
 | `s3:GetObject` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObject`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObject`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObject`</span> |
+| `s3:GetObjectAttributes` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectAttributes`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectAttributes`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectAttributes`</span> |
 | `s3:GetObjectTagging` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectTagging`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectTagging`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `GetObjectTagging`</span> |
 | `s3:ListAllMyBuckets` | Volume | Permission: `READ`, `LIST`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListAllMyBuckets`</span> | — | — |
 | `s3:ListBucket` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucket`</span> | Permission: `READ`, `LIST`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucket`</span> | Permission: `READ`†<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucket`</span> |
 | `s3:ListBucketMultipartUploads` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucketMultipartUploads`</span> | Permission: `READ`, `LIST`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucketMultipartUploads`</span> | — |
+| `s3:ListBucketVersions` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucketVersions`</span> | Permission: `READ`, `LIST`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucketVersions`</span> | Permission: `READ`†<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListBucketVersions`</span> |
 | `s3:ListMultipartUploadParts` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListMultipartUploadParts`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListMultipartUploadParts`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `ListMultipartUploadParts`</span> |
 | `s3:PutBucketAcl` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutBucketAcl`</span> | Permission: `READ`, `READ_ACL`, `WRITE_ACL`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutBucketAcl`</span> | — |
+| `s3:PutBucketTagging` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutBucketTagging`</span> | Permission: `READ`, `WRITE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutBucketTagging`</span> | — |
+| `s3:PutLifecycleConfiguration` | Bucket | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutLifecycleConfiguration`</span> | Permission: `READ`, `WRITE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutLifecycleConfiguration`</span> | — |
 | `s3:PutObject` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObject`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObject`</span> | Permission: `CREATE`, `WRITE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObject`</span> |
 | `s3:PutObjectTagging` | Object | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObjectTagging`</span> | Permission: `READ`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObjectTagging`</span> | Permission: `WRITE`<br/><span style={{whiteSpace: 'nowrap'}}>Action: `PutObjectTagging`</span> |
 
 </div>
 
-† For `s3:ListBucket`, key-level **READ** is granted on the listed prefix (or `*` if no `s3:prefix` condition is present).
+† For `s3:ListBucket` and `s3:ListBucketVersions`, key-level **READ** is granted on the listed prefix (or `*` if no `s3:prefix` condition is present).
 
 </Details>
 
@@ -247,16 +255,16 @@ Without `action-matches` on the volume, bucket and key policies, the same key-le
 
 :::
 
-#### `s3:prefix` condition (ListBucket only)
+#### `s3:prefix` condition (ListBucket and ListBucketVersions)
 
-If an IAM session policy or role permission policy statement includes a Condition, **only `s3:ListBucket`** from that statement takes effect (similar to AWS behavior).
+If an IAM session policy or role permission policy statement includes a Condition, **only `s3:ListBucket` and `s3:ListBucketVersions`** from that statement take effect (similar to AWS behavior).
 
 | Operator | Behavior |
 | --- | --- |
 | `StringEquals` | Exact prefix match; wildcard values in `s3:prefix` are ignored |
 | `StringLike` | Prefix pattern match; supports `*` wildcards |
 
-The caller must supply a matching `prefix` (and optionally `delimiter`) on ListObjects/ListObjectsV2 or access is denied.
+The caller must supply a matching `prefix` (and optionally `delimiter`) on ListObjects, ListObjectsV2, or ListObjectVersions or access is denied.
 
 ---
 
