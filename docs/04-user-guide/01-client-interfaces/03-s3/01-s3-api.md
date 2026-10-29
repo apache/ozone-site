@@ -7,8 +7,6 @@ sidebar_label: Overview
 Ozone provides S3 compatible REST interface to use the object store data with any S3 compatible tools.
 S3 buckets are stored under the `/s3v` volume.
 
-See [S3 Chunked Uploads](./chunked-uploads) for signature and trailing checksum verification.
-
 ## Getting started
 
 S3 Gateway is a separated component which provides the S3 compatible APIs. It should be started additional to the regular Ozone components.
