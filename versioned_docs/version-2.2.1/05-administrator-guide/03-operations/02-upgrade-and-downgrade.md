@@ -88,7 +88,7 @@ Starting with your current version of Ozone, complete the following steps to upg
 
     **Once the following steps are performed, downgrading will not be possible.**
 
-5. Finalize SCM
+5. Finalize SCM. At least three healthy Datanodes must be available: SCM finalization waits for a RATIS/THREE pipeline, even if the default replication factor is ONE.
 
     ```bash
     ozone admin scm finalizeupgrade
