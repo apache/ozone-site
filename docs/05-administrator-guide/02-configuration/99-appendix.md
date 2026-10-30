@@ -583,6 +583,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.om.snapshot.diff.max.in.memory.entries.per.job` | 1000000 | `OZONE`, `OM` | Maximum number of diff-candidate object IDs a snapshot diff job may retain in memory before spilling to a temporary RocksDB column family. |
 | `ozone.om.snapshot.diff.max.jobs.purge.per.task` | 100 | `OZONE`, `OM` | Maximum number of snapshot diff jobs to be purged per snapDiff clean up run. |
 | `ozone.om.snapshot.diff.max.page.size` | 5000 | `OZONE`, `OM` | Maximum number of entries to be returned in a single page of snap diff report. |
+| `ozone.om.snapshot.diff.optimized.enabled` | false | `OZONE`, `OM` | When true, snapshot diff jobs use the optimized merge-join pipeline instead of the legacy object-id map diff path. |
 | `ozone.om.snapshot.diff.thread.pool.size` | 10 | `OZONE`, `OM` | Maximum numbers of concurrent snapshot diff jobs are allowed. |
 | `ozone.om.snapshot.directory.metrics.update.interval` | 5m | `OZONE`, `OM` | Time interval used to update the space consumption stats of the Ozone Manager snapshot directories. Background thread periodically calculates and updates these stats. Unit could be defined with postfix (ns,ms,s,m,h,d) |
 | `ozone.om.snapshot.force.full.diff` | false | `OZONE`, `OM` | Flag to always perform full snapshot diff (can be slow) without using the optimised compaction DAG. |
@@ -840,7 +841,7 @@ This page provides a comprehensive overview of the configuration keys available 
 | `ozone.snapshot.filtering.limit.per.task` | 2 | `OZONE`, `PERFORMANCE`, `OM`, `DELETION` | A maximum number of snapshots to be filtered by sst filtering service per time interval. |
 | `ozone.snapshot.filtering.service.interval` | 1m | `OZONE`, `PERFORMANCE`, `OM`, `DELETION` | Time interval of the SST File filtering service from Snapshot. |
 | `ozone.snapshot.key.deleting.limit.per.task` | 20000 | `OM`, `PERFORMANCE`, `DELETION` | The maximum number of deleted keys to be scanned by Snapshot Deleting Service per snapshot run. |
-| `ozone.ssl.enabled.protocols` |  | `OZONE`, `SECURITY`, `CRYPTO_COMPLIANCE` | The supported SSL protocols used to restrict connections towards the WebUI of different components, and the S3 GateWay. |
+| `ozone.ssl.enabled.protocols` |  | `OZONE`, `SECURITY`, `CRYPTO_COMPLIANCE` | The supported SSL protocols used to restrict connections towards the WebUI of different components, and the S3 GateWay. If unset, hadoop.ssl.enabled.protocols is used when it is explicitly configured, otherwise TLSv1.2,TLSv1.3. |
 | `ozone.sst.filtering.service.timeout` | 300000ms | `OZONE`, `PERFORMANCE`, `OM`, `DELETION` | A timeout value of sst filtering service. |
 | `ozone.tracing.client.application-aware` | true | `OZONE`, `HDDS` | Only effective when ozone.tracing.enabled=false. When true, Ozone will continue an application-supplied trace (via GlobalOpenTelemetry or a wire-propagated context) as child spans, but will NOT start a new root trace on its own. |
 | `ozone.tracing.enabled` | false | `OZONE`, `HDDS` | If true, tracing is initialized and spans may be exported (subject to sampling). |
