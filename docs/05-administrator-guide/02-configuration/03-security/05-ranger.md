@@ -34,3 +34,14 @@ export OZONE_MANAGER_CLASSPATH=/opt/ranger/ozone-plugin/lib/*
 ```
 
 If Ranger is installed on a different host, copy the Ranger Ozone plugin JARs from that installation to a directory on the Ozone Manager host (such as `share/ozone/lib/libext/`) and reference that directory from `OZONE_MANAGER_CLASSPATH` so that Ozone Manager can load the plugin at startup.
+
+## S3 action-based policies
+
+Requires Apache Ranger 2.9.0 or later.
+
+Ozone S3 Gateway passes the S3 action of each S3 request that has an IAM action (for example `GetObject` or `PutObjectTagging`, without the `s3:` prefix) to the authorizer, whether the STS endpoint enabled or disabled. To restrict a Ranger permission to specific S3 actions, set `ranger.servicedef.ozone.enableActionMatcherInPoliciesCondition` to `true` in `ranger-admin-site.xml` and restart Ranger Admin, then add an `action-matches` condition to the policy. For example, key-level `read` can be limited to `GetObject` so that it does not also authorize `GetObjectTagging`.
+
+- Requests that do not come through S3 Gateway (for example ofs or `ozone sh`) also carry no S3 action. An `action-matches` condition that lists specific actions does not match those requests. A condition that allows any action (`*`) still matches.
+- `GetObjectAttributes` is allowed only when Ranger authorizes both the `GetObjectAttributes` and `GetObject` actions. Ozone checks `GetObject` as a dependent action on the same request.
+
+The [STS guide](../../03%2Doperations/07%2Ds3/02%2Dsts.md?#s3-action--ranger-permissions-and-actions) has the S3 action to Ranger permission mapping, including how inline session policies use the same condition.
