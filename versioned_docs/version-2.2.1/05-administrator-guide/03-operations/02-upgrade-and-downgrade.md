@@ -22,7 +22,7 @@ OM, SCM, and Datanodes use the following upgrade states:
 
 ### Querying finalization status
 
-**OM**: `ozone admin om finalizationstatus`. If using OM HA, finalization status is checked for the quorum, not individual OMs.
+**OM**: `ozone admin om finalizationstatus --service-id=<om-service-id>` for HA, or `ozone admin om finalizationstatus --service-host=<om-host>` for non-HA. If using OM HA, finalization status is checked for the quorum, not individual OMs.
 
 **SCM**: `ozone admin scm finalizationstatus`. SCM will report that finalization is complete once it has finalized and is aware of enough finalized Datanodes to form a write pipeline. The remaining Datanodes will finalize asynchronously and be incorporated into write pipelines after informing SCM that they have finalized.
 
@@ -34,23 +34,23 @@ Check the release notes for your source and target versions for upgrade restrict
 
 Include every deployed service: OM, SCM, Datanodes, Recon, S3 Gateway, and HttpFS Gateway.
 
-Recon upgrades its own metadata automatically on startup, independently of OM and SCM finalization. Back up its metadata while Recon is stopped, including its SQL database. Before downgrading Recon, check the release-specific compatibility requirements. If compatibility is not established, restore the pre-upgrade Recon backup before starting the older version. This loses Recon changes made since the backup.
+Recon upgrades its own metadata automatically on startup, independently of OM and SCM finalization. Back up its configured metadata directories and SQL database while Recon is stopped. Before downgrading Recon, check the release-specific compatibility requirements. If compatibility is not established, restore the pre-upgrade Recon backup before starting the older version. This loses Recon changes made since the backup.
 
 S3 Gateway and HttpFS Gateway do not have a separate layout finalization step. Upgrade or downgrade their binaries with the cluster and restart them normally.
 
 ## Steps to upgrade and downgrade
 
-Starting with your current version of Ozone, complete the following steps to upgrade to a newer version of Ozone.
+Starting with your current version of Ozone, complete the following steps to upgrade to a newer version of Ozone. For OM HA, use `--service-id=<om-service-id>` with your configured service ID. For non-HA OM finalization and status commands, use `--service-host=<om-host>` instead.
 
 1. If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. If OM HA is not being used, this step can be skipped.
 
     ```bash
-    ozone admin om prepare -id=<om-service-id>
+    ozone admin om prepare --service-id=<om-service-id>
     ```
 
     The `prepare` command will block the Ozone Managers from receiving all write requests. See [Ozone Manager Prepare For Upgrade](https://ozone.apache.org/docs/edge/design/omprepare.html) for more information
 
-2. Stop all components, including Recon, S3 Gateway, and HttpFS Gateway where deployed. See [Start and Stop](./01-start-and-stop.md) for commands. Take the Recon backup described above while Recon is stopped.
+2. Stop all components, including Recon, S3 Gateway, and HttpFS Gateway where deployed. See [Start and Stop](./start-and-stop) for commands. Take the Recon backup described above while Recon is stopped.
 
 3. Replace the binaries of all deployed components with the newer version, preserving configuration and data directories.
 
@@ -69,7 +69,7 @@ Starting with your current version of Ozone, complete the following steps to upg
         ```
 
         - There also exists a `--downgrade` flag which is an alias of `--upgrade`. The name used does not matter.
-        - **IMPORTANT**: All OMs must be started with the `--upgrade`  or `--downgrade` flag in this step. If some of the OMs are not started with this flag by mistake, run `ozone admin om cancelprepare -id=<om-service-id>` to make sure all OMs leave prepare mode.
+        - **IMPORTANT**: All OMs must be started with the `--upgrade`  or `--downgrade` flag in this step. If some of the OMs are not started with this flag by mistake, run `ozone admin om cancelprepare --service-id=<om-service-id>` to make sure all OMs leave prepare mode.
 
     3. Wait for SCM to leave safe mode, then start the optional services where deployed:
 
@@ -99,7 +99,7 @@ Starting with your current version of Ozone, complete the following steps to upg
 6. Finalize OM
 
     ```bash
-    ozone admin om finalizeupgrade -id=<om-service-id>
+    ozone admin om finalizeupgrade --service-id=<om-service-id>
     ```
 
 At this point, the cluster is finalized and the upgrade is complete.
