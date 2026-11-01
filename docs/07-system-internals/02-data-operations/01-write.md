@@ -11,6 +11,10 @@ This mechanism leads to two consequences:
 - **A key is invisible until it is committed:** In the ordinary path, there is no partially visible key.
 - **An abandoned write leaves something behind:** Blocks were reserved and bytes may already sit on the Datanodes, but no key accounts for them and the bucket's quota does not count them either, since space is only charged at commit. A background cleanup service reclaims those abandoned entries once they are older than a configured threshold.
 
+## Scope
+
+This page traces a single key written with the Ozone client, from `createKey` to `commitKey`, with [Ratis](../../core-concepts/replication/ratis) replication or [EC](../../core-concepts/replication/erasure-coding). A write that arrives through [S3 Gateway](../../core-concepts/architecture/s3-gateway) reaches the same OM RPCs once the request is translated, so the four phases below describe it unchanged. Multipart upload, Ratis streaming, and pipeline failover with its exclude lists are out of scope.
+
 ## The Write Path at a Glance
 
 ```mermaid
@@ -102,13 +106,15 @@ Hadoop RPC SASL verifies either a Kerberos ticket or an OM delegation token at t
 3. **Routed to `OMExecutionFlow`**, which performs the pre-replication work:
    1) Switches on the command type and constructs the concrete request object. For `CreateKey` on an OBS bucket this is `OMKeyCreateRequest`; an FSO bucket gets `OMKeyCreateRequestWithFSO` instead, chosen by bucket layout.
    2) Calls `preExecute(...)` on the request object from previous step, which:
-      - Validate and normalize the key path
-      - Resolve which replication config to use
-      - Ask SCM to allocate blocks, then signs a block token for each. See [1.3.1](#131-allocate-and-sign-blocks).
-      - Generate the wrapped encryption key if the bucket is encrypted. See [1.3.2](#132-om--kms-key--encryption)
-      - Authorize the request. See [1.3.3](#133-om-authorization-check)
-      - Mint the client identifier
+      1. Validate and normalize the key path
+      2. Resolve which replication config to use
+      3. Ask SCM to allocate blocks, then signs a block token for each. See [1.3.1](#131-allocate-and-sign-blocks).
+      4. Generate the wrapped encryption key if the bucket is encrypted. See [1.3.2](#132-om--kms-key--encryption)
+      5. Authorize the request: `resolveBucketAndCheckKeyAcls(...)` with `ACLType.CREATE`. See [1.3.3](#133-om-authorization-check)
+      6. Mint the client identifier
    3) Submits the rewritten request to Ratis to replicate. See [1.4](#14-om-replicate-validation-and-write-into-the-openkeytable)
+
+Note the ordering inside `preExecute`: block allocation and token signing (step 3.2.3) can run before the ACL check (step 3.2.5), so an unauthorized request may already have allocated blocks in SCM and generated an EDEK before it is rejected.
 
 For the logic in processing write requests, OM splits each write request into two parts:
 
@@ -118,6 +124,8 @@ For the logic in processing write requests, OM splits each write request into tw
 Anything that cannot be repeated identically has to happen in `preExecute`. See [Ozone Manager high availability](../components/ozone-manager/high-availability) for the replication machinery itself.
 
 #### 1.3.1 Allocate and Sign Blocks
+
+This step runs only when the request carries a positive `dataSize`. If the size is unset or not greater than zero, `preExecute` skips SCM block allocation entirely and the key opens with an empty location list: a zero-length key then commits with no blocks, and a client that does turn out to have bytes to write asks OM for blocks on demand with `allocateBlock` while streaming.
 
 Before asking SCM, OM calculates the `dataGroupSize` and `numBlocks`. OM then asks SCM where blocks should be allocated. SCM replies with a list of `AllocatedBlock`, each containing:
 
@@ -137,6 +145,16 @@ Write requests authorize in `OMClientRequest.checkAcls()`. `checkAcls()` delegat
 - **VOLUME**: a single check with the volume owner as `{OWNER}`.
 - **BUCKET/KEY/PREFIX**: a single check if the caller is the volume owner. Otherwise two checks: first, the parent volume with the volume owner as `{OWNER}`, then the resource itself with the bucket owner as `{OWNER}`.
 
+`OzoneAclUtils` decides which resources are checked; each check itself is evaluated by the authorizer configured in `ozone.acl.authorizer.class`, either [Native ACLs](../../core-concepts/security/acls/native-acls) stored in OM's metadata or [Apache Ranger policies](../../core-concepts/security/acls/ranger-acls) resolved by the OM Ranger plugin.
+
+Which ACL is required depends on the RPC. `CreateKey` asks for permission to bring a new key into existence, while `AllocateBlock` and `CommitKey` act on a reservation the caller already opened, so they authorize against the open key entry, which is keyed by the key name plus the client identifier:
+
+| RPC | Helper | `ACLType` | Resource checked |
+| --- | --- | --- | --- |
+| `CreateKey` | `resolveBucketAndCheckKeyAcls(...)` | `CREATE` | the key name |
+| `AllocateBlock` | `resolveBucketAndCheckOpenKeyAcls(...)` | `WRITE` | the open key: key name plus client id |
+| `CommitKey` | `resolveBucketAndCheckOpenKeyAcls(...)` | `WRITE` | the open key: key name plus client id |
+
 ### 1.4 OM: Replicate Validation and Write into the `OpenKeyTable`
 
 With the non-deterministic work already done, the OM leader hands the request to the Ratis `RaftServer` via `server.submitClientRequestAsync(raftClientRequest)`. Every OM then independently applies the checks that decide whether the key may exist.
@@ -144,7 +162,7 @@ With the non-deterministic work already done, the OM leader hands the request to
 1. **Entry Point**: `OzoneManagerStateMachine.applyTransaction(...)`
 2. **Validate Namespace**: The volume and bucket must exist, or the request fails with `VOLUME_NOT_FOUND`/`BUCKET_NOT_FOUND`. For bucket layouts with filesystem semantics, the path must not collide with an existing directory, and any missing parent directories are created inside the same transaction rather than as separate operations.
 3. **Validate Key Existence**: If the key already exists with a specific generation, the key must exist with matching updateID and update KeyArgs with expectedDataGeneration set. Otherwise, an `OMException` is thrown.
-4. **Check Quota**: Byte quota is **checked here, not charged**. OM compares the bucket's used space against the size of the blocks being reserved and rejects the write if it would not fit, so a write can be rejected before a single byte moves. But nothing is recorded: an open key adds nothing to the bucket's usage, which means concurrent open writes do not reserve against one another. Several clients can each pass this check and collectively overshoot the quota, and the overshoot only surfaces at commit, where the check runs again. See [Implementation of Quota](./quota).
+4. **Check Quota**: Byte quota is **checked here, not charged**. OM compares the bucket's used space against the size of the blocks being reserved and rejects the write if it would not fit, so a write can be rejected before a single byte moves. But no bytes are recorded: an open key adds nothing to the bucket's used space, which means concurrent open writes do not reserve against one another. Several clients can each pass this check and collectively overshoot the quota, and the overshoot only surfaces at commit, where the check runs again. Namespace quota is the exception. The check covers the missing parent directories from step 2 plus the key itself, but only the parent directories are **charged now**, in the same transaction that writes them to the directory table; the key's own namespace unit waits for commit. See [Implementation of Quota](./quota).
 5. **Write to the OpenKeyTable**: The reservation is recorded in `openKeyTable`, keyed by the key name plus the client identifier. That extra component is what allows several clients to have concurrent, uncommitted writes to the same name without colliding. It is deliberately a different table from `keyTable`, because reads never consult it.
 
 ---
@@ -219,7 +237,7 @@ When an application calls `OzoneOutputStream.write(data)`, the call passes throu
    1. Computes a checksum over the chunk and attaches it to the `ChunkInfo`.
    2. Validates the new chunk's offset against the previous chunk's offset; the write fails on a mismatch.
    3. With incremental chunk list enabled, rebuilds the trailing partial chunk entry in the container block data; otherwise, appends the chunk to it.
-   4. Sends the chunk with `writeChunkAsync` through the `XceiverClient`, whose implementation depends on the replication configuration. (`XceiverClientRatis` for `RATIS`; `XceiverClientGrpc` for `STAND_ALONE`; `ECXceiverClientGrpc` for EC)
+   4. Sends the chunk with `writeChunkAsync` through the `XceiverClient`, whose implementation depends on the replication configuration. (`XceiverClientRatis` for `RATIS`; `XceiverClientGrpc` for `STAND_ALONE`; `ECXceiverClientGrpc` for [EC](../../core-concepts/replication/erasure-coding))
 3. Sends `putBlockAsync` to publish the block's chunk list.
 
 | Layer | Responsibility |
@@ -254,7 +272,7 @@ Datanode (Followers)
 
 #### 3.2.2 replicationConfig = EC (RS-k-m)
 
-EC does not use Ratis. The client writes each replica index to the corresponding Datanode over standalone gRPC.
+[EC](../../core-concepts/replication/erasure-coding) does not use Ratis. The client writes each replica index to the corresponding Datanode over standalone gRPC.
 
 Client (`ECXceiverClientGrpc`)
 
@@ -305,7 +323,7 @@ Every OM then applies the commit as a replicated state machine step, entered at 
 
 1. **Validate the namespace:** The volume and bucket must still exist.
 2. **Record the real sizes:** The data size is taken from the request, the update id is set to the transaction index.
-3. **Charge quota:** Phase 1 only *checked* quota; here it is charged. Re-checks against the bucket's byte quota together with one namespace unit, then adds to the bucket's usage.
+3. **Charge quota:** Bytes are charged here, against the real sizes rather than the sizes reserved in phase 1. Re-checks the bucket's byte quota together with one namespace unit for the key itself, then adds both to the bucket's usage. Namespace for any parent directories created in phase 1 was already charged there.
 4. **Apply:** Moves an open key in `openKeyTable` (in-flight writes) into a committed key (in `keyTable`) and later flushes to RocksDB in one batch by the `OzoneManagerDoubleBuffer`.
 
 ### 4.3 Cleanup the Writes that Never Commit
@@ -313,7 +331,8 @@ Every OM then applies the commit as a replicated state machine step, entered at 
 If a client crashes, or stops writing without ever committing, the open key row stays behind with blocks that no visible key accounts for.
 
 - A background service `OpenKeyCleanupService`, running on the OM leader, resolves those rows.
-  - Each run scans the open table and gets rows whose **creation time** is older than `ozone.om.open.key.expire.threshold`(default `7d`).
+  - Each run scans the open table and gets rows whose **creation time** is older than `ozone.om.open.key.expire.threshold` (default `7d`).
+  - `hsync` keys are an exception: they are selected by **modification time** against the lease hard limit `ozone.om.lease.hard.limit` (`leaseThreshold`, default `7d`), and are **committed** instead of deleted unless they are already marked as deleted or overwritten in `keyTable`.
   - Delete the rows through a `DeleteOpenKeys` request (`OMOpenKeysDeleteRequest`). See [Implementation of Delete Operation](./delete)
 
 ---
@@ -324,8 +343,12 @@ If a client crashes, or stops writing without ever committing, the open key row 
 | --- | --- | --- | --- |
 | 1. Reservation | Client, OM, SCM | Metadata only | Key is in `openKeyTable` with blocks reserved, block tokens signed, and quota checked, invisible to readers |
 | 2. Encryption setup | Client, KMS (encrypted buckets only) | The wrapped key, if any | Client holds the data encryption key; plain buckets skip this phase entirely |
-| 3. Data transfer | Client, Datanodes | The data | Chunks and block metadata persisted and replicated on the Datanodes. Replicated by Ratis for `RATIS`, written as k+m shards for EC |
+| 3. Data transfer | Client, Datanodes | The data | Chunks and block metadata persisted and replicated on the Datanodes. Replicated by Ratis for `RATIS`, written as k+m shards for [EC](../../core-concepts/replication/erasure-coding) |
 | 4. Commit | Client, OM | Actual block lengths | Key is in `keyTable` and visible; quota charged against actual lengths; leftover blocks queued for reclamation |
+
+Table names above are the OBS and LEGACY ones. An FSO bucket uses
+`openFileTable` and `fileTable` in their place; see
+[Bucket Layouts](#bucket-layouts).
 
 ## Bucket Layouts
 
