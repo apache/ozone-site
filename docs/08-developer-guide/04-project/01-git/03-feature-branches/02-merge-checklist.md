@@ -48,7 +48,7 @@ All Github actions runs for a branch can be found at `github.com/apache/ozone/ac
 
 ## Incompatible Changes
 
-Ozone currently supports non-rolling upgrades and downgrades even when backwards incompatible features are present. Backwards incompatible features should be added to the versioning framework so that they are not used until the Ozone upgrade is finalized, after which downgrading is not possible.
+Ozone supports both rolling (zero downtime) and non-rolling upgrades and downgrades even when backwards incompatible features are present. Backwards incompatible features should be added to the versioning framework so that they are not used until the Ozone upgrade is finalized, after which downgrading is not possible. Because a rolling upgrade means components can run mixed versions at the same time, changes must be version gated so that the API surface and on-disk format stay consistent across components until the cluster is finalized.
 
 Client cross compatibility should also be maintained as much as possible, with sensible error messages provided when this is not possible. An old client should be able to talk to the new Ozone instance, and a new client should be able to talk to the old Ozone instance.
 
