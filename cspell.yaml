@@ -45,7 +45,7 @@ patterns:
 - name: markdown_code_block
   pattern: |
     /
-        ^(\s*`{3,}).*     # match the ```
+        ^([ \t]*`{3,}).*  # match the ```
         [\s\S]*?          # the block of code
         ^\1               # end of the block
     /gmx
@@ -140,7 +140,16 @@ words:
 - xcompat
 - Linearizable
 - thirdparty
+- EDEK
+- CSE
 # Other systems' words
+- truststore
+- appender
+- kinit
+- keytabs
+- RDRAND
+- LLM
+- Ollama
 - savepoints
 - HDDs
 - KDC
@@ -287,8 +296,10 @@ words:
 - amz
 - gh
 - GPT
-# Apache Ozone community member names
-- Sumit
+- passwordless
+- linearizability
+- classpaths
+- parallelizable
 # Company names for "Who Uses Ozone" page
 - Didi
 - Shopee
@@ -310,27 +321,8 @@ words:
 - Modularise
 - Optimise
 - behaviour
-# Author names
-- jojochuang
-- Gargi
-- jais
-- lai
-- activetimebyseconds
-- charindex
-- thecount
+# Other terms
 - debugability
-- auditparser
-- checknative
-- subpages
-- analyse
-- Sammi
-- slfan1989
-- whbing
-- jianghuazhu
-- weimingdiit
-- sravani
-- revuri
-- sumitagrawl
 # Infrastructure and hardware terms
 - firewalled
 - Chrony

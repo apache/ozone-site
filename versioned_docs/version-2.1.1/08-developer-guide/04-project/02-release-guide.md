@@ -2,6 +2,8 @@
 sidebar_label: Release Manager Guide
 ---
 
+<!-- cspell:ignore ubuntulinux -->
+
 # Apache Release Manager Guide
 
 This document describes the process to release Apache Ozone. The process is not yet scripted, and the documentation is **a work in progress**.

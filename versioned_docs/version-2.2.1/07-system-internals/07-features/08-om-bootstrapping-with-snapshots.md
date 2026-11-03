@@ -2,6 +2,8 @@
 sidebar_label: OM Bootstrapping with Snapshots
 ---
 
+<!-- cspell:ignore Sumit -->
+
 # OM Bootstrapping with Snapshots
 
 ## Problem Statement

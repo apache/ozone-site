@@ -162,7 +162,7 @@ primordial SCM is not defined. Bring up other SCM's using **--bootstrap**.
 
 SCM HA uses Apache Ratis to replicate state between the members of the SCM HA quorum. Each node maintains the block management metadata in local RocksDB.
 
-This replication process is a simpler version of OM HA replication process as it doesn't use any double buffer (as the overall db thourghput of SCM requests are lower)
+This replication process is a simpler version of OM HA replication process as it doesn't use any double buffer (as the overall db throughput of SCM requests are lower)
 
 Datanodes are sending all the reports (Container reports, Pipeline reports...) to *all* SCM nodes in parallel. Only the leader node can assign/create new containers, and only the leader node sends commands back to the Datanodes.
 

@@ -78,7 +78,7 @@ The OpenSSL-based hardware acceleration discussed below is currently only suppor
       ```
   
     - The output should show "true" for the Hadoop library
-    - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the libhadoop native library fails to load:
+    - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the `libhadoop` native library fails to load:
 
       ```bash
       25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...

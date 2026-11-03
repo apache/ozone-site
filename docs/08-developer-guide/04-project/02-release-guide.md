@@ -418,7 +418,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
       bin/ozone debug checknative
       ```
 
-    - Check the newest glibc and libstdc++ versions it requires. They must not be newer than `GLIBC_2.34` and `GLIBCXX_3.4.29`, the versions in Rocky Linux 9.
+    - Check the newest `glibc` and `libstdc++` versions it requires. They must not be newer than `GLIBC_2.34` and `GLIBCXX_3.4.29`, the versions in Rocky Linux 9.
 
       ```bash
       unzip -o -q share/ozone/lib/hdds-rocks-native-$VERSION.jar libozone_rocksdb_tools.so -d /tmp/ozone-native
