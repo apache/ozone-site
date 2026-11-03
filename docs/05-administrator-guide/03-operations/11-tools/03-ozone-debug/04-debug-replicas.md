@@ -13,7 +13,7 @@ Commands:
                 the keys with failed checks.
 ```
 
-## chunk-info
+## `chunk-info`
 
 For a given URI of a key, the command returns all the chunks’ location information.
 
@@ -44,7 +44,7 @@ Returns chunk location information about an existing key
       --verbose   More verbose output. Show the stack trace of the errors.
 ```
 
-## verify
+## `verify`
 
 Verify data across replicas. There are multiple checks available, which can be selected using the command line options:
 

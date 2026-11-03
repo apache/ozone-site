@@ -150,6 +150,7 @@ words:
 - Kerberized
 - goofys
 - OOM
+- LRU
 - untar
 - YCSB
 # Maven / library names
@@ -193,6 +194,7 @@ words:
 - UIs
 - doublebuffer
 # Infrastructure and hardware terms
+- firewalled
 - SAS
 - hotswap
 - UDF

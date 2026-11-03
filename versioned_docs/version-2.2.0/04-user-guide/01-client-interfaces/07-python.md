@@ -2,8 +2,6 @@
 sidebar_label: Accessing Apache Ozone from Python
 ---
 
-<!-- cspell:ignore fsspec -->
-
 # Accessing Apache Ozone from Python
 
 Apache Ozone project itself does not provide Python client libraries.
@@ -234,4 +232,4 @@ Replace host, port, and path as per your setup.
 - [Apache Ozone Documentation](https://ozone.apache.org/docs/)
 - [PyArrow Documentation](https://arrow.apache.org/docs/python/)
 - [Boto3 Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- [fsspec WebHDFS Python API](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.webhdfs.WebHDFS)
+- [`fsspec` WebHDFS Python API](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.webhdfs.WebHDFS)

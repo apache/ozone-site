@@ -5,7 +5,7 @@ authors: ["rich7420", "apache-ozone-community", "slfan1989", "whbing", "jianghua
 tags: [user-stories, performance, erasure-coding, scale]
 ---
 
-<!-- cspell:ignore slfan whbing jianghuazhu weimingdiit Didi LRU SPDK -->
+<!-- cspell:ignore slfan whbing jianghuazhu weimingdiit Didi SPDK -->
 
 Guest post by the Didi Engineering Team. For the full story with detailed slides, see [Apache Ozone Best Practices at Didi (PDF)](/ApacheOzoneBestPracticesAtDidi.pdf).
 
