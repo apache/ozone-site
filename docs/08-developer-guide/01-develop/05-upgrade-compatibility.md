@@ -6,7 +6,8 @@ sidebar_label: Upgrade Compatibility
 
 Zero Downtime Upgrade (ZDU) lets the internal components of an Ozone cluster (OM, SCM, Datanode, S3 Gateway, and Recon) run in mixed versions during an upgrade with no interruption to service. Additionally, Ozone provides a window where a cluster can be downgraded after the upgrade. Both of these features require every release to uphold certain compatibility guarantees; otherwise, an upgrade can silently introduce problems such as diverging OM state machines, a corrupted container replica, or a Datanode that is unable to re-register. This page is a practical guide to what counts as an incompatible change inside the cluster, and how to safely introduce such changes in each area of the code.
 
-The rationale behind the framework lives in the [ZDU design document](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/zdu-design.md). Read it if you want the full model. This page focuses only on day-to-day development.
+<!-- Once design documents are published to the website in HDDS-15923, update this to a relative link within the website. -->
+The rationale behind the framework lives in the [ZDU design document](https://github.com/apache/ozone-site/blob/master/docs/07-system-internals/08-design/zdu-design.md). Read it if you want the full model. This page focuses only on day-to-day development.
 
 :::note Scope
 This page covers compatibility **between internal Ozone components** during an upgrade. External client ↔ Ozone-server compatibility is a separate concern.
