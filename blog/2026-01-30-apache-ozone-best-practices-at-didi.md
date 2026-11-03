@@ -5,6 +5,8 @@ authors: ["rich7420", "apache-ozone-community", "slfan1989", "whbing", "jianghua
 tags: [user-stories, performance, erasure-coding, scale]
 ---
 
+<!-- cspell:ignore slfan whbing jianghuazhu weimingdiit Didi SPDK -->
+
 Guest post by the Didi Engineering Team. For the full story with detailed slides, see [Apache Ozone Best Practices at Didi (PDF)](/ApacheOzoneBestPracticesAtDidi.pdf).
 
 As Didi's volume of unstructured data surged into the hundreds of petabytes, comprising tens of billions of files, their traditional storage architecture faced severe scalability bottlenecks. This post summarizes how they migrated from HDFS to Apache Ozone, the optimizations they implemented for high-performance reads, and their journey in contributing these improvements back to the community.

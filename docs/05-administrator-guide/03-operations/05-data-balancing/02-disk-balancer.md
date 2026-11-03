@@ -12,7 +12,7 @@ Apache Ozone works well to distribute all containers evenly across all multiple 
 - **Replacing old broken disks** with new disks.
 - Massive **block** or **replica deletions**.
 
-This uneven utilisation of disks can create performance bottlenecks, as **over-utilised** disks become **hotspots** limiting the overall throughput of the Datanode. As a result, this new feature,
+This uneven utilization of disks can create performance bottlenecks, as **over-utilized** disks become **hotspots** limiting the overall throughput of the Datanode. As a result, this new feature,
 **DiskBalancer**, is introduced to ensure even data distribution across disks within a Datanode.
 
 A disk is considered a candidate for balancing if its `VolumeDataDensity` exceeds a configurable `threshold`. DiskBalancer can be triggered manually by **CLI commands**.

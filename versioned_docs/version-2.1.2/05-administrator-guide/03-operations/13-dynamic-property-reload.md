@@ -11,7 +11,7 @@ Ozone supports dynamic reloading of certain configuration properties without res
 When a property is marked as reconfigurable, you can:
 
 1. Modify the property value in the configuration file (`ozone-site.xml`)
-2. Invoke the reconfig command to apply the changes to the running service
+2. Invoke the `reconfig` command to apply the changes to the running service
 
 The reconfiguration is performed asynchronously, and you can check the status to verify completion.
 

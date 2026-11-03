@@ -1,5 +1,7 @@
 # Roadmap
 
+<!-- cspell:ignore LLAP NIFI PKI Teragen -->
+
 These release names are based on US national parks, and for every minor release, we also move to the next letter for the release code name.
 
 <!--

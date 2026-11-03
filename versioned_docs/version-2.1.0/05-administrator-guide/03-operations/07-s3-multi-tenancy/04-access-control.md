@@ -53,7 +53,7 @@ The Ranger Sync thread does the following:
 1. Cleans up any default tenant policies if a tenant is already deleted.
 2. Checks if default tenant roles are out-of-sync (could be caused by OM crash during user assign/revoke operation). Overwrites them if this is the case.
 3. Performs all Ranger update (write) operations queued by Ozone tenant commands from the last sync, if any.
-   - This implies there will be a delay before Ranger policies and roles are updated for any tenant write operations (tenant create/delete, tenant user assign/revoke/assignadmin/revokeadmin, etc.).
+   - This implies there will be a delay before Ranger policies and roles are updated for any tenant write operations (tenant create/delete, `tenant user assign/revoke/assignadmin/revokeadmin`, etc.).
 
 ## Adding new bucket policies when sharing a bucket
 
