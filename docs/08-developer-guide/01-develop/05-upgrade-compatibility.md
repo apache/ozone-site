@@ -117,7 +117,7 @@ Ozone's component versions are a logical versioning framework decoupled from off
 
 1. **Incompatible: Adding an incompatible change and then adding a version gate for it in a follow-up commit.** A release cut between these two commits will release the incompatible change without the version gate.
 
-2. **Incompatible: Adding a version in one commit and using it in a follow-up commit.** Clustrers on a release cut between these two commits will finalize the version without the feature code. The next release's code then activates the feature with no version gate or upgrade action.
+2. **Incompatible: Adding a version in one commit and using it in a follow-up commit.** Clusters on a release cut between these two commits will finalize the version without the feature code. The next release's code then activates the feature with no version gate or upgrade action.
 
 3. **Incompatible: Extending the usage of an existing version in follow-up commits.** This breaks for the same reason as (2). A new version must be used for the new functionality.
 
@@ -238,7 +238,7 @@ If in doubt, ask: *would an OM acting as apparent version X and an OM acting as 
 
 ### OM/SCM ↔ OM/SCM Peer RPCs Outside Ratis, Including Ratis Snapshot Installation APIs
 
-**Incompatible:** Adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright. Ratis snapshots are also installed user a peer to peer API, so they are subject to the same requirements.
+**Incompatible:** Adding a required method, or changing the semantics of an existing method, in [`OMAdminProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMAdminProtocol.java) or [`OMInterServiceProtocol`](https://github.com/apache/ozone/blob/master/hadoop-ozone/common/src/main/java/org/apache/hadoop/ozone/om/protocol/OMInterServiceProtocol.java). During a rolling upgrade, peer OMs can be at mixed software versions, so a new method may not exist on the callee. Unlike an unknown protobuf *field*, an unknown *method* fails the RPC outright. Ratis snapshots are also installed using a peer to peer API, so they are subject to the same requirements.
 
 **Pattern:** Callers must not invoke a new inter-OM method until its version is finalized. The method invocation should only proceed if `ozoneManager.getVersionManager().isAllowed(OzoneManagerVersion.X)`. Receivers should not gate the call and should process it regardless of their finalization state. Because all components must be upgraded before finalization is invoked, the existence of a finalized OM making the call means that the receiver is in a new enough software version to be able to process the call, even if it is a slow follower that has not yet finalized.
 
