@@ -124,7 +124,7 @@ Under the lock following operations would be performed:
 #### Drawback
 
 The drawbacks for this approach are the same as approach 1, but here we are optimizing on the amount of time lock is held
-by performing very lightweight operations under the lock. So this is a more optimal approach since it minimises the lock wait time on other threads.
+by performing very lightweight operations under the lock. So this is a more optimal approach since it minimizes the lock wait time on other threads.
 
 ### Approach 2 (Single tarball creation under lock)
 
@@ -165,7 +165,7 @@ order up to 5 million files.
 
 ## Recommendations
 
-Approach 1 is the most optimized solution as it balances the amount of time under the lock by minimising the amount of IO
+Approach 1 is the most optimized solution as it balances the amount of time under the lock by minimizing the amount of IO
 ops inside the lock by introducing another threshold config to track this. Moreover, taking this approach will also need the
 most minimal amount of code change as it doesn't differ from the current approach by much. While approach 2 might look simpler
 but this would imply revamping the entire bootstrap logic currently in place and moreover this approach might increase the

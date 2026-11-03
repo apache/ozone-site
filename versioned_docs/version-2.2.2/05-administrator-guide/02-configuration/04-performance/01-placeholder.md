@@ -2,6 +2,8 @@
 sidebar_label: Production Deployment
 ---
 
+<!-- cspell:ignore Chrony Gbps Hugepage JBOD LVM NAS -->
+
 # Production Deployment
 
 This document provides guidance on the requirements and best practices for a production deployment of Apache Ozone.

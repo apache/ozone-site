@@ -1,5 +1,7 @@
 # Transparent Data Encryption (TDE)
 
+<!-- cspell:ignore CSE RDRAND -->
+
 Ozone Transparent Data Encryption (TDE) enables you to encrypt data at rest. TDE is enabled at the bucket level when a bucket is created. To use TDE, an administrator must first configure a Key Management Server (KMS). Ozone can work with **Hadoop KMS** and **Ranger KMS**. The KMS URI needs to be provided to Ozone via the `core-site.xml` configuration file.
 
 Once the KMS is configured, users can create an encryption key and then create an encrypted bucket using that key. All data written to an encrypted bucket will be transparently encrypted on the server-side, and data read from the bucket will be transparently decrypted.

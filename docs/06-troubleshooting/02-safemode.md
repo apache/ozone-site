@@ -17,7 +17,7 @@ For background on what safemode is, how it works, and the full list of exit rule
 - After a **cluster restart** or **rolling restart**, writes fail but the cluster otherwise looks up.
 - After **Datanode or SCM node failures**, SCM restarted and has not left safemode.
 - During **initial cluster startup**, `ozone admin safemode wait` times out.
-- Client or SCM logs mention **SafeModePrecheck** failures.
+- Client or SCM logs mention **`SafeModePrecheck`** failures.
 
 ## Symptoms
 

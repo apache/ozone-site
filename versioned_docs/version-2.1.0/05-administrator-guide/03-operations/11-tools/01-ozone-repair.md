@@ -202,7 +202,7 @@ asynchronously. Requires admin privileges.
 
 ```
 
-#### skip-ratis-transaction, `srt`
+#### `skip-ratis-transaction`, `srt`
 
 Omit a raft log in a Ratis segment file by replacing the specified index with a dummy EchoOM command.
 This is an offline tool meant to be used only when all 3 OMs crash on the same transaction.
