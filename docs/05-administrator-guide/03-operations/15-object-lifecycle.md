@@ -346,6 +346,37 @@ The following table lists all related configuration properties:
 | `ozone.lifecycle.service.delete.cached.directory.max-count` | `1000000` | The maximum number of directories cached in memory during recursive evaluation of FSO buckets. The current evaluation will be aborted if this limit is exceeded. |
 | `ozone.om.open.mpu.expire.threshold` | `30d` | Age threshold for the `MultipartUploadCleanupService`. Incomplete multipart uploads older than this value are unconditionally aborted by that service. Enabled `AbortIncompleteMultipartUpload` lifecycle rules must have `DaysAfterInitiation` strictly less than this value; otherwise the lifecycle configuration is rejected at creation time. |
 
+### Change Configuration Without OM Restart {#runtime-reconfiguration}
+
+All `ozone.lifecycle.service.*` properties can be changed on a running OM without a restart:
+
+- `ozone.lifecycle.service.enabled`
+- `ozone.lifecycle.service.interval`
+- `ozone.lifecycle.service.timeout`
+- `ozone.lifecycle.service.workers`
+- `ozone.lifecycle.service.delete.batch-size`
+- `ozone.lifecycle.service.mpu.abort.limit.per.task`
+- `ozone.lifecycle.service.delete.cached.directory.max-count`
+- `ozone.lifecycle.service.state.save.interval.ms`
+- `ozone.lifecycle.service.state.save.keys.processed`
+- `ozone.lifecycle.service.move.to.trash.enabled`
+
+To apply a change, update `ozone-site.xml` on the OM and run the reconfig command. See [Dynamic Property Reload](./dynamic-property-reload) for more details.
+
+```shell
+ozone admin reconfig --service=OM --address=<om-host:port> start
+ozone admin reconfig --service=OM --address=<om-host:port> status
+```
+
+How the new values take effect:
+
+- Most changes apply right away. Running tasks pick up the new values at their next batch.
+- Changing `ozone.lifecycle.service.interval`, or setting `ozone.lifecycle.service.enabled` to `true`, restarts the lifecycle service. Running tasks stop at their next checkpoint and continue from the saved progress in the next run.
+- Setting `ozone.lifecycle.service.enabled` to `false` stops running tasks and prevents new ones from starting.
+- All numeric values must be positive. If any value is invalid, the reconfiguration fails and none of the lifecycle settings are changed.
+
+In OM HA mode, reconfiguration applies only to the OM node given in `--address`. Run the command on every OM so that the same settings remain in effect after a leader change.
+
 ## Administrative Operations
 
 Ozone provides administrative commands to view and control the lifecycle service runtime status.

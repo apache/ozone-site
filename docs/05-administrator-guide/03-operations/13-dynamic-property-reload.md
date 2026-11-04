@@ -55,6 +55,8 @@ ozone admin reconfig --service=[OM|SCM|DATANODE] --address=<ip:port|hostname:por
 | `ozone.thread.number.dir.deletion`             | `10`      | Number of threads for directory deletion                  |
 | `ozone.snapshot.filtering.service.interval`    | `60s`     | Snapshot SST filtering service run interval               |
 
+All object lifecycle service properties (`ozone.lifecycle.service.*`) are also reconfigurable on OM. See [Object Lifecycle Management](./object-lifecycle#runtime-reconfiguration).
+
 ### Storage Container Manager (SCM)
 
 | Property                                                  | Default    | Description                                                   |
