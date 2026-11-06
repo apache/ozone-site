@@ -16,17 +16,32 @@ After upgrading components, the upgrade process is divided into two states:
     - The cluster will remain fully operational with all functionality present in the old version still allowed.
     - Any data created while pre-finalized will remain readable after downgrade.
 
-2. **Finalized**: When a finalize command is given to OM or SCM, they will enter a finalized state.  In the finalized state:
+2. **Finalized**: When a finalize command is given to the cluster, the components will enter a finalized state.  In the finalized state:
     - The cluster can no longer be downgraded.
     - All new features of the cluster introduced in the new version can be used.
 
 ### Querying finalization status
 
-**OM**: `ozone admin om finalizationstatus`. If using OM HA, finalization status is checked for the quorum, not individual OMs.
+Use a single command to query the finalization status of the whole cluster:
 
-**SCM**: `ozone admin scm finalizationstatus`. SCM will report that finalization is complete once it has finalized and is aware of enough finalized Datanodes to form a write pipeline. The remaining Datanodes will finalize asynchronously and be incorporated into write pipelines after informing SCM that they have finalized.
+```bash
+ozone admin upgrade status
+```
 
-**Datanodes**: `ozone admin datanode list` will list all Datanodes and their health state as seen by SCM. If SCM is finalized, then Datanodes whose health state is `HEALTHY` have informed SCM that they have finalized. Datanodes whose health state is `HEALTHY_READONLY` have not yet informed SCM that they have finished finalization. `HEALTHY_READONLY` (pre-finalized) Datanodes remain readable, so the cluster is operational even if some otherwise healthy Datanodes have not yet finalized. `STALE` or `DEAD` Datanodes will be told to finalize by SCM once they are reachable again.
+This command is sent to OM, which gathers the SCM and Datanode status and reports the combined result, for example:
+
+```text
+Upgrade finalization status:
+    Cluster: FINALIZED
+    OM: FINALIZED
+    SCM: FINALIZED
+    Datanodes finalized: 3/3
+```
+
+- Add `--verbose` to also show the apparent versions of OM, SCM and the Datanodes.
+- Add `--json` to format the output as JSON.
+
+`ozone admin datanode list` lists all Datanodes and their health state (`HEALTHY`, `STALE`, or `DEAD`) as seen by SCM. `STALE` or `DEAD` Datanodes will be told to finalize by SCM once they are reachable.
 
 ## Steps to upgrade and downgrade
 
@@ -65,18 +80,14 @@ Starting with your current version of Ozone, complete the following steps to upg
 
     **Once the following steps are performed, downgrading will not be possible.**
 
-5. Finalize SCM
+5. Finalize the cluster
 
     ```bash
-    ozone admin scm finalizeupgrade
+    ozone admin upgrade finalize
     ```
 
-    At this point, SCM will tell all of the Datanodes to finalize. Once SCM has finalized enough Datanodes to form a write pipeline, it will return that finalization was successful. The remaining pre-finalized Datanodes will be in a read-only state until they indicate to SCM that they have finalized. Write requests will be directed to finalized Datanodes only.
-
-6. Finalize OM
-
-    ```bash
-    ozone admin om finalizeupgrade -id=<om-service-id>
-    ```
+    - The command is sent to OM, which orchestrates finalization across the cluster: SCM finalizes first, then the Datanodes, and finally the OMs.
+    - Finalization is asynchronous: the command returns as soon as the process has been started. Monitor progress with [`ozone admin upgrade status`](#querying-finalization-status), or add `--wait` to have the command poll and block until the entire cluster is finalized. Interrupting `--wait` with Ctrl-C only stops waiting; finalization continues on the server.
+    - The command is idempotent, so it can be safely re-issued at any time, for example to resume waiting with `--wait`.
 
 At this point, the cluster is finalized and the upgrade is complete.
