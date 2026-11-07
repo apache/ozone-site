@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.3aabcfef.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b74ffc8c.js" defer="defer"></script>
 <script src="/assets/js/main.725f35c2.js" defer="defer"></script>
 </head>
 <body>
@@ -104,7 +104,7 @@ Ranger KMS supports both 128 and 256 bits. Hadoop KMS is also commonly used with
 </li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Dk4v" id="using-transparent-data-encryption-from-s3g">Using Transparent Data Encryption from S3G<a href="#using-transparent-data-encryption-from-s3g" class="hash-link" aria-label="Direct link to Using Transparent Data Encryption from S3G" title="Direct link to Using Transparent Data Encryption from S3G" translate="no">​</a></h2>
-<p>Ozone’s S3 Gateway (S3G) allows you to access encrypted buckets. However, it&#x27;s important to note that <strong>Ozone does not support S3-SSE (Server-Side Encryption) or S3-CSE (Client-Side Encryption) in the way AWS S3 does.</strong> That said, Ozone S3 buckets can be encrypted using Ranger KMS or Hadoop KMS to provide a guarantee similar to S3-SSE with client-supplied keys (SSE-C).</p>
+<p>Ozone’s S3 Gateway (S3G) allows you to access encrypted buckets. However, it&#x27;s important to note that <strong>Ozone does not support S3-SSE (Server-Side Encryption) or S3-CSE (Client-Side Encryption) in the way AWS S3 does.</strong> Ozone encrypts all data in an encrypted bucket with the bucket&#x27;s encryption key, not with a key chosen per object. S3G accepts SSE-S3 (<code>AES256</code>) and SSE-KMS (<code>aws:kms</code> with the bucket&#x27;s encryption key) requests only in encrypted buckets. It rejects them in buckets that are not encrypted, and rejects all SSE-C (customer-provided key) requests, with <code>501 NotImplemented</code>. A client that asks for encryption never gets a success response for data stored unencrypted. For details, see <a class="" href="/docs/next/user-guide/client-interfaces/s3/s3-api#server-side-encryption">Server-side encryption</a>.</p>
 <p>When creating an encrypted bucket that will be accessed via S3G:</p>
 <ol>
 <li class="">
