@@ -106,7 +106,7 @@ The OpenSSL-based hardware acceleration discussed below is currently only suppor
 
 ## Using Transparent Data Encryption from S3G
 
-Ozone’s S3 Gateway (S3G) allows you to access encrypted buckets. However, it's important to note that **Ozone does not support S3-SSE (Server-Side Encryption) or S3-CSE (Client-Side Encryption) in the way AWS S3 does.** That said, Ozone S3 buckets can be encrypted using Ranger KMS or Hadoop KMS to provide a guarantee similar to S3-SSE with client-supplied keys (SSE-C).
+Ozone’s S3 Gateway (S3G) allows you to access encrypted buckets. However, it's important to note that **Ozone does not support S3-SSE (Server-Side Encryption) or S3-CSE (Client-Side Encryption) in the way AWS S3 does.** Ozone encrypts all data in an encrypted bucket with the bucket's encryption key, not with a key chosen per object. S3G accepts SSE-S3 (`AES256`) and SSE-KMS (`aws:kms` with the bucket's encryption key) requests only in encrypted buckets. It rejects them in buckets that are not encrypted, and rejects all SSE-C (customer-provided key) requests, with `501 NotImplemented`. A client that asks for encryption never gets a success response for data stored unencrypted. For details, see [Server-side encryption](../../../../user-guide/client-interfaces/s3/s3-api#server-side-encryption).
 
 When creating an encrypted bucket that will be accessed via S3G:
 
