@@ -38,8 +38,7 @@ Upgrade finalization status:
     Datanodes finalized: 3/3
 ```
 
-- Add `--verbose` to also show the apparent versions of OM, SCM and the Datanodes.
-- Add `--json` to format the output as JSON.
+Add `--json` to format the output as JSON.
 
 `ozone admin datanode list` lists all Datanodes and their health state (`HEALTHY`, `STALE`, or `DEAD`) as seen by SCM. `STALE` or `DEAD` Datanodes will be told to finalize by SCM once they are reachable.
 
@@ -47,13 +46,11 @@ Upgrade finalization status:
 
 Starting with your current version of Ozone, complete the following steps to upgrade to a newer version of Ozone.
 
-1. If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. If OM HA is not being used, this step can be skipped.
+1. If using OM HA and currently running Ozone 1.2.0 or greater, prepare the Ozone Manager. The `prepare` command will block the Ozone Managers from receiving all write requests. If OM HA is not being used, this step can be skipped.
 
     ```bash
     ozone admin om prepare -id=<om-sevice-id>
     ```
-
-    The `prepare` command will block the Ozone Managers from receiving all write requests. See [Ozone Manager Prepare For Upgrade](https://ozone.apache.org/docs/edge/design/omprepare.html) for more information
 
 2. Stop all components.
 
@@ -87,7 +84,7 @@ Starting with your current version of Ozone, complete the following steps to upg
     ```
 
     - The command is sent to OM, which orchestrates finalization across the cluster: SCM finalizes first, then the Datanodes, and finally the OMs.
-    - Finalization is asynchronous: the command returns as soon as the process has been started. Monitor progress with [`ozone admin upgrade status`](#querying-finalization-status), or add `--wait` to have the command poll and block until the entire cluster is finalized. Interrupting `--wait` with Ctrl-C only stops waiting; finalization continues on the server.
-    - The command is idempotent, so it can be safely re-issued at any time, for example to resume waiting with `--wait`.
+    - Finalization is asynchronous: the command returns as soon as the process has been started. Monitor progress with [`ozone admin upgrade status`](#querying-finalization-status), or use `ozone admin upgrade finalize --wait` to have the command poll and block until the entire cluster is finalized. Interrupting `--wait` with Ctrl-C only stops waiting; finalization continues on the server.
+    - The finalize command is idempotent, so it can be safely re-issued at any time, for example to resume waiting with `--wait`.
 
 At this point, the cluster is finalized and the upgrade is complete.
