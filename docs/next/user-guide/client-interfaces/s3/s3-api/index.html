@@ -18,7 +18,7 @@
 <meta name="google-site-verification" content="fXhAWQ_Jb1fOk6QlN9a7Zs_Xsj-E2U0Q8oFqTNVclaE">
 <meta name="algolia-site-verification" content="A2998EF969F36A0D">
 <script src="/script/matomo.js"></script><link rel="stylesheet" href="/assets/css/styles.129d61b2.css">
-<script src="/assets/js/runtime~main.37ceafb4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7a09d695.js" defer="defer"></script>
 <script src="/assets/js/main.725f35c2.js" defer="defer"></script>
 </head>
 <body>
@@ -71,6 +71,7 @@ By default it uses the path-style addressing. To use virtual host style URLs set
 <p>Ozone encrypts data at rest only in encrypted buckets, with the bucket&#x27;s encryption key (see <a class="" href="/docs/next/administrator-guide/configuration/security/encryption/transparent-data-encryption">Transparent Data Encryption</a>). The S3 Gateway honors S3 server-side encryption headers only where that guarantee holds. It never stores unencrypted data with a success response for a request that asks for encryption:</p>
 <ul>
 <li class=""><strong>SSE-S3 and SSE-KMS:</strong> PutObject, CopyObject, CreateMultipartUpload, UploadPart, and UploadPartCopy accept <code>x-amz-server-side-encryption: AES256</code> or <code>aws:kms</code> in an encrypted bucket. The response returns <code>x-amz-server-side-encryption</code>; for <code>aws:kms</code> it also returns the bucket&#x27;s encryption key in <code>x-amz-server-side-encryption-aws-kms-key-id</code>.</li>
+<li class=""><strong>Reads:</strong> GetObject and HeadObject return <code>x-amz-server-side-encryption</code> for an object in an encrypted bucket. The value is the algorithm the object was written with: for a multipart object, the one in CreateMultipartUpload, and for a copy, the one in the CopyObject request, not the source object&#x27;s. An object written without an encryption header, or before Ozone stored the algorithm, reports <code>aws:kms</code>. With <code>aws:kms</code>, the response also returns the object&#x27;s encryption key in <code>x-amz-server-side-encryption-aws-kms-key-id</code>. An object in a bucket that is not encrypted returns no encryption headers.</li>
 <li class=""><strong>Rejected with <code>501 NotImplemented</code>:</strong> SSE-S3 and SSE-KMS requests in a bucket that is not encrypted, <code>aws:kms:dsse</code>, an <code>x-amz-server-side-encryption-context</code>, and an <code>x-amz-server-side-encryption-aws-kms-key-id</code> other than the bucket&#x27;s encryption key.</li>
 <li class=""><strong>Rejected with <code>400 InvalidArgument</code>:</strong> an unknown encryption algorithm, and a KMS key ID or encryption context without <code>x-amz-server-side-encryption: aws:kms</code>.</li>
 <li class=""><strong>SSE-C:</strong> Customer-provided keys are not supported. A request with <code>x-amz-server-side-encryption-customer-*</code> or <code>x-amz-copy-source-server-side-encryption-customer-*</code> headers returns <code>501 NotImplemented</code> on the write operations above and on GetObject, HeadObject, GetObjectAttributes, ListParts, and CompleteMultipartUpload.</li>
