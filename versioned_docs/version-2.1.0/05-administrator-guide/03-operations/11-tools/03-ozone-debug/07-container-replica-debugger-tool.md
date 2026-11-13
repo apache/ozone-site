@@ -9,7 +9,7 @@ In the past we have seen different issues on container state. To debug problems 
 
 ## Solution Approach
 
-An offline tool that would analyse the dn-container log files and help us find issues related to the containers across the Datanodes in the cluster.
+An offline tool that would analyze the dn-container log files and help us find issues related to the containers across the Datanodes in the cluster.
 
 ### Component 1: Parser
 

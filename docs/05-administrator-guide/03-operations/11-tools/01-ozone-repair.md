@@ -29,20 +29,20 @@ Commands:
 
 For more detailed usage see the output of --help for each of the subcommands.
 
-## ozone repair Datanode
+## `ozone repair datanode`
 
 Operational tool to repair Datanode.
 
-### upgrade-container-schema
+### `upgrade-container-schema`
 
 Upgrade all schema V2 containers to schema V3 for a Datanode in offline mode.
 Optionally takes `--volume` option to specify which volume needs the upgrade.
 
-## ozone repair ldb
+## `ozone repair ldb`
 
 Operational tool to repair ldb.
 
-### compact
+### `compact`
 
 Compact a column family in the DB to clean up tombstones while the service is offline.
 
@@ -57,21 +57,21 @@ Ozone Manager's efficient snapshot diff.
       --db=<dbPath>   Database File Path
 ```
 
-## ozone repair OM
+## `ozone repair om`
 
 Operational tool to repair OM.
 
 ### Subcommands under OM
 
-- FSO-tree
-- snapshot
-- update-transaction
-- quota
-- compact
-- skip-ratis-transaction
-- download
+- `fso-tree`
+- `snapshot`
+- `update-transaction`
+- `quota`
+- `compact`
+- `skip-ratis-transaction`
+- `download`
 
-### FSO-tree
+### `fso-tree`
 
 Identify and repair a disconnected FSO tree by marking unreferenced entries for deletion.
 Reports the reachable, unreachable (pending delete) and unreferenced (orphaned) directories and files.
@@ -91,11 +91,11 @@ deletion. OM should be stopped while this tool is run.
 
 ```
 
-### snapshot
+### `snapshot`
 
 Subcommand for all snapshot related repairs.
 
-#### chain
+#### `chain`
 
 Update global and path previous snapshot for a snapshot in case snapshot chain is corrupted.
 
@@ -116,7 +116,7 @@ chain is corrupted.
                        Path previous snapshotId to set for the given snapshot
 ```
 
-### update-transaction
+### `update-transaction`
 
 To avoid modifying Ratis logs and only update the latest applied transaction, use `update-transaction` command.  
 This updates the highest transaction index in the OM transaction info table.
@@ -136,11 +136,11 @@ CLI to update the highest index in transaction info table.
 
 ```
 
-### quota
+### `quota`
 
 Operational tool to repair quota in OM DB.
 
-#### start
+#### `start`
 
 To trigger quota repair use the `start` command.
 
@@ -165,7 +165,7 @@ CLI to trigger quota repair.
 
 ```
 
-#### status
+#### `status`
 
 Get the status of last triggered quota repair.
 
@@ -185,7 +185,7 @@ CLI to get the status of last trigger quota repair if available.
 
 ```
 
-#### compact
+#### `compact`
 
 Compact a column family in the OM DB to clean up tombstones. The compaction happens asynchronously. Requires admin privileges.
 
@@ -203,7 +203,7 @@ asynchronously. Requires admin privileges.
 
 ```
 
-#### skip-ratis-transaction, srt
+#### `skip-ratis-transaction`, `srt`
 
 Omit a raft log in a Ratis segment file by replacing the specified index with a dummy EchoOM command.
 This is an offline tool meant to be used only when all 3 OMs crash on the same transaction.
@@ -230,7 +230,7 @@ from one of the good OMs to the crashing OM instead.
                              Path of the input segment file
 ```
 
-#### download
+#### `download`
 
 Download OM metadata from a running OM (same v2 checkpoint flow as follower bootstrap). The source cluster must be **running**; stop the target OM before installing the output. Requires Ozone 2.2+ (HDDS-16171). See [OM metadata backup](../backup-and-recovery/om-metadata-backup).
 
@@ -245,20 +245,20 @@ Usage: ozone repair om download [-hV] [--dry-run] [--overwrite] [--verbose]
       --overwrite                     Overwrite output directory if it exists
 ```
 
-## ozone repair SCM
+## `ozone repair scm`
 
 Operational tool to repair SCM.
 
 ### Subcommands under SCM
 
-- cert
-- update-transaction
+- `cert`
+- `update-transaction`
 
-### cert
+### `cert`
 
 Subcommand for all certificate related repairs on SCM.
 
-#### recover
+#### `recover`
 
 Recover Deleted SCM Certificate from RocksDB.
 
@@ -269,7 +269,7 @@ Recover Deleted SCM Certificate from RocksDB
       --db=<dbPath>   SCM DB Path
 ```
 
-### update-transaction
+### `update-transaction`
 
 To avoid modifying Ratis logs and only update the latest applied transaction, use update-transaction command.
 This updates the highest transaction index in the SCM transaction info table.

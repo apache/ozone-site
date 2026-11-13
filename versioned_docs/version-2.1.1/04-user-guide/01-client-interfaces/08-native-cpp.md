@@ -6,8 +6,8 @@ sidebar_label: Native C/C++ Client Access to Ozone
 
 ## Components Summary
 
-- **libhdfs**: The standard Hadoop C API. It is a JNI bridge between C/C++ and Java FileSystem implementations.
-- **libo3fs**: Lightweight wrapper exposing a simplified API for Ozone clients. It is built on top of `libhdfs`.
+- **`libhdfs`**: The standard Hadoop C API. It is a JNI bridge between C/C++ and Java FileSystem implementations.
+- **`libo3fs`**: Lightweight wrapper exposing a simplified API for Ozone clients. It is built on top of `libhdfs`.
 - **OFS (Ozone FileSystem)**: Java-based filesystem client used internally by `libhdfs` to interact with Ozone.
 
 ## Overview

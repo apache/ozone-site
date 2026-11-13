@@ -184,7 +184,7 @@ $ ozone sh volume setacl tmp -a user:anyuser:rwlc \
   user:adminuser:a,group:anyuser:rwlc,group:adminuser:a tmp/tmp
 ```
 
-where, anyuser is username(s) admin wants to grant access and, adminuser is the admin username.
+where, `anyuser` is username(s) admin wants to grant access and, `adminuser` is the admin username.
 
 Users then access the tmp directory as,
 

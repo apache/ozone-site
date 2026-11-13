@@ -143,7 +143,7 @@ bash-4.2$ ozone tenant --verbose user assignadmin 'tenantone$testuser' --tenant=
 }
 ```
 
-Once `testuser` becomes a tenant admin of `tenantone`, one can kinit as `testuser` and assign new users to the tenant, even new tenant admins (if delegated). Example commands for illustration:
+Once `testuser` becomes a tenant admin of `tenantone`, one can `kinit` as `testuser` and assign new users to the tenant, even new tenant admins (if delegated). Example commands for illustration:
 
 ```bash
 kinit -kt /etc/security/keytabs/testuser.keytab testuser/scm@EXAMPLE.COM

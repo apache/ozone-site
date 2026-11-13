@@ -129,7 +129,7 @@ Each module is a plain Maven jar (`ozone-integration-test`, `ozone-integration-t
 Two factors drive this layout:
 
 1. **They sit downstream of every production module.** An integration test routinely needs types from `ozone-manager`, `hdds-server-scm`, `hdds-container-service`, `ozone-client`, `recon`, `s3gateway`, and more. If these tests lived inside any of those modules, the consuming module would have to depend on its siblings, creating cycles that Maven cannot resolve. A dedicated downstream module breaks the cycle by being the single place that pulls everything together.
-2. **Splitting Recon and S3 keeps the classpaths focused and the build parallelizable.** Recon and S3 Gateway each bring large transitive dependency trees (web framework, codegen output, AWS SDK). Isolating their tests in `integration-test-recon` and `integration-test-s3` keeps the core `integration-test` module lighter, lets Maven build and run the three suites independently, and makes it easier to run only the slice you care about during development.
+2. **Splitting Recon and S3 keeps the classpaths focused and the build parallelizable.** Recon and S3 Gateway each bring large transitive dependency trees (web framework, generated code, AWS SDK). Isolating their tests in `integration-test-recon` and `integration-test-s3` keeps the core `integration-test` module lighter, lets Maven build and run the three suites independently, and makes it easier to run only the slice you care about during development.
 
 The reusable cluster harness — `MiniOzoneCluster` and its builders — lives in a separate `hadoop-ozone/mini-cluster` module so that non-test modules can depend on it without inheriting an integration test's test-scoped classpath.
 

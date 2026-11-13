@@ -20,7 +20,7 @@ Commands:
   checkpoint                Create checkpoint for specified db
 ```
 
-## list_column_families command
+## `list_column_families` command
 
 `list_column_families` command lists all the column families in the db provided.
 
@@ -43,7 +43,7 @@ revokedCerts
 move
 ```
 
-## scan command
+## `scan` command
 
 `scan` command parses a particular column family of a RocksDB provided and prints the records.
 
@@ -354,9 +354,9 @@ ozone debug ldb --db=/path/to/om.db scan --cf=volumeTable --filter="usedNamespac
 }
 ```
 
-## value-schema command
+## `value-schema` command
 
-`value-schema` command shows the schema of the value stored in a column-family of a RocksDB, i.e., it shows the fields stored in the value and it's datatype.
+`value-schema` command shows the schema of the value stored in a column family of a RocksDB, i.e., it shows the fields stored in the value and it's datatype.
 `--depth` can be used optionally to limit the level until which the fields are fetched.
 
 ```bash
@@ -459,7 +459,7 @@ ozone debug ldb --db=/data/metadata/om.db value-schema --cf=keyTable
 }
 ```
 
-## checkpoint command
+## `checkpoint` command
 
 `checkpoint` command takes a checkpoint of a RocksDB, at a provided path.
 
