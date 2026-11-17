@@ -28,7 +28,7 @@ When a Recon disk fails, the service will stop functioning, but upon restart wit
 
 Recon uses several database directories that may be affected by disk failure:
 
-- **`ozone.recon.db.dir`**: Stores Recon's primary RocksDB database, which contains aggregated data and analysis results (ContainerKey and ContainerKeyCount tables). This directory also typically contains the SQL database (default Derby) used for storing GlobalStats, FileCountBySize, ReconTaskStatus, ContainerHistory, and UnhealthyContainers tables.
+- **`ozone.recon.db.dir`**: Stores Recon's primary RocksDB database, which contains aggregated data and analysis results (ContainerKey and ContainerKeyCount tables). This directory also typically contains the SQL database (default SQLite) used for storing GlobalStats, FileCountBySize, ReconTaskStatus, ContainerHistory, and UnhealthyContainers tables.
 - **`ozone.recon.om.db.dir`**: Stores the copy of the OM database snapshot that Recon uses as its source of truth for the namespace.
 - **`ozone.recon.scm.db.dirs`**: Stores the copy of the SCM database snapshot (if SCM snapshot is enabled via `ozone.recon.scm.snapshot.enabled`). This contains information about Datanodes, pipelines, and containers.
 
@@ -46,7 +46,7 @@ Before starting, the administrator should:
    - `ozone.recon.db.dir`: Stores Recon's primary RocksDB database, which contains aggregated data and analysis results.
    - `ozone.recon.om.db.dir`: Stores the copy of the OM database snapshot that Recon uses as its source of truth for the namespace.
    - `ozone.recon.scm.db.dirs`: Stores the copy of the SCM database snapshot (if SCM snapshot is enabled).
-   - `ozone.recon.sql.db.jdbc.url`: The JDBC URL for the SQL database (defaults to `jdbc:derby:${ozone.recon.db.dir}/ozone_recon_derby.db` if not explicitly configured).
+   - `ozone.recon.sql.db.jdbc.url`: The JDBC URL for the SQL database (defaults to `jdbc:sqlite:${ozone.recon.db.dir}/ozone_recon_sqlite.db` if not explicitly configured).
 
 3. **Prepare the Replacement Disk:** Physically install a new, healthy disk. Format it and mount it at the same path as the failed disk. Ensure it has the correct ownership and permissions for the user that runs the Recon process. The default permissions for Recon metadata directories are **750** (configurable via `ozone.recon.db.dirs.permissions`).
 
