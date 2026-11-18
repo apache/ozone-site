@@ -2,6 +2,8 @@
 sidebar_label: Release Manager Guide
 ---
 
+<!-- cspell:ignore ubuntulinux rockylinux -->
+
 # Apache Release Manager Guide
 
 This document describes the process to release Apache Ozone. The process is not yet scripted, and the documentation is **a work in progress**.
@@ -406,7 +408,7 @@ These packages are intended for convenience for Linux users. The official releas
   for i in $(ls -1 *.tar.gz); do gpg --print-mds "$i" > "$i.mds"; done
   ```
 
-Now each .tar.gz file should have an associated .mds file, .asc file, and .sha512 file
+Now each .tar.gz file should have an associated `.mds` file, `.asc` file, and `.sha512` file
 
 ### Check the Artifacts
 
@@ -437,7 +439,7 @@ Before uploading the artifacts, run some basic tests on them, similar to what ot
       ```
 
 4. Verify checksums
-    - For each artifact, verify that the checksums given by the `shasum` command match the contents of the .sha512 file and the SHA512 line in its .mds file.
+    - For each artifact, verify that the checksums given by the `shasum` command match the contents of the `.sha512` file and the SHA512 line in its `.mds` file.
 
         ```bash
         shasum -a 512 *.tar.gz

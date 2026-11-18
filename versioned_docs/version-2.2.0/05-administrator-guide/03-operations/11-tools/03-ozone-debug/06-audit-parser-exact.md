@@ -50,10 +50,10 @@ ozone debug auditparser <path to db file> template <templateName>
 
 Following templates are available:
 
-| Template Name           | Description                            | SQL                                                                                                                                   |
-| ----------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| top5users               | Top 5 users                            | select user,count(\*) as total from audit group by user order by total DESC limit 5                                                   |
-| top5cmds                | Top 5 commands                         | select op,count(\*) as total from audit group by op order by total DESC limit 5                                                       |
-| top5activetimebyseconds | Top 5 active times, grouped by seconds | select substr(datetime,1,charindex(',',datetime)-1) as dt,count(\*) as thecount from audit group by dt order by thecount DESC limit 5 |
+| Template Name             | Description                            | SQL                                                                                                                                    |
+| ------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `top5users`               | Top 5 users                            | `select user,count(*) as total from audit group by user order by total DESC limit 5`                                                   |
+| `top5cmds`                | Top 5 commands                         | `select op,count(*) as total from audit group by op order by total DESC limit 5`                                                       |
+| `top5activetimebyseconds` | Top 5 active times, grouped by seconds | `select substr(datetime,1,charindex(',',datetime)-1) as dt,count(*) as thecount from audit group by dt order by thecount DESC limit 5` |
 
 [Next >>](./container-replica-debugger-tool)

@@ -118,7 +118,7 @@ Example rule:
 }
 ```
 
-#### Interaction with MultipartUploadCleanupService {#interaction-with-multipartuploadcleanupservice}
+#### Interaction with `MultipartUploadCleanupService`
 
 Ozone runs two independent services that can clean up stale incomplete multipart uploads:
 

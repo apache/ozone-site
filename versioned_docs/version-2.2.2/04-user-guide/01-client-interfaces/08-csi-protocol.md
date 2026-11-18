@@ -37,9 +37,9 @@ Now, create the CSI related resources by execute the follow command.
 kubectl create -f /ozone/kubernetes/examples/ozone/csi
 ```
 
-## Create pv-test and visit the result
+## Create `pv-test` and visit the result
 
-Create pv-test related resources by execute the follow command.
+Create `pv-test` related resources by execute the follow command.
 
 ```bash
 kubectl create -f /ozone/kubernetes/examples/ozone/pv-test

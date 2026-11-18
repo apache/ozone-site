@@ -1,5 +1,7 @@
 # Transparent Data Encryption (TDE)
 
+<!-- cspell:ignore CSE RDRAND -->
+
 Ozone Transparent Data Encryption (TDE) enables you to encrypt data at rest. TDE is enabled at the bucket level when a bucket is created. To use TDE, an administrator must first configure a Key Management Server (KMS). Ozone can work with **Hadoop KMS** and **Ranger KMS**. The KMS URI needs to be provided to Ozone via the `core-site.xml` configuration file.
 
 Once the KMS is configured, users can create an encryption key and then create an encrypted bucket using that key. All data written to an encrypted bucket will be transparently encrypted on the server-side, and data read from the bucket will be transparently decrypted.
@@ -78,7 +80,7 @@ The OpenSSL-based hardware acceleration discussed below is currently only suppor
       ```
   
     - The output should show "true" for the Hadoop library
-    - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the libhadoop native library fails to load:
+    - To troubleshoot native library loading issues on Ozone Datanode and applications, configure their log level to DEBUG. The log messages below are examples, and actual paths may vary. The following log message indicates that the `libhadoop` native library fails to load:
 
       ```bash
       25/06/14 01:25:21 DEBUG util.NativeCodeLoader: Trying to load the custom-built native-hadoop library...

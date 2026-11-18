@@ -33,7 +33,7 @@ This multi-tenant support will also allow users to access Ozone volumes over AWS
    - They can even assign new tenant admins in their tenant, if they are delegated tenant admins, which is the default.
    - Note that tenant admins still need to use Ozone tenant CLI to assign new users to the tenant.
      - Once tenant admins get the Kerberos TGT (via `kinit`), they can run `user assign` command to assign new users. Ozone Manager will recognize that they are the tenant admins and allow the user to do so in their tenants.
-5. After that, users can use any S3-compatible client (awscli, Python boto3 library, etc.) to access the buckets in the tenant volume via S3 Gateway using the generated key pairs.
+5. After that, users can use any S3-compatible client (`awscli`, Python boto3 library, etc.) to access the buckets in the tenant volume via S3 Gateway using the generated key pairs.
 
 ## Next Steps
 

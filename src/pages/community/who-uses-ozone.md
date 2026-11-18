@@ -1,5 +1,7 @@
 # Who Uses Ozone?
 
+<!-- cspell:ignore Meituan Qihoo360 Shopee Unicom -->
+
 This page lists organizations that are using Apache Ozone in production or for significant projects. If your organization is using Apache Ozone and would like to be added to this list, please create a pull request with your organization's name, use case, and any relevant links (e.g., blog posts, case studies, or architectural overviews).
 
 | Organization | Use Case Details / Reference Architecture / Blogs / Links |

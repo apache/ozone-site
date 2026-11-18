@@ -112,7 +112,7 @@ Running S3 specific tests requires the following setup:
 
 1. Create a bucket
 2. Configure your local `aws cli`
-3. Set bucket/endpointurl during the robot test execution
+3. Set `bucket`/`endpointurl` during the robot test execution
 
 ```bash
 robot -v bucket:ozonetest -v OZONE_TEST:false -v OZONE_S3_SET_CREDENTIALS:false -v ENDPOINT_URL:https://s3.us-east-2.amazonaws.com smoketest/s3
