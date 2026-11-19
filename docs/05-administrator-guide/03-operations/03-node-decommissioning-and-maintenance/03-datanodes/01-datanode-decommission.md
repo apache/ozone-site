@@ -90,9 +90,11 @@ These metrics are available on the SCM and provide a cluster-wide view of the re
 - `replicasCreatedTotal` (`replication_manager_metrics_replicas_created_total`): The total number of container replicas successfully created.
 - `replicateContainerCmdsDeferredTotal` (`replication_manager_metrics_replicate_container_cmds_deferred_total`): The number of replication commands deferred because source Datanodes were overloaded. If this value is high, it might indicate that the source Datanodes (including the decommissioning one) are too busy.
 
-#### Datanode-side Metrics (`MeasuredReplicator` metrics)
+#### Datanode-side Metrics
 
-These metrics are available on each Datanode. For a decommissioning node, they show its activity as a source of replicas. For other nodes, they show their activity as targets. The name in parentheses is the corresponding Prometheus metric name.
+These metrics are available on each DataNode. Together, `MeasuredReplicator` metrics describe transfer-level outcomes for replication work (for a decommissioning node this is mainly as a replica source; for other nodes they reflect activity as replication targets). `ReplicationSupervisorMetrics` track replication and reconstruction tasks managed by the Replication Supervisor (queues, lifecycle counts, and concurrency limits). The name in parentheses is the corresponding Prometheus metric name.
+
+##### `MeasuredReplicator` metrics
 
 - `success` (`measured_replicator_success`): The number of successful replication tasks.
 - `successTime` (`measured_replicator_success_time`): The total time spent on successful replication tasks.
@@ -101,6 +103,17 @@ These metrics are available on each Datanode. For a decommissioning node, they s
 - `failureTime` (`measured_replicator_failure_time`): The total time spent on failed replication tasks.
 - `failureBytes` (`measured_replicator_failure_bytes`): The total bytes that failed to be transferred.
 - `queueTime` (`measured_replicator_queue_time`): The total time tasks spend in the replication queue. A high value might indicate the Datanode is overloaded.
+
+##### `ReplicationSupervisorMetrics`
+
+- `numInFlightReplications` (`replication_supervisor_metrics_num_in_flight_replications`): Total number of pending replications and reconstructions (both low and normal priority).
+- `numQueuedReplications` (`replication_supervisor_metrics_num_queued_replications`): Number of replication tasks currently in the queue.
+- `numRequestedReplications` (`replication_supervisor_metrics_num_requested_replications`): Total number of replication tasks requested.
+- `numSuccessReplications` (`replication_supervisor_metrics_num_success_replications`): Total number of successful replication tasks.
+- `numFailureReplications` (`replication_supervisor_metrics_num_failure_replications`): Total number of failed replication tasks.
+- `numTimeoutReplications` (`replication_supervisor_metrics_num_timeout_replications`): Number of replication requests that timed out before being processed.
+- `numSkippedReplications` (`replication_supervisor_metrics_num_skipped_replications`): Number of replication requests skipped (for example, if the container is already present).
+- `maxReplicationStreams` (`replication_supervisor_metrics_max_replication_streams`): Maximum number of concurrent replication tasks allowed to run simultaneously.
 
 By monitoring these metrics, administrators can get a clear picture of the decommissioning progress and identify potential bottlenecks.
 
