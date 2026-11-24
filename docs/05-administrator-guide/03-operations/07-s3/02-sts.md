@@ -818,6 +818,6 @@ aws s3api put-object \
 
 ## Further Reading
 
-- [AWS STS Design for Ozone S3](https://github.com/apache/ozone/blob/master/hadoop-hdds/docs/content/design/ozone-sts.md) — architecture, session token format, and design rationale
+- [AWS STS Design for Ozone S3](https://github.com/apache/ozone-site/blob/master/docs/07-system-internals/08-design/ozone-sts.md) — architecture, session token format, and design rationale
 - [Configuring Apache Ranger](../../../administrator-guide/configuration/security/ranger) — base Ranger/Ozone integration
 - [Securing S3](../../../user-guide/client-interfaces/s3/securing-s3) — Kerberos, S3 secrets, and S3 Gateway security
