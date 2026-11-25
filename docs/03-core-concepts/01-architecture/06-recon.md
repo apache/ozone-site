@@ -68,7 +68,7 @@ The following data is persisted in Recon in the specified RocksDB directory:
 - **ContainerKeyCount table**
   - Stores containerID -> no. of keys count within the container
 
-The following data is stored in the configured SQL database (**default is Derby**):
+The following data is stored in the configured SQL database (**default is SQLite**):
 
 - **GlobalStats table**
   - A Key -> Value table to store aggregate information like total number of volumes / buckets / keys present in the cluster
@@ -80,6 +80,10 @@ The following data is stored in the configured SQL database (**default is Derby*
   - Stores ContainerReplica -> Datanode mapping with last known timestamp. This is used to determine the last known Datanodes when a container is reported missing
 - **UnhealthyContainers table**
   - Keeps track of all the Unhealthy Containers (MISSING, UNDER_REPLICATED, OVER_REPLICATED, MIS_REPLICATED) in the cluster at any given time
+
+Earlier releases used Apache Derby. An existing Derby database is not migrated: these tables only hold data that Recon derives from the cluster, so after the upgrade Recon creates a new SQLite database and fills it again. If `ozone.recon.sql.db.jdbc.url` still points to a Derby database, Recon logs a warning and uses the SQLite defaults. The old `ozone_recon_derby.db` directory is no longer used and can be deleted.
+
+The SQLite JDBC driver extracts a native library to `java.io.tmpdir` when Recon starts. If that directory is mounted `noexec`, set `-Dorg.sqlite.tmpdir` (for example in `OZONE_RECON_OPTS`) to a directory that allows execution.
 
 ## Notable configurations
 
@@ -93,11 +97,11 @@ The following data is stored in the configured SQL database (**default is Derby*
 | `ozone.recon.om.snapshot.task.interval.delay` | 10m                                                                          | Interval in MINUTES by Recon to request OM DB Snapshot / delta updates.                                                              |
 | `ozone.recon.task.missingcontainer.interval` | 300s                                                                         | Time interval of the periodic check for Unhealthy Containers in the cluster.                                                         |
 | `ozone.recon.task.safemode.wait.threshold` | 300s                                                                         | Max time for Recon to wait before it exits out of safe or warmup mode.                                                               |
-| `ozone.recon.sql.db.jooq.dialect` | DERBY                                                                        | Please refer to [SQL Dialect](https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/SQLDialect.html) to specify a different dialect. |
-| `ozone.recon.sql.db.jdbc.url` | `jdbc:derby:$&#123;ozone.recon.db.dir&#125;`<br></br>`/ozone_recon_derby.db` | Recon SQL database jdbc url.                                                                                                         |
+| `ozone.recon.sql.db.jooq.dialect` | SQLITE                                                                       | Please refer to [SQL Dialect](https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/SQLDialect.html) to specify a different dialect. |
+| `ozone.recon.sql.db.jdbc.url` | `jdbc:sqlite:$&#123;ozone.recon.db.dir&#125;`<br></br>`/ozone_recon_sqlite.db` | Recon SQL database jdbc url.                                                                                                         |
 | `ozone.recon.sql.db.username` | none                                                                         | Recon SQL database username.                                                                                                         |
 | `ozone.recon.sql.db.password` | none                                                                         | Recon SQL database password.                                                                                                         |
-| `ozone.recon.sql.db.driver` | `org.apache.derby.jdbc.EmbeddedDriver`                                       | Recon SQL database jdbc driver.                                                                                                      |
+| `ozone.recon.sql.db.driver` | `org.sqlite.JDBC`                                                            | Recon SQL database jdbc driver.                                                                                                      |
 | `ozone.recon.prometheus.http.endpoint` | none                                                                         | Prometheus HTTP endpoint URL for Recon to integrate with Prometheus. Enables display of metrics in Recon UI and exposes a proxy endpoint to query Prometheus. Example: `http://prometheus:9090`. |
 | `ozone.recon.scmconfig` | none                                                                         | Prefix for SCM configuration.                                                                                                        |
 | `ozone.recon.db.dirs.permissions` | `750`                                                                        | Permissions for the metadata directories for Recon. The permissions can either be octal or symbolic. If the default permissions are not set then the default value of 750 will be used. |
