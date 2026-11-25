@@ -85,7 +85,7 @@ INFO Finished at: 2021-03-10T17:06:42+08:00
 
 For using the SCM HA feature, "ozone.SCM.ratis.enable" config needs to be set to be true in `ozone-site.xml`.
 
-## 9. third party dependencies/licence changes
+## 9. third party dependencies/license changes
 
 Checking the content of the two branches (`find -type f | sort > ...`  + diff) the only jar differences are due to a latest version bump:
 

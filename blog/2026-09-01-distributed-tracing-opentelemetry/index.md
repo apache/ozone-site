@@ -5,6 +5,8 @@ date: 2026-09-01
 tags: [Ozone, Distributed Tracing, OpenTelemetry, Observability]
 ---
 
+<!-- cspell:ignore sravani revuri sumitagrawl -->
+
 If you have ever stared at a wall of logs trying to figure out why a single request took ten seconds, you know the struggle: each service tells its own story, but none of them show you the full journey.
 
 Apache Ozone is a distributed system by design. A single request can touch the Ozone Manager (OM), Storage Container Manager (SCM), and multiple Datanodes. When things slow down, metrics might tell you something is wrong but they rarely show the full path. The logs might tell you where something complained, but they're hard to interpret.

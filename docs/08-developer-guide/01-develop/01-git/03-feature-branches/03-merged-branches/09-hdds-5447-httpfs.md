@@ -29,7 +29,7 @@ acceptance tests were added in the following tasks:
 - [HDDS-5698](https://issues.apache.org/jira/browse/HDDS-5698)
 - [HDDS-7719](https://issues.apache.org/jira/browse/HDDS-7719)
 
-it can be found at [/Hadoop-ozone/dist/src/main/smoketest/HttpFS](https://github.com/apache/ozone/tree/HDDS-5447-httpfs/hadoop-ozone/dist/src/main/smoketest/httpfs).
+it can be found at [`/Hadoop-ozone/dist/src/main/smoketest/HttpFS`](https://github.com/apache/ozone/tree/HDDS-5447-httpfs/hadoop-ozone/dist/src/main/smoketest/httpfs).
 
 ## 6. support of containers / Kubernetes
 

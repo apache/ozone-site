@@ -2,6 +2,8 @@
 sidebar_label: Kerberos
 ---
 
+<!-- cspell:ignore GSSAPI TGS -->
+
 # Kerberos Authentication in Apache Ozone
 
 This document explains the fundamentals of Kerberos authentication and its application within Apache Ozone to secure communication between clients and services, as well as between Ozone services internally.

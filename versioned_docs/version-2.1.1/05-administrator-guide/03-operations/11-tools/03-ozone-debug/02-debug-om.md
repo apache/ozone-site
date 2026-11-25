@@ -3,7 +3,7 @@
 Debug commands related to OM.  
 It has the following subcommands:
 
-## generate-compaction-dag
+## `generate-compaction-dag`
 
 Creates a DAG image of the current compaction log of an OM.db instance. It is downloaded to the specified location.
 
@@ -23,7 +23,7 @@ be up.
       --verbose       More verbose output. Show the stack trace of the errors.
 ```
 
-## prefix
+## `prefix`
 
 Parses the contents of a prefix.
 

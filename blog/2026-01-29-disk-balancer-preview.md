@@ -5,6 +5,8 @@ date: 2026-01-29
 tags: [Ozone, Disk Balancer, Ozone 2.2, Datanode]
 ---
 
+<!-- cspell:ignore jojochuang lai Gargi jais Sammi -->
+
 Ever replaced a drive on a Datanode only to watch it become an I/O hotspot?
 Or seen one disk hit 95% usage while others on the same machine sit idle?
 These imbalances create performance bottlenecks and increase failure risk.

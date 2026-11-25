@@ -16,7 +16,7 @@ Before starting, ensure the following:
 
 - Python installed (3.x recommended)
 - Apache Ozone configured and accessible
-- For PyArrow with libhdfs:
+- For PyArrow with `libhdfs`:
   - PyArrow library (`pip install pyarrow`)
   - Hadoop native libraries configured and Ozone classpath specified (see below for details)
 - For S3 access:
@@ -24,12 +24,12 @@ Before starting, ensure the following:
   - Ozone S3 Gateway endpoint and bucket names
   - Access credentials (AWS-like key and secret)
 - For HttpFS access:
-  - Requests (`pip install requests`) or fsspec (`pip install fsspec`)
+  - Requests (`pip install requests`) or `fsspec` (`pip install fsspec`)
 
-## Method 1: Access Ozone via PyArrow and libhdfs
+## Method 1: Access Ozone via PyArrow and `libhdfs`
 
-This approach leverages PyArrow's HadoopFileSystem API, which requires *libhdfs.so* native library.
-The *libhdfs.so* is not packaged within PyArrow and you must download it separately from Hadoop.
+This approach leverages PyArrow's HadoopFileSystem API, which requires `libhdfs.so` native library.
+The `libhdfs.so` is not packaged within PyArrow and you must download it separately from Hadoop.
 
 ### Configuration
 
@@ -196,7 +196,7 @@ Try it yourself! Check out [Access Ozone using HttpFS REST API Tutorial](https:/
 
 ### Code Example (webhdfs)
 
-First, install fsspec Python module:
+First, install `fsspec` Python module:
 
 ```shell
 pip install fsspec
@@ -232,4 +232,4 @@ Replace host, port, and path as per your setup.
 - [Apache Ozone Documentation](https://ozone.apache.org/docs/)
 - [PyArrow Documentation](https://arrow.apache.org/docs/python/)
 - [Boto3 Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-- [fsspec WebHDFS Python API](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.webhdfs.WebHDFS)
+- [`fsspec` WebHDFS Python API](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.webhdfs.WebHDFS)

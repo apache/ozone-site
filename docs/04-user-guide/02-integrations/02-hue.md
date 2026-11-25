@@ -2,6 +2,8 @@
 sidebar_label: Hue
 ---
 
+<!-- cspell:ignore CDP -->
+
 # Hue
 
 [Cloudera Hue](https://docs.gethue.com/) provides a web interface for browsing files, running SQL, and working with data across many storage and query engines. Hue's **File Browser** can browse Apache Ozone volumes, buckets, and paths when Ozone is exposed through the **Ozone HttpFS gateway** and its WebHDFS-compatible REST API.

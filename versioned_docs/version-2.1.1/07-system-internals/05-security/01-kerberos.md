@@ -2,6 +2,8 @@
 sidebar_label: Kerberos
 ---
 
+<!-- cspell:ignore GSS -->
+
 # How Ozone Uses Kerberos
 
 ## 1. Kerberos

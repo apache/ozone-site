@@ -2,6 +2,8 @@
 sidebar_label: Comparison with Other Storage Technologies
 ---
 
+<!-- cspell:ignore ABFS APAC Cloudian Gluster GPFS HPC Isilon NAS OCI RADOS RGW Scality -->
+
 # Comparison with Other Storage Technologies
 
 This document provides a high-level comparison of Apache Ozone with other storage technologies.

@@ -2,6 +2,8 @@
 sidebar_label: Overview
 ---
 
+<!-- cspell:ignore Clickhouse Teradata -->
+
 # Overview
 
 Ozone provides S3 compatible REST interface to use the object store data with any S3 compatible tools.
