@@ -131,7 +131,7 @@ RetainUntilDate is calculated
 locked until RetainUntilDate
 ```
 
-Event holds use `PutObjectRetention`, as in AWS S3, so no new API or Ranger action is needed (native clients use `OzoneBucket#setRetention`).
+Event holds use `PutObjectRetention`, as in AWS S3, so no new API or Ranger action is needed (native clients use `OzoneBucket#setObjectRetention`).
 OM handles the request under the key write lock and uses the leader-stamped request time as now.
 
 The key stores `retentionDate` and the event hold (status and duration):
@@ -429,15 +429,15 @@ Showing Object Lock settings in the ozone shell is left to a follow-up (see [Fut
 **OzoneBucket**
 
 ```java
-public void setRetentionConfig(RetentionArgs retentionArgs);
-public RetentionArgs getRetentionConfig();
-public void setRetention(String keyName, ObjectRetention retention, boolean bypassGovernanceRetention);
-public ObjectRetention getRetention(String keyName);
+public void setDefaultRetention(BucketRetention bucketRetention);
+public BucketRetention getDefaultRetention();
+public void setObjectRetention(String keyName, ObjectRetention retention, boolean bypassGovernanceRetention);
+public ObjectRetention getObjectRetention(String keyName);
 public void setLegalHold(String keyName, boolean hold);
 public boolean getLegalHold(String keyName);
 ```
 
-* `setRetention` with an empty retention removes it (see [Retention Updates](#retention-updates)).
+* `setObjectRetention` with an empty retention removes it (see [Retention Updates](#retention-updates)).
 * `createKey`, `createStreamKey` and `initiateMultipartUpload` get overloads that take the retention and legal hold of the new key.
 * `createKey`, `completeMultipartUpload`, `deleteKey`, `deleteKeys` and `renameKey` get overloads that take `bypassGovernanceRetention`.
 
