@@ -9,8 +9,7 @@ and get answers assembled from the data Recon already collects. It is an optiona
 default**, experimental feature of the Recon service.
 
 > **Note:** This page is for operators (who enable, secure, configure and run the assistant) and end
-> users (who ask it questions). It is not a code walkthrough; contributors can find the internal flow
-> in `CODE_FLOW.md` next to the chatbot source.
+> users (who ask it questions). It is not a code walkthrough.
 
 ## 1. Overview
 
@@ -89,7 +88,9 @@ key is simply unavailable.
 | Anthropic | `ozone.recon.chatbot.anthropic.models` | `claude-opus-4-6, claude-sonnet-4-6` |
 | Gateway | `ozone.recon.chatbot.gateway.models` | _(none - you must list the aliases your gateway exposes)_ |
 
-The **default selection** is provider `gemini`, model `gemini-2.5-flash`.
+The **default selection** is provider `gemini`, model `gemini-2.5-flash`. These defaults are only
+examples: providers rename and retire models often, so set the `*.models` lists and `default.model`
+to models your account can use.
 
 > **Tip - reasoning vs. fast models:** "Reasoning" models (for example `gemini-2.5-pro`) spend output
 > tokens on internal thinking and are slower and more token-hungry; "fast" models (for example
@@ -188,6 +189,10 @@ cluster before enabling it.
 **Transmitted to the provider:**
 
 - The user's **question text**.
+- **Earlier turns of the conversation** - the chat window sends recent questions and answers with
+  each new question, and Recon includes up to the last 8 turns (within `history.max.chars`) in both
+  provider calls. Earlier answers can contain cluster metadata. Set `history.max.chars` to `0` to
+  stop sending them.
 - The **system prompts** (the catalog of Recon tools and the semantic guide describing them).
 - The **raw JSON results** of the Recon reads used to answer - this is cluster **metadata** such as
   volume / bucket / key names, paths, container and pipeline IDs, sizes, counts, and health states.
@@ -229,8 +234,9 @@ shares the single admin-configured key. (This is why you should gate who can rea
 </property>
 ```
 
-> **Warning:** Plaintext keys are readable by anyone who can read `ozone-site.xml`. Use this only for
-> local development or testing, never in production.
+> **Warning:** Plaintext keys are readable by anyone who can read `ozone-site.xml`, and Recon's
+> `/conf` page (for example `http://<recon-host>:9888/conf`) also shows them in clear text. Use this
+> only for local development or testing, never in production.
 
 ### Secure: Hadoop Credential Provider (`JCEKS`) - recommended
 
@@ -247,6 +253,18 @@ The credential **alias must equal the config key name** (for example
    Repeat for the aliases you use - for example `ozone.recon.chatbot.openai.api.key`,
    `ozone.recon.chatbot.anthropic.api.key`, or `ozone.recon.chatbot.gateway.api.key` (when using the
    [gateway provider](#gateway-provider)). The command prompts for the secret value.
+
+   If the `hadoop` command is not installed (for example in the Ozone Docker image), run the same
+   `CredentialShell` class on Recon's classpath, which `ozone classpath ozone-recon` prints:
+
+   ```bash
+   java -cp "$(ozone classpath ozone-recon)" org.apache.hadoop.security.alias.CredentialShell \
+     create ozone.recon.chatbot.gemini.api.key \
+     -provider localjceks://file/etc/security/recon-keys.jceks
+   ```
+
+   `hadoop credential` is a wrapper for this class, so every `hadoop credential` subcommand on this
+   page works the same way.
 
 2. Point Recon at the keystore in `ozone-site.xml`:
 
@@ -276,8 +294,9 @@ The credential **alias must equal the config key name** (for example
 **Verify the key really comes from `JCEKS`:**
 
 - `GET /api/v1/chatbot/health` returns `llmClientAvailable: true`.
-- `ozone getconf -confKey ozone.recon.chatbot.gateway.api.key` (or the relevant provider key) returns
-  **empty** - confirming there is no plaintext key and the value is sourced from the keystore.
+- `ozone getconf -confKey ozone.recon.chatbot.gateway.api.key` (or the relevant provider key) reports
+  `Configuration ozone.recon.chatbot.gateway.api.key is missing.` - confirming there is no plaintext
+  key and the value is sourced from the keystore.
 
 **Failure behavior to expect:**
 
@@ -287,9 +306,11 @@ The credential **alias must equal the config key name** (for example
   `enabled` and the affected provider is the only one configured (common with `gateway`), a `/chat`
   request fails at query time with **HTTP 500** (not 503). Use `health` as the reliable indicator.
 
-**Rotation / removal:** update or delete the alias with `hadoop credential create` / `hadoop
-credential delete`, then **restart Recon** (new alias values take effect only after a restart). If a
-key is missing, that provider is simply unavailable; the feature still works through any other
+**Rotation / removal:** `hadoop credential create` does not overwrite an existing alias; it fails
+with an "already exists" error. To rotate a key, run `hadoop credential delete` for the alias (it
+asks for confirmation unless you add `-f`) and then `hadoop credential create` again. To remove a
+key, run only `delete`. Then **restart Recon** (new alias values take effect only after a restart).
+If a key is missing, that provider is simply unavailable; the feature still works through any other
 configured provider.
 
 > **Note:** `JCEKS` does **not** require a secure/Kerberized cluster - it works on unsecure clusters
@@ -360,6 +381,13 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 |---|---|---|
 | `exec.require.safe.scope` | `true` | Require a bucket-scoped prefix for key listings. Keep enabled in production (see [Limits](#11-limits--boundary-conditions)). |
 | `max.tool.calls` | `5` | Maximum number of Recon reads a single question may trigger. |
+| `max.tokens` | `8192` | Maximum output tokens per provider call. Raise it for reasoning models (for example `gemini-2.5-pro`) that spend output tokens on internal thinking. |
+
+### Conversation memory
+
+| Key | Default | Description |
+|---|---|---|
+| `history.max.chars` | `8000` | Maximum characters of earlier conversation sent with each question (at most the last 8 turns). Set to `0` to turn conversation memory off. |
 
 ### Concurrency & timeouts
 
@@ -369,6 +397,10 @@ All keys are under the prefix `ozone.recon.chatbot.`.
 | `max.queue.size` | `10` | Requests that may wait when all threads are busy; beyond this, clients get HTTP 503. |
 | `timeout.ms` | `120000` | Timeout for a single provider call (ms). |
 | `request.timeout.ms` | `180000` | Overall per-request wall-clock timeout (ms); exceeding it returns HTTP 504. Default is 3 minutes. |
+
+> **Note:** `timeout.ms` applies to each provider call, and one question can make two calls (tool
+> selection and summarization). With the defaults, two calls of up to 120 seconds each can outlast
+> the 180-second `request.timeout.ms`, so the client can get HTTP 504 before either call times out.
 
 ### Model lists (UI dropdown)
 
@@ -432,6 +464,27 @@ You can also ask the assistant to list all open keys and categorize them by thei
 
 ![Open Keys Categorized by Storage Mode](/img/recon-ai-filter-both.png)
 
+### Using the chat window
+
+Open **Recon AI** from the Recon navigation menu; the menu item appears only when the feature is
+enabled.
+
+- **Model picker** - choose a provider and then one of its models, or keep **Default Provider** to
+  use the server defaults. The choices come from `GET /api/v1/chatbot/models`, and the server may
+  still fall back to its defaults (see
+  [Provider & model routing](#provider--model-routing-fallback-behavior)).
+- **Stop** - while an answer is pending, the send button turns into a **Stop** button. It stops
+  waiting in the browser; Recon still finishes or times out the request on the server.
+- **Retry** - when a question fails, the error message offers **Retry**, which sends the same
+  question again with the same model.
+- **Regenerate** - asks the question behind an answer again with the same model. The new answer is
+  added to the end of the chat; the old one stays.
+- **Copy** - copies an answer to the clipboard as Markdown.
+- **New chat** - clears the conversation, so later questions are sent without earlier turns.
+
+The conversation is kept in the browser's session storage, not on the Recon server. It survives a
+page reload, is lost when you close the tab, and is not shared between tabs or users.
+
 ## 10. Tool (endpoint) reference
 
 These are the Recon views the assistant can call. This list mirrors the in-code catalog (see
@@ -487,9 +540,12 @@ interpreting answers:
   about task/sync status (`api_v1_task_status`) to gauge freshness.
 - **Bounded concurrency and time.** Requests beyond pool + queue capacity get HTTP 503; requests
   exceeding `request.timeout.ms` get HTTP 504.
-- **No conversation memory.** Each query is independent - the assistant does not retain context from
-  previous questions in the same session. If a follow-up question relies on a prior answer, repeat
-  the relevant detail in the new query.
+- **Limited conversation memory.** The chat window sends recent turns with each question, so a
+  follow-up such as "which of them are stale?" can refer to an earlier answer. Recon uses at most
+  the last 8 turns (about four questions and answers), trimmed to `history.max.chars`, and passes
+  them to the model only as a hint for resolving references, not as a source of cluster data. Set
+  `history.max.chars` to `0` to turn memory off. Repeat any detail from older or very long answers
+  in the new question.
 - **Honest answers.** Truncation, empty results, and sampling are called out in the response text.
 
 ## 12. REST API endpoints
@@ -498,16 +554,24 @@ The assistant is exposed under `/api/v1/chatbot`.
 
 ### `POST /api/v1/chatbot/chat`
 
-Request (`model`, `provider`, and `userId` are optional):
+Request (`model`, `provider`, `userId`, and `history` are optional):
 
 ```json
 {
-  "query": "How many datanodes are healthy?",
+  "query": "Which of them are stale?",
   "model": "gemini-2.5-flash",
   "provider": "gemini",
-  "userId": "alice"
+  "userId": "alice",
+  "history": [
+    { "role": "user", "content": "How many datanodes are healthy?" },
+    { "role": "assistant", "content": "2 of 3 datanodes are healthy; 1 is stale." }
+  ]
 }
 ```
+
+`history` lists earlier turns, oldest first, each with a `role` (`user` or `assistant`) and its
+`content`. Recon ignores other roles and blank turns, keeps the last 8, and trims them to
+`history.max.chars`. Omit it for a stand-alone question.
 
 Response:
 
@@ -517,7 +581,8 @@ Response:
 
 ### `GET /api/v1/chatbot/health`
 
-Always returns HTTP 200 with the current state. `llmClientAvailable` is `true` only when the feature
+Returns HTTP 200 with the current state while the feature is enabled (when it is disabled, this and
+the other chatbot endpoints return HTTP 404). `llmClientAvailable` is `true` only when the feature
 is enabled **and** at least one provider has a usable API key:
 
 ```json
@@ -539,7 +604,8 @@ should offer. The list is empty when no provider is configured:
 |---|---|
 | 200 | Success. |
 | 400 | Empty/blank query. |
-| 503 | Feature disabled, or the request queue is full (overloaded). |
+| 404 | Feature disabled. Recon registers the `/api/v1/chatbot` endpoints only when `enabled` is `true`. |
+| 503 | The request queue is full (overloaded), or the request was interrupted. Try again later. |
 | 504 | Request exceeded `request.timeout.ms`. |
 | 500 | Internal error (details are logged, not returned). Also returned when the resolved provider has no usable key at query time - for example a `JCEKS` key that cannot be read - and no other provider is configured. Check `GET /api/v1/chatbot/health`. |
 
@@ -547,7 +613,7 @@ The `userId` is masked in logs so identities are not leaked.
 
 ## 13. Security model
 
-Defenses are layered so that even a fully prompt-injected model cannot make Recon do anything unsafe:
+Defenses are layered so that even a fully prompt-injected model cannot make Recon modify the cluster:
 
 - **Prompt-level** - the model is told the user message is untrusted and to ignore embedded
   instructions.
@@ -558,6 +624,9 @@ Defenses are layered so that even a fully prompt-injected model cannot make Reco
   [Managing API keys](#managing-api-keys)); never per request.
 - **Resource bounds** - a bounded thread pool, queue, and per-request timeout.
 - **Read-only** - by construction, the assistant only reads Recon metadata.
+
+> **Note:** Only key listings get extra argument checks (the safe-scope rule above). Other tools run
+> with whatever arguments the model chooses, within the allowlist and the record cap.
 
 See also [Data sent to third-party providers](#5-data-sent-to-third-party-llm-providers) for the
 data-egress considerations.
@@ -598,11 +667,11 @@ The shipped versions are tuned for Recon - change them deliberately.
 
 | Symptom | Likely cause / fix |
 |---|---|
-| Empty answer from a reasoning model (e.g. `gemini-2.5-pro`) | The model spent its token budget "thinking". Prefer a fast model (flash), or raise token limits. |
+| Empty answer from a reasoning model (e.g. `gemini-2.5-pro`) | The model spent its token budget "thinking". Prefer a fast model (flash), or raise `max.tokens`. |
 | Answered by an unexpected model/provider | Routing fallback - the requested provider/model was not configured. See [routing](#provider--model-routing-fallback-behavior). |
 | "No API key configured" | Check the provider, the key, and `hadoop.security.credential.provider.path`. |
 | `llmClientAvailable: false` after enabling `JCEKS` | Wrong/missing keystore password (`HADOOP_CREDSTORE_PASSWORD` or the password file), or the alias name does not match the config key. A bad password makes **all** aliases in that keystore unreadable. |
-| Chat works but you expected `JCEKS` to be in use | A plaintext `*.api.key` is still present and is used as fallback. Remove it; confirm `ozone getconf` returns empty for the key. |
+| Chat works but you expected `JCEKS` to be in use | A plaintext `*.api.key` is still present and is used as fallback. Remove it; confirm `ozone getconf` reports the key as missing. |
 | HTTP 504 (timeout) / HTTP 503 (overloaded) | Tune `thread.pool.size`, `max.queue.size`, `request.timeout.ms`. |
 | Stale answers | Recon sync lag - answers reflect the last sync. Check `api_v1_task_status`. |
 | Egress / connection failures | Firewall, proxy, or `*.base.url`. See [Prerequisites & egress](#4-prerequisites--network-egress). |
