@@ -46,7 +46,7 @@ For `STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER` and `STREAMING-UNSIGNED-PAYLOAD
 4. A transfer or verification failure prevents the object or part from being committed. Data can already have been streamed to Datanodes, but the failed upload does not become a committed key or part.
 
 Streams with HMAC verification enabled or a supported checksum trailer require a final zero-byte chunk and valid CRLF delimiters after chunk data.
-Other signed streams, including those with ECDSA markers, skip these checks.
+Other accepted signed streams skip these checks.
 For these streams, S3 Gateway stops reading at `x-amz-decoded-content-length`: a shorter payload is rejected, and excess data is neither stored nor reported as an error.
 `Content-MD5`, when supplied, is still checked against the payload that is written.
 
@@ -78,6 +78,7 @@ The trailer section must end with a blank line and the request body must end the
 | Well-formed chunk or trailer signature fails an enabled HMAC check | `SignatureDoesNotMatch` | 403 |
 | Derived key missing when HMAC verification is requested in secure mode | `InternalError` | 500 |
 | `AWS4-ECDSA-P256-SHA256` used as the request authentication algorithm | `AuthorizationHeaderMalformed` | 400 |
+| ECDSA streaming payload marker | `NotImplemented` | 501 |
 
 ## Limitations
 
@@ -86,17 +87,15 @@ The trailer section must end with a blank line and the request body must end the
 S3 Gateway does not verify ECDSA chunk or trailer signatures. It also rejects `AWS4-ECDSA-P256-SHA256` in the `Authorization` header or the presigned URL's `X-Amz-Algorithm` parameter, so a SigV4a request fails before the payload is read.
 
 The payload marker is handled separately from the authentication algorithm.
-An ECDSA `STREAMING-...` marker on an otherwise accepted request selects signed chunk decoding without signature verification.
-The decoder still requires a 64-character hexadecimal signature on each chunk, as used by HMAC-SHA256.
-The `STREAMING-AWS4-ECDSA-P256-SHA256-PAYLOAD-TRAILER` marker does not enable trailer parsing or checksum verification; its trailer is ignored.
-The upload can succeed if the chunk format and other upload checks pass.
+S3 Gateway rejects requests using `STREAMING-AWS4-ECDSA-P256-SHA256-PAYLOAD` or `STREAMING-AWS4-ECDSA-P256-SHA256-PAYLOAD-TRAILER` with `NotImplemented`.
+This also applies to requests that create FSO directories.
 
 ### FSO directories
 
 With `ozone.s3g.fso.directory.creation` enabled, a zero-length upload to a key ending in `/` in an FSO bucket can create a directory without opening a key.
 This path does not obtain a signing key or verify chunk and trailer HMAC.
 The two supported trailer modes still check framing, signature format where present, and the empty-payload checksum.
-The non-trailer mode does not consume or verify the chunk body on this path.
+The HMAC non-trailer mode does not consume or verify the chunk body on this path.
 
 ### Checksum storage
 
